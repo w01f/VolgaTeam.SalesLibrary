@@ -2,7 +2,6 @@
 using System.Globalization;
 using System.Threading;
 using System.Windows.Forms;
-using SalesLibraries.Common.Helpers;
 
 namespace SalesLibraries.BatchTagger
 {
@@ -21,8 +20,6 @@ namespace SalesLibraries.BatchTagger
 			_mutex = new Mutex(false, uniqueIdentifier, out firstInstance);
 			if (firstInstance)
 			{
-				AppDomain.CurrentDomain.AssemblyResolve += SharedAssemblyHelper.OnAssemblyResolve;
-
 				Application.EnableVisualStyles();
 				Application.SetCompatibleTextRenderingDefault(false);
 				Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");

@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevComponents.DotNetBar2, Version=12.6.0.6, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Data.v15.2, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
@@ -133,6 +136,7 @@
     <Compile Include="PresentationLayer\LibraryFilter.designer.cs">
       <DependentUpon>LibraryFilter.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationLayer\LibraryOpenEventArgs.cs" />
     <Compile Include="PresentationLayer\LinksFormatTreeGroup.cs" />
     <Compile Include="PresentationLayer\LinksTreeSelectorControl.cs">
       <SubType>UserControl</SubType>
@@ -189,6 +193,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="app.manifest" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

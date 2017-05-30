@@ -749,6 +749,8 @@ namespace SalesLibraries.ServiceConnector.StatisticService {
         
         private string libraryDateField;
         
+        private string pageNameField;
+        
         private string linkIdField;
         
         private string linkNameField;
@@ -790,6 +792,16 @@ namespace SalesLibraries.ServiceConnector.StatisticService {
             }
             set {
                 this.libraryDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string pageName {
+            get {
+                return this.pageNameField;
+            }
+            set {
+                this.pageNameField = value;
             }
         }
         

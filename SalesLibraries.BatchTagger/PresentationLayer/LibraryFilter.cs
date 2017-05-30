@@ -62,6 +62,18 @@ namespace SalesLibraries.BatchTagger.PresentationLayer
 			_init = false;
 		}
 
+		public void ResetFilter()
+		{
+			_init = true;
+			checkedListBoxControlGroups.CheckAll();
+			checkEditAllFiles.Checked = true;
+			_init = false;
+
+			EnableFilter = true;
+
+			FilterChanged?.Invoke(this, new EventArgs());
+		}
+
 		public void UpdateLiksInfo(int allLinksCount, int untaggedLinksCount, int noKeywordsLinksCount)
 		{
 			checkEditAllFiles.Text = String.Format("All Links ({0})", allLinksCount);
@@ -112,6 +124,7 @@ namespace SalesLibraries.BatchTagger.PresentationLayer
 
 		private void checkEditLinkTagFilter_CheckedChanged(object sender, EventArgs e)
 		{
+			if (_init) return;
 			LinkTagFilterChanged?.Invoke(this, EventArgs.Empty);
 		}
 	}

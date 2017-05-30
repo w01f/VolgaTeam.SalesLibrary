@@ -310,7 +310,7 @@
 			this.xtraTabPageCategories.Controls.Add(this.panelCategoriesInfo);
 			this.xtraTabPageCategories.Name = "xtraTabPageCategories";
 			this.xtraTabPageCategories.Padding = new System.Windows.Forms.Padding(5);
-			this.xtraTabPageCategories.Size = new System.Drawing.Size(824, 473);
+			this.xtraTabPageCategories.Size = new System.Drawing.Size(828, 476);
 			this.xtraTabPageCategories.Text = "Category Tags";
 			// 
 			// splitContainerCategories
@@ -333,7 +333,7 @@
 			this.splitContainerCategories.Panel2.Appearance.Options.UseBackColor = true;
 			this.splitContainerCategories.Panel2.Appearance.Options.UseForeColor = true;
 			this.splitContainerCategories.Panel2.Text = "Panel2";
-			this.splitContainerCategories.Size = new System.Drawing.Size(520, 463);
+			this.splitContainerCategories.Size = new System.Drawing.Size(524, 466);
 			this.splitContainerCategories.SplitterPosition = 250;
 			this.splitContainerCategories.TabIndex = 2;
 			this.splitContainerCategories.Text = "splitContainerControl1";
@@ -368,7 +368,7 @@
 			this.treeListCategories.OptionsView.ShowVertLines = false;
 			this.treeListCategories.RowHeight = 25;
 			this.treeListCategories.ShowButtonMode = DevExpress.XtraTreeList.ShowButtonModeEnum.ShowForFocusedRow;
-			this.treeListCategories.Size = new System.Drawing.Size(250, 425);
+			this.treeListCategories.Size = new System.Drawing.Size(250, 428);
 			this.treeListCategories.TabIndex = 3;
 			this.treeListCategories.NodeCellStyle += new DevExpress.XtraTreeList.GetCustomNodeCellStyleEventHandler(this.OnCategoriesNodeCellStyle);
 			this.treeListCategories.BeforeCollapse += new DevExpress.XtraTreeList.BeforeCollapseEventHandler(this.OnCategoriesBeforeCollapse);
@@ -432,10 +432,10 @@
 			this.panelCategoriesInfo.Controls.Add(this.panelControlCategoriesInfoInner);
 			this.panelCategoriesInfo.Dock = System.Windows.Forms.DockStyle.Right;
 			this.panelCategoriesInfo.ForeColor = System.Drawing.Color.Black;
-			this.panelCategoriesInfo.Location = new System.Drawing.Point(525, 5);
+			this.panelCategoriesInfo.Location = new System.Drawing.Point(529, 5);
 			this.panelCategoriesInfo.Name = "panelCategoriesInfo";
 			this.panelCategoriesInfo.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-			this.panelCategoriesInfo.Size = new System.Drawing.Size(294, 463);
+			this.panelCategoriesInfo.Size = new System.Drawing.Size(294, 466);
 			this.panelCategoriesInfo.TabIndex = 3;
 			// 
 			// panelControlCategoriesInfoInner
@@ -448,7 +448,7 @@
 			this.panelControlCategoriesInfoInner.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panelControlCategoriesInfoInner.Location = new System.Drawing.Point(5, 0);
 			this.panelControlCategoriesInfoInner.Name = "panelControlCategoriesInfoInner";
-			this.panelControlCategoriesInfoInner.Size = new System.Drawing.Size(289, 463);
+			this.panelControlCategoriesInfoInner.Size = new System.Drawing.Size(289, 466);
 			this.panelControlCategoriesInfoInner.TabIndex = 52;
 			// 
 			// xtraScrollableControlCategoriesInfo
@@ -462,7 +462,7 @@
 			this.xtraScrollableControlCategoriesInfo.Location = new System.Drawing.Point(2, 2);
 			this.xtraScrollableControlCategoriesInfo.Name = "xtraScrollableControlCategoriesInfo";
 			this.xtraScrollableControlCategoriesInfo.Padding = new System.Windows.Forms.Padding(5);
-			this.xtraScrollableControlCategoriesInfo.Size = new System.Drawing.Size(285, 459);
+			this.xtraScrollableControlCategoriesInfo.Size = new System.Drawing.Size(285, 462);
 			this.xtraScrollableControlCategoriesInfo.TabIndex = 0;
 			// 
 			// labelControlCategoriesInfo
@@ -499,7 +499,7 @@
 			this.xtraTabPageKeywords.Controls.Add(this.buttonXAddKeyWord);
 			this.xtraTabPageKeywords.Controls.Add(this.gridControlKeywords);
 			this.xtraTabPageKeywords.Name = "xtraTabPageKeywords";
-			this.xtraTabPageKeywords.Size = new System.Drawing.Size(824, 473);
+			this.xtraTabPageKeywords.Size = new System.Drawing.Size(828, 476);
 			this.xtraTabPageKeywords.Text = "Keyword Tags";
 			// 
 			// buttonXAddKeyWord
@@ -534,7 +534,7 @@
 			this.gridControlKeywords.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemButtonEditKeywordShared,
             this.repositoryItemButtonEditKeywordPartial});
-			this.gridControlKeywords.Size = new System.Drawing.Size(803, 421);
+			this.gridControlKeywords.Size = new System.Drawing.Size(807, 424);
 			this.gridControlKeywords.TabIndex = 7;
 			this.gridControlKeywords.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewKeywords});
@@ -652,7 +652,8 @@
 			// 
 			// FormEditLinkTags
 			// 
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.BackColor = System.Drawing.Color.White;
 			this.ClientSize = new System.Drawing.Size(1134, 607);
 			this.Controls.Add(this.panelMainContainer);

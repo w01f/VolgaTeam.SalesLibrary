@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
 using DevExpress.XtraTab;
 using SalesLibraries.BatchTagger.PresentationLayer;
+using SalesLibraries.Common.Configuration;
+using SalesLibraries.CommonGUI.Common;
 using SalesLibraries.ServiceConnector.StatisticService;
 
 namespace SalesLibraries.BatchTagger
@@ -38,6 +41,7 @@ namespace SalesLibraries.BatchTagger
 				ApplyData();
 			};
 
+			FormStateHelper.Init(this, GlobalSettings.ApplicationRootPath, "Batch Tagger", false, true);
 		}
 
 		private readonly List<LibraryFilesModel> _records = new List<LibraryFilesModel>();
@@ -56,7 +60,16 @@ namespace SalesLibraries.BatchTagger
 
 			RefreshData();
 
-			AppManager.Instance.ActivateMainForm();
+			AppManager.Instance.ActivateForm(Handle, WindowState == FormWindowState.Maximized, false);
+		}
+
+		private void OnFormClosed(object sender, FormClosedEventArgs e)
+		{
+			var totalControl = xtraTabControlLibraries.TabPages.OfType<TotalControl>().FirstOrDefault();
+			totalControl?.SaveLayout();
+
+			var libraryControl = xtraTabControlLibraries.SelectedTabPage as LibraryControl;
+			libraryControl?.SaveLayout();
 		}
 
 		public void RefreshData()
@@ -85,7 +98,6 @@ namespace SalesLibraries.BatchTagger
 
 		private void ApplyData()
 		{
-			xtraTabControlLibraries.TabPages.Clear();
 			var filteredRecords = new List<LibraryFilesModel>();
 			filteredRecords.AddRange(_filterControlTotal.EnableFilter ?
 				_records.Where(g => _filterControlTotal.SelectedGroups.Contains(g.library)) :
@@ -103,26 +115,52 @@ namespace SalesLibraries.BatchTagger
 					LibraryDate = g.Select(r => r.LibraryDate).FirstOrDefault()
 				})
 				.OrderBy(r => r.Name).ToList();
-			var totalPage = new TotalControl(totalRecords);
-			xtraTabControlLibraries.TabPages.Add(totalPage);
+			var totalPage = xtraTabControlLibraries.TabPages.OfType<TotalControl>().FirstOrDefault();
+			if (totalPage == null)
+			{
+				totalPage = new TotalControl(totalRecords);
+				totalPage.LibraryOpen += (o, e) =>
+				{
+					_filterControlLibrary.ResetFilter();
+					var targetLibraryControl = xtraTabControlLibraries.TabPages
+						.OfType<LibraryControl>()
+						.FirstOrDefault(lc => lc.GroupName == e.LibraryName);
+					xtraTabControlLibraries.SelectedTabPage = targetLibraryControl;
+				};
+				xtraTabControlLibraries.TabPages.Add(totalPage);
+			}
+			else
+				totalPage.ApplyData(totalRecords);
 
 			foreach (var group in filteredRecords.OrderBy(r => r.library).Select(g => g.library).Distinct())
 			{
-				var libraryPage = new LibraryControl(filteredRecords.Where(r => r.library == group).OrderBy(r => r.linkName).ToList()) { GroupName = group };
-				_filterControlLibrary.LinkTagFilterChanged += (o, e) => libraryPage.ApplyFilter(_filterControlLibrary);
+				var libraryRecords = filteredRecords.Where(r => r.library == group).OrderBy(r => r.linkName).ToList();
+				var libraryPage = xtraTabControlLibraries.TabPages
+					.OfType<LibraryControl>()
+					.FirstOrDefault(lc => lc.GroupName == group);
+				if (libraryPage == null)
+				{
+					libraryPage = new LibraryControl(libraryRecords) { GroupName = group };
+					_filterControlLibrary.LinkTagFilterChanged += (o, e) => libraryPage.ApplyFilter(_filterControlLibrary);
+					xtraTabControlLibraries.TabPages.Add(libraryPage);
+				}
+				else
+					libraryPage.ApplyData(libraryRecords);
 				libraryPage.ApplyFilter(_filterControlLibrary);
-				xtraTabControlLibraries.TabPages.Add(libraryPage);
 			}
 		}
 
 		private void buttonXLoadData_Click(object sender, EventArgs e)
 		{
 			RefreshData();
-			AppManager.Instance.ActivateMainForm();
+			AppManager.Instance.ActivateForm(Handle, WindowState == FormWindowState.Maximized, false);
 		}
 
 		private void OnSelectedPageChanged(object sender, TabPageChangedEventArgs e)
 		{
+			var prevLibraryPage = e.PrevPage as LibraryControl;
+			prevLibraryPage?.SaveLayout();
+
 			if (e.Page is TotalControl)
 				_filterControlTotal.BringToFront();
 			else

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -44,8 +45,30 @@ namespace SalesLibraries.BatchTagger.PresentationLayer
 			InitializeComponent();
 			Dock = DockStyle.Fill;
 			Records = new List<LibraryFilesModel>();
+
+			ApplyData(records);
+
+			RestoreLayout();
+		}
+
+		public void ApplyData(IEnumerable<LibraryFilesModel> records)
+		{
+			Records.Clear();
 			Records.AddRange(records);
 			gridControlData.DataSource = Records;
+			advBandedGridViewData.RefreshData();
+			gridControlData.Update();
+		}
+
+		public void SaveLayout()
+		{
+			advBandedGridViewData.SaveLayoutToXml(AppManager.Instance.Resources.LibraryControlLayoutConfigPath);
+		}
+
+		public void RestoreLayout()
+		{
+			if (File.Exists(AppManager.Instance.Resources.LibraryControlLayoutConfigPath))
+				advBandedGridViewData.RestoreLayoutFromXml(AppManager.Instance.Resources.LibraryControlLayoutConfigPath);
 		}
 
 		public void ApplyFilter(LibraryFilter filterControlLibrary)
@@ -178,7 +201,7 @@ namespace SalesLibraries.BatchTagger.PresentationLayer
 										var category = new LinkCategory();
 										category.libraryId = sourceLink.ParentLibrary.ExtId.ToString();
 										category.linkId = sourceLink.ExtId.ToString();
-										category.@group = searchGroup.SuperGroup;
+										category.group = searchGroup.SuperGroup;
 										category.category = searchGroup.Name;
 										category.tag = tag.Name;
 										fileCategories.Add(category);
@@ -206,6 +229,7 @@ namespace SalesLibraries.BatchTagger.PresentationLayer
 								var tagsInfo = linkInfoList.First(linkTagsInfo => linkTagsInfo.LinkId == Guid.Parse(targetModel.linkId));
 								targetModel.categories = String.Join(", ", tagsInfo.Categories.Select(lc => lc.tag));
 								targetModel.keywords = tagsInfo.Keywords;
+								targetModel.linkModifyDate = DateTime.Now.ToString(CultureInfo.CurrentCulture);
 							}
 						});
 					}
@@ -217,7 +241,10 @@ namespace SalesLibraries.BatchTagger.PresentationLayer
 
 		private void OnCustomDrawRowPreview(object sender, RowObjectCustomDrawEventArgs e)
 		{
-			if (e.RowHandle % 2 == 0)
+			var selectedRows = advBandedGridViewData.GetSelectedRows();
+			if (selectedRows.Contains(e.RowHandle))
+				e.Appearance.BackColor = Color.FromArgb(205, 230, 247);
+			else if (e.RowHandle % 2 == 0)
 				e.Appearance.BackColor = SystemColors.ControlLight;
 		}
 

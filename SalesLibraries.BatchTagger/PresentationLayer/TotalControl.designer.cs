@@ -30,18 +30,17 @@
         {
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
 			this.gridControlData = new DevExpress.XtraGrid.GridControl();
-			this.advBandedGridViewData = new DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView();
-			this.gridBandMain = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-			this.gridColumnName = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-			this.gridColumnFileName = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-			this.gridColumnTaggedFilesCount = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-			this.gridColumnVideoCount = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-			this.gridColumnTaggedVideoCount = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-			this.gridColumnFileDate = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-			this.griodColumnDaysFormLastUpdate = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+			this.gridView = new DevExpress.XtraGrid.Views.Grid.GridView();
+			this.gridColumnName = new DevExpress.XtraGrid.Columns.GridColumn();
+			this.gridColumnFileName = new DevExpress.XtraGrid.Columns.GridColumn();
+			this.gridColumnTaggedFilesCount = new DevExpress.XtraGrid.Columns.GridColumn();
+			this.gridColumnVideoCount = new DevExpress.XtraGrid.Columns.GridColumn();
+			this.gridColumnTaggedVideoCount = new DevExpress.XtraGrid.Columns.GridColumn();
+			this.gridColumnFileDate = new DevExpress.XtraGrid.Columns.GridColumn();
+			this.griodColumnDaysFormLastUpdate = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.repositoryItemHyperLinkEdit = new DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlData)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.advBandedGridViewData)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemHyperLinkEdit)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -49,52 +48,46 @@
 			// 
 			this.gridControlData.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.gridControlData.Location = new System.Drawing.Point(0, 0);
-			this.gridControlData.MainView = this.advBandedGridViewData;
+			this.gridControlData.MainView = this.gridView;
 			this.gridControlData.Name = "gridControlData";
 			this.gridControlData.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemHyperLinkEdit});
 			this.gridControlData.Size = new System.Drawing.Size(898, 483);
 			this.gridControlData.TabIndex = 2;
 			this.gridControlData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.advBandedGridViewData});
+            this.gridView});
 			// 
-			// advBandedGridViewData
+			// gridView
 			// 
-			this.advBandedGridViewData.Appearance.BandPanel.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold);
-			this.advBandedGridViewData.Appearance.BandPanel.Options.UseFont = true;
-			this.advBandedGridViewData.Appearance.BandPanel.Options.UseTextOptions = true;
-			this.advBandedGridViewData.Appearance.BandPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-			this.advBandedGridViewData.Appearance.EvenRow.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.advBandedGridViewData.Appearance.EvenRow.Options.UseFont = true;
-			this.advBandedGridViewData.Appearance.EvenRow.Options.UseTextOptions = true;
-			this.advBandedGridViewData.Appearance.EvenRow.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-			this.advBandedGridViewData.Appearance.FocusedCell.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.advBandedGridViewData.Appearance.FocusedCell.Options.UseFont = true;
-			this.advBandedGridViewData.Appearance.FocusedRow.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.advBandedGridViewData.Appearance.FocusedRow.Options.UseFont = true;
-			this.advBandedGridViewData.Appearance.HeaderPanel.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold);
-			this.advBandedGridViewData.Appearance.HeaderPanel.Options.UseFont = true;
-			this.advBandedGridViewData.Appearance.HeaderPanel.Options.UseTextOptions = true;
-			this.advBandedGridViewData.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-			this.advBandedGridViewData.Appearance.OddRow.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.advBandedGridViewData.Appearance.OddRow.Options.UseFont = true;
-			this.advBandedGridViewData.Appearance.OddRow.Options.UseTextOptions = true;
-			this.advBandedGridViewData.Appearance.OddRow.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-			this.advBandedGridViewData.Appearance.Preview.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.advBandedGridViewData.Appearance.Preview.Options.UseFont = true;
-			this.advBandedGridViewData.Appearance.Row.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.advBandedGridViewData.Appearance.Row.Options.UseFont = true;
-			this.advBandedGridViewData.Appearance.SelectedRow.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.advBandedGridViewData.Appearance.SelectedRow.Options.UseFont = true;
-			this.advBandedGridViewData.AppearancePrint.HeaderPanel.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.advBandedGridViewData.AppearancePrint.HeaderPanel.Options.UseFont = true;
-			this.advBandedGridViewData.AppearancePrint.HeaderPanel.Options.UseTextOptions = true;
-			this.advBandedGridViewData.AppearancePrint.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
-			this.advBandedGridViewData.AppearancePrint.Preview.Options.UseTextOptions = true;
-			this.advBandedGridViewData.AppearancePrint.Preview.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-			this.advBandedGridViewData.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {
-            this.gridBandMain});
-			this.advBandedGridViewData.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] {
+			this.gridView.Appearance.EvenRow.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.gridView.Appearance.EvenRow.Options.UseFont = true;
+			this.gridView.Appearance.EvenRow.Options.UseTextOptions = true;
+			this.gridView.Appearance.EvenRow.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+			this.gridView.Appearance.FocusedCell.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.gridView.Appearance.FocusedCell.Options.UseFont = true;
+			this.gridView.Appearance.FocusedRow.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.gridView.Appearance.FocusedRow.Options.UseFont = true;
+			this.gridView.Appearance.HeaderPanel.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold);
+			this.gridView.Appearance.HeaderPanel.Options.UseFont = true;
+			this.gridView.Appearance.HeaderPanel.Options.UseTextOptions = true;
+			this.gridView.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+			this.gridView.Appearance.OddRow.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.gridView.Appearance.OddRow.Options.UseFont = true;
+			this.gridView.Appearance.OddRow.Options.UseTextOptions = true;
+			this.gridView.Appearance.OddRow.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+			this.gridView.Appearance.Preview.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.gridView.Appearance.Preview.Options.UseFont = true;
+			this.gridView.Appearance.Row.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.gridView.Appearance.Row.Options.UseFont = true;
+			this.gridView.Appearance.SelectedRow.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.gridView.Appearance.SelectedRow.Options.UseFont = true;
+			this.gridView.AppearancePrint.HeaderPanel.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
+			this.gridView.AppearancePrint.HeaderPanel.Options.UseFont = true;
+			this.gridView.AppearancePrint.HeaderPanel.Options.UseTextOptions = true;
+			this.gridView.AppearancePrint.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+			this.gridView.AppearancePrint.Preview.Options.UseTextOptions = true;
+			this.gridView.AppearancePrint.Preview.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+			this.gridView.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumnName,
             this.gridColumnFileName,
             this.gridColumnTaggedFilesCount,
@@ -102,50 +95,31 @@
             this.gridColumnTaggedVideoCount,
             this.gridColumnFileDate,
             this.griodColumnDaysFormLastUpdate});
-			this.advBandedGridViewData.GridControl = this.gridControlData;
-			this.advBandedGridViewData.Name = "advBandedGridViewData";
-			this.advBandedGridViewData.OptionsCustomization.AllowBandMoving = false;
-			this.advBandedGridViewData.OptionsCustomization.AllowColumnMoving = false;
-			this.advBandedGridViewData.OptionsCustomization.AllowColumnResizing = false;
-			this.advBandedGridViewData.OptionsCustomization.AllowFilter = false;
-			this.advBandedGridViewData.OptionsCustomization.AllowGroup = false;
-			this.advBandedGridViewData.OptionsCustomization.AllowQuickHideColumns = false;
-			this.advBandedGridViewData.OptionsCustomization.ShowBandsInCustomizationForm = false;
-			this.advBandedGridViewData.OptionsMenu.EnableColumnMenu = false;
-			this.advBandedGridViewData.OptionsMenu.EnableFooterMenu = false;
-			this.advBandedGridViewData.OptionsMenu.EnableGroupPanelMenu = false;
-			this.advBandedGridViewData.OptionsMenu.ShowAutoFilterRowItem = false;
-			this.advBandedGridViewData.OptionsMenu.ShowDateTimeGroupIntervalItems = false;
-			this.advBandedGridViewData.OptionsMenu.ShowGroupSortSummaryItems = false;
-			this.advBandedGridViewData.OptionsPrint.PrintBandHeader = false;
-			this.advBandedGridViewData.OptionsPrint.PrintPreview = true;
-			this.advBandedGridViewData.OptionsSelection.EnableAppearanceFocusedCell = false;
-			this.advBandedGridViewData.OptionsSelection.EnableAppearanceHideSelection = false;
-			this.advBandedGridViewData.OptionsView.AutoCalcPreviewLineCount = true;
-			this.advBandedGridViewData.OptionsView.ColumnAutoWidth = true;
-			this.advBandedGridViewData.OptionsView.ShowBands = false;
-			this.advBandedGridViewData.OptionsView.ShowDetailButtons = false;
-			this.advBandedGridViewData.OptionsView.ShowGroupExpandCollapseButtons = false;
-			this.advBandedGridViewData.OptionsView.ShowGroupPanel = false;
-			this.advBandedGridViewData.OptionsView.ShowIndicator = false;
-			this.advBandedGridViewData.OptionsView.ShowPreview = true;
-			this.advBandedGridViewData.RowHeight = 30;
-			this.advBandedGridViewData.CustomDrawCell += new DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventHandler(this.OnCustomDrawCell);
-			// 
-			// gridBandMain
-			// 
-			this.gridBandMain.Caption = "User:";
-			this.gridBandMain.Columns.Add(this.gridColumnName);
-			this.gridBandMain.Columns.Add(this.gridColumnFileName);
-			this.gridBandMain.Columns.Add(this.gridColumnTaggedFilesCount);
-			this.gridBandMain.Columns.Add(this.gridColumnVideoCount);
-			this.gridBandMain.Columns.Add(this.gridColumnTaggedVideoCount);
-			this.gridBandMain.Columns.Add(this.gridColumnFileDate);
-			this.gridBandMain.Columns.Add(this.griodColumnDaysFormLastUpdate);
-			this.gridBandMain.MinWidth = 20;
-			this.gridBandMain.Name = "gridBandMain";
-			this.gridBandMain.VisibleIndex = 0;
-			this.gridBandMain.Width = 896;
+			this.gridView.GridControl = this.gridControlData;
+			this.gridView.Name = "gridView";
+			this.gridView.OptionsCustomization.AllowFilter = false;
+			this.gridView.OptionsCustomization.AllowGroup = false;
+			this.gridView.OptionsCustomization.AllowQuickHideColumns = false;
+			this.gridView.OptionsMenu.EnableColumnMenu = false;
+			this.gridView.OptionsMenu.EnableFooterMenu = false;
+			this.gridView.OptionsMenu.EnableGroupPanelMenu = false;
+			this.gridView.OptionsMenu.ShowAutoFilterRowItem = false;
+			this.gridView.OptionsMenu.ShowDateTimeGroupIntervalItems = false;
+			this.gridView.OptionsMenu.ShowGroupSortSummaryItems = false;
+			this.gridView.OptionsPrint.PrintPreview = true;
+			this.gridView.OptionsSelection.EnableAppearanceFocusedCell = false;
+			this.gridView.OptionsSelection.EnableAppearanceHideSelection = false;
+			this.gridView.OptionsView.AutoCalcPreviewLineCount = true;
+			this.gridView.OptionsView.ColumnAutoWidth = false;
+			this.gridView.OptionsView.ShowDetailButtons = false;
+			this.gridView.OptionsView.ShowGroupExpandCollapseButtons = false;
+			this.gridView.OptionsView.ShowGroupPanel = false;
+			this.gridView.OptionsView.ShowIndicator = false;
+			this.gridView.OptionsView.ShowPreview = true;
+			this.gridView.RowHeight = 30;
+			this.gridView.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(this.OnRowClick);
+			this.gridView.CustomDrawCell += new DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventHandler(this.OnCustomDrawCell);
+			this.gridView.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.OnRowCellStyle);
 			// 
 			// gridColumnName
 			// 
@@ -159,7 +133,8 @@
 			this.gridColumnName.OptionsColumn.AllowEdit = false;
 			this.gridColumnName.OptionsColumn.ReadOnly = true;
 			this.gridColumnName.Visible = true;
-			this.gridColumnName.Width = 136;
+			this.gridColumnName.VisibleIndex = 0;
+			this.gridColumnName.Width = 184;
 			// 
 			// gridColumnFileName
 			// 
@@ -171,9 +146,9 @@
 			this.gridColumnFileName.FieldName = "FilesTotalCount";
 			this.gridColumnFileName.Name = "gridColumnFileName";
 			this.gridColumnFileName.OptionsColumn.AllowEdit = false;
-			this.gridColumnFileName.OptionsColumn.FixedWidth = true;
 			this.gridColumnFileName.OptionsColumn.ReadOnly = true;
 			this.gridColumnFileName.Visible = true;
+			this.gridColumnFileName.VisibleIndex = 1;
 			this.gridColumnFileName.Width = 120;
 			// 
 			// gridColumnTaggedFilesCount
@@ -182,14 +157,13 @@
 			this.gridColumnTaggedFilesCount.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
 			this.gridColumnTaggedFilesCount.AppearanceHeader.Options.UseTextOptions = true;
 			this.gridColumnTaggedFilesCount.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-			this.gridColumnTaggedFilesCount.AutoFillDown = true;
 			this.gridColumnTaggedFilesCount.Caption = "Tagged";
 			this.gridColumnTaggedFilesCount.FieldName = "FilesTaggedCount";
 			this.gridColumnTaggedFilesCount.Name = "gridColumnTaggedFilesCount";
 			this.gridColumnTaggedFilesCount.OptionsColumn.AllowEdit = false;
-			this.gridColumnTaggedFilesCount.OptionsColumn.FixedWidth = true;
 			this.gridColumnTaggedFilesCount.OptionsColumn.ReadOnly = true;
 			this.gridColumnTaggedFilesCount.Visible = true;
+			this.gridColumnTaggedFilesCount.VisibleIndex = 2;
 			this.gridColumnTaggedFilesCount.Width = 120;
 			// 
 			// gridColumnVideoCount
@@ -202,9 +176,9 @@
 			this.gridColumnVideoCount.FieldName = "VideoTotalCount";
 			this.gridColumnVideoCount.Name = "gridColumnVideoCount";
 			this.gridColumnVideoCount.OptionsColumn.AllowEdit = false;
-			this.gridColumnVideoCount.OptionsColumn.FixedWidth = true;
 			this.gridColumnVideoCount.OptionsColumn.ReadOnly = true;
 			this.gridColumnVideoCount.Visible = true;
+			this.gridColumnVideoCount.VisibleIndex = 3;
 			this.gridColumnVideoCount.Width = 120;
 			// 
 			// gridColumnTaggedVideoCount
@@ -217,9 +191,9 @@
 			this.gridColumnTaggedVideoCount.FieldName = "VideoTaggedCount";
 			this.gridColumnTaggedVideoCount.Name = "gridColumnTaggedVideoCount";
 			this.gridColumnTaggedVideoCount.OptionsColumn.AllowEdit = false;
-			this.gridColumnTaggedVideoCount.OptionsColumn.FixedWidth = true;
 			this.gridColumnTaggedVideoCount.OptionsColumn.ReadOnly = true;
 			this.gridColumnTaggedVideoCount.Visible = true;
+			this.gridColumnTaggedVideoCount.VisibleIndex = 4;
 			this.gridColumnTaggedVideoCount.Width = 120;
 			// 
 			// gridColumnFileDate
@@ -234,9 +208,9 @@
 			this.gridColumnFileDate.FieldName = "LibraryDate";
 			this.gridColumnFileDate.Name = "gridColumnFileDate";
 			this.gridColumnFileDate.OptionsColumn.AllowEdit = false;
-			this.gridColumnFileDate.OptionsColumn.FixedWidth = true;
 			this.gridColumnFileDate.OptionsColumn.ReadOnly = true;
 			this.gridColumnFileDate.Visible = true;
+			this.gridColumnFileDate.VisibleIndex = 5;
 			this.gridColumnFileDate.Width = 120;
 			// 
 			// griodColumnDaysFormLastUpdate
@@ -249,9 +223,9 @@
 			this.griodColumnDaysFormLastUpdate.FieldName = "DaysFormLastUpdate";
 			this.griodColumnDaysFormLastUpdate.Name = "griodColumnDaysFormLastUpdate";
 			this.griodColumnDaysFormLastUpdate.OptionsColumn.AllowEdit = false;
-			this.griodColumnDaysFormLastUpdate.OptionsColumn.FixedWidth = true;
 			this.griodColumnDaysFormLastUpdate.OptionsColumn.ReadOnly = true;
 			this.griodColumnDaysFormLastUpdate.Visible = true;
+			this.griodColumnDaysFormLastUpdate.VisibleIndex = 6;
 			this.griodColumnDaysFormLastUpdate.Width = 160;
 			// 
 			// repositoryItemHyperLinkEdit
@@ -268,7 +242,7 @@
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.Size = new System.Drawing.Size(898, 483);
 			((System.ComponentModel.ISupportInitialize)(this.gridControlData)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.advBandedGridViewData)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemHyperLinkEdit)).EndInit();
 			this.ResumeLayout(false);
 
@@ -277,15 +251,14 @@
         #endregion
 
 		private DevExpress.XtraGrid.GridControl gridControlData;
-		private DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView advBandedGridViewData;
-		private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gridColumnName;
-		private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gridColumnFileName;
 		private DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit repositoryItemHyperLinkEdit;
-		private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gridColumnVideoCount;
-		private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gridColumnFileDate;
-		private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn griodColumnDaysFormLastUpdate;
-		private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBandMain;
-		private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gridColumnTaggedFilesCount;
-		private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gridColumnTaggedVideoCount;
+		private DevExpress.XtraGrid.Views.Grid.GridView gridView;
+		private DevExpress.XtraGrid.Columns.GridColumn gridColumnName;
+		private DevExpress.XtraGrid.Columns.GridColumn gridColumnFileName;
+		private DevExpress.XtraGrid.Columns.GridColumn gridColumnTaggedFilesCount;
+		private DevExpress.XtraGrid.Columns.GridColumn gridColumnVideoCount;
+		private DevExpress.XtraGrid.Columns.GridColumn gridColumnTaggedVideoCount;
+		private DevExpress.XtraGrid.Columns.GridColumn gridColumnFileDate;
+		private DevExpress.XtraGrid.Columns.GridColumn griodColumnDaysFormLastUpdate;
 	}
 }
