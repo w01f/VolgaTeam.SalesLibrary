@@ -58,7 +58,7 @@
 			// 
 			// FormCustomDialog
 			// 
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.BackColor = System.Drawing.Color.Red;
 			this.ClientSize = new System.Drawing.Size(397, 196);
 			this.Controls.Add(this.labelControlMessage);

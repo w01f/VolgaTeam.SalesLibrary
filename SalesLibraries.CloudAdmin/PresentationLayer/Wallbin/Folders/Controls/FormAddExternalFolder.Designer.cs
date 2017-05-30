@@ -164,7 +164,7 @@
 			// 
 			// FormAddExternalFolder
 			// 
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.ClientSize = new System.Drawing.Size(486, 501);
 			this.Controls.Add(this.buttonXClearAll);
 			this.Controls.Add(this.buttonXSelectAll);

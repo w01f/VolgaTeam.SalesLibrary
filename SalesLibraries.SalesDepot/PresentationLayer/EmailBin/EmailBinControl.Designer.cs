@@ -201,7 +201,7 @@
 			// 
 			// EmailBinControl
 			// 
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.BackColor = System.Drawing.Color.White;
 			this.Controls.Add(this.gridControlFiles);
 			this.Controls.Add(this.pnBottom);

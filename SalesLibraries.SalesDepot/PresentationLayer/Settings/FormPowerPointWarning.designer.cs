@@ -112,7 +112,7 @@
 			// 
 			// FormPowerPointWarning
 			// 
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.ClientSize = new System.Drawing.Size(488, 267);
 			this.Controls.Add(this.checkEditDoNotShow);
 			this.Controls.Add(this.pbLogo);

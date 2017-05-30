@@ -43,6 +43,9 @@
   <PropertyGroup>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ceTe.DynamicPDF.Rasterizer.40.x86, Version=2.0.0.28903, Culture=neutral, PublicKeyToken=09b5ce0d5c0a9d8b, processorArchitecture=x86">
       <Private>True</Private>
@@ -1212,6 +1215,7 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="app.manifest" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

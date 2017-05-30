@@ -600,7 +600,7 @@
 			// 
 			// FormWindow
 			// 
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.ClientSize = new System.Drawing.Size(664, 392);
 			this.Controls.Add(this.xtraTabControlWindowProperties);
 			this.Controls.Add(this.pnBottom);

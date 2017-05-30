@@ -5,7 +5,6 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
-using SalesLibraries.Common.Extensions;
 using SalesLibraries.Common.Objects.RemoteStorage;
 
 namespace SalesLibraries.CommonGUI.Common
@@ -19,20 +18,25 @@ namespace SalesLibraries.CommonGUI.Common
 		private readonly Form _form;
 		private readonly bool _showMaximized;
 		private readonly string _formKey;
-		private readonly StorageFile _stateStorageFile;
+		private readonly string _stateStorageFilePath;
 		private readonly bool _saveSate;
 
-		private FormStateHelper(Form targetForm, StorageDirectory storagePath, string filePrefix, bool showMaximized, bool saveSate)
+		private FormStateHelper(Form targetForm, string storagePath, string filePrefix, bool showMaximized, bool saveSate)
 		{
 			_form = targetForm;
 			_formKey = filePrefix;
-			_stateStorageFile = new StorageFile(storagePath.RelativePathParts.Merge(String.Format("{0}-{1}", filePrefix, StorageName)));
+			_stateStorageFilePath = Path.Combine(storagePath, String.Format("{0}-{1}", filePrefix, StorageName));
 			_showMaximized = showMaximized;
 			_saveSate = saveSate;
 			_form.Load += (o, e) => LoadState();
 		}
 
 		public static FormStateHelper Init(Form targetForm, StorageDirectory storagePath, string filePrefix, bool showMaximized, bool saveSate)
+		{
+			return new FormStateHelper(targetForm, storagePath.LocalPath, filePrefix, showMaximized, saveSate);
+		}
+
+		public static FormStateHelper Init(Form targetForm, string storagePath, string filePrefix, bool showMaximized, bool saveSate)
 		{
 			return new FormStateHelper(targetForm, storagePath, filePrefix, showMaximized, saveSate);
 		}
@@ -44,7 +48,7 @@ namespace SalesLibraries.CommonGUI.Common
 				state = SessionStates[_formKey];
 			else
 			{
-				state = FormState.LoadFromFile(_stateStorageFile.LocalPath);
+				state = FormState.LoadFromFile(_stateStorageFilePath);
 				SessionStates.Add(_formKey, state);
 			}
 
@@ -58,7 +62,7 @@ namespace SalesLibraries.CommonGUI.Common
 					_form.Width = state.Width.Value;
 					_form.Height = state.Height.Value;
 				}
-				_form.WindowState = state.WindowState ?? 
+				_form.WindowState = state.WindowState ??
 					(_showMaximized ? FormWindowState.Maximized : FormWindowState.Normal);
 			}
 			else
@@ -84,7 +88,7 @@ namespace SalesLibraries.CommonGUI.Common
 				SessionStates[_formKey].WindowState = _form.WindowState;
 			}
 			if (_saveSate)
-				SessionStates[_formKey].SaveToFile(_stateStorageFile.LocalPath);
+				SessionStates[_formKey].SaveToFile(_stateStorageFilePath);
 		}
 
 		internal class FormState

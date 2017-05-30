@@ -64,15 +64,15 @@
 			this.laPhone = new System.Windows.Forms.Label();
 			this.laEmailConfirm = new System.Windows.Forms.Label();
 			this.xtraTabPageGroups = new DevExpress.XtraTab.XtraTabPage();
-			this.pnAssignedGroups = new System.Windows.Forms.Panel();
-			this.buttonXGroupsClearAll = new DevComponents.DotNetBar.ButtonX();
-			this.buttonXGroupsSelectAll = new DevComponents.DotNetBar.ButtonX();
 			this.gridControlGroups = new DevExpress.XtraGrid.GridControl();
 			this.gridViewGroups = new DevExpress.XtraGrid.Views.Grid.GridView();
 			this.gridColumnGroupId = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.gridColumnGroupSelected = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.repositoryItemCheckEditGroup = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
 			this.gridColumnGroupName = new DevExpress.XtraGrid.Columns.GridColumn();
+			this.pnAssignedGroups = new System.Windows.Forms.Panel();
+			this.buttonXGroupsClearAll = new DevComponents.DotNetBar.ButtonX();
+			this.buttonXGroupsSelectAll = new DevComponents.DotNetBar.ButtonX();
 			this.xtraTabPageLibraries = new DevExpress.XtraTab.XtraTabPage();
 			this.pnAssignedLibraries = new System.Windows.Forms.Panel();
 			this.buttonXLibrariesClearAll = new DevComponents.DotNetBar.ButtonX();
@@ -96,10 +96,10 @@
 			this.xtraTabControl.SuspendLayout();
 			this.xtraTabPageUser.SuspendLayout();
 			this.xtraTabPageGroups.SuspendLayout();
-			this.pnAssignedGroups.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlGroups)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewGroups)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEditGroup)).BeginInit();
+			this.pnAssignedGroups.SuspendLayout();
 			this.xtraTabPageLibraries.SuspendLayout();
 			this.pnAssignedLibraries.SuspendLayout();
 			this.SuspendLayout();
@@ -604,48 +604,6 @@
 			this.xtraTabPageGroups.Size = new System.Drawing.Size(371, 538);
 			this.xtraTabPageGroups.Text = "Groups";
 			// 
-			// pnAssignedGroups
-			// 
-			this.pnAssignedGroups.Controls.Add(this.buttonXGroupsClearAll);
-			this.pnAssignedGroups.Controls.Add(this.buttonXGroupsSelectAll);
-			this.pnAssignedGroups.Dock = System.Windows.Forms.DockStyle.Top;
-			this.pnAssignedGroups.ForeColor = System.Drawing.Color.Black;
-			this.pnAssignedGroups.Location = new System.Drawing.Point(0, 0);
-			this.pnAssignedGroups.Name = "pnAssignedGroups";
-			this.pnAssignedGroups.Size = new System.Drawing.Size(371, 46);
-			this.pnAssignedGroups.TabIndex = 2;
-			// 
-			// buttonXGroupsClearAll
-			// 
-			this.buttonXGroupsClearAll.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-			this.buttonXGroupsClearAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonXGroupsClearAll.CausesValidation = false;
-			this.buttonXGroupsClearAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXGroupsClearAll.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.buttonXGroupsClearAll.Location = new System.Drawing.Point(252, 7);
-			this.buttonXGroupsClearAll.Name = "buttonXGroupsClearAll";
-			this.buttonXGroupsClearAll.Size = new System.Drawing.Size(90, 33);
-			this.buttonXGroupsClearAll.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.buttonXGroupsClearAll.TabIndex = 14;
-			this.buttonXGroupsClearAll.Text = "Clear All";
-			this.buttonXGroupsClearAll.TextColor = System.Drawing.Color.Black;
-			this.buttonXGroupsClearAll.Click += new System.EventHandler(this.buttonXGroupsClearAll_Click);
-			// 
-			// buttonXGroupsSelectAll
-			// 
-			this.buttonXGroupsSelectAll.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-			this.buttonXGroupsSelectAll.CausesValidation = false;
-			this.buttonXGroupsSelectAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXGroupsSelectAll.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.buttonXGroupsSelectAll.Location = new System.Drawing.Point(29, 7);
-			this.buttonXGroupsSelectAll.Name = "buttonXGroupsSelectAll";
-			this.buttonXGroupsSelectAll.Size = new System.Drawing.Size(90, 33);
-			this.buttonXGroupsSelectAll.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.buttonXGroupsSelectAll.TabIndex = 13;
-			this.buttonXGroupsSelectAll.Text = "Select All";
-			this.buttonXGroupsSelectAll.TextColor = System.Drawing.Color.Black;
-			this.buttonXGroupsSelectAll.Click += new System.EventHandler(this.buttonXGroupsSelectAll_Click);
-			// 
 			// gridControlGroups
 			// 
 			this.gridControlGroups.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -736,6 +694,48 @@
 			this.gridColumnGroupName.VisibleIndex = 1;
 			this.gridColumnGroupName.Width = 355;
 			// 
+			// pnAssignedGroups
+			// 
+			this.pnAssignedGroups.Controls.Add(this.buttonXGroupsClearAll);
+			this.pnAssignedGroups.Controls.Add(this.buttonXGroupsSelectAll);
+			this.pnAssignedGroups.Dock = System.Windows.Forms.DockStyle.Top;
+			this.pnAssignedGroups.ForeColor = System.Drawing.Color.Black;
+			this.pnAssignedGroups.Location = new System.Drawing.Point(0, 0);
+			this.pnAssignedGroups.Name = "pnAssignedGroups";
+			this.pnAssignedGroups.Size = new System.Drawing.Size(371, 46);
+			this.pnAssignedGroups.TabIndex = 2;
+			// 
+			// buttonXGroupsClearAll
+			// 
+			this.buttonXGroupsClearAll.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXGroupsClearAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXGroupsClearAll.CausesValidation = false;
+			this.buttonXGroupsClearAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXGroupsClearAll.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.buttonXGroupsClearAll.Location = new System.Drawing.Point(252, 7);
+			this.buttonXGroupsClearAll.Name = "buttonXGroupsClearAll";
+			this.buttonXGroupsClearAll.Size = new System.Drawing.Size(90, 33);
+			this.buttonXGroupsClearAll.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXGroupsClearAll.TabIndex = 14;
+			this.buttonXGroupsClearAll.Text = "Clear All";
+			this.buttonXGroupsClearAll.TextColor = System.Drawing.Color.Black;
+			this.buttonXGroupsClearAll.Click += new System.EventHandler(this.buttonXGroupsClearAll_Click);
+			// 
+			// buttonXGroupsSelectAll
+			// 
+			this.buttonXGroupsSelectAll.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXGroupsSelectAll.CausesValidation = false;
+			this.buttonXGroupsSelectAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXGroupsSelectAll.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.buttonXGroupsSelectAll.Location = new System.Drawing.Point(29, 7);
+			this.buttonXGroupsSelectAll.Name = "buttonXGroupsSelectAll";
+			this.buttonXGroupsSelectAll.Size = new System.Drawing.Size(90, 33);
+			this.buttonXGroupsSelectAll.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXGroupsSelectAll.TabIndex = 13;
+			this.buttonXGroupsSelectAll.Text = "Select All";
+			this.buttonXGroupsSelectAll.TextColor = System.Drawing.Color.Black;
+			this.buttonXGroupsSelectAll.Click += new System.EventHandler(this.buttonXGroupsSelectAll_Click);
+			// 
 			// xtraTabPageLibraries
 			// 
 			this.xtraTabPageLibraries.Appearance.PageClient.ForeColor = System.Drawing.Color.Black;
@@ -790,7 +790,8 @@
 			// 
 			// FormEditUser
 			// 
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
 			this.ClientSize = new System.Drawing.Size(381, 617);
 			this.Controls.Add(this.xtraTabControl);
@@ -798,7 +799,6 @@
 			this.Controls.Add(this.buttonXSave);
 			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.ForeColor = System.Drawing.Color.Black;
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
@@ -827,10 +827,10 @@
 			this.xtraTabPageUser.ResumeLayout(false);
 			this.xtraTabPageUser.PerformLayout();
 			this.xtraTabPageGroups.ResumeLayout(false);
-			this.pnAssignedGroups.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.gridControlGroups)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewGroups)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEditGroup)).EndInit();
+			this.pnAssignedGroups.ResumeLayout(false);
 			this.xtraTabPageLibraries.ResumeLayout(false);
 			this.pnAssignedLibraries.ResumeLayout(false);
 			this.ResumeLayout(false);

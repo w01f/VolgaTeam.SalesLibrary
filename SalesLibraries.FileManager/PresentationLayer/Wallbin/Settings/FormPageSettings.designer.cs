@@ -177,7 +177,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			// 
 			// FormPageSettings
 			// 
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.ClientSize = new System.Drawing.Size(353, 186);
 			this.Controls.Add(this.labelControlIconColor);
 			this.Controls.Add(this.textEditIcon);

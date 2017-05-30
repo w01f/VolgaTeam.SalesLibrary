@@ -119,7 +119,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Bundl
 			// 
 			// FormAddBundle
 			// 
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.ClientSize = new System.Drawing.Size(393, 142);
 			this.Controls.Add(this.pictureBox1);
 			this.Controls.Add(this.labelControlName);

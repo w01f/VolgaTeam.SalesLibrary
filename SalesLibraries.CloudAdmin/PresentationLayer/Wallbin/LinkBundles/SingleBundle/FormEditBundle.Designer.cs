@@ -583,7 +583,7 @@
 			// 
 			// FormEditBundle
 			// 
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.ClientSize = new System.Drawing.Size(934, 579);
 			this.Controls.Add(this.xtraTabControl);
 			this.Controls.Add(this.pnBottom);

@@ -107,7 +107,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Singl
 			// 
 			// FormAddUrl
 			// 
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.ClientSize = new System.Drawing.Size(419, 147);
 			this.Controls.Add(this.pictureBoxLogo);
 			this.Controls.Add(this.buttonXCancel);

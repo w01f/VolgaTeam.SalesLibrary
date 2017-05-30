@@ -143,7 +143,7 @@
 			// 
 			// LinksTreeSelectorControl
 			// 
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.BackColor = System.Drawing.Color.Transparent;
 			this.Controls.Add(this.treeList);
 			this.Controls.Add(this.panelButtons);

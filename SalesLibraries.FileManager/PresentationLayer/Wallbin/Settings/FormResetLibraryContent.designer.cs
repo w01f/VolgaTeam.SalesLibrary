@@ -194,7 +194,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			// 
 			// FormResetLibraryContent
 			// 
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.ClientSize = new System.Drawing.Size(569, 447);
 			this.Controls.Add(this.buttonXResetKeywords);
 			this.Controls.Add(this.buttonXResetCategories);

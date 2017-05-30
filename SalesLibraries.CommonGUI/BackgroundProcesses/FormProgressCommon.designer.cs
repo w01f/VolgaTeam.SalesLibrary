@@ -89,15 +89,16 @@
 			this.panelEx.Style.GradientAngle = 90;
 			this.panelEx.TabIndex = 5;
 			// 
-			// FormProgress
+			// FormProgressCommon
 			// 
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.BackColor = System.Drawing.Color.White;
 			this.ClientSize = new System.Drawing.Size(318, 102);
 			this.ControlBox = false;
 			this.Controls.Add(this.panelEx);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-			this.Name = "FormProgress";
+			this.Name = "FormProgressCommon";
 			this.Opacity = 0.85D;
 			this.Padding = new System.Windows.Forms.Padding(2);
 			this.ShowIcon = false;

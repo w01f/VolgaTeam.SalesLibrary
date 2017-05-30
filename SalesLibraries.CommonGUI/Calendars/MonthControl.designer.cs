@@ -65,7 +65,7 @@
             // 
             // MonthControl
             // 
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.AliceBlue;
             this.Controls.Add(this.pnDaysExternalContainer);
             this.Controls.Add(this.laMonthName);

@@ -3065,7 +3065,7 @@
 			// 
 			// FormMain
 			// 
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.ClientSize = new System.Drawing.Size(1268, 669);
 			this.Controls.Add(this.pnContainer);
 			this.Controls.Add(this.ribbonControl);

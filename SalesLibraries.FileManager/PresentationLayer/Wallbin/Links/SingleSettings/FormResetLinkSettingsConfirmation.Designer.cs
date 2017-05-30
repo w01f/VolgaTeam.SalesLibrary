@@ -103,7 +103,7 @@
 			// 
 			// FormResetLinkSettingsConfirmation
 			// 
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.ClientSize = new System.Drawing.Size(485, 131);
 			this.Controls.Add(this.labelControlTitle);
 			this.Controls.Add(this.buttonXReset);

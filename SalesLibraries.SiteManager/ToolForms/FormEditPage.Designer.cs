@@ -170,7 +170,7 @@
 			this.xtraTabPageUsers.Controls.Add(this.gridControlUsers);
 			this.xtraTabPageUsers.Controls.Add(this.pnAssignedUsers);
 			this.xtraTabPageUsers.Name = "xtraTabPageUsers";
-			this.xtraTabPageUsers.Size = new System.Drawing.Size(375, 444);
+			this.xtraTabPageUsers.Size = new System.Drawing.Size(371, 441);
 			this.xtraTabPageUsers.Text = "Users";
 			// 
 			// gridControlUsers
@@ -185,7 +185,7 @@
 			this.gridControlUsers.Name = "gridControlUsers";
 			this.gridControlUsers.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemCheckEditUser});
-			this.gridControlUsers.Size = new System.Drawing.Size(375, 398);
+			this.gridControlUsers.Size = new System.Drawing.Size(371, 395);
 			this.gridControlUsers.TabIndex = 1;
 			this.gridControlUsers.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewUsers});
@@ -271,7 +271,7 @@
 			this.pnAssignedUsers.ForeColor = System.Drawing.Color.Black;
 			this.pnAssignedUsers.Location = new System.Drawing.Point(0, 0);
 			this.pnAssignedUsers.Name = "pnAssignedUsers";
-			this.pnAssignedUsers.Size = new System.Drawing.Size(375, 46);
+			this.pnAssignedUsers.Size = new System.Drawing.Size(371, 46);
 			this.pnAssignedUsers.TabIndex = 2;
 			// 
 			// buttonXUsersClearAll
@@ -281,7 +281,7 @@
 			this.buttonXUsersClearAll.CausesValidation = false;
 			this.buttonXUsersClearAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXUsersClearAll.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.buttonXUsersClearAll.Location = new System.Drawing.Point(256, 7);
+			this.buttonXUsersClearAll.Location = new System.Drawing.Point(252, 7);
 			this.buttonXUsersClearAll.Name = "buttonXUsersClearAll";
 			this.buttonXUsersClearAll.Size = new System.Drawing.Size(90, 33);
 			this.buttonXUsersClearAll.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -312,7 +312,7 @@
 			this.xtraTabPageGroups.Controls.Add(this.gridControlGroups);
 			this.xtraTabPageGroups.Controls.Add(this.pnAssignedGroups);
 			this.xtraTabPageGroups.Name = "xtraTabPageGroups";
-			this.xtraTabPageGroups.Size = new System.Drawing.Size(375, 444);
+			this.xtraTabPageGroups.Size = new System.Drawing.Size(371, 441);
 			this.xtraTabPageGroups.Text = "Groups";
 			// 
 			// gridControlGroups
@@ -327,7 +327,7 @@
 			this.gridControlGroups.Name = "gridControlGroups";
 			this.gridControlGroups.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemCheckEditGroup});
-			this.gridControlGroups.Size = new System.Drawing.Size(375, 398);
+			this.gridControlGroups.Size = new System.Drawing.Size(371, 395);
 			this.gridControlGroups.TabIndex = 2;
 			this.gridControlGroups.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewGroups});
@@ -413,7 +413,7 @@
 			this.pnAssignedGroups.ForeColor = System.Drawing.Color.Black;
 			this.pnAssignedGroups.Location = new System.Drawing.Point(0, 0);
 			this.pnAssignedGroups.Name = "pnAssignedGroups";
-			this.pnAssignedGroups.Size = new System.Drawing.Size(375, 46);
+			this.pnAssignedGroups.Size = new System.Drawing.Size(371, 46);
 			this.pnAssignedGroups.TabIndex = 1;
 			// 
 			// buttonXGroupsClearAll
@@ -423,7 +423,7 @@
 			this.buttonXGroupsClearAll.CausesValidation = false;
 			this.buttonXGroupsClearAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXGroupsClearAll.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.buttonXGroupsClearAll.Location = new System.Drawing.Point(256, 7);
+			this.buttonXGroupsClearAll.Location = new System.Drawing.Point(252, 7);
 			this.buttonXGroupsClearAll.Name = "buttonXGroupsClearAll";
 			this.buttonXGroupsClearAll.Size = new System.Drawing.Size(90, 33);
 			this.buttonXGroupsClearAll.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -474,7 +474,8 @@
 			// 
 			// FormEditPage
 			// 
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
 			this.ClientSize = new System.Drawing.Size(381, 617);
 			this.Controls.Add(this.checkEditapplyForLibrary);

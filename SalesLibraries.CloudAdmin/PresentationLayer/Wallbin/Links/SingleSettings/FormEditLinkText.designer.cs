@@ -110,7 +110,7 @@
 			// 
 			// FormEditLinkText
 			// 
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.ClientSize = new System.Drawing.Size(824, 314);
 			this.Controls.Add(this.checkEditTextWordWrap);
 			this.Controls.Add(this.memoEdit);

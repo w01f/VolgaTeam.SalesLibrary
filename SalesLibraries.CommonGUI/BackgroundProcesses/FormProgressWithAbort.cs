@@ -18,12 +18,6 @@ namespace SalesLibraries.CommonGUI.BackgroundProcesses
 		public FormProgressWithAbort()
 		{
 			InitializeComponent();
-			if ((CreateGraphics()).DpiX > 96)
-			{
-				laTitle.Font = new Font(laTitle.Font.FontFamily, laTitle.Font.Size - 2, laTitle.Font.Style);
-				laTime.Font = new Font(laTime.Font.FontFamily, laTime.Font.Size - 2, laTime.Font.Style);
-			}
-
 			Left = Screen.PrimaryScreen.WorkingArea.Width - Width - 20;
 			Top = Screen.PrimaryScreen.WorkingArea.Height - Height - 20;
 

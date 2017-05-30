@@ -806,7 +806,7 @@
 			// 
 			// FormCompactWallbin
 			// 
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.ClientSize = new System.Drawing.Size(398, 555);
 			this.Controls.Add(this.panelMain);
 			this.Controls.Add(this.panelTop);

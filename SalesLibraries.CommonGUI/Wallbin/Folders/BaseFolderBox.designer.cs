@@ -109,7 +109,7 @@
 			// BaseFolderBox
 			// 
 			this.AllowDrop = true;
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.Controls.Add(this.pnBorders);
 			this.Name = "BaseFolderBox";
 			this.Size = new System.Drawing.Size(311, 308);

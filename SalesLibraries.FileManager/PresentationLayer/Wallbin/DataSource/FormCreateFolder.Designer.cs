@@ -108,7 +108,7 @@
 			// 
 			// FormCreateFolder
 			// 
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.ClientSize = new System.Drawing.Size(393, 108);
 			this.Controls.Add(this.textEditName);
 			this.Controls.Add(this.laName);
