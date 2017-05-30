@@ -389,6 +389,7 @@
 					$libraryFilesModel = new LibraryFilesModel();
 					$libraryFilesModel->library = $resultRecord['library'];
 					$libraryFilesModel->libraryDate = $resultRecord['library_date'];
+					$libraryFilesModel->pageName = $resultRecord['page_name'];
 					$libraryFilesModel->linkId = $resultRecord['link_id'];
 					$libraryFilesModel->linkName = $resultRecord['link_name'];
 					$libraryFilesModel->fileName = $resultRecord['file_name'];

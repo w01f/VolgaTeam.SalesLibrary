@@ -99,19 +99,31 @@
 			leftButton.on('click', function ()
 			{
 				$(this).blur();
+
+				feedContainer.find('.carousel-inner .item').css('transition-duration', viewSettings.manualAnimationSpeed + 's');
 				feedContainer.find('.carousel').carousel('prev');
+				setTimeout(function(){
+					feedContainer.find('.carousel-inner .item').css('transition-duration', viewSettings.autoAnimationSpeed + 's');
+				}, 1500);
 			});
 
 			rightButton.prop('href', '#');
 			rightButton.off('click').on('click', function ()
 			{
 				$(this).blur();
+
+				feedContainer.find('.carousel-inner .item').css('transition-duration', viewSettings.manualAnimationSpeed + 's');
 				feedContainer.find('.carousel').carousel('next');
+				setTimeout(function(){
+					feedContainer.find('.carousel-inner .item').css('transition-duration', viewSettings.autoAnimationSpeed + 's');
+				}, 1500);
 			});
 		};
 
 		var initSlider = function ()
 		{
+			feedContainer.find('.carousel-inner .item').css('transition-duration', viewSettings.autoAnimationSpeed + 's');
+
 			feedContainer.find('.carousel-slide-show').carousel();
 
 			feedContainer.find('.carousel .carousel-inner').swipe({
@@ -161,15 +173,24 @@
 				$(this).carousel('cycle')
 			});
 
-			feedContainer.on('mousewheel DOMMouseScroll', function (event)
+			feedContainer.on('mousewheel DOMMouseScroll', function (e)
 			{
-				event.stopPropagation();
-				event.preventDefault();
+				e.stopPropagation();
+				e.preventDefault();
 
-				if (event.originalEvent.wheelDelta > 0 || event.originalEvent.detail < 0)
-					feedContainer.find('.carousel').carousel('prev');
-				else
+				if(e.originalEvent.wheelDelta / 120 > 0) {
+					feedContainer.find('.carousel-inner .item').css('transition-duration', viewSettings.scrollAnimationSpeed + 's');
 					feedContainer.find('.carousel').carousel('next');
+					setTimeout(function(){
+						feedContainer.find('.carousel-inner .item').css('transition-duration', viewSettings.autoAnimationSpeed + 's');
+					}, 1500);
+				} else {
+					feedContainer.find('.carousel-inner .item').css('transition-duration', viewSettings.scrollAnimationSpeed + 's');
+					feedContainer.find('.carousel').carousel('prev');
+					setTimeout(function(){
+						feedContainer.find('.carousel-inner .item').css('transition-duration', viewSettings.autoAnimationSpeed + 's');
+					}, 1500);
+				}
 			});
 
 			$.SalesPortal.ShortcutsManager.assignShortcutItemHandlers(feedContainer);
@@ -187,6 +208,9 @@
 		this.dataItemSettings = undefined;
 		this.controlSettings = undefined;
 		this.controlsStyle = undefined;
+		this.autoAnimationSpeed = undefined;
+		this.manualAnimationSpeed = undefined;
+		this.scrollAnimationSpeed = undefined;
 
 		for (var property in data)
 			if (data.hasOwnProperty(property))

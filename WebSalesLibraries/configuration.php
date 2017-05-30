@@ -113,10 +113,8 @@
 				'froala_editor' => array(
 					'key' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
 				),
-				'ifly_chat' => array(
-					'enabled' => false,
-					'app_id' => 'e84d4792-4d04-4da4-a7da-3a51bcd986d7',
-					'app_key' => 'H8jp4ubbW2Yx9w7wJIvE_5mmeOpkqL3gIJyf0thuPvcW48909'
+				'comet_chat' => array(
+					'enabled' => true,
 				),
 			),
 			'components' => array(

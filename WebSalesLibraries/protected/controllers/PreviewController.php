@@ -11,6 +11,12 @@
 	 */
 	class PreviewController extends IsdController
 	{
+		/** return boolean */
+		protected function getIsPublicController()
+		{
+			return true;
+		}
+
 		public function getViewPath()
 		{
 			return YiiBase::getPathOfAlias($this->pathPrefix . 'preview');

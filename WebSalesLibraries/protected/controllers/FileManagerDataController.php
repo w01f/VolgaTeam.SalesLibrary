@@ -74,6 +74,7 @@
 					{
 						$linkRecord = LinkRecord::getLinkById($linkInfo->linkId);
 						$linkRecord->tags = $linkInfo->keywords;
+						$linkRecord->date_modify = date(Yii::app()->params['mysqlDateTimeFormat'], time());
 						$linkRecord->save();
 
 						LinkCategoryRecord::model()->deleteAll('id_link=?', array($linkRecord->id));

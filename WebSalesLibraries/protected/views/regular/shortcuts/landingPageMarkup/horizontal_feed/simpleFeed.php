@@ -100,20 +100,6 @@
     #horizontal-feed-carousel-<? echo $feedId; ?> .portfolio_utube_carousel_control_icons {
         line-height: <?echo $viewSettings->style->controlButtonHeight;?>px !important;
     }
-
-    #horizontal-feed-carousel-<? echo $feedId; ?> .carousel-inner > .item {
-        -webkit-transition: <? echo $viewSettings->animationSpeed;?>s ease-in-out left;
-        -o-transition: <? echo $viewSettings->animationSpeed;?>s ease-in-out left;
-        transition: <? echo $viewSettings->animationSpeed;?>s ease-in-out left;
-    }
-
-    @media all and (transform-3d), (-webkit-transform-3d) {
-        #horizontal-feed-carousel-<? echo $feedId; ?> .carousel-inner > .item {
-            -webkit-transition: -webkit-transform <? echo $viewSettings->animationSpeed;?>s ease-in-out;
-            -o-transition: -o-transform <? echo $viewSettings->animationSpeed;?>s ease-in-out;
-            transition: transform <? echo $viewSettings->animationSpeed;?>s ease-in-out;
-        }
-    }
 </style>
 <div id="horizontal-feed-<? echo $feedId; ?>" class="row horizontal-feed">
 	<div class="service-data">

@@ -4,6 +4,7 @@ CREATE PROCEDURE sp_get_library_files_report()
     lib.name as library,
     lib.path as library_path,
     lib.last_update as library_date,
+    pg.name as page_name,
     l.id as link_id,
     l.name as link_name,
     l.file_name as file_name,
@@ -17,6 +18,8 @@ CREATE PROCEDURE sp_get_library_files_report()
     l.date_modify as link_modify_date
   from tbl_library lib
     join tbl_link l on l.id_library = lib.id
+    join tbl_folder f on f.id = l.id_folder
+    join tbl_page pg on pg.id = f.id_page
     left join tbl_preview p on p.id_container = l.id_preview
     left join tbl_link_category l_c on l_c.id_link = l.id
   where l.type in (0,1,3,4,10,11,12,999)

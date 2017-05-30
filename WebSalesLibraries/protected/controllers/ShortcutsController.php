@@ -25,43 +25,46 @@
 			$shortcutId = Yii::app()->request->getQuery('linkId');
 			/** @var  $shortcutRecord ShortcutLinkRecord */
 			$shortcutRecord = ShortcutLinkRecord::model()->findByPk($shortcutId);
-			/** @var  $shortcut PageContentShortcut */
-			$shortcut = $shortcutRecord->getModel($this->isPhone);
-			$shortcut->loadPageConfig();
-
-			if (UserIdentity::isUserAuthorized() || ($shortcut->allowPublicAccess && !isset($shortcut->publicPassword)))
-				$this->renderSinglePage($shortcut);
-			else if ($shortcut->allowPublicAccess && isset($shortcut->publicPassword))
+			if (isset($shortcutRecord))
 			{
-				$passwordSessionKey = sprintf('shortcutPassword%s', $shortcutId);
-				$savedPassword = Yii::app()->session[$passwordSessionKey];
-				if ($shortcut->publicPassword == $savedPassword)
-					$this->renderSinglePage($shortcut);
-				else
-				{
-					$passwordModel = new PublicPageContentShortcutPasswordForm();
-					$passwordModel->shortcutId = $shortcutId;
-					$passwordModel->isPhone = $shortcutId;
+				/** @var  $shortcut PageContentShortcut */
+				$shortcut = $shortcutRecord->getModel($this->isPhone);
+				$shortcut->loadPageConfig();
 
-					$attributes = Yii::app()->request->getPost('PublicPageContentShortcutPasswordForm');
-					if (isset($attributes))
+				if (UserIdentity::isUserAuthorized() || ($shortcut->allowPublicAccess && !isset($shortcut->publicPassword)))
+					$this->renderSinglePage($shortcut);
+				else if ($shortcut->allowPublicAccess && isset($shortcut->publicPassword))
+				{
+					$passwordSessionKey = sprintf('shortcutPassword%s', $shortcutId);
+					$savedPassword = Yii::app()->session[$passwordSessionKey];
+					if ($shortcut->publicPassword == $savedPassword)
+						$this->renderSinglePage($shortcut);
+					else
 					{
-						$passwordModel->attributes = $attributes;
-						$passwordModel->password = $attributes['password'];
-						if ($passwordModel->validate())
+						$passwordModel = new PublicPageContentShortcutPasswordForm();
+						$passwordModel->shortcutId = $shortcutId;
+						$passwordModel->isPhone = $shortcutId;
+
+						$attributes = Yii::app()->request->getPost('PublicPageContentShortcutPasswordForm');
+						if (isset($attributes))
 						{
-							Yii::app()->session[$passwordSessionKey] = $passwordModel->password;
-							$this->renderSinglePage($shortcut);
+							$passwordModel->attributes = $attributes;
+							$passwordModel->password = $attributes['password'];
+							if ($passwordModel->validate())
+							{
+								Yii::app()->session[$passwordSessionKey] = $passwordModel->password;
+								$this->renderSinglePage($shortcut);
+							}
+							else
+								$this->render('publicLogin', array('formData' => $passwordModel, 'shortcut' => $shortcut));
 						}
 						else
 							$this->render('publicLogin', array('formData' => $passwordModel, 'shortcut' => $shortcut));
 					}
-					else
-						$this->render('publicLogin', array('formData' => $passwordModel, 'shortcut' => $shortcut));
 				}
+				else
+					Yii::app()->user->loginRequired();
 			}
-			else
-				Yii::app()->user->loginRequired();
 		}
 
 		/** @var $shortcut BaseShortcut */

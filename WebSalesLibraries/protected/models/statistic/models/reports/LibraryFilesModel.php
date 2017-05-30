@@ -16,6 +16,11 @@
 		 */
 		public $libraryDate;
 		/**
+		 * @var string pageName
+		 * @soap
+		 */
+		public $pageName;
+		/**
 		 * @var string linkName
 		 * @soap
 		 */

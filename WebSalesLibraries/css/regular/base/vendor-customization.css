@@ -157,36 +157,84 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6
 }
 /*-------------------------------------------------------------------------------------------*/
 
-/*iFlyChat-----------------------------------------------------------------*/
-.ifc.ifc-popup #ifc-app .ifc-chat-list-container .ifc-chat-list .ifc-chat-list-roster
+/*Comet Chat-----------------------------------------------------------------*/
+#cometchat_userstab
+{
+    z-index: 8011 !important;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+}
+
+.cometchat_userscontentavatarimage,
+.cometchat_botscontentavatarimage,
+.cometchat_recentcontentavatarimage
+{
+    border: none !important;
+    border-radius: 0 !important;
+}
+
+.cometchat_tabtitle_header
+{
+    max-width: 100px !important;
+}
+
+.cometchat_userstabtitletext
+{
+    font-size: 10px !important;
+    line-height: 13px;
+}
+
+.cometchat_userstabtitle
+{
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+}
+
+.cometchat_tabtitle
+{
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+}
+
+#cometchat_chatboxes_wide .cometchat_tab
+{
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+}
+
+#cometchat_userstab_popup,
+#cometchat_optionsbutton_popup,
+#cometchat_announcements_popup,
+#cometchat_blockedusers_popup,
+#cometchat_bots_popup,
+#cometchat_newchat_popup,
+#cometchat_createchatroom_popup
+{
+    height: 425px !important;
+}
+
+#cometchat_chatboxes .cometchat_tabcontent
 {
     height: 388px !important;
+    max-height: 388px !important;
 }
 
-.ifc #ifc-app-container .ifc-chat-list .ifc-chat-list-roster .ifc-chat-list-roster-item .ifc-chat-list-roster-item-avatar .ifc-chat-list-roster-item-avatar-img, .ifc #ifc-app-container .ifc-chat-window .ifc-chat-list-roster .ifc-chat-list-roster-item .ifc-chat-list-roster-item-avatar .ifc-chat-list-roster-item-avatar-img
+.cometchat_inner_container
 {
-    border-radius: 0 !important;
+    height: 88px !important;
 }
 
-.ifc #ifc-app-container .ifc-chat-window .ifc-chat-window-content .ifc-chat-window-message-wrapper-compact .ifc-chat-window-message-avatar-holder .ifc-chat-window-message-avatar .ifc-chat-window-message-avatar-img
+#cometchat textarea.cometchat_textarea
 {
-    border-radius: 0 !important;
+    height: 88px !important;
 }
 
-.ifc #ifc-app-container .ifc-chat-window .ifc-chat-window-footer
+#cometchat_userscontent,
+#cometchat_userscontent .slimScrollDiv,
+#cometchat_userscontent .slimScrollDiv>div,
+#cometchat_groupslist_content>div
 {
-    height: 172px !important;
-}
-
-.ifc #ifc-app-container .ifc-chat-window .ifc-chat-window-footer .ifc-chat-window-textbox
-{
-    height: 136px !important;
-}
-
-.ifc #ifc-app-container .ifc-chat-window .ifc-chat-window-footer .ifc-chat-window-textbox .ifc-chat-window-textbox-input
-{
-    padding-top: 10px  !important;
-    font-size: 14px  !important;
+    height: 345px !important;
 }
 /*-------------------------------------------------------------------------------*/
 

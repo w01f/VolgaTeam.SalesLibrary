@@ -33,7 +33,9 @@
 		public $slideShow;
 		public $slideShowInterval;
 		public $maxImageHeight;
-		public $animationSpeed;
+		public $autoAnimationSpeed;
+		public $manualAnimationSpeed;
+		public $scrollAnimationSpeed;
 
 		/** @var  FeedControlSettings[] */
 		public $controlSettings;
@@ -45,7 +47,9 @@
 			$this->slideShow = false;
 			$this->slideShowInterval = 5000;
 			$this->maxImageHeight = 0;
-			$this->animationSpeed = ".6";
+			$this->autoAnimationSpeed = ".6";
+			$this->manualAnimationSpeed = ".6";
+			$this->scrollAnimationSpeed = ".6";
 			$this->initDefaultControlSettings();
 		}
 
@@ -136,8 +140,14 @@
 			$queryResult = $xpath->query('./SlideShowInterval', $contextNode);
 			$this->slideShowInterval = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue)) : $this->slideShowInterval;
 
-			$queryResult = $xpath->query('./FadeSpeed', $contextNode);
-			$this->animationSpeed = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : $this->animationSpeed;
+			$queryResult = $xpath->query('./AutoFadeSpeed', $contextNode);
+			$this->autoAnimationSpeed = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : $this->autoAnimationSpeed;
+
+			$queryResult = $xpath->query('./ButtonFadeSpeed', $contextNode);
+			$this->manualAnimationSpeed = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : $this->manualAnimationSpeed;
+
+			$queryResult = $xpath->query('./MouseWheelFadeSpeed', $contextNode);
+			$this->scrollAnimationSpeed = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : $this->scrollAnimationSpeed;
 
 			$queryResult = $xpath->query('./ControlSettings/Item', $contextNode);
 			/** @var $node \DOMElement */
