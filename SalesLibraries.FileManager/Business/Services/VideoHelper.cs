@@ -130,16 +130,63 @@ namespace SalesLibraries.FileManager.Business.Services
 		{
 			var allowToExit = false;
 			var converterPath = Path.Combine(MainController.Instance.Settings.FFMpegPackagePath, "ffmpeg.exe");
-			var destinationOutputFilePath = Path.Combine(destinationPath, String.Format("{0}%d.png",Path.GetFileNameWithoutExtension(sourceFilePath)));
+			var destinationOutputFilePath = Path.Combine(destinationPath, String.Format("{0}%d.png", Path.GetFileNameWithoutExtension(sourceFilePath)));
 			if (!File.Exists(sourceFilePath) || !File.Exists(converterPath)) return;
+
+			int startDelay;
+			int endDelay;
+			int imagesCount;
+			if (ffMpegData.Duration < 7)
+			{
+				startDelay = 1;
+				endDelay = 0;
+				imagesCount = 4;
+			}
+			else if (ffMpegData.Duration < 10)
+			{
+				startDelay = 3;
+				endDelay = 0;
+				imagesCount = 4;
+			}
+			else if (ffMpegData.Duration < 20)
+			{
+				startDelay = 5;
+				endDelay = 2;
+				imagesCount = 5;
+			}
+			else if (ffMpegData.Duration < 60)
+			{
+				startDelay = 7;
+				endDelay = 5;
+				imagesCount = 10;
+			}
+			else if (ffMpegData.Duration < 300)
+			{
+				startDelay = 7;
+				endDelay = 5;
+				imagesCount = 15;
+			}
+			else
+			{
+				startDelay = 7;
+				endDelay = 5;
+				imagesCount = 20;
+			}
+
+			var everySecond = (int)Math.Ceiling((ffMpegData.Duration - startDelay - endDelay) / imagesCount);
+			var targetDuration = ffMpegData.Duration - startDelay - endDelay;
+
 			var videoConverter = new Process
 			{
 				StartInfo = new ProcessStartInfo(
-					converterPath, 
-					String.Format("-i \"{0}\" -vf fps=1/{2} \"{1}\"", 
-						sourceFilePath, 
+					converterPath,
+					String.Format("-i \"{0}\" -ss {2} -t {3} {4} -vframes {5} \"{1}\"",
+						sourceFilePath,
 						destinationOutputFilePath,
-						(int)Math.Floor(ffMpegData.Duration / 4)
+						targetDuration - startDelay < imagesCount ? targetDuration - imagesCount : startDelay,
+						targetDuration,
+						everySecond * imagesCount >= targetDuration ? "-vf fps=1" : String.Format("-vf fps=1/{0}", everySecond),
+						imagesCount
 						)
 					)
 				{
