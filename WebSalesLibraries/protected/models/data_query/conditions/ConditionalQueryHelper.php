@@ -173,10 +173,6 @@
 			}
 
 			$textConditions = self::prepareTextCondition($queryConditions->text, $queryConditions->textExactMatch);
-			if (!(isset($baseLinks) ||
-				(count($textConditions) > 0 || count($queryConditions->categories) > 0 || count($queryConditions->superFilters) > 0 || count($queryConditions->superFilters) > 0 || (isset($queryConditions->startDate) && isset($queryConditions->endDate))))
-			)
-				return array();
 
 			$libraryCondition = '1 = 1';
 			if (isset($queryConditions->libraries) && count($queryConditions->libraries) > 0)

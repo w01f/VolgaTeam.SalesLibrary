@@ -43,28 +43,11 @@
 		{
 			$feedItems = array();
 
-			$today = date(\Yii::app()->params['mysqlDateFormat']);
-			$startDate = $today;
-			$endDate = date(\Yii::app()->params['mysqlDateFormat'], strtotime($today . ' + 1 days'));
-			switch ($feedSettings->dateRangeType)
-			{
-				case "today":
-					$startDate = $today;
-					break;
-				case "week":
-					$startDate = date(\Yii::app()->params['mysqlDateFormat'], strtotime('last monday', strtotime('tomorrow')));
-					break;
-				case "month":
-					$startDate = date(\Yii::app()->params['mysqlDateFormat'], strtotime(date('Y-m-1')));
-					break;
-			}
-
 			$queryFormats = array();
 			foreach ($feedSettings->linkFormats as $linkFormat)
 				switch ($linkFormat)
 				{
 					case LinkFeedQuerySettings::LinkFormatPowerPoint:
-					case LinkFeedQuerySettings::LinkFormatVideo:
 					case LinkFeedQuerySettings::LinkFormatPdf:
 					case LinkFeedQuerySettings::LinkFormatWord:
 						$queryFormats[] = $linkFormat;
@@ -72,6 +55,11 @@
 					case LinkFeedQuerySettings::LinkFormatDocument:
 						$queryFormats[] = LinkFeedQuerySettings::LinkFormatWord;
 						$queryFormats[] = LinkFeedQuerySettings::LinkFormatPdf;
+						break;
+					case LinkFeedQuerySettings::LinkFormatVideo:
+						$queryFormats[] = $linkFormat;
+						$queryFormats[] = LinkFeedQuerySettings::LinkFormatYouTube;
+						$queryFormats[] = LinkFeedQuerySettings::LinkFormatVideo;
 						break;
 				}
 
@@ -86,6 +74,7 @@
 				'id_library' => 'link.id_library as id_library',
 				'library_name' => 'lib.name as library_name',
 				'name' => 'link.name as name',
+				'path' => 'link.file_relative_path as path',
 				'file_name' => 'link.file_name as file_name',
 				'search_format' => 'link.search_format as search_format',
 				'total_views' => 'count(s_a.id) as total_views',
@@ -117,12 +106,25 @@
 			$dbCommand = $dbCommand->join('tbl_page p', 'p.id = f.id_page');
 			$dbCommand = $dbCommand->join('tbl_library lib', 'lib.id = p.id_library');
 			$dbCommand = $dbCommand->join('tbl_statistic_link s_l', 's_l.id_link = link.id');
-			$dbCommand = $dbCommand->join('tbl_statistic_activity s_a', sprintf("s_a.id = s_l.id_activity and s_a.date_time>='%s' and s_a.date_time<='%s'", $startDate, $endDate));
+			$dbCommand = $dbCommand->join('tbl_statistic_activity s_a', "s_a.id = s_l.id_activity");
 
 			$whereConditions = array(
 				'AND',
 				sprintf('link.search_format in (\'%s\')', implode("','", $queryFormats)),
 			);
+
+			switch ($feedSettings->dateRangeType)
+			{
+				case "today":
+					$whereConditions[] = sprintf("s_a.date_time>='%s'", date(\Yii::app()->params['mysqlDateFormat']));
+					break;
+				case "week":
+					$whereConditions[] = sprintf("s_a.date_time>='%s'", date(\Yii::app()->params['mysqlDateFormat'], strtotime('last monday', strtotime('tomorrow'))));
+					break;
+				case "month":
+					$whereConditions[] ="year(s_a.date_time) = year(curdate()) and month(s_a.date_time) = month(curdate())";
+					break;
+			}
 
 			if (count($feedSettings->libraries) > 0)
 				$whereConditions[] = sprintf('lib.name in (\'%s\')', implode("','", $feedSettings->libraries));
@@ -214,10 +216,22 @@
 				$feedItem->libraryName = $resultRecord['library_name'];
 				$feedItem->viewsCount = $resultRecord['total_views'];
 
-				$libraryId = $resultRecord['id_library'];
-				$library = $libraryManager->getLibraryById($libraryId);
-				$thumbnailRelativePath = $resultRecord['thumbnail'];
-				$feedItem->thumbnail = \Utils::formatUrl($library->storageLink . '//' . $thumbnailRelativePath);
+				switch ($resultRecord['search_format'])
+				{
+					case LinkFeedQuerySettings::LinkFormatYouTube:
+						if (preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $resultRecord['path'], $match))
+						{
+							$youTubeId = $match[1];
+							$feedItem->thumbnail = sprintf("https://img.youtube.com/vi/%s/0.jpg", $youTubeId);
+						}
+						break;
+					default:
+						$libraryId = $resultRecord['id_library'];
+						$library = $libraryManager->getLibraryById($libraryId);
+						$thumbnailRelativePath = $resultRecord['thumbnail'];
+						$feedItem->thumbnail = \Utils::formatUrl($library->storageLink . '//' . $thumbnailRelativePath);
+						break;
+				}
 
 				$feedItems[] = $feedItem;
 			}
@@ -239,10 +253,14 @@
 				switch ($linkFormat)
 				{
 					case LinkFeedQuerySettings::LinkFormatPowerPoint:
-					case LinkFeedQuerySettings::LinkFormatVideo:
 					case LinkFeedQuerySettings::LinkFormatPdf:
 					case LinkFeedQuerySettings::LinkFormatWord:
 						$feedSettings->conditions->fileTypes[] = $linkFormat;
+						break;
+					case LinkFeedQuerySettings::LinkFormatVideo:
+						$feedSettings->conditions->fileTypes[] = $linkFormat;
+						$feedSettings->conditions->fileTypes[] = LinkFeedQuerySettings::LinkFormatYouTube;
+						$feedSettings->conditions->fileTypes[] = LinkFeedQuerySettings::LinkFormatVimeo;
 						break;
 					case LinkFeedQuerySettings::LinkFormatDocument:
 						$feedSettings->conditions->fileTypes[] = LinkFeedQuerySettings::LinkFormatWord;
@@ -260,19 +278,31 @@
 			{
 				if (!empty($resultRecord['thumbnail']))
 				{
-					$trendingLink = new LinkFeedItem();
-					$trendingLink->linkId = $resultRecord['id'];
-					$trendingLink->linkName = $resultRecord['name'];
-					$trendingLink->format = $resultRecord['original_format'];
-					$trendingLink->libraryName = $resultRecord['library_name'];
-					$trendingLink->viewsCount = $resultRecord['total_views'];
+					$feedItem = new LinkFeedItem();
+					$feedItem->linkId = $resultRecord['id'];
+					$feedItem->linkName = $resultRecord['name'];
+					$feedItem->format = $resultRecord['original_format'];
+					$feedItem->libraryName = $resultRecord['library_name'];
+					$feedItem->viewsCount = $resultRecord['total_views'];
 
-					$libraryId = $resultRecord['id_library'];
-					$library = $libraryManager->getLibraryById($libraryId);
-					$thumbnailRelativePath = $resultRecord['thumbnail'];
-					$trendingLink->thumbnail = \Utils::formatUrl($library->storageLink . '//' . $thumbnailRelativePath);
+					switch ($resultRecord['original_format'])
+					{
+						case LinkFeedQuerySettings::LinkFormatYouTube:
+							if (preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $resultRecord['path'], $match))
+							{
+								$youTubeId = $match[1];
+								$feedItem->thumbnail = sprintf("https://img.youtube.com/vi/%s/0.jpg", $youTubeId);
+							}
+							break;
+						default:
+							$libraryId = $resultRecord['id_library'];
+							$library = $libraryManager->getLibraryById($libraryId);
+							$thumbnailRelativePath = $resultRecord['thumbnail'];
+							$feedItem->thumbnail = \Utils::formatUrl($library->storageLink . '//' . $thumbnailRelativePath);
+							break;
+					}
 
-					$feedItems[] = $trendingLink;
+					$feedItems[] = $feedItem;
 				}
 			}
 
@@ -314,6 +344,7 @@
 				'id_library' => 'link.id_library as id_library',
 				'library_name' => 'lib.name as library_name',
 				'name' => 'link.name as name',
+				'path' => 'link.file_relative_path as path',
 				'original_format' => 'link.original_format as original_format',
 				'link_date' => 'link.file_date as link_date',
 				'total_views' => '(select sum(aggr.link_views) from
@@ -352,7 +383,6 @@
 				switch ($linkFormat)
 				{
 					case LinkFeedQuerySettings::LinkFormatPowerPoint:
-					case LinkFeedQuerySettings::LinkFormatVideo:
 					case LinkFeedQuerySettings::LinkFormatPdf:
 					case LinkFeedQuerySettings::LinkFormatWord:
 						$queryFormats[] = $linkFormat;
@@ -360,6 +390,11 @@
 					case LinkFeedQuerySettings::LinkFormatDocument:
 						$queryFormats[] = LinkFeedQuerySettings::LinkFormatWord;
 						$queryFormats[] = LinkFeedQuerySettings::LinkFormatPdf;
+						break;
+					case LinkFeedQuerySettings::LinkFormatVideo:
+						$queryFormats[] = $linkFormat;
+						$queryFormats[] = LinkFeedQuerySettings::LinkFormatYouTube;
+						$queryFormats[] = LinkFeedQuerySettings::LinkFormatVideo;
 						break;
 				}
 
@@ -419,19 +454,31 @@
 			{
 				if (!empty($resultRecord['thumbnail']))
 				{
-					$trendingLink = new LinkFeedItem();
-					$trendingLink->linkId = $resultRecord['id'];
-					$trendingLink->linkName = $resultRecord['name'];
-					$trendingLink->format = $resultRecord['original_format'];
-					$trendingLink->libraryName = $resultRecord['library_name'];
-					$trendingLink->viewsCount = $resultRecord['total_views'];
+					$feedItem = new LinkFeedItem();
+					$feedItem->linkId = $resultRecord['id'];
+					$feedItem->linkName = $resultRecord['name'];
+					$feedItem->format = $resultRecord['original_format'];
+					$feedItem->libraryName = $resultRecord['library_name'];
+					$feedItem->viewsCount = $resultRecord['total_views'];
 
-					$libraryId = $resultRecord['id_library'];
-					$library = $libraryManager->getLibraryById($libraryId);
-					$thumbnailRelativePath = $resultRecord['thumbnail'];
-					$trendingLink->thumbnail = \Utils::formatUrl($library->storageLink . '//' . $thumbnailRelativePath);
+					switch ($resultRecord['original_format'])
+					{
+						case LinkFeedQuerySettings::LinkFormatYouTube:
+							if (preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $resultRecord['path'], $match))
+							{
+								$youTubeId = $match[1];
+								$feedItem->thumbnail = sprintf("https://img.youtube.com/vi/%s/0.jpg", $youTubeId);
+							}
+							break;
+						default:
+							$libraryId = $resultRecord['id_library'];
+							$library = $libraryManager->getLibraryById($libraryId);
+							$thumbnailRelativePath = $resultRecord['thumbnail'];
+							$feedItem->thumbnail = \Utils::formatUrl($library->storageLink . '//' . $thumbnailRelativePath);
+							break;
+					}
 
-					$feedItems[] = $trendingLink;
+					$feedItems[] = $feedItem;
 				}
 			}
 

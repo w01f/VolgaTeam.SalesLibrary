@@ -1,4 +1,5 @@
 <?
+
 	namespace application\models\data_query\data_table;
 
 	use application\models\wallbin\models\web\LibraryLink;
@@ -168,6 +169,13 @@
 										$imageFileName = null;
 										switch ($linkRecord['search_format'])
 										{
+											case 'youtube':
+												if (preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $fileInfo->link, $match))
+												{
+													$youTubeId = $match[1];
+													$imageUrl = sprintf("https://img.youtube.com/vi/%s/0.jpg", $youTubeId);
+												}
+												break;
 											case 'app':
 											case 'doc':
 											case 'html5':
@@ -182,7 +190,6 @@
 											case 'video':
 											case 'vimeo':
 											case 'xls':
-											case 'youtube':
 											case 'internal library':
 											case 'internal page':
 											case 'internal shortcut':

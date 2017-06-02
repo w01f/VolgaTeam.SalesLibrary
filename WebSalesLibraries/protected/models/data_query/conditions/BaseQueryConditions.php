@@ -83,7 +83,7 @@
 				switch ($startDateText)
 				{
 					case "today":
-						$this->startDate = date(\Yii::app()->params['outputDateFormat'], strtotime($today . ' + 1 days'));
+						$this->startDate = $today;
 						break;
 					case "yesterday":
 						$this->startDate = date(\Yii::app()->params['outputDateFormat'], strtotime($today . ' - 1 days'));

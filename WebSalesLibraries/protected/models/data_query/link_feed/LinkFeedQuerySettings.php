@@ -17,6 +17,8 @@
 		const LinkFormatWord = 'doc';
 		const LinkFormatPdf = 'pdf';
 		const LinkFormatVideo = 'video';
+		const LinkFormatYouTube = 'youtube';
+		const LinkFormatVimeo = 'vimeo';
 
 		public $feedType;
 

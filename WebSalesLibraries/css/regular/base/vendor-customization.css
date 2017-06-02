@@ -167,7 +167,9 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6
 
 .cometchat_userscontentavatarimage,
 .cometchat_botscontentavatarimage,
-.cometchat_recentcontentavatarimage
+.cometchat_recentcontentavatarimage,
+.ccmsg_avatar,
+.cometchat_userscontentavatarsmall
 {
     border: none !important;
     border-radius: 0 !important;
@@ -210,23 +212,23 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6
 #cometchat_newchat_popup,
 #cometchat_createchatroom_popup
 {
-    height: 425px !important;
+    /*height: 425px !important;*/
 }
 
 #cometchat_chatboxes .cometchat_tabcontent
 {
-    height: 388px !important;
-    max-height: 388px !important;
+    /*height: 388px !important;*/
+    /*max-height: 388px !important;*/
 }
 
 .cometchat_inner_container
 {
-    height: 88px !important;
+    /*height: 88px !important;*/
 }
 
 #cometchat textarea.cometchat_textarea
 {
-    height: 88px !important;
+    /*height: 88px !important;*/
 }
 
 #cometchat_userscontent,
@@ -234,7 +236,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6
 #cometchat_userscontent .slimScrollDiv>div,
 #cometchat_groupslist_content>div
 {
-    height: 345px !important;
+    /*height: 345px !important;*/
 }
 /*-------------------------------------------------------------------------------*/
 
