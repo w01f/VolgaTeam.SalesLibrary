@@ -176,6 +176,22 @@
 													$imageUrl = sprintf("https://img.youtube.com/vi/%s/0.jpg", $youTubeId);
 												}
 												break;
+											case 'vimeo':
+												if (preg_match('/https?:\/\/(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|(\w*\/)*review\/|)(\d+)(?:$|\/|\?)/', $fileInfo->link, $match))
+												{
+													try
+													{
+														$vimeoId = $match[4];
+														$vimeoInfo = \CJSON::decode(@file_get_contents(sprintf("http://vimeo.com/api/v2/video/%s.json", $vimeoId)), true);
+														$imageUrl = $vimeoInfo[0]["thumbnail_large"];
+													}
+													catch (\Exception $ex)
+													{
+													}
+												}
+												if (empty($imageUrl))
+													$imageUrl = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/grid/thumbnail-placeholder/vimeo.png');
+												break;
 											case 'app':
 											case 'doc':
 											case 'html5':
@@ -188,7 +204,6 @@
 											case 'quicksite':
 											case 'url':
 											case 'video':
-											case 'vimeo':
 											case 'xls':
 											case 'internal library':
 											case 'internal page':

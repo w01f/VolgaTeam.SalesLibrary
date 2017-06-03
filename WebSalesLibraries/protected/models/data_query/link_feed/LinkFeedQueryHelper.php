@@ -59,6 +59,7 @@
 					case LinkFeedQuerySettings::LinkFormatVideo:
 						$queryFormats[] = $linkFormat;
 						$queryFormats[] = LinkFeedQuerySettings::LinkFormatYouTube;
+						$queryFormats[] = LinkFeedQuerySettings::LinkFormatVimeo;
 						$queryFormats[] = LinkFeedQuerySettings::LinkFormatVideo;
 						break;
 				}
@@ -122,7 +123,7 @@
 					$whereConditions[] = sprintf("s_a.date_time>='%s'", date(\Yii::app()->params['mysqlDateFormat'], strtotime('last monday', strtotime('tomorrow'))));
 					break;
 				case "month":
-					$whereConditions[] ="year(s_a.date_time) = year(curdate()) and month(s_a.date_time) = month(curdate())";
+					$whereConditions[] = "year(s_a.date_time) = year(curdate()) and month(s_a.date_time) = month(curdate())";
 					break;
 			}
 
@@ -225,6 +226,22 @@
 							$feedItem->thumbnail = sprintf("https://img.youtube.com/vi/%s/0.jpg", $youTubeId);
 						}
 						break;
+					case LinkFeedQuerySettings::LinkFormatVimeo:
+						if (preg_match('/https?:\/\/(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|(\w*\/)*review\/|)(\d+)(?:$|\/|\?)/', $resultRecord['path'], $match))
+						{
+							try
+							{
+								$vimeoId = $match[4];
+								$vimeoInfo = \CJSON::decode(@file_get_contents(sprintf("http://vimeo.com/api/v2/video/%s.json", $vimeoId)), true);
+								$feedItem->thumbnail = $vimeoInfo[0]["thumbnail_large"];
+							}
+							catch (\Exception $ex)
+							{
+							}
+						}
+						if (empty($feedItem->thumbnail))
+							$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/grid/thumbnail-placeholder/vimeo.png');
+						break;
 					default:
 						$libraryId = $resultRecord['id_library'];
 						$library = $libraryManager->getLibraryById($libraryId);
@@ -293,6 +310,22 @@
 								$youTubeId = $match[1];
 								$feedItem->thumbnail = sprintf("https://img.youtube.com/vi/%s/0.jpg", $youTubeId);
 							}
+							break;
+						case LinkFeedQuerySettings::LinkFormatVimeo:
+							if (preg_match('/https?:\/\/(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|(\w*\/)*review\/|)(\d+)(?:$|\/|\?)/', $resultRecord['path'], $match))
+							{
+								try
+								{
+									$vimeoId = $match[4];
+									$vimeoInfo = \CJSON::decode(@file_get_contents(sprintf("http://vimeo.com/api/v2/video/%s.json", $vimeoId)), true);
+									$feedItem->thumbnail = $vimeoInfo[0]["thumbnail_large"];
+								}
+								catch (\Exception $ex)
+								{
+								}
+							}
+							if (empty($feedItem->thumbnail))
+								$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/grid/thumbnail-placeholder/vimeo.png');
 							break;
 						default:
 							$libraryId = $resultRecord['id_library'];
@@ -394,6 +427,7 @@
 					case LinkFeedQuerySettings::LinkFormatVideo:
 						$queryFormats[] = $linkFormat;
 						$queryFormats[] = LinkFeedQuerySettings::LinkFormatYouTube;
+						$queryFormats[] = LinkFeedQuerySettings::LinkFormatVimeo;
 						$queryFormats[] = LinkFeedQuerySettings::LinkFormatVideo;
 						break;
 				}
@@ -469,6 +503,22 @@
 								$youTubeId = $match[1];
 								$feedItem->thumbnail = sprintf("https://img.youtube.com/vi/%s/0.jpg", $youTubeId);
 							}
+							break;
+						case LinkFeedQuerySettings::LinkFormatVimeo:
+							if (preg_match('/https?:\/\/(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|(\w*\/)*review\/|)(\d+)(?:$|\/|\?)/', $resultRecord['path'], $match))
+							{
+								try
+								{
+									$vimeoId = $match[4];
+									$vimeoInfo = \CJSON::decode(@file_get_contents(sprintf("http://vimeo.com/api/v2/video/%s.json", $vimeoId)), true);
+									$feedItem->thumbnail = $vimeoInfo[0]["thumbnail_large"];
+								}
+								catch (\Exception $ex)
+								{
+								}
+							}
+							if (empty($feedItem->thumbnail))
+								$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/grid/thumbnail-placeholder/vimeo.png');
 							break;
 						default:
 							$libraryId = $resultRecord['id_library'];
