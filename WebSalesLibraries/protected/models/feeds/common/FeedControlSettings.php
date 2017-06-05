@@ -4,14 +4,8 @@
 	/**
 	 * Class FeedControlSettings
 	 */
-	abstract class FeedControlSettings
+	class FeedControlSettings
 	{
-		const ControlTagScrollButton = 'scroll';
-
-		const ControlTagLinkFormatPowerPoint = 'ppt';
-		const ControlTagLinkFormatVideo = 'video';
-		const ControlTagLinkFormatDocuments = 'document';
-
 		public $enabled;
 		public $title;
 
@@ -21,27 +15,6 @@
 		public function __construct()
 		{
 			$this->hideCondition = new \HideCondition();
-		}
-
-		/**
-		 * @param $tag string
-		 */
-		protected function initDefaults($tag){
-			switch ($tag)
-			{
-				case self::ControlTagLinkFormatPowerPoint:
-					$this->enabled = true;
-					$this->title = 'presentations';
-					break;
-				case self::ControlTagLinkFormatDocuments:
-					$this->enabled = true;
-					$this->title = 'documents';
-					break;
-				case self::ControlTagLinkFormatVideo:
-					$this->enabled = true;
-					$this->title = 'video';
-					break;
-			}
 		}
 
 		/**

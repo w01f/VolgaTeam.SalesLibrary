@@ -21,13 +21,14 @@
     }
 
     #content .navigation-panel.expanded li a {
-        padding-bottom: <?echo $navigationPanel->itemsGapExpanded;?>px;
+        padding-top: <?echo intval($navigationPanel->itemsGapExpanded/2);?>px;
+        padding-bottom: <?echo intval($navigationPanel->itemsGapExpanded/2);?>px;
     }
 
     #content .navigation-panel.expanded .control-bar a:hover,
     #content .navigation-panel.expanded .control-bar a:focus:hover,
-    #content .navigation-panel.expanded li a:hover,
-    #content .navigation-panel.expanded li a:focus:hover {
+    #content .navigation-panel.expanded li.enabled a:hover,
+    #content .navigation-panel.expanded li.enabled a:focus:hover {
         background-color: <?echo Utils::formatColor($navigationPanel->hoverColorExpanded);?>;
     }
 
@@ -37,13 +38,14 @@
     }
 
     #content .navigation-panel.collapsed li a {
-        padding-bottom: <?echo $navigationPanel->itemsGapCollapsed;?>px;
+        padding-top: <?echo intval($navigationPanel->itemsGapCollapsed/2);?>px;
+        padding-bottom: <?echo intval($navigationPanel->itemsGapCollapsed/2);?>px;
     }
 
     #content .navigation-panel.collapsed .control-bar a:hover,
     #content .navigation-panel.collapsed .control-bar a:focus:hover,
-    #content .navigation-panel.collapsed li a:hover,
-    #content .navigation-panel.collapsed li a:focus:hover {
+    #content .navigation-panel.collapsed li.enabled a:hover,
+    #content .navigation-panel.collapsed li.enabled a:focus:hover {
         background-color: <?echo Utils::formatColor($navigationPanel->hoverColorCollapsed);?>;
     }
 </style>
@@ -59,7 +61,7 @@
     <div class="navigation-item-list">
         <ul class="nav nav-pills">
 			<? foreach ($navigationPanel->items as $navigationItem): ?>
-                <li class="navigation-item<? if (!$navigationItem->enabled): ?> disabled<? endif; ?>" <? if (!Yii::app()->browser->isMobile() && !empty($navigationItem->tooltip)): ?> title="<? echo $navigationItem->tooltip; ?>"<? endif; ?>>
+                <li class="navigation-item<? if ($navigationItem->enabled): ?> enabled<?else:?> disabled<? endif; ?>" <? if (!Yii::app()->browser->isMobile() && !empty($navigationItem->tooltip)): ?> title="<? echo $navigationItem->tooltip; ?>"<? endif; ?>>
 					<?
 						$viewPath = \Yii::getPathOfAlias('application.views.regular.shortcuts.navigationPanel') . '/' . $navigationItem->contentView . '.php';
 						echo $this->renderFile($viewPath, array('itemData' => $navigationItem), true);

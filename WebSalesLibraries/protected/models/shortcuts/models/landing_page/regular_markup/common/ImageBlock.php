@@ -34,7 +34,7 @@
 
 			$queryResult = $xpath->query('./File', $contextNode);
 			$fileName = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
-			$this->source = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . $this->parentShortcut->relativeLink . '/images/' . $fileName);
+			$this->source = $this->imagePath . $fileName;
 
 			$queryResult = $xpath->query('./Float', $contextNode);
 			$this->floatSide = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;

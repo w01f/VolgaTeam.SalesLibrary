@@ -2,7 +2,7 @@
 
 	namespace application\models\feeds\vertical;
 
-	use application\models\feeds\common\SearchFeedControlSettings;
+	use application\models\feeds\common\FeedControlFactory;
 
 	/**
 	 * Class SearchFeedSettings
@@ -18,7 +18,7 @@
 		protected function initDefaultControlSettings()
 		{
 			$this->controlSettings = new \stdClass();
-			foreach (SearchFeedControlSettings::$tags as $tag)
-				$this->controlSettings->{$tag} = SearchFeedControlSettings::createDefault($tag);
+			foreach (FeedControlFactory::getAvailableControlTags(FeedControlFactory::FeedTypeSearch) as $tag)
+				$this->controlSettings->{$tag} = FeedControlFactory::getControl(FeedControlFactory::FeedTypeSearch, $tag);
 		}
 	}

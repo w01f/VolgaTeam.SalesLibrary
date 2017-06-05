@@ -206,12 +206,13 @@
 
 			if ($viewName != '')
 			{
+				$viewParameters = $shortcut->getViewParameters();
 				if ($this->isPhone && $useMobileWrapper)
 					$content = $this->renderPartial(
 						'pages/pageWrapper',
 						array_merge(
-							$shortcut->getViewParameters(),
-							array('shortcutContent' => $this->renderPartial('pages/' . $viewName, $shortcut->getViewParameters(), true))
+							$viewParameters,
+							array('shortcutContent' => $this->renderPartial('pages/' . $viewName, $viewParameters, true))
 						),
 						true);
 				else

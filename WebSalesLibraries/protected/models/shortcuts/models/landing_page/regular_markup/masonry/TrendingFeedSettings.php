@@ -2,7 +2,7 @@
 
 	namespace application\models\shortcuts\models\landing_page\regular_markup\masonry;
 
-	use application\models\feeds\common\TrendingFeedControlSettings;
+	use application\models\feeds\common\FeedControlFactory;
 
 	/**
 	 * Class TrendingFeedSettings
@@ -18,7 +18,7 @@
 		protected function initDefaultControlSettings()
 		{
 			$this->controlSettings = new \stdClass();
-			foreach (TrendingFeedControlSettings::$tags as $tag)
-				$this->controlSettings->{$tag} = TrendingFeedControlSettings::createDefault($tag);
+			foreach (FeedControlFactory::getAvailableControlTags(FeedControlFactory::FeedTypeTrending) as $tag)
+				$this->controlSettings->{$tag} = FeedControlFactory::getControl(FeedControlFactory::FeedTypeTrending, $tag);
 		}
 	}

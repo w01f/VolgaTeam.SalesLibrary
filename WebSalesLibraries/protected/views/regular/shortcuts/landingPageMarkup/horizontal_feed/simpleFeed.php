@@ -1,5 +1,6 @@
 <?
 	use application\models\feeds\common\FeedControlSettings;
+	use application\models\feeds\common\FeedControlTag;
 	use application\models\feeds\horizontal\FeedSettings;
 	use application\models\feeds\horizontal\SimpleFeedSettings;
 	use application\models\shortcuts\models\landing_page\regular_markup\horizontal_feed\SimpleFeedBlock;
@@ -184,7 +185,7 @@
 		</div>
 		<?
 			/** @var FeedControlSettings $control */
-			$control = $viewSettings->controlSettings->{FeedControlSettings::ControlTagScrollButton};
+			$control = $viewSettings->controlSettings->{FeedControlTag::ControlTagScrollButton};
 		?>
 		<? if ($control->enabled && count($feedItems) > 1): ?>
 			<div class="carousel-controls-container <? if ($control->hideCondition->large): ?> hidden-lg<? endif; ?>

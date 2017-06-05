@@ -2,7 +2,7 @@
 
 	namespace application\models\feeds\horizontal;
 
-	use application\models\feeds\common\SimpleFeedControlSettings;
+	use application\models\feeds\common\FeedControlFactory;
 
 	/**
 	 * Class SimpleFeedSettings
@@ -40,7 +40,7 @@
 		protected function initDefaultControlSettings()
 		{
 			$this->controlSettings = new \stdClass();
-			foreach (SimpleFeedControlSettings::$tags as $tag)
-				$this->controlSettings->{$tag} = SimpleFeedControlSettings::createDefault($tag);
+			foreach (FeedControlFactory::getAvailableControlTags(FeedControlFactory::FeedTypeSimple) as $tag)
+				$this->controlSettings->{$tag} = FeedControlFactory::getControl(FeedControlFactory::FeedTypeSimple, $tag);
 		}
 	}

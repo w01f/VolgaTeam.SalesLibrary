@@ -56,6 +56,8 @@
 
 		public $isAccessGranted;
 
+		public $imagePath;
+
 		/**
 		 * @param $parentShortcut \LandingPageShortcut
 		 * @param $parentBlock BlockContainer
@@ -71,6 +73,8 @@
 
 			$this->padding = new \Padding(0);
 			$this->margin = new \Padding(0);
+
+			$this->imagePath = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . $this->parentShortcut->relativeLink . '/images/');
 		}
 
 		/**

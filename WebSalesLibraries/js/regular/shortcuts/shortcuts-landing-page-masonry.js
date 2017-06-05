@@ -18,7 +18,7 @@
 
 			if (viewSettings.feedType !== 'masonry')
 			{
-				initToggles();
+				initControls();
 				setTimeout(function ()
 				{
 					reloadLinks(false);
@@ -59,7 +59,7 @@
 			});
 		};
 
-		var initToggles = function ()
+		var initControls = function ()
 		{
 			masonryContainer.find('.date-range-toggle a').off('click.link-feed').on('click.link-feed', function ()
 			{
@@ -86,7 +86,49 @@
 				});
 
 				reloadLinks(true);
-			})
+			});
+
+			masonryContainer.find('.feed-details-button').each(function ()
+			{
+				var img = $(this).find('.svg');
+				if (img.length > 0)
+				{
+					var imgClass = img.attr('class');
+					var imgURL = img.attr('src');
+
+					$.get(imgURL, function (data)
+					{
+						var svg = $(data).find('svg');
+						if (typeof imgClass !== 'undefined')
+							svg = svg.attr('class', imgClass + ' replaced-svg');
+						svg = svg.removeAttr('xmlns:a');
+						img.replaceWith(svg);
+					}, 'xml');
+				}
+			});
+
+			masonryContainer.find('.feed-details-button').off('click').on('click', function ()
+			{
+				$(this).blur();
+
+				var url = '#';
+				switch (querySettings.dateRangeType)
+				{
+					case "today":
+						url = $(this).find('.service-data .today-url').text();
+						break;
+					case "week":
+						url = $(this).find('.service-data .week-url').text();
+						break;
+					case "month":
+						url = $(this).find('.service-data .month-url').text();
+						break;
+					default:
+						url = $(this).find('.service-data .default-url').text();
+						break;
+				}
+				window.open(url, "_blank");
+			});
 		};
 
 		var initMasonry = function ()

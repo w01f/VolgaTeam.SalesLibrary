@@ -52,6 +52,19 @@
     margin-right: auto;
 }
 
+#content .shortcuts-page-content.landing-page .feed-controls-container .feed-details-button
+{
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-left: 0 !important;
+}
+
+#content .shortcuts-page-content.landing-page .feed-controls-container .feed-details-button img,
+#content .shortcuts-page-content.landing-page .feed-controls-container .feed-details-button svg
+{
+    height: 100% !important;
+    width: auto !important;
+}
 /*-----------------------------------------------------*/
 
 /*Auto-fit row-----------------------------------------*/

@@ -3,6 +3,8 @@
 	use application\models\data_query\link_feed\LinkFeedQuerySettings;
 	use application\models\data_query\link_feed\SearchFeedQuerySettings;
 	use application\models\feeds\common\FeedControlSettings;
+	use application\models\feeds\common\FeedControlTag;
+	use application\models\feeds\common\FeedDetailsControlSettings;
 	use application\models\feeds\vertical\LinkFeedStyle;
 	use application\models\feeds\vertical\SearchFeedSettings;
 	use application\models\shortcuts\models\landing_page\regular_markup\vertical_feed\SearchFeedBlock;
@@ -80,7 +82,7 @@
     <div class="btn-group feed-controls-container vertical-feed-controls-container" role="group">
 		<?
 			/** @var FeedControlSettings $control */
-			$control = $viewSettings->controlSettings->{FeedControlSettings::ControlTagLinkFormatPowerPoint};
+			$control = $viewSettings->controlSettings->{FeedControlTag::ControlTagLinkFormatPowerPoint};
 		?>
 		<? if ($control->enabled): ?>
             <button type="button"
@@ -96,7 +98,7 @@
 		<? endif; ?>
 		<?
 			/** @var FeedControlSettings $control */
-			$control = $viewSettings->controlSettings->{FeedControlSettings::ControlTagLinkFormatVideo};
+			$control = $viewSettings->controlSettings->{FeedControlTag::ControlTagLinkFormatVideo};
 		?>
 		<? if ($control->enabled): ?>
             <button type="button"
@@ -112,7 +114,7 @@
 		<? endif; ?>
 		<?
 			/** @var FeedControlSettings $control */
-			$control = $viewSettings->controlSettings->{FeedControlSettings::ControlTagLinkFormatDocuments};
+			$control = $viewSettings->controlSettings->{FeedControlTag::ControlTagLinkFormatDocuments};
 		?>
 		<? if ($control->enabled): ?>
             <button type="button"
@@ -126,6 +128,32 @@
                             </span>
             </button>
 		<? endif; ?>
+	    <?
+		    /** @var FeedDetailsControlSettings $control */
+		    $control = $viewSettings->controlSettings->{FeedControlTag::ControlTagDetailsButton};
+	    ?>
+	    <? if ($control->enabled): ?>
+		    <? if (!empty($viewSettings->controlsStyle->regularTextColor) || !empty($control->iconColor)): ?>
+                <style>
+                    #vertical-feed-<? echo $contentBlock->id; ?> .feed-details-button .svg path
+                    {
+                        fill: <? echo Utils::formatColor(!empty($control->iconColor)?$control->iconColor:$viewSettings->controlsStyle->regularTextColor);?> !important;
+                    }
+                </style>
+		    <? endif; ?>
+            <button type="button"
+                    class="btn btn-default feed-details-button<? if ($control->hideCondition->large): ?> hidden-lg<? endif; ?>
+                            <? if ($control->hideCondition->medium): ?> hidden-md<? endif; ?>
+                            <? if ($control->hideCondition->small): ?> hidden-sm<? endif; ?>
+                            <? if ($control->hideCondition->extraSmall): ?> hidden-xs<? endif; ?>" style="
+		    <?if(!empty($control->backColor)):?>background-color: <? echo Utils::formatColor($control->backColor);?> !important;<?endif;?>
+		    <?if(!empty($control->borderColor)):?>border-color: <? echo Utils::formatColor($control->borderColor);?> !important;<?endif;?>">
+                <img src="<? echo $contentBlock->imagePath . $control->iconFile; ?>" <?if(strpos($control->iconFile, '.svg') !== false):?>class="svg"<?endif;?>>
+                <span class="service-data">
+                    <span class="default-url"><? echo $contentBlock->detailsSettings->detailsUrl; ?></span>
+                </span>
+            </button>
+	    <? endif; ?>
     </div>
     <div class="panel panel-default"
          style="<? if (!empty($style->outsideBorderColor)): ?>border-color: <? echo Utils::formatColor($style->outsideBorderColor); ?>; -webkit-box-shadow: 0 0 0 <? echo Utils::formatColor($style->outsideBorderColor); ?>; box-shadow: 0 0 0 <? echo Utils::formatColor($style->outsideBorderColor); ?>;border-color: <? echo Utils::formatColor($style->headerColor); ?>;<? endif; ?>">

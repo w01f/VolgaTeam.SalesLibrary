@@ -6,6 +6,7 @@
 	use application\models\data_query\link_feed\LinkFeedQueryHelper;
 	use application\models\data_query\link_feed\LinkFeedQuerySettings;
 	use application\models\data_query\link_feed\TrendingFeedQuerySettings;
+	use application\models\feeds\common\TrendingDetailsSettings;
 	use application\models\feeds\horizontal\FeedSettings;
 	use application\models\feeds\horizontal\TrendingFeedSettings;
 	use application\models\shortcuts\models\landing_page\regular_markup\common\BlockContainer;
@@ -21,6 +22,9 @@
 
 		/** @var  TrendingFeedSettings */
 		public $viewSettings;
+
+		/** @var  TrendingDetailsSettings */
+		public $detailsSettings;
 
 		/**
 		 * @param $parentShortcut \LandingPageShortcut
@@ -41,6 +45,7 @@
 			ContentBlock::configureFromXml($xpath, $contextNode);
 			$this->querySettings = LinkFeedQuerySettings::fromXml(LinkFeedQuerySettings::FeedTypeTrending, $xpath, $contextNode);
 			$this->viewSettings = FeedSettings::fromXml(FeedSettings::FeedTypeTrending, $xpath, $contextNode);
+			$this->detailsSettings = TrendingDetailsSettings::fromXml($xpath, $contextNode);
 		}
 
 		/** @return LinkFeedItem[] */

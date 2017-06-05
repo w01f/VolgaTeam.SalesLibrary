@@ -3,7 +3,8 @@
 	use application\models\data_query\link_feed\LinkFeedQuerySettings;
 	use application\models\data_query\link_feed\TrendingFeedQuerySettings;
 	use application\models\feeds\common\FeedControlSettings;
-	use application\models\feeds\common\TrendingFeedControlSettings;
+	use application\models\feeds\common\FeedControlTag;
+	use application\models\feeds\common\FeedDetailsControlSettings;
 	use application\models\shortcuts\models\landing_page\regular_markup\masonry\TrendingBlock;
 	use application\models\shortcuts\models\landing_page\regular_markup\masonry\TrendingFeedSettings;
 
@@ -37,32 +38,32 @@
         </div>
     </div>
     <div class="btn-group feed-controls-container masonry-feed-controls-container" role="group">
-		<? if ($viewSettings->controlSettings->{TrendingFeedControlSettings::ControlTagDateToday}->enabled ||
-			$viewSettings->controlSettings->{TrendingFeedControlSettings::ControlTagDateWeek}->enabled ||
-			$viewSettings->controlSettings->{TrendingFeedControlSettings::ControlTagDateMonth}->enabled
+		<? if ($viewSettings->controlSettings->{FeedControlTag::ControlTagDateToday}->enabled ||
+			$viewSettings->controlSettings->{FeedControlTag::ControlTagDateWeek}->enabled ||
+			$viewSettings->controlSettings->{FeedControlTag::ControlTagDateMonth}->enabled
 		): ?>
 			<?
 			$activeDateRangeTitle = 'Date Range';
 			switch ($querySettings->dateRangeType)
 			{
 				case TrendingFeedQuerySettings::DataRangeTypeToday:
-					$activeDateRangeTitle = $viewSettings->controlSettings->{TrendingFeedControlSettings::ControlTagDateToday}->title;
+					$activeDateRangeTitle = $viewSettings->controlSettings->{FeedControlTag::ControlTagDateToday}->title;
 					break;
 				case TrendingFeedQuerySettings::DataRangeTypeWeek:
-					$activeDateRangeTitle = $viewSettings->controlSettings->{TrendingFeedControlSettings::ControlTagDateWeek}->title;
+					$activeDateRangeTitle = $viewSettings->controlSettings->{FeedControlTag::ControlTagDateWeek}->title;
 					break;
 				case TrendingFeedQuerySettings::DataRangeTypeMonth:
-					$activeDateRangeTitle = $viewSettings->controlSettings->{TrendingFeedControlSettings::ControlTagDateMonth}->title;
+					$activeDateRangeTitle = $viewSettings->controlSettings->{FeedControlTag::ControlTagDateMonth}->title;
 					break;
 			}
 			?>
 			<?
-			/** @var TrendingFeedControlSettings $todayControl */
-			$todayControl = $viewSettings->controlSettings->{TrendingFeedControlSettings::ControlTagDateToday};
-			/** @var TrendingFeedControlSettings $weekControl */
-			$weekControl = $viewSettings->controlSettings->{TrendingFeedControlSettings::ControlTagDateWeek};
-			/** @var TrendingFeedControlSettings $monthControl */
-			$monthControl = $viewSettings->controlSettings->{TrendingFeedControlSettings::ControlTagDateMonth};
+			/** @var FeedControlSettings $todayControl */
+			$todayControl = $viewSettings->controlSettings->{FeedControlTag::ControlTagDateToday};
+			/** @var FeedControlSettings $weekControl */
+			$weekControl = $viewSettings->controlSettings->{FeedControlTag::ControlTagDateWeek};
+			/** @var FeedControlSettings $monthControl */
+			$monthControl = $viewSettings->controlSettings->{FeedControlTag::ControlTagDateMonth};
 
 			$dateHideLg = $todayControl->hideCondition->large || $weekControl->hideCondition->large || $monthControl->hideCondition->large;
 			$dateHideMd = $todayControl->hideCondition->medium || $weekControl->hideCondition->medium || $monthControl->hideCondition->medium;
@@ -80,8 +81,8 @@
                 </button>
                 <ul class="dropdown-menu">
 					<?
-						/** @var TrendingFeedControlSettings $control */
-						$control = $viewSettings->controlSettings->{TrendingFeedControlSettings::ControlTagDateToday};
+						/** @var FeedControlSettings $control */
+						$control = $viewSettings->controlSettings->{FeedControlTag::ControlTagDateToday};
 					?>
 					<? if ($control->enabled): ?>
                         <li class="date-range-toggle">
@@ -92,8 +93,8 @@
                         </li>
 					<? endif; ?>
 					<?
-						/** @var TrendingFeedControlSettings $control */
-						$control = $viewSettings->controlSettings->{TrendingFeedControlSettings::ControlTagDateWeek};
+						/** @var FeedControlSettings $control */
+						$control = $viewSettings->controlSettings->{FeedControlTag::ControlTagDateWeek};
 					?>
 					<? if ($control->enabled): ?>
                         <li class="date-range-toggle">
@@ -104,8 +105,8 @@
                         </li>
 					<? endif; ?>
 					<?
-						/** @var TrendingFeedControlSettings $control */
-						$control = $viewSettings->controlSettings->{TrendingFeedControlSettings::ControlTagDateMonth};
+						/** @var FeedControlSettings $control */
+						$control = $viewSettings->controlSettings->{FeedControlTag::ControlTagDateMonth};
 					?>
 					<? if ($control->enabled): ?>
                         <li class="date-range-toggle">
@@ -120,7 +121,7 @@
 		<? endif; ?>
 		<?
 			/** @var FeedControlSettings $control */
-			$control = $viewSettings->controlSettings->{FeedControlSettings::ControlTagLinkFormatPowerPoint};
+			$control = $viewSettings->controlSettings->{FeedControlTag::ControlTagLinkFormatPowerPoint};
 		?>
 		<? if ($control->enabled): ?>
             <button type="button"
@@ -136,7 +137,7 @@
 		<? endif; ?>
 		<?
 			/** @var FeedControlSettings $control */
-			$control = $viewSettings->controlSettings->{FeedControlSettings::ControlTagLinkFormatVideo};
+			$control = $viewSettings->controlSettings->{FeedControlTag::ControlTagLinkFormatVideo};
 		?>
 		<? if ($control->enabled): ?>
             <button type="button"
@@ -152,7 +153,7 @@
 		<? endif; ?>
 		<?
 			/** @var FeedControlSettings $control */
-			$control = $viewSettings->controlSettings->{FeedControlSettings::ControlTagLinkFormatDocuments};
+			$control = $viewSettings->controlSettings->{FeedControlTag::ControlTagLinkFormatDocuments};
 		?>
 		<? if ($control->enabled): ?>
             <button type="button"
@@ -166,11 +167,37 @@
                             </span>
             </button>
 		<? endif; ?>
+	    <?
+		    /** @var FeedDetailsControlSettings $control */
+		    $control = $viewSettings->controlSettings->{FeedControlTag::ControlTagDetailsButton};
+	    ?>
+	    <? if ($control->enabled): ?>
+		    <? if (!empty($viewSettings->controlsStyle->regularTextColor) || !empty($control->iconColor)): ?>
+                <style>
+                    #masonry-container-<? echo $contentBlock->id; ?> .feed-details-button .svg path
+                    {
+                        fill: <? echo Utils::formatColor(!empty($control->iconColor)?$control->iconColor:$viewSettings->controlsStyle->regularTextColor);?> !important;
+                    }
+                </style>
+		    <? endif; ?>
+            <button type="button"
+                    class="btn btn-default feed-details-button<? if ($control->hideCondition->large): ?> hidden-lg<? endif; ?>
+                            <? if ($control->hideCondition->medium): ?> hidden-md<? endif; ?>
+                            <? if ($control->hideCondition->small): ?> hidden-sm<? endif; ?>
+                            <? if ($control->hideCondition->extraSmall): ?> hidden-xs<? endif; ?>" style="
+		    <? if (!empty($control->backColor)): ?>background-color: <? echo Utils::formatColor($control->backColor); ?> !important;<? endif; ?>
+		    <? if (!empty($control->borderColor)): ?>border-color: <? echo Utils::formatColor($control->borderColor); ?> !important;<? endif; ?>">
+                <img src="<? echo $contentBlock->imagePath . $control->iconFile; ?>"
+			         <? if (strpos($control->iconFile, '.svg') !== false): ?>class="svg"<? endif; ?>>
+                <span class="service-data">
+                    <span class="today-url"><? echo $contentBlock->detailsSettings->todayDetailsUrl; ?></span>
+                    <span class="week-url"><? echo $contentBlock->detailsSettings->weekDetailsUrl; ?></span>
+                    <span class="month-url"><? echo $contentBlock->detailsSettings->monthDetailsUrl; ?></span>
+                </span>
+            </button>
+	    <? endif; ?>
     </div>
     <div id="masonry-grid-<? echo $contentBlock->id; ?>" class="cbp cbp-l-grid-masonry-projects">
 		<? echo $this->renderPartial('landingPageMarkup/masonry/feedItems', array('feedId' => $contentBlock->id, 'viewSettings' => $viewSettings, 'feedItems' => $feedItems), true); ?>
     </div>
 </div>
-
-
-

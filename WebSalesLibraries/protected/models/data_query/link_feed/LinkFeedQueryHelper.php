@@ -188,6 +188,12 @@
 					$whereConditions[] = array('OR', 'link.id not in (select wl.id_link from tbl_link_white_list wl)', $restrictedLinkConditions);
 				else
 					$whereConditions[] = 'link.id not in (select wl.id_link from tbl_link_white_list wl)';
+
+				$assignedPageIds = \UserLibraryRecord::getPageIdsByUserAngHisGroups($userId);
+				if (count($assignedPageIds) > 0)
+					$whereConditions[] = sprintf("p.id in ('%s')", implode("', '", $assignedPageIds));
+				else
+					$whereConditions[] = '1<>1';
 			}
 
 			$dbCommand = $dbCommand->where($whereConditions);
@@ -462,6 +468,12 @@
 					$whereConditions[] = array('OR', 'link.is_restricted <> 1', array('AND', $restrictedLinkConditions));
 				else
 					$whereConditions[] = array('link.is_restricted <> 1');
+
+				$assignedPageIds = \UserLibraryRecord::getPageIdsByUserAngHisGroups($userId);
+				if (count($assignedPageIds) > 0)
+					$whereConditions[] = sprintf("p.id in ('%s')", implode("', '", $assignedPageIds));
+				else
+					$whereConditions[] = '1<>1';
 			}
 
 			$dbCommand = $dbCommand->where($whereConditions);

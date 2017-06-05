@@ -6,6 +6,7 @@
 	use application\models\data_query\link_feed\LinkFeedQueryHelper;
 	use application\models\data_query\link_feed\LinkFeedQuerySettings;
 	use application\models\data_query\link_feed\SpecificLinkFeedQuerySettings;
+	use application\models\feeds\common\SimpleDetailsSettings;
 	use application\models\shortcuts\models\landing_page\regular_markup\common\BlockContainer;
 	use application\models\shortcuts\models\landing_page\regular_markup\common\ContentBlock;
 
@@ -19,6 +20,9 @@
 
 		/** @var  MasonryFeedSettings */
 		public $viewSettings;
+
+		/** @var  SimpleDetailsSettings */
+		public $detailsSettings;
 
 		/**
 		 * @param $parentShortcut \LandingPageShortcut
@@ -40,6 +44,7 @@
 
 			$this->querySettings = LinkFeedQuerySettings::fromXml(LinkFeedQuerySettings::FeedTypeSpecificLinks, $xpath, $contextNode);
 			$this->viewSettings = MasonrySettings::fromXml(MasonrySettings::MasonryTypeSpecificLinks, $xpath, $contextNode);
+			$this->detailsSettings = SimpleDetailsSettings::fromXml($xpath, $contextNode);
 		}
 
 		/** @return LinkFeedItem[] */

@@ -2,7 +2,7 @@
 
 	namespace application\models\feeds\horizontal;
 
-	use application\models\feeds\common\SpecificLinkFeedControlSettings;
+	use application\models\feeds\common\FeedControlFactory;
 
 	/**
 	 * Class SpecificLinkFeedSettings
@@ -19,7 +19,7 @@
 		protected function initDefaultControlSettings()
 		{
 			$this->controlSettings = new \stdClass();
-			foreach (SpecificLinkFeedControlSettings::$tags as $tag)
-				$this->controlSettings->{$tag} = SpecificLinkFeedControlSettings::createDefault($tag);
+			foreach (FeedControlFactory::getAvailableControlTags(FeedControlFactory::FeedTypeSpecificLinks) as $tag)
+				$this->controlSettings->{$tag} = FeedControlFactory::getControl(FeedControlFactory::FeedTypeSpecificLinks, $tag);
 		}
 	}
