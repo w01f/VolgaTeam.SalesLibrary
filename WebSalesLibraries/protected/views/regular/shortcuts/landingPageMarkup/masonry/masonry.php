@@ -66,32 +66,34 @@
                              style="<? if ($masonryItem->imageWidth > 0): ?>max-width:<? echo $masonryItem->imageWidth; ?>px;<? endif; ?><? if ($masonryItem->imageHeight > 0): ?> max-height:<? echo $masonryItem->imageHeight; ?>px;<? endif; ?>">
                     </div>
                 </div>
-				<? if (!empty($masonryItem->title)): ?>
-					<?
-					$itemTitleId = sprintf("masonry-item-title-%s", $masonryItem->id);
-					echo $this->renderPartial('landingPageMarkup/style/styleTextAppearance',
-						array(
-							'textAppearance' => $masonryItem->titleTextAppearance,
-							'blockId' => $itemTitleId
-						)
-						, true);
-					?>
-                    <div id="<? echo $itemTitleId; ?>"
-                         class="cbp-l-grid-masonry-projects-title"><? echo $masonryItem->title; ?></div>
-				<? endif; ?>
-				<? if (!empty($masonryItem->description)): ?>
-					<?
-					$itemDescriptionId = sprintf("masonry-item-description-%s", $masonryItem->id);
-					echo $this->renderPartial('landingPageMarkup/style/styleTextAppearance',
-						array(
-							'textAppearance' => $masonryItem->descriptionTextAppearance,
-							'blockId' => $itemDescriptionId
-						)
-						, true);
-					?>
-                    <div id="<? echo $itemDescriptionId; ?>"
-                         class="cbp-l-grid-masonry-projects-desc"><? echo $masonryItem->description; ?></div>
-				<? endif; ?>
+                <div style="<? echo $this->renderPartial('../shortcuts/landingPageMarkup/style/stylePadding', array('padding' => $contentBlock->viewSettings->textPadding), true); ?>">
+                    <? if (!empty($masonryItem->title)): ?>
+                        <?
+                        $itemTitleId = sprintf("masonry-item-title-%s", $masonryItem->id);
+                        echo $this->renderPartial('landingPageMarkup/style/styleTextAppearance',
+                            array(
+                                'textAppearance' => $masonryItem->titleTextAppearance,
+                                'blockId' => $itemTitleId
+                            )
+                            , true);
+                        ?>
+                        <div id="<? echo $itemTitleId; ?>"
+                             class="cbp-l-grid-masonry-projects-title"><? echo $masonryItem->title; ?></div>
+                    <? endif; ?>
+                    <? if (!empty($masonryItem->description)): ?>
+                        <?
+                        $itemDescriptionId = sprintf("masonry-item-description-%s", $masonryItem->id);
+                        echo $this->renderPartial('landingPageMarkup/style/styleTextAppearance',
+                            array(
+                                'textAppearance' => $masonryItem->descriptionTextAppearance,
+                                'blockId' => $itemDescriptionId
+                            )
+                            , true);
+                        ?>
+                        <div id="<? echo $itemDescriptionId; ?>"
+                             class="cbp-l-grid-masonry-projects-desc"><? echo $masonryItem->description; ?></div>
+                    <? endif; ?>
+                </div>
             </a>
 			<? endforeach; ?>
     </div>

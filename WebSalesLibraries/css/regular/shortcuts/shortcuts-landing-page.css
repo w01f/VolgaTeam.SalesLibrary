@@ -136,8 +136,8 @@
 }
 
 #content .shortcuts-page-content.landing-page .cbp-l-grid-masonry-projects-title {
-    margin-top: 5px !important;
-    margin-bottom: 6px !important;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 /*-----------------------------------------------------*/
@@ -278,6 +278,11 @@
     }
 }
 
+
+#content .shortcuts-page-content.landing-page .portfolio_utube_item_caption
+{
+    padding-top: 0;
+}
 /*-----------------------------------------------------*/
 
 /*Vertical Feed----------------------------------------------------------------*/

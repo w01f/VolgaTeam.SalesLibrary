@@ -50,7 +50,7 @@
                             <img src="<? echo $feedItem->thumbnail; ?>"/>
                         </div>
 					<? endif; ?>
-                    <div class="text">
+                    <div class="text" style="<? echo $this->renderPartial('../shortcuts/landingPageMarkup/style/stylePadding', array('padding' => $viewSettings->textPadding), true); ?>">
 						<? if ($itemSettingsName->enabled && $style->linkNamePosition === LinkFeedStyle::LinkNamePositionBottom): ?>
                             <span class="feed-info link-name" style="
 							<? if (!empty($itemSettingsName->color)): ?>

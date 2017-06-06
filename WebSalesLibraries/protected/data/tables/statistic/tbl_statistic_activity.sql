@@ -5,5 +5,6 @@ CREATE TABLE IF NOT EXISTS `tbl_statistic_activity` (
   `type` varchar(64) NOT NULL,
   `sub_type` varchar(256) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `date_time` (`date_time`,`type`,`sub_type`)
+  KEY `date_time_type` (`date_time`,`type`,`sub_type`),
+  KEY `date_time` (`date_time`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

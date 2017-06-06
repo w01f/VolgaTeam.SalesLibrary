@@ -20,11 +20,19 @@
 		/** @var  ControlsStyle */
 		public $controlsStyle;
 
+		/** @var  \Padding */
+		public $textPadding;
+
 		public function __construct()
 		{
 			parent::__construct();
 			$this->style = new LinkFeedStyle();
 			$this->controlsStyle = new ControlsStyle();
+
+			$this->textPadding = new \Padding(0);
+			$this->textPadding->isConfigured = true;
+			$this->textPadding->top = 5;
+
 			$this->initDefaultDataItemSettings();
 			$this->initDefaultControlSettings();
 		}
@@ -66,6 +74,10 @@
 			$queryResult = $xpath->query('./ControlsStyle', $contextNode);
 			if ($queryResult->length > 0)
 				$this->controlsStyle->configureFromXml($xpath, $queryResult->item(0));
+
+			$queryResult = $xpath->query('./TextPadding', $contextNode);
+			if ($queryResult->length > 0)
+				$this->textPadding = \Padding::fromXml($xpath, $queryResult->item(0));
 		}
 
 		private function initDefaultDataItemSettings()

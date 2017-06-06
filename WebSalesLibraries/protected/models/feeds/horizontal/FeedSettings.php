@@ -7,7 +7,7 @@
 	use application\models\feeds\common\FeedItemSettings;
 
 	/**
-	 * Class LinkFeedSettings
+	 * Class FeedSettings
 	 */
 	abstract class FeedSettings
 	{
@@ -33,12 +33,16 @@
 		public $slideShow;
 		public $slideShowInterval;
 		public $maxImageHeight;
+		public $enableMouseWheel;
 		public $autoAnimationSpeed;
 		public $manualAnimationSpeed;
 		public $scrollAnimationSpeed;
 
 		/** @var  FeedControlSettings[] */
 		public $controlSettings;
+
+		/** @var  \Padding */
+		public $textPadding;
 
 		public function __construct()
 		{
@@ -50,6 +54,12 @@
 			$this->autoAnimationSpeed = ".6";
 			$this->manualAnimationSpeed = ".6";
 			$this->scrollAnimationSpeed = ".6";
+			$this->enableMouseWheel = true;
+
+			$this->textPadding = new \Padding(0);
+			$this->textPadding->isConfigured = true;
+			$this->textPadding->top = 5;
+
 			$this->initDefaultControlSettings();
 		}
 
@@ -148,6 +158,13 @@
 
 			$queryResult = $xpath->query('./MouseWheelFadeSpeed', $contextNode);
 			$this->scrollAnimationSpeed = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : $this->scrollAnimationSpeed;
+
+			$queryResult = $xpath->query('./MouseWheelScroll', $contextNode);
+			$this->enableMouseWheel = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : $this->enableMouseWheel;
+
+			$queryResult = $xpath->query('./TextPadding', $contextNode);
+			if ($queryResult->length > 0)
+				$this->textPadding = \Padding::fromXml($xpath, $queryResult->item(0));
 
 			$queryResult = $xpath->query('./ControlSettings/Item', $contextNode);
 			/** @var $node \DOMElement */

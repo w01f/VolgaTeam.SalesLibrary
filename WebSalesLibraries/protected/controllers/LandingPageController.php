@@ -12,7 +12,7 @@
 	{
 		public function getViewPath()
 		{
-			return YiiBase::getPathOfAlias($this->pathPrefix . 'shortcuts.landingPageMarkup');
+			return YiiBase::getPathOfAlias($this->pathPrefix . 'shortcuts');
 		}
 
 		public function actionGetHorizontalLinkFeedItems()
@@ -32,7 +32,7 @@
 				$viewSettings = HorizontalFeedSettings::fromJson($feedType, CJSON::encode($viewSettingsEncoded));
 
 			if (isset($viewSettings) && isset($feedItems))
-				$this->renderPartial('horizontal_feed/feedItems', array('feedId' => $feedId, 'viewSettings' => $viewSettings, 'feedItems' => $feedItems));
+				$this->renderPartial('landingPageMarkup/horizontal_feed/feedItems', array('feedId' => $feedId, 'viewSettings' => $viewSettings, 'feedItems' => $feedItems));
 			else
 				Yii::app()->end();
 		}
@@ -54,7 +54,7 @@
 				$viewSettings = VerticalFeedSettings::fromJson($feedType, CJSON::encode($viewSettingsEncoded));
 
 			if (isset($viewSettings) && isset($feedItems))
-				$this->renderPartial('vertical_feed/feedItems', array('feedId' => $feedId, 'viewSettings' => $viewSettings, 'feedItems' => $feedItems));
+				$this->renderPartial('landingPageMarkup/vertical_feed/feedItems', array('feedId' => $feedId, 'viewSettings' => $viewSettings, 'feedItems' => $feedItems));
 			else
 				Yii::app()->end();
 		}
@@ -76,7 +76,7 @@
 				$viewSettings = MasonrySettings::fromJson($feedType, CJSON::encode($viewSettingsEncoded));
 
 			if (isset($viewSettings) && isset($feedItems))
-				$this->renderPartial('masonry/feedItems', array('feedId' => $feedId, 'viewSettings' => $viewSettings, 'feedItems' => $feedItems));
+				$this->renderPartial('landingPageMarkup/masonry/feedItems', array('feedId' => $feedId, 'viewSettings' => $viewSettings, 'feedItems' => $feedItems));
 			else
 				Yii::app()->end();
 		}

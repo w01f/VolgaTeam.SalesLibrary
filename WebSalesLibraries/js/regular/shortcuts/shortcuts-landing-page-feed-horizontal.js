@@ -217,30 +217,33 @@
 				$(this).carousel('cycle')
 			});
 
-			feedContainer.on('mousewheel DOMMouseScroll', function (e)
+			if(viewSettings.enableMouseWheel)
 			{
-				e.stopPropagation();
-				e.preventDefault();
+				feedContainer.on('mousewheel DOMMouseScroll', function (e)
+				{
+					e.stopPropagation();
+					e.preventDefault();
 
-				if (e.originalEvent.wheelDelta / 120 > 0)
-				{
-					feedContainer.find('.carousel-inner .item').css('transition-duration', viewSettings.scrollAnimationSpeed + 's');
-					feedContainer.find('.carousel').carousel('next');
-					setTimeout(function ()
+					if (e.originalEvent.wheelDelta / 120 > 0)
 					{
-						feedContainer.find('.carousel-inner .item').css('transition-duration', viewSettings.autoAnimationSpeed + 's');
-					}, 1500);
-				}
-				else
-				{
-					feedContainer.find('.carousel-inner .item').css('transition-duration', viewSettings.scrollAnimationSpeed + 's');
-					feedContainer.find('.carousel').carousel('prev');
-					setTimeout(function ()
+						feedContainer.find('.carousel-inner .item').css('transition-duration', viewSettings.scrollAnimationSpeed + 's');
+						feedContainer.find('.carousel').carousel('next');
+						setTimeout(function ()
+						{
+							feedContainer.find('.carousel-inner .item').css('transition-duration', viewSettings.autoAnimationSpeed + 's');
+						}, 1500);
+					}
+					else
 					{
-						feedContainer.find('.carousel-inner .item').css('transition-duration', viewSettings.autoAnimationSpeed + 's');
-					}, 1500);
-				}
-			});
+						feedContainer.find('.carousel-inner .item').css('transition-duration', viewSettings.scrollAnimationSpeed + 's');
+						feedContainer.find('.carousel').carousel('prev');
+						setTimeout(function ()
+						{
+							feedContainer.find('.carousel-inner .item').css('transition-duration', viewSettings.autoAnimationSpeed + 's');
+						}, 1500);
+					}
+				});
+			}
 
 			$.SalesPortal.ShortcutsManager.assignShortcutItemHandlers(feedContainer);
 		};
@@ -254,6 +257,7 @@
 		this.slideShow = undefined;
 		this.slideShowInterval = undefined;
 		this.maxThumbnailHeight = undefined;
+		this.enableMouseWheel = undefined;
 		this.dataItemSettings = undefined;
 		this.controlSettings = undefined;
 		this.controlsStyle = undefined;

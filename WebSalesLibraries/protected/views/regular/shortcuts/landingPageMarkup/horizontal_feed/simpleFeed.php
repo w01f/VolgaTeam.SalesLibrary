@@ -142,7 +142,7 @@
 									<div class="portfolio_utube_item_image">
 										<img src="<? echo $feedItems[$j]->imagePath; ?>"/>
 									</div>
-									<div class="portfolio_utube_item_caption">
+									<div class="portfolio_utube_item_caption" style="<? echo $this->renderPartial('../shortcuts/landingPageMarkup/style/stylePadding', array('padding' => $viewSettings->textPadding), true); ?>">
 										<? if (!empty($feedItems[$j]->title)): ?>
 											<?
 											$itemTitleId = sprintf("simple-horizontal-feed-item-title-%s", $feedItems[$j]->id);

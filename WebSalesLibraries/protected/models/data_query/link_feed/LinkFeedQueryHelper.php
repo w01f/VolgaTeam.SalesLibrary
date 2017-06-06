@@ -120,7 +120,7 @@
 					$whereConditions[] = sprintf("s_a.date_time>='%s'", date(\Yii::app()->params['mysqlDateFormat']));
 					break;
 				case "week":
-					$whereConditions[] = sprintf("s_a.date_time>='%s'", date(\Yii::app()->params['mysqlDateFormat'], strtotime('last monday', strtotime('tomorrow'))));
+					$whereConditions[] = "yearweek(s_a.date_time, 1) = yearweek(curdate(), 1)";
 					break;
 				case "month":
 					$whereConditions[] = "year(s_a.date_time) = year(curdate()) and month(s_a.date_time) = month(curdate())";

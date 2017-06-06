@@ -15,12 +15,20 @@
 		/** @var  \Padding */
 		public $itemsPadding;
 
+		/** @var  \Padding */
+		public $textPadding;
+
 		public $enableCaptionZoom;
 		public $captionZoomScale;
 
 		public function __construct()
 		{
 			$this->itemsPadding = new \Padding(0);
+
+			$this->textPadding = new \Padding(0);
+			$this->textPadding->isConfigured = true;
+			$this->textPadding->top = 5;
+
 			$this->enableCaptionZoom = true;
 			$this->captionZoomScale = 1.25;
 		}
@@ -97,6 +105,10 @@
 			$queryResult = $xpath->query('./ImagePadding', $contextNode);
 			if ($queryResult->length > 0)
 				$this->itemsPadding = \Padding::fromXml($xpath, $queryResult->item(0));
+
+			$queryResult = $xpath->query('./TextPadding', $contextNode);
+			if ($queryResult->length > 0)
+				$this->textPadding = \Padding::fromXml($xpath, $queryResult->item(0));
 
 			$queryResult = $xpath->query('./EnableCaptionZoom', $contextNode);
 			$this->enableCaptionZoom = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : $this->enableCaptionZoom;
