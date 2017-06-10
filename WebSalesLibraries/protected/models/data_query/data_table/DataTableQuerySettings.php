@@ -234,6 +234,8 @@
 						$this->baseQueryFields['thumbnail'] = "case 
 							when link.original_format='jpeg' or link.original_format='gif' or link.original_format='png' then
 								link.file_relative_path
+							when link.original_format='url' then
+								(select pv.relative_path from tbl_preview pv where pv.id_container=link.id_preview and pv.type='thumbs' " . $thumbnailCondition . ")								
 							when link.original_format='video' then
 								(select pv.relative_path from tbl_preview pv where pv.id_container=link.id_preview and pv.type='mp4 thumb' " . $thumbnailCondition . ")										
 							when link.original_format='ppt' or link.original_format='doc' or link.original_format='pdf' then

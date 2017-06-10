@@ -50,11 +50,13 @@
 					case LinkFeedQuerySettings::LinkFormatPowerPoint:
 					case LinkFeedQuerySettings::LinkFormatPdf:
 					case LinkFeedQuerySettings::LinkFormatWord:
+					case LinkFeedQuerySettings::LinkFormatUrl:
 						$queryFormats[] = $linkFormat;
 						break;
 					case LinkFeedQuerySettings::LinkFormatDocument:
 						$queryFormats[] = LinkFeedQuerySettings::LinkFormatWord;
 						$queryFormats[] = LinkFeedQuerySettings::LinkFormatPdf;
+						$queryFormats[] = LinkFeedQuerySettings::LinkFormatUrl;
 						break;
 					case LinkFeedQuerySettings::LinkFormatVideo:
 						$queryFormats[] = $linkFormat;
@@ -83,6 +85,8 @@
 							        then (case
 							              when link.original_format='jpeg' or link.original_format='gif' or link.original_format='png' then
 							                link.file_relative_path
+							              when link.original_format='url' then
+							                (select pv.relative_path from tbl_preview pv where pv.id_container=link.id_preview and pv.type='thumbs' order by pv.relative_path limit 1)
 							              when link.original_format='video' then
 							                (select pv.relative_path from tbl_preview pv where pv.id_container=link.id_preview and pv.type='mp4 thumb' order by pv.relative_path limit 1)
 							              when link.original_format='ppt' or link.original_format='doc' or link.original_format='pdf' then
@@ -93,6 +97,8 @@
 							      else (case
 							            when link.original_format='jpeg' or link.original_format='gif' or link.original_format='png' then
 							              link.file_relative_path
+										when link.original_format='url' then
+							              (select pv.relative_path from tbl_preview pv where pv.id_container=link.id_preview and pv.type='thumbs' order by rand() limit 1)							              
 							            when link.original_format='video' then
 							              (select pv.relative_path from tbl_preview pv where pv.id_container=link.id_preview and pv.type='mp4 thumb' order by rand() limit 1)
 							            when link.original_format='ppt' or link.original_format='doc' or link.original_format='pdf' then
@@ -248,6 +254,17 @@
 						if (empty($feedItem->thumbnail))
 							$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/grid/thumbnail-placeholder/vimeo.png');
 						break;
+					case LinkFeedQuerySettings::LinkFormatUrl:
+						if (!empty($resultRecord['thumbnail']))
+						{
+							$libraryId = $resultRecord['id_library'];
+							$library = $libraryManager->getLibraryById($libraryId);
+							$thumbnailRelativePath = $resultRecord['thumbnail'];
+							$feedItem->thumbnail = \Utils::formatUrl($library->storageLink . '//' . $thumbnailRelativePath);
+						}
+						else
+							$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/grid/thumbnail-placeholder/url.png');
+						break;
 					default:
 						$libraryId = $resultRecord['id_library'];
 						$library = $libraryManager->getLibraryById($libraryId);
@@ -278,6 +295,7 @@
 					case LinkFeedQuerySettings::LinkFormatPowerPoint:
 					case LinkFeedQuerySettings::LinkFormatPdf:
 					case LinkFeedQuerySettings::LinkFormatWord:
+					case LinkFeedQuerySettings::LinkFormatUrl:
 						$feedSettings->conditions->fileTypes[] = $linkFormat;
 						break;
 					case LinkFeedQuerySettings::LinkFormatVideo:
@@ -288,6 +306,7 @@
 					case LinkFeedQuerySettings::LinkFormatDocument:
 						$feedSettings->conditions->fileTypes[] = LinkFeedQuerySettings::LinkFormatWord;
 						$feedSettings->conditions->fileTypes[] = LinkFeedQuerySettings::LinkFormatPdf;
+						$feedSettings->conditions->fileTypes[] = LinkFeedQuerySettings::LinkFormatUrl;
 						break;
 				}
 
@@ -332,6 +351,17 @@
 							}
 							if (empty($feedItem->thumbnail))
 								$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/grid/thumbnail-placeholder/vimeo.png');
+							break;
+						case LinkFeedQuerySettings::LinkFormatUrl:
+							if (!empty($resultRecord['thumbnail']))
+							{
+								$libraryId = $resultRecord['id_library'];
+								$library = $libraryManager->getLibraryById($libraryId);
+								$thumbnailRelativePath = $resultRecord['thumbnail'];
+								$feedItem->thumbnail = \Utils::formatUrl($library->storageLink . '//' . $thumbnailRelativePath);
+							}
+							else
+								$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/grid/thumbnail-placeholder/url.png');
 							break;
 						default:
 							$libraryId = $resultRecord['id_library'];
@@ -404,6 +434,8 @@
 				'thumbnail' => "case 
 							when link.original_format='jpeg' or link.original_format='gif' or link.original_format='png' then
 								link.file_relative_path
+							when link.original_format='url' then
+								(select pv.relative_path from tbl_preview pv where pv.id_container=link.id_preview and pv.type='thumbs' " . $thumbnailCondition . ")								
 							when link.original_format='video' then
 								(select pv.relative_path from tbl_preview pv where pv.id_container=link.id_preview and pv.type='mp4 thumb' " . $thumbnailCondition . ")										
 							when link.original_format='ppt' or link.original_format='doc' or link.original_format='pdf' then
@@ -424,11 +456,13 @@
 					case LinkFeedQuerySettings::LinkFormatPowerPoint:
 					case LinkFeedQuerySettings::LinkFormatPdf:
 					case LinkFeedQuerySettings::LinkFormatWord:
+					case LinkFeedQuerySettings::LinkFormatUrl:
 						$queryFormats[] = $linkFormat;
 						break;
 					case LinkFeedQuerySettings::LinkFormatDocument:
 						$queryFormats[] = LinkFeedQuerySettings::LinkFormatWord;
 						$queryFormats[] = LinkFeedQuerySettings::LinkFormatPdf;
+						$queryFormats[] = LinkFeedQuerySettings::LinkFormatUrl;
 						break;
 					case LinkFeedQuerySettings::LinkFormatVideo:
 						$queryFormats[] = $linkFormat;
@@ -531,6 +565,17 @@
 							}
 							if (empty($feedItem->thumbnail))
 								$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/grid/thumbnail-placeholder/vimeo.png');
+							break;
+						case LinkFeedQuerySettings::LinkFormatUrl:
+							if (!empty($resultRecord['thumbnail']))
+							{
+								$libraryId = $resultRecord['id_library'];
+								$library = $libraryManager->getLibraryById($libraryId);
+								$thumbnailRelativePath = $resultRecord['thumbnail'];
+								$feedItem->thumbnail = \Utils::formatUrl($library->storageLink . '//' . $thumbnailRelativePath);
+							}
+							else
+								$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/grid/thumbnail-placeholder/url.png');
 							break;
 						default:
 							$libraryId = $resultRecord['id_library'];

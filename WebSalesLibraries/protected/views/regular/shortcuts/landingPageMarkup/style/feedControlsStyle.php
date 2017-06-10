@@ -21,6 +21,7 @@
     <?endif;?>
 		-webkit-box-shadow: none !important;
 		box-shadow: none !important;
+        outline: none !important;
 	}
 
 	<? echo '#'.$feedId; ?> .feed-controls-container .btn.btn-default.active,
@@ -43,6 +44,7 @@
     <?endif;?>
 		-webkit-box-shadow: none !important;
 		box-shadow: none !important;
+        outline: none !important;
 	}
 
     <? echo '#'.$feedId; ?> .feed-controls-container .btn,

@@ -193,6 +193,7 @@
                     <span class="today-url"><? echo $contentBlock->detailsSettings->todayDetailsUrl; ?></span>
                     <span class="week-url"><? echo $contentBlock->detailsSettings->weekDetailsUrl; ?></span>
                     <span class="month-url"><? echo $contentBlock->detailsSettings->monthDetailsUrl; ?></span>
+                    <span class="hover-tip-template"><? echo $control->hoverTip; ?></span>
                 </span>
             </button>
 	    <? endif; ?>

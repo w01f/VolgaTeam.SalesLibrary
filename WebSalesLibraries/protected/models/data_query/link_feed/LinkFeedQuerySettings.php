@@ -16,6 +16,7 @@
 		const LinkFormatDocument = 'document';
 		const LinkFormatWord = 'doc';
 		const LinkFormatPdf = 'pdf';
+		const LinkFormatUrl = 'url';
 		const LinkFormatVideo = 'video';
 		const LinkFormatYouTube = 'youtube';
 		const LinkFormatVimeo = 'vimeo';
@@ -113,6 +114,7 @@
 						case self::LinkFormatPdf:
 						case self::LinkFormatWord:
 						case self::LinkFormatDocument:
+						case self::LinkFormatUrl:
 							$this->linkFormats[] = $format;
 							break;
 					}

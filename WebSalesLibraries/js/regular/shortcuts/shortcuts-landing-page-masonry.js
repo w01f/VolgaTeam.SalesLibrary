@@ -67,6 +67,8 @@
 				masonryContainer.find('.date-range-toggle-group>button .title').text(dateRangeTitle);
 				querySettings.dateRangeType = $(this).closest('.date-range-toggle').find('>.service-data .date-range-tag').text();
 
+				updateDetailsHoverTip();
+
 				reloadLinks(true);
 			});
 
@@ -88,6 +90,8 @@
 				reloadLinks(true);
 			});
 
+			updateDetailsHoverTip();
+			masonryContainer.find('.date-range-toggle-group, .link-format-toggle').last().css("margin-right", "6px");
 			masonryContainer.find('.feed-details-button').each(function ()
 			{
 				var img = $(this).find('.svg');
@@ -165,6 +169,19 @@
 				{
 					initMasonry();
 				});
+			}
+		};
+
+		var updateDetailsHoverTip = function ()
+		{
+			var hoverTipButton = masonryContainer.find('.feed-details-button');
+			var hoverTipTemplateObject = hoverTipButton.find('.service-data .hover-tip-template');
+			if (hoverTipTemplateObject.length > 0)
+			{
+				var hoverTipTemplate = hoverTipTemplateObject.text();
+				if (masonryContainer.find('.date-range-toggle').length > 0)
+					hoverTipTemplate += (' by ' + querySettings.dateRangeType);
+				hoverTipButton.prop('title', hoverTipTemplate);
 			}
 		};
 	};

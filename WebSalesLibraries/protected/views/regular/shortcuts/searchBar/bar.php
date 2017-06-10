@@ -30,6 +30,8 @@
         <?endif;?><?if(!empty($style->buttonTextColor)):?> color: <? echo Utils::formatColor($style->buttonTextColor);?> !important;
         <?endif;?><?if(!empty($style->borderColor)):?> border-color: <? echo Utils::formatColor($style->borderColor);?> !important;
         <?endif;?>
+            outline: none !important;
+            box-shadow: unset !important;
         }
 
         <?echo '#'.$searchBarId; ?>
@@ -41,6 +43,8 @@
         <?endif;?><?if(!empty($style->searchTextColor)):?> color: <? echo Utils::formatColor($style->searchTextColor);?> !important;
         <?endif;?><?if(!empty($style->borderColor)):?> border-color: <? echo Utils::formatColor($style->borderColor);?> !important;
         <?endif;?>
+            outline: none !important;
+            box-shadow: unset !important;
         }
 
         <?echo '#'.$searchBarId; ?>

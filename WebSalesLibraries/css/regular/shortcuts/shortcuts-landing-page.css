@@ -54,8 +54,7 @@
 
 #content .shortcuts-page-content.landing-page .feed-controls-container .feed-details-button
 {
-    padding-top: 0;
-    padding-bottom: 0;
+    padding: 0 !important;
     margin-left: 0 !important;
 }
 

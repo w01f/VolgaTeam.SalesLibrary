@@ -9,6 +9,7 @@
 		public $iconColor;
 		public $backColor;
 		public $borderColor;
+		public $hoverTip;
 
 		/**
 		 * @param $xpath \DOMXPath
@@ -29,5 +30,8 @@
 
 			$queryResult = $xpath->query('./BorderColor', $contextNode);
 			$this->borderColor = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : $this->borderColor;
+
+			$queryResult = $xpath->query('./HoverTip', $contextNode);
+			$this->hoverTip	= $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : $this->iconFile;
 		}
 	}

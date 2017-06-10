@@ -110,6 +110,7 @@
 			         <? if (strpos($control->iconFile, '.svg') !== false): ?>class="svg"<? endif; ?>>
                 <span class="service-data">
                     <span class="default-url"><? echo $contentBlock->detailsSettings->detailsUrl; ?></span>
+                    <span class="hover-tip-template"><? echo $control->hoverTip; ?></span>
                 </span>
             </button>
 	    <? endif; ?>
