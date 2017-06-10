@@ -55,18 +55,16 @@ namespace SalesLibraries.BatchTagger.PresentationLayer
 			{
 				_linkGroup = sourceLinks.ToMultiLinkSet();
 				panelFilesContainer.Visible = true;
-				Width = 1150;
 			}
 			else
-			{
 				panelFilesContainer.Visible = false;
-				Width = 950;
-			}
+
+			Width = (Int32)(AppManager.Instance.MainForm.Width * 0.8);
+			Height = (Int32)(AppManager.Instance.MainForm.Height * 0.9);
 		}
 
 		public void InitForm()
 		{
-			Height = 590;
 			StartPosition = FormStartPosition.CenterParent;
 
 			LoadTreeView();
