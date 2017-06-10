@@ -10,7 +10,7 @@
 	else
 		$internalConfig = $webRoot . '/protected/config/console.php';
 
-	return CMap::mergeArray(
+	$configArray = CMap::mergeArray(
 		require($internalConfig), array(
 			'name' => 'Sales Libraries',
 			'params' => array(
@@ -126,9 +126,10 @@
 				'db' => array(
 					'connectionString' => 'mysql:host=localhost;dbname=sales_library',
 					'username' => 'root',
-					'password' => 'root',
+					'password' => null,
 				),
 			),
 		)
 	);
+	return $configArray;
 ?>
