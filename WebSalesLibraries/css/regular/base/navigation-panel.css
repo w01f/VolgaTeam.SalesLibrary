@@ -13,9 +13,11 @@
     text-align: center;
 }
 
-#content .navigation-panel .control-bar .button img
+#content .navigation-panel .control-bar .button img,
+#content .navigation-panel .control-bar .button svg
 {
     height: 32px;
+    width: 32px;
 }
 
 #content .navigation-panel .navigation-item-list-container
@@ -108,7 +110,7 @@
 
 #content .navigation-panel.collapsed .navigation-item-list-container
 {
-    width: 48px;
+    width: 47px;
 }
 
 #content .navigation-panel.collapsed .navigation-item-list

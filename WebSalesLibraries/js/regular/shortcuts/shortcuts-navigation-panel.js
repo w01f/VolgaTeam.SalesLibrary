@@ -32,6 +32,22 @@
 			}
 
 			navigationPanelObject.html(parameters.content);
+
+			navigationPanelObject.find('.control-bar .button').each(function ()
+			{
+				var img = $(this).find('img');
+				if (img.length > 0)
+				{
+					var imgURL = img.attr('src');
+					$.get(imgURL, function (data)
+					{
+						var svg = $(data).find('svg');
+						svg = svg.removeAttr('xmlns:a');
+						img.replaceWith(svg);
+					}, 'xml');
+				}
+			});
+
 			navigationItemList = navigationPanelObject.find('.navigation-item-list');
 
 			if (parameters.options)

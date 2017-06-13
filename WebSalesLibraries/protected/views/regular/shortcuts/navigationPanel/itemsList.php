@@ -25,6 +25,16 @@
         padding-bottom: <?echo intval($navigationPanel->itemsGapExpanded/2);?>px;
     }
 
+    #content .navigation-panel .control-bar .button-collapse svg g,
+    #content .navigation-panel .control-bar .button-collapse svg path{
+        fill: <?echo Utils::formatColor($navigationPanel->buttonColorCollapse);?> !important;
+    }
+
+    #content .navigation-panel .control-bar .button-expand svg g,
+    #content .navigation-panel .control-bar .button-expand svg path{
+        fill: <?echo Utils::formatColor($navigationPanel->buttonColorExpand);?> !important;
+    }
+
     #content .navigation-panel.expanded .control-bar a:hover,
     #content .navigation-panel.expanded .control-bar a:focus:hover,
     #content .navigation-panel.expanded li.enabled a:hover,
@@ -51,17 +61,17 @@
 </style>
 <div class="control-bar">
     <a class="button button-collapse" href="#" title="Collapse">
-        <img src="<? echo Yii::app()->getBaseUrl(true) . '/images/shortcuts/left-panel/collapse_panel.svg'; ?>">
+        <img src="<? echo Yii::app()->getBaseUrl(true) . '/images/shortcuts/left-panel/collapse_panel.svg'; ?>" style="display: none">
     </a>
     <a class="button button-expand" href="#" title="Expand">
-        <img src="<? echo Yii::app()->getBaseUrl(true) . '/images/shortcuts/left-panel/expand_panel.svg'; ?>">
+        <img src="<? echo Yii::app()->getBaseUrl(true) . '/images/shortcuts/left-panel/expand_panel.svg'; ?>" style="display: none">
     </a>
 </div>
 <div class="navigation-item-list-container">
     <div class="navigation-item-list">
         <ul class="nav nav-pills">
 			<? foreach ($navigationPanel->items as $navigationItem): ?>
-                <li class="navigation-item<? if ($navigationItem->enabled): ?> enabled<?else:?> disabled<? endif; ?>" <? if (!Yii::app()->browser->isMobile() && !empty($navigationItem->tooltip)): ?> title="<? echo $navigationItem->tooltip; ?>"<? endif; ?>>
+                <li class="navigation-item<? if ($navigationItem->enabled): ?> enabled<? else: ?> disabled<? endif; ?>" <? if (!Yii::app()->browser->isMobile() && !empty($navigationItem->tooltip)): ?> title="<? echo $navigationItem->tooltip; ?>"<? endif; ?>>
 					<?
 						$viewPath = \Yii::getPathOfAlias('application.views.regular.shortcuts.navigationPanel') . '/' . $navigationItem->contentView . '.php';
 						echo $this->renderFile($viewPath, array('itemData' => $navigationItem), true);

@@ -32,6 +32,19 @@
     box-shadow: none;
 }
 
+.shortcuts-search-bar .search-input-container .search-bar-run
+{
+	padding-top: 4px;
+	padding-bottom: 4px;
+}
+
+.shortcuts-search-bar .search-input-container .search-bar-run img,
+.shortcuts-search-bar .search-input-container .search-bar-run svg
+{
+	height: 100%;
+	width: auto;
+}
+
 /*Modals------------------------------------*/
 .search-bar-modal .row
 {

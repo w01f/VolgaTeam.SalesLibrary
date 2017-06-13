@@ -16,6 +16,21 @@
 					if (e.which === 13)
 						search();
 				});
+
+				searchBar.find('.search-bar-run').each(function ()
+				{
+					var img = $(this).find('img');
+					if (img.length > 0)
+					{
+						var imgURL = img.attr('src');
+						$.get(imgURL, function (data)
+						{
+							var svg = $(data).find('svg');
+							svg = svg.removeAttr('xmlns:a');
+							img.replaceWith(svg);
+						}, 'xml');
+					}
+				});
 				searchBar.find('.search-bar-run').on('click.search-bar', search);
 
 				searchBar.find('.file-filter-panel .file-selector input').off('change').on('change', function ()

@@ -12,6 +12,7 @@
 		public $labelBackColor;
 		public $placeholderTextColor;
 		public $borderColor;
+		public $iconColor;
 
 		public $lineHeight;
 
@@ -50,6 +51,9 @@
 
 			$queryResult = $xpath->query('./BorderColor', $contextNode);
 			$this->borderColor = $queryResult->length > 0 ? strtolower(trim($queryResult->item(0)->nodeValue)) : null;
+
+			$queryResult = $xpath->query('./IconColor', $contextNode);
+			$this->iconColor = $queryResult->length > 0 ? strtolower(trim($queryResult->item(0)->nodeValue)) : null;
 
 			$queryResult = $xpath->query('./LineHeight', $contextNode);
 			$this->lineHeight = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue)) : $this->lineHeight;

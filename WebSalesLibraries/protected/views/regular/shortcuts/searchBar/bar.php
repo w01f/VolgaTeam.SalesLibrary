@@ -29,8 +29,7 @@
         <?if(!empty($style->buttonBackColor)):?> background-color: <? echo Utils::formatColor($style->buttonBackColor);?> !important;
         <?endif;?><?if(!empty($style->buttonTextColor)):?> color: <? echo Utils::formatColor($style->buttonTextColor);?> !important;
         <?endif;?><?if(!empty($style->borderColor)):?> border-color: <? echo Utils::formatColor($style->borderColor);?> !important;
-        <?endif;?>
-            outline: none !important;
+        <?endif;?> outline: none !important;
             box-shadow: unset !important;
         }
 
@@ -42,9 +41,14 @@
         <?if(!empty($style->searchBackColor)):?> background-color: <? echo Utils::formatColor($style->searchBackColor);?> !important;
         <?endif;?><?if(!empty($style->searchTextColor)):?> color: <? echo Utils::formatColor($style->searchTextColor);?> !important;
         <?endif;?><?if(!empty($style->borderColor)):?> border-color: <? echo Utils::formatColor($style->borderColor);?> !important;
-        <?endif;?>
-            outline: none !important;
+        <?endif;?> outline: none !important;
             box-shadow: unset !important;
+        }
+
+        <?echo '#'.$searchBarId; ?>
+        .search-bar-run path {
+        <?if(!empty($style->iconColor)):?> fill: <? echo Utils::formatColor($style->iconColor);?> !important;
+        <?endif;?>
         }
 
         <?echo '#'.$searchBarId; ?>
@@ -82,6 +86,11 @@
         .btn {
             line-height: <? echo $style->lineHeight;?>px !important;
         }
+
+        <?echo '#'.$searchBarId; ?>
+        .search-bar-run {
+            height: <? echo ($style->lineHeight+14);?>px !important;
+        }
     </style>
     <table id="<? echo $searchBarId; ?>" class="shortcuts-search-bar logger-form open" data-log-group="Shortcut Tile"
            data-log-action="Search Bar"
@@ -113,7 +122,8 @@
                         <button class="btn btn-default log-action search-bar-button search-bar-options"
                                 type="button">Search Options</button>
 						<button class="btn btn-default search-bar-run" type="button">
-							<img src="<? echo Yii::app()->getBaseUrl(true) . '/images/shortcuts/search-bar/search.png'; ?>">
+							<img src="<? echo Yii::app()->getBaseUrl(true) . '/images/shortcuts/search-bar/search.svg'; ?>"
+                                 style="height: 16px; width: 16px;">
 						</button>
 				  	</span>
                 </div>

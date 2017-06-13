@@ -24,6 +24,9 @@
 		public $dividerWidthCollapsed;
 		public $dividerColorCollapsed;
 
+		public $buttonColorExpand;
+		public $buttonColorCollapse;
+
 		public $showScroll;
 
 		/** @var  HideCondition */
@@ -73,6 +76,12 @@
 			$navigationPanel->dividerWidthCollapsed = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue)) : 0;
 			$queryResult = $xpath->query('//Config/Appearance/Bar/DividerColor');
 			$navigationPanel->dividerColorCollapsed = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '000000';
+
+			$queryResult = $xpath->query('//Config/Appearance/Buttons/ExpandIconColor');
+			$navigationPanel->buttonColorExpand = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '000000';
+
+			$queryResult = $xpath->query('//Config/Appearance/Buttons/CollapseIconColor');
+			$navigationPanel->buttonColorCollapse = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '000000';
 
 			$queryResult = $xpath->query('//Config/Appearance/Hide');
 			if ($queryResult->length > 0)
