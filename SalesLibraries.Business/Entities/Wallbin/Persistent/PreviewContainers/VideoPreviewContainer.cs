@@ -5,13 +5,13 @@ using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
 using SalesLibraries.Business.Entities.Helpers;
+using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Constants;
-using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Objects.Video;
 
 namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 {
-	public class VideoPreviewContainer : BasePreviewContainer
+	public class VideoPreviewContainer : FilePreviewContainer
 	{
 		#region Nonpersistent Properties
 		[NotMapped, JsonIgnore]
@@ -51,7 +51,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 
 		#endregion
 
-		protected override void UpdateState(IEnumerable<PreviewableLink> associatedLinks)
+		protected override void UpdateState(IEnumerable<IPreviewableLink> associatedLinks)
 		{
 			var associatedLinksList = associatedLinks.ToList();
 			base.UpdateState(associatedLinksList);

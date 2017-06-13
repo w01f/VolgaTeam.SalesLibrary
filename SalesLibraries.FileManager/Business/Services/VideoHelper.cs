@@ -135,58 +135,50 @@ namespace SalesLibraries.FileManager.Business.Services
 
 			int startDelay;
 			int endDelay;
-			int imagesCount;
-			if (ffMpegData.Duration < 7)
+			string imageExtractOption;
+			if (ffMpegData.Duration < 10)
 			{
 				startDelay = 1;
 				endDelay = 0;
-				imagesCount = 4;
+				imageExtractOption = "-vf fps=1";
 			}
-			else if (ffMpegData.Duration < 10)
-			{
-				startDelay = 3;
-				endDelay = 0;
-				imagesCount = 4;
-			}
-			else if (ffMpegData.Duration < 20)
+			else if (ffMpegData.Duration < 30)
 			{
 				startDelay = 5;
 				endDelay = 2;
-				imagesCount = 5;
+				imageExtractOption = "-vf fps=1";
 			}
-			else if (ffMpegData.Duration < 60)
+			else if (ffMpegData.Duration < 180)
 			{
-				startDelay = 7;
+				startDelay = 5;
 				endDelay = 5;
-				imagesCount = 10;
+				imageExtractOption = "-vf fps=1/2";
 			}
 			else if (ffMpegData.Duration < 300)
 			{
-				startDelay = 7;
+				startDelay = 5;
 				endDelay = 5;
-				imagesCount = 15;
+				imageExtractOption = "-vf fps=1/6";
 			}
 			else
 			{
 				startDelay = 7;
-				endDelay = 5;
-				imagesCount = 20;
+				endDelay = 7;
+				imageExtractOption = "-vf fps=1/30";
 			}
 
-			var everySecond = (int)Math.Ceiling((ffMpegData.Duration - startDelay - endDelay) / imagesCount);
 			var targetDuration = ffMpegData.Duration - startDelay - endDelay;
 
 			var videoConverter = new Process
 			{
 				StartInfo = new ProcessStartInfo(
 					converterPath,
-					String.Format("-i \"{0}\" -ss {2} -t {3} {4} -vframes {5} \"{1}\"",
+					String.Format("-i \"{0}\" -ss {2} -t {3} {4} \"{1}\"",
 						sourceFilePath,
 						destinationOutputFilePath,
-						targetDuration - startDelay < imagesCount ? targetDuration - imagesCount : startDelay,
+						startDelay,
 						targetDuration,
-						everySecond * imagesCount >= targetDuration ? "-vf fps=1" : String.Format("-vf fps=1/{0}", everySecond),
-						imagesCount
+						imageExtractOption
 						)
 					)
 				{

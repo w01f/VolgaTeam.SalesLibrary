@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
+using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Constants;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkBundleSettings;
@@ -339,9 +340,9 @@ namespace SalesLibraries.FileManager.Business.Services
 
 				target.extendedProperties.ImportData(sourceObject.QuickLinkSettings);
 			}
-			if (source is PreviewableLink)
+			if (source is IPreviewableLink)
 			{
-				var sourcePreviewObject = (PreviewableLink)source;
+				var sourcePreviewObject = (IPreviewableLink)source;
 				var previewContainer = source.ParentLibrary.GetPreviewContainerBySourcePath(sourcePreviewObject.FullPath);
 				if (previewContainer != null)
 				{
@@ -748,6 +749,11 @@ namespace SalesLibraries.FileManager.Business.Services
 					.GetPreviewLinksByFormat(PreviewFormats.VideoThumbnail)
 					.Select(path => path.Replace(source.Library.Path, String.Empty))
 					.ToArray();
+			}
+			if (source is WebLinkPreviewContainer)
+			{
+				var thumbnails = source.GetPreviewLinksByFormat(PreviewFormats.Thumbnails).ToList();
+				target.thumbsLinks = thumbnails.Select(path => path.Replace(source.Library.Path, String.Empty)).ToArray();
 			}
 		}
 

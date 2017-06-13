@@ -14,7 +14,7 @@ using SalesLibraries.Common.Helpers;
 
 namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 {
-	public class PowerPointLink : PreviewableLink, IThumbnailSettingsHolder
+	public class PowerPointLink : PreviewableFileLink, IThumbnailSettingsHolder
 	{
 		#region Nonpersistent Properties
 		private PowerPointLinkSettings _settings;

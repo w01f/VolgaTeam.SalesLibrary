@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace SalesLibraries.Business.Entities.Helpers
 {
@@ -171,6 +172,11 @@ namespace SalesLibraries.Business.Entities.Helpers
 				default:
 					return false;
 			}
+		}
+
+		public static bool IsUrlLink(string path)
+		{
+			return !String.IsNullOrEmpty(path) && path.StartsWith("http", StringComparison.OrdinalIgnoreCase);
 		}
 	}
 }

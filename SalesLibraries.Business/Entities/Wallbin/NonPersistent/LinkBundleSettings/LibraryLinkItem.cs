@@ -1,5 +1,6 @@
 ﻿using System;
 using Newtonsoft.Json;
+using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 
@@ -23,7 +24,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkBundleSetti
 		public bool IsDead => TargetLink == null;
 
 		[JsonIgnore]
-		public bool ThumbnailAvailable => (TargetLink is PreviewableLink && !(TargetLink is ExcelLink)) || TargetLink is ImageLink;
+		public bool ThumbnailAvailable => (TargetLink is IPreviewableLink && !(TargetLink is ExcelLink)) || TargetLink is ImageLink;
 
 		public LibraryLinkItem()
 		{

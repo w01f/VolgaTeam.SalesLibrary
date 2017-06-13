@@ -8,7 +8,7 @@ using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 
 namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 {
-	public class ExcelLink : PreviewableLink
+	public class ExcelLink : PreviewableFileLink
 	{
 		#region Nonpersistent Properties
 		private ExcelLinkSettings _settings;

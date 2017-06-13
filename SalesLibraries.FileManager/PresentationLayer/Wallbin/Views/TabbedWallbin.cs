@@ -9,6 +9,7 @@ using DevExpress.XtraTab;
 using DevExpress.XtraTab.ViewInfo;
 using SalesLibraries.Business.Contexts.Wallbin;
 using SalesLibraries.Business.Entities.Helpers;
+using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
@@ -181,7 +182,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			barButtonItemPagePropertiesMultiLinksExpirationDate.Visibility = selectedPage.Page.AllGroupLinks.OfType<LibraryObjectLink>().Any()
 					? BarItemVisibility.Always
 					: BarItemVisibility.Never;
-			barButtonItemPagePropertiesMultiLinksRefreshPreviewFiles.Visibility = selectedPage.Page.AllGroupLinks.OfType<PreviewableLink>().Any()
+			barButtonItemPagePropertiesMultiLinksRefreshPreviewFiles.Visibility = selectedPage.Page.AllGroupLinks.OfType<IPreviewableLink>().Any()
 					? BarItemVisibility.Always
 					: BarItemVisibility.Never;
 

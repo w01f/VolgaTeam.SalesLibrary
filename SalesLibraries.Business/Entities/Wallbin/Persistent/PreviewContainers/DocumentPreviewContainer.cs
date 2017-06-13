@@ -3,13 +3,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
+using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Constants;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 
 namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 {
-	public abstract class DocumentPreviewContainer : BasePreviewContainer
+	public abstract class DocumentPreviewContainer : FilePreviewContainer
 	{
 		#region Nonpersistent Properties
 		[NotMapped, JsonIgnore]
@@ -40,14 +41,16 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 		public bool GenerateText { get; private set; }
 		#endregion
 
-		protected override void UpdateState(IEnumerable<PreviewableLink> associatedLinks)
+		protected override void UpdateState(IEnumerable<IPreviewableLink> associatedLinks)
 		{
 			var associatedLinksList = associatedLinks.ToList();
 			GenerateImages = associatedLinksList
+				.OfType<PreviewableFileLink>()
 				.Select(link => link.Settings)
 				.OfType<DocumentLinkSettings>()
 				.Any(set => set.GeneratePreviewImages);
 			GenerateText = associatedLinksList
+				.OfType<PreviewableFileLink>()
 				.Select(link => link.Settings)
 				.OfType<DocumentLinkSettings>()
 				.Any(set => set.GenerateContentText);

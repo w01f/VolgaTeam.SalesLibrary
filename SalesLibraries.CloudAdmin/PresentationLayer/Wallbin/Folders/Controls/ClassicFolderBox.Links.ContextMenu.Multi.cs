@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraBars;
 using SalesLibraries.Business.Entities.Helpers;
+using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.CommonGUI.Wallbin.Folders;
@@ -65,7 +66,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 			barButtonItemMultiLinkPropertiesExpirationDate.Visibility = SelectionManager.SelectedLinks.OfType<LibraryObjectLink>().Any()
 					? BarItemVisibility.Always
 					: BarItemVisibility.Never;
-			barButtonItemMultiLinkPropertiesRefreshPreviewFiles.Visibility = SelectionManager.SelectedLinks.OfType<PreviewableLink>().Any()
+			barButtonItemMultiLinkPropertiesRefreshPreviewFiles.Visibility = SelectionManager.SelectedLinks.OfType<IPreviewableLink>().Any()
 					? BarItemVisibility.Always
 					: BarItemVisibility.Never;
 
@@ -140,7 +141,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 		private void barButtonItemMultiLinkPropertiesRefreshPreviewFiles_ItemClick(object sender, ItemClickEventArgs e)
 		{
 			if (MainController.Instance.PopupMessages.ShowWarningQuestion("Are you sure you want to refresh the server files for selected links?") != DialogResult.Yes) return;
-			RefreshPreviewFiles(SelectionManager.SelectedLinks.OfType<PreviewableLink>().ToList());
+			RefreshPreviewFiles(SelectionManager.SelectedLinks.OfType<IPreviewableLink>().ToList());
 			MainController.Instance.PopupMessages.ShowInfo("Links are now updated for the server!");
 		}
 	}

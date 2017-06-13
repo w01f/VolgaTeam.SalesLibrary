@@ -155,8 +155,6 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			base.ResetParent();
 		}
 
-		protected virtual void AfterCreate() { }
-
 		public virtual bool CheckIfDead()
 		{
 			return !File.Exists(FullPath);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraBars;
+using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.CloudAdmin.Controllers;
@@ -159,7 +160,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 		private void barButtonItemFolderPropertiesMultiLinksRefreshPreview_ItemClick(object sender, ItemClickEventArgs e)
 		{
 			if (MainController.Instance.PopupMessages.ShowWarningQuestion("Are you sure you want to refresh the server files for links in this window?") != DialogResult.Yes) return;
-			RefreshPreviewFiles(DataSource.AllGroupLinks.OfType<PreviewableLink>().ToList());
+			RefreshPreviewFiles(DataSource.AllGroupLinks.OfType<IPreviewableLink>().ToList());
 			MainController.Instance.PopupMessages.ShowInfo("Links are now updated for the server!");
 		}
 

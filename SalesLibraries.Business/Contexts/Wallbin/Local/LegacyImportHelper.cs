@@ -157,7 +157,7 @@ namespace SalesLibraries.Business.Contexts.Wallbin.Local
 				libraryLink.ImportLegacyData(legacyLink);
 				target.Links.Add(libraryLink);
 			}
-			target.Links.OfType<PreviewableLink>().ToList().ForEach(previewableLink => previewableLink.ParentLibrary.GetPreviewContainerBySourcePath(previewableLink.FullPath));
+			target.Links.OfType<PreviewableFileLink>().ToList().ForEach(previewableLink => previewableLink.ParentLibrary.GetPreviewContainerBySourcePath(previewableLink.FullPath));
 		}
 
 		public static void ImportLegacyData(this ColumnTitle target, Legacy.Entities.ColumnTitle legacy)

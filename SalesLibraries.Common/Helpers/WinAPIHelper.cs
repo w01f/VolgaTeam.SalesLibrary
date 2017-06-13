@@ -217,6 +217,9 @@ namespace SalesLibraries.Common.Helpers
 
 		[DllImport("user32.dll", SetLastError = true)]
 		public static extern IntPtr CreateIconIndirect([In] ref IconInfo icon);
+
+		[DllImport("ole32.dll")]
+		public static extern int OleDraw(IntPtr pUnk, int dwAspect, IntPtr hdcDraw, ref Rectangle lprcBounds);
 		#endregion
 
 		public static void MakeTopMost(IntPtr handle)

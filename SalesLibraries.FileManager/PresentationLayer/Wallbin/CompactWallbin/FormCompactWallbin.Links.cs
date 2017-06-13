@@ -84,12 +84,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.CompactWallbin
 
 		private void RefreshLinkPreviewFiles(TreeListNode targetLinkNode)
 		{
-			var sourceLink = (targetLinkNode?.Tag as WallbinItem)?.Source as PreviewableLink;
+			var sourceLink = (targetLinkNode?.Tag as WallbinItem)?.Source as IPreviewableLink;
 			if (sourceLink == null) return;
 			RefreshPreviewFiles(new[] { sourceLink });
 		}
 
-		private void RefreshPreviewFiles(IList<PreviewableLink> links)
+		private void RefreshPreviewFiles(IList<IPreviewableLink> links)
 		{
 			MainController.Instance.ProcessManager.Run("Updating Preview files...", (cancelationToken, formProgess) =>
 			{

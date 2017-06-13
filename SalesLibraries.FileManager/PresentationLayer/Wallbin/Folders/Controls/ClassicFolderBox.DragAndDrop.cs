@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraBars;
 using SalesLibraries.Business.Entities.Helpers;
+using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.HyperLinkInfo;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
@@ -271,7 +271,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 						barButtonItemFolderPropertiesMultiLinksExpirationDate.Visibility = DataSource.AllGroupLinks.OfType<LibraryObjectLink>().Any()
 								? BarItemVisibility.Always
 								: BarItemVisibility.Never;
-						barButtonItemFolderPropertiesMultiLinksRefreshPreviewFiles.Visibility = DataSource.AllGroupLinks.OfType<PreviewableLink>().Any()
+						barButtonItemFolderPropertiesMultiLinksRefreshPreviewFiles.Visibility = DataSource.AllGroupLinks.OfType<IPreviewableLink>().Any()
 								? BarItemVisibility.Always
 								: BarItemVisibility.Never;
 

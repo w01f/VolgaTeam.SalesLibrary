@@ -73,6 +73,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			{
 				((LibraryObjectLinkSettings)link.Settings).RegularFontStyle = ((LibraryObjectLinkSettings)link.Settings).RegularFontStyle | FontStyle.Bold;
 			}
+			link.AfterCreate();
 			return link;
 		}
 	}

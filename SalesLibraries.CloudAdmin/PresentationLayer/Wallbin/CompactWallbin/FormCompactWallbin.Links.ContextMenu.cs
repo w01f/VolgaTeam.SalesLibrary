@@ -155,7 +155,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.CompactWallbin
 																				 sourceLink is LibraryFolderLink &&
 																				 ((LibraryFolderLink)sourceLink).AllLinks.Any(
 																					 l => l.Type == FileTypes.Excel);
-				barButtonItemSingleLinkPropertiesRefreshPreview.Visibility = !isLinkInaccessable && sourceLink is PreviewableLink
+				barButtonItemSingleLinkPropertiesRefreshPreview.Visibility = !isLinkInaccessable && sourceLink is IPreviewableLink
 					? BarItemVisibility.Always
 					: BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesTags.Visibility = !isLinkInaccessable && MainController.Instance.Settings.EditorSettings.EnableTagsEdit

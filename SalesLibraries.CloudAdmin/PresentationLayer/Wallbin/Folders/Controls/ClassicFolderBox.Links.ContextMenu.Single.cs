@@ -201,7 +201,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 																				 linkRow.Source is LibraryFolderLink &&
 																				 ((LibraryFolderLink)linkRow.Source).AllLinks.Any(
 																					 l => l.Type == FileTypes.Excel);
-				barButtonItemSingleLinkPropertiesRefreshPreview.Visibility = !linkRow.Inaccessable && linkRow.Source is PreviewableLink
+				barButtonItemSingleLinkPropertiesRefreshPreview.Visibility = !linkRow.Inaccessable && linkRow.Source is IPreviewableLink
 					? BarItemVisibility.Always
 					: BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesTags.Visibility = !linkRow.Inaccessable &&
@@ -279,11 +279,11 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 
 		private void barButtonItemLinkPropertiesRefreshPreview_ItemClick(object sender, ItemClickEventArgs e)
 		{
-			var sourceLink = SelectedLinkRow?.Source as PreviewableLink;
+			var sourceLink = SelectedLinkRow?.Source as IPreviewableLink;
 			if (sourceLink == null) return;
-			if (MainController.Instance.PopupMessages.ShowWarningQuestion(String.Format("Are you sure you want to refresh the server files for:{1}{0}?", sourceLink.NameWithExtension, Environment.NewLine)) != DialogResult.Yes) return;
+			if (MainController.Instance.PopupMessages.ShowWarningQuestion(String.Format("Are you sure you want to refresh the server files for:{1}{0}?", sourceLink.PreviewName, Environment.NewLine)) != DialogResult.Yes) return;
 			RefreshPreviewFiles(new[] { sourceLink });
-			MainController.Instance.PopupMessages.ShowInfo(String.Format("{0}{1}Is now updated for the server!", sourceLink.NameWithExtension, Environment.NewLine));
+			MainController.Instance.PopupMessages.ShowInfo(String.Format("{0}{1}Is now updated for the server!", sourceLink.PreviewName, Environment.NewLine));
 		}
 
 		private void barButtonItemLinkPropertiesEditImageSettings_ItemClick(object sender, ItemClickEventArgs e)

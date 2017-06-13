@@ -510,7 +510,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 		{
 			MainController.Instance.ProcessManager.Run("Updating Images...", (cancelationToken, formProgess) =>
 			{
-				var previewableLink = (PreviewableLink)_sourceLink;
+				var previewableLink = (IPreviewableLink)_sourceLink;
 				previewableLink.ClearPreviewContainer();
 				var previewContainer = previewableLink.GetPreviewContainer();
 				//var previewGenerator = previewContainer.GetPreviewGenerator();

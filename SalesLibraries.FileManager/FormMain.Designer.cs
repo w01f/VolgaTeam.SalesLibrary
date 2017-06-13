@@ -3051,7 +3051,7 @@
 			this.pnContainer.Location = new System.Drawing.Point(5, 157);
 			this.pnContainer.Name = "pnContainer";
 			this.pnContainer.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
-			this.pnContainer.Size = new System.Drawing.Size(1258, 510);
+			this.pnContainer.Size = new System.Drawing.Size(1258, 508);
 			this.pnContainer.TabIndex = 32;
 			// 
 			// defaultLookAndFeel
@@ -3065,8 +3065,9 @@
 			// 
 			// FormMain
 			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-			this.ClientSize = new System.Drawing.Size(1268, 669);
+			this.ClientSize = new System.Drawing.Size(1268, 667);
 			this.Controls.Add(this.pnContainer);
 			this.Controls.Add(this.ribbonControl);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

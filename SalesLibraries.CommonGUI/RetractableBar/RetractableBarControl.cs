@@ -131,6 +131,7 @@ namespace SalesLibraries.CommonGUI.RetractableBar
 
 		private void pnAdditionalButtons_Resize(object sender, EventArgs e)
 		{
+			if (pnAdditionalButtons.Controls.Count == 0) return;
 			var buttonHeight = (pnAdditionalButtons.Height - pnAdditionalButtons.Padding.Top - pnAdditionalButtons.Padding.Bottom) / pnAdditionalButtons.Controls.Count;
 			foreach (var button in pnAdditionalButtons.Controls.OfType<Control>())
 				button.Height = buttonHeight;

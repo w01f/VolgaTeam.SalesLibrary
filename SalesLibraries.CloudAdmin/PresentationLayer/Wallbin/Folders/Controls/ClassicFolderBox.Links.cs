@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using SalesLibraries.Business.Entities.Helpers;
+using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.HyperLinkInfo;
@@ -366,7 +367,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 			DataChanged?.Invoke(this, EventArgs.Empty);
 		}
 
-		private void RefreshPreviewFiles(IList<PreviewableLink> links)
+		private void RefreshPreviewFiles(IList<IPreviewableLink> links)
 		{
 			MainController.Instance.ProcessManager.Run("Updating Preview files...", (cancelationToken, formProgess) =>
 			{

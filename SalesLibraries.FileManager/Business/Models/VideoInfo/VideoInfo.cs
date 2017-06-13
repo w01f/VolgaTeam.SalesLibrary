@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using SalesLibraries.Business.Entities.Wallbin.Common.Constants;
+using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers;
 using SalesLibraries.Common.DataState;
 using SalesLibraries.FileManager.Business.PreviewGenerators;
@@ -93,7 +94,7 @@ namespace SalesLibraries.FileManager.Business.Models.VideoInfo
 
 		public void DeleteWithLinks()
 		{
-			var topLevelLinks = _previewContainer.Library.GetPreviewableLinksBySourcePath(_previewContainer.SourcePath, true).ToList();
+			var topLevelLinks = _previewContainer.Library.GetPreviewableLinksBySourcePath(_previewContainer.SourcePath, true).OfType<BaseLibraryLink>().ToList();
 			var allLinks = _previewContainer.Library.GetPreviewableLinksBySourcePath(_previewContainer.SourcePath).ToList();
 			if (topLevelLinks.Any())
 			{

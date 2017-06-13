@@ -210,11 +210,13 @@
     <Compile Include="Entities\Wallbin\Persistent\Links\BaseLibraryLink.cs" />
     <Compile Include="Entities\Wallbin\Persistent\LibraryPage.cs" />
     <Compile Include="Entities\Wallbin\Persistent\Links\CommonFileLink.cs" />
+    <Compile Include="Entities\Interfaces\IPreviewableLink.cs" />
     <Compile Include="Entities\Wallbin\Persistent\Links\LibraryFolderLink.cs" />
     <Compile Include="Entities\Wallbin\Persistent\Links\AppLink.cs" />
     <Compile Include="Entities\Wallbin\Persistent\Links\LinkBundleLink.cs" />
     <Compile Include="Entities\Wallbin\Persistent\Links\PdfLink.cs" />
-    <Compile Include="Entities\Wallbin\Persistent\Links\PreviewableLink.cs" />
+    <Compile Include="Entities\Wallbin\Persistent\Links\PreviewableHyperLink.cs" />
+    <Compile Include="Entities\Wallbin\Persistent\Links\PreviewableFileLink.cs" />
     <Compile Include="Entities\Wallbin\Persistent\Links\VideoLink.cs" />
     <Compile Include="Entities\Wallbin\Persistent\Links\LibraryFileLink.cs" />
     <Compile Include="Entities\Wallbin\Persistent\Links\LineBreak.cs" />
@@ -231,9 +233,11 @@
     <Compile Include="Entities\Wallbin\Persistent\Links\WebLink.cs" />
     <Compile Include="Entities\Wallbin\Persistent\Links\WordLink.cs" />
     <Compile Include="Entities\Wallbin\Persistent\PreviewContainers\BasePreviewContainer.cs" />
+    <Compile Include="Entities\Wallbin\Persistent\PreviewContainers\FilePreviewContainer.cs" />
     <Compile Include="Entities\Wallbin\Persistent\PreviewContainers\VideoPreviewContainer.cs" />
     <Compile Include="Entities\Wallbin\Persistent\PreviewContainers\ExcelPreviewContainer.cs" />
     <Compile Include="Entities\Wallbin\Persistent\PreviewContainers\PdfPreviewContainer.cs" />
+    <Compile Include="Entities\Wallbin\Persistent\PreviewContainers\WebLinkPreviewContainer.cs" />
     <Compile Include="Entities\Wallbin\Persistent\PreviewContainers\WordPreviewContainer.cs" />
     <Compile Include="Entities\Wallbin\Persistent\PreviewContainers\PowerPointPreviewContainer.cs" />
     <Compile Include="Entities\Wallbin\Persistent\PreviewContainers\DocumentPreviewContainer.cs" />

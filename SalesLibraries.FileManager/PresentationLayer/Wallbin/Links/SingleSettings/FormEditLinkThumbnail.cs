@@ -512,16 +512,18 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		{
 			MainController.Instance.ProcessManager.Run("Updating Images...", (cancelationToken, formProgess) =>
 			{
-				var previewableLink = (PreviewableLink)_sourceLink;
-				var settings = previewableLink.Settings as DocumentLinkSettings;
-				if (settings != null)
+				if (_sourceLink is PreviewableFileLink)
 				{
-					settings.IsArchiveResource = false;
-					settings.GeneratePreviewImages = true;
+					var settings = ((PreviewableFileLink)_sourceLink).Settings as DocumentLinkSettings;
+					if (settings != null)
+					{
+						settings.IsArchiveResource = false;
+						settings.GeneratePreviewImages = true;
+					}
 				}
-
+				var previewableLink = (IPreviewableLink)_sourceLink;
 				var previewGenerator = previewableLink.GetPreviewContainer().GetPreviewGenerator();
-				previewableLink.UpddatePreviewContainer(previewGenerator, cancelationToken);
+				previewableLink.UpdatePreviewContainer(previewGenerator, cancelationToken);
 			});
 
 			LoadSourceImages();

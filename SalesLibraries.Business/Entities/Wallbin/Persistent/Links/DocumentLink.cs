@@ -13,7 +13,7 @@ using SalesLibraries.Common.Helpers;
 
 namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 {
-	public abstract class DocumentLink : PreviewableLink, IThumbnailSettingsHolder
+	public abstract class DocumentLink : PreviewableFileLink, IThumbnailSettingsHolder
 	{
 		#region Nonpersistent Properties
 		private DocumentLinkSettings _settings;

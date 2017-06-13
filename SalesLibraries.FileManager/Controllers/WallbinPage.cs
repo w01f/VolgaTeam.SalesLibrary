@@ -199,7 +199,7 @@ namespace SalesLibraries.FileManager.Controllers
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesWidget.Enabled =
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesBanner.Enabled = selectedLinks.Any(l => !(l is LibraryFileLink) || !((LibraryFileLink)l).IsDead);
 
-			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesThumbnail.Enabled = selectedLinks.Any(l => l is IThumbnailSettingsHolder && !((LibraryFileLink)l).IsDead);
+			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesThumbnail.Enabled = selectedLinks.Any(l => l is IThumbnailSettingsHolder && !((IPreviewableLink)l).IsDead);
 
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesTags.Enabled =
 				selectedLinks.Any(l => !(l is LineBreak) && (!(l is LibraryFileLink) || !((LibraryFileLink)l).IsDead));

@@ -138,11 +138,11 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 		#endregion
 
 		#region Preview Container Processing
-		public IEnumerable<PreviewableLink> GetPreviewableLinksBySourcePath(string sourcePath, bool onlyTopLevel = false)
+		public IEnumerable<IPreviewableLink> GetPreviewableLinksBySourcePath(string sourcePath, bool onlyTopLevel = false)
 		{
 			return Pages
 				.SelectMany(p => onlyTopLevel ? p.TopLevelLinks : p.AllGroupLinks)
-				.OfType<PreviewableLink>()
+				.OfType<IPreviewableLink>()
 				.Where(link => String.Equals(link.FullPath, sourcePath, StringComparison.InvariantCultureIgnoreCase));
 		}
 

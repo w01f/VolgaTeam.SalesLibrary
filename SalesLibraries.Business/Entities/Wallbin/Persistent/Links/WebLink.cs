@@ -9,7 +9,7 @@ using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 
 namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 {
-	public class WebLink : HyperLink
+	public class WebLink : PreviewableHyperLink
 	{
 		#region Nonpersistent Properties
 		private WebLinkSettings _settings;
@@ -47,6 +47,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			{
 				((LibraryObjectLinkSettings)link.Settings).RegularFontStyle = ((LibraryObjectLinkSettings)link.Settings).RegularFontStyle | FontStyle.Bold;
 			}
+			link.AfterCreate();
 			return link;
 		}
 

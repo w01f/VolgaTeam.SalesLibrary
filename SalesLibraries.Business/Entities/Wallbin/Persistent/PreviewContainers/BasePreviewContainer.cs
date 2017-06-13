@@ -8,7 +8,6 @@ using System.Threading;
 using Newtonsoft.Json;
 using SalesLibraries.Business.Entities.Helpers;
 using SalesLibraries.Business.Entities.Interfaces;
-using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Configuration;
 using SalesLibraries.Common.Helpers;
 
@@ -37,14 +36,14 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 		public override int CollectionOrder { get; set; }
 
 		[NotMapped, JsonIgnore]
-		public string SourcePath => Path.Combine(Library.Path, RelativePath);
-
-		[NotMapped, JsonIgnore]
 		public string ContainerPath => Path.Combine(
 			Library.Path,
 			Constants.WebPreviewContainersRootFolderName,
 			PreviewSubFolder,
 			ExtId.ToString());
+
+		[NotMapped, JsonIgnore]
+		public abstract string SourcePath { get; }
 
 		[NotMapped, JsonIgnore]
 		protected abstract string PreviewSubFolder { get; }
@@ -64,20 +63,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 			Library = null;
 		}
 
-		protected virtual void UpdateState(IEnumerable<PreviewableLink> associatedLinks)
+		protected virtual void UpdateState(IEnumerable<IPreviewableLink> associatedLinks)
 		{
-			if (!File.Exists(SourcePath) ||
-				associatedLinks.All(link => link.IsDead))
-			{
-				IsUpToDate = false;
-				IsAlive = false;
-				return;
-			}
 			IsAlive = true;
-			var sourceFileActualDate = File.GetLastWriteTime(SourcePath);
-			var containerActualDate = Directory.GetLastWriteTime(ContainerPath);
-			var time = sourceFileActualDate.Subtract(containerActualDate);
-			IsUpToDate = time.Minutes <= 0;
 		}
 
 		public void UpdateContent(IPreviewGenerator generator, CancellationToken cancellationToken)
@@ -88,7 +76,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 			UpdateContent(associatedLinks, generator, cancellationToken);
 		}
 
-		public void UpdateContent(IList<PreviewableLink> associatedLinks, IPreviewGenerator generator, CancellationToken cancellationToken)
+		public void UpdateContent(IList<IPreviewableLink> associatedLinks, IPreviewGenerator generator, CancellationToken cancellationToken)
 		{
 			if (generator == null)
 				throw new NotImplementedException("Preview Generator is not implemented for that file format");
@@ -140,6 +128,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 				previewContainer = CreateEntity<ExcelPreviewContainer>();
 			else if (FileFormatHelper.IsVideoFile(sourceFile))
 				previewContainer = CreateEntity<VideoPreviewContainer>();
+			else if (FileFormatHelper.IsUrlLink(sourceFile))
+				previewContainer = CreateEntity<WebLinkPreviewContainer>();
 			else
 				return null;
 			var relativePath = sourceFile.Replace(parent.Path, String.Empty);

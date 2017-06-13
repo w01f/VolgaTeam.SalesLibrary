@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using SalesLibraries.Business.Entities.Helpers;
+using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
@@ -110,7 +111,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 
 		public void RefreshPreviewFiles()
 		{
-			var links = PageContainer.Page.AllGroupLinks.OfType<PreviewableLink>().ToList();
+			var links = PageContainer.Page.AllGroupLinks.OfType<IPreviewableLink>().ToList();
 			MainController.Instance.ProcessManager.Run("Updating Preview files...", (cancelationToken, formProgess) =>
 			{
 				var powerPointLinks = links.OfType<PowerPointLink>().ToList();
