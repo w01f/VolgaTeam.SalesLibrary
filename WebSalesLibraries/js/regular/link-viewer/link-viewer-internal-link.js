@@ -75,10 +75,13 @@
 					});
 					break;
 				case 4:
-					if (viewerData.previewInfo.libraryLinkId != null)
+					if (viewerData.previewInfo.libraryLinkId !== null)
 						$.SalesPortal.LinkManager.requestViewDialog({
 							linkId: viewerData.previewInfo.libraryLinkId,
-							isQuickSite: false
+							isQuickSite: false,
+							viewContainer: parameters.viewContainer,
+							parentPreviewParameters: parameters.parentPreviewParameters,
+							afterViewerOpenedCallback: parameters.afterViewerOpenedCallback
 						});
 					else
 					{
@@ -107,7 +110,7 @@
 					$.SalesPortal.ShortcutsManager.trackActivity(activityData);
 
 					var hasCustomHandler = data.find('.has-custom-handler').length > 0;
-					if (hasCustomHandler == true)
+					if (hasCustomHandler === true)
 						$.SalesPortal.ShortcutsManager.openShortcutByMenuItemData(data, {pushHistory: true});
 					break;
 			}

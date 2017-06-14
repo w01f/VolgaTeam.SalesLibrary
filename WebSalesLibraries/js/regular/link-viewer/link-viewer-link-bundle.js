@@ -85,7 +85,7 @@
 
 		var releaseOpenedBundleItem = function ()
 		{
-			if (openedViewer != undefined)
+			if (openedViewer !== undefined)
 				openedViewer.afterClose();
 			openedViewer = undefined;
 			dialogContent.find('.link-viewer-container').html('');
