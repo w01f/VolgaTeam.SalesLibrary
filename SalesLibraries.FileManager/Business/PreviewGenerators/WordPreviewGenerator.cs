@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using Microsoft.Office.Interop.Word;
 using SalesLibraries.Business.Entities.Helpers;
@@ -19,6 +20,9 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 		public void Generate(BasePreviewContainer previewContainer, CancellationToken cancellationToken)
 		{
 			var wordContainer = (WordPreviewContainer)previewContainer;
+
+			var log = new StringBuilder();
+			log.AppendLine(String.Format("Process started at {0:hh:mm:ss tt zz}", DateTime.Now));
 
 			var pdfDestination = Path.Combine(wordContainer.ContainerPath, PreviewFormats.Pdf);
 			var updatePdf = !(Directory.Exists(pdfDestination) && Directory.GetFiles(pdfDestination).Any());
@@ -90,12 +94,21 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 						if (updatePdf)
 						{
 							document.ExportAsFixedFormat(pdfFileName, WdExportFormat.wdExportFormatPDF);
+							log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.Pdf, DateTime.Now));
 						}
 
 						if (updatePng || updateThumbs)
+						{
 							PdfHelper.ExportPdf(pdfFileName, pngDestination, thumbsDestination);
+							log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.Png, DateTime.Now));
+							log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.Thumbnails, DateTime.Now));
+						}
 						if (updatePngPhone || updateThumbsPhone)
+						{
 							PdfHelper.ExportPdfPhone(pdfFileName, pngPhoneDestination, thumbsPhoneDestination);
+							log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.PngForMobile, DateTime.Now));
+							log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.ThumbnailsForMobile, DateTime.Now));
+						}
 
 						if (updateTxt)
 						{
@@ -105,6 +118,7 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 								sw.Write(document.Content.Text);
 								sw.Flush();
 							}
+							log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.Text, DateTime.Now));
 						}
 
 						if (updateDocx)
@@ -136,6 +150,7 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 							if (!documentSlitted)
 								for (var i = 1; i <= pageCount; i++)
 									document.SaveAs(Path.Combine(docxDestination, string.Format("Page{0}.{1}", i, "docx")), WdSaveFormat.wdFormatXMLDocument);
+							log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.Word, DateTime.Now));
 						}
 						document.Close(false);
 						Utils.ReleaseComObject(document);
@@ -159,6 +174,9 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 				PngHelper.ConvertFiles(wordContainer.ContainerPath);
 				previewContainer.MarkAsModified();
 			}
+
+			log.AppendLine(String.Format("Process finished at {0:hh:mm:ss tt zz}", DateTime.Now));
+			File.WriteAllText(Path.Combine(previewContainer.ContainerPath, String.Format("log_{0:MMddyy_hhmmsstt}.txt", DateTime.Now)), log.ToString());
 		}
 	}
 }

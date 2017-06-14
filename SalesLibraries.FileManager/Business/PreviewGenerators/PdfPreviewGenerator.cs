@@ -1,5 +1,7 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Constants;
@@ -16,6 +18,9 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 		{
 			var updated = false;
 			var pdfContainer = (PdfPreviewContainer)previewContainer;
+
+			var log = new StringBuilder();
+			log.AppendLine(String.Format("Process started at {0:hh:mm:ss tt zz}", DateTime.Now));
 
 			var pngDestination = Path.Combine(pdfContainer.ContainerPath, PreviewFormats.Png);
 			var updatePng = !(Directory.Exists(pngDestination) && Directory.GetFiles(pngDestination).Any()) &&
@@ -39,10 +44,16 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 				Directory.CreateDirectory(thumbsPhoneDestination);
 
 			if (updatePng || updateThumbs)
+			{
 				PdfHelper.ExportPdf(pdfContainer.SourcePath, pngDestination, thumbsDestination);
+				log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.Png, DateTime.Now));
+			}
 
 			if (updatePngPhone || updateThumbsPhone)
-				PdfHelper.ExportPdfPhone(pdfContainer.SourcePath, pngPhoneDestination,thumbsPhoneDestination);
+			{
+				PdfHelper.ExportPdfPhone(pdfContainer.SourcePath, pngPhoneDestination, thumbsPhoneDestination);
+				log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.PngForMobile, DateTime.Now));
+			}
 
 			var txtDestination = Path.Combine(pdfContainer.ContainerPath, PreviewFormats.Text);
 			var updateTxt = !(Directory.Exists(txtDestination) && Directory.GetFiles(txtDestination).Any()) &&
@@ -50,7 +61,11 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 			if (updateTxt && !Directory.Exists(txtDestination))
 				Directory.CreateDirectory(txtDestination);
 			if (updateTxt)
-				PdfHelper.ExtractText(pdfContainer.SourcePath, Path.Combine(txtDestination, Path.ChangeExtension(Path.GetFileName(pdfContainer.SourcePath), "txt")));
+			{
+				PdfHelper.ExtractText(pdfContainer.SourcePath,
+					Path.Combine(txtDestination, Path.ChangeExtension(Path.GetFileName(pdfContainer.SourcePath), "txt")));
+				log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.Text, DateTime.Now));
+			}
 
 			updated = updatePng || updateThumbs || updatePngPhone || updateThumbsPhone || updateTxt;
 			if (updated)
@@ -58,6 +73,9 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 				PngHelper.ConvertFiles(pdfContainer.ContainerPath);
 				previewContainer.MarkAsModified();
 			}
+
+			log.AppendLine(String.Format("Process finished at {0:hh:mm:ss tt zz}", DateTime.Now));
+			File.WriteAllText(Path.Combine(previewContainer.ContainerPath, String.Format("log_{0:MMddyy_hhmmsstt}.txt", DateTime.Now)), log.ToString());
 		}
 	}
 }

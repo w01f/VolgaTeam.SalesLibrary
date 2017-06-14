@@ -21,6 +21,9 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 		{
 			var powerPointContainer = (PowerPointPreviewContainer)previewContainer;
 
+			var log = new StringBuilder();
+			log.AppendLine(String.Format("Process started at {0:hh:mm:ss tt zz}", DateTime.Now));
+
 			var updated = false;
 			var tryCount = 0;
 			do
@@ -170,14 +173,34 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 								i++;
 							}
 							if (processInteropped)
+							{
+								tryCount++;
 								continue;
+							}
+							if (updatePng)
+								log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.Png, DateTime.Now));
+							if (updatePngPhone)
+								log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.PngForMobile, DateTime.Now));
+							if (updateThumbs)
+								log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.Thumbnails, DateTime.Now));
+							if (updateThumbsPhone)
+								log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.ThumbnailsForMobile, DateTime.Now));
+							if (updatePptx)
+								log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.PowerPoint, DateTime.Now));
 						}
 						if (!cancellationToken.IsCancellationRequested && updateTxt)
-							using (var sw = new StreamWriter(Path.Combine(txtDestination, Path.ChangeExtension(Path.GetFileName(powerPointContainer.SourcePath), "txt")), false))
+						{
+							using (
+								var sw =
+									new StreamWriter(
+										Path.Combine(txtDestination, Path.ChangeExtension(Path.GetFileName(powerPointContainer.SourcePath), "txt")),
+										false))
 							{
 								sw.Write(content.ToString());
 								sw.Flush();
 							}
+							log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.Text, DateTime.Now));
+						}
 
 						if (!cancellationToken.IsCancellationRequested && updatePdf)
 						{
@@ -187,7 +210,11 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 										Path.ChangeExtension(Path.GetFileName(powerPointContainer.SourcePath), "pdf")),
 									PpFixedFormatType.ppFixedFormatTypePDF));
 							if (processInteropped)
+							{
+								tryCount++;
 								continue;
+							}
+							log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.Pdf, DateTime.Now));
 						}
 
 						presentation.Close();
@@ -209,6 +236,9 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 					}
 				}
 			} while (!updated && tryCount < 10);
+
+			log.AppendLine(String.Format("Process finished at {0:hh:mm:ss tt zz}", DateTime.Now));
+			File.WriteAllText(Path.Combine(previewContainer.ContainerPath, String.Format("log_{0:MMddyy_hhmmsstt}.txt", DateTime.Now)), log.ToString());
 		}
 	}
 }

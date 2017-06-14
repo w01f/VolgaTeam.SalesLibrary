@@ -1,5 +1,7 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Constants;
@@ -18,6 +20,9 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 			var updated = false;
 			FFMpegData videoData = null;
 
+			var log = new StringBuilder();
+			log.AppendLine(String.Format("Process started at {0:hh:mm:ss tt zz}", DateTime.Now));
+
 			if (!cancellationToken.IsCancellationRequested)
 			{
 				var infoDestination = Path.Combine(previewContainer.ContainerPath, PreviewFormats.VideoInfo);
@@ -25,7 +30,10 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 				if (!Directory.Exists(infoDestination))
 					Directory.CreateDirectory(infoDestination);
 				if (updateInfo)
+				{
 					VideoHelper.ExtractVideoInfo(previewContainer.SourcePath, infoDestination, cancellationToken);
+					log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.VideoInfo, DateTime.Now));
+				}
 				videoData = ((VideoPreviewContainer)previewContainer).GetVideoData();
 				updated |= updateInfo;
 			}
@@ -37,7 +45,10 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 				if (!Directory.Exists(mp4Destination))
 					Directory.CreateDirectory(mp4Destination);
 				if (updateMp4)
+				{
 					VideoHelper.ExportMp4(previewContainer.SourcePath, mp4Destination, videoData, cancellationToken);
+					log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.VideoMp4, DateTime.Now));
+				}
 				updated |= updateMp4;
 			}
 
@@ -54,12 +65,16 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 				{
 					VideoHelper.GenerateThumbnails(sourceFile, thumbDestination, videoData, cancellationToken);
 					PngHelper.ConvertFiles(thumbDestination);
+					log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.VideoThumbnail, DateTime.Now));
 				}
 				updated |= updateThumbs;
 			}
 
 			if (updated)
 				previewContainer.MarkAsModified();
+
+			log.AppendLine(String.Format("Process finished at {0:hh:mm:ss tt zz}", DateTime.Now));
+			File.WriteAllText(Path.Combine(previewContainer.ContainerPath, String.Format("log_{0:MMddyy_hhmmsstt}.txt", DateTime.Now)), log.ToString());
 		}
 	}
 }
