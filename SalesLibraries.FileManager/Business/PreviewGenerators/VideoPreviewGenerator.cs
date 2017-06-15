@@ -32,7 +32,8 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 				if (updateInfo)
 				{
 					VideoHelper.ExtractVideoInfo(previewContainer.SourcePath, infoDestination, cancellationToken);
-					log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.VideoInfo, DateTime.Now));
+					if (Directory.GetFiles(infoDestination).Any())
+						log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.VideoInfo, DateTime.Now));
 				}
 				videoData = ((VideoPreviewContainer)previewContainer).GetVideoData();
 				updated |= updateInfo;
@@ -47,7 +48,8 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 				if (updateMp4)
 				{
 					VideoHelper.ExportMp4(previewContainer.SourcePath, mp4Destination, videoData, cancellationToken);
-					log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.VideoMp4, DateTime.Now));
+					if (Directory.GetFiles(mp4Destination).Any())
+						log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.VideoMp4, DateTime.Now));
 				}
 				updated |= updateMp4;
 			}
@@ -65,7 +67,8 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 				{
 					VideoHelper.GenerateThumbnails(sourceFile, thumbDestination, videoData, cancellationToken);
 					PngHelper.ConvertFiles(thumbDestination);
-					log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.VideoThumbnail, DateTime.Now));
+					if (Directory.GetFiles(thumbDestination).Any())
+						log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.VideoThumbnail, DateTime.Now));
 				}
 				updated |= updateThumbs;
 			}

@@ -38,6 +38,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Bundl
 		{
 			InitializeComponent();
 			Dock = DockStyle.Fill;
+			DataStateObserver.Instance.DataChanged += (o, e) =>
+			{
+				if (e.ChangeType != DataChangeType.LinksDeleted) return;
+				LoadBundleItems();
+			};
 		}
 
 		public void LoadData(Library library)

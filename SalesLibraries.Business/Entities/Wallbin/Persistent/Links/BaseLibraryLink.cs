@@ -11,6 +11,7 @@ using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Constants;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
+using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkBundleSettings;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 
 namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
@@ -292,7 +293,20 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		public virtual void DeleteLink()
 		{
-			Delete(ParentLibrary.Context);
+			if (ParentLibrary != null)
+			{
+				foreach (var linkBundle in ParentLibrary.LinkBundles)
+				{
+					if (linkBundle.Settings.Items.OfType<LibraryLinkItem>().Any(linkItem => linkItem.LinkId == ExtId))
+					{
+						linkBundle.Settings.Items.RemoveAll(item => item is LibraryLinkItem && ((LibraryLinkItem)item).LinkId == ExtId);
+						linkBundle.MarkAsModified();
+						linkBundle.Save(ParentLibrary.Context, linkBundle);
+					}
+				}
+
+				Delete(ParentLibrary.Context);
+			}
 			UnlinkLink();
 		}
 

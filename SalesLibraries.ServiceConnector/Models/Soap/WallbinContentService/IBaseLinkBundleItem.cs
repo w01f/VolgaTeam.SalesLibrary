@@ -9,6 +9,9 @@
 		int itemType { get; set; }
 
 		/// <remarks/>
+		bool visible { get; set; }
+
+		/// <remarks/>
 		int collectionOrder { get; set; }
 
 		/// <remarks/>

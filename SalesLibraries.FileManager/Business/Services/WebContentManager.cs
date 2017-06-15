@@ -582,7 +582,6 @@ namespace SalesLibraries.FileManager.Business.Services
 			((IBaseLinkSettings)target).ImportData(source);
 			target.customWebFormat = source.CustomWebFormat;
 			target.bundleItems = source.Bundle.Settings.Items
-				.Where(sourceBundleItem => sourceBundleItem.Visible)
 				.Select(sourceBundleItem =>
 				{
 					IBaseLinkBundleItem linkItem;
@@ -654,6 +653,7 @@ namespace SalesLibraries.FileManager.Business.Services
 					}
 					linkItem.id = sourceBundleItem.Id.ToString();
 					linkItem.itemType = (Int32)sourceBundleItem.ItemType;
+					linkItem.visible = sourceBundleItem.Visible;
 					linkItem.collectionOrder = sourceBundleItem.CollectionOrder;
 					linkItem.title = sourceBundleItem.Title;
 					linkItem.image = Convert.ToBase64String((byte[])imageConverter.ConvertTo(sourceBundleItem.Image, typeof(byte[])));

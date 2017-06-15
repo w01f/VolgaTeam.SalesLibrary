@@ -203,6 +203,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 					{
 						case DialogResult.OK:
 							selectedRow.DeleteWithSourceLink();
+							DataStateObserver.Instance.RaiseLinksDeleted(new Guid[] { });
 							break;
 						case DialogResult.Yes:
 							DataStateObserver.Instance.RaiseLinksDeleted(relatedLinks.Select(l => l.ExtId));

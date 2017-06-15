@@ -136,7 +136,14 @@ namespace SalesLibraries.FileManager.Business.Services
 			int startDelay;
 			int endDelay;
 			string imageExtractOption;
-			if (ffMpegData.Duration < 10)
+
+			if (ffMpegData.Duration < 1)
+			{
+				startDelay = 5;
+				endDelay = 5;
+				imageExtractOption = "-vf fps=1 -vframes 1";
+			}
+			else if (ffMpegData.Duration < 10)
 			{
 				startDelay = 1;
 				endDelay = 0;

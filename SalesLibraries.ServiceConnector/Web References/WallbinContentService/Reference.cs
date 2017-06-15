@@ -1167,6 +1167,8 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         private int itemTypeField;
         
+        private bool visibleField;
+        
         private int collectionOrderField;
         
         private string imageField;
@@ -1254,6 +1256,16 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
             }
             set {
                 this.itemTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool visible {
+            get {
+                return this.visibleField;
+            }
+            set {
+                this.visibleField = value;
             }
         }
         
@@ -1399,6 +1411,8 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         private int itemTypeField;
         
+        private bool visibleField;
+        
         private int collectionOrderField;
         
         private string imageField;
@@ -1476,6 +1490,16 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
             }
             set {
                 this.itemTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool visible {
+            get {
+                return this.visibleField;
+            }
+            set {
+                this.visibleField = value;
             }
         }
         
@@ -1552,6 +1576,8 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         private int itemTypeField;
         
+        private bool visibleField;
+        
         private int collectionOrderField;
         
         private string imageField;
@@ -1629,6 +1655,16 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
             }
             set {
                 this.itemTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool visible {
+            get {
+                return this.visibleField;
+            }
+            set {
+                this.visibleField = value;
             }
         }
         
@@ -1714,6 +1750,8 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         private string idField;
         
         private int itemTypeField;
+        
+        private bool visibleField;
         
         private int collectionOrderField;
         
@@ -1846,6 +1884,16 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         }
         
         /// <remarks/>
+        public bool visible {
+            get {
+                return this.visibleField;
+            }
+            set {
+                this.visibleField = value;
+            }
+        }
+        
+        /// <remarks/>
         public int collectionOrder {
             get {
                 return this.collectionOrderField;
@@ -1910,6 +1958,8 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         private int itemTypeField;
         
+        private bool visibleField;
+        
         private int collectionOrderField;
         
         private string imageField;
@@ -1947,6 +1997,16 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
             }
             set {
                 this.itemTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool visible {
+            get {
+                return this.visibleField;
+            }
+            set {
+                this.visibleField = value;
             }
         }
         
@@ -2015,6 +2075,8 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         private int itemTypeField;
         
+        private bool visibleField;
+        
         private int collectionOrderField;
         
         private string imageField;
@@ -2052,6 +2114,16 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
             }
             set {
                 this.itemTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool visible {
+            get {
+                return this.visibleField;
+            }
+            set {
+                this.visibleField = value;
             }
         }
         
@@ -2118,6 +2190,8 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         private int itemTypeField;
         
+        private bool visibleField;
+        
         private int collectionOrderField;
         
         private string imageField;
@@ -2145,6 +2219,16 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
             }
             set {
                 this.itemTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool visible {
+            get {
+                return this.visibleField;
+            }
+            set {
+                this.visibleField = value;
             }
         }
         

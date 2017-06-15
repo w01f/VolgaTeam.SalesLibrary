@@ -654,6 +654,7 @@
         <xsd:all>
           <xsd:element name="id" type="xsd:string" />
           <xsd:element name="itemType" type="xsd:int" />
+          <xsd:element name="visible" type="xsd:boolean" />
           <xsd:element name="collectionOrder" type="xsd:int" />
           <xsd:element name="image" type="xsd:string" />
           <xsd:element name="title" type="xsd:string" />
@@ -666,6 +667,7 @@
           <xsd:element name="libraryLinkId" type="xsd:string" />
           <xsd:element name="id" type="xsd:string" />
           <xsd:element name="itemType" type="xsd:int" />
+          <xsd:element name="visible" type="xsd:boolean" />
           <xsd:element name="collectionOrder" type="xsd:int" />
           <xsd:element name="image" type="xsd:string" />
           <xsd:element name="title" type="xsd:string" />
@@ -678,6 +680,7 @@
           <xsd:element name="url" type="xsd:string" />
           <xsd:element name="id" type="xsd:string" />
           <xsd:element name="itemType" type="xsd:int" />
+          <xsd:element name="visible" type="xsd:boolean" />
           <xsd:element name="collectionOrder" type="xsd:int" />
           <xsd:element name="image" type="xsd:string" />
           <xsd:element name="title" type="xsd:string" />
@@ -699,6 +702,7 @@
           <xsd:element name="footerFont" type="tns:Font" />
           <xsd:element name="id" type="xsd:string" />
           <xsd:element name="itemType" type="xsd:int" />
+          <xsd:element name="visible" type="xsd:boolean" />
           <xsd:element name="collectionOrder" type="xsd:int" />
           <xsd:element name="image" type="xsd:string" />
           <xsd:element name="title" type="xsd:string" />
@@ -715,6 +719,7 @@
           <xsd:element name="font" type="tns:Font" />
           <xsd:element name="id" type="xsd:string" />
           <xsd:element name="itemType" type="xsd:int" />
+          <xsd:element name="visible" type="xsd:boolean" />
           <xsd:element name="collectionOrder" type="xsd:int" />
           <xsd:element name="image" type="xsd:string" />
           <xsd:element name="title" type="xsd:string" />
@@ -731,6 +736,7 @@
           <xsd:element name="font" type="tns:Font" />
           <xsd:element name="id" type="xsd:string" />
           <xsd:element name="itemType" type="xsd:int" />
+          <xsd:element name="visible" type="xsd:boolean" />
           <xsd:element name="collectionOrder" type="xsd:int" />
           <xsd:element name="image" type="xsd:string" />
           <xsd:element name="title" type="xsd:string" />
@@ -748,6 +754,7 @@
           <xsd:element name="font" type="tns:Font" />
           <xsd:element name="id" type="xsd:string" />
           <xsd:element name="itemType" type="xsd:int" />
+          <xsd:element name="visible" type="xsd:boolean" />
           <xsd:element name="collectionOrder" type="xsd:int" />
           <xsd:element name="image" type="xsd:string" />
           <xsd:element name="title" type="xsd:string" />
@@ -859,128 +866,107 @@
   </wsdl:message>
   <wsdl:portType name="ContentControllerPortType">
     <wsdl:operation name="mockLibrary">
-      <wsdl:documentation>
-      </wsdl:documentation>
+      <wsdl:documentation />
       <wsdl:input message="tns:mockLibraryIn" />
       <wsdl:output message="tns:mockLibraryOut" />
     </wsdl:operation>
     <wsdl:operation name="mockVideoLinkSettings">
-      <wsdl:documentation>
-      </wsdl:documentation>
+      <wsdl:documentation />
       <wsdl:input message="tns:mockVideoLinkSettingsIn" />
       <wsdl:output message="tns:mockVideoLinkSettingsOut" />
     </wsdl:operation>
     <wsdl:operation name="mockHyperLinkSettings">
-      <wsdl:documentation>
-      </wsdl:documentation>
+      <wsdl:documentation />
       <wsdl:input message="tns:mockHyperLinkSettingsIn" />
       <wsdl:output message="tns:mockHyperLinkSettingsOut" />
     </wsdl:operation>
     <wsdl:operation name="mockPowerPointLinkSettings">
-      <wsdl:documentation>
-      </wsdl:documentation>
+      <wsdl:documentation />
       <wsdl:input message="tns:mockPowerPointLinkSettingsIn" />
       <wsdl:output message="tns:mockPowerPointLinkSettingsOut" />
     </wsdl:operation>
     <wsdl:operation name="mockPowerDocumentSettings">
-      <wsdl:documentation>
-      </wsdl:documentation>
+      <wsdl:documentation />
       <wsdl:input message="tns:mockPowerDocumentSettingsIn" />
       <wsdl:output message="tns:mockPowerDocumentSettingsOut" />
     </wsdl:operation>
     <wsdl:operation name="mockAppLinkSettings">
-      <wsdl:documentation>
-      </wsdl:documentation>
+      <wsdl:documentation />
       <wsdl:input message="tns:mockAppLinkSettingsIn" />
       <wsdl:output message="tns:mockAppLinkSettingsOut" />
     </wsdl:operation>
     <wsdl:operation name="mockInternalWallbinLinkSettings">
-      <wsdl:documentation>
-      </wsdl:documentation>
+      <wsdl:documentation />
       <wsdl:input message="tns:mockInternalWallbinLinkSettingsIn" />
       <wsdl:output message="tns:mockInternalWallbinLinkSettingsOut" />
     </wsdl:operation>
     <wsdl:operation name="mockInternalLibraryPageLinkSettings">
-      <wsdl:documentation>
-      </wsdl:documentation>
+      <wsdl:documentation />
       <wsdl:input message="tns:mockInternalLibraryPageLinkSettingsIn" />
       <wsdl:output message="tns:mockInternalLibraryPageLinkSettingsOut" />
     </wsdl:operation>
     <wsdl:operation name="mockInternalLibraryFolderLinkSettings">
-      <wsdl:documentation>
-      </wsdl:documentation>
+      <wsdl:documentation />
       <wsdl:input message="tns:mockInternalLibraryFolderLinkSettingsIn" />
       <wsdl:output message="tns:mockInternalLibraryFolderLinkSettingsOut" />
     </wsdl:operation>
     <wsdl:operation name="mockInternalLibraryObjectLinkSettings">
-      <wsdl:documentation>
-      </wsdl:documentation>
+      <wsdl:documentation />
       <wsdl:input message="tns:mockInternalLibraryObjectLinkSettingsIn" />
       <wsdl:output message="tns:mockInternalLibraryObjectLinkSettingsOut" />
     </wsdl:operation>
     <wsdl:operation name="mockInternalShortcutLinkSettings">
-      <wsdl:documentation>
-      </wsdl:documentation>
+      <wsdl:documentation />
       <wsdl:input message="tns:mockInternalShortcutLinkSettingsIn" />
       <wsdl:output message="tns:mockInternalShortcutLinkSettingsOut" />
     </wsdl:operation>
     <wsdl:operation name="mockExcelLinkSettings">
-      <wsdl:documentation>
-      </wsdl:documentation>
+      <wsdl:documentation />
       <wsdl:input message="tns:mockExcelLinkSettingsIn" />
       <wsdl:output message="tns:mockExcelLinkSettingsOut" />
     </wsdl:operation>
     <wsdl:operation name="mockQPageLinkSettings">
-      <wsdl:documentation>
-      </wsdl:documentation>
+      <wsdl:documentation />
       <wsdl:input message="tns:mockQPageLinkSettingsIn" />
       <wsdl:output message="tns:mockQPageLinkSettingsOut" />
     </wsdl:operation>
     <wsdl:operation name="mockLinkBundleLinkSettings">
-      <wsdl:documentation>
-      </wsdl:documentation>
+      <wsdl:documentation />
       <wsdl:input message="tns:mockLinkBundleLinkSettingsIn" />
       <wsdl:output message="tns:mockLinkBundleLinkSettingsOut" />
     </wsdl:operation>
     <wsdl:operation name="mockLibraryLinkBundleItem">
-      <wsdl:documentation>
-      </wsdl:documentation>
+      <wsdl:documentation />
       <wsdl:input message="tns:mockLibraryLinkBundleItemIn" />
       <wsdl:output message="tns:mockLibraryLinkBundleItemOut" />
     </wsdl:operation>
     <wsdl:operation name="mockUrlLinkBundleItem">
-      <wsdl:documentation>
-      </wsdl:documentation>
+      <wsdl:documentation />
       <wsdl:input message="tns:mockUrlLinkBundleItemIn" />
       <wsdl:output message="tns:mockUrlLinkBundleItemOut" />
     </wsdl:operation>
     <wsdl:operation name="mockLinkBundleLaunchScreenItem">
-      <wsdl:documentation>
-      </wsdl:documentation>
+      <wsdl:documentation />
       <wsdl:input message="tns:mockLinkBundleLaunchScreenItemIn" />
       <wsdl:output message="tns:mockLinkBundleLaunchScreenItemOut" />
     </wsdl:operation>
     <wsdl:operation name="mockLinkBundleInfoItem">
-      <wsdl:documentation>
-      </wsdl:documentation>
+      <wsdl:documentation />
       <wsdl:input message="tns:mockLinkBundleInfoItemIn" />
       <wsdl:output message="tns:mockLinkBundleInfoItemOut" />
     </wsdl:operation>
     <wsdl:operation name="mockLinkBundleStrategyItem">
-      <wsdl:documentation>
-      </wsdl:documentation>
+      <wsdl:documentation />
       <wsdl:input message="tns:mockLinkBundleStrategyItemIn" />
       <wsdl:output message="tns:mockLinkBundleStrategyItemOut" />
     </wsdl:operation>
     <wsdl:operation name="mockLinkBundleRevenueItem">
-      <wsdl:documentation>
-      </wsdl:documentation>
+      <wsdl:documentation />
       <wsdl:input message="tns:mockLinkBundleRevenueItemIn" />
       <wsdl:output message="tns:mockLinkBundleRevenueItemOut" />
     </wsdl:operation>
     <wsdl:operation name="getSessionKey">
-      <wsdl:documentation>
-      </wsdl:documentation>
+      <wsdl:documentation />
       <wsdl:input message="tns:getSessionKeyIn" />
       <wsdl:output message="tns:getSessionKeyOut" />
     </wsdl:operation>
