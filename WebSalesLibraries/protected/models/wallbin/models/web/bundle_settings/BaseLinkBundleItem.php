@@ -1,4 +1,5 @@
 <?
+
 	/**
 	 * Class BaseLinkBundleItem
 	 */
@@ -14,6 +15,11 @@
 		 * @soap
 		 */
 		public $itemType;
+		/**
+		 * @var bool
+		 * @soap
+		 */
+		public $visible;
 		/**
 		 * @var int
 		 * @soap

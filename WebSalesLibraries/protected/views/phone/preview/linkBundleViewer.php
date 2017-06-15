@@ -27,41 +27,45 @@
             <div class="link-bundle-section">
                 <h4>Files:</h4>
 				<? foreach ($data->bundleItems as $bundleItem): ?>
-					<? if ($bundleItem instanceof LinkBundlePreviewLinkItem): ?>
-						<? /** @var LinkBundlePreviewLinkItem $bundleItem */ ?>
-						<? if ($bundleItem->libraryLinkFormat != 'video'): ?>
-                            <div class="link-bundle-item ">
-                                <a class="preview-link"
-                                   href="#"><span><? echo nl2br($bundleItem->title); ?></span>
-                                    <div class="service-data">
-										<? echo $bundleItem->getItemData(); ?>
-                                    </div>
-                                </a>
+					<? if ($bundleItem->visible): ?>
+						<? if ($bundleItem instanceof LinkBundlePreviewLinkItem): ?>
+							<? /** @var LinkBundlePreviewLinkItem $bundleItem */ ?>
+							<? if ($bundleItem->libraryLinkFormat != 'video'): ?>
+                                <div class="link-bundle-item ">
+                                    <a class="preview-link"
+                                       href="#"><span><? echo nl2br($bundleItem->title); ?></span>
+                                        <div class="service-data">
+											<? echo $bundleItem->getItemData(); ?>
+                                        </div>
+                                    </a>
+                                </div>
+							<? endif; ?>
+						<? endif; ?>
+						<? if ($bundleItem instanceof LinkBundlePreviewUrlItem): ?>
+							<? /** @var LinkBundlePreviewUrlItem $bundleItem */ ?>
+                            <div class="link-bundle-item">
+                                <a href="<? echo $bundleItem->url; ?>"
+                                   target="_blank"><span><? echo !empty($bundleItem->title) ? nl2br($bundleItem->title) : $bundleItem->url; ?></span></a>
                             </div>
 						<? endif; ?>
-					<? endif; ?>
-					<? if ($bundleItem instanceof LinkBundlePreviewUrlItem): ?>
-						<? /** @var LinkBundlePreviewUrlItem $bundleItem */ ?>
-                        <div class="link-bundle-item">
-                            <a href="<? echo $bundleItem->url; ?>"
-                               target="_blank"><span><? echo !empty($bundleItem->title) ? nl2br($bundleItem->title) : $bundleItem->url; ?></span></a>
-                        </div>
 					<? endif; ?>
 				<? endforeach; ?>
             </div>
             <div class="link-bundle-section">
                 <h4>Video:</h4>
 				<? foreach ($data->bundleItems as $bundleItem): ?>
-					<? if ($bundleItem instanceof LinkBundlePreviewLinkItem): ?>
-						<? /** @var LinkBundlePreviewLinkItem $bundleItem */ ?>
-						<? if ($bundleItem->libraryLinkFormat == 'video'): ?>
-                            <div class="link-bundle-item ">
-                                <a class="preview-link" href="#"><span><? echo nl2br($bundleItem->title); ?></span>
-                                    <div class="service-data">
-										<? echo $bundleItem->getItemData(); ?>
-                                    </div>
-                                </a>
-                            </div>
+					<? if ($bundleItem->visible): ?>
+						<? if ($bundleItem instanceof LinkBundlePreviewLinkItem): ?>
+							<? /** @var LinkBundlePreviewLinkItem $bundleItem */ ?>
+							<? if ($bundleItem->libraryLinkFormat == 'video'): ?>
+                                <div class="link-bundle-item ">
+                                    <a class="preview-link" href="#"><span><? echo nl2br($bundleItem->title); ?></span>
+                                        <div class="service-data">
+											<? echo $bundleItem->getItemData(); ?>
+                                        </div>
+                                    </a>
+                                </div>
+							<? endif; ?>
 						<? endif; ?>
 					<? endif; ?>
 				<? endforeach; ?>

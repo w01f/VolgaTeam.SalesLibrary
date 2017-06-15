@@ -114,7 +114,7 @@
 					'key' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
 				),
 				'comet_chat' => array(
-					'enabled' => true,
+					'enabled' => false,
 				),
 				'ifly_chat' => array(
 					'enabled' => false,

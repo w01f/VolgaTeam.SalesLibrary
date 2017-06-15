@@ -12,6 +12,7 @@
 		public $id;
 		public $itemType;
 		public $isDefault;
+		public $visible;
 
 		public $image;
 		public $title;
@@ -26,6 +27,7 @@
 		public function __construct($bundleItem)
 		{
 			$this->id = uniqid();
+			$this->visible = !property_exists($bundleItem, 'visible') || $bundleItem->visible;
 			$this->image = $bundleItem->image;
 			$this->title = $bundleItem->title;
 			$this->hoverTip = $bundleItem->hoverTip;

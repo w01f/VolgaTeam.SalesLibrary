@@ -35,9 +35,9 @@
 			$xpath = new DomXPath($linkConfig);
 
 			$queryResult = $xpath->query('//Config/Library');
-			$this->libraryName = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
+			$this->libraryName = $queryResult->length > 0 ? str_replace("'", "''", trim($queryResult->item(0)->nodeValue)) : null;
 			$queryResult = $xpath->query('//Config/Page');
-			$this->pageName = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
+			$this->pageName = $queryResult->length > 0 ? str_replace("'", "''", trim($queryResult->item(0)->nodeValue)) : null;
 			$queryResult = $xpath->query('//Config/PageViewType');
 			$this->pageViewType = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : 'columns';
 

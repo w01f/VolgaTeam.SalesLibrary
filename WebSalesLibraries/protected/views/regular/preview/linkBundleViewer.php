@@ -9,11 +9,13 @@
         <td class="bundle-items-list" rowspan="2">
             <ul class="nav nav-pills">
 				<? foreach ($data->bundleItems as $bundleItem): ?>
-                    <li id="bundle-item-<? echo $bundleItem->id; ?>"
-                        class="bundle-item<? if ($bundleItem->hasContent): ?> content-item<? endif; ?>"
-						<? if (!Yii::app()->browser->isMobile() && !empty($bundleItem->hoverTip)): ?> data-toggle="tooltip" title="<? echo $bundleItem->hoverTip; ?>"<? endif; ?>>
-						<? echo $this->renderPartial($bundleItem->contentView, array('itemData' => $bundleItem), true); ?>
-                    </li>
+					<? if ($bundleItem->visible): ?>
+                        <li id="bundle-item-<? echo $bundleItem->id; ?>"
+                            class="bundle-item<? if ($bundleItem->hasContent): ?> content-item<? endif; ?>"
+							<? if (!Yii::app()->browser->isMobile() && !empty($bundleItem->hoverTip)): ?> data-toggle="tooltip" title="<? echo $bundleItem->hoverTip; ?>"<? endif; ?>>
+							<? echo $this->renderPartial($bundleItem->contentView, array('itemData' => $bundleItem), true); ?>
+                        </li>
+					<? endif; ?>
 				<? endforeach; ?>
             </ul>
         </td>

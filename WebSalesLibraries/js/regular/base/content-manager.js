@@ -27,18 +27,18 @@
 			parameters.actions = parameters.actions !== undefined ? parameters.actions : undefined;
 			parameters.navigationPanel = parameters.navigationPanel !== undefined ? parameters.navigationPanel : undefined;
 			parameters.loadCallback = parameters.loadCallback !== undefined ? parameters.loadCallback : function ()
-				{
-				};
+			{
+			};
 			parameters.resizeCallback = parameters.resizeCallback !== undefined ? parameters.resizeCallback : function ()
-				{
-				};
+			{
+			};
 
 			initHeader(parameters.headerOptions);
 			initShortcutActions(parameters.actions);
 
 			new $.SalesPortal.ShortcutsNavigationPanel({
-				content: parameters.navigationPanel !== undefined ? parameters.navigationPanel.content : '',
-				options: parameters.navigationPanel !== undefined ? parameters.navigationPanel.options : undefined,
+				content: parameters.navigationPanel !== undefined && parameters.navigationPanel !== null ? parameters.navigationPanel.content : '',
+				options: parameters.navigationPanel !== undefined && parameters.navigationPanel !== null ? parameters.navigationPanel.options : undefined,
 				sizeChangedCallback: parameters.resizeCallback
 			});
 

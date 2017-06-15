@@ -24,9 +24,9 @@
 		{
 			parent::__construct($linkSettings, $isPhone);
 
-			$this->libraryName = $linkSettings->libraryName;
-			$this->pageName = $linkSettings->pageName;
-			$this->windowName = $linkSettings->windowName;
+			$this->libraryName = str_replace("'", "''", $linkSettings->libraryName);
+			$this->pageName = str_replace("'", "''", $linkSettings->pageName);
+			$this->windowName = str_replace("'", "''", $linkSettings->windowName);
 
 			$this->column = -1;
 			$this->windowViewType = 'columns';

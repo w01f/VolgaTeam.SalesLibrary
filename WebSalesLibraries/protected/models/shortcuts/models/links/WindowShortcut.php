@@ -28,13 +28,13 @@
 			$xpath = new DomXPath($linkConfig);
 
 			$queryResult = $xpath->query('//Config/Library');
-			$libraryName = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '';
+			$libraryName = $queryResult->length > 0 ? str_replace("'", "''", trim($queryResult->item(0)->nodeValue)) : '';
 
 			$queryResult = $xpath->query('//Config/Page');
-			$pageName = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '';
+			$pageName = $queryResult->length > 0 ? str_replace("'", "''", trim($queryResult->item(0)->nodeValue)) : '';
 
 			$queryResult = $xpath->query('//Config/Window');
-			$windowName = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '';
+			$windowName = $queryResult->length > 0 ? str_replace("'", "''", trim($queryResult->item(0)->nodeValue)) : '';
 
 			$userId = \UserIdentity::getCurrentUserId();
 			$isAdmin = \UserIdentity::isUserAdmin();

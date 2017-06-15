@@ -1,4 +1,5 @@
 <?
+
 	/**
 	 * Class InternalLibraryObjectPreviewInfo
 	 */
@@ -14,10 +15,10 @@
 		{
 			$this->internalLinkType = $linkSettings->internalLinkType;
 
-			$libraryName = $linkSettings->libraryName;
-			$pageName = $linkSettings->pageName;
-			$windowName = $linkSettings->windowName;
-			$linkName = $linkSettings->linkName;
+			$libraryName = str_replace("'", "''", $linkSettings->libraryName);
+			$pageName = str_replace("'", "''", $linkSettings->pageName);
+			$windowName = str_replace("'", "''", $linkSettings->windowName);
+			$linkName = str_replace("'", "''", $linkSettings->linkName);
 
 			if (isset($libraryName) && isset($pageName) && isset($linkName) && isset($windowName))
 			{

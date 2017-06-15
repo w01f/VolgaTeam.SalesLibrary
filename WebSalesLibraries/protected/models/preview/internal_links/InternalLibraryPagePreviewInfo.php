@@ -23,8 +23,8 @@
 		{
 			parent::__construct($linkSettings, $isPhone);
 
-			$this->libraryName = $linkSettings->libraryName;
-			$this->pageName = $linkSettings->pageName;
+			$this->libraryName = str_replace("'", "''", $linkSettings->libraryName);
+			$this->pageName = str_replace("'", "''", $linkSettings->pageName);
 
 			$this->pageViewType = 'columns';
 			$this->style = WallbinStyle::createDefault();

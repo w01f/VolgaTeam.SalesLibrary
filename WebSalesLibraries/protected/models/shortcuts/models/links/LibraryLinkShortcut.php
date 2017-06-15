@@ -17,10 +17,10 @@
 			$linkConfig = new DOMDocument();
 			$linkConfig->loadXML($linkRecord->config);
 
-			$libraryName = trim($linkConfig->getElementsByTagName("Library")->item(0)->nodeValue);
-			$pageName = trim($linkConfig->getElementsByTagName("Page")->item(0)->nodeValue);
-			$windowName = trim($linkConfig->getElementsByTagName("Window")->item(0)->nodeValue);
-			$fileName = trim($linkConfig->getElementsByTagName("File")->item(0)->nodeValue);
+			$libraryName = str_replace("'", "''", trim($linkConfig->getElementsByTagName("Library")->item(0)->nodeValue));
+			$pageName = str_replace("'", "''", trim($linkConfig->getElementsByTagName("Page")->item(0)->nodeValue));
+			$windowName = str_replace("'", "''", trim($linkConfig->getElementsByTagName("Window")->item(0)->nodeValue));
+			$fileName = str_replace("'", "''", trim($linkConfig->getElementsByTagName("File")->item(0)->nodeValue));
 			if (isset($libraryName) && isset($pageName) && isset($windowName) && isset($fileName))
 			{
 				$linkRecord = Yii::app()->db->createCommand()
