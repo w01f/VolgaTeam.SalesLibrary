@@ -1,4 +1,5 @@
 <?
+
 	namespace application\models\wallbin\models\web;
 
 	/**
@@ -430,6 +431,24 @@
 				$quickSiteViews = \StatisticQPageRecord::model()->count('id_qpage=?', array($quickSiteSettings->qpageId));
 				if ($quickSiteViews > 0)
 					$totalLinkViews += $quickSiteViews;
+			}
+			else if ($this->originalFormat == 'link bundle')
+			{
+				/** @var  $linkSettings \LinkBundleLinkSettings */
+				$linkBundleSettings = $this->extendedProperties;
+				foreach ($linkBundleSettings->bundleItems as $bundleItem)
+				{
+					switch ($bundleItem->itemType)
+					{
+						case 1:
+							/** @var \LibraryLinkBundleItem $bundleItem */
+							$linkBundleLinkViews = \StatisticLinkRecord::model()->count('id_link=?', array($bundleItem->libraryLinkId));
+							/** @var int $linkBundleLinkViews */
+							if ($linkBundleLinkViews > 0)
+								$totalLinkViews += $linkBundleLinkViews;
+							break;
+					}
+				}
 			}
 			return $totalLinkViews;
 		}

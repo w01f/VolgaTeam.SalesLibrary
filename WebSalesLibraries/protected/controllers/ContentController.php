@@ -48,6 +48,7 @@
 						'LibraryLinkBundleItem' => 'LibraryLinkBundleItem',
 						'UrlLinkBundleItem' => 'UrlLinkBundleItem',
 						'LinkBundleLaunchScreenItem' => 'LinkBundleLaunchScreenItem',
+						'LinkBundleCoverItem' => 'LinkBundleCoverItem',
 						'LinkBundleInfoItem' => 'LinkBundleInfoItem',
 						'LinkBundleStrategyItem' => 'LinkBundleStrategyItem',
 						'LinkBundleRevenueItem' => 'LinkBundleRevenueItem',
@@ -205,6 +206,15 @@
 		 * @soap
 		 */
 		public function mockUrlLinkBundleItem($item)
+		{
+
+		}
+
+		/**
+		 * @param LinkBundleCoverItem $item
+		 * @soap
+		 */
+		public function mockLinkBundleCoverItem($item)
 		{
 
 		}

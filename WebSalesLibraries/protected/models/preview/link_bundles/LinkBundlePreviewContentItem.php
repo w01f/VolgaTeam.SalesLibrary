@@ -5,7 +5,7 @@
 	abstract class LinkBundlePreviewContentItem extends LinkBundlePreviewBaseItem
 	{
 		/**
-		 * @param $bundleItem LinkBundleInfoItem |LinkBundleStrategyItem | LinkBundleRevenueItem | LinkBundleLaunchScreenItem
+		 * @param $bundleItem LinkBundleInfoItem |LinkBundleStrategyItem | LinkBundleRevenueItem | LinkBundleLaunchScreenItem| LinkBundleCoverItem
 		 */
 		public function __construct($bundleItem)
 		{

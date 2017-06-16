@@ -66,6 +66,19 @@
 						break;
 				}
 
+			$statisticRangeCondition = '';
+			switch ($feedSettings->dateRangeType)
+			{
+				case "today":
+					$statisticRangeCondition = sprintf("sa.date_time>='%s'", date(\Yii::app()->params['mysqlDateFormat']));
+					break;
+				case "week":
+					$statisticRangeCondition = "yearweek(sa.date_time, 1) = yearweek(curdate(), 1)";
+					break;
+				case "month":
+					$statisticRangeCondition = "year(sa.date_time) = year(curdate()) and month(sa.date_time) = month(curdate())";
+					break;
+			}
 
 			/** @var \CDbCommand $dbCommand */
 			$dbCommand = \Yii::app()->db->createCommand();
@@ -80,7 +93,7 @@
 				'path' => 'link.file_relative_path as path',
 				'file_name' => 'link.file_name as file_name',
 				'search_format' => 'link.search_format as search_format',
-				'total_views' => 'count(s_a.id) as total_views',
+				'total_views' => 'link_views_set.link_views as total_views',
 				'thumbnail' => sprintf("case when '%s' = 0
 							        then (case
 							              when link.original_format='jpeg' or link.original_format='gif' or link.original_format='png' then
@@ -112,26 +125,37 @@
 			$dbCommand = $dbCommand->join('tbl_folder f', 'f.id = link.id_folder');
 			$dbCommand = $dbCommand->join('tbl_page p', 'p.id = f.id_page');
 			$dbCommand = $dbCommand->join('tbl_library lib', 'lib.id = p.id_library');
-			$dbCommand = $dbCommand->join('tbl_statistic_link s_l', 's_l.id_link = link.id');
-			$dbCommand = $dbCommand->join('tbl_statistic_activity s_a', "s_a.id = s_l.id_activity");
+			$dbCommand = $dbCommand->join('(select aggr.id_link as id_link, sum(aggr.link_views) as link_views from
+														           (select
+														              s_l.id_link as id_link,
+														              count(s_l.id) as link_views
+														            from tbl_statistic_link s_l ' .
+				'join tbl_statistic_activity sa on s_l.id_activity=sa.id ' .
+				'where ' . $statisticRangeCondition . ' ' .
+				'group by s_l.id_link
+														            union
+														            select
+														              l_b.id_bundle as id_link,
+														              count(s_l.id) as link_views
+														            from tbl_statistic_link s_l 
+														              join tbl_link_bundle l_b on l_b.id_link = s_l.id_link ' .
+				'join tbl_statistic_activity sa on s_l.id_activity=sa.id ' .
+				'where ' . $statisticRangeCondition . ' ' .
+				'group by l_b.id_bundle								
+														            union
+														            select
+														              l_q.id_link as id_link,
+														              count(s_q.id) as link_views
+														            from tbl_statistic_qpage s_q
+														              join tbl_link_qpage l_q on l_q.id_qpage = s_q.id_qpage ' .
+				'join tbl_statistic_activity sa on s_q.id_activity=sa.id ' .
+				'where ' . $statisticRangeCondition . ' ' .
+				'group by l_q.id_link) aggr group by aggr.id_link) link_views_set', "link_views_set.id_link=link.id");
 
 			$whereConditions = array(
 				'AND',
 				sprintf('link.search_format in (\'%s\')', implode("','", $queryFormats)),
 			);
-
-			switch ($feedSettings->dateRangeType)
-			{
-				case "today":
-					$whereConditions[] = sprintf("s_a.date_time>='%s'", date(\Yii::app()->params['mysqlDateFormat']));
-					break;
-				case "week":
-					$whereConditions[] = "yearweek(s_a.date_time, 1) = yearweek(curdate(), 1)";
-					break;
-				case "month":
-					$whereConditions[] = "year(s_a.date_time) = year(curdate()) and month(s_a.date_time) = month(curdate())";
-					break;
-			}
 
 			if (count($feedSettings->libraries) > 0)
 				$whereConditions[] = sprintf('lib.name in (\'%s\')', implode("','", $feedSettings->libraries));
@@ -406,13 +430,18 @@
 			/** @var \CDbCommand $dbCommand */
 			$dbCommand = \Yii::app()->db->createCommand();
 
-			$dbCommand = $dbCommand->from('tbl_link link');
+			$fromClause = array();
+			foreach ($feedSettings->linkConditions as $linkCondition)
+				$fromClause[] = "select sub_link.*, '" . (!empty($linkCondition->linkAlias) ? $linkCondition->linkAlias : "") . "' as link_alias from tbl_link sub_link join tbl_folder sub_folder on sub_folder.id=sub_link.id_folder join tbl_page sub_page on sub_page.id=sub_folder.id_page join tbl_library sub_lib on sub_lib.id=sub_page.id_library where (trim(sub_link.file_name)='" . $linkCondition->linkName . "' or trim(sub_link.name)='" . $linkCondition->linkName . "') and trim(sub_folder.name)='" . $linkCondition->folderName . "' and trim(sub_page.name)='" . $linkCondition->pageName . "' and trim(sub_lib.name)='" . $linkCondition->libraryName . "'";
+
+			$dbCommand = $dbCommand->from('(' . implode(" union ", $fromClause) . ') link');
 
 			$dbCommand = $dbCommand->select(array(
 				'id' => 'link.id as id',
 				'id_library' => 'link.id_library as id_library',
 				'library_name' => 'lib.name as library_name',
 				'name' => 'link.name as name',
+				'link_alias' => 'link.link_alias as link_alias',
 				'path' => 'link.file_relative_path as path',
 				'original_format' => 'link.original_format as original_format',
 				'link_date' => 'link.file_date as link_date',
@@ -422,6 +451,13 @@
 						              count(s_l.id) as link_views
 						            from tbl_statistic_link s_l 
 						            group by s_l.id_link
+						            union
+						            select
+						              l_b.id_bundle as link_id,
+						              count(s_l.id) as link_views
+						            from tbl_statistic_link s_l
+						              join tbl_link_bundle l_b on l_b.id_link = s_l.id_link  
+						              group by l_b.id_bundle
 						            union
 						            select
 						              l_q.id_link as link_id,
@@ -477,12 +513,6 @@
 				sprintf('link.search_format in (\'%s\')', implode("','", $queryFormats)),
 			);
 
-			$linkConditions = array();
-			$linkConditions[] = 'or';
-			foreach ($feedSettings->linkConditions as $linkCondition)
-				$linkConditions[] = "(trim(link.file_name)='" . $linkCondition->linkName . "' or trim(link.name)='" . $linkCondition->linkName . "') and trim(f.name)='" . $linkCondition->folderName . "' and trim(p.name)='" . $linkCondition->pageName . "' and trim(lib.name)='" . $linkCondition->libraryName . "'";
-			$whereConditions[] = $linkConditions;
-
 			$isAdmin = \UserIdentity::isUserAdmin();
 			if (!$isAdmin)
 			{
@@ -536,7 +566,7 @@
 				{
 					$feedItem = new LinkFeedItem();
 					$feedItem->linkId = $resultRecord['id'];
-					$feedItem->linkName = $resultRecord['name'];
+					$feedItem->linkName = !empty($resultRecord['link_alias']) ? $resultRecord['link_alias'] : $resultRecord['name'];
 					$feedItem->format = $resultRecord['original_format'];
 					$feedItem->libraryName = $resultRecord['library_name'];
 					$feedItem->viewsCount = $resultRecord['total_views'];

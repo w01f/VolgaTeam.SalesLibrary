@@ -8,11 +8,14 @@
 		var viewerData = new $.SalesPortal.DocumentViewerData(parameters.data);
 		var dialogContent = undefined;
 		var imageViewer = undefined;
+		var embeddedViewer = false;
 
 		var imageViewerStartIndex = viewerData.savedState && viewerData.savedState.startIndex ? viewerData.savedState.startIndex : 0;
 
 		this.show = function ()
 		{
+			embeddedViewer = parameters.viewContainer !== undefined;
+
 			if (viewerData.config.isEOBrowser === true && viewerData.config.forceEOOpen === true)
 				$.SalesPortal.SalesLibraryExtensions.openLink(viewerData);
 			else if (viewerData.config.forceDownload === true)
@@ -117,7 +120,6 @@
 		this.afterClose = function ()
 		{
 			$.SalesPortal.SalesLibraryExtensions.releaseLinkData();
-			releaseDialogTitle();
 		};
 
 		var initDialogTitle = function ()
@@ -126,17 +128,15 @@
 				$('.fancybox-title').addClass('link-viewer-title');
 		};
 
-		var releaseDialogTitle = function ()
-		{
-			$('.fancybox-title').removeClass('link-viewer-title');
-		};
-
 		var setDialogTitle = function (title)
 		{
-			if (viewerData.totalViews > 0)
-				$('.fancybox-title .child').html('<div class="row"><div class="col col-xs-10 text-left">' + title + '</div><div class="col col-xs-2 text-right">views (' + viewerData.totalViews + ')</div></div>');
-			else
-				$('.fancybox-title .child').html(title);
+			if (!embeddedViewer)
+			{
+				if (viewerData.totalViews > 0)
+					$('.fancybox-title .child').html('<div class="row"><div class="col col-xs-10 text-left">' + title + '</div><div class="col col-xs-2 text-right">views (' + viewerData.totalViews + ')</div></div>');
+				else
+					$('.fancybox-title .child').html(title);
+			}
 		};
 
 		var updateImageViewer = function ()
@@ -248,7 +248,7 @@
 					{
 						$.SalesPortal.SalesLibraryExtensions.switchDocumentPage(this.index);
 						imageViewerStartIndex = this.index;
-							documentBar.resize();
+						documentBar.resize();
 						if (viewerData.config.enableLogging)
 						{
 							$.SalesPortal.LogHelper.write({

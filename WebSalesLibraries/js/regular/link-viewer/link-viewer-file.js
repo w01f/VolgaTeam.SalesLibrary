@@ -7,16 +7,19 @@
 		var that = this;
 		var viewerData = new $.SalesPortal.SimpleViewerData(parameters.data);
 		var dialogContent = undefined;
+		var embeddedViewer = false;
 
 		this.show = function ()
 		{
-			if (viewerData.config.isEOBrowser == true && viewerData.config.forceEOOpen == true)
+			embeddedViewer = parameters.viewContainer !== undefined;
+
+			if (viewerData.config.isEOBrowser === true && viewerData.config.forceEOOpen === true)
 				$.SalesPortal.SalesLibraryExtensions.openLink(viewerData);
-			else if (viewerData.config.forceDownload == true)
+			else if (viewerData.config.forceDownload === true)
 				download();
 			else
 			{
-				if (parameters.viewContainer == undefined)
+				if (parameters.viewContainer === undefined)
 					$.fancybox({
 						content: parameters.content,
 						title: viewerData.name,
@@ -94,7 +97,6 @@
 		this.afterClose = function ()
 		{
 			$.SalesPortal.SalesLibraryExtensions.releaseLinkData();
-			releaseDialogTitle();
 		};
 
 		var initDialogTitle = function ()
@@ -103,17 +105,15 @@
 				$('.fancybox-title').addClass('link-viewer-title');
 		};
 
-		var releaseDialogTitle = function ()
-		{
-			$('.fancybox-title').removeClass('link-viewer-title');
-		};
-
 		var setDialogTitle = function (title)
 		{
-			if (viewerData.totalViews > 0)
-				$('.fancybox-title .child').html('<div class="row"><div class="col col-xs-10 text-left">' + title + '</div><div class="col col-xs-2 text-right">views (' + viewerData.totalViews + ')</div></div>');
-			else
-				$('.fancybox-title .child').html(title);
+			if (!embeddedViewer)
+			{
+				if (viewerData.totalViews > 0)
+					$('.fancybox-title .child').html('<div class="row"><div class="col col-xs-10 text-left">' + title + '</div><div class="col col-xs-2 text-right">views (' + viewerData.totalViews + ')</div></div>');
+				else
+					$('.fancybox-title .child').html(title);
+			}
 		};
 
 		var download = function ()

@@ -193,6 +193,15 @@
 								. 'group by s_l.id_link
 														            union
 														            select
+														              l_b.id_bundle as id_link,
+														              count(s_l.id) as link_views
+														            from tbl_statistic_link s_l 
+														              join tbl_link_bundle l_b on l_b.id_link = s_l.id_link ' .
+								(!empty($this->viewCountQuerySettings['startDate']) ? 'join tbl_statistic_activity sa on s_l.id_activity=sa.id ' : '') .
+								(!empty($this->viewCountQuerySettings['startDate']) ? 'where sa.date_time>=\'' . $this->viewCountQuerySettings['startDate'] . '\' and sa.date_time<=\'' . $this->viewCountQuerySettings['endDate'] . '\' ' : '')
+								. 'group by l_b.id_bundle								
+														            union
+														            select
 														              l_q.id_link as id_link,
 														              count(s_q.id) as link_views
 														            from tbl_statistic_qpage s_q
@@ -209,6 +218,13 @@
 														              count(s_l.id) as link_views
 														            from tbl_statistic_link s_l 
 														            group by s_l.id_link
+														            union
+														            select
+														              l_b.id_bundle as link_id,
+														              count(s_l.id) as link_views
+														            from tbl_statistic_link s_l
+														              join tbl_link_bundle l_b on l_b.id_link = s_l.id_link  
+														              group by l_b.id_bundle
 														            union
 														            select
 														              l_q.id_link as link_id,

@@ -10,6 +10,7 @@
 		public $pageName;
 		public $folderName;
 		public $linkName;
+		public $linkAlias;
 
 		/**
 		 * @param $xpath \DOMXPath
@@ -32,6 +33,9 @@
 
 			$queryResult = $xpath->query('./LinkName', $contextNode);
 			$instance->linkName = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
+
+			$queryResult = $xpath->query('./AltName', $contextNode);
+			$instance->linkAlias = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
 
 			return $instance;
 		}
