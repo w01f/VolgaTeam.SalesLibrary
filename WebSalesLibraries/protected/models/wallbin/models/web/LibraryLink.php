@@ -432,6 +432,18 @@
 				if ($quickSiteViews > 0)
 					$totalLinkViews += $quickSiteViews;
 			}
+			else if ($this->originalFormat == 'internal link')
+			{
+				/** @var \LinkInternalLinkRecord $internalLinkRecord */
+				$internalLinkRecord = \LinkInternalLinkRecord::model()->find('id_internal=?', array($this->id));
+				if (isset($internalLinkRecord))
+				{
+					/** @var int $internalLinkViews */
+					$internalLinkViews = \StatisticLinkRecord::model()->count('id_link=?', array($internalLinkRecord->id_original));
+					if ($internalLinkViews > 0)
+						$totalLinkViews += $internalLinkViews;
+				}
+			}
 			else if ($this->originalFormat == 'link bundle')
 			{
 				/** @var  $linkSettings \LinkBundleLinkSettings */
@@ -443,6 +455,17 @@
 						case 1:
 							/** @var \LibraryLinkBundleItem $bundleItem */
 							$linkBundleLinkViews = \StatisticLinkRecord::model()->count('id_link=?', array($bundleItem->libraryLinkId));
+
+							/** @var \LinkInternalLinkRecord $internalLinkRecord */
+							$internalLinkRecord = \LinkInternalLinkRecord::model()->find('id_internal=?', array($bundleItem->libraryLinkId));
+							if (isset($internalLinkRecord))
+							{
+								/** @var int $internalLinkViews */
+								$internalLinkViews = \StatisticLinkRecord::model()->count('id_link=?', array($internalLinkRecord->id_original));
+								if ($internalLinkViews > 0)
+									$totalLinkViews += $internalLinkViews;
+							}
+
 							/** @var int $linkBundleLinkViews */
 							if ($linkBundleLinkViews > 0)
 								$totalLinkViews += $linkBundleLinkViews;

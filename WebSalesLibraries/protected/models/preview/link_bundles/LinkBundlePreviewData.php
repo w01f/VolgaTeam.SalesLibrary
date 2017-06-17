@@ -29,7 +29,7 @@
 			$hasDefault = false;
 			foreach ($linkSettings->bundleItems as $bundleItem)
 			{
-				$previewItem = LinkBundlePreviewBaseItem::Create($bundleItem, $link);
+				$previewItem = LinkBundlePreviewBaseItem::Create($bundleItem);
 				if (!$hasDefault && $previewItem->itemType != 'url')
 				{
 					$this->defaultItemId = $previewItem->id;

@@ -145,6 +145,10 @@
 							break;
 					}
 				}
+
+				if ($link['type'] == 16)
+					LinkInternalLinkRecord::updateData($link['id'], $link['libraryId'], $link['extendedProperties']);
+
 				$linkRecord->settings = CJSON::encode($link['extendedProperties']);
 			}
 
@@ -254,7 +258,7 @@
 						else
 							$linkAvailable = false;
 					}
-					if($linkAvailable)
+					if ($linkAvailable)
 					{
 						$deniedLinkIds = LinkBlackListRecord::getDeniedLinks($userId);
 						if (!in_array($link->id, $deniedLinkIds))

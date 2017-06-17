@@ -162,5 +162,6 @@
 			LinkBlackListRecord::clearData($libraryId);
 			LibraryConfigRecord::clearData($libraryId);
 			LinkBundleRecord::clearData($libraryId);
+			LinkInternalLinkRecord::clearData($libraryId);
 		}
 	}

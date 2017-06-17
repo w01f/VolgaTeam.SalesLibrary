@@ -47,10 +47,9 @@
 
 		/**
 		 * @param $bundleItem BaseLinkBundleItem
-		 * @param $link LibraryLink
 		 * @return LinkBundlePreviewBaseItem
 		 */
-		public static function Create($bundleItem, $link)
+		public static function Create($bundleItem)
 		{
 			/** @var LinkBundlePreviewBaseItem $bundlePreviewItem */
 			$bundlePreviewItem = null;
@@ -91,7 +90,6 @@
 				case 7:
 					/** @var LinkBundleCoverItem $bundleItem */
 					$bundlePreviewItem = new LinkBundlePreviewCoverItem($bundleItem);
-					$bundlePreviewItem->title = $link->name;
 					break;
 			}
 			return $bundlePreviewItem;

@@ -133,6 +133,15 @@
 				'join tbl_statistic_activity sa on s_l.id_activity=sa.id ' .
 				'where ' . $statisticRangeCondition . ' ' .
 				'group by s_l.id_link
+																	union
+																	select
+														              l_i_l.id_internal as link_id,
+														              count(s_l.id) as link_views
+														            from tbl_statistic_link s_l
+														              join tbl_link_internal_link l_i_l on l_i_l.id_original = s_l.id_link ' .
+				'join tbl_statistic_activity sa on s_l.id_activity=sa.id ' .
+				'where ' . $statisticRangeCondition . ' ' .
+				'group by l_i_l.id_internal
 														            union
 														            select
 														              l_b.id_bundle as id_link,
@@ -142,6 +151,16 @@
 				'join tbl_statistic_activity sa on s_l.id_activity=sa.id ' .
 				'where ' . $statisticRangeCondition . ' ' .
 				'group by l_b.id_bundle								
+														            union
+														            select
+														              l_b.id_bundle as link_id,
+														              count(s_l.id) as link_views
+														            from tbl_statistic_link s_l
+														              join tbl_link_internal_link l_i_l on l_i_l.id_original = s_l.id_link
+														              join tbl_link_bundle l_b on l_b.id_link = l_i_l.id_internal ' .
+				'join tbl_statistic_activity sa on s_l.id_activity=sa.id ' .
+				'where ' . $statisticRangeCondition . ' ' .
+				'group by l_b.id_bundle
 														            union
 														            select
 														              l_q.id_link as id_link,
@@ -453,10 +472,25 @@
 						            group by s_l.id_link
 						            union
 						            select
+						              l_i_l.id_internal as link_id,
+						              count(s_l.id) as link_views
+						            from tbl_statistic_link s_l
+						              join tbl_link_internal_link l_i_l on l_i_l.id_original = s_l.id_link
+						            group by l_i_l.id_internal
+						            union
+						            select
 						              l_b.id_bundle as link_id,
 						              count(s_l.id) as link_views
 						            from tbl_statistic_link s_l
 						              join tbl_link_bundle l_b on l_b.id_link = s_l.id_link  
+						              group by l_b.id_bundle
+						            union
+						            select
+						              l_b.id_bundle as link_id,
+						              count(s_l.id) as link_views
+						            from tbl_statistic_link s_l
+						              join tbl_link_internal_link l_i_l on l_i_l.id_original = s_l.id_link
+						              join tbl_link_bundle l_b on l_b.id_link = l_i_l.id_internal  
 						              group by l_b.id_bundle
 						            union
 						            select
