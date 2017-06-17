@@ -103,6 +103,16 @@ namespace SalesLibraries.FileManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap BundlesEditorCoverLogo {
+            get {
+                object obj = ResourceManager.GetObject("BundlesEditorCoverLogo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap BundlesEditorInfoLogo {
             get {
                 object obj = ResourceManager.GetObject("BundlesEditorInfoLogo", resourceCulture);
@@ -116,6 +126,16 @@ namespace SalesLibraries.FileManager.Properties {
         internal static System.Drawing.Bitmap BundlesEditorLinksAdd {
             get {
                 object obj = ResourceManager.GetObject("BundlesEditorLinksAdd", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap BundlesEditorLinksAddCover {
+            get {
+                object obj = ResourceManager.GetObject("BundlesEditorLinksAddCover", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

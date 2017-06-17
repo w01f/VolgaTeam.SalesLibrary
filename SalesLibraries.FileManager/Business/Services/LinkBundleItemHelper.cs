@@ -67,6 +67,11 @@ namespace SalesLibraries.FileManager.Business.Services
 						? Image.FromFile(MainController.Instance.Lists.LinkBundleImages.DefaultInfoLogo.LocalPath)
 						: null;
 					break;
+				case LinkBundleItemType.Cover:
+					target.Image = MainController.Instance.Lists.LinkBundleImages.DefaultCoverLogo.ExistsLocal()
+						? Image.FromFile(MainController.Instance.Lists.LinkBundleImages.DefaultCoverLogo.LocalPath)
+						: null;
+					break;
 				case LinkBundleItemType.Info:
 					target.Image = MainController.Instance.Lists.LinkBundleImages.DefaultInfoLogo.ExistsLocal()
 						? Image.FromFile(MainController.Instance.Lists.LinkBundleImages.DefaultInfoLogo.LocalPath)

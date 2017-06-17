@@ -42,6 +42,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Singl
 			repositoryItemTextEditBundleItems.EnableSelectAll();
 			repositoryItemMemoEditBundleItems.EnableSelectAll();
 
+			barLargeButtonItemLinksAddCover.Caption = CoverItem.ItemName;
 			barLargeButtonItemLinksAddLaunchScreen.Caption = LaunchScreenItem.ItemName;
 			barLargeButtonItemLinksAddInfo.Caption = InfoItem.ItemName;
 			barLargeButtonItemLinksAddRevenue.Caption = RevenueItem.ItemName;
@@ -193,10 +194,17 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Singl
 
 		private void UpdateItemsAvailableToAdd()
 		{
+			barLargeButtonItemLinksAddCover.Enabled = !_linkBundle.Settings.Items.OfType<CoverItem>().Any();
 			barLargeButtonItemLinksAddLaunchScreen.Enabled = !_linkBundle.Settings.Items.OfType<LaunchScreenItem>().Any();
 			barLargeButtonItemLinksAddInfo.Enabled = !_linkBundle.Settings.Items.OfType<InfoItem>().Any();
 			barLargeButtonItemLinksAddRevenue.Enabled = !_linkBundle.Settings.Items.OfType<RevenueItem>().Any();
 			barLargeButtonItemLinksAddStrategy.Enabled = !_linkBundle.Settings.Items.OfType<StrategyItem>().Any();
+		}
+
+		private void OnAddCoverItemClick(object sender, ItemClickEventArgs e)
+		{
+			_linkBundle.AddBundleItem<CoverItem>().AssignDefaultImage();
+			LoadBundleItems();
 		}
 
 		private void OnAddLaunchScreebItemClick(object sender, ItemClickEventArgs e)
@@ -282,11 +290,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Singl
 		{
 			if (e.Clicks < 2) return;
 			if (e.Column != gridColumnBundleItemsImage) return;
-			using (var form = new FormImageGallery(MainController.Instance.Lists.LinkBundleImages.Items))
+			using (var form = new FormImageGallery(MainController.Instance.Lists.LinkBundleImages))
 			{
 				if (form.ShowDialog() != DialogResult.OK) return;
-				if (form.SelectedImageSource == null) return;
-				SelectedBundleItem.Image = Image.FromFile(form.SelectedImageSource.FilePath);
+				SelectedBundleItem.Image = (Image)form.OriginalImage.Clone();
 				gridViewBundleItems.UpdateCurrentRow();
 			}
 		}
@@ -314,6 +321,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Singl
 			{
 				case LinkBundleItemType.LaunchScreen:
 					xtraTabControl.SelectedTabPage = xtraTabControl.TabPages.OfType<LaunchScreenEditControl>().FirstOrDefault();
+					break;
+				case LinkBundleItemType.Cover:
+					xtraTabControl.SelectedTabPage = xtraTabControl.TabPages.OfType<CoverEditControl>().FirstOrDefault();
 					break;
 				case LinkBundleItemType.Info:
 					xtraTabControl.SelectedTabPage = xtraTabControl.TabPages.OfType<InfoEditControl>().FirstOrDefault();

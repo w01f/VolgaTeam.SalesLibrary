@@ -63,6 +63,7 @@
 			this.barManager = new DevExpress.XtraBars.BarManager(this.components);
 			this.barToolbar = new DevExpress.XtraBars.Bar();
 			this.barSubItemLinksAdd = new DevExpress.XtraBars.BarSubItem();
+			this.barLargeButtonItemLinksAddCover = new DevExpress.XtraBars.BarButtonItem();
 			this.barLargeButtonItemLinksAddLaunchScreen = new DevExpress.XtraBars.BarLargeButtonItem();
 			this.barLargeButtonItemLinksAddInfo = new DevExpress.XtraBars.BarLargeButtonItem();
 			this.barLargeButtonItemLinksAddRevenue = new DevExpress.XtraBars.BarLargeButtonItem();
@@ -508,8 +509,9 @@
             this.barLargeButtonItemLinksAddRevenue,
             this.barLargeButtonItemLinksAddStrategy,
             this.barLargeButtonItemLinksAddUrls,
-            this.barLargeButtonItemLinksAddLaunchScreen});
-			this.barManager.MaxItemId = 15;
+            this.barLargeButtonItemLinksAddLaunchScreen,
+            this.barLargeButtonItemLinksAddCover});
+			this.barManager.MaxItemId = 16;
 			// 
 			// barToolbar
 			// 
@@ -534,12 +536,21 @@
 			this.barSubItemLinksAdd.Id = 3;
 			this.barSubItemLinksAdd.ItemClickFireMode = DevExpress.XtraBars.BarItemEventFireMode.Immediate;
 			this.barSubItemLinksAdd.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.barLargeButtonItemLinksAddCover),
             new DevExpress.XtraBars.LinkPersistInfo(this.barLargeButtonItemLinksAddLaunchScreen),
             new DevExpress.XtraBars.LinkPersistInfo(this.barLargeButtonItemLinksAddInfo),
             new DevExpress.XtraBars.LinkPersistInfo(this.barLargeButtonItemLinksAddRevenue),
             new DevExpress.XtraBars.LinkPersistInfo(this.barLargeButtonItemLinksAddStrategy),
             new DevExpress.XtraBars.LinkPersistInfo(this.barLargeButtonItemLinksAddUrls)});
 			this.barSubItemLinksAdd.Name = "barSubItemLinksAdd";
+			// 
+			// barLargeButtonItemLinksAddCover
+			// 
+			this.barLargeButtonItemLinksAddCover.Caption = "Cover Art";
+			this.barLargeButtonItemLinksAddCover.Glyph = global::SalesLibraries.FileManager.Properties.Resources.BundlesEditorLinksAddCover;
+			this.barLargeButtonItemLinksAddCover.Id = 15;
+			this.barLargeButtonItemLinksAddCover.Name = "barLargeButtonItemLinksAddCover";
+			this.barLargeButtonItemLinksAddCover.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.OnAddCoverItemClick);
 			// 
 			// barLargeButtonItemLinksAddLaunchScreen
 			// 
@@ -583,6 +594,7 @@
 			// 
 			// FormEditBundle
 			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.ClientSize = new System.Drawing.Size(934, 579);
 			this.Controls.Add(this.xtraTabControl);
@@ -663,5 +675,6 @@
 		private DevExpress.XtraBars.BarLargeButtonItem barLargeButtonItemLinksAddLaunchScreen;
 		private DevExpress.XtraGrid.Columns.GridColumn gridColumnBundleItemsUseAsThumbnail;
 		private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEditBundleItemsDisabled;
+		private DevExpress.XtraBars.BarButtonItem barLargeButtonItemLinksAddCover;
 	}
 }

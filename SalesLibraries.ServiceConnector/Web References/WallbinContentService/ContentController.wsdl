@@ -688,6 +688,19 @@
           <xsd:element name="useAsThumbnail" type="xsd:boolean" />
         </xsd:all>
       </xsd:complexType>
+      <xsd:complexType name="LinkBundleCoverItem">
+        <xsd:all>
+          <xsd:element name="logo" type="xsd:string" />
+          <xsd:element name="id" type="xsd:string" />
+          <xsd:element name="itemType" type="xsd:int" />
+          <xsd:element name="visible" type="xsd:boolean" />
+          <xsd:element name="collectionOrder" type="xsd:int" />
+          <xsd:element name="image" type="xsd:string" />
+          <xsd:element name="title" type="xsd:string" />
+          <xsd:element name="hoverTip" type="xsd:string" />
+          <xsd:element name="useAsThumbnail" type="xsd:boolean" />
+        </xsd:all>
+      </xsd:complexType>
       <xsd:complexType name="LinkBundleLaunchScreenItem">
         <xsd:all>
           <xsd:element name="header" type="xsd:string" />
@@ -841,6 +854,10 @@
     <wsdl:part name="item" type="tns:UrlLinkBundleItem" />
   </wsdl:message>
   <wsdl:message name="mockUrlLinkBundleItemOut" />
+  <wsdl:message name="mockLinkBundleCoverItemIn">
+    <wsdl:part name="item" type="tns:LinkBundleCoverItem" />
+  </wsdl:message>
+  <wsdl:message name="mockLinkBundleCoverItemOut" />
   <wsdl:message name="mockLinkBundleLaunchScreenItemIn">
     <wsdl:part name="item" type="tns:LinkBundleLaunchScreenItem" />
   </wsdl:message>
@@ -944,6 +961,11 @@
       <wsdl:documentation />
       <wsdl:input message="tns:mockUrlLinkBundleItemIn" />
       <wsdl:output message="tns:mockUrlLinkBundleItemOut" />
+    </wsdl:operation>
+    <wsdl:operation name="mockLinkBundleCoverItem">
+      <wsdl:documentation />
+      <wsdl:input message="tns:mockLinkBundleCoverItemIn" />
+      <wsdl:output message="tns:mockLinkBundleCoverItemOut" />
     </wsdl:operation>
     <wsdl:operation name="mockLinkBundleLaunchScreenItem">
       <wsdl:documentation />
@@ -1110,6 +1132,15 @@
     </wsdl:operation>
     <wsdl:operation name="mockUrlLinkBundleItem">
       <soap:operation soapAction="urn:ContentControllerwsdl#mockUrlLinkBundleItem" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="mockLinkBundleCoverItem">
+      <soap:operation soapAction="urn:ContentControllerwsdl#mockLinkBundleCoverItem" style="rpc" />
       <wsdl:input>
         <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:input>

@@ -595,6 +595,11 @@ namespace SalesLibraries.FileManager.Business.Services
 							linkItem = new UrlLinkBundleItem();
 							((UrlLinkBundleItem)linkItem).url = ((UrlItem)sourceBundleItem).Url;
 							break;
+						case LinkBundleItemType.Cover:
+							linkItem = new LinkBundleCoverItem();
+							if (((CoverItem)sourceBundleItem).Logo != null)
+								((LinkBundleCoverItem)linkItem).logo = Convert.ToBase64String((byte[])imageConverter.ConvertTo(((CoverItem)sourceBundleItem).Logo, typeof(byte[])));
+							break;
 						case LinkBundleItemType.LaunchScreen:
 							linkItem = new LinkBundleLaunchScreenItem();
 							((LinkBundleLaunchScreenItem)linkItem).header = ((LaunchScreenItem)sourceBundleItem).Header;

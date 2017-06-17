@@ -315,6 +315,12 @@
     <Compile Include="PresentationLayer\Wallbin\Folders\Controls\FormAddExternalFolder.Designer.cs">
       <DependentUpon>FormAddExternalFolder.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationLayer\Wallbin\ImageGallery\FormImageGallery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\ImageGallery\FormImageGallery.designer.cs">
+      <DependentUpon>FormImageGallery.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationLayer\Wallbin\ImageGallery\GalleryTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -325,6 +331,12 @@
       <DependentUpon>FormAddUrl.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\LinkBundles\SingleBundle\ILinkBundleInfoEditControl.cs" />
+    <Compile Include="PresentationLayer\Wallbin\LinkBundles\SingleBundle\CoverEditControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\LinkBundles\SingleBundle\CoverEditControl.Designer.cs">
+      <DependentUpon>CoverEditControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationLayer\Wallbin\LinkBundles\SingleBundle\LaunchScreenEditControl.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -536,12 +548,6 @@
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\LinkBundles\BundleList\LinkBundleListControl.Designer.cs">
       <DependentUpon>LinkBundleListControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Wallbin\ImageGallery\FormImageGallery.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\Wallbin\ImageGallery\FormImageGallery.designer.cs">
-      <DependentUpon>FormImageGallery.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\LinkBundles\SingleBundle\FormEditBundle.cs">
       <SubType>Form</SubType>
@@ -957,8 +963,14 @@
     <EmbeddedResource Include="PresentationLayer\Wallbin\Folders\Controls\FormAddExternalFolder.resx">
       <DependentUpon>FormAddExternalFolder.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\ImageGallery\FormImageGallery.resx">
+      <DependentUpon>FormImageGallery.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\LinkBundles\SingleBundle\FormAddUrl.resx">
       <DependentUpon>FormAddUrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\LinkBundles\SingleBundle\CoverEditControl.resx">
+      <DependentUpon>CoverEditControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\LinkBundles\SingleBundle\LaunchScreenEditControl.resx">
       <DependentUpon>LaunchScreenEditControl.cs</DependentUpon>
@@ -1046,9 +1058,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\LinkBundles\BundleList\LinkBundleListControl.resx">
       <DependentUpon>LinkBundleListControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Wallbin\ImageGallery\FormImageGallery.resx">
-      <DependentUpon>FormImageGallery.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\LinkBundles\SingleBundle\FormEditBundle.resx">
       <DependentUpon>FormEditBundle.cs</DependentUpon>
@@ -1285,6 +1294,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\BundlesEditorLinksAddCover.png" />
+    <None Include="Resources\BundlesEditorCoverLogo.png" />
     <None Include="Resources\LinkSettingsTagsIconCategories.png" />
     <None Include="Resources\LinkSettingsTagsLogoKeywords.png" />
     <None Include="Resources\LinkSettingsTagsLogoCategories.png" />

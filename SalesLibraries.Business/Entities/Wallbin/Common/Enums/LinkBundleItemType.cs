@@ -9,5 +9,6 @@
 		Strategy,
 		Url,
 		LaunchScreen,
+		Cover,
 	}
 }

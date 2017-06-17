@@ -14,7 +14,7 @@ namespace SalesLibraries.Common.Dictionaries
 		public StorageDirectory MainFolder { get; set; }
 		public StorageDirectory AdditionalFolder { get; set; }
 		public StorageDirectory FavsFolder { get; set; }
-		public List<ImageSourceGroup> Items { get; private set; }
+		public List<ImageSourceGroup> Items { get; }
 
 		public SearchResultsImageGroup SearchResults => Items.OfType<SearchResultsImageGroup>().Single();
 

@@ -28,7 +28,8 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.styleController = new DevExpress.XtraEditors.StyleController();
+			this.components = new System.ComponentModel.Container();
+			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.pnTop = new DevExpress.XtraEditors.PanelControl();
 			this.labelControlTitle = new DevExpress.XtraEditors.LabelControl();
 			this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
@@ -142,7 +143,7 @@
 			this.pictureEditLogo.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.pictureEditLogo.Location = new System.Drawing.Point(7, 85);
 			this.pictureEditLogo.Name = "pictureEditLogo";
-			this.pictureEditLogo.Properties.NullText = "Add Logo Hear";
+			this.pictureEditLogo.Properties.NullText = "Add Logo...";
 			this.pictureEditLogo.Properties.ReadOnly = true;
 			this.pictureEditLogo.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
 			this.pictureEditLogo.Properties.ShowMenu = false;
@@ -158,7 +159,7 @@
 			this.pictureEditBanner.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.pictureEditBanner.Location = new System.Drawing.Point(119, 224);
 			this.pictureEditBanner.Name = "pictureEditBanner";
-			this.pictureEditBanner.Properties.NullText = "Add Logo Hear";
+			this.pictureEditBanner.Properties.NullText = "Add Logo...";
 			this.pictureEditBanner.Properties.ReadOnly = true;
 			this.pictureEditBanner.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
 			this.pictureEditBanner.Properties.ShowMenu = false;

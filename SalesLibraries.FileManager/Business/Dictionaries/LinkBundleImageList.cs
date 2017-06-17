@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using SalesLibraries.Common.Extensions;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.Objects.Graphics;
@@ -12,6 +13,7 @@ namespace SalesLibraries.FileManager.Business.Dictionaries
 		public StorageDirectory AdditionalFolder { get; private set; }
 		public StorageDirectory FavsFolder { get; private set; }
 		public List<ImageSourceGroup> Items { get; }
+		public SearchResultsImageGroup SearchResults => Items.OfType<SearchResultsImageGroup>().Single();
 
 		public StorageFile DefaultPowerPointLogo { get; private set; }
 		public StorageFile DefaultWordLogo { get; private set; }
@@ -19,7 +21,8 @@ namespace SalesLibraries.FileManager.Business.Dictionaries
 		public StorageFile DefaultPdfLogo { get; private set; }
 		public StorageFile DefaultVideoLogo { get; private set; }
 		public StorageFile DefaultImageLogo { get; private set; }
-		
+
+		public StorageFile DefaultCoverLogo { get; private set; }
 		public StorageFile DefaultInfoLogo { get; private set; }
 		public StorageFile DefaultRevenueLogo { get; private set; }
 		public StorageFile DefaultStrategyLogo { get; private set; }
@@ -43,6 +46,7 @@ namespace SalesLibraries.FileManager.Business.Dictionaries
 			DefaultVideoLogo = new StorageFile(MainFolder.RelativePathParts.Merge("default_mp4.png"));
 			DefaultImageLogo = new StorageFile(MainFolder.RelativePathParts.Merge("default_image.png"));
 
+			DefaultCoverLogo = new StorageFile(MainFolder.RelativePathParts.Merge("default_cover.png"));
 			DefaultInfoLogo = new StorageFile(MainFolder.RelativePathParts.Merge("default_info.png"));
 			DefaultRevenueLogo = new StorageFile(MainFolder.RelativePathParts.Merge("default_revenue.png"));
 			DefaultStrategyLogo = new StorageFile(MainFolder.RelativePathParts.Merge("default_sales_strategy.png"));
@@ -56,6 +60,11 @@ namespace SalesLibraries.FileManager.Business.Dictionaries
 			if (MainFolder.ExistsLocal())
 				sourceFolderImageGroup.LoadImages<Widget>(MainFolder.LocalPath);
 			Items.Add(sourceFolderImageGroup);
+
+			var searchResultsimageGroup = new SearchResultsImageGroup(this);
+			searchResultsimageGroup.Name = "Search Results";
+			searchResultsimageGroup.Order = -2;
+			Items.Add(searchResultsimageGroup);
 
 			sourceFolderImageGroup = new FavoriteImageGroup(this);
 			sourceFolderImageGroup.Name = "My Favorites";

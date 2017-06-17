@@ -87,21 +87,19 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Singl
 
 		private void OnLogoEditClick(object sender, EventArgs e)
 		{
-			using (var form = new FormImageGallery(MainController.Instance.Lists.Banners.Items))
+			using (var form = new FormImageGallery(MainController.Instance.Lists.Banners))
 			{
 				if (form.ShowDialog() != DialogResult.OK) return;
-				if (form.SelectedImageSource == null) return;
-				pictureEditLogo.Image = Image.FromFile(form.SelectedImageSource.FilePath);
+				pictureEditLogo.Image = (Image)form.OriginalImage.Clone(); 
 			}
 		}
 
 		private void OnBannerEditClick(object sender, EventArgs e)
 		{
-			using (var form = new FormImageGallery(MainController.Instance.Lists.Banners.Items))
+			using (var form = new FormImageGallery(MainController.Instance.Lists.Banners))
 			{
 				if (form.ShowDialog() != DialogResult.OK) return;
-				if (form.SelectedImageSource == null) return;
-				pictureEditBanner.Image = Image.FromFile(form.SelectedImageSource.FilePath);
+				pictureEditBanner.Image = (Image)form.OriginalImage.Clone();
 			}
 		}
 

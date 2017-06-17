@@ -284,11 +284,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Bundl
 		{
 			if (e.Column != gridColumnBundleItemsImage) return;
 			if (e.Clicks < 2) return;
-			using (var form = new FormImageGallery(MainController.Instance.Lists.LinkBundleImages.Items))
+			using (var form = new FormImageGallery(MainController.Instance.Lists.LinkBundleImages))
 			{
 				if (form.ShowDialog() != DialogResult.OK) return;
-				if (form.SelectedImageSource == null) return;
-				SelectedBundleItem.Image = Image.FromFile(form.SelectedImageSource.FilePath);
+				SelectedBundleItem.Image = (Image)form.OriginalImage.Clone();
 				gridViewBundleItems.UpdateCurrentRow();
 				RaiseDataChanged();
 			}

@@ -121,8 +121,8 @@
   <data name="DataSourceListPdd" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DataSourceListPdd.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ProgressWallbinLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ProgressWallbinLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="RibbonSettingsColumns" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RibbonSettingsColumns.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="HomeLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\HomeLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -151,6 +151,9 @@
   <data name="BundlesEditorRevenueAdd" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BundlesEditorRevenueAdd.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="ArrowLeft" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ArrowLeft.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="LinkSettingsTextNote" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LinkSettingsTextNote.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -169,6 +172,12 @@
   <data name="DataSourceListMp3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DataSourceListMp3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="DataSourceListEps" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DataSourceListEps.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ButtonSettings" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ButtonSettings.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="CompactWallbinPageClosed" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CompactWallbinPageClosed.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -181,11 +190,8 @@
   <data name="ButtonVideoReset" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ButtonVideoReset.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="RibbonTagsCategories" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\RibbonTagsCategories.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="RibbonLinkDelete" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\RibbonLinkDelete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="RibbonSettingsAdvanced" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RibbonSettingsAdvanced.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ArrowUp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ArrowUp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -199,23 +205,20 @@
   <data name="ProgressStartRegularSecurity" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ProgressStartRegularSecurity.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="RibbonSettingsColumns" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\RibbonSettingsColumns.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="RibbonSettingsWallbin" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RibbonSettingsWallbin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="RibbonLinkTags" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RibbonLinkTags.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="RetractableLogoSecurity" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\RetractableLogoSecurity.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="DataSourceListPpt" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DataSourceListPpt.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ArrowRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ArrowRight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ProgressStartRegularBrand" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ProgressStartRegularBrand.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="RibbonSettingsAdvanced" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\RibbonSettingsAdvanced.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SettingsColumnsAlignByRows" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SettingsColumnsAlignByRows.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -232,8 +235,8 @@
   <data name="BundlesEditorLinksAdd" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BundlesEditorLinksAdd.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="RibbonLinkImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\RibbonLinkImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="RetractableLogoSecurity" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RetractableLogoSecurity.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="DataSourceListOpenedFolder" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DataSourceListOpenedFolder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -250,11 +253,14 @@
   <data name="DataSourceListClosedFolder" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DataSourceListClosedFolder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="WallbinSettingsTabPages" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\WallbinSettingsTabPages.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="LinkSettingsTagsIconCategories" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LinkSettingsTagsIconCategories.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="CompactWallbinLineBreak" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CompactWallbinLineBreak.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ProgressStartRegularHeader" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ProgressStartRegularHeader.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="CompactWallbinFolderOpen" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CompactWallbinFolderOpen.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -277,9 +283,6 @@
   <data name="RibbonSettingsPages" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RibbonSettingsPages.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="RibbonCalendarColors" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\RibbonCalendarColors.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="DataSourceListUrl" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DataSourceListUrl.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -289,14 +292,11 @@
   <data name="LinkSettingsQuickLink" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LinkSettingsQuickLink.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="WallbinSettingsComboboxes" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\WallbinSettingsComboboxes.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BundlesEditorUrlLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BundlesEditorUrlLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="RibbonLinkAddLineBreak" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RibbonLinkAddLineBreak.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RibbonTagsCategories" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RibbonTagsCategories.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="BundlesEditorInfoLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BundlesEditorInfoLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -304,14 +304,23 @@
   <data name="DataSourceListXlsx" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DataSourceListXlsx.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="BundlesEditorLinksAddRevenue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BundlesEditorLinksAddRevenue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="RibbonExit" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RibbonExit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ButtonSettings" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ButtonSettings.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="BundlesEditorStrategyLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BundlesEditorStrategyLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CompactWallbinPageOpen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CompactWallbinPageOpen.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="RibbonSecurityReset" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RibbonSecurityReset.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WallbinSettingsTabPages" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WallbinSettingsTabPages.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="QatHelp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\QatHelp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -319,26 +328,29 @@
   <data name="RibbonSecuritySelect" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RibbonSecuritySelect.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ProgressStartRegularHeader" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ProgressStartRegularHeader.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="LinkAddYoutube" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LinkAddYoutube.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="DataSourceList7z" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DataSourceList7z.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="LinkAddYoutube" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\LinkAddYoutube.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ButtonApplyForAll" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ButtonApplyForAll.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="RibbonSettingsAutoWidgets" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RibbonSettingsAutoWidgets.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="DataSourceListSvg" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DataSourceListSvg.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="BundlesEditorCoverLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BundlesEditorCoverLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RibbonLinkOpen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RibbonLinkOpen.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="DataSourceListXml" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DataSourceListXml.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ButtonApplyForAll" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ButtonApplyForAll.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="RibbonLinkDelete" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RibbonLinkDelete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SecurityMenuReset" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SecurityMenuReset.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -352,8 +364,11 @@
   <data name="RibbonSettingsSync" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RibbonSettingsSync.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="BundlesEditorStrategyLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BundlesEditorStrategyLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="DataSourceListMov" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DataSourceListMov.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LinkSettingsTagsLogoKeywords" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LinkSettingsTagsLogoKeywords.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="DataSourceListDocx" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DataSourceListDocx.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -361,14 +376,17 @@
   <data name="RibbonTagsKeywords" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RibbonTagsKeywords.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="BundlesEditorLinksAddRevenue" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BundlesEditorLinksAddRevenue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="LinkSettingsTextFormat" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LinkSettingsTextFormat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BundlesEditorLinksAddInfo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BundlesEditorLinksAddInfo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Favorites" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Favorites.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="SettingsColumns" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SettingsColumns.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="RibbonCalendarColors" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RibbonCalendarColors.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="RetractableLogoGallery" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RetractableLogoGallery.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -376,20 +394,17 @@
   <data name="DataSourceListMp4" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DataSourceListMp4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="RibbonLinkOpen" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\RibbonLinkOpen.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CalendarFontUp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CalendarFontUp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="LinkSettingsTagsLogoCategories" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LinkSettingsTagsLogoCategories.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ProgressStartMinimizedFisrtStart" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ProgressStartMinimizedFisrtStart.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="LinkSettingsResetSettingsScheduler" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\LinkSettingsResetSettingsScheduler.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="CalendarFontUp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CalendarFontUp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="DataSourceListEps" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DataSourceListEps.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="RibbonSettingsLibraries" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RibbonSettingsLibraries.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="BundlesFormNew" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BundlesFormNew.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -412,12 +427,6 @@
   <data name="RibbonBundlesNew" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RibbonBundlesNew.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ArrowLeft" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ArrowLeft.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CompactWallbinPageOpen" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CompactWallbinPageOpen.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="ButtonOpen" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ButtonOpen.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -426,6 +435,9 @@
   </data>
   <data name="RetractableLogoBundles" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RetractableLogoBundles.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SettingsColumns" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SettingsColumns.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="RibbonVideoDelete" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RibbonVideoDelete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -451,11 +463,11 @@
   <data name="RetractableLogoFiles" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RetractableLogoFiles.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="DataSourceListMov" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DataSourceListMov.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="RibbonLinkImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RibbonLinkImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="RibbonSettingsLibraries" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\RibbonSettingsLibraries.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="DataSourceListSvg" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DataSourceListSvg.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="DataSourceListPng" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DataSourceListPng.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -463,8 +475,8 @@
   <data name="BundlesEditorLinksAddStrategy" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BundlesEditorLinksAddStrategy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="BundlesEditorLinksAddInfo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BundlesEditorLinksAddInfo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ProgressWallbinLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ProgressWallbinLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="DataSourceListRar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DataSourceListRar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -472,23 +484,26 @@
   <data name="RetractableLogoTags" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RetractableLogoTags.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="LinkAddInternal" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\LinkAddInternal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="CompactWallbinFolderClosed" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CompactWallbinFolderClosed.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="RibbonSync" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RibbonSync.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="BundlesEditorUrlLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BundlesEditorUrlLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="LinkAddNetwork" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LinkAddNetwork.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="DataSourceListPpt" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DataSourceListPpt.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="LinkAddInternal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LinkAddInternal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="LinkSettingsTextFormat" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\LinkSettingsTextFormat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WallbinSettingsComboboxes" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WallbinSettingsComboboxes.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LinkSettingsResetSettingsScheduler" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LinkSettingsResetSettingsScheduler.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="DataSourceListXls" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DataSourceListXls.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -499,16 +514,7 @@
   <data name="ProgressStartRegularWebConnection" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ProgressStartRegularWebConnection.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="RibbonSettingsWallbin" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\RibbonSettingsWallbin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="LinkSettingsTagsIconCategories" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\LinkSettingsTagsIconCategories.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="LinkSettingsTagsLogoCategories" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\LinkSettingsTagsLogoCategories.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="LinkSettingsTagsLogoKeywords" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\LinkSettingsTagsLogoKeywords.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="BundlesEditorLinksAddCover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BundlesEditorLinksAddCover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

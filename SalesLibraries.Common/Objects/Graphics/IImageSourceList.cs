@@ -9,5 +9,6 @@ namespace SalesLibraries.Common.Objects.Graphics
 		StorageDirectory AdditionalFolder { get; }
 		StorageDirectory FavsFolder { get; }
 		List<ImageSourceGroup> Items { get; }
+		SearchResultsImageGroup SearchResults { get; }
 	}
 }

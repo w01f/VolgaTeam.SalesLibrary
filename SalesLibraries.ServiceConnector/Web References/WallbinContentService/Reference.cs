@@ -73,6 +73,8 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         private System.Threading.SendOrPostCallback mockUrlLinkBundleItemOperationCompleted;
         
+        private System.Threading.SendOrPostCallback mockLinkBundleCoverItemOperationCompleted;
+        
         private System.Threading.SendOrPostCallback mockLinkBundleLaunchScreenItemOperationCompleted;
         
         private System.Threading.SendOrPostCallback mockLinkBundleInfoItemOperationCompleted;
@@ -168,6 +170,9 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         /// <remarks/>
         public event mockUrlLinkBundleItemCompletedEventHandler mockUrlLinkBundleItemCompleted;
+        
+        /// <remarks/>
+        public event mockLinkBundleCoverItemCompletedEventHandler mockLinkBundleCoverItemCompleted;
         
         /// <remarks/>
         public event mockLinkBundleLaunchScreenItemCompletedEventHandler mockLinkBundleLaunchScreenItemCompleted;
@@ -629,6 +634,34 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
             if ((this.mockUrlLinkBundleItemCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.mockUrlLinkBundleItemCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:ContentControllerwsdl#mockLinkBundleCoverItem", RequestNamespace="urn:ContentControllerwsdl", ResponseNamespace="urn:ContentControllerwsdl")]
+        public void mockLinkBundleCoverItem(LinkBundleCoverItem item) {
+            this.Invoke("mockLinkBundleCoverItem", new object[] {
+                        item});
+        }
+        
+        /// <remarks/>
+        public void mockLinkBundleCoverItemAsync(LinkBundleCoverItem item) {
+            this.mockLinkBundleCoverItemAsync(item, null);
+        }
+        
+        /// <remarks/>
+        public void mockLinkBundleCoverItemAsync(LinkBundleCoverItem item, object userState) {
+            if ((this.mockLinkBundleCoverItemOperationCompleted == null)) {
+                this.mockLinkBundleCoverItemOperationCompleted = new System.Threading.SendOrPostCallback(this.OnmockLinkBundleCoverItemOperationCompleted);
+            }
+            this.InvokeAsync("mockLinkBundleCoverItem", new object[] {
+                        item}, this.mockLinkBundleCoverItemOperationCompleted, userState);
+        }
+        
+        private void OnmockLinkBundleCoverItemOperationCompleted(object arg) {
+            if ((this.mockLinkBundleCoverItemCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.mockLinkBundleCoverItemCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -1860,6 +1893,123 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
             }
             set {
                 this.footerFontField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int itemType {
+            get {
+                return this.itemTypeField;
+            }
+            set {
+                this.itemTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool visible {
+            get {
+                return this.visibleField;
+            }
+            set {
+                this.visibleField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int collectionOrder {
+            get {
+                return this.collectionOrderField;
+            }
+            set {
+                this.collectionOrderField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string image {
+            get {
+                return this.imageField;
+            }
+            set {
+                this.imageField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string title {
+            get {
+                return this.titleField;
+            }
+            set {
+                this.titleField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string hoverTip {
+            get {
+                return this.hoverTipField;
+            }
+            set {
+                this.hoverTipField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool useAsThumbnail {
+            get {
+                return this.useAsThumbnailField;
+            }
+            set {
+                this.useAsThumbnailField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:ContentControllerwsdl")]
+    public partial class LinkBundleCoverItem {
+        
+        private string logoField;
+        
+        private string idField;
+        
+        private int itemTypeField;
+        
+        private bool visibleField;
+        
+        private int collectionOrderField;
+        
+        private string imageField;
+        
+        private string titleField;
+        
+        private string hoverTipField;
+        
+        private bool useAsThumbnailField;
+        
+        /// <remarks/>
+        public string logo {
+            get {
+                return this.logoField;
+            }
+            set {
+                this.logoField = value;
             }
         }
         
@@ -7437,6 +7587,10 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
     public delegate void mockUrlLinkBundleItemCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    public delegate void mockLinkBundleCoverItemCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
