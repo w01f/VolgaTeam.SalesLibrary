@@ -105,7 +105,7 @@
 							              when link.original_format='ppt' or link.original_format='doc' or link.original_format='pdf' then
 							                (select pv.relative_path from tbl_preview pv where pv.id_container=link.id_preview and pv.type='png_phone' order by pv.relative_path limit 1)
 							              when link.original_format='link bundle' then
-							                (select pv.relative_path from tbl_preview pv join tbl_link child_link on child_link.id_preview=pv.id_container join tbl_link_bundle lb on lb.id_link=child_link.id where lb.id_bundle=link.id and lb.use_as_thumbnail=1 and (pv.type='png_phone' or pv.type='mp4 thumb') order by pv.relative_path limit 1)
+							                (select pv.relative_path from tbl_preview pv join tbl_link child_link on child_link.id_preview=pv.id_container join (select lb.id_link as id_link, lb.id_bundle as id_bundle, lb.use_as_thumbnail as use_as_thumbnail from tbl_link_bundle lb union select l_i_l.id_original as id_link, lb.id_bundle as id_bundle, lb.use_as_thumbnail as use_as_thumbnail from tbl_link_bundle lb join tbl_link_internal_link l_i_l on l_i_l.id_internal = lb.id_link) link_set on link_set.id_link=child_link.id where link_set.id_bundle=link.id and link_set.use_as_thumbnail=1 and (pv.type='png_phone' or pv.type='mp4 thumb') order by pv.relative_path limit 1)
 							              end)
 							      else (case
 							            when link.original_format='jpeg' or link.original_format='gif' or link.original_format='png' then
@@ -117,7 +117,7 @@
 							            when link.original_format='ppt' or link.original_format='doc' or link.original_format='pdf' then
 							              (select pv.relative_path from tbl_preview pv where pv.id_container=link.id_preview and pv.type='png_phone' order by rand() limit 1)
 							            when link.original_format='link bundle' then
-							              (select pv.relative_path from tbl_preview pv join tbl_link child_link on child_link.id_preview=pv.id_container join tbl_link_bundle lb on lb.id_link=child_link.id where lb.id_bundle=link.id and lb.use_as_thumbnail=1 and (pv.type='png_phone' or pv.type='mp4 thumb') order by rand() limit 1)
+							              (select pv.relative_path from tbl_preview pv join tbl_link child_link on child_link.id_preview=pv.id_container join (select lb.id_link as id_link, lb.id_bundle as id_bundle, lb.use_as_thumbnail as use_as_thumbnail from tbl_link_bundle lb union select l_i_l.id_original as id_link, lb.id_bundle as id_bundle, lb.use_as_thumbnail as use_as_thumbnail from tbl_link_bundle lb join tbl_link_internal_link l_i_l on l_i_l.id_internal = lb.id_link) link_set on link_set.id_link=child_link.id where link_set.id_bundle=link.id and link_set.use_as_thumbnail=1 and (pv.type='png_phone' or pv.type='mp4 thumb') order by rand() limit 1)
 							            end)
 							      end as thumbnail", $feedSettings->thumbnailSettings->mode)
 			));
@@ -511,7 +511,7 @@
 							when link.original_format='ppt' or link.original_format='doc' or link.original_format='pdf' then
 								(select pv.relative_path from tbl_preview pv where pv.id_container=link.id_preview and pv.type='png_phone' " . $thumbnailCondition . ")
 							when link.original_format='link bundle' then
-								(select pv.relative_path from tbl_preview pv join tbl_link child_link on child_link.id_preview=pv.id_container join tbl_link_bundle lb on lb.id_link=child_link.id where lb.id_bundle=link.id and lb.use_as_thumbnail=1 and (pv.type='png_phone' or pv.type='mp4 thumb') " . $thumbnailCondition . ")
+								(select pv.relative_path from tbl_preview pv join tbl_link child_link on child_link.id_preview=pv.id_container join (select lb.id_link as id_link, lb.id_bundle as id_bundle, lb.use_as_thumbnail as use_as_thumbnail from tbl_link_bundle lb union select l_i_l.id_original as id_link, lb.id_bundle as id_bundle, lb.use_as_thumbnail as use_as_thumbnail from tbl_link_bundle lb join tbl_link_internal_link l_i_l on l_i_l.id_internal = lb.id_link) link_set on link_set.id_link=child_link.id where link_set.id_bundle=link.id and link_set.use_as_thumbnail=1 and (pv.type='png_phone' or pv.type='mp4 thumb') " . $thumbnailCondition . ")
 							end as thumbnail"
 			));
 
