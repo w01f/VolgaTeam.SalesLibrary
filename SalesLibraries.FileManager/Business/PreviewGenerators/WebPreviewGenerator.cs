@@ -39,7 +39,8 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 			previewContainer.MarkAsModified();
 
 			log.AppendLine(String.Format("Process finished at {0:hh:mm:ss tt zz}", DateTime.Now));
-			File.WriteAllText(Path.Combine(previewContainer.ContainerPath, String.Format("log_{0:MMddyy_hhmmsstt}.txt", DateTime.Now)), log.ToString());
+			if (Directory.Exists(previewContainer.ContainerPath))
+				File.WriteAllText(Path.Combine(previewContainer.ContainerPath, String.Format("log_{0:MMddyy_hhmmsstt}.txt", DateTime.Now)), log.ToString());
 		}
 	}
 }
