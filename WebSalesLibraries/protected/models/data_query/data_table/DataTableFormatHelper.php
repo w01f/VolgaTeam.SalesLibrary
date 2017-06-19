@@ -163,7 +163,7 @@
 								{
 									$imageUrl = null;
 									if (!empty($linkRecord['thumbnail']))
-										$imageUrl = \Utils::formatUrl($library->storageLink . '//' . $linkRecord['thumbnail']);
+										$imageUrl = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '//' . 'sd_cache' . '//' . $linkRecord['thumbnail']);
 									else
 									{
 										$imageFileName = null;
