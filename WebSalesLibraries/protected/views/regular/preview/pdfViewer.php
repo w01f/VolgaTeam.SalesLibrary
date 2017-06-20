@@ -90,7 +90,7 @@
 				</div>
 			</div>
 			<div class="row row-buttons gallery-control-buttons">
-				<div class="col col-xs-3 text-left">
+				<div class="col col-xs-4 text-left">
 					<? if ($data->config->enableRating): ?>
 						<div id="user-link-rate-container">
 							<img class="total-rate" src="" style="height:16px"/>
@@ -99,8 +99,7 @@
 						</div>
 					<? endif; ?>
 				</div>
-				<div class="col col-xs-2"></div>
-				<div class="col col-xs-2 text-center">
+				<div class="col col-xs-4 text-center">
 					<? if (!$data->singlePage): ?>
 						<div class="dropdown-button">
 							<div class="dropdown-container">
@@ -114,23 +113,16 @@
 				</div>
 				<?
 					$footerGapSize = 0;
-					if (!$data->config->allowDownload)
-						$footerGapSize += 2;
 					if (!isset($data->quickLinkUrl))
+						$footerGapSize++;
+					if (!$data->config->allowDownload)
 						$footerGapSize++;
 					if (!$data->config->allowAddToFavorites)
 						$footerGapSize++;
 					if (!$data->config->allowAddToQuickSite)
 						$footerGapSize++;
 				?>
-				<div class="col col-xs-<? echo $footerGapSize; ?>"></div>
-				<? if ($data->config->allowDownload): ?>
-					<div class="col col-xs-2 text-center">
-						<div class="text-button log-action download-file" data-log-action="Download File" title="download file">
-							<span class="text-muted text-item">file <span class="file-size"></span></span>
-						</div>
-					</div>
-				<? endif; ?>
+                <div class="col col-xs-<? echo $footerGapSize; ?>"></div>
 				<? if (isset($data->quickLinkUrl)): ?>
 					<div class="col col-xs-1 text-center">
 						<div class="image-button log-action open-quick-link" data-log-action="Open Quick Link"
@@ -140,6 +132,25 @@
 							</span>
 						</div>
 					</div>
+				<? endif; ?>
+				<? if ($data->config->allowDownload): ?>
+                    <div class="col col-xs-1 text-center">
+                        <div class="image-button" title="download">
+                            <span class="text-item dropup">
+                                 <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+                                    <img src="<? echo sprintf('%s/images/preview/gallery/button-download.png', $imageUrlPrefix); ?>">
+                                 </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="#" class="log-action download-file"
+                                           data-log-action="Download File">
+                                            Download file <span class="file-size"></span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </span>
+                        </div>
+                    </div>
 				<? endif; ?>
 				<? if ($data->config->allowAddToFavorites): ?>
 					<div class="col col-xs-1 text-center">
