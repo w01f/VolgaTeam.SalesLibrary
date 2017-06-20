@@ -100,6 +100,22 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 			Library = null;
 		}
 
+		public LinkBundle Clone(string name)
+		{
+			NeedToSave = true;
+			BeforeSave();
+			var clone = CreateEntity<LinkBundle>(linkBundleClone =>
+			{
+				linkBundleClone.Name = name;
+				linkBundleClone.Order = Library.LinkBundles.Count;
+				linkBundleClone.SettingsEncoded = SettingsEncoded;
+				linkBundleClone.Library = Library;
+			});
+			Library.LinkBundles.Add(clone);
+			((List<LinkBundle>)Library.LinkBundles).ChangeItemPosition(clone, Order + 1);
+			return clone;
+		}
+
 		public IList<LinkBundleLink> GetLibraryLinks()
 		{
 			return Library.Pages

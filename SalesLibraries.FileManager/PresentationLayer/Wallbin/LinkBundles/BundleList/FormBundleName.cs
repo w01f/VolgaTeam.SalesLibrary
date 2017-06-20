@@ -5,15 +5,21 @@ using SalesLibraries.CommonGUI.Common;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.BundleList
 {
-	public partial class FormAddBundle : MetroForm
+	public partial class FormBundleName : MetroForm
 	{
+		public string Title
+		{
+			get { return labelControlName.Text; }
+			set { labelControlName.Text = String.Format(labelControlName.Text,value); }
+		}
+
 		public string BundleName
 		{
 			get { return textEditName.EditValue as String; }
 			set { textEditName.EditValue = value; }
 		}
 
-		public FormAddBundle()
+		public FormBundleName()
 		{
 			InitializeComponent();
 			textEditName.MouseDown += EditorHelper.EditorMouseDown;

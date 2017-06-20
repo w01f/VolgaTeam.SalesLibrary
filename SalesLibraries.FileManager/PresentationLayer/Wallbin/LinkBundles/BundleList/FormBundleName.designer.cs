@@ -1,6 +1,6 @@
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.BundleList
 {
-	partial class FormAddBundle
+	partial class FormBundleName
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -100,16 +100,20 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Bundl
 			this.labelControlName.AllowHtmlString = true;
 			this.labelControlName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelControlName.Appearance.BackColor = System.Drawing.Color.White;
+			this.labelControlName.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.labelControlName.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
 			this.labelControlName.Location = new System.Drawing.Point(98, 12);
 			this.labelControlName.Name = "labelControlName";
 			this.labelControlName.Size = new System.Drawing.Size(283, 16);
 			this.labelControlName.StyleController = this.styleController;
 			this.labelControlName.TabIndex = 3;
-			this.labelControlName.Text = "<b>Link Bundle Name</b>";
+			this.labelControlName.Text = "<b>{0}</b>";
 			// 
 			// pictureBox1
 			// 
+			this.pictureBox1.BackColor = System.Drawing.Color.White;
+			this.pictureBox1.ForeColor = System.Drawing.Color.Black;
 			this.pictureBox1.Image = global::SalesLibraries.FileManager.Properties.Resources.BundlesFormNew;
 			this.pictureBox1.Location = new System.Drawing.Point(12, 3);
 			this.pictureBox1.Name = "pictureBox1";
@@ -117,8 +121,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Bundl
 			this.pictureBox1.TabIndex = 4;
 			this.pictureBox1.TabStop = false;
 			// 
-			// FormAddBundle
+			// FormBundleName
 			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.ClientSize = new System.Drawing.Size(393, 142);
 			this.Controls.Add(this.pictureBox1);
@@ -131,7 +136,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Bundl
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
-			this.Name = "FormAddBundle";
+			this.Name = "FormBundleName";
 			this.ShowIcon = false;
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

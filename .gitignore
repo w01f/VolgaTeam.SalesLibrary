@@ -67,3 +67,5 @@ packages
 /SalesLibraries.SalesDepot/Business/Services/LicenseHelper.cs
 /SalesLibraries.FileManager/Business/Services/LicenseHelper.cs
 /SalesLibraries.CloudAdmin/Business/Services/LicenseHelper.cs
+/WebSalesLibraries/test.php
+/WebSalesLibraries/image.php

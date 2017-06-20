@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using DevExpress.Utils.Menu;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid;
@@ -57,6 +58,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Bundl
 		}
 
 		#region Bundles
+
 		private void LoadBundles(int selectedBundleIndex = 0)
 		{
 			_loading = true;
@@ -80,8 +82,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Bundl
 
 		public void AddBundle()
 		{
-			using (var form = new FormAddBundle())
+			using (var form = new FormBundleName())
 			{
+				form.Text = "New Link Bundle";
+				form.Title = "Link Bundle Name";
 				if (form.ShowDialog() != DialogResult.OK) return;
 				_library.AddLinkBundle(form.BundleName);
 				LoadBundles(_library.LinkBundles.Count - 1);
@@ -97,6 +101,36 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Bundl
 			RaiseDataChanged();
 		}
 
+		private void RenameBundle(LinkBundle targetBundle)
+		{
+			using (var form = new FormBundleName())
+			{
+				form.Text = "Rename Link Bundle";
+				form.Title = "Link Bundle Name";
+				form.BundleName = targetBundle.Name;
+				if (form.ShowDialog() != DialogResult.OK) return;
+				targetBundle.Name = form.BundleName;
+				var currentBundleIndex = gridViewBundles.FocusedRowHandle;
+				LoadBundles(currentBundleIndex);
+				RaiseDataChanged();
+			}
+		}
+
+		private void CloneBundle(LinkBundle targetBundle)
+		{
+			using (var form = new FormBundleName())
+			{
+				form.Text = "Clone Link Bundle";
+				form.Title = "Link Bundle Name";
+				form.BundleName = String.Format("{0}(Clone)", targetBundle.Name);
+				if (form.ShowDialog() != DialogResult.OK) return;
+				targetBundle.Clone(form.BundleName);
+				var currentBundleIndex = gridViewBundles.FocusedRowHandle + 1;
+				LoadBundles(currentBundleIndex);
+				RaiseDataChanged();
+			}
+		}
+
 		private void DeleteBundle()
 		{
 			if (SelectedBundle == null) return;
@@ -106,13 +140,13 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Bundl
 					"<size=+4>Are you SURE you want to DELETE this Link Bundle?</size><br>",
 					String.Format("<size=+2>{0}</size>", bundleToDelete.Name),
 					"<br><br>*All Links to this bundle will be removed from your site"
-					),
+				),
 				new[]
 				{
 					new CustomDialogButtonInfo {Title = "DELETE", DialogResult = DialogResult.OK, Width = 100},
 					new CustomDialogButtonInfo {Title = "CANCEL", DialogResult = DialogResult.Cancel, Width = 100}
 				}
-				))
+			))
 			{
 				form.Width = 500;
 				form.Height = 160;
@@ -127,6 +161,28 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Bundl
 					RaiseDataChanged();
 				}
 			}
+		}
+
+		private IEnumerable<DXMenuItem> GetBundleContextMenuItems(LinkBundle targetBundle)
+		{
+			var items = new List<DXMenuItem>();
+			items.Add(new DXMenuItem("Rename", (o, args) =>
+			{
+				RenameBundle(targetBundle);
+			}));
+			items.Add(new DXMenuItem("Edit", (o, args) =>
+			{
+				EditBundle();
+			}));
+			items.Add(new DXMenuItem("Clone", (o, args) =>
+			{
+				CloneBundle(targetBundle);
+			}));
+			items.Add(new DXMenuItem("Delete", (o, args) =>
+			{
+				DeleteBundle();
+			}));
+			return items;
 		}
 
 		private void OnSwitchBundleItemsPanel(object sender, EventArgs e)
@@ -150,14 +206,15 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Bundl
 			LoadBundleItems();
 		}
 
-		private void OnBundlesEditorDoubleClick(object sender, EventArgs e)
+		private void OnBundlesRowCellClick(object sender, RowCellClickEventArgs e)
 		{
-			EditBundle();
+			if (e.Clicks > 1 && e.Column == gridColumnBundlesName)
+				EditBundle();
 		}
 
 		private void OnGridBundlesButtonClick(object sender, ButtonPressedEventArgs e)
 		{
-			switch ((String)e.Button.Tag)
+			switch ((String) e.Button.Tag)
 			{
 				case "Edit":
 					EditBundle();
@@ -178,13 +235,37 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Bundl
 			if (downHitInfo == null) return;
 			var sourceBundle = view.GetRow(downHitInfo.RowHandle) as LinkBundle;
 			var targetRowIndex = hitInfo.HitTest == GridHitTest.EmptyRow ? view.DataRowCount : hitInfo.RowHandle;
-			((IList<LinkBundle>)_library.LinkBundles).ChangeItemPosition(sourceBundle, targetRowIndex);
+			((IList<LinkBundle>) _library.LinkBundles).ChangeItemPosition(sourceBundle, targetRowIndex);
 			LoadBundles(targetRowIndex);
 			RaiseDataChanged();
+		}
+
+		private void OnBundlesPopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
+		{
+			if (!(e.HitInfo.InRowCell || e.HitInfo.InRow || e.HitInfo.InDataRow)) return;
+			e.Allow = true;
+			var targetBundle = gridViewBundles.GetRow(e.HitInfo.RowHandle) as LinkBundle;
+			if (targetBundle == null) return;
+			e.Menu.Items.Clear();
+			var items = GetBundleContextMenuItems(targetBundle).ToList();
+			foreach (var menuItem in items)
+				e.Menu.Items.Add(menuItem);
+		}
+
+		private void OnBundlesCustomRowCellEdit(object sender, CustomRowCellEditEventArgs e)
+		{
+			if (e.Column == gridColumnBundlesActions)
+			{
+				if (e.RowHandle == gridViewBundles.FocusedRowHandle)
+					e.RepositoryItem = repositoryItemButtonEditBundles;
+				else
+					e.RepositoryItem = null;
+			}
 		}
 		#endregion
 
 		#region Bundle Items
+
 		private void LoadBundleItems(int selectedItemIndex = 0)
 		{
 			gridControlBundleItems.DataSource = SelectedBundle?.Settings.Items;
@@ -217,7 +298,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Bundl
 					new CustomDialogButtonInfo {Title = "DELETE", DialogResult = DialogResult.OK, Width = 100},
 					new CustomDialogButtonInfo {Title = "CANCEL", DialogResult = DialogResult.Cancel, Width = 100}
 				}
-				))
+			))
 			{
 				form.Width = 500;
 				form.Height = 160;
@@ -238,7 +319,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Bundl
 
 		private void OnGridBundleItemsButtonClick(object sender, ButtonPressedEventArgs e)
 		{
-			switch ((String)e.Button.Tag)
+			switch ((String) e.Button.Tag)
 			{
 				case "Edit":
 					EditBundle();
@@ -267,8 +348,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Bundl
 		private void OnGridBundleItemsDragEnter(object sender, DragEventArgs e)
 		{
 			if (e.Data != null &&
-				e.Data.GetDataPresent(typeof(LinkRow)) &&
-				((LinkRow)e.Data.GetData(typeof(LinkRow))).IsLinkBundleCompatible)
+			    e.Data.GetDataPresent(typeof(LinkRow)) &&
+			    ((LinkRow) e.Data.GetData(typeof(LinkRow))).IsLinkBundleCompatible)
 				e.Effect = DragDropEffects.Copy;
 		}
 
@@ -287,7 +368,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Bundl
 			using (var form = new FormImageGallery(MainController.Instance.Lists.LinkBundleImages))
 			{
 				if (form.ShowDialog() != DialogResult.OK) return;
-				SelectedBundleItem.Image = (Image)form.OriginalImage.Clone();
+				SelectedBundleItem.Image = (Image) form.OriginalImage.Clone();
 				gridViewBundleItems.UpdateCurrentRow();
 				RaiseDataChanged();
 			}
@@ -295,10 +376,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Bundl
 
 		private void OnGridBundleItemsRowCellStyle(object sender, RowCellStyleEventArgs e)
 		{
-			var bundleItem = ((GridView)sender).GetRow(e.RowHandle) as LibraryLinkItem;
+			var bundleItem = ((GridView) sender).GetRow(e.RowHandle) as LibraryLinkItem;
 			if (bundleItem != null && bundleItem.IsDead)
 				e.Appearance.ForeColor = Color.Red;
 		}
+
 		#endregion
 	}
 }

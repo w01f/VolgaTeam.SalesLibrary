@@ -29,15 +29,16 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.splitContainerControl = new DevExpress.XtraEditors.SplitContainerControl();
 			this.gridControlBundles = new DevExpress.XtraGrid.GridControl();
 			this.gridViewBundles = new DevExpress.XtraGrid.Views.Grid.GridView();
 			this.gridColumnBundlesName = new DevExpress.XtraGrid.Columns.GridColumn();
+			this.gridColumnBundlesActions = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.repositoryItemButtonEditBundles = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
 			this.pnBundlesBottom = new System.Windows.Forms.Panel();
 			this.buttonXSwitchBundleItems = new DevComponents.DotNetBar.ButtonX();
@@ -112,7 +113,8 @@
 			this.gridViewBundles.Appearance.SelectedRow.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.gridViewBundles.Appearance.SelectedRow.Options.UseFont = true;
 			this.gridViewBundles.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumnBundlesName});
+            this.gridColumnBundlesName,
+            this.gridColumnBundlesActions});
 			this.gridViewBundles.GridControl = this.gridControlBundles;
 			this.gridViewBundles.Name = "gridViewBundles";
 			this.gridViewBundles.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
@@ -129,18 +131,32 @@
 			this.gridViewBundles.OptionsView.ShowGroupPanel = false;
 			this.gridViewBundles.OptionsView.ShowIndicator = false;
 			this.gridViewBundles.OptionsView.ShowPreviewRowLines = DevExpress.Utils.DefaultBoolean.False;
+			this.gridViewBundles.OptionsView.ShowVerticalLines = DevExpress.Utils.DefaultBoolean.False;
 			this.gridViewBundles.RowHeight = 35;
+			this.gridViewBundles.RowCellClick += new DevExpress.XtraGrid.Views.Grid.RowCellClickEventHandler(this.OnBundlesRowCellClick);
+			this.gridViewBundles.CustomRowCellEdit += new DevExpress.XtraGrid.Views.Grid.CustomRowCellEditEventHandler(this.OnBundlesCustomRowCellEdit);
+			this.gridViewBundles.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.OnBundlesPopupMenuShowing);
 			this.gridViewBundles.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.OnFocusedBundleRowChanged);
 			// 
 			// gridColumnBundlesName
 			// 
 			this.gridColumnBundlesName.Caption = "Name";
-			this.gridColumnBundlesName.ColumnEdit = this.repositoryItemButtonEditBundles;
 			this.gridColumnBundlesName.FieldName = "Name";
 			this.gridColumnBundlesName.Name = "gridColumnBundlesName";
-			this.gridColumnBundlesName.ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowForFocusedCell;
+			this.gridColumnBundlesName.OptionsColumn.AllowEdit = false;
+			this.gridColumnBundlesName.OptionsColumn.ReadOnly = true;
 			this.gridColumnBundlesName.Visible = true;
 			this.gridColumnBundlesName.VisibleIndex = 0;
+			this.gridColumnBundlesName.Width = 168;
+			// 
+			// gridColumnBundlesActions
+			// 
+			this.gridColumnBundlesActions.Caption = "Actions";
+			this.gridColumnBundlesActions.Name = "gridColumnBundlesActions";
+			this.gridColumnBundlesActions.OptionsColumn.FixedWidth = true;
+			this.gridColumnBundlesActions.Visible = true;
+			this.gridColumnBundlesActions.VisibleIndex = 1;
+			this.gridColumnBundlesActions.Width = 70;
 			// 
 			// repositoryItemButtonEditBundles
 			// 
@@ -154,12 +170,11 @@
 			this.repositoryItemButtonEditBundles.AppearanceReadOnly.Options.UseFont = true;
 			this.repositoryItemButtonEditBundles.AutoHeight = false;
 			this.repositoryItemButtonEditBundles.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.FileManager.Properties.Resources.ButtonSettings, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, "Edit Settings", "Edit", null, true),
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.FileManager.Properties.Resources.ButtonDelete, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject6, "Delete", "Delete", null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.FileManager.Properties.Resources.ButtonSettings, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "Edit Settings", "Edit", null, true),
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.FileManager.Properties.Resources.ButtonDelete, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "Delete", "Delete", null, true)});
 			this.repositoryItemButtonEditBundles.Name = "repositoryItemButtonEditBundles";
-			this.repositoryItemButtonEditBundles.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+			this.repositoryItemButtonEditBundles.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
 			this.repositoryItemButtonEditBundles.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.OnGridBundlesButtonClick);
-			this.repositoryItemButtonEditBundles.DoubleClick += new System.EventHandler(this.OnBundlesEditorDoubleClick);
 			// 
 			// pnBundlesBottom
 			// 
@@ -293,8 +308,8 @@
 			this.repositoryItemButtonEditBundleItems.AppearanceReadOnly.Options.UseFont = true;
 			this.repositoryItemButtonEditBundleItems.AutoHeight = false;
 			this.repositoryItemButtonEditBundleItems.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.FileManager.Properties.Resources.ButtonSettings, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject7, "Edit Setings", "Edit", null, true),
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.FileManager.Properties.Resources.ButtonDelete, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject8, "Delete", "Delete", null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.FileManager.Properties.Resources.ButtonSettings, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "Edit Setings", "Edit", null, true),
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.FileManager.Properties.Resources.ButtonDelete, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject4, "Delete", "Delete", null, true)});
 			this.repositoryItemButtonEditBundleItems.Name = "repositoryItemButtonEditBundleItems";
 			this.repositoryItemButtonEditBundleItems.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
 			this.repositoryItemButtonEditBundleItems.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.OnGridBundleItemsButtonClick);
@@ -326,6 +341,7 @@
 			// 
 			// LinkBundleListControl
 			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.Controls.Add(this.splitContainerControl);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -366,5 +382,6 @@
 		private DevExpress.XtraEditors.LabelControl labelControlTitleBundleItems;
 		private DevExpress.XtraGrid.Columns.GridColumn gridColumnBundleItemsImage;
 		private DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit repositoryItemPictureEdit;
+		private DevExpress.XtraGrid.Columns.GridColumn gridColumnBundlesActions;
 	}
 }

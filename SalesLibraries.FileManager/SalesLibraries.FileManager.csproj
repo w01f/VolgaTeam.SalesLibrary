@@ -537,11 +537,11 @@
     <Compile Include="PresentationLayer\Wallbin\Folders\Controls\FormDeleteLink.Designer.cs">
       <DependentUpon>FormDeleteLink.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Wallbin\LinkBundles\BundleList\FormAddBundle.cs">
+    <Compile Include="PresentationLayer\Wallbin\LinkBundles\BundleList\FormBundleName.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Wallbin\LinkBundles\BundleList\FormAddBundle.designer.cs">
-      <DependentUpon>FormAddBundle.cs</DependentUpon>
+    <Compile Include="PresentationLayer\Wallbin\LinkBundles\BundleList\FormBundleName.designer.cs">
+      <DependentUpon>FormBundleName.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\LinkBundles\BundleList\LinkBundleListControl.cs">
       <SubType>UserControl</SubType>
@@ -1053,8 +1053,8 @@
     <EmbeddedResource Include="PresentationLayer\Wallbin\Folders\Controls\FormDeleteLink.resx">
       <DependentUpon>FormDeleteLink.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Wallbin\LinkBundles\BundleList\FormAddBundle.resx">
-      <DependentUpon>FormAddBundle.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\LinkBundles\BundleList\FormBundleName.resx">
+      <DependentUpon>FormBundleName.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\LinkBundles\BundleList\LinkBundleListControl.resx">
       <DependentUpon>LinkBundleListControl.cs</DependentUpon>
