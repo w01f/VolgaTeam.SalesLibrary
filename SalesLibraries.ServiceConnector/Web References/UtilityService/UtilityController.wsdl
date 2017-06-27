@@ -19,6 +19,12 @@
   <wsdl:message name="updateQuizzesOut">
     <wsdl:part name="return" type="xsd:string" />
   </wsdl:message>
+  <wsdl:message name="resetOpCacheIn">
+    <wsdl:part name="sessionKey" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="resetOpCacheOut">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
   <wsdl:message name="getSessionKeyIn">
     <wsdl:part name="login" type="xsd:string" />
     <wsdl:part name="password" type="xsd:string" />
@@ -28,26 +34,27 @@
   </wsdl:message>
   <wsdl:portType name="UtilityControllerPortType">
     <wsdl:operation name="updateWallbin">
-      <wsdl:documentation>
-      </wsdl:documentation>
+      <wsdl:documentation />
       <wsdl:input message="tns:updateWallbinIn" />
       <wsdl:output message="tns:updateWallbinOut" />
     </wsdl:operation>
     <wsdl:operation name="updateShortcuts">
-      <wsdl:documentation>
-      </wsdl:documentation>
+      <wsdl:documentation />
       <wsdl:input message="tns:updateShortcutsIn" />
       <wsdl:output message="tns:updateShortcutsOut" />
     </wsdl:operation>
     <wsdl:operation name="updateQuizzes">
-      <wsdl:documentation>
-      </wsdl:documentation>
+      <wsdl:documentation />
       <wsdl:input message="tns:updateQuizzesIn" />
       <wsdl:output message="tns:updateQuizzesOut" />
     </wsdl:operation>
+    <wsdl:operation name="resetOpCache">
+      <wsdl:documentation />
+      <wsdl:input message="tns:resetOpCacheIn" />
+      <wsdl:output message="tns:resetOpCacheOut" />
+    </wsdl:operation>
     <wsdl:operation name="getSessionKey">
-      <wsdl:documentation>
-      </wsdl:documentation>
+      <wsdl:documentation />
       <wsdl:input message="tns:getSessionKeyIn" />
       <wsdl:output message="tns:getSessionKeyOut" />
     </wsdl:operation>
@@ -74,6 +81,15 @@
     </wsdl:operation>
     <wsdl:operation name="updateQuizzes">
       <soap:operation soapAction="urn:UtilityControllerwsdl#updateQuizzes" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:UtilityControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:UtilityControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="resetOpCache">
+      <soap:operation soapAction="urn:UtilityControllerwsdl#resetOpCache" style="rpc" />
       <wsdl:input>
         <soap:body use="encoded" namespace="urn:UtilityControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:input>

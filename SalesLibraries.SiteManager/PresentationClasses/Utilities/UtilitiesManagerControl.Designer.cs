@@ -33,9 +33,10 @@
 			this.splitContainerControl = new DevExpress.XtraEditors.SplitContainerControl();
 			this.pnUtilityOperations = new System.Windows.Forms.Panel();
 			this.buttonXUpdateContent = new DevComponents.DotNetBar.ButtonX();
-			this.buttonXUpdateShorcuts = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXUpdateQuizzes = new DevComponents.DotNetBar.ButtonX();
+			this.buttonXUpdateShorcuts = new DevComponents.DotNetBar.ButtonX();
 			this.memoEditResult = new DevExpress.XtraEditors.MemoEdit();
+			this.buttonXResetOpCache = new DevComponents.DotNetBar.ButtonX();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).BeginInit();
 			this.splitContainerControl.SuspendLayout();
@@ -75,6 +76,7 @@
 			// 
 			// pnUtilityOperations
 			// 
+			this.pnUtilityOperations.Controls.Add(this.buttonXResetOpCache);
 			this.pnUtilityOperations.Controls.Add(this.buttonXUpdateContent);
 			this.pnUtilityOperations.Controls.Add(this.buttonXUpdateQuizzes);
 			this.pnUtilityOperations.Controls.Add(this.buttonXUpdateShorcuts);
@@ -99,21 +101,6 @@
 			this.buttonXUpdateContent.Text = "Update Data";
 			this.buttonXUpdateContent.Click += new System.EventHandler(this.simpleButtonUpdateContent_Click);
 			// 
-			// buttonXUpdateShorcuts
-			// 
-			this.buttonXUpdateShorcuts.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-			this.buttonXUpdateShorcuts.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonXUpdateShorcuts.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXUpdateShorcuts.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.buttonXUpdateShorcuts.Location = new System.Drawing.Point(12, 86);
-			this.buttonXUpdateShorcuts.Name = "buttonXUpdateShorcuts";
-			this.buttonXUpdateShorcuts.Size = new System.Drawing.Size(205, 41);
-			this.buttonXUpdateShorcuts.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.buttonXUpdateShorcuts.TabIndex = 6;
-			this.buttonXUpdateShorcuts.Text = "Update Shortcuts";
-			this.buttonXUpdateShorcuts.Click += new System.EventHandler(this.simpleButtonUpdateShorcuts_Click);
-			// 
 			// buttonXUpdateQuizzes
 			// 
 			this.buttonXUpdateQuizzes.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
@@ -129,6 +116,21 @@
 			this.buttonXUpdateQuizzes.Text = "Update Quizzes";
 			this.buttonXUpdateQuizzes.Click += new System.EventHandler(this.simpleButtonUpdateQuizzes_Click);
 			// 
+			// buttonXUpdateShorcuts
+			// 
+			this.buttonXUpdateShorcuts.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXUpdateShorcuts.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXUpdateShorcuts.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXUpdateShorcuts.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.buttonXUpdateShorcuts.Location = new System.Drawing.Point(12, 86);
+			this.buttonXUpdateShorcuts.Name = "buttonXUpdateShorcuts";
+			this.buttonXUpdateShorcuts.Size = new System.Drawing.Size(205, 41);
+			this.buttonXUpdateShorcuts.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXUpdateShorcuts.TabIndex = 6;
+			this.buttonXUpdateShorcuts.Text = "Update Shortcuts";
+			this.buttonXUpdateShorcuts.Click += new System.EventHandler(this.simpleButtonUpdateShorcuts_Click);
+			// 
 			// memoEditResult
 			// 
 			this.memoEditResult.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -140,8 +142,23 @@
 			this.memoEditResult.Properties.Appearance.Options.UseBackColor = true;
 			this.memoEditResult.Properties.Appearance.Options.UseFont = true;
 			this.memoEditResult.Properties.ReadOnly = true;
-			this.memoEditResult.Size = new System.Drawing.Size(669, 483);
+			this.memoEditResult.Size = new System.Drawing.Size(676, 483);
 			this.memoEditResult.TabIndex = 0;
+			// 
+			// buttonXResetOpCache
+			// 
+			this.buttonXResetOpCache.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXResetOpCache.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXResetOpCache.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXResetOpCache.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.buttonXResetOpCache.Location = new System.Drawing.Point(12, 232);
+			this.buttonXResetOpCache.Name = "buttonXResetOpCache";
+			this.buttonXResetOpCache.Size = new System.Drawing.Size(205, 41);
+			this.buttonXResetOpCache.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXResetOpCache.TabIndex = 10;
+			this.buttonXResetOpCache.Text = "Reset OppCache";
+			this.buttonXResetOpCache.Click += new System.EventHandler(this.simpleButtonResetOpCache_Click);
 			// 
 			// UtilitiesManagerControl
 			// 
@@ -170,5 +187,6 @@
 		private DevComponents.DotNetBar.ButtonX buttonXUpdateContent;
 		private DevComponents.DotNetBar.ButtonX buttonXUpdateShorcuts;
 		private DevComponents.DotNetBar.ButtonX buttonXUpdateQuizzes;
-    }
+		private DevComponents.DotNetBar.ButtonX buttonXResetOpCache;
+	}
 }

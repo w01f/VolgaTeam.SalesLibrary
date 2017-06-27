@@ -35,6 +35,8 @@ namespace SalesLibraries.ServiceConnector.UtilityService {
         
         private System.Threading.SendOrPostCallback updateQuizzesOperationCompleted;
         
+        private System.Threading.SendOrPostCallback resetOpCacheOperationCompleted;
+        
         private System.Threading.SendOrPostCallback getSessionKeyOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
@@ -83,6 +85,9 @@ namespace SalesLibraries.ServiceConnector.UtilityService {
         
         /// <remarks/>
         public event updateQuizzesCompletedEventHandler updateQuizzesCompleted;
+        
+        /// <remarks/>
+        public event resetOpCacheCompletedEventHandler resetOpCacheCompleted;
         
         /// <remarks/>
         public event getSessionKeyCompletedEventHandler getSessionKeyCompleted;
@@ -174,6 +179,36 @@ namespace SalesLibraries.ServiceConnector.UtilityService {
             if ((this.updateQuizzesCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.updateQuizzesCompleted(this, new updateQuizzesCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:UtilityControllerwsdl#resetOpCache", RequestNamespace="urn:UtilityControllerwsdl", ResponseNamespace="urn:UtilityControllerwsdl")]
+        [return: System.Xml.Serialization.SoapElementAttribute("return")]
+        public string resetOpCache(string sessionKey) {
+            object[] results = this.Invoke("resetOpCache", new object[] {
+                        sessionKey});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void resetOpCacheAsync(string sessionKey) {
+            this.resetOpCacheAsync(sessionKey, null);
+        }
+        
+        /// <remarks/>
+        public void resetOpCacheAsync(string sessionKey, object userState) {
+            if ((this.resetOpCacheOperationCompleted == null)) {
+                this.resetOpCacheOperationCompleted = new System.Threading.SendOrPostCallback(this.OnresetOpCacheOperationCompleted);
+            }
+            this.InvokeAsync("resetOpCache", new object[] {
+                        sessionKey}, this.resetOpCacheOperationCompleted, userState);
+        }
+        
+        private void OnresetOpCacheOperationCompleted(object arg) {
+            if ((this.resetOpCacheCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.resetOpCacheCompleted(this, new resetOpCacheCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -293,6 +328,32 @@ namespace SalesLibraries.ServiceConnector.UtilityService {
         private object[] results;
         
         internal updateQuizzesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    public delegate void resetOpCacheCompletedEventHandler(object sender, resetOpCacheCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class resetOpCacheCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal resetOpCacheCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
