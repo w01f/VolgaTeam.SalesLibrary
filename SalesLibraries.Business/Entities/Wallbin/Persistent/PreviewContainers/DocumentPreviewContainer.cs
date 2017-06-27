@@ -29,6 +29,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 			PreviewFormats.PngForMobile,
 			PreviewFormats.Thumbnails,
 			PreviewFormats.ThumbnailsForMobile,
+			PreviewFormats.ThumbnailsForDatatable
 		};
 
 		[NotMapped, JsonIgnore]

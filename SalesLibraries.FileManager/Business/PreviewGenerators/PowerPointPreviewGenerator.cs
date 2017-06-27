@@ -10,6 +10,7 @@ using SalesLibraries.Business.Entities.Wallbin.Common.Constants;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.OfficeInterops;
+using SalesLibraries.FileManager.Business.Services;
 using Shape = Microsoft.Office.Interop.PowerPoint.Shape;
 
 namespace SalesLibraries.FileManager.Business.PreviewGenerators
@@ -57,6 +58,12 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 				if (updateThumbsPhone && !Directory.Exists(thumbsPhoneDestination))
 					Directory.CreateDirectory(thumbsPhoneDestination);
 
+				var thumbsDatatableDestination = Path.Combine(powerPointContainer.ContainerPath, PreviewFormats.ThumbnailsForDatatable);
+				var updateThumbsDatatable = !(Directory.Exists(thumbsDatatableDestination) && Directory.GetFiles(thumbsDatatableDestination).Any()) &&
+					powerPointContainer.GenerateImages;
+				if (updateThumbsDatatable && !Directory.Exists(thumbsDatatableDestination))
+					Directory.CreateDirectory(thumbsDatatableDestination);
+
 				var pptxDestination = Path.Combine(powerPointContainer.ContainerPath, PreviewFormats.PowerPoint);
 				var updatePptx = !(Directory.Exists(pptxDestination) && Directory.GetFiles(pptxDestination).Any());
 				if (updatePptx && !Directory.Exists(pptxDestination))
@@ -74,7 +81,8 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 					updatePptx ||
 					updateTxt ||
 					updatePngPhone ||
-					updateThumbsPhone;
+					updateThumbsPhone ||
+					updateThumbsDatatable;
 
 				if (!needToUpdate)
 					break;
@@ -215,6 +223,12 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 								continue;
 							}
 							log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.Pdf, DateTime.Now));
+						}
+
+						if (!cancellationToken.IsCancellationRequested && updateThumbsDatatable)
+						{
+							JpegGenerator.GenerateDatatableJpegs(pngDestination, thumbsDatatableDestination);
+							log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.ThumbnailsForDatatable, DateTime.Now));
 						}
 
 						presentation.Close();

@@ -35,7 +35,13 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 		protected override string PreviewSubFolder => VideoSubFolderName;
 
 		[NotMapped, JsonIgnore]
-		public override string[] AvailablePreviewFormats => new[] { PreviewFormats.VideoMp4, PreviewFormats.VideoInfo, PreviewFormats.VideoThumbnail };
+		public override string[] AvailablePreviewFormats => new[]
+		{
+			PreviewFormats.VideoMp4,
+			PreviewFormats.VideoInfo,
+			PreviewFormats.VideoThumbnail,
+			PreviewFormats.ThumbnailsForDatatable
+		};
 
 		[NotMapped, JsonIgnore]
 		public bool IsMp4Converted
@@ -47,8 +53,11 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 			}
 		}
 
-		private IEnumerable<string> NecessaryPreviewFormats => new[] { PreviewFormats.VideoInfo, PreviewFormats.VideoThumbnail };
-
+		private IEnumerable<string> NecessaryPreviewFormats => new[]
+		{
+			PreviewFormats.VideoInfo,
+			PreviewFormats.VideoThumbnail,
+		};
 		#endregion
 
 		protected override void UpdateState(IEnumerable<IPreviewableLink> associatedLinks)

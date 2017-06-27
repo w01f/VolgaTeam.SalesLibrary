@@ -135,47 +135,46 @@ namespace SalesLibraries.FileManager.Business.Services
 
 			int startDelay;
 			int endDelay;
-			string imageExtractOption;
+			string imageExtractOption = "-vf \"{0},scale=-1:'min(ih,360)'\"";
 
 			if (ffMpegData.Duration < 1)
 			{
 				startDelay = 5;
 				endDelay = 5;
-				imageExtractOption = "-vf fps=1 -vframes 1";
+				imageExtractOption = String.Format(imageExtractOption, "fps=1") + " -vframes 1";
 			}
 			else if (ffMpegData.Duration < 10)
 			{
 				startDelay = 1;
 				endDelay = 0;
-				imageExtractOption = "-vf fps=1";
+				imageExtractOption = String.Format(imageExtractOption, "fps=1");
 			}
 			else if (ffMpegData.Duration < 30)
 			{
 				startDelay = 5;
 				endDelay = 2;
-				imageExtractOption = "-vf fps=1";
+				imageExtractOption = String.Format(imageExtractOption, "fps=1");
 			}
 			else if (ffMpegData.Duration < 180)
 			{
 				startDelay = 5;
 				endDelay = 5;
-				imageExtractOption = "-vf fps=1/2";
+				imageExtractOption = String.Format(imageExtractOption, "fps=1/2");
 			}
 			else if (ffMpegData.Duration < 300)
 			{
 				startDelay = 5;
 				endDelay = 5;
-				imageExtractOption = "-vf fps=1/6";
+				imageExtractOption = String.Format(imageExtractOption, "fps=1/6");
 			}
 			else
 			{
 				startDelay = 7;
 				endDelay = 7;
-				imageExtractOption = "-vf fps=1/30";
+				imageExtractOption = String.Format(imageExtractOption, "fps=1/30");
 			}
 
 			var targetDuration = ffMpegData.Duration - startDelay - endDelay;
-
 			var videoConverter = new Process
 			{
 				StartInfo = new ProcessStartInfo(

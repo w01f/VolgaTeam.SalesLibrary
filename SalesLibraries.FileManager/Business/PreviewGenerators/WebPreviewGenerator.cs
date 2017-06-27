@@ -24,16 +24,24 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 			var thumbsDestination = Path.Combine(previewContainer.ContainerPath, PreviewFormats.Thumbnails);
 			var updateThumbs = !(Directory.Exists(thumbsDestination) && Directory.GetFiles(thumbsDestination).Any());
 
-			if (!updateThumbs) return;
+			var thumbsDatatableDestination = Path.Combine(previewContainer.ContainerPath, PreviewFormats.ThumbnailsForDatatable);
+			var updateThumbsDatatable = !(Directory.Exists(thumbsDatatableDestination) && Directory.GetFiles(thumbsDatatableDestination).Any());
+
+			if (!(updateThumbs || updateThumbsDatatable)) return;
 
 			if (!Directory.Exists(thumbsDestination))
 				Directory.CreateDirectory(thumbsDestination);
 
+			if (!Directory.Exists(thumbsDatatableDestination))
+				Directory.CreateDirectory(thumbsDatatableDestination);
+
 			MainController.Instance.MainForm.Invoke(new MethodInvoker(() =>
 			{
-				var siteCatcher = new WebLinkThumbnailMaker();
-				siteCatcher.MakeThumbnail(previewContainer.SourcePath, thumbsDestination);
+				var thumbnailGenerator = new WebLinkThumbnailGenerator();
+				thumbnailGenerator.GenerateThumbnail(previewContainer.SourcePath, thumbsDestination);
+				JpegGenerator.GenerateDatatableJpegs(thumbsDestination, thumbsDatatableDestination);
 				log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.Thumbnails, DateTime.Now));
+				log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.ThumbnailsForDatatable, DateTime.Now));
 			}));
 
 			previewContainer.MarkAsModified();

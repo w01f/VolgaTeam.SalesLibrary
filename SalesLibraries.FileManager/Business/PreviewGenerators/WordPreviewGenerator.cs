@@ -53,6 +53,12 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 			if (updateThumbsPhone && !Directory.Exists(thumbsPhoneDestination))
 				Directory.CreateDirectory(thumbsPhoneDestination);
 
+			var thumbsDatatableDestination = Path.Combine(wordContainer.ContainerPath, PreviewFormats.ThumbnailsForDatatable);
+			var updateThumbsDatatable = !(Directory.Exists(thumbsDatatableDestination) && Directory.GetFiles(thumbsDatatableDestination).Any()) &&
+				wordContainer.GenerateImages;
+			if (updateThumbsDatatable && !Directory.Exists(thumbsDatatableDestination))
+				Directory.CreateDirectory(thumbsDatatableDestination);
+
 			var docxDestination = Path.Combine(wordContainer.ContainerPath, PreviewFormats.Word);
 			var updateDocx = !(Directory.Exists(docxDestination) && Directory.GetFiles(docxDestination).Any());
 			if (updateDocx && !Directory.Exists(docxDestination))
@@ -70,7 +76,8 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 				updateDocx ||
 				updateTxt ||
 				updatePngPhone ||
-				updateThumbsPhone;
+				updateThumbsPhone ||
+				updateThumbsDatatable;
 
 			if (!needToUpdate) return;
 			var updated = false;
@@ -97,11 +104,13 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 							log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.Pdf, DateTime.Now));
 						}
 
-						if (updatePng || updateThumbs)
+						if (updatePng || updateThumbs || updateThumbsDatatable)
 						{
 							PdfHelper.ExportPdf(pdfFileName, pngDestination, thumbsDestination);
+							JpegGenerator.GenerateDatatableJpegs(pngDestination, thumbsDatatableDestination);
 							log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.Png, DateTime.Now));
 							log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.Thumbnails, DateTime.Now));
+							log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.ThumbnailsForDatatable, DateTime.Now));
 						}
 						if (updatePngPhone || updateThumbsPhone)
 						{

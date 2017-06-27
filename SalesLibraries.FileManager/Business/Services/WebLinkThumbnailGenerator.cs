@@ -15,14 +15,14 @@ using Timer = System.Threading.Timer;
 
 namespace SalesLibraries.FileManager.Business.Services
 {
-	class WebLinkThumbnailMaker
+	class WebLinkThumbnailGenerator
 	{
 		private bool _complited;
 		private readonly List<Link> _loadingLinks = new List<Link>();
 		private readonly ExtendedWebBrowser _webBrowser;
 		private Timer _compliteTimer;
 
-		public WebLinkThumbnailMaker()
+		public WebLinkThumbnailGenerator()
 		{
 			_webBrowser = new ExtendedWebBrowser();
 			_webBrowser.ScrollBarsEnabled = false;
@@ -32,7 +32,7 @@ namespace SalesLibraries.FileManager.Business.Services
 			_webBrowser.DocumentCompleted += OnWebBrowserDocumentCompleted;
 		}
 
-		public void MakeThumbnail(string url, string destinationPath)
+		public void GenerateThumbnail(string url, string destinationPath)
 		{
 			var width = 1280;
 			var height = 1024;

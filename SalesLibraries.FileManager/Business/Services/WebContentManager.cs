@@ -712,6 +712,10 @@ namespace SalesLibraries.FileManager.Business.Services
 					.GetPreviewLinksByFormat(PreviewFormats.ThumbnailsForMobile)
 					.Select(path => path.Replace(source.Library.Path, String.Empty))
 					.ToArray();
+				target.thumbsDatatableLinks = source
+					.GetPreviewLinksByFormat(PreviewFormats.ThumbnailsForDatatable)
+					.Select(path => path.Replace(source.Library.Path, String.Empty))
+					.ToArray();
 
 				var thumbnails = source.GetPreviewLinksByFormat(PreviewFormats.Thumbnails).ToList();
 				target.thumbsLinks = thumbnails.Select(path => path.Replace(source.Library.Path, String.Empty)).ToArray();
@@ -754,11 +758,19 @@ namespace SalesLibraries.FileManager.Business.Services
 					.GetPreviewLinksByFormat(PreviewFormats.VideoThumbnail)
 					.Select(path => path.Replace(source.Library.Path, String.Empty))
 					.ToArray();
+				target.thumbsDatatableLinks = source
+					.GetPreviewLinksByFormat(PreviewFormats.ThumbnailsForDatatable)
+					.Select(path => path.Replace(source.Library.Path, String.Empty))
+					.ToArray();
 			}
 			if (source is WebLinkPreviewContainer)
 			{
 				var thumbnails = source.GetPreviewLinksByFormat(PreviewFormats.Thumbnails).ToList();
 				target.thumbsLinks = thumbnails.Select(path => path.Replace(source.Library.Path, String.Empty)).ToArray();
+				target.thumbsDatatableLinks = source
+					.GetPreviewLinksByFormat(PreviewFormats.ThumbnailsForDatatable)
+					.Select(path => path.Replace(source.Library.Path, String.Empty))
+					.ToArray();
 			}
 		}
 

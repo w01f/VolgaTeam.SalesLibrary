@@ -9,6 +9,7 @@
 		public const string Text = "txt";
 		public const string Thumbnails = "thumbs";
 		public const string ThumbnailsForMobile = "thumbs_phone";
+		public const string ThumbnailsForDatatable = "thumbs_datatable";
 		public const string VideoMp4 = "mp4";
 		public const string VideoThumbnail = "thumb";
 		public const string VideoInfo = "info";

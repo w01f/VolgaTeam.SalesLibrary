@@ -5635,6 +5635,8 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         private string[] thumbsPhoneLinksField;
         
+        private string[] thumbsDatatableLinksField;
+        
         private int thumbsWidthField;
         
         private int thumbsHeightField;
@@ -5736,6 +5738,16 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
             }
             set {
                 this.thumbsPhoneLinksField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string[] thumbsDatatableLinks {
+            get {
+                return this.thumbsDatatableLinksField;
+            }
+            set {
+                this.thumbsDatatableLinksField = value;
             }
         }
         

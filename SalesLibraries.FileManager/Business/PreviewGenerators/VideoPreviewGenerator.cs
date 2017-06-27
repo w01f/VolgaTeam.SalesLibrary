@@ -59,18 +59,28 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 				var sourceFile = !((VideoPreviewContainer)previewContainer).IsMp4Converted ?
 					Path.Combine(previewContainer.ContainerPath, PreviewFormats.VideoMp4, Path.ChangeExtension(Path.GetFileName(previewContainer.SourcePath), ".mp4")) :
 					previewContainer.SourcePath;
+
 				var thumbDestination = Path.Combine(previewContainer.ContainerPath, PreviewFormats.VideoThumbnail);
 				var updateThumbs = !(Directory.Exists(thumbDestination) && Directory.GetFiles(thumbDestination).Any());
 				if (!Directory.Exists(thumbDestination))
 					Directory.CreateDirectory(thumbDestination);
-				if (updateThumbs)
+
+				var thumbDatatableDestination = Path.Combine(previewContainer.ContainerPath, PreviewFormats.ThumbnailsForDatatable);
+				var updateThumbsDatatable = !(Directory.Exists(thumbDatatableDestination) && Directory.GetFiles(thumbDatatableDestination).Any());
+				if (!Directory.Exists(thumbDatatableDestination))
+					Directory.CreateDirectory(thumbDatatableDestination);
+
+				if (updateThumbs || updateThumbsDatatable)
 				{
 					VideoHelper.GenerateThumbnails(sourceFile, thumbDestination, videoData, cancellationToken);
+					JpegGenerator.GenerateDatatableJpegs(thumbDestination, thumbDatatableDestination);
 					PngHelper.ConvertFiles(thumbDestination);
 					if (Directory.GetFiles(thumbDestination).Any())
 						log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.VideoThumbnail, DateTime.Now));
+					if (Directory.GetFiles(thumbDatatableDestination).Any())
+						log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.ThumbnailsForDatatable, DateTime.Now));
 				}
-				updated |= updateThumbs;
+				updated |= updateThumbs || updateThumbsDatatable;
 			}
 
 			if (updated)

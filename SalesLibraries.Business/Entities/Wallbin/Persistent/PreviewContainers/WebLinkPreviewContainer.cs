@@ -19,7 +19,11 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 		protected override string PreviewSubFolder => DocumentSubFolderName;
 
 		[NotMapped, JsonIgnore]
-		public override string[] AvailablePreviewFormats => new[] { PreviewFormats.Thumbnails };
+		public override string[] AvailablePreviewFormats => new[]
+		{
+			PreviewFormats.Thumbnails,
+			PreviewFormats.ThumbnailsForDatatable,
+		};
 		#endregion
 
 		protected override void UpdateState(IEnumerable<IPreviewableLink> associatedLinks)

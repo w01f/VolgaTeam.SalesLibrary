@@ -42,17 +42,26 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 				pdfContainer.GenerateImages;
 			if (updateThumbsPhone && !Directory.Exists(thumbsPhoneDestination))
 				Directory.CreateDirectory(thumbsPhoneDestination);
+			var thumbsDatatableDestination = Path.Combine(pdfContainer.ContainerPath, PreviewFormats.ThumbnailsForDatatable);
+			var updateThumbsDatatable = !(Directory.Exists(thumbsDatatableDestination) && Directory.GetFiles(thumbsDatatableDestination).Any()) &&
+				pdfContainer.GenerateImages;
+			if (updateThumbsDatatable && !Directory.Exists(thumbsDatatableDestination))
+				Directory.CreateDirectory(thumbsDatatableDestination);
 
-			if (updatePng || updateThumbs)
+			if (updatePng || updateThumbs || updateThumbsDatatable)
 			{
 				PdfHelper.ExportPdf(pdfContainer.SourcePath, pngDestination, thumbsDestination);
+				JpegGenerator.GenerateDatatableJpegs(pngDestination, thumbsDatatableDestination);
 				log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.Png, DateTime.Now));
+				log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.Thumbnails, DateTime.Now));
+				log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.ThumbnailsForDatatable, DateTime.Now));
 			}
 
 			if (updatePngPhone || updateThumbsPhone)
 			{
 				PdfHelper.ExportPdfPhone(pdfContainer.SourcePath, pngPhoneDestination, thumbsPhoneDestination);
 				log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.PngForMobile, DateTime.Now));
+				log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.ThumbnailsForMobile, DateTime.Now));
 			}
 
 			var txtDestination = Path.Combine(pdfContainer.ContainerPath, PreviewFormats.Text);
