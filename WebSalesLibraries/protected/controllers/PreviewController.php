@@ -25,6 +25,7 @@
 		public function actionGetViewDialog()
 		{
 			$linkId = Yii::app()->request->getPost('linkId');
+			$parentBundleId = Yii::app()->request->getPost('parentBundleId');
 			if (strtolower(trim(Yii::app()->request->getPost('isQuickSite'))) == 'true')
 				$isQuickSite = true;
 			else
@@ -39,7 +40,7 @@
 					$library = $libraryManager->getLibraryById($linkRecord->id_library);
 					$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
 					$link->load($linkRecord);
-					$previewData = $link->getPreviewData($isQuickSite, $this->isPhone);
+					$previewData = $link->getPreviewData($parentBundleId, $isQuickSite, $this->isPhone);
 					$content = '';
 					if ($previewData->contentView != '')
 						$content = $this->renderPartial($previewData->contentView, array('data' => $previewData), true);
@@ -57,6 +58,7 @@
 		public function actionGetRateDialog()
 		{
 			$linkId = Yii::app()->request->getPost('linkId');
+			$parentBundleId = Yii::app()->request->getPost('parentBundleId');
 			$dialogData = array();
 			if (isset($linkId))
 			{
@@ -68,7 +70,7 @@
 					$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
 					$link->load($linkRecord);
 
-					$previewData = $link->getPreviewData(false, $this->isPhone);
+					$previewData = $link->getPreviewData($parentBundleId, false, $this->isPhone);
 
 					$dialogData = array(
 						'format' => $previewData->viewerFormat,
@@ -84,6 +86,7 @@
 		public function actionGetLinkContextMenu()
 		{
 			$linkId = Yii::app()->request->getPost('linkId');
+			$parentBundleId = Yii::app()->request->getPost('parentBundleId');
 			if (strtolower(trim(Yii::app()->request->getPost('isQuickSite'))) == 'true')
 				$isQuickSite = true;
 			else
@@ -99,7 +102,7 @@
 					$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
 					$link->load($linkRecord);
 
-					$previewData = $link->getPreviewData($isQuickSite, $this->isPhone);
+					$previewData = $link->getPreviewData($parentBundleId, $isQuickSite, $this->isPhone);
 
 					$menuData = array(
 						'format' => $previewData->viewerFormat,
@@ -157,6 +160,7 @@
 		public function actionGetEmailDialog()
 		{
 			$linkId = Yii::app()->request->getPost('linkId');
+			$parentBundleId = Yii::app()->request->getPost('parentBundleId');
 			$dialogData = array();
 			if (isset($linkId))
 			{
@@ -168,7 +172,7 @@
 					$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
 					$link->load($linkRecord);
 
-					$previewData = $link->getPreviewData(false, $this->isPhone);
+					$previewData = $link->getPreviewData($parentBundleId, false, $this->isPhone);
 
 					$dialogData = array(
 						'format' => $previewData->viewerFormat,
@@ -188,7 +192,7 @@
 			Yii::app()->end();
 		}
 
-		public function actionPrepareDownloadFolder()
+		public function actionPrepareDownloadFolderLink()
 		{
 			$linkId = Yii::app()->request->getPost('linkId');
 			if (isset($linkId))
@@ -202,32 +206,12 @@
 					$link->load($linkRecord);
 					if ($link->isFolder)
 					{
-						$rootPath = realpath($link->filePath);
-
-						/** @var SplFileInfo[] $folderFies */
-						$folderFies = new RecursiveIteratorIterator(
-							new RecursiveDirectoryIterator($rootPath),
-							RecursiveIteratorIterator::LEAVES_ONLY
-						);
-
-						$folderFileInfoList = array();
-						foreach ($folderFies as $name => $file)
-						{
-							if (!$file->isDir())
-							{
-								$fileInfo = new FileDownloadInfo();
-								$fileInfo->name = $file->getBasename();
-								$fileInfo->fullPath = $file->getRealPath();
-								$fileInfo->relativePath = substr($fileInfo->fullPath, strlen($rootPath) + 1);
-								$fileInfo->size = $file->getSize();
-								$folderFileInfoList[] = $fileInfo;
-							}
-						}
+						$downloadInfoList = FileDownloadInfo::getFolderDownloadInfo($link);
 						$this->renderPartial(
-							'zipFolder',
+							'zipFiles',
 							array(
-								'folderName' => $link->fileName,
-								'folderFileInfoList' => $folderFileInfoList
+								'zipName' => $link->fileName,
+								'downloadInfoList' => $downloadInfoList
 							),
 							false, true);
 					}
@@ -235,19 +219,87 @@
 			}
 		}
 
-		public function actionDownloadFolder()
+		public function actionPrepareDownloadLinkBundle()
 		{
-			$folderName = Yii::app()->request->getPost('folderName');
+			$linkId = Yii::app()->request->getPost('linkId');
+			if (isset($linkId))
+			{
+				$linkRecord = LinkRecord::getLinkById($linkId);
+				if (isset($linkRecord))
+				{
+					$libraryManager = new LibraryManager();
+					$library = $libraryManager->getLibraryById($linkRecord->id_library);
+					$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
+					$link->load($linkRecord);
+					if ($link->isLinkBundle)
+					{
+						$downloadInfoList = FileDownloadInfo::getLinkBundleDownloadInfo($link);
+						$this->renderPartial(
+							'zipFiles',
+							array(
+								'zipName' => $link->name,
+								'downloadInfoList' => $downloadInfoList
+							),
+							false, true);
+					}
+				}
+			}
+		}
 
-			/** @var FileDownloadInfo $folderFiles */
-			$folderFiles = CJSON::decode(Yii::app()->request->getPost('folderFiles'), false);
+		public function actionPrepareDownloadLibraryFolder()
+		{
+			$folderId = Yii::app()->request->getPost('folderId');
+			if (isset($folderId))
+			{
+				$downloadInfoList = array();
+				/** @var FolderRecord $folderRecord */
+				$folderRecord = FolderRecord::model()->findByPk($folderId);
+				$libraryManager = new LibraryManager();
+				$linkRecords = LinkRecord::getLinksByFolder($folderId);
+				foreach ($linkRecords as $linkRecord)
+				{
+					if (!isset($library))
+						$library = $libraryManager->getLibraryById($linkRecord->id_library);
+					$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
+					$link->load($linkRecord);
+					if ($link->isFolder)
+					{
+						$downloadInfoList = array_merge($downloadInfoList, FileDownloadInfo::getFolderDownloadInfo($link));
+					}
+					else if ($link->isLinkBundle)
+					{
+						$downloadInfoList = array_merge($downloadInfoList, FileDownloadInfo::getLinkBundleDownloadInfo($link));
+					}
+					else
+					{
+						$fileInfo = FileInfo::fromLinkRecord($linkRecord, $library);
+						if ($fileInfo->isFile)
+							$downloadInfoList[] = FileDownloadInfo::getFileDownloadInfo($fileInfo);
+					}
+				}
+				$this->renderPartial(
+					'zipFiles',
+					array(
+						'zipName' => $folderRecord->name,
+						'downloadInfoList' => $downloadInfoList
+					),
+					false, true);
+			}
+		}
 
-			$zipFile = $folderName . '.zip';
+		public function actionZipAndDownloadFiles()
+		{
+			$zipName = Yii::app()->request->getPost('zipName');
+
+			/** @var FileDownloadInfo $files */
+			$files = CJSON::decode(Yii::app()->request->getPost('files'), false);
+
+			$zipFile = $zipName . '.zip';
 			$zipPath = LibraryManager::getLibrariesRootPath() . DIRECTORY_SEPARATOR . 'downloads' . DIRECTORY_SEPARATOR . $zipFile;
 			$zip = new ZipArchive();
 			$zip->open($zipPath, ZipArchive::CREATE | ZipArchive::OVERWRITE);
 
-			foreach ($folderFiles as $file)
+			foreach ($files as $file)
 			{
 				$filePath = $file->fullPath;
 				$relativePath = $file->relativePath;

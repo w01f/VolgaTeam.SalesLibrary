@@ -32,7 +32,7 @@
 
 			var defaultItemId = parameters.data.defaultItemId;
 			var defaultItem = dialogContent.find('#bundle-item-' + defaultItemId);
-			defaultItem.find('a').addClass('selected');
+			defaultItem.find('>a').addClass('selected');
 			var defaultItemData = defaultItem.find('.service-data');
 
 			openBundleItem(defaultItemData);
@@ -52,8 +52,8 @@
 		var processBundleItem = function ()
 		{
 			var itemData = $(this).find('.service-data');
-			dialogContent.find('.content-item a').removeClass('selected');
-			$(this).find('a').addClass('selected');
+			dialogContent.find('.content-item > a').removeClass('selected');
+			$(this).find('>a').addClass('selected');
 			openBundleItem(itemData);
 		};
 
@@ -62,6 +62,14 @@
 			releaseOpenedBundleItem();
 
 			parameters.data.defaultItemId = itemData.find('.item-id').text();
+
+			var itemTitle = itemData.find('.item-title').text();
+			var fancyBoxTitleArea = $('.fancybox-title .child');
+			if (viewerData.totalViews > 0)
+				fancyBoxTitleArea.html('<div class="row"><div class="col col-xs-10 text-left">' + itemTitle + '</div><div class="col col-xs-2 text-right">views (' + viewerData.totalViews + ')</div></div>');
+			else
+				fancyBoxTitleArea.html(title);
+
 			var itemType = itemData.find('.item-type').text();
 			switch (itemType)
 			{
@@ -69,8 +77,33 @@
 					var itemContent = itemData.find('.item-info-content').html();
 					dialogContent.find('.link-viewer-container').html(itemContent);
 					break;
+				case 'cover':
+					var coverContent = itemData.find('.item-cover-content');
+					var linkViewContainer = dialogContent.find('.link-viewer-container');
+					linkViewContainer.html(coverContent.html());
+
+					linkViewContainer.find('.download-link-bundle').off('click.preview').on('click.preview', downloadLinkBundle);
+					linkViewContainer.find('.add-quicksite').off('click.preview').on('click.preview', addToQuickSite);
+					linkViewContainer.find('.add-favorites').off('click.preview').on('click.preview', addToFavorites);
+
+					new $.SalesPortal.RateManager().init(
+						{
+							id: viewerData.linkId,
+							name: viewerData.name,
+							file: viewerData.fileName,
+							format: viewerData.format
+						},
+						linkViewContainer.find('.user-link-rate-container'),
+						viewerData.rateData,
+						function (newRateData)
+						{
+							viewerData.rateData = newRateData;
+						}
+					);
+					break;
 				case 'link':
 					$.SalesPortal.Overlay.show();
+					dialogContent.find('.link-viewer-container').html('');
 					var libraryLinkId = itemData.find('.library-link-id').text();
 					$.SalesPortal.LinkManager.requestViewDialog({
 						linkId: libraryLinkId,
@@ -86,12 +119,7 @@
 					break;
 			}
 
-			var itemTitle = itemData.find('.item-title').text();
-			var fancyBoxTitleArea = $('.fancybox-title .child');
-			if (viewerData.totalViews > 0)
-				fancyBoxTitleArea.html('<div class="row"><div class="col col-xs-10 text-left">' + itemTitle + '</div><div class="col col-xs-2 text-right">views (' + viewerData.totalViews + ')</div></div>');
-			else
-				fancyBoxTitleArea.html(title);
+
 		};
 
 		var releaseOpenedBundleItem = function ()
@@ -100,6 +128,26 @@
 				openedViewer.afterClose();
 			openedViewer = undefined;
 			dialogContent.find('.link-viewer-container').html('');
+		};
+
+		var downloadLinkBundle = function ()
+		{
+			$.SalesPortal.ZipDownloadFilesHelper.processLinkBundle(viewerData.linkId);
+		};
+
+		var addToQuickSite = function ()
+		{
+			$.fancybox.close();
+			$.SalesPortal.QBuilder.LinkCart.addLinks([viewerData.linkId]);
+		};
+
+		var addToFavorites = function ()
+		{
+			$.SalesPortal.LinkManager.addToFavorites(
+				viewerData.linkId,
+				viewerData.name,
+				viewerData.name,
+				viewerData.format);
 		};
 	};
 })(jQuery);

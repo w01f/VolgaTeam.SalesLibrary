@@ -209,7 +209,7 @@
 		public static function getLinksByFolder($folderId)
 		{
 			/** @var LinkRecord[] $linkRecords */
-			$linkRecords = self::model()->findAll('id_folder=? and id_parent_link is null and is_preview_not_ready=0', array($folderId));
+			$linkRecords = self::model()->findAll('id_folder=? and id_parent_link is null', array($folderId));
 			return $linkRecords;
 		}
 

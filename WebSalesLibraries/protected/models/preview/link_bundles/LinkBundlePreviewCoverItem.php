@@ -12,7 +12,7 @@
 		public function __construct($bundleItem)
 		{
 			parent::__construct($bundleItem);
-
+			$this->itemType = 'cover';
 			$this->contentView = 'linkBundleCoverContent';
 			$this->logo = $bundleItem->logo;
 		}

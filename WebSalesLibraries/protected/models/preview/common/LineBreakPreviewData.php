@@ -34,5 +34,12 @@
 				$action->text = 'Add all links in this window…';
 				$this->contextActions[] = $action;
 			}
+			if ($this->config->allowDownload)
+			{
+				$action = new PreviewAction();
+				$action->tag = 'zip-library-folder';
+				$action->text = 'Download ALL in this window';
+				$this->contextActions[] = $action;
+			}
 		}
 	}

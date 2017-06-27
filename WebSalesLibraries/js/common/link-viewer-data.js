@@ -29,6 +29,7 @@
 
 		this.linkId = undefined;
 		this.folderId = undefined;
+		this.linkBundleId = undefined;
 		this.name = undefined;
 		this.format = undefined;
 		this.tags = undefined;
@@ -63,6 +64,7 @@
 	{
 		this.linkId = undefined;
 		this.folderId = undefined;
+		this.linkBundleId = undefined;
 		this.name = undefined;
 		this.format = undefined;
 		this.tags = undefined;
@@ -88,6 +90,7 @@
 	{
 		this.linkId = undefined;
 		this.folderId = undefined;
+		this.linkBundleId = undefined;
 		this.name = undefined;
 		this.format = undefined;
 		this.tags = undefined;
@@ -107,6 +110,7 @@
 	{
 		this.linkId = undefined;
 		this.folderId = undefined;
+		this.linkBundleId = undefined;
 		this.name = undefined;
 		this.format = undefined;
 		this.tags = undefined;
@@ -162,6 +166,7 @@
 	{
 		this.linkId = undefined;
 		this.folderId = undefined;
+		this.linkBundleId = undefined;
 		this.name = undefined;
 		this.format = undefined;
 		this.tags = undefined;
@@ -180,6 +185,7 @@
 	{
 		this.linkId = undefined;
 		this.folderId = undefined;
+		this.linkBundleId = undefined;
 		this.name = undefined;
 		this.format = undefined;
 		this.tags = undefined;

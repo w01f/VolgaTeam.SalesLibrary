@@ -23,6 +23,7 @@
 				url: window.BaseUrl + "preview/getViewDialog",
 				data: {
 					linkId: requestData.linkId,
+					parentBundleId: requestData.parentPreviewParameters !== undefined ? requestData.parentPreviewParameters.data.linkId : undefined,
 					isQuickSite: requestData.isQuickSite
 				},
 				beforeSend: function ()
@@ -222,7 +223,13 @@
 											that.requestEmailDialog(linkId);
 											break;
 										case 'zip-folder':
-											$.SalesPortal.DownloadFolderHelper.run(parameters.data);
+											$.SalesPortal.ZipDownloadFilesHelper.processFolderLink(parameters.data);
+											break;
+										case 'zip-link-bundle':
+											$.SalesPortal.ZipDownloadFilesHelper.processLinkBundle(parameters.data.linkId);
+											break;
+										case 'zip-library-folder':
+											$.SalesPortal.ZipDownloadFilesHelper.processLibraryFolder(parameters.data.folderId);
 											break;
 										case 'favorites':
 											that.addToFavorites(
@@ -316,7 +323,7 @@
 										file: parameters.data.fileName,
 										format: parameters.data.format
 									},
-									dialogContent.find('#user-link-rate-container'),
+									dialogContent.find('.user-link-rate-container'),
 									parameters.data.rateData);
 							},
 							afterClose: afterClose

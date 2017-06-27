@@ -18,9 +18,9 @@
 	</div>
 	<div class="row">
 		<div class="col col-xs-12 text-left">
-			<div id="user-link-rate-container">
+			<div class="user-link-rate-container">
 				<img class="total-rate" src="" style="height:16px"/>
-				<label for="user-link-rate" class="ui-hide-label"></label><input id="user-link-rate" class="rating">
+                <input name="user-link-rate" class="user-link-rate rating">
 			</div>
 		</div>
 	</div>

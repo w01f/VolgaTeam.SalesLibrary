@@ -1,12 +1,13 @@
 (function ($)
 {
 	window.BaseUrl = window.BaseUrl || '';
-	$.SalesPortal = $.SalesPortal || { };
+	$.SalesPortal = $.SalesPortal || {};
 	$.SalesPortal.PreviewGallery = function (parameters)
 	{
 		var that = this;
 		var sliderData = new $.SalesPortal.GalleryData(parameters);
 
+		var pageImageContainer = sliderData.container.find('.preview-image-container');
 		var pageImage = sliderData.container.find('.page-preview-image');
 
 		var navButtonNext = sliderData.container.find('.nav-image-button.move-next');
@@ -25,7 +26,7 @@
 				{
 					var index = sliderData.pages[i].index;
 					options += '<option value="' + index + '"';
-					if (i == that.currentPageIndex)
+					if (i === that.currentPageIndex)
 						options += ' selected = "selected"';
 					options += '>' + (index + 1) + '</option>';
 				}
@@ -64,35 +65,38 @@
 		var showCurrentPage = function ()
 		{
 			var page = sliderData.pages[that.currentPageIndex];
-
-			pageImage.fadeOut(500, function ()
+			var newPageImage = pageImage.clone();
+			newPageImage.hide().appendTo(pageImageContainer);
+			newPageImage.one('load', function ()
 			{
-				var image = $(this);
-				image.one('load', function ()
+				newPageImage.fadeIn(600, function ()
 				{
-					image.fadeIn(500);
+					pageImage = newPageImage;
+					if ($.isFunction(sliderData.pageChanged))
+						sliderData.pageChanged(that.currentPageIndex);
 				});
-				image.prop('src', page.href);
+				pageImage.fadeOut(200, function ()
+				{
+					pageImage.remove();
+				});
 			});
-
-			if ($.isFunction(sliderData.pageChanged))
-				sliderData.pageChanged(that.currentPageIndex);
+			newPageImage.prop('src', page.href);
 		};
 
 		var updateNavButtons = function ()
 		{
 			navButtonNext.removeClass('disabled');
 			navButtonPrev.removeClass('disabled');
-			if (that.currentPageIndex == 0)
+			if (that.currentPageIndex === 0)
 			{
 				navButtonPrev.addClass('disabled');
 			}
-			if (that.currentPageIndex == (totalPages - 1))
+			if (that.currentPageIndex === (totalPages - 1))
 			{
 				navButtonNext.addClass('disabled');
 			}
 
-			sliderData.pageSelector.selectpicker('val',that.currentPageIndex);
+			sliderData.pageSelector.selectpicker('val', that.currentPageIndex);
 			sliderData.pageSelector.selectpicker('refresh');
 		};
 

@@ -66,6 +66,7 @@
 		public $isDirectUrl;
 		public $isExternalUrl;
 		public $isAppLink;
+		public $isLinkBundle;
 
 		/**
 		 * @param $folder
@@ -152,6 +153,7 @@
 			$this->isFolder = $this->originalFormat == 'folder' || count(\LinkRecord::model()->findAll('id_parent_link=?', array($linkRecord->id))) > 0;
 			$this->isLineBreak = $this->originalFormat == 'line break' || ($this->type == 6 && isset($this->lineBreakProperties));
 			$this->isAppLink = $this->type == 15;
+			$this->isLinkBundle = $this->type == 19;
 
 			$this->isDirectUrl = self::isOpenedAsHyperlink($this->type, $this->extendedProperties);
 
@@ -371,13 +373,14 @@
 		}
 
 		/**
+		 * @param $parentBundleId string
 		 * @param $isQuickSite boolean
 		 * @param $isPhone boolean
 		 * @return \PreviewData
 		 */
-		public function getPreviewData($isQuickSite, $isPhone)
+		public function getPreviewData($parentBundleId, $isQuickSite, $isPhone)
 		{
-			return \PreviewData::getInstance($this, $isQuickSite, $isPhone);
+			return \PreviewData::getInstance($this, $parentBundleId, $isQuickSite, $isPhone);
 		}
 
 		/**

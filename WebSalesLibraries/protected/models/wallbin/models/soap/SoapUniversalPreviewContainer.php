@@ -56,6 +56,11 @@
 		 */
 		public $thumbsPhoneLinks;
 		/**
+		 * @var string[]
+		 * @soap
+		 */
+		public $thumbsDatatableLinks;
+		/**
 		 * @var int
 		 * @soap
 		 */

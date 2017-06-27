@@ -4,6 +4,7 @@
 	 * */
 
 	$imageUrlPrefix = Yii::app()->getBaseUrl(true);
+	$linkBundleInfo = $data->getLinkBundleInfo();
 ?>
 <div class="link-viewer<? if ($data->config->enableLogging): ?> logger-form<? endif; ?>" data-log-group="Link"
      data-log-action="Preview Activity">
@@ -66,10 +67,9 @@
 			<div class="row gallery-control-buttons">
 				<div class="col col-xs-8 text-left">
 					<? if ($data->config->enableRating): ?>
-						<div id="user-link-rate-container">
-							<img class="total-rate" src="" style="height:16px"/>
-							<label for="user-link-rate" class="ui-hide-label"></label><input id="user-link-rate"
-							                                                                 class="rating">
+						<div class="user-link-rate-container">
+                            <img class="total-rate" src="" style="height:16px"/>
+                            <input name="user-link-rate" class="user-link-rate rating">
 						</div>
 					<? endif; ?>
 				</div>
@@ -109,6 +109,15 @@
                                             Download file <span class="file-size"></span>
                                         </a>
                                     </li>
+	                                <? if (isset($linkBundleInfo) && count($linkBundleInfo->downloadInfo) > 1): ?>
+                                        <li role="separator" class="divider"></li>
+                                        <li>
+                                        <a href="#" class="log-action download-link-bundle"
+                                           data-log-action="Download Link Bundle">
+                                            Download all <? echo count($linkBundleInfo->downloadInfo); ?> files (<? echo FileInfo::formatFileSize(FileDownloadInfo::getTotalSize($linkBundleInfo->downloadInfo)); ?>)
+                                        </a>
+                                    </li>
+	                                <? endif; ?>
                                 </ul>
                             </span>
                         </div>

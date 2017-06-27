@@ -86,4 +86,28 @@
 			}
 			return $result;
 		}
+
+		/**
+		 * @param string $sessionKey
+		 * @return string
+		 * @soap
+		 */
+		public function resetOpCache($sessionKey)
+		{
+			$result = 'Error';
+			if ($this->authenticateBySession($sessionKey))
+			{
+				ob_start();
+
+				echo "Job started...\n";
+
+				opcache_reset();
+
+				echo "Job completed...\n";
+
+				$result = ob_get_contents();
+				ob_end_clean();
+			}
+			return $result;
+		}
 	}

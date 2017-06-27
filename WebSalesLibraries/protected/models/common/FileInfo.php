@@ -83,6 +83,7 @@
 					break;
 				default:
 					$fileInfo->path = str_replace('//', DIRECTORY_SEPARATOR, str_replace('\\', DIRECTORY_SEPARATOR, $parentLibrary->storagePath . $relativePath));
+					$fileInfo->name = basename($fileInfo->path);
 					$fileInfo->link = Utils::formatUrl($parentLibrary->storageLink . $relativePath);
 					$fileInfo->size = file_exists($fileInfo->path) ? filesize($fileInfo->path) : 0;
 					$fileInfo->isFile = true;

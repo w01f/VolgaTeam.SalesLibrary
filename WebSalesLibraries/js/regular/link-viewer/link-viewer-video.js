@@ -57,7 +57,7 @@
 
 			initDialogTitle();
 
-			dialogContent = $('.link-viewer');
+			dialogContent = embeddedViewer ? $('.link-viewer-container .link-viewer') : $('.link-viewer');
 
 			if (viewerData.config.enableLogging)
 			{
@@ -88,6 +88,7 @@
 
 			dialogContent.find('.download-mp4-file').off('click.preview').on('click.preview', downloadMp4File);
 			dialogContent.find('.download-original-file').off('click.preview').on('click.preview', downloadOriginalFile);
+			dialogContent.find('.download-link-bundle').off('click.preview').on('click.preview', downloadLinkBundle);
 			dialogContent.find('.add-quicksite').off('click.preview').on('click.preview', addToQuickSite);
 			dialogContent.find('.add-favorites').off('click.preview').on('click.preview', addToFavorites);
 			dialogContent.find('.action-container .action').off('click.preview').on('click.preview', processSaveAction);
@@ -119,8 +120,13 @@
 					file: viewerData.fileName,
 					format: viewerData.format
 				},
-				dialogContent.find('#user-link-rate-container'),
-				viewerData.rateData);
+				dialogContent.find('.user-link-rate-container'),
+				viewerData.rateData,
+				function (newRateData)
+				{
+					viewerData.rateData = newRateData;
+				}
+			);
 
 			new $.SalesPortal.PreviewEmailer(viewerData, false);
 			new $.SalesPortal.PreviewEmailer(viewerData, true);
@@ -140,8 +146,9 @@
 
 		var initDialogTitle = function ()
 		{
-			if (viewerData.totalViews > 0)
-				$('.fancybox-title').addClass('link-viewer-title');
+			var fancyboxTitle = $('.fancybox-title');
+			if (viewerData.totalViews > 0 && !fancyboxTitle.hasClass('link-viewer-title'))
+				fancyboxTitle.addClass('link-viewer-title');
 		};
 
 		var setDialogTitle = function (title)
@@ -152,6 +159,10 @@
 					$('.fancybox-title .child').html('<div class="row"><div class="col col-xs-10 text-left">' + title + '</div><div class="col col-xs-2 text-right">views (' + viewerData.totalViews + ')</div></div>');
 				else
 					$('.fancybox-title .child').html(title);
+			}
+			else
+			{
+				$('.fancybox-title .child .text-left').html(title);
 			}
 		};
 
@@ -169,6 +180,11 @@
 				name: viewerData.fileName,
 				path: viewerData.filePath
 			});
+		};
+
+		var downloadLinkBundle = function ()
+		{
+			$.SalesPortal.ZipDownloadFilesHelper.processLinkBundle(viewerData.linkBundleId);
 		};
 
 		var addToQuickSite = function ()

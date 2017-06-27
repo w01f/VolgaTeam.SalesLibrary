@@ -29,6 +29,11 @@
 				$action->tag = 'zip-folder';
 				$action->text = 'Zip & Download';
 				$this->contextActions[] = $action;
+
+				$action = new PreviewAction();
+				$action->tag = 'zip-library-folder';
+				$action->text = 'Download ALL in this window';
+				$this->contextActions[] = $action;
 			}
 			if ($this->config->allowAddToQuickSite)
 			{

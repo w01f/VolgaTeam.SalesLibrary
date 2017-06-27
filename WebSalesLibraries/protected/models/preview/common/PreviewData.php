@@ -1,5 +1,8 @@
 <?
+	use application\models\wallbin\models\web\LibraryFolder;
 	use application\models\wallbin\models\web\LibraryLink as LibraryLink;
+	use application\models\wallbin\models\web\LibraryManager;
+	use application\models\wallbin\models\web\LibraryPage;
 
 	/**
 	 * Class PreviewData
@@ -8,6 +11,7 @@
 	{
 		public $linkId;
 		public $folderId;
+		public $linkBundleId;
 		public $name;
 		public $format;
 		public $tags;
@@ -20,6 +24,8 @@
 		public $quickLinkUrl;
 		public $quickLinkLogo;
 		public $quickLinkTitle;
+
+		public $showBundleInfo;
 
 		/**
 		 * @var BasePreviewConfig config
@@ -117,12 +123,23 @@
 		public abstract function initContextActions();
 
 		/**
+		 * @return ParentLinkBundleInfo
+		 */
+		public function getLinkBundleInfo()
+		{
+			if (isset($this->linkBundleId))
+				return ParentLinkBundleInfo::fromLinkId($this->linkBundleId);
+			return null;
+		}
+
+		/**
 		 * @param $link LibraryLink
+		 * @param $parentBundleId boolean
 		 * @param $isQuickSite boolean
 		 * @param $isPhone boolean
 		 * @return PreviewData
 		 */
-		public static function getInstance($link, $isQuickSite, $isPhone)
+		public static function getInstance($link, $parentBundleId, $isQuickSite, $isPhone)
 		{
 			$previewData = null;
 			switch ($link->originalFormat)
@@ -194,6 +211,7 @@
 						$previewData = new FilePreviewData($link);
 					break;
 			}
+			$previewData->linkBundleId = $parentBundleId;
 			$previewData->applyLinkSettings($isQuickSite);
 			$previewData->initDialogActions();
 			$previewData->initContextActions();

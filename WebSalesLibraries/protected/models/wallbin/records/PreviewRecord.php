@@ -143,6 +143,17 @@
 						$previewRecord->relative_path = $link;
 						$previewRecord->save();
 					}
+			if (array_key_exists('thumbsDatatableLinks', $previewContainer))
+				if (isset($previewContainer['thumbsDatatableLinks']))
+					foreach ($previewContainer['thumbsDatatableLinks'] as $link)
+					{
+						$previewRecord = new PreviewRecord();
+						$previewRecord->id_container = $previewContainer['id'];
+						$previewRecord->id_library = $previewContainer['libraryId'];
+						$previewRecord->type = 'thumbs_datatable';
+						$previewRecord->relative_path = $link;
+						$previewRecord->save();
+					}
 		}
 
 		/**

@@ -13,7 +13,7 @@
                         <li id="bundle-item-<? echo $bundleItem->id; ?>"
                             class="bundle-item<? if ($bundleItem->hasContent): ?> content-item<? endif; ?>"
 							<? if (!Yii::app()->browser->isMobile() && !empty($bundleItem->hoverTip)): ?> data-toggle="tooltip" title="<? echo $bundleItem->hoverTip; ?>"<? endif; ?>>
-							<? echo $this->renderPartial($bundleItem->contentView, array('itemData' => $bundleItem), true); ?>
+							<? echo $this->renderPartial($bundleItem->contentView, array('itemData' => $bundleItem, 'parentBundleData' => $data), true); ?>
                         </li>
 					<? endif; ?>
 				<? endforeach; ?>

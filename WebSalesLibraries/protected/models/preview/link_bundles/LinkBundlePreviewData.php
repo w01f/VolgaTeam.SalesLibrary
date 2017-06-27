@@ -53,6 +53,18 @@
 			$action->text = 'Open this Link Bundle';
 			$this->contextActions[] = $action;
 
+			if ($this->config->allowDownload)
+			{
+				$action = new PreviewAction();
+				$action->tag = 'zip-link-bundle';
+				$action->text = 'Zip & Download all files from Link Bundle';
+				$this->contextActions[] = $action;
+
+				$action = new PreviewAction();
+				$action->tag = 'zip-library-folder';
+				$action->text = 'Download ALL in this window';
+				$this->contextActions[] = $action;
+			}
 			if ($this->config->allowAddToQuickSite)
 			{
 				$action = new PreviewAction();
@@ -65,5 +77,13 @@
 				$action->text = 'Email this Link Bundle';
 				$this->contextActions[] = $action;
 			}
+		}
+
+		/**
+		 * @return ParentLinkBundleInfo
+		 */
+		public function getLinkBundleInfo()
+		{
+			return ParentLinkBundleInfo::fromLinkId($this->linkId);
 		}
 	}

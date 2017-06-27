@@ -4,6 +4,7 @@
 	 */
 
 	$imageUrlPrefix = Yii::app()->getBaseUrl(true);
+	$linkBundleInfo = $data->getLinkBundleInfo();
 ?>
 <div class="link-viewer<? if ($data->config->enableLogging): ?> logger-form<? endif; ?>" data-log-group="Link"
      data-log-action="Preview Activity">
@@ -70,17 +71,18 @@
 			<div class="row row-buttons gallery-control-buttons">
 				<div class="col col-xs-3 text-left">
 					<? if ($data->config->enableRating): ?>
-						<div id="user-link-rate-container">
+						<div class="user-link-rate-container">
 							<img class="total-rate" src="" style="height:16px"/>
-							<label for="user-link-rate" class="ui-hide-label"></label><input id="user-link-rate"
-							                                                                 class="rating">
+                            <input name="user-link-rate" class="user-link-rate rating">
 						</div>
 					<? endif; ?>
 				</div>
 				<div class="col col-xs-2"></div>
 				<?
-					$footerGapSize = 4;
+					$footerGapSize = 3;
 					if (!isset($data->quickLinkUrl))
+						$footerGapSize++;
+					if (!$data->config->allowDownload && isset($linkBundleInfo) && count($linkBundleInfo->downloadInfo))
 						$footerGapSize++;
 					if (!$data->config->allowAddToFavorites)
 						$footerGapSize++;
@@ -97,6 +99,25 @@
 							</span>
 						</div>
 					</div>
+				<? endif; ?>
+				<? if ($data->config->allowDownload && isset($linkBundleInfo) && count($linkBundleInfo->downloadInfo)): ?>
+                    <div class="col col-xs-1 text-center">
+                        <div class="image-button" title="download">
+                            <span class="text-item dropup">
+                                 <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+                                    <img src="<? echo sprintf('%s/images/preview/gallery/button-download.png', $imageUrlPrefix); ?>">
+                                 </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="#" class="log-action download-link-bundle"
+                                           data-log-action="Download Link Bundle">
+                                            Download all <? echo count($linkBundleInfo->downloadInfo); ?> files (<? echo FileInfo::formatFileSize(FileDownloadInfo::getTotalSize($linkBundleInfo->downloadInfo)); ?>)
+                                        </a>
+                                    </li>
+                                </ul>
+                            </span>
+                        </div>
+                    </div>
 				<? endif; ?>
 				<? if ($data->config->allowAddToFavorites): ?>
 					<div class="col col-xs-1 text-center">

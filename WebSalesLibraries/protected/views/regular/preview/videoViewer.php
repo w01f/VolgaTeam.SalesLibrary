@@ -6,6 +6,7 @@
 	$imageUrlPrefix = Yii::app()->getBaseUrl(true);
 	$isEOBrowser = Yii::app()->browser->getBrowser() == Browser::BROWSER_EO;
 	$fullScreenSizeMode = Yii::app()->browser->isMobile() ? 'mobile' : 'regular';
+	$linkBundleInfo = $data->getLinkBundleInfo();
 ?>
 <div
         class="link-viewer<? echo $isEOBrowser ? ' eo' : ''; ?><? if ($data->config->enableLogging): ?> logger-form<? endif; ?>"
@@ -79,10 +80,9 @@
             <div class="row row-buttons gallery-control-buttons">
                 <div class="col col-xs-8 text-left">
 					<? if ($data->config->enableRating): ?>
-                        <div id="user-link-rate-container">
+                        <div class="user-link-rate-container">
                             <img class="total-rate" src="" style="height:16px"/>
-                            <label for="user-link-rate" class="ui-hide-label"></label><input id="user-link-rate"
-                                                                                             class="rating">
+                            <input name="user-link-rate" class="user-link-rate rating">
                         </div>
 					<? endif; ?>
                 </div>
@@ -134,6 +134,15 @@
                                                 </a>
                                             </li>
                                         <? endif; ?>
+	                                    <? if (isset($linkBundleInfo) && count($linkBundleInfo->downloadInfo) > 1): ?>
+                                            <li role="separator" class="divider"></li>
+                                            <li>
+                                                <a href="#" class="log-action download-link-bundle"
+                                                   data-log-action="Download Link Bundle">
+                                                    Download all <? echo count($linkBundleInfo->downloadInfo); ?> files (<? echo FileInfo::formatFileSize(FileDownloadInfo::getTotalSize($linkBundleInfo->downloadInfo)); ?>)
+                                                </a>
+                                            </li>
+	                                    <? endif; ?>
                                     </ul>
                                 </span>
                             </div>

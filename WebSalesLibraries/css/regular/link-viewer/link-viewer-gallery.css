@@ -8,6 +8,11 @@
 	margin-top: 130px;
 }
 
+.link-viewer .preview-image-container
+{
+    overflow: hidden;
+}
+
 .link-viewer .preview-image-container,
 .link-viewer .preview-image-container .page-preview-image
 {

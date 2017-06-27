@@ -29,10 +29,10 @@
 				{};
 
 				$.SalesPortal.LogHelper.write({
-					type: actionGroupName != undefined ? actionGroupName : actionDefaultGroupName,
-					subType: actionName != undefined ? actionName : actionDefaultName,
-					linkId: logObject.linkId != undefined ? logObject.linkId : undefined,
-					qpageId: logObject.qpageId != undefined ? logObject.qpageId : undefined,
+					type: actionGroupName !== undefined ? actionGroupName : actionDefaultGroupName,
+					subType: actionName !== undefined ? actionName : actionDefaultName,
+					linkId: logObject.linkId !== undefined ? logObject.linkId : undefined,
+					qpageId: logObject.qpageId !== undefined ? logObject.qpageId : undefined,
 					data: actionData
 				});
 			};
@@ -49,7 +49,7 @@
 		this.linkId = undefined;
 		this.qpageId = undefined;
 
-		if (source != undefined)
+		if (source !== undefined)
 		{
 			for (var prop in source)
 				if (source.hasOwnProperty(prop))
