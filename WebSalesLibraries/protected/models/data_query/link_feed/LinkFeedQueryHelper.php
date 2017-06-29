@@ -5,6 +5,8 @@
 	use application\models\data_query\conditions\ConditionalQueryHelper;
 	use application\models\data_query\conditions\ThumbnailQuerySettings;
 	use application\models\data_query\data_table\DataTableQuerySettings;
+	use application\models\wallbin\models\web\LibraryLink;
+	use application\models\wallbin\models\web\LibraryManager;
 
 	/**
 	 * Class LinkFeedManager
@@ -89,9 +91,12 @@
 				'id_library' => 'link.id_library as id_library',
 				'library_name' => 'lib.name as library_name',
 				'name' => 'link.name as name',
+				'type' => 'link.type as type',
 				'path' => 'link.file_relative_path as path',
 				'file_name' => 'link.file_name as file_name',
+				'original_format' => 'link.original_format as original_format',
 				'search_format' => 'link.search_format as search_format',
+				'settings' => 'link.settings as settings',
 				'total_views' => 'link_views_set.link_views as total_views',
 				'thumbnail' => sprintf("case when '%s' = 0
 							        then (case
@@ -260,6 +265,8 @@
 
 			$resultRecords = $dbCommand->queryAll();
 
+			$libraryManager = new LibraryManager();
+
 			foreach ($resultRecords as $resultRecord)
 			{
 				$feedItem = new LinkFeedItem();
@@ -268,6 +275,31 @@
 				$feedItem->format = $resultRecord['search_format'];
 				$feedItem->libraryName = $resultRecord['library_name'];
 				$feedItem->viewsCount = $resultRecord['total_views'];
+
+				$library = $libraryManager->getLibraryById($resultRecord['id_library']);
+				$settings = \BaseLinkSettings::createByContent($resultRecord['settings']);
+				$fileInfo = \FileInfo::fromLinkData(
+					$resultRecord['id'],
+					$resultRecord['type'],
+					$resultRecord['name'],
+					$resultRecord['path'],
+					$settings,
+					$library);
+				$isHyperlink = LibraryLink::isOpenedAsHyperlink($resultRecord['type'], $settings);
+
+				$feedItem->isDraggable = $fileInfo->isFile || $isHyperlink;
+				if ($isHyperlink)
+				{
+					$feedItem->dragHeader = 'URL';
+					$feedItem->dragUrl = $fileInfo->link;
+				}
+				else if ($fileInfo->isFile)
+				{
+					$feedItem->dragHeader = 'DownloadURL';
+					$feedItem->dragUrl = \FileInfo::getFileMIME($resultRecord['original_format']) . ':' .
+						$fileInfo->name . ':' .
+						str_replace('SalesLibraries/SalesLibraries', 'SalesLibraries', $fileInfo->link);
+				}
 
 				switch ($resultRecord['search_format'])
 				{
@@ -350,6 +382,8 @@
 
 			$resultRecords = ConditionalQueryHelper::queryLinksByCondition($feedSettings->conditions);
 
+			$libraryManager = new LibraryManager();
+
 			foreach ($resultRecords as $resultRecord)
 			{
 				if (!empty($resultRecord['thumbnail']))
@@ -360,6 +394,31 @@
 					$feedItem->format = $resultRecord['original_format'];
 					$feedItem->libraryName = $resultRecord['library_name'];
 					$feedItem->viewsCount = $resultRecord['total_views'];
+
+					$library = $libraryManager->getLibraryById($resultRecord['id_library']);
+					$settings = \BaseLinkSettings::createByContent($resultRecord['extended_properties']);
+					$fileInfo = \FileInfo::fromLinkData(
+						$resultRecord['id'],
+						$resultRecord['type'],
+						$resultRecord['name'],
+						$resultRecord['path'],
+						$settings,
+						$library);
+					$isHyperlink = LibraryLink::isOpenedAsHyperlink($resultRecord['type'], $settings);
+
+					$feedItem->isDraggable = $fileInfo->isFile || $isHyperlink;
+					if ($isHyperlink)
+					{
+						$feedItem->dragHeader = 'URL';
+						$feedItem->dragUrl = $fileInfo->link;
+					}
+					else if ($fileInfo->isFile)
+					{
+						$feedItem->dragHeader = 'DownloadURL';
+						$feedItem->dragUrl = \FileInfo::getFileMIME($resultRecord['original_format']) . ':' .
+							$fileInfo->name . ':' .
+							str_replace('SalesLibraries/SalesLibraries', 'SalesLibraries', $fileInfo->link);
+					}
 
 					switch ($resultRecord['original_format'])
 					{
@@ -447,9 +506,12 @@
 				'id_library' => 'link.id_library as id_library',
 				'library_name' => 'lib.name as library_name',
 				'name' => 'link.name as name',
-				'link_alias' => 'link.link_alias as link_alias',
+				'type' => 'link.type as type',
 				'path' => 'link.file_relative_path as path',
 				'original_format' => 'link.original_format as original_format',
+				'search_format' => 'link.search_format as search_format',
+				'settings' => 'link.settings as settings',
+				'link_alias' => 'link.link_alias as link_alias',
 				'link_date' => 'link.file_date as link_date',
 				'total_views' => '(select sum(aggr.link_views) from
 						           (select
@@ -579,6 +641,8 @@
 			$dbCommand = $dbCommand->order(sprintf("%s %s", $sortFiled, $feedSettings->sortSettings->order));
 			$resultRecords = $dbCommand->queryAll();
 
+			$libraryManager = new LibraryManager();
+
 			foreach ($resultRecords as $resultRecord)
 			{
 				if (!empty($resultRecord['thumbnail']))
@@ -589,6 +653,31 @@
 					$feedItem->format = $resultRecord['original_format'];
 					$feedItem->libraryName = $resultRecord['library_name'];
 					$feedItem->viewsCount = $resultRecord['total_views'];
+
+					$library = $libraryManager->getLibraryById($resultRecord['id_library']);
+					$settings = \BaseLinkSettings::createByContent($resultRecord['settings']);
+					$fileInfo = \FileInfo::fromLinkData(
+						$resultRecord['id'],
+						$resultRecord['type'],
+						$resultRecord['name'],
+						$resultRecord['path'],
+						$settings,
+						$library);
+					$isHyperlink = LibraryLink::isOpenedAsHyperlink($resultRecord['type'], $settings);
+
+					$feedItem->isDraggable = $fileInfo->isFile || $isHyperlink;
+					if ($isHyperlink)
+					{
+						$feedItem->dragHeader = 'URL';
+						$feedItem->dragUrl = $fileInfo->link;
+					}
+					else if ($fileInfo->isFile)
+					{
+						$feedItem->dragHeader = 'DownloadURL';
+						$feedItem->dragUrl = \FileInfo::getFileMIME($resultRecord['original_format']) . ':' .
+							$fileInfo->name . ':' .
+							str_replace('SalesLibraries/SalesLibraries', 'SalesLibraries', $fileInfo->link);
+					}
 
 					switch ($resultRecord['original_format'])
 					{

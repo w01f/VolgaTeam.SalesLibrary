@@ -12,4 +12,8 @@
 		public $format;
 		public $viewsCount;
 		public $linkId;
+
+		public $isDraggable;
+		public $dragHeader;
+		public $dragUrl;
 	}

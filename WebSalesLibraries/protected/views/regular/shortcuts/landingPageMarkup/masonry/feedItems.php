@@ -10,7 +10,9 @@
 	 */
 ?>
 <? foreach ($feedItems as $masonryItem): ?>
-    <a href="#" class="cbp-item library-link-item"
+    <a href="#" class="cbp-item library-link-item<? if ($masonryItem->isDraggable): ?> draggable<? endif; ?>" <? if ($masonryItem->isDraggable): ?>draggable="true"
+       data-url-header="<? echo $masonryItem->dragHeader; ?>"
+       data-url="<? echo $masonryItem->dragUrl; ?>"<? endif; ?>
        style="<? if ($viewSettings->imageWidth > 0): ?>max-width:<? echo $viewSettings->imageWidth; ?>px;<? endif; ?>">
         <div class="service-data">
             <div class="link-id"><? echo $masonryItem->linkId; ?></div>

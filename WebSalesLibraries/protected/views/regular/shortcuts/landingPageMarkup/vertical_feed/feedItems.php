@@ -17,7 +17,9 @@
 	<? $linkNumber = 1; ?>
 	<? foreach ($feedItems as $feedItem): ?>
         <li class="news-item">
-            <a href="#" class="content library-link-block">
+            <a href="#" class="content library-link-block<? if ($feedItem->isDraggable): ?> draggable<? endif; ?>" <? if ($feedItem->isDraggable): ?>draggable="true"
+               data-url-header="<? echo $feedItem->dragHeader; ?>"
+               data-url="<? echo $feedItem->dragUrl; ?>"<? endif; ?>>
 				<? if ($style->showLinkCounter): ?>
                     <div class="link-number"><? echo $linkNumber; ?>.</div>
 				<? endif; ?>

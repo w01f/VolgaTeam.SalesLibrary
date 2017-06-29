@@ -8,6 +8,8 @@
 	 */
 	class ListBlock extends BlockContainer
 	{
+		public $borderColor;
+
 		/**
 		 * @param $parentShortcut \LandingPageShortcut
 		 * @param $parentBlock BlockContainer
@@ -16,5 +18,17 @@
 		{
 			parent::__construct($parentShortcut, $parentBlock);
 			$this->type = 'list';
+		}
+
+		/**
+		 * @param $xpath \DOMXPath
+		 * @param $contextNode \DOMNode
+		 */
+		protected function configureFromXml($xpath, $contextNode)
+		{
+			parent::configureFromXml($xpath, $contextNode);
+
+			$queryResult = $xpath->query('./BorderColor', $contextNode);
+			$this->borderColor = $queryResult->length > 0 ? strtolower(trim($queryResult->item(0)->nodeValue)) : null;
 		}
 	}

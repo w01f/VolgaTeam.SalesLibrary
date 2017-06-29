@@ -81,6 +81,9 @@
 							break;
 					}
 					break;
+				case 19:
+					$fileInfo->name = $name;
+					break;
 				default:
 					$fileInfo->path = str_replace('//', DIRECTORY_SEPARATOR, str_replace('\\', DIRECTORY_SEPARATOR, $parentLibrary->storagePath . $relativePath));
 					$fileInfo->name = basename($fileInfo->path);

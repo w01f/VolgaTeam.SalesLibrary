@@ -162,6 +162,13 @@
 						isQuickSite: false
 					});
 				});
+				grid.find('.draggable').off('dragstart').on('dragstart', function (e)
+				{
+					var urlHeader = $(this).data("url-header");
+					var url = $(this).data('url');
+					if (url !== '')
+						e.originalEvent.dataTransfer.setData(urlHeader, url);
+				});
 			}
 			catch (err)
 			{

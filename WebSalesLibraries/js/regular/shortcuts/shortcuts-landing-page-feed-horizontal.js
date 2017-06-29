@@ -213,6 +213,14 @@
 				});
 			});
 
+			feedContainer.find('.carousel-links .item .draggable').off('dragstart').on('dragstart', function (e)
+			{
+				var urlHeader = $(this).data("url-header");
+				var url = $(this).data('url');
+				if (url !== '')
+					e.originalEvent.dataTransfer.setData(urlHeader, url);
+			});
+
 			feedContainer.find('.carousel').hover(function ()
 			{
 				$(this).carousel('pause')

@@ -90,16 +90,16 @@
 						'value' => strtotime($linkRecord['link_date'])
 					);
 
+					$extendedProperties = \BaseLinkSettings::createByContent($linkRecord['extended_properties']);
 					$fileInfo = \FileInfo::fromLinkData(
 						$record['id'],
 						$type,
 						$linkRecord['name'],
 						$linkRecord['path'],
-						\BaseLinkSettings::createByContent($linkRecord['extended_properties']),
+						$extendedProperties,
 						$library);
 					$record['isFile'] = $fileInfo->isFile;
 
-					$extendedProperties = \BaseLinkSettings::createByContent($linkRecord['extended_properties']);
 					$isHyperlink = LibraryLink::isOpenedAsHyperlink($type, $extendedProperties);
 					$record['isHyperlink'] = $isHyperlink;
 					if ($isHyperlink)
@@ -125,7 +125,7 @@
 						$record['url_header'] = 'DownloadURL';
 						$record['url'] = \FileInfo::getFileMIME($linkRecord['original_format']) . ':' .
 							(isset($fileInfo->name) ? $fileInfo->name : $linkRecord['file_name']) . ':' .
-							str_replace('SalesLibraries/SalesLibraries', 'SalesLibraries', \Yii::app()->getBaseUrl(true) . $fileInfo->link);
+							str_replace('SalesLibraries/SalesLibraries', 'SalesLibraries', $fileInfo->link);
 					}
 
 					$record['isDraggable'] = $fileInfo->isFile || $isHyperlink;
