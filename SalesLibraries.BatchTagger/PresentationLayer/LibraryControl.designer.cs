@@ -81,7 +81,7 @@
 			this.advBandedGridViewData.Appearance.OddRow.Options.UseFont = true;
 			this.advBandedGridViewData.Appearance.OddRow.Options.UseTextOptions = true;
 			this.advBandedGridViewData.Appearance.OddRow.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-			this.advBandedGridViewData.Appearance.Preview.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.advBandedGridViewData.Appearance.Preview.Font = new System.Drawing.Font("Arial", 9F);
 			this.advBandedGridViewData.Appearance.Preview.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
 			this.advBandedGridViewData.Appearance.Preview.Options.UseFont = true;
 			this.advBandedGridViewData.Appearance.Preview.Options.UseForeColor = true;
@@ -154,7 +154,7 @@
 			this.gridBandMain.MinWidth = 20;
 			this.gridBandMain.Name = "gridBandMain";
 			this.gridBandMain.VisibleIndex = 0;
-			this.gridBandMain.Width = 1077;
+			this.gridBandMain.Width = 1083;
 			// 
 			// gridColumnLinkName
 			// 
@@ -169,7 +169,7 @@
 			this.gridColumnLinkName.OptionsColumn.AllowEdit = false;
 			this.gridColumnLinkName.OptionsColumn.ReadOnly = true;
 			this.gridColumnLinkName.Visible = true;
-			this.gridColumnLinkName.Width = 255;
+			this.gridColumnLinkName.Width = 256;
 			// 
 			// gridColumnFileName
 			// 
@@ -198,7 +198,7 @@
 			this.gridColumnPageName.OptionsColumn.AllowEdit = false;
 			this.gridColumnPageName.OptionsColumn.ReadOnly = true;
 			this.gridColumnPageName.Visible = true;
-			this.gridColumnPageName.Width = 173;
+			this.gridColumnPageName.Width = 142;
 			// 
 			// gridColumnExtensionGroup
 			// 
@@ -212,7 +212,7 @@
 			this.gridColumnExtensionGroup.OptionsColumn.AllowEdit = false;
 			this.gridColumnExtensionGroup.OptionsColumn.ReadOnly = true;
 			this.gridColumnExtensionGroup.Visible = true;
-			this.gridColumnExtensionGroup.Width = 91;
+			this.gridColumnExtensionGroup.Width = 79;
 			// 
 			// gridColumnFileExtension
 			// 
@@ -226,7 +226,7 @@
 			this.gridColumnFileExtension.OptionsColumn.AllowEdit = false;
 			this.gridColumnFileExtension.OptionsColumn.ReadOnly = true;
 			this.gridColumnFileExtension.Visible = true;
-			this.gridColumnFileExtension.Width = 91;
+			this.gridColumnFileExtension.Width = 77;
 			// 
 			// gridColumnLinkAddDate
 			// 
@@ -242,7 +242,7 @@
 			this.gridColumnLinkAddDate.OptionsColumn.AllowEdit = false;
 			this.gridColumnLinkAddDate.OptionsColumn.ReadOnly = true;
 			this.gridColumnLinkAddDate.Visible = true;
-			this.gridColumnLinkAddDate.Width = 91;
+			this.gridColumnLinkAddDate.Width = 127;
 			// 
 			// gridColumnLinkModifyDate
 			// 
@@ -258,7 +258,7 @@
 			this.gridColumnLinkModifyDate.OptionsColumn.AllowEdit = false;
 			this.gridColumnLinkModifyDate.OptionsColumn.ReadOnly = true;
 			this.gridColumnLinkModifyDate.Visible = true;
-			this.gridColumnLinkModifyDate.Width = 91;
+			this.gridColumnLinkModifyDate.Width = 123;
 			// 
 			// gridColumnFileDate
 			// 
@@ -274,7 +274,7 @@
 			this.gridColumnFileDate.OptionsColumn.AllowEdit = false;
 			this.gridColumnFileDate.OptionsColumn.ReadOnly = true;
 			this.gridColumnFileDate.Visible = true;
-			this.gridColumnFileDate.Width = 112;
+			this.gridColumnFileDate.Width = 106;
 			// 
 			// repositoryItemHyperLinkEdit
 			// 

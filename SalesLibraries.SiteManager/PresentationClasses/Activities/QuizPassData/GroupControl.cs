@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Windows.Forms;
+using DevExpress.Skins;
 using DevExpress.XtraPrinting;
 using DevExpress.XtraTab;
 using SalesLibraries.ServiceConnector.StatisticService;
@@ -41,6 +42,14 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities.QuizPassData
 			_endDate = endDate;
 
 			gridControlData.DataSource = Records;
+
+			if (CreateGraphics().DpiX > 96)
+			{
+				gridColumnQuizPassDate.Width =
+					RectangleHelper.ScaleHorizontal(gridColumnQuizPassDate.Width, gridControlData.ScaleFactor.Width);
+				gridColumnQuizTryCount.Width =
+					RectangleHelper.ScaleHorizontal(gridColumnQuizTryCount.Width, gridControlData.ScaleFactor.Width);
+			}
 		}
 
 		public PrintableComponentLink GetPrintLink()

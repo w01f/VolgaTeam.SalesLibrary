@@ -28,8 +28,9 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			this.checkEditEnableFilter = new DevExpress.XtraEditors.CheckEdit();
-			this.styleController = new DevExpress.XtraEditors.StyleController();
+			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.checkedListBoxControlGroups = new DevExpress.XtraEditors.CheckedListBoxControl();
 			this.labelControlGroupsTitle = new DevExpress.XtraEditors.LabelControl();
 			this.buttonXGroupsAll = new DevComponents.DotNetBar.ButtonX();
@@ -154,7 +155,8 @@
 			// 
 			// Filter
 			// 
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.BackColor = System.Drawing.Color.White;
 			this.Controls.Add(this.imageComboBoxEditRecords);
 			this.Controls.Add(this.labelControlRecordsTitle);

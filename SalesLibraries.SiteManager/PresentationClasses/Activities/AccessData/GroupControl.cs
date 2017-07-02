@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Windows.Forms;
+using DevExpress.Skins;
 using DevExpress.XtraPrinting;
 using DevExpress.XtraTab;
 using SalesLibraries.ServiceConnector.StatisticService;
@@ -43,6 +44,18 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities.AccessData
 			_endDate = endDate;
 
 			gridControlData.DataSource = Records;
+
+			if (CreateGraphics().DpiX > 96)
+			{
+				gridBand1.Width =
+					RectangleHelper.ScaleHorizontal(gridBand1.Width, gridControlData.ScaleFactor.Width);
+				bandedGridColumnTotalUsersNumber.Width =
+					RectangleHelper.ScaleHorizontal(bandedGridColumnTotalUsersNumber.Width, gridControlData.ScaleFactor.Width);
+				bandedGridColumnActiveUsersPercent.Width =
+					RectangleHelper.ScaleHorizontal(bandedGridColumnActiveUsersPercent.Width, gridControlData.ScaleFactor.Width);
+				bandedGridColumnInactiveUsersPercent.Width =
+					RectangleHelper.ScaleHorizontal(bandedGridColumnInactiveUsersPercent.Width, gridControlData.ScaleFactor.Width);
+			}
 		}
 
 		public PrintableComponentLink GetPrintLink()

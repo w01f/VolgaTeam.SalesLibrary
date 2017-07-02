@@ -46,12 +46,14 @@
 			this.xtraTabControl = new DevExpress.XtraTab.XtraTabControl();
 			this.xtraTabPageUsers = new DevExpress.XtraTab.XtraTabPage();
 			this.splitContainerControlUsers = new DevExpress.XtraEditors.SplitContainerControl();
+			this.pnUsersFilterContent = new System.Windows.Forms.Panel();
+			this.checkedListBoxControlUserFilterGroups = new DevExpress.XtraEditors.CheckedListBoxControl();
+			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
+			this.pnUsersFilterButtons = new System.Windows.Forms.Panel();
 			this.buttonXUserFilterGroupsNone = new DevComponents.DotNetBar.ButtonX();
+			this.checkEditEnableUserFilter = new DevExpress.XtraEditors.CheckEdit();
 			this.buttonXUserFilterGroupsAll = new DevComponents.DotNetBar.ButtonX();
 			this.labelControlUserFilterGroupsTitle = new DevExpress.XtraEditors.LabelControl();
-			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
-			this.checkedListBoxControlUserFilterGroups = new DevExpress.XtraEditors.CheckedListBoxControl();
-			this.checkEditEnableUserFilter = new DevExpress.XtraEditors.CheckEdit();
 			this.xtraTabPageGroups = new DevExpress.XtraTab.XtraTabPage();
 			this.gridControlGroups = new DevExpress.XtraGrid.GridControl();
 			this.gridViewGroups = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -76,8 +78,10 @@
 			this.xtraTabPageUsers.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainerControlUsers)).BeginInit();
 			this.splitContainerControlUsers.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
+			this.pnUsersFilterContent.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControlUserFilterGroups)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
+			this.pnUsersFilterButtons.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditEnableUserFilter.Properties)).BeginInit();
 			this.xtraTabPageGroups.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlGroups)).BeginInit();
@@ -268,11 +272,8 @@
 			this.splitContainerControlUsers.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.splitContainerControlUsers.Location = new System.Drawing.Point(0, 0);
 			this.splitContainerControlUsers.Name = "splitContainerControlUsers";
-			this.splitContainerControlUsers.Panel1.Controls.Add(this.buttonXUserFilterGroupsNone);
-			this.splitContainerControlUsers.Panel1.Controls.Add(this.buttonXUserFilterGroupsAll);
-			this.splitContainerControlUsers.Panel1.Controls.Add(this.labelControlUserFilterGroupsTitle);
-			this.splitContainerControlUsers.Panel1.Controls.Add(this.checkedListBoxControlUserFilterGroups);
-			this.splitContainerControlUsers.Panel1.Controls.Add(this.checkEditEnableUserFilter);
+			this.splitContainerControlUsers.Panel1.Controls.Add(this.pnUsersFilterContent);
+			this.splitContainerControlUsers.Panel1.Controls.Add(this.pnUsersFilterButtons);
 			this.splitContainerControlUsers.Panel1.MinSize = 250;
 			this.splitContainerControlUsers.Panel1.Text = "Panel1";
 			this.splitContainerControlUsers.Panel2.Controls.Add(this.gridControlUsers);
@@ -282,47 +283,29 @@
 			this.splitContainerControlUsers.TabIndex = 3;
 			this.splitContainerControlUsers.Text = "splitContainerControl1";
 			// 
-			// buttonXUserFilterGroupsNone
+			// pnUsersFilterContent
 			// 
-			this.buttonXUserFilterGroupsNone.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-			this.buttonXUserFilterGroupsNone.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonXUserFilterGroupsNone.CausesValidation = false;
-			this.buttonXUserFilterGroupsNone.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXUserFilterGroupsNone.Enabled = false;
-			this.buttonXUserFilterGroupsNone.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.buttonXUserFilterGroupsNone.Location = new System.Drawing.Point(139, 63);
-			this.buttonXUserFilterGroupsNone.Name = "buttonXUserFilterGroupsNone";
-			this.buttonXUserFilterGroupsNone.Size = new System.Drawing.Size(103, 23);
-			this.buttonXUserFilterGroupsNone.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2013;
-			this.buttonXUserFilterGroupsNone.TabIndex = 24;
-			this.buttonXUserFilterGroupsNone.Text = "Clear All";
-			this.buttonXUserFilterGroupsNone.TextColor = System.Drawing.Color.Black;
-			this.buttonXUserFilterGroupsNone.Click += new System.EventHandler(this.buttonXUserFilterGroupsNone_Click);
+			this.pnUsersFilterContent.Controls.Add(this.checkedListBoxControlUserFilterGroups);
+			this.pnUsersFilterContent.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.pnUsersFilterContent.Location = new System.Drawing.Point(0, 101);
+			this.pnUsersFilterContent.Name = "pnUsersFilterContent";
+			this.pnUsersFilterContent.Padding = new System.Windows.Forms.Padding(5);
+			this.pnUsersFilterContent.Size = new System.Drawing.Size(250, 351);
+			this.pnUsersFilterContent.TabIndex = 26;
 			// 
-			// buttonXUserFilterGroupsAll
+			// checkedListBoxControlUserFilterGroups
 			// 
-			this.buttonXUserFilterGroupsAll.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-			this.buttonXUserFilterGroupsAll.CausesValidation = false;
-			this.buttonXUserFilterGroupsAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXUserFilterGroupsAll.Enabled = false;
-			this.buttonXUserFilterGroupsAll.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.buttonXUserFilterGroupsAll.Location = new System.Drawing.Point(8, 63);
-			this.buttonXUserFilterGroupsAll.Name = "buttonXUserFilterGroupsAll";
-			this.buttonXUserFilterGroupsAll.Size = new System.Drawing.Size(103, 23);
-			this.buttonXUserFilterGroupsAll.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2013;
-			this.buttonXUserFilterGroupsAll.TabIndex = 23;
-			this.buttonXUserFilterGroupsAll.Text = "Select All";
-			this.buttonXUserFilterGroupsAll.TextColor = System.Drawing.Color.Black;
-			this.buttonXUserFilterGroupsAll.Click += new System.EventHandler(this.buttonXUserFilterGroupsAll_Click);
-			// 
-			// labelControlUserFilterGroupsTitle
-			// 
-			this.labelControlUserFilterGroupsTitle.Location = new System.Drawing.Point(8, 39);
-			this.labelControlUserFilterGroupsTitle.Name = "labelControlUserFilterGroupsTitle";
-			this.labelControlUserFilterGroupsTitle.Size = new System.Drawing.Size(46, 16);
-			this.labelControlUserFilterGroupsTitle.StyleController = this.styleController;
-			this.labelControlUserFilterGroupsTitle.TabIndex = 22;
-			this.labelControlUserFilterGroupsTitle.Text = "Groups:";
+			this.checkedListBoxControlUserFilterGroups.CheckOnClick = true;
+			this.checkedListBoxControlUserFilterGroups.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.checkedListBoxControlUserFilterGroups.Enabled = false;
+			this.checkedListBoxControlUserFilterGroups.ItemHeight = 35;
+			this.checkedListBoxControlUserFilterGroups.Location = new System.Drawing.Point(5, 5);
+			this.checkedListBoxControlUserFilterGroups.Name = "checkedListBoxControlUserFilterGroups";
+			this.checkedListBoxControlUserFilterGroups.SelectionMode = System.Windows.Forms.SelectionMode.None;
+			this.checkedListBoxControlUserFilterGroups.Size = new System.Drawing.Size(240, 341);
+			this.checkedListBoxControlUserFilterGroups.StyleController = this.styleController;
+			this.checkedListBoxControlUserFilterGroups.TabIndex = 21;
+			this.checkedListBoxControlUserFilterGroups.ItemCheck += new DevExpress.XtraEditors.Controls.ItemCheckEventHandler(this.checkedListBoxControlUserFilterGroups_ItemCheck);
 			// 
 			// styleController
 			// 
@@ -339,31 +322,68 @@
 			this.styleController.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.styleController.AppearanceReadOnly.Options.UseFont = true;
 			// 
-			// checkedListBoxControlUserFilterGroups
+			// pnUsersFilterButtons
 			// 
-			this.checkedListBoxControlUserFilterGroups.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.checkedListBoxControlUserFilterGroups.CheckOnClick = true;
-			this.checkedListBoxControlUserFilterGroups.Enabled = false;
-			this.checkedListBoxControlUserFilterGroups.ItemHeight = 35;
-			this.checkedListBoxControlUserFilterGroups.Location = new System.Drawing.Point(8, 95);
-			this.checkedListBoxControlUserFilterGroups.Name = "checkedListBoxControlUserFilterGroups";
-			this.checkedListBoxControlUserFilterGroups.SelectionMode = System.Windows.Forms.SelectionMode.None;
-			this.checkedListBoxControlUserFilterGroups.Size = new System.Drawing.Size(234, 354);
-			this.checkedListBoxControlUserFilterGroups.StyleController = this.styleController;
-			this.checkedListBoxControlUserFilterGroups.TabIndex = 21;
-			this.checkedListBoxControlUserFilterGroups.ItemCheck += new DevExpress.XtraEditors.Controls.ItemCheckEventHandler(this.checkedListBoxControlUserFilterGroups_ItemCheck);
+			this.pnUsersFilterButtons.Controls.Add(this.buttonXUserFilterGroupsNone);
+			this.pnUsersFilterButtons.Controls.Add(this.checkEditEnableUserFilter);
+			this.pnUsersFilterButtons.Controls.Add(this.buttonXUserFilterGroupsAll);
+			this.pnUsersFilterButtons.Controls.Add(this.labelControlUserFilterGroupsTitle);
+			this.pnUsersFilterButtons.Dock = System.Windows.Forms.DockStyle.Top;
+			this.pnUsersFilterButtons.Location = new System.Drawing.Point(0, 0);
+			this.pnUsersFilterButtons.Name = "pnUsersFilterButtons";
+			this.pnUsersFilterButtons.Size = new System.Drawing.Size(250, 101);
+			this.pnUsersFilterButtons.TabIndex = 25;
+			// 
+			// buttonXUserFilterGroupsNone
+			// 
+			this.buttonXUserFilterGroupsNone.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXUserFilterGroupsNone.CausesValidation = false;
+			this.buttonXUserFilterGroupsNone.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXUserFilterGroupsNone.Enabled = false;
+			this.buttonXUserFilterGroupsNone.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.buttonXUserFilterGroupsNone.Location = new System.Drawing.Point(137, 65);
+			this.buttonXUserFilterGroupsNone.Name = "buttonXUserFilterGroupsNone";
+			this.buttonXUserFilterGroupsNone.Size = new System.Drawing.Size(103, 23);
+			this.buttonXUserFilterGroupsNone.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2013;
+			this.buttonXUserFilterGroupsNone.TabIndex = 24;
+			this.buttonXUserFilterGroupsNone.Text = "Clear All";
+			this.buttonXUserFilterGroupsNone.TextColor = System.Drawing.Color.Black;
+			this.buttonXUserFilterGroupsNone.Click += new System.EventHandler(this.buttonXUserFilterGroupsNone_Click);
 			// 
 			// checkEditEnableUserFilter
 			// 
-			this.checkEditEnableUserFilter.Location = new System.Drawing.Point(6, 12);
+			this.checkEditEnableUserFilter.Location = new System.Drawing.Point(6, 15);
 			this.checkEditEnableUserFilter.Name = "checkEditEnableUserFilter";
 			this.checkEditEnableUserFilter.Properties.Caption = "Enable Filter";
 			this.checkEditEnableUserFilter.Size = new System.Drawing.Size(236, 20);
 			this.checkEditEnableUserFilter.StyleController = this.styleController;
 			this.checkEditEnableUserFilter.TabIndex = 20;
 			this.checkEditEnableUserFilter.CheckedChanged += new System.EventHandler(this.checkEditEnableUserFilter_CheckedChanged);
+			// 
+			// buttonXUserFilterGroupsAll
+			// 
+			this.buttonXUserFilterGroupsAll.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXUserFilterGroupsAll.CausesValidation = false;
+			this.buttonXUserFilterGroupsAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXUserFilterGroupsAll.Enabled = false;
+			this.buttonXUserFilterGroupsAll.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.buttonXUserFilterGroupsAll.Location = new System.Drawing.Point(6, 65);
+			this.buttonXUserFilterGroupsAll.Name = "buttonXUserFilterGroupsAll";
+			this.buttonXUserFilterGroupsAll.Size = new System.Drawing.Size(103, 23);
+			this.buttonXUserFilterGroupsAll.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2013;
+			this.buttonXUserFilterGroupsAll.TabIndex = 23;
+			this.buttonXUserFilterGroupsAll.Text = "Select All";
+			this.buttonXUserFilterGroupsAll.TextColor = System.Drawing.Color.Black;
+			this.buttonXUserFilterGroupsAll.Click += new System.EventHandler(this.buttonXUserFilterGroupsAll_Click);
+			// 
+			// labelControlUserFilterGroupsTitle
+			// 
+			this.labelControlUserFilterGroupsTitle.Location = new System.Drawing.Point(6, 41);
+			this.labelControlUserFilterGroupsTitle.Name = "labelControlUserFilterGroupsTitle";
+			this.labelControlUserFilterGroupsTitle.Size = new System.Drawing.Size(46, 16);
+			this.labelControlUserFilterGroupsTitle.StyleController = this.styleController;
+			this.labelControlUserFilterGroupsTitle.TabIndex = 22;
+			this.labelControlUserFilterGroupsTitle.Text = "Groups:";
 			// 
 			// xtraTabPageGroups
 			// 
@@ -614,7 +634,8 @@
 			// 
 			// PermissionsManagerControl
 			// 
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.BackColor = System.Drawing.Color.White;
 			this.Controls.Add(this.xtraTabControl);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -629,8 +650,11 @@
 			this.xtraTabPageUsers.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.splitContainerControlUsers)).EndInit();
 			this.splitContainerControlUsers.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
+			this.pnUsersFilterContent.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControlUserFilterGroups)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
+			this.pnUsersFilterButtons.ResumeLayout(false);
+			this.pnUsersFilterButtons.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditEnableUserFilter.Properties)).EndInit();
 			this.xtraTabPageGroups.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.gridControlGroups)).EndInit();
@@ -681,5 +705,7 @@
 		private DevExpress.XtraEditors.CheckEdit checkEditEnableUserFilter;
 		private DevExpress.XtraEditors.StyleController styleController;
 		private DevExpress.XtraGrid.Columns.GridColumn gridColumnUsersCreateDate;
-    }
+		private System.Windows.Forms.Panel pnUsersFilterContent;
+		private System.Windows.Forms.Panel pnUsersFilterButtons;
+	}
 }

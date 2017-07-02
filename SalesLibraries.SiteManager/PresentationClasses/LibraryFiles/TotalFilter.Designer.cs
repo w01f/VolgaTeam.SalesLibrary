@@ -121,9 +121,10 @@
 			this.buttonXGroupsNone.TextColor = System.Drawing.Color.Black;
 			this.buttonXGroupsNone.Click += new System.EventHandler(this.buttonXGroupsNone_Click);
 			// 
-			// Filter
+			// TotalFilter
 			// 
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.BackColor = System.Drawing.Color.White;
 			this.Controls.Add(this.buttonXGroupsNone);
 			this.Controls.Add(this.buttonXGroupsAll);
@@ -131,7 +132,7 @@
 			this.Controls.Add(this.checkedListBoxControlGroups);
 			this.Controls.Add(this.checkEditEnableFilter);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.Name = "Filter";
+			this.Name = "TotalFilter";
 			this.Size = new System.Drawing.Size(238, 429);
 			((System.ComponentModel.ISupportInitialize)(this.checkEditEnableFilter.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Windows.Forms;
+using DevExpress.Skins;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraPrinting;
@@ -49,6 +50,18 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities.FileActivity
 			gridColumnExtensionGroup.Visible = showDeatils;
 			gridColumnFileDetail.Visible = showDeatils;
 			gridColumnLibraryName.Visible = showDeatils;
+
+			if (CreateGraphics().DpiX > 96)
+			{
+				gridColumnActivityCount.Width =
+					RectangleHelper.ScaleHorizontal(gridColumnActivityCount.Width, gridControlData.ScaleFactor.Width);
+				gridColumnExtension.Width =
+					RectangleHelper.ScaleHorizontal(gridColumnExtension.Width, gridControlData.ScaleFactor.Width);
+				gridColumnExtensionGroup.Width =
+					RectangleHelper.ScaleHorizontal(gridColumnExtensionGroup.Width, gridControlData.ScaleFactor.Width);
+				gridColumnLibraryName.Width =
+					RectangleHelper.ScaleHorizontal(gridColumnLibraryName.Width, gridControlData.ScaleFactor.Width);
+			}
 		}
 
 		public PrintableComponentLink GetPrintLink()

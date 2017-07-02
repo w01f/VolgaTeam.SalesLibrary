@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Windows.Forms;
+using DevExpress.Skins;
 using DevExpress.XtraPrinting;
 using DevExpress.XtraTab;
 using SalesLibraries.ServiceConnector.StatisticService;
@@ -41,6 +42,18 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities.MainData
 			_endDate = endDate;
 
 			gridControlData.DataSource = Records;
+
+			if (CreateGraphics().DpiX > 96)
+			{
+				gridBandDocs.Width =
+					RectangleHelper.ScaleHorizontal(gridBandDocs.Width, gridControlData.ScaleFactor.Width);
+				gridBandLogin.Width =
+					RectangleHelper.ScaleHorizontal(gridBandLogin.Width, gridControlData.ScaleFactor.Width);
+				gridBandTotal.Width =
+					RectangleHelper.ScaleHorizontal(gridBandTotal.Width, gridControlData.ScaleFactor.Width);
+				gridBandVideos.Width =
+					RectangleHelper.ScaleHorizontal(gridBandVideos.Width, gridControlData.ScaleFactor.Width);
+			}
 		}
 
 		public PrintableComponentLink GetPrintLink()

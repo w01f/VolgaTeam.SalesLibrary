@@ -30,28 +30,28 @@
         {
 			this.gridControlData = new DevExpress.XtraGrid.GridControl();
 			this.advBandedGridViewData = new DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView();
-			this.gridBandMain = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
 			this.gridColumnName = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
 			this.gridColumnGroup = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-			this.gridBandLogin = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
 			this.gridColumnUserLoginNumber = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
 			this.repositoryItemSpinEditNumeric = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
 			this.gridColumnUserLoginPercent = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
 			this.repositoryItemSpinEditPercent = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
 			this.gridColumnGroupLoginNumber = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-			this.gridBandDocs = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
 			this.gridColumnUserDocsNumber = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
 			this.gridColumnUserDocsPercent = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
 			this.gridColumnGroupDocsNumber = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-			this.gridBandVideos = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
 			this.gridColumnUserVideosNumber = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
 			this.gridColumnUserVideosPercent = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
 			this.gridColumnGroupVideosNumber = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-			this.gridBandTotal = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
 			this.gridColumnUserTotalNumber = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
 			this.gridColumnUserTotalPercent = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
 			this.gridColumnGroupTotalNumber = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
 			this.repositoryItemDateEditDate = new DevExpress.XtraEditors.Repository.RepositoryItemDateEdit();
+			this.gridBandMain = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+			this.gridBandLogin = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+			this.gridBandDocs = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+			this.gridBandVideos = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+			this.gridBandTotal = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlData)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.advBandedGridViewData)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEditNumeric)).BeginInit();
@@ -111,7 +111,6 @@
             this.gridBandDocs,
             this.gridBandVideos,
             this.gridBandTotal});
-			this.advBandedGridViewData.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Default;
 			this.advBandedGridViewData.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] {
             this.gridColumnName,
             this.gridColumnGroup,
@@ -131,7 +130,6 @@
 			this.advBandedGridViewData.Name = "advBandedGridViewData";
 			this.advBandedGridViewData.OptionsBehavior.Editable = false;
 			this.advBandedGridViewData.OptionsBehavior.ReadOnly = true;
-			this.advBandedGridViewData.OptionsCustomization.AllowBandMoving = false;
 			this.advBandedGridViewData.OptionsCustomization.AllowColumnMoving = false;
 			this.advBandedGridViewData.OptionsCustomization.AllowFilter = false;
 			this.advBandedGridViewData.OptionsCustomization.AllowGroup = false;
@@ -160,14 +158,6 @@
 			this.advBandedGridViewData.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
             new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gridColumnUserTotalNumber, DevExpress.Data.ColumnSortOrder.Descending)});
 			// 
-			// gridBandMain
-			// 
-			this.gridBandMain.Columns.Add(this.gridColumnName);
-			this.gridBandMain.Columns.Add(this.gridColumnGroup);
-			this.gridBandMain.Name = "gridBandMain";
-			this.gridBandMain.VisibleIndex = 0;
-			this.gridBandMain.Width = 336;
-			// 
 			// gridColumnName
 			// 
 			this.gridColumnName.AppearanceCell.Options.UseTextOptions = true;
@@ -178,7 +168,7 @@
 			this.gridColumnName.FieldName = "FullName";
 			this.gridColumnName.Name = "gridColumnName";
 			this.gridColumnName.Visible = true;
-			this.gridColumnName.Width = 336;
+			this.gridColumnName.Width = 277;
 			// 
 			// gridColumnGroup
 			// 
@@ -191,18 +181,7 @@
 			this.gridColumnGroup.Name = "gridColumnGroup";
 			this.gridColumnGroup.RowIndex = 1;
 			this.gridColumnGroup.Visible = true;
-			this.gridColumnGroup.Width = 336;
-			// 
-			// gridBandLogin
-			// 
-			this.gridBandLogin.Caption = "Login";
-			this.gridBandLogin.Columns.Add(this.gridColumnUserLoginNumber);
-			this.gridBandLogin.Columns.Add(this.gridColumnUserLoginPercent);
-			this.gridBandLogin.Columns.Add(this.gridColumnGroupLoginNumber);
-			this.gridBandLogin.Name = "gridBandLogin";
-			this.gridBandLogin.OptionsBand.FixedWidth = true;
-			this.gridBandLogin.VisibleIndex = 1;
-			this.gridBandLogin.Width = 143;
+			this.gridColumnGroup.Width = 277;
 			// 
 			// gridColumnUserLoginNumber
 			// 
@@ -213,7 +192,7 @@
 			this.gridColumnUserLoginNumber.FieldName = "userLogins";
 			this.gridColumnUserLoginNumber.Name = "gridColumnUserLoginNumber";
 			this.gridColumnUserLoginNumber.Visible = true;
-			this.gridColumnUserLoginNumber.Width = 143;
+			this.gridColumnUserLoginNumber.Width = 200;
 			// 
 			// repositoryItemSpinEditNumeric
 			// 
@@ -235,7 +214,7 @@
 			this.gridColumnUserLoginPercent.Name = "gridColumnUserLoginPercent";
 			this.gridColumnUserLoginPercent.RowIndex = 1;
 			this.gridColumnUserLoginPercent.Visible = true;
-			this.gridColumnUserLoginPercent.Width = 64;
+			this.gridColumnUserLoginPercent.Width = 88;
 			// 
 			// repositoryItemSpinEditPercent
 			// 
@@ -257,18 +236,7 @@
 			this.gridColumnGroupLoginNumber.Name = "gridColumnGroupLoginNumber";
 			this.gridColumnGroupLoginNumber.RowIndex = 1;
 			this.gridColumnGroupLoginNumber.Visible = true;
-			this.gridColumnGroupLoginNumber.Width = 79;
-			// 
-			// gridBandDocs
-			// 
-			this.gridBandDocs.Caption = "Doc";
-			this.gridBandDocs.Columns.Add(this.gridColumnUserDocsNumber);
-			this.gridBandDocs.Columns.Add(this.gridColumnUserDocsPercent);
-			this.gridBandDocs.Columns.Add(this.gridColumnGroupDocsNumber);
-			this.gridBandDocs.Name = "gridBandDocs";
-			this.gridBandDocs.OptionsBand.FixedWidth = true;
-			this.gridBandDocs.VisibleIndex = 2;
-			this.gridBandDocs.Width = 136;
+			this.gridColumnGroupLoginNumber.Width = 112;
 			// 
 			// gridColumnUserDocsNumber
 			// 
@@ -279,7 +247,7 @@
 			this.gridColumnUserDocsNumber.FieldName = "userDocs";
 			this.gridColumnUserDocsNumber.Name = "gridColumnUserDocsNumber";
 			this.gridColumnUserDocsNumber.Visible = true;
-			this.gridColumnUserDocsNumber.Width = 136;
+			this.gridColumnUserDocsNumber.Width = 200;
 			// 
 			// gridColumnUserDocsPercent
 			// 
@@ -289,7 +257,7 @@
 			this.gridColumnUserDocsPercent.Name = "gridColumnUserDocsPercent";
 			this.gridColumnUserDocsPercent.RowIndex = 1;
 			this.gridColumnUserDocsPercent.Visible = true;
-			this.gridColumnUserDocsPercent.Width = 62;
+			this.gridColumnUserDocsPercent.Width = 91;
 			// 
 			// gridColumnGroupDocsNumber
 			// 
@@ -299,18 +267,7 @@
 			this.gridColumnGroupDocsNumber.Name = "gridColumnGroupDocsNumber";
 			this.gridColumnGroupDocsNumber.RowIndex = 1;
 			this.gridColumnGroupDocsNumber.Visible = true;
-			this.gridColumnGroupDocsNumber.Width = 74;
-			// 
-			// gridBandVideos
-			// 
-			this.gridBandVideos.Caption = "Video";
-			this.gridBandVideos.Columns.Add(this.gridColumnUserVideosNumber);
-			this.gridBandVideos.Columns.Add(this.gridColumnUserVideosPercent);
-			this.gridBandVideos.Columns.Add(this.gridColumnGroupVideosNumber);
-			this.gridBandVideos.Name = "gridBandVideos";
-			this.gridBandVideos.OptionsBand.FixedWidth = true;
-			this.gridBandVideos.VisibleIndex = 3;
-			this.gridBandVideos.Width = 144;
+			this.gridColumnGroupDocsNumber.Width = 109;
 			// 
 			// gridColumnUserVideosNumber
 			// 
@@ -321,7 +278,7 @@
 			this.gridColumnUserVideosNumber.FieldName = "userVideos";
 			this.gridColumnUserVideosNumber.Name = "gridColumnUserVideosNumber";
 			this.gridColumnUserVideosNumber.Visible = true;
-			this.gridColumnUserVideosNumber.Width = 144;
+			this.gridColumnUserVideosNumber.Width = 200;
 			// 
 			// gridColumnUserVideosPercent
 			// 
@@ -331,7 +288,7 @@
 			this.gridColumnUserVideosPercent.Name = "gridColumnUserVideosPercent";
 			this.gridColumnUserVideosPercent.RowIndex = 1;
 			this.gridColumnUserVideosPercent.Visible = true;
-			this.gridColumnUserVideosPercent.Width = 71;
+			this.gridColumnUserVideosPercent.Width = 98;
 			// 
 			// gridColumnGroupVideosNumber
 			// 
@@ -341,18 +298,7 @@
 			this.gridColumnGroupVideosNumber.Name = "gridColumnGroupVideosNumber";
 			this.gridColumnGroupVideosNumber.RowIndex = 1;
 			this.gridColumnGroupVideosNumber.Visible = true;
-			this.gridColumnGroupVideosNumber.Width = 73;
-			// 
-			// gridBandTotal
-			// 
-			this.gridBandTotal.Caption = "Site Activity";
-			this.gridBandTotal.Columns.Add(this.gridColumnUserTotalNumber);
-			this.gridBandTotal.Columns.Add(this.gridColumnUserTotalPercent);
-			this.gridBandTotal.Columns.Add(this.gridColumnGroupTotalNumber);
-			this.gridBandTotal.Name = "gridBandTotal";
-			this.gridBandTotal.OptionsBand.FixedWidth = true;
-			this.gridBandTotal.VisibleIndex = 4;
-			this.gridBandTotal.Width = 135;
+			this.gridColumnGroupVideosNumber.Width = 102;
 			// 
 			// gridColumnUserTotalNumber
 			// 
@@ -363,7 +309,7 @@
 			this.gridColumnUserTotalNumber.FieldName = "userTotal";
 			this.gridColumnUserTotalNumber.Name = "gridColumnUserTotalNumber";
 			this.gridColumnUserTotalNumber.Visible = true;
-			this.gridColumnUserTotalNumber.Width = 135;
+			this.gridColumnUserTotalNumber.Width = 200;
 			// 
 			// gridColumnUserTotalPercent
 			// 
@@ -373,7 +319,7 @@
 			this.gridColumnUserTotalPercent.Name = "gridColumnUserTotalPercent";
 			this.gridColumnUserTotalPercent.RowIndex = 1;
 			this.gridColumnUserTotalPercent.Visible = true;
-			this.gridColumnUserTotalPercent.Width = 69;
+			this.gridColumnUserTotalPercent.Width = 102;
 			// 
 			// gridColumnGroupTotalNumber
 			// 
@@ -383,7 +329,7 @@
 			this.gridColumnGroupTotalNumber.Name = "gridColumnGroupTotalNumber";
 			this.gridColumnGroupTotalNumber.RowIndex = 1;
 			this.gridColumnGroupTotalNumber.Visible = true;
-			this.gridColumnGroupTotalNumber.Width = 66;
+			this.gridColumnGroupTotalNumber.Width = 98;
 			// 
 			// repositoryItemDateEditDate
 			// 
@@ -398,10 +344,61 @@
 			this.repositoryItemDateEditDate.EditFormat.FormatType = DevExpress.Utils.FormatType.Custom;
 			this.repositoryItemDateEditDate.Name = "repositoryItemDateEditDate";
 			// 
+			// gridBandMain
+			// 
+			this.gridBandMain.Columns.Add(this.gridColumnName);
+			this.gridBandMain.Columns.Add(this.gridColumnGroup);
+			this.gridBandMain.Name = "gridBandMain";
+			this.gridBandMain.VisibleIndex = 0;
+			this.gridBandMain.Width = 277;
+			// 
+			// gridBandLogin
+			// 
+			this.gridBandLogin.Caption = "Login";
+			this.gridBandLogin.Columns.Add(this.gridColumnUserLoginNumber);
+			this.gridBandLogin.Columns.Add(this.gridColumnUserLoginPercent);
+			this.gridBandLogin.Columns.Add(this.gridColumnGroupLoginNumber);
+			this.gridBandLogin.Name = "gridBandLogin";
+			this.gridBandLogin.OptionsBand.FixedWidth = true;
+			this.gridBandLogin.VisibleIndex = 1;
+			this.gridBandLogin.Width = 200;
+			// 
+			// gridBandDocs
+			// 
+			this.gridBandDocs.Caption = "Doc";
+			this.gridBandDocs.Columns.Add(this.gridColumnUserDocsNumber);
+			this.gridBandDocs.Columns.Add(this.gridColumnUserDocsPercent);
+			this.gridBandDocs.Columns.Add(this.gridColumnGroupDocsNumber);
+			this.gridBandDocs.Name = "gridBandDocs";
+			this.gridBandDocs.OptionsBand.FixedWidth = true;
+			this.gridBandDocs.VisibleIndex = 2;
+			this.gridBandDocs.Width = 200;
+			// 
+			// gridBandVideos
+			// 
+			this.gridBandVideos.Caption = "Video";
+			this.gridBandVideos.Columns.Add(this.gridColumnUserVideosNumber);
+			this.gridBandVideos.Columns.Add(this.gridColumnUserVideosPercent);
+			this.gridBandVideos.Columns.Add(this.gridColumnGroupVideosNumber);
+			this.gridBandVideos.Name = "gridBandVideos";
+			this.gridBandVideos.OptionsBand.FixedWidth = true;
+			this.gridBandVideos.VisibleIndex = 3;
+			this.gridBandVideos.Width = 200;
+			// 
+			// gridBandTotal
+			// 
+			this.gridBandTotal.Caption = "Site Activity";
+			this.gridBandTotal.Columns.Add(this.gridColumnUserTotalNumber);
+			this.gridBandTotal.Columns.Add(this.gridColumnUserTotalPercent);
+			this.gridBandTotal.Columns.Add(this.gridColumnGroupTotalNumber);
+			this.gridBandTotal.Name = "gridBandTotal";
+			this.gridBandTotal.OptionsBand.FixedWidth = true;
+			this.gridBandTotal.VisibleIndex = 4;
+			this.gridBandTotal.Width = 200;
+			// 
 			// GroupControl
 			// 
 			this.Controls.Add(this.gridControlData);
-			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.Size = new System.Drawing.Size(898, 483);
 			((System.ComponentModel.ISupportInitialize)(this.gridControlData)).EndInit();
@@ -440,5 +437,5 @@
 		private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBandDocs;
 		private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBandVideos;
 		private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBandTotal;
-    }
+	}
 }

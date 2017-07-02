@@ -38,7 +38,7 @@
 			this.gridColumnVideoCount = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
 			this.gridColumnTaggedVideoCount = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
 			this.gridColumnFileDate = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-			this.griodColumnDaysFormLastUpdate = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+			this.gridColumnDaysFormLastUpdate = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
 			this.repositoryItemHyperLinkEdit = new DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlData)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.advBandedGridViewData)).BeginInit();
@@ -101,7 +101,7 @@
             this.gridColumnVideoCount,
             this.gridColumnTaggedVideoCount,
             this.gridColumnFileDate,
-            this.griodColumnDaysFormLastUpdate});
+            this.gridColumnDaysFormLastUpdate});
 			this.advBandedGridViewData.GridControl = this.gridControlData;
 			this.advBandedGridViewData.Name = "advBandedGridViewData";
 			this.advBandedGridViewData.OptionsCustomization.AllowBandMoving = false;
@@ -141,11 +141,11 @@
 			this.gridBandMain.Columns.Add(this.gridColumnVideoCount);
 			this.gridBandMain.Columns.Add(this.gridColumnTaggedVideoCount);
 			this.gridBandMain.Columns.Add(this.gridColumnFileDate);
-			this.gridBandMain.Columns.Add(this.griodColumnDaysFormLastUpdate);
+			this.gridBandMain.Columns.Add(this.gridColumnDaysFormLastUpdate);
 			this.gridBandMain.MinWidth = 20;
 			this.gridBandMain.Name = "gridBandMain";
 			this.gridBandMain.VisibleIndex = 0;
-			this.gridBandMain.Width = 896;
+			this.gridBandMain.Width = 960;
 			// 
 			// gridColumnName
 			// 
@@ -159,7 +159,7 @@
 			this.gridColumnName.OptionsColumn.AllowEdit = false;
 			this.gridColumnName.OptionsColumn.ReadOnly = true;
 			this.gridColumnName.Visible = true;
-			this.gridColumnName.Width = 136;
+			this.gridColumnName.Width = 20;
 			// 
 			// gridColumnFileName
 			// 
@@ -174,7 +174,7 @@
 			this.gridColumnFileName.OptionsColumn.FixedWidth = true;
 			this.gridColumnFileName.OptionsColumn.ReadOnly = true;
 			this.gridColumnFileName.Visible = true;
-			this.gridColumnFileName.Width = 120;
+			this.gridColumnFileName.Width = 140;
 			// 
 			// gridColumnTaggedFilesCount
 			// 
@@ -190,7 +190,7 @@
 			this.gridColumnTaggedFilesCount.OptionsColumn.FixedWidth = true;
 			this.gridColumnTaggedFilesCount.OptionsColumn.ReadOnly = true;
 			this.gridColumnTaggedFilesCount.Visible = true;
-			this.gridColumnTaggedFilesCount.Width = 120;
+			this.gridColumnTaggedFilesCount.Width = 140;
 			// 
 			// gridColumnVideoCount
 			// 
@@ -205,7 +205,7 @@
 			this.gridColumnVideoCount.OptionsColumn.FixedWidth = true;
 			this.gridColumnVideoCount.OptionsColumn.ReadOnly = true;
 			this.gridColumnVideoCount.Visible = true;
-			this.gridColumnVideoCount.Width = 120;
+			this.gridColumnVideoCount.Width = 140;
 			// 
 			// gridColumnTaggedVideoCount
 			// 
@@ -220,7 +220,7 @@
 			this.gridColumnTaggedVideoCount.OptionsColumn.FixedWidth = true;
 			this.gridColumnTaggedVideoCount.OptionsColumn.ReadOnly = true;
 			this.gridColumnTaggedVideoCount.Visible = true;
-			this.gridColumnTaggedVideoCount.Width = 120;
+			this.gridColumnTaggedVideoCount.Width = 140;
 			// 
 			// gridColumnFileDate
 			// 
@@ -237,22 +237,22 @@
 			this.gridColumnFileDate.OptionsColumn.FixedWidth = true;
 			this.gridColumnFileDate.OptionsColumn.ReadOnly = true;
 			this.gridColumnFileDate.Visible = true;
-			this.gridColumnFileDate.Width = 120;
+			this.gridColumnFileDate.Width = 140;
 			// 
-			// griodColumnDaysFormLastUpdate
+			// gridColumnDaysFormLastUpdate
 			// 
-			this.griodColumnDaysFormLastUpdate.AppearanceCell.Options.UseTextOptions = true;
-			this.griodColumnDaysFormLastUpdate.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-			this.griodColumnDaysFormLastUpdate.AppearanceHeader.Options.UseTextOptions = true;
-			this.griodColumnDaysFormLastUpdate.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-			this.griodColumnDaysFormLastUpdate.Caption = "Days since Update";
-			this.griodColumnDaysFormLastUpdate.FieldName = "DaysFormLastUpdate";
-			this.griodColumnDaysFormLastUpdate.Name = "griodColumnDaysFormLastUpdate";
-			this.griodColumnDaysFormLastUpdate.OptionsColumn.AllowEdit = false;
-			this.griodColumnDaysFormLastUpdate.OptionsColumn.FixedWidth = true;
-			this.griodColumnDaysFormLastUpdate.OptionsColumn.ReadOnly = true;
-			this.griodColumnDaysFormLastUpdate.Visible = true;
-			this.griodColumnDaysFormLastUpdate.Width = 160;
+			this.gridColumnDaysFormLastUpdate.AppearanceCell.Options.UseTextOptions = true;
+			this.gridColumnDaysFormLastUpdate.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+			this.gridColumnDaysFormLastUpdate.AppearanceHeader.Options.UseTextOptions = true;
+			this.gridColumnDaysFormLastUpdate.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+			this.gridColumnDaysFormLastUpdate.Caption = "Days since Update";
+			this.gridColumnDaysFormLastUpdate.FieldName = "DaysFormLastUpdate";
+			this.gridColumnDaysFormLastUpdate.Name = "gridColumnDaysFormLastUpdate";
+			this.gridColumnDaysFormLastUpdate.OptionsColumn.AllowEdit = false;
+			this.gridColumnDaysFormLastUpdate.OptionsColumn.FixedWidth = true;
+			this.gridColumnDaysFormLastUpdate.OptionsColumn.ReadOnly = true;
+			this.gridColumnDaysFormLastUpdate.Visible = true;
+			this.gridColumnDaysFormLastUpdate.Width = 240;
 			// 
 			// repositoryItemHyperLinkEdit
 			// 
@@ -283,7 +283,7 @@
 		private DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit repositoryItemHyperLinkEdit;
 		private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gridColumnVideoCount;
 		private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gridColumnFileDate;
-		private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn griodColumnDaysFormLastUpdate;
+		private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gridColumnDaysFormLastUpdate;
 		private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBandMain;
 		private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gridColumnTaggedFilesCount;
 		private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gridColumnTaggedVideoCount;

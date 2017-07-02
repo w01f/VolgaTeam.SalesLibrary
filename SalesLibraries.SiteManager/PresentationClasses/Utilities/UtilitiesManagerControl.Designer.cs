@@ -32,11 +32,11 @@
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.splitContainerControl = new DevExpress.XtraEditors.SplitContainerControl();
 			this.pnUtilityOperations = new System.Windows.Forms.Panel();
+			this.buttonXResetOpCache = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXUpdateContent = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXUpdateQuizzes = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXUpdateShorcuts = new DevComponents.DotNetBar.ButtonX();
 			this.memoEditResult = new DevExpress.XtraEditors.MemoEdit();
-			this.buttonXResetOpCache = new DevComponents.DotNetBar.ButtonX();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).BeginInit();
 			this.splitContainerControl.SuspendLayout();
@@ -85,6 +85,21 @@
 			this.pnUtilityOperations.Name = "pnUtilityOperations";
 			this.pnUtilityOperations.Size = new System.Drawing.Size(230, 483);
 			this.pnUtilityOperations.TabIndex = 21;
+			// 
+			// buttonXResetOpCache
+			// 
+			this.buttonXResetOpCache.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXResetOpCache.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXResetOpCache.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXResetOpCache.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.buttonXResetOpCache.Location = new System.Drawing.Point(12, 232);
+			this.buttonXResetOpCache.Name = "buttonXResetOpCache";
+			this.buttonXResetOpCache.Size = new System.Drawing.Size(205, 41);
+			this.buttonXResetOpCache.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXResetOpCache.TabIndex = 10;
+			this.buttonXResetOpCache.Text = "Reset OppCache";
+			this.buttonXResetOpCache.Click += new System.EventHandler(this.simpleButtonResetOpCache_Click);
 			// 
 			// buttonXUpdateContent
 			// 
@@ -145,24 +160,10 @@
 			this.memoEditResult.Size = new System.Drawing.Size(676, 483);
 			this.memoEditResult.TabIndex = 0;
 			// 
-			// buttonXResetOpCache
-			// 
-			this.buttonXResetOpCache.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-			this.buttonXResetOpCache.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonXResetOpCache.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXResetOpCache.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.buttonXResetOpCache.Location = new System.Drawing.Point(12, 232);
-			this.buttonXResetOpCache.Name = "buttonXResetOpCache";
-			this.buttonXResetOpCache.Size = new System.Drawing.Size(205, 41);
-			this.buttonXResetOpCache.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.buttonXResetOpCache.TabIndex = 10;
-			this.buttonXResetOpCache.Text = "Reset OppCache";
-			this.buttonXResetOpCache.Click += new System.EventHandler(this.simpleButtonResetOpCache_Click);
-			// 
 			// UtilitiesManagerControl
 			// 
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.BackColor = System.Drawing.Color.White;
 			this.Controls.Add(this.splitContainerControl);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));

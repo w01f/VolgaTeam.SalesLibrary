@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using SalesLibraries.SiteManager.ToolForms;
@@ -25,6 +26,34 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities
 			dateEditStart.DateTime = new DateTime(now.Year, now.Month, now.Day, 0, 0, 0);
 			now = now.AddDays(1);
 			dateEditEnd.DateTime = new DateTime(now.Year, now.Month, now.Day, 0, 0, 0);
+
+			//var dpi = CreateGraphics().DpiX;
+			//if (dpi > 96 && dpi <= 150)
+			//{
+			//	var font = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2,
+			//		styleController.Appearance.Font.Style);
+			//	styleController.Appearance.Font = font;
+			//	styleController.AppearanceDisabled.Font = font;
+			//	styleController.AppearanceDropDown.Font = font;
+			//	styleController.AppearanceDropDownHeader.Font = font;
+			//	styleController.AppearanceFocused.Font = font;
+			//	styleController.AppearanceReadOnly.Font = font;
+
+			//	buttonXLoadData.Font = new Font(buttonXLoadData.Font.FontFamily, buttonXLoadData.Font.Size - 2, buttonXLoadData.Font.Style);
+			//}
+			//else if (dpi >= 192)
+			//{
+			//	var font = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 3,
+			//	styleController.Appearance.Font.Style);
+			//	styleController.Appearance.Font = font;
+			//	styleController.AppearanceDisabled.Font = font;
+			//	styleController.AppearanceDropDown.Font = font;
+			//	styleController.AppearanceDropDownHeader.Font = font;
+			//	styleController.AppearanceFocused.Font = font;
+			//	styleController.AppearanceReadOnly.Font = font;
+
+			//	buttonXLoadData.Font = new Font(buttonXLoadData.Font.FontFamily, buttonXLoadData.Font.Size - 3, buttonXLoadData.Font.Style);
+			//}
 		}
 
 		private void InitViews()

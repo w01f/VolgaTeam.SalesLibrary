@@ -103,7 +103,7 @@
             this.repositoryItemDateEditPages,
             this.repositoryItemButtonEditPagesActions,
             this.repositoryItemHyperLinkEditPages});
-			this.gridControlRecords.Size = new System.Drawing.Size(676, 483);
+			this.gridControlRecords.Size = new System.Drawing.Size(536, 483);
 			this.gridControlRecords.TabIndex = 3;
 			this.gridControlRecords.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewRecords});
@@ -172,7 +172,7 @@
 			this.gridColumnPagesUrl.ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowAlways;
 			this.gridColumnPagesUrl.Visible = true;
 			this.gridColumnPagesUrl.VisibleIndex = 0;
-			this.gridColumnPagesUrl.Width = 242;
+			this.gridColumnPagesUrl.Width = 20;
 			// 
 			// repositoryItemHyperLinkEditPages
 			// 
@@ -203,7 +203,7 @@
 			this.gridColumnPagesType.OptionsColumn.ReadOnly = true;
 			this.gridColumnPagesType.Visible = true;
 			this.gridColumnPagesType.VisibleIndex = 2;
-			this.gridColumnPagesType.Width = 91;
+			this.gridColumnPagesType.Width = 100;
 			// 
 			// gridColumnPagesSecurityType
 			// 
@@ -215,7 +215,7 @@
 			this.gridColumnPagesSecurityType.OptionsColumn.ReadOnly = true;
 			this.gridColumnPagesSecurityType.Visible = true;
 			this.gridColumnPagesSecurityType.VisibleIndex = 3;
-			this.gridColumnPagesSecurityType.Width = 100;
+			this.gridColumnPagesSecurityType.Width = 120;
 			// 
 			// gridColumnPagesUserName
 			// 
@@ -250,7 +250,7 @@
 			this.gridColumnPagesDateCreate.OptionsColumn.ReadOnly = true;
 			this.gridColumnPagesDateCreate.Visible = true;
 			this.gridColumnPagesDateCreate.VisibleIndex = 6;
-			this.gridColumnPagesDateCreate.Width = 93;
+			this.gridColumnPagesDateCreate.Width = 140;
 			// 
 			// repositoryItemDateEditPages
 			// 
@@ -276,7 +276,7 @@
 			this.gridColumnPagesDateExpiration.OptionsColumn.ReadOnly = true;
 			this.gridColumnPagesDateExpiration.Visible = true;
 			this.gridColumnPagesDateExpiration.VisibleIndex = 7;
-			this.gridColumnPagesDateExpiration.Width = 88;
+			this.gridColumnPagesDateExpiration.Width = 140;
 			// 
 			// gridColumnTotalViews
 			// 
@@ -288,7 +288,7 @@
 			this.gridColumnTotalViews.OptionsColumn.ReadOnly = true;
 			this.gridColumnTotalViews.Visible = true;
 			this.gridColumnTotalViews.VisibleIndex = 9;
-			this.gridColumnTotalViews.Width = 60;
+			this.gridColumnTotalViews.Width = 100;
 			// 
 			// gridColumnPinCode
 			// 
@@ -300,7 +300,7 @@
 			this.gridColumnPinCode.OptionsColumn.ReadOnly = true;
 			this.gridColumnPinCode.Visible = true;
 			this.gridColumnPinCode.VisibleIndex = 8;
-			this.gridColumnPinCode.Width = 60;
+			this.gridColumnPinCode.Width = 80;
 			// 
 			// gridColumnPagesActions
 			// 
@@ -332,7 +332,7 @@
 			this.splitContainerControlData.Panel1.Controls.Add(this.pnCustomFilter);
 			this.splitContainerControlData.Panel1.Controls.Add(this.pnFilterButtons);
 			this.splitContainerControlData.Panel1.Controls.Add(this.gbDate);
-			this.splitContainerControlData.Panel1.MinSize = 230;
+			this.splitContainerControlData.Panel1.MinSize = 370;
 			this.splitContainerControlData.Panel1.Text = "Panel1";
 			this.splitContainerControlData.Panel2.Controls.Add(this.gridControlRecords);
 			this.splitContainerControlData.Panel2.Text = "Panel2";
@@ -345,7 +345,7 @@
 			this.pnCustomFilter.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pnCustomFilter.Location = new System.Drawing.Point(0, 173);
 			this.pnCustomFilter.Name = "pnCustomFilter";
-			this.pnCustomFilter.Size = new System.Drawing.Size(230, 310);
+			this.pnCustomFilter.Size = new System.Drawing.Size(370, 310);
 			this.pnCustomFilter.TabIndex = 21;
 			// 
 			// pnFilterButtons
@@ -354,7 +354,7 @@
 			this.pnFilterButtons.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnFilterButtons.Location = new System.Drawing.Point(0, 134);
 			this.pnFilterButtons.Name = "pnFilterButtons";
-			this.pnFilterButtons.Size = new System.Drawing.Size(230, 39);
+			this.pnFilterButtons.Size = new System.Drawing.Size(370, 39);
 			this.pnFilterButtons.TabIndex = 23;
 			// 
 			// buttonXLoadData
@@ -368,7 +368,7 @@
 			this.buttonXLoadData.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.buttonXLoadData.Location = new System.Drawing.Point(7, 5);
 			this.buttonXLoadData.Name = "buttonXLoadData";
-			this.buttonXLoadData.Size = new System.Drawing.Size(216, 27);
+			this.buttonXLoadData.Size = new System.Drawing.Size(356, 27);
 			this.buttonXLoadData.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXLoadData.TabIndex = 16;
 			this.buttonXLoadData.Text = "Load Data";
@@ -387,7 +387,7 @@
 			this.gbDate.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.gbDate.Location = new System.Drawing.Point(0, 0);
 			this.gbDate.Name = "gbDate";
-			this.gbDate.Size = new System.Drawing.Size(230, 134);
+			this.gbDate.Size = new System.Drawing.Size(370, 134);
 			this.gbDate.TabIndex = 22;
 			this.gbDate.TabStop = false;
 			this.gbDate.Text = "Date Range";
@@ -472,7 +472,8 @@
 			// 
 			// QPagesManagerControl
 			// 
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.BackColor = System.Drawing.Color.White;
 			this.Controls.Add(this.splitContainerControlData);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));

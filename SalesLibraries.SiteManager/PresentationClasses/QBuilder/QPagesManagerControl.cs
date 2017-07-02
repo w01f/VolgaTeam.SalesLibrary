@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using DevExpress.Skins;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
@@ -39,6 +40,26 @@ namespace SalesLibraries.SiteManager.PresentationClasses.QBuilder
 			dateEditStart.DateTime = new DateTime(now.Year, now.Month, now.Day, 0, 0, 0);
 			now = now.AddDays(1);
 			dateEditEnd.DateTime = new DateTime(now.Year, now.Month, now.Day, 0, 0, 0);
+
+			if (CreateGraphics().DpiX > 96)
+			{
+				gridColumnPagesActions.Width =
+					RectangleHelper.ScaleHorizontal(gridColumnPagesActions.Width, gridControlRecords.ScaleFactor.Width);
+				gridColumnPagesDateCreate.Width =
+					RectangleHelper.ScaleHorizontal(gridColumnPagesDateCreate.Width, gridControlRecords.ScaleFactor.Width);
+				gridColumnPagesDateExpiration.Width =
+					RectangleHelper.ScaleHorizontal(gridColumnPagesDateExpiration.Width, gridControlRecords.ScaleFactor.Width);
+				gridColumnPagesSecurityType.Width =
+					RectangleHelper.ScaleHorizontal(gridColumnPagesSecurityType.Width, gridControlRecords.ScaleFactor.Width);
+				gridColumnPagesTitle.Width =
+					RectangleHelper.ScaleHorizontal(gridColumnPagesTitle.Width, gridControlRecords.ScaleFactor.Width);
+				gridColumnPagesType.Width =
+					RectangleHelper.ScaleHorizontal(gridColumnPagesType.Width, gridControlRecords.ScaleFactor.Width);
+				gridColumnPinCode.Width =
+					RectangleHelper.ScaleHorizontal(gridColumnPinCode.Width, gridControlRecords.ScaleFactor.Width);
+				gridColumnTotalViews.Width =
+					RectangleHelper.ScaleHorizontal(gridColumnTotalViews.Width, gridControlRecords.ScaleFactor.Width);
+			}
 		}
 
 		public void RefreshData(bool showMessages)

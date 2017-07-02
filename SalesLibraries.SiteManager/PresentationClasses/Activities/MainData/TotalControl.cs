@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Windows.Forms;
+using DevExpress.Skins;
 using DevExpress.Utils;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraPrinting;
@@ -20,7 +21,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities.MainData
 		private readonly DateTime _startDate;
 		private readonly DateTime _endDate;
 		public List<MainGroupReportModel> Records { get; private set; }
-		
+
 		public string GroupName => Text;
 
 		public TotalControl(IEnumerable<MainGroupReportModel> records, DateTime startDate, DateTime endDate)
@@ -37,8 +38,20 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities.MainData
 			_endDate = endDate;
 
 			gridControlData.DataSource = Records;
+
+			if (CreateGraphics().DpiX > 96)
+			{
+				gridBandDocs.Width =
+					RectangleHelper.ScaleHorizontal(gridBandDocs.Width, gridControlData.ScaleFactor.Width);
+				gridBandLogin.Width =
+					RectangleHelper.ScaleHorizontal(gridBandLogin.Width, gridControlData.ScaleFactor.Width);
+				gridBandTotal.Width =
+					RectangleHelper.ScaleHorizontal(gridBandTotal.Width, gridControlData.ScaleFactor.Width);
+				gridBandVideos.Width =
+					RectangleHelper.ScaleHorizontal(gridBandVideos.Width, gridControlData.ScaleFactor.Width);
+			}
 		}
-		
+
 		public PrintableComponentLink GetPrintLink()
 		{
 			advBandedGridViewData.CheckLoaded();

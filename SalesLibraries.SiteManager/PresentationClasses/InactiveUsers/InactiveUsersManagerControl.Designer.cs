@@ -121,7 +121,7 @@
 			this.gridControlRecords.Name = "gridControlRecords";
 			this.gridControlRecords.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemCheckEditUsers});
-			this.gridControlRecords.Size = new System.Drawing.Size(257, 483);
+			this.gridControlRecords.Size = new System.Drawing.Size(151, 483);
 			this.gridControlRecords.TabIndex = 3;
 			this.gridControlRecords.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewRecords});
@@ -217,7 +217,7 @@
 			this.splitContainerControlMain.Panel1.Controls.Add(this.splitContainerControlData);
 			this.splitContainerControlMain.Panel1.Text = "Panel1";
 			this.splitContainerControlMain.Panel2.Controls.Add(this.xtraTabControlEmail);
-			this.splitContainerControlMain.Panel2.MinSize = 380;
+			this.splitContainerControlMain.Panel2.MinSize = 400;
 			this.splitContainerControlMain.Panel2.Text = "Panel2";
 			this.splitContainerControlMain.Size = new System.Drawing.Size(911, 483);
 			this.splitContainerControlMain.TabIndex = 4;
@@ -231,11 +231,11 @@
 			this.splitContainerControlData.Panel1.Controls.Add(this.pnCustomFilter);
 			this.splitContainerControlData.Panel1.Controls.Add(this.pnFilterButtons);
 			this.splitContainerControlData.Panel1.Controls.Add(this.gbDate);
-			this.splitContainerControlData.Panel1.MinSize = 250;
+			this.splitContainerControlData.Panel1.MinSize = 350;
 			this.splitContainerControlData.Panel1.Text = "Panel1";
 			this.splitContainerControlData.Panel2.Controls.Add(this.gridControlRecords);
 			this.splitContainerControlData.Panel2.Text = "Panel2";
-			this.splitContainerControlData.Size = new System.Drawing.Size(519, 483);
+			this.splitContainerControlData.Size = new System.Drawing.Size(506, 483);
 			this.splitContainerControlData.TabIndex = 0;
 			this.splitContainerControlData.Text = "splitContainerControl1";
 			// 
@@ -244,7 +244,7 @@
 			this.pnCustomFilter.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pnCustomFilter.Location = new System.Drawing.Point(0, 137);
 			this.pnCustomFilter.Name = "pnCustomFilter";
-			this.pnCustomFilter.Size = new System.Drawing.Size(250, 346);
+			this.pnCustomFilter.Size = new System.Drawing.Size(350, 346);
 			this.pnCustomFilter.TabIndex = 21;
 			// 
 			// pnFilterButtons
@@ -253,7 +253,7 @@
 			this.pnFilterButtons.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnFilterButtons.Location = new System.Drawing.Point(0, 98);
 			this.pnFilterButtons.Name = "pnFilterButtons";
-			this.pnFilterButtons.Size = new System.Drawing.Size(250, 39);
+			this.pnFilterButtons.Size = new System.Drawing.Size(350, 39);
 			this.pnFilterButtons.TabIndex = 22;
 			// 
 			// buttonXLoadData
@@ -267,7 +267,7 @@
 			this.buttonXLoadData.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.buttonXLoadData.Location = new System.Drawing.Point(7, 5);
 			this.buttonXLoadData.Name = "buttonXLoadData";
-			this.buttonXLoadData.Size = new System.Drawing.Size(236, 27);
+			this.buttonXLoadData.Size = new System.Drawing.Size(336, 27);
 			this.buttonXLoadData.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXLoadData.TabIndex = 16;
 			this.buttonXLoadData.Text = "Load Data";
@@ -281,9 +281,10 @@
 			this.gbDate.Controls.Add(this.labelControlDateStart);
 			this.gbDate.Controls.Add(this.dateEditStart);
 			this.gbDate.Dock = System.Windows.Forms.DockStyle.Top;
+			this.gbDate.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.gbDate.Location = new System.Drawing.Point(0, 0);
 			this.gbDate.Name = "gbDate";
-			this.gbDate.Size = new System.Drawing.Size(250, 98);
+			this.gbDate.Size = new System.Drawing.Size(350, 98);
 			this.gbDate.TabIndex = 20;
 			this.gbDate.TabStop = false;
 			this.gbDate.Text = "Date range";
@@ -356,7 +357,7 @@
 			this.xtraTabControlEmail.Location = new System.Drawing.Point(0, 0);
 			this.xtraTabControlEmail.Name = "xtraTabControlEmail";
 			this.xtraTabControlEmail.SelectedTabPage = this.xtraTabPageEmailReset;
-			this.xtraTabControlEmail.Size = new System.Drawing.Size(380, 483);
+			this.xtraTabControlEmail.Size = new System.Drawing.Size(400, 483);
 			this.xtraTabControlEmail.TabIndex = 0;
 			this.xtraTabControlEmail.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPageEmailReset,
@@ -366,7 +367,7 @@
 			// 
 			this.xtraTabPageEmailReset.Controls.Add(this.panelEmailReset);
 			this.xtraTabPageEmailReset.Name = "xtraTabPageEmailReset";
-			this.xtraTabPageEmailReset.Size = new System.Drawing.Size(378, 455);
+			this.xtraTabPageEmailReset.Size = new System.Drawing.Size(394, 452);
 			this.xtraTabPageEmailReset.Text = "Password Reset Email";
 			// 
 			// panelEmailReset
@@ -382,7 +383,7 @@
 			this.panelEmailReset.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panelEmailReset.Location = new System.Drawing.Point(0, 0);
 			this.panelEmailReset.Name = "panelEmailReset";
-			this.panelEmailReset.Size = new System.Drawing.Size(378, 455);
+			this.panelEmailReset.Size = new System.Drawing.Size(394, 452);
 			this.panelEmailReset.TabIndex = 0;
 			// 
 			// buttonXEmailResetSend
@@ -392,9 +393,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXEmailResetSend.CausesValidation = false;
 			this.buttonXEmailResetSend.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXEmailResetSend.Location = new System.Drawing.Point(8, 405);
+			this.buttonXEmailResetSend.Location = new System.Drawing.Point(8, 402);
 			this.buttonXEmailResetSend.Name = "buttonXEmailResetSend";
-			this.buttonXEmailResetSend.Size = new System.Drawing.Size(364, 38);
+			this.buttonXEmailResetSend.Size = new System.Drawing.Size(380, 38);
 			this.buttonXEmailResetSend.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXEmailResetSend.TabIndex = 17;
 			this.buttonXEmailResetSend.Text = "Send Email";
@@ -405,7 +406,7 @@
 			// 
 			this.labelControlEmailResetUserCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.labelControlEmailResetUserCount.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelControlEmailResetUserCount.Location = new System.Drawing.Point(8, 380);
+			this.labelControlEmailResetUserCount.Location = new System.Drawing.Point(8, 377);
 			this.labelControlEmailResetUserCount.Name = "labelControlEmailResetUserCount";
 			this.labelControlEmailResetUserCount.Size = new System.Drawing.Size(321, 16);
 			this.labelControlEmailResetUserCount.StyleController = this.styleController;
@@ -419,7 +420,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.memoEditEmailResetBody.Location = new System.Drawing.Point(8, 166);
 			this.memoEditEmailResetBody.Name = "memoEditEmailResetBody";
-			this.memoEditEmailResetBody.Size = new System.Drawing.Size(364, 197);
+			this.memoEditEmailResetBody.Size = new System.Drawing.Size(380, 194);
 			this.memoEditEmailResetBody.StyleController = this.styleController;
 			this.memoEditEmailResetBody.TabIndex = 7;
 			// 
@@ -438,7 +439,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.textEditEmailResetSubject.Location = new System.Drawing.Point(8, 94);
 			this.textEditEmailResetSubject.Name = "textEditEmailResetSubject";
-			this.textEditEmailResetSubject.Size = new System.Drawing.Size(364, 22);
+			this.textEditEmailResetSubject.Size = new System.Drawing.Size(380, 22);
 			this.textEditEmailResetSubject.StyleController = this.styleController;
 			this.textEditEmailResetSubject.TabIndex = 5;
 			// 
@@ -457,7 +458,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.textEditEmailResetSender.Location = new System.Drawing.Point(8, 28);
 			this.textEditEmailResetSender.Name = "textEditEmailResetSender";
-			this.textEditEmailResetSender.Size = new System.Drawing.Size(364, 22);
+			this.textEditEmailResetSender.Size = new System.Drawing.Size(380, 22);
 			this.textEditEmailResetSender.StyleController = this.styleController;
 			this.textEditEmailResetSender.TabIndex = 3;
 			// 
@@ -475,7 +476,7 @@
 			this.xtraTabPageEmailDelete.Controls.Add(this.panelEmailDelete);
 			this.xtraTabPageEmailDelete.Name = "xtraTabPageEmailDelete";
 			this.xtraTabPageEmailDelete.PageEnabled = false;
-			this.xtraTabPageEmailDelete.Size = new System.Drawing.Size(378, 455);
+			this.xtraTabPageEmailDelete.Size = new System.Drawing.Size(394, 452);
 			this.xtraTabPageEmailDelete.Text = "Account Termination Email";
 			// 
 			// panelEmailDelete
@@ -491,7 +492,7 @@
 			this.panelEmailDelete.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panelEmailDelete.Location = new System.Drawing.Point(0, 0);
 			this.panelEmailDelete.Name = "panelEmailDelete";
-			this.panelEmailDelete.Size = new System.Drawing.Size(378, 455);
+			this.panelEmailDelete.Size = new System.Drawing.Size(394, 452);
 			this.panelEmailDelete.TabIndex = 1;
 			// 
 			// buttonXEmailDeleteSend
@@ -501,9 +502,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXEmailDeleteSend.CausesValidation = false;
 			this.buttonXEmailDeleteSend.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXEmailDeleteSend.Location = new System.Drawing.Point(8, 405);
+			this.buttonXEmailDeleteSend.Location = new System.Drawing.Point(8, 402);
 			this.buttonXEmailDeleteSend.Name = "buttonXEmailDeleteSend";
-			this.buttonXEmailDeleteSend.Size = new System.Drawing.Size(364, 38);
+			this.buttonXEmailDeleteSend.Size = new System.Drawing.Size(380, 38);
 			this.buttonXEmailDeleteSend.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXEmailDeleteSend.TabIndex = 17;
 			this.buttonXEmailDeleteSend.Text = "Send Email";
@@ -514,7 +515,7 @@
 			// 
 			this.labelControlEmailDeleteUserCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.labelControlEmailDeleteUserCount.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelControlEmailDeleteUserCount.Location = new System.Drawing.Point(8, 380);
+			this.labelControlEmailDeleteUserCount.Location = new System.Drawing.Point(8, 377);
 			this.labelControlEmailDeleteUserCount.Name = "labelControlEmailDeleteUserCount";
 			this.labelControlEmailDeleteUserCount.Size = new System.Drawing.Size(321, 16);
 			this.labelControlEmailDeleteUserCount.StyleController = this.styleController;
@@ -528,7 +529,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.memoEditEmailDeleteBody.Location = new System.Drawing.Point(8, 166);
 			this.memoEditEmailDeleteBody.Name = "memoEditEmailDeleteBody";
-			this.memoEditEmailDeleteBody.Size = new System.Drawing.Size(364, 197);
+			this.memoEditEmailDeleteBody.Size = new System.Drawing.Size(380, 194);
 			this.memoEditEmailDeleteBody.StyleController = this.styleController;
 			this.memoEditEmailDeleteBody.TabIndex = 7;
 			// 
@@ -547,7 +548,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.textEditEmailDeleteSubject.Location = new System.Drawing.Point(8, 94);
 			this.textEditEmailDeleteSubject.Name = "textEditEmailDeleteSubject";
-			this.textEditEmailDeleteSubject.Size = new System.Drawing.Size(364, 22);
+			this.textEditEmailDeleteSubject.Size = new System.Drawing.Size(380, 22);
 			this.textEditEmailDeleteSubject.StyleController = this.styleController;
 			this.textEditEmailDeleteSubject.TabIndex = 5;
 			// 
@@ -566,7 +567,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.textEditEmailDeleteSender.Location = new System.Drawing.Point(8, 28);
 			this.textEditEmailDeleteSender.Name = "textEditEmailDeleteSender";
-			this.textEditEmailDeleteSender.Size = new System.Drawing.Size(364, 22);
+			this.textEditEmailDeleteSender.Size = new System.Drawing.Size(380, 22);
 			this.textEditEmailDeleteSender.StyleController = this.styleController;
 			this.textEditEmailDeleteSender.TabIndex = 3;
 			// 
@@ -593,7 +594,8 @@
 			// 
 			// InactiveUsersManagerControl
 			// 
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.BackColor = System.Drawing.Color.White;
 			this.Controls.Add(this.splitContainerControlMain);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));

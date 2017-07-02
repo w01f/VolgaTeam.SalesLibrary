@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Windows.Forms;
+using DevExpress.Skins;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraPrinting;
 using DevExpress.XtraTab;
@@ -27,6 +28,22 @@ namespace SalesLibraries.SiteManager.PresentationClasses.LibraryFiles
 			Records.AddRange(records);
 			gridControlData.DataSource = Records;
 			Text = "Total Summary";
+
+			if (CreateGraphics().DpiX > 96)
+			{
+				gridColumnFileName.Width =
+					RectangleHelper.ScaleHorizontal(gridColumnFileName.Width, gridControlData.ScaleFactor.Width);
+				gridColumnFileDate.Width =
+					RectangleHelper.ScaleHorizontal(gridColumnFileDate.Width, gridControlData.ScaleFactor.Width);
+				gridColumnTaggedFilesCount.Width =
+					RectangleHelper.ScaleHorizontal(gridColumnTaggedFilesCount.Width, gridControlData.ScaleFactor.Width);
+				gridColumnTaggedVideoCount.Width =
+					RectangleHelper.ScaleHorizontal(gridColumnTaggedVideoCount.Width, gridControlData.ScaleFactor.Width);
+				gridColumnVideoCount.Width =
+					RectangleHelper.ScaleHorizontal(gridColumnVideoCount.Width, gridControlData.ScaleFactor.Width);
+				gridColumnDaysFormLastUpdate.Width =
+					RectangleHelper.ScaleHorizontal(gridColumnDaysFormLastUpdate.Width, gridControlData.ScaleFactor.Width);
+			}
 		}
 
 		public PrintableComponentLink GetPrintLink()

@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using DevExpress.Skins;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraPrinting;
 using SalesLibraries.ServiceConnector.InactiveUsersService;
@@ -37,6 +38,17 @@ namespace SalesLibraries.SiteManager.PresentationClasses.InactiveUsers
 			pnCustomFilter.Controls.Add(_filterControl);
 
 			LoadDefaultEmailSettings();
+
+			if (CreateGraphics().DpiX > 96)
+			{
+				splitContainerControlMain.Panel1.Width =
+					RectangleHelper.ScaleVertical(splitContainerControlMain.Panel1.Width,
+						splitContainerControlMain.ScaleFactor.Width);
+
+				splitContainerControlData.Panel2.Width =
+					RectangleHelper.ScaleVertical(splitContainerControlData.Panel2.Width,
+						splitContainerControlData.ScaleFactor.Width);
+			}
 		}
 
 		public void RefreshData(bool showMessages)

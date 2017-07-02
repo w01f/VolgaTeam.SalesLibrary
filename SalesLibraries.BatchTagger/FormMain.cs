@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
+using DevExpress.Skins;
 using DevExpress.XtraTab;
 using SalesLibraries.BatchTagger.PresentationLayer;
 using SalesLibraries.Common.Configuration;
@@ -42,6 +43,12 @@ namespace SalesLibraries.BatchTagger
 			};
 
 			FormStateHelper.Init(this, GlobalSettings.ApplicationRootPath, "Batch Tagger", false, true);
+
+			if (CreateGraphics().DpiX > 96)
+			{
+				splitContainerControl.Panel1.Width =
+					RectangleHelper.ScaleVertical(splitContainerControl.Panel1.Width, splitContainerControl.ScaleFactor.Height);
+			}
 		}
 
 		private readonly List<LibraryFilesModel> _records = new List<LibraryFilesModel>();

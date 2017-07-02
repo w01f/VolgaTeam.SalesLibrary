@@ -134,7 +134,7 @@
 			this.xtraTabPageConditions.Controls.Add(this.checkEditDisableDownload);
 			this.xtraTabPageConditions.Controls.Add(this.checkEditDisablePreview);
 			this.xtraTabPageConditions.Name = "xtraTabPageConditions";
-			this.xtraTabPageConditions.Size = new System.Drawing.Size(688, 533);
+			this.xtraTabPageConditions.Size = new System.Drawing.Size(684, 530);
 			this.xtraTabPageConditions.Text = "Link Modal Restrictions";
 			// 
 			// checkEditDisableEmail
@@ -236,7 +236,7 @@
 			this.xtraTabPageLibraries.Controls.Add(this.buttonXLibrariesClearAll);
 			this.xtraTabPageLibraries.Controls.Add(this.buttonXLibrariesSelectAll);
 			this.xtraTabPageLibraries.Name = "xtraTabPageLibraries";
-			this.xtraTabPageLibraries.Size = new System.Drawing.Size(688, 533);
+			this.xtraTabPageLibraries.Size = new System.Drawing.Size(684, 530);
 			this.xtraTabPageLibraries.Text = "Sales Libraries";
 			// 
 			// labelControlLibrariesTotals
@@ -251,7 +251,7 @@
 			this.labelControlLibrariesTotals.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
 			this.labelControlLibrariesTotals.Location = new System.Drawing.Point(277, 14);
 			this.labelControlLibrariesTotals.Name = "labelControlLibrariesTotals";
-			this.labelControlLibrariesTotals.Size = new System.Drawing.Size(398, 33);
+			this.labelControlLibrariesTotals.Size = new System.Drawing.Size(394, 33);
 			this.labelControlLibrariesTotals.StyleController = this.styleController;
 			this.labelControlLibrariesTotals.TabIndex = 24;
 			// 
@@ -265,7 +265,7 @@
 			this.gridControlLibraries.Name = "gridControlLibraries";
 			this.gridControlLibraries.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemCheckEditLibraries});
-			this.gridControlLibraries.Size = new System.Drawing.Size(659, 462);
+			this.gridControlLibraries.Size = new System.Drawing.Size(655, 459);
 			this.gridControlLibraries.TabIndex = 4;
 			this.gridControlLibraries.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewLibraries});
@@ -378,7 +378,7 @@
 			this.xtraTabPageSecurityGroups.Controls.Add(this.buttonXSecurityGroupsClearAll);
 			this.xtraTabPageSecurityGroups.Controls.Add(this.buttonXSecurityGroupsSelectAll);
 			this.xtraTabPageSecurityGroups.Name = "xtraTabPageSecurityGroups";
-			this.xtraTabPageSecurityGroups.Size = new System.Drawing.Size(688, 533);
+			this.xtraTabPageSecurityGroups.Size = new System.Drawing.Size(684, 530);
 			this.xtraTabPageSecurityGroups.Text = "Security Groups";
 			// 
 			// labelControlSecurityGroupsTotals
@@ -393,7 +393,7 @@
 			this.labelControlSecurityGroupsTotals.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
 			this.labelControlSecurityGroupsTotals.Location = new System.Drawing.Point(277, 14);
 			this.labelControlSecurityGroupsTotals.Name = "labelControlSecurityGroupsTotals";
-			this.labelControlSecurityGroupsTotals.Size = new System.Drawing.Size(398, 33);
+			this.labelControlSecurityGroupsTotals.Size = new System.Drawing.Size(394, 33);
 			this.labelControlSecurityGroupsTotals.StyleController = this.styleController;
 			this.labelControlSecurityGroupsTotals.TabIndex = 23;
 			// 
@@ -407,7 +407,7 @@
 			this.gridControlSecurityGroups.Name = "gridControlSecurityGroups";
 			this.gridControlSecurityGroups.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemCheckEditSecurityGroups});
-			this.gridControlSecurityGroups.Size = new System.Drawing.Size(659, 462);
+			this.gridControlSecurityGroups.Size = new System.Drawing.Size(655, 459);
 			this.gridControlSecurityGroups.TabIndex = 7;
 			this.gridControlSecurityGroups.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewSecurityGroups});
@@ -524,7 +524,7 @@
 			this.xtraTabPageFiles.Controls.Add(this.textEditFilesTags);
 			this.xtraTabPageFiles.Controls.Add(this.labelControlFilesTags);
 			this.xtraTabPageFiles.Name = "xtraTabPageFiles";
-			this.xtraTabPageFiles.Size = new System.Drawing.Size(688, 533);
+			this.xtraTabPageFiles.Size = new System.Drawing.Size(684, 530);
 			this.xtraTabPageFiles.Text = "Files";
 			// 
 			// labelControlFilesTotals
@@ -539,7 +539,7 @@
 			this.labelControlFilesTotals.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
 			this.labelControlFilesTotals.Location = new System.Drawing.Point(414, 57);
 			this.labelControlFilesTotals.Name = "labelControlFilesTotals";
-			this.labelControlFilesTotals.Size = new System.Drawing.Size(261, 33);
+			this.labelControlFilesTotals.Size = new System.Drawing.Size(257, 33);
 			this.labelControlFilesTotals.StyleController = this.styleController;
 			this.labelControlFilesTotals.TabIndex = 22;
 			// 
@@ -553,7 +553,7 @@
 			this.gridControlFiles.Name = "gridControlFiles";
 			this.gridControlFiles.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemCheckEditFiles});
-			this.gridControlFiles.Size = new System.Drawing.Size(659, 411);
+			this.gridControlFiles.Size = new System.Drawing.Size(655, 408);
 			this.gridControlFiles.TabIndex = 21;
 			this.gridControlFiles.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewFiles});
@@ -714,7 +714,7 @@
 			this.textEditFilesTags.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.textEditFilesTags.Properties.Appearance.Options.UseBackColor = true;
 			this.textEditFilesTags.Properties.Appearance.Options.UseForeColor = true;
-			this.textEditFilesTags.Size = new System.Drawing.Size(559, 22);
+			this.textEditFilesTags.Size = new System.Drawing.Size(555, 22);
 			this.textEditFilesTags.StyleController = this.styleController;
 			this.textEditFilesTags.TabIndex = 16;
 			this.textEditFilesTags.EditValueChanged += new System.EventHandler(this.OnDataChanged);
@@ -743,7 +743,8 @@
 			// 
 			// ProfileControl
 			// 
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.BackColor = System.Drawing.Color.White;
 			this.Controls.Add(this.xtraTabControl);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));

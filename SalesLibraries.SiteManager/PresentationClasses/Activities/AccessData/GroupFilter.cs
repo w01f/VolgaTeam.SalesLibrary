@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
+using DevExpress.Skins;
 using DevExpress.XtraEditors.Controls;
 using ItemCheckEventArgs = DevExpress.XtraEditors.Controls.ItemCheckEventArgs;
 
@@ -50,6 +51,13 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities.AccessData
 			Dock = DockStyle.Fill;
 			AllGroups = new List<string>();
 			SelectedGroups = new List<string>();
+
+			if (CreateGraphics().DpiX > 96)
+			{
+				checkedListBoxControlGroups.ItemHeight =
+					RectangleHelper.ScaleVertical(checkedListBoxControlGroups.ItemHeight,
+						checkedListBoxControlGroups.ScaleFactor.Height);
+			}
 		}
 
 		public void UpdateDataSource(string[] groups, bool reset = true)

@@ -79,17 +79,17 @@
 			this.checkedListBoxControlGroups.CheckOnClick = true;
 			this.checkedListBoxControlGroups.Enabled = false;
 			this.checkedListBoxControlGroups.ItemHeight = 35;
-			this.checkedListBoxControlGroups.Location = new System.Drawing.Point(8, 91);
+			this.checkedListBoxControlGroups.Location = new System.Drawing.Point(8, 113);
 			this.checkedListBoxControlGroups.Name = "checkedListBoxControlGroups";
 			this.checkedListBoxControlGroups.SelectionMode = System.Windows.Forms.SelectionMode.None;
-			this.checkedListBoxControlGroups.Size = new System.Drawing.Size(222, 227);
+			this.checkedListBoxControlGroups.Size = new System.Drawing.Size(222, 205);
 			this.checkedListBoxControlGroups.StyleController = this.styleController;
 			this.checkedListBoxControlGroups.TabIndex = 1;
 			this.checkedListBoxControlGroups.ItemCheck += new DevExpress.XtraEditors.Controls.ItemCheckEventHandler(this.checkedListBoxControlGroups_ItemCheck);
 			// 
 			// labelControlGroupsTitle
 			// 
-			this.labelControlGroupsTitle.Location = new System.Drawing.Point(10, 34);
+			this.labelControlGroupsTitle.Location = new System.Drawing.Point(8, 44);
 			this.labelControlGroupsTitle.Name = "labelControlGroupsTitle";
 			this.labelControlGroupsTitle.Size = new System.Drawing.Size(53, 16);
 			this.labelControlGroupsTitle.StyleController = this.styleController;
@@ -102,9 +102,9 @@
 			this.buttonXGroupsAll.CausesValidation = false;
 			this.buttonXGroupsAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXGroupsAll.Enabled = false;
-			this.buttonXGroupsAll.Location = new System.Drawing.Point(8, 59);
+			this.buttonXGroupsAll.Location = new System.Drawing.Point(8, 73);
 			this.buttonXGroupsAll.Name = "buttonXGroupsAll";
-			this.buttonXGroupsAll.Size = new System.Drawing.Size(103, 23);
+			this.buttonXGroupsAll.Size = new System.Drawing.Size(103, 34);
 			this.buttonXGroupsAll.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXGroupsAll.TabIndex = 17;
 			this.buttonXGroupsAll.Text = "Select All";
@@ -118,9 +118,9 @@
 			this.buttonXGroupsNone.CausesValidation = false;
 			this.buttonXGroupsNone.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXGroupsNone.Enabled = false;
-			this.buttonXGroupsNone.Location = new System.Drawing.Point(127, 59);
+			this.buttonXGroupsNone.Location = new System.Drawing.Point(127, 73);
 			this.buttonXGroupsNone.Name = "buttonXGroupsNone";
-			this.buttonXGroupsNone.Size = new System.Drawing.Size(103, 23);
+			this.buttonXGroupsNone.Size = new System.Drawing.Size(103, 34);
 			this.buttonXGroupsNone.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXGroupsNone.TabIndex = 18;
 			this.buttonXGroupsNone.Text = "Clear All";
@@ -180,6 +180,7 @@
 			// 
 			// LibraryFilter
 			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.BackColor = System.Drawing.Color.White;
 			this.Controls.Add(this.checkEditNoKeywordLinks);

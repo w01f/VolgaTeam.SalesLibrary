@@ -22,6 +22,7 @@ namespace SalesLibraries.BatchTagger
 			{
 				Application.EnableVisualStyles();
 				Application.SetCompatibleTextRenderingDefault(false);
+					
 				Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
 				Thread.CurrentThread.CurrentCulture.DateTimeFormat.FirstDayOfWeek = DayOfWeek.Monday;
 				Thread.CurrentThread.CurrentCulture.DateTimeFormat.ShortDatePattern = @"MM/dd/yyyy";

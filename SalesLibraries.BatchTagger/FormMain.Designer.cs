@@ -59,7 +59,7 @@
 			this.splitContainerControl.Panel1.Appearance.Options.UseForeColor = true;
 			this.splitContainerControl.Panel1.Controls.Add(this.pnCustomFilter);
 			this.splitContainerControl.Panel1.Controls.Add(this.pnFilterButtons);
-			this.splitContainerControl.Panel1.MinSize = 250;
+			this.splitContainerControl.Panel1.MinSize = 300;
 			this.splitContainerControl.Panel1.Padding = new System.Windows.Forms.Padding(5);
 			this.splitContainerControl.Panel1.Text = "Panel1";
 			this.splitContainerControl.Panel2.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
@@ -80,7 +80,7 @@
 			this.pnCustomFilter.ForeColor = System.Drawing.Color.Black;
 			this.pnCustomFilter.Location = new System.Drawing.Point(5, 44);
 			this.pnCustomFilter.Name = "pnCustomFilter";
-			this.pnCustomFilter.Size = new System.Drawing.Size(240, 456);
+			this.pnCustomFilter.Size = new System.Drawing.Size(290, 456);
 			this.pnCustomFilter.TabIndex = 18;
 			// 
 			// pnFilterButtons
@@ -91,7 +91,7 @@
 			this.pnFilterButtons.ForeColor = System.Drawing.Color.Black;
 			this.pnFilterButtons.Location = new System.Drawing.Point(5, 5);
 			this.pnFilterButtons.Name = "pnFilterButtons";
-			this.pnFilterButtons.Size = new System.Drawing.Size(240, 39);
+			this.pnFilterButtons.Size = new System.Drawing.Size(290, 39);
 			this.pnFilterButtons.TabIndex = 19;
 			// 
 			// buttonXLoadData
@@ -105,7 +105,7 @@
 			this.buttonXLoadData.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.buttonXLoadData.Location = new System.Drawing.Point(7, 5);
 			this.buttonXLoadData.Name = "buttonXLoadData";
-			this.buttonXLoadData.Size = new System.Drawing.Size(226, 27);
+			this.buttonXLoadData.Size = new System.Drawing.Size(276, 27);
 			this.buttonXLoadData.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXLoadData.TabIndex = 16;
 			this.buttonXLoadData.Text = "Load Data";
@@ -133,7 +133,7 @@
 			this.xtraTabControlLibraries.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.xtraTabControlLibraries.Location = new System.Drawing.Point(0, 0);
 			this.xtraTabControlLibraries.Name = "xtraTabControlLibraries";
-			this.xtraTabControlLibraries.Size = new System.Drawing.Size(608, 505);
+			this.xtraTabControlLibraries.Size = new System.Drawing.Size(558, 505);
 			this.xtraTabControlLibraries.TabIndex = 3;
 			this.xtraTabControlLibraries.SelectedPageChanged += new DevExpress.XtraTab.TabPageChangedEventHandler(this.OnSelectedPageChanged);
 			// 
@@ -170,7 +170,6 @@
 			this.Controls.Add(this.splitContainerControl);
 			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.ForeColor = System.Drawing.Color.Black;
 			this.Name = "FormMain";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
 			this.Text = "Batch Tagger";

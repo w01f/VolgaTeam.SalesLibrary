@@ -2468,7 +2468,7 @@ namespace SalesLibraries.SiteManager
 			this.pnMain.Location = new System.Drawing.Point(5, 175);
 			this.pnMain.Name = "pnMain";
 			this.pnMain.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
-			this.pnMain.Size = new System.Drawing.Size(962, 434);
+			this.pnMain.Size = new System.Drawing.Size(962, 432);
 			this.pnMain.TabIndex = 3;
 			// 
 			// styleManager
@@ -2480,7 +2480,7 @@ namespace SalesLibraries.SiteManager
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-			this.ClientSize = new System.Drawing.Size(972, 611);
+			this.ClientSize = new System.Drawing.Size(972, 609);
 			this.Controls.Add(this.pnMain);
 			this.Controls.Add(this.ribbonControl);
 			this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

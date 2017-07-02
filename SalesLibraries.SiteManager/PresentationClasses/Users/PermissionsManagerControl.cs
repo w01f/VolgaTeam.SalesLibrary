@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using DevExpress.Skins;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Base;
@@ -33,6 +34,16 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 		{
 			InitializeComponent();
 			Dock = DockStyle.Fill;
+
+			if (CreateGraphics().DpiX > 96)
+			{
+				gridColumnUsersCreateDate.Width =
+					RectangleHelper.ScaleHorizontal(gridColumnUsersCreateDate.Width, gridControlUsers.ScaleFactor.Width);
+
+				checkedListBoxControlUserFilterGroups.ItemHeight =
+					RectangleHelper.ScaleVertical(checkedListBoxControlUserFilterGroups.ItemHeight,
+						checkedListBoxControlUserFilterGroups.ScaleFactor.Height);
+			}
 		}
 
 		public bool HasConnection { get; set; }

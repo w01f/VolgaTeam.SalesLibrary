@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
+using DevExpress.Skins;
 using DevExpress.XtraEditors.Controls;
 using ItemCheckEventArgs = DevExpress.XtraEditors.Controls.ItemCheckEventArgs;
 
@@ -36,6 +37,13 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities.RawData
 			AllGroups = new List<string>();
 			AllUsers = new List<String>();
 			SelectedGroups = new List<string>();
+
+			if (CreateGraphics().DpiX > 96)
+			{
+				checkedListBoxControlGroups.ItemHeight =
+					RectangleHelper.ScaleVertical(checkedListBoxControlGroups.ItemHeight,
+						checkedListBoxControlGroups.ScaleFactor.Height);
+			}
 		}
 
 		public void UpdateDataSource(string[] groups, string[] users)

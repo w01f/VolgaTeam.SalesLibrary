@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using DevExpress.Data;
+using DevExpress.Skins;
 using DevExpress.Utils;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
@@ -26,6 +27,14 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities.QuizUnitedDa
 			Records.AddRange(records.OrderBy(r => r.FullName));
 			_quizCount = quizCount;
 			gridControlData.DataSource = Records;
+
+			if (CreateGraphics().DpiX > 96)
+			{
+				gridColumnTaken.Width =
+					RectangleHelper.ScaleHorizontal(gridColumnTaken.Width, gridControlData.ScaleFactor.Width);
+				gridColumnPassed.Width =
+					RectangleHelper.ScaleHorizontal(gridColumnPassed.Width, gridControlData.ScaleFactor.Width);
+			}
 		}
 
 		public void CollapseAll()

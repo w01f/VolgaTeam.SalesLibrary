@@ -109,6 +109,7 @@
 			this.gbDate.Controls.Add(this.labelControlDateStart);
 			this.gbDate.Controls.Add(this.dateEditStart);
 			this.gbDate.Dock = System.Windows.Forms.DockStyle.Top;
+			this.gbDate.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.gbDate.Location = new System.Drawing.Point(5, 5);
 			this.gbDate.Name = "gbDate";
 			this.gbDate.Size = new System.Drawing.Size(240, 98);
@@ -185,7 +186,8 @@
 			// 
 			// ActivitiesManagerControl
 			// 
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.BackColor = System.Drawing.Color.White;
 			this.Controls.Add(this.splitContainerControl);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));

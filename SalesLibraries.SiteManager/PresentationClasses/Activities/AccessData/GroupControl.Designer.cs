@@ -31,16 +31,16 @@
 			this.gridControlData = new DevExpress.XtraGrid.GridControl();
 			this.bandedGridView = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridView();
 			this.gridBand1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-			this.bandedGridColumn1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+			this.bandedGridColumnTotalUsersNumber = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
 			this.repositoryItemSpinEditNumeric = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
 			this.gridBand2 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-			this.bandedGridColumn2 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+			this.bandedGridColumnActiveUsersNumber = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
 			this.repositoryItemMemoEdit = new DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit();
-			this.bandedGridColumn3 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+			this.bandedGridColumnActiveUsersPercent = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
 			this.repositoryItemSpinEditPercent = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
 			this.gridBand3 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-			this.bandedGridColumn4 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-			this.bandedGridColumn5 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+			this.bandedGridColumnInactiveUsersNumber = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+			this.bandedGridColumnInactiveUsersPercent = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
 			this.advBandedGridViewData = new DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView();
 			this.gridBandMain = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
 			this.gridColumnUsersNumber = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
@@ -111,11 +111,11 @@
             this.gridBand2,
             this.gridBand3});
 			this.bandedGridView.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] {
-            this.bandedGridColumn1,
-            this.bandedGridColumn2,
-            this.bandedGridColumn3,
-            this.bandedGridColumn4,
-            this.bandedGridColumn5});
+            this.bandedGridColumnTotalUsersNumber,
+            this.bandedGridColumnActiveUsersNumber,
+            this.bandedGridColumnActiveUsersPercent,
+            this.bandedGridColumnInactiveUsersNumber,
+            this.bandedGridColumnInactiveUsersPercent});
 			this.bandedGridView.GridControl = this.gridControlData;
 			this.bandedGridView.Name = "bandedGridView";
 			this.bandedGridView.OptionsBehavior.Editable = false;
@@ -149,28 +149,27 @@
 			// 
 			// gridBand1
 			// 
-			this.gridBand1.Columns.Add(this.bandedGridColumn1);
+			this.gridBand1.Columns.Add(this.bandedGridColumnTotalUsersNumber);
 			this.gridBand1.MinWidth = 20;
 			this.gridBand1.Name = "gridBand1";
 			this.gridBand1.VisibleIndex = 0;
 			this.gridBand1.Width = 120;
 			// 
-			// bandedGridColumn1
+			// bandedGridColumnTotalUsersNumber
 			// 
-			this.bandedGridColumn1.AppearanceCell.Options.UseTextOptions = true;
-			this.bandedGridColumn1.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-			this.bandedGridColumn1.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
-			this.bandedGridColumn1.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-			this.bandedGridColumn1.AppearanceHeader.Options.UseTextOptions = true;
-			this.bandedGridColumn1.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-			this.bandedGridColumn1.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
-			this.bandedGridColumn1.Caption = "Total Users#";
-			this.bandedGridColumn1.ColumnEdit = this.repositoryItemSpinEditNumeric;
-			this.bandedGridColumn1.FieldName = "userCount";
-			this.bandedGridColumn1.Name = "bandedGridColumn1";
-			this.bandedGridColumn1.OptionsColumn.FixedWidth = true;
-			this.bandedGridColumn1.Visible = true;
-			this.bandedGridColumn1.Width = 120;
+			this.bandedGridColumnTotalUsersNumber.AppearanceCell.Options.UseTextOptions = true;
+			this.bandedGridColumnTotalUsersNumber.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+			this.bandedGridColumnTotalUsersNumber.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
+			this.bandedGridColumnTotalUsersNumber.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+			this.bandedGridColumnTotalUsersNumber.AppearanceHeader.Options.UseTextOptions = true;
+			this.bandedGridColumnTotalUsersNumber.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+			this.bandedGridColumnTotalUsersNumber.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
+			this.bandedGridColumnTotalUsersNumber.Caption = "Total Users#";
+			this.bandedGridColumnTotalUsersNumber.ColumnEdit = this.repositoryItemSpinEditNumeric;
+			this.bandedGridColumnTotalUsersNumber.FieldName = "userCount";
+			this.bandedGridColumnTotalUsersNumber.Name = "bandedGridColumnTotalUsersNumber";
+			this.bandedGridColumnTotalUsersNumber.Visible = true;
+			this.bandedGridColumnTotalUsersNumber.Width = 120;
 			// 
 			// repositoryItemSpinEditNumeric
 			// 
@@ -187,49 +186,49 @@
 			// gridBand2
 			// 
 			this.gridBand2.Caption = "Active";
-			this.gridBand2.Columns.Add(this.bandedGridColumn2);
-			this.gridBand2.Columns.Add(this.bandedGridColumn3);
+			this.gridBand2.Columns.Add(this.bandedGridColumnActiveUsersNumber);
+			this.gridBand2.Columns.Add(this.bandedGridColumnActiveUsersPercent);
 			this.gridBand2.MinWidth = 20;
 			this.gridBand2.Name = "gridBand2";
 			this.gridBand2.VisibleIndex = 1;
 			this.gridBand2.Width = 372;
 			// 
-			// bandedGridColumn2
+			// bandedGridColumnActiveUsersNumber
 			// 
-			this.bandedGridColumn2.AppearanceCell.Options.UseTextOptions = true;
-			this.bandedGridColumn2.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
-			this.bandedGridColumn2.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
-			this.bandedGridColumn2.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-			this.bandedGridColumn2.AppearanceHeader.Options.UseTextOptions = true;
-			this.bandedGridColumn2.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
-			this.bandedGridColumn2.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
-			this.bandedGridColumn2.Caption = "Active#";
-			this.bandedGridColumn2.ColumnEdit = this.repositoryItemMemoEdit;
-			this.bandedGridColumn2.FieldName = "ActiveNames";
-			this.bandedGridColumn2.Name = "bandedGridColumn2";
-			this.bandedGridColumn2.Visible = true;
-			this.bandedGridColumn2.Width = 252;
+			this.bandedGridColumnActiveUsersNumber.AppearanceCell.Options.UseTextOptions = true;
+			this.bandedGridColumnActiveUsersNumber.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+			this.bandedGridColumnActiveUsersNumber.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
+			this.bandedGridColumnActiveUsersNumber.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+			this.bandedGridColumnActiveUsersNumber.AppearanceHeader.Options.UseTextOptions = true;
+			this.bandedGridColumnActiveUsersNumber.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+			this.bandedGridColumnActiveUsersNumber.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
+			this.bandedGridColumnActiveUsersNumber.Caption = "Active#";
+			this.bandedGridColumnActiveUsersNumber.ColumnEdit = this.repositoryItemMemoEdit;
+			this.bandedGridColumnActiveUsersNumber.FieldName = "ActiveNames";
+			this.bandedGridColumnActiveUsersNumber.Name = "bandedGridColumnActiveUsersNumber";
+			this.bandedGridColumnActiveUsersNumber.Visible = true;
+			this.bandedGridColumnActiveUsersNumber.Width = 252;
 			// 
 			// repositoryItemMemoEdit
 			// 
 			this.repositoryItemMemoEdit.Name = "repositoryItemMemoEdit";
 			// 
-			// bandedGridColumn3
+			// bandedGridColumnActiveUsersPercent
 			// 
-			this.bandedGridColumn3.AppearanceCell.Options.UseTextOptions = true;
-			this.bandedGridColumn3.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
-			this.bandedGridColumn3.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
-			this.bandedGridColumn3.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-			this.bandedGridColumn3.AppearanceHeader.Options.UseTextOptions = true;
-			this.bandedGridColumn3.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
-			this.bandedGridColumn3.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
-			this.bandedGridColumn3.Caption = "Active%";
-			this.bandedGridColumn3.ColumnEdit = this.repositoryItemSpinEditPercent;
-			this.bandedGridColumn3.FieldName = "ActivePercent";
-			this.bandedGridColumn3.Name = "bandedGridColumn3";
-			this.bandedGridColumn3.OptionsColumn.FixedWidth = true;
-			this.bandedGridColumn3.Visible = true;
-			this.bandedGridColumn3.Width = 120;
+			this.bandedGridColumnActiveUsersPercent.AppearanceCell.Options.UseTextOptions = true;
+			this.bandedGridColumnActiveUsersPercent.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+			this.bandedGridColumnActiveUsersPercent.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
+			this.bandedGridColumnActiveUsersPercent.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+			this.bandedGridColumnActiveUsersPercent.AppearanceHeader.Options.UseTextOptions = true;
+			this.bandedGridColumnActiveUsersPercent.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+			this.bandedGridColumnActiveUsersPercent.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
+			this.bandedGridColumnActiveUsersPercent.Caption = "Active%";
+			this.bandedGridColumnActiveUsersPercent.ColumnEdit = this.repositoryItemSpinEditPercent;
+			this.bandedGridColumnActiveUsersPercent.FieldName = "ActivePercent";
+			this.bandedGridColumnActiveUsersPercent.Name = "bandedGridColumnActiveUsersPercent";
+			this.bandedGridColumnActiveUsersPercent.OptionsColumn.FixedWidth = true;
+			this.bandedGridColumnActiveUsersPercent.Visible = true;
+			this.bandedGridColumnActiveUsersPercent.Width = 120;
 			// 
 			// repositoryItemSpinEditPercent
 			// 
@@ -246,45 +245,45 @@
 			// gridBand3
 			// 
 			this.gridBand3.Caption = "Inactive";
-			this.gridBand3.Columns.Add(this.bandedGridColumn4);
-			this.gridBand3.Columns.Add(this.bandedGridColumn5);
+			this.gridBand3.Columns.Add(this.bandedGridColumnInactiveUsersNumber);
+			this.gridBand3.Columns.Add(this.bandedGridColumnInactiveUsersPercent);
 			this.gridBand3.MinWidth = 20;
 			this.gridBand3.Name = "gridBand3";
 			this.gridBand3.VisibleIndex = 2;
 			this.gridBand3.Width = 403;
 			// 
-			// bandedGridColumn4
+			// bandedGridColumnInactiveUsersNumber
 			// 
-			this.bandedGridColumn4.AppearanceCell.Options.UseTextOptions = true;
-			this.bandedGridColumn4.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
-			this.bandedGridColumn4.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
-			this.bandedGridColumn4.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-			this.bandedGridColumn4.AppearanceHeader.Options.UseTextOptions = true;
-			this.bandedGridColumn4.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
-			this.bandedGridColumn4.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
-			this.bandedGridColumn4.Caption = "Inactive#";
-			this.bandedGridColumn4.ColumnEdit = this.repositoryItemMemoEdit;
-			this.bandedGridColumn4.FieldName = "InactiveNames";
-			this.bandedGridColumn4.Name = "bandedGridColumn4";
-			this.bandedGridColumn4.Visible = true;
-			this.bandedGridColumn4.Width = 283;
+			this.bandedGridColumnInactiveUsersNumber.AppearanceCell.Options.UseTextOptions = true;
+			this.bandedGridColumnInactiveUsersNumber.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+			this.bandedGridColumnInactiveUsersNumber.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
+			this.bandedGridColumnInactiveUsersNumber.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+			this.bandedGridColumnInactiveUsersNumber.AppearanceHeader.Options.UseTextOptions = true;
+			this.bandedGridColumnInactiveUsersNumber.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+			this.bandedGridColumnInactiveUsersNumber.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
+			this.bandedGridColumnInactiveUsersNumber.Caption = "Inactive#";
+			this.bandedGridColumnInactiveUsersNumber.ColumnEdit = this.repositoryItemMemoEdit;
+			this.bandedGridColumnInactiveUsersNumber.FieldName = "InactiveNames";
+			this.bandedGridColumnInactiveUsersNumber.Name = "bandedGridColumnInactiveUsersNumber";
+			this.bandedGridColumnInactiveUsersNumber.Visible = true;
+			this.bandedGridColumnInactiveUsersNumber.Width = 283;
 			// 
-			// bandedGridColumn5
+			// bandedGridColumnInactiveUsersPercent
 			// 
-			this.bandedGridColumn5.AppearanceCell.Options.UseTextOptions = true;
-			this.bandedGridColumn5.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
-			this.bandedGridColumn5.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
-			this.bandedGridColumn5.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-			this.bandedGridColumn5.AppearanceHeader.Options.UseTextOptions = true;
-			this.bandedGridColumn5.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
-			this.bandedGridColumn5.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
-			this.bandedGridColumn5.Caption = "Inactive%";
-			this.bandedGridColumn5.ColumnEdit = this.repositoryItemSpinEditPercent;
-			this.bandedGridColumn5.FieldName = "InactivePercent";
-			this.bandedGridColumn5.Name = "bandedGridColumn5";
-			this.bandedGridColumn5.OptionsColumn.FixedWidth = true;
-			this.bandedGridColumn5.Visible = true;
-			this.bandedGridColumn5.Width = 120;
+			this.bandedGridColumnInactiveUsersPercent.AppearanceCell.Options.UseTextOptions = true;
+			this.bandedGridColumnInactiveUsersPercent.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+			this.bandedGridColumnInactiveUsersPercent.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
+			this.bandedGridColumnInactiveUsersPercent.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+			this.bandedGridColumnInactiveUsersPercent.AppearanceHeader.Options.UseTextOptions = true;
+			this.bandedGridColumnInactiveUsersPercent.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+			this.bandedGridColumnInactiveUsersPercent.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
+			this.bandedGridColumnInactiveUsersPercent.Caption = "Inactive%";
+			this.bandedGridColumnInactiveUsersPercent.ColumnEdit = this.repositoryItemSpinEditPercent;
+			this.bandedGridColumnInactiveUsersPercent.FieldName = "InactivePercent";
+			this.bandedGridColumnInactiveUsersPercent.Name = "bandedGridColumnInactiveUsersPercent";
+			this.bandedGridColumnInactiveUsersPercent.OptionsColumn.FixedWidth = true;
+			this.bandedGridColumnInactiveUsersPercent.Visible = true;
+			this.bandedGridColumnInactiveUsersPercent.Width = 120;
 			// 
 			// advBandedGridViewData
 			// 
@@ -504,12 +503,12 @@
 		private DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit repositoryItemMemoEdit;
 		private DevExpress.XtraGrid.Views.BandedGrid.BandedGridView bandedGridView;
 		private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand1;
-		private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn1;
+		private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumnTotalUsersNumber;
 		private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand2;
-		private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn2;
-		private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn3;
+		private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumnActiveUsersNumber;
+		private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumnActiveUsersPercent;
 		private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand3;
-		private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn4;
-		private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn5;
+		private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumnInactiveUsersNumber;
+		private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumnInactiveUsersPercent;
 	}
 }

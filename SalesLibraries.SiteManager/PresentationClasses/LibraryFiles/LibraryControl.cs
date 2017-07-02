@@ -9,6 +9,7 @@ using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Windows.Forms;
+using DevExpress.Skins;
 using DevExpress.Utils.Menu;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
@@ -46,6 +47,20 @@ namespace SalesLibraries.SiteManager.PresentationClasses.LibraryFiles
 			Records = new List<LibraryFilesModel>();
 			Records.AddRange(records);
 			gridControlData.DataSource = Records;
+
+			if (CreateGraphics().DpiX > 96)
+			{
+				gridColumnExtensionGroup.Width =
+					RectangleHelper.ScaleHorizontal(gridColumnExtensionGroup.Width, gridControlData.ScaleFactor.Width);
+				gridColumnFileDate.Width =
+					RectangleHelper.ScaleHorizontal(gridColumnFileDate.Width, gridControlData.ScaleFactor.Width);
+				gridColumnFileExtension.Width =
+					RectangleHelper.ScaleHorizontal(gridColumnFileExtension.Width, gridControlData.ScaleFactor.Width);
+				gridColumnLinkAddDate.Width =
+					RectangleHelper.ScaleHorizontal(gridColumnLinkAddDate.Width, gridControlData.ScaleFactor.Width);
+				gridColumnLinkModifyDate.Width =
+					RectangleHelper.ScaleHorizontal(gridColumnLinkModifyDate.Width, gridControlData.ScaleFactor.Width);
+			}
 		}
 
 		public PrintableComponentLink GetPrintLink()

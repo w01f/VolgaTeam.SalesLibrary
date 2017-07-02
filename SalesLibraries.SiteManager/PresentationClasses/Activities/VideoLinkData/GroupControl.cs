@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
+using DevExpress.Skins;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid;
 using DevExpress.XtraTab;
@@ -33,6 +34,12 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities.VideoLinkDat
 			Records = new List<VideoLinkInfo>();
 			Records.AddRange(records);
 			gridControlData.DataSource = Records;
+
+			if (CreateGraphics().DpiX > 96)
+			{
+				gridColumnDateModify.Width =
+					RectangleHelper.ScaleHorizontal(gridColumnDateModify.Width, gridControlData.ScaleFactor.Width);
+			}
 		}
 
 		private void repositoryItemHyperLinkEdit_ButtonClick(object sender, ButtonPressedEventArgs e)

@@ -134,7 +134,7 @@
 			this.gridColumnName.OptionsColumn.ReadOnly = true;
 			this.gridColumnName.Visible = true;
 			this.gridColumnName.VisibleIndex = 0;
-			this.gridColumnName.Width = 184;
+			this.gridColumnName.Width = 169;
 			// 
 			// gridColumnFileName
 			// 
@@ -149,7 +149,7 @@
 			this.gridColumnFileName.OptionsColumn.ReadOnly = true;
 			this.gridColumnFileName.Visible = true;
 			this.gridColumnFileName.VisibleIndex = 1;
-			this.gridColumnFileName.Width = 120;
+			this.gridColumnFileName.Width = 133;
 			// 
 			// gridColumnTaggedFilesCount
 			// 
@@ -164,7 +164,7 @@
 			this.gridColumnTaggedFilesCount.OptionsColumn.ReadOnly = true;
 			this.gridColumnTaggedFilesCount.Visible = true;
 			this.gridColumnTaggedFilesCount.VisibleIndex = 2;
-			this.gridColumnTaggedFilesCount.Width = 120;
+			this.gridColumnTaggedFilesCount.Width = 136;
 			// 
 			// gridColumnVideoCount
 			// 
@@ -179,7 +179,7 @@
 			this.gridColumnVideoCount.OptionsColumn.ReadOnly = true;
 			this.gridColumnVideoCount.Visible = true;
 			this.gridColumnVideoCount.VisibleIndex = 3;
-			this.gridColumnVideoCount.Width = 120;
+			this.gridColumnVideoCount.Width = 141;
 			// 
 			// gridColumnTaggedVideoCount
 			// 
@@ -194,7 +194,7 @@
 			this.gridColumnTaggedVideoCount.OptionsColumn.ReadOnly = true;
 			this.gridColumnTaggedVideoCount.Visible = true;
 			this.gridColumnTaggedVideoCount.VisibleIndex = 4;
-			this.gridColumnTaggedVideoCount.Width = 120;
+			this.gridColumnTaggedVideoCount.Width = 130;
 			// 
 			// gridColumnFileDate
 			// 
@@ -211,7 +211,7 @@
 			this.gridColumnFileDate.OptionsColumn.ReadOnly = true;
 			this.gridColumnFileDate.Visible = true;
 			this.gridColumnFileDate.VisibleIndex = 5;
-			this.gridColumnFileDate.Width = 120;
+			this.gridColumnFileDate.Width = 144;
 			// 
 			// griodColumnDaysFormLastUpdate
 			// 
@@ -226,7 +226,7 @@
 			this.griodColumnDaysFormLastUpdate.OptionsColumn.ReadOnly = true;
 			this.griodColumnDaysFormLastUpdate.Visible = true;
 			this.griodColumnDaysFormLastUpdate.VisibleIndex = 6;
-			this.griodColumnDaysFormLastUpdate.Width = 160;
+			this.griodColumnDaysFormLastUpdate.Width = 237;
 			// 
 			// repositoryItemHyperLinkEdit
 			// 

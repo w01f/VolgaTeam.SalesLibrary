@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using DevExpress.Skins;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraPrinting;
 using SalesLibraries.ServiceConnector.LinkConfigProfileService;
@@ -39,6 +40,12 @@ namespace SalesLibraries.SiteManager.PresentationClasses.LinkConfigProfiles
 			Dock = DockStyle.Fill;
 			_dataSource = dataSource;
 			NeedToSave = true;
+
+			if (CreateGraphics().DpiX > 96)
+			{
+				gridColumnFilesSelected.Width =
+					RectangleHelper.ScaleHorizontal(gridColumnFilesSelected.Width, gridControlFiles.ScaleFactor.Width);
+			}
 		}
 
 		#region Common Methods
