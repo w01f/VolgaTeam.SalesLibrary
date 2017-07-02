@@ -173,10 +173,5 @@ namespace SalesLibraries.Business.Entities.Helpers
 					return false;
 			}
 		}
-
-		public static bool IsUrlLink(string path)
-		{
-			return !String.IsNullOrEmpty(path) && path.StartsWith("http", StringComparison.OrdinalIgnoreCase);
-		}
 	}
 }

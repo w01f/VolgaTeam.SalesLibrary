@@ -128,10 +128,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 				previewContainer = CreateEntity<ExcelPreviewContainer>();
 			else if (FileFormatHelper.IsVideoFile(sourceFile))
 				previewContainer = CreateEntity<VideoPreviewContainer>();
-			else if (FileFormatHelper.IsUrlLink(sourceFile))
-				previewContainer = CreateEntity<WebLinkPreviewContainer>();
 			else
-				return null;
+				previewContainer = CreateEntity<WebLinkPreviewContainer>();
 			var relativePath = sourceFile.Replace(parent.Path, String.Empty);
 			if (relativePath.StartsWith(@"\"))
 				relativePath = relativePath.Substring(1);
