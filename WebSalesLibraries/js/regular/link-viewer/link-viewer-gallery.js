@@ -81,6 +81,13 @@
 				});
 			});
 			newPageImage.prop('src', page.href);
+			newPageImage.off('dragstart').on('dragstart', function (e)
+			{
+				var urlHeader = $(this).data("url-header");
+				var url = $(this).data('url');
+				if (url !== '')
+					e.originalEvent.dataTransfer.setData(urlHeader, url);
+			});
 		};
 
 		var updateNavButtons = function ()

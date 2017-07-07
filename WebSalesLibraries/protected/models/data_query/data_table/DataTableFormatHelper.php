@@ -101,6 +101,9 @@
 					$record['isFile'] = $fileInfo->isFile;
 
 					$isHyperlink = LibraryLink::isOpenedAsHyperlink($type, $extendedProperties);
+
+					$isLinkBundle = $linkRecord['original_format'] === 'link bundle';
+
 					$record['isHyperlink'] = $isHyperlink;
 					if ($isHyperlink)
 					{
@@ -120,7 +123,7 @@
 									strpos($urlPath, 'public_links') ||
 									strpos($urlPath, 'getSinglePage')));
 					}
-					else if ($fileInfo->isFile)
+					else if ($fileInfo->isFile || $isLinkBundle)
 					{
 						$record['url_header'] = 'DownloadURL';
 						$record['url'] = \FileInfo::getFileMIME($linkRecord['original_format']) . ':' .
@@ -128,7 +131,7 @@
 							str_replace('SalesLibraries/SalesLibraries', 'SalesLibraries', $fileInfo->link);
 					}
 
-					$record['isDraggable'] = $fileInfo->isFile || $isHyperlink;
+					$record['isDraggable'] = $fileInfo->isFile || $isHyperlink || $isLinkBundle;
 
 					$record['extended_data'] = array();
 					foreach ($extraColumns as $column)

@@ -272,7 +272,7 @@
 				$feedItem = new LinkFeedItem();
 				$feedItem->linkId = $resultRecord['id'];
 				$feedItem->linkName = $resultRecord['name'];
-				$feedItem->format = $resultRecord['search_format'];
+				$feedItem->format = $resultRecord['original_format'];
 				$feedItem->libraryName = $resultRecord['library_name'];
 				$feedItem->viewsCount = $resultRecord['total_views'];
 
@@ -286,14 +286,15 @@
 					$settings,
 					$library);
 				$isHyperlink = LibraryLink::isOpenedAsHyperlink($resultRecord['type'], $settings);
+				$isLinkBundle = $resultRecord['original_format'] === 'link bundle';
 
-				$feedItem->isDraggable = $fileInfo->isFile || $isHyperlink;
+				$feedItem->isDraggable = $fileInfo->isFile || $isHyperlink || $isLinkBundle;
 				if ($isHyperlink)
 				{
 					$feedItem->dragHeader = 'URL';
 					$feedItem->dragUrl = $fileInfo->link;
 				}
-				else if ($fileInfo->isFile)
+				else if ($fileInfo->isFile || $isLinkBundle)
 				{
 					$feedItem->dragHeader = 'DownloadURL';
 					$feedItem->dragUrl = \FileInfo::getFileMIME($resultRecord['original_format']) . ':' .
@@ -405,14 +406,15 @@
 						$settings,
 						$library);
 					$isHyperlink = LibraryLink::isOpenedAsHyperlink($resultRecord['type'], $settings);
+					$isLinkBundle = $resultRecord['original_format'] === 'link bundle';
 
-					$feedItem->isDraggable = $fileInfo->isFile || $isHyperlink;
+					$feedItem->isDraggable = $fileInfo->isFile || $isHyperlink || $isLinkBundle;
 					if ($isHyperlink)
 					{
 						$feedItem->dragHeader = 'URL';
 						$feedItem->dragUrl = $fileInfo->link;
 					}
-					else if ($fileInfo->isFile)
+					else if ($fileInfo->isFile || $isLinkBundle)
 					{
 						$feedItem->dragHeader = 'DownloadURL';
 						$feedItem->dragUrl = \FileInfo::getFileMIME($resultRecord['original_format']) . ':' .
@@ -664,14 +666,15 @@
 						$settings,
 						$library);
 					$isHyperlink = LibraryLink::isOpenedAsHyperlink($resultRecord['type'], $settings);
+					$isLinkBundle = $resultRecord['original_format'] === 'link bundle';
 
-					$feedItem->isDraggable = $fileInfo->isFile || $isHyperlink;
+					$feedItem->isDraggable = $fileInfo->isFile || $isHyperlink || $isLinkBundle;
 					if ($isHyperlink)
 					{
 						$feedItem->dragHeader = 'URL';
 						$feedItem->dragUrl = $fileInfo->link;
 					}
-					else if ($fileInfo->isFile)
+					else if ($fileInfo->isFile || $isLinkBundle)
 					{
 						$feedItem->dragHeader = 'DownloadURL';
 						$feedItem->dragUrl = \FileInfo::getFileMIME($resultRecord['original_format']) . ':' .

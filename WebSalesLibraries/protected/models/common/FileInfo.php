@@ -82,7 +82,8 @@
 					}
 					break;
 				case 19:
-					$fileInfo->name = $name;
+					$fileInfo->name = sprintf("%s.zip", $name);
+					$fileInfo->link = Yii::app()->createAbsoluteUrl('preview/zipAndDownloadLinkBundle', array('linkId' => $id));
 					break;
 				default:
 					$fileInfo->path = str_replace('//', DIRECTORY_SEPARATOR, str_replace('\\', DIRECTORY_SEPARATOR, $parentLibrary->storagePath . $relativePath));

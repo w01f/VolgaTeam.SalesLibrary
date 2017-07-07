@@ -7,12 +7,12 @@
 		var that = this;
 
 		var storedTextSize = $.cookie("wallbinTextSize");
-		if (storedTextSize == null)
+		if (storedTextSize === null)
 			storedTextSize = 12;
 		else
 		{
 			storedTextSize = parseInt(storedTextSize);
-			if (!(storedTextSize == 14 || storedTextSize == 12 || storedTextSize == 10))
+			if (!(storedTextSize === 14 || storedTextSize === 12 || storedTextSize === 10))
 				storedTextSize = 12
 		}
 
@@ -159,7 +159,7 @@
 			{
 				var header = $(this).find('.service-data .download-header').text();
 				var url = $(this).find('.service-data .download-link').text();
-				if (url != '')
+				if (url !== '')
 					event.originalEvent.dataTransfer.setData(header, url.replace(/\/\/+/g, '/'));
 			});
 
@@ -188,9 +188,9 @@
 				linkObject.addClass('active');
 				var folderLinkContent = linkObject.children('.folder-link-content');
 				var linkId = null;
-				if (folderLinkContent.attr("id") != null)
+				if (folderLinkContent.attr("id") !== null)
 					linkId = folderLinkContent.attr("id").replace('folder-link-content', '');
-				if (!folderLinkContent.find('.link-container').length && linkId != null)
+				if (!folderLinkContent.find('.link-container').length && linkId !== null)
 				{
 					$.ajax({
 						type: "POST",
@@ -332,7 +332,7 @@
 		var showAccordionFolder = function (folderContainer, folderId)
 		{
 			var folderLinks = folderContainer.find('.folder-links');
-			if (folderLinks.html() == '')
+			if (folderLinks.html() === '')
 			{
 				$.ajax({
 					type: "POST",

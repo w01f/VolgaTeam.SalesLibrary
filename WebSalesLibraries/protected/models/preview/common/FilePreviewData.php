@@ -10,6 +10,8 @@
 		public $fileSize;
 		public $fileExtension;
 
+		public $dragUrl;
+
 		/**
 		 * @param $link LibraryLink
 		 */
@@ -64,6 +66,11 @@
 					}
 			}
 			$this->fileLogo = sprintf('%s/images/preview/actions/file-logo-%s.png?%s', Yii::app()->getBaseUrl(true), $fileLogoSuffix, Yii::app()->params['version']);
+
+			$fileInfo = FileInfo::fromLinkData($link->id, $link->type, $link->name, $link->fileRelativePath, $link->extendedProperties, $link->parent->parent->parent);
+			if ($fileInfo->isFile)
+				$this->dragUrl = \FileInfo::getFileMIME($link->originalFormat) . ':' .
+					$fileInfo->name . ':' . $fileInfo->link;
 		}
 
 		/**

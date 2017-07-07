@@ -310,6 +310,39 @@
 			Yii::app()->end();
 		}
 
+		public function actionZipAndDownloadLinkBundle()
+		{
+			$linkId = Yii::app()->request->getQuery('linkId');
+			if (isset($linkId))
+			{
+				$linkRecord = LinkRecord::getLinkById($linkId);
+				if (isset($linkRecord))
+				{
+					$libraryManager = new LibraryManager();
+					$library = $libraryManager->getLibraryById($linkRecord->id_library);
+					$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
+					$link->load($linkRecord);
+					if ($link->isLinkBundle)
+					{
+						$files = FileDownloadInfo::getLinkBundleDownloadInfo($link);
+						$zipFile = $link->name . '.zip';
+						$zipPath = LibraryManager::getLibrariesRootPath() . DIRECTORY_SEPARATOR . 'downloads' . DIRECTORY_SEPARATOR . $zipFile;
+						$zip = new ZipArchive();
+						$zip->open($zipPath, ZipArchive::CREATE | ZipArchive::OVERWRITE);
+						foreach ($files as $file)
+						{
+							$filePath = $file->fullPath;
+							$relativePath = $file->relativePath;
+							$zip->addFile($filePath, $relativePath);
+						}
+						$zip->close();
+						Yii::app()->getRequest()->sendFile($zipFile, @file_get_contents($zipPath));
+						Yii::app()->end();
+					}
+				}
+			}
+		}
+
 		public function actionGetSingleInternalLink()
 		{
 			$linkId = Yii::app()->request->getQuery('linkId');

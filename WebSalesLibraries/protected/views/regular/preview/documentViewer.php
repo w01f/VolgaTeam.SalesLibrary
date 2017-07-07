@@ -91,7 +91,7 @@
 					<? endif; ?>
                 </div>
                 <div class="col col-xs-10 text-center preview-image-container">
-                    <img class="page-preview-image log-action" style="display: none;" src="//:0">
+                    <img class="page-preview-image log-action" style="display: none;" src="//:0" draggable="true" data-url-header="DownloadURL" data-url="<? echo $data->dragUrl; ?>">
                 </div>
                 <div class="col col-xs-1 text-center">
 					<? if (!$data->singlePage): ?>
@@ -174,7 +174,8 @@
                                             <li>
                                                 <a href="#" class="log-action download-link-bundle"
                                                    data-log-action="Download Link Bundle">
-                                                    Download all <? echo count($linkBundleInfo->downloadInfo); ?> files (<? echo FileInfo::formatFileSize(FileDownloadInfo::getTotalSize($linkBundleInfo->downloadInfo)); ?>)
+                                                    Download all <? echo count($linkBundleInfo->downloadInfo); ?> files (<? echo FileInfo::formatFileSize(FileDownloadInfo::getTotalSize($linkBundleInfo->downloadInfo)); ?>
+                                                    )
                                                 </a>
                                             </li>
 	                                    <? endif; ?>
