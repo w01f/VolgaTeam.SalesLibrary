@@ -22,8 +22,8 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 		{
 			var powerPointContainer = (PowerPointPreviewContainer)previewContainer;
 
-			var log = new StringBuilder();
-			log.AppendLine(String.Format("Process started at {0:hh:mm:ss tt zz}", DateTime.Now));
+			var logger = new PreviewGenerationLogger(powerPointContainer);
+			logger.StartLogging();
 
 			var updated = false;
 			var tryCount = 0;
@@ -98,21 +98,23 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 						Presentation presentation = null;
 						processInteropped = powerPointProcessor.DoTimeLimitedAction(() =>
 						{
-							presentation = powerPointProcessor.PowerPointObject.Presentations.Open(previewContainer.SourcePath, WithWindow: MsoTriState.msoFalse);
+							presentation = powerPointProcessor.PowerPointObject.Presentations.Open(previewContainer.SourcePath,
+								WithWindow: MsoTriState.msoFalse);
 							presentation.Final = false;
 						});
 						if (processInteropped || presentation == null) continue;
 
 						var content = new StringBuilder();
-						if (!cancellationToken.IsCancellationRequested && (updatePng || updateThumbs || updatePptx || updateTxt || updatePngPhone || updateThumbsPhone))
+						if (!cancellationToken.IsCancellationRequested &&
+						    (updatePng || updateThumbs || updatePptx || updateTxt || updatePngPhone || updateThumbsPhone))
 						{
 							var i = 1;
-							var thumbHeight = (int)presentation.PageSetup.SlideHeight / 10;
-							var thumbWidth = (int)presentation.PageSetup.SlideWidth / 10;
-							var phoneHeight = (int)(presentation.PageSetup.SlideHeight / 1.5);
-							var phoneWidth = (int)(presentation.PageSetup.SlideWidth / 1.5);
-							var thumbPhoneHeight = (int)presentation.PageSetup.SlideHeight / 4;
-							var thumbPhoneWidth = (int)presentation.PageSetup.SlideWidth / 4;
+							var thumbHeight = (int) presentation.PageSetup.SlideHeight / 10;
+							var thumbWidth = (int) presentation.PageSetup.SlideWidth / 10;
+							var phoneHeight = (int) (presentation.PageSetup.SlideHeight / 1.5);
+							var phoneWidth = (int) (presentation.PageSetup.SlideWidth / 1.5);
+							var thumbPhoneHeight = (int) presentation.PageSetup.SlideHeight / 4;
+							var thumbPhoneWidth = (int) presentation.PageSetup.SlideWidth / 4;
 							foreach (Slide slide in presentation.Slides)
 							{
 								if (cancellationToken.IsCancellationRequested) break;
@@ -129,7 +131,8 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 								{
 									processInteropped = powerPointProcessor.DoTimeLimitedAction(() =>
 									{
-										slide.Export(Path.Combine(pngPhoneDestination, String.Format("Slide{0}.{1}", i, "png")), "PNG", phoneWidth, phoneHeight);
+										slide.Export(Path.Combine(pngPhoneDestination, String.Format("Slide{0}.{1}", i, "png")), "PNG", phoneWidth,
+											phoneHeight);
 									});
 									if (processInteropped)
 										break;
@@ -138,7 +141,8 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 								{
 									processInteropped = powerPointProcessor.DoTimeLimitedAction(() =>
 									{
-										slide.Export(Path.Combine(thumbDestination, String.Format("Slide{0}.{1}", i, "png")), "PNG", thumbWidth, thumbHeight);
+										slide.Export(Path.Combine(thumbDestination, String.Format("Slide{0}.{1}", i, "png")), "PNG", thumbWidth,
+											thumbHeight);
 									});
 									if (processInteropped)
 										break;
@@ -147,7 +151,8 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 								{
 									processInteropped = powerPointProcessor.DoTimeLimitedAction(() =>
 									{
-										slide.Export(Path.Combine(thumbsPhoneDestination, String.Format("Slide{0}.{1}", i, "png")), "PNG", thumbPhoneWidth, thumbPhoneHeight);
+										slide.Export(Path.Combine(thumbsPhoneDestination, String.Format("Slide{0}.{1}", i, "png")), "PNG",
+											thumbPhoneWidth, thumbPhoneHeight);
 									});
 									if (processInteropped)
 										break;
@@ -156,7 +161,9 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 								{
 									processInteropped = powerPointProcessor.DoTimeLimitedAction(() =>
 									{
-										var singleSlidePresentation = powerPointProcessor.PowerPointObject.Presentations.Open(previewContainer.SourcePath, WithWindow: MsoTriState.msoFalse);
+										var singleSlidePresentation =
+											powerPointProcessor.PowerPointObject.Presentations.Open(previewContainer.SourcePath,
+												WithWindow: MsoTriState.msoFalse);
 										var totalSlides = singleSlidePresentation.Slides.Count;
 										for (int j = totalSlides; j >= 1; j--)
 											if (j != i)
@@ -186,15 +193,15 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 								continue;
 							}
 							if (updatePng)
-								log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.Png, DateTime.Now));
+								logger.LogStage(PreviewFormats.Png);
 							if (updatePngPhone)
-								log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.PngForMobile, DateTime.Now));
+								logger.LogStage(PreviewFormats.PngForMobile);
 							if (updateThumbs)
-								log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.Thumbnails, DateTime.Now));
+								logger.LogStage(PreviewFormats.Thumbnails);
 							if (updateThumbsPhone)
-								log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.ThumbnailsForMobile, DateTime.Now));
+								logger.LogStage(PreviewFormats.ThumbnailsForMobile);
 							if (updatePptx)
-								log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.PowerPoint, DateTime.Now));
+								logger.LogStage(PreviewFormats.PowerPoint);
 						}
 						if (!cancellationToken.IsCancellationRequested && updateTxt)
 						{
@@ -207,7 +214,7 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 								sw.Write(content.ToString());
 								sw.Flush();
 							}
-							log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.Text, DateTime.Now));
+							logger.LogStage(PreviewFormats.Text);
 						}
 
 						if (!cancellationToken.IsCancellationRequested && updatePdf)
@@ -222,13 +229,13 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 								tryCount++;
 								continue;
 							}
-							log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.Pdf, DateTime.Now));
+							logger.LogStage(PreviewFormats.Pdf);
 						}
 
 						if (!cancellationToken.IsCancellationRequested && updateThumbsDatatable)
 						{
 							JpegGenerator.GenerateDatatableJpegs(pngDestination, thumbsDatatableDestination);
-							log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.ThumbnailsForDatatable, DateTime.Now));
+							logger.LogStage(PreviewFormats.ThumbnailsForDatatable);
 						}
 
 						presentation.Close();
@@ -242,6 +249,10 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 
 						updated = true;
 					}
+					catch (PreviewGenerationException)
+					{
+						throw;
+					}
 					catch { }
 					finally
 					{
@@ -251,9 +262,7 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 				}
 			} while (!updated && tryCount < 10);
 
-			log.AppendLine(String.Format("Process finished at {0:hh:mm:ss tt zz}", DateTime.Now));
-			if (Directory.Exists(previewContainer.ContainerPath))
-				File.WriteAllText(Path.Combine(previewContainer.ContainerPath, String.Format("log_{0:MMddyy_hhmmsstt}.txt", DateTime.Now)), log.ToString());
+			logger.FinishLogging();
 		}
 	}
 }

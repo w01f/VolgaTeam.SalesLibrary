@@ -6,6 +6,7 @@ using SalesLibraries.Business.Entities.Wallbin.Common.Constants;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers;
 using SalesLibraries.Common.DataState;
+using SalesLibraries.Common.Helpers;
 using SalesLibraries.FileManager.Business.PreviewGenerators;
 
 namespace SalesLibraries.FileManager.Business.Models.VideoInfo
@@ -35,7 +36,7 @@ namespace SalesLibraries.FileManager.Business.Models.VideoInfo
 				SourceFolderPath = Path.GetDirectoryName(previewContainer.SourcePath),
 				SourceFileInfo = String.Format("{0}     <b>({1})</b>",
 					Path.GetFileName(previewContainer.SourcePath),
-					FormatVideoSize(new FileInfo(previewContainer.SourcePath).Length)),
+					Utils.FormatFileSize(new FileInfo(previewContainer.SourcePath).Length)),
 				PreviewContainerPath = previewContainer.ContainerPath,
 				Converted = previewContainer.IsConverted
 			};
@@ -69,7 +70,7 @@ namespace SalesLibraries.FileManager.Business.Models.VideoInfo
 					videoInfo.Mp4FilePath = mp4FilePath;
 					videoInfo.Mp4FileInfo = String.Format("{0}{1}",
 						Path.GetFileName(mp4FilePath),
-						String.Format("     <b>({0})</b>", FormatVideoSize(new FileInfo(videoInfo.Mp4FilePath).Length)));
+						String.Format("     <b>({0})</b>", Utils.FormatFileSize(new FileInfo(videoInfo.Mp4FilePath).Length)));
 				}
 				else
 				{
@@ -84,7 +85,11 @@ namespace SalesLibraries.FileManager.Business.Models.VideoInfo
 		public void UpdateContent(CancellationToken cancellationToken)
 		{
 			var previewGenerator = _previewContainer.GetPreviewGenerator();
-			_previewContainer.UpdateContent(previewGenerator, cancellationToken);
+			try
+			{
+				_previewContainer.UpdateContent(previewGenerator, cancellationToken);
+			}
+			catch { }
 		}
 
 		public void ClearContent()
@@ -106,17 +111,6 @@ namespace SalesLibraries.FileManager.Business.Models.VideoInfo
 				_previewContainer.DeleteContainer();
 			else
 				_previewContainer.ClearContent();
-		}
-
-		private static string FormatVideoSize(long size)
-		{
-			if (size >= 524288000)
-				return String.Format("{0} gb", (size * 0.0009765625 * 0.0009765625 * 0.0009765625).ToString("# ##0"));
-			if (size < 524288000 && size >= 512000)
-				return String.Format("{0} mb", (size * 0.0009765625 * 0.0009765625).ToString("# ##0"));
-			if (size < 512000)
-				return String.Format("{0} kb", (size * 0.0009765625).ToString("# ##0"));
-			return String.Format("{0} b", size.ToString("# ##0"));
 		}
 	}
 }

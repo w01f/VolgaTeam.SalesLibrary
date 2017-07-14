@@ -72,6 +72,18 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 			}
 		}
 
+		public static void ProcessSyncException(Exception ex)
+		{
+			if (ex is PreviewGenerationException)
+			{
+				var previewGenerationexception = (PreviewGenerationException)ex;
+				if (MainController.Instance.PopupMessages.ShowWarningQuestion(String.Format("{0}.{1}Do you want to open log file?", previewGenerationexception.Message, Environment.NewLine)) == DialogResult.Yes)
+					Utils.OpenFile(previewGenerationexception.LogPath);
+			}
+			else
+				MainController.Instance.PopupMessages.ShowWarning(ex.Message);
+		}
+
 		private static void SyncLibrary(Library library, CancellationToken cancellationToken)
 		{
 			var syncLogs = new List<SyncLog>();
@@ -137,7 +149,6 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 			if (cancellationToken.IsCancellationRequested) return;
 			folderLinks.ForEach(f => f.UpdateContent());
 		}
-
 
 		private static void ApplyOriginalFileStateChangesOnAssociatedLink(Library library, CancellationToken cancellationToken)
 		{
@@ -207,7 +218,6 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 				previewContainer.UpdateContent(previewGenerator, cancellationToken);
 			}
 		}
-
 
 		private static void DeleteDeadLinks(Library library, CancellationToken cancellationToken)
 		{

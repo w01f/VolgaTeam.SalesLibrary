@@ -21,7 +21,7 @@ namespace SalesLibraries.FileManager.Business.Services
 			if (!File.Exists(sourceFilePath) || !File.Exists(analizerPath)) return;
 			var videoAnalyzer = new Process
 			{
-				StartInfo = new ProcessStartInfo(analizerPath, String.Format("-v error -print_format json -show_streams -select_streams v:0 \"{0}\"", sourceFilePath))
+				StartInfo = new ProcessStartInfo(analizerPath, String.Format("-v error -print_format json -show_format -show_streams -select_streams v:0 \"{0}\"", sourceFilePath))
 				{
 					UseShellExecute = false,
 					RedirectStandardError = true,
@@ -66,10 +66,53 @@ namespace SalesLibraries.FileManager.Business.Services
 			var tmpVideoFilePath = Path.Combine(destinationPath, Path.ChangeExtension(Path.GetFileName(Path.GetTempFileName()), ".mp4"));
 			var destinationVideoFilePath = Path.Combine(destinationPath, Path.ChangeExtension(Path.GetFileName(sourceFilePath), ".mp4"));
 			if (!File.Exists(sourceFilePath) || !File.Exists(converterPath) || !File.Exists(postProcessorPath)) return;
+
+			var fileType = Path.GetExtension(sourceFilePath)?.ToUpper();
+			string converterParameters;
+			switch (fileType)
+			{
+				case ".MP4":
+					converterParameters = String.Format("-i \"{0}\" -c:v libx264 -b:v 2800k -b:a 192k -movflags faststart \"{1}\"", sourceFilePath, tmpVideoFilePath);
+					break;
+				case ".MPG":
+				case ".MPEG":
+					converterParameters = String.Format(ffMpegData.IsBitrateNormal ?
+						"-i \"{0}\" -c:v libx264 -movflags faststart \"{1}\"" :
+						"-i \"{0}\" -c:v libx264 -b:v 2800k -b:a 192k -movflags faststart \"{1}\"", sourceFilePath, tmpVideoFilePath);
+					break;
+				case ".MOV":
+					converterParameters = String.Format(ffMpegData.IsBitrateNormal ?
+						"-i \"{0}\" -pix_fmt yuv420p -vcodec h264 -acodec aac -strict -2 -movflags faststart \"{1}\"" :
+						"-i \"{0}\" -pix_fmt yuv420p -vcodec h264 -b:v 2800k -b:a 192k -acodec aac -strict -2 -movflags faststart \"{1}\"", sourceFilePath, tmpVideoFilePath);
+					break;
+				case ".WMV":
+					converterParameters = String.Format(ffMpegData.IsBitrateNormal ?
+						"-i \"{0}\" -c:v libx264 -movflags faststart \"{1}\"" :
+						"-i \"{0}\" -c:v libx264 -b:v 2800k -b:a 192k -movflags faststart \"{1}\"", sourceFilePath, tmpVideoFilePath);
+					break;
+				case ".ASF":
+					converterParameters = String.Format(ffMpegData.IsBitrateNormal ?
+						"-i \"{0}\" -c:v libx264 -movflags faststart \"{1}\"" :
+						"-i \"{0}\" -c:v libx264 -b:v 2800k -b:a 192k -movflags faststart \"{1}\"", sourceFilePath, tmpVideoFilePath);
+					break;
+				case ".M4V":
+					converterParameters = String.Format(ffMpegData.IsBitrateNormal ?
+						"-i \"{0}\" -c:v libx264 -movflags faststart \"{1}\"" :
+						"-i \"{0}\" -c:v libx264 -b:v 2800k -b:a 192k -movflags faststart \"{1}\"", sourceFilePath, tmpVideoFilePath);
+					break;
+				case ".MKV":
+					converterParameters = String.Format(ffMpegData.IsBitrateNormal ?
+						"-i \"{0}\" -c:v libx264 -movflags faststart \"{1}\"" :
+						"-i \"{0}\" -c:v libx264 -b:v 5M -b:a 192k -movflags faststart \"{1}\"", sourceFilePath, tmpVideoFilePath);
+					break;
+				default:
+					converterParameters = String.Format("-i \"{0}\" -c:v libx264 -crf 23 -b {1} \"{2}\"", sourceFilePath,
+						ffMpegData.Bitrate, tmpVideoFilePath);
+					break;
+			}
 			var videoConverter = new Process
 			{
-				StartInfo = new ProcessStartInfo(converterPath, String.Format("-i \"{0}\" -c:v libx264 -crf 23 -b {1} \"{2}\"", sourceFilePath,
-					ffMpegData.Bitrate, tmpVideoFilePath))
+				StartInfo = new ProcessStartInfo(converterPath, converterParameters)
 				{
 					UseShellExecute = false,
 					RedirectStandardError = false,

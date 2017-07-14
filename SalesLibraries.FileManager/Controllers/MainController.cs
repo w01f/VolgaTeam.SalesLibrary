@@ -195,7 +195,7 @@ namespace SalesLibraries.FileManager.Controllers
 					}
 				});
 			}
-			
+
 			if (stopRun) return;
 			if (appReady)
 			{
@@ -277,7 +277,12 @@ namespace SalesLibraries.FileManager.Controllers
 				await FileStorageManager.Instance.FixDataState();
 			});
 			Wallbin.LoadLibrary(Settings.BackupPath);
-			SyncManager.SyncSilent();
+
+			try
+			{
+				SyncManager.SyncSilent();
+			}
+			catch { }
 		}
 
 		public void ReloadData()

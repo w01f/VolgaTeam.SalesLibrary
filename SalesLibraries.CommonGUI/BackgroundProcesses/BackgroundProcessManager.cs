@@ -30,16 +30,16 @@ namespace SalesLibraries.CommonGUI.BackgroundProcesses
 				_formProgress?.Dispose();
 				_formProgress = null;
 			}
-			catch{}
+			catch { }
 		}
 
-		public void Run(string title, Action<CancellationToken, FormProgressCommon> process, Action afterComplete = null)
+		public void Run(string title, Action<CancellationToken, FormProgressCommon> process, Action afterComplete = null, Action<Exception> onException = null)
 		{
 			using (var form = new FormProgressCommon())
 			{
 				form.Title = title;
 				form.StartPosition = FormStartPosition.CenterParent;
-				RunWithProgress(form, false, process, cancellationToken => { afterComplete?.Invoke(); });
+				RunWithProgress(form, false, process, cancellationToken => { afterComplete?.Invoke(); }, onException);
 			}
 		}
 
@@ -47,7 +47,8 @@ namespace SalesLibraries.CommonGUI.BackgroundProcesses
 			TForm formProgress,
 			bool showAsync,
 			Action<CancellationToken, TForm> process,
-			Action<CancellationToken> afterComplete = null)
+			Action<CancellationToken> afterComplete = null,
+			Action<Exception> onException = null)
 			where TForm : FormProgressBase
 		{
 			var cancellationTokenSource = new CancellationTokenSource();
@@ -70,10 +71,27 @@ namespace SalesLibraries.CommonGUI.BackgroundProcesses
 
 			formProgress.Shown += async (sender, args) =>
 			{
-				await Task.Run(() => process(cancellationTokenSource.Token, formProgress), cancellationTokenSource.Token);
-				afterComplete?.Invoke(cancellationTokenSource.Token);
-				_mainFormAccessor().Invoke(new MethodInvoker(formProgress.Close));
-				cancellationTokenSource.Dispose();
+				try
+				{
+					await Task.Run(() => process(cancellationTokenSource.Token, formProgress), cancellationTokenSource.Token);
+					afterComplete?.Invoke(cancellationTokenSource.Token);
+					_mainFormAccessor().Invoke(new MethodInvoker(formProgress.Close));
+				}
+				catch (Exception ex)
+				{
+					_mainFormAccessor().Invoke(new MethodInvoker(() =>
+					{
+						formProgress.Visible = false;
+						formProgress.Close();
+						Application.DoEvents();
+
+						onException?.Invoke(ex);
+					}));
+				}
+				finally
+				{
+					cancellationTokenSource.Dispose();
+				}
 			};
 			formProgress.ProcessAborted += (o, e) => cancellationTokenSource.Cancel();
 			if (showAsync)

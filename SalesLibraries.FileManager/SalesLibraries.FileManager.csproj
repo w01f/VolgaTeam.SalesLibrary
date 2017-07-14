@@ -180,6 +180,9 @@
     <Compile Include="Business\PreviewGenerators\PowerPointPreviewGenerator.cs" />
     <Compile Include="Business\PreviewGenerators\ExcelPreviewGenerator.cs" />
     <Compile Include="Business\PreviewGenerators\PdfPreviewGenerator.cs" />
+    <Compile Include="Business\PreviewGenerators\PreviewGenerationException.cs" />
+    <Compile Include="Business\PreviewGenerators\VideoPreviewGenerationLogger.cs" />
+    <Compile Include="Business\PreviewGenerators\PreviewGenerationLogger.cs" />
     <Compile Include="Business\PreviewGenerators\WebPreviewGenerator.cs" />
     <Compile Include="Business\PreviewGenerators\WordPreviewGenerator.cs" />
     <Compile Include="Business\PreviewGenerators\VideoPreviewGenerator.cs" />

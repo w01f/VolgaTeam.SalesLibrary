@@ -1,7 +1,5 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Constants;
@@ -20,8 +18,8 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 			var updated = false;
 			FFMpegData videoData = null;
 
-			var log = new StringBuilder();
-			log.AppendLine(String.Format("Process started at {0:hh:mm:ss tt zz}", DateTime.Now));
+			var logger = new VideoPreviewGenerationLogger(previewContainer);
+			logger.StartLogging();
 
 			if (!cancellationToken.IsCancellationRequested)
 			{
@@ -32,8 +30,7 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 				if (updateInfo)
 				{
 					VideoHelper.ExtractVideoInfo(previewContainer.SourcePath, infoDestination, cancellationToken);
-					if (Directory.GetFiles(infoDestination).Any())
-						log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.VideoInfo, DateTime.Now));
+					logger.LogInfoStage();
 				}
 				videoData = ((VideoPreviewContainer)previewContainer).GetVideoData();
 				updated |= updateInfo;
@@ -48,8 +45,7 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 				if (updateMp4)
 				{
 					VideoHelper.ExportMp4(previewContainer.SourcePath, mp4Destination, videoData, cancellationToken);
-					if (Directory.GetFiles(mp4Destination).Any())
-						log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.VideoMp4, DateTime.Now));
+					logger.LogStage(PreviewFormats.VideoMp4);
 				}
 				updated |= updateMp4;
 			}
@@ -75,10 +71,8 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 					VideoHelper.GenerateThumbnails(sourceFile, thumbDestination, videoData, cancellationToken);
 					JpegGenerator.GenerateDatatableJpegs(thumbDestination, thumbDatatableDestination);
 					PngHelper.ConvertFiles(thumbDestination);
-					if (Directory.GetFiles(thumbDestination).Any())
-						log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.VideoThumbnail, DateTime.Now));
-					if (Directory.GetFiles(thumbDatatableDestination).Any())
-						log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.ThumbnailsForDatatable, DateTime.Now));
+					logger.LogStage(PreviewFormats.VideoThumbnail);
+					logger.LogStage(PreviewFormats.ThumbnailsForDatatable);
 				}
 				updated |= updateThumbs || updateThumbsDatatable;
 			}
@@ -86,9 +80,7 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 			if (updated)
 				previewContainer.MarkAsModified();
 
-			log.AppendLine(String.Format("Process finished at {0:hh:mm:ss tt zz}", DateTime.Now));
-			if (Directory.Exists(previewContainer.ContainerPath))
-				File.WriteAllText(Path.Combine(previewContainer.ContainerPath, String.Format("log_{0:MMddyy_hhmmsstt}.txt", DateTime.Now)), log.ToString());
+			logger.FinishLogging();
 		}
 	}
 }

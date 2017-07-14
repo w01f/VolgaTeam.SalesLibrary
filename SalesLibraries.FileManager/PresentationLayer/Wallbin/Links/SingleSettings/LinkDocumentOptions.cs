@@ -213,7 +213,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 					link.ClearPreviewContainer();
 					var previewContainer = link.GetPreviewContainer();
 					var previewGenerator = previewContainer.GetPreviewGenerator();
-					previewContainer.UpdateContent(previewGenerator, cancelationToken);
+					try
+					{
+						previewContainer.UpdateContent(previewGenerator, cancelationToken);
+					}
+					catch { }
 				}
 			});
 			MainController.Instance.PopupMessages.ShowInfo(String.Format("{0}{1} now updated for the server!", _sourceLinks.Count == 1 ? _sourceLinks.First().NameWithExtension : "Links", Environment.NewLine));

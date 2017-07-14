@@ -271,5 +271,16 @@ namespace SalesLibraries.Common.Helpers
 				return false;
 			}
 		}
+
+		public static string FormatFileSize(long size)
+		{
+			if (size >= 524288000)
+				return String.Format("{0} gb", (size * 0.0009765625 * 0.0009765625 * 0.0009765625).ToString("# ##0"));
+			if (size < 524288000 && size >= 512000)
+				return String.Format("{0} mb", (size * 0.0009765625 * 0.0009765625).ToString("# ##0"));
+			if (size < 512000)
+				return String.Format("{0} kb", (size * 0.0009765625).ToString("# ##0"));
+			return String.Format("{0} b", size.ToString("# ##0"));
+		}
 	}
 }

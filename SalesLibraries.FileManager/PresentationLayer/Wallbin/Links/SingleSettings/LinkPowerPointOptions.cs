@@ -98,7 +98,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				_data.ClearPreviewContainer();
 				var previewContainer = _data.GetPreviewContainer();
 				var previewGenerator = previewContainer.GetPreviewGenerator();
-				previewContainer.UpdateContent(previewGenerator, cancelationToken);
+				try
+				{
+					previewContainer.UpdateContent(previewGenerator, cancelationToken);
+				}
+				catch { }
 			});
 			MainController.Instance.PopupMessages.ShowInfo(String.Format("{0}{1}Is now updated for the server!", _data.NameWithExtension, Environment.NewLine));
 		}

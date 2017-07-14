@@ -1,10 +1,7 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using Microsoft.Office.Interop.Word;
-using SalesLibraries.Business.Entities.Helpers;
 using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Constants;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers;
@@ -21,8 +18,8 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 		{
 			var wordContainer = (WordPreviewContainer)previewContainer;
 
-			var log = new StringBuilder();
-			log.AppendLine(String.Format("Process started at {0:hh:mm:ss tt zz}", DateTime.Now));
+			var logger = new PreviewGenerationLogger(wordContainer);
+			logger.StartLogging();
 
 			var pdfDestination = Path.Combine(wordContainer.ContainerPath, PreviewFormats.Pdf);
 			var updatePdf = !(Directory.Exists(pdfDestination) && Directory.GetFiles(pdfDestination).Any());
@@ -101,22 +98,22 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 						if (updatePdf)
 						{
 							document.ExportAsFixedFormat(pdfFileName, WdExportFormat.wdExportFormatPDF);
-							log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.Pdf, DateTime.Now));
+							logger.LogStage(PreviewFormats.Pdf);
 						}
 
 						if (updatePng || updateThumbs || updateThumbsDatatable)
 						{
 							PdfHelper.ExportPdf(pdfFileName, pngDestination, thumbsDestination);
 							JpegGenerator.GenerateDatatableJpegs(pngDestination, thumbsDatatableDestination);
-							log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.Png, DateTime.Now));
-							log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.Thumbnails, DateTime.Now));
-							log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.ThumbnailsForDatatable, DateTime.Now));
+							logger.LogStage(PreviewFormats.Png);
+							logger.LogStage(PreviewFormats.Thumbnails);
+							logger.LogStage(PreviewFormats.ThumbnailsForDatatable);
 						}
 						if (updatePngPhone || updateThumbsPhone)
 						{
 							PdfHelper.ExportPdfPhone(pdfFileName, pngPhoneDestination, thumbsPhoneDestination);
-							log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.PngForMobile, DateTime.Now));
-							log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.ThumbnailsForMobile, DateTime.Now));
+							logger.LogStage(PreviewFormats.PngForMobile);
+							logger.LogStage(PreviewFormats.ThumbnailsForMobile);
 						}
 
 						if (updateTxt)
@@ -127,7 +124,7 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 								sw.Write(document.Content.Text);
 								sw.Flush();
 							}
-							log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.Text, DateTime.Now));
+							logger.LogStage(PreviewFormats.Text);
 						}
 
 						if (updateDocx)
@@ -159,11 +156,15 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 							if (!documentSlitted)
 								for (var i = 1; i <= pageCount; i++)
 									document.SaveAs(Path.Combine(docxDestination, string.Format("Page{0}.{1}", i, "docx")), WdSaveFormat.wdFormatXMLDocument);
-							log.AppendLine(String.Format("{0} generated at {1:hh:mm:ss tt}", PreviewFormats.Word, DateTime.Now));
+							logger.LogStage(PreviewFormats.Word);
 						}
 						document.Close(false);
 						Utils.ReleaseComObject(document);
 						updated = true;
+					}
+					catch (PreviewGenerationException)
+					{
+						throw;
 					}
 					catch
 					{
@@ -184,9 +185,7 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 				previewContainer.MarkAsModified();
 			}
 
-			log.AppendLine(String.Format("Process finished at {0:hh:mm:ss tt zz}", DateTime.Now));
-			if (Directory.Exists(previewContainer.ContainerPath))
-				File.WriteAllText(Path.Combine(previewContainer.ContainerPath, String.Format("log_{0:MMddyy_hhmmsstt}.txt", DateTime.Now)), log.ToString());
+			logger.FinishLogging();
 		}
 	}
 }

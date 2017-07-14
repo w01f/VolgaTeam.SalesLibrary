@@ -277,18 +277,40 @@ namespace SalesLibraries.FileManager.Controllers
 
 			using (var formProgressSync = new FormProgressSync())
 			{
+				var successfullSync = false;
 				MainController.Instance.ProcessManager.RunWithProgress(
 					formProgressSync,
 					false,
-					(cancellationToken, formProgress) => SyncManager.SyncRegular(cancellationToken));
-				if (targetLibrary.SyncSettings.CloseAfterSync)
-					MainController.Instance.MainForm.Close();
-				else
+					(cancellationToken, formProgress) =>
+					{
+						SyncManager.SyncRegular(cancellationToken);
+						successfullSync = true;
+					},
+					null,
+					exception =>
+					{
+						MainController.Instance.MainForm.WindowState = savedState;
+						MainController.Instance.MainForm.ribbonControl.Enabled = true;
+						Application.DoEvents();
+
+						MainController.Instance.ActivateApplication();
+						Application.DoEvents();
+
+						SyncManager.ProcessSyncException(exception);
+					}
+					);
+
+				if (successfullSync)
 				{
-					MainController.Instance.MainForm.WindowState = savedState;
-					MainController.Instance.MainForm.ribbonControl.Enabled = true;
-					MainController.Instance.TabWallbin.UpdateWallbin();
-					MainController.Instance.ActivateApplication();
+					if (targetLibrary.SyncSettings.CloseAfterSync)
+						MainController.Instance.MainForm.Close();
+					else
+					{
+						MainController.Instance.MainForm.WindowState = savedState;
+						MainController.Instance.MainForm.ribbonControl.Enabled = true;
+						MainController.Instance.TabWallbin.UpdateWallbin();
+						MainController.Instance.ActivateApplication();
+					}
 				}
 			}
 		}

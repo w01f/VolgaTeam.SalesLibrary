@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
 using Newtonsoft.Json;
 
@@ -14,6 +15,7 @@ namespace SalesLibraries.Common.Objects.Video
 		public double Duration { get; private set; }
 
 		public bool IsH264Encoded => String.Equals(Codec, "h264", StringComparison.OrdinalIgnoreCase);
+		public bool IsBitrateNormal => Bitrate < 3000000;
 
 		public FFMpegData() { }
 
@@ -23,9 +25,15 @@ namespace SalesLibraries.Common.Objects.Video
 			if (codecValue != null)
 				Codec = codecValue.ToString();
 
-			var bitrateValue = source.streams[0].bit_rate;
+			var bitrateValue = source.format?.bit_rate;
 			if (bitrateValue != null)
 				Bitrate = Int32.Parse(bitrateValue.ToString());
+			else
+			{
+				bitrateValue = source.streams[0].bit_rate;
+				if (bitrateValue != null)
+					Bitrate = Int32.Parse(bitrateValue.ToString());
+			}
 
 			var widthValue = source.streams[0].width;
 			if (widthValue != null)
@@ -35,9 +43,15 @@ namespace SalesLibraries.Common.Objects.Video
 			if (heightValue != null)
 				Height = Int32.Parse(heightValue.ToString());
 
-			var durationValue = source.streams[0].duration;
+			var durationValue = source.format?.duration;
 			if (durationValue != null)
-				Duration = Math.Floor(Double.Parse(durationValue.ToString(), new System.Globalization.CultureInfo("en-us")));
+				Duration = Math.Floor(Double.Parse(durationValue.ToString(), new CultureInfo("en-us")));
+			else
+			{
+				durationValue = source.streams[0].duration;
+				if (durationValue != null)
+					Duration = Math.Floor(Double.Parse(durationValue.ToString(), new CultureInfo("en-us")));
+			}
 		}
 
 		public static FFMpegData LoadFromFile(string infoFilePath)

@@ -95,10 +95,17 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.CompactWallbin
 			circularProgressSyncProgress.IsRunning = true;
 
 			var cancellationTokenSource = new CancellationTokenSource();
-			await Task.Run(() =>
+			try
 			{
-				SyncManager.SyncRegular(cancellationTokenSource.Token);
-			}, cancellationTokenSource.Token);
+				await Task.Run(() =>
+				{
+					SyncManager.SyncRegular(cancellationTokenSource.Token);
+				}, cancellationTokenSource.Token);
+			}
+			catch (Exception exception)
+			{
+				SyncManager.ProcessSyncException(exception);
+			}
 
 			circularProgressSyncProgress.IsRunning = false;
 			panelSyncProgress.Visible = false;
