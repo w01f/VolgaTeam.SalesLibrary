@@ -77,12 +77,13 @@
 			else
 			{
 				$alphabet = "abcdefghijklmnopqrstuwxyz0123456789";
+				$passArray = array();
 				for ($i = 0; $i < 5; $i++)
 				{
 					$n = rand(0, strlen($alphabet) - 1);
-					$pass[$i] = $alphabet[$n];
+					$passArray[$i] = $alphabet[$n];
 				}
-				$pass = implode($pass);
+				$pass = implode($passArray);
 			}
 			return $pass;
 		}

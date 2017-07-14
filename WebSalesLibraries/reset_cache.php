@@ -1,0 +1,4 @@
+<?
+	opcache_reset();
+?>
+Done
