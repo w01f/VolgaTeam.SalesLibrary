@@ -124,5 +124,18 @@ namespace SalesLibraries.SalesDepot.Controllers
 		{
 			MainController.Instance.HelpManager.OpenHelpLink("overnights");
 		}
+
+		private void InitializeComponent()
+		{
+			this.SuspendLayout();
+			// 
+			// CalendarPage
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+			this.Name = "CalendarPage";
+			this.Size = new System.Drawing.Size(823, 904);
+			this.ResumeLayout(false);
+
+		}
 	}
 }

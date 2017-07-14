@@ -86,8 +86,8 @@
 			// 
 			// LinkSettingsControl
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.Name = "LinkSettingsControl";
 			this.pnBody.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.pbLogo)).EndInit();
