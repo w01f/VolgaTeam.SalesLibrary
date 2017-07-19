@@ -41,6 +41,7 @@ namespace SalesLibraries.SiteManager.Controllers
 			FormMain.Instance.buttonItemUsersDelete.Click += buttonItemIPadUsersDelete_Click;
 			FormMain.Instance.buttonItemUsersRefresh.Click += buttonItemIPadUsersRefresh_Click;
 			FormMain.Instance.buttonItemUsersImport.Click += buttonItemIPadUsersImport_Click;
+			FormMain.Instance.buttonItemUsersExport.Click += buttonItemIPadUsersExport_Click;
 			MainController.Instance.SiteChanged += (sender, args) =>
 													   {
 														   if (IsActive)
@@ -91,6 +92,11 @@ namespace SalesLibraries.SiteManager.Controllers
 		private void buttonItemIPadUsersImport_Click(object sender, EventArgs e)
 		{
 			PermissionsManagerControl.ImportUsers();
+		}
+
+		private void buttonItemIPadUsersExport_Click(object sender, EventArgs e)
+		{
+			PermissionsManagerControl.Export();
 		}
 	}
 }

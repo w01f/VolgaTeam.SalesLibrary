@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Printing;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
@@ -10,9 +13,12 @@ using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraPrinting;
 using DevExpress.XtraTab;
 using SalesLibraries.ServiceConnector.AdminService;
 using SalesLibraries.SiteManager.BusinessClasses;
+using SalesLibraries.SiteManager.PresentationClasses.Common;
+using SalesLibraries.SiteManager.ToolClasses;
 using SalesLibraries.SiteManager.ToolForms;
 using ItemCheckEventArgs = DevExpress.XtraEditors.Controls.ItemCheckEventArgs;
 
@@ -156,6 +162,65 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 			}
 			if (!string.IsNullOrEmpty(message))
 				AppManager.Instance.ShowWarning(message);
+		}
+
+		public void Export()
+		{
+			using (var dialog = new SaveFileDialog())
+			{
+				dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+				dialog.FileName = string.Format("Users({0:MMddyy-hmmtt}).xlsx", DateTime.Now);
+				dialog.Filter = "Excel files|*.xlsx";
+				dialog.Title = "Export Users";
+				if (dialog.ShowDialog() != DialogResult.OK) return;
+				var options = new XlsxExportOptions();
+				options.SheetName = Path.GetFileNameWithoutExtension(dialog.FileName);
+				options.TextExportMode = TextExportMode.Text;
+				options.ExportHyperlinks = true;
+				options.ShowGridLines = true;
+				options.ExportMode = XlsxExportMode.SingleFile;
+
+				using (var form = new FormProgress())
+				{
+					FormMain.Instance.ribbonControl.Enabled = false;
+					Enabled = false;
+					form.laProgress.Text = "Exporting data...";
+					form.TopMost = true;
+					form.Show();
+					Application.DoEvents();
+					var thread = new Thread(() =>
+					{
+						BeginInvoke(new Action(() =>
+						{
+							using (var printingSystem = new PrintingSystem())
+							{
+								gridViewUsers.CheckLoaded();
+								var printLink = new PrintableComponentLink()
+								{
+									Landscape = true,
+									PaperKind = PaperKind.A4,
+									Component = gridControlUsers
+								};
+								printLink.CreateReportHeaderArea += OnCreateUsersReportHeaderArea;
+								printLink.CreateDocument(printingSystem);
+								printingSystem.ExportToXlsx(dialog.FileName, options);
+							}
+						}));
+					});
+					thread.Start();
+					while (thread.IsAlive)
+					{
+						Thread.Sleep(100);
+						Application.DoEvents();
+					}
+					form.Close();
+					Enabled = true;
+					FormMain.Instance.ribbonControl.Enabled = true;
+				}
+
+				if (File.Exists(dialog.FileName))
+					Process.Start(dialog.FileName);
+			}
 		}
 
 		public void AddObject()
@@ -430,6 +495,15 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 			var userModel = gridViewUsers.GetRow(e.RowHandle) as UserModel;
 			if (userModel == null) return;
 			e.Appearance.ForeColor = userModel.IsModified ? Color.Red : Color.Black;
+		}
+
+		private void OnCreateUsersReportHeaderArea(object sender, CreateAreaEventArgs e)
+		{
+			var reportHeader = string.Format("Users" );
+			e.Graph.StringFormat = new BrickStringFormat(StringAlignment.Center);
+			e.Graph.Font = new System.Drawing.Font("Arial", 12, FontStyle.Bold);
+			var rec = new RectangleF(0, 0, e.Graph.ClientPageSize.Width, 50);
+			e.Graph.DrawString(reportHeader, Color.Black, rec, DevExpress.XtraPrinting.BorderSide.None);
 		}
 
 		#region Users Filter

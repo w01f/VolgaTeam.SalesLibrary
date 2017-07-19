@@ -64,6 +64,8 @@ namespace SalesLibraries.SiteManager
 			this.ribbonControl = new DevComponents.DotNetBar.RibbonControl();
 			this.ribbonPanelUsers = new DevComponents.DotNetBar.RibbonPanel();
 			this.ribbonBarUsersExit = new DevComponents.DotNetBar.RibbonBar();
+			this.ribbonBarUsersExport = new DevComponents.DotNetBar.RibbonBar();
+			this.buttonItemUsersExport = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarUsersImport = new DevComponents.DotNetBar.RibbonBar();
 			this.buttonItemUsersImport = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarUsersRefresh = new DevComponents.DotNetBar.RibbonBar();
@@ -416,7 +418,7 @@ namespace SalesLibraries.SiteManager
 			this.ribbonControl.Location = new System.Drawing.Point(5, 1);
 			this.ribbonControl.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.ribbonControl.Name = "ribbonControl";
-			this.ribbonControl.Size = new System.Drawing.Size(962, 174);
+			this.ribbonControl.Size = new System.Drawing.Size(1032, 174);
 			this.ribbonControl.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonControl.SystemText.MaximizeRibbonText = "&Maximize the Ribbon";
 			this.ribbonControl.SystemText.MinimizeRibbonText = "Mi&nimize the Ribbon";
@@ -442,6 +444,7 @@ namespace SalesLibraries.SiteManager
 			// 
 			this.ribbonPanelUsers.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonPanelUsers.Controls.Add(this.ribbonBarUsersExit);
+			this.ribbonPanelUsers.Controls.Add(this.ribbonBarUsersExport);
 			this.ribbonPanelUsers.Controls.Add(this.ribbonBarUsersImport);
 			this.ribbonPanelUsers.Controls.Add(this.ribbonBarUsersRefresh);
 			this.ribbonPanelUsers.Controls.Add(this.ribbonBarUsersDelete);
@@ -454,7 +457,7 @@ namespace SalesLibraries.SiteManager
 			this.ribbonPanelUsers.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.ribbonPanelUsers.Name = "ribbonPanelUsers";
 			this.ribbonPanelUsers.Padding = new System.Windows.Forms.Padding(3, 0, 3, 2);
-			this.ribbonPanelUsers.Size = new System.Drawing.Size(962, 121);
+			this.ribbonPanelUsers.Size = new System.Drawing.Size(1032, 121);
 			// 
 			// 
 			// 
@@ -488,7 +491,7 @@ namespace SalesLibraries.SiteManager
 			this.ribbonBarUsersExit.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItemUsersExit});
 			this.ribbonBarUsersExit.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarUsersExit.Location = new System.Drawing.Point(883, 0);
+			this.ribbonBarUsersExit.Location = new System.Drawing.Point(971, 0);
 			this.ribbonBarUsersExit.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.ribbonBarUsersExit.Name = "ribbonBarUsersExit";
 			this.ribbonBarUsersExit.Size = new System.Drawing.Size(77, 119);
@@ -503,6 +506,47 @@ namespace SalesLibraries.SiteManager
 			// 
 			// 
 			this.ribbonBarUsersExit.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// ribbonBarUsersExport
+			// 
+			this.ribbonBarUsersExport.AutoOverflowEnabled = true;
+			this.ribbonBarUsersExport.BackColor = System.Drawing.Color.White;
+			// 
+			// 
+			// 
+			this.ribbonBarUsersExport.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// 
+			// 
+			this.ribbonBarUsersExport.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.ribbonBarUsersExport.ContainerControlProcessDialogKey = true;
+			this.ribbonBarUsersExport.Dock = System.Windows.Forms.DockStyle.Left;
+			this.ribbonBarUsersExport.DragDropSupport = true;
+			this.ribbonBarUsersExport.ForeColor = System.Drawing.Color.Black;
+			this.ribbonBarUsersExport.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.buttonItemUsersExport});
+			this.ribbonBarUsersExport.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
+			this.ribbonBarUsersExport.Location = new System.Drawing.Point(883, 0);
+			this.ribbonBarUsersExport.Name = "ribbonBarUsersExport";
+			this.ribbonBarUsersExport.Size = new System.Drawing.Size(88, 119);
+			this.ribbonBarUsersExport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.ribbonBarUsersExport.TabIndex = 32;
+			this.ribbonBarUsersExport.Text = "Export Users";
+			// 
+			// 
+			// 
+			this.ribbonBarUsersExport.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// 
+			// 
+			this.ribbonBarUsersExport.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// buttonItemUsersExport
+			// 
+			this.buttonItemUsersExport.Image = global::SalesLibraries.SiteManager.Properties.Resources.ImportUsers;
+			this.buttonItemUsersExport.Name = "buttonItemUsersExport";
+			this.buttonItemUsersExport.SubItemsExpandWidth = 14;
+			this.buttonItemUsersExport.Text = "buttonItem1";
 			// 
 			// ribbonBarUsersImport
 			// 
@@ -847,7 +891,7 @@ namespace SalesLibraries.SiteManager
 			this.ribbonPanelActivities.Location = new System.Drawing.Point(0, 53);
 			this.ribbonPanelActivities.Name = "ribbonPanelActivities";
 			this.ribbonPanelActivities.Padding = new System.Windows.Forms.Padding(3, 0, 3, 2);
-			this.ribbonPanelActivities.Size = new System.Drawing.Size(962, 121);
+			this.ribbonPanelActivities.Size = new System.Drawing.Size(1032, 121);
 			// 
 			// 
 			// 
@@ -2468,7 +2512,7 @@ namespace SalesLibraries.SiteManager
 			this.pnMain.Location = new System.Drawing.Point(5, 175);
 			this.pnMain.Name = "pnMain";
 			this.pnMain.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
-			this.pnMain.Size = new System.Drawing.Size(962, 432);
+			this.pnMain.Size = new System.Drawing.Size(1032, 428);
 			this.pnMain.TabIndex = 3;
 			// 
 			// styleManager
@@ -2480,7 +2524,7 @@ namespace SalesLibraries.SiteManager
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-			this.ClientSize = new System.Drawing.Size(972, 609);
+			this.ClientSize = new System.Drawing.Size(1042, 605);
 			this.Controls.Add(this.pnMain);
 			this.Controls.Add(this.ribbonControl);
 			this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -2655,5 +2699,7 @@ namespace SalesLibraries.SiteManager
 		public DevComponents.DotNetBar.ButtonItem buttonItemQBuilder;
 		private DevComponents.DotNetBar.ItemContainer itemContainer1;
 		public DevComponents.DotNetBar.ButtonItem buttonItemActivitiesViewsReport8;
+		private DevComponents.DotNetBar.RibbonBar ribbonBarUsersExport;
+		public DevComponents.DotNetBar.ButtonItem buttonItemUsersExport;
 	}
 }
