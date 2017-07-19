@@ -8,6 +8,7 @@ using Microsoft.Office.Interop.PowerPoint;
 using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Constants;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers;
+using SalesLibraries.Common.Configuration;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.OfficeInterops;
 using SalesLibraries.FileManager.Business.Services;
@@ -35,32 +36,27 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 					Directory.CreateDirectory(pdfDestination);
 
 				var pngDestination = Path.Combine(powerPointContainer.ContainerPath, PreviewFormats.Png);
-				var updatePng = !(Directory.Exists(pngDestination) && Directory.GetFiles(pngDestination).Any()) &&
-					powerPointContainer.GenerateImages;
+				var updatePng = !(Directory.Exists(pngDestination) && Directory.GetFiles(pngDestination).Any());
 				if (updatePng && !Directory.Exists(pngDestination))
 					Directory.CreateDirectory(pngDestination);
 
 				var pngPhoneDestination = Path.Combine(powerPointContainer.ContainerPath, PreviewFormats.PngForMobile);
-				var updatePngPhone = !(Directory.Exists(pngPhoneDestination) && Directory.GetFiles(pngPhoneDestination).Any()) &&
-					powerPointContainer.GenerateImages;
+				var updatePngPhone = !(Directory.Exists(pngPhoneDestination) && Directory.GetFiles(pngPhoneDestination).Any());
 				if (updatePngPhone && !Directory.Exists(pngPhoneDestination))
 					Directory.CreateDirectory(pngPhoneDestination);
 
 				var thumbDestination = Path.Combine(powerPointContainer.ContainerPath, PreviewFormats.Thumbnails);
-				var updateThumbs = !(Directory.Exists(thumbDestination) && Directory.GetFiles(thumbDestination).Any()) &&
-					powerPointContainer.GenerateImages;
+				var updateThumbs = !(Directory.Exists(thumbDestination) && Directory.GetFiles(thumbDestination).Any());
 				if (updateThumbs && !Directory.Exists(thumbDestination))
 					Directory.CreateDirectory(thumbDestination);
 
 				var thumbsPhoneDestination = Path.Combine(powerPointContainer.ContainerPath, PreviewFormats.ThumbnailsForMobile);
-				var updateThumbsPhone = !(Directory.Exists(thumbsPhoneDestination) && Directory.GetFiles(thumbsPhoneDestination, "*.png").Length > 0) &&
-					powerPointContainer.GenerateImages;
+				var updateThumbsPhone = !(Directory.Exists(thumbsPhoneDestination) && Directory.GetFiles(thumbsPhoneDestination, "*.png").Length > 0);
 				if (updateThumbsPhone && !Directory.Exists(thumbsPhoneDestination))
 					Directory.CreateDirectory(thumbsPhoneDestination);
 
 				var thumbsDatatableDestination = Path.Combine(powerPointContainer.ContainerPath, PreviewFormats.ThumbnailsForDatatable);
-				var updateThumbsDatatable = !(Directory.Exists(thumbsDatatableDestination) && Directory.GetFiles(thumbsDatatableDestination).Any()) &&
-					powerPointContainer.GenerateImages;
+				var updateThumbsDatatable = !(Directory.Exists(thumbsDatatableDestination) && Directory.GetFiles(thumbsDatatableDestination).Any());
 				if (updateThumbsDatatable && !Directory.Exists(thumbsDatatableDestination))
 					Directory.CreateDirectory(thumbsDatatableDestination);
 
@@ -91,12 +87,11 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 				{
 					try
 					{
-						var processInteropped = false;
 						if (!powerPointProcessor.Connect(true)) continue;
 						MessageFilter.Register();
 
 						Presentation presentation = null;
-						processInteropped = powerPointProcessor.DoTimeLimitedAction(() =>
+						var processInteropped = powerPointProcessor.DoTimeLimitedAction(() =>
 						{
 							presentation = powerPointProcessor.PowerPointObject.Presentations.Open(previewContainer.SourcePath,
 								WithWindow: MsoTriState.msoFalse);
@@ -106,59 +101,79 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 
 						var content = new StringBuilder();
 						if (!cancellationToken.IsCancellationRequested &&
-						    (updatePng || updateThumbs || updatePptx || updateTxt || updatePngPhone || updateThumbsPhone))
+							(updatePng || updateThumbs || updatePptx || updateTxt || updatePngPhone || updateThumbsPhone))
 						{
-							var i = 1;
-							var thumbHeight = (int) presentation.PageSetup.SlideHeight / 10;
-							var thumbWidth = (int) presentation.PageSetup.SlideWidth / 10;
-							var phoneHeight = (int) (presentation.PageSetup.SlideHeight / 1.5);
-							var phoneWidth = (int) (presentation.PageSetup.SlideWidth / 1.5);
-							var thumbPhoneHeight = (int) presentation.PageSetup.SlideHeight / 4;
-							var thumbPhoneWidth = (int) presentation.PageSetup.SlideWidth / 4;
+							var slideIndex = 1;
+							var thumbHeight = (int)presentation.PageSetup.SlideHeight / 10;
+							var thumbWidth = (int)presentation.PageSetup.SlideWidth / 10;
+							var phoneHeight = (int)(presentation.PageSetup.SlideHeight / 1.5);
+							var phoneWidth = (int)(presentation.PageSetup.SlideWidth / 1.5);
+							var thumbPhoneHeight = (int)presentation.PageSetup.SlideHeight / 4;
+							var thumbPhoneWidth = (int)presentation.PageSetup.SlideWidth / 4;
 							foreach (Slide slide in presentation.Slides)
 							{
 								if (cancellationToken.IsCancellationRequested) break;
 								if (updatePng)
 								{
+									var index = slideIndex;
 									processInteropped = powerPointProcessor.DoTimeLimitedAction(() =>
 									{
-										slide.Export(Path.Combine(pngDestination, String.Format("Slide{0}.{1}", i, "png")), "PNG");
+										if (powerPointContainer.GenerateFullImages)
+											slide.Export(Path.Combine(pngDestination, String.Format("Slide{0}.{1}", index, "png")), "PNG");
+										else if (powerPointContainer.GenerateSingleImage && index == 1)
+											slide.Export(Path.Combine(pngDestination, String.Format("{0}Slide.{1}", Constants.SinglePreviewFilePrefixName, "png")), "PNG");
 									});
 									if (processInteropped)
 										break;
 								}
 								if (updatePngPhone)
 								{
+									var index = slideIndex;
 									processInteropped = powerPointProcessor.DoTimeLimitedAction(() =>
 									{
-										slide.Export(Path.Combine(pngPhoneDestination, String.Format("Slide{0}.{1}", i, "png")), "PNG", phoneWidth,
-											phoneHeight);
+										if (powerPointContainer.GenerateFullImages)
+											slide.Export(Path.Combine(pngPhoneDestination, String.Format("Slide{0}.{1}", index, "png")), "PNG", phoneWidth,
+												phoneHeight);
+										else if (powerPointContainer.GenerateSingleImage && index == 1)
+											slide.Export(Path.Combine(pngPhoneDestination, String.Format("{0}Slide.{1}", Constants.SinglePreviewFilePrefixName, "png")), "PNG", phoneWidth,
+												phoneHeight);
 									});
 									if (processInteropped)
 										break;
 								}
 								if (updateThumbs)
 								{
+									var index = slideIndex;
 									processInteropped = powerPointProcessor.DoTimeLimitedAction(() =>
 									{
-										slide.Export(Path.Combine(thumbDestination, String.Format("Slide{0}.{1}", i, "png")), "PNG", thumbWidth,
-											thumbHeight);
+										if (powerPointContainer.GenerateFullImages)
+											slide.Export(Path.Combine(thumbDestination, String.Format("Slide{0}.{1}", index, "png")), "PNG", thumbWidth,
+												thumbHeight);
+										else if (powerPointContainer.GenerateSingleImage && index == 1)
+											slide.Export(Path.Combine(thumbDestination, String.Format("{0}Slide.{1}", Constants.SinglePreviewFilePrefixName, "png")), "PNG", thumbWidth,
+												thumbHeight);
 									});
 									if (processInteropped)
 										break;
 								}
 								if (updateThumbsPhone)
 								{
+									var index = slideIndex;
 									processInteropped = powerPointProcessor.DoTimeLimitedAction(() =>
 									{
-										slide.Export(Path.Combine(thumbsPhoneDestination, String.Format("Slide{0}.{1}", i, "png")), "PNG",
-											thumbPhoneWidth, thumbPhoneHeight);
+										if (powerPointContainer.GenerateFullImages)
+											slide.Export(Path.Combine(thumbsPhoneDestination, String.Format("Slide{0}.{1}", index, "png")), "PNG",
+												thumbPhoneWidth, thumbPhoneHeight);
+										else if (powerPointContainer.GenerateSingleImage && index == 1)
+											slide.Export(Path.Combine(thumbsPhoneDestination, String.Format("{0}Slide.{1}", Constants.SinglePreviewFilePrefixName, "png")), "PNG",
+												thumbPhoneWidth, thumbPhoneHeight);
 									});
 									if (processInteropped)
 										break;
 								}
 								if (updatePptx)
 								{
+									var index = slideIndex;
 									processInteropped = powerPointProcessor.DoTimeLimitedAction(() =>
 									{
 										var singleSlidePresentation =
@@ -166,9 +181,9 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 												WithWindow: MsoTriState.msoFalse);
 										var totalSlides = singleSlidePresentation.Slides.Count;
 										for (int j = totalSlides; j >= 1; j--)
-											if (j != i)
+											if (j != index)
 												singleSlidePresentation.Slides[j].Delete();
-										singleSlidePresentation.SaveCopyAs(Path.Combine(pptxDestination, String.Format("Slide{0}.{1}", i, "pptx")));
+										singleSlidePresentation.SaveCopyAs(Path.Combine(pptxDestination, String.Format("Slide{0}.{1}", index, "pptx")));
 										singleSlidePresentation.Close();
 										Utils.ReleaseComObject(singleSlidePresentation);
 									});
@@ -185,7 +200,8 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 									if (processInteropped)
 										break;
 								}
-								i++;
+
+								slideIndex++;
 							}
 							if (processInteropped)
 							{

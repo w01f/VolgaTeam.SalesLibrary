@@ -23,5 +23,6 @@
 		public const string DeadLinkInfoFileName = @"z_dead_links.txt";
 		public const string LogArchiveFolderName = @"zzzz_logs_never_delete";
 		public const string OfficeTempFilePrefixName = @"~$";
+		public const string SinglePreviewFilePrefixName = "Single";
 	}
 }

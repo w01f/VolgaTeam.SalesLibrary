@@ -21,34 +21,29 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 			logger.StartLogging();
 
 			var pngDestination = Path.Combine(pdfContainer.ContainerPath, PreviewFormats.Png);
-			var updatePng = !(Directory.Exists(pngDestination) && Directory.GetFiles(pngDestination).Any()) &&
-				pdfContainer.GenerateImages;
+			var updatePng = !(Directory.Exists(pngDestination) && Directory.GetFiles(pngDestination).Any());
 			if (updatePng && !Directory.Exists(pngDestination))
 				Directory.CreateDirectory(pngDestination);
 			var pngPhoneDestination = Path.Combine(pdfContainer.ContainerPath, PreviewFormats.PngForMobile);
-			var updatePngPhone = !(Directory.Exists(pngPhoneDestination) && Directory.GetFiles(pngPhoneDestination).Any()) &&
-				pdfContainer.GenerateImages;
+			var updatePngPhone = !(Directory.Exists(pngPhoneDestination) && Directory.GetFiles(pngPhoneDestination).Any());
 			if (updatePngPhone && !Directory.Exists(pngPhoneDestination))
 				Directory.CreateDirectory(pngPhoneDestination);
 			var thumbsDestination = Path.Combine(pdfContainer.ContainerPath, PreviewFormats.Thumbnails);
-			var updateThumbs = !(Directory.Exists(thumbsDestination) && Directory.GetFiles(thumbsDestination).Any()) &&
-				pdfContainer.GenerateImages;
+			var updateThumbs = !(Directory.Exists(thumbsDestination) && Directory.GetFiles(thumbsDestination).Any());
 			if (updateThumbs && !Directory.Exists(thumbsDestination))
 				Directory.CreateDirectory(thumbsDestination);
 			var thumbsPhoneDestination = Path.Combine(pdfContainer.ContainerPath, PreviewFormats.ThumbnailsForMobile);
-			var updateThumbsPhone = !(Directory.Exists(thumbsPhoneDestination) && Directory.GetFiles(thumbsPhoneDestination).Any()) &&
-				pdfContainer.GenerateImages;
+			var updateThumbsPhone = !(Directory.Exists(thumbsPhoneDestination) && Directory.GetFiles(thumbsPhoneDestination).Any());
 			if (updateThumbsPhone && !Directory.Exists(thumbsPhoneDestination))
 				Directory.CreateDirectory(thumbsPhoneDestination);
 			var thumbsDatatableDestination = Path.Combine(pdfContainer.ContainerPath, PreviewFormats.ThumbnailsForDatatable);
-			var updateThumbsDatatable = !(Directory.Exists(thumbsDatatableDestination) && Directory.GetFiles(thumbsDatatableDestination).Any()) &&
-				pdfContainer.GenerateImages;
+			var updateThumbsDatatable = !(Directory.Exists(thumbsDatatableDestination) && Directory.GetFiles(thumbsDatatableDestination).Any());
 			if (updateThumbsDatatable && !Directory.Exists(thumbsDatatableDestination))
 				Directory.CreateDirectory(thumbsDatatableDestination);
 
 			if (updatePng || updateThumbs || updateThumbsDatatable)
 			{
-				PdfHelper.ExportPdf(pdfContainer.SourcePath, pngDestination, thumbsDestination);
+				PdfHelper.ExportPdf(pdfContainer.SourcePath, pngDestination, thumbsDestination, pdfContainer.GenerateSingleImage);
 				JpegGenerator.GenerateDatatableJpegs(pngDestination, thumbsDatatableDestination);
 				logger.LogStage(PreviewFormats.Png);
 				logger.LogStage(PreviewFormats.Thumbnails);
@@ -57,7 +52,7 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 
 			if (updatePngPhone || updateThumbsPhone)
 			{
-				PdfHelper.ExportPdfPhone(pdfContainer.SourcePath, pngPhoneDestination, thumbsPhoneDestination);
+				PdfHelper.ExportPdfPhone(pdfContainer.SourcePath, pngPhoneDestination, thumbsPhoneDestination, pdfContainer.GenerateSingleImage);
 				logger.LogStage(PreviewFormats.PngForMobile);
 				logger.LogStage(PreviewFormats.ThumbnailsForMobile);
 			}

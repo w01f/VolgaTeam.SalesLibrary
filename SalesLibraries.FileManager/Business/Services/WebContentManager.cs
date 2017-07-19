@@ -698,7 +698,7 @@ namespace SalesLibraries.FileManager.Business.Services
 		{
 			target.id = source.ExtId.ToString();
 			target.libraryId = source.Library.ExtId.ToString();
-			if (source is DocumentPreviewContainer && ((DocumentPreviewContainer)source).GenerateImages)
+			if (source is DocumentPreviewContainer)
 			{
 				target.pngLinks = source
 					.GetPreviewLinksByFormat(PreviewFormats.Png)

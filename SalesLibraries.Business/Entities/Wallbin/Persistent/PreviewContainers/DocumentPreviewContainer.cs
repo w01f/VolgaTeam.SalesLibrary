@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.IO;
 using System.Linq;
@@ -7,6 +8,7 @@ using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Constants;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
+using SalesLibraries.Common.Configuration;
 
 namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 {
@@ -36,7 +38,10 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 		private IEnumerable<string> TextPreviewFormats => new[] { PreviewFormats.Text };
 
 		[NotMapped, JsonIgnore]
-		public bool GenerateImages { get; private set; }
+		public bool GenerateFullImages { get; private set; }
+
+		[NotMapped, JsonIgnore]
+		public bool GenerateSingleImage { get; private set; }
 
 		[NotMapped, JsonIgnore]
 		public bool GenerateText { get; private set; }
@@ -45,11 +50,16 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 		protected override void UpdateState(IEnumerable<IPreviewableLink> associatedLinks)
 		{
 			var associatedLinksList = associatedLinks.ToList();
-			GenerateImages = associatedLinksList
+			GenerateFullImages = associatedLinksList
 				.OfType<PreviewableFileLink>()
 				.Select(link => link.Settings)
 				.OfType<DocumentLinkSettings>()
 				.Any(set => set.GeneratePreviewImages);
+			GenerateSingleImage = associatedLinksList
+				.OfType<PreviewableFileLink>()
+				.Select(link => link.Settings)
+				.OfType<DocumentLinkSettings>()
+				.All(set => !set.GeneratePreviewImages);
 			GenerateText = associatedLinksList
 				.OfType<PreviewableFileLink>()
 				.Select(link => link.Settings)
@@ -64,13 +74,18 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 					return Directory.Exists(previewFolderPath) && Directory.GetFiles(previewFolderPath).Any();
 				})
 				&&
-				(!GenerateImages && ImagePreviewFormats.All(previewFormat => !(Directory.Exists(Path.Combine(ContainerPath, previewFormat))))
+				(
+					GenerateSingleImage && ImagePreviewFormats.All(previewFormat =>
+					 {
+						 var previewFolderPath = Path.Combine(ContainerPath, previewFormat);
+						 return Directory.Exists(previewFolderPath) && Directory.GetFiles(previewFolderPath).Count(filePath => !String.IsNullOrEmpty(filePath) && Path.GetFileName(filePath).StartsWith(Constants.SinglePreviewFilePrefixName)) > 0;
+					 })
 					||
-					(GenerateImages && ImagePreviewFormats.All(previewFormat =>
-						{
-							var previewFolderPath = Path.Combine(ContainerPath, previewFormat);
-							return Directory.Exists(previewFolderPath) && Directory.GetFiles(previewFolderPath).Any();
-						}))
+					GenerateFullImages && ImagePreviewFormats.All(previewFormat =>
+					{
+						var previewFolderPath = Path.Combine(ContainerPath, previewFormat);
+						return Directory.Exists(previewFolderPath) && Directory.GetFiles(previewFolderPath).Count(filePath => !String.IsNullOrEmpty(filePath) && !Path.GetFileName(filePath).StartsWith(Constants.SinglePreviewFilePrefixName)) > 0;
+					})
 				)
 				&&
 				((!GenerateText && TextPreviewFormats.All(previewFormat => !Directory.Exists(Path.Combine(ContainerPath, previewFormat))))
