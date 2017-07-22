@@ -107,12 +107,5 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 
 			return customizedSettingsGroups;
 		}
-
-		public static TSettings CreateEmpty<TSettings>(IChangable parent) where TSettings : BaseLinkSettings
-		{
-			var settings = SettingsContainer.CreateInstance<TSettings>(parent);
-			settings.ResetToEmpty();
-			return settings;
-		}
 	}
 }

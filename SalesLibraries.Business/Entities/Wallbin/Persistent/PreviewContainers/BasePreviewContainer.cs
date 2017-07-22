@@ -8,6 +8,7 @@ using System.Threading;
 using Newtonsoft.Json;
 using SalesLibraries.Business.Entities.Helpers;
 using SalesLibraries.Business.Entities.Interfaces;
+using SalesLibraries.Business.Entities.Wallbin.NonPersistent.PreviewContainerSettings;
 using SalesLibraries.Common.Configuration;
 using SalesLibraries.Common.Helpers;
 
@@ -21,6 +22,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 		#region Persistent Properties
 		[Required]
 		public string RelativePath { get; set; }
+		public string SettingsEncoded { get; set; }
 		public virtual Library Library { get; set; }
 		#endregion
 
@@ -41,6 +43,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 			Constants.WebPreviewContainersRootFolderName,
 			PreviewSubFolder,
 			ExtId.ToString());
+
+		[NotMapped, JsonIgnore]
+		public abstract BasePreviewContainerSettings Settings { get; set; }
 
 		[NotMapped, JsonIgnore]
 		public abstract string SourcePath { get; }
@@ -67,6 +72,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 		{
 			IsAlive = true;
 		}
+
+		public virtual void InitDefaultSettings() { }
 
 		public void UpdateContent(IPreviewGenerator generator, CancellationToken cancellationToken)
 		{
@@ -127,7 +134,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 			else if (FileFormatHelper.IsExcelFile(sourceFile))
 				previewContainer = CreateEntity<ExcelPreviewContainer>();
 			else if (FileFormatHelper.IsVideoFile(sourceFile))
+			{
 				previewContainer = CreateEntity<VideoPreviewContainer>();
+			}
 			else
 				previewContainer = CreateEntity<WebLinkPreviewContainer>();
 			var relativePath = sourceFile.Replace(parent.Path, String.Empty);

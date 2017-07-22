@@ -54,11 +54,9 @@ namespace SalesLibraries.FileManager.Business.Dictionaries
 
 			Items.Clear();
 
-			SourceFolderImageGroup sourceFolderImageGroup = new RegularImageGroup(this);
+			SourceFolderImageGroup sourceFolderImageGroup = new RegularImageGroup(this, MainFolder.LocalPath);
 			sourceFolderImageGroup.Name = "Gallery";
 			sourceFolderImageGroup.Order = -2;
-			if (MainFolder.ExistsLocal())
-				sourceFolderImageGroup.LoadImages<Widget>(MainFolder.LocalPath);
 			Items.Add(sourceFolderImageGroup);
 
 			var searchResultsimageGroup = new SearchResultsImageGroup(this);
@@ -66,11 +64,9 @@ namespace SalesLibraries.FileManager.Business.Dictionaries
 			searchResultsimageGroup.Order = -2;
 			Items.Add(searchResultsimageGroup);
 
-			sourceFolderImageGroup = new FavoriteImageGroup(this);
+			sourceFolderImageGroup = new FavoriteImageGroup(this, FavsFolder.LocalPath);
 			sourceFolderImageGroup.Name = "My Favorites";
 			sourceFolderImageGroup.Order = -1;
-			if (FavsFolder.ExistsLocal())
-				sourceFolderImageGroup.LoadImages<Widget>(FavsFolder.LocalPath);
 			Items.Add(sourceFolderImageGroup);
 
 			Items.Sort((x, y) => x.Order.CompareTo(y.Order));

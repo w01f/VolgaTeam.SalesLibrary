@@ -85,7 +85,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			xtraTabControlGallery.TabPages.AddRange(
 				MainController.Instance.Lists.Banners.Items.Select(imageGroup =>
 				{
-					var tabPage = BaseLinkImagesContainer.Create(imageGroup);
+					var tabPage = BaseLinkImagesContainer.Create<Banner>(imageGroup);
 					tabPage.SelectedImageChanged += OnSelectedBannerChanged;
 					tabPage.OnImageDoubleClick += OnImageDoubleClick;
 					return (XtraTabPage)tabPage;

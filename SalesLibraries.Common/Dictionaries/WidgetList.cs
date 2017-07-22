@@ -30,11 +30,9 @@ namespace SalesLibraries.Common.Dictionaries
 
 			Items.Clear();
 
-			SourceFolderImageGroup sourceFolderImageGroup = new RegularImageGroup(this);
+			SourceFolderImageGroup sourceFolderImageGroup = new RegularImageGroup(this, MainFolder.LocalPath);
 			sourceFolderImageGroup.Name = "Gallery";
 			sourceFolderImageGroup.Order = -3;
-			if (MainFolder.ExistsLocal())
-				sourceFolderImageGroup.LoadImages<Widget>(MainFolder.LocalPath);
 			Items.Add(sourceFolderImageGroup);
 
 			var searchResultsimageGroup = new SearchResultsImageGroup(this);
@@ -42,11 +40,9 @@ namespace SalesLibraries.Common.Dictionaries
 			searchResultsimageGroup.Order = -2;
 			Items.Add(searchResultsimageGroup);
 
-			sourceFolderImageGroup = new FavoriteImageGroup(this);
+			sourceFolderImageGroup = new FavoriteImageGroup(this, FavsFolder.LocalPath);
 			sourceFolderImageGroup.Name = "My Favorites";
 			sourceFolderImageGroup.Order = -1;
-			if (FavsFolder.ExistsLocal())
-				sourceFolderImageGroup.LoadImages<Widget>(FavsFolder.LocalPath);
 			Items.Add(sourceFolderImageGroup);
 
 			if (AdditionalFolder.ExistsLocal())
@@ -60,10 +56,9 @@ namespace SalesLibraries.Common.Dictionaries
 					{
 						var groupFolderPath = Path.Combine(AdditionalFolder.LocalPath, groupName);
 						if (!Directory.Exists(groupFolderPath)) continue;
-						sourceFolderImageGroup = new RegularImageGroup(this);
+						sourceFolderImageGroup = new RegularImageGroup(this, groupFolderPath);
 						sourceFolderImageGroup.Name = groupName;
 						sourceFolderImageGroup.Order = groupIndex;
-						sourceFolderImageGroup.LoadImages<Widget>(groupFolderPath);
 						Items.Add(sourceFolderImageGroup);
 						groupIndex++;
 					}

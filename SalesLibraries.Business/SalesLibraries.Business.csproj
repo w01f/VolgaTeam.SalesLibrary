@@ -130,6 +130,9 @@
     <Compile Include="Entities\Wallbin\Common\Enums\WidgetType.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\AutoWidget.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkBundleSettings\CoverItem.cs" />
+    <Compile Include="Entities\Wallbin\NonPersistent\PreviewContainerSettings\CommonPreviewContainerSettings.cs" />
+    <Compile Include="Entities\Wallbin\NonPersistent\PreviewContainerSettings\BasePreviewContainerSettings.cs" />
+    <Compile Include="Entities\Wallbin\NonPersistent\PreviewContainerSettings\VideoPreviewContainerSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\ThumbnailSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\BannerSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\HyperLinkInfo\InternalLinkTemplate.cs" />
@@ -196,6 +199,7 @@
     <Compile Include="Entities\Wallbin\NonPersistent\SourceLink.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\SyncSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\CalendarSettings.cs" />
+    <Compile Include="Entities\Wallbin\NonPersistent\VideoConvertSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\WidgetSettings.cs" />
     <Compile Include="Entities\Wallbin\Persistent\ColumnTitle.cs" />
     <Compile Include="Entities\Wallbin\Persistent\Library.cs" />
@@ -287,6 +291,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Schema\Wallbin\Version7\sequense.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Schema\Wallbin\Version8\preview_container.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Schema\Wallbin\Version8\sequense.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

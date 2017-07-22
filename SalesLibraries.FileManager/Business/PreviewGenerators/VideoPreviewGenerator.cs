@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading;
 using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Constants;
+using SalesLibraries.Business.Entities.Wallbin.NonPersistent.PreviewContainerSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.Objects.Video;
@@ -44,7 +45,7 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 					Directory.CreateDirectory(mp4Destination);
 				if (updateMp4)
 				{
-					VideoHelper.ExportMp4(previewContainer.SourcePath, mp4Destination, videoData, cancellationToken);
+					VideoHelper.ExportMp4(previewContainer.SourcePath, mp4Destination, videoData, ((VideoPreviewContainerSettings)previewContainer.Settings).VideoConvertSettings.Crf, cancellationToken);
 					logger.LogStage(PreviewFormats.VideoMp4);
 				}
 				updated |= updateMp4;

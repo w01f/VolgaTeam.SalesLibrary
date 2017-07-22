@@ -52,6 +52,7 @@ namespace SalesLibraries.Business.Contexts.Wallbin.Local
 				targetPreviewContainer.ExtId = Guid.Parse(previewContainer.Identifier);
 				targetPreviewContainer.Library = target;
 				target.PreviewContainers.AddItem(targetPreviewContainer);
+				targetPreviewContainer.InitDefaultSettings();
 			}
 
 			foreach (var legacyPage in legacyLibrary.Pages)

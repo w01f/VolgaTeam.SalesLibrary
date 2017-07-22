@@ -10,7 +10,7 @@ using SalesLibraries.FileManager.Properties;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.ImageGallery
 {
-	public partial class FormImageGallery : MetroForm
+	public partial class FormImageGallery<TImageSource> : MetroForm where TImageSource : BaseImageSource
 	{
 		private bool _loading;
 		private readonly IImageSourceList _imageSourceList;
@@ -38,7 +38,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.ImageGallery
 			xtraTabControlGallery.TabPages.AddRange(
 				_imageSourceList.Items.Select(imageGroup =>
 				{
-					var tabPage = BaseLinkImagesContainer.Create(imageGroup);
+					var tabPage = BaseLinkImagesContainer.Create<TImageSource>(imageGroup);
 					tabPage.SelectedImageChanged += OnSelectedWidgetChanged;
 					tabPage.OnImageDoubleClick += OnImageDoubleClick;
 					return (XtraTabPage)tabPage;
@@ -98,19 +98,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.ImageGallery
 			_loading = false;
 		}
 
-		private void UpdateDisplayImage()
-		{
-			//if (OriginalImage != null && checkEditInvert.Checked)
-			//{
-			//	var imageClone = (Image)OriginalImage.Clone();
-			//	labelControlExtension.Appearance.Image = colorEditInversionColor.Color != GraphicObjectExtensions.DefaultInversionColor
-			//		? imageClone.ReplaceColor(colorEditInversionColor.Color)
-			//		: imageClone.Invert();
-			//}
-			//else
-			//	labelControlExtension.Appearance.Image = OriginalImage;
-		}
-
 		private void OnImageDoubleClick(object sender, EventArgs e)
 		{
 			DialogResult = DialogResult.OK;
@@ -120,7 +107,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.ImageGallery
 		{
 			OriginalImage = e.Image;
 			OriginalImageName = e.Text;
-			UpdateDisplayImage();
 		}
 
 		private void OnSearchButtonClick(object sender, EventArgs e)
@@ -144,38 +130,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.ImageGallery
 		private void OnFormClick(object sender, EventArgs e)
 		{
 			buttonXOK.Focus();
-		}
-
-		private void colorEditInversionColor_EditValueChanged(object sender, EventArgs e)
-		{
-			UpdateDisplayImage();
-		}
-
-		private void checkEditInvert_CheckedChanged(object sender, EventArgs e)
-		{
-			UpdateDisplayImage();
-			//colorEditInversionColor.Enabled = checkEditInvert.Checked;
-		}
-
-		private void FormSelectWidget_Load(object sender, EventArgs e)
-		{
-			UpdateDisplayImage();
-		}
-
-		private void toolStripMenuItemImageAddToFavorites_Click(object sender, EventArgs e)
-		{
-			//if (labelControlExtension.Appearance.Image == null) return;
-			//var favoritesContainer = xtraTabControlGallery.TabPages.OfType<FavoritesImagesContainer>().FirstOrDefault();
-			//((FavoriteImageGroup)favoritesContainer?.ParentImageGroup)?.AddImage<Widget>(labelControlExtension.Appearance.Image, String.Format("{0}_{1}", OriginalImageName, colorEditInversionColor.Color.ToHex()));
-		}
-
-		private void labelControlExtension_MouseClick(object sender, MouseEventArgs e)
-		{
-			//if (e.Button != MouseButtons.Right) return;
-			//var viewInfo = labelControlExtension.GetViewInfo() as LabelControlViewInfo;
-			//if (viewInfo == null) return;
-			//if (viewInfo.ImageBounds.Contains(e.Location) && checkEditInvert.Checked && labelControlExtension.Appearance.Image != null && colorEditInversionColor.Color != Color.White)
-			//	contextMenuStripImage.Show(Cursor.Position);
 		}
 	}
 }

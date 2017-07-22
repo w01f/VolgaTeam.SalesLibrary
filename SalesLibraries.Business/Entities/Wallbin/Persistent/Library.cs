@@ -156,6 +156,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 				previewContainer = BasePreviewContainer.Create(sourcePath, this);
 				previewContainer.Library = this;
 				PreviewContainers.AddItem(previewContainer);
+				previewContainer.InitDefaultSettings();
 				MarkAsModified();
 			}
 			return previewContainer;
@@ -199,12 +200,29 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 			public bool ApplyWidgetForAllWindows { get; set; }
 			public bool ApplyWidgetColorForAllWindows { get; set; }
 			public bool ApplyBannerForAllWindows { get; set; }
+			public bool ApplyConvertSettingsForAllVideo { get; set; }
 
 			public List<AutoWidget> AutoWidgets { get; private set; }
+
+			public VideoConvertSettings VideoConvertSettings { get; private set; }
 
 			public LibrarySettings()
 			{
 				AutoWidgets = new List<AutoWidget>();
+			}
+
+			protected override void AfterConstruction()
+			{
+				base.AfterConstruction();
+				VideoConvertSettings = new VideoConvertSettings();
+			}
+
+			protected override void AfterCreate()
+			{
+				base.AfterCreate();
+				if (VideoConvertSettings == null)
+					VideoConvertSettings = new VideoConvertSettings();
+				VideoConvertSettings.SettingsContainer = this;
 			}
 		}
 	}

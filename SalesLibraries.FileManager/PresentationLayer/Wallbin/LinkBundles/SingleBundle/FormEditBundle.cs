@@ -19,6 +19,7 @@ using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkBundleSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Helpers;
+using SalesLibraries.Common.Objects.Graphics;
 using SalesLibraries.CommonGUI.Common;
 using SalesLibraries.CommonGUI.CustomDialog;
 using SalesLibraries.FileManager.Business.Services;
@@ -290,7 +291,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Singl
 		{
 			if (e.Clicks < 2) return;
 			if (e.Column != gridColumnBundleItemsImage) return;
-			using (var form = new FormImageGallery(MainController.Instance.Lists.LinkBundleImages))
+			using (var form = new FormImageGallery<Widget>(MainController.Instance.Lists.LinkBundleImages))
 			{
 				if (form.ShowDialog() != DialogResult.OK) return;
 				SelectedBundleItem.Image = (Image)form.OriginalImage.Clone();

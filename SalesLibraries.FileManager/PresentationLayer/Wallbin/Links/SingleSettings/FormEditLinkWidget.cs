@@ -101,7 +101,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			xtraTabControlGallery.TabPages.AddRange(
 				MainController.Instance.Lists.Widgets.Items.Select(imageGroup =>
 				{
-					var tabPage = BaseLinkImagesContainer.Create(imageGroup);
+					var tabPage = BaseLinkImagesContainer.Create<Widget>(imageGroup);
 					tabPage.SelectedImageChanged += OnSelectedWidgetChanged;
 					tabPage.OnImageDoubleClick += OnImageDoubleClick;
 					return (XtraTabPage)tabPage;

@@ -1,0 +1,1 @@
+ALTER TABLE [PreviewContainer] ADD [SettingsEncoded] TEXT

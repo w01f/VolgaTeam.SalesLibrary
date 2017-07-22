@@ -4,9 +4,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
+using SalesLibraries.Business.Entities.Common;
 using SalesLibraries.Business.Entities.Helpers;
 using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Constants;
+using SalesLibraries.Business.Entities.Wallbin.NonPersistent.PreviewContainerSettings;
 using SalesLibraries.Common.Objects.Video;
 
 namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
@@ -14,6 +16,14 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 	public class VideoPreviewContainer : FilePreviewContainer
 	{
 		#region Nonpersistent Properties
+		private VideoPreviewContainerSettings _settings;
+		[NotMapped, JsonIgnore]
+		public override BasePreviewContainerSettings Settings
+		{
+			get { return _settings ?? (_settings = SettingsContainer.CreateInstance<VideoPreviewContainerSettings>(this, SettingsEncoded)); }
+			set { _settings = value as VideoPreviewContainerSettings; }
+		}
+
 		[NotMapped, JsonIgnore]
 		public bool IsConverted
 		{
@@ -67,6 +77,17 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 			if (!IsUpToDate)
 				return;
 			IsUpToDate = IsConverted;
+		}
+
+		public override void InitDefaultSettings()
+		{
+			base.InitDefaultSettings();
+
+			if (Library.Settings.ApplyConvertSettingsForAllVideo)
+			{
+				var videoPreviewContainerSettings = (VideoPreviewContainerSettings)Settings;
+				videoPreviewContainerSettings.VideoConvertSettings.Crf = Library.Settings.VideoConvertSettings.Crf;
+			}
 		}
 
 		public FFMpegData GetVideoData()

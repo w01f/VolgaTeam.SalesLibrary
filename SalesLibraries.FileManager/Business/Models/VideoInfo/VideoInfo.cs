@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using SalesLibraries.Business.Entities.Wallbin.Common.Constants;
+using SalesLibraries.Business.Entities.Wallbin.NonPersistent.PreviewContainerSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers;
 using SalesLibraries.Common.DataState;
@@ -25,6 +26,26 @@ namespace SalesLibraries.FileManager.Business.Models.VideoInfo
 		public int Index { get; set; }
 		public bool Converted { get; set; }
 		public bool Selected { get; set; }
+
+		public VideoPreviewContainerSettings PreviewContainerSettings
+			=> (VideoPreviewContainerSettings)_previewContainer.Settings;
+
+		public string Crf
+		{
+			get
+			{
+				if (PreviewContainerSettings.VideoConvertSettings.Crf.HasValue)
+					return PreviewContainerSettings.VideoConvertSettings.Crf.Value.ToString();
+				return "none";
+			}
+			set
+			{
+				if (!String.Equals(value, "none", StringComparison.OrdinalIgnoreCase))
+					PreviewContainerSettings.VideoConvertSettings.Crf = Int32.Parse(value);
+				else
+					PreviewContainerSettings.VideoConvertSettings.Crf = null;
+			}
+		}
 
 		private VideoInfo() { }
 

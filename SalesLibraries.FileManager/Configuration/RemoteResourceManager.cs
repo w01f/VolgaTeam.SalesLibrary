@@ -11,6 +11,7 @@ namespace SalesLibraries.FileManager.Configuration
 
 		#region Local
 		public StorageDirectory MetaDataCacheFolder { get; private set; }
+		public StorageFile VideoConverterGridLayoutFile { get; private set; }
 		#endregion
 
 		#region Remote
@@ -42,6 +43,13 @@ namespace SalesLibraries.FileManager.Configuration
 					FileStorageManager.LocalFilesFolderName,
 					AppProfileManager.Instance.AppNameSet
 				}, "Cache");
+
+			VideoConverterGridLayoutFile = new StorageFile(new object[]
+			{
+				FileStorageManager.LocalFilesFolderName,
+				AppProfileManager.Instance.AppNameSet,
+				"Video-Converter-Layout.xml"
+			});
 		}
 
 		public async Task LoadRemote()

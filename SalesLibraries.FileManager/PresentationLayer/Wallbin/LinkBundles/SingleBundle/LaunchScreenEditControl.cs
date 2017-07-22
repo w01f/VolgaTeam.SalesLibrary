@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkBundleSettings;
 using SalesLibraries.Common.Helpers;
+using SalesLibraries.Common.Objects.Graphics;
 using SalesLibraries.CommonGUI.Common;
 using SalesLibraries.FileManager.Controllers;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.ImageGallery;
@@ -87,7 +88,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Singl
 
 		private void OnLogoEditClick(object sender, EventArgs e)
 		{
-			using (var form = new FormImageGallery(MainController.Instance.Lists.Banners))
+			using (var form = new FormImageGallery<Widget>(MainController.Instance.Lists.Banners))
 			{
 				if (form.ShowDialog() != DialogResult.OK) return;
 				pictureEditLogo.Image = (Image)form.OriginalImage.Clone(); 
@@ -96,7 +97,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Singl
 
 		private void OnBannerEditClick(object sender, EventArgs e)
 		{
-			using (var form = new FormImageGallery(MainController.Instance.Lists.Banners))
+			using (var form = new FormImageGallery<Widget>(MainController.Instance.Lists.Banners))
 			{
 				if (form.ShowDialog() != DialogResult.OK) return;
 				pictureEditBanner.Image = (Image)form.OriginalImage.Clone();

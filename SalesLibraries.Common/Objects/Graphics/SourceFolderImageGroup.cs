@@ -10,17 +10,18 @@ namespace SalesLibraries.Common.Objects.Graphics
 	{
 		protected const string IgnoredListFileName = "ignored.txt";
 
-		protected SourceFolderImageGroup(IImageSourceList parentList) : base(parentList) { }
-
-		public void LoadImages<T>(string sourcePath) where T : BaseImageSource
+		protected SourceFolderImageGroup(IImageSourceList parentList, string sourcePath) : base(parentList)
 		{
 			_sourcePath = sourcePath;
+		}
 
+		public void LoadImages<T>() where T : BaseImageSource
+		{
 			Images.Clear();
 
 			var ignoredFiles = new List<string>();
 
-			var ignoredListPath = Path.Combine(sourcePath, IgnoredListFileName);
+			var ignoredListPath = Path.Combine(_sourcePath, IgnoredListFileName);
 			if (File.Exists(ignoredListPath))
 			{
 				ignoredFiles.AddRange(File.ReadAllLines(ignoredListPath));
@@ -28,7 +29,7 @@ namespace SalesLibraries.Common.Objects.Graphics
 				{
 					foreach (var ignoredFile in ignoredFiles)
 					{
-						var targetFile = Path.Combine(sourcePath, ignoredFile);
+						var targetFile = Path.Combine(_sourcePath, ignoredFile);
 						if (File.Exists(targetFile))
 							File.Delete(targetFile);
 					}
@@ -37,7 +38,7 @@ namespace SalesLibraries.Common.Objects.Graphics
 				catch { }
 			}
 
-			foreach (var filePath in Directory.GetFiles(sourcePath, "*.png"))
+			foreach (var filePath in Directory.GetFiles(_sourcePath, "*.png"))
 			{
 				if (ignoredFiles.Any(ignoredFile => ignoredFile.Equals(Path.GetFileName(filePath), StringComparison.OrdinalIgnoreCase)))
 					continue;

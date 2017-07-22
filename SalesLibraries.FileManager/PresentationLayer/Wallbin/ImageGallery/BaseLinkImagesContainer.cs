@@ -44,8 +44,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.ImageGallery
 			Disposed += OnDisposed;
 		}
 
-		public static BaseLinkImagesContainer Create(ImageSourceGroup parent)
+		public static BaseLinkImagesContainer Create<TImageSource>(ImageSourceGroup parent) where TImageSource : BaseImageSource
 		{
+			if(!parent.Images.Any())
+				(parent as SourceFolderImageGroup)?.LoadImages<TImageSource>();
 			if (parent is FavoriteImageGroup)
 				return new FavoritesImagesContainer(parent);
 			if (parent is RegularImageGroup)

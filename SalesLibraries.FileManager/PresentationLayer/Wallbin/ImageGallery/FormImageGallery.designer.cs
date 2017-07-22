@@ -1,6 +1,6 @@
 ﻿namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.ImageGallery
 {
-	partial class FormImageGallery
+	partial class FormImageGallery<TImageSource>
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -31,8 +31,6 @@
 			this.components = new System.ComponentModel.Container();
 			this.buttonXOK = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXCancel = new DevComponents.DotNetBar.ButtonX();
-			this.contextMenuStripImage = new System.Windows.Forms.ContextMenuStrip(this.components);
-			this.toolStripMenuItemImageAddToFavorites = new System.Windows.Forms.ToolStripMenuItem();
 			this.pnSearch = new System.Windows.Forms.Panel();
 			this.labelControlSearchTitle = new DevExpress.XtraEditors.LabelControl();
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
@@ -43,7 +41,6 @@
 			this.retractableBarGallery = new SalesLibraries.CommonGUI.RetractableBar.RetractableBarLeft();
 			this.treeViewGallery = new SalesLibraries.FileManager.PresentationLayer.Wallbin.ImageGallery.GalleryTreeView();
 			this.labelControlSelectedGalleryName = new DevExpress.XtraEditors.LabelControl();
-			this.contextMenuStripImage.SuspendLayout();
 			this.pnSearch.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditSearch.Properties)).BeginInit();
@@ -80,21 +77,6 @@
 			this.buttonXCancel.TabIndex = 9;
 			this.buttonXCancel.Text = "Cancel";
 			this.buttonXCancel.TextColor = System.Drawing.Color.Black;
-			// 
-			// contextMenuStripImage
-			// 
-			this.contextMenuStripImage.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItemImageAddToFavorites});
-			this.contextMenuStripImage.Name = "contextMenuStripImage";
-			this.contextMenuStripImage.Size = new System.Drawing.Size(163, 26);
-			// 
-			// toolStripMenuItemImageAddToFavorites
-			// 
-			this.toolStripMenuItemImageAddToFavorites.Image = global::SalesLibraries.FileManager.Properties.Resources.Favorites;
-			this.toolStripMenuItemImageAddToFavorites.Name = "toolStripMenuItemImageAddToFavorites";
-			this.toolStripMenuItemImageAddToFavorites.Size = new System.Drawing.Size(162, 22);
-			this.toolStripMenuItemImageAddToFavorites.Text = "Add To Favorites";
-			this.toolStripMenuItemImageAddToFavorites.Click += new System.EventHandler(this.toolStripMenuItemImageAddToFavorites_Click);
 			// 
 			// pnSearch
 			// 
@@ -286,6 +268,7 @@
 			this.Controls.Add(this.buttonXOK);
 			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.ForeColor = System.Drawing.Color.Black;
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.MinimizeBox = false;
 			this.Name = "FormImageGallery";
@@ -293,9 +276,7 @@
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Select Image";
-			this.Load += new System.EventHandler(this.FormSelectWidget_Load);
 			this.Click += new System.EventHandler(this.OnFormClick);
-			this.contextMenuStripImage.ResumeLayout(false);
 			this.pnSearch.ResumeLayout(false);
 			this.pnSearch.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
@@ -322,7 +303,5 @@
 		private CommonGUI.RetractableBar.RetractableBarLeft retractableBarGallery;
 		private DevExpress.XtraEditors.LabelControl labelControlSelectedGalleryName;
 		private ImageGallery.GalleryTreeView treeViewGallery;
-		private System.Windows.Forms.ContextMenuStrip contextMenuStripImage;
-		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemImageAddToFavorites;
 	}
 }

@@ -7,7 +7,7 @@ namespace SalesLibraries.Common.Objects.Graphics
 {
 	public class FavoriteImageGroup : SourceFolderImageGroup
 	{
-		public FavoriteImageGroup(IImageSourceList parentList) : base(parentList) { }
+		public FavoriteImageGroup(IImageSourceList parentList, string sourcePath) : base(parentList, sourcePath) { }
 
 		public void AddImageSource<T>(T imageSource) where T : BaseImageSource
 		{
@@ -29,7 +29,7 @@ namespace SalesLibraries.Common.Objects.Graphics
 			if (!ParentList.FavsFolder.ExistsLocal())
 				ParentList.FavsFolder.Allocate(false);
 			File.Copy(filePath, Path.Combine(ParentList.FavsFolder.LocalPath, Path.GetFileName(filePath)), true);
-			LoadImages<T>(ParentList.FavsFolder.LocalPath);
+			LoadImages<T>();
 		}
 
 		public void RemoveImageFile<T>(string filePath) where T : BaseImageSource
@@ -46,7 +46,7 @@ namespace SalesLibraries.Common.Objects.Graphics
 
 			File.WriteAllLines(ignoredListPath, ignoredFiles);
 
-			LoadImages<T>(ParentList.FavsFolder.LocalPath);
+			LoadImages<T>();
 		}
 	}
 }

@@ -2,6 +2,6 @@
 {
 	public class RegularImageGroup : SourceFolderImageGroup
 	{
-		public RegularImageGroup(IImageSourceList parentList) : base(parentList) { }
+		public RegularImageGroup(IImageSourceList parentList, string sourcePath) : base(parentList, sourcePath) { }
 	}
 }
