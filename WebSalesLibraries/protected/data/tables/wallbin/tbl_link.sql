@@ -35,5 +35,6 @@ CREATE TABLE IF NOT EXISTS `tbl_link` (
   KEY `is_restricted` (`is_restricted`),
   KEY `original_format` (`original_format`),
   KEY `search_format` (`search_format`),
+  KEY `type` (`type`),
   FULLTEXT KEY `content` (`name`,`file_name`,`tags`,`content`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
