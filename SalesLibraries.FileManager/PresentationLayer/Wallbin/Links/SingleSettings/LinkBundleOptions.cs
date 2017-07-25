@@ -38,6 +38,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			}
 		}
 
+		public LinkBundleOptions(FileTypes? defaultLinkType = null) : this() { }
+
 		public void LoadData(BaseLibraryLink sourceLink)
 		{
 			_data = (LinkBundleLink)sourceLink;

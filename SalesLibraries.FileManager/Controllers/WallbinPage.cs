@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using DevComponents.DotNetBar;
+using DevExpress.Skins;
 using SalesLibraries.Business.Entities.Helpers;
 using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
@@ -50,6 +51,8 @@ namespace SalesLibraries.FileManager.Controllers
 				styleController.AppearanceDropDownHeader.Font = font;
 				styleController.AppearanceFocused.Font = font;
 				styleController.AppearanceReadOnly.Font = font;
+
+				pnTagInfoContainer.Width = RectangleHelper.ScaleHorizontal(pnTagInfoContainer.Width, comboBoxEditPages.ScaleFactor.Width);
 			}
 		}
 

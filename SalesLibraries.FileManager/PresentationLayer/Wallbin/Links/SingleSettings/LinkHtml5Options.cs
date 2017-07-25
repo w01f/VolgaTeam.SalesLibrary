@@ -40,6 +40,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			}
 		}
 
+		public LinkHtml5Options(FileTypes? defaultLinkType = null) : this() { }
+
 		public void LoadData(BaseLibraryLink sourceLink)
 		{
 			_data = (Html5Link)sourceLink;

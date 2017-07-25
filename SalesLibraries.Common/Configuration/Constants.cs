@@ -24,5 +24,7 @@
 		public const string LogArchiveFolderName = @"zzzz_logs_never_delete";
 		public const string OfficeTempFilePrefixName = @"~$";
 		public const string SinglePreviewFilePrefixName = "Single";
+		public const string OriginalVideoInfoFileNameTemplate = @"{0}_original";
+		public const string OutputVideoInfoFileNameTemplate = @"{0}_output";
 	}
 }

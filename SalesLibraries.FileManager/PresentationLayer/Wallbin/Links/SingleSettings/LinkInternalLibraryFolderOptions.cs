@@ -41,6 +41,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			}
 		}
 
+		public LinkInternalLibraryFolderOptions(FileTypes? defaultLinkType = null) : this() { }
+
 		public void LoadData(BaseLibraryLink sourceLink)
 		{
 			_data = (InternalLibraryFolderLink)sourceLink;

@@ -85,7 +85,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			}
 		}
 
-		public FormEditLinkBanner(BaseLibraryLink sourceLink) : this()
+		public FormEditLinkBanner(BaseLibraryLink sourceLink, FileTypes? defaultLinkType = null) : this()
 		{
 			_sourceLink = sourceLink;
 			labelControlTitle.Text = String.Format(ImageTitleFormat, BannerTitle, String.Empty);

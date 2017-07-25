@@ -201,6 +201,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 			public bool ApplyWidgetColorForAllWindows { get; set; }
 			public bool ApplyBannerForAllWindows { get; set; }
 			public bool ApplyConvertSettingsForAllVideo { get; set; }
+			public bool UserCrfForVideoConvert { get; set; }
 
 			public List<AutoWidget> AutoWidgets { get; private set; }
 

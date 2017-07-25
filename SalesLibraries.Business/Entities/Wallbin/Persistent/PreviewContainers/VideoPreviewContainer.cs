@@ -9,6 +9,7 @@ using SalesLibraries.Business.Entities.Helpers;
 using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Constants;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.PreviewContainerSettings;
+using SalesLibraries.Common.Configuration;
 using SalesLibraries.Common.Objects.Video;
 
 namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
@@ -58,7 +59,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 		{
 			get
 			{
-				var videoData = GetVideoData();
+				var videoData = GetOriginalVideoData();
 				return FileFormatHelper.IsMp4File(SourcePath) && videoData != null && videoData.IsH264Encoded && videoData.IsBitrateNormal;
 			}
 		}
@@ -90,17 +91,32 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 			}
 		}
 
-		public FFMpegData GetVideoData()
+		public FFMpegData GetOriginalVideoData()
 		{
-			var infoPath = GetInfoPath();
+			var infoPath = GetOriginalInfoPath();
 			return !String.IsNullOrEmpty(infoPath) ? FFMpegData.LoadFromFile(infoPath) : null;
 		}
 
-		private string GetInfoPath()
+		private string GetOriginalInfoPath()
 		{
-			var infoDestination = Path.Combine(ContainerPath, PreviewFormats.VideoInfo);
-			return Directory.Exists(infoDestination) ?
-				Directory.GetFiles(infoDestination, "*.txt").FirstOrDefault() :
+			var infoFileDestination = Path.Combine(ContainerPath, PreviewFormats.VideoInfo, String.Format(Constants.OriginalVideoInfoFileNameTemplate, Path.GetFileNameWithoutExtension(SourcePath))) + ".txt";
+			var oldFileDestination = Path.Combine(ContainerPath, PreviewFormats.VideoInfo, Path.GetFileNameWithoutExtension(SourcePath)) + ".txt";
+			return File.Exists(infoFileDestination) ?
+				infoFileDestination :
+				(File.Exists(oldFileDestination) ? oldFileDestination : null);
+		}
+
+		public FFMpegData GetOutputVideoData()
+		{
+			var infoPath = GetOutputInfoPath();
+			return !String.IsNullOrEmpty(infoPath) ? FFMpegData.LoadFromFile(infoPath) : null;
+		}
+
+		public string GetOutputInfoPath()
+		{
+			var infoFileDestination = Path.Combine(ContainerPath, PreviewFormats.VideoInfo, String.Format(Constants.OutputVideoInfoFileNameTemplate, Path.GetFileNameWithoutExtension(SourcePath))) + ".txt";
+			return File.Exists(infoFileDestination) ?
+				infoFileDestination :
 				null;
 		}
 	}

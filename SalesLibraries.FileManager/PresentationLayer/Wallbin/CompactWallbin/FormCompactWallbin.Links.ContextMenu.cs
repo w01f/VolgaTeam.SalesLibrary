@@ -37,14 +37,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.CompactWallbin
 			lineBreakFormatEditor.EditValueChanged += OnSingleLinkContextEditorValueChanged;
 			_singleLinkContextMenuEditors.Add(lineBreakFormatEditor);
 
-			var documentSettingsEditor = new DocumentSettingsEditor(barSubItemSingleLinkPropertiesAdminSettings);
-			documentSettingsEditor.EditValueChanged += OnSingleLinkContextEditorValueChanged;
-			_singleLinkContextMenuEditors.Add(documentSettingsEditor);
-
-			var excelSettingsEditor = new ExcelSettingsEditor(barSubItemSingleLinkPropertiesAdminSettings);
-			excelSettingsEditor.EditValueChanged += OnSingleLinkContextEditorValueChanged;
-			_singleLinkContextMenuEditors.Add(excelSettingsEditor);
-
 			popupMenuSingleLinkProperties.CloseUp += OnSingleLinkPropertiesMenuCloseUp;
 		}
 
@@ -109,7 +101,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.CompactWallbin
 				barButtonItemSingleLinkPropertiesRefreshPreview.Visibility = BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesTags.Visibility = BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesExpirationDate.Visibility = BarItemVisibility.Never;
-				barSubItemSingleLinkPropertiesAdminSettings.Visibility = BarItemVisibility.Never;
+				barButtonItemSingleLinkPropertiesAdminSettings.Visibility = BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesThumbnail.Visibility = BarItemVisibility.Never;
 
 				barButtonItemSingleLinkPropertiesLinkSettings.Caption = "Line Break Settings";
@@ -123,7 +115,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.CompactWallbin
 				barButtonItemSingleLinkPropertiesFileLocation.Visibility = BarItemVisibility.Never;
 				barSubItemSingleLinkPropertiesFolderLinkSettings.Visibility = BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesRefreshPreview.Visibility = BarItemVisibility.Never;
-				barSubItemSingleLinkPropertiesAdminSettings.Visibility = BarItemVisibility.Never;
+				barButtonItemSingleLinkPropertiesAdminSettings.Visibility = BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesThumbnail.Visibility = BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesTags.Visibility = MainController.Instance.Settings.EditorSettings.EnableTagsEdit
 					? BarItemVisibility.Always
@@ -164,7 +156,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.CompactWallbin
 				barButtonItemSingleLinkPropertiesExpirationDate.Visibility = !isLinkInaccessable
 					? BarItemVisibility.Always
 					: BarItemVisibility.Never;
-				barSubItemSingleLinkPropertiesAdminSettings.Visibility = !isLinkInaccessable && (sourceLink is PdfLink ||
+				barButtonItemSingleLinkPropertiesAdminSettings.Visibility = !isLinkInaccessable && (sourceLink is PdfLink ||
 																							 sourceLink is ExcelLink)
 					? BarItemVisibility.Always
 					: BarItemVisibility.Never;
@@ -176,6 +168,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.CompactWallbin
 				barButtonItemSingleLinkPropertiesDelete.Caption = "Delete this Link";
 				barSubItemSingleLinkPropertiesImages.Caption = "Link ART";
 				barButtonItemSingleLinkPropertiesResetSettings.Caption = "Reset this Link";
+
+				if (sourceLink is PdfLink)
+					barButtonItemSingleLinkPropertiesAdminSettings.Caption = "PDF Settings";
+				else if (sourceLink is ExcelLink)
+					barButtonItemSingleLinkPropertiesAdminSettings.Caption = "Excel Settings";
 			}
 
 			barButtonItemSingleLinkPropertiesLinkSettings.Visibility = !isLinkInaccessable
@@ -267,6 +264,17 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.CompactWallbin
 		private void barButtonItemSingleLinkPropertiesFolderLinkPdfSettings_ItemClick(object sender, ItemClickEventArgs e)
 		{
 			EditSingleLinkSettings(_contextMenuTargetNode, LinkSettingsType.AdminSettings, FileTypes.Pdf);
+		}
+
+		private void barButtonItemSingleLinkPropertiesAdminSettings_ItemClick(object sender, ItemClickEventArgs e)
+		{
+			var wallbinItem = (WallbinItem)_contextMenuTargetNode?.Tag;
+			if (wallbinItem?.Type != WallbinItemType.Link) return;
+			var sourceLink = wallbinItem.Source as BaseLibraryLink;
+			if (sourceLink is PdfLink)
+				EditSingleLinkSettings(_contextMenuTargetNode, LinkSettingsType.AdminSettings, FileTypes.Pdf);
+			else if (sourceLink is ExcelLink)
+				EditSingleLinkSettings(_contextMenuTargetNode, LinkSettingsType.AdminSettings, FileTypes.Excel);
 		}
 	}
 }

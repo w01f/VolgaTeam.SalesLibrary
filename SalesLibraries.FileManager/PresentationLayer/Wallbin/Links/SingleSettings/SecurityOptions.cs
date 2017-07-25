@@ -99,6 +99,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			}
 		}
 
+		public SecurityOptions(FileTypes? defaultLinkType = null) : this() { }
+
 		public SecurityOptions(ILinksGroup linksGroup, FileTypes? defaultLinkType = null) : this() { }
 
 		public void LoadData(BaseLibraryLink sourceLink)

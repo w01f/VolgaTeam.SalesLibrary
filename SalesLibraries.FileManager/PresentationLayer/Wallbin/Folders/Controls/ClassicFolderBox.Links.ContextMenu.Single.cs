@@ -35,14 +35,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 			lineBreakFormatEditor.EditValueChanged += OnSingleLinkContextEditorValueChanged;
 			_singleLinkContextMenuEditors.Add(lineBreakFormatEditor);
 
-			var documentSettingsEditor = new DocumentSettingsEditor(barSubItemSingleLinkPropertiesAdminSettings);
-			documentSettingsEditor.EditValueChanged += OnSingleLinkContextEditorValueChanged;
-			_singleLinkContextMenuEditors.Add(documentSettingsEditor);
-
-			var excelSettingsEditor = new ExcelSettingsEditor(barSubItemSingleLinkPropertiesAdminSettings);
-			excelSettingsEditor.EditValueChanged += OnSingleLinkContextEditorValueChanged;
-			_singleLinkContextMenuEditors.Add(excelSettingsEditor);
-
 			popupMenuSingleLinkProperties.CloseUp += OnSingleLinkPropertiesMenuCloseUp;
 		}
 
@@ -83,7 +75,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 				barButtonItemSingleLinkPropertiesLinkSettings.Visibility = BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesImageSettings.Visibility = BarItemVisibility.Never;
 				barSubItemSingleLinkPropertiesObjectNotes.Visibility = BarItemVisibility.Never;
-				barSubItemSingleLinkPropertiesAdminSettings.Visibility = BarItemVisibility.Never;
+				barButtonItemSingleLinkPropertiesAdminSettings.Visibility = BarItemVisibility.Never;
 				barSubItemSingleLinkPropertiesFolderLinkSettings.Visibility = BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesTags.Visibility = BarItemVisibility.Never;
 				barSubItemSingleLinkPropertiesImages.Visibility = BarItemVisibility.Never;
@@ -103,7 +95,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 				barButtonItemSingleLinkPropertiesLinkSettings.Visibility = BarItemVisibility.Always;
 				barButtonItemSingleLinkPropertiesImageSettings.Visibility = BarItemVisibility.Always;
 				barSubItemSingleLinkPropertiesObjectNotes.Visibility = BarItemVisibility.Always;
-				barSubItemSingleLinkPropertiesAdminSettings.Visibility = BarItemVisibility.Always;
+				barButtonItemSingleLinkPropertiesAdminSettings.Visibility = BarItemVisibility.Always;
 				barSubItemSingleLinkPropertiesFolderLinkSettings.Visibility = BarItemVisibility.Always;
 				barButtonItemSingleLinkPropertiesTags.Visibility = BarItemVisibility.Always;
 				barSubItemSingleLinkPropertiesImages.Visibility = BarItemVisibility.Always;
@@ -154,7 +146,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 				barButtonItemSingleLinkPropertiesRefreshPreview.Visibility = BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesTags.Visibility = BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesExpirationDate.Visibility = BarItemVisibility.Never;
-				barSubItemSingleLinkPropertiesAdminSettings.Visibility = BarItemVisibility.Never;
+				barButtonItemSingleLinkPropertiesAdminSettings.Visibility = BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesThumbnail.Visibility = BarItemVisibility.Never;
 
 				barButtonItemSingleLinkPropertiesLinkSettings.Caption = "Line Break Settings";
@@ -168,7 +160,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 				barButtonItemSingleLinkPropertiesFileLocation.Visibility = BarItemVisibility.Never;
 				barSubItemSingleLinkPropertiesFolderLinkSettings.Visibility = BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesRefreshPreview.Visibility = BarItemVisibility.Never;
-				barSubItemSingleLinkPropertiesAdminSettings.Visibility = BarItemVisibility.Never;
+				barButtonItemSingleLinkPropertiesAdminSettings.Visibility = BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesThumbnail.Visibility = BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesTags.Visibility = MainController.Instance.Settings.EditorSettings.EnableTagsEdit
 					? BarItemVisibility.Always
@@ -211,7 +203,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 				barButtonItemSingleLinkPropertiesExpirationDate.Visibility = !linkRow.Inaccessable
 					? BarItemVisibility.Always
 					: BarItemVisibility.Never;
-				barSubItemSingleLinkPropertiesAdminSettings.Visibility = !linkRow.Inaccessable && (linkRow.Source is PdfLink ||
+				barButtonItemSingleLinkPropertiesAdminSettings.Visibility = !linkRow.Inaccessable && (linkRow.Source is PdfLink ||
 																							 linkRow.Source is ExcelLink)
 					? BarItemVisibility.Always
 					: BarItemVisibility.Never;
@@ -224,6 +216,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 				barButtonItemSingleLinkPropertiesDelete.Caption = "Delete this Link";
 				barSubItemSingleLinkPropertiesImages.Caption = "Link ART";
 				barButtonItemSingleLinkPropertiesResetSettings.Caption = "Reset this Link";
+
+				if (linkRow.Source is PdfLink)
+					barButtonItemSingleLinkPropertiesAdminSettings.Caption = "PDF Settings";
+				else if (linkRow.Source is ExcelLink)
+					barButtonItemSingleLinkPropertiesAdminSettings.Caption = "Excel Settings";
 			}
 
 			barButtonItemSingleLinkPropertiesLinkSettings.Visibility = !linkRow.Inaccessable
@@ -379,6 +376,15 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 		private void barButtonItemSingleLinkPropertiesFolderLinkExcelSettings_ItemClick(object sender, ItemClickEventArgs e)
 		{
 			EditSingleLinkSettings(LinkSettingsType.AdminSettings, FileTypes.Excel);
+		}
+
+		private void barButtonItemSingleLinkPropertiesAdminSettings_ItemClick(object sender, ItemClickEventArgs e)
+		{
+			var sourceLink = SelectedLinkRow?.Source as IPreviewableLink;
+			if (sourceLink is PdfLink)
+				EditSingleLinkSettings(LinkSettingsType.AdminSettings, FileTypes.Pdf);
+			else if (sourceLink is ExcelLink)
+				EditSingleLinkSettings(LinkSettingsType.AdminSettings, FileTypes.Excel);
 		}
 	}
 }

@@ -12,12 +12,11 @@ namespace SalesLibraries.FileManager.Business.Services
 	{
 		public static void ExtractVideoInfo(
 			string sourceFilePath,
-			string destinationPath,
+			string destinationFilePath,
 			CancellationToken cancellationToken)
 		{
 			var allowToExit = false;
 			var analizerPath = Path.Combine(MainController.Instance.Settings.FFMpegPackagePath, "ffprobe.exe");
-			var destinationInfoFilePath = Path.Combine(destinationPath, Path.ChangeExtension(Path.GetFileName(sourceFilePath), ".txt"));
 			if (!File.Exists(sourceFilePath) || !File.Exists(analizerPath)) return;
 			var videoAnalyzer = new Process
 			{
@@ -34,7 +33,7 @@ namespace SalesLibraries.FileManager.Business.Services
 			{
 				var analyzeOutput = videoAnalyzer.StandardOutput.ReadToEnd();
 				analyzeOutput += videoAnalyzer.StandardError.ReadToEnd();
-				File.WriteAllText(destinationInfoFilePath, analyzeOutput);
+				File.WriteAllText(destinationFilePath, analyzeOutput);
 				allowToExit = true;
 			};
 			videoAnalyzer.Start();

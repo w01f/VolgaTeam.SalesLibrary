@@ -14,6 +14,8 @@ namespace SalesLibraries.FileManager.Business.Models.VideoInfo
 {
 	class VideoInfo
 	{
+		public const string NoCrfValue = "none";
+
 		private VideoPreviewContainer _previewContainer;
 		public string SourceFileInfo { get; set; }
 		public string SourceFolderPath { get; set; }
@@ -36,11 +38,11 @@ namespace SalesLibraries.FileManager.Business.Models.VideoInfo
 			{
 				if (PreviewContainerSettings.VideoConvertSettings.Crf.HasValue)
 					return PreviewContainerSettings.VideoConvertSettings.Crf.Value.ToString();
-				return "none";
+				return NoCrfValue;
 			}
 			set
 			{
-				if (!String.Equals(value, "none", StringComparison.OrdinalIgnoreCase))
+				if (!String.Equals(value, NoCrfValue, StringComparison.OrdinalIgnoreCase))
 					PreviewContainerSettings.VideoConvertSettings.Crf = Int32.Parse(value);
 				else
 					PreviewContainerSettings.VideoConvertSettings.Crf = null;
@@ -55,29 +57,27 @@ namespace SalesLibraries.FileManager.Business.Models.VideoInfo
 			{
 				_previewContainer = previewContainer,
 				SourceFolderPath = Path.GetDirectoryName(previewContainer.SourcePath),
-				SourceFileInfo = String.Format("{0}     <b>({1})</b>",
+				SourceFileInfo = String.Format("{0} <color=gray>{1}</color>",
 					Path.GetFileName(previewContainer.SourcePath),
 					Utils.FormatFileSize(new FileInfo(previewContainer.SourcePath).Length)),
 				PreviewContainerPath = previewContainer.ContainerPath,
 				Converted = previewContainer.IsConverted
 			};
 
-			var videoData = previewContainer.GetVideoData();
+			var videoData = previewContainer.GetOriginalVideoData();
 			if (videoData != null)
 			{
 				videoInfo.Width = videoData.Width;
 				videoInfo.Height = videoData.Height;
 
 				var durationSpan = TimeSpan.FromSeconds(videoData.Duration);
-				videoInfo.Length = String.Format("{0}{1}:{2}",
-					durationSpan.Hours > 0 ? String.Format("{0}:", durationSpan.Hours.ToString("#0")) : String.Empty,
-					durationSpan.Minutes.ToString("# ##0"),
-					durationSpan.Seconds.ToString("00"));
+				videoInfo.Length = String.Format("{0}{1:# ##0}:{2:00}",
+					durationSpan.Hours > 0 ? String.Format("{0:#0}:", durationSpan.Hours) : String.Empty, durationSpan.Minutes, durationSpan.Seconds);
 			}
 
 			if (previewContainer.IsMp4Converted)
 			{
-				videoInfo.Mp4FileInfo = videoInfo.SourceFileInfo;
+				videoInfo.Mp4FileInfo = Utils.FormatFileSize(new FileInfo(previewContainer.SourcePath).Length);
 				videoInfo.Mp4FilePath = previewContainer.SourcePath;
 			}
 			else
@@ -89,9 +89,7 @@ namespace SalesLibraries.FileManager.Business.Models.VideoInfo
 				if (File.Exists(mp4FilePath))
 				{
 					videoInfo.Mp4FilePath = mp4FilePath;
-					videoInfo.Mp4FileInfo = String.Format("{0}{1}",
-						Path.GetFileName(mp4FilePath),
-						String.Format("     <b>({0})</b>", Utils.FormatFileSize(new FileInfo(videoInfo.Mp4FilePath).Length)));
+					videoInfo.Mp4FileInfo = Utils.FormatFileSize(new FileInfo(videoInfo.Mp4FilePath).Length);
 				}
 				else
 				{

@@ -15,7 +15,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 	{
 		private static readonly LinkSettingsType[] LinkGroupSettings = {
 			LinkSettingsType.Tags,
-			LinkSettingsType.AdminSettings, 
+			LinkSettingsType.AdminSettings,
 		};
 
 		public void EditSingleLinkSettings(LinkSettingsType settingsType, FileTypes? defaultLinkType = null)
@@ -24,7 +24,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 			if (selectedRow == null) return;
 			if ((selectedRow.Source is ILinksGroup && LinkGroupSettings.Contains(settingsType) ?
 				SettingsEditorFactory.Run((ILinksGroup)selectedRow.Source, settingsType, defaultLinkType) :
-				SettingsEditorFactory.Run(selectedRow.Source, settingsType)) == DialogResult.OK)
+				SettingsEditorFactory.Run(selectedRow.Source, settingsType, defaultLinkType)) == DialogResult.OK)
 			{
 				UpdateContent(true);
 				DataChanged?.Invoke(this, EventArgs.Empty);

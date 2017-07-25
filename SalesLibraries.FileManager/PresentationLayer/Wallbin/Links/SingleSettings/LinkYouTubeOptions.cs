@@ -43,6 +43,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			}
 		}
 
+		public LinkYouTubeOptions(FileTypes? defaultLinkType = null) : this() { }
+
 		public void LoadData(BaseLibraryLink sourceLink)
 		{
 			_data = (YouTubeLink)sourceLink;

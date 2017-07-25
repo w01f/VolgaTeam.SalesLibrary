@@ -1,10 +1,12 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Constants;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.PreviewContainerSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers;
+using SalesLibraries.Common.Configuration;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.Objects.Video;
 using SalesLibraries.FileManager.Business.Services;
@@ -22,19 +24,21 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 			var logger = new VideoPreviewGenerationLogger(previewContainer);
 			logger.StartLogging();
 
+			var infoDestination = Path.Combine(previewContainer.ContainerPath, PreviewFormats.VideoInfo);
+			if (!Directory.Exists(infoDestination))
+				Directory.CreateDirectory(infoDestination);
+
 			if (!cancellationToken.IsCancellationRequested)
 			{
-				var infoDestination = Path.Combine(previewContainer.ContainerPath, PreviewFormats.VideoInfo);
-				var updateInfo = !(Directory.Exists(infoDestination) && Directory.GetFiles(infoDestination).Any());
-				if (!Directory.Exists(infoDestination))
-					Directory.CreateDirectory(infoDestination);
-				if (updateInfo)
+				var infoFilePath = Path.Combine(infoDestination, String.Format(Constants.OriginalVideoInfoFileNameTemplate, Path.GetFileNameWithoutExtension(previewContainer.SourcePath)) + ".txt");
+				var updateOriginalInfo = !File.Exists(infoFilePath);
+				if (updateOriginalInfo)
 				{
-					VideoHelper.ExtractVideoInfo(previewContainer.SourcePath, infoDestination, cancellationToken);
-					logger.LogInfoStage();
+					VideoHelper.ExtractVideoInfo(previewContainer.SourcePath, infoFilePath, cancellationToken);
+					logger.LogOriginalInfoStage();
 				}
-				videoData = ((VideoPreviewContainer)previewContainer).GetVideoData();
-				updated |= updateInfo;
+				videoData = ((VideoPreviewContainer)previewContainer).GetOriginalVideoData();
+				updated |= updateOriginalInfo;
 			}
 
 			if (!cancellationToken.IsCancellationRequested && videoData != null && !((VideoPreviewContainer)previewContainer).IsMp4Converted)
@@ -47,6 +51,15 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 				{
 					VideoHelper.ExportMp4(previewContainer.SourcePath, mp4Destination, videoData, ((VideoPreviewContainerSettings)previewContainer.Settings).VideoConvertSettings.Crf, cancellationToken);
 					logger.LogStage(PreviewFormats.VideoMp4);
+
+					var infoFilePath = Path.Combine(infoDestination, String.Format(Constants.OutputVideoInfoFileNameTemplate, Path.GetFileNameWithoutExtension(previewContainer.SourcePath)) + ".txt");
+					var updateOutputInfo = !File.Exists(infoFilePath);
+					if (updateOutputInfo)
+					{
+						VideoHelper.ExtractVideoInfo(Path.Combine(mp4Destination, Path.ChangeExtension(Path.GetFileName(previewContainer.SourcePath), ".mp4")), infoFilePath, cancellationToken);
+						logger.LogOutputInfoStage();
+					}
+					updated |= updateOutputInfo;
 				}
 				updated |= updateMp4;
 			}

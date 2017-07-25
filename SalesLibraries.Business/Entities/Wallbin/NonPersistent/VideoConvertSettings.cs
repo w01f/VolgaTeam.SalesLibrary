@@ -4,8 +4,6 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 {
 	public class VideoConvertSettings
 	{
-		public const int DefaultCrf = 29;
-
 		public SettingsContainer SettingsContainer { get; set; }
 
 		private int? _crf;

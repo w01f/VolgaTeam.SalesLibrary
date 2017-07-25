@@ -50,6 +50,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			}
 		}
 
+		public LinkExcelOptions(FileTypes? defaultLinkType = null) : this() { }
+
 		public LinkExcelOptions(ILinksGroup linksGroup, FileTypes? defaultLinkType = null) : this()
 		{
 			_linksGroup = linksGroup;

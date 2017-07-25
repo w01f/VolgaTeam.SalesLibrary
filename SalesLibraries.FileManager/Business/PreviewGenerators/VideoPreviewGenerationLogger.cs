@@ -1,8 +1,10 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using SalesLibraries.Business.Entities.Wallbin.Common.Constants;
+using SalesLibraries.Business.Entities.Wallbin.NonPersistent.PreviewContainerSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers;
+using SalesLibraries.Common.Configuration;
+using SalesLibraries.FileManager.Business.Models.VideoInfo;
 
 namespace SalesLibraries.FileManager.Business.PreviewGenerators
 {
@@ -10,27 +12,33 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 	{
 		public VideoPreviewGenerationLogger(BasePreviewContainer previewContainer) : base(previewContainer) { }
 
-		public void LogInfoStage()
+		public void LogOriginalInfoStage()
 		{
-			_log.AppendLine(String.Format(@"{0} - {1:hh\:mm\:ss tt}", PreviewFormats.VideoInfo.ToUpper(), DateTime.Now));
+			_log.AppendLine(String.Format(@"{0} - {1:hh\:mm\:ss tt}", String.Format(Constants.OriginalVideoInfoFileNameTemplate, PreviewFormats.VideoInfo).ToUpper(), DateTime.Now));
 
-			var formatContentPath = Path.Combine(_previewContainer.ContainerPath, PreviewFormats.VideoInfo);
-			var files = Directory.GetFiles(formatContentPath);
-			if (files.Any())
+			var videoPreviewContainer = (VideoPreviewContainer)_previewContainer;
+			var videoData = videoPreviewContainer.GetOriginalVideoData();
+			if (videoData != null)
 			{
-				var videoPreviewContainer = (VideoPreviewContainer)_previewContainer;
-				var videoData = videoPreviewContainer.GetVideoData();
-				if (videoData != null)
-				{
-					_log.AppendLine(String.Format(@"Length - {0:hh\:mm\:ss}", TimeSpan.FromSeconds(videoData.Duration)));
-					SaveToFile();
-				}
+				_log.AppendLine(String.Format(@"Length - {0:hh\:mm\:ss}", TimeSpan.FromSeconds(videoData.Duration)));
+				SaveToFile();
 			}
 			else
 			{
 				SaveToFile();
 				throw PreviewGenerationException.Create(_logPath);
 			}
+		}
+
+		public void LogOutputInfoStage()
+		{
+			var videoPreviewContainer = (VideoPreviewContainer)_previewContainer;
+
+			_log.AppendLine(String.Format(@"CRF - {0}", ((VideoPreviewContainerSettings)videoPreviewContainer.Settings).VideoConvertSettings.Crf.HasValue ? ((VideoPreviewContainerSettings)videoPreviewContainer.Settings).VideoConvertSettings.Crf.Value.ToString() : VideoInfo.NoCrfValue));
+			_log.AppendLine(String.Format(@"{0} - {1:hh\:mm\:ss tt}", String.Format(Constants.OutputVideoInfoFileNameTemplate, PreviewFormats.VideoInfo).ToUpper(), DateTime.Now));
+			SaveToFile();
+			if (!File.Exists(videoPreviewContainer.GetOutputInfoPath()))
+				throw PreviewGenerationException.Create(_logPath);
 		}
 	}
 }

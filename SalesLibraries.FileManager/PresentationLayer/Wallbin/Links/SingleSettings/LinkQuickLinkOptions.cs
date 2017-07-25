@@ -47,6 +47,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			textEditUrl.MouseDown += EditorHelper.EditorMouseUp;
 		}
 
+		public LinkQuickLinkOptions(FileTypes? defaultLinkType = null) : this() { }
+
 		public void LoadData(BaseLibraryLink sourceLink)
 		{
 			_data = (LibraryObjectLink)sourceLink;

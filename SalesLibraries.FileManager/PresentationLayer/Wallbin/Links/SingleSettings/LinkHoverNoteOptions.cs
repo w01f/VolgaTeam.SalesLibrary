@@ -42,6 +42,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			memoEditNote.MouseDown += EditorHelper.EditorMouseUp;
 		}
 
+		public LinkHoverNoteOptions(FileTypes? defaultLinkType = null) : this() { }
+
 		public void LoadData(BaseLibraryLink sourceLink)
 		{
 			_data = (LibraryObjectLink)sourceLink;

@@ -61,7 +61,7 @@
 			this.barButtonItemSingleLinkPropertiesThumbnail = new DevExpress.XtraBars.BarButtonItem();
 			this.barSubItemSingleLinkPropertiesLineBreakNotes = new DevExpress.XtraBars.BarSubItem();
 			this.barSubItemSingleLinkPropertiesObjectNotes = new DevExpress.XtraBars.BarSubItem();
-			this.barSubItemSingleLinkPropertiesAdminSettings = new DevExpress.XtraBars.BarSubItem();
+			this.barButtonItemSingleLinkPropertiesAdminSettings = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemSingleLinkPropertiesResetSettings = new DevExpress.XtraBars.BarButtonItem();
 			this.barSubItemSingleLinkPropertiesAdvanced = new DevExpress.XtraBars.BarSubItem();
 			this.barButtonItemSingleLinkPropertiesFileLocation = new DevExpress.XtraBars.BarButtonItem();
@@ -178,7 +178,7 @@
             new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemSingleLinkPropertiesImages, true),
             new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemSingleLinkPropertiesLineBreakNotes),
             new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemSingleLinkPropertiesObjectNotes),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemSingleLinkPropertiesAdminSettings, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSingleLinkPropertiesAdminSettings, true),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSingleLinkPropertiesResetSettings, true),
             new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemSingleLinkPropertiesAdvanced, true),
             new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemSingleLinkPropertiesObjectTextFormat, true),
@@ -421,12 +421,13 @@
 			this.barSubItemSingleLinkPropertiesObjectNotes.Id = 36;
 			this.barSubItemSingleLinkPropertiesObjectNotes.Name = "barSubItemSingleLinkPropertiesObjectNotes";
 			// 
-			// barSubItemSingleLinkPropertiesAdminSettings
+			// barButtonItemSingleLinkPropertiesAdminSettings
 			// 
-			this.barSubItemSingleLinkPropertiesAdminSettings.Caption = "Admin Settings";
-			this.barSubItemSingleLinkPropertiesAdminSettings.CategoryGuid = new System.Guid("0399476a-ad4e-415d-bbb8-97162e27fa1a");
-			this.barSubItemSingleLinkPropertiesAdminSettings.Id = 37;
-			this.barSubItemSingleLinkPropertiesAdminSettings.Name = "barSubItemSingleLinkPropertiesAdminSettings";
+			this.barButtonItemSingleLinkPropertiesAdminSettings.Caption = "Admin Settings";
+			this.barButtonItemSingleLinkPropertiesAdminSettings.CategoryGuid = new System.Guid("0399476a-ad4e-415d-bbb8-97162e27fa1a");
+			this.barButtonItemSingleLinkPropertiesAdminSettings.Id = 110;
+			this.barButtonItemSingleLinkPropertiesAdminSettings.Name = "barButtonItemSingleLinkPropertiesAdminSettings";
+			this.barButtonItemSingleLinkPropertiesAdminSettings.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemSingleLinkPropertiesAdminSettings_ItemClick);
 			// 
 			// barButtonItemSingleLinkPropertiesResetSettings
 			// 
@@ -525,7 +526,6 @@
             this.barSubItemSingleLinkPropertiesImages,
             this.barButtonItemSingleLinkPropertiesImageSettings,
             this.barSubItemSingleLinkPropertiesObjectNotes,
-            this.barSubItemSingleLinkPropertiesAdminSettings,
             this.barButtonItemFolderPropertiesFolderSettings,
             this.barButtonItemFolderPropertiesDeleteFolder,
             this.barSubItemFolderPropertiesFolderCopy,
@@ -586,8 +586,9 @@
             this.barButtonItemSingleLinkPropertiesThumbnail,
             this.barSubItemSingleLinkPropertiesFolderLinkSettings,
             this.barButtonItemSingleLinkPropertiesFolderLinkExcelSettings,
-            this.barButtonItemSingleLinkPropertiesFolderLinkPdfSettings});
-			this.barManager.MaxItemId = 110;
+            this.barButtonItemSingleLinkPropertiesFolderLinkPdfSettings,
+            this.barButtonItemSingleLinkPropertiesAdminSettings});
+			this.barManager.MaxItemId = 111;
 			// 
 			// barDockControlTop
 			// 
@@ -1051,6 +1052,7 @@
 			// 
 			// ClassicFolderBox
 			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
 			this.Controls.Add(this.barDockControlLeft);
 			this.Controls.Add(this.barDockControlRight);
 			this.Controls.Add(this.barDockControlBottom);
@@ -1106,7 +1108,6 @@
 		private DevExpress.XtraBars.BarSubItem barSubItemSingleLinkPropertiesImages;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemSingleLinkPropertiesImageSettings;
 		private DevExpress.XtraBars.BarSubItem barSubItemSingleLinkPropertiesObjectNotes;
-		private DevExpress.XtraBars.BarSubItem barSubItemSingleLinkPropertiesAdminSettings;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemFolderPropertiesFolderSettings;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemFolderPropertiesDeleteFolder;
 		private DevExpress.XtraBars.BarSubItem barSubItemFolderPropertiesFolderCopy;
@@ -1170,5 +1171,6 @@
 		private DevExpress.XtraBars.BarSubItem barSubItemSingleLinkPropertiesFolderLinkSettings;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemSingleLinkPropertiesFolderLinkExcelSettings;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemSingleLinkPropertiesFolderLinkPdfSettings;
+		private DevExpress.XtraBars.BarButtonItem barButtonItemSingleLinkPropertiesAdminSettings;
 	}
 }

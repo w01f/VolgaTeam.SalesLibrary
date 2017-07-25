@@ -68,7 +68,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			}
 		}
 
-		public FormEditLinkWidget(BaseLibraryLink sourceLink) : this()
+		public FormEditLinkWidget(BaseLibraryLink sourceLink, FileTypes? defaultLinkType = null) : this()
 		{
 			_sourceLink = sourceLink;
 		}

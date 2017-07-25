@@ -62,7 +62,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			}
 		}
 
-		public FormEditLinkTags(BaseLibraryLink sourceLink) : this()
+		public FormEditLinkTags(BaseLibraryLink sourceLink, FileTypes? defaultLinkType = null) : this()
 		{
 			_selectedLinks.Add(sourceLink);
 			panelFilesContainer.Visible = false;

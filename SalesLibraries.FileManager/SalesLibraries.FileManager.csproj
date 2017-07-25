@@ -369,12 +369,8 @@
     <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\BaseLibraryObjectLoader.cs" />
     <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\BaseLinkLoader.cs" />
     <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\BaseContextMenuEditor.cs" />
-    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\ExcelSettingsLoader.cs" />
-    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\ExcelSettingsEditor.cs" />
     <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\LibraryObjectNotesLoader.cs" />
     <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\LibraryObjectNotesEditor.cs" />
-    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\DocumentSettingsEditor.cs" />
-    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\DocumentSettingsLoader.cs" />
     <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\LineBreakNotesEditor.cs" />
     <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\LineBreakTextFormatEditor.cs" />
     <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\LibraryObjectTextFormatEditor.cs" />

@@ -53,9 +53,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			}
 		}
 
-		public FormEditLinkSettingsRegular(BaseLibraryLink sourceLink) : this()
+		public FormEditLinkSettingsRegular(BaseLibraryLink sourceLink, FileTypes? defaultLinkType = null) : this()
 		{
 			_sourceLink = sourceLink;
+			_defaultLinkType = defaultLinkType;
 
 			Width = 680;
 			panelFilesContainer.Visible = false;
@@ -150,7 +151,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		private object[] GetEditControlParams()
 		{
 			return _sourceLinkGroup == null ?
-				null :
+				(_defaultLinkType.HasValue ? new object[] { _defaultLinkType } : null) :
 				new object[] { _sourceLinkGroup, _defaultLinkType };
 		}
 

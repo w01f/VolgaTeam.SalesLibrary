@@ -77,7 +77,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			}
 		}
 
-		public FormEditLinkThumbnail(BaseLibraryLink sourceLink) : this()
+		public FormEditLinkThumbnail(BaseLibraryLink sourceLink, FileTypes? defaultLinkType = null) : this()
 		{
 			_sourceLink = sourceLink as IThumbnailSettingsHolder;
 		}

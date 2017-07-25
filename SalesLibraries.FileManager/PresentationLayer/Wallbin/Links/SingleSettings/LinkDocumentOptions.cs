@@ -59,6 +59,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			}
 		}
 
+		public LinkDocumentOptions(FileTypes? defaultLinkType = null) : this()
+		{
+			_defaultLinkType = defaultLinkType;
+		}
+
 		public LinkDocumentOptions(ILinksGroup linksGroup, FileTypes? defaultLinkType = null) : this()
 		{
 			_linksGroup = linksGroup;

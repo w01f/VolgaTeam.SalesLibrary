@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using DevExpress.Skins;
+using DevExpress.Utils.Menu;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
@@ -30,11 +31,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Video
 		{
 			InitializeComponent();
 			Dock = DockStyle.Fill;
-			laVideoTitle.Visible = false;
 			labelControlMp4ConversionWarning.Visible = false;
-
-			if (Configuration.RemoteResourceManager.Instance.VideoConverterGridLayoutFile.ExistsLocal())
-				gridViewVideo.RestoreLayoutFromXml(Configuration.RemoteResourceManager.Instance.VideoConverterGridLayoutFile.LocalPath);
 
 			if ((CreateGraphics()).DpiX > 96)
 			{
@@ -47,25 +44,16 @@ namespace SalesLibraries.FileManager.PresentationLayer.Video
 				styleController.AppearanceFocused.Font = font;
 				styleController.AppearanceReadOnly.Font = font;
 
-				laVideoTitle.Font = new Font(laVideoTitle.Font.FontFamily,
-					laVideoTitle.Font.Size - 2,
-					laVideoTitle.Font.Style);
-				labelControlMp4ConversionWarning.Font = new Font(labelControlMp4ConversionWarning.Font.FontFamily,
-					labelControlMp4ConversionWarning.Font.Size - 2,
-					labelControlMp4ConversionWarning.Font.Style);
-
+				gridColumnVideoMp4FileInfo.Width =
+					RectangleHelper.ScaleHorizontal(gridColumnVideoMp4FileInfo.Width, gridControlVideo.ScaleFactor.Width);
 				gridColumnVideoConvert.Width =
 					RectangleHelper.ScaleHorizontal(gridColumnVideoConvert.Width, gridControlVideo.ScaleFactor.Width);
 				gridColumnVideoHeight.Width =
 					RectangleHelper.ScaleHorizontal(gridColumnVideoHeight.Width, gridControlVideo.ScaleFactor.Width);
-				gridColumnVideoIPadFolder.Width =
-					RectangleHelper.ScaleHorizontal(gridColumnVideoIPadFolder.Width, gridControlVideo.ScaleFactor.Width);
 				gridColumnVideoLength.Width =
 					RectangleHelper.ScaleHorizontal(gridColumnVideoLength.Width, gridControlVideo.ScaleFactor.Width);
 				gridColumnVideoRefresh.Width =
 					RectangleHelper.ScaleHorizontal(gridColumnVideoRefresh.Width, gridControlVideo.ScaleFactor.Width);
-				gridColumnVideoSourceFolder.Width =
-					RectangleHelper.ScaleHorizontal(gridColumnVideoSourceFolder.Width, gridControlVideo.ScaleFactor.Width);
 				gridColumnVideoWidth.Width =
 					RectangleHelper.ScaleHorizontal(gridColumnVideoWidth.Width, gridControlVideo.ScaleFactor.Width);
 				gridColumnVideoCrf.Width =
@@ -80,7 +68,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Video
 
 		public void LoadVideoInfo()
 		{
-			laVideoTitle.Visible = false;
 			labelControlMp4ConversionWarning.Visible = false;
 			_videoInfoList.Clear();
 			MainController.Instance.ProcessManager.RunInQueue("Loading Video...",
@@ -90,20 +77,17 @@ namespace SalesLibraries.FileManager.PresentationLayer.Video
 						_loading = true;
 						gridControlVideo.DataSource = _videoInfoList;
 						gridViewVideo.RefreshData();
-						laVideoTitle.Text = _videoInfoList.Count > 0 ?
-							String.Format("Your Library has {0} Video File{1}",
-								_videoInfoList.Count, (_videoInfoList.Count > 1 ? "s" : String.Empty)) :
-							"Your Library does not have any Video Files";
-						laVideoTitle.Visible = true;
+						UpdateVideoTitle();
 
 						var mp4NoteConvertedCount = _videoInfoList.Count(vi => String.IsNullOrEmpty(vi.Mp4FilePath));
 						if (mp4NoteConvertedCount > 0)
 						{
-							labelControlMp4ConversionWarning.Text = String.Format("<i><color=red>MP4 Conversions Needed: {0}</color></i>",
+							labelControlMp4ConversionWarning.Text = String.Format("<size=+4><i><color=red>MP4 Conversions Needed: {0}</color></i></size>",
 								mp4NoteConvertedCount);
 							labelControlMp4ConversionWarning.Visible = true;
 						}
 
+						checkEditEnableCrf.Checked = _libraryContext.Library.Settings.UserCrfForVideoConvert;
 						checkEditUseConvertSettingsForAllVideo.Checked = _libraryContext.Library.Settings.ApplyConvertSettingsForAllVideo;
 
 						if (_libraryContext.Library.Settings.VideoConvertSettings.Crf.HasValue)
@@ -136,13 +120,23 @@ namespace SalesLibraries.FileManager.PresentationLayer.Video
 			}
 		}
 
+		private void UpdateVideoTitle()
+		{
+			labelControlVideoTitle.Text = _videoInfoList.Count > 0 ?
+			String.Format("<size=+4>Your Library has {0} Video File{1}</size>{2}",
+				_videoInfoList.Count,
+				(_videoInfoList.Count > 1 ? "s" : String.Empty),
+				(_videoInfoList.Any(vi => vi.Selected) ? String.Format("<br><size=+2><color=gray>Videos selected: {0}</color></size>", _videoInfoList.Count(vi => vi.Selected)) : String.Empty)) :
+			"Your Library does not have any Video Files";
+		}
+
 		public void ProcessChanges()
 		{
-			gridViewVideo.SaveLayoutToXml(Configuration.RemoteResourceManager.Instance.VideoConverterGridLayoutFile.LocalPath);
 			if (!_isDataChanged) return;
 
 			MainController.Instance.ProcessManager.Run("Saving Changes...", (cancelationToken, formProgess) =>
 			{
+				_libraryContext.Library.MarkAsModified();
 				_libraryContext.SaveChanges();
 			});
 
@@ -237,6 +231,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Video
 		{
 			_videoInfoList.ForEach(vi => vi.Selected = true);
 			gridViewVideo.RefreshData();
+
+			UpdateVideoTitle();
 		}
 
 		private void buttonXSelectMissing_Click(object sender, EventArgs e)
@@ -247,13 +243,33 @@ namespace SalesLibraries.FileManager.PresentationLayer.Video
 				.ToList()
 				.ForEach(vi => vi.Selected = true);
 			gridViewVideo.RefreshData();
-		}
 
+			UpdateVideoTitle();
+		}
 
 		private void buttonXClearAll_Click(object sender, EventArgs e)
 		{
 			_videoInfoList.ForEach(vi => vi.Selected = false);
 			gridViewVideo.RefreshData();
+
+			UpdateVideoTitle();
+		}
+
+		#region CRF Processing
+		private void OnEnableCrfCheckedChanged(object sender, EventArgs e)
+		{
+			checkEditUseConvertSettingsForAllVideo.Visible = checkEditEnableCrf.Checked;
+			comboBoxEditCrf.Visible = checkEditEnableCrf.Checked;
+			gridColumnVideoCrf.Visible = checkEditEnableCrf.Checked;
+			if (checkEditEnableCrf.Checked)
+				gridColumnVideoCrf.VisibleIndex = 3;
+			if (!_loading)
+			{
+				if (!checkEditEnableCrf.Checked)
+					checkEditUseConvertSettingsForAllVideo.Checked = false;
+				_libraryContext.Library.Settings.UserCrfForVideoConvert = checkEditEnableCrf.Checked;
+				_isDataChanged = true;
+			}
 		}
 
 		private void OnUseConvertSettingsForAllVideoCheckedChanged(object sender, EventArgs e)
@@ -265,7 +281,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Video
 					ApplyCrfForAllVideo();
 			}
 			else
-				comboBoxEditCrf.EditValue = VideoConvertSettings.DefaultCrf;
+				comboBoxEditCrf.SelectedIndex = 0;
 			gridViewVideo.RefreshData();
 			if (!_loading)
 			{
@@ -285,35 +301,13 @@ namespace SalesLibraries.FileManager.PresentationLayer.Video
 			}
 		}
 
+		private void repositoryItemComboBoxCrfEnabled_Closed(object sender, ClosedEventArgs e)
+		{
+			gridViewVideo.CloseEditor();
+		}
+		#endregion
+
 		#region Grid Editors Click Handlers
-		private void repositoryItemButtonEditVideoMp4_ButtonClick(object sender, ButtonPressedEventArgs e)
-		{
-			var videoInfo = gridViewVideo.GetFocusedRow() as VideoInfo;
-			if (videoInfo == null) return;
-			if (!String.IsNullOrEmpty(videoInfo.Mp4FilePath) && File.Exists(videoInfo.Mp4FilePath))
-				VideoHelper.PlayVideo(videoInfo.Mp4FilePath);
-			else
-				MainController.Instance.PopupMessages.ShowWarning("You need to convert this video first!");
-		}
-
-		private void repositoryItemButtonEditVideoMp4_Click(object sender, EventArgs e)
-		{
-			repositoryItemButtonEditVideoMp4_ButtonClick(this, new ButtonPressedEventArgs(repositoryItemButtonEditVideoMp4.Buttons[0]));
-		}
-
-		private void repositoryItemButtonEditVideoFolder_ButtonClick(object sender, ButtonPressedEventArgs e)
-		{
-			var videoInfo = gridViewVideo.GetFocusedRow() as VideoInfo;
-			if (videoInfo == null) return;
-			var folderPath = gridViewVideo.FocusedColumn == gridColumnVideoSourceFolder ?
-				videoInfo.SourceFolderPath :
-				videoInfo.PreviewContainerPath;
-			if (Directory.Exists(folderPath))
-				Process.Start(folderPath);
-			else
-				MainController.Instance.PopupMessages.ShowWarning("The folder is unavailable");
-		}
-
 		private void repositoryItemButtonEditVideoConvert_ButtonClick(object sender, ButtonPressedEventArgs e)
 		{
 			var videoInfo = gridViewVideo.GetFocusedRow() as VideoInfo;
@@ -336,10 +330,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Video
 			gridViewVideo.CloseEditor();
 		}
 
-		private void OnGridViewVideoShowingEditor(object sender, System.ComponentModel.CancelEventArgs e)
+		private void OnGridViewVideoCellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
 		{
-			if (gridViewVideo.FocusedColumn == gridColumnVideoCrf)
-				e.Cancel = checkEditUseConvertSettingsForAllVideo.Checked;
+			if (_loading) return;
+			UpdateVideoTitle();
 		}
 		#endregion
 
@@ -351,7 +345,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Video
 			if (e.Column == gridColumnVideoMp4FileInfo)
 				e.Appearance.ForeColor = String.IsNullOrEmpty(videoInfo.Mp4FilePath) ? Color.Red : Color.Green;
 			if (e.Column == gridColumnVideoCrf)
-				e.Appearance.ForeColor = checkEditUseConvertSettingsForAllVideo.Checked ? Color.Gray : Color.Black;
+				e.Appearance.ForeColor = videoInfo.Crf == VideoInfo.NoCrfValue ? Color.Gray : Color.Black;
+			if (e.Column == gridColumnVideoWidth || e.Column == gridColumnVideoHeight || e.Column == gridColumnVideoLength)
+				e.Appearance.ForeColor = Color.Gray;
 			e.Appearance.BackColor = videoInfo.Selected ? Color.LightGreen : Color.White;
 		}
 
@@ -360,9 +356,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Video
 			var videoInfo = gridViewVideo.GetRow(e.RowHandle) as VideoInfo;
 			if (videoInfo == null) return;
 			var videoConverted = videoInfo.Converted;
-			if (e.Column == gridColumnVideoIPadFolder)
-				e.RepositoryItem = videoConverted ? repositoryItemButtonEditVideoFolderEnabled : repositoryItemButtonEditVideoFolderDisabled;
-			else if (e.Column == gridColumnVideoConvert)
+			if (e.Column == gridColumnVideoConvert)
 				e.RepositoryItem = videoConverted ? repositoryItemButtonEditVideoConvertDisabled : repositoryItemButtonEditVideoConvertEnabled;
 			else if (e.Column == gridColumnVideoCrf)
 				e.RepositoryItem = checkEditUseConvertSettingsForAllVideo.Checked ? repositoryItemTextEditCrfDisabled : repositoryItemComboBoxCrfEnabled;
@@ -376,6 +370,29 @@ namespace SalesLibraries.FileManager.PresentationLayer.Video
 			e.RepositoryItem.Appearance.ForeColor = ri.Cells[e.Column].Appearance.ForeColor;
 			e.RepositoryItem.Appearance.BackColor = ri.Cells[e.Column].Appearance.BackColor;
 		}
+
+		private void OnGridViewVideoShowingEditor(object sender, System.ComponentModel.CancelEventArgs e)
+		{
+			if (gridViewVideo.FocusedColumn == gridColumnVideoCrf)
+				e.Cancel = checkEditUseConvertSettingsForAllVideo.Checked;
+		}
 		#endregion
+
+		private void gridViewVideo_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
+		{
+			if (!(e.HitInfo.InRowCell || e.HitInfo.InRow || e.HitInfo.InDataRow)) return;
+			var videoInfo = gridViewVideo.GetRow(e.HitInfo.RowHandle) as VideoInfo;
+			if (videoInfo == null) return;
+			e.Menu.Items.Add(new DXMenuItem("Source Location", (o, args) =>
+			{
+				Process.Start(videoInfo.SourceFolderPath);
+			}));
+			if (Directory.Exists(videoInfo.PreviewContainerPath))
+				e.Menu.Items.Add(new DXMenuItem("Output Location", (o, args) =>
+				{
+					Process.Start(videoInfo.PreviewContainerPath);
+				})
+				{ BeginGroup = true });
+		}
 	}
 }
