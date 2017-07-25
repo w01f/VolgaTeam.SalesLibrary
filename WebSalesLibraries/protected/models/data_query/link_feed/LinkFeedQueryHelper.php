@@ -81,6 +81,8 @@
 					break;
 			}
 
+			$textConditions = ConditionalQueryHelper::prepareTextCondition($feedSettings->text, $feedSettings->textExactMatch);
+
 			/** @var \CDbCommand $dbCommand */
 			$dbCommand = \Yii::app()->db->createCommand();
 
@@ -179,6 +181,15 @@
 				'AND',
 				sprintf('link.search_format in (\'%s\')', implode("','", $queryFormats)),
 			);
+
+			if (count($textConditions) > 0)
+			{
+				$matchCondition = 'link.name,link.file_name,link.tags';
+				$conditionParts = array();
+				foreach ($textConditions as $contentConditionPart)
+					$conditionParts[] = sprintf("(match(%s) against('%s' in boolean mode))", $matchCondition, str_replace("'", "\'", $contentConditionPart));
+				$whereConditions[] = implode(" or ", $conditionParts);
+			}
 
 			if (count($feedSettings->libraries) > 0)
 				$whereConditions[] = sprintf('lib.name in (\'%s\')', implode("','", $feedSettings->libraries));

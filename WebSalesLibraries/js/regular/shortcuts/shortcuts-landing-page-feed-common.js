@@ -10,6 +10,8 @@
 		this.linkFormats = undefined;
 		this.libraries = undefined;
 		this.dateRangeType = undefined;
+		this.text = undefined;
+		this.textExactMatch = undefined;
 		this.thumbnailSettings = undefined;
 		this.categories = undefined;
 		this.conditions = undefined;

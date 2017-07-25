@@ -231,9 +231,16 @@
 		    <?if(!empty($control->borderColor)):?>border-color: <? echo Utils::formatColor($control->borderColor);?> !important;<?endif;?>">
                 <img src="<? echo $contentBlock->imagePath . $control->iconFile; ?>" <?if(strpos($control->iconFile, '.svg') !== false):?>class="svg"<?endif;?>>
                 <span class="service-data">
-                    <span class="today-url"><? echo $contentBlock->detailsSettings->todayDetailsUrl; ?></span>
-                    <span class="week-url"><? echo $contentBlock->detailsSettings->weekDetailsUrl; ?></span>
-                    <span class="month-url"><? echo $contentBlock->detailsSettings->monthDetailsUrl; ?></span>
+                    <? if ($contentBlock->detailsSettings->openSamePage): ?>
+                        <span class="same-page">true</span>
+                        <span class="today-link-id"><? echo $contentBlock->detailsSettings->todayDetailsLinkId; ?></span>
+                        <span class="week-link-id"><? echo $contentBlock->detailsSettings->weekDetailsLinkId; ?></span>
+                        <span class="month-link-id"><? echo $contentBlock->detailsSettings->monthDetailsLinkId; ?></span>
+                    <? else: ?>
+                        <span class="today-url"><? echo \PageContentShortcut::createShortcutUrl($contentBlock->detailsSettings->todayDetailsLinkId, false); ?></span>
+                        <span class="week-url"><? echo \PageContentShortcut::createShortcutUrl($contentBlock->detailsSettings->weekDetailsLinkId, false); ?></span>
+                        <span class="month-url"><? echo \PageContentShortcut::createShortcutUrl($contentBlock->detailsSettings->monthDetailsLinkId, false); ?></span>
+                    <? endif; ?>
                     <span class="hover-tip-template"><? echo $control->hoverTip; ?></span>
                 </span>
             </button>

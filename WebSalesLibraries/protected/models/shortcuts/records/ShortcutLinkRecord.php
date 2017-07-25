@@ -58,22 +58,30 @@
 		 */
 		public function getModel($isPhone, $parameters = null)
 		{
+			$shortcut = null;
 			switch ($this->type)
 			{
 				case 'video':
-					return new VideoShortcut($this, $isPhone);
+					$shortcut = new VideoShortcut($this, $isPhone);
+					break;
 				case 'url':
-					return new UrlShortcut($this, $isPhone);
+					$shortcut = new UrlShortcut($this, $isPhone);
+					break;
 				case 'qpage':
-					return new QPageShortcut($this, $isPhone);
+					$shortcut = new QPageShortcut($this, $isPhone);
+					break;
 				case 'file':
-					return new FileShortcut($this, $isPhone);
+					$shortcut = new FileShortcut($this, $isPhone);
+					break;
 				case 'download':
-					return new DownloadShortcut($this, $isPhone);
+					$shortcut = new DownloadShortcut($this, $isPhone);
+					break;
 				case 'libraryfile':
-					return new LibraryLinkShortcut($this, $isPhone);
+					$shortcut = new LibraryLinkShortcut($this, $isPhone);
+					break;
 				case 'window':
-					return new WindowShortcut($this, $isPhone);
+					$shortcut = new WindowShortcut($this, $isPhone);
+					break;
 				case 'page':
 					$shortcut = new LibraryPageShortcut($this, $isPhone);
 					if (isset($shortcut->library->id))
@@ -96,15 +104,19 @@
 						if ($needToUpdate)
 							$shortcut->updateAction();
 					}
-					return $shortcut;
+					break;
 				case 'quicklist':
-					return new QuickListShortcut($this, $isPhone);
+					$shortcut = new QuickListShortcut($this, $isPhone);
+					break;
 				case 'search':
-					return new SearchLinkShortcut($this, $isPhone);
+					$shortcut = new SearchLinkShortcut($this, $isPhone);
+					break;
 				case 'gbookmark':
-					return new GroupBookmarkShortcut($this, $isPhone);
+					$shortcut = new GroupBookmarkShortcut($this, $isPhone);
+					break;
 				case 'supergroup':
-					return new SuperGroupShortcut($this, $isPhone);
+					$shortcut = new SuperGroupShortcut($this, $isPhone);
+					break;
 				case 'gridbundle':
 				case 'carouselbundle':
 					if (!$isPhone)
@@ -130,18 +142,22 @@
 						switch ($bundleType)
 						{
 							case 'gridbundle':
-								return new GridBundleShortcut($this, $isPhone);
+								$shortcut = new GridBundleShortcut($this, $isPhone);
+								break;
 							case 'carouselbundle':
 								$defaultCategoryIndex = 1;
 								if ($parametersHaveBeenSet && array_key_exists('defaultCategoryIndex', $parameters))
 									$defaultCategoryIndex = $parameters['defaultCategoryIndex'];
-								return new CarouselBundleShortcut($this, $isPhone, $defaultCategoryIndex);
+								$shortcut = new CarouselBundleShortcut($this, $isPhone, $defaultCategoryIndex);
+								break;
 							default:
-								return new EmptyShortcut($this, $isPhone);
+								$shortcut = new EmptyShortcut($this, $isPhone);
+								break;
 						}
 					}
 					else
-						return new GridBundleShortcut($this, $isPhone);
+						$shortcut = new GridBundleShortcut($this, $isPhone);
+					break;
 				case 'library':
 					$shortcut = new WallbinShortcut($this, $isPhone);
 
@@ -170,28 +186,38 @@
 					{
 						$shortcut->pageSelectorMode = Yii::app()->request->cookies[$savedPageSelectorModeTag]->value;
 					}
-
-					return $shortcut;
 					break;
 				case 'searchapp':
-					return new SearchAppShortcut($this, $isPhone);
+					$shortcut = new SearchAppShortcut($this, $isPhone);
+					break;
 				case 'qbuilder':
-					return new QBuilderShortcut($this, $isPhone, $parameters);
+					$shortcut = new QBuilderShortcut($this, $isPhone, $parameters);
+					break;
 				case 'quizzes':
-					return new QuizzesShortcut($this, $isPhone);
+					$shortcut = new QuizzesShortcut($this, $isPhone);
+					break;
 				case 'favorites':
-					return new FavoritesShortcut($this, $isPhone);
+					$shortcut = new FavoritesShortcut($this, $isPhone);
+					break;
 				case 'user_preferences':
-					return new FavoritesShortcut($this, $isPhone);
+					$shortcut = new FavoritesShortcut($this, $isPhone);
+					break;
 				case 'youtube':
-					return new YouTubeShortcut($this, $isPhone);
+					$shortcut = new YouTubeShortcut($this, $isPhone);
+					break;
 				case 'vimeo':
-					return new VimeoShortcut($this, $isPhone);
+					$shortcut = new VimeoShortcut($this, $isPhone);
+					break;
 				case 'landing':
-					return new LandingPageShortcut($this, $isPhone);
+					$shortcut = new LandingPageShortcut($this, $isPhone);
+					break;
 				default:
-					return new EmptyShortcut($this, $isPhone);
+					$shortcut = new EmptyShortcut($this, $isPhone);
+					break;
 			}
+			if (isset($parameters) && array_key_exists('singlePage', $parameters) && $parameters['singlePage'])
+				$shortcut->samePage = false;
+			return $shortcut;
 		}
 
 		/**

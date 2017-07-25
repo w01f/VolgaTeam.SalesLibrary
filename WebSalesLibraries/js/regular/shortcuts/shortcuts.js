@@ -126,7 +126,7 @@
 		{
 			$.ajax({
 				type: "POST",
-				url: window.BaseUrl + "shortcuts/getShortcutData",
+				url: window.BaseUrl + "shortcuts/getShortcutDataByType",
 				data: {
 					shortcutType: type
 				},

@@ -109,7 +109,12 @@
                 <img src="<? echo $contentBlock->imagePath . $control->iconFile; ?>"
 			         <? if (strpos($control->iconFile, '.svg') !== false): ?>class="svg"<? endif; ?>>
                 <span class="service-data">
-                    <span class="default-url"><? echo $contentBlock->detailsSettings->detailsUrl; ?></span>
+                    <? if ($contentBlock->detailsSettings->openSamePage): ?>
+                        <span class="same-page">true</span>
+                        <span class="default-link-id"><? echo $contentBlock->detailsSettings->detailsLinkId; ?></span>
+                    <? else: ?>
+                        <span class="default-url"><? echo \PageContentShortcut::createShortcutUrl($contentBlock->detailsSettings->detailsLinkId, false); ?></span>
+                    <? endif; ?>
                     <span class="hover-tip-template"><? echo $control->hoverTip; ?></span>
                 </span>
             </button>

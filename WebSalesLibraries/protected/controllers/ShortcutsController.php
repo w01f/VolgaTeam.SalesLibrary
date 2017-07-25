@@ -83,7 +83,17 @@
 			echo CJSON::encode($this->buildShortcutPage($linkId, $linkParameters));
 		}
 
-		public function actionGetShortcutData()
+		public function actionGetShortcutDataById()
+		{
+			$shortcutId = Yii::app()->request->getPost('linkId');
+			/** @var  $shortcutRecord ShortcutLinkRecord */
+			$shortcutRecord = ShortcutLinkRecord::model()->findByPk($shortcutId);
+			/** @var  $shortcut BaseShortcut */
+			$shortcut = $shortcutRecord->getModel($this->isPhone);
+			echo $shortcut->getMenuItemData();
+		}
+
+		public function actionGetShortcutDataByType()
 		{
 			$shortcutType = Yii::app()->request->getPost('shortcutType');
 			/** @var  $shortcutRecord ShortcutLinkRecord */

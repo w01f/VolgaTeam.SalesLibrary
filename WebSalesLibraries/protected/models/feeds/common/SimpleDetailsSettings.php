@@ -5,7 +5,9 @@
 
 	class SimpleDetailsSettings
 	{
-		public $detailsUrl;
+		public $openSamePage;
+
+		public $detailsLinkId;
 
 		/**
 		 * @param $xpath \DOMXPath
@@ -17,10 +19,11 @@
 		{
 			$instance = new SimpleDetailsSettings();
 
+			$queryResult = $xpath->query('./Details/OpenOnSamePage', $contextNode);
+			$instance->openSamePage = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
+
 			$queryResult = $xpath->query('./Details/ShortcutId', $contextNode);
-			$instance->detailsUrl = $queryResult->length > 0 ?
-				\PageContentShortcut::createShortcutUrl(trim($queryResult->item(0)->nodeValue), false) :
-				'#';
+			$instance->detailsLinkId = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
 
 			return $instance;
 		}

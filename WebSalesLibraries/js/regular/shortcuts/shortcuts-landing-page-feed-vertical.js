@@ -115,23 +115,70 @@
 			{
 				$(this).blur();
 
-				var url = '#';
-				switch (querySettings.dateRangeType)
+				var data = $(this).find('.service-data');
+				var samePage = data.find('.same-page').length > 0;
+				if (samePage === true)
 				{
-					case "today":
-						url = $(this).find('.service-data .today-url').text();
-						break;
-					case "week":
-						url = $(this).find('.service-data .week-url').text();
-						break;
-					case "month":
-						url = $(this).find('.service-data .month-url').text();
-						break;
-					default:
-						url = $(this).find('.service-data .default-url').text();
-						break;
+					var linkId = '';
+					switch (querySettings.dateRangeType)
+					{
+						case "today":
+							linkId = data.find('.today-link-id').text();
+							break;
+						case "week":
+							linkId = data.find('.week-link-id').text();
+							break;
+						case "month":
+							linkId = data.find('.month-link-id').text();
+							break;
+						default:
+							linkId = data.find('.default-link-id').text();
+							break;
+					}
+					$.ajax({
+						type: "POST",
+						url: window.BaseUrl + "shortcuts/getShortcutDataById",
+						data: {
+							linkId: linkId
+						},
+						beforeSend: function () {
+							$.SalesPortal.Overlay.show();
+						},
+						complete: function () {
+							$.SalesPortal.Overlay.hide();
+						},
+						success: function (msg) {
+							$.SalesPortal.ShortcutsManager.openShortcutByMenuItemData($('<div>' + msg + '</div>'), {
+								pushHistory: true
+							});
+						},
+						error: function () {
+							$.SalesPortal.Overlay.hide();
+						},
+						async: true,
+						dataType: 'html'
+					});
 				}
-				window.open(url, "_blank");
+				else
+				{
+					var url = '#';
+					switch (querySettings.dateRangeType)
+					{
+						case "today":
+							url = data.find('.today-url').text();
+							break;
+						case "week":
+							url = data.find('.week-url').text();
+							break;
+						case "month":
+							url = data.find('.month-url').text();
+							break;
+						default:
+							url = data.find('.default-url').text();
+							break;
+					}
+					window.open(url, "_blank");
+				}
 			});
 		};
 

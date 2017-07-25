@@ -17,6 +17,9 @@
 		public $libraries;
 		public $dateRangeType;
 
+		public $text;
+		public $textExactMatch;
+
 		/** @var CategoryConditionItem[] */
 		public $categories;
 
@@ -59,6 +62,12 @@
 			$dateRangeType = $queryResult->length > 0 ? strtolower(trim($queryResult->item(0)->nodeValue)) : $this->dateRangeType;
 			if (in_array($dateRangeType, array(self::DataRangeTypeToday, self::DataRangeTypeWeek, self::DataRangeTypeMonth)))
 				$this->dateRangeType = $dateRangeType;
+
+			$queryResult = $xpath->query('./Text', $contextNode);
+			$this->text = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
+
+			$queryResult = $xpath->query('./TextExactMatch', $contextNode);
+			$this->textExactMatch = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
 
 			$queryResult = $xpath->query('./Categories/Category', $contextNode);
 			/** @var $node \DOMElement */

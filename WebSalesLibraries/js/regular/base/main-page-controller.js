@@ -1,16 +1,16 @@
-(function ($)
-{
+(function ($) {
 	window.BaseUrl = window.BaseUrl || '';
-	$.SalesPortal = $.SalesPortal || { };
+	$.SalesPortal = $.SalesPortal || {};
 
-	var openDefaultShortcut = function ()
-	{
+	var openDefaultShortcut = function () {
 		var defaultShortcutData = $('.default-shortcut-data');
 		if (defaultShortcutData.length > 0)
-			$.SalesPortal.ShortcutsManager.openShortcutByMenuItemData(defaultShortcutData, {pushHistory: true});
+			$.SalesPortal.ShortcutsManager.openShortcutByMenuItemData(defaultShortcutData, {
+				pushHistory: true,
+				singlePage: true
+			});
 	};
-	$(document).ready(function ()
-	{
+	$(document).ready(function () {
 		$.SalesPortal.MainMenu.init();
 		$.SalesPortal.Content.init();
 		$.SalesPortal.HistoryManager.init();

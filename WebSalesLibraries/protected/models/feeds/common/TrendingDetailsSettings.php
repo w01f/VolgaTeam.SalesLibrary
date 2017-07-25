@@ -5,9 +5,11 @@
 
 	class TrendingDetailsSettings
 	{
-		public $todayDetailsUrl;
-		public $weekDetailsUrl;
-		public $monthDetailsUrl;
+		public $openSamePage;
+
+		public $todayDetailsLinkId;
+		public $weekDetailsLinkId;
+		public $monthDetailsLinkId;
 
 		/**
 		 * @param $xpath \DOMXPath
@@ -19,20 +21,17 @@
 		{
 			$instance = new TrendingDetailsSettings();
 
+			$queryResult = $xpath->query('./Details/OpenOnSamePage', $contextNode);
+			$instance->openSamePage = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
+
 			$queryResult = $xpath->query('./Details/TodayShortcutId', $contextNode);
-			$instance->todayDetailsUrl = $queryResult->length > 0 ?
-				\PageContentShortcut::createShortcutUrl(trim($queryResult->item(0)->nodeValue), false) :
-				'#';
+			$instance->todayDetailsLinkId = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
 
 			$queryResult = $xpath->query('./Details/WeekShortcutId', $contextNode);
-			$instance->weekDetailsUrl = $queryResult->length > 0 ?
-				\PageContentShortcut::createShortcutUrl(trim($queryResult->item(0)->nodeValue), false) :
-				'#';
+			$instance->weekDetailsLinkId = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
 
 			$queryResult = $xpath->query('./Details/MonthShortcutId', $contextNode);
-			$instance->monthDetailsUrl = $queryResult->length > 0 ?
-				\PageContentShortcut::createShortcutUrl(trim($queryResult->item(0)->nodeValue), false) :
-				'#';
+			$instance->monthDetailsLinkId = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
 
 			return $instance;
 		}

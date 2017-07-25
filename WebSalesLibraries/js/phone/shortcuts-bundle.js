@@ -13,7 +13,7 @@
 		{
 			$(window).off("pagecontainerchange.bundle").on("pagecontainerchange.bundle", function (event, ui)
 			{
-				if ((ui.toPage != undefined && ui.toPage.prop('id') == bundlePage.prop('id')) || ui.options.target == bundlePage.prop('id'))
+				if ((ui.toPage !== undefined && ui.toPage.prop('id') == bundlePage.prop('id')) || ui.options.target == bundlePage.prop('id'))
 				{
 					if (contentContainer.find('.cbp-l-grid-masonry').length > 0)
 					{
@@ -66,7 +66,7 @@
 				var hasCustomHandler = data.find('.has-custom-handler').length > 0;
 				var samePage = data.find('.same-page').length > 0;
 
-				if (hasCustomHandler == true && samePage == true)
+				if (hasCustomHandler === true && samePage === true)
 				{
 					e.preventDefault();
 					$.SalesPortal.ShortcutsManager.openShortcutByMenuItemData(data, "#shortcut-link-page-" + shortcutData.options.linkId);
