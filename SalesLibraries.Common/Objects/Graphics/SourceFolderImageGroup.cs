@@ -38,25 +38,26 @@ namespace SalesLibraries.Common.Objects.Graphics
 				catch { }
 			}
 
-			foreach (var filePath in Directory.GetFiles(_sourcePath, "*.png"))
-			{
-				if (ignoredFiles.Any(ignoredFile => ignoredFile.Equals(Path.GetFileName(filePath), StringComparison.OrdinalIgnoreCase)))
-					continue;
-				var linkImageSource = (T)Activator.CreateInstance(typeof(T), filePath);
-				linkImageSource.AddToFavs += (o, e) =>
+			if (Directory.Exists(_sourcePath))
+				foreach (var filePath in Directory.GetFiles(_sourcePath, "*.png"))
 				{
-					var favoritesImagesGroup = ParentList.Items.OfType<FavoriteImageGroup>().FirstOrDefault();
-					if (favoritesImagesGroup == null) return;
-					favoritesImagesGroup.AddImageSource(linkImageSource);
-				};
-				linkImageSource.RemoveFromFavs += (o, e) =>
-				{
-					var favoritesImagesGroup = ParentList.Items.OfType<FavoriteImageGroup>().FirstOrDefault();
-					if (favoritesImagesGroup == null) return;
-					favoritesImagesGroup.RemoveImageFile<T>(linkImageSource.FilePath);
-				};
-				Images.Add(linkImageSource);
-			}
+					if (ignoredFiles.Any(ignoredFile => ignoredFile.Equals(Path.GetFileName(filePath), StringComparison.OrdinalIgnoreCase)))
+						continue;
+					var linkImageSource = (T)Activator.CreateInstance(typeof(T), filePath);
+					linkImageSource.AddToFavs += (o, e) =>
+					{
+						var favoritesImagesGroup = ParentList.Items.OfType<FavoriteImageGroup>().FirstOrDefault();
+						if (favoritesImagesGroup == null) return;
+						favoritesImagesGroup.AddImageSource(linkImageSource);
+					};
+					linkImageSource.RemoveFromFavs += (o, e) =>
+					{
+						var favoritesImagesGroup = ParentList.Items.OfType<FavoriteImageGroup>().FirstOrDefault();
+						if (favoritesImagesGroup == null) return;
+						favoritesImagesGroup.RemoveImageFile<T>(linkImageSource.FilePath);
+					};
+					Images.Add(linkImageSource);
+				}
 
 			Images.Sort((x, y) => WinAPIHelper.StrCmpLogicalW(x.FileName, y.FileName));
 			DataChanged?.Invoke(this, EventArgs.Empty);

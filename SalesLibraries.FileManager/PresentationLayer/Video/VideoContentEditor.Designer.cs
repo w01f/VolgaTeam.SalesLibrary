@@ -247,8 +247,6 @@
 			this.gridColumnVideoCrf.Name = "gridColumnVideoCrf";
 			this.gridColumnVideoCrf.OptionsColumn.AllowSize = false;
 			this.gridColumnVideoCrf.OptionsColumn.FixedWidth = true;
-			this.gridColumnVideoCrf.Visible = true;
-			this.gridColumnVideoCrf.VisibleIndex = 3;
 			this.gridColumnVideoCrf.Width = 84;
 			// 
 			// repositoryItemComboBoxCrfEnabled
@@ -297,7 +295,7 @@
 			this.gridColumnVideoMp4FileInfo.OptionsColumn.ReadOnly = true;
 			this.gridColumnVideoMp4FileInfo.ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowAlways;
 			this.gridColumnVideoMp4FileInfo.Visible = true;
-			this.gridColumnVideoMp4FileInfo.VisibleIndex = 4;
+			this.gridColumnVideoMp4FileInfo.VisibleIndex = 3;
 			this.gridColumnVideoMp4FileInfo.Width = 84;
 			// 
 			// repositoryItemButtonEditVideoMp4
@@ -323,7 +321,7 @@
 			this.gridColumnVideoWidth.OptionsColumn.FixedWidth = true;
 			this.gridColumnVideoWidth.OptionsColumn.ReadOnly = true;
 			this.gridColumnVideoWidth.Visible = true;
-			this.gridColumnVideoWidth.VisibleIndex = 5;
+			this.gridColumnVideoWidth.VisibleIndex = 4;
 			this.gridColumnVideoWidth.Width = 84;
 			// 
 			// gridColumnVideoHeight
@@ -338,7 +336,7 @@
 			this.gridColumnVideoHeight.OptionsColumn.FixedWidth = true;
 			this.gridColumnVideoHeight.OptionsColumn.ReadOnly = true;
 			this.gridColumnVideoHeight.Visible = true;
-			this.gridColumnVideoHeight.VisibleIndex = 6;
+			this.gridColumnVideoHeight.VisibleIndex = 5;
 			this.gridColumnVideoHeight.Width = 84;
 			// 
 			// gridColumnVideoLength
@@ -353,7 +351,7 @@
 			this.gridColumnVideoLength.OptionsColumn.FixedWidth = true;
 			this.gridColumnVideoLength.OptionsColumn.ReadOnly = true;
 			this.gridColumnVideoLength.Visible = true;
-			this.gridColumnVideoLength.VisibleIndex = 7;
+			this.gridColumnVideoLength.VisibleIndex = 6;
 			this.gridColumnVideoLength.Width = 90;
 			// 
 			// gridColumnVideoConvert
@@ -364,7 +362,7 @@
 			this.gridColumnVideoConvert.OptionsColumn.AllowSize = false;
 			this.gridColumnVideoConvert.OptionsColumn.FixedWidth = true;
 			this.gridColumnVideoConvert.Visible = true;
-			this.gridColumnVideoConvert.VisibleIndex = 8;
+			this.gridColumnVideoConvert.VisibleIndex = 7;
 			this.gridColumnVideoConvert.Width = 64;
 			// 
 			// repositoryItemButtonEditVideoConvertDisabled
@@ -383,7 +381,7 @@
 			this.gridColumnVideoRefresh.OptionsColumn.AllowSize = false;
 			this.gridColumnVideoRefresh.OptionsColumn.FixedWidth = true;
 			this.gridColumnVideoRefresh.Visible = true;
-			this.gridColumnVideoRefresh.VisibleIndex = 9;
+			this.gridColumnVideoRefresh.VisibleIndex = 8;
 			this.gridColumnVideoRefresh.Width = 64;
 			// 
 			// repositoryItemButtonEditVideoRefersh
@@ -458,7 +456,6 @@
 			// comboBoxEditCrf
 			// 
 			this.comboBoxEditCrf.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.comboBoxEditCrf.Enabled = false;
 			this.comboBoxEditCrf.Location = new System.Drawing.Point(965, 65);
 			this.comboBoxEditCrf.Name = "comboBoxEditCrf";
 			this.comboBoxEditCrf.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {

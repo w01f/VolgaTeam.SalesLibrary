@@ -60,7 +60,11 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 			get
 			{
 				var videoData = GetOriginalVideoData();
-				return FileFormatHelper.IsMp4File(SourcePath) && videoData != null && videoData.IsH264Encoded && videoData.IsBitrateNormal;
+				return FileFormatHelper.IsMp4File(SourcePath) && 
+					videoData != null && 
+					videoData.IsH264Encoded && 
+					videoData.IsBitrateNormal &&
+					!((VideoPreviewContainerSettings)Settings).VideoConvertSettings.Crf.HasValue;
 			}
 		}
 

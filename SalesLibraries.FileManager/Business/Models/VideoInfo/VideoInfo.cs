@@ -57,7 +57,7 @@ namespace SalesLibraries.FileManager.Business.Models.VideoInfo
 			{
 				_previewContainer = previewContainer,
 				SourceFolderPath = Path.GetDirectoryName(previewContainer.SourcePath),
-				SourceFileInfo = String.Format("{0} <color=gray>{1}</color>",
+				SourceFileInfo = String.Format("{0} <color=lightgray>{1}</color>",
 					Path.GetFileName(previewContainer.SourcePath),
 					Utils.FormatFileSize(new FileInfo(previewContainer.SourcePath).Length)),
 				PreviewContainerPath = previewContainer.ContainerPath,

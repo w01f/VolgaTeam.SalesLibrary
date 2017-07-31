@@ -11,11 +11,9 @@ using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using SalesLibraries.Business.Contexts.Wallbin;
-using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.FileManager.Business.Models.VideoInfo;
-using SalesLibraries.FileManager.Business.Services;
 using SalesLibraries.FileManager.Controllers;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Video
@@ -259,7 +257,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Video
 		private void OnEnableCrfCheckedChanged(object sender, EventArgs e)
 		{
 			checkEditUseConvertSettingsForAllVideo.Visible = checkEditEnableCrf.Checked;
-			comboBoxEditCrf.Visible = checkEditEnableCrf.Checked;
 			gridColumnVideoCrf.Visible = checkEditEnableCrf.Checked;
 			if (checkEditEnableCrf.Checked)
 				gridColumnVideoCrf.VisibleIndex = 3;
@@ -274,7 +271,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Video
 
 		private void OnUseConvertSettingsForAllVideoCheckedChanged(object sender, EventArgs e)
 		{
-			comboBoxEditCrf.Enabled = checkEditUseConvertSettingsForAllVideo.Checked;
+			comboBoxEditCrf.Visible = checkEditUseConvertSettingsForAllVideo.Checked;
 			if (checkEditUseConvertSettingsForAllVideo.Checked)
 			{
 				if (!_loading)
