@@ -282,6 +282,14 @@
 {
     padding-top: 0;
 }
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none)
+{
+    #content .shortcuts-page-content.landing-page .horizontal-link-feed .portfolio_utube_item_image > img[src*=".svg"]
+    {
+        width: 100%;
+    }
+}
 /*-----------------------------------------------------*/
 
 /*Vertical Feed----------------------------------------------------------------*/

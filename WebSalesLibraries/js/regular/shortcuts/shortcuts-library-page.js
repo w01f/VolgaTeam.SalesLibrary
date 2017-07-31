@@ -77,10 +77,56 @@
 			});
 		};
 
+		var fixColumnBorders = function () {
+			var pageContent = $.SalesPortal.Content.getContentObject().find('.wallbin-container .page-container');
+			var column1Height = pageContent.find('.column0 .page-column-inner').outerHeight(true);
+			var column2Height = pageContent.find('.column1 .page-column-inner').outerHeight(true);
+			var column3Height = pageContent.find('.column2 .page-column-inner').outerHeight(true);
+
+			if (column1Height > column2Height)
+			{
+				pageContent.find('.column0 .page-column-inner').css({
+					'border-right-width': '1px'
+				});
+				pageContent.find('.column1 .page-column-inner').css({
+					'border-left-width': '0'
+				});
+			}
+			else
+			{
+				pageContent.find('.column0 .page-column-inner').css({
+					'border-right-width': '0'
+				});
+				pageContent.find('.column1 .page-column-inner').css({
+					'border-left-width': '1px'
+				});
+			}
+
+			if (column2Height > column3Height)
+			{
+				pageContent.find('.column1 .page-column-inner').css({
+					'border-right-width': '1px'
+				});
+				pageContent.find('.column2 .page-column-inner').css({
+					'border-left-width': '0'
+				});
+			}
+			else
+			{
+				pageContent.find('.column1 .page-column-inner').css({
+					'border-right-width': '0'
+				});
+				pageContent.find('.column2 .page-column-inner').css({
+					'border-left-width': '1px'
+				});
+			}
+		};
+
 		var updateContentSize = function ()
 		{
 			$.SalesPortal.ShortcutsManager.updateContentSize();
 			$.SalesPortal.Wallbin.updateContentSize();
+			fixColumnBorders();
 		};
 	};
 })(jQuery);

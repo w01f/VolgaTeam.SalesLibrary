@@ -122,10 +122,7 @@
 			var menu = $('#main-menu');
 			var navigationPanelObject = $.SalesPortal.Content.getNavigationPanel();
 			var controlBar = navigationPanelObject.find('.control-bar');
-			var height = $(window).height() - menu.outerHeight(true) - menu.offset().top - controlBar.outerHeight(true);
-			navigationPanelObject.find('.navigation-item-list-container').css({
-				'height': height + 'px'
-			});
+			var height = $(window).height() - menu.outerHeight(true) - menu.offset().top - 48;//control bar button image height;
 			navigationPanelObject.find('.navigation-item-list').css({
 				'height': height + 'px'
 			});

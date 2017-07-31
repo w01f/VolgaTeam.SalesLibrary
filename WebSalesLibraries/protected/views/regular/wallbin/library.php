@@ -27,15 +27,14 @@
 		$selectedPage = $library->pages[0];
 ?>
 <style>
-    <?if($style->header->paddingLeft>0):?>
+    <? if (isset($style->header->padding) && $style->header->padding->isConfigured): ?>
     #content .wallbin-header-container {
-        padding-left: <? echo $style->header->paddingLeft;?>px;
-    }
 
-    #content .wallbin-header .wallbin-header-cell {
-        padding-left: 0;
+        padding-top: <? echo $style->header->padding->top; ?>px !important;
+        padding-left: <? echo $style->header->padding->left; ?>px !important;
+        padding-bottom: <? echo $style->header->padding->bottom; ?>px !important;
+        padding-right: <? echo $style->header->padding->right; ?>px !important;
     }
-
     <?endif;?>
 
     #content .wallbin-header .wallbin-header-cell {
@@ -52,7 +51,7 @@
     <? if ($searchBar->configured): ?>
     #content .wallbin-header .shortcuts-search-bar-container {
         width: 100%;
-        padding-right: 10px;
+        padding-right: 0;
         padding-top: 25px;
         padding-bottom: 0;
         vertical-align: top;
@@ -66,6 +65,49 @@
     }
 
     <? endif; ?>
+
+    #content .wallbin-header .page-selector-container .tab-pages div,
+    #content .wallbin-header .page-selector-container .tab-pages span,
+    #content .wallbin-header .page-selector-container .tab-pages li
+    {
+        background-color: <? echo Utils::formatColor($style->header->tabSelector->regularBackColor)?> !important;
+        border-color: <? echo Utils::formatColor($style->header->tabSelector->borderColor)?> !important;
+    }
+
+    #content .wallbin-header .page-selector-container .tab-pages div.scroll_tab_inner span,
+    #content .wallbin-header .page-selector-container .tab-pages div.scroll_tab_inner li
+    {
+        color: <? echo Utils::formatColor($style->header->tabSelector->regularTextColor)?> !important;
+    }
+
+    #content .wallbin-header .page-selector-container .tab-pages .scroll_tab_left_button,
+    #content .wallbin-header .page-selector-container .tab-pages .scroll_tab_right_button
+    {
+        color: <? echo Utils::formatColor($style->header->tabSelector->arrowColor)?> !important;
+    }
+
+    #content .wallbin-header .page-selector-container .tab-pages div.scroll_tab_inner span.scroll_tab_over,
+    #content .wallbin-header .page-selector-container .tab-pages div.scroll_tab_inner li.scroll_tab_over
+    {
+        color: <? echo Utils::formatColor($style->header->tabSelector->hoverTextColor)?> !important;
+        background-color: <? echo Utils::formatColor($style->header->tabSelector->hoverBackColor)?> !important;
+    }
+
+    #content .wallbin-header .page-selector-container .tab-pages .page-tab-header.selected
+    {
+        color: <? echo Utils::formatColor($style->header->tabSelector->selectedTextColor)?> !important;
+        background-color: <? echo Utils::formatColor($style->header->tabSelector->selectedBackColor)?> !important;
+    }
+
+    <? if (isset($style->page->padding) && $style->page->padding->isConfigured): ?>
+    #content .wallbin-container .content-container {
+
+        padding-top: <? echo $style->page->padding->top; ?>px !important;
+        padding-left: <? echo $style->page->padding->left; ?>px !important;
+        padding-bottom: <? echo $style->page->padding->bottom; ?>px !important;
+        padding-right: <? echo $style->page->padding->right; ?>px !important;
+    }
+    <?endif;?>
 </style>
 <div id="library-update-stamp">
 	<span

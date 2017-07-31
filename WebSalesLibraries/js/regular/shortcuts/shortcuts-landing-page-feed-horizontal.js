@@ -134,8 +134,55 @@
 							$.SalesPortal.Overlay.hide();
 						},
 						success: function (msg) {
-							$.SalesPortal.ShortcutsManager.openShortcutByMenuItemData($('<div>' + msg + '</div>'), {
+							var shortcutData = $('<div>' + msg + '</div>');
+							var url = shortcutData.find('.url').text();
+							var parameters = {
 								pushHistory: true
+							};
+							$.ajax({
+								type: "POST",
+								url: url,
+								data: {
+									linkId: linkId,
+									parameters: parameters
+								},
+								beforeSend: function () {
+									$.SalesPortal.Overlay.show();
+								},
+								complete: function () {
+									$.SalesPortal.Overlay.hide();
+								},
+								success: function (result) {
+									$.SalesPortal.ShortcutsSearchLink(result).runSearch(function (data)
+									{
+										if (data.dataset.length === 0)
+										{
+											var modalDialog = new $.SalesPortal.ModalDialog({
+												title: 'Site Update',
+												description: 'This section is not yet updated today.<br><br>' +
+												'Check back later and maybe this page will be ready…',
+												width: 300,
+												buttons: [
+													{
+														tag: 'ok',
+														title: 'OK',
+														clickHandler: function ()
+														{
+															modalDialog.close();
+														}
+													}
+												]
+											});
+											modalDialog.show();
+										}
+										else
+											$.SalesPortal.HistoryManager.pushShortcut(shortcutData, parameters);
+									});
+								},
+								error: function () {
+								},
+								async: true,
+								dataType: 'json'
 							});
 						},
 						error: function () {

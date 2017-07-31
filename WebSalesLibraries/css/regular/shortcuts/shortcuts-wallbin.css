@@ -13,12 +13,12 @@
 {
 	vertical-align: middle;
 	border-bottom: 1px #999 solid;
-	padding-left: 5px;
 }
 
 #content .wallbin-header .wallbin-logo-wrapper
 {
 	height: 90px;
+	padding-right: 5px;
 }
 
 #content .wallbin-header .page-selector-container,
@@ -27,7 +27,6 @@
 	width: 100%;
 	text-align: right;
 	padding-bottom: 15px;
-	padding-right: 10px;
 }
 
 #content .wallbin-header .page-selector-container.page-selector-container-no-logo
@@ -71,25 +70,13 @@
 #content .wallbin-header .page-selector-container .tab-pages div,
 #content .wallbin-header .page-selector-container .tab-pages span
 {
-	background-color: #FFF !important;
 	border-radius: 0 !important;
-}
-
-#content .wallbin-header .page-selector-container .tab-pages div.scroll_tab_inner span.scroll_tab_over,
-#content .wallbin-header .page-selector-container .tab-pages div.scroll_tab_inner li.scroll_tab_over
-{
-	background-color: #CCC !important;
 }
 
 #content .wallbin-header .page-selector-container .tab-pages .scroll_tab_left_finisher,
 #content .wallbin-header .page-selector-container .tab-pages .scroll_tab_right_finisher
 {
 	width: 0 !important;
-}
-
-#content .wallbin-header .page-selector-container .tab-pages .page-tab-header.selected
-{
-	background-color: #C6E2FF !important;
 }
 
 #content .wallbin-header .page-selector-container .scroll_tabs_theme_light .scroll_tab_left_button span,

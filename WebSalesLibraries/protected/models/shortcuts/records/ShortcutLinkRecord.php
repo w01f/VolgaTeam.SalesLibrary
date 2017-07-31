@@ -216,7 +216,7 @@
 					break;
 			}
 			if (isset($parameters) && array_key_exists('singlePage', $parameters) && $parameters['singlePage'])
-				$shortcut->samePage = false;
+				$shortcut->samePage = $parameters['singlePage']!=true;
 			return $shortcut;
 		}
 

@@ -15,13 +15,13 @@
 			), true);
 ?>
 <style>
-	<?if($shortcut->style->header->paddingLeft>0):?>
+    <? if (isset($shortcut->style->header->padding) && $shortcut->style->header->padding->isConfigured): ?>
 	#content .wallbin-header-container {
-		padding-left: <? echo $shortcut->style->header->paddingLeft;?>px;
-	}
 
-	#content .wallbin-header .wallbin-header-cell {
-		padding-left: 0;
+        padding-top: <? echo $shortcut->style->header->padding->top; ?>px !important;
+        padding-left: <? echo $shortcut->style->header->padding->left; ?>px !important;
+        padding-bottom: <? echo $shortcut->style->header->padding->bottom; ?>px !important;
+        padding-right: <? echo $shortcut->style->header->padding->right; ?>px !important;
 	}
 	<?endif;?>
 
@@ -39,7 +39,7 @@
 
 	<? if ($shortcut->searchBar->configured): ?>
 	#content .wallbin-header .shortcuts-search-bar-container {
-		padding-right: 10px;
+		padding-right: 0;
 		padding-top: 25px;
 		padding-bottom: 0;
 		vertical-align: top;
@@ -73,6 +73,16 @@
 
 	<? endif; ?>
 	<? endif; ?>
+
+    <? if (isset($shortcut->style->page->padding) && $shortcut->style->page->padding->isConfigured): ?>
+    #content .wallbin-container .content-container{
+
+        padding-top: <? echo $shortcut->style->page->padding->top; ?>px !important;
+        padding-left: <? echo $shortcut->style->page->padding->left; ?>px !important;
+        padding-bottom: <? echo $shortcut->style->page->padding->bottom; ?>px !important;
+        padding-right: <? echo $shortcut->style->page->padding->right; ?>px !important;
+    }
+    <?endif;?>
 </style>
 <div class="wallbin-header-container">
 	<table class="wallbin-header">

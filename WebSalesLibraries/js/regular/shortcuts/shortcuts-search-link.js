@@ -1,118 +1,128 @@
-(function ($)
-{
+(function ($) {
 	window.BaseUrl = window.BaseUrl || '';
 	$.SalesPortal = $.SalesPortal || {};
-	$.SalesPortal.ShortcutsSearchLink = function (data)
-	{
+	$.SalesPortal.ShortcutsSearchLink = function (data) {
 		var that = this;
 
 		var parentSearchData = data;
-
-		if (parentSearchData.content !== undefined)
-		{
-			$.SalesPortal.Content.fillContent({
-				content: parentSearchData.content,
-				headerOptions: {
-					title: parentSearchData.options.headerTitle,
-					icon: parentSearchData.options.headerIcon,
-					titleHideCondition: parentSearchData.options.headerTitleHideCondition,
-					iconHideCondition: parentSearchData.options.headerIconHideCondition
-				},
-				actions: parentSearchData.actions,
-				navigationPanel: parentSearchData.navigationPanel,
-				resizeCallback: function ()
-				{
-					updateContentSize();
-				}
-			});
-		}
-
-		var optionsContainer = data.optionsContainer !== undefined ? data.optionsContainer : $.SalesPortal.Content.getContentObject();
+		var optionsContainer = data.optionsContainer !== undefined ? data.optionsContainer :
+			(parentSearchData.content !== undefined ? $('<div>' + parentSearchData.content + '</div>') : $.SalesPortal.Content.getContentObject());
 		var searchShortcutOptions = new $.SalesPortal.SearchOptions($.parseJSON(optionsContainer.find('.search-conditions .encoded-object').text()));
 		var searchViewOptions = new $.SalesPortal.SearchViewOptions($.parseJSON(optionsContainer.find('.search-view-options .encoded-object').text()));
-		var content = $.SalesPortal.Content.getContentObject();
 
+		var content = undefined;
 		var baseDatasetKey = undefined;
+		var dataTable = undefined;
 
-		var dataTable = new $.SalesPortal.SearchDataTable(
-			{
-				tableContainerSelector: '.shortcuts-search-link-data-table-container',
-				saveState: false,
-				backHandler: parentSearchData.backHandler,
-				logHandler: function ()
-				{
-					$.SalesPortal.ShortcutsManager.trackActivity(
-						{details: {File: searchShortcutOptions.title}},
-						'Search Activity',
-						'Search Activity');
-				}
-			}
-		);
-
-		this.runSearch = function (resultCallback)
-		{
+		this.runSearch = function (resultCallback) {
 			$.SalesPortal.SearchHelper.runSearch(
 				{
 					datasetKey: undefined,
 					conditions: $.toJSON(searchShortcutOptions.conditions)
 				},
-				function ()
-				{
+				function () {
 					$.SalesPortal.Overlay.show();
 				},
-				function ()
-				{
+				function () {
 					$.SalesPortal.Overlay.hide();
 				},
-				function (data)
-				{
+				function (data) {
 					if (data.dataset.length > 0)
 					{
-						$.SalesPortal.Content.getContentObject().html('<table id="shortcuts-search-container" style="table-layout:fixed;"><tr>' +
-							'<td id="right-navbar" style="display: none;"></td>' +
-							'<td>' +
-							'<div class="data-table-content-container shortcuts-search-link-data-table-container"></div>' +
-							'</td>' +
-							'</tr></table>');
+						if (parentSearchData.content !== undefined)
+						{
+							$.SalesPortal.Content.fillContent({
+								content: parentSearchData.content,
+								headerOptions: {
+									title: parentSearchData.options.headerTitle,
+									icon: parentSearchData.options.headerIcon,
+									titleHideCondition: parentSearchData.options.headerTitleHideCondition,
+									iconHideCondition: parentSearchData.options.headerIconHideCondition
+								},
+								actions: parentSearchData.actions,
+								navigationPanel: parentSearchData.navigationPanel,
+								resizeCallback: function () {
+									updateContentSize();
+								}
+							});
+						}
+						content = $.SalesPortal.Content.getContentObject();
+						dataTable = new $.SalesPortal.SearchDataTable(
+							{
+								tableContainerSelector: '.shortcuts-search-link-data-table-container',
+								saveState: false,
+								backHandler: parentSearchData.backHandler,
+								logHandler: function () {
+									$.SalesPortal.ShortcutsManager.trackActivity(
+										{details: {File: searchShortcutOptions.title}},
+										'Search Activity',
+										'Search Activity');
+								}
+							}
+						);
 
-						baseDatasetKey = data.datasetKey;
-						if (searchShortcutOptions.subSearchDefaultView === 'all')
-							SimpleSearch(content);
-						else if (searchShortcutOptions.subSearchDefaultView === 'search')
-							SubSearchCustom(content);
-						else if (searchShortcutOptions.subSearchDefaultView === 'links')
-							SubSearchByTemplates(content);
+						if (data.dataset.length > 0)
+						{
+							$.SalesPortal.Content.getContentObject().html('<table id="shortcuts-search-container" style="table-layout:fixed;"><tr>' +
+								'<td id="right-navbar" style="display: none;"></td>' +
+								'<td>' +
+								'<div class="data-table-content-container shortcuts-search-link-data-table-container"></div>' +
+								'</td>' +
+								'</tr></table>');
 
-						initActionButtons();
-						$(window).off('resize.search-link').on('resize.search-link', updateContentSize);
+							baseDatasetKey = data.datasetKey;
+							if (searchShortcutOptions.subSearchDefaultView === 'all')
+								SimpleSearch(content);
+							else if (searchShortcutOptions.subSearchDefaultView === 'search')
+								SubSearchCustom(content);
+							else if (searchShortcutOptions.subSearchDefaultView === 'links')
+								SubSearchByTemplates(content);
+
+							initActionButtons();
+							$(window).off('resize.search-link').on('resize.search-link', updateContentSize);
+						}
 					}
 					if (resultCallback !== undefined)
 						resultCallback(data);
+					else if (data.dataset.length === 0)
+					{
+						var modalDialog = new $.SalesPortal.ModalDialog({
+							title: 'Site Update',
+							description: 'This section is not yet updated today.<br><br>' +
+							'Check back later and maybe this page will be ready…',
+							width: 300,
+							buttons: [
+								{
+									tag: 'ok',
+									title: 'OK',
+									clickHandler: function () {
+										modalDialog.close();
+									}
+								}
+							]
+						});
+						modalDialog.show();
+					}
 				}
 			);
 		};
 
-		var SimpleSearch = function (content)
-		{
+		var SimpleSearch = function (content) {
 			var sideBar = content.find('#right-navbar');
 
-			var getSearchResults = function ()
-			{
+			var getSearchResults = function () {
 				$.SalesPortal.SearchHelper.runSearch(
 					{
 						datasetKey: baseDatasetKey
 					},
-					function ()
-					{
+					function () {
 						sideBar.hide();
 						$.SalesPortal.Overlay.show();
 					},
-					function ()
-					{
+					function () {
 						$.SalesPortal.Overlay.hide();
 					},
-					function (data)
-					{
+					function (data) {
 						var searchResults = new $.SalesPortal.SearchResult(data.datasetKey, data.dataset);
 						dataTable.init({
 							dataset: searchResults.dataset,
@@ -127,16 +137,13 @@
 			getSearchResults();
 		};
 
-		var SubSearchCustom = function (content)
-		{
+		var SubSearchCustom = function (content) {
 			var sideBar = content.find('#right-navbar');
 
-			var customSearchData = new $.SalesPortal.SearchConditions(function ()
-			{
+			var customSearchData = new $.SalesPortal.SearchConditions(function () {
 			});
 
-			var getSearchResults = function ()
-			{
+			var getSearchResults = function () {
 				var customSearchConditions = customSearchData.getConditionsFormatted();
 
 				$.SalesPortal.SearchHelper.runSearch(
@@ -155,16 +162,13 @@
 							datasetKey: null
 						})
 					},
-					function ()
-					{
+					function () {
 						$.SalesPortal.Overlay.show();
 					},
-					function ()
-					{
+					function () {
 						$.SalesPortal.Overlay.hide();
 					},
-					function (data)
-					{
+					function (data) {
 						var searchResults = new $.SalesPortal.SearchResult(data.datasetKey, data.dataset);
 						dataTable.init({
 							dataset: searchResults.dataset,
@@ -177,42 +181,36 @@
 				);
 			};
 
-			var initPanel = function ()
-			{
+			var initPanel = function () {
 				var formLogger = new $.SalesPortal.FormLogger();
 				formLogger.init({
 					logObject: {name: searchShortcutOptions.title},
 					formContent: sideBar
 				});
 
-				sideBar.find('.tags-filter-panel-switcher').off('click.search-options').on('click.search-options', function ()
-				{
+				sideBar.find('.tags-filter-panel-switcher').off('click.search-options').on('click.search-options', function () {
 					editTagsCondition();
 				});
 
 				sideBar.find('.search-bar-text')
-					.off('input').on('input', function ()
-				{
+					.off('input').on('input', function () {
 					var text = $(this).val();
 					if (text !== '')
 						customSearchData.set('text', text);
 					else
 						customSearchData.set('text', null);
 				})
-					.off('keypress').on('keypress', function (e)
-				{
+					.off('keypress').on('keypress', function (e) {
 					if (e.which === 13)
 						getSearchResults();
 				});
 
-				sideBar.find('.file-filter-panel .file-selector input').off('change').on('change', function ()
-				{
+				sideBar.find('.file-filter-panel .file-selector input').off('change').on('change', function () {
 					applySelectedFileTypes();
 					applySearchSettings();
 				});
 
-				sideBar.find('.search-bar-run').on('click', function ()
-				{
+				sideBar.find('.search-bar-run').on('click', function () {
 					getSearchResults();
 				});
 
@@ -220,8 +218,7 @@
 				applySearchSettings();
 			};
 
-			var applySelectedFileTypes = function ()
-			{
+			var applySelectedFileTypes = function () {
 				customSearchData.setFileTypesSettings({
 					showPowerPoint: sideBar.find('#search-file-type-powerpoint').prop('checked'),
 					showVideo: sideBar.find('#search-file-type-video').prop('checked'),
@@ -233,14 +230,12 @@
 				});
 			};
 
-			var applySearchSettings = function ()
-			{
+			var applySearchSettings = function () {
 				customSearchData.set('onlyFileNames', sideBar.find('#search-file-names-only').prop('checked'));
 				customSearchData.set('exactMatch', sideBar.find('#search-exact-match').prop('checked'));
 			};
 
-			var editTagsCondition = function ()
-			{
+			var editTagsCondition = function () {
 				var categoryConditions = sideBar.find('.search-conditions');
 				var categorySelector = categoryConditions.find('.tag-condition-selector-wrapper');
 				categorySelector.find('.tag-condition-selector').addClass('logger-form');
@@ -252,8 +247,7 @@
 					autoHeight: true,
 					openEffect: 'none',
 					closeEffect: 'none',
-					afterShow: function ()
-					{
+					afterShow: function () {
 						var innerContent = $('.fancybox-inner');
 
 						var formLogger = new $.SalesPortal.FormLogger();
@@ -267,25 +261,21 @@
 						var groupsCount = categoriesContent.find('.group-selector-container').length;
 						if (categories.length > 0)
 						{
-							$.each(categoriesContent.find('>.checkbox'), function ()
-							{
+							$.each(categoriesContent.find('>.checkbox'), function () {
 								var groupCheckBoxContainer = $(this);
 								var groupName = groupCheckBoxContainer.find('.group-selector-container .name').text();
 								var groupCheckBoxItems = groupCheckBoxContainer.find('.checkbox');
-								$.each(categories, function (groupIndex, group)
-								{
+								$.each(categories, function (groupIndex, group) {
 									if (group.name === groupName)
 									{
 										if (group.items.length === groupCheckBoxItems.length)
 											groupCheckBoxItems.find('.tag-selector').prop('checked', true);
 										else
-											$.each(groupCheckBoxItems, function ()
-											{
+											$.each(groupCheckBoxItems, function () {
 												var tagCheckBoxContainer = $(this);
 												var tagCheckBox = tagCheckBoxContainer.find('.tag-selector');
 												var tagName = tagCheckBoxContainer.find('.name').text();
-												$.each(group.items, function (itemIndex, item)
-												{
+												$.each(group.items, function (itemIndex, item) {
 													if (item === tagName)
 														tagCheckBox.prop('checked', true);
 												});
@@ -294,8 +284,7 @@
 								});
 							});
 						}
-						categoriesContent.find('.group-selector').off('change').on('change', function ()
-						{
+						categoriesContent.find('.group-selector').off('change').on('change', function () {
 							$(this).closest('.group-checkbox').find('.tag-selector').prop('checked', $(this).is(':checked'));
 						});
 						categoriesContent.accordion({
@@ -310,35 +299,29 @@
 
 						var superFiltersContent = innerContent.find(".super-filter-list");
 						var superFilters = customSearchData.getSuperFiltersSettings();
-						$.each(superFilters, function (index, value)
-						{
+						$.each(superFilters, function (index, value) {
 							superFiltersContent.find('.btn:contains("' + value + '")').button('toggle');
 						});
-						superFiltersContent.find('.btn').off('click.search-options').on('click.search-options', function ()
-						{
+						superFiltersContent.find('.btn').off('click.search-options').on('click.search-options', function () {
 							$(this).button('toggle').blur();
 						});
 
 
-						innerContent.find('.tags-clear-all').off('click.search-options').on('click.search-options', function ()
-						{
+						innerContent.find('.tags-clear-all').off('click.search-options').on('click.search-options', function () {
 							superFiltersContent.find('.btn').removeClass('active').blur();
 							categoriesContent.find(":checked").prop('checked', false);
 						});
 
-						innerContent.find('.cancel-button').on('click.search-app', function ()
-						{
+						innerContent.find('.cancel-button').on('click.search-app', function () {
 							$.fancybox.close();
 						});
 
-						innerContent.find('.accept-button').on('click.search-app', function ()
-						{
+						innerContent.find('.accept-button').on('click.search-app', function () {
 							var selectedSuperFilters = [];
 							var allSuperFilterButtons = superFiltersContent.find('.btn');
 							var selectedSuperFilterButtons = superFiltersContent.find('.btn.active');
 							if (allSuperFilterButtons.length !== selectedSuperFilterButtons.length)
-								$.each(selectedSuperFilterButtons, function ()
-								{
+								$.each(selectedSuperFilterButtons, function () {
 									selectedSuperFilters.push($(this).text());
 								});
 							customSearchData.setSuperFiltersSettings(selectedSuperFilters);
@@ -347,16 +330,14 @@
 							var allCategoryTagCheckBoxes = categoriesContent.find('.tag-selector');
 							var selectedCategoryTagCheckBoxes = categoriesContent.find('.tag-selector-container :checked');
 							if (allCategoryTagCheckBoxes.length !== selectedCategoryTagCheckBoxes.length)
-								$.each(categoriesContent.find('>.checkbox'), function ()
-								{
+								$.each(categoriesContent.find('>.checkbox'), function () {
 									var groupCheckBoxContainer = $(this);
 									var groupCheckBoxItems = groupCheckBoxContainer.find('.checkbox');
 									if (groupCheckBoxItems.find('.tag-selector-container :checked').length > 0)
 									{
 										var tags = [];
 										var groupName = groupCheckBoxContainer.find('.group-selector-container .name').text();
-										$.each(groupCheckBoxItems, function ()
-										{
+										$.each(groupCheckBoxItems, function () {
 											var tagCheckBoxContainer = $(this);
 											var tagCheckBox = tagCheckBoxContainer.find('.tag-selector');
 											if (tagCheckBox.prop('checked') === true)
@@ -398,36 +379,30 @@
 					bundleId: searchShortcutOptions.isSearchBar ? parentSearchData.options.linkId : undefined,
 					linkId: searchShortcutOptions.isSearchBar ? undefined : parentSearchData.options.linkId
 				},
-				beforeSend: function ()
-				{
+				beforeSend: function () {
 					$.SalesPortal.Overlay.show();
 				},
-				complete: function ()
-				{
+				complete: function () {
 					$.SalesPortal.Overlay.hide();
 				},
-				success: function (msg)
-				{
+				success: function (msg) {
 					sideBar.html(msg);
 					sideBar.show();
 					initPanel();
 					updateContentSize();
 					getSearchResults();
 				},
-				error: function ()
-				{
+				error: function () {
 				},
 				async: true,
 				dataType: 'html'
 			});
 		};
 
-		var SubSearchByTemplates = function (content)
-		{
+		var SubSearchByTemplates = function (content) {
 			var sideBar = content.find('#right-navbar');
 
-			var getSearchResults = function ()
-			{
+			var getSearchResults = function () {
 				var selectedTemplateConditions = new $.SalesPortal.SearchOptions($.parseJSON(sideBar.find('a.opened .search-conditions .encoded-object').text()));
 
 				var textCondition = selectedTemplateConditions.conditions.text;
@@ -459,16 +434,13 @@
 							datasetKey: null
 						})
 					},
-					function ()
-					{
+					function () {
 						$.SalesPortal.Overlay.show();
 					},
-					function ()
-					{
+					function () {
 						$.SalesPortal.Overlay.hide();
 					},
-					function (data)
-					{
+					function (data) {
 						var searchResults = new $.SalesPortal.SearchResult(data.datasetKey, data.dataset);
 						dataTable.init({
 							dataset: searchResults.dataset,
@@ -485,8 +457,7 @@
 				);
 			};
 
-			var initPanel = function ()
-			{
+			var initPanel = function () {
 				var logoSelector = sideBar.find('.logo-list ul');
 				sideBar.find('.logo-list ul li.enabled img').tooltip({
 					animation: false,
@@ -498,8 +469,7 @@
 				var firstItem = selectorItems.first();
 				if (firstItem !== null)
 					firstItem.addClass('opened');
-				selectorItems.on('click.search-app', function ()
-				{
+				selectorItems.on('click.search-app', function () {
 					selectorItems.removeClass('opened');
 					$(this).addClass('opened');
 					getSearchResults();
@@ -513,32 +483,27 @@
 					bundleId: searchShortcutOptions.isSearchBar ? parentSearchData.options.linkId : undefined,
 					linkId: searchShortcutOptions.isSearchBar ? undefined : parentSearchData.options.linkId
 				},
-				beforeSend: function ()
-				{
+				beforeSend: function () {
 					$.SalesPortal.Overlay.show();
 				},
-				complete: function ()
-				{
+				complete: function () {
 					$.SalesPortal.Overlay.hide();
 				},
-				success: function (msg)
-				{
+				success: function (msg) {
 					sideBar.html(msg);
 					sideBar.show();
 					initPanel();
 					updateContentSize();
 					getSearchResults();
 				},
-				error: function ()
-				{
+				error: function () {
 				},
 				async: true,
 				dataType: 'html'
 			});
 		};
 
-		var initActionButtons = function ()
-		{
+		var initActionButtons = function () {
 			var shortcutActionsContainer = $('#shortcut-action-container');
 
 			if (searchShortcutOptions.enableSubSearch)
@@ -551,22 +516,19 @@
 				else if (searchShortcutOptions.subSearchDefaultView === 'links')
 					shortcutActionsContainer.find('.sub-search-links').hide();
 
-				shortcutActionsContainer.find('.sub-search-all').off('click.action').on('click.action', function ()
-				{
+				shortcutActionsContainer.find('.sub-search-all').off('click.action').on('click.action', function () {
 					SimpleSearch(content);
 					shortcutActionsContainer.find('.sub-search-action').show();
 					$(this).hide();
 				});
 
-				shortcutActionsContainer.find('.sub-search-criteria').off('click.action').on('click.action', function ()
-				{
+				shortcutActionsContainer.find('.sub-search-criteria').off('click.action').on('click.action', function () {
 					SubSearchCustom(content);
 					shortcutActionsContainer.find('.sub-search-action').show();
 					$(this).hide();
 				});
 
-				shortcutActionsContainer.find('.sub-search-links').off('click.action').on('click.action', function ()
-				{
+				shortcutActionsContainer.find('.sub-search-links').off('click.action').on('click.action', function () {
 					SubSearchByTemplates(content);
 					shortcutActionsContainer.find('.sub-search-action').show();
 					$(this).hide();
@@ -578,8 +540,7 @@
 			}
 		};
 
-		var updateContentSize = function ()
-		{
+		var updateContentSize = function () {
 			$.SalesPortal.ShortcutsManager.updateContentSize();
 
 			var content = $.SalesPortal.Content.getContentObject();

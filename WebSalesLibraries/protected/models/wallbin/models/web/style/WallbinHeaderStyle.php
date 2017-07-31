@@ -11,7 +11,12 @@
 		public $textColor;
 		public $backColor;
 		public $headerBorderColor;
-		public $paddingLeft;
+
+		/** @var  TabPageSelectorStyle */
+		public $tabSelector;
+
+		/** @var  \Padding */
+		public $padding;
 
 		/**
 		 * @param $xpath \DOMXPath
@@ -37,8 +42,13 @@
 			$queryResult = $xpath->query('.//TopBorderColor', $contextNode);
 			$headerStyle->headerBorderColor = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '999';
 
-			$queryResult = $xpath->query('.//PaddingLeft', $contextNode);
-			$headerStyle->paddingLeft = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue)) : 0;
+			$queryResult = $xpath->query('.//PageTabStrip', $contextNode);
+			if ($queryResult->length > 0)
+				$headerStyle->tabSelector = TabPageSelectorStyle::fromXml($xpath, $queryResult->item(0));
+
+			$queryResult = $xpath->query('.//Padding', $contextNode);
+			if ($queryResult->length > 0)
+				$headerStyle->padding = \Padding::fromXml($xpath, $queryResult->item(0));
 
 			return $headerStyle;
 		}
@@ -54,6 +64,10 @@
 			$headerStyle->textColor = 'inherite';
 			$headerStyle->backColor = 'inherite';
 			$headerStyle->headerBorderColor = '999';
+
+			$headerStyle->tabSelector = TabPageSelectorStyle::createDefault();
+
+			$headerStyle->padding = new \Padding(0);
 			return $headerStyle;
 		}
 	}

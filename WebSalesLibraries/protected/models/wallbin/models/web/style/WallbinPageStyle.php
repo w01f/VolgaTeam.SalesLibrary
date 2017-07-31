@@ -15,6 +15,9 @@
 		public $verticalBorder2Color;
 		public $verticalBorderStretch;
 
+		/** @var  \Padding */
+		public $padding;
+
 		/** @var  PageColumnStyle */
 		public $column1Style;
 		/** @var  PageColumnStyle */
@@ -43,6 +46,10 @@
 
 			$queryResult = $xpath->query('.//VerticalBorderStretch', $contextNode);
 			$pageStyle->verticalBorderStretch = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
+
+			$queryResult = $xpath->query('.//Padding', $contextNode);
+			if ($queryResult->length > 0)
+				$pageStyle->padding = \Padding::fromXml($xpath, $queryResult->item(0));
 
 			$queryResult = $xpath->query('.//Column1', $contextNode);
 			if ($queryResult->length > 0)

@@ -22,13 +22,13 @@
 			), true);
 ?>
 <style>
-    <?if($previewInfo->style->header->paddingLeft>0):?>
+    <? if (isset($previewInfo->style->header->padding) && $previewInfo->style->header->padding->isConfigured): ?>
     #content .wallbin-header-container {
-        padding-left: <? echo $previewInfo->style->header->paddingLeft;?>px;
-    }
 
-    #content .wallbin-header .wallbin-header-cell {
-        padding-left: 0;
+        padding-top: <? echo $previewInfo->style->header->padding->top; ?>px !important;
+        padding-left: <? echo $previewInfo->style->header->padding->left; ?>px !important;
+        padding-bottom: <? echo $previewInfo->style->header->padding->bottom; ?>px !important;
+        padding-right: <? echo $previewInfo->style->header->padding->right; ?>px !important;
     }
     <?endif;?>
 
@@ -46,7 +46,7 @@
 
     <? if ($previewInfo->searchBar->configured): ?>
     #content .wallbin-header .shortcuts-search-bar-container {
-        padding-right: 10px;
+        padding-right: 0;
         padding-top: 25px;
         padding-bottom: 0;
         vertical-align: top;
@@ -80,6 +80,16 @@
 
     <? endif; ?>
     <? endif; ?>
+
+    <? if (isset($previewInfo->style->page->padding) && $previewInfo->style->page->padding->isConfigured): ?>
+    #content .wallbin-container .content-container {
+
+        padding-top: <? echo $previewInfo->style->page->padding->top; ?>px !important;
+        padding-left: <? echo $previewInfo->style->page->padding->left; ?>px !important;
+        padding-bottom: <? echo $previewInfo->style->page->padding->bottom; ?>px !important;
+        padding-right: <? echo $previewInfo->style->page->padding->right; ?>px !important;
+    }
+    <?endif;?>
 </style>
 <div class="wallbin-header-container">
     <table class="wallbin-header">

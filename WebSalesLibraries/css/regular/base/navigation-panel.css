@@ -3,6 +3,11 @@
     vertical-align: top;
 }
 
+#content .navigation-panel .control-bar
+{
+    height: 0;
+}
+
 #content .navigation-panel .control-bar .button
 {
     display: block;
@@ -23,6 +28,8 @@
 #content .navigation-panel .navigation-item-list-container
 {
     overflow: hidden;
+    position: relative;
+    top: 48px;
 }
 
 #content .navigation-panel .navigation-item-list
