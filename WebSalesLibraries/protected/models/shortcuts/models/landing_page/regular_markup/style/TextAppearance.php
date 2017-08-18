@@ -12,6 +12,7 @@
 
 		public $color;
 		public $hoverColor;
+		public $selectedColor;
 		public $alignment;
 		public $lineHeight;
 		public $wrapText;
@@ -39,6 +40,9 @@
 
 			$queryResult = $xpath->query('./HoverColor', $contextNode);
 			$textAppearance->hoverColor = $queryResult->length > 0 ? strtolower(trim($queryResult->item(0)->nodeValue)) : null;
+
+			$queryResult = $xpath->query('./SelectedColor', $contextNode);
+			$textAppearance->selectedColor = $queryResult->length > 0 ? strtolower(trim($queryResult->item(0)->nodeValue)) : null;
 
 			$queryResult = $xpath->query('./TextAlign', $contextNode);
 			$textAlign = $queryResult->length > 0 ? strtolower(trim($queryResult->item(0)->nodeValue)) : $textAppearance->alignment;

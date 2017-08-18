@@ -2,6 +2,7 @@
 	use application\models\wallbin\models\web\LibraryManager as LibraryManager;
 	use application\models\wallbin\models\web\LibraryPage as LibraryPage;
 	use application\models\wallbin\models\web\LibraryFolder as LibraryFolder;
+	use application\models\wallbin\models\web\style\WallbinHeaderStyle;
 
 	/**
 	 * Class InternalLibraryFolderPreviewInfo
@@ -15,6 +16,9 @@
 		public $windowViewType;
 		public $column;
 		public $linksOnly;
+
+		/** @var  WallbinHeaderStyle */
+		public $header;
 
 		/**
 		 * @param $linkSettings InternalLibraryFolderLinkSettings
@@ -43,6 +47,12 @@
 				$this->windowViewType = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : $this->windowViewType;
 				$queryResult = $xpath->query('//Config/LinksOnly');
 				$this->linksOnly = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : $this->linksOnly;
+
+				$queryResult = $xpath->query('//Config//Header');
+				if ($queryResult->length > 0)
+					$this->header = WallbinHeaderStyle::fromXml($xpath, $queryResult->item(0));
+				else
+					$this->header = WallbinHeaderStyle::createDefault();
 
 				$queryResult = $xpath->query('//Config/Actions/Action');
 				$this->initActions($xpath, $queryResult);

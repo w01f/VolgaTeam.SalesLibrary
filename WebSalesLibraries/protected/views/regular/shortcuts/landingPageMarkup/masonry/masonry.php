@@ -1,4 +1,5 @@
 <?
+
 	use application\models\shortcuts\models\landing_page\regular_markup\masonry\MasonryBlock;
 	use application\models\shortcuts\models\landing_page\regular_markup\masonry\MasonryItem;
 	use application\models\shortcuts\models\landing_page\regular_markup\masonry\MasonryShortcut;
@@ -11,6 +12,16 @@
         -webkit-transform: scale(<?echo $contentBlock->viewSettings->captionZoomScale;?>) !important;
         transform: scale(<?echo $contentBlock->viewSettings->captionZoomScale;?>) !important;
     }
+
+    #masonry-container-<? echo $contentBlock->id; ?> .cbp-l-filters-buttonCenter .cbp-filter-item {
+        background-color: <?echo Utils::formatColor($contentBlock->viewSettings->buttonStyle->backColorRegular);?> !important;
+        border-color: <?echo $contentBlock->viewSettings->buttonStyle->hasBorder? Utils::formatColor($contentBlock->viewSettings->buttonStyle->borderColorRegular):'transparent';?> !important;
+    }
+
+    #masonry-container-<? echo $contentBlock->id; ?> .cbp-l-filters-buttonCenter .cbp-filter-item.cbp-filter-item-active {
+        background-color: <?echo Utils::formatColor($contentBlock->viewSettings->buttonStyle->backColorSelected);?> !important;
+        border-color: <?echo $contentBlock->viewSettings->buttonStyle->hasBorder? Utils::formatColor($contentBlock->viewSettings->buttonStyle->borderColorSelected):'transparent';?> !important;
+    }
 </style>
 <div id="masonry-container-<? echo $contentBlock->id; ?>" class="col-xs-12 masonry-container">
     <div class="service-data">
@@ -21,18 +32,19 @@
 	<? if (count($contentBlock->viewSettings->filters) > 1): ?>
         <div id="masonry-filter-<? echo $contentBlock->id; ?>" class="cbp-l-filters-buttonCenter">
 			<? foreach ($contentBlock->viewSettings->filters as $filter): ?>
-                <div data-filter="<? echo '.' . implode(', .', $filter->tags) ?>"
+				<?
+				$filterTextId = sprintf("masonry-filter-item-text-%s", $filter->id);
+				echo $this->renderPartial('landingPageMarkup/style/styleTextAppearance',
+					array(
+						'textAppearance' => $filter->textAppearance,
+						'blockId' => $filterTextId,
+                        'selectedClass'=>'cbp-filter-item-active'
+					)
+					, true);
+				?>
+                <div id="<? echo $filterTextId; ?>" data-filter="<? echo '.' . implode(', .', $filter->tags) ?>"
                      class="cbp-filter-item<? if ($filter->isDefault): ?> cbp-filter-item-active<? endif; ?>">
-					<?
-						$filterTextId = sprintf("masonry-filter-item-text-%s", $filter->id);
-						echo $this->renderPartial('landingPageMarkup/style/styleTextAppearance',
-							array(
-								'textAppearance' => $filter->textAppearance,
-								'blockId' => $filterTextId
-							)
-							, true);
-					?>
-                    <span id="<? echo $filterTextId; ?>">
+                    <span>
                         <? echo $filter->title; ?>
                     </span>
                     <div class="cbp-filter-counter"></div>
@@ -50,11 +62,13 @@
 		?>
 		<? if ($masonryItem->type === 'url'): ?>
 		<? /** @var MasonryUrl $masonryItem */ ?>
-        <a href="<? echo $masonryItem->url; ?>" <? if ($masonryItem->isMailTo!==false): ?>target="_self"<?else:?>target="_blank"<? endif; ?>
+        <a href="<? echo $masonryItem->url; ?>" <? if ($masonryItem->isMailTo !== false): ?>target="_self"
+		   <? else: ?>target="_blank"<? endif; ?>
            class="cbp-item <? echo implode(' ', $masonryItem->filterTags); ?>" <? echo $itemStyle; ?>>
 			<? elseif ($masonryItem->type === 'shortcut'): ?>
 		<? /** @var MasonryShortcut $masonryItem */ ?>
-            <a href="<? echo isset($masonryItem->shortcut) ? $masonryItem->shortcut->getSourceLink() : '#'; ?>" target="<? echo isset($masonryItem->shortcut) && !$masonryItem->shortcut->samePage ? '_blank' : '_self'; ?>"
+            <a href="<? echo isset($masonryItem->shortcut) ? $masonryItem->shortcut->getSourceLink() : '#'; ?>"
+               target="<? echo isset($masonryItem->shortcut) && !$masonryItem->shortcut->samePage ? '_blank' : '_self'; ?>"
                class="cbp-item <? echo implode(' ', $masonryItem->filterTags); ?> shortcuts-link<? if (!isset($masonryItem->shortcut)): ?> disabled<? endif; ?>" <? echo $itemStyle; ?>>
                 <div class="service-data">
 					<? echo isset($masonryItem->shortcut) ? $masonryItem->shortcut->getMenuItemData() : '<div class="same-page"></div><div class="has-custom-handler"></div>'; ?>
@@ -67,32 +81,32 @@
                     </div>
                 </div>
                 <div style="<? echo $this->renderPartial('../shortcuts/landingPageMarkup/style/stylePadding', array('padding' => $contentBlock->viewSettings->textPadding), true); ?>">
-                    <? if (!empty($masonryItem->title)): ?>
-                        <?
-                        $itemTitleId = sprintf("masonry-item-title-%s", $masonryItem->id);
-                        echo $this->renderPartial('landingPageMarkup/style/styleTextAppearance',
-                            array(
-                                'textAppearance' => $masonryItem->titleTextAppearance,
-                                'blockId' => $itemTitleId
-                            )
-                            , true);
-                        ?>
+					<? if (!empty($masonryItem->title)): ?>
+						<?
+						$itemTitleId = sprintf("masonry-item-title-%s", $masonryItem->id);
+						echo $this->renderPartial('landingPageMarkup/style/styleTextAppearance',
+							array(
+								'textAppearance' => $masonryItem->titleTextAppearance,
+								'blockId' => $itemTitleId
+							)
+							, true);
+						?>
                         <div id="<? echo $itemTitleId; ?>"
                              class="cbp-l-grid-masonry-projects-title"><? echo $masonryItem->title; ?></div>
-                    <? endif; ?>
-                    <? if (!empty($masonryItem->description)): ?>
-                        <?
-                        $itemDescriptionId = sprintf("masonry-item-description-%s", $masonryItem->id);
-                        echo $this->renderPartial('landingPageMarkup/style/styleTextAppearance',
-                            array(
-                                'textAppearance' => $masonryItem->descriptionTextAppearance,
-                                'blockId' => $itemDescriptionId
-                            )
-                            , true);
-                        ?>
+					<? endif; ?>
+					<? if (!empty($masonryItem->description)): ?>
+						<?
+						$itemDescriptionId = sprintf("masonry-item-description-%s", $masonryItem->id);
+						echo $this->renderPartial('landingPageMarkup/style/styleTextAppearance',
+							array(
+								'textAppearance' => $masonryItem->descriptionTextAppearance,
+								'blockId' => $itemDescriptionId
+							)
+							, true);
+						?>
                         <div id="<? echo $itemDescriptionId; ?>"
                              class="cbp-l-grid-masonry-projects-desc"><? echo $masonryItem->description; ?></div>
-                    <? endif; ?>
+					<? endif; ?>
                 </div>
             </a>
 			<? endforeach; ?>

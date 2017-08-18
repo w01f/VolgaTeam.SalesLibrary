@@ -3,6 +3,7 @@
 
 	/**
 	 * @var $blockId string
+	 * @var $selectedClass string
      * @var $textAppearance TextAppearance
      */
 ?>
@@ -38,6 +39,11 @@
         <? if (isset($textAppearance->hoverColor)): ?>
             <?echo '#'.$blockId;?>:hover {
                 color: <? echo Utils::formatColor($textAppearance->hoverColor); ?> !important;
+            }
+        <? endif; ?>
+        <? if (isset($textAppearance->selectedColor) && isset($selectedClass)): ?>
+            <?echo '#'.$blockId;?>.<? echo $selectedClass;?> {
+                color: <? echo Utils::formatColor($textAppearance->selectedColor); ?> !important;
             }
         <? endif; ?>
     </style>

@@ -29,14 +29,28 @@
 ?>
 <? if ($previewInfo->searchBar->configured): ?>
     <style>
-        #content .shortcuts-search-bar-container
-        {
-            width: 100%;
-            padding: 20px 20px 20px;
+        <? if (isset($previewInfo->header->padding) && $previewInfo->header->padding->isConfigured): ?>
+        #content .wallbin-header-container {
+
+            padding-top: <? echo $previewInfo->header->padding->top; ?>px !important;
+            padding-left: <? echo $previewInfo->header->padding->left; ?>px !important;
+            padding-bottom: <? echo $previewInfo->header->padding->bottom; ?>px !important;
+            padding-right: <? echo $previewInfo->header->padding->right; ?>px !important;
+        }
+        <?endif;?>
+
+        #content .wallbin-header .wallbin-header-cell {
+            border-bottom: 1px <? echo Utils::formatColor($previewInfo->header->headerBorderColor); ?> solid !important;
         }
     </style>
-    <div class="shortcuts-search-bar-container">
-		<? echo $this->renderPartial('../shortcuts/searchBar/bar', array('searchBar' => $previewInfo->searchBar), true); ?>
+    <div class="wallbin-header-container">
+        <table class="wallbin-header">
+            <tr>
+                <td class="wallbin-header-cell shortcuts-search-bar-container">
+	                <? echo $this->renderPartial('../shortcuts/searchBar/bar', array('searchBar' => $previewInfo->searchBar), true); ?>
+                </td>
+            </tr>
+        </table>
     </div>
 <? endif; ?>
 <div class='padding'>

@@ -1,4 +1,5 @@
 <?
+
 	namespace application\models\shortcuts\models\landing_page\regular_markup\masonry;
 
 	class MasonrySimpleSettings extends MasonrySettings
@@ -9,11 +10,15 @@
 		/** @var  MasonryFilter */
 		public $defaultFilter;
 
+		/** @var  MasonryFilterButtonStyle */
+		public $buttonStyle;
+
 		public function __construct()
 		{
 			$this->feedType = self::MasonryTypeSimple;
 			parent::__construct();
 			$this->filters = array();
+			$this->buttonStyle = MasonryFilterButtonStyle::createDefault();
 		}
 
 		/**
@@ -36,5 +41,9 @@
 						$this->defaultFilter = $filter;
 				}
 			}
+
+			$queryResult = $xpath->query('./FilterButtonStyle', $contextNode);
+			if ($queryResult->length > 0)
+				$this->buttonStyle = MasonryFilterButtonStyle::fromXml($xpath, $queryResult->item(0));
 		}
 	}
