@@ -212,6 +212,9 @@
 				case 'page':
 					new $.SalesPortal.ShortcutsLibraryPage().init(result);
 					break;
+				case 'pagebundle':
+					new $.SalesPortal.ShortcutsLibraryPageBundle().init(result);
+					break;
 				case 'library':
 					new $.SalesPortal.ShortcutsWallbin().init(result);
 					break;

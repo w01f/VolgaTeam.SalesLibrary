@@ -141,6 +141,7 @@
 				case 'carouselbundle':
 				case 'library':
 				case 'page':
+				case 'pagebundle':
 				case 'window':
 				case 'search':
 				case 'searchapp':
@@ -181,6 +182,9 @@
 					break;
 				case 'page':
 					$viewName = 'libraryPage';
+					break;
+				case 'pagebundle':
+					$viewName = 'libraryPageBundle';
 					break;
 				case 'qpage':
 					$useMobileWrapper = false;

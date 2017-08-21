@@ -82,29 +82,6 @@
 				case 'window':
 					$shortcut = new WindowShortcut($this, $isPhone);
 					break;
-				case 'page':
-					$shortcut = new LibraryPageShortcut($this, $isPhone);
-					if (isset($shortcut->library->id))
-					{
-						$needToUpdate = false;
-						$savedPageViewTypeTag = sprintf('PageViewType-%s', $shortcut->libraryName);
-						if (isset($parameters) && array_key_exists('pageViewType', $parameters))
-						{
-							$shortcut->pageViewType = $parameters['pageViewType'];
-							$cookie = new CHttpCookie($savedPageViewTypeTag, $shortcut->pageViewType);
-							$cookie->expire = time() + (60 * 60 * 24 * 7);
-							Yii::app()->request->cookies[$savedPageViewTypeTag] = $cookie;
-							$needToUpdate = true;
-						}
-						else if (isset(Yii::app()->request->cookies[$savedPageViewTypeTag]))
-						{
-							$shortcut->pageViewType = Yii::app()->request->cookies[$savedPageViewTypeTag]->value;
-							$needToUpdate = true;
-						}
-						if ($needToUpdate)
-							$shortcut->updateAction();
-					}
-					break;
 				case 'quicklist':
 					$shortcut = new QuickListShortcut($this, $isPhone);
 					break;
@@ -157,6 +134,58 @@
 					}
 					else
 						$shortcut = new GridBundleShortcut($this, $isPhone);
+					break;
+				case 'page':
+					$shortcut = new LibraryPageShortcut($this, $isPhone);
+					if (isset($shortcut->library->id))
+					{
+						$needToUpdate = false;
+						$savedPageViewTypeTag = sprintf('PageViewType-%s', $shortcut->libraryName);
+						if (isset($parameters) && array_key_exists('pageViewType', $parameters))
+						{
+							$shortcut->pageViewType = $parameters['pageViewType'];
+							$cookie = new CHttpCookie($savedPageViewTypeTag, $shortcut->pageViewType);
+							$cookie->expire = time() + (60 * 60 * 24 * 7);
+							Yii::app()->request->cookies[$savedPageViewTypeTag] = $cookie;
+							$needToUpdate = true;
+						}
+						else if (isset(Yii::app()->request->cookies[$savedPageViewTypeTag]))
+						{
+							$shortcut->pageViewType = Yii::app()->request->cookies[$savedPageViewTypeTag]->value;
+							$needToUpdate = true;
+						}
+						if ($needToUpdate)
+							$shortcut->updateAction();
+					}
+					break;
+				case 'pagebundle':
+					$shortcut = new LibraryPageBundleShortcut($this, $isPhone);
+
+					$savedPageViewTypeTag = sprintf('PageViewType-%s', $shortcut->id);
+					if (isset($parameters) && array_key_exists('pageViewType', $parameters))
+					{
+						$shortcut->pageViewType = $parameters['pageViewType'];
+						$cookie = new CHttpCookie($savedPageViewTypeTag, $shortcut->pageViewType);
+						$cookie->expire = time() + (60 * 60 * 24 * 7);
+						Yii::app()->request->cookies[$savedPageViewTypeTag] = $cookie;
+					}
+					else if (isset(Yii::app()->request->cookies[$savedPageViewTypeTag]))
+					{
+						$shortcut->pageViewType = Yii::app()->request->cookies[$savedPageViewTypeTag]->value;
+					}
+
+					$savedPageSelectorModeTag = sprintf('PageSelectorMode-%s', $shortcut->id);
+					if (isset($parameters) && array_key_exists('pageSelectorMode', $parameters))
+					{
+						$shortcut->pageSelectorMode = $parameters['pageSelectorMode'];
+						$cookie = new CHttpCookie($savedPageSelectorModeTag, $shortcut->pageSelectorMode);
+						$cookie->expire = time() + (60 * 60 * 24 * 7);
+						Yii::app()->request->cookies[$savedPageSelectorModeTag] = $cookie;
+					}
+					else if (isset(Yii::app()->request->cookies[$savedPageSelectorModeTag]))
+					{
+						$shortcut->pageSelectorMode = Yii::app()->request->cookies[$savedPageSelectorModeTag]->value;
+					}
 					break;
 				case 'library':
 					$shortcut = new WallbinShortcut($this, $isPhone);

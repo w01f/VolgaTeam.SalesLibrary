@@ -362,4 +362,8 @@
     width: 100%;
 }
 
+.news-block .news-item .img-circle {
+    border-radius: 0;
+}
+
 /*-----------------------------------------------------*/

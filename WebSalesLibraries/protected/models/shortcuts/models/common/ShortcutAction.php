@@ -198,6 +198,7 @@
 					break;
 
 				case 'library':
+				case 'pagebundle':
 					$action = new ShortcutAction('page-select-tabs');
 					$action->order = 10;
 					$action->title = 'Show Tabs';
@@ -241,7 +242,7 @@
 					$customActions[$action->tag] = $action;
 
 					$action = new ShortcutAction('hide-search');
-					$action->order = 70;
+					$action->order = 80;
 					$action->title = 'Hide Search';
 					$action->iconClass = 'icon-search32';
 					$customActions[$action->tag] = $action;
