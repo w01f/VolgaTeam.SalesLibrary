@@ -15,6 +15,8 @@
 	use application\models\shortcuts\models\landing_page\regular_markup\style\BorderStyle;
 	use application\models\shortcuts\models\landing_page\regular_markup\style\TextAppearance;
 	use application\models\shortcuts\models\landing_page\regular_markup\horizontal_feed\SimpleFeedBlock as SimpleHorizontalFeedBlock;
+	use application\models\shortcuts\models\landing_page\regular_markup\toggle_panel\TogglePanelBlock;
+	use application\models\shortcuts\models\landing_page\regular_markup\toggle_panel\TogglePanelItem;
 	use application\models\shortcuts\models\landing_page\regular_markup\vertical_feed\SimpleFeedBlock as SimpleVerticalFeedBlock;
 	use application\models\shortcuts\models\landing_page\regular_markup\vertical_feed\SimpleFeedItem;
 	use application\models\shortcuts\models\landing_page\regular_markup\vertical_feed\TrendingBlock as VerticalTrendingBlock;
@@ -214,6 +216,10 @@
 					return 'masonry/searchFeed';
 				case 'specific-links-feed-masonry':
 					return 'masonry/specificLinkFeed';
+				case 'toggle-panel':
+					return 'toggle_panel/panel';
+				case 'toggle-item':
+					return 'toggle_panel/item';
 				default:
 					return 'common/undefinedBlock';
 			}
@@ -336,6 +342,14 @@
 					$masonryBlock = new MasonryBlock($parentShortcut, $parentBlock);
 					$masonryBlock->configureFromXml($xpath, $contextNode);
 					return $masonryBlock;
+				case "toggle-panel":
+					$togglePanelBlock = new TogglePanelBlock($parentShortcut, $parentBlock);
+					$togglePanelBlock->configureFromXml($xpath, $contextNode);
+					return $togglePanelBlock;
+				case "toggle-item":
+					$togglePanelItem = new TogglePanelItem($parentShortcut, $parentBlock);
+					$togglePanelItem->configureFromXml($xpath, $contextNode);
+					return $togglePanelItem;
 				default:
 					return new UndefinedBlock($parentShortcut, $parentBlock);
 			}

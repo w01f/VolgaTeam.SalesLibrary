@@ -84,6 +84,16 @@
 				}).init();
 			});
 
+			$.each(landingPage.find('.toggle-panel'), function (key, value)
+			{
+				var togglePanelBlock = $(value);
+				var togglePanelId = togglePanelBlock.prop('id').replace('toggle-panel-', '');
+
+				new $.SalesPortal.LandingPage.TogglePanel({
+					containerId: togglePanelId
+				}).init();
+			});
+
 			landingPage.find('[data-bs-hover-animate]')
 				.mouseenter(function ()
 				{

@@ -367,3 +367,21 @@
 }
 
 /*-----------------------------------------------------*/
+
+/*Toggle Panel----------------------------------------------------------------*/
+#content .shortcuts-page-content.landing-page .toggle-panel .toggle-buttons
+{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#content .shortcuts-page-content.landing-page .toggle-panel .toggle-item
+{
+    display: none;
+}
+
+#content .shortcuts-page-content.landing-page .toggle-panel .toggle-item.toggle-item-active
+{
+    display: block;
+}
+/*-----------------------------------------------------*/
