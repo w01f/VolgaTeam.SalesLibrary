@@ -240,12 +240,17 @@
 				case 'landing':
 					$shortcut = new LandingPageShortcut($this, $isPhone);
 					break;
+				case 'shortcutlink':
+					/** @var AliasShortcut $aliasShortcut */
+					$aliasShortcut = new AliasShortcut($this, $isPhone);
+					$shortcut = $aliasShortcut->originalShortcut;
+					break;
 				default:
 					$shortcut = new EmptyShortcut($this, $isPhone);
 					break;
 			}
 			if (isset($parameters) && array_key_exists('singlePage', $parameters) && $parameters['singlePage'])
-				$shortcut->samePage = $parameters['singlePage']!=true;
+				$shortcut->samePage = $parameters['singlePage'] != true;
 			return $shortcut;
 		}
 

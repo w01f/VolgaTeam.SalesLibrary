@@ -1,4 +1,4 @@
-<?php
+<?
 
 	/**
 	 * Class BaseShortcut
@@ -44,6 +44,7 @@
 			$this->id = $linkRecord->id;
 			$this->groupId = $linkRecord->id_group;
 			$this->bundleId = $linkRecord->id_parent;
+			$this->isPhone = $isPhone;
 
 			$this->relativePath = str_replace(Yii::app()->params['appRoot'], '', $linkRecord->source_path);
 			$this->relativeLink = str_replace('\\', '/', $this->relativePath);
@@ -57,7 +58,19 @@
 
 			$this->order = $linkRecord->order;
 
-			$visualSettingsSubSection = $isPhone ? 'Mobile' : 'Regular';
+			$queryResult = $xpath->query('//Config/CarouselGroup');
+			$this->carouselGroup = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '';
+
+			$this->loadAppearanceData($xpath);
+			$this->loadSecurityData($xpath);
+		}
+
+		/**
+		 * @param $xpath DOMXPath
+		 */
+		public function loadAppearanceData($xpath)
+		{
+			$visualSettingsSubSection = $this->isPhone ? 'Mobile' : 'Regular';
 			$queryResult = $xpath->query('//Config/' . $visualSettingsSubSection);
 			if ($queryResult->length == 0)
 				$visualSettingsSubSection = '';
@@ -94,7 +107,7 @@
 				}
 				else
 				{
-					$imagePath = $linkRecord->source_path . DIRECTORY_SEPARATOR . $iconValue;
+					$imagePath = $this->linkRecord->source_path . DIRECTORY_SEPARATOR . $iconValue;
 					if (file_exists($imagePath))
 					{
 						$data = file_get_contents($imagePath);
@@ -107,16 +120,17 @@
 				$this->appearance = ShortcutAppearance::fromXml($xpath, $queryResult->item(0));
 			else
 				$this->appearance = new ShortcutAppearance();
+		}
 
-
-			$queryResult = $xpath->query('//Config/CarouselGroup');
-			$this->carouselGroup = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '';
-
+		/**
+		 * @param $xpath DOMXPath
+		 */
+		public function loadSecurityData($xpath)
+		{
 			$this->isAccessGranted = true;
 			$isAdmin = UserIdentity::isUserAdmin();
 			if (!$isAdmin)
 			{
-
 				$approvedUsers = array();
 				$queryResult = $xpath->query('//Config/ApprovedUsers/User');
 				foreach ($queryResult as $groupNode)
@@ -159,8 +173,6 @@
 					}
 				}
 			}
-
-			$this->isPhone = $isPhone;
 		}
 
 		/**
