@@ -5,7 +5,6 @@
 	class LibraryPageBundleItem
 	{
 		public $name;
-		public $shortcutId;
 
 		/** @var  LibraryPageShortcut */
 		public $shortcut;
@@ -26,12 +25,12 @@
 			$item->name = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
 
 			$queryResult = $xpath->query('./Id', $contextNode);
-			$item->shortcutId = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
+			$shortcutId = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
 
-			if (isset($item->shortcutId))
+			if (isset($shortcutId))
 			{
 				/** @var  $shortcutRecord \ShortcutLinkRecord */
-				$shortcutRecord = \ShortcutLinkRecord::model()->findByPk($item->shortcutId);
+				$shortcutRecord = \ShortcutLinkRecord::model()->findByPk($shortcutId);
 				if (isset($shortcutRecord))
 				{
 					/** @var  $shortcut LibraryPageShortcut */

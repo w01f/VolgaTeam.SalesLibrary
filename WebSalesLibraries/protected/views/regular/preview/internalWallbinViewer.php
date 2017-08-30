@@ -23,7 +23,9 @@
 		'library' => $library,
 		'pageSelectorMode' => $previewInfo->pageSelectorMode,
 		'pageViewType' => $previewInfo->pageViewType,
-		'style' => $previewInfo->style,
+		'isEmbedded' => false,
+		'containerId' => 'content',
+		'styleContainer' => $previewInfo,
 		'searchBar'=> $previewInfo->searchBar
 	));
 ?>

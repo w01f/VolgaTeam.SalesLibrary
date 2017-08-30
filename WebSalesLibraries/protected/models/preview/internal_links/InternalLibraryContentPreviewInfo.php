@@ -64,11 +64,12 @@
 				$navigationPanelId = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
 				if ($showNavigationPanel)
 				{
-					$navigationPanelData = ShortcutsManager::getNavigationPanel($navigationPanelId);
+					$navigationPanelData = ShortcutsManager::getNavigationPanel($navigationPanelId, $isPhone);
 					$viewPath = \Yii::getPathOfAlias('application.views.regular.shortcuts.navigationPanel') . '/itemsList.php';
 					$this->navigationPanel = array(
 						'content' => \Yii::app()->controller->renderFile($viewPath, array('navigationPanel' => $navigationPanelData), true),
 						'options' => array(
+							'expanded' => $navigationPanelData->isExpanded,
 							'hideCondition' => array(
 								'extraSmall' => $navigationPanelData->hideCondition->extraSmall,
 								'small' => $navigationPanelData->hideCondition->small,

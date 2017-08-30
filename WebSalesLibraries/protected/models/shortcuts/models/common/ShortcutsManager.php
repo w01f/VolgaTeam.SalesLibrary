@@ -89,10 +89,11 @@
 		}
 
 		/**
-		 * @var $id string
+		 * @param $id string
+		 * @param $isPhone boolean
 		 * @return NavigationPanel
 		 */
-		public static function getNavigationPanel($id)
+		public static function getNavigationPanel($id, $isPhone)
 		{
 			$navigationPanel = null;
 			if (!isset($id))
@@ -107,7 +108,7 @@
 				$config = new DOMDocument();
 				$config->loadXML($configContent);
 				$xpath = new DomXPath($config);
-				$navigationPanel = NavigationPanel::fromXml($xpath, $configRootLink);
+				$navigationPanel = NavigationPanel::fromXml($xpath, $configRootLink, $isPhone);
 				$navigationPanel->id = $id;
 			}
 			return $navigationPanel;

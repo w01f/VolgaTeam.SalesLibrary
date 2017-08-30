@@ -1,11 +1,12 @@
 <?
 	use application\models\wallbin\models\web\LibraryManager as LibraryManager;
+	use application\models\wallbin\models\web\style\IWallbinStyleContainer;
 	use application\models\wallbin\models\web\style\WallbinStyle;
 
 	/**
 	 * Class InternalWallbinPreviewInfo
 	 */
-	class InternalWallbinPreviewInfo extends InternalLibraryContentPreviewInfo
+	class InternalWallbinPreviewInfo extends InternalLibraryContentPreviewInfo implements IWallbinStyleContainer
 	{
 		public $libraryName;
 		public $pageName;
@@ -91,5 +92,17 @@
 				$actionsByKey['show-search']->enabled = $actionsByKey['show-search']->enabled && $this->searchBar->configured;
 			if (array_key_exists('hide-search', $actionsByKey))
 				$actionsByKey['hide-search']->enabled = $actionsByKey['hide-search']->enabled && $this->searchBar->configured;
+		}
+
+		/** @return string */
+		public function getStyleContainerId()
+		{
+			return null;
+		}
+
+		/** @return WallbinStyle */
+		public function getStyle()
+		{
+			return $this->style;
 		}
 	}

@@ -159,6 +159,7 @@
 		public function getPageData()
 		{
 			$data = parent::getPageData();
+
 			if ($this->isPhone)
 				$data['headerTitle'] = $this->headerTitle != '' ?
 					$this->headerTitle :
@@ -181,7 +182,6 @@
 				'large' => $this->hideTextCondition->large,
 			);
 
-			$data['linkId'] = $this->id;
 			return $data;
 		}
 
@@ -189,12 +189,12 @@
 		public function getNavigationPanel()
 		{
 			if ($this->showNavigationPanel)
-				return ShortcutsManager::getNavigationPanel($this->navigationPanelId);
+				return ShortcutsManager::getNavigationPanel($this->navigationPanelId, $this->isPhone);
 			return null;
 		}
 
 		/**
-		 * @var $linkId string
+		 * @param $linkId string
 		 * @param $samePage boolean
 		 * @return string
 		 */

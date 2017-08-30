@@ -7,12 +7,9 @@
 	{
 		public $id;
 		public $type;
-		public $enabled;
-		public $title;
-		public $tooltip;
-		public $iconUrlExpanded;
-		public $iconUrlCollapsed;
-		public $textColor;
+
+		/** @var  RegularNavigationItemSettings|MobileNavigationItemSettings */
+		public $settings;
 
 		public $contentView;
 
@@ -21,27 +18,68 @@
 		 * @param $xpath DOMXPath
 		 * @param $contextNode DOMNode
 		 * @param $imagePath string
+		 * @param $isPhone boolean
 		 */
-		public function __construct($parent, $xpath, $contextNode, $imagePath)
+		public function __construct($parent, $xpath, $contextNode, $imagePath, $isPhone)
 		{
 			$this->id = uniqid();
 
-			$queryResult = $xpath->query('Enabled', $contextNode);
-			$this->enabled = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
+			$settingsSubSection = $isPhone ? 'Mobile' : 'Regular';
+			$queryResult = $xpath->query('./' . $settingsSubSection, $contextNode);
+			if ($queryResult->length == 0)
+				$settingsNode = $contextNode;
+			else
+				$settingsNode = $queryResult->item(0);
+			if ($isPhone)
+				$this->settings = new MobileNavigationItemSettings($parent, $xpath, $settingsNode, $imagePath);
+			else
+				$this->settings = new RegularNavigationItemSettings($parent, $xpath, $settingsNode, $imagePath);
 
-			$queryResult = $xpath->query('IconPanel', $contextNode);
-			$this->iconUrlExpanded = $imagePath . '/' . ($queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '');
-			$queryResult = $xpath->query('IconBar', $contextNode);
-			$this->iconUrlCollapsed = $imagePath . '/' . ($queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '');
+			if ($this->settings->enabled)
+			{
+				$user = \Yii::app()->user;
+				$userGroups = \UserIdentity::getCurrentUserGroups();
 
-			$queryResult = $xpath->query('Text', $contextNode);
-			$this->title = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
+				$approvedUsers = array();
+				$queryResult = $xpath->query('./ApprovedUsers/User', $contextNode);
+				foreach ($queryResult as $groupNode)
+					$approvedUsers[] = trim($groupNode->nodeValue);
 
-			$queryResult = $xpath->query('Tooltip', $contextNode);
-			$this->tooltip = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
+				$approvedGroups = array();
+				$queryResult = $xpath->query('./ApprovedGroups/Group', $contextNode);
+				foreach ($queryResult as $groupNode)
+					$approvedGroups[] = trim($groupNode->nodeValue);
 
-			$queryResult = $xpath->query('IconPanelColor', $contextNode);
-			$this->textColor = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : $parent->textColor;
+				$excludedUsers = array();
+				$queryResult = $xpath->query('./ExcludedUsers/User', $contextNode);
+				foreach ($queryResult as $groupNode)
+					$excludedUsers[] = trim($groupNode->nodeValue);
+
+				$excludedGroups = array();
+				$queryResult = $xpath->query('./ExcludedGroups/Group', $contextNode);
+				foreach ($queryResult as $groupNode)
+					$excludedGroups[] = trim($groupNode->nodeValue);
+
+				$isAccessGranted = true;
+
+				if (isset($user) && count($excludedUsers) > 0)
+					$isAccessGranted &= !in_array($user->login, $excludedUsers);
+				if (isset($user) && count($excludedGroups) > 0)
+					$isAccessGranted &= !array_intersect($userGroups, $excludedGroups);
+
+				if ($isAccessGranted && (count($approvedUsers) > 0 || count($approvedGroups) > 0))
+				{
+					$isAccessGranted = false;
+					if (isset($user) && isset($user->login))
+					{
+						$isAccessGranted |= in_array($user->login, $approvedUsers);
+						if (count($userGroups) > 0)
+							$isAccessGranted |= array_intersect($userGroups, $approvedGroups);
+					}
+				}
+
+				$this->settings->enabled &= $isAccessGranted;
+			}
 		}
 
 		/** @return string */
@@ -55,23 +93,24 @@
 		 * @param $xpath DOMXPath
 		 * @param $contextNode DOMNode
 		 * @param $imagePath string
+		 * @param $isPhone boolean
 		 * @return BaseNavigationItem
 		 */
-		public static function fromXml($parent, $xpath, $contextNode, $imagePath)
+		public static function fromXml($parent, $xpath, $contextNode, $imagePath, $isPhone)
 		{
 			$queryResult = $xpath->query('Type', $contextNode);
 			$itemType = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '';
 			switch ($itemType)
 			{
 				case 'shortcut':
-					$item = new ShortcutNavigationItem($parent, $xpath, $contextNode, $imagePath);
+					$item = new ShortcutNavigationItem($parent, $xpath, $contextNode, $imagePath, $isPhone);
 					break;
 				case 'url':
-					$item = new UrlNavigationItem($parent, $xpath, $contextNode, $imagePath);
+					$item = new UrlNavigationItem($parent, $xpath, $contextNode, $imagePath, $isPhone);
 					break;
 				default:
 					return null;
 			}
-			return $item;
+			return $item->settings->enabled ? $item : null;
 		}
 	}

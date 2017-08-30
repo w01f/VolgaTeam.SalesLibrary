@@ -85,7 +85,7 @@
 					function (content)
 					{
 						var text = content.find('#search-filter-edit-condition-content-value').val();
-						if (text && text != '')
+						if (text && text !== '')
 							currentSearchConditions.set('text', text);
 						else
 							currentSearchConditions.set('text', null);
@@ -106,11 +106,11 @@
 
 						if (dateStart && dateEnd)
 						{
-							if (moment(dateEnd, dateFormat).subtract('days', 1).format(dateFormat) == dateStart)
+							if (moment(dateEnd, dateFormat).subtract('days', 1).format(dateFormat) === dateStart)
 								content.find('#search-filter-edit-data-range-last-day').prop('checked', true);
-							else if (moment(dateEnd, dateFormat).subtract('days', 14).format(dateFormat) == dateStart)
+							else if (moment(dateEnd, dateFormat).subtract('days', 14).format(dateFormat) === dateStart)
 								content.find('#search-filter-edit-data-range-15-days').prop('checked', true);
-							else if (moment(dateEnd, dateFormat).subtract('days', 30).format(dateFormat) == dateStart)
+							else if (moment(dateEnd, dateFormat).subtract('days', 30).format(dateFormat) === dateStart)
 								content.find('#search-filter-edit-data-range-30-days').prop('checked', true);
 							else
 							{
@@ -128,9 +128,9 @@
 
 						content.find('.search-filter-edit-data-range-toggle').on('change', function ()
 						{
-							if ($(this).prop('checked') == true)
+							if ($(this).prop('checked') === true)
 								content.find('.search-filter-edit-data-range-toggle').not($(this)).prop('checked', false);
-							if (content.find('#search-filter-edit-data-range-custom').prop('checked') == true)
+							if (content.find('#search-filter-edit-data-range-custom').prop('checked') === true)
 							{
 								content.find('#search-filter-edit-date-range-custom-start-container button').removeClass('disabled');
 								content.find('#search-filter-edit-date-range-custom-start-container input').prop('disabled', false);
@@ -166,22 +166,22 @@
 					{
 						var dateStart = null;
 						var dateEnd = null;
-						if (content.find('#search-filter-edit-data-range-last-day').prop('checked') == true)
+						if (content.find('#search-filter-edit-data-range-last-day').prop('checked') === true)
 						{
 							dateEnd = moment().format(dateFormat);
 							dateStart = moment().subtract('day', 1).startOf('day').format(dateFormat);
 						}
-						else if (content.find('#search-filter-edit-data-range-15-days').prop('checked') == true)
+						else if (content.find('#search-filter-edit-data-range-15-days').prop('checked') === true)
 						{
 							dateEnd = moment().format(dateFormat);
 							dateStart = moment().subtract('day', 14).startOf('day').format(dateFormat);
 						}
-						else if (content.find('#search-filter-edit-data-range-30-days').prop('checked') == true)
+						else if (content.find('#search-filter-edit-data-range-30-days').prop('checked') === true)
 						{
 							dateEnd = moment().format(dateFormat);
 							dateStart = moment().subtract('day', 30).startOf('day').format(dateFormat);
 						}
-						else if (content.find('#search-filter-edit-data-range-custom').prop('checked') == true)
+						else if (content.find('#search-filter-edit-data-range-custom').prop('checked') === true)
 						{
 							dateEnd = content.find('#search-filter-edit-date-range-custom-end-container input').val();
 							dateStart = content.find('#search-filter-edit-date-range-custom-start-container input').val();
@@ -306,9 +306,9 @@
 								var groupCheckBoxItems = groupCheckBoxContainer.find('.checkbox');
 								$.each(categories, function (groupIndex, group)
 								{
-									if (group.name == groupName)
+									if (group.name === groupName)
 									{
-										if (group.items.length == groupCheckBoxItems.length)
+										if (group.items.length === groupCheckBoxItems.length)
 											groupCheckBoxItems.find('.tag-selector').prop('checked', true);
 										else
 											$.each(groupCheckBoxItems, function ()
@@ -318,7 +318,7 @@
 												var tagName = tagCheckBoxContainer.find('.name').text();
 												$.each(group.items, function (itemIndex, item)
 												{
-													if (item == tagName)
+													if (item === tagName)
 														tagCheckBox.prop('checked', true);
 												});
 											});
@@ -353,7 +353,7 @@
 						var categoriesFiltersContent = content.find(".category-filter-list");
 						var allCategoriesFilterItems = categoriesFiltersContent.find('li');
 						var selectedCategoriesFilterItems = categoriesFiltersContent.find('li.active');
-						if (allCategoriesFilterItems.length != selectedCategoriesFilterItems.length)
+						if (allCategoriesFilterItems.length !== selectedCategoriesFilterItems.length)
 							$.each(selectedCategoriesFilterItems, function ()
 							{
 								selectedCategoryFilters.push($(this).find('a').text());
@@ -364,7 +364,7 @@
 						var categoriesPane = content.find('.category-list');
 						var allCheckBoxes = categoriesPane.find('.tag-selector');
 						var selectedCheckBoxes = categoriesPane.find('.tag-selector-container :checked');
-						if (allCheckBoxes.length != selectedCheckBoxes.length)
+						if (allCheckBoxes.length !== selectedCheckBoxes.length)
 							$.each(categoriesPane.find('>.checkbox'), function ()
 							{
 								var groupCheckBoxContainer = $(this);
@@ -377,7 +377,7 @@
 									{
 										var tagCheckBoxContainer = $(this);
 										var tagCheckBox = tagCheckBoxContainer.find('.tag-selector');
-										if (tagCheckBox.prop('checked') == true)
+										if (tagCheckBox.prop('checked') === true)
 											tags.push(tagCheckBoxContainer.find('.name').text());
 									});
 									categories.push({
@@ -402,7 +402,7 @@
 						{
 							$.each(content.find('.checkbox'), function ()
 							{
-								if ($(this).find('.name').text() == item)
+								if ($(this).find('.name').text() === item)
 									$(this).find('input[type="checkbox"]').prop('checked', true);
 							});
 						});
@@ -412,10 +412,10 @@
 						var items = [];
 						var allCheckBoxes = content.find('.checkbox');
 						var selectedCheckBoxes = content.find('.checkbox :checked');
-						if (allCheckBoxes.length != selectedCheckBoxes.length)
+						if (allCheckBoxes.length !== selectedCheckBoxes.length)
 							$.each(allCheckBoxes, function ()
 							{
-								if ($(this).find('input[type="checkbox"]').prop('checked') == true)
+								if ($(this).find('input[type="checkbox"]').prop('checked') === true)
 									items.push($(this).find('.name').text());
 							});
 						currentSearchConditions.setSuperFiltersSettings(items);
@@ -440,7 +440,7 @@
 							if (libraries.length > 0)
 								$.each(libraries, function ()
 								{
-									if (this.id == libraryId)
+									if (this.id === libraryId)
 										checkBox.prop('checked', true);
 								});
 							else
@@ -472,10 +472,10 @@
 						var items = [];
 						var allCheckBoxes = content.find('#search-filter-edit-libraries .checkbox');
 						var selectedCheckBoxes = content.find('#search-filter-edit-libraries :checked');
-						if (allCheckBoxes.length != selectedCheckBoxes.length)
+						if (allCheckBoxes.length !== selectedCheckBoxes.length)
 							$.each(allCheckBoxes, function ()
 							{
-								if ($(this).find('input[type="checkbox"]').prop('checked') == true)
+								if ($(this).find('input[type="checkbox"]').prop('checked') === true)
 									items.push({
 										id: $(this).find('input[type="checkbox"]').val(),
 										name: $(this).find('.name').text()
@@ -555,7 +555,7 @@
 					});
 					$(document).on('keydown.search', function (e)
 					{
-						if (e.keyCode == 13)
+						if (e.keyCode === 13)
 						{
 							e.preventDefault();
 							e.stopPropagation();
@@ -598,7 +598,7 @@
 			$("#search-ribbon-condition-content-value").val(currentSearchConditions.get('text'));
 			var dateStart = currentSearchConditions.get('dateStart');
 			var dateEnd = currentSearchConditions.get('dateEnd');
-			$('#search-app-condition-date-container').find('input').val((dateStart != null && dateEnd != null) ? (dateStart + ' - ' + dateEnd) : '');
+			$('#search-app-condition-date-container').find('input').val((dateStart !== null && dateEnd !== null) ? (dateStart + ' - ' + dateEnd) : '');
 			currentSearchConditions.raiseOnChange();
 
 			initDataTable();
@@ -703,7 +703,7 @@
 		var initDataTable = function ()
 		{
 			dataTable.init({
-				dataset: existedSearchResults != undefined ? existedSearchResults.dataset : undefined,
+				dataset: existedSearchResults !== undefined ? existedSearchResults.dataset : undefined,
 				dataOptions: viewOptions
 			});
 		};

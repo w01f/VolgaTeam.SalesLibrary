@@ -34,7 +34,7 @@
 				formContent: servicePanel
 			});
 
-			if ($.cookie("showServicePanel") == "false")
+			if ($.cookie("showServicePanel") === "false")
 				servicePanel.hide();
 			else
 				servicePanel.show();
@@ -66,7 +66,7 @@
 		{
 			var shortcutActionsContainer = $('#shortcut-action-container');
 
-			if ($.cookie("showServicePanel") == "true")
+			if ($.cookie("showServicePanel") === "true")
 			{
 				shortcutActionsContainer.find('.qbuilder-panel-show').hide();
 			}

@@ -65,7 +65,12 @@
 			{
 				var navigationPanelSate = $.cookie("navigationPanelState");
 				if (navigationPanelSate === null)
-					navigationPanelSate = 'expanded';
+				{
+					if(parameters.options.expanded)
+						navigationPanelSate = 'expanded';
+					else
+						navigationPanelSate = 'collapsed';
+				}
 				navigationPanelObject.addClass(navigationPanelSate);
 				navigationPanelObject.show();
 
@@ -121,7 +126,6 @@
 		{
 			var menu = $('#main-menu');
 			var navigationPanelObject = $.SalesPortal.Content.getNavigationPanel();
-			var controlBar = navigationPanelObject.find('.control-bar');
 			var height = $(window).height() - menu.outerHeight(true) - menu.offset().top - 48;//control bar button image height;
 			navigationPanelObject.find('.navigation-item-list').css({
 				'height': height + 'px'

@@ -50,33 +50,28 @@
 
     #content .wallbin-header .page-selector-container .tab-pages div,
     #content .wallbin-header .page-selector-container .tab-pages span,
-    #content .wallbin-header .page-selector-container .tab-pages li
-    {
+    #content .wallbin-header .page-selector-container .tab-pages li {
         background-color: <? echo Utils::formatColor($shortcut->style->header->tabSelector->regularBackColor)?> !important;
         border-color: <? echo Utils::formatColor($shortcut->style->header->tabSelector->borderColor)?> !important;
     }
 
     #content .wallbin-header .page-selector-container .tab-pages div.scroll_tab_inner span,
-    #content .wallbin-header .page-selector-container .tab-pages div.scroll_tab_inner li
-    {
+    #content .wallbin-header .page-selector-container .tab-pages div.scroll_tab_inner li {
         color: <? echo Utils::formatColor($shortcut->style->header->tabSelector->regularTextColor)?> !important;
     }
 
     #content .wallbin-header .page-selector-container .tab-pages .scroll_tab_left_button,
-    #content .wallbin-header .page-selector-container .tab-pages .scroll_tab_right_button
-    {
+    #content .wallbin-header .page-selector-container .tab-pages .scroll_tab_right_button {
         color: <? echo Utils::formatColor($shortcut->style->header->tabSelector->arrowColor)?> !important;
     }
 
     #content .wallbin-header .page-selector-container .tab-pages div.scroll_tab_inner span.scroll_tab_over,
-    #content .wallbin-header .page-selector-container .tab-pages div.scroll_tab_inner li.scroll_tab_over
-    {
+    #content .wallbin-header .page-selector-container .tab-pages div.scroll_tab_inner li.scroll_tab_over {
         color: <? echo Utils::formatColor($shortcut->style->header->tabSelector->hoverTextColor)?> !important;
         background-color: <? echo Utils::formatColor($shortcut->style->header->tabSelector->hoverBackColor)?> !important;
     }
 
-    #content .wallbin-header .page-selector-container .tab-pages .page-tab-header.selected
-    {
+    #content .wallbin-header .page-selector-container .tab-pages .page-tab-header.selected {
         color: <? echo Utils::formatColor($shortcut->style->header->tabSelector->selectedTextColor)?> !important;
         background-color: <? echo Utils::formatColor($shortcut->style->header->tabSelector->selectedBackColor)?> !important;
     }
@@ -111,10 +106,10 @@
                                 <div class="service-data">
 									<div class="encoded-data">
 										<? echo CJSON::encode(array(
-												'shortcutId' => $item->shortcutId,
 												'libraryId' => $item->libraryPage->libraryId,
 												'pageId' => $item->libraryPage->id,
-												'name' => $item->name
+												'styleContainerId' => $item->shortcut->getStyleContainerId(),
+												'pageName' => $item->name
 											)
 										); ?>
 									</div>
@@ -126,10 +121,10 @@
                     <select class="selectpicker bootstrapped">
 						<? foreach ($shortcut->items as $item): ?>
                             <option value='<? echo base64_encode(CJSON::encode(array(
-									'shortcutId' => $item->shortcutId,
 									'libraryId' => $item->libraryPage->libraryId,
 									'pageId' => $item->libraryPage->id,
-									'name' => $item->name
+		                            'styleContainerId' => $item->shortcut->getStyleContainerId(),
+									'pageName' => $item->name
 								)
 							)); ?>' <? echo $selectedPage->libraryPage->id == $item->libraryPage->id ? 'selected' : ''; ?>><? echo $item->name; ?></option>
 						<? endforeach; ?>
@@ -151,6 +146,7 @@
 			$this->renderPartial('../wallbin/columnsView',
 				array(
 					'libraryPage' => $selectedPage->libraryPage,
+					'containerId' => 'content',
 					'style' => \application\models\wallbin\models\web\style\WallbinStyle::createDefault()
 				));
 		}
@@ -160,6 +156,7 @@
 			$this->renderPartial('../wallbin/columnsView',
 				array(
 					'libraryPage' => $selectedPage->libraryPage,
+					'containerId' => 'content',
 					'style' => $selectedPage->shortcut->style->page
 				));
 		}

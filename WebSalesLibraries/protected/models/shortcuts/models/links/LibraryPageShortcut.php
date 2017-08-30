@@ -1,13 +1,15 @@
 <?
+
 	use application\models\wallbin\models\web\LibraryManager as LibraryManager;
 	use application\models\wallbin\models\web\LibraryPage as LibraryPage;
 	use application\models\wallbin\models\web\Library as Library;
+	use application\models\wallbin\models\web\style\IWallbinStyleContainer;
 	use application\models\wallbin\models\web\style\WallbinStyle as WallbinStyle;
 
 	/**
 	 * Class LibraryPageShortcut
 	 */
-	class LibraryPageShortcut extends PageContentShortcut
+	class LibraryPageShortcut extends PageContentShortcut implements IWallbinStyleContainer
 	{
 		public $libraryName;
 		public $pageName;
@@ -152,9 +154,9 @@
 			if (array_key_exists('page-zoom-out', $actionsByKey))
 				$actionsByKey['page-zoom-out']->enabled = $actionsByKey['page-zoom-out']->enabled && $this->pageViewType == 'columns';
 			if (array_key_exists('show-search', $actionsByKey))
-				$actionsByKey['show-search']->enabled = $actionsByKey['show-search']->enabled && $this->searchBar->configured;
+				$actionsByKey['show-search']->enabled = $actionsByKey['show-search']->enabled && isset($this->searchBar) && $this->searchBar->configured;
 			if (array_key_exists('hide-search', $actionsByKey))
-				$actionsByKey['hide-search']->enabled = $actionsByKey['hide-search']->enabled && $this->searchBar->configured;
+				$actionsByKey['hide-search']->enabled = $actionsByKey['hide-search']->enabled && isset($this->searchBar) && $this->searchBar->configured;
 		}
 
 		public function updateAction()
@@ -170,5 +172,17 @@
 		public function getSearchBar()
 		{
 			return $this->searchBar;
+		}
+
+		/** @return string */
+		public function getStyleContainerId()
+		{
+			return $this->id;
+		}
+
+		/** @return WallbinStyle */
+		public function getStyle()
+		{
+			return $this->style;
 		}
 	}

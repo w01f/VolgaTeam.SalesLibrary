@@ -36,7 +36,7 @@
         border-color: <?echo $contentBlock->buttonStyle->hasBorder? Utils::formatColor($contentBlock->buttonStyle->borderColorSelected):'transparent';?> !important;
     }
 </style>
-<div class="toggle-panel" id="<? echo 'toggle-panel-' . $contentBlock->id; ?>">
+<div class="toggle-panel" id="<? echo $blockId; ?>">
     <div class="row">
         <div class="col-xs-12">
             <div class="btn-group toggle-buttons" role="group">

@@ -1,12 +1,14 @@
 <?
+
 	use application\models\wallbin\models\web\LibraryManager as LibraryManager;
 	use application\models\wallbin\models\web\LibraryPage as LibraryPage;
+	use application\models\wallbin\models\web\style\IWallbinStyleContainer;
 	use application\models\wallbin\models\web\style\WallbinStyle;
 
 	/**
 	 * Class InternalLibraryPagePreviewInfo
 	 */
-	class InternalLibraryPagePreviewInfo extends InternalLibraryContentPreviewInfo
+	class InternalLibraryPagePreviewInfo extends InternalLibraryContentPreviewInfo implements IWallbinStyleContainer
 	{
 		public $libraryName;
 		public $pageName;
@@ -30,7 +32,7 @@
 			$this->style = WallbinStyle::createDefault();
 			if (!empty($this->styleSettingsEncoded))
 			{
-				$styleConfig =  new DOMDocument();
+				$styleConfig = new DOMDocument();
 				$styleConfig->loadXML($this->styleSettingsEncoded);
 				$xpath = new DomXPath($styleConfig);
 
@@ -91,5 +93,17 @@
 				$actionsByKey['show-search']->enabled = $actionsByKey['show-search']->enabled && $this->searchBar->configured;
 			if (array_key_exists('hide-search', $actionsByKey))
 				$actionsByKey['hide-search']->enabled = $actionsByKey['hide-search']->enabled && $this->searchBar->configured;
+		}
+
+		/** @return string */
+		public function getStyleContainerId()
+		{
+			return null;
+		}
+
+		/** @return WallbinStyle */
+		public function getStyle()
+		{
+			return $this->style;
 		}
 	}

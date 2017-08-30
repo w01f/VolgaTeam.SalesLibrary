@@ -12,13 +12,14 @@
 		 * @param $xpath DOMXPath
 		 * @param $contextNode DOMNode
 		 * @param $imagePath string
+		 * @param $isPhone boolean
 		 */
-		public function __construct($parent, $xpath, $contextNode, $imagePath)
+		public function __construct($parent, $xpath, $contextNode, $imagePath, $isPhone)
 		{
 			$this->type = 'shortcut';
 			$this->contentView = 'shortcutItem';
 
-			parent::__construct($parent, $xpath, $contextNode, $imagePath);
+			parent::__construct($parent, $xpath, $contextNode, $imagePath, $isPhone);
 
 			$queryResult = $xpath->query('StaticID', $contextNode);
 			$shortcutId = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
@@ -30,12 +31,13 @@
 					/** @var  $shortcut BaseShortcut */
 					$this->shortcut = $shortcutRecord->getModel(false, null);
 			}
+			$this->settings->enabled &= isset($this->shortcut);
 		}
 
 		/** @return string */
 		public function getUrl()
 		{
-			return $this->enabled ? $this->shortcut->getSourceLink() : '#';
+			return $this->settings->enabled ? $this->shortcut->getSourceLink() : '#';
 		}
 
 		/** @return string */

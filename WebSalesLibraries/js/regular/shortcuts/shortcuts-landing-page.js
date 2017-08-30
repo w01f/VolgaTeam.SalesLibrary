@@ -94,6 +94,46 @@
 				}).init();
 			});
 
+			$.each(landingPage.find('.library-block'), function (key, value)
+			{
+				var libraryBlock = $(value);
+				var libraryBlockId = libraryBlock.prop('id').replace('library-block-', '');
+
+				new $.SalesPortal.LandingPage.Wallbin.LibraryBlock({
+					containerId: libraryBlockId
+				}).init();
+			});
+
+			$.each(landingPage.find('.library-page-bundle-block'), function (key, value)
+			{
+				var libraryPageBundleBlock = $(value);
+				var libraryPageBundleBlockId = libraryPageBundleBlock.prop('id').replace('library-page-bundle-block-', '');
+
+				new $.SalesPortal.LandingPage.Wallbin.LibraryPageBundleBlock({
+					containerId: libraryPageBundleBlockId
+				}).init();
+			});
+
+			$.each(landingPage.find('.library-page-block'), function (key, value)
+			{
+				var libraryPageBlock = $(value);
+				var libraryPageBlockId = libraryPageBlock.prop('id').replace('library-page-block-', '');
+
+				new $.SalesPortal.LandingPage.Wallbin.LibraryPageBlock({
+					containerId: libraryPageBlockId
+				}).init();
+			});
+
+			$.each(landingPage.find('.library-window-block'), function (key, value)
+			{
+				var libraryWindowBlock = $(value);
+				var libraryWindowBlockId = libraryWindowBlock.prop('id').replace('library-window-block-', '');
+
+				new $.SalesPortal.LandingPage.Wallbin.LibraryWindowBlock({
+					containerId: libraryWindowBlockId
+				}).init();
+			});
+
 			landingPage.find('[data-bs-hover-animate]')
 				.mouseenter(function ()
 				{

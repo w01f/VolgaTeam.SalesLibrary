@@ -1,14 +1,20 @@
 <?
+
 	use application\models\wallbin\models\web\Library as Library;
 	use application\models\wallbin\models\web\LibraryPage as LibraryPage;
+	use application\models\wallbin\models\web\style\IWallbinStyleContainer;
 
 	/**
 	 * @var $library Library
 	 * @var $pageSelectorMode string
 	 * @var $pageViewType string
-	 * @var $style \application\models\wallbin\models\web\style\WallbinStyle
+	 * @var $isEmbedded boolean
+	 * @var $containerId string
+	 * @var $styleContainer IWallbinStyleContainer
 	 * @var $searchBar SearchBar
 	 */
+
+	$style = $styleContainer->getStyle();
 
 	/** @var LibraryPage $selectedPage */
 	$selectedPage = null;
@@ -28,28 +34,29 @@
 ?>
 <style>
     <? if (isset($style->header->padding) && $style->header->padding->isConfigured): ?>
-    #content .wallbin-header-container {
-
+    <? echo '#'.$containerId;?> .wallbin-header-container {
         padding-top: <? echo $style->header->padding->top; ?>px !important;
         padding-left: <? echo $style->header->padding->left; ?>px !important;
         padding-bottom: <? echo $style->header->padding->bottom; ?>px !important;
         padding-right: <? echo $style->header->padding->right; ?>px !important;
     }
+
     <?endif;?>
 
-    #content .wallbin-header .wallbin-header-cell {
+    <? echo '#'.$containerId;?>
+    .wallbin-header .wallbin-header-cell {
         border-bottom: 1px <? echo Utils::formatColor($style->header->headerBorderColor);?> solid !important;
     }
 
-    <? if (!($searchBar->configured && $style->header->showLogo)): ?>
-    #content .wallbin-header .page-selector-container {
+    <? if (!$isEmbedded && !($searchBar->configured && $style->header->showLogo)): ?>
+    <? echo '#'.$containerId;?> .wallbin-header .page-selector-container {
         padding-top: 25px;
     }
 
     <? endif; ?>
 
-    <? if ($searchBar->configured): ?>
-    #content .wallbin-header .shortcuts-search-bar-container {
+    <? if (!$isEmbedded && $searchBar->configured): ?>
+    <? echo '#'.$containerId;?> .wallbin-header .shortcuts-search-bar-container {
         width: 100%;
         padding-right: 0;
         padding-top: 25px;
@@ -59,63 +66,60 @@
 
     <? endif; ?>
 
-    <? if ($style->header->showLogo): ?>
-    #content .wallbin-header .shortcuts-search-bar-container {
+    <? if (!$isEmbedded && $style->header->showLogo): ?>
+    <? echo '#'.$containerId;?> .wallbin-header .shortcuts-search-bar-container {
         padding-left: 20px;
     }
 
     <? endif; ?>
 
-    #content .wallbin-header .page-selector-container .tab-pages div,
-    #content .wallbin-header .page-selector-container .tab-pages span,
-    #content .wallbin-header .page-selector-container .tab-pages li
-    {
+    <? echo '#'.$containerId;?> .wallbin-header .page-selector-container .tab-pages div,
+    <? echo '#'.$containerId;?> .wallbin-header .page-selector-container .tab-pages span,
+    <? echo '#'.$containerId;?> .wallbin-header .page-selector-container .tab-pages li {
         background-color: <? echo Utils::formatColor($style->header->tabSelector->regularBackColor)?> !important;
         border-color: <? echo Utils::formatColor($style->header->tabSelector->borderColor)?> !important;
     }
 
-    #content .wallbin-header .page-selector-container .tab-pages div.scroll_tab_inner span,
-    #content .wallbin-header .page-selector-container .tab-pages div.scroll_tab_inner li
-    {
+    <? echo '#'.$containerId;?> .wallbin-header .page-selector-container .tab-pages div.scroll_tab_inner span,
+    <? echo '#'.$containerId;?> .wallbin-header .page-selector-container .tab-pages div.scroll_tab_inner li {
         color: <? echo Utils::formatColor($style->header->tabSelector->regularTextColor)?> !important;
     }
 
-    #content .wallbin-header .page-selector-container .tab-pages .scroll_tab_left_button,
-    #content .wallbin-header .page-selector-container .tab-pages .scroll_tab_right_button
-    {
+    <? echo '#'.$containerId;?> .wallbin-header .page-selector-container .tab-pages .scroll_tab_left_button,
+    <? echo '#'.$containerId;?> .wallbin-header .page-selector-container .tab-pages .scroll_tab_right_button {
         color: <? echo Utils::formatColor($style->header->tabSelector->arrowColor)?> !important;
     }
 
-    #content .wallbin-header .page-selector-container .tab-pages div.scroll_tab_inner span.scroll_tab_over,
-    #content .wallbin-header .page-selector-container .tab-pages div.scroll_tab_inner li.scroll_tab_over
-    {
+    <? echo '#'.$containerId;?> .wallbin-header .page-selector-container .tab-pages div.scroll_tab_inner span.scroll_tab_over,
+    <? echo '#'.$containerId;?> .wallbin-header .page-selector-container .tab-pages div.scroll_tab_inner li.scroll_tab_over {
         color: <? echo Utils::formatColor($style->header->tabSelector->hoverTextColor)?> !important;
         background-color: <? echo Utils::formatColor($style->header->tabSelector->hoverBackColor)?> !important;
     }
 
-    #content .wallbin-header .page-selector-container .tab-pages .page-tab-header.selected
-    {
+    <? echo '#'.$containerId;?> .wallbin-header .page-selector-container .tab-pages .page-tab-header.selected {
         color: <? echo Utils::formatColor($style->header->tabSelector->selectedTextColor)?> !important;
         background-color: <? echo Utils::formatColor($style->header->tabSelector->selectedBackColor)?> !important;
     }
 
     <? if (isset($style->page->padding) && $style->page->padding->isConfigured): ?>
-    #content .wallbin-container .content-container {
+    <? echo '#'.$containerId;?> .wallbin-container .content-container {
 
         padding-top: <? echo $style->page->padding->top; ?>px !important;
         padding-left: <? echo $style->page->padding->left; ?>px !important;
         padding-bottom: <? echo $style->page->padding->bottom; ?>px !important;
         padding-right: <? echo $style->page->padding->right; ?>px !important;
     }
+
     <?endif;?>
 </style>
-<div id="library-update-stamp">
-	<span
-            class="text">Updated: <? echo date(Yii::app()->params['outputDateFormat'], strtotime($library->lastUpdate)); ?></span>
-</div>
+<? if (!$isEmbedded): ?>
+    <div id="library-update-stamp">
+        <span class="text">Updated: <? echo date(Yii::app()->params['outputDateFormat'], strtotime($library->lastUpdate)); ?></span>
+    </div>
+<? endif; ?>
 <div class="wallbin-header-container">
     <table class="wallbin-header">
-		<? if ($searchBar->configured): ?>
+		<? if (!$isEmbedded && $searchBar->configured): ?>
             <tr>
 				<? if ($style->header->showLogo): ?>
                     <td class="wallbin-logo-wrapper">
@@ -133,8 +137,8 @@
                     <img class="wallbin-logo" src="<? echo $selectedPage->logoContent; ?>">
                 </td>
 			<? endif; ?>
-            <td class="wallbin-header-cell page-selector-container<? if (!$style->header->showLogo): ?> page-selector-container-no-logo<? endif; ?>"
-			    <? if ($searchBar->configured && $style->header->showLogo): ?>colspan="2" <? endif; ?>>
+            <td class="wallbin-header-cell page-selector-container<? if ($isEmbedded || !$style->header->showLogo): ?> page-selector-container-no-logo<? endif; ?>"
+			    <? if (!$isEmbedded && $searchBar->configured && $style->header->showLogo): ?>colspan="2" <? endif; ?>>
 				<? if ($pageSelectorMode == 'tabs'): ?>
                     <div class="tab-pages scroll_tabs_theme_light">
 						<? foreach ($library->pages as $page): ?>
@@ -147,23 +151,27 @@
                                 <div class="service-data">
 									<div class="encoded-data">
 										<? echo CJSON::encode(array(
-												'id' => $page->id,
-												'name' => $page->name,
-												'logoContent' => $style->header->showLogo ? $page->logoContent : ''
+												'libraryId' => $library->id,
+												'pageId' => $page->id,
+												'styleContainerId' => $styleContainer->getStyleContainerId(),
+												'pageName' => $page->name,
+												'logoContent' => !$isEmbedded && $style->header->showLogo ? $page->logoContent : ''
 											)
 										); ?>
 									</div>
 								</div>
-				</span>
+				            </span>
 						<? endforeach; ?>
                     </div>
 				<? else: ?>
                     <select class="selectpicker bootstrapped">
 						<? foreach ($library->pages as $page): ?>
                             <option value='<? echo base64_encode(CJSON::encode(array(
-									'id' => $page->id,
-									'name' => $page->name,
-									'logoContent' => $style->header->showLogo ? $page->logoContent : ''
+									'libraryId' => $library->id,
+									'pageId' => $page->id,
+		                            'styleContainerId' => $styleContainer->getStyleContainerId(),
+									'pageName' => $page->name,
+									'logoContent' => !$isEmbedded && $style->header->showLogo ? $page->logoContent : ''
 								)
 							)); ?>' <? echo $selectedPage->id == $page->id ? 'selected' : ''; ?>><? echo $page->name; ?></option>
 						<? endforeach; ?>
@@ -187,6 +195,7 @@
 			$this->renderPartial('../wallbin/columnsView',
 				array(
 					'libraryPage' => $selectedPage,
+					'containerId' => $containerId,
 					'style' => $style->page
 				));
 		}
@@ -197,6 +206,7 @@
 			$this->renderPartial('../wallbin/columnsView',
 				array(
 					'libraryPage' => $selectedPage,
+					'containerId' => $containerId,
 					'style' => \application\models\wallbin\models\web\style\WallbinStyle::createDefault()
 				));
 		}

@@ -1,12 +1,13 @@
 <?
 	use application\models\wallbin\models\web\LibraryManager as LibraryManager;
 	use application\models\wallbin\models\web\Library as Library;
+	use application\models\wallbin\models\web\style\IWallbinStyleContainer;
 	use application\models\wallbin\models\web\style\WallbinStyle as WallbinStyle;
 
 	/**
 	 * Class WallbinShortcut
 	 */
-	class WallbinShortcut extends PageContentShortcut
+	class WallbinShortcut extends PageContentShortcut implements IWallbinStyleContainer
 	{
 		public $libraryName;
 		public $pageSelectorMode;
@@ -133,5 +134,17 @@
 		public function getSearchBar()
 		{
 			return $this->searchBar;
+		}
+
+		/** @return string */
+		public function getStyleContainerId()
+		{
+			return $this->id;
+		}
+
+		/** @return WallbinStyle */
+		public function getStyle()
+		{
+			return $this->style;
 		}
 	}

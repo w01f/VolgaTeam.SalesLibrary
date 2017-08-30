@@ -25,6 +25,10 @@
 	use application\models\shortcuts\models\landing_page\regular_markup\masonry\TrendingBlock as MasonryTrendingBlock;
 	use application\models\shortcuts\models\landing_page\regular_markup\masonry\SearchFeedBlock as MasonrySearchFeedBlock;
 	use application\models\shortcuts\models\landing_page\regular_markup\masonry\SpecificLinkFeedBlock as MasonrySpecificLinkFeedBlock;
+	use application\models\shortcuts\models\landing_page\regular_markup\wallbin\LibraryBlock;
+	use application\models\shortcuts\models\landing_page\regular_markup\wallbin\LibraryPageBlock;
+	use application\models\shortcuts\models\landing_page\regular_markup\wallbin\LibraryPageBundleBlock;
+	use application\models\shortcuts\models\landing_page\regular_markup\wallbin\LibraryWindowBlock;
 
 	/**
 	 * Class ContentBlock
@@ -220,6 +224,14 @@
 					return 'toggle_panel/panel';
 				case 'toggle-item':
 					return 'toggle_panel/item';
+				case 'library':
+					return 'wallbin/library';
+				case 'library-page-bundle':
+					return 'wallbin/libraryPageBundle';
+				case 'library-page':
+					return 'wallbin/libraryPage';
+				case 'library-window':
+					return 'wallbin/libraryWindow';
 				default:
 					return 'common/undefinedBlock';
 			}
@@ -350,6 +362,22 @@
 					$togglePanelItem = new TogglePanelItem($parentShortcut, $parentBlock);
 					$togglePanelItem->configureFromXml($xpath, $contextNode);
 					return $togglePanelItem;
+				case "library":
+					$libraryItem = new LibraryBlock($parentShortcut, $parentBlock);
+					$libraryItem->configureFromXml($xpath, $contextNode);
+					return $libraryItem;
+				case "library-page-bundle":
+					$libraryPageBundleItem = new LibraryPageBundleBlock($parentShortcut, $parentBlock);
+					$libraryPageBundleItem->configureFromXml($xpath, $contextNode);
+					return $libraryPageBundleItem;
+				case "library-page":
+					$libraryPageItem = new LibraryPageBlock($parentShortcut, $parentBlock);
+					$libraryPageItem->configureFromXml($xpath, $contextNode);
+					return $libraryPageItem;
+				case "library-window":
+					$libraryWindow = new LibraryWindowBlock($parentShortcut, $parentBlock);
+					$libraryWindow->configureFromXml($xpath, $contextNode);
+					return $libraryWindow;
 				default:
 					return new UndefinedBlock($parentShortcut, $parentBlock);
 			}

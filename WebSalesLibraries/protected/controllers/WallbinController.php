@@ -1,4 +1,5 @@
 <?
+
 	use application\models\wallbin\models\web\LibraryManager as LibraryManager;
 	use application\models\wallbin\models\web\LibraryPage as LibraryPage;
 	use application\models\wallbin\models\web\LibraryFolder as LibraryFolder;
@@ -63,16 +64,17 @@
 		//------Regular Site API-------------------------------------------
 		public function actionGetColumnsView()
 		{
-			$shortcutId = Yii::app()->request->getPost('shortcutId');
+			$styleContainerId = Yii::app()->request->getPost('styleContainerId');
 			$libraryId = Yii::app()->request->getPost('libraryId');
 			$pageId = Yii::app()->request->getPost('pageId');
+			$contentContainerId = Yii::app()->request->getPost('contentContainerId');
 
 			/** @var \application\models\wallbin\models\web\style\WallbinStyle $style */
 			$style = null;
-			if (isset($shortcutId))
+			if (isset($styleContainerId))
 			{
 				/** @var  $shortcutRecord ShortcutLinkRecord */
-				$shortcutRecord = ShortcutLinkRecord::model()->findByPk($shortcutId);
+				$shortcutRecord = ShortcutLinkRecord::model()->findByPk($styleContainerId);
 				/** @var  $shortcut WallbinShortcut */
 				$shortcut = $shortcutRecord->getModel($this->isPhone);
 				$shortcut->loadPageConfig();
@@ -89,6 +91,7 @@
 				$this->renderPartial('../wallbin/columnsView',
 					array(
 						'libraryPage' => $selectedPage,
+						'containerId' => $contentContainerId,
 						'style' => $style->page
 					));
 			}
@@ -99,6 +102,7 @@
 				$this->renderPartial('../wallbin/columnsView',
 					array(
 						'libraryPage' => $selectedPage,
+						'containerId' => $contentContainerId,
 						'style' => \application\models\wallbin\models\web\style\WallbinStyle::createDefault()
 					));
 			}

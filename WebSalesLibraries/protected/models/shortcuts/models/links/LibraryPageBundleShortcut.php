@@ -1,11 +1,12 @@
 <?
 
+	use application\models\wallbin\models\web\style\IWallbinStyleContainer;
 	use application\models\wallbin\models\web\style\WallbinStyle as WallbinStyle;
 
 	/**
 	 * Class LibraryPageBundleShortcut
 	 */
-	class LibraryPageBundleShortcut extends PageContentShortcut
+	class LibraryPageBundleShortcut extends PageContentShortcut implements IWallbinStyleContainer
 	{
 		public $pageSelectorMode;
 		public $pageViewType;
@@ -123,5 +124,17 @@
 		public function getSearchBar()
 		{
 			return $this->searchBar;
+		}
+
+		/** @return string */
+		public function getStyleContainerId()
+		{
+			return $this->id;
+		}
+
+		/** @return WallbinStyle */
+		public function getStyle()
+		{
+			return $this->style;
 		}
 	}

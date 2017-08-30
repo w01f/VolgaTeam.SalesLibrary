@@ -18,6 +18,7 @@
 			'../wallbin/columnsView',
 			array(
 				'libraryPage' => $libraryPage,
+				'containerId' => 'content',
 				'style' => $previewInfo->style->page
 			), true);
 ?>
@@ -30,6 +31,7 @@
         padding-bottom: <? echo $previewInfo->style->header->padding->bottom; ?>px !important;
         padding-right: <? echo $previewInfo->style->header->padding->right; ?>px !important;
     }
+
     <?endif;?>
 
     #content .wallbin-header {
@@ -89,6 +91,7 @@
         padding-bottom: <? echo $previewInfo->style->page->padding->bottom; ?>px !important;
         padding-right: <? echo $previewInfo->style->page->padding->right; ?>px !important;
     }
+
     <?endif;?>
 </style>
 <div class="wallbin-header-container">

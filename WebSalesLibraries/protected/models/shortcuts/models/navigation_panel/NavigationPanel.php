@@ -10,6 +10,8 @@
 		public $textColor;
 		public $textSize;
 
+		public $isExpanded;
+
 		public $imagePadding;
 
 		public $itemsGapExpanded;
@@ -38,9 +40,10 @@
 		/**
 		 * @param $xpath DOMXPath
 		 * @param $imagePath string
+		 * @param $isPhone boolean
 		 * @return NavigationPanel
 		 */
-		public static function fromXml($xpath, $imagePath)
+		public static function fromXml($xpath, $imagePath, $isPhone)
 		{
 			$navigationPanel = new NavigationPanel();
 
@@ -48,6 +51,18 @@
 			$navigationPanel->textSize = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue)) : 12;
 			$queryResult = $xpath->query('//Config/Appearance/TextColor');
 			$navigationPanel->textColor = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : 'eee';
+
+			$queryResult = $xpath->query('//Config/Appearance/DefaultStyle');
+			$defaultStyle = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : 'panel';
+			switch ($defaultStyle)
+			{
+				case 'bar':
+					$navigationPanel->isExpanded = false;
+					break;
+				default:
+					$navigationPanel->isExpanded = true;
+					break;
+			}
 
 			$queryResult = $xpath->query('//Config/Appearance/ImagePadding');
 			$navigationPanel->imagePadding = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue)) : 0;
@@ -93,7 +108,7 @@
 			$queryResult = $xpath->query('//Config/Items/Item');
 			foreach ($queryResult as $itemConfigNode)
 			{
-				$navigationItem = BaseNavigationItem::fromXml($navigationPanel, $xpath, $itemConfigNode, $imagePath);
+				$navigationItem = BaseNavigationItem::fromXml($navigationPanel, $xpath, $itemConfigNode, $imagePath, $isPhone);
 				if (isset($navigationItem))
 					$navigationPanel->items[] = $navigationItem;
 			}

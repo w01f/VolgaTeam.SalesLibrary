@@ -12,13 +12,14 @@
 		 * @param $xpath DOMXPath
 		 * @param $contextNode DOMNode
 		 * @param $imagePath string
+		 * @param $isPhone boolean
 		 */
-		public function __construct($parent, $xpath, $contextNode, $imagePath)
+		public function __construct($parent, $xpath, $contextNode, $imagePath, $isPhone)
 		{
 			$this->type = 'url';
 			$this->contentView = 'urlItem';
 
-			parent::__construct($parent, $xpath, $contextNode, $imagePath);
+			parent::__construct($parent, $xpath, $contextNode, $imagePath, $isPhone);
 
 			$queryResult = $xpath->query('Url', $contextNode);
 			$this->url = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
@@ -27,7 +28,7 @@
 		/** @return string */
 		public function getUrl()
 		{
-			return $this->enabled ? $this->url : '#';
+			return $this->settings->enabled ? $this->url : '#';
 		}
 
 		/** @return string */
