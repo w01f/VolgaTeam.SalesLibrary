@@ -1,5 +1,7 @@
 <?
 
+	use application\models\data_query\data_table\DataTableColumnSettings;
+
 	/**
 	 * Class FavoritesShortcut
 	 */
@@ -15,7 +17,8 @@
 			if ($this->isPhone)
 			{
 				$viewParameters['folders'] = FavoritesFolderRecord::getChildFolders($userId, null);
-				$viewParameters['links'] = FavoritesLinkRecord::getLinksByFolder($userId, null);
+				$columnSettings = DataTableColumnSettings::createEmpty();
+				$viewParameters['links'] = FavoritesLinkRecord::getLinksByFolder($userId, null, $columnSettings);
 
 			}
 			else

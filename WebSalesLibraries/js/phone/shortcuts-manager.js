@@ -20,7 +20,7 @@
 					var hasCustomHandler = data.find('.has-custom-handler').length > 0;
 					var samePage = data.find('.same-page').length > 0;
 
-					if (hasCustomHandler == true && samePage == true)
+					if (hasCustomHandler === true && samePage === true)
 					{
 						e.preventDefault();
 						that.openShortcutByMenuItemData(data, '#' + groupPage.prop('id'));
@@ -37,7 +37,7 @@
 
 			$(window).off("pagecontainerchange.group").on("pagecontainerchange.group", function (event, ui)
 			{
-				if ((ui.toPage != undefined && ui.toPage.prop('id') == groupPage.prop('id')) || ui.options.target == groupPage.prop('id'))
+				if ((ui.toPage !== undefined && ui.toPage.prop('id') === groupPage.prop('id')) || ui.options.target === groupPage.prop('id'))
 				{
 					if (groupPage.find('.cbp-l-grid-masonry').length > 0)
 					{
@@ -85,7 +85,7 @@
 					);
 					break;
 				case 'download':
-					if (parentShortcutId == undefined)
+					if (parentShortcutId === undefined)
 						$('#shortcuts-link-download-warning-popup').popup('open');
 					else
 						$(parentShortcutId + '-download-warning-popup').popup('open');
@@ -124,10 +124,10 @@
 
 							var navigationToggleButton = pageContent.find('.navigation-panel-toggle');
 							var navigationItemsConteiner = pageContent.find('.navigation-items-container');
-							if (!(result.navigationPanel && result.navigationPanel.content != ''))
+							if (!(result.navigationPanel && result.navigationPanel.content !== ''))
 								navigationToggleButton.hide();
 							navigationItemsConteiner.html(result.navigationPanel.content);
-							$(window).one("pagecontainerchange.navigation-items", function (event, ui)
+							$(window).one("pagecontainerchange.navigation-items", function ()
 							{
 								navigationItemsConteiner.find('.shortcuts-link').off('click').on('click', function (e)
 								{
@@ -137,7 +137,7 @@
 									var hasCustomHandler = data.find('.has-custom-handler').length > 0;
 									var samePage = data.find('.same-page').length > 0;
 
-									if (hasCustomHandler == true && samePage == true)
+									if (hasCustomHandler === true && samePage === true)
 									{
 										e.preventDefault();
 										$.SalesPortal.ShortcutsManager.openShortcutByMenuItemData(data, '#' + $('.shortcut-link-page.ui-page-active').prop('id'));
@@ -167,6 +167,7 @@
 									new $.SalesPortal.ShortcutsLibraryPage(result).init();
 									break;
 								case 'library':
+								case 'pagebundle':
 									new $.SalesPortal.ShortcutsWallbin().init(result);
 									break;
 								case 'searchapp':
@@ -194,7 +195,7 @@
 
 		var cleanupPreviousInstance = function (parentShortcutId)
 		{
-			if (parentShortcutId == undefined)
+			if (parentShortcutId === undefined)
 				$('body .shortcut-link-page').remove();
 			else
 			{

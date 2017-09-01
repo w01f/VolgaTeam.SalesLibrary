@@ -1,4 +1,5 @@
 <?
+
 	use application\models\wallbin\models\web\LibraryLink as LibraryLink;
 
 	/**
@@ -6,11 +7,16 @@
 	 */
 	class ExcelPreviewData extends FilePreviewData
 	{
+		public $isPhone;
+
 		/**
 		 * @param $link LibraryLink
+		 * @param $isPhone boolean
 		 */
-		public function __construct($link)
+		public function __construct($link, $isPhone)
 		{
+			$this->isPhone = $isPhone;
+
 			parent::__construct($link);
 			$this->viewerFormat = 'xls';
 			$this->linkTitle = 'Excel File';
@@ -37,7 +43,7 @@
 		{
 			parent::initDialogActions();
 
-			if ((($this->link->fileSize * .0009765625) * .0009765625) < 10)
+			if (!$this->isPhone && (($this->link->fileSize * .0009765625) * .0009765625) < 10)
 			{
 				$imageUrlPrefix = Yii::app()->getBaseUrl(true);
 				$action = new PreviewAction();

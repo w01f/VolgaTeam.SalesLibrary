@@ -7,7 +7,7 @@
 		this.init = function ()
 		{
 			$.SalesPortal.Wallbin.init();
-			$.mobile.pageContainer.pagecontainer("change", "#library", {
+			$.mobile.pageContainer.pagecontainer("change", "#wallbin", {
 				transition: "slidefade"
 			});
 		};

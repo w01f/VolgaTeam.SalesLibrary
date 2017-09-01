@@ -56,6 +56,8 @@
 
 		public function getSourceLink()
 		{
-			return $this->sourceLink;
+			return $this->isPhone ?
+				Yii::app()->createAbsoluteUrl('shortcuts/getSamePage') :
+				$this->sourceLink;
 		}
 	}

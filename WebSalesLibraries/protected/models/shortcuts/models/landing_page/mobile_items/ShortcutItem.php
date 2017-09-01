@@ -1,4 +1,5 @@
 <?
+
 	namespace application\models\shortcuts\models\landing_page\mobile_items;
 
 	/** Class ShortcutItem */
@@ -38,7 +39,7 @@
 
 		public function getSourceLink()
 		{
-			return $this->shortcut->getSourceLink();
+			return isset($this->shortcut) ? $this->shortcut->getSourceLink() : '#';
 		}
 
 		/**
@@ -46,6 +47,6 @@
 		 */
 		public function getMenuItemData()
 		{
-			return $this->shortcut->getMenuItemData();
+			return isset($this->shortcut) ? $this->shortcut->getMenuItemData() : '';
 		}
 	}

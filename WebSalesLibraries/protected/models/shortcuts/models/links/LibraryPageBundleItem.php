@@ -42,4 +42,16 @@
 
 			return $item;
 		}
+
+		/**
+		 * @param $libraryPage LibraryPage
+		 * @return LibraryPageBundleItem
+		 */
+		public static function fromLibraryPage($libraryPage)
+		{
+			$item = new self();
+			$item->name = $libraryPage->name;
+			$item->libraryPage = $libraryPage;
+			return $item;
+		}
 	}

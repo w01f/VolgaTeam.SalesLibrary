@@ -1,10 +1,19 @@
 <?
 	/** @var $shortcut WallbinShortcut */
-	$library = $shortcut->library;
-	/** @var \application\models\wallbin\models\web\LibraryPage $defaultPage */
-	$defaultPage = $library->pages[0];
-	$defaultPage->loadData();
 
-	$this->renderPartial('../wallbin/libraryContent', array('library' => $library, 'defaultPage' => $defaultPage, 'openOnSamePage' => $shortcut->samePage));
+	/** @var LibraryPageBundleItem[] $pageItems */
+	$pageItems = array();
+	foreach ($shortcut->library->pages as $page)
+		$pageItems[] = LibraryPageBundleItem::fromLibraryPage($page);
+
+	$pageItems[0]->libraryPage->loadData();
+
+	$this->renderPartial('../wallbin/pageBundleContent',
+		array(
+			'wallbinName' => $shortcut->library->alias,
+			'pageItems' => $pageItems,
+			'defaultPageItem' => $pageItems[0],
+			'openOnSamePage' => $shortcut->samePage)
+	);
 ?>
 

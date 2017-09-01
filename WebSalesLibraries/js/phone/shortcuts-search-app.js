@@ -31,7 +31,7 @@
 			$('#search-tab-filters-text').off('input').on('input', function ()
 			{
 				var text = $(this).val();
-				if (text != '')
+				if (text !== '')
 					currentSearchConditions.set('text', text);
 				else
 					currentSearchConditions.set('text', null);
@@ -105,7 +105,7 @@
 					$.each(categoryGroupPanel.find('.search-category-tag-toggle'), function ()
 					{
 						var tagCheckBox = $(this);
-						if (tagCheckBox.prop('checked') == true)
+						if (tagCheckBox.prop('checked') === true)
 							currentGroupCategories.push(categoryGroupPanel.find("label[for='" + tagCheckBox.attr('id') + "']").text());
 					});
 					if (currentGroupCategories.length > 0)
@@ -116,7 +116,7 @@
 					var existedCategories = currentSearchConditions.getCategorySettings();
 					$.each(existedCategories, function (groupIndex, group)
 					{
-						if (group.name != categoryGroupName)
+						if (group.name !== categoryGroupName)
 							newCategories.push(group);
 					});
 					currentSearchConditions.setCategorySettings(newCategories);
@@ -137,7 +137,7 @@
 					$.each(libraryPanel.find('.search-filter-library-toggle'), function ()
 					{
 						var libraryCheckBox = $(this);
-						if (libraryCheckBox.prop('checked') == true)
+						if (libraryCheckBox.prop('checked') === true)
 							libraries.push({
 								id: libraryCheckBox.val(),
 								name: libraryPanel.find("label[for='" + libraryCheckBox.attr('id') + "']").text()
@@ -161,7 +161,7 @@
 					$.each(superFilterPanel.find('.search-super-filter-toggle'), function ()
 					{
 						var superFilterCheckBox = $(this);
-						if (superFilterCheckBox.prop('checked') == true)
+						if (superFilterCheckBox.prop('checked') === true)
 							superFilters.push(superFilterPanel.find("label[for='" + superFilterCheckBox.attr('id') + "']").text());
 					});
 					currentSearchConditions.setSuperFiltersSettings(superFilters);

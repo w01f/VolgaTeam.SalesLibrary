@@ -13,7 +13,7 @@
 		{
 			$(window).off("pagecontainerchange.bundle").on("pagecontainerchange.bundle", function (event, ui)
 			{
-				if ((ui.toPage !== undefined && ui.toPage.prop('id') == bundlePage.prop('id')) || ui.options.target == bundlePage.prop('id'))
+				if ((ui.toPage !== undefined && ui.toPage.prop('id') === bundlePage.prop('id')) || ui.options.target === bundlePage.prop('id'))
 				{
 					if (contentContainer.find('.cbp-l-grid-masonry').length > 0)
 					{

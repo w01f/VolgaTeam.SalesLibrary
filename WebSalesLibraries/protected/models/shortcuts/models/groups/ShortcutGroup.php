@@ -20,6 +20,7 @@
 
 		public $isAccessGranted;
 
+		/** @var array MenuItem[] */
 		public $menuItems;
 
 		/**

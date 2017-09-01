@@ -1,8 +1,5 @@
 <?
-	use application\models\wallbin\models\web\LibraryFolder;
 	use application\models\wallbin\models\web\LibraryLink as LibraryLink;
-	use application\models\wallbin\models\web\LibraryManager;
-	use application\models\wallbin\models\web\LibraryPage;
 
 	/**
 	 * Class PreviewData
@@ -181,7 +178,7 @@
 					$previewData = new Mp3PreviewData($link);
 					break;
 				case 'xls':
-					$previewData = new ExcelPreviewData($link);
+					$previewData = new ExcelPreviewData($link, $isPhone);
 					break;
 				case 'app':
 					$previewData = new AppLinkPreviewData($link);

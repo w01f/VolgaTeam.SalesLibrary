@@ -297,12 +297,12 @@
 		}
 
 		/**
-		 * @param $libraryId
+		 * @param $pageIds string[]
 		 * @return int
 		 */
-		public static function getLinksCountByLibrary($libraryId)
+		public static function getLinksCountByPageIds($pageIds)
 		{
-			return self::model()->count('id_library=? and type<>6', array($libraryId));
+			return self::model()->count(sprintf("id_folder in (select f.id from tbl_folder f where f.id_page in ('%s')) and type<>6", implode("','", $pageIds)));
 		}
 
 		/**

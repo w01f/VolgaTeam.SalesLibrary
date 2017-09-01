@@ -1,4 +1,5 @@
 <?
+
 	namespace application\models\shortcuts\models\landing_page\mobile_items;
 
 	/** Class MobileSettings */
@@ -19,7 +20,11 @@
 
 			$queryResult = $xpath->query('./Item', $contextNode);
 			foreach ($queryResult as $node)
-				$mobileSettings->items[] = BaseMobileItem::fromXml($parentShortcut, $xpath, $node);
+			{
+				$shortcutItem = BaseMobileItem::fromXml($parentShortcut, $xpath, $node);
+				if (isset($shortcutItem))
+					$mobileSettings->items[] = $shortcutItem;
+			}
 
 			return $mobileSettings;
 		}

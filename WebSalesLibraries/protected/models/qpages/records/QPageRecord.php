@@ -30,10 +30,6 @@
 	 */
 	class QPageRecord extends CActiveRecord
 	{
-		/**
-		 * @param string $className
-		 * @return QPageRecord
-		 */
 		public static function model($className = __CLASS__)
 		{
 			return parent::model($className);

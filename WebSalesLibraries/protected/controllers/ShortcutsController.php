@@ -170,6 +170,12 @@
 				case 'video':
 					$viewName = 'video';
 					break;
+				case 'youtube':
+					$viewName = 'youtube';
+					break;
+				case 'vimeo':
+					$viewName = 'vimeo';
+					break;
 				case 'search':
 					$useMobileWrapper = false;
 					$viewName = 'searchLink';
@@ -184,6 +190,7 @@
 					$viewName = 'libraryPage';
 					break;
 				case 'pagebundle':
+					$useMobileWrapper = false;
 					$viewName = 'libraryPageBundle';
 					break;
 				case 'qpage':

@@ -8,16 +8,16 @@
 
 		this.init = function ()
 		{
-			var libraryPage = $('#library');
+			var wallbinPage = $('#wallbin');
 
-			$('#library-popup-panel-pages').find('.page-item a').off('click').on('click', function ()
+			$('#wallbin-popup-panel-pages').find('.page-item a').off('click').on('click', function ()
 			{
 				var pageId = $(this).find('.service-data .page-id').text();
-				libraryPage.find('.content-header .title .page-name').html($(this).find('span').html());
+				wallbinPage.find('.content-header .title .page-name').html($(this).find('span').html());
 				pageChanged(pageId);
 			});
 
-			that.initPageContent(libraryPage.find('.content-data'), '#library');
+			that.initPageContent(wallbinPage.find('.content-data'), '#wallbin');
 
 			$('.logout-button').off('click').on('click', function (e)
 			{
@@ -51,9 +51,9 @@
 				},
 				success: function (msg)
 				{
-					var pageContent = $('#library').find('.content-data');
+					var pageContent = $('#wallbin').find('.content-data');
 					pageContent.html(msg).find('div[data-role=collapsible]').collapsible();
-					that.initPageContent(pageContent, '#library');
+					that.initPageContent(pageContent, '#wallbin');
 				},
 				async: true,
 				dataType: 'html'
@@ -65,7 +65,7 @@
 			var folders = pageContent.find('div[data-role=collapsible]');
 			folders.on("collapsibleexpand", function ()
 			{
-				if ($(this).find('.folder-content').html() == '')
+				if ($(this).find('.folder-content').html() === '')
 					loadLibraryFolderLinks($(this), parentId);
 			});
 		};
@@ -114,7 +114,7 @@
 					$(this).find('.link-id').text(),
 					{
 						id: parentId,
-						name: $('#library').find('.header-title').text()
+						name: $('#wallbin').find('.header-title').text()
 					},
 					false
 				);
@@ -129,7 +129,7 @@
 			var folderLinks = libraryFolderElement.find('.folder-link');
 			folderLinks.on("collapsibleexpand", function ()
 			{
-				if ($(this).find('.link-folder-content').html() == '')
+				if ($(this).find('.link-folder-content').html() === '')
 					loadLinkFolderLinks($(this), parentId);
 			});
 		};

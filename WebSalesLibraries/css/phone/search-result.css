@@ -10,16 +10,49 @@
 	font-size: 0.9em;
 }
 
+.search-results-page .content-data table
+{
+	max-width: 100%;
+	table-layout: fixed;
+}
+
 .search-results-page .content-data table .link-id
 {
 	display: none;
 }
 
+.search-results-page .content-data table .type,
+.search-results-page .content-data table .date,
+.search-results-page .content-data table .views
+{
+	max-width: 60px;
+	width: 60px;
+}
+
 .search-results-page .content-data table .link-name
 {
 	text-align: left;
+}
+
+.search-results-page .content-data table tr td.views
+{
+	text-align: center;
+}
+
+.search-results-page .content-data table td.link-name .name
+{
 	color: #4A87EE;
 	text-decoration: underline;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: 100%;
+}
+
+.search-results-page .content-data table .link-name .library
+{
+	font-size: 0.8em;
+	color: #cecece;
 }
 
 .search-results-page .content-data table th span.asc

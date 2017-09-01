@@ -1,4 +1,5 @@
 <?
+
 	namespace application\models\shortcuts\models\landing_page\mobile_items;
 
 	/** Class BaseMobileItem */
@@ -76,7 +77,7 @@
 				case "shortcut":
 					$shortcutItem = new ShortcutItem($parentShortcut);
 					$shortcutItem->configureFromXml($xpath, $contextNode);
-					return $shortcutItem;
+					return isset($shortcutItem) ? $shortcutItem : null;
 				default:
 					return null;
 			}

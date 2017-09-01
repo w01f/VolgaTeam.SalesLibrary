@@ -40,8 +40,7 @@
         </div>
     </div>
     <div data-role="panel" data-display="overlay" id="search-results-<? echo $parentShortcutId; ?>-popup-panel-left">
-        <ul class="navigation-items-container" data-role="listview">
-        </ul>
+        <ul class="navigation-items-container" data-role="listview"></ul>
     </div>
     <div data-role="panel" data-display="overlay" data-position="right" id="search-results-<? echo $parentShortcutId; ?>-popup-panel-right">
         <ul data-role="listview">

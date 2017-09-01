@@ -19,6 +19,13 @@
 			$this->pageId = str_replace('id=', '', $urlData['query']);
 		}
 
+		public function getSourceLink()
+		{
+			return $this->isPhone ?
+				Yii::app()->createAbsoluteUrl('shortcuts/getSamePage') :
+				$this->sourceLink;
+		}
+
 		/**
 		 * @return string
 		 */
@@ -29,6 +36,7 @@
 			{
 				$result .= '<div class="has-custom-handler"></div>';
 				$result .= '<div class="same-page"></div>';
+				$result .= '<div class="push-history"></div>';
 			}
 			return $result;
 		}
