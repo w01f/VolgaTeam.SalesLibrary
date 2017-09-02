@@ -1,4 +1,5 @@
 <?
+
 	use application\models\wallbin\models\web\LibraryLink as LibraryLink;
 
 	/**
@@ -87,11 +88,12 @@
 
 		/**
 		 * @param $isQuickSite boolean
+		 * @param $openFromBundle boolean
 		 */
-		public function applyLinkSettings($isQuickSite)
+		public function applyLinkSettings($isQuickSite, $openFromBundle)
 		{
 			$this->config = new BasePreviewConfig();
-			$this->config->init($this->link, $isQuickSite);
+			$this->config->init($this->link, $isQuickSite, $openFromBundle);
 		}
 
 		public function initDialogActions()
@@ -209,7 +211,7 @@
 					break;
 			}
 			$previewData->linkBundleId = $parentBundleId;
-			$previewData->applyLinkSettings($isQuickSite);
+			$previewData->applyLinkSettings($isQuickSite, isset($parentBundleId));
 			$previewData->initDialogActions();
 			$previewData->initContextActions();
 			return $previewData;

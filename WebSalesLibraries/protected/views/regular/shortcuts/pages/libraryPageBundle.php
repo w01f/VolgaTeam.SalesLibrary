@@ -75,17 +75,6 @@
         color: <? echo Utils::formatColor($shortcut->style->header->tabSelector->selectedTextColor)?> !important;
         background-color: <? echo Utils::formatColor($shortcut->style->header->tabSelector->selectedBackColor)?> !important;
     }
-
-    <? if (isset($shortcut->style->page->padding) && $shortcut->style->page->padding->isConfigured): ?>
-    #content .wallbin-container .content-container {
-
-        padding-top: <? echo $shortcut->style->page->padding->top; ?>px !important;
-        padding-left: <? echo $shortcut->style->page->padding->left; ?>px !important;
-        padding-bottom: <? echo $shortcut->style->page->padding->bottom; ?>px !important;
-        padding-right: <? echo $shortcut->style->page->padding->right; ?>px !important;
-    }
-
-    <?endif;?>
 </style>
 <div class="wallbin-header-container">
     <table class="wallbin-header">

@@ -100,17 +100,6 @@
         color: <? echo Utils::formatColor($style->header->tabSelector->selectedTextColor)?> !important;
         background-color: <? echo Utils::formatColor($style->header->tabSelector->selectedBackColor)?> !important;
     }
-
-    <? if (isset($style->page->padding) && $style->page->padding->isConfigured): ?>
-    <? echo '#'.$containerId;?> .wallbin-container .content-container {
-
-        padding-top: <? echo $style->page->padding->top; ?>px !important;
-        padding-left: <? echo $style->page->padding->left; ?>px !important;
-        padding-bottom: <? echo $style->page->padding->bottom; ?>px !important;
-        padding-right: <? echo $style->page->padding->right; ?>px !important;
-    }
-
-    <?endif;?>
 </style>
 <? if (!$isEmbedded): ?>
     <div id="library-update-stamp">

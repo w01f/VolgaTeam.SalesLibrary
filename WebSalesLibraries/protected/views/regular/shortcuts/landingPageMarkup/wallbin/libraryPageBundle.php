@@ -42,7 +42,7 @@
 		, true);
 ?>
 <style>
-    <? if (isset($shortcut->style->header->padding) && $contentBlock->shortcut->style->header->padding->isConfigured): ?>
+    <? if (isset($contentBlock->shortcut->style->header->padding) && $contentBlock->shortcut->style->header->padding->isConfigured): ?>
     <? echo '#'.$blockId; ?> .wallbin-header-container {
 
         padding-top: <? echo $contentBlock->shortcut->style->header->padding->top; ?>px !important;
@@ -88,16 +88,6 @@
         color: <? echo Utils::formatColor($contentBlock->shortcut->style->header->tabSelector->selectedTextColor)?> !important;
         background-color: <? echo Utils::formatColor($contentBlock->shortcut->style->header->tabSelector->selectedBackColor)?> !important;
     }
-
-    <? if (isset($contentBlock->shortcut->style->page->padding) && $contentBlock->shortcut->style->page->padding->isConfigured): ?>
-    <? echo '#'.$blockId; ?> .wallbin-container .content-container {
-        padding-top: <? echo $contentBlock->shortcut->style->page->padding->top; ?>px !important;
-        padding-left: <? echo $contentBlock->shortcut->style->page->padding->left; ?>px !important;
-        padding-bottom: <? echo $contentBlock->shortcut->style->page->padding->bottom; ?>px !important;
-        padding-right: <? echo $contentBlock->shortcut->style->page->padding->right; ?>px !important;
-    }
-
-    <?endif;?>
 </style>
 <div id="<? echo $blockId; ?>" class="library-page-bundle-block">
     <div class="service-data wallbin-settings">

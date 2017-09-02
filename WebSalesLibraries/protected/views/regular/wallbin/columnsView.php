@@ -13,146 +13,155 @@
 
 	$pageColumnInnerMargin = 1;
 ?>
-<? if (!$style->columnStyleEnabled): ?>
-	<style>
-		.folder-body
-		{
-			min-height: 40px;
-		}
+<style>
+    <? if (isset($style->padding) && $style->padding->isConfigured): ?>
+    <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .content-container {
 
-		.folder-links-scroll-area
-		{
-			min-height: 80px;
-		}
-	</style>
-<? else: ?>
-	<style>
-        <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .content-columns-container {
-			border-collapse: separate;
-			border-spacing: 0 <? echo (max($style->column1Style->padding,$style->column2Style->padding,$style->column3Style->padding)* 1.2).'px';?>;
-		}
+        padding-top: <? echo $style->padding->top; ?>px !important;
+        padding-left: <? echo $style->padding->left; ?>px !important;
+        padding-bottom: <? echo $style->padding->bottom; ?>px !important;
+        padding-right: <? echo $style->padding->right; ?>px !important;
+    }
 
-        <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .page-column {
-			border-collapse: collapse;
-			border-spacing: 0;
-		}
+    <?endif;?>
+    <? if (!$style->columnStyleEnabled): ?>
 
-        <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .folder-links-container {
-			margin-bottom: 20px;
-		}
+            .folder-body
+            {
+                min-height: 40px;
+            }
 
-		<?if(isset($style->verticalBorder1Color)):?>
-		<?if($style->verticalBorderStretch):?>
-        <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .page-column.column0 {
-			border-right: 1px solid <?echo Utils::formatColor($style->verticalBorder1Color);?>;
-		}
+            .folder-links-scroll-area
+            {
+                min-height: 80px;
+            }
+    <? else: ?>
+            <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .content-columns-container {
+                border-collapse: separate;
+                border-spacing: 0 <? echo (max($style->column1Style->padding,$style->column2Style->padding,$style->column3Style->padding)* 1.2).'px';?>;
+            }
 
-		<? else: ?>
-		<?if(!$style->column1Style->frozen):?>
-        <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .page-column.column0 .page-column-inner {
-			border-right: 1px solid <?echo Utils::formatColor($style->verticalBorder1Color);?>;
-		}
+            <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .page-column {
+                border-collapse: collapse;
+                border-spacing: 0;
+            }
 
-		<? endif; ?>
+            <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .folder-links-container {
+                margin-bottom: 20px;
+            }
 
-        <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .page-column.column1 .page-column-inner {
-			border-left: 1px solid <?echo Utils::formatColor($style->verticalBorder1Color);?>;
-			margin-left: -<? echo $pageColumnInnerMargin; ?>px;
-		}
+            <?if(isset($style->verticalBorder1Color)):?>
+            <?if($style->verticalBorderStretch):?>
+            <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .page-column.column0 {
+                border-right: 1px solid <?echo Utils::formatColor($style->verticalBorder1Color);?>;
+            }
 
-		<?$pageColumnInnerMargin++;?>
-		<? endif; ?>
-		<? endif; ?>
+            <? else: ?>
+            <?if(!$style->column1Style->frozen):?>
+            <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .page-column.column0 .page-column-inner {
+                border-right: 1px solid <?echo Utils::formatColor($style->verticalBorder1Color);?>;
+            }
 
-		<?if(isset($style->verticalBorder2Color)):?>
-		<?if($style->verticalBorderStretch):?>
-        <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .page-column.column1 {
-			border-right: 1px solid <?echo Utils::formatColor($style->verticalBorder2Color);?>;
-		}
+            <? endif; ?>
 
-		<? else: ?>
-        <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .page-column.column1 .page-column-inner {
-			border-right: 1px solid <?echo Utils::formatColor($style->verticalBorder2Color);?>;
-		}
+            <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .page-column.column1 .page-column-inner {
+                border-left: 1px solid <?echo Utils::formatColor($style->verticalBorder1Color);?>;
+                margin-left: -<? echo $pageColumnInnerMargin; ?>px;
+            }
 
-        <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .page-column.column2 .page-column-inner {
-			border-left: 1px solid <?echo Utils::formatColor($style->verticalBorder2Color);?>;
-			margin-left: -<? echo $pageColumnInnerMargin; ?>px;
-		}
+            <?$pageColumnInnerMargin++;?>
+            <? endif; ?>
+            <? endif; ?>
 
-		<? endif; ?>
-		<? endif; ?>
+            <?if(isset($style->verticalBorder2Color)):?>
+            <?if($style->verticalBorderStretch):?>
+            <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .page-column.column1 {
+                border-right: 1px solid <?echo Utils::formatColor($style->verticalBorder2Color);?>;
+            }
 
-		<? if ($style->column1Style->enabled): ?>
+            <? else: ?>
+            <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .page-column.column1 .page-column-inner {
+                border-right: 1px solid <?echo Utils::formatColor($style->verticalBorder2Color);?>;
+            }
 
-		<?if($style->column1Style->frozen):?>
-        <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .page-column.column0 .page-column-inner {
-			position: fixed;
-			width: 30%;
-		}
+            <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .page-column.column2 .page-column-inner {
+                border-left: 1px solid <?echo Utils::formatColor($style->verticalBorder2Color);?>;
+                margin-left: -<? echo $pageColumnInnerMargin; ?>px;
+            }
 
-		<? endif; ?>
+            <? endif; ?>
+            <? endif; ?>
 
-		<?if($style->verticalBorderStretch):?>
-        <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .page-column.column0 {
-			padding: 0 <? echo $style->column1Style->padding.'px';?> 0 <? echo $style->column1Style->padding.'px';?>;
-		}
+            <? if ($style->column1Style->enabled): ?>
 
-		<? else: ?>
-        <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .page-column.column0 .page-column-inner {
-			padding: 0 <? echo $style->column1Style->padding.'px';?> 0 <? echo $style->column1Style->padding.'px';?>;
-		}
+            <?if($style->column1Style->frozen):?>
+            <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .page-column.column0 .page-column-inner {
+                position: fixed;
+                width: 30%;
+            }
 
-		<? endif; ?>
+            <? endif; ?>
 
-        <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .page-column.column0 .folder-body {
-			margin-bottom: <? echo ($style->column1Style->padding*0.6).'px';?>;
-			border-bottom: 1px solid <?echo Utils::formatColor($style->column1Style->windowBorderColor);?> !important;
-		}
+            <?if($style->verticalBorderStretch):?>
+            <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .page-column.column0 {
+                padding: 0 <? echo $style->column1Style->padding.'px';?> 0 <? echo $style->column1Style->padding.'px';?>;
+            }
 
-		<? endif; ?>
+            <? else: ?>
+            <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .page-column.column0 .page-column-inner {
+                padding: 0 <? echo $style->column1Style->padding.'px';?> 0 <? echo $style->column1Style->padding.'px';?>;
+            }
 
-		<? if ($style->column2Style->enabled): ?>
-		<?if($style->verticalBorderStretch):?>
-        <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .page-column.column1 {
-			padding: 0 <? echo $style->column2Style->padding.'px';?> 0 <? echo $style->column2Style->padding.'px';?>;
-		}
+            <? endif; ?>
 
-		<? else: ?>
-        <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .page-column.column1 .page-column-inner {
-			padding: 0 <? echo $style->column2Style->padding.'px';?> 0 <? echo $style->column2Style->padding.'px';?>;
-		}
+            <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .page-column.column0 .folder-body {
+                margin-bottom: <? echo ($style->column1Style->padding*0.6).'px';?>;
+                border-bottom: 1px solid <?echo Utils::formatColor($style->column1Style->windowBorderColor);?> !important;
+            }
 
-		<? endif; ?>
+            <? endif; ?>
 
-        <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .page-column.column1 .folder-body {
-			margin-bottom: <? echo ($style->column2Style->padding*0.6).'px';?>;
-			border-bottom: 1px solid <?echo Utils::formatColor($style->column2Style->windowBorderColor);?> !important;
-		}
+            <? if ($style->column2Style->enabled): ?>
+            <?if($style->verticalBorderStretch):?>
+            <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .page-column.column1 {
+                padding: 0 <? echo $style->column2Style->padding.'px';?> 0 <? echo $style->column2Style->padding.'px';?>;
+            }
 
-		<? endif; ?>
+            <? else: ?>
+            <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .page-column.column1 .page-column-inner {
+                padding: 0 <? echo $style->column2Style->padding.'px';?> 0 <? echo $style->column2Style->padding.'px';?>;
+            }
 
-		<? if ($style->column3Style->enabled): ?>
-		<?if($style->verticalBorderStretch):?>
-        <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .page-column.column2 {
-			padding: 0 <? echo $style->column3Style->padding.'px';?> 0 <? echo $style->column3Style->padding.'px';?>;
-		}
+            <? endif; ?>
 
-		<? else: ?>
-        <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .page-column.column2 .page-column-inner {
-			padding: 0 <? echo $style->column3Style->padding.'px';?> 0 <? echo $style->column3Style->padding.'px';?>;
-		}
+            <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .page-column.column1 .folder-body {
+                margin-bottom: <? echo ($style->column2Style->padding*0.6).'px';?>;
+                border-bottom: 1px solid <?echo Utils::formatColor($style->column2Style->windowBorderColor);?> !important;
+            }
 
-		<? endif; ?>
+            <? endif; ?>
 
-        <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .page-column.column2 .folder-body {
-			margin-bottom: <? echo ($style->column3Style->padding*0.6).'px';?>;
-			border-bottom: 1px solid <?echo Utils::formatColor($style->column3Style->windowBorderColor);?> !important;
-		}
+            <? if ($style->column3Style->enabled): ?>
+            <?if($style->verticalBorderStretch):?>
+            <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .page-column.column2 {
+                padding: 0 <? echo $style->column3Style->padding.'px';?> 0 <? echo $style->column3Style->padding.'px';?>;
+            }
 
-		<? endif; ?>
-	</style>
-<? endif; ?>
+            <? else: ?>
+            <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .page-column.column2 .page-column-inner {
+                padding: 0 <? echo $style->column3Style->padding.'px';?> 0 <? echo $style->column3Style->padding.'px';?>;
+            }
+
+            <? endif; ?>
+
+            <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .page-column.column2 .folder-body {
+                margin-bottom: <? echo ($style->column3Style->padding*0.6).'px';?>;
+                border-bottom: 1px solid <?echo Utils::formatColor($style->column3Style->windowBorderColor);?> !important;
+            }
+
+            <? endif; ?>
+    <? endif; ?>
+</style>
 <div class="page-container" id="page-<? echo $libraryPage->id; ?>">
 	<? if (isset($libraryPage->columns) && $libraryPage->enableColumns && !$style->columnStyleEnabled): ?>
 		<div class="header-container">

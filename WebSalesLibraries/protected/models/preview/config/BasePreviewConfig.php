@@ -1,4 +1,5 @@
 <?
+
 	use application\models\wallbin\models\web\LibraryLink as LibraryLink;
 
 	/**
@@ -24,12 +25,14 @@
 		/**
 		 * @param $libraryLink LibraryLink
 		 * @param $isQuickSite boolean
+		 * @param $openFromBundle boolean
 		 */
-		public function init($libraryLink, $isQuickSite)
+		public function init($libraryLink, $isQuickSite, $openFromBundle)
 		{
 			$this->isEOBrowser = Yii::app()->browser->getBrowser() == Browser::BROWSER_EO;
 			$this->initDefaults($isQuickSite);
-			$this->loadConfigProfiles($libraryLink);
+			if (!$openFromBundle)
+				$this->loadConfigProfiles($libraryLink);
 		}
 
 		/**

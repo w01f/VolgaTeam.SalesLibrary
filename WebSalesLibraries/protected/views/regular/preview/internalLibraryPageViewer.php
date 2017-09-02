@@ -82,17 +82,6 @@
 
     <? endif; ?>
     <? endif; ?>
-
-    <? if (isset($previewInfo->style->page->padding) && $previewInfo->style->page->padding->isConfigured): ?>
-    #content .wallbin-container .content-container {
-
-        padding-top: <? echo $previewInfo->style->page->padding->top; ?>px !important;
-        padding-left: <? echo $previewInfo->style->page->padding->left; ?>px !important;
-        padding-bottom: <? echo $previewInfo->style->page->padding->bottom; ?>px !important;
-        padding-right: <? echo $previewInfo->style->page->padding->right; ?>px !important;
-    }
-
-    <?endif;?>
 </style>
 <div class="wallbin-header-container">
     <table class="wallbin-header">

@@ -1,4 +1,5 @@
 <?
+
 	use application\models\wallbin\models\web\LibraryLink as LibraryLink;
 
 	/**
@@ -14,10 +15,11 @@
 		 * @param $libraryLink LibraryLink
 		 * @param $isQuickSite boolean
 		 */
-		public function init($libraryLink, $isQuickSite)
+		public function init($libraryLink, $isQuickSite, $openFromBundle)
 		{
-			parent::init($libraryLink, $isQuickSite);
-			$this->loadUserProfile($libraryLink);
+			parent::init($libraryLink, $isQuickSite, $openFromBundle);
+			if (!$openFromBundle)
+				$this->loadUserProfile($libraryLink);
 		}
 
 		/**

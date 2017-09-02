@@ -24,19 +24,23 @@
 
 		/**
 		 * @param $isQuickSite boolean
+		 * @param $openFromBundle boolean
 		 */
-		public function applyLinkSettings($isQuickSite)
+		public function applyLinkSettings($isQuickSite, $openFromBundle)
 		{
-			parent::applyLinkSettings($isQuickSite);
+			parent::applyLinkSettings($isQuickSite, $openFromBundle);
 
 			/** @var  $previewConfig FilePreviewConfig */
 			$previewConfig = $this->config;
 
-			/** @var  $linkSettings ExcelLinkSettings */
-			$linkSettings = $this->link->extendedProperties;
+			if (!$openFromBundle)
+			{
+				/** @var  $linkSettings ExcelLinkSettings */
+				$linkSettings = $this->link->extendedProperties;
 
-			$previewConfig->forceEOOpen |= $linkSettings->forceOpen;
-			$previewConfig->forceDownload |= $linkSettings->forceDownload;
+				$previewConfig->forceEOOpen |= $linkSettings->forceOpen;
+				$previewConfig->forceDownload |= $linkSettings->forceDownload;
+			}
 		}
 
 		public function initDialogActions()

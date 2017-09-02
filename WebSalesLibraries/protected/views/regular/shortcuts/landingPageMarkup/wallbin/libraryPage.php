@@ -40,7 +40,7 @@
 		, true);
 ?>
 <style>
-    <? if (isset($shortcut->style->page->padding) && $contentBlock->shortcut->style->page->padding->isConfigured): ?>
+    <? if (isset($contentBlock->shortcut->style->page->padding) && $contentBlock->shortcut->style->page->padding->isConfigured): ?>
     <? echo '#'.$blockId; ?> .wallbin-container .content-container {
 
         padding-top: <? echo $contentBlock->shortcut->style->page->padding->top; ?>px !important;
