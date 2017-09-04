@@ -18,6 +18,9 @@
 		/** @var  ToggleButtonStyle */
 		public $buttonStyle;
 
+		/** @var  \Padding */
+		public $buttonPadding;
+
 		/**
 		 * @param $parentShortcut \LandingPageShortcut
 		 * @param $parentBlock BlockContainer
@@ -66,5 +69,9 @@
 				$this->buttonStyle = ToggleButtonStyle::fromXml($xpath, $queryResult->item(0));
 			else
 				$this->buttonStyle = ToggleButtonStyle::createDefault();
+
+			$queryResult = $xpath->query('./Toggles/Padding', $contextNode);
+			if ($queryResult->length > 0)
+				$this->buttonPadding = \Padding::fromXml($xpath, $queryResult->item(0));
 		}
 	}

@@ -26,6 +26,17 @@
 		, true);
 ?>
 <style>
+    <? if (isset($contentBlock->buttonPadding) && $contentBlock->buttonPadding->isConfigured): ?>
+    <? echo '#'.$blockId; ?> .toggle-buttons {
+
+        padding-top: <? echo $contentBlock->buttonPadding->top; ?>px !important;
+        padding-left: <? echo $contentBlock->buttonPadding->left; ?>px !important;
+        padding-bottom: <? echo $contentBlock->buttonPadding->bottom; ?>px !important;
+        padding-right: <? echo $contentBlock->buttonPadding->right; ?>px !important;
+    }
+
+    <?endif;?>
+
     <? echo '#'.$blockId; ?> .toggle-button {
         background-color: <?echo Utils::formatColor($contentBlock->buttonStyle->backColorRegular);?> !important;
         border-color: <?echo $contentBlock->buttonStyle->hasBorder? Utils::formatColor($contentBlock->buttonStyle->borderColorRegular):'transparent';?> !important;
