@@ -185,4 +185,10 @@
 		{
 			return $this->style;
 		}
+
+		/** @return string */
+		public function getStyleContainerType()
+		{
+			return 'shortcut';
+		}
 	}

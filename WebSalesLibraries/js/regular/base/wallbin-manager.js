@@ -132,6 +132,7 @@
 					data: {
 						libraryId: pageData.libraryId,
 						pageId: pageData.pageId,
+						styleContainerType: pageData.styleContainerType,
 						styleContainerId: pageData.styleContainerId,
 						contentContainerId: contentContainerId
 					},

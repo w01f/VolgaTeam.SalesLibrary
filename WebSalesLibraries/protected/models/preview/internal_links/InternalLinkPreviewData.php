@@ -1,4 +1,5 @@
 <?
+
 	use application\models\wallbin\models\web\LibraryManager as LibraryManager;
 	use application\models\wallbin\models\web\LibraryLink as LibraryLink;
 
@@ -51,6 +52,8 @@
 					$this->previewInfo = new InternalShortcutPreviewInfo($linkSettings);
 					break;
 			}
+			if (isset($this->previewInfo))
+				$this->previewInfo->internalLinkId = $this->linkId;
 		}
 
 		public function initDialogActions()

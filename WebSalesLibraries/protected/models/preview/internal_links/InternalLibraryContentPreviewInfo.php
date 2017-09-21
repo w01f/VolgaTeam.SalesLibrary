@@ -5,6 +5,7 @@
 	 */
 	abstract class InternalLibraryContentPreviewInfo implements IShortcutActionContainer
 	{
+		public $internalLinkId;
 		public $internalLinkType;
 
 		public $styleSettingsEncoded;
@@ -52,19 +53,22 @@
 				if ($showNavigationPanel)
 				{
 					$navigationPanelData = ShortcutsManager::getNavigationPanel($navigationPanelId, $isPhone);
-					$viewPath = \Yii::getPathOfAlias('application.views.regular.shortcuts.navigationPanel') . '/itemsList.php';
-					$this->navigationPanel = array(
-						'content' => \Yii::app()->controller->renderFile($viewPath, array('navigationPanel' => $navigationPanelData), true),
-						'options' => array(
-							'expanded' => $navigationPanelData->isExpanded,
-							'hideCondition' => array(
-								'extraSmall' => $navigationPanelData->hideCondition->extraSmall,
-								'small' => $navigationPanelData->hideCondition->small,
-								'medium' => $navigationPanelData->hideCondition->medium,
-								'large' => $navigationPanelData->hideCondition->large,
+					if (isset($navigationPanelData->items))
+					{
+						$viewPath = \Yii::getPathOfAlias('application.views.regular.shortcuts.navigationPanel') . '/itemsList.php';
+						$this->navigationPanel = array(
+							'content' => \Yii::app()->controller->renderFile($viewPath, array('navigationPanel' => $navigationPanelData), true),
+							'options' => array(
+								'expanded' => $navigationPanelData->isExpanded,
+								'hideCondition' => array(
+									'extraSmall' => $navigationPanelData->hideCondition->extraSmall,
+									'small' => $navigationPanelData->hideCondition->small,
+									'medium' => $navigationPanelData->hideCondition->medium,
+									'large' => $navigationPanelData->hideCondition->large,
+								)
 							)
-						)
-					);
+						);
+					}
 				}
 
 				if ($isPhone != true)

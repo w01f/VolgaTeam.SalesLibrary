@@ -98,12 +98,18 @@
 		/** @return string */
 		public function getStyleContainerId()
 		{
-			return null;
+			return $this->internalLinkId;
 		}
 
 		/** @return WallbinStyle */
 		public function getStyle()
 		{
 			return $this->style;
+		}
+
+		/** @return string */
+		public function getStyleContainerType()
+		{
+			return 'internal link';
 		}
 	}

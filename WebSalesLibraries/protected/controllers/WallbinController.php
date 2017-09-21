@@ -64,24 +64,40 @@
 		//------Regular Site API-------------------------------------------
 		public function actionGetColumnsView()
 		{
+			$styleContainerType = Yii::app()->request->getPost('styleContainerType');
 			$styleContainerId = Yii::app()->request->getPost('styleContainerId');
 			$libraryId = Yii::app()->request->getPost('libraryId');
 			$pageId = Yii::app()->request->getPost('pageId');
 			$contentContainerId = Yii::app()->request->getPost('contentContainerId');
 
+			$libraryManager = new LibraryManager();
+
 			/** @var \application\models\wallbin\models\web\style\WallbinStyle $style */
 			$style = null;
-			if (isset($styleContainerId))
+			if (isset($styleContainerType) && isset($styleContainerId))
 			{
-				/** @var  $shortcutRecord ShortcutLinkRecord */
-				$shortcutRecord = ShortcutLinkRecord::model()->findByPk($styleContainerId);
-				/** @var  $shortcut WallbinShortcut */
-				$shortcut = $shortcutRecord->getModel($this->isPhone);
-				$shortcut->loadPageConfig();
-				$style = $shortcut->style;
+				switch ($styleContainerType)
+				{
+					case 'shortcut':
+						/** @var  $shortcutRecord ShortcutLinkRecord */
+						$shortcutRecord = ShortcutLinkRecord::model()->findByPk($styleContainerId);
+						/** @var  $shortcut WallbinShortcut */
+						$shortcut = $shortcutRecord->getModel($this->isPhone);
+						$shortcut->loadPageConfig();
+						$style = $shortcut->style;
+						break;
+					case 'internal link':
+						$linkRecord = LinkRecord::getLinkById($styleContainerId);
+						$library = $libraryManager->getLibraryById($linkRecord->id_library);
+						$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
+						$link->load($linkRecord);
+						/** @var InternalLinkPreviewData $previewData */
+						$previewData = $link->getPreviewData(null, false, $this->isPhone);
+						$style = $previewData->previewInfo->getStyle();
+						break;
+				}
 			}
 
-			$libraryManager = new LibraryManager();
 			$library = $libraryManager->getLibraryById($libraryId);
 			$selectedPage = $library->getPageById($pageId);
 			if (isset($style) && $style->page->enabled)

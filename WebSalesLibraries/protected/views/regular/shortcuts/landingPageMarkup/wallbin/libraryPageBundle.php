@@ -116,6 +116,7 @@
                                             <? echo CJSON::encode(array(
                                                     'libraryId' => $item->libraryPage->libraryId,
                                                     'pageId' => $item->libraryPage->id,
+		                                            'styleContainerType' => $item->shortcut->getStyleContainerType(),
                                                     'styleContainerId' => $item->shortcut->getStyleContainerId(),
                                                     'pageName' => $item->name
                                                 )
@@ -131,6 +132,7 @@
                                 <option value='<? echo base64_encode(CJSON::encode(array(
 										'libraryId' => $item->libraryPage->libraryId,
 										'pageId' => $item->libraryPage->id,
+		                                'styleContainerType' => $item->shortcut->getStyleContainerType(),
 										'styleContainerId' => $item->shortcut->getStyleContainerId(),
 										'pageName' => $item->name
 									)

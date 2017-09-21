@@ -6,6 +6,9 @@
 	interface IWallbinStyleContainer
 	{
 		/** @return string */
+		public function getStyleContainerType();
+
+		/** @return string */
 		public function getStyleContainerId();
 
 		/** @return WallbinStyle */

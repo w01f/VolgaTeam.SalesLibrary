@@ -142,6 +142,7 @@
 										<? echo CJSON::encode(array(
 												'libraryId' => $library->id,
 												'pageId' => $page->id,
+												'styleContainerType' => $styleContainer->getStyleContainerType(),
 												'styleContainerId' => $styleContainer->getStyleContainerId(),
 												'pageName' => $page->name,
 												'logoContent' => !$isEmbedded && $style->header->showLogo ? $page->logoContent : ''
@@ -158,6 +159,7 @@
                             <option value='<? echo base64_encode(CJSON::encode(array(
 									'libraryId' => $library->id,
 									'pageId' => $page->id,
+		                            'styleContainerType' => $styleContainer->getStyleContainerType(),
 		                            'styleContainerId' => $styleContainer->getStyleContainerId(),
 									'pageName' => $page->name,
 									'logoContent' => !$isEmbedded && $style->header->showLogo ? $page->logoContent : ''
