@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
+using SalesLibraries.FileManager.Controllers;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 {
@@ -16,7 +17,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 			treeListExternalFiles.Nodes.Clear();
 
 			var defaultDataSource = _dataSources.First();
-			await Task.Run(() => Invoke(new MethodInvoker(() =>
+			await Task.Run(() => MainController.Instance.MainForm.Invoke(new MethodInvoker(() =>
 			{
 				var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 				if (Directory.Exists(desktopPath))

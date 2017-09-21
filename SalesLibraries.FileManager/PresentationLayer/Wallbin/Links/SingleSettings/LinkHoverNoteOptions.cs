@@ -28,18 +28,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			InitializeComponent();
 			Text = "Hover Note";
 
-			if ((base.CreateGraphics()).DpiX > 96)
-			{
-				var styleControllerFont = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2, styleController.Appearance.Font.Style);
-				styleController.AppearanceDisabled.Font = styleControllerFont;
-				styleController.AppearanceDropDown.Font = styleControllerFont;
-				styleController.AppearanceDropDownHeader.Font = styleControllerFont;
-				styleController.AppearanceFocused.Font = styleControllerFont;
-				styleController.AppearanceReadOnly.Font = styleControllerFont;
-			}
 			memoEditNote.Enter += EditorHelper.EditorEnter;
 			memoEditNote.MouseUp += EditorHelper.EditorMouseUp;
 			memoEditNote.MouseDown += EditorHelper.EditorMouseUp;
+
+			layoutControlGroupControls.Enabled = false;
 		}
 
 		public LinkHoverNoteOptions(FileTypes? defaultLinkType = null) : this() { }
@@ -61,8 +54,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		private void checkEditNote_CheckedChanged(object sender, EventArgs e)
 		{
-			memoEditNote.Enabled = checkEditNote.Checked;
-			checkEditShowOnlyCustomNote.Enabled = checkEditNote.Checked;
+			layoutControlGroupControls.Enabled = checkEditNote.Checked;
 			if (!checkEditNote.Checked)
 			{
 				memoEditNote.EditValue = null;

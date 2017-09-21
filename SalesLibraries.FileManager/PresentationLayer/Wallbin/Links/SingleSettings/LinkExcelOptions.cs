@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using DevExpress.XtraLayout.Utils;
 using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Common;
 using SalesLibraries.Business.Entities.Helpers;
@@ -33,21 +33,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		{
 			InitializeComponent();
 			Text = "Admin";
-			if ((base.CreateGraphics()).DpiX > 96)
-			{
-				var styleControllerFont = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2, styleController.Appearance.Font.Style);
-				styleController.AppearanceDisabled.Font = styleControllerFont;
-				styleController.AppearanceDropDown.Font = styleControllerFont;
-				styleController.AppearanceDropDownHeader.Font = styleControllerFont;
-				styleController.AppearanceFocused.Font = styleControllerFont;
-				styleController.AppearanceReadOnly.Font = styleControllerFont;
-
-				ckIsArchiveResource.Font = new Font(ckIsArchiveResource.Font.FontFamily, ckIsArchiveResource.Font.Size - 2, ckIsArchiveResource.Font.Style);
-				ckForceOpen.Font = new Font(ckForceOpen.Font.FontFamily, ckForceOpen.Font.Size - 2, ckForceOpen.Font.Style);
-				ckForceDownload.Font = new Font(ckForceDownload.Font.FontFamily, ckForceDownload.Font.Size - 2, ckForceDownload.Font.Style);
-				ckDoNotGenerateText.Font = new Font(ckDoNotGenerateText.Font.FontFamily, ckDoNotGenerateText.Font.Size - 2, ckDoNotGenerateText.Font.Style);
-				ckSaveAsTemplate.Font = new Font(ckSaveAsTemplate.Font.FontFamily, ckSaveAsTemplate.Font.Size - 2, ckSaveAsTemplate.Font.Style);
-			}
 		}
 
 		public LinkExcelOptions(FileTypes? defaultLinkType = null) : this() { }
@@ -76,51 +61,51 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		private void LoadData()
 		{
-			ckSaveAsTemplate.Visible = _linksGroup != null;
+			layoutControlItemSaveAsTemplate.Visibility = _linksGroup != null ? LayoutVisibility.Always : LayoutVisibility.Never;
 
 			var settingsTemplate = _linksGroup?.LinkGroupSettingsContainer.GetSettingsTemplate<ExcelLinkSettings>(
 					LinkSettingsGroupType.AdminSettings, _defaultLinkType);
 			if (settingsTemplate != null)
 			{
-				ckIsArchiveResource.Checked = settingsTemplate.IsArchiveResource;
-				ckDoNotGenerateText.Checked = !settingsTemplate.GenerateContentText;
-				ckForceDownload.Checked = settingsTemplate.ForceDownload;
-				ckForceOpen.Checked = settingsTemplate.ForceOpen;
-				ckSaveAsTemplate.Checked = true;
+				checkEditIsArchiveResource.Checked = settingsTemplate.IsArchiveResource;
+				checkEditDoNotGenerateText.Checked = !settingsTemplate.GenerateContentText;
+				checkEditForceDownload.Checked = settingsTemplate.ForceDownload;
+				checkEditForceOpen.Checked = settingsTemplate.ForceOpen;
+				checkEditSaveAsTemplate.Checked = true;
 			}
 			else if (_sourceLinks.Any())
 			{
 				var linkSettings = _sourceLinks.Select(link => link.Settings).OfType<ExcelLinkSettings>().ToList();
 
 				if (linkSettings.All(settings => settings.IsArchiveResource))
-					ckIsArchiveResource.CheckState = CheckState.Checked;
+					checkEditIsArchiveResource.CheckState = CheckState.Checked;
 				else if (linkSettings.Any(settings => settings.IsArchiveResource))
-					ckIsArchiveResource.CheckState = CheckState.Indeterminate;
+					checkEditIsArchiveResource.CheckState = CheckState.Indeterminate;
 				else
-					ckIsArchiveResource.CheckState = CheckState.Unchecked;
+					checkEditIsArchiveResource.CheckState = CheckState.Unchecked;
 
 				if (linkSettings.All(settings => !settings.GenerateContentText))
-					ckDoNotGenerateText.CheckState = CheckState.Checked;
+					checkEditDoNotGenerateText.CheckState = CheckState.Checked;
 				else if (linkSettings.Any(settings => !settings.GenerateContentText))
-					ckDoNotGenerateText.CheckState = CheckState.Indeterminate;
+					checkEditDoNotGenerateText.CheckState = CheckState.Indeterminate;
 				else
-					ckDoNotGenerateText.CheckState = CheckState.Unchecked;
+					checkEditDoNotGenerateText.CheckState = CheckState.Unchecked;
 
 				if (linkSettings.All(settings => settings.ForceDownload))
-					ckForceDownload.CheckState = CheckState.Checked;
+					checkEditForceDownload.CheckState = CheckState.Checked;
 				else if (linkSettings.Any(settings => settings.ForceDownload))
-					ckForceDownload.CheckState = CheckState.Indeterminate;
+					checkEditForceDownload.CheckState = CheckState.Indeterminate;
 				else
-					ckForceDownload.CheckState = CheckState.Unchecked;
+					checkEditForceDownload.CheckState = CheckState.Unchecked;
 
 				if (linkSettings.All(settings => settings.ForceDownload))
-					ckForceDownload.CheckState = CheckState.Checked;
+					checkEditForceDownload.CheckState = CheckState.Checked;
 				else if (linkSettings.Any(settings => settings.ForceDownload))
-					ckForceDownload.CheckState = CheckState.Indeterminate;
+					checkEditForceDownload.CheckState = CheckState.Indeterminate;
 				else
-					ckForceDownload.CheckState = CheckState.Unchecked;
+					checkEditForceDownload.CheckState = CheckState.Unchecked;
 
-				ckSaveAsTemplate.Checked = false;
+				checkEditSaveAsTemplate.Checked = false;
 			}
 		}
 
@@ -129,8 +114,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			if (!_sourceLinks.Any()) return;
 			foreach (var link in _sourceLinks)
 			{
-				((ExcelLinkSettings)link.Settings).IsArchiveResource = ckIsArchiveResource.CheckState != CheckState.Indeterminate ?
-					ckIsArchiveResource.Checked :
+				((ExcelLinkSettings)link.Settings).IsArchiveResource = checkEditIsArchiveResource.CheckState != CheckState.Indeterminate ?
+					checkEditIsArchiveResource.Checked :
 					((ExcelLinkSettings)link.Settings).IsArchiveResource;
 				if (((ExcelLinkSettings)link.Settings).IsArchiveResource)
 				{
@@ -139,23 +124,23 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				}
 				else
 				{
-					((ExcelLinkSettings)link.Settings).GenerateContentText = ckDoNotGenerateText.CheckState != CheckState.Indeterminate ?
-						!ckDoNotGenerateText.Checked :
+					((ExcelLinkSettings)link.Settings).GenerateContentText = checkEditDoNotGenerateText.CheckState != CheckState.Indeterminate ?
+						!checkEditDoNotGenerateText.Checked :
 						((ExcelLinkSettings)link.Settings).GenerateContentText;
-					((ExcelLinkSettings)link.Settings).ForceDownload = ckForceDownload.CheckState != CheckState.Indeterminate ?
-						ckForceDownload.Checked :
+					((ExcelLinkSettings)link.Settings).ForceDownload = checkEditForceDownload.CheckState != CheckState.Indeterminate ?
+						checkEditForceDownload.Checked :
 						((ExcelLinkSettings)link.Settings).ForceDownload;
 				}
-				((ExcelLinkSettings)link.Settings).ForceOpen = ckForceOpen.CheckState != CheckState.Indeterminate ?
-					ckForceOpen.Checked :
+				((ExcelLinkSettings)link.Settings).ForceOpen = checkEditForceOpen.CheckState != CheckState.Indeterminate ?
+					checkEditForceOpen.Checked :
 					((ExcelLinkSettings)link.Settings).ForceOpen;
 
 			}
 
-			if (ckSaveAsTemplate.Checked)
+			if (checkEditSaveAsTemplate.Checked)
 			{
 				var setttingsTemplate = SettingsContainer.CreateInstance<ExcelLinkSettings>(null);
-				setttingsTemplate.IsArchiveResource = ckIsArchiveResource.Checked;
+				setttingsTemplate.IsArchiveResource = checkEditIsArchiveResource.Checked;
 				if (setttingsTemplate.IsArchiveResource)
 				{
 					setttingsTemplate.GenerateContentText = false;
@@ -163,22 +148,22 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				}
 				else
 				{
-					setttingsTemplate.GenerateContentText = ckDoNotGenerateText.CheckState == CheckState.Unchecked;
-					setttingsTemplate.ForceDownload = ckForceDownload.CheckState != CheckState.Unchecked;
+					setttingsTemplate.GenerateContentText = checkEditDoNotGenerateText.CheckState == CheckState.Unchecked;
+					setttingsTemplate.ForceDownload = checkEditForceDownload.CheckState != CheckState.Unchecked;
 				}
-				setttingsTemplate.ForceOpen = ckForceOpen.CheckState != CheckState.Unchecked;
+				setttingsTemplate.ForceOpen = checkEditForceOpen.CheckState != CheckState.Unchecked;
 				_linksGroup.LinkGroupSettingsContainer.SaveSettingsTemplate(LinkSettingsGroupType.AdminSettings, _defaultLinkType, setttingsTemplate);
 			}
 		}
 
 		private void ckIsArchiveResource_CheckedChanged(object sender, EventArgs e)
 		{
-			ckDoNotGenerateText.Enabled =
-				ckForceDownload.Enabled = ckIsArchiveResource.CheckState != CheckState.Checked;
-			if (ckIsArchiveResource.CheckState == CheckState.Checked)
+			checkEditDoNotGenerateText.Enabled =
+				checkEditForceDownload.Enabled = checkEditIsArchiveResource.CheckState != CheckState.Checked;
+			if (checkEditIsArchiveResource.CheckState == CheckState.Checked)
 			{
-				ckDoNotGenerateText.Checked =
-					ckForceDownload.Checked = true;
+				checkEditDoNotGenerateText.Checked =
+					checkEditForceDownload.Checked = true;
 			}
 		}
 	}

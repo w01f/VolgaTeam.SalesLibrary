@@ -29,14 +29,10 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
-			this.pnBottom = new System.Windows.Forms.Panel();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
 			this.buttonXCancel = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXOK = new DevComponents.DotNetBar.ButtonX();
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
-			this.xtraTabControl = new DevExpress.XtraTab.XtraTabControl();
-			this.xtraTabPageLinks = new DevExpress.XtraTab.XtraTabPage();
-			this.pnLinksMain = new System.Windows.Forms.Panel();
 			this.gridControlBundleItems = new DevExpress.XtraGrid.GridControl();
 			this.gridViewBundleItems = new DevExpress.XtraGrid.Views.Grid.GridView();
 			this.gridColumnBundleItemsImage = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -57,9 +53,6 @@
 			this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
-			this.pnLinksTop = new DevExpress.XtraEditors.PanelControl();
-			this.labelControlLinksTitle = new DevExpress.XtraEditors.LabelControl();
-			this.pictureBoxLinksLogo = new System.Windows.Forms.PictureBox();
 			this.barManager = new DevExpress.XtraBars.BarManager(this.components);
 			this.barToolbar = new DevExpress.XtraBars.Bar();
 			this.barSubItemLinksAdd = new DevExpress.XtraBars.BarSubItem();
@@ -69,12 +62,27 @@
 			this.barLargeButtonItemLinksAddRevenue = new DevExpress.XtraBars.BarLargeButtonItem();
 			this.barLargeButtonItemLinksAddStrategy = new DevExpress.XtraBars.BarLargeButtonItem();
 			this.barLargeButtonItemLinksAddUrls = new DevExpress.XtraBars.BarLargeButtonItem();
-			this.pnBottom.SuspendLayout();
+			this.layoutControlLinks = new DevExpress.XtraLayout.LayoutControl();
+			this.pictureEditLogo = new DevExpress.XtraEditors.PictureEdit();
+			this.layoutControlItemBarDockControlLeft = new DevExpress.XtraLayout.LayoutControlItem();
+			this.layoutControlItemBarDockControlBottom = new DevExpress.XtraLayout.LayoutControlItem();
+			this.layoutControlItemBarDockControlRight = new DevExpress.XtraLayout.LayoutControlItem();
+			this.layoutControlGroupLinksRoot = new DevExpress.XtraLayout.LayoutControlGroup();
+			this.layoutControlItemLogo = new DevExpress.XtraLayout.LayoutControlItem();
+			this.simpleLabelItemTitle = new DevExpress.XtraLayout.SimpleLabelItem();
+			this.layoutControlItemBarDockControlTop = new DevExpress.XtraLayout.LayoutControlItem();
+			this.layoutControlItemBundleItems = new DevExpress.XtraLayout.LayoutControlItem();
+			this.layoutControlMain = new DevExpress.XtraLayout.LayoutControl();
+			this.xtraTabControl = new DevExpress.XtraTab.XtraTabControl();
+			this.xtraTabPageLinks = new DevExpress.XtraTab.XtraTabPage();
+			this.layoutControlGroupRoot = new DevExpress.XtraLayout.LayoutControlGroup();
+			this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.layoutControlItemItems = new DevExpress.XtraLayout.LayoutControlItem();
+			this.layoutControlItemCancel = new DevExpress.XtraLayout.LayoutControlItem();
+			this.emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.layoutControlItemOK = new DevExpress.XtraLayout.LayoutControlItem();
+			this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.xtraTabControl)).BeginInit();
-			this.xtraTabControl.SuspendLayout();
-			this.xtraTabPageLinks.SuspendLayout();
-			this.pnLinksMain.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlBundleItems)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewBundleItems)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEditBundelItems)).BeginInit();
@@ -84,23 +92,31 @@
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditBundleItemsActions)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditBundleItemsDisabledText)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEditBundleItemsDisabled)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.pnLinksTop)).BeginInit();
-			this.pnLinksTop.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLinksLogo)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.barManager)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlLinks)).BeginInit();
+			this.layoutControlLinks.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pictureEditLogo.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemBarDockControlLeft)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemBarDockControlBottom)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemBarDockControlRight)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupLinksRoot)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemLogo)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemTitle)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemBarDockControlTop)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemBundleItems)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlMain)).BeginInit();
+			this.layoutControlMain.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.xtraTabControl)).BeginInit();
+			this.xtraTabControl.SuspendLayout();
+			this.xtraTabPageLinks.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupRoot)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemItems)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemCancel)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemOK)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
 			this.SuspendLayout();
-			// 
-			// pnBottom
-			// 
-			this.pnBottom.BackColor = System.Drawing.Color.Transparent;
-			this.pnBottom.Controls.Add(this.buttonXCancel);
-			this.pnBottom.Controls.Add(this.buttonXOK);
-			this.pnBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.pnBottom.ForeColor = System.Drawing.Color.Black;
-			this.pnBottom.Location = new System.Drawing.Point(0, 525);
-			this.pnBottom.Name = "pnBottom";
-			this.pnBottom.Size = new System.Drawing.Size(934, 54);
-			this.pnBottom.TabIndex = 9;
 			// 
 			// buttonXCancel
 			// 
@@ -108,9 +124,9 @@
 			this.buttonXCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXCancel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.buttonXCancel.Location = new System.Drawing.Point(816, 10);
+			this.buttonXCancel.Location = new System.Drawing.Point(811, 531);
 			this.buttonXCancel.Name = "buttonXCancel";
-			this.buttonXCancel.Size = new System.Drawing.Size(111, 34);
+			this.buttonXCancel.Size = new System.Drawing.Size(116, 36);
 			this.buttonXCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXCancel.TabIndex = 6;
 			this.buttonXCancel.Text = "Cancel";
@@ -122,9 +138,9 @@
 			this.buttonXOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXOK.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.buttonXOK.Location = new System.Drawing.Point(685, 10);
+			this.buttonXOK.Location = new System.Drawing.Point(671, 531);
 			this.buttonXOK.Name = "buttonXOK";
-			this.buttonXOK.Size = new System.Drawing.Size(111, 34);
+			this.buttonXOK.Size = new System.Drawing.Size(116, 36);
 			this.buttonXOK.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXOK.TabIndex = 5;
 			this.buttonXOK.Text = "OK";
@@ -149,67 +165,15 @@
 			this.styleController.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.styleController.AppearanceReadOnly.Options.UseFont = true;
 			// 
-			// xtraTabControl
-			// 
-			this.xtraTabControl.Appearance.BackColor = System.Drawing.Color.White;
-			this.xtraTabControl.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.xtraTabControl.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.xtraTabControl.Appearance.Options.UseBackColor = true;
-			this.xtraTabControl.Appearance.Options.UseFont = true;
-			this.xtraTabControl.Appearance.Options.UseForeColor = true;
-			this.xtraTabControl.AppearancePage.Header.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.xtraTabControl.AppearancePage.Header.Options.UseFont = true;
-			this.xtraTabControl.AppearancePage.HeaderActive.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.xtraTabControl.AppearancePage.HeaderActive.Options.UseFont = true;
-			this.xtraTabControl.AppearancePage.HeaderDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.xtraTabControl.AppearancePage.HeaderDisabled.Options.UseFont = true;
-			this.xtraTabControl.AppearancePage.HeaderHotTracked.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.xtraTabControl.AppearancePage.HeaderHotTracked.Options.UseFont = true;
-			this.xtraTabControl.AppearancePage.PageClient.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.xtraTabControl.AppearancePage.PageClient.Options.UseFont = true;
-			this.xtraTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.xtraTabControl.Location = new System.Drawing.Point(0, 0);
-			this.xtraTabControl.Name = "xtraTabControl";
-			this.xtraTabControl.SelectedTabPage = this.xtraTabPageLinks;
-			this.xtraTabControl.Size = new System.Drawing.Size(934, 525);
-			this.xtraTabControl.TabIndex = 10;
-			this.xtraTabControl.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
-            this.xtraTabPageLinks});
-			// 
-			// xtraTabPageLinks
-			// 
-			this.xtraTabPageLinks.Appearance.PageClient.ForeColor = System.Drawing.Color.Black;
-			this.xtraTabPageLinks.Appearance.PageClient.Options.UseForeColor = true;
-			this.xtraTabPageLinks.Controls.Add(this.pnLinksMain);
-			this.xtraTabPageLinks.Controls.Add(this.pnLinksTop);
-			this.xtraTabPageLinks.Name = "xtraTabPageLinks";
-			this.xtraTabPageLinks.Size = new System.Drawing.Size(928, 494);
-			this.xtraTabPageLinks.Text = "Links";
-			// 
-			// pnLinksMain
-			// 
-			this.pnLinksMain.Controls.Add(this.gridControlBundleItems);
-			this.pnLinksMain.Controls.Add(this.barDockControlLeft);
-			this.pnLinksMain.Controls.Add(this.barDockControlRight);
-			this.pnLinksMain.Controls.Add(this.barDockControlBottom);
-			this.pnLinksMain.Controls.Add(this.barDockControlTop);
-			this.pnLinksMain.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.pnLinksMain.ForeColor = System.Drawing.Color.Black;
-			this.pnLinksMain.Location = new System.Drawing.Point(0, 77);
-			this.pnLinksMain.Name = "pnLinksMain";
-			this.pnLinksMain.Size = new System.Drawing.Size(928, 417);
-			this.pnLinksMain.TabIndex = 3;
-			// 
 			// gridControlBundleItems
 			// 
 			this.gridControlBundleItems.AllowDrop = true;
 			this.gridControlBundleItems.Cursor = System.Windows.Forms.Cursors.Default;
-			this.gridControlBundleItems.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.gridControlBundleItems.EmbeddedNavigator.Appearance.BackColor = System.Drawing.Color.White;
 			this.gridControlBundleItems.EmbeddedNavigator.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.gridControlBundleItems.EmbeddedNavigator.Appearance.Options.UseBackColor = true;
 			this.gridControlBundleItems.EmbeddedNavigator.Appearance.Options.UseForeColor = true;
-			this.gridControlBundleItems.Location = new System.Drawing.Point(0, 47);
+			this.gridControlBundleItems.Location = new System.Drawing.Point(2, 122);
 			this.gridControlBundleItems.MainView = this.gridViewBundleItems;
 			this.gridControlBundleItems.Name = "gridControlBundleItems";
 			this.gridControlBundleItems.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
@@ -220,7 +184,7 @@
             this.repositoryItemCheckEditBundleItems,
             this.repositoryItemButtonEditBundleItemsDisabledText,
             this.repositoryItemCheckEditBundleItemsDisabled});
-			this.gridControlBundleItems.Size = new System.Drawing.Size(928, 370);
+			this.gridControlBundleItems.Size = new System.Drawing.Size(910, 360);
 			this.gridControlBundleItems.TabIndex = 2;
 			this.gridControlBundleItems.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewBundleItems});
@@ -283,7 +247,7 @@
 			this.gridColumnBundleItemsImage.OptionsColumn.ReadOnly = true;
 			this.gridColumnBundleItemsImage.Visible = true;
 			this.gridColumnBundleItemsImage.VisibleIndex = 0;
-			this.gridColumnBundleItemsImage.Width = 48;
+			this.gridColumnBundleItemsImage.Width = 64;
 			// 
 			// repositoryItemPictureEditBundelItems
 			// 
@@ -300,7 +264,7 @@
 			this.repositoryItemPictureEditBundelItems.NullText = "     ";
 			this.repositoryItemPictureEditBundelItems.ReadOnly = true;
 			this.repositoryItemPictureEditBundelItems.ShowMenu = false;
-			this.repositoryItemPictureEditBundelItems.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Squeeze;
+			this.repositoryItemPictureEditBundelItems.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Zoom;
 			// 
 			// gridColumnBundleItemsName
 			// 
@@ -310,7 +274,7 @@
 			this.gridColumnBundleItemsName.ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowForFocusedRow;
 			this.gridColumnBundleItemsName.Visible = true;
 			this.gridColumnBundleItemsName.VisibleIndex = 1;
-			this.gridColumnBundleItemsName.Width = 326;
+			this.gridColumnBundleItemsName.Width = 304;
 			// 
 			// gridColumnBundleItemsTitle
 			// 
@@ -320,7 +284,7 @@
 			this.gridColumnBundleItemsTitle.Name = "gridColumnBundleItemsTitle";
 			this.gridColumnBundleItemsTitle.Visible = true;
 			this.gridColumnBundleItemsTitle.VisibleIndex = 2;
-			this.gridColumnBundleItemsTitle.Width = 186;
+			this.gridColumnBundleItemsTitle.Width = 173;
 			// 
 			// repositoryItemTextEditBundleItems
 			// 
@@ -337,7 +301,7 @@
 			this.gridColumnBundleItemsHoverTip.Name = "gridColumnBundleItemsHoverTip";
 			this.gridColumnBundleItemsHoverTip.Visible = true;
 			this.gridColumnBundleItemsHoverTip.VisibleIndex = 3;
-			this.gridColumnBundleItemsHoverTip.Width = 176;
+			this.gridColumnBundleItemsHoverTip.Width = 167;
 			// 
 			// repositoryItemMemoEditBundleItems
 			// 
@@ -400,7 +364,7 @@
 			this.repositoryItemButtonEditBundleItemsActions.AppearanceReadOnly.Options.UseFont = true;
 			this.repositoryItemButtonEditBundleItemsActions.AutoHeight = false;
 			this.repositoryItemButtonEditBundleItemsActions.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.FileManager.Properties.Resources.ButtonDelete, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "Delete", "Delete", null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.FileManager.Properties.Resources.ButtonDelete, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "Delete", "Delete", null, true)});
 			this.repositoryItemButtonEditBundleItemsActions.Name = "repositoryItemButtonEditBundleItemsActions";
 			this.repositoryItemButtonEditBundleItemsActions.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
 			this.repositoryItemButtonEditBundleItemsActions.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.OnGridBundleItemsActionsButtonClick);
@@ -423,76 +387,31 @@
 			this.barDockControlLeft.CausesValidation = false;
 			this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
 			this.barDockControlLeft.ForeColor = System.Drawing.Color.Black;
-			this.barDockControlLeft.Location = new System.Drawing.Point(0, 47);
-			this.barDockControlLeft.Size = new System.Drawing.Size(0, 370);
+			this.barDockControlLeft.Location = new System.Drawing.Point(2, 2);
+			this.barDockControlLeft.Size = new System.Drawing.Size(0, 200);
 			// 
 			// barDockControlRight
 			// 
 			this.barDockControlRight.CausesValidation = false;
 			this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
 			this.barDockControlRight.ForeColor = System.Drawing.Color.Black;
-			this.barDockControlRight.Location = new System.Drawing.Point(928, 47);
-			this.barDockControlRight.Size = new System.Drawing.Size(0, 370);
+			this.barDockControlRight.Location = new System.Drawing.Point(239, 134);
+			this.barDockControlRight.Size = new System.Drawing.Size(0, 68);
 			// 
 			// barDockControlBottom
 			// 
 			this.barDockControlBottom.CausesValidation = false;
 			this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.barDockControlBottom.ForeColor = System.Drawing.Color.Black;
-			this.barDockControlBottom.Location = new System.Drawing.Point(0, 417);
-			this.barDockControlBottom.Size = new System.Drawing.Size(928, 0);
+			this.barDockControlBottom.Location = new System.Drawing.Point(239, 182);
+			this.barDockControlBottom.Size = new System.Drawing.Size(663, 0);
 			// 
 			// barDockControlTop
 			// 
 			this.barDockControlTop.CausesValidation = false;
-			this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
 			this.barDockControlTop.ForeColor = System.Drawing.Color.Black;
-			this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-			this.barDockControlTop.Size = new System.Drawing.Size(928, 47);
-			// 
-			// pnLinksTop
-			// 
-			this.pnLinksTop.Appearance.BackColor = System.Drawing.Color.White;
-			this.pnLinksTop.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.pnLinksTop.Appearance.Options.UseBackColor = true;
-			this.pnLinksTop.Appearance.Options.UseForeColor = true;
-			this.pnLinksTop.Controls.Add(this.labelControlLinksTitle);
-			this.pnLinksTop.Controls.Add(this.pictureBoxLinksLogo);
-			this.pnLinksTop.Dock = System.Windows.Forms.DockStyle.Top;
-			this.pnLinksTop.Location = new System.Drawing.Point(0, 0);
-			this.pnLinksTop.Name = "pnLinksTop";
-			this.pnLinksTop.Size = new System.Drawing.Size(928, 77);
-			this.pnLinksTop.TabIndex = 4;
-			// 
-			// labelControlLinksTitle
-			// 
-			this.labelControlLinksTitle.AllowHtmlString = true;
-			this.labelControlLinksTitle.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelControlLinksTitle.Appearance.BackColor = System.Drawing.Color.Transparent;
-			this.labelControlLinksTitle.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.labelControlLinksTitle.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-			this.labelControlLinksTitle.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-			this.labelControlLinksTitle.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-			this.labelControlLinksTitle.Location = new System.Drawing.Point(87, 6);
-			this.labelControlLinksTitle.Name = "labelControlLinksTitle";
-			this.labelControlLinksTitle.Size = new System.Drawing.Size(833, 64);
-			this.labelControlLinksTitle.StyleController = this.styleController;
-			this.labelControlLinksTitle.TabIndex = 1;
-			this.labelControlLinksTitle.Text = "<size=+4>Drag & Drop the <b><u>Link Order:</u></b></size>";
-			this.labelControlLinksTitle.UseMnemonic = false;
-			// 
-			// pictureBoxLinksLogo
-			// 
-			this.pictureBoxLinksLogo.BackColor = System.Drawing.Color.Transparent;
-			this.pictureBoxLinksLogo.ForeColor = System.Drawing.Color.Black;
-			this.pictureBoxLinksLogo.Image = global::SalesLibraries.FileManager.Properties.Resources.BundlesEditorLinksLogo;
-			this.pictureBoxLinksLogo.Location = new System.Drawing.Point(7, 6);
-			this.pictureBoxLinksLogo.Name = "pictureBoxLinksLogo";
-			this.pictureBoxLinksLogo.Size = new System.Drawing.Size(64, 64);
-			this.pictureBoxLinksLogo.TabIndex = 0;
-			this.pictureBoxLinksLogo.TabStop = false;
+			this.barDockControlTop.Location = new System.Drawing.Point(2, 74);
+			this.barDockControlTop.Size = new System.Drawing.Size(910, 44);
 			// 
 			// barManager
 			// 
@@ -502,7 +421,7 @@
 			this.barManager.DockControls.Add(this.barDockControlBottom);
 			this.barManager.DockControls.Add(this.barDockControlLeft);
 			this.barManager.DockControls.Add(this.barDockControlRight);
-			this.barManager.Form = this.pnLinksMain;
+			this.barManager.Form = this.layoutControlLinks;
 			this.barManager.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.barSubItemLinksAdd,
             this.barLargeButtonItemLinksAddInfo,
@@ -592,13 +511,357 @@
 			this.barLargeButtonItemLinksAddUrls.Name = "barLargeButtonItemLinksAddUrls";
 			this.barLargeButtonItemLinksAddUrls.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.OnAddUrlsItemClick);
 			// 
+			// layoutControlLinks
+			// 
+			this.layoutControlLinks.Appearance.Control.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.layoutControlLinks.Appearance.Control.Options.UseFont = true;
+			this.layoutControlLinks.Appearance.ControlDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlLinks.Appearance.ControlDisabled.Options.UseFont = true;
+			this.layoutControlLinks.Appearance.ControlDropDown.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlLinks.Appearance.ControlDropDown.Options.UseFont = true;
+			this.layoutControlLinks.Appearance.ControlDropDownHeader.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlLinks.Appearance.ControlDropDownHeader.Options.UseFont = true;
+			this.layoutControlLinks.Appearance.ControlFocused.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlLinks.Appearance.ControlFocused.Options.UseFont = true;
+			this.layoutControlLinks.Appearance.ControlReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlLinks.Appearance.ControlReadOnly.Options.UseFont = true;
+			this.layoutControlLinks.Controls.Add(this.gridControlBundleItems);
+			this.layoutControlLinks.Controls.Add(this.pictureEditLogo);
+			this.layoutControlLinks.Controls.Add(this.barDockControlLeft);
+			this.layoutControlLinks.Controls.Add(this.barDockControlRight);
+			this.layoutControlLinks.Controls.Add(this.barDockControlBottom);
+			this.layoutControlLinks.Controls.Add(this.barDockControlTop);
+			this.layoutControlLinks.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.layoutControlLinks.ForeColor = System.Drawing.Color.Black;
+			this.layoutControlLinks.HiddenItems.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItemBarDockControlLeft,
+            this.layoutControlItemBarDockControlBottom,
+            this.layoutControlItemBarDockControlRight});
+			this.layoutControlLinks.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlLinks.Name = "layoutControlLinks";
+			this.layoutControlLinks.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(802, 383, 250, 350);
+			this.layoutControlLinks.Root = this.layoutControlGroupLinksRoot;
+			this.layoutControlLinks.Size = new System.Drawing.Size(914, 484);
+			this.layoutControlLinks.StyleController = this.styleController;
+			this.layoutControlLinks.TabIndex = 63;
+			this.layoutControlLinks.Text = "layoutControl1";
+			// 
+			// pictureEditLogo
+			// 
+			this.pictureEditLogo.EditValue = global::SalesLibraries.FileManager.Properties.Resources.BundlesEditorLinksLogo;
+			this.pictureEditLogo.Location = new System.Drawing.Point(4, 4);
+			this.pictureEditLogo.MenuManager = this.barManager;
+			this.pictureEditLogo.Name = "pictureEditLogo";
+			this.pictureEditLogo.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.pictureEditLogo.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.pictureEditLogo.Properties.Appearance.Options.UseBackColor = true;
+			this.pictureEditLogo.Properties.Appearance.Options.UseForeColor = true;
+			this.pictureEditLogo.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+			this.pictureEditLogo.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
+			this.pictureEditLogo.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Zoom;
+			this.pictureEditLogo.Size = new System.Drawing.Size(64, 64);
+			this.pictureEditLogo.StyleController = this.layoutControlLinks;
+			this.pictureEditLogo.TabIndex = 64;
+			// 
+			// layoutControlItemBarDockControlLeft
+			// 
+			this.layoutControlItemBarDockControlLeft.Control = this.barDockControlLeft;
+			this.layoutControlItemBarDockControlLeft.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+			this.layoutControlItemBarDockControlLeft.FillControlToClientArea = false;
+			this.layoutControlItemBarDockControlLeft.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlItemBarDockControlLeft.Name = "layoutControlItemBarDockControlLeft";
+			this.layoutControlItemBarDockControlLeft.Size = new System.Drawing.Size(104, 204);
+			this.layoutControlItemBarDockControlLeft.Text = "Bar Dock Control Left";
+			this.layoutControlItemBarDockControlLeft.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemBarDockControlLeft.TextVisible = false;
+			this.layoutControlItemBarDockControlLeft.TrimClientAreaToControl = false;
+			this.layoutControlItemBarDockControlLeft.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+			// 
+			// layoutControlItemBarDockControlBottom
+			// 
+			this.layoutControlItemBarDockControlBottom.Control = this.barDockControlBottom;
+			this.layoutControlItemBarDockControlBottom.Location = new System.Drawing.Point(0, 180);
+			this.layoutControlItemBarDockControlBottom.Name = "layoutControlItemBarDockControlBottom";
+			this.layoutControlItemBarDockControlBottom.Size = new System.Drawing.Size(904, 24);
+			this.layoutControlItemBarDockControlBottom.Text = "Bar Dock Control Bottom";
+			this.layoutControlItemBarDockControlBottom.TextSize = new System.Drawing.Size(50, 20);
+			// 
+			// layoutControlItemBarDockControlRight
+			// 
+			this.layoutControlItemBarDockControlRight.Control = this.barDockControlRight;
+			this.layoutControlItemBarDockControlRight.Location = new System.Drawing.Point(0, 132);
+			this.layoutControlItemBarDockControlRight.Name = "layoutControlItemBarDockControlRight";
+			this.layoutControlItemBarDockControlRight.Size = new System.Drawing.Size(904, 72);
+			this.layoutControlItemBarDockControlRight.Text = "Bar Dock Control Right";
+			this.layoutControlItemBarDockControlRight.TextSize = new System.Drawing.Size(50, 20);
+			// 
+			// layoutControlGroupLinksRoot
+			// 
+			this.layoutControlGroupLinksRoot.AllowHtmlStringInCaption = true;
+			this.layoutControlGroupLinksRoot.AppearanceGroup.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlGroupLinksRoot.AppearanceGroup.Options.UseFont = true;
+			this.layoutControlGroupLinksRoot.AppearanceItemCaption.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlGroupLinksRoot.AppearanceItemCaption.Options.UseFont = true;
+			this.layoutControlGroupLinksRoot.AppearanceTabPage.Header.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlGroupLinksRoot.AppearanceTabPage.Header.Options.UseFont = true;
+			this.layoutControlGroupLinksRoot.AppearanceTabPage.HeaderActive.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlGroupLinksRoot.AppearanceTabPage.HeaderActive.Options.UseFont = true;
+			this.layoutControlGroupLinksRoot.AppearanceTabPage.HeaderDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlGroupLinksRoot.AppearanceTabPage.HeaderDisabled.Options.UseFont = true;
+			this.layoutControlGroupLinksRoot.AppearanceTabPage.HeaderHotTracked.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlGroupLinksRoot.AppearanceTabPage.HeaderHotTracked.Options.UseFont = true;
+			this.layoutControlGroupLinksRoot.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+			this.layoutControlGroupLinksRoot.GroupBordersVisible = false;
+			this.layoutControlGroupLinksRoot.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItemLogo,
+            this.simpleLabelItemTitle,
+            this.layoutControlItemBarDockControlTop,
+            this.layoutControlItemBundleItems});
+			this.layoutControlGroupLinksRoot.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlGroupLinksRoot.Name = "Root";
+			this.layoutControlGroupLinksRoot.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+			this.layoutControlGroupLinksRoot.Size = new System.Drawing.Size(914, 484);
+			this.layoutControlGroupLinksRoot.TextVisible = false;
+			// 
+			// layoutControlItemLogo
+			// 
+			this.layoutControlItemLogo.Control = this.pictureEditLogo;
+			this.layoutControlItemLogo.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+			this.layoutControlItemLogo.FillControlToClientArea = false;
+			this.layoutControlItemLogo.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlItemLogo.MaxSize = new System.Drawing.Size(72, 72);
+			this.layoutControlItemLogo.MinSize = new System.Drawing.Size(72, 72);
+			this.layoutControlItemLogo.Name = "layoutControlItemLogo";
+			this.layoutControlItemLogo.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 4, 4);
+			this.layoutControlItemLogo.Size = new System.Drawing.Size(72, 72);
+			this.layoutControlItemLogo.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.layoutControlItemLogo.Text = "Logo";
+			this.layoutControlItemLogo.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemLogo.TextVisible = false;
+			this.layoutControlItemLogo.TrimClientAreaToControl = false;
+			// 
+			// simpleLabelItemTitle
+			// 
+			this.simpleLabelItemTitle.AllowHotTrack = false;
+			this.simpleLabelItemTitle.AllowHtmlStringInCaption = true;
+			this.simpleLabelItemTitle.AppearanceItemCaption.Options.UseTextOptions = true;
+			this.simpleLabelItemTitle.AppearanceItemCaption.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.None;
+			this.simpleLabelItemTitle.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+			this.simpleLabelItemTitle.FillControlToClientArea = false;
+			this.simpleLabelItemTitle.Location = new System.Drawing.Point(72, 0);
+			this.simpleLabelItemTitle.MaxSize = new System.Drawing.Size(0, 72);
+			this.simpleLabelItemTitle.MinSize = new System.Drawing.Size(226, 72);
+			this.simpleLabelItemTitle.Name = "simpleLabelItemTitle";
+			this.simpleLabelItemTitle.Size = new System.Drawing.Size(842, 72);
+			this.simpleLabelItemTitle.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.simpleLabelItemTitle.Text = "<size=+4>Drag & Drop the <b><u>Link Order:</u></b></size>";
+			this.simpleLabelItemTitle.TextSize = new System.Drawing.Size(234, 21);
+			this.simpleLabelItemTitle.TrimClientAreaToControl = false;
+			// 
+			// layoutControlItemBarDockControlTop
+			// 
+			this.layoutControlItemBarDockControlTop.Control = this.barDockControlTop;
+			this.layoutControlItemBarDockControlTop.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+			this.layoutControlItemBarDockControlTop.FillControlToClientArea = false;
+			this.layoutControlItemBarDockControlTop.Location = new System.Drawing.Point(0, 72);
+			this.layoutControlItemBarDockControlTop.MaxSize = new System.Drawing.Size(0, 48);
+			this.layoutControlItemBarDockControlTop.MinSize = new System.Drawing.Size(104, 48);
+			this.layoutControlItemBarDockControlTop.Name = "layoutControlItemBarDockControlTop";
+			this.layoutControlItemBarDockControlTop.Size = new System.Drawing.Size(914, 48);
+			this.layoutControlItemBarDockControlTop.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.layoutControlItemBarDockControlTop.Text = "Bar Dock Control Top";
+			this.layoutControlItemBarDockControlTop.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemBarDockControlTop.TextVisible = false;
+			this.layoutControlItemBarDockControlTop.TrimClientAreaToControl = false;
+			// 
+			// layoutControlItemBundleItems
+			// 
+			this.layoutControlItemBundleItems.Control = this.gridControlBundleItems;
+			this.layoutControlItemBundleItems.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+			this.layoutControlItemBundleItems.FillControlToClientArea = false;
+			this.layoutControlItemBundleItems.Location = new System.Drawing.Point(0, 120);
+			this.layoutControlItemBundleItems.Name = "layoutControlItemBundleItems";
+			this.layoutControlItemBundleItems.Size = new System.Drawing.Size(914, 364);
+			this.layoutControlItemBundleItems.Text = "Bundle Items";
+			this.layoutControlItemBundleItems.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemBundleItems.TextVisible = false;
+			this.layoutControlItemBundleItems.TrimClientAreaToControl = false;
+			// 
+			// layoutControlMain
+			// 
+			this.layoutControlMain.Appearance.Control.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.layoutControlMain.Appearance.Control.Options.UseFont = true;
+			this.layoutControlMain.Appearance.ControlDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlMain.Appearance.ControlDisabled.Options.UseFont = true;
+			this.layoutControlMain.Appearance.ControlDropDown.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlMain.Appearance.ControlDropDown.Options.UseFont = true;
+			this.layoutControlMain.Appearance.ControlDropDownHeader.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlMain.Appearance.ControlDropDownHeader.Options.UseFont = true;
+			this.layoutControlMain.Appearance.ControlFocused.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlMain.Appearance.ControlFocused.Options.UseFont = true;
+			this.layoutControlMain.Appearance.ControlReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlMain.Appearance.ControlReadOnly.Options.UseFont = true;
+			this.layoutControlMain.BackColor = System.Drawing.Color.White;
+			this.layoutControlMain.Controls.Add(this.buttonXOK);
+			this.layoutControlMain.Controls.Add(this.buttonXCancel);
+			this.layoutControlMain.Controls.Add(this.xtraTabControl);
+			this.layoutControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.layoutControlMain.ForeColor = System.Drawing.Color.Black;
+			this.layoutControlMain.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlMain.Name = "layoutControlMain";
+			this.layoutControlMain.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(802, 383, 250, 350);
+			this.layoutControlMain.Root = this.layoutControlGroupRoot;
+			this.layoutControlMain.Size = new System.Drawing.Size(934, 579);
+			this.layoutControlMain.StyleController = this.styleController;
+			this.layoutControlMain.TabIndex = 63;
+			this.layoutControlMain.Text = "layoutControl1";
+			// 
+			// xtraTabControl
+			// 
+			this.xtraTabControl.Appearance.BackColor = System.Drawing.Color.White;
+			this.xtraTabControl.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.xtraTabControl.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.xtraTabControl.Appearance.Options.UseBackColor = true;
+			this.xtraTabControl.Appearance.Options.UseFont = true;
+			this.xtraTabControl.Appearance.Options.UseForeColor = true;
+			this.xtraTabControl.AppearancePage.Header.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.xtraTabControl.AppearancePage.Header.Options.UseFont = true;
+			this.xtraTabControl.AppearancePage.HeaderActive.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.xtraTabControl.AppearancePage.HeaderActive.Options.UseFont = true;
+			this.xtraTabControl.AppearancePage.HeaderDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.xtraTabControl.AppearancePage.HeaderDisabled.Options.UseFont = true;
+			this.xtraTabControl.AppearancePage.HeaderHotTracked.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.xtraTabControl.AppearancePage.HeaderHotTracked.Options.UseFont = true;
+			this.xtraTabControl.AppearancePage.PageClient.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.xtraTabControl.AppearancePage.PageClient.Options.UseFont = true;
+			this.xtraTabControl.Location = new System.Drawing.Point(7, 2);
+			this.xtraTabControl.Name = "xtraTabControl";
+			this.xtraTabControl.SelectedTabPage = this.xtraTabPageLinks;
+			this.xtraTabControl.Size = new System.Drawing.Size(920, 515);
+			this.xtraTabControl.TabIndex = 64;
+			this.xtraTabControl.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
+            this.xtraTabPageLinks});
+			// 
+			// xtraTabPageLinks
+			// 
+			this.xtraTabPageLinks.Appearance.PageClient.ForeColor = System.Drawing.Color.Black;
+			this.xtraTabPageLinks.Appearance.PageClient.Options.UseForeColor = true;
+			this.xtraTabPageLinks.Controls.Add(this.layoutControlLinks);
+			this.xtraTabPageLinks.Name = "xtraTabPageLinks";
+			this.xtraTabPageLinks.Size = new System.Drawing.Size(914, 484);
+			this.xtraTabPageLinks.Text = "Links";
+			// 
+			// layoutControlGroupRoot
+			// 
+			this.layoutControlGroupRoot.AllowHtmlStringInCaption = true;
+			this.layoutControlGroupRoot.AppearanceGroup.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlGroupRoot.AppearanceGroup.Options.UseFont = true;
+			this.layoutControlGroupRoot.AppearanceItemCaption.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlGroupRoot.AppearanceItemCaption.Options.UseFont = true;
+			this.layoutControlGroupRoot.AppearanceTabPage.Header.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlGroupRoot.AppearanceTabPage.Header.Options.UseFont = true;
+			this.layoutControlGroupRoot.AppearanceTabPage.HeaderActive.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlGroupRoot.AppearanceTabPage.HeaderActive.Options.UseFont = true;
+			this.layoutControlGroupRoot.AppearanceTabPage.HeaderDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlGroupRoot.AppearanceTabPage.HeaderDisabled.Options.UseFont = true;
+			this.layoutControlGroupRoot.AppearanceTabPage.HeaderHotTracked.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlGroupRoot.AppearanceTabPage.HeaderHotTracked.Options.UseFont = true;
+			this.layoutControlGroupRoot.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+			this.layoutControlGroupRoot.GroupBordersVisible = false;
+			this.layoutControlGroupRoot.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.emptySpaceItem1,
+            this.layoutControlItemItems,
+            this.layoutControlItemCancel,
+            this.emptySpaceItem3,
+            this.layoutControlItemOK,
+            this.emptySpaceItem2});
+			this.layoutControlGroupRoot.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlGroupRoot.Name = "Root";
+			this.layoutControlGroupRoot.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 0, 10);
+			this.layoutControlGroupRoot.Size = new System.Drawing.Size(934, 579);
+			this.layoutControlGroupRoot.TextVisible = false;
+			// 
+			// emptySpaceItem1
+			// 
+			this.emptySpaceItem1.AllowHotTrack = false;
+			this.emptySpaceItem1.Location = new System.Drawing.Point(0, 529);
+			this.emptySpaceItem1.Name = "emptySpaceItem1";
+			this.emptySpaceItem1.Size = new System.Drawing.Size(664, 40);
+			this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// layoutControlItemItems
+			// 
+			this.layoutControlItemItems.Control = this.xtraTabControl;
+			this.layoutControlItemItems.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+			this.layoutControlItemItems.FillControlToClientArea = false;
+			this.layoutControlItemItems.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlItemItems.Name = "layoutControlItemItems";
+			this.layoutControlItemItems.Size = new System.Drawing.Size(924, 519);
+			this.layoutControlItemItems.Text = "Items";
+			this.layoutControlItemItems.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemItems.TextVisible = false;
+			this.layoutControlItemItems.TrimClientAreaToControl = false;
+			// 
+			// layoutControlItemCancel
+			// 
+			this.layoutControlItemCancel.Control = this.buttonXCancel;
+			this.layoutControlItemCancel.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+			this.layoutControlItemCancel.FillControlToClientArea = false;
+			this.layoutControlItemCancel.Location = new System.Drawing.Point(804, 529);
+			this.layoutControlItemCancel.MaxSize = new System.Drawing.Size(120, 40);
+			this.layoutControlItemCancel.MinSize = new System.Drawing.Size(120, 40);
+			this.layoutControlItemCancel.Name = "layoutControlItemCancel";
+			this.layoutControlItemCancel.Size = new System.Drawing.Size(120, 40);
+			this.layoutControlItemCancel.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.layoutControlItemCancel.Text = "Cancel";
+			this.layoutControlItemCancel.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemCancel.TextVisible = false;
+			this.layoutControlItemCancel.TrimClientAreaToControl = false;
+			// 
+			// emptySpaceItem3
+			// 
+			this.emptySpaceItem3.AllowHotTrack = false;
+			this.emptySpaceItem3.Location = new System.Drawing.Point(784, 529);
+			this.emptySpaceItem3.MaxSize = new System.Drawing.Size(20, 0);
+			this.emptySpaceItem3.MinSize = new System.Drawing.Size(20, 10);
+			this.emptySpaceItem3.Name = "emptySpaceItem3";
+			this.emptySpaceItem3.Size = new System.Drawing.Size(20, 40);
+			this.emptySpaceItem3.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem3.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// layoutControlItemOK
+			// 
+			this.layoutControlItemOK.Control = this.buttonXOK;
+			this.layoutControlItemOK.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+			this.layoutControlItemOK.FillControlToClientArea = false;
+			this.layoutControlItemOK.Location = new System.Drawing.Point(664, 529);
+			this.layoutControlItemOK.MaxSize = new System.Drawing.Size(120, 40);
+			this.layoutControlItemOK.MinSize = new System.Drawing.Size(120, 40);
+			this.layoutControlItemOK.Name = "layoutControlItemOK";
+			this.layoutControlItemOK.Size = new System.Drawing.Size(120, 40);
+			this.layoutControlItemOK.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.layoutControlItemOK.Text = "OK";
+			this.layoutControlItemOK.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemOK.TextVisible = false;
+			this.layoutControlItemOK.TrimClientAreaToControl = false;
+			// 
+			// emptySpaceItem2
+			// 
+			this.emptySpaceItem2.AllowHotTrack = false;
+			this.emptySpaceItem2.Location = new System.Drawing.Point(0, 519);
+			this.emptySpaceItem2.MaxSize = new System.Drawing.Size(0, 10);
+			this.emptySpaceItem2.MinSize = new System.Drawing.Size(10, 10);
+			this.emptySpaceItem2.Name = "emptySpaceItem2";
+			this.emptySpaceItem2.Size = new System.Drawing.Size(924, 10);
+			this.emptySpaceItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
+			// 
 			// FormEditBundle
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.ClientSize = new System.Drawing.Size(934, 579);
-			this.Controls.Add(this.xtraTabControl);
-			this.Controls.Add(this.pnBottom);
+			this.Controls.Add(this.layoutControlMain);
 			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -611,13 +874,7 @@
 			this.Text = "FormEditBundle";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.OnFormClosed);
 			this.Load += new System.EventHandler(this.OnFormEditBundleLoad);
-			this.pnBottom.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.xtraTabControl)).EndInit();
-			this.xtraTabControl.ResumeLayout(false);
-			this.xtraTabPageLinks.ResumeLayout(false);
-			this.pnLinksMain.ResumeLayout(false);
-			this.pnLinksMain.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlBundleItems)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewBundleItems)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEditBundelItems)).EndInit();
@@ -627,24 +884,38 @@
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditBundleItemsActions)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditBundleItemsDisabledText)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEditBundleItemsDisabled)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.pnLinksTop)).EndInit();
-			this.pnLinksTop.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLinksLogo)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.barManager)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlLinks)).EndInit();
+			this.layoutControlLinks.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.pictureEditLogo.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemBarDockControlLeft)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemBarDockControlBottom)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemBarDockControlRight)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupLinksRoot)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemLogo)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemTitle)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemBarDockControlTop)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemBundleItems)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlMain)).EndInit();
+			this.layoutControlMain.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.xtraTabControl)).EndInit();
+			this.xtraTabControl.ResumeLayout(false);
+			this.xtraTabPageLinks.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupRoot)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemItems)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemCancel)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemOK)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
 			this.ResumeLayout(false);
 
 		}
 
 		#endregion
-
-		private System.Windows.Forms.Panel pnBottom;
 		private DevComponents.DotNetBar.ButtonX buttonXCancel;
 		private DevComponents.DotNetBar.ButtonX buttonXOK;
 		private DevExpress.XtraEditors.StyleController styleController;
-		public DevExpress.XtraTab.XtraTabControl xtraTabControl;
-		private DevExpress.XtraTab.XtraTabPage xtraTabPageLinks;
-		private System.Windows.Forms.PictureBox pictureBoxLinksLogo;
-		private DevExpress.XtraEditors.LabelControl labelControlLinksTitle;
 		private DevExpress.XtraGrid.GridControl gridControlBundleItems;
 		private DevExpress.XtraGrid.Views.Grid.GridView gridViewBundleItems;
 		private DevExpress.XtraGrid.Columns.GridColumn gridColumnBundleItemsImage;
@@ -669,12 +940,30 @@
 		private DevExpress.XtraBars.BarDockControl barDockControlBottom;
 		private DevExpress.XtraBars.BarDockControl barDockControlLeft;
 		private DevExpress.XtraBars.BarDockControl barDockControlRight;
-		private System.Windows.Forms.Panel pnLinksMain;
 		private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEditBundleItemsDisabledText;
-		private DevExpress.XtraEditors.PanelControl pnLinksTop;
 		private DevExpress.XtraBars.BarLargeButtonItem barLargeButtonItemLinksAddLaunchScreen;
 		private DevExpress.XtraGrid.Columns.GridColumn gridColumnBundleItemsUseAsThumbnail;
 		private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEditBundleItemsDisabled;
 		private DevExpress.XtraBars.BarButtonItem barLargeButtonItemLinksAddCover;
+		private DevExpress.XtraLayout.LayoutControl layoutControlMain;
+		public DevExpress.XtraTab.XtraTabControl xtraTabControl;
+		private DevExpress.XtraTab.XtraTabPage xtraTabPageLinks;
+		private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroupRoot;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemItems;
+		private DevExpress.XtraLayout.LayoutControl layoutControlLinks;
+		private DevExpress.XtraEditors.PictureEdit pictureEditLogo;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemBarDockControlLeft;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemBarDockControlBottom;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemBarDockControlRight;
+		private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroupLinksRoot;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemLogo;
+		private DevExpress.XtraLayout.SimpleLabelItem simpleLabelItemTitle;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemBarDockControlTop;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemBundleItems;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemCancel;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem3;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemOK;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
 	}
 }

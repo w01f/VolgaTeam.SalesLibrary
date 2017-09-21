@@ -78,7 +78,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 			get { return Order; }
 			set { Order = value; }
 		}
-
+		
 		[NotMapped, JsonIgnore]
 		public IEnumerable<BaseLibraryLink> TopLevelLinks
 		{

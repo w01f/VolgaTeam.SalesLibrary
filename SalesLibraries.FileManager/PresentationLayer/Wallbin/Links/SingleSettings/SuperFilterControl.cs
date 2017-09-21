@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
+using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
+using SalesLibraries.Common.Helpers;
 using SalesLibraries.FileManager.Controllers;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings
 {
-	public partial class SuperFilterControl : UserControl
+	public sealed partial class SuperFilterControl : CheckedListBoxControl
 	{
 		private bool _loading;
 
@@ -16,14 +18,16 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		public SuperFilterControl()
 		{
-			InitializeComponent();
+			CheckOnClick = true;
+			ItemHeight = (Int32)(23f * Utils.GetScaleFactor(CreateGraphics().DpiX).Height);
+			MultiColumn = true;
+			SelectionMode = SelectionMode.None;
+			ItemCheck += OnItemCheck;
 		}
 
 		public void Init()
 		{
-			Visible = MainController.Instance.Lists.SuperFilters.Items.Any();
-			checkedListBoxControl.Items.Clear();
-			checkedListBoxControl.Items.AddRange(MainController.Instance.Lists.SuperFilters.Items.Cast<object>().ToArray());
+			Items.AddRange(MainController.Instance.Lists.SuperFilters.Items.Cast<object>().ToArray());
 		}
 
 		public void UpdateData()
@@ -41,7 +45,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			if (selectedLinks.Any())
 			{
 				Enabled = true;
-				foreach (CheckedListBoxItem item in checkedListBoxControl.Items)
+				foreach (CheckedListBoxItem item in Items)
 				{
 					var superFilter = item.Value.ToString();
 					if (selectedLinks.All(link => link.Tags.SuperFilters.Any(tag => String.Equals(tag, superFilter, StringComparison.OrdinalIgnoreCase))))
@@ -64,20 +68,20 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			Visible = false;
 			if (!AllowEdit) return;
 			_loading = true;
-			checkedListBoxControl.UnCheckAll();
+			UnCheckAll();
 			_loading = false;
 		}
 
-		private void checkedListBoxControl_ItemCheck(object sender, DevExpress.XtraEditors.Controls.ItemCheckEventArgs e)
+		private void OnItemCheck(object sender, DevExpress.XtraEditors.Controls.ItemCheckEventArgs e)
 		{
 			if (_loading) return;
 			var filtersToRemove =
-				checkedListBoxControl.Items
+				Items
 					.OfType<CheckedListBoxItem>()
 					.Where(it => it.CheckState != CheckState.Indeterminate)
 					.Select(it => it.Value.ToString());
 			var filtersToAdd =
-				checkedListBoxControl.Items
+				Items
 					.OfType<CheckedListBoxItem>()
 					.Where(it => it.CheckState == CheckState.Checked)
 					.Select(it => it.Value.ToString());

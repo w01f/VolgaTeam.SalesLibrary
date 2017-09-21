@@ -1,7 +1,8 @@
 using System;
-using System.Drawing;
 using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
+using DevExpress.Skins;
+using SalesLibraries.Common.Helpers;
 using SalesLibraries.CommonGUI.Common;
 using SalesLibraries.FileManager.Controllers;
 
@@ -22,16 +23,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Singl
 			textEditUrl.EnableSelectAll();
 			textEditUrl.Focus();
 
-			if (!((CreateGraphics()).DpiX > 96)) return;
-			var styleControllerFont = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2, styleController.Appearance.Font.Style);
-			styleController.AppearanceDisabled.Font = styleControllerFont;
-			styleController.AppearanceDropDown.Font = styleControllerFont;
-			styleController.AppearanceDropDownHeader.Font = styleControllerFont;
-			styleController.AppearanceFocused.Font = styleControllerFont;
-			styleController.AppearanceReadOnly.Font = styleControllerFont;
-
-			buttonXOK.Font = new Font(buttonXOK.Font.FontFamily, buttonXOK.Font.Size - 2, buttonXOK.Font.Style);
-			buttonXCancel.Font = new Font(buttonXCancel.Font.FontFamily, buttonXCancel.Font.Size - 2, buttonXCancel.Font.Style);
+			layoutControlItemOK.MinSize = RectangleHelper.ScaleSize(layoutControlItemOK.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemOK.MaxSize = RectangleHelper.ScaleSize(layoutControlItemOK.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCancel.MinSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCancel.MaxSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
 		private void OnFormClosing(object sender, FormClosingEventArgs e)

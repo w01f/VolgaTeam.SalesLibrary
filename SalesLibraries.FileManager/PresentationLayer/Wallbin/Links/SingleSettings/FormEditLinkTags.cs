@@ -5,9 +5,12 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
+using DevExpress.Skins;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraLayout;
+using DevExpress.XtraLayout.Utils;
 using DevExpress.XtraTreeList;
 using DevExpress.XtraTreeList.Nodes;
 using SalesLibraries.Business.Entities.Helpers;
@@ -40,46 +43,41 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		{
 			InitializeComponent();
 
-			hyperLinkEditRequestNewCategories.Visible =
+			layoutControlItemCategoriesRequestNew.Visibility =
 				!String.IsNullOrEmpty(MainController.Instance.Settings.CategoryRequestRecipients) &&
 				!String.IsNullOrEmpty(MainController.Instance.Settings.CategoryRequestSubject) &&
-				!String.IsNullOrEmpty(MainController.Instance.Settings.CategoryRequestBody);
+				!String.IsNullOrEmpty(MainController.Instance.Settings.CategoryRequestBody) ?
+				LayoutVisibility.Always :
+				LayoutVisibility.Never;
 
-			if (CreateGraphics().DpiX > 96)
-			{
-				var font = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2,
-					styleController.Appearance.Font.Style);
-				styleController.Appearance.Font = font;
-				styleController.AppearanceDisabled.Font = font;
-				styleController.AppearanceDropDown.Font = font;
-				styleController.AppearanceDropDownHeader.Font = font;
-				styleController.AppearanceFocused.Font = font;
-				styleController.AppearanceReadOnly.Font = font;
-
-				buttonXAddKeyWord.Font = new Font(buttonXAddKeyWord.Font.FontFamily, buttonXAddKeyWord.Font.Size - 2, buttonXAddKeyWord.Font.Style);
-				buttonXCancel.Font = new Font(buttonXCancel.Font.FontFamily, buttonXCancel.Font.Size - 2, buttonXCancel.Font.Style);
-				buttonXOK.Font = new Font(buttonXOK.Font.FontFamily, buttonXOK.Font.Size - 2, buttonXOK.Font.Style);
-			}
+			layoutControlItemCategoriesListExpandAll.MinSize = RectangleHelper.ScaleSize(layoutControlItemCategoriesListExpandAll.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCategoriesListExpandAll.MaxSize = RectangleHelper.ScaleSize(layoutControlItemCategoriesListExpandAll.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCategoriesListCollapseAll.MinSize = RectangleHelper.ScaleSize(layoutControlItemCategoriesListCollapseAll.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCategoriesListCollapseAll.MaxSize = RectangleHelper.ScaleSize(layoutControlItemCategoriesListCollapseAll.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemKeywordsAdd.MinSize = RectangleHelper.ScaleSize(layoutControlItemKeywordsAdd.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemKeywordsAdd.MaxSize = RectangleHelper.ScaleSize(layoutControlItemKeywordsAdd.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemOK.MinSize = RectangleHelper.ScaleSize(layoutControlItemOK.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemOK.MaxSize = RectangleHelper.ScaleSize(layoutControlItemOK.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCancel.MinSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCancel.MaxSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
 		public FormEditLinkTags(BaseLibraryLink sourceLink, FileTypes? defaultLinkType = null) : this()
 		{
 			_selectedLinks.Add(sourceLink);
-			panelFilesContainer.Visible = false;
-			Width = 950;
+			Width = Width - layoutControlItemLinksTree.Width;
+			layoutControlItemLinksTree.Visibility = LayoutVisibility.Never;
 		}
 
 		public FormEditLinkTags(ILinksGroup linkGroup, FileTypes? defaultLinkType = null) : this()
 		{
 			_linkGroup = linkGroup;
 			_defaultLinkType = defaultLinkType;
-			panelFilesContainer.Visible = true;
-			Width = 1150;
+			layoutControlItemLinksTree.Visibility = LayoutVisibility.Always;
 		}
 
 		public void InitForm<TEditControl>(LinkSettingsType settingsType) where TEditControl : ILinkSettingsEditControl
 		{
-			Height = 590;
 			FormStateHelper.Init(this, RemoteResourceManager.Instance.AppAliasSettingsFolder, String.Format("Site Admin-Link-Tags-{0}", _linkGroup != null ? "Link-Group" : "Single-Link"), false, false);
 			StartPosition = FormStartPosition.CenterParent;
 
@@ -124,7 +122,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		private void UpdateTitle()
 		{
-			labelControlTitle.Appearance.Image = xtraTabControl.SelectedTabPage == xtraTabPageCategories
+			labelControlTitle.Appearance.Image = tabbedControlGroupMain.SelectedTabPage == layoutControlGroupCategories
 				? Resources.LinkSettingsTagsLogoCategories
 				: Resources.LinkSettingsTagsLogoKeywords;
 			labelControlTitle.Text = String.Format(HeaderTitleTemplate,
@@ -135,10 +133,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		private void UpdateControlPanels()
 		{
-			panelTopControlsCategories.Visible = xtraTabControl.SelectedTabPage == xtraTabPageCategories;
-			panelBottomControlsCategories.Visible = xtraTabControl.SelectedTabPage == xtraTabPageCategories;
+			layoutControlGroupCategoriesHeader.Visibility = tabbedControlGroupMain.SelectedTabPage == layoutControlGroupCategories ? LayoutVisibility.Always : LayoutVisibility.Never;
+			layoutControlItemCategoriesRequestNew.Visibility = tabbedControlGroupMain.SelectedTabPage == layoutControlGroupCategories ? LayoutVisibility.Always : LayoutVisibility.Never;
 
-			panelTopControlsKeywords.Visible = xtraTabControl.SelectedTabPage == xtraTabPageKeywords;
+			layoutControlGroupKeywordsHeader.Visibility = tabbedControlGroupMain.SelectedTabPage == layoutControlGroupKeywords ? LayoutVisibility.Always : LayoutVisibility.Never;
 		}
 
 		private void FormEditLinkSettings_FormClosing(object sender, FormClosingEventArgs e)
@@ -152,7 +150,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			buttonXOK.Focus();
 		}
 
-		private void OnSelectedTabPageChanged(object sender, DevExpress.XtraTab.TabPageChangedEventArgs e)
+		private void OnSelectedTabPageChanged(object sender, LayoutTabPageChangedEventArgs e)
 		{
 			UpdateTitle();
 			UpdateControlPanels();
@@ -245,7 +243,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		private void LoadTreeView()
 		{
-			splitContainerCategories.Panel2.Controls.Clear();
+			panelCategoriesContent.Controls.Clear();
 			treeListCategories.Nodes.Clear();
 			_searchGroups.Clear();
 
@@ -269,7 +267,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 						UpdateSuperGroupNodes();
 						UpdateCategoryInfo();
 					};
-					splitContainerCategories.Panel2.Controls.Add(searchGroupContainer.ListBox);
+					panelCategoriesContent.Controls.Add(searchGroupContainer.ListBox);
 					_searchGroups.Add(searchGroupContainer);
 					groupNode.Tag = searchGroupContainer;
 					groupNode.StateImageIndex = 0;

@@ -17,7 +17,7 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 			var updated = false;
 			var pdfContainer = (PdfPreviewContainer)previewContainer;
 
-			var logger = new PreviewGenerationLogger(pdfContainer);
+			var logger = new FilePreviewGenerationLogger(pdfContainer);
 			logger.StartLogging();
 
 			var pngDestination = Path.Combine(pdfContainer.ContainerPath, PreviewFormats.Png);

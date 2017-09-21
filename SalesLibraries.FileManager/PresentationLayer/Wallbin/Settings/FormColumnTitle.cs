@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Drawing;
-using System.IO;
 using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
+using DevExpress.Skins;
 using DevExpress.Utils;
-using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
+using DevExpress.XtraLayout;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.CommonGUI.Common;
@@ -24,31 +24,18 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			InitializeComponent();
 			_columnTitle = columnTitle;
 
-			xtraTabPageBanner.PageEnabled = MainController.Instance.Lists.Banners.MainFolder.ExistsLocal();
-			xtraTabPageWidget.PageEnabled = MainController.Instance.Lists.Widgets.MainFolder.ExistsLocal();
+			layoutControlGroupBanner.PageEnabled = MainController.Instance.Lists.Banners.MainFolder.ExistsLocal();
+			layoutControlGroupWidget.PageEnabled = MainController.Instance.Lists.Widgets.MainFolder.ExistsLocal();
 
 			buttonEditFont.ButtonClick += EditorHelper.FontEdit_ButtonClick;
 			buttonEditFont.Click += EditorHelper.FontEdit_Click;
 
 			Load += OnFormLoad;
 
-			if ((base.CreateGraphics()).DpiX > 96)
-			{
-				laColumn1BackColor.Font = new Font(laColumn1BackColor.Font.FontFamily, laColumn1BackColor.Font.Size - 2, laColumn1BackColor.Font.Style);
-				laForeColor.Font = new Font(laForeColor.Font.FontFamily, laForeColor.Font.Size - 2, laForeColor.Font.Style);
-				laFont.Font = new Font(laFont.Font.FontFamily, laFont.Font.Size - 2, laFont.Font.Style);
-				laColumn1Alignment.Font = new Font(laColumn1Alignment.Font.FontFamily, laColumn1Alignment.Font.Size - 2, laColumn1Alignment.Font.Style);
-				ckEnableText.Font = new Font(ckEnableText.Font.FontFamily, ckEnableText.Font.Size - 2, ckEnableText.Font.Style);
-				rbAlignmentCenter.Font = new Font(rbAlignmentCenter.Font.FontFamily, rbAlignmentCenter.Font.Size - 2, rbAlignmentCenter.Font.Style);
-				rbAlignmentLeft.Font = new Font(rbAlignmentLeft.Font.FontFamily, rbAlignmentLeft.Font.Size - 2, rbAlignmentLeft.Font.Style);
-				rbAlignmentRight.Font = new Font(rbAlignmentRight.Font.FontFamily, rbAlignmentRight.Font.Size - 2, rbAlignmentRight.Font.Style);
-				ckApplyForAllColumnTitles.Font = new Font(ckApplyForAllColumnTitles.Font.FontFamily, ckApplyForAllColumnTitles.Font.Size - 2, ckApplyForAllColumnTitles.Font.Style);
-				xtraTabControlWindowProperties.Appearance.Font = new Font(xtraTabControlWindowProperties.Appearance.Font.FontFamily, xtraTabControlWindowProperties.Appearance.Font.Size - 2, xtraTabControlWindowProperties.Appearance.Font.Style);
-				xtraTabControlWindowProperties.AppearancePage.Header.Font = new Font(xtraTabControlWindowProperties.AppearancePage.Header.Font.FontFamily, xtraTabControlWindowProperties.AppearancePage.Header.Font.Size - 2, xtraTabControlWindowProperties.AppearancePage.Header.Font.Style);
-				xtraTabControlWindowProperties.AppearancePage.HeaderActive.Font = new Font(xtraTabControlWindowProperties.AppearancePage.HeaderActive.Font.FontFamily, xtraTabControlWindowProperties.AppearancePage.HeaderActive.Font.Size - 2, xtraTabControlWindowProperties.AppearancePage.HeaderActive.Font.Style);
-				xtraTabControlWindowProperties.AppearancePage.HeaderDisabled.Font = new Font(xtraTabControlWindowProperties.AppearancePage.HeaderDisabled.Font.FontFamily, xtraTabControlWindowProperties.AppearancePage.HeaderDisabled.Font.Size - 2, xtraTabControlWindowProperties.AppearancePage.HeaderDisabled.Font.Style);
-				xtraTabControlWindowProperties.AppearancePage.HeaderHotTracked.Font = new Font(xtraTabControlWindowProperties.AppearancePage.HeaderHotTracked.Font.FontFamily, xtraTabControlWindowProperties.AppearancePage.HeaderHotTracked.Font.Size - 2, xtraTabControlWindowProperties.AppearancePage.HeaderHotTracked.Font.Style);
-			}
+			layoutControlItemSave.MinSize = RectangleHelper.ScaleSize(layoutControlItemSave.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemSave.MaxSize = RectangleHelper.ScaleSize(layoutControlItemSave.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCancel.MinSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCancel.MaxSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
 		private void OnFormLoad(object sender, EventArgs e)
@@ -58,23 +45,23 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 
 		private void LoadData()
 		{
-			laLocation.Text = String.Format("Title for column {0}", (_columnTitle.ColumnOrder + 1).ToString("#,##0"));
+			labelControlLocation.Text = String.Format("Title for column {0}", (_columnTitle.ColumnOrder + 1).ToString("#,##0"));
 
-			ckApplyForAllColumnTitles.Checked = _columnTitle.Page.Settings.ApplyForAllColumnTitles;
+			checkEditApplyForAllColumnTitles.Checked = _columnTitle.Page.Settings.ApplyForAllColumnTitles;
 			colorEditBackColor.Color = _columnTitle.Settings.BackgroundColor;
 			switch (_columnTitle.Settings.HeaderAlignment)
 			{
 				case HorizontalAlignment.Left:
-					rbAlignmentLeft.Checked = true;
+					checkEditAlignmentLeft.Checked = true;
 					break;
 				case HorizontalAlignment.Center:
-					rbAlignmentCenter.Checked = true;
+					checkEditAlignmentCenter.Checked = true;
 					break;
 				case HorizontalAlignment.Right:
-					rbAlignmentRight.Checked = true;
+					checkEditAlignmentRight.Checked = true;
 					break;
 			}
-			ckEnableText.Checked = _columnTitle.Settings.ShowText;
+			checkEditEnableText.Checked = _columnTitle.Settings.ShowText;
 			memoEditTitle.EditValue = _columnTitle.Settings.Text;
 			colorEditForeColor.Color = _columnTitle.Settings.ForeColor;
 			buttonEditFont.Tag = _columnTitle.Settings.HeaderFont;
@@ -90,16 +77,16 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 
 		private void SaveData()
 		{
-			_columnTitle.Page.Settings.ApplyForAllColumnTitles = ckApplyForAllColumnTitles.Checked;
+			_columnTitle.Page.Settings.ApplyForAllColumnTitles = checkEditApplyForAllColumnTitles.Checked;
 			_columnTitle.Settings.BackgroundColor = colorEditBackColor.Color;
-			if (rbAlignmentLeft.Checked)
+			if (checkEditAlignmentLeft.Checked)
 				_columnTitle.Settings.HeaderAlignment = HorizontalAlignment.Left;
-			else if (rbAlignmentCenter.Checked)
+			else if (checkEditAlignmentCenter.Checked)
 				_columnTitle.Settings.HeaderAlignment = HorizontalAlignment.Center;
-			else if (rbAlignmentRight.Checked)
+			else if (checkEditAlignmentRight.Checked)
 				_columnTitle.Settings.HeaderAlignment = HorizontalAlignment.Right;
-			_columnTitle.Settings.Text = ckEnableText.Checked & memoEditTitle.EditValue != null ? memoEditTitle.EditValue.ToString() : string.Empty;
-			_columnTitle.Settings.ShowText = ckEnableText.Checked & !String.IsNullOrEmpty(_columnTitle.Settings.Text);
+			_columnTitle.Settings.Text = checkEditEnableText.Checked & memoEditTitle.EditValue != null ? memoEditTitle.EditValue.ToString() : string.Empty;
+			_columnTitle.Settings.ShowText = checkEditEnableText.Checked & !String.IsNullOrEmpty(_columnTitle.Settings.Text);
 			_columnTitle.Settings.ForeColor = colorEditForeColor.Color;
 			_columnTitle.Settings.HeaderFont = (Font)buttonEditFont.Tag;
 
@@ -114,14 +101,14 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			_columnTitle.Page.ApplyColumnTitleSettings(_columnTitle);
 		}
 
-		private void OnSelectedPageChanging(object sender, DevExpress.XtraTab.TabPageChangingEventArgs pageArgs)
+		private void OnSelectedPageChanging(object sender, LayoutTabPageChangedEventArgs pageArgs)
 		{
-			if (pageArgs.Page == xtraTabPageWidget && _widgetControl == null)
+			if (pageArgs.Page == layoutControlGroupWidget && _widgetControl == null)
 			{
 				Cursor = Cursors.WaitCursor;
 				Application.DoEvents();
 				_widgetControl = new WidgetSettingsControl(_columnTitle.Widget);
-				xtraTabPageWidget.Controls.Add(_widgetControl);
+				pnWidgetContainer.Controls.Add(_widgetControl);
 				_widgetControl.Dock = DockStyle.Fill;
 				_widgetControl.LoadData();
 				_widgetControl.StateChanged += (o, e) =>
@@ -132,12 +119,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 				_widgetControl.ControlClicked += OnFormClick;
 				Cursor = Cursors.Default;
 			}
-			else if (pageArgs.Page == xtraTabPageBanner && _bannerControl == null)
+			else if (pageArgs.Page == layoutControlGroupBanner && _bannerControl == null)
 			{
 				Cursor = Cursors.WaitCursor;
 				Application.DoEvents();
 				_bannerControl = new BannerSettingsControl(_columnTitle);
-				xtraTabPageBanner.Controls.Add(_bannerControl);
+				pnBannerContainer.Controls.Add(_bannerControl);
 				_bannerControl.Dock = DockStyle.Fill;
 				_bannerControl.LoadData();
 				_bannerControl.StateChanged += (o, e) =>
@@ -153,11 +140,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 		#region Appearance
 		private void ckEnableText_CheckedChanged(object sender, EventArgs e)
 		{
-			laFont.Enabled = ckEnableText.Checked;
-			laForeColor.Enabled = ckEnableText.Checked;
-			memoEditTitle.Enabled = ckEnableText.Checked;
-			colorEditForeColor.Enabled = ckEnableText.Checked;
-			buttonEditFont.Enabled = ckEnableText.Checked;
+			layoutControlItemTitle.Enabled = checkEditEnableText.Checked;
+			layoutControlItemForeColor.Enabled = checkEditEnableText.Checked;
+			layoutControlItemFont.Enabled = checkEditEnableText.Checked;
 		}
 
 		private void colorEditBackColor_EditValueChanged(object sender, EventArgs e)
@@ -181,7 +166,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 
 		private void rbAlignmentLeft_CheckedChanged(object sender, EventArgs e)
 		{
-			if (!rbAlignmentLeft.Checked) return;
+			if (!checkEditAlignmentLeft.Checked) return;
 			memoEditTitle.Properties.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
 			memoEditTitle.Properties.AppearanceDisabled.TextOptions.HAlignment = HorzAlignment.Near;
 			memoEditTitle.Properties.AppearanceFocused.TextOptions.HAlignment = HorzAlignment.Near;
@@ -190,7 +175,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 
 		private void rbAlignmentCenter_CheckedChanged(object sender, EventArgs e)
 		{
-			if (!rbAlignmentCenter.Checked) return;
+			if (!checkEditAlignmentCenter.Checked) return;
 			memoEditTitle.Properties.Appearance.TextOptions.HAlignment = HorzAlignment.Center;
 			memoEditTitle.Properties.AppearanceDisabled.TextOptions.HAlignment = HorzAlignment.Center;
 			memoEditTitle.Properties.AppearanceFocused.TextOptions.HAlignment = HorzAlignment.Center;
@@ -199,7 +184,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 
 		private void rbAlignmentRight_CheckedChanged(object sender, EventArgs e)
 		{
-			if (!rbAlignmentRight.Checked) return;
+			if (!checkEditAlignmentRight.Checked) return;
 			memoEditTitle.Properties.Appearance.TextOptions.HAlignment = HorzAlignment.Far;
 			memoEditTitle.Properties.AppearanceDisabled.TextOptions.HAlignment = HorzAlignment.Far;
 			memoEditTitle.Properties.AppearanceFocused.TextOptions.HAlignment = HorzAlignment.Far;

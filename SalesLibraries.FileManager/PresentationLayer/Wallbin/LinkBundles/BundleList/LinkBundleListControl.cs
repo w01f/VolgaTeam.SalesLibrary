@@ -3,18 +3,20 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using DevExpress.Skins;
 using DevExpress.Utils.Menu;
-using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using DevExpress.XtraLayout.Utils;
 using SalesLibraries.Business.Entities.Helpers;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkBundleSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.DataState;
+using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.Objects.Graphics;
 using SalesLibraries.CommonGUI.Common;
 using SalesLibraries.CommonGUI.CustomDialog;
@@ -45,6 +47,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Bundl
 				if (e.ChangeType != DataChangeType.LinksDeleted) return;
 				LoadBundleItems();
 			};
+
+			layoutControlItemSwitchBundleItems.MinSize = RectangleHelper.ScaleSize(layoutControlItemSwitchBundleItems.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemSwitchBundleItems.MaxSize = RectangleHelper.ScaleSize(layoutControlItemSwitchBundleItems.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
 		public void LoadData(Library library)
@@ -151,6 +156,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Bundl
 			{
 				form.Width = 500;
 				form.Height = 160;
+				form.Size = RectangleHelper.ScaleSize(form.Size, Utils.GetScaleFactor(CreateGraphics().DpiX));
 				if (form.ShowDialog(MainController.Instance.MainForm) == DialogResult.OK)
 				{
 					var currentBundleIndex = gridViewBundles.FocusedRowHandle;
@@ -188,15 +194,15 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Bundl
 
 		private void OnSwitchBundleItemsPanel(object sender, EventArgs e)
 		{
-			var isLinksVisible = splitContainerControl.PanelVisibility == SplitPanelVisibility.Both;
+			var isLinksVisible = layoutControlGroupBundleItems.Visibility == LayoutVisibility.Always;
 			if (isLinksVisible)
 			{
-				splitContainerControl.PanelVisibility = SplitPanelVisibility.Panel1;
+				layoutControlGroupBundleItems.Visibility = LayoutVisibility.Never;
 				buttonXSwitchBundleItems.Text = "Show Bundle Items";
 			}
 			else
 			{
-				splitContainerControl.PanelVisibility = SplitPanelVisibility.Both;
+				layoutControlGroupBundleItems.Visibility = LayoutVisibility.Always;
 				buttonXSwitchBundleItems.Text = "Hide Bundle Items";
 			}
 		}
@@ -215,7 +221,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Bundl
 
 		private void OnGridBundlesButtonClick(object sender, ButtonPressedEventArgs e)
 		{
-			switch ((String) e.Button.Tag)
+			switch ((String)e.Button.Tag)
 			{
 				case "Edit":
 					EditBundle();
@@ -236,7 +242,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Bundl
 			if (downHitInfo == null) return;
 			var sourceBundle = view.GetRow(downHitInfo.RowHandle) as LinkBundle;
 			var targetRowIndex = hitInfo.HitTest == GridHitTest.EmptyRow ? view.DataRowCount : hitInfo.RowHandle;
-			((IList<LinkBundle>) _library.LinkBundles).ChangeItemPosition(sourceBundle, targetRowIndex);
+			((IList<LinkBundle>)_library.LinkBundles).ChangeItemPosition(sourceBundle, targetRowIndex);
 			LoadBundles(targetRowIndex);
 			RaiseDataChanged();
 		}
@@ -303,6 +309,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Bundl
 			{
 				form.Width = 500;
 				form.Height = 160;
+				form.Size = RectangleHelper.ScaleSize(form.Size, Utils.GetScaleFactor(CreateGraphics().DpiX));
 				if (form.ShowDialog(MainController.Instance.MainForm) == DialogResult.OK)
 				{
 					var currentItemIndex = gridViewBundleItems.FocusedRowHandle;
@@ -320,7 +327,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Bundl
 
 		private void OnGridBundleItemsButtonClick(object sender, ButtonPressedEventArgs e)
 		{
-			switch ((String) e.Button.Tag)
+			switch ((String)e.Button.Tag)
 			{
 				case "Edit":
 					EditBundle();
@@ -349,8 +356,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Bundl
 		private void OnGridBundleItemsDragEnter(object sender, DragEventArgs e)
 		{
 			if (e.Data != null &&
-			    e.Data.GetDataPresent(typeof(LinkRow)) &&
-			    ((LinkRow) e.Data.GetData(typeof(LinkRow))).IsLinkBundleCompatible)
+				e.Data.GetDataPresent(typeof(LinkRow)) &&
+				((LinkRow)e.Data.GetData(typeof(LinkRow))).IsLinkBundleCompatible)
 				e.Effect = DragDropEffects.Copy;
 		}
 
@@ -369,7 +376,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Bundl
 			using (var form = new FormImageGallery<Widget>(MainController.Instance.Lists.LinkBundleImages))
 			{
 				if (form.ShowDialog() != DialogResult.OK) return;
-				SelectedBundleItem.Image = (Image) form.OriginalImage.Clone();
+				SelectedBundleItem.Image = (Image)form.OriginalImage.Clone();
 				gridViewBundleItems.UpdateCurrentRow();
 				RaiseDataChanged();
 			}
@@ -377,7 +384,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Bundl
 
 		private void OnGridBundleItemsRowCellStyle(object sender, RowCellStyleEventArgs e)
 		{
-			var bundleItem = ((GridView) sender).GetRow(e.RowHandle) as LibraryLinkItem;
+			var bundleItem = ((GridView)sender).GetRow(e.RowHandle) as LibraryLinkItem;
 			if (bundleItem != null && bundleItem.IsDead)
 				e.Appearance.ForeColor = Color.Red;
 		}

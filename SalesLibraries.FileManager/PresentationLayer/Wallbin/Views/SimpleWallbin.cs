@@ -30,7 +30,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 		{
 			base.InitControls();
 			_pageSelector = MainController.Instance.TabWallbin.comboBoxEditPages;
-			_pageSelector.Enabled = Pages.Count > 1;
+			MainController.Instance.TabWallbin.layoutControlItemPages.Enabled = Pages.Count > 1;
 			_pageSelector.Properties.Items.Clear();
 			_pageSelector.Properties.Items.AddRange(Pages);
 			_pageSelector.EditValue = ActivePage;

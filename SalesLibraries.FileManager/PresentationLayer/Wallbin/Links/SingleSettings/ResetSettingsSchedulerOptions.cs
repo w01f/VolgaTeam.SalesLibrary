@@ -28,17 +28,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			Text = "Link RESET Timer";
 
 			dateEditExpirationDate.Properties.NullDate = DateTime.MinValue;
-			if ((CreateGraphics()).DpiX > 96)
-			{
-				var font = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2,
-					styleController.Appearance.Font.Style);
-				styleController.Appearance.Font = font;
-				styleController.AppearanceDisabled.Font = font;
-				styleController.AppearanceDropDown.Font = font;
-				styleController.AppearanceDropDownHeader.Font = font;
-				styleController.AppearanceFocused.Font = font;
-				styleController.AppearanceReadOnly.Font = font;
-			}
+			layoutControlGroupDate.Enabled = false;
+			layoutControlGroupLinkSettingsGroup.Enabled = false;
 		}
 
 		public ResetSettingsSchedulerOptions(FileTypes? defaultLinkType = null) : this() { }
@@ -120,16 +111,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		private void checkBoxEnableResetSettingsScheduler_CheckedChanged(object sender, EventArgs e)
 		{
-			dateEditExpirationDate.Enabled = checkEditEnableResetSettingsScheduler.Checked;
-			timeEditExpirationTime.Enabled = checkEditEnableResetSettingsScheduler.Checked;
-			checkEditLinkSettingsGroupExpirationDate.Enabled = checkEditEnableResetSettingsScheduler.Checked;
-			checkEditLinkSettingsGroupHoverNotes.Enabled = checkEditEnableResetSettingsScheduler.Checked;
-			checkEditLinkSettingsGroupKeywords.Enabled = checkEditEnableResetSettingsScheduler.Checked;
-			checkEditLinkSettingsGroupSearchTags.Enabled = checkEditEnableResetSettingsScheduler.Checked;
-			checkEditLinkSettingsGroupTextFormatting.Enabled = checkEditEnableResetSettingsScheduler.Checked;
-			checkEditLinkSettingsGroupSecurity.Enabled = checkEditEnableResetSettingsScheduler.Checked;
-			checkEditLinkSettingsGroupTextNotes.Enabled = checkEditEnableResetSettingsScheduler.Checked;
-			checkEditLinkSettingsGroupWidgetsAndBanners.Enabled = checkEditEnableResetSettingsScheduler.Checked;
+			layoutControlGroupDate.Enabled =
+			layoutControlGroupLinkSettingsGroup.Enabled =
+				checkEditEnableResetSettingsScheduler.Checked;
 
 			if (checkEditEnableResetSettingsScheduler.Checked)
 			{

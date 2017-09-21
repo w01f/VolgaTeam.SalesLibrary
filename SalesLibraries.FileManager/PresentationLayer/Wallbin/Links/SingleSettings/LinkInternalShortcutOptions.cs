@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraTab;
@@ -30,18 +29,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		{
 			InitializeComponent();
 			Text = "Admin";
-
-			if ((CreateGraphics()).DpiX > 96)
-			{
-				var styleControllerFont = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2, styleController.Appearance.Font.Style);
-				styleController.AppearanceDisabled.Font = styleControllerFont;
-				styleController.AppearanceDropDown.Font = styleControllerFont;
-				styleController.AppearanceDropDownHeader.Font = styleControllerFont;
-				styleController.AppearanceFocused.Font = styleControllerFont;
-				styleController.AppearanceReadOnly.Font = styleControllerFont;
-
-				ckOpenOnSamePage.Font = new Font(ckOpenOnSamePage.Font.FontFamily, ckOpenOnSamePage.Font.Size - 2, ckOpenOnSamePage.Font.Style);
-			}
 		}
 
 		public LinkInternalShortcutOptions(FileTypes? defaultLinkType = null) : this() { }
@@ -81,14 +68,14 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				comboBoxEditShortcutGroup.EditValue = shortcut.GroupFolder;
 				comboBoxEditShortcutLink.EditValue = shortcut;
 			}
-			ckOpenOnSamePage.Checked = !((InternalShortcutLinkSettings)_data.Settings).OpenOnSamePage;
+			checkEditOpenOnSamePage.Checked = !((InternalShortcutLinkSettings)_data.Settings).OpenOnSamePage;
 		}
 
 		public void SaveData()
 		{
 			_data.Name = textEditName.EditValue as String;
 			((InternalShortcutLinkSettings)_data.Settings).ShortcutId = (comboBoxEditShortcutLink.EditValue as ShortcutLink)?.Id;
-			((InternalShortcutLinkSettings)_data.Settings).OpenOnSamePage = !ckOpenOnSamePage.Checked;
+			((InternalShortcutLinkSettings)_data.Settings).OpenOnSamePage = !checkEditOpenOnSamePage.Checked;
 		}
 
 		private void OnShortcutGroupChanged(object sender, EventArgs e)

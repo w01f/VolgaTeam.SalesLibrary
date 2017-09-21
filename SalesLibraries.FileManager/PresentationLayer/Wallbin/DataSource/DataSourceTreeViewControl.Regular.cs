@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.XtraLayout.Utils;
 using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
+using SalesLibraries.FileManager.Controllers;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 {
@@ -21,7 +23,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 			var expandNode = treeListRegularFiles.AppendNode(new object[] { "Expand All" }, null);
 			expandNode.StateImageIndex = 0;
 
-			await Task.Run(() => Invoke(new MethodInvoker(() =>
+			await Task.Run(() => MainController.Instance.MainForm.Invoke(new MethodInvoker(() =>
 			{
 				foreach (var rootNode in _dataSources.Select(rootFolder =>
 					treeListRegularFiles.AppendNode(new[] { rootFolder.Name }, null, new FolderLink { RootId = rootFolder.DataSourceId, Path = rootFolder.Path })))
@@ -36,14 +38,14 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 
 		public void ShowFileInTree(string filePath)
 		{
-			xtraTabControlFiles.SelectedTabPage = xtraTabPageRegular;
+			tabbedControlGroupFiles.SelectedTabPage = layoutControlGroupRegularFiles;
 			treeListRegularFiles.Selection.Clear();
 
 			treeListRegularFiles.SuspendLayout();
-			laTreeViewProgressLabel.Text = "Searching Item...";
-			pnTreeViewProgress.Visible = true;
+			labelControlProgress.Text = "Searching Item...";
+			layoutControlGroupProgress.Visibility = LayoutVisibility.Always;;
 			circularProgressTreeView.IsRunning = true;
-			xtraTabControlFiles.Enabled = false;
+			layoutControlGroupFiles.Enabled = false;
 
 			var thread = new Thread(() => Invoke(new MethodInvoker(() =>
 			{
@@ -58,9 +60,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 				Application.DoEvents();
 			}
 
-			xtraTabControlFiles.Enabled = true;
+			layoutControlGroupFiles.Enabled = true;
 			circularProgressTreeView.IsRunning = false;
-			pnTreeViewProgress.Visible = false;
+			layoutControlGroupProgress.Visibility = LayoutVisibility.Never;
 			treeListRegularFiles.ResumeLayout();
 			treeListRegularFiles.Enabled = true;
 		}

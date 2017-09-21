@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using DevExpress.XtraEditors;
-using DevExpress.XtraEditors.Controls;
+using DevExpress.XtraLayout.Utils;
 using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
@@ -32,16 +31,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 			buttonEditLinkSpecialFont.ButtonClick += EditorHelper.FontEdit_ButtonClick;
 			buttonEditLinkSpecialFont.Click += EditorHelper.FontEdit_Click;
-
-			if ((CreateGraphics()).DpiX > 96)
-			{
-				var styleControllerFont = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2, styleController.Appearance.Font.Style);
-				styleController.AppearanceDisabled.Font = styleControllerFont;
-				styleController.AppearanceDropDown.Font = styleControllerFont;
-				styleController.AppearanceDropDownHeader.Font = styleControllerFont;
-				styleController.AppearanceFocused.Font = styleControllerFont;
-				styleController.AppearanceReadOnly.Font = styleControllerFont;
-			}
 		}
 
 		public LinkTextOptions(FileTypes? defaultLinkType = null) : this() { }
@@ -89,7 +78,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		private void checkEditSpecialFormat_CheckedChanged(object sender, EventArgs e)
 		{
-			buttonEditLinkSpecialFont.Enabled = checkEditSpecialFormat.Checked;
+			layoutControlItemSpecialFormatEditor.Enabled = checkEditSpecialFormat.Checked;
 			if (checkEditSpecialFormat.Checked)
 			{
 				checkEditBold.Checked = false;
@@ -108,7 +97,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		private void checkEditFakeDate_CheckedChanged(object sender, EventArgs e)
 		{
-			dateEditFakeDate.Visible = checkEditFakeDate.Checked;
+			layoutControlItemFakeDateEditor.Visibility = checkEditFakeDate.Checked?LayoutVisibility.Always : LayoutVisibility.Never;
 		}
 	}
 }

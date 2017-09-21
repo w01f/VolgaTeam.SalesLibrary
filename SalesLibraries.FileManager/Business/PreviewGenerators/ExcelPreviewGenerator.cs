@@ -17,7 +17,7 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 		{
 			var excelContainer = (ExcelPreviewContainer)previewContainer;
 
-			var logger = new PreviewGenerationLogger(excelContainer);
+			var logger = new FilePreviewGenerationLogger(excelContainer);
 			logger.StartLogging();
 
 			var txtDestination = Path.Combine(excelContainer.ContainerPath, PreviewFormats.Text);

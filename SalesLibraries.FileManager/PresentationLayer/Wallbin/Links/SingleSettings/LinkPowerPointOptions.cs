@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using DevExpress.Skins;
+using DevExpress.XtraLayout.Utils;
 using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
@@ -31,22 +32,13 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		{
 			InitializeComponent();
 			Text = "Admin";
-			if ((base.CreateGraphics()).DpiX > 96)
-			{
-				var styleControllerFont = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2, styleController.Appearance.Font.Style);
-				styleController.AppearanceDisabled.Font = styleControllerFont;
-				styleController.AppearanceDropDown.Font = styleControllerFont;
-				styleController.AppearanceDropDownHeader.Font = styleControllerFont;
-				styleController.AppearanceFocused.Font = styleControllerFont;
-				styleController.AppearanceReadOnly.Font = styleControllerFont;
 
-				ckDoNotGeneratePreview.Font = new Font(ckDoNotGeneratePreview.Font.FontFamily, ckDoNotGeneratePreview.Font.Size - 2, ckDoNotGeneratePreview.Font.Style);
-				ckDoNotGenerateText.Font = new Font(ckDoNotGenerateText.Font.FontFamily, ckDoNotGenerateText.Font.Size - 2, ckDoNotGenerateText.Font.Style);
-
-				buttonXOpenQV.Font = new Font(buttonXOpenQV.Font.FontFamily, buttonXOpenQV.Font.Size - 2, buttonXOpenQV.Font.Style);
-				buttonXOpenWV.Font = new Font(buttonXOpenWV.Font.FontFamily, buttonXOpenWV.Font.Size - 2, buttonXOpenWV.Font.Style);
-				buttonXRefreshPreview.Font = new Font(buttonXRefreshPreview.Font.FontFamily, buttonXRefreshPreview.Font.Size - 2, buttonXRefreshPreview.Font.Style);
-			}
+			layoutControlItemRefreshPreview.MinSize = RectangleHelper.ScaleSize(layoutControlItemRefreshPreview.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemRefreshPreview.MaxSize = RectangleHelper.ScaleSize(layoutControlItemRefreshPreview.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemOpenWV.MinSize = RectangleHelper.ScaleSize(layoutControlItemOpenWV.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemOpenWV.MaxSize = RectangleHelper.ScaleSize(layoutControlItemOpenWV.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemOpenQV.MinSize = RectangleHelper.ScaleSize(layoutControlItemOpenQV.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemOpenQV.MaxSize = RectangleHelper.ScaleSize(layoutControlItemOpenQV.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
 		public LinkPowerPointOptions(FileTypes? defaultLinkType = null) : this() { }
@@ -55,32 +47,32 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		{
 			_data = (PowerPointLink)sourceLink;
 
-			ckDoNotGeneratePreview.Checked = !((DocumentLinkSettings)_data.Settings).GeneratePreviewImages;
-			ckDoNotGenerateText.Checked = !((DocumentLinkSettings)_data.Settings).GenerateContentText;
+			checkEditDoNotGeneratePreview.Checked = !((DocumentLinkSettings)_data.Settings).GeneratePreviewImages;
+			checkEditDoNotGenerateText.Checked = !((DocumentLinkSettings)_data.Settings).GenerateContentText;
 
 			if (MainController.Instance.Settings.EnableLocalSync &&
 				Directory.Exists(((PowerPointLinkSettings)_data.Settings).ContainerPath))
 			{
-				buttonXOpenQV.Enabled = true;
+				layoutControlItemOpenQV.Visibility = LayoutVisibility.Always;
 				buttonXOpenQV.Text = String.Format("!QV Folder ({0})", ((PowerPointLinkSettings)_data.Settings).Id.ToString("D"));
 			}
 			else
-				buttonXOpenQV.Enabled = false;
+				layoutControlItemOpenQV.Visibility = LayoutVisibility.Never;
 
 
 			if (Directory.Exists(_data.PreviewContainerPath))
 			{
-				buttonXOpenWV.Enabled = true;
+				layoutControlItemOpenWV.Visibility = LayoutVisibility.Always;
 				buttonXOpenWV.Text = String.Format("!WV Folder ({0})", _data.PreviewContainerName);
 			}
 			else
-				buttonXOpenWV.Enabled = false;
+				layoutControlItemOpenWV.Visibility = LayoutVisibility.Never;
 		}
 
 		public void SaveData()
 		{
-			((DocumentLinkSettings)_data.Settings).GeneratePreviewImages = !ckDoNotGeneratePreview.Checked;
-			((DocumentLinkSettings)_data.Settings).GenerateContentText = !ckDoNotGenerateText.Checked;
+			((DocumentLinkSettings)_data.Settings).GeneratePreviewImages = !checkEditDoNotGeneratePreview.Checked;
+			((DocumentLinkSettings)_data.Settings).GenerateContentText = !checkEditDoNotGenerateText.Checked;
 		}
 
 		private void buttonXRefreshPreview_Click(object sender, EventArgs e)

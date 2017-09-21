@@ -282,5 +282,16 @@ namespace SalesLibraries.Common.Helpers
 				return String.Format("{0} kb", (size * 0.0009765625).ToString("# ##0"));
 			return String.Format("{0} b", size.ToString("# ##0"));
 		}
+
+		public static SizeF GetScaleFactor(float dpi)
+		{
+			if (dpi >= 192)
+				return new SizeF(2, 2);
+			if (dpi >= 144)
+				return new SizeF(1.5f, 1.5f);
+			if (dpi >= 120)
+				return new SizeF(1.25f, 1.25f);
+			return new SizeF(1, 1);
+		}
 	}
 }

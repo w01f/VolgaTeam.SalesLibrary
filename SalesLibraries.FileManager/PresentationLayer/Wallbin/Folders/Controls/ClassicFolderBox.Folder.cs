@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
+using DevExpress.Skins;
+using SalesLibraries.Common.Helpers;
 using SalesLibraries.CommonGUI.CustomDialog;
 using SalesLibraries.FileManager.Controllers;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Clipboard;
@@ -14,7 +16,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 
 		public DialogResult EditFolderSettings()
 		{
-			using (var form = new FormWindow(DataSource, new BaseEditFormParams()))
+			using (var form = new FormWindow(DataSource, new TitleFormParams()))
 			{
 				var dialogResult = form.ShowDialog(MainController.Instance.MainForm);
 				if (dialogResult != DialogResult.OK) return dialogResult;
@@ -102,6 +104,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 			{
 				form.Width = 500;
 				form.Height = 160;
+				form.Size = RectangleHelper.ScaleSize(form.Size, Utils.GetScaleFactor(CreateGraphics().DpiX));
 				if (form.ShowDialog(MainController.Instance.MainForm) == DialogResult.OK)
 					FolderContainer.DeleteFolder(this);
 			}

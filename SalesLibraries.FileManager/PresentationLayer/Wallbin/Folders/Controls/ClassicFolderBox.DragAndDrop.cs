@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using DevExpress.Skins;
 using DevExpress.XtraBars;
 using SalesLibraries.Business.Entities.Helpers;
 using SalesLibraries.Business.Entities.Interfaces;
@@ -9,6 +10,7 @@ using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.HyperLinkInfo;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
+using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.JsonConverters;
 using SalesLibraries.CommonGUI.CustomDialog;
 using SalesLibraries.CommonGUI.Wallbin.Folders;
@@ -155,7 +157,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 							))
 							{
 								form.Width = 500;
-								form.Height = 160;
+								form.Height = 210;
+								form.Size = RectangleHelper.ScaleSize(form.Size, Utils.GetScaleFactor(CreateGraphics().DpiX));
 								confirmDrop = form.ShowDialog(MainController.Instance.MainForm) == DialogResult.OK;
 							}
 						}

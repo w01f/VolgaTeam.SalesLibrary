@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using DevComponents.DotNetBar;
 using DevComponents.DotNetBar.Metro;
+using DevExpress.Skins;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.ViewInfo;
 using DevExpress.XtraTab;
@@ -63,26 +64,20 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 					}
 				});
 
-			if (CreateGraphics().DpiX > 96)
-			{
-				var font = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2,
-					styleController.Appearance.Font.Style);
-				styleController.Appearance.Font = font;
-				styleController.AppearanceDisabled.Font = font;
-				styleController.AppearanceDropDown.Font = font;
-				styleController.AppearanceDropDownHeader.Font = font;
-				styleController.AppearanceFocused.Font = font;
-				styleController.AppearanceReadOnly.Font = font;
+			layoutControlGroupGallery.Enabled = false;
+			layoutControlGroupTextSettings.Enabled = false;
+			layoutControlGroupTextFont.Enabled = false;
 
-				buttonXCancel.Font = new Font(buttonXCancel.Font.FontFamily, buttonXCancel.Font.Size - 2, buttonXCancel.Font.Style);
-				buttonXOK.Font = new Font(buttonXOK.Font.FontFamily, buttonXOK.Font.Size - 2, buttonXOK.Font.Style);
-				buttonXSearch.Font = new Font(buttonXSearch.Font.FontFamily, buttonXSearch.Font.Size - 2, buttonXSearch.Font.Style);
-				buttonXEnable.Font = new Font(buttonXEnable.Font.FontFamily, buttonXEnable.Font.Size - 2, buttonXEnable.Font.Style);
-				buttonXDisable.Font = new Font(buttonXDisable.Font.FontFamily, buttonXDisable.Font.Size - 2, buttonXDisable.Font.Style);
-				buttonXShowTextNone.Font = new Font(buttonXShowTextNone.Font.FontFamily, buttonXShowTextNone.Font.Size - 2, buttonXShowTextNone.Font.Style);
-				buttonXShowTextLinkName.Font = new Font(buttonXShowTextLinkName.Font.FontFamily, buttonXShowTextLinkName.Font.Size - 2, buttonXShowTextLinkName.Font.Style);
-				buttonXShowTextCustom.Font = new Font(buttonXShowTextCustom.Font.FontFamily, buttonXShowTextCustom.Font.Size - 2, buttonXShowTextCustom.Font.Style);
-			}
+			layoutControlItemTextToggleNone.MinSize = RectangleHelper.ScaleSize(layoutControlItemTextToggleNone.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemTextToggleNone.MaxSize = RectangleHelper.ScaleSize(layoutControlItemTextToggleNone.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemTextToggleCustom.MinSize = RectangleHelper.ScaleSize(layoutControlItemTextToggleCustom.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemTextToggleCustom.MaxSize = RectangleHelper.ScaleSize(layoutControlItemTextToggleCustom.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemTextToggleLinkName.MinSize = RectangleHelper.ScaleSize(layoutControlItemTextToggleLinkName.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemTextToggleLinkName.MaxSize = RectangleHelper.ScaleSize(layoutControlItemTextToggleLinkName.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemButtonOK.MinSize = RectangleHelper.ScaleSize(layoutControlItemButtonOK.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemButtonOK.MaxSize = RectangleHelper.ScaleSize(layoutControlItemButtonOK.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemButtonCancel.MinSize = RectangleHelper.ScaleSize(layoutControlItemButtonCancel.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemButtonCancel.MaxSize = RectangleHelper.ScaleSize(layoutControlItemButtonCancel.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
 		public FormEditLinkBanner(BaseLibraryLink sourceLink, FileTypes? defaultLinkType = null) : this()
@@ -101,8 +96,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		public void InitForm<TEditControl>(LinkSettingsType settingsType) where TEditControl : ILinkSettingsEditControl
 		{
-			Width = 990;
-			Height = 670;
 			FormStateHelper.Init(this, RemoteResourceManager.Instance.AppAliasSettingsFolder, "Site Admin-Link-Banner", false, false);
 			Text = String.Format(Text,
 				_sourceLinkGroup != null ?
@@ -160,7 +153,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				xtraTabControlGallery.SelectedTabPage = galleryPage;
 			};
 
-			buttonXEnable.Enabled = MainController.Instance.Lists.Banners.MainFolder.ExistsLocal();
+			layoutControlItemToggleEnable.Enabled = MainController.Instance.Lists.Banners.MainFolder.ExistsLocal();
 			memoEditBannerText.BackColor = _sourceLink.BannerBackColor;
 
 			LoadBanner(_sourceLink.Banner);
@@ -453,7 +446,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		{
 			var button = (ButtonX)sender;
 			if (!button.Checked) return;
-			xtraTabControlSettings.Enabled = buttonXEnable.Checked;
+			layoutControlGroupGallery.Enabled = buttonXEnable.Checked;
+			layoutControlGroupTextSettings.Enabled = buttonXEnable.Checked;
 			if (_allowHandleEvents)
 			{
 				_allowHandleEvents = false;
@@ -487,7 +481,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		private void OnBannerHorizontalChanged(object sender, EventArgs e)
 		{
 			var enableText = checkEditHorizontalAlignmentLeft.Checked;
-			xtraTabPageText.PageEnabled = enableText;
+			layoutControlGroupTextSettings.PageEnabled = enableText;
 			if (!enableText)
 				OnTextModeButtonClick(buttonXShowTextNone, EventArgs.Empty);
 		}
@@ -504,13 +498,15 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		private void OnTextModeButtonCheckedChanged(object sender, EventArgs e)
 		{
-			labelControlTextFont.Enabled = buttonXShowTextLinkName.Checked || buttonXShowTextCustom.Checked;
-			labelControlTextColor.Enabled = buttonXShowTextLinkName.Checked || buttonXShowTextCustom.Checked;
-			memoEditBannerText.Enabled = buttonXShowTextLinkName.Checked || buttonXShowTextCustom.Checked;
+			layoutControlGroupTextFont.Enabled = buttonXShowTextLinkName.Checked || buttonXShowTextCustom.Checked;
+			
+			layoutControlItemTextColorTitle.Enabled = buttonXShowTextLinkName.Checked || buttonXShowTextCustom.Checked;
+			layoutControlItemTextColorEditor.Enabled = buttonXShowTextLinkName.Checked || buttonXShowTextCustom.Checked;
+
+			layoutControlItemTextEditor.Enabled = buttonXShowTextLinkName.Checked || buttonXShowTextCustom.Checked;
 			memoEditBannerText.ReadOnly = buttonXShowTextLinkName.Checked;
-			buttonEditBannerTextFont.Enabled = buttonXShowTextLinkName.Checked || buttonXShowTextCustom.Checked;
-			colorEditBannerTextColor.Enabled = buttonXShowTextLinkName.Checked || buttonXShowTextCustom.Checked;
-			checkEditTextWordWrap.Enabled = buttonXShowTextLinkName.Checked || buttonXShowTextCustom.Checked;
+
+			layoutControlItemTextWordWrap.Enabled = buttonXShowTextLinkName.Checked || buttonXShowTextCustom.Checked;
 
 			if (buttonXShowTextNone.Checked)
 				memoEditBannerText.EditValue = null;

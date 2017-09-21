@@ -18,10 +18,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			InitializeComponent();
 			_libraryPath = libraryPath;
 
-			buttonXResetQV.Enabled = MainController.Instance.Settings.EnableLocalSync;
-			buttonXResetSecurity.Enabled = MainController.Instance.Settings.EditorSettings.EnableSecurityEdit;
-			buttonXResetCategories.Enabled = MainController.Instance.Settings.EnableTagsTab;
-			buttonXResetKeywords.Enabled = MainController.Instance.Settings.EnableTagsTab;
+			layoutControlItemResetQV.Enabled = MainController.Instance.Settings.EnableLocalSync;
+			layoutControlItemResetSecurity.Enabled = MainController.Instance.Settings.EditorSettings.EnableSecurityEdit;
+			layoutControlItemResetCategories.Enabled = MainController.Instance.Settings.EnableTagsTab;
+			layoutControlItemResetKeywords.Enabled = MainController.Instance.Settings.EnableTagsTab;
 		}
 
 		private void buttonXResetQV_Click(object sender, EventArgs e)

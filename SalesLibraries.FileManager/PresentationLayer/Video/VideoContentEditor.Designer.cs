@@ -30,12 +30,10 @@
 		{
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VideoContentEditor));
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
-			this.pnVideo = new System.Windows.Forms.Panel();
-			this.pnVideoMain = new System.Windows.Forms.Panel();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
 			this.gridControlVideo = new DevExpress.XtraGrid.GridControl();
 			this.gridViewVideo = new DevExpress.XtraGrid.Views.Grid.GridView();
 			this.gridColumnVideoSelected = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -56,18 +54,37 @@
 			this.repositoryItemButtonEditVideoRefersh = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
 			this.repositoryItemButtonEditVideoConvertEnabled = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
 			this.repositoryItemTextEditCrfDisabled = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
-			this.pnVideoTop = new System.Windows.Forms.Panel();
 			this.checkEditEnableCrf = new DevExpress.XtraEditors.CheckEdit();
-			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
-			this.comboBoxEditCrf = new DevExpress.XtraEditors.ComboBoxEdit();
-			this.checkEditUseConvertSettingsForAllVideo = new DevExpress.XtraEditors.CheckEdit();
+			this.layoutControl = new DevExpress.XtraLayout.LayoutControl();
 			this.buttonXSelectMissing = new DevComponents.DotNetBar.ButtonX();
-			this.labelControlMp4ConversionWarning = new DevExpress.XtraEditors.LabelControl();
-			this.buttonXClearAll = new DevComponents.DotNetBar.ButtonX();
+			this.checkEditUseConvertSettingsForAllVideo = new DevExpress.XtraEditors.CheckEdit();
+			this.comboBoxEditCrf = new DevExpress.XtraEditors.ComboBoxEdit();
 			this.buttonXSelectAll = new DevComponents.DotNetBar.ButtonX();
+			this.labelControlMp4ConversionWarning = new DevExpress.XtraEditors.LabelControl();
 			this.labelControlVideoTitle = new DevExpress.XtraEditors.LabelControl();
-			this.pnVideo.SuspendLayout();
-			this.pnVideoMain.SuspendLayout();
+			this.buttonXClearAll = new DevComponents.DotNetBar.ButtonX();
+			this.layoutControlGroupRoot = new DevExpress.XtraLayout.LayoutControlGroup();
+			this.layoutControlItemClearAll = new DevExpress.XtraLayout.LayoutControlItem();
+			this.layoutControlItemSelectMissing = new DevExpress.XtraLayout.LayoutControlItem();
+			this.layoutControlItemSelectAll = new DevExpress.XtraLayout.LayoutControlItem();
+			this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.emptySpaceItem5 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.emptySpaceItem6 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.emptySpaceItem4 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.layoutControlItemMp4ConversionWarning = new DevExpress.XtraLayout.LayoutControlItem();
+			this.layoutControlItemVideoTitle = new DevExpress.XtraLayout.LayoutControlItem();
+			this.emptySpaceItem9 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.emptySpaceItem12 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.layoutControlItemVideoList = new DevExpress.XtraLayout.LayoutControlItem();
+			this.layoutControlItemCrfEnableToggle = new DevExpress.XtraLayout.LayoutControlItem();
+			this.layoutControlItemCrfAllVideoToggle = new DevExpress.XtraLayout.LayoutControlItem();
+			this.layoutControlItemCrfEditor = new DevExpress.XtraLayout.LayoutControlItem();
+			this.emptySpaceItem11 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.emptySpaceItem10 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.emptySpaceItem8 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.gridControlVideo)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewVideo)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit)).BeginInit();
@@ -78,38 +95,39 @@
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditVideoRefersh)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditVideoConvertEnabled)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEditCrfDisabled)).BeginInit();
-			this.pnVideoTop.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditEnableCrf.Properties)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.comboBoxEditCrf.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControl)).BeginInit();
+			this.layoutControl.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditUseConvertSettingsForAllVideo.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.comboBoxEditCrf.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupRoot)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemClearAll)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemSelectMissing)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemSelectAll)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem5)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem6)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem4)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemMp4ConversionWarning)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemVideoTitle)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem9)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem12)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemVideoList)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemCrfEnableToggle)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemCrfAllVideoToggle)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemCrfEditor)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem11)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem10)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem8)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			this.SuspendLayout();
-			// 
-			// pnVideo
-			// 
-			this.pnVideo.BackColor = System.Drawing.Color.White;
-			this.pnVideo.Controls.Add(this.pnVideoMain);
-			this.pnVideo.Controls.Add(this.pnVideoTop);
-			this.pnVideo.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.pnVideo.Location = new System.Drawing.Point(0, 0);
-			this.pnVideo.Name = "pnVideo";
-			this.pnVideo.Size = new System.Drawing.Size(1128, 637);
-			this.pnVideo.TabIndex = 1;
-			// 
-			// pnVideoMain
-			// 
-			this.pnVideoMain.Controls.Add(this.gridControlVideo);
-			this.pnVideoMain.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.pnVideoMain.Location = new System.Drawing.Point(0, 102);
-			this.pnVideoMain.Name = "pnVideoMain";
-			this.pnVideoMain.Size = new System.Drawing.Size(1128, 535);
-			this.pnVideoMain.TabIndex = 1;
 			// 
 			// gridControlVideo
 			// 
 			this.gridControlVideo.Cursor = System.Windows.Forms.Cursors.Default;
-			this.gridControlVideo.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.gridControlVideo.Location = new System.Drawing.Point(0, 0);
+			this.gridControlVideo.Location = new System.Drawing.Point(2, 108);
 			this.gridControlVideo.MainView = this.gridViewVideo;
 			this.gridControlVideo.Name = "gridControlVideo";
 			this.gridControlVideo.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
@@ -121,7 +139,7 @@
             this.repositoryItemTextEdit,
             this.repositoryItemComboBoxCrfEnabled,
             this.repositoryItemTextEditCrfDisabled});
-			this.gridControlVideo.Size = new System.Drawing.Size(1128, 535);
+			this.gridControlVideo.Size = new System.Drawing.Size(1124, 527);
 			this.gridControlVideo.TabIndex = 0;
 			this.gridControlVideo.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewVideo});
@@ -304,7 +322,7 @@
 			this.repositoryItemButtonEditVideoMp4.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
 			this.repositoryItemButtonEditVideoMp4.AutoHeight = false;
 			this.repositoryItemButtonEditVideoMp4.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditVideoMp4.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditVideoMp4.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, "", null, null, true)});
 			this.repositoryItemButtonEditVideoMp4.Name = "repositoryItemButtonEditVideoMp4";
 			this.repositoryItemButtonEditVideoMp4.NullText = "MISSING!";
 			this.repositoryItemButtonEditVideoMp4.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
@@ -369,7 +387,7 @@
 			// 
 			this.repositoryItemButtonEditVideoConvertDisabled.AutoHeight = false;
 			this.repositoryItemButtonEditVideoConvertDisabled.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, false, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.FileManager.Properties.Resources.ButtonVideoConvert, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, false, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.FileManager.Properties.Resources.ButtonVideoConvert, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject6, "", null, null, true)});
 			this.repositoryItemButtonEditVideoConvertDisabled.Name = "repositoryItemButtonEditVideoConvertDisabled";
 			this.repositoryItemButtonEditVideoConvertDisabled.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
 			// 
@@ -388,7 +406,7 @@
 			// 
 			this.repositoryItemButtonEditVideoRefersh.AutoHeight = false;
 			this.repositoryItemButtonEditVideoRefersh.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.FileManager.Properties.Resources.ButtonVideoReset, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.FileManager.Properties.Resources.ButtonVideoReset, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject7, "", null, null, true)});
 			this.repositoryItemButtonEditVideoRefersh.Name = "repositoryItemButtonEditVideoRefersh";
 			this.repositoryItemButtonEditVideoRefersh.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
 			this.repositoryItemButtonEditVideoRefersh.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repositoryItemButtonEditVideoRefersh_ButtonClick);
@@ -397,7 +415,7 @@
 			// 
 			this.repositoryItemButtonEditVideoConvertEnabled.AutoHeight = false;
 			this.repositoryItemButtonEditVideoConvertEnabled.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.FileManager.Properties.Resources.ButtonVideoConvert, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject4, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.FileManager.Properties.Resources.ButtonVideoConvert, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject8, "", null, null, true)});
 			this.repositoryItemButtonEditVideoConvertEnabled.Name = "repositoryItemButtonEditVideoConvertEnabled";
 			this.repositoryItemButtonEditVideoConvertEnabled.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
 			this.repositoryItemButtonEditVideoConvertEnabled.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repositoryItemButtonEditVideoConvert_ButtonClick);
@@ -407,32 +425,436 @@
 			this.repositoryItemTextEditCrfDisabled.AutoHeight = false;
 			this.repositoryItemTextEditCrfDisabled.Name = "repositoryItemTextEditCrfDisabled";
 			// 
-			// pnVideoTop
-			// 
-			this.pnVideoTop.Controls.Add(this.checkEditEnableCrf);
-			this.pnVideoTop.Controls.Add(this.comboBoxEditCrf);
-			this.pnVideoTop.Controls.Add(this.checkEditUseConvertSettingsForAllVideo);
-			this.pnVideoTop.Controls.Add(this.buttonXSelectMissing);
-			this.pnVideoTop.Controls.Add(this.labelControlMp4ConversionWarning);
-			this.pnVideoTop.Controls.Add(this.buttonXClearAll);
-			this.pnVideoTop.Controls.Add(this.buttonXSelectAll);
-			this.pnVideoTop.Controls.Add(this.labelControlVideoTitle);
-			this.pnVideoTop.Dock = System.Windows.Forms.DockStyle.Top;
-			this.pnVideoTop.Location = new System.Drawing.Point(0, 0);
-			this.pnVideoTop.Name = "pnVideoTop";
-			this.pnVideoTop.Size = new System.Drawing.Size(1128, 102);
-			this.pnVideoTop.TabIndex = 0;
-			// 
 			// checkEditEnableCrf
 			// 
 			this.checkEditEnableCrf.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.checkEditEnableCrf.Location = new System.Drawing.Point(615, 66);
+			this.checkEditEnableCrf.Location = new System.Drawing.Point(600, 64);
 			this.checkEditEnableCrf.Name = "checkEditEnableCrf";
 			this.checkEditEnableCrf.Properties.Caption = "Enable CRF";
-			this.checkEditEnableCrf.Size = new System.Drawing.Size(150, 20);
-			this.checkEditEnableCrf.StyleController = this.styleController;
+			this.checkEditEnableCrf.Size = new System.Drawing.Size(156, 20);
+			this.checkEditEnableCrf.StyleController = this.layoutControl;
 			this.checkEditEnableCrf.TabIndex = 7;
 			this.checkEditEnableCrf.CheckedChanged += new System.EventHandler(this.OnEnableCrfCheckedChanged);
+			// 
+			// layoutControl
+			// 
+			this.layoutControl.Appearance.Control.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.layoutControl.Appearance.Control.Options.UseFont = true;
+			this.layoutControl.Appearance.ControlDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControl.Appearance.ControlDisabled.Options.UseFont = true;
+			this.layoutControl.Appearance.ControlDropDown.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControl.Appearance.ControlDropDown.Options.UseFont = true;
+			this.layoutControl.Appearance.ControlDropDownHeader.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControl.Appearance.ControlDropDownHeader.Options.UseFont = true;
+			this.layoutControl.Appearance.ControlFocused.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControl.Appearance.ControlFocused.Options.UseFont = true;
+			this.layoutControl.Appearance.ControlReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControl.Appearance.ControlReadOnly.Options.UseFont = true;
+			this.layoutControl.Controls.Add(this.gridControlVideo);
+			this.layoutControl.Controls.Add(this.checkEditEnableCrf);
+			this.layoutControl.Controls.Add(this.buttonXSelectMissing);
+			this.layoutControl.Controls.Add(this.checkEditUseConvertSettingsForAllVideo);
+			this.layoutControl.Controls.Add(this.comboBoxEditCrf);
+			this.layoutControl.Controls.Add(this.buttonXSelectAll);
+			this.layoutControl.Controls.Add(this.labelControlMp4ConversionWarning);
+			this.layoutControl.Controls.Add(this.labelControlVideoTitle);
+			this.layoutControl.Controls.Add(this.buttonXClearAll);
+			this.layoutControl.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.layoutControl.Location = new System.Drawing.Point(0, 0);
+			this.layoutControl.Name = "layoutControl";
+			this.layoutControl.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(-1180, 182, 1267, 630);
+			this.layoutControl.Root = this.layoutControlGroupRoot;
+			this.layoutControl.Size = new System.Drawing.Size(1128, 637);
+			this.layoutControl.StyleController = this.styleController;
+			this.layoutControl.TabIndex = 63;
+			this.layoutControl.Text = "layoutControl1";
+			// 
+			// buttonXSelectMissing
+			// 
+			this.buttonXSelectMissing.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXSelectMissing.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXSelectMissing.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXSelectMissing.Location = new System.Drawing.Point(780, 12);
+			this.buttonXSelectMissing.Name = "buttonXSelectMissing";
+			this.buttonXSelectMissing.Size = new System.Drawing.Size(156, 36);
+			this.buttonXSelectMissing.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXSelectMissing.TabIndex = 4;
+			this.buttonXSelectMissing.Text = "Select Missing";
+			this.buttonXSelectMissing.TextColor = System.Drawing.Color.Black;
+			this.buttonXSelectMissing.Click += new System.EventHandler(this.buttonXSelectMissing_Click);
+			// 
+			// checkEditUseConvertSettingsForAllVideo
+			// 
+			this.checkEditUseConvertSettingsForAllVideo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.checkEditUseConvertSettingsForAllVideo.Location = new System.Drawing.Point(780, 64);
+			this.checkEditUseConvertSettingsForAllVideo.Name = "checkEditUseConvertSettingsForAllVideo";
+			this.checkEditUseConvertSettingsForAllVideo.Properties.Caption = "Use CRF for all Video";
+			this.checkEditUseConvertSettingsForAllVideo.Size = new System.Drawing.Size(156, 20);
+			this.checkEditUseConvertSettingsForAllVideo.StyleController = this.layoutControl;
+			this.checkEditUseConvertSettingsForAllVideo.TabIndex = 5;
+			this.checkEditUseConvertSettingsForAllVideo.CheckedChanged += new System.EventHandler(this.OnUseConvertSettingsForAllVideoCheckedChanged);
+			// 
+			// comboBoxEditCrf
+			// 
+			this.comboBoxEditCrf.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.comboBoxEditCrf.Location = new System.Drawing.Point(960, 62);
+			this.comboBoxEditCrf.Name = "comboBoxEditCrf";
+			this.comboBoxEditCrf.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+			this.comboBoxEditCrf.Properties.DropDownRows = 4;
+			this.comboBoxEditCrf.Properties.Items.AddRange(new object[] {
+            "none",
+            "24",
+            "29",
+            "35"});
+			this.comboBoxEditCrf.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+			this.comboBoxEditCrf.Size = new System.Drawing.Size(156, 22);
+			this.comboBoxEditCrf.StyleController = this.layoutControl;
+			this.comboBoxEditCrf.TabIndex = 6;
+			this.comboBoxEditCrf.EditValueChanged += new System.EventHandler(this.OnAllVideoCrfEditValueChanged);
+			// 
+			// buttonXSelectAll
+			// 
+			this.buttonXSelectAll.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXSelectAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXSelectAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXSelectAll.Location = new System.Drawing.Point(600, 12);
+			this.buttonXSelectAll.Name = "buttonXSelectAll";
+			this.buttonXSelectAll.Size = new System.Drawing.Size(156, 36);
+			this.buttonXSelectAll.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXSelectAll.TabIndex = 1;
+			this.buttonXSelectAll.Text = "Select All";
+			this.buttonXSelectAll.TextColor = System.Drawing.Color.Black;
+			this.buttonXSelectAll.Click += new System.EventHandler(this.buttonXSelectAll_Click);
+			// 
+			// labelControlMp4ConversionWarning
+			// 
+			this.labelControlMp4ConversionWarning.AllowHtmlString = true;
+			this.labelControlMp4ConversionWarning.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelControlMp4ConversionWarning.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+			this.labelControlMp4ConversionWarning.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+			this.labelControlMp4ConversionWarning.Location = new System.Drawing.Point(280, 19);
+			this.labelControlMp4ConversionWarning.Name = "labelControlMp4ConversionWarning";
+			this.labelControlMp4ConversionWarning.Size = new System.Drawing.Size(296, 22);
+			this.labelControlMp4ConversionWarning.StyleController = this.layoutControl;
+			this.labelControlMp4ConversionWarning.TabIndex = 3;
+			this.labelControlMp4ConversionWarning.Text = "<size=+4><i><color=red>MP4 Conversions Needed: {0}</color></i></size>";
+			// 
+			// labelControlVideoTitle
+			// 
+			this.labelControlVideoTitle.AllowHtmlString = true;
+			this.labelControlVideoTitle.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+			this.labelControlVideoTitle.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+			this.labelControlVideoTitle.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+			this.labelControlVideoTitle.Location = new System.Drawing.Point(12, 29);
+			this.labelControlVideoTitle.Name = "labelControlVideoTitle";
+			this.labelControlVideoTitle.Size = new System.Drawing.Size(264, 1);
+			this.labelControlVideoTitle.StyleController = this.layoutControl;
+			this.labelControlVideoTitle.TabIndex = 8;
+			// 
+			// buttonXClearAll
+			// 
+			this.buttonXClearAll.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXClearAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXClearAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXClearAll.Location = new System.Drawing.Point(960, 12);
+			this.buttonXClearAll.Name = "buttonXClearAll";
+			this.buttonXClearAll.Size = new System.Drawing.Size(156, 36);
+			this.buttonXClearAll.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXClearAll.TabIndex = 2;
+			this.buttonXClearAll.Text = "Clear All";
+			this.buttonXClearAll.TextColor = System.Drawing.Color.Black;
+			this.buttonXClearAll.Click += new System.EventHandler(this.buttonXClearAll_Click);
+			// 
+			// layoutControlGroupRoot
+			// 
+			this.layoutControlGroupRoot.AllowHtmlStringInCaption = true;
+			this.layoutControlGroupRoot.AppearanceGroup.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlGroupRoot.AppearanceGroup.Options.UseFont = true;
+			this.layoutControlGroupRoot.AppearanceItemCaption.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlGroupRoot.AppearanceItemCaption.Options.UseFont = true;
+			this.layoutControlGroupRoot.AppearanceTabPage.Header.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlGroupRoot.AppearanceTabPage.Header.Options.UseFont = true;
+			this.layoutControlGroupRoot.AppearanceTabPage.HeaderActive.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlGroupRoot.AppearanceTabPage.HeaderActive.Options.UseFont = true;
+			this.layoutControlGroupRoot.AppearanceTabPage.HeaderDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlGroupRoot.AppearanceTabPage.HeaderDisabled.Options.UseFont = true;
+			this.layoutControlGroupRoot.AppearanceTabPage.HeaderHotTracked.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlGroupRoot.AppearanceTabPage.HeaderHotTracked.Options.UseFont = true;
+			this.layoutControlGroupRoot.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+			this.layoutControlGroupRoot.GroupBordersVisible = false;
+			this.layoutControlGroupRoot.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItemClearAll,
+            this.layoutControlItemSelectMissing,
+            this.layoutControlItemSelectAll,
+            this.emptySpaceItem2,
+            this.emptySpaceItem3,
+            this.emptySpaceItem5,
+            this.emptySpaceItem6,
+            this.emptySpaceItem4,
+            this.layoutControlItemMp4ConversionWarning,
+            this.layoutControlItemVideoTitle,
+            this.emptySpaceItem9,
+            this.emptySpaceItem12,
+            this.layoutControlItemVideoList,
+            this.layoutControlItemCrfEnableToggle,
+            this.layoutControlItemCrfAllVideoToggle,
+            this.layoutControlItemCrfEditor,
+            this.emptySpaceItem11,
+            this.emptySpaceItem10,
+            this.emptySpaceItem1,
+            this.emptySpaceItem8});
+			this.layoutControlGroupRoot.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlGroupRoot.Name = "Root";
+			this.layoutControlGroupRoot.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+			this.layoutControlGroupRoot.Size = new System.Drawing.Size(1128, 637);
+			this.layoutControlGroupRoot.TextVisible = false;
+			// 
+			// layoutControlItemClearAll
+			// 
+			this.layoutControlItemClearAll.Control = this.buttonXClearAll;
+			this.layoutControlItemClearAll.Location = new System.Drawing.Point(958, 10);
+			this.layoutControlItemClearAll.MaxSize = new System.Drawing.Size(160, 40);
+			this.layoutControlItemClearAll.MinSize = new System.Drawing.Size(160, 40);
+			this.layoutControlItemClearAll.Name = "layoutControlItemClearAll";
+			this.layoutControlItemClearAll.Size = new System.Drawing.Size(160, 40);
+			this.layoutControlItemClearAll.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.layoutControlItemClearAll.Text = "Clear All";
+			this.layoutControlItemClearAll.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemClearAll.TextVisible = false;
+			this.layoutControlItemClearAll.TrimClientAreaToControl = false;
+			// 
+			// layoutControlItemSelectMissing
+			// 
+			this.layoutControlItemSelectMissing.Control = this.buttonXSelectMissing;
+			this.layoutControlItemSelectMissing.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+			this.layoutControlItemSelectMissing.FillControlToClientArea = false;
+			this.layoutControlItemSelectMissing.Location = new System.Drawing.Point(778, 10);
+			this.layoutControlItemSelectMissing.MaxSize = new System.Drawing.Size(160, 40);
+			this.layoutControlItemSelectMissing.MinSize = new System.Drawing.Size(160, 40);
+			this.layoutControlItemSelectMissing.Name = "layoutControlItemSelectMissing";
+			this.layoutControlItemSelectMissing.Size = new System.Drawing.Size(160, 40);
+			this.layoutControlItemSelectMissing.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.layoutControlItemSelectMissing.Text = "Select Missing";
+			this.layoutControlItemSelectMissing.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemSelectMissing.TextVisible = false;
+			this.layoutControlItemSelectMissing.TrimClientAreaToControl = false;
+			// 
+			// layoutControlItemSelectAll
+			// 
+			this.layoutControlItemSelectAll.Control = this.buttonXSelectAll;
+			this.layoutControlItemSelectAll.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+			this.layoutControlItemSelectAll.FillControlToClientArea = false;
+			this.layoutControlItemSelectAll.Location = new System.Drawing.Point(598, 10);
+			this.layoutControlItemSelectAll.MaxSize = new System.Drawing.Size(160, 40);
+			this.layoutControlItemSelectAll.MinSize = new System.Drawing.Size(160, 40);
+			this.layoutControlItemSelectAll.Name = "layoutControlItemSelectAll";
+			this.layoutControlItemSelectAll.Size = new System.Drawing.Size(160, 40);
+			this.layoutControlItemSelectAll.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.layoutControlItemSelectAll.Text = "Select All";
+			this.layoutControlItemSelectAll.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemSelectAll.TextVisible = false;
+			this.layoutControlItemSelectAll.TrimClientAreaToControl = false;
+			// 
+			// emptySpaceItem2
+			// 
+			this.emptySpaceItem2.AllowHotTrack = false;
+			this.emptySpaceItem2.Location = new System.Drawing.Point(758, 10);
+			this.emptySpaceItem2.MaxSize = new System.Drawing.Size(20, 0);
+			this.emptySpaceItem2.MinSize = new System.Drawing.Size(20, 10);
+			this.emptySpaceItem2.Name = "emptySpaceItem2";
+			this.emptySpaceItem2.Size = new System.Drawing.Size(20, 76);
+			this.emptySpaceItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// emptySpaceItem3
+			// 
+			this.emptySpaceItem3.AllowHotTrack = false;
+			this.emptySpaceItem3.Location = new System.Drawing.Point(938, 10);
+			this.emptySpaceItem3.MaxSize = new System.Drawing.Size(20, 0);
+			this.emptySpaceItem3.MinSize = new System.Drawing.Size(20, 10);
+			this.emptySpaceItem3.Name = "emptySpaceItem3";
+			this.emptySpaceItem3.Size = new System.Drawing.Size(20, 76);
+			this.emptySpaceItem3.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem3.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// emptySpaceItem5
+			// 
+			this.emptySpaceItem5.AllowHotTrack = false;
+			this.emptySpaceItem5.Location = new System.Drawing.Point(1118, 10);
+			this.emptySpaceItem5.MaxSize = new System.Drawing.Size(10, 0);
+			this.emptySpaceItem5.MinSize = new System.Drawing.Size(10, 10);
+			this.emptySpaceItem5.Name = "emptySpaceItem5";
+			this.emptySpaceItem5.Size = new System.Drawing.Size(10, 76);
+			this.emptySpaceItem5.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem5.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// emptySpaceItem6
+			// 
+			this.emptySpaceItem6.AllowHotTrack = false;
+			this.emptySpaceItem6.Location = new System.Drawing.Point(0, 10);
+			this.emptySpaceItem6.MaxSize = new System.Drawing.Size(10, 0);
+			this.emptySpaceItem6.MinSize = new System.Drawing.Size(10, 10);
+			this.emptySpaceItem6.Name = "emptySpaceItem6";
+			this.emptySpaceItem6.Size = new System.Drawing.Size(10, 76);
+			this.emptySpaceItem6.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem6.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// emptySpaceItem4
+			// 
+			this.emptySpaceItem4.AllowHotTrack = false;
+			this.emptySpaceItem4.Location = new System.Drawing.Point(578, 10);
+			this.emptySpaceItem4.MaxSize = new System.Drawing.Size(20, 0);
+			this.emptySpaceItem4.MinSize = new System.Drawing.Size(20, 10);
+			this.emptySpaceItem4.Name = "emptySpaceItem4";
+			this.emptySpaceItem4.Size = new System.Drawing.Size(20, 76);
+			this.emptySpaceItem4.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem4.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// layoutControlItemMp4ConversionWarning
+			// 
+			this.layoutControlItemMp4ConversionWarning.Control = this.labelControlMp4ConversionWarning;
+			this.layoutControlItemMp4ConversionWarning.ControlAlignment = System.Drawing.ContentAlignment.MiddleRight;
+			this.layoutControlItemMp4ConversionWarning.FillControlToClientArea = false;
+			this.layoutControlItemMp4ConversionWarning.Location = new System.Drawing.Point(278, 10);
+			this.layoutControlItemMp4ConversionWarning.MaxSize = new System.Drawing.Size(300, 40);
+			this.layoutControlItemMp4ConversionWarning.MinSize = new System.Drawing.Size(300, 40);
+			this.layoutControlItemMp4ConversionWarning.Name = "layoutControlItemMp4ConversionWarning";
+			this.layoutControlItemMp4ConversionWarning.Size = new System.Drawing.Size(300, 40);
+			this.layoutControlItemMp4ConversionWarning.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.layoutControlItemMp4ConversionWarning.Text = "Mp4 Conversion Warning";
+			this.layoutControlItemMp4ConversionWarning.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemMp4ConversionWarning.TextVisible = false;
+			this.layoutControlItemMp4ConversionWarning.TrimClientAreaToControl = false;
+			this.layoutControlItemMp4ConversionWarning.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+			// 
+			// layoutControlItemVideoTitle
+			// 
+			this.layoutControlItemVideoTitle.Control = this.labelControlVideoTitle;
+			this.layoutControlItemVideoTitle.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+			this.layoutControlItemVideoTitle.FillControlToClientArea = false;
+			this.layoutControlItemVideoTitle.Location = new System.Drawing.Point(10, 10);
+			this.layoutControlItemVideoTitle.Name = "layoutControlItemVideoTitle";
+			this.layoutControlItemVideoTitle.Size = new System.Drawing.Size(268, 40);
+			this.layoutControlItemVideoTitle.Text = "Video Title";
+			this.layoutControlItemVideoTitle.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemVideoTitle.TextVisible = false;
+			this.layoutControlItemVideoTitle.TrimClientAreaToControl = false;
+			// 
+			// emptySpaceItem9
+			// 
+			this.emptySpaceItem9.AllowHotTrack = false;
+			this.emptySpaceItem9.Location = new System.Drawing.Point(0, 0);
+			this.emptySpaceItem9.MaxSize = new System.Drawing.Size(0, 10);
+			this.emptySpaceItem9.MinSize = new System.Drawing.Size(10, 10);
+			this.emptySpaceItem9.Name = "emptySpaceItem9";
+			this.emptySpaceItem9.Size = new System.Drawing.Size(1128, 10);
+			this.emptySpaceItem9.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem9.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// emptySpaceItem12
+			// 
+			this.emptySpaceItem12.AllowHotTrack = false;
+			this.emptySpaceItem12.Location = new System.Drawing.Point(0, 86);
+			this.emptySpaceItem12.MaxSize = new System.Drawing.Size(0, 20);
+			this.emptySpaceItem12.MinSize = new System.Drawing.Size(10, 20);
+			this.emptySpaceItem12.Name = "emptySpaceItem12";
+			this.emptySpaceItem12.Size = new System.Drawing.Size(1128, 20);
+			this.emptySpaceItem12.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem12.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// layoutControlItemVideoList
+			// 
+			this.layoutControlItemVideoList.Control = this.gridControlVideo;
+			this.layoutControlItemVideoList.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+			this.layoutControlItemVideoList.FillControlToClientArea = false;
+			this.layoutControlItemVideoList.Location = new System.Drawing.Point(0, 106);
+			this.layoutControlItemVideoList.Name = "layoutControlItemVideoList";
+			this.layoutControlItemVideoList.Size = new System.Drawing.Size(1128, 531);
+			this.layoutControlItemVideoList.Text = "Video List";
+			this.layoutControlItemVideoList.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemVideoList.TextVisible = false;
+			this.layoutControlItemVideoList.TrimClientAreaToControl = false;
+			// 
+			// layoutControlItemCrfEnableToggle
+			// 
+			this.layoutControlItemCrfEnableToggle.Control = this.checkEditEnableCrf;
+			this.layoutControlItemCrfEnableToggle.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+			this.layoutControlItemCrfEnableToggle.FillControlToClientArea = false;
+			this.layoutControlItemCrfEnableToggle.Location = new System.Drawing.Point(598, 62);
+			this.layoutControlItemCrfEnableToggle.Name = "layoutControlItemCrfEnableToggle";
+			this.layoutControlItemCrfEnableToggle.Size = new System.Drawing.Size(160, 24);
+			this.layoutControlItemCrfEnableToggle.Text = "Crf Enable Toggle";
+			this.layoutControlItemCrfEnableToggle.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemCrfEnableToggle.TextVisible = false;
+			this.layoutControlItemCrfEnableToggle.TrimClientAreaToControl = false;
+			// 
+			// layoutControlItemCrfAllVideoToggle
+			// 
+			this.layoutControlItemCrfAllVideoToggle.Control = this.checkEditUseConvertSettingsForAllVideo;
+			this.layoutControlItemCrfAllVideoToggle.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+			this.layoutControlItemCrfAllVideoToggle.FillControlToClientArea = false;
+			this.layoutControlItemCrfAllVideoToggle.Location = new System.Drawing.Point(778, 62);
+			this.layoutControlItemCrfAllVideoToggle.Name = "layoutControlItemCrfAllVideoToggle";
+			this.layoutControlItemCrfAllVideoToggle.Size = new System.Drawing.Size(160, 24);
+			this.layoutControlItemCrfAllVideoToggle.Text = "Crf All Video Toggle";
+			this.layoutControlItemCrfAllVideoToggle.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemCrfAllVideoToggle.TextVisible = false;
+			this.layoutControlItemCrfAllVideoToggle.TrimClientAreaToControl = false;
+			// 
+			// layoutControlItemCrfEditor
+			// 
+			this.layoutControlItemCrfEditor.Control = this.comboBoxEditCrf;
+			this.layoutControlItemCrfEditor.ControlAlignment = System.Drawing.ContentAlignment.MiddleRight;
+			this.layoutControlItemCrfEditor.FillControlToClientArea = false;
+			this.layoutControlItemCrfEditor.Location = new System.Drawing.Point(958, 60);
+			this.layoutControlItemCrfEditor.Name = "layoutControlItemCrfEditor";
+			this.layoutControlItemCrfEditor.Size = new System.Drawing.Size(160, 26);
+			this.layoutControlItemCrfEditor.Text = "Crf Editor";
+			this.layoutControlItemCrfEditor.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemCrfEditor.TextVisible = false;
+			this.layoutControlItemCrfEditor.TrimClientAreaToControl = false;
+			// 
+			// emptySpaceItem11
+			// 
+			this.emptySpaceItem11.AllowHotTrack = false;
+			this.emptySpaceItem11.Location = new System.Drawing.Point(598, 50);
+			this.emptySpaceItem11.MaxSize = new System.Drawing.Size(0, 12);
+			this.emptySpaceItem11.MinSize = new System.Drawing.Size(10, 12);
+			this.emptySpaceItem11.Name = "emptySpaceItem11";
+			this.emptySpaceItem11.Size = new System.Drawing.Size(160, 12);
+			this.emptySpaceItem11.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem11.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// emptySpaceItem10
+			// 
+			this.emptySpaceItem10.AllowHotTrack = false;
+			this.emptySpaceItem10.Location = new System.Drawing.Point(778, 50);
+			this.emptySpaceItem10.MaxSize = new System.Drawing.Size(0, 12);
+			this.emptySpaceItem10.MinSize = new System.Drawing.Size(10, 12);
+			this.emptySpaceItem10.Name = "emptySpaceItem10";
+			this.emptySpaceItem10.Size = new System.Drawing.Size(160, 12);
+			this.emptySpaceItem10.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem10.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// emptySpaceItem1
+			// 
+			this.emptySpaceItem1.AllowHotTrack = false;
+			this.emptySpaceItem1.Location = new System.Drawing.Point(958, 50);
+			this.emptySpaceItem1.MaxSize = new System.Drawing.Size(0, 10);
+			this.emptySpaceItem1.MinSize = new System.Drawing.Size(10, 10);
+			this.emptySpaceItem1.Name = "emptySpaceItem1";
+			this.emptySpaceItem1.Size = new System.Drawing.Size(160, 10);
+			this.emptySpaceItem1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// emptySpaceItem8
+			// 
+			this.emptySpaceItem8.AllowHotTrack = false;
+			this.emptySpaceItem8.Location = new System.Drawing.Point(10, 50);
+			this.emptySpaceItem8.Name = "emptySpaceItem8";
+			this.emptySpaceItem8.Size = new System.Drawing.Size(568, 36);
+			this.emptySpaceItem8.TextSize = new System.Drawing.Size(0, 0);
 			// 
 			// styleController
 			// 
@@ -453,116 +875,16 @@
 			this.styleController.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.styleController.AppearanceReadOnly.Options.UseFont = true;
 			// 
-			// comboBoxEditCrf
-			// 
-			this.comboBoxEditCrf.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.comboBoxEditCrf.Location = new System.Drawing.Point(965, 65);
-			this.comboBoxEditCrf.Name = "comboBoxEditCrf";
-			this.comboBoxEditCrf.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-			this.comboBoxEditCrf.Properties.DropDownRows = 4;
-			this.comboBoxEditCrf.Properties.Items.AddRange(new object[] {
-            "none",
-            "24",
-            "29",
-            "35"});
-			this.comboBoxEditCrf.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-			this.comboBoxEditCrf.Size = new System.Drawing.Size(100, 22);
-			this.comboBoxEditCrf.StyleController = this.styleController;
-			this.comboBoxEditCrf.TabIndex = 6;
-			this.comboBoxEditCrf.Visible = false;
-			this.comboBoxEditCrf.EditValueChanged += new System.EventHandler(this.OnAllVideoCrfEditValueChanged);
-			// 
-			// checkEditUseConvertSettingsForAllVideo
-			// 
-			this.checkEditUseConvertSettingsForAllVideo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.checkEditUseConvertSettingsForAllVideo.Location = new System.Drawing.Point(790, 66);
-			this.checkEditUseConvertSettingsForAllVideo.Name = "checkEditUseConvertSettingsForAllVideo";
-			this.checkEditUseConvertSettingsForAllVideo.Properties.Caption = "Use CRF for all Video";
-			this.checkEditUseConvertSettingsForAllVideo.Size = new System.Drawing.Size(150, 20);
-			this.checkEditUseConvertSettingsForAllVideo.StyleController = this.styleController;
-			this.checkEditUseConvertSettingsForAllVideo.TabIndex = 5;
-			this.checkEditUseConvertSettingsForAllVideo.Visible = false;
-			this.checkEditUseConvertSettingsForAllVideo.CheckedChanged += new System.EventHandler(this.OnUseConvertSettingsForAllVideoCheckedChanged);
-			// 
-			// buttonXSelectMissing
-			// 
-			this.buttonXSelectMissing.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-			this.buttonXSelectMissing.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonXSelectMissing.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXSelectMissing.Location = new System.Drawing.Point(790, 7);
-			this.buttonXSelectMissing.Name = "buttonXSelectMissing";
-			this.buttonXSelectMissing.Size = new System.Drawing.Size(150, 40);
-			this.buttonXSelectMissing.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.buttonXSelectMissing.TabIndex = 4;
-			this.buttonXSelectMissing.Text = "Select Missing";
-			this.buttonXSelectMissing.TextColor = System.Drawing.Color.Black;
-			this.buttonXSelectMissing.Click += new System.EventHandler(this.buttonXSelectMissing_Click);
-			// 
-			// labelControlMp4ConversionWarning
-			// 
-			this.labelControlMp4ConversionWarning.AllowHtmlString = true;
-			this.labelControlMp4ConversionWarning.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelControlMp4ConversionWarning.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-			this.labelControlMp4ConversionWarning.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-			this.labelControlMp4ConversionWarning.Location = new System.Drawing.Point(295, 7);
-			this.labelControlMp4ConversionWarning.Name = "labelControlMp4ConversionWarning";
-			this.labelControlMp4ConversionWarning.Size = new System.Drawing.Size(296, 40);
-			this.labelControlMp4ConversionWarning.StyleController = this.styleController;
-			this.labelControlMp4ConversionWarning.TabIndex = 3;
-			this.labelControlMp4ConversionWarning.Text = "<size=+4><i><color=red>MP4 Conversions Needed: {0}</color></i></size>";
-			// 
-			// buttonXClearAll
-			// 
-			this.buttonXClearAll.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-			this.buttonXClearAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonXClearAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXClearAll.Location = new System.Drawing.Point(965, 7);
-			this.buttonXClearAll.Name = "buttonXClearAll";
-			this.buttonXClearAll.Size = new System.Drawing.Size(150, 40);
-			this.buttonXClearAll.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.buttonXClearAll.TabIndex = 2;
-			this.buttonXClearAll.Text = "Clear All";
-			this.buttonXClearAll.TextColor = System.Drawing.Color.Black;
-			this.buttonXClearAll.Click += new System.EventHandler(this.buttonXClearAll_Click);
-			// 
-			// buttonXSelectAll
-			// 
-			this.buttonXSelectAll.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-			this.buttonXSelectAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonXSelectAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXSelectAll.Location = new System.Drawing.Point(615, 7);
-			this.buttonXSelectAll.Name = "buttonXSelectAll";
-			this.buttonXSelectAll.Size = new System.Drawing.Size(150, 40);
-			this.buttonXSelectAll.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.buttonXSelectAll.TabIndex = 1;
-			this.buttonXSelectAll.Text = "Select All";
-			this.buttonXSelectAll.TextColor = System.Drawing.Color.Black;
-			this.buttonXSelectAll.Click += new System.EventHandler(this.buttonXSelectAll_Click);
-			// 
-			// labelControlVideoTitle
-			// 
-			this.labelControlVideoTitle.AllowHtmlString = true;
-			this.labelControlVideoTitle.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
-			this.labelControlVideoTitle.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-			this.labelControlVideoTitle.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-			this.labelControlVideoTitle.Location = new System.Drawing.Point(7, 7);
-			this.labelControlVideoTitle.Name = "labelControlVideoTitle";
-			this.labelControlVideoTitle.Size = new System.Drawing.Size(282, 40);
-			this.labelControlVideoTitle.StyleController = this.styleController;
-			this.labelControlVideoTitle.TabIndex = 8;
-			// 
 			// VideoContentEditor
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-			this.Controls.Add(this.pnVideo);
+			this.BackColor = System.Drawing.Color.White;
+			this.Controls.Add(this.layoutControl);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.Name = "VideoContentEditor";
 			this.Size = new System.Drawing.Size(1128, 637);
-			this.pnVideo.ResumeLayout(false);
-			this.pnVideoMain.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.gridControlVideo)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewVideo)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit)).EndInit();
@@ -573,19 +895,38 @@
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditVideoRefersh)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditVideoConvertEnabled)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEditCrfDisabled)).EndInit();
-			this.pnVideoTop.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.checkEditEnableCrf.Properties)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.comboBoxEditCrf.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControl)).EndInit();
+			this.layoutControl.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.checkEditUseConvertSettingsForAllVideo.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.comboBoxEditCrf.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupRoot)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemClearAll)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemSelectMissing)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemSelectAll)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem5)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem6)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem4)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemMp4ConversionWarning)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemVideoTitle)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem9)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem12)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemVideoList)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemCrfEnableToggle)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemCrfAllVideoToggle)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemCrfEditor)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem11)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem10)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem8)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			this.ResumeLayout(false);
 
 		}
 
 		#endregion
-
-		private System.Windows.Forms.Panel pnVideo;
-		private System.Windows.Forms.Panel pnVideoMain;
 		private DevExpress.XtraGrid.GridControl gridControlVideo;
 		private DevExpress.XtraGrid.Views.Grid.GridView gridViewVideo;
 		private DevExpress.XtraGrid.Columns.GridColumn gridColumnVideoIndex;
@@ -599,7 +940,6 @@
 		private DevExpress.XtraGrid.Columns.GridColumn gridColumnVideoRefresh;
 		private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEditVideoRefersh;
 		private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEditVideoConvertEnabled;
-		private System.Windows.Forms.Panel pnVideoTop;
 		private DevComponents.DotNetBar.ButtonX buttonXClearAll;
 		private DevComponents.DotNetBar.ButtonX buttonXSelectAll;
 		private DevExpress.XtraEditors.LabelControl labelControlMp4ConversionWarning;
@@ -616,5 +956,27 @@
 		private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repositoryItemTextEditCrfDisabled;
 		private DevExpress.XtraEditors.CheckEdit checkEditEnableCrf;
 		private DevExpress.XtraEditors.LabelControl labelControlVideoTitle;
+		private DevExpress.XtraLayout.LayoutControl layoutControl;
+		private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroupRoot;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemClearAll;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemSelectMissing;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemSelectAll;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem3;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem5;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem6;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem4;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemMp4ConversionWarning;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemVideoTitle;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemCrfEditor;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem9;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem10;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemCrfAllVideoToggle;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem12;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem11;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemCrfEnableToggle;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemVideoList;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem8;
 	}
 }

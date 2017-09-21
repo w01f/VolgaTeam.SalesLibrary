@@ -8,7 +8,7 @@ using SalesLibraries.FileManager.Business.Models.VideoInfo;
 
 namespace SalesLibraries.FileManager.Business.PreviewGenerators
 {
-	class VideoPreviewGenerationLogger : PreviewGenerationLogger
+	class VideoPreviewGenerationLogger : FilePreviewGenerationLogger
 	{
 		public VideoPreviewGenerationLogger(BasePreviewContainer previewContainer) : base(previewContainer) { }
 

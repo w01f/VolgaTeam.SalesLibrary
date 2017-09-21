@@ -4,7 +4,8 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using DevExpress.XtraTab;
+using DevExpress.Skins;
+using DevExpress.XtraLayout.Utils;
 using SalesLibraries.Business.Entities.Interfaces;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
@@ -16,14 +17,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 		{
 			InitializeComponent();
 			Dock = DockStyle.Fill;
-			if (!((CreateGraphics()).DpiX > 96)) return;
-			laDoubleClick.Font = new Font(laDoubleClick.Font.FontFamily, laDoubleClick.Font.Size - 3, laDoubleClick.Font.Style);
-			laEndDate.Font = new Font(laEndDate.Font.FontFamily, laEndDate.Font.Size - 2, laEndDate.Font.Style);
-			laStartDate.Font = new Font(laStartDate.Font.FontFamily, laStartDate.Font.Size - 2, laStartDate.Font.Style);
-			laTreeViewProgressLabel.Font = new Font(laTreeViewProgressLabel.Font.FontFamily, laTreeViewProgressLabel.Font.Size - 3, laTreeViewProgressLabel.Font.Style);
-			checkEditDateRange.Font = new Font(checkEditDateRange.Font.FontFamily, checkEditDateRange.Font.Size - 2, checkEditDateRange.Font.Style);
-			buttonXRefresh.Font = new Font(buttonXRefresh.Font.FontFamily, buttonXRefresh.Font.Size - 2, buttonXRefresh.Font.Style);
-			buttonXSearch.Font = new Font(buttonXSearch.Font.FontFamily, buttonXSearch.Font.Size - 2, buttonXSearch.Font.Style);
+
+			layoutControlItemRefresh.MaxSize = new Size(
+				0,
+				RectangleHelper.ScaleVertical(layoutControlItemRefresh.MaxSize.Height, treeListRegularFiles.ScaleFactor.Height));
 		}
 
 		public void LoadData(IEnumerable<IDataSource> dataSources)
@@ -35,9 +32,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 			RefreshExternalFiles();
 		}
 
-		private void OnXtraTabControlFilesSelectedPageChanged(object sender, TabPageChangedEventArgs e)
+		private void OnSelectedPageChanged(object sender, DevExpress.XtraLayout.LayoutTabPageChangedEventArgs e)
 		{
-			switch (xtraTabControlFiles.SelectedTabPageIndex)
+			switch (tabbedControlGroupFiles.SelectedTabPageIndex)
 			{
 				case 0:
 					treeListSearchFiles.Selection.Clear();
@@ -51,12 +48,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 
 		private async void OnRefreshRegularFilesClick(object sender, EventArgs e)
 		{
-			laTreeViewProgressLabel.Text = "Loading Tree View...";
-			pnTreeViewProgress.Visible = true;
+			labelControlProgress.Text = "Loading Tree View...";
+			layoutControlGroupProgress.Visibility = LayoutVisibility.Always;
 			circularProgressTreeView.IsRunning = true;
-			xtraTabControlFiles.Enabled = false;
+			layoutControlGroupFiles.Enabled = false;
 
-			switch (xtraTabControlFiles.SelectedTabPageIndex)
+			switch (tabbedControlGroupFiles.SelectedTabPageIndex)
 			{
 				case 0:
 					await RefreshRegularFiles();
@@ -66,9 +63,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 					break;
 			}
 
-			xtraTabControlFiles.Enabled = true;
+			layoutControlGroupFiles.Enabled = true;
 			circularProgressTreeView.IsRunning = false;
-			pnTreeViewProgress.Visible = false;
+			layoutControlGroupProgress.Visibility = LayoutVisibility.Never;
 		}
 	}
 }

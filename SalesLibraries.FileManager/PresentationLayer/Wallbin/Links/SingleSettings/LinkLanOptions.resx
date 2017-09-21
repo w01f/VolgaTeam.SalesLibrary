@@ -120,35 +120,10 @@
   <metadata name="styleController.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>168, 56</value>
   </metadata>
-  <metadata name="labelControlName.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 56</value>
-  </metadata>
-  <metadata name="textEditName.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>720, 17</value>
-  </metadata>
-  <metadata name="textEditPath.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>603, 17</value>
-  </metadata>
-  <metadata name="labelControlPath.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>460, 17</value>
-  </metadata>
-  <metadata name="labelControlWarning.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>295, 17</value>
-  </metadata>
   <data name="labelControlWarning.Text" xml:space="preserve">
-    <value>&lt;color=red&gt;&lt;i&gt;&lt;b&gt;*Important:&lt;/b&gt;&lt;br&gt;This link will open a Local Network Folder (on your LAN/network)&lt;br&gt;&lt;br&gt;This link will NOT work in standard Browsers like Chrome, Firefox, etc…&lt;br&gt;&lt;br&gt;The Link will work IF the user has access to the network location.&lt;br&gt;LAN links will only work in the custom windows app created for your site.&lt;/i&gt;&lt;/color&gt;
-</value>
+    <value>&lt;color=red&gt;&lt;i&gt;&lt;b&gt;*Important:&lt;/b&gt;&lt;br&gt;This link will open a Local Network Folder (on your LAN/network)&lt;br&gt;&lt;br&gt;This link will NOT work in standard Browsers like Chrome, Firefox, etc…&lt;br&gt;&lt;br&gt;The Link will work IF the user has access to the network location.&lt;br&gt;LAN links will only work in the custom windows app created for your site.&lt;/i&gt;&lt;/color&gt;</value>
   </data>
-  <metadata name="pictureBoxLogo.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>158, 17</value>
-  </metadata>
-  <metadata name="labelControlTitle.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <data name="labelControlTitle.Text" xml:space="preserve">
     <value>&lt;size=+2&gt;Admin Tools allow you to look at the specific server files that are generated for a link. This stuff is a little more advanced, and only click on these buttons if you know what you are doing…&lt;/size&gt;</value>
   </data>
-  <metadata name="$this.TrayLargeIcon" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
 </root>

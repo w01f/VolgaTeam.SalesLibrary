@@ -1,9 +1,11 @@
 ﻿using System;
-using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
+using DevExpress.Skins;
+using DevExpress.XtraLayout.Utils;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
+using SalesLibraries.Common.Helpers;
 using SalesLibraries.FileManager.Controllers;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
@@ -19,32 +21,40 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 		public FormColumns()
 		{
 			InitializeComponent();
-			if ((CreateGraphics()).DpiX > 96)
-			{
-				laPages.Font = new Font(laPages.Font.FontFamily, laPages.Font.Size - 2, laPages.Font.Style);
-				ckEnableColumnTitles.Font = new Font(ckEnableColumnTitles.Font.FontFamily, ckEnableColumnTitles.Font.Size - 2, ckEnableColumnTitles.Font.Style);
-				buttonXColumnTitleSettings.Font = new Font(buttonXColumnTitleSettings.Font.FontFamily, buttonXColumnTitleSettings.Font.Size - 2, buttonXColumnTitleSettings.Font.Style);
-				buttonXSave.Font = new Font(buttonXSave.Font.FontFamily, buttonXSave.Font.Size - 2, buttonXSave.Font.Style);
-				buttonXClose.Font = new Font(buttonXClose.Font.FontFamily, buttonXClose.Font.Size - 2, buttonXClose.Font.Style);
-			}
+
+			layoutControlItemSave.MinSize = RectangleHelper.ScaleSize(layoutControlItemSave.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemSave.MaxSize = RectangleHelper.ScaleSize(layoutControlItemSave.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCancel.MinSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCancel.MaxSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
 		#region Base Methods
 		private void GetColumnSettings()
 		{
 			_allowToSave = false;
-			ckEnableColumnTitles.Checked = _currentPage.Settings.EnableColumnTitles;
-			xtraTabControlWindows.TabPages.Clear();
+			checkEditEnableColumnTitles.Checked = _currentPage.Settings.EnableColumnTitles;
+
+			layoutControl.SuspendLayout();
+			tabbedControlGroupWindows.BeginUpdate();
+			foreach (var columnSettingsTab in tabbedControlGroupWindows.TabPages.OfType<ColumnSettings>().ToList())
+			{
+				columnSettingsTab.ReleaseControl();
+				tabbedControlGroupWindows.RemoveTabPage(columnSettingsTab);
+			}
 			for (int i = 0; i < LibraryPage.ColumnsCount; i++)
 			{
 				var columnPage = new ColumnSettings(_currentPage, i);
 				columnPage.FolderChanged += (o, e) => { _stateChanged = true; };
 				columnPage.FolderMovedLeft += OnMoveFolderLeft;
 				columnPage.FolderMovedRight += OnMoveFolderRight;
-				xtraTabControlWindows.TabPages.Add(columnPage);
+				tabbedControlGroupWindows.AddTabPage(columnPage);
 			}
-			foreach (var targetPage in xtraTabControlWindows.TabPages.OfType<ColumnSettings>())
-				foreach (var columnPage in xtraTabControlWindows.TabPages.OfType<ColumnSettings>().Where(p => p != targetPage))
+			tabbedControlGroupWindows.SelectedTabPage = tabbedControlGroupWindows.TabPages.OfType<ColumnSettings>().FirstOrDefault();
+			tabbedControlGroupWindows.EndUpdate();
+			layoutControl.ResumeLayout(true);
+
+			foreach (var targetPage in tabbedControlGroupWindows.TabPages.OfType<ColumnSettings>())
+				foreach (var columnPage in tabbedControlGroupWindows.TabPages.OfType<ColumnSettings>().Where(p => p != targetPage))
 				{
 					targetPage.FolderCopied += (o, e) =>
 					{
@@ -65,9 +75,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 		private void SaveColumnSettings()
 		{
 			if (_currentPage == null) return;
-			foreach (var columnPage in xtraTabControlWindows.TabPages.OfType<ColumnSettings>())
+			foreach (var columnPage in tabbedControlGroupWindows.TabPages.OfType<ColumnSettings>())
 				columnPage.SaveData();
-			_currentPage.Settings.EnableColumnTitles = ckEnableColumnTitles.Checked;
+			_currentPage.Settings.EnableColumnTitles = checkEditEnableColumnTitles.Checked;
 		}
 
 		private void PopulatePagesList()
@@ -75,7 +85,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			comboBoxEditPages.Properties.Items.Clear();
 			comboBoxEditPages.Properties.Items.AddRange(Library.Pages.ToList());
 			comboBoxEditPages.EditValue = Library.Pages.FirstOrDefault();
-			pnPages.Visible = Library.Pages.Count > 1;
+			layoutControlItemPages.Visibility = Library.Pages.Count > 1 ? LayoutVisibility.Always : LayoutVisibility.Never;
 		}
 		#endregion
 
@@ -117,7 +127,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 
 		private void btAddWindow_Click(object sender, EventArgs e)
 		{
-			var columnPage = xtraTabControlWindows.SelectedTabPage as ColumnSettings;
+			var columnPage = tabbedControlGroupWindows.SelectedTabPage as ColumnSettings;
 			if (columnPage == null) return;
 			columnPage.AddFolder();
 			_stateChanged = true;
@@ -128,7 +138,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			var columnPage = sender as ColumnSettings;
 			if (columnPage == null) return;
 			if (columnPage.ColumnOrder == 2) return;
-			var nextPage = xtraTabControlWindows.TabPages[columnPage.ColumnOrder + 1] as ColumnSettings;
+			var nextPage = tabbedControlGroupWindows.TabPages[columnPage.ColumnOrder + 1] as ColumnSettings;
 			columnPage.CopyFolder();
 			nextPage.PasteFolder();
 			_stateChanged = true;
@@ -139,7 +149,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			var columnPage = sender as ColumnSettings;
 			if (columnPage == null) return;
 			if (columnPage.ColumnOrder == 0) return;
-			var prevPage = xtraTabControlWindows.TabPages[columnPage.ColumnOrder - 1] as ColumnSettings;
+			var prevPage = tabbedControlGroupWindows.TabPages[columnPage.ColumnOrder - 1] as ColumnSettings;
 			columnPage.CopyFolder();
 			prevPage.PasteFolder();
 			_stateChanged = true;
@@ -149,7 +159,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 		{
 			if (_currentPage == null) return;
 			_currentPage.AlignFoldersByColumns();
-			foreach (var columnPage in xtraTabControlWindows.TabPages.OfType<ColumnSettings>())
+			foreach (var columnPage in tabbedControlGroupWindows.TabPages.OfType<ColumnSettings>())
 				columnPage.LoadData();
 			_stateChanged = true;
 		}
@@ -158,21 +168,21 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 		{
 			if (_currentPage == null) return;
 			_currentPage.AlignFoldersByRows();
-			foreach (var columnPage in xtraTabControlWindows.TabPages.OfType<ColumnSettings>())
+			foreach (var columnPage in tabbedControlGroupWindows.TabPages.OfType<ColumnSettings>())
 				columnPage.LoadData();
 			_stateChanged = true;
 		}
 
 		private void ckEnableColumnTitles_CheckedChanged(object sender, EventArgs e)
 		{
-			buttonXColumnTitleSettings.Enabled = ckEnableColumnTitles.Checked;
+			layoutControlItemColumnTitleSettings.Enabled = checkEditEnableColumnTitles.Checked;
 			if (_allowToSave)
 				_stateChanged = true;
 		}
 
 		private void buttonXColumnTitleSettings_Click(object sender, EventArgs e)
 		{
-			var columnPage = xtraTabControlWindows.SelectedTabPage as ColumnSettings;
+			var columnPage = tabbedControlGroupWindows.SelectedTabPage as ColumnSettings;
 			if (columnPage == null) return;
 			var columnTitle = _currentPage.GetColumnTitles().ElementAtOrDefault(columnPage.ColumnOrder);
 			using (var form = new FormColumnTitle(columnTitle))

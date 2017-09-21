@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
+using DevExpress.Skins;
 using DevExpress.XtraEditors.Controls;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
 using SalesLibraries.Common.Extensions;
@@ -23,20 +23,14 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 
 			InitializeComponent();
 
-			if (CreateGraphics().DpiX > 96)
-			{
-				var font = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2,
-					styleController.Appearance.Font.Style);
-				styleController.Appearance.Font = font;
-				styleController.AppearanceDisabled.Font = font;
-				styleController.AppearanceDropDown.Font = font;
-				styleController.AppearanceDropDownHeader.Font = font;
-				styleController.AppearanceFocused.Font = font;
-				styleController.AppearanceReadOnly.Font = font;
-
-				buttonXCancel.Font = new Font(buttonXCancel.Font.FontFamily, buttonXCancel.Font.Size - 2, buttonXCancel.Font.Style);
-				buttonXOK.Font = new Font(buttonXOK.Font.FontFamily, buttonXOK.Font.Size - 2, buttonXOK.Font.Style);
-			}
+			layoutControlItemSelectAll.MinSize = RectangleHelper.ScaleSize(layoutControlItemSelectAll.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemSelectAll.MaxSize = RectangleHelper.ScaleSize(layoutControlItemSelectAll.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemClearAll.MinSize = RectangleHelper.ScaleSize(layoutControlItemClearAll.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemClearAll.MaxSize = RectangleHelper.ScaleSize(layoutControlItemClearAll.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemOK.MinSize = RectangleHelper.ScaleSize(layoutControlItemOK.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemOK.MaxSize = RectangleHelper.ScaleSize(layoutControlItemOK.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCancel.MinSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCancel.MaxSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
 		private void LoadData()

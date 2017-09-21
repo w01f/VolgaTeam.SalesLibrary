@@ -2,9 +2,10 @@
 using System.Drawing;
 using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
+using DevExpress.Skins;
 using DevExpress.Utils;
-using DevExpress.XtraEditors.Controls;
-using DevExpress.XtraTab;
+using DevExpress.XtraLayout;
+using DevExpress.XtraLayout.Utils;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.CommonGUI.Common;
@@ -26,39 +27,23 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			_folder = folder;
 			_formParameters = formParameters;
 			Text = String.Format(_formParameters.Title, folder.Name);
-			Width = _formParameters.Width;
-			Height = _formParameters.Height;
+			Width = (Int32)(_formParameters.Width * Utils.GetScaleFactor(CreateGraphics().DpiX).Width);
+			Height = (Int32)(_formParameters.Height * Utils.GetScaleFactor(CreateGraphics().DpiX).Height);
 			Load += (o, e) => LoadData();
 			Shown += (o, e) => textEditName.Focus();
-			ckApllyForAllWindowsAppearance.Checked = _folder.Page.Library.Settings.ApplyAppearanceForAllWindows;
-			ckApllyForAllWindowsWidget.Checked = _folder.Page.Library.Settings.ApplyWidgetForAllWindows;
-			ckApllyForAllWindowsBanner.Checked = _folder.Page.Library.Settings.ApplyBannerForAllWindows;
-			xtraTabPageBanner.PageEnabled = MainController.Instance.Lists.Banners.MainFolder.ExistsLocal();
-			xtraTabPageWidget.PageEnabled = MainController.Instance.Lists.Widgets.MainFolder.ExistsLocal();
+			checkEditApllyForAllWindowsAppearance.Checked = _folder.Page.Library.Settings.ApplyAppearanceForAllWindows;
+			checkEditApllyForAllWindowsWidget.Checked = _folder.Page.Library.Settings.ApplyWidgetForAllWindows;
+			checkEditApllyForAllWindowsBanner.Checked = _folder.Page.Library.Settings.ApplyBannerForAllWindows;
+			layoutControlGroupBanner.Enabled = MainController.Instance.Lists.Banners.MainFolder.ExistsLocal();
+			layoutControlGroupWidget.Enabled = MainController.Instance.Lists.Widgets.MainFolder.ExistsLocal();
 			buttonEditWindowHeaderFont.ButtonClick += EditorHelper.FontEdit_ButtonClick;
 			buttonEditWindowHeaderFont.Click += EditorHelper.FontEdit_Click;
 			textEditName.EnableSelectAll();
-			if ((base.CreateGraphics()).DpiX > 96)
-			{
-				laHeaderBackColor.Font = new Font(laHeaderBackColor.Font.FontFamily, laHeaderBackColor.Font.Size - 2, laHeaderBackColor.Font.Style);
-				laHeaderFont.Font = new Font(laHeaderFont.Font.FontFamily, laHeaderFont.Font.Size - 2, laHeaderFont.Font.Style);
-				laHeaderForeColor.Font = new Font(laHeaderForeColor.Font.FontFamily, laHeaderForeColor.Font.Size - 2, laHeaderForeColor.Font.Style);
-				laBorderColor.Font = new Font(laBorderColor.Font.FontFamily, laBorderColor.Font.Size - 2, laBorderColor.Font.Style);
-				laBackColor.Font = new Font(laBackColor.Font.FontFamily, laBackColor.Font.Size - 2, laBackColor.Font.Style);
-				laForeColor.Font = new Font(laForeColor.Font.FontFamily, laForeColor.Font.Size - 2, laForeColor.Font.Style);
-				laHeaderAlignment.Font = new Font(laHeaderAlignment.Font.FontFamily, laHeaderAlignment.Font.Size - 2, laHeaderAlignment.Font.Style);
-				ckApllyForAllWindowsAppearance.Font = new Font(ckApllyForAllWindowsAppearance.Font.FontFamily, ckApllyForAllWindowsAppearance.Font.Size - 2, ckApllyForAllWindowsAppearance.Font.Style);
-				ckApllyForAllWindowsBanner.Font = new Font(ckApllyForAllWindowsBanner.Font.FontFamily, ckApllyForAllWindowsBanner.Font.Size - 2, ckApllyForAllWindowsBanner.Font.Style);
-				ckApllyForAllWindowsWidget.Font = new Font(ckApllyForAllWindowsWidget.Font.FontFamily, ckApllyForAllWindowsWidget.Font.Size - 2, ckApllyForAllWindowsWidget.Font.Style);
-				rbHeaderAlignmentCenter.Font = new Font(rbHeaderAlignmentCenter.Font.FontFamily, rbHeaderAlignmentCenter.Font.Size - 2, rbHeaderAlignmentCenter.Font.Style);
-				rbHeaderAlignmentLeft.Font = new Font(rbHeaderAlignmentLeft.Font.FontFamily, rbHeaderAlignmentLeft.Font.Size - 2, rbHeaderAlignmentLeft.Font.Style);
-				rbWindowHeaderAlignmentRight.Font = new Font(rbWindowHeaderAlignmentRight.Font.FontFamily, rbWindowHeaderAlignmentRight.Font.Size - 2, rbWindowHeaderAlignmentRight.Font.Style);
-				xtraTabControlWindowProperties.Appearance.Font = new Font(xtraTabControlWindowProperties.Appearance.Font.FontFamily, xtraTabControlWindowProperties.Appearance.Font.Size - 2, xtraTabControlWindowProperties.Appearance.Font.Style);
-				xtraTabControlWindowProperties.AppearancePage.Header.Font = new Font(xtraTabControlWindowProperties.AppearancePage.Header.Font.FontFamily, xtraTabControlWindowProperties.AppearancePage.Header.Font.Size - 2, xtraTabControlWindowProperties.AppearancePage.Header.Font.Style);
-				xtraTabControlWindowProperties.AppearancePage.HeaderActive.Font = new Font(xtraTabControlWindowProperties.AppearancePage.HeaderActive.Font.FontFamily, xtraTabControlWindowProperties.AppearancePage.HeaderActive.Font.Size - 2, xtraTabControlWindowProperties.AppearancePage.HeaderActive.Font.Style);
-				xtraTabControlWindowProperties.AppearancePage.HeaderDisabled.Font = new Font(xtraTabControlWindowProperties.AppearancePage.HeaderDisabled.Font.FontFamily, xtraTabControlWindowProperties.AppearancePage.HeaderDisabled.Font.Size - 2, xtraTabControlWindowProperties.AppearancePage.HeaderDisabled.Font.Style);
-				xtraTabControlWindowProperties.AppearancePage.HeaderHotTracked.Font = new Font(xtraTabControlWindowProperties.AppearancePage.HeaderHotTracked.Font.FontFamily, xtraTabControlWindowProperties.AppearancePage.HeaderHotTracked.Font.Size - 2, xtraTabControlWindowProperties.AppearancePage.HeaderHotTracked.Font.Style);
-			}
+
+			layoutControlItemSave.MinSize = RectangleHelper.ScaleSize(layoutControlItemSave.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemSave.MaxSize = RectangleHelper.ScaleSize(layoutControlItemSave.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCancel.MinSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCancel.MaxSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
 		private void LoadData()
@@ -66,44 +51,40 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			switch (_formParameters.Type)
 			{
 				case WindowPropertiesType.None:
-					xtraTabPageAppearance.PageVisible = true;
-					xtraTabPageWidget.PageVisible = true;
-					xtraTabPageBanner.PageVisible = true;
-					xtraTabControlWindowProperties.ShowTabHeader = DefaultBoolean.True;
-					xtraTabControlWindowProperties.BorderStyle = BorderStyles.Default;
-					xtraTabControlWindowProperties.BorderStylePage = BorderStyles.Default;
+					layoutControlGroupAppearance.Visibility = LayoutVisibility.Always;
+					layoutControlGroupWidget.Visibility = LayoutVisibility.Always;
+					layoutControlGroupBanner.Visibility = LayoutVisibility.Always;
+					tabbedControlGroupProperties.ShowTabHeader = DefaultBoolean.True;
+					layoutControlGroupAppearance.GroupBordersVisible = true;
+					layoutControlGroupWidget.GroupBordersVisible = true;
+					layoutControlGroupBanner.GroupBordersVisible = true;
 					break;
 				case WindowPropertiesType.Appearnce:
-					xtraTabPageAppearance.PageVisible = true;
-					xtraTabPageWidget.PageVisible = false;
-					xtraTabPageBanner.PageVisible = false;
-					xtraTabPageBanner.BorderStyle = BorderStyle.None;
-					xtraTabControlWindowProperties.ShowTabHeader = DefaultBoolean.False;
-					xtraTabControlWindowProperties.BorderStyle = BorderStyles.NoBorder;
-					xtraTabControlWindowProperties.BorderStylePage = BorderStyles.NoBorder;
+					layoutControlGroupAppearance.Visibility = LayoutVisibility.Always;
+					layoutControlGroupWidget.Visibility = LayoutVisibility.Never;
+					layoutControlGroupBanner.Visibility = LayoutVisibility.Never;
+					tabbedControlGroupProperties.ShowTabHeader = DefaultBoolean.False;
+					layoutControlGroupAppearance.GroupBordersVisible = false;
 					break;
 				case WindowPropertiesType.Widget:
-					xtraTabPageAppearance.PageVisible = false;
-					xtraTabPageWidget.PageVisible = true;
-					xtraTabPageBanner.PageVisible = false;
-					xtraTabPageWidget.BorderStyle = BorderStyle.None;
-					xtraTabControlWindowProperties.ShowTabHeader = DefaultBoolean.False;
-					xtraTabControlWindowProperties.BorderStyle = BorderStyles.NoBorder;
-					xtraTabControlWindowProperties.BorderStylePage = BorderStyles.NoBorder;
-					OnSelectedPageChanging(xtraTabControlWindowProperties, new TabPageChangingEventArgs(null, xtraTabPageWidget));
+					layoutControlGroupAppearance.Visibility = LayoutVisibility.Never;
+					layoutControlGroupWidget.Visibility = LayoutVisibility.Always;
+					layoutControlGroupBanner.Visibility = LayoutVisibility.Never;
+					tabbedControlGroupProperties.ShowTabHeader = DefaultBoolean.False;
+					layoutControlGroupWidget.GroupBordersVisible = false;
+					OnSelectedPageChanging(tabbedControlGroupProperties, new LayoutTabPageChangedEventArgs(null, layoutControlGroupWidget));
 					break;
 				case WindowPropertiesType.Banner:
-					xtraTabPageAppearance.PageVisible = false;
-					xtraTabPageWidget.PageVisible = false;
-					xtraTabPageBanner.PageVisible = true;
-					xtraTabControlWindowProperties.ShowTabHeader = DefaultBoolean.False;
-					xtraTabControlWindowProperties.BorderStyle = BorderStyles.NoBorder;
-					xtraTabControlWindowProperties.BorderStylePage = BorderStyles.NoBorder;
-					OnSelectedPageChanging(xtraTabControlWindowProperties, new TabPageChangingEventArgs(null, xtraTabPageBanner));
+					layoutControlGroupAppearance.Visibility = LayoutVisibility.Never;
+					layoutControlGroupWidget.Visibility = LayoutVisibility.Never;
+					layoutControlGroupBanner.Visibility = LayoutVisibility.Always;
+					tabbedControlGroupProperties.ShowTabHeader = DefaultBoolean.False;
+					layoutControlGroupBanner.GroupBordersVisible = false;
+					OnSelectedPageChanging(tabbedControlGroupProperties, new LayoutTabPageChangedEventArgs(null, layoutControlGroupBanner));
 					break;
 			}
 
-			laLocation.Text = String.Format("Location: {0}", "Window " + (_folder.RowOrder + 1).ToString("#,##0") + " - Column " + (_folder.ColumnOrder + 1).ToString("#,##0"));
+			labelControlLocation.Text = String.Format("Location: {0}", "Window " + (_folder.RowOrder + 1).ToString("#,##0") + " - Column " + (_folder.ColumnOrder + 1).ToString("#,##0"));
 			textEditName.EditValue = _folder.Name;
 			colorEditWindowHeaderBackColor.Color = _folder.Settings.BackgroundHeaderColor;
 			colorEditWindowHeaderForeColor.Color = _folder.Settings.ForeHeaderColor;
@@ -121,17 +102,17 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			switch (_folder.Settings.HeaderAlignment)
 			{
 				case HorizontalAlignment.Left:
-					rbHeaderAlignmentLeft.Checked = true;
+					checkEditWindowHeaderAlignmentLeft.Checked = true;
 					break;
 				case HorizontalAlignment.Center:
-					rbHeaderAlignmentCenter.Checked = true;
+					checkEditWindowHeaderAlignmentCenter.Checked = true;
 					break;
 				case HorizontalAlignment.Right:
-					rbWindowHeaderAlignmentRight.Checked = true;
+					checkEditWindowHeaderAlignmentRight.Checked = true;
 					break;
 			}
-			ckApllyForAllWindowsAppearance.Visible = _formParameters.Type == WindowPropertiesType.None;
-			ckApllyForAllWindowsAppearance.Checked = _formParameters.Type == WindowPropertiesType.None && _folder.Page.Library.Settings.ApplyAppearanceForAllWindows;
+			layoutControlItemApllyForAllWindowsAppearance.Visibility = _formParameters.Type == WindowPropertiesType.None ? LayoutVisibility.Always : LayoutVisibility.Never;
+			checkEditApllyForAllWindowsAppearance.Checked = _formParameters.Type == WindowPropertiesType.None && _folder.Page.Library.Settings.ApplyAppearanceForAllWindows;
 		}
 
 		private void SaveData()
@@ -144,26 +125,26 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			_folder.Settings.BorderColor = colorEditWindowBorderColor.Color;
 			_folder.Settings.HeaderFont = buttonEditWindowHeaderFont.Tag as Font;
 			_folder.Settings.UseForeHeaderColorForWidget = checkEditUseForeHeaderColorForWidget.Checked;
-			if (rbHeaderAlignmentLeft.Checked)
+			if (checkEditWindowHeaderAlignmentLeft.Checked)
 				_folder.Settings.HeaderAlignment = HorizontalAlignment.Left;
-			else if (rbHeaderAlignmentCenter.Checked)
+			else if (checkEditWindowHeaderAlignmentCenter.Checked)
 				_folder.Settings.HeaderAlignment = HorizontalAlignment.Center;
-			else if (rbWindowHeaderAlignmentRight.Checked)
+			else if (checkEditWindowHeaderAlignmentRight.Checked)
 				_folder.Settings.HeaderAlignment = HorizontalAlignment.Right;
 			if (_formParameters.Type == WindowPropertiesType.None)
-				_folder.Page.Library.Settings.ApplyAppearanceForAllWindows = ckApllyForAllWindowsAppearance.Checked;
+				_folder.Page.Library.Settings.ApplyAppearanceForAllWindows = checkEditApllyForAllWindowsAppearance.Checked;
 
 			_widgetControl?.SaveData();
 			if (_bannerControl == null && _folder.Widget.Enabled)
 				_folder.Banner.Enable = false;
 
-			_folder.Page.Library.Settings.ApplyWidgetForAllWindows = ckApllyForAllWindowsWidget.Checked;
-			_folder.Page.Library.Settings.ApplyWidgetColorForAllWindows = ckApllyForAllWindowsWidgetColor.Checked;
+			_folder.Page.Library.Settings.ApplyWidgetForAllWindows = checkEditApllyForAllWindowsWidget.Checked;
+			_folder.Page.Library.Settings.ApplyWidgetColorForAllWindows = checkEditApllyForAllWindowsWidgetColor.Checked;
 
 			_bannerControl?.SaveData();
 			if (_widgetControl == null && _folder.Banner.Enable)
 				_folder.Widget.WidgetType = _folder.Widget.DefaultWidgetType;
-			_folder.Page.Library.Settings.ApplyBannerForAllWindows = ckApllyForAllWindowsBanner.Checked;
+			_folder.Page.Library.Settings.ApplyBannerForAllWindows = checkEditApllyForAllWindowsBanner.Checked;
 
 			_folder.Page.ApplyFolderSettings(_folder);
 			_folder.BeforeSave();
@@ -175,9 +156,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			SaveData();
 		}
 
-		private void OnSelectedPageChanging(object sender, TabPageChangingEventArgs pageArgs)
+		private void OnSelectedPageChanging(object sender, LayoutTabPageChangedEventArgs pageArgs)
 		{
-			if (pageArgs.Page == xtraTabPageWidget)
+			if (pageArgs.Page == layoutControlGroupWidget)
 			{
 				if (_widgetControl == null)
 				{
@@ -195,12 +176,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 					};
 					_widgetControl.ControlClicked += OnFormClick;
 					_widgetControl.UpdateColor(checkEditUseForeHeaderColorForWidget.Checked ? colorEditWindowHeaderForeColor.Color : (Color?)null);
-					ckApllyForAllWindowsWidget.Checked = _folder.Page.Library.Settings.ApplyWidgetForAllWindows;
-					ckApllyForAllWindowsWidgetColor.Checked = _folder.Page.Library.Settings.ApplyWidgetColorForAllWindows;
+					checkEditApllyForAllWindowsWidget.Checked = _folder.Page.Library.Settings.ApplyWidgetForAllWindows;
+					checkEditApllyForAllWindowsWidgetColor.Checked = _folder.Page.Library.Settings.ApplyWidgetColorForAllWindows;
 					Cursor = Cursors.Default;
 				}
 			}
-			else if (pageArgs.Page == xtraTabPageBanner && _bannerControl == null)
+			else if (pageArgs.Page == layoutControlGroupBanner && _bannerControl == null)
 			{
 				Cursor = Cursors.WaitCursor;
 				Application.DoEvents();
@@ -214,7 +195,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 						_widgetControl?.ChangeState(false);
 				};
 				_bannerControl.ControlClicked += OnFormClick;
-				ckApllyForAllWindowsBanner.Checked = _folder.Page.Library.Settings.ApplyBannerForAllWindows;
+				checkEditApllyForAllWindowsBanner.Checked = _folder.Page.Library.Settings.ApplyBannerForAllWindows;
 				Cursor = Cursors.Default;
 			}
 		}
@@ -267,7 +248,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 		{
 			Type = WindowPropertiesType.Appearnce;
 			Title = "Window Settings";
-			Width = 580;
+			Width = 680;
 			Height = 430;
 		}
 	}

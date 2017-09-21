@@ -3,7 +3,10 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using DevExpress.Skins;
+using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Filtering;
+using DevExpress.XtraEditors.ViewInfo;
 using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
@@ -42,21 +45,14 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 					}
 				});
 
-			if ((CreateGraphics()).DpiX > 96)
-			{
-				var font = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2,
-					styleController.Appearance.Font.Style);
-				styleController.Appearance.Font = font;
-				styleController.AppearanceDisabled.Font = font;
-				styleController.AppearanceDropDown.Font = font;
-				styleController.AppearanceDropDownHeader.Font = font;
-				styleController.AppearanceFocused.Font = font;
-				styleController.AppearanceReadOnly.Font = font;
+			layoutControlGroupSearch.Enabled = false;
+			layoutControlItemGallery.Enabled = false;
+			layoutControlGroupCustomWidget.Enabled = false;
 
-				radioButtonWidgetTypeCustom.Font = new Font(radioButtonWidgetTypeCustom.Font.FontFamily, radioButtonWidgetTypeCustom.Font.Size - 2, radioButtonWidgetTypeCustom.Font.Style);
-				radioButtonWidgetTypeDisabled.Font = new Font(radioButtonWidgetTypeDisabled.Font.FontFamily, radioButtonWidgetTypeDisabled.Font.Size - 2, radioButtonWidgetTypeDisabled.Font.Style);
-				buttonXSearch.Font = new Font(buttonXSearch.Font.FontFamily, buttonXSearch.Font.Size - 2, buttonXSearch.Font.Style);
-			}
+			layoutControlItemWidgetNone.MaxSize = RectangleHelper.ScaleSize(layoutControlItemWidgetNone.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemWidgetCustom.MaxSize = RectangleHelper.ScaleSize(layoutControlItemWidgetCustom.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemWidgetColorizeToggle.MaxSize = RectangleHelper.ScaleSize(layoutControlItemWidgetColorizeToggle.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemWidgetColorizeEditor.MaxSize = RectangleHelper.ScaleSize(layoutControlItemWidgetColorizeEditor.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
 		public void LoadData()
@@ -109,20 +105,20 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 
 			checkEditInvert.Checked = _data.Inverted;
 			checkEditUseTextColor.Checked = _data.WidgetHolder != null && _data.WidgetHolder.UseTextColorForWidget;
-			checkEditUseTextColor.Enabled = radioButtonWidgetTypeCustom.Checked && checkEditInvert.Checked;
-			colorEditInversionColor.Enabled = radioButtonWidgetTypeCustom.Checked && checkEditInvert.Checked && !checkEditUseTextColor.Checked;
+			checkEditUseTextColor.Enabled = checkEditWidgetCustom.Checked && checkEditInvert.Checked;
+			colorEditInversionColor.Enabled = checkEditWidgetCustom.Checked && checkEditInvert.Checked && !checkEditUseTextColor.Checked;
 			colorEditInversionColor.EditValue = _data.InversionColor;
 			_originalImage = _data.WidgetType == WidgetType.CustomWidget ? _data.Image : null;
 			_originalImageName = _data.WidgetType == WidgetType.CustomWidget ? _data.ImageName : null;
 			switch (_data.WidgetType)
 			{
 				case WidgetType.CustomWidget:
-					radioButtonWidgetTypeCustom.Checked = true;
-					radioButtonWidgetTypeDisabled.Checked = false;
+					checkEditWidgetCustom.Checked = true;
+					checkEditWidgetNone.Checked = false;
 					break;
 				default:
-					radioButtonWidgetTypeCustom.Checked = false;
-					radioButtonWidgetTypeDisabled.Checked = true;
+					checkEditWidgetCustom.Checked = false;
+					checkEditWidgetNone.Checked = true;
 					break;
 			}
 
@@ -134,7 +130,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 		public void SaveData()
 		{
 			if (_data == null) return;
-			if (radioButtonWidgetTypeCustom.Checked)
+			if (checkEditWidgetCustom.Checked)
 			{
 				_data.WidgetType = WidgetType.CustomWidget;
 				_data.Inverted = checkEditInvert.Checked;
@@ -146,7 +142,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 				_data.Image = _originalImage;
 				_data.ImageName = _originalImageName;
 			}
-			else if (radioButtonWidgetTypeDisabled.Checked)
+			else if (checkEditWidgetNone.Checked)
 			{
 				_data.WidgetType = WidgetType.NoWidget;
 				_data.Image = null;
@@ -157,15 +153,15 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 		public void ChangeState(bool enable)
 		{
 			_loading = true;
-			radioButtonWidgetTypeCustom.Checked = enable;
-			radioButtonWidgetTypeDisabled.Checked = !enable;
+			checkEditWidgetCustom.Checked = enable;
+			checkEditWidgetNone.Checked = !enable;
 			_loading = false;
 		}
 
 		public void UpdateColor(Color? textColor)
 		{
 			checkEditUseTextColor.Checked = textColor.HasValue;
-			colorEditInversionColor.Enabled = radioButtonWidgetTypeCustom.Checked && checkEditInvert.Checked && !checkEditUseTextColor.Checked;
+			colorEditInversionColor.Enabled = checkEditWidgetCustom.Checked && checkEditInvert.Checked && !checkEditUseTextColor.Checked;
 			colorEditInversionColor.EditValue = checkEditUseTextColor.Checked ? textColor : _data.InversionColor;
 		}
 
@@ -174,26 +170,28 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			if (_originalImage != null && checkEditInvert.Checked)
 			{
 				var imageClone = (Image)_originalImage.Clone();
-				pbCustomWidget.Image = colorEditInversionColor.Color != GraphicObjectExtensions.DefaultInversionColor
+				pictureEditCustomWidget.Image = colorEditInversionColor.Color != GraphicObjectExtensions.DefaultInversionColor
 					? imageClone.ReplaceColor(colorEditInversionColor.Color)
 					: imageClone.Invert();
 			}
 			else
-				pbCustomWidget.Image = _originalImage;
+				pictureEditCustomWidget.Image = _originalImage;
 		}
 
 		private void OnWidgetTypeChanged(object sender, EventArgs e)
 		{
-			pbCustomWidget.Enabled = radioButtonWidgetTypeCustom.Checked;
-			pnSearch.Enabled = radioButtonWidgetTypeCustom.Checked;
-			checkEditInvert.Enabled = radioButtonWidgetTypeCustom.Checked;
-			checkEditUseTextColor.Enabled = radioButtonWidgetTypeCustom.Checked && checkEditInvert.Checked;
-			colorEditInversionColor.Enabled = radioButtonWidgetTypeCustom.Checked && checkEditInvert.Checked && !checkEditUseTextColor.Checked;
-			pnGallery.Enabled = radioButtonWidgetTypeCustom.Checked;
+			layoutControlItemGallery.Enabled = checkEditWidgetCustom.Checked;
+			layoutControlGroupCustomWidget.Enabled = checkEditWidgetCustom.Checked;
+			layoutControlGroupSearch.Enabled = checkEditWidgetCustom.Checked;
+
+			colorEditInversionColor.Enabled = checkEditInvert.Checked;
+
+			layoutControlItemUseTextColor.Enabled = checkEditWidgetCustom.Checked && checkEditInvert.Checked;
+
 			if (!_loading)
 			{
 				UpdateCustomDisplayImage();
-				StateChanged?.Invoke(this, new CheckedChangedEventArgs(radioButtonWidgetTypeCustom.Checked));
+				StateChanged?.Invoke(this, new CheckedChangedEventArgs(checkEditWidgetCustom.Checked));
 			}
 		}
 
@@ -216,7 +214,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 		private void checkEditUseTextColor_CheckedChanged(object sender, EventArgs e)
 		{
 			if (!_loading)
-				StateChanged?.Invoke(this, new CheckedChangedEventArgs(radioButtonWidgetTypeCustom.Checked));
+				StateChanged?.Invoke(this, new CheckedChangedEventArgs(checkEditWidgetCustom.Checked));
 		}
 
 		private void OnImageDoubleClick(object sender, EventArgs e)
@@ -247,18 +245,24 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			ControlClicked?.Invoke(sender, e);
 		}
 
+		private void OnWidgetPictureMouseClick(object sender, MouseEventArgs e)
+		{
+			if (e.Button != MouseButtons.Right) return;
+			var pictureEdit = sender as PictureEdit;
+			if (checkEditInvert.Checked && pictureEdit?.Image != null && colorEditInversionColor.Color != Color.White)
+				contextMenuStripImage.Show(Cursor.Position);
+		}
+
 		private void toolStripMenuItemImageAddToFavorites_Click(object sender, EventArgs e)
 		{
-			if (pbCustomWidget.Image == null) return;
+			if (pictureEditCustomWidget.Image == null) return;
 			var favoritesContainer = xtraTabControlGallery.TabPages.OfType<FavoritesImagesContainer>().FirstOrDefault();
-			((FavoriteImageGroup)favoritesContainer?.ParentImageGroup)?.AddImage<Widget>(pbCustomWidget.Image, String.Format("{0}_{1}", _originalImageName, colorEditInversionColor.Color.ToHex()));
+			((FavoriteImageGroup)favoritesContainer?.ParentImageGroup)?.AddImage<Widget>(pictureEditCustomWidget.Image, String.Format("{0}_{1}", _originalImageName, colorEditInversionColor.Color.ToHex()));
 		}
 
 		private void contextMenuStripImage_Opening(object sender, CancelEventArgs e)
 		{
-			e.Cancel = !checkEditInvert.Checked || pbCustomWidget.Image == null || colorEditInversionColor.Color == Color.White;
+			e.Cancel = !checkEditInvert.Checked || pictureEditCustomWidget.Image == null || colorEditInversionColor.Color == Color.White;
 		}
-
-
 	}
 }

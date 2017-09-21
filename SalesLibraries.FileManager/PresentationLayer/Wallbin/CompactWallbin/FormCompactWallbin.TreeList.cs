@@ -4,12 +4,12 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.XtraLayout.Utils;
 using DevExpress.XtraTreeList;
 using DevExpress.XtraTreeList.Nodes;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.DataState;
-using SalesLibraries.Common.Extensions;
 using SalesLibraries.FileManager.Controllers;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.CompactWallbin
@@ -21,11 +21,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.CompactWallbin
 
 		public async void LoadData()
 		{
-			laTreeViewProgressLabel.Text = "Loading Library...";
-			pnTreeViewProgress.Visible = true;
+			simpleLabelItemTreeViewProgressLabel.Text = "Loading Library...";
+			layoutControlGroupTreeViewProgress.Visibility = LayoutVisibility.Always;
 			circularProgressTreeView.IsRunning = true;
-
-			panelTop.Enabled = panelMain.Enabled = false;
+			layoutControlGroupTreeView.Enabled = false;
 			treeListWallbinItems.SuspendLayout();
 			treeListWallbinItems.Nodes.Clear();
 
@@ -44,9 +43,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.CompactWallbin
 			})));
 
 			treeListWallbinItems.ResumeLayout();
-			panelTop.Enabled = panelMain.Enabled = true;
+			layoutControlGroupTreeView.Enabled = true;
 			circularProgressTreeView.IsRunning = false;
-			pnTreeViewProgress.Visible = false;
+			layoutControlGroupTreeViewProgress.Visibility = LayoutVisibility.Never;
 
 			UpdateSyncInfo();
 		}

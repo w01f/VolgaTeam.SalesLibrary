@@ -1,12 +1,11 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using DevExpress.Skins;
 using DevExpress.XtraEditors.Controls;
 using SalesLibraries.Business.Entities.Helpers;
-using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
-using SalesLibraries.Common.Extensions;
+using SalesLibraries.Common.Helpers;
 using SalesLibraries.FileManager.Controllers;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Views;
 
@@ -27,14 +26,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 			checkedListBoxControl.Items.Clear();
 			checkedListBoxControl.Items.AddRange(MainController.Instance.Lists.SuperFilters.Items.ToArray());
 
-			if (!((CreateGraphics()).DpiX > 96)) return;
-			var styleControllerFont = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2, styleController.Appearance.Font.Style);
-			styleController.AppearanceDisabled.Font = styleControllerFont;
-			styleController.AppearanceDropDown.Font = styleControllerFont;
-			styleController.AppearanceDropDownHeader.Font = styleControllerFont;
-			styleController.AppearanceFocused.Font = styleControllerFont;
-			styleController.AppearanceReadOnly.Font = styleControllerFont;
-			buttonXReset.Font = new Font(buttonXReset.Font.FontFamily, buttonXReset.Font.Size - 2, buttonXReset.Font.Style);
+			layoutControlItemReset.MinSize = RectangleHelper.ScaleSize(layoutControlItemReset.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemReset.MaxSize = RectangleHelper.ScaleSize(layoutControlItemReset.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			checkedListBoxControl.ItemHeight = (Int32)(checkedListBoxControl.ItemHeight * Utils.GetScaleFactor(CreateGraphics().DpiX).Height);
 		}
 
 		#region IGroupSettingsEditor Members
@@ -44,29 +38,25 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 
 		public void UpdateData()
 		{
-			pnButtons.Enabled = false;
-			pnData.Enabled = false;
-
 			_loading = true;
 			checkedListBoxControl.UnCheckAll();
-			_loading = false;
 
-			Enabled = false;
+			Enabled = Selection.SelectedObjects.Any();
 
-			var defaultLink = Selection.SelectedObjects.OfType<LibraryObjectLink>().FirstOrDefault(link => link.Tags.HasSuperFilters) ?? Selection.SelectedObjects.FirstOrDefault();
-			Enabled = defaultLink != null;
-			if (defaultLink == null) return;
+			var commonFilters = Selection.SelectedObjects.GetCommonSuperFilters().ToList();
+			var allFilters = Selection.SelectedObjects.SelectMany(l => l.Tags.SuperFilters).ToList();
 
-			var noData = Selection.SelectedObjects.All(link => !link.Tags.SuperFilters.Any());
-			var sameData = Selection.SelectedObjects.All(link => link.Tags.SuperFilters.Compare(defaultLink.Tags.SuperFilters));
-
-			pnButtons.Enabled = !noData;
-			pnData.Enabled = sameData || noData;
-
-			if (!sameData) return;
-			_loading = true;
 			foreach (var item in checkedListBoxControl.Items.OfType<CheckedListBoxItem>())
-				item.CheckState = defaultLink.Tags.SuperFilters.Contains(item.Value.ToString()) ? CheckState.Checked : CheckState.Unchecked;
+			{
+				if (commonFilters.Contains(item.Value.ToString()))
+					item.CheckState = CheckState.Checked;
+				else
+				{
+					item.CheckState = allFilters.Contains(item.Value.ToString())
+						? CheckState.Checked
+						: CheckState.Unchecked;
+				}
+			}
 			_loading = false;
 		}
 

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using DevExpress.Skins;
 using DevExpress.XtraBars;
 using DevExpress.XtraTab;
 using DevExpress.XtraTab.ViewInfo;
@@ -228,6 +229,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			{
 				form.Width = 500;
 				form.Height = 160;
+				form.Size = RectangleHelper.ScaleSize(form.Size, Utils.GetScaleFactor(CreateGraphics().DpiX));
 				if (form.ShowDialog(MainController.Instance.MainForm) != DialogResult.OK) return;
 				selectedPage.DisposePage();
 				MainController.Instance.ProcessManager.Run("Deleting Page...",

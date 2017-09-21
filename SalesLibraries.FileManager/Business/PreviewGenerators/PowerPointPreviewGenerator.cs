@@ -23,7 +23,7 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 		{
 			var powerPointContainer = (PowerPointPreviewContainer)previewContainer;
 
-			var logger = new PreviewGenerationLogger(powerPointContainer);
+			var logger = new FilePreviewGenerationLogger(powerPointContainer);
 			logger.StartLogging();
 
 			var updated = false;

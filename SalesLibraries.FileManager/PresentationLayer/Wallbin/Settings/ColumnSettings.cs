@@ -1,23 +1,25 @@
 ﻿using System;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using DevExpress.Utils.Menu;
 using DevExpress.XtraGrid.Menu;
 using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraTab;
+using DevExpress.XtraLayout;
 using SalesLibraries.Business.Entities.Helpers;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
 using SalesLibraries.CommonGUI.Common;
 using SalesLibraries.FileManager.Controllers;
+using PopupMenuShowingEventArgs = DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 {
-	//public partial class ColumnSettings : UserControl
-	public sealed partial class ColumnSettings : XtraTabPage
+	public partial class ColumnSettings : LayoutControlGroup
 	{
 		private readonly LibraryPage _page;
+		private LayoutControlItem _gridContainer;
 
-		public int ColumnOrder { get; private set; }
+		public int ColumnOrder { get; }
 		public LibraryFolder FolderInBuffer { get; set; }
 
 		public event EventHandler<EventArgs> FolderChanged;
@@ -29,11 +31,30 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 		public ColumnSettings(LibraryPage page, int columnOrder)
 		{
 			InitializeComponent();
+
+			InitControls();
+
 			_page = page;
 			ColumnOrder = columnOrder;
 			Text = String.Format("Column {0}", ColumnOrder + 1);
 			LoadData();
 			repositoryItemTextEdit.EnableSelectAll();
+		}
+
+		private void InitControls()
+		{
+			_gridContainer = AddItem();
+			_gridContainer.Control = gridControl;
+			_gridContainer.TextVisible = false;
+			_gridContainer.TrimClientAreaToControl = false;
+			_gridContainer.FillControlToClientArea = false;
+			_gridContainer.ControlAlignment = ContentAlignment.MiddleCenter;
+		}
+
+		public void ReleaseControl()
+		{
+			_gridContainer.Dispose();
+			gridControl.Dispose();
 		}
 
 		public void LoadData()

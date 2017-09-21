@@ -853,6 +853,56 @@ namespace SalesLibraries.FileManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap LinkSettingsSecurityBlackList {
+            get {
+                object obj = ResourceManager.GetObject("LinkSettingsSecurityBlackList", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap LinkSettingsSecurityHidden {
+            get {
+                object obj = ResourceManager.GetObject("LinkSettingsSecurityHidden", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap LinkSettingsSecurityLocal {
+            get {
+                object obj = ResourceManager.GetObject("LinkSettingsSecurityLocal", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap LinkSettingsSecurityVisible {
+            get {
+                object obj = ResourceManager.GetObject("LinkSettingsSecurityVisible", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap LinkSettingsSecurityWhiteList {
+            get {
+                object obj = ResourceManager.GetObject("LinkSettingsSecurityWhiteList", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap LinkSettingsTagsIconCategories {
             get {
                 object obj = ResourceManager.GetObject("LinkSettingsTagsIconCategories", resourceCulture);

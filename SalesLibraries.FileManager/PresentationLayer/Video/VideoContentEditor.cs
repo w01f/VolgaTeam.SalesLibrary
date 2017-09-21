@@ -10,6 +10,7 @@ using DevExpress.Utils.Menu;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using DevExpress.XtraLayout.Utils;
 using SalesLibraries.Business.Contexts.Wallbin;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers;
 using SalesLibraries.Common.Helpers;
@@ -29,34 +30,30 @@ namespace SalesLibraries.FileManager.PresentationLayer.Video
 		{
 			InitializeComponent();
 			Dock = DockStyle.Fill;
-			labelControlMp4ConversionWarning.Visible = false;
 
-			if ((CreateGraphics()).DpiX > 96)
-			{
-				var font = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2,
-					styleController.Appearance.Font.Style);
-				styleController.Appearance.Font = font;
-				styleController.AppearanceDisabled.Font = font;
-				styleController.AppearanceDropDown.Font = font;
-				styleController.AppearanceDropDownHeader.Font = font;
-				styleController.AppearanceFocused.Font = font;
-				styleController.AppearanceReadOnly.Font = font;
+			layoutControlItemMp4ConversionWarning.MinSize = RectangleHelper.ScaleSize(layoutControlItemMp4ConversionWarning.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemMp4ConversionWarning.MaxSize = RectangleHelper.ScaleSize(layoutControlItemMp4ConversionWarning.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemSelectAll.MinSize = RectangleHelper.ScaleSize(layoutControlItemSelectAll.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemSelectAll.MaxSize = RectangleHelper.ScaleSize(layoutControlItemSelectAll.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemSelectMissing.MinSize = RectangleHelper.ScaleSize(layoutControlItemSelectMissing.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemSelectMissing.MaxSize = RectangleHelper.ScaleSize(layoutControlItemSelectMissing.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemClearAll.MinSize = RectangleHelper.ScaleSize(layoutControlItemClearAll.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemClearAll.MaxSize = RectangleHelper.ScaleSize(layoutControlItemClearAll.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 
-				gridColumnVideoMp4FileInfo.Width =
-					RectangleHelper.ScaleHorizontal(gridColumnVideoMp4FileInfo.Width, gridControlVideo.ScaleFactor.Width);
-				gridColumnVideoConvert.Width =
-					RectangleHelper.ScaleHorizontal(gridColumnVideoConvert.Width, gridControlVideo.ScaleFactor.Width);
-				gridColumnVideoHeight.Width =
-					RectangleHelper.ScaleHorizontal(gridColumnVideoHeight.Width, gridControlVideo.ScaleFactor.Width);
-				gridColumnVideoLength.Width =
-					RectangleHelper.ScaleHorizontal(gridColumnVideoLength.Width, gridControlVideo.ScaleFactor.Width);
-				gridColumnVideoRefresh.Width =
-					RectangleHelper.ScaleHorizontal(gridColumnVideoRefresh.Width, gridControlVideo.ScaleFactor.Width);
-				gridColumnVideoWidth.Width =
-					RectangleHelper.ScaleHorizontal(gridColumnVideoWidth.Width, gridControlVideo.ScaleFactor.Width);
-				gridColumnVideoCrf.Width =
-					RectangleHelper.ScaleHorizontal(gridColumnVideoCrf.Width, gridControlVideo.ScaleFactor.Width);
-			}
+			gridColumnVideoMp4FileInfo.Width =
+				RectangleHelper.ScaleHorizontal(gridColumnVideoMp4FileInfo.Width, gridControlVideo.ScaleFactor.Width);
+			gridColumnVideoConvert.Width =
+				RectangleHelper.ScaleHorizontal(gridColumnVideoConvert.Width, gridControlVideo.ScaleFactor.Width);
+			gridColumnVideoHeight.Width =
+				RectangleHelper.ScaleHorizontal(gridColumnVideoHeight.Width, gridControlVideo.ScaleFactor.Width);
+			gridColumnVideoLength.Width =
+				RectangleHelper.ScaleHorizontal(gridColumnVideoLength.Width, gridControlVideo.ScaleFactor.Width);
+			gridColumnVideoRefresh.Width =
+				RectangleHelper.ScaleHorizontal(gridColumnVideoRefresh.Width, gridControlVideo.ScaleFactor.Width);
+			gridColumnVideoWidth.Width =
+				RectangleHelper.ScaleHorizontal(gridColumnVideoWidth.Width, gridControlVideo.ScaleFactor.Width);
+			gridColumnVideoCrf.Width =
+				RectangleHelper.ScaleHorizontal(gridColumnVideoCrf.Width, gridControlVideo.ScaleFactor.Width);
 		}
 
 		public void LoadLibrary(LibraryContext libraryContext)
@@ -66,7 +63,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Video
 
 		public void LoadVideoInfo()
 		{
-			labelControlMp4ConversionWarning.Visible = false;
+			layoutControlItemMp4ConversionWarning.Visibility = LayoutVisibility.Never;
 			_videoInfoList.Clear();
 			MainController.Instance.ProcessManager.RunInQueue("Loading Video...",
 				LoadVideoInfoInternal,
@@ -82,7 +79,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Video
 						{
 							labelControlMp4ConversionWarning.Text = String.Format("<size=+4><i><color=red>MP4 Conversions Needed: {0}</color></i></size>",
 								mp4NoteConvertedCount);
-							labelControlMp4ConversionWarning.Visible = true;
+							layoutControlItemMp4ConversionWarning.Visibility = LayoutVisibility.Always;
 						}
 
 						checkEditEnableCrf.Checked = _libraryContext.Library.Settings.UserCrfForVideoConvert;
@@ -256,7 +253,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Video
 		#region CRF Processing
 		private void OnEnableCrfCheckedChanged(object sender, EventArgs e)
 		{
-			checkEditUseConvertSettingsForAllVideo.Visible = checkEditEnableCrf.Checked;
+			layoutControlItemCrfAllVideoToggle.Visibility = checkEditEnableCrf.Checked ? LayoutVisibility.Always : LayoutVisibility.Never;
 			gridColumnVideoCrf.Visible = checkEditEnableCrf.Checked;
 			if (checkEditEnableCrf.Checked)
 				gridColumnVideoCrf.VisibleIndex = 3;
@@ -271,7 +268,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Video
 
 		private void OnUseConvertSettingsForAllVideoCheckedChanged(object sender, EventArgs e)
 		{
-			comboBoxEditCrf.Visible = checkEditUseConvertSettingsForAllVideo.Checked;
+			layoutControlItemCrfEditor.Visibility = checkEditUseConvertSettingsForAllVideo.Checked ? LayoutVisibility.Always : LayoutVisibility.Never;
 			if (checkEditUseConvertSettingsForAllVideo.Checked)
 			{
 				if (!_loading)

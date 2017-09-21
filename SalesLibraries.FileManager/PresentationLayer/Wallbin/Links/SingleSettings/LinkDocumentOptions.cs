@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using DevExpress.Skins;
+using DevExpress.XtraLayout.Utils;
 using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Common;
 using SalesLibraries.Business.Entities.Helpers;
@@ -39,24 +40,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		{
 			InitializeComponent();
 			Text = "Admin";
-			if ((base.CreateGraphics()).DpiX > 96)
-			{
-				var styleControllerFont = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2, styleController.Appearance.Font.Style);
-				styleController.AppearanceDisabled.Font = styleControllerFont;
-				styleController.AppearanceDropDown.Font = styleControllerFont;
-				styleController.AppearanceDropDownHeader.Font = styleControllerFont;
-				styleController.AppearanceFocused.Font = styleControllerFont;
-				styleController.AppearanceReadOnly.Font = styleControllerFont;
 
-				ckIsArchiveResource.Font = new Font(ckIsArchiveResource.Font.FontFamily, ckIsArchiveResource.Font.Size - 2, ckIsArchiveResource.Font.Style);
-				ckForcePreview.Font = new Font(ckForcePreview.Font.FontFamily, ckForcePreview.Font.Size - 2, ckForcePreview.Font.Style);
-				ckDoNotGeneratePreview.Font = new Font(ckDoNotGeneratePreview.Font.FontFamily, ckDoNotGeneratePreview.Font.Size - 2, ckDoNotGeneratePreview.Font.Style);
-				ckDoNotGenerateText.Font = new Font(ckDoNotGenerateText.Font.FontFamily, ckDoNotGenerateText.Font.Size - 2, ckDoNotGenerateText.Font.Style);
-				ckSaveAsTemplate.Font = new Font(ckSaveAsTemplate.Font.FontFamily, ckSaveAsTemplate.Font.Size - 2, ckSaveAsTemplate.Font.Style);
-
-				buttonXOpenWV.Font = new Font(buttonXOpenWV.Font.FontFamily, buttonXOpenWV.Font.Size - 2, buttonXOpenWV.Font.Style);
-				buttonXRefreshPreview.Font = new Font(buttonXRefreshPreview.Font.FontFamily, buttonXRefreshPreview.Font.Size - 2, buttonXRefreshPreview.Font.Style);
-			}
+			layoutControlItemRefreshPreview.MinSize = RectangleHelper.ScaleSize(layoutControlItemRefreshPreview.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemRefreshPreview.MaxSize = RectangleHelper.ScaleSize(layoutControlItemRefreshPreview.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemOpenWV.MinSize = RectangleHelper.ScaleSize(layoutControlItemOpenWV.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemOpenWV.MaxSize = RectangleHelper.ScaleSize(layoutControlItemOpenWV.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
 		public LinkDocumentOptions(FileTypes? defaultLinkType = null) : this()
@@ -88,62 +76,62 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		private void LoadData()
 		{
-			ckSaveAsTemplate.Visible = _linksGroup != null;
+			layoutControlItemSaveAsTemplate.Visibility = _linksGroup != null ? LayoutVisibility.Always : LayoutVisibility.Never;
 
 			var settingsTemplate = _linksGroup?.LinkGroupSettingsContainer.GetSettingsTemplate<DocumentLinkSettings>(
 					LinkSettingsGroupType.AdminSettings, _defaultLinkType);
 			if (settingsTemplate != null)
 			{
-				ckIsArchiveResource.Checked = settingsTemplate.IsArchiveResource;
-				ckDoNotGeneratePreview.Checked = !settingsTemplate.GeneratePreviewImages;
-				ckDoNotGenerateText.Checked = !settingsTemplate.GenerateContentText;
-				ckForcePreview.Checked = settingsTemplate.ForcePreview;
-				ckSaveAsTemplate.Checked = true;
+				checkEditIsArchiveResource.Checked = settingsTemplate.IsArchiveResource;
+				checkEditDoNotGeneratePreview.Checked = !settingsTemplate.GeneratePreviewImages;
+				checkEditDoNotGenerateText.Checked = !settingsTemplate.GenerateContentText;
+				checkEditForcePreview.Checked = settingsTemplate.ForcePreview;
+				checkEditSaveAsTemplate.Checked = true;
 			}
 			else if (_sourceLinks.Any())
 			{
 				var linkSettings = _sourceLinks.Select(link => link.Settings).OfType<DocumentLinkSettings>().ToList();
 
 				if (linkSettings.All(settings => settings.IsArchiveResource))
-					ckIsArchiveResource.CheckState = CheckState.Checked;
+					checkEditIsArchiveResource.CheckState = CheckState.Checked;
 				else if (linkSettings.Any(settings => settings.IsArchiveResource))
-					ckIsArchiveResource.CheckState = CheckState.Indeterminate;
+					checkEditIsArchiveResource.CheckState = CheckState.Indeterminate;
 				else
-					ckIsArchiveResource.CheckState = CheckState.Unchecked;
+					checkEditIsArchiveResource.CheckState = CheckState.Unchecked;
 
 				if (linkSettings.All(settings => !settings.GeneratePreviewImages))
-					ckDoNotGeneratePreview.CheckState = CheckState.Checked;
+					checkEditDoNotGeneratePreview.CheckState = CheckState.Checked;
 				else if (linkSettings.Any(settings => !settings.GeneratePreviewImages))
-					ckDoNotGeneratePreview.CheckState = CheckState.Indeterminate;
+					checkEditDoNotGeneratePreview.CheckState = CheckState.Indeterminate;
 				else
-					ckDoNotGeneratePreview.CheckState = CheckState.Unchecked;
+					checkEditDoNotGeneratePreview.CheckState = CheckState.Unchecked;
 
 				if (linkSettings.All(settings => !settings.GenerateContentText))
-					ckDoNotGenerateText.CheckState = CheckState.Checked;
+					checkEditDoNotGenerateText.CheckState = CheckState.Checked;
 				else if (linkSettings.Any(settings => !settings.GenerateContentText))
-					ckDoNotGenerateText.CheckState = CheckState.Indeterminate;
+					checkEditDoNotGenerateText.CheckState = CheckState.Indeterminate;
 				else
-					ckDoNotGenerateText.CheckState = CheckState.Unchecked;
+					checkEditDoNotGenerateText.CheckState = CheckState.Unchecked;
 
 				if (linkSettings.All(settings => settings.ForcePreview))
-					ckForcePreview.CheckState = CheckState.Checked;
+					checkEditForcePreview.CheckState = CheckState.Checked;
 				else if (linkSettings.Any(settings => settings.ForcePreview))
-					ckForcePreview.CheckState = CheckState.Indeterminate;
+					checkEditForcePreview.CheckState = CheckState.Indeterminate;
 				else
-					ckForcePreview.CheckState = CheckState.Unchecked;
+					checkEditForcePreview.CheckState = CheckState.Unchecked;
 
-				ckSaveAsTemplate.Checked = false;
+				checkEditSaveAsTemplate.Checked = false;
 			}
 
 			if (_sourceLinks.Count == 1 && Directory.Exists(_sourceLinks.First().PreviewContainerPath))
 			{
-				buttonXOpenWV.Enabled = true;
+				layoutControlItemOpenWV.Visibility = LayoutVisibility.Always;
 				buttonXOpenWV.Text = String.Format("!WV Folder ({0})", _sourceLinks.First().PreviewContainerName);
 			}
 			else
-				buttonXOpenWV.Enabled = false;
+				layoutControlItemOpenWV.Visibility = LayoutVisibility.Never;
 
-			buttonXRefreshPreview.Enabled = _sourceLinks.Any();
+			layoutControlItemRefreshPreview.Enabled = _sourceLinks.Any();
 		}
 
 		public void SaveData()
@@ -151,8 +139,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			if (!_sourceLinks.Any()) return;
 			foreach (var link in _sourceLinks)
 			{
-				((DocumentLinkSettings)link.Settings).IsArchiveResource = ckIsArchiveResource.CheckState != CheckState.Indeterminate ?
-					ckIsArchiveResource.Checked :
+				((DocumentLinkSettings)link.Settings).IsArchiveResource = checkEditIsArchiveResource.CheckState != CheckState.Indeterminate ?
+					checkEditIsArchiveResource.Checked :
 					((DocumentLinkSettings)link.Settings).IsArchiveResource;
 				if (((DocumentLinkSettings)link.Settings).IsArchiveResource)
 				{
@@ -162,22 +150,22 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				}
 				else
 				{
-					((DocumentLinkSettings)link.Settings).GeneratePreviewImages = ckDoNotGeneratePreview.CheckState != CheckState.Indeterminate ?
-						!ckDoNotGeneratePreview.Checked :
+					((DocumentLinkSettings)link.Settings).GeneratePreviewImages = checkEditDoNotGeneratePreview.CheckState != CheckState.Indeterminate ?
+						!checkEditDoNotGeneratePreview.Checked :
 						((DocumentLinkSettings)link.Settings).GeneratePreviewImages;
-					((DocumentLinkSettings)link.Settings).GenerateContentText = ckDoNotGenerateText.CheckState != CheckState.Indeterminate ?
-						!ckDoNotGenerateText.Checked :
+					((DocumentLinkSettings)link.Settings).GenerateContentText = checkEditDoNotGenerateText.CheckState != CheckState.Indeterminate ?
+						!checkEditDoNotGenerateText.Checked :
 						((DocumentLinkSettings)link.Settings).GenerateContentText;
-					((DocumentLinkSettings)link.Settings).ForcePreview = ckForcePreview.CheckState != CheckState.Indeterminate ?
-						ckForcePreview.Checked :
+					((DocumentLinkSettings)link.Settings).ForcePreview = checkEditForcePreview.CheckState != CheckState.Indeterminate ?
+						checkEditForcePreview.Checked :
 						((DocumentLinkSettings)link.Settings).ForcePreview;
 				}
 			}
 
-			if (ckSaveAsTemplate.Checked)
+			if (checkEditSaveAsTemplate.Checked)
 			{
 				var setttingsTemplate = SettingsContainer.CreateInstance<DocumentLinkSettings>(null);
-				setttingsTemplate.IsArchiveResource = ckIsArchiveResource.Checked;
+				setttingsTemplate.IsArchiveResource = checkEditIsArchiveResource.Checked;
 				if (setttingsTemplate.IsArchiveResource)
 				{
 					setttingsTemplate.GeneratePreviewImages = false;
@@ -186,9 +174,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				}
 				else
 				{
-					setttingsTemplate.GeneratePreviewImages = ckDoNotGeneratePreview.CheckState == CheckState.Unchecked;
-					setttingsTemplate.GenerateContentText = ckDoNotGenerateText.CheckState == CheckState.Unchecked;
-					setttingsTemplate.ForcePreview = ckForcePreview.CheckState != CheckState.Unchecked;
+					setttingsTemplate.GeneratePreviewImages = checkEditDoNotGeneratePreview.CheckState == CheckState.Unchecked;
+					setttingsTemplate.GenerateContentText = checkEditDoNotGenerateText.CheckState == CheckState.Unchecked;
+					setttingsTemplate.ForcePreview = checkEditForcePreview.CheckState != CheckState.Unchecked;
 				}
 				_linksGroup.LinkGroupSettingsContainer.SaveSettingsTemplate(LinkSettingsGroupType.AdminSettings, _defaultLinkType, setttingsTemplate);
 			}
@@ -196,14 +184,14 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		private void ckIsArchiveResource_CheckedChanged(object sender, EventArgs e)
 		{
-			ckDoNotGeneratePreview.Enabled =
-				ckDoNotGenerateText.Enabled =
-					ckForcePreview.Enabled = ckIsArchiveResource.CheckState != CheckState.Checked;
-			if (ckIsArchiveResource.CheckState == CheckState.Checked)
+			checkEditDoNotGeneratePreview.Enabled =
+				checkEditDoNotGenerateText.Enabled =
+					checkEditForcePreview.Enabled = checkEditIsArchiveResource.CheckState != CheckState.Checked;
+			if (checkEditIsArchiveResource.CheckState == CheckState.Checked)
 			{
-				ckDoNotGeneratePreview.Checked =
-				ckDoNotGenerateText.Checked =
-					ckForcePreview.Checked = true;
+				checkEditDoNotGeneratePreview.Checked =
+				checkEditDoNotGenerateText.Checked =
+					checkEditForcePreview.Checked = true;
 			}
 		}
 

@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Drawing;
 using System.Linq;
 using Newtonsoft.Json;
+using SalesLibraries.Business.Contexts.Wallbin;
 using SalesLibraries.Business.Entities.Common;
 using SalesLibraries.Business.Entities.Helpers;
 using SalesLibraries.Business.Entities.Interfaces;
@@ -68,10 +69,10 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		}
 
 		[NotMapped, JsonIgnore]
-		public virtual Library ParentLibrary => Folder.Page.Library;
+		public virtual Library ParentLibrary => Folder?.Page?.Library;
 
 		[NotMapped, JsonIgnore]
-		public virtual LibraryPage ParentPage => Folder.Page;
+		public virtual LibraryPage ParentPage => Folder?.Page;
 
 		[NotMapped, JsonIgnore]
 		public virtual LibraryFolder ParentFolder => Folder;
@@ -255,9 +256,20 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			AddDate = DateTime.Now;
 		}
 
+		public override void MarkAsModified()
+		{
+			base.MarkAsModified();
+			ParentLibrary?.LogLinklAction(LinkActionType.Change, this);
+		}
+
 		public override string ToString()
 		{
 			return Name;
+		}
+
+		protected virtual void AfterCreate()
+		{
+			ParentLibrary?.LogLinklAction(LinkActionType.Add, this);
 		}
 
 		public override void BeforeSave()
@@ -291,6 +303,12 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			Folder = null;
 		}
 
+		public override void Delete(LibraryContext context)
+		{
+			ParentLibrary?.LogLinklAction(LinkActionType.Delete, this);
+			base.Delete(context);
+		}
+
 		public virtual void DeleteLink()
 		{
 			if (ParentLibrary != null)
@@ -304,7 +322,6 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 						linkBundle.Save(ParentLibrary.Context, linkBundle);
 					}
 				}
-
 				Delete(ParentLibrary.Context);
 			}
 			UnlinkLink();

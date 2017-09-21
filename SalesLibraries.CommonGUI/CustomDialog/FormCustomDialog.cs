@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using DevComponents.DotNetBar;
+using DevExpress.Skins;
+using SalesLibraries.Common.Helpers;
 
 namespace SalesLibraries.CommonGUI.CustomDialog
 {
@@ -11,7 +14,11 @@ namespace SalesLibraries.CommonGUI.CustomDialog
 		public FormCustomDialog(string message, IEnumerable<CustomDialogButtonInfo> buttons)
 		{
 			InitializeComponent();
-			labelControlMessage.Text = message;
+
+			layoutControlItemButtons.MinSize = RectangleHelper.ScaleSize(layoutControlItemButtons.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemButtons.MaxSize = RectangleHelper.ScaleSize(layoutControlItemButtons.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+
+			simpleLabelItemMessage.Text = String.Format("<color=white>{0}</color>", message);
 			LoadButtons(buttons);
 		}
 

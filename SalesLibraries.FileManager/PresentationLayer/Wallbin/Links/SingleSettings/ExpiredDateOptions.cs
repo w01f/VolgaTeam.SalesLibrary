@@ -31,14 +31,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			InitializeComponent();
 
 			dateEditExpirationDate.Properties.NullDate = DateTime.MinValue;
-			if ((CreateGraphics()).DpiX > 96)
-			{
-				laAddDateValue.Font = new Font(laAddDateValue.Font.FontFamily, laAddDateValue.Font.Size - 1, laAddDateValue.Font.Style);
-				laExpireddateActions.Font = new Font(laExpireddateActions.Font.FontFamily, laExpireddateActions.Font.Size - 2, laExpireddateActions.Font.Style);
-				checkBoxLabelLink.Font = new Font(checkBoxLabelLink.Font.FontFamily, checkBoxLabelLink.Font.Size - 2, checkBoxLabelLink.Font.Style);
-				checkBoxEnableExpiredLinks.Font = new Font(checkBoxEnableExpiredLinks.Font.FontFamily, checkBoxEnableExpiredLinks.Font.Size - 2, checkBoxEnableExpiredLinks.Font.Style);
-				checkBoxSendEmailWhenDelete.Font = new Font(checkBoxSendEmailWhenDelete.Font.FontFamily, checkBoxSendEmailWhenDelete.Font.Size - 2, checkBoxSendEmailWhenDelete.Font.Style);
-			}
 		}
 
 		public ExpiredDateOptions(FileTypes? defaultLinkType = null) : this() { }
@@ -63,12 +55,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		private void LoadData()
 		{
-			laAddDateValue.Text = String.Format(laAddDateValue.Text, DefaultLink.AddDate.ToString("M/dd/yy"));
+			labelControlDateAdd.Text = String.Format(labelControlDateAdd.Text, DefaultLink.AddDate.ToString("M/dd/yy"));
 			dateEditExpirationDate.DateTime = DefaultLink.ExpirationSettings.ExpirationDate;
 			timeEditExpirationTime.Time = DefaultLink.ExpirationSettings.ExpirationDate;
-			checkBoxSendEmailWhenDelete.Checked = DefaultLink.ExpirationSettings.SendEmailOnSync;
-			checkBoxLabelLink.Checked = DefaultLink.ExpirationSettings.MarkWhenExpired;
-			checkBoxEnableExpiredLinks.Checked = DefaultLink.ExpirationSettings.Enable;
+			checkEditSendEmailWhenDelete.Checked = DefaultLink.ExpirationSettings.SendEmailOnSync;
+			checkEditLabelLink.Checked = DefaultLink.ExpirationSettings.MarkWhenExpired;
+			checkEditEnableExpiration.Checked = DefaultLink.ExpirationSettings.Enable;
 		}
 
 		public void SaveData()
@@ -79,22 +71,23 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				link.ExpirationSettings.ExpirationDate = new DateTime(dateEditExpirationDate.DateTime.Year,
 					dateEditExpirationDate.DateTime.Month, dateEditExpirationDate.DateTime.Day, timeEditExpirationTime.Time.Hour,
 					timeEditExpirationTime.Time.Minute, timeEditExpirationTime.Time.Second);
-				link.ExpirationSettings.SendEmailOnSync = checkBoxSendEmailWhenDelete.Checked;
-				link.ExpirationSettings.MarkWhenExpired = checkBoxLabelLink.Checked;
-				link.ExpirationSettings.Enable = checkBoxEnableExpiredLinks.Checked;
+				link.ExpirationSettings.SendEmailOnSync = checkEditSendEmailWhenDelete.Checked;
+				link.ExpirationSettings.MarkWhenExpired = checkEditLabelLink.Checked;
+				link.ExpirationSettings.Enable = checkEditEnableExpiration.Checked;
 			}
 		}
 
 		private void checkBoxEnableExpiredLinks_CheckedChanged(object sender, EventArgs e)
 		{
-			foreach (var control in Controls.OfType<Control>())
+			layoutControlItemDateAddLabel.Enabled =
+				layoutControlItemExpirationDate.Enabled =
+					layoutControlItemExpirationTime.Enabled =
+						layoutControlItemExpiredDateActions.Enabled =
+							layoutControlItemLabelLink.Enabled =
+								layoutControlItemSendEmailWhenDelete.Enabled = checkEditEnableExpiration.Checked;
+			if (checkEditEnableExpiration.Checked)
 			{
-				if (control == checkBoxEnableExpiredLinks) continue;
-				control.Enabled = checkBoxEnableExpiredLinks.Checked;
-			}
-			if (checkBoxEnableExpiredLinks.Checked)
-			{
-				checkBoxEnableExpiredLinks.ForeColor = Color.Black;
+				checkEditEnableExpiration.ForeColor = Color.Black;
 				dateEditExpirationDate.ForeColor = Color.Black;
 				timeEditExpirationTime.ForeColor = Color.Black;
 				dateEditExpirationDate.DateTime = DefaultLink.ExpirationSettings.ExpirationDate;
@@ -102,7 +95,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			}
 			else
 			{
-				checkBoxEnableExpiredLinks.ForeColor = Color.Gray;
+				checkEditEnableExpiration.ForeColor = Color.Gray;
 				dateEditExpirationDate.ForeColor = Color.Gray;
 				timeEditExpirationTime.ForeColor = Color.Gray;
 				dateEditExpirationDate.EditValue = DateTime.MinValue;

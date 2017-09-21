@@ -30,74 +30,115 @@
         {
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormEditLinkTags));
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject9 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
 			this.buttonXOK = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXCancel = new DevComponents.DotNetBar.ButtonX();
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.labelControlTitle = new DevExpress.XtraEditors.LabelControl();
-			this.panelTopControls = new System.Windows.Forms.Panel();
-			this.panelTopControlsCategories = new System.Windows.Forms.Panel();
-			this.hyperLinkEditWipeCategories = new DevExpress.XtraEditors.HyperLinkEdit();
-			this.labelControlCategoriesCount = new DevExpress.XtraEditors.LabelControl();
-			this.panelTopControlsKeywords = new System.Windows.Forms.Panel();
-			this.hyperLinkEditWipeKeywords = new DevExpress.XtraEditors.HyperLinkEdit();
-			this.labelControlKeywordsCount = new DevExpress.XtraEditors.LabelControl();
-			this.xtraTabControl = new DevExpress.XtraTab.XtraTabControl();
-			this.xtraTabPageCategories = new DevExpress.XtraTab.XtraTabPage();
-			this.splitContainerCategories = new DevExpress.XtraEditors.SplitContainerControl();
-			this.treeListCategories = new SalesLibraries.CommonGUI.CustomTreeList.EmptyImageTreeList();
-			this.treeListColumnName = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-			this.panelCategoriesInfo = new System.Windows.Forms.Panel();
-			this.panelControlCategoriesInfoInner = new DevExpress.XtraEditors.PanelControl();
+			this.layoutControl = new DevExpress.XtraLayout.LayoutControl();
+			this.linksTreeSelector = new SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.LinksTreeSelector.LinksTreeSelectorControl();
+			this.hyperLinkEditRequestNewCategories = new DevExpress.XtraEditors.HyperLinkEdit();
+			this.buttonXCategoriesCollapseAll = new DevComponents.DotNetBar.ButtonX();
 			this.xtraScrollableControlCategoriesInfo = new DevExpress.XtraEditors.XtraScrollableControl();
 			this.labelControlCategoriesInfo = new DevExpress.XtraEditors.LabelControl();
 			this.imageCollectionCategories = new DevExpress.Utils.ImageCollection(this.components);
-			this.xtraTabPageKeywords = new DevExpress.XtraTab.XtraTabPage();
-			this.buttonXAddKeyWord = new DevComponents.DotNetBar.ButtonX();
+			this.buttonXCategoriesExpandAll = new DevComponents.DotNetBar.ButtonX();
+			this.panelCategoriesContent = new System.Windows.Forms.Panel();
+			this.treeListCategories = new SalesLibraries.CommonGUI.CustomTreeList.EmptyImageTreeList();
+			this.treeListColumnName = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+			this.hyperLinkEditWipeCategories = new DevExpress.XtraEditors.HyperLinkEdit();
+			this.hyperLinkEditWipeKeywords = new DevExpress.XtraEditors.HyperLinkEdit();
+			this.labelControlCategoriesCount = new DevExpress.XtraEditors.LabelControl();
+			this.labelControlKeywordsCount = new DevExpress.XtraEditors.LabelControl();
 			this.gridControlKeywords = new DevExpress.XtraGrid.GridControl();
 			this.gridViewKeywords = new DevExpress.XtraGrid.Views.Grid.GridView();
 			this.gridColumnKeywordsValue = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.repositoryItemButtonEditKeywordShared = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
 			this.repositoryItemButtonEditKeywordPartial = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
-			this.panelBottomControls = new System.Windows.Forms.Panel();
-			this.panelBottomControlsCategories = new System.Windows.Forms.Panel();
-			this.hyperLinkEditRequestNewCategories = new DevExpress.XtraEditors.HyperLinkEdit();
-			this.panelMainContainer = new System.Windows.Forms.Panel();
-			this.panelFilesContainer = new System.Windows.Forms.Panel();
-			this.linksTreeSelector = new SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.LinksTreeSelector.LinksTreeSelectorControl();
-			this.panelButtons = new System.Windows.Forms.Panel();
-			this.buttonXCategoriesCollapseAll = new DevComponents.DotNetBar.ButtonX();
-			this.buttonXCategoriesExpandAll = new DevComponents.DotNetBar.ButtonX();
+			this.buttonXAddKeyWord = new DevComponents.DotNetBar.ButtonX();
+			this.layoutControlGroupRoot = new DevExpress.XtraLayout.LayoutControlGroup();
+			this.layoutControlItemTitle = new DevExpress.XtraLayout.LayoutControlItem();
+			this.layoutControlGroupCategoriesHeader = new DevExpress.XtraLayout.LayoutControlGroup();
+			this.layoutControlItemCategoriesHeaderInfo = new DevExpress.XtraLayout.LayoutControlItem();
+			this.layoutControlItemCategoriesHeaderWipeButton = new DevExpress.XtraLayout.LayoutControlItem();
+			this.layoutControlGroupKeywordsHeader = new DevExpress.XtraLayout.LayoutControlGroup();
+			this.layoutControlItemKeywordsHeaderInfo = new DevExpress.XtraLayout.LayoutControlItem();
+			this.layoutControlItemKeywordsWipeButton = new DevExpress.XtraLayout.LayoutControlItem();
+			this.tabbedControlGroupMain = new DevExpress.XtraLayout.TabbedControlGroup();
+			this.layoutControlGroupCategories = new DevExpress.XtraLayout.LayoutControlGroup();
+			this.splitterItem1 = new DevExpress.XtraLayout.SplitterItem();
+			this.layoutControlGroupCategoriesList = new DevExpress.XtraLayout.LayoutControlGroup();
+			this.layoutControlItemCategoriesList = new DevExpress.XtraLayout.LayoutControlItem();
+			this.layoutControlGroupCategoriesListButtons = new DevExpress.XtraLayout.LayoutControlGroup();
+			this.layoutControlItemCategoriesListExpandAll = new DevExpress.XtraLayout.LayoutControlItem();
+			this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.layoutControlItemCategoriesListCollapseAll = new DevExpress.XtraLayout.LayoutControlItem();
+			this.emptySpaceItem6 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.layoutControlGroupCategoriesContent = new DevExpress.XtraLayout.LayoutControlGroup();
+			this.layoutControlItemCategoriesContent = new DevExpress.XtraLayout.LayoutControlItem();
+			this.layoutControlGroupCategoriesInfo = new DevExpress.XtraLayout.LayoutControlGroup();
+			this.layoutControlItemCategoriesInfo = new DevExpress.XtraLayout.LayoutControlItem();
+			this.splitterItem2 = new DevExpress.XtraLayout.SplitterItem();
+			this.layoutControlGroupKeywords = new DevExpress.XtraLayout.LayoutControlGroup();
+			this.layoutControlItemKeywordsAdd = new DevExpress.XtraLayout.LayoutControlItem();
+			this.emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.layoutControlItemKeywordsList = new DevExpress.XtraLayout.LayoutControlItem();
+			this.emptySpaceItem4 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.layoutControlItemOK = new DevExpress.XtraLayout.LayoutControlItem();
+			this.layoutControlItemCancel = new DevExpress.XtraLayout.LayoutControlItem();
+			this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.layoutControlItemCategoriesRequestNew = new DevExpress.XtraLayout.LayoutControlItem();
+			this.emptySpaceItem5 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.layoutControlItemLinksTree = new DevExpress.XtraLayout.LayoutControlItem();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
-			this.panelTopControls.SuspendLayout();
-			this.panelTopControlsCategories.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.hyperLinkEditWipeCategories.Properties)).BeginInit();
-			this.panelTopControlsKeywords.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.hyperLinkEditWipeKeywords.Properties)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.xtraTabControl)).BeginInit();
-			this.xtraTabControl.SuspendLayout();
-			this.xtraTabPageCategories.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.splitContainerCategories)).BeginInit();
-			this.splitContainerCategories.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.treeListCategories)).BeginInit();
-			this.panelCategoriesInfo.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.panelControlCategoriesInfoInner)).BeginInit();
-			this.panelControlCategoriesInfoInner.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControl)).BeginInit();
+			this.layoutControl.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.hyperLinkEditRequestNewCategories.Properties)).BeginInit();
 			this.xtraScrollableControlCategoriesInfo.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.imageCollectionCategories)).BeginInit();
-			this.xtraTabPageKeywords.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.treeListCategories)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.hyperLinkEditWipeCategories.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.hyperLinkEditWipeKeywords.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlKeywords)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewKeywords)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditKeywordShared)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditKeywordPartial)).BeginInit();
-			this.panelBottomControls.SuspendLayout();
-			this.panelBottomControlsCategories.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.hyperLinkEditRequestNewCategories.Properties)).BeginInit();
-			this.panelMainContainer.SuspendLayout();
-			this.panelFilesContainer.SuspendLayout();
-			this.panelButtons.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupRoot)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemTitle)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupCategoriesHeader)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemCategoriesHeaderInfo)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemCategoriesHeaderWipeButton)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupKeywordsHeader)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemKeywordsHeaderInfo)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemKeywordsWipeButton)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.tabbedControlGroupMain)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupCategories)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.splitterItem1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupCategoriesList)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemCategoriesList)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupCategoriesListButtons)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemCategoriesListExpandAll)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemCategoriesListCollapseAll)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem6)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupCategoriesContent)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemCategoriesContent)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupCategoriesInfo)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemCategoriesInfo)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.splitterItem2)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupKeywords)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemKeywordsAdd)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemKeywordsList)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem4)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemOK)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemCancel)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemCategoriesRequestNew)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem5)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemLinksTree)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// buttonXOK
@@ -106,9 +147,9 @@
 			this.buttonXOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXOK.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.buttonXOK.Location = new System.Drawing.Point(937, 564);
+			this.buttonXOK.Location = new System.Drawing.Point(866, 503);
 			this.buttonXOK.Name = "buttonXOK";
-			this.buttonXOK.Size = new System.Drawing.Size(79, 34);
+			this.buttonXOK.Size = new System.Drawing.Size(116, 36);
 			this.buttonXOK.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXOK.TabIndex = 5;
 			this.buttonXOK.Text = "OK";
@@ -120,9 +161,9 @@
 			this.buttonXCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXCancel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.buttonXCancel.Location = new System.Drawing.Point(1047, 564);
+			this.buttonXCancel.Location = new System.Drawing.Point(1006, 503);
 			this.buttonXCancel.Name = "buttonXCancel";
-			this.buttonXCancel.Size = new System.Drawing.Size(79, 34);
+			this.buttonXCancel.Size = new System.Drawing.Size(116, 36);
 			this.buttonXCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXCancel.TabIndex = 6;
 			this.buttonXCancel.Text = "Cancel";
@@ -150,8 +191,6 @@
 			// labelControlTitle
 			// 
 			this.labelControlTitle.AllowHtmlString = true;
-			this.labelControlTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelControlTitle.Appearance.BackColor = System.Drawing.Color.White;
 			this.labelControlTitle.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.labelControlTitle.Appearance.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -159,262 +198,99 @@
 			this.labelControlTitle.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
 			this.labelControlTitle.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
 			this.labelControlTitle.ImageAlignToText = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-			this.labelControlTitle.Location = new System.Drawing.Point(1, 0);
+			this.labelControlTitle.Location = new System.Drawing.Point(12, 24);
 			this.labelControlTitle.Name = "labelControlTitle";
-			this.labelControlTitle.Size = new System.Drawing.Size(814, 48);
-			this.labelControlTitle.StyleController = this.styleController;
+			this.labelControlTitle.Size = new System.Drawing.Size(530, 21);
+			this.labelControlTitle.StyleController = this.layoutControl;
 			this.labelControlTitle.TabIndex = 49;
 			this.labelControlTitle.Text = "<size=+4>{0}</size>";
 			this.labelControlTitle.UseMnemonic = false;
 			// 
-			// panelTopControls
+			// layoutControl
 			// 
-			this.panelTopControls.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.panelTopControls.BackColor = System.Drawing.Color.Transparent;
-			this.panelTopControls.Controls.Add(this.panelTopControlsCategories);
-			this.panelTopControls.Controls.Add(this.panelTopControlsKeywords);
-			this.panelTopControls.ForeColor = System.Drawing.Color.Black;
-			this.panelTopControls.Location = new System.Drawing.Point(821, 0);
-			this.panelTopControls.Name = "panelTopControls";
-			this.panelTopControls.Size = new System.Drawing.Size(310, 48);
-			this.panelTopControls.TabIndex = 50;
+			this.layoutControl.Appearance.Control.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.layoutControl.Appearance.Control.Options.UseFont = true;
+			this.layoutControl.Appearance.ControlDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControl.Appearance.ControlDisabled.Options.UseFont = true;
+			this.layoutControl.Appearance.ControlDropDown.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControl.Appearance.ControlDropDown.Options.UseFont = true;
+			this.layoutControl.Appearance.ControlDropDownHeader.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControl.Appearance.ControlDropDownHeader.Options.UseFont = true;
+			this.layoutControl.Appearance.ControlFocused.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControl.Appearance.ControlFocused.Options.UseFont = true;
+			this.layoutControl.Appearance.ControlReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControl.Appearance.ControlReadOnly.Options.UseFont = true;
+			this.layoutControl.BackColor = System.Drawing.Color.White;
+			this.layoutControl.Controls.Add(this.linksTreeSelector);
+			this.layoutControl.Controls.Add(this.hyperLinkEditRequestNewCategories);
+			this.layoutControl.Controls.Add(this.buttonXCancel);
+			this.layoutControl.Controls.Add(this.buttonXCategoriesCollapseAll);
+			this.layoutControl.Controls.Add(this.buttonXOK);
+			this.layoutControl.Controls.Add(this.xtraScrollableControlCategoriesInfo);
+			this.layoutControl.Controls.Add(this.buttonXCategoriesExpandAll);
+			this.layoutControl.Controls.Add(this.panelCategoriesContent);
+			this.layoutControl.Controls.Add(this.treeListCategories);
+			this.layoutControl.Controls.Add(this.hyperLinkEditWipeCategories);
+			this.layoutControl.Controls.Add(this.hyperLinkEditWipeKeywords);
+			this.layoutControl.Controls.Add(this.labelControlCategoriesCount);
+			this.layoutControl.Controls.Add(this.labelControlKeywordsCount);
+			this.layoutControl.Controls.Add(this.labelControlTitle);
+			this.layoutControl.Controls.Add(this.gridControlKeywords);
+			this.layoutControl.Controls.Add(this.buttonXAddKeyWord);
+			this.layoutControl.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.layoutControl.ForeColor = System.Drawing.Color.Black;
+			this.layoutControl.Location = new System.Drawing.Point(0, 0);
+			this.layoutControl.Name = "layoutControl";
+			this.layoutControl.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(-1134, 368, 583, 350);
+			this.layoutControl.Root = this.layoutControlGroupRoot;
+			this.layoutControl.Size = new System.Drawing.Size(1134, 551);
+			this.layoutControl.StyleController = this.styleController;
+			this.layoutControl.TabIndex = 61;
+			this.layoutControl.Text = "layoutControl1";
 			// 
-			// panelTopControlsCategories
+			// linksTreeSelector
 			// 
-			this.panelTopControlsCategories.BackColor = System.Drawing.Color.Transparent;
-			this.panelTopControlsCategories.Controls.Add(this.hyperLinkEditWipeCategories);
-			this.panelTopControlsCategories.Controls.Add(this.labelControlCategoriesCount);
-			this.panelTopControlsCategories.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panelTopControlsCategories.ForeColor = System.Drawing.Color.Black;
-			this.panelTopControlsCategories.Location = new System.Drawing.Point(0, 0);
-			this.panelTopControlsCategories.Name = "panelTopControlsCategories";
-			this.panelTopControlsCategories.Size = new System.Drawing.Size(310, 48);
-			this.panelTopControlsCategories.TabIndex = 51;
+			this.linksTreeSelector.BackColor = System.Drawing.Color.Transparent;
+			this.linksTreeSelector.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.linksTreeSelector.ForeColor = System.Drawing.Color.Black;
+			this.linksTreeSelector.Location = new System.Drawing.Point(12, 62);
+			this.linksTreeSelector.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+			this.linksTreeSelector.Name = "linksTreeSelector";
+			this.linksTreeSelector.Size = new System.Drawing.Size(246, 437);
+			this.linksTreeSelector.TabIndex = 63;
 			// 
-			// hyperLinkEditWipeCategories
+			// hyperLinkEditRequestNewCategories
 			// 
-			this.hyperLinkEditWipeCategories.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.hyperLinkEditWipeCategories.EditValue = "<color=192, 0, 0><u>Wipe all Tags</u></color>";
-			this.hyperLinkEditWipeCategories.Location = new System.Drawing.Point(208, 14);
-			this.hyperLinkEditWipeCategories.Name = "hyperLinkEditWipeCategories";
-			this.hyperLinkEditWipeCategories.Properties.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
-			this.hyperLinkEditWipeCategories.Properties.Appearance.BackColor = System.Drawing.Color.White;
-			this.hyperLinkEditWipeCategories.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.hyperLinkEditWipeCategories.Properties.Appearance.Options.UseBackColor = true;
-			this.hyperLinkEditWipeCategories.Properties.Appearance.Options.UseForeColor = true;
-			this.hyperLinkEditWipeCategories.Properties.Appearance.Options.UseTextOptions = true;
-			this.hyperLinkEditWipeCategories.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-			this.hyperLinkEditWipeCategories.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-			this.hyperLinkEditWipeCategories.Size = new System.Drawing.Size(99, 20);
-			this.hyperLinkEditWipeCategories.StyleController = this.styleController;
-			this.hyperLinkEditWipeCategories.TabIndex = 51;
-			this.hyperLinkEditWipeCategories.TabStop = false;
-			this.hyperLinkEditWipeCategories.OpenLink += new DevExpress.XtraEditors.Controls.OpenLinkEventHandler(this.OnWipeCategoriesClick);
+			this.hyperLinkEditRequestNewCategories.EditValue = "<color=darkblue><u>Need a new tag category? Click here...</u></color>";
+			this.hyperLinkEditRequestNewCategories.Location = new System.Drawing.Point(12, 503);
+			this.hyperLinkEditRequestNewCategories.Name = "hyperLinkEditRequestNewCategories";
+			this.hyperLinkEditRequestNewCategories.Properties.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
+			this.hyperLinkEditRequestNewCategories.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.hyperLinkEditRequestNewCategories.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.hyperLinkEditRequestNewCategories.Properties.Appearance.Options.UseBackColor = true;
+			this.hyperLinkEditRequestNewCategories.Properties.Appearance.Options.UseForeColor = true;
+			this.hyperLinkEditRequestNewCategories.Properties.AutoHeight = false;
+			this.hyperLinkEditRequestNewCategories.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+			this.hyperLinkEditRequestNewCategories.Size = new System.Drawing.Size(840, 36);
+			this.hyperLinkEditRequestNewCategories.StyleController = this.layoutControl;
+			this.hyperLinkEditRequestNewCategories.TabIndex = 8;
+			this.hyperLinkEditRequestNewCategories.TabStop = false;
+			this.hyperLinkEditRequestNewCategories.OpenLink += new DevExpress.XtraEditors.Controls.OpenLinkEventHandler(this.OnRequestNewCategoriesOpenLink);
 			// 
-			// labelControlCategoriesCount
+			// buttonXCategoriesCollapseAll
 			// 
-			this.labelControlCategoriesCount.AllowHtmlString = true;
-			this.labelControlCategoriesCount.Appearance.BackColor = System.Drawing.Color.White;
-			this.labelControlCategoriesCount.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.labelControlCategoriesCount.Appearance.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			this.labelControlCategoriesCount.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-			this.labelControlCategoriesCount.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-			this.labelControlCategoriesCount.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-			this.labelControlCategoriesCount.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-			this.labelControlCategoriesCount.ImageAlignToText = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-			this.labelControlCategoriesCount.Location = new System.Drawing.Point(3, 8);
-			this.labelControlCategoriesCount.Name = "labelControlCategoriesCount";
-			this.labelControlCategoriesCount.Size = new System.Drawing.Size(197, 32);
-			this.labelControlCategoriesCount.StyleController = this.styleController;
-			this.labelControlCategoriesCount.TabIndex = 50;
-			this.labelControlCategoriesCount.UseMnemonic = false;
-			// 
-			// panelTopControlsKeywords
-			// 
-			this.panelTopControlsKeywords.BackColor = System.Drawing.Color.Transparent;
-			this.panelTopControlsKeywords.Controls.Add(this.hyperLinkEditWipeKeywords);
-			this.panelTopControlsKeywords.Controls.Add(this.labelControlKeywordsCount);
-			this.panelTopControlsKeywords.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panelTopControlsKeywords.ForeColor = System.Drawing.Color.Black;
-			this.panelTopControlsKeywords.Location = new System.Drawing.Point(0, 0);
-			this.panelTopControlsKeywords.Name = "panelTopControlsKeywords";
-			this.panelTopControlsKeywords.Size = new System.Drawing.Size(310, 48);
-			this.panelTopControlsKeywords.TabIndex = 52;
-			// 
-			// hyperLinkEditWipeKeywords
-			// 
-			this.hyperLinkEditWipeKeywords.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.hyperLinkEditWipeKeywords.EditValue = "<color=192, 0, 0><u>Wipe all Keywords Tags</u></color>";
-			this.hyperLinkEditWipeKeywords.Location = new System.Drawing.Point(154, 14);
-			this.hyperLinkEditWipeKeywords.Name = "hyperLinkEditWipeKeywords";
-			this.hyperLinkEditWipeKeywords.Properties.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
-			this.hyperLinkEditWipeKeywords.Properties.Appearance.BackColor = System.Drawing.Color.White;
-			this.hyperLinkEditWipeKeywords.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.hyperLinkEditWipeKeywords.Properties.Appearance.Options.UseBackColor = true;
-			this.hyperLinkEditWipeKeywords.Properties.Appearance.Options.UseForeColor = true;
-			this.hyperLinkEditWipeKeywords.Properties.Appearance.Options.UseTextOptions = true;
-			this.hyperLinkEditWipeKeywords.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-			this.hyperLinkEditWipeKeywords.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-			this.hyperLinkEditWipeKeywords.Size = new System.Drawing.Size(153, 20);
-			this.hyperLinkEditWipeKeywords.StyleController = this.styleController;
-			this.hyperLinkEditWipeKeywords.TabIndex = 51;
-			this.hyperLinkEditWipeKeywords.TabStop = false;
-			this.hyperLinkEditWipeKeywords.OpenLink += new DevExpress.XtraEditors.Controls.OpenLinkEventHandler(this.OnWipeKeywordsClick);
-			// 
-			// labelControlKeywordsCount
-			// 
-			this.labelControlKeywordsCount.AllowHtmlString = true;
-			this.labelControlKeywordsCount.Appearance.BackColor = System.Drawing.Color.White;
-			this.labelControlKeywordsCount.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.labelControlKeywordsCount.Appearance.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			this.labelControlKeywordsCount.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-			this.labelControlKeywordsCount.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-			this.labelControlKeywordsCount.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-			this.labelControlKeywordsCount.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-			this.labelControlKeywordsCount.ImageAlignToText = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-			this.labelControlKeywordsCount.Location = new System.Drawing.Point(3, 8);
-			this.labelControlKeywordsCount.Name = "labelControlKeywordsCount";
-			this.labelControlKeywordsCount.Size = new System.Drawing.Size(145, 32);
-			this.labelControlKeywordsCount.StyleController = this.styleController;
-			this.labelControlKeywordsCount.TabIndex = 50;
-			this.labelControlKeywordsCount.UseMnemonic = false;
-			// 
-			// xtraTabControl
-			// 
-			this.xtraTabControl.Appearance.BackColor = System.Drawing.Color.White;
-			this.xtraTabControl.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.xtraTabControl.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.xtraTabControl.Appearance.Options.UseBackColor = true;
-			this.xtraTabControl.Appearance.Options.UseFont = true;
-			this.xtraTabControl.Appearance.Options.UseForeColor = true;
-			this.xtraTabControl.AppearancePage.Header.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.xtraTabControl.AppearancePage.Header.Options.UseFont = true;
-			this.xtraTabControl.AppearancePage.HeaderActive.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.xtraTabControl.AppearancePage.HeaderActive.Options.UseFont = true;
-			this.xtraTabControl.AppearancePage.HeaderDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.xtraTabControl.AppearancePage.HeaderDisabled.Options.UseFont = true;
-			this.xtraTabControl.AppearancePage.HeaderHotTracked.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.xtraTabControl.AppearancePage.HeaderHotTracked.Options.UseFont = true;
-			this.xtraTabControl.AppearancePage.PageClient.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.xtraTabControl.AppearancePage.PageClient.Options.UseFont = true;
-			this.xtraTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.xtraTabControl.Location = new System.Drawing.Point(300, 0);
-			this.xtraTabControl.Name = "xtraTabControl";
-			this.xtraTabControl.SelectedTabPage = this.xtraTabPageCategories;
-			this.xtraTabControl.Size = new System.Drawing.Size(830, 504);
-			this.xtraTabControl.TabIndex = 52;
-			this.xtraTabControl.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
-            this.xtraTabPageCategories,
-            this.xtraTabPageKeywords});
-			this.xtraTabControl.SelectedPageChanged += new DevExpress.XtraTab.TabPageChangedEventHandler(this.OnSelectedTabPageChanged);
-			// 
-			// xtraTabPageCategories
-			// 
-			this.xtraTabPageCategories.Appearance.PageClient.ForeColor = System.Drawing.Color.Black;
-			this.xtraTabPageCategories.Appearance.PageClient.Options.UseForeColor = true;
-			this.xtraTabPageCategories.Controls.Add(this.splitContainerCategories);
-			this.xtraTabPageCategories.Controls.Add(this.panelCategoriesInfo);
-			this.xtraTabPageCategories.Name = "xtraTabPageCategories";
-			this.xtraTabPageCategories.Padding = new System.Windows.Forms.Padding(5);
-			this.xtraTabPageCategories.Size = new System.Drawing.Size(824, 473);
-			this.xtraTabPageCategories.Text = "Category Tags";
-			// 
-			// splitContainerCategories
-			// 
-			this.splitContainerCategories.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.splitContainerCategories.Appearance.Options.UseForeColor = true;
-			this.splitContainerCategories.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.splitContainerCategories.Location = new System.Drawing.Point(5, 5);
-			this.splitContainerCategories.Name = "splitContainerCategories";
-			this.splitContainerCategories.Panel1.Appearance.BackColor = System.Drawing.Color.White;
-			this.splitContainerCategories.Panel1.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.splitContainerCategories.Panel1.Appearance.Options.UseBackColor = true;
-			this.splitContainerCategories.Panel1.Appearance.Options.UseForeColor = true;
-			this.splitContainerCategories.Panel1.Controls.Add(this.treeListCategories);
-			this.splitContainerCategories.Panel1.Controls.Add(this.panelButtons);
-			this.splitContainerCategories.Panel1.MinSize = 250;
-			this.splitContainerCategories.Panel1.Text = "Panel1";
-			this.splitContainerCategories.Panel2.Appearance.BackColor = System.Drawing.Color.White;
-			this.splitContainerCategories.Panel2.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.splitContainerCategories.Panel2.Appearance.Options.UseBackColor = true;
-			this.splitContainerCategories.Panel2.Appearance.Options.UseForeColor = true;
-			this.splitContainerCategories.Panel2.Text = "Panel2";
-			this.splitContainerCategories.Size = new System.Drawing.Size(520, 463);
-			this.splitContainerCategories.SplitterPosition = 250;
-			this.splitContainerCategories.TabIndex = 2;
-			this.splitContainerCategories.Text = "splitContainerControl1";
-			// 
-			// treeListCategories
-			// 
-			this.treeListCategories.AllowCheckMinLevel = 0;
-			this.treeListCategories.Appearance.FocusedCell.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.treeListCategories.Appearance.FocusedCell.Options.UseFont = true;
-			this.treeListCategories.Appearance.FocusedRow.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.treeListCategories.Appearance.FocusedRow.Options.UseFont = true;
-			this.treeListCategories.Appearance.Row.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.treeListCategories.Appearance.Row.Options.UseFont = true;
-			this.treeListCategories.Appearance.SelectedRow.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.treeListCategories.Appearance.SelectedRow.Options.UseFont = true;
-			this.treeListCategories.Columns.AddRange(new DevExpress.XtraTreeList.Columns.TreeListColumn[] {
-            this.treeListColumnName});
-			this.treeListCategories.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.treeListCategories.Location = new System.Drawing.Point(0, 38);
-			this.treeListCategories.Name = "treeListCategories";
-			this.treeListCategories.OptionsBehavior.AutoChangeParent = false;
-			this.treeListCategories.OptionsBehavior.Editable = false;
-			this.treeListCategories.OptionsBehavior.ResizeNodes = false;
-			this.treeListCategories.OptionsLayout.AddNewColumns = false;
-			this.treeListCategories.OptionsMenu.EnableColumnMenu = false;
-			this.treeListCategories.OptionsMenu.EnableFooterMenu = false;
-			this.treeListCategories.OptionsSelection.EnableAppearanceFocusedCell = false;
-			this.treeListCategories.OptionsView.FocusRectStyle = DevExpress.XtraTreeList.DrawFocusRectStyle.None;
-			this.treeListCategories.OptionsView.ShowColumns = false;
-			this.treeListCategories.OptionsView.ShowHorzLines = false;
-			this.treeListCategories.OptionsView.ShowIndicator = false;
-			this.treeListCategories.OptionsView.ShowVertLines = false;
-			this.treeListCategories.RowHeight = 25;
-			this.treeListCategories.ShowButtonMode = DevExpress.XtraTreeList.ShowButtonModeEnum.ShowForFocusedRow;
-			this.treeListCategories.Size = new System.Drawing.Size(250, 425);
-			this.treeListCategories.TabIndex = 3;
-			this.treeListCategories.NodeCellStyle += new DevExpress.XtraTreeList.GetCustomNodeCellStyleEventHandler(this.OnCategoriesNodeCellStyle);
-			this.treeListCategories.BeforeCollapse += new DevExpress.XtraTreeList.BeforeCollapseEventHandler(this.OnCategoriesBeforeCollapse);
-			this.treeListCategories.BeforeFocusNode += new DevExpress.XtraTreeList.BeforeFocusNodeEventHandler(this.OnCategoriesBeforeFocusNode);
-			this.treeListCategories.AfterExpand += new DevExpress.XtraTreeList.NodeEventHandler(this.OnCategoriesAfterExpand);
-			this.treeListCategories.AfterCollapse += new DevExpress.XtraTreeList.NodeEventHandler(this.OnCategoriesAfterCollapse);
-			this.treeListCategories.FocusedNodeChanged += new DevExpress.XtraTreeList.FocusedNodeChangedEventHandler(this.OnCategoriesFocusedNodeChanged);
-			// 
-			// treeListColumnName
-			// 
-			this.treeListColumnName.Caption = "Name";
-			this.treeListColumnName.FieldName = "Name";
-			this.treeListColumnName.MinWidth = 49;
-			this.treeListColumnName.Name = "treeListColumnName";
-			this.treeListColumnName.Visible = true;
-			this.treeListColumnName.VisibleIndex = 0;
-			// 
-			// panelCategoriesInfo
-			// 
-			this.panelCategoriesInfo.Controls.Add(this.panelControlCategoriesInfoInner);
-			this.panelCategoriesInfo.Dock = System.Windows.Forms.DockStyle.Right;
-			this.panelCategoriesInfo.ForeColor = System.Drawing.Color.Black;
-			this.panelCategoriesInfo.Location = new System.Drawing.Point(525, 5);
-			this.panelCategoriesInfo.Name = "panelCategoriesInfo";
-			this.panelCategoriesInfo.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-			this.panelCategoriesInfo.Size = new System.Drawing.Size(294, 463);
-			this.panelCategoriesInfo.TabIndex = 3;
-			// 
-			// panelControlCategoriesInfoInner
-			// 
-			this.panelControlCategoriesInfoInner.Appearance.BackColor = System.Drawing.Color.White;
-			this.panelControlCategoriesInfoInner.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.panelControlCategoriesInfoInner.Appearance.Options.UseBackColor = true;
-			this.panelControlCategoriesInfoInner.Appearance.Options.UseForeColor = true;
-			this.panelControlCategoriesInfoInner.Controls.Add(this.xtraScrollableControlCategoriesInfo);
-			this.panelControlCategoriesInfoInner.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panelControlCategoriesInfoInner.Location = new System.Drawing.Point(5, 0);
-			this.panelControlCategoriesInfoInner.Name = "panelControlCategoriesInfoInner";
-			this.panelControlCategoriesInfoInner.Size = new System.Drawing.Size(289, 463);
-			this.panelControlCategoriesInfoInner.TabIndex = 52;
+			this.buttonXCategoriesCollapseAll.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXCategoriesCollapseAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXCategoriesCollapseAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXCategoriesCollapseAll.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.buttonXCategoriesCollapseAll.Location = new System.Drawing.Point(423, 98);
+			this.buttonXCategoriesCollapseAll.Name = "buttonXCategoriesCollapseAll";
+			this.buttonXCategoriesCollapseAll.Size = new System.Drawing.Size(118, 34);
+			this.buttonXCategoriesCollapseAll.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXCategoriesCollapseAll.TabIndex = 7;
+			this.buttonXCategoriesCollapseAll.Text = "Collapse All";
+			this.buttonXCategoriesCollapseAll.TextColor = System.Drawing.Color.Black;
+			this.buttonXCategoriesCollapseAll.Click += new System.EventHandler(this.buttonXCategoriesCollapseAll_Click);
 			// 
 			// xtraScrollableControlCategoriesInfo
 			// 
@@ -423,11 +299,10 @@
 			this.xtraScrollableControlCategoriesInfo.Appearance.Options.UseBackColor = true;
 			this.xtraScrollableControlCategoriesInfo.Appearance.Options.UseForeColor = true;
 			this.xtraScrollableControlCategoriesInfo.Controls.Add(this.labelControlCategoriesInfo);
-			this.xtraScrollableControlCategoriesInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.xtraScrollableControlCategoriesInfo.Location = new System.Drawing.Point(2, 2);
+			this.xtraScrollableControlCategoriesInfo.Location = new System.Drawing.Point(861, 98);
 			this.xtraScrollableControlCategoriesInfo.Name = "xtraScrollableControlCategoriesInfo";
 			this.xtraScrollableControlCategoriesInfo.Padding = new System.Windows.Forms.Padding(5);
-			this.xtraScrollableControlCategoriesInfo.Size = new System.Drawing.Size(285, 459);
+			this.xtraScrollableControlCategoriesInfo.Size = new System.Drawing.Size(250, 390);
 			this.xtraScrollableControlCategoriesInfo.TabIndex = 0;
 			// 
 			// labelControlCategoriesInfo
@@ -446,7 +321,7 @@
 			this.labelControlCategoriesInfo.IndentBetweenImageAndText = 5;
 			this.labelControlCategoriesInfo.Location = new System.Drawing.Point(5, 5);
 			this.labelControlCategoriesInfo.Name = "labelControlCategoriesInfo";
-			this.labelControlCategoriesInfo.Size = new System.Drawing.Size(275, 0);
+			this.labelControlCategoriesInfo.Size = new System.Drawing.Size(240, 0);
 			this.labelControlCategoriesInfo.StyleController = this.styleController;
 			this.labelControlCategoriesInfo.TabIndex = 51;
 			this.labelControlCategoriesInfo.UseMnemonic = false;
@@ -457,32 +332,153 @@
 			this.imageCollectionCategories.ImageStream = ((DevExpress.Utils.ImageCollectionStreamer)(resources.GetObject("imageCollectionCategories.ImageStream")));
 			this.imageCollectionCategories.Images.SetKeyName(0, "LinkSettingsTagsIconCategories.png");
 			// 
-			// xtraTabPageKeywords
+			// buttonXCategoriesExpandAll
 			// 
-			this.xtraTabPageKeywords.Appearance.PageClient.ForeColor = System.Drawing.Color.Black;
-			this.xtraTabPageKeywords.Appearance.PageClient.Options.UseForeColor = true;
-			this.xtraTabPageKeywords.Controls.Add(this.buttonXAddKeyWord);
-			this.xtraTabPageKeywords.Controls.Add(this.gridControlKeywords);
-			this.xtraTabPageKeywords.Name = "xtraTabPageKeywords";
-			this.xtraTabPageKeywords.Size = new System.Drawing.Size(824, 473);
-			this.xtraTabPageKeywords.Text = "Keyword Tags";
+			this.buttonXCategoriesExpandAll.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXCategoriesExpandAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXCategoriesExpandAll.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.buttonXCategoriesExpandAll.Location = new System.Drawing.Point(274, 99);
+			this.buttonXCategoriesExpandAll.Name = "buttonXCategoriesExpandAll";
+			this.buttonXCategoriesExpandAll.Size = new System.Drawing.Size(116, 32);
+			this.buttonXCategoriesExpandAll.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXCategoriesExpandAll.TabIndex = 6;
+			this.buttonXCategoriesExpandAll.Text = "Expand All";
+			this.buttonXCategoriesExpandAll.TextColor = System.Drawing.Color.Black;
+			this.buttonXCategoriesExpandAll.Click += new System.EventHandler(this.buttonXCategoriesExpandAll_Click);
 			// 
-			// buttonXAddKeyWord
+			// panelCategoriesContent
 			// 
-			this.buttonXAddKeyWord.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-			this.buttonXAddKeyWord.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXAddKeyWord.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.buttonXAddKeyWord.Image = global::SalesLibraries.FileManager.Properties.Resources.ButtonPlus;
-			this.buttonXAddKeyWord.ImageFixedSize = new System.Drawing.Size(24, 24);
-			this.buttonXAddKeyWord.Location = new System.Drawing.Point(11, 9);
-			this.buttonXAddKeyWord.Name = "buttonXAddKeyWord";
-			this.buttonXAddKeyWord.Size = new System.Drawing.Size(132, 34);
-			this.buttonXAddKeyWord.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.buttonXAddKeyWord.TabIndex = 8;
-			this.buttonXAddKeyWord.Text = "   Add Keyword";
-			this.buttonXAddKeyWord.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
-			this.buttonXAddKeyWord.TextColor = System.Drawing.Color.Green;
-			this.buttonXAddKeyWord.Click += new System.EventHandler(this.OnAddKeyWordClick);
+			this.panelCategoriesContent.BackColor = System.Drawing.Color.Transparent;
+			this.panelCategoriesContent.ForeColor = System.Drawing.Color.Black;
+			this.panelCategoriesContent.Location = new System.Drawing.Point(548, 98);
+			this.panelCategoriesContent.Name = "panelCategoriesContent";
+			this.panelCategoriesContent.Size = new System.Drawing.Size(306, 390);
+			this.panelCategoriesContent.TabIndex = 0;
+			// 
+			// treeListCategories
+			// 
+			this.treeListCategories.AllowCheckMinLevel = 0;
+			this.treeListCategories.Appearance.FocusedCell.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.treeListCategories.Appearance.FocusedCell.Options.UseFont = true;
+			this.treeListCategories.Appearance.FocusedRow.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.treeListCategories.Appearance.FocusedRow.Options.UseFont = true;
+			this.treeListCategories.Appearance.Row.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.treeListCategories.Appearance.Row.Options.UseFont = true;
+			this.treeListCategories.Appearance.SelectedRow.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.treeListCategories.Appearance.SelectedRow.Options.UseFont = true;
+			this.treeListCategories.Columns.AddRange(new DevExpress.XtraTreeList.Columns.TreeListColumn[] {
+            this.treeListColumnName});
+			this.treeListCategories.Location = new System.Drawing.Point(274, 145);
+			this.treeListCategories.Name = "treeListCategories";
+			this.treeListCategories.OptionsBehavior.AutoChangeParent = false;
+			this.treeListCategories.OptionsBehavior.Editable = false;
+			this.treeListCategories.OptionsBehavior.ResizeNodes = false;
+			this.treeListCategories.OptionsLayout.AddNewColumns = false;
+			this.treeListCategories.OptionsMenu.EnableColumnMenu = false;
+			this.treeListCategories.OptionsMenu.EnableFooterMenu = false;
+			this.treeListCategories.OptionsSelection.EnableAppearanceFocusedCell = false;
+			this.treeListCategories.OptionsView.FocusRectStyle = DevExpress.XtraTreeList.DrawFocusRectStyle.None;
+			this.treeListCategories.OptionsView.ShowColumns = false;
+			this.treeListCategories.OptionsView.ShowHorzLines = false;
+			this.treeListCategories.OptionsView.ShowIndicator = false;
+			this.treeListCategories.OptionsView.ShowVertLines = false;
+			this.treeListCategories.RowHeight = 25;
+			this.treeListCategories.ShowButtonMode = DevExpress.XtraTreeList.ShowButtonModeEnum.ShowForFocusedRow;
+			this.treeListCategories.Size = new System.Drawing.Size(266, 344);
+			this.treeListCategories.TabIndex = 3;
+			this.treeListCategories.NodeCellStyle += new DevExpress.XtraTreeList.GetCustomNodeCellStyleEventHandler(this.OnCategoriesNodeCellStyle);
+			this.treeListCategories.BeforeCollapse += new DevExpress.XtraTreeList.BeforeCollapseEventHandler(this.OnCategoriesBeforeCollapse);
+			this.treeListCategories.BeforeFocusNode += new DevExpress.XtraTreeList.BeforeFocusNodeEventHandler(this.OnCategoriesBeforeFocusNode);
+			this.treeListCategories.AfterExpand += new DevExpress.XtraTreeList.NodeEventHandler(this.OnCategoriesAfterExpand);
+			this.treeListCategories.AfterCollapse += new DevExpress.XtraTreeList.NodeEventHandler(this.OnCategoriesAfterCollapse);
+			this.treeListCategories.FocusedNodeChanged += new DevExpress.XtraTreeList.FocusedNodeChangedEventHandler(this.OnCategoriesFocusedNodeChanged);
+			// 
+			// treeListColumnName
+			// 
+			this.treeListColumnName.Caption = "Name";
+			this.treeListColumnName.FieldName = "Name";
+			this.treeListColumnName.MinWidth = 49;
+			this.treeListColumnName.Name = "treeListColumnName";
+			this.treeListColumnName.Visible = true;
+			this.treeListColumnName.VisibleIndex = 0;
+			// 
+			// hyperLinkEditWipeCategories
+			// 
+			this.hyperLinkEditWipeCategories.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.hyperLinkEditWipeCategories.EditValue = "<color=192, 0, 0><u>Wipe all Tags</u></color>";
+			this.hyperLinkEditWipeCategories.Location = new System.Drawing.Point(706, 25);
+			this.hyperLinkEditWipeCategories.Name = "hyperLinkEditWipeCategories";
+			this.hyperLinkEditWipeCategories.Properties.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
+			this.hyperLinkEditWipeCategories.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.hyperLinkEditWipeCategories.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.hyperLinkEditWipeCategories.Properties.Appearance.Options.UseBackColor = true;
+			this.hyperLinkEditWipeCategories.Properties.Appearance.Options.UseForeColor = true;
+			this.hyperLinkEditWipeCategories.Properties.Appearance.Options.UseTextOptions = true;
+			this.hyperLinkEditWipeCategories.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+			this.hyperLinkEditWipeCategories.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+			this.hyperLinkEditWipeCategories.Size = new System.Drawing.Size(96, 20);
+			this.hyperLinkEditWipeCategories.StyleController = this.layoutControl;
+			this.hyperLinkEditWipeCategories.TabIndex = 51;
+			this.hyperLinkEditWipeCategories.TabStop = false;
+			this.hyperLinkEditWipeCategories.OpenLink += new DevExpress.XtraEditors.Controls.OpenLinkEventHandler(this.OnWipeCategoriesClick);
+			// 
+			// hyperLinkEditWipeKeywords
+			// 
+			this.hyperLinkEditWipeKeywords.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.hyperLinkEditWipeKeywords.EditValue = "<color=192, 0, 0><u>Wipe all Keywords Tags</u></color>";
+			this.hyperLinkEditWipeKeywords.Location = new System.Drawing.Point(966, 25);
+			this.hyperLinkEditWipeKeywords.Name = "hyperLinkEditWipeKeywords";
+			this.hyperLinkEditWipeKeywords.Properties.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
+			this.hyperLinkEditWipeKeywords.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.hyperLinkEditWipeKeywords.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.hyperLinkEditWipeKeywords.Properties.Appearance.Options.UseBackColor = true;
+			this.hyperLinkEditWipeKeywords.Properties.Appearance.Options.UseForeColor = true;
+			this.hyperLinkEditWipeKeywords.Properties.Appearance.Options.UseTextOptions = true;
+			this.hyperLinkEditWipeKeywords.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+			this.hyperLinkEditWipeKeywords.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+			this.hyperLinkEditWipeKeywords.Size = new System.Drawing.Size(156, 20);
+			this.hyperLinkEditWipeKeywords.StyleController = this.layoutControl;
+			this.hyperLinkEditWipeKeywords.TabIndex = 51;
+			this.hyperLinkEditWipeKeywords.TabStop = false;
+			this.hyperLinkEditWipeKeywords.OpenLink += new DevExpress.XtraEditors.Controls.OpenLinkEventHandler(this.OnWipeKeywordsClick);
+			// 
+			// labelControlCategoriesCount
+			// 
+			this.labelControlCategoriesCount.AllowHtmlString = true;
+			this.labelControlCategoriesCount.Appearance.BackColor = System.Drawing.Color.White;
+			this.labelControlCategoriesCount.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.labelControlCategoriesCount.Appearance.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.labelControlCategoriesCount.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+			this.labelControlCategoriesCount.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+			this.labelControlCategoriesCount.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+			this.labelControlCategoriesCount.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+			this.labelControlCategoriesCount.ImageAlignToText = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+			this.labelControlCategoriesCount.Location = new System.Drawing.Point(546, 27);
+			this.labelControlCategoriesCount.Name = "labelControlCategoriesCount";
+			this.labelControlCategoriesCount.Size = new System.Drawing.Size(156, 16);
+			this.labelControlCategoriesCount.StyleController = this.layoutControl;
+			this.labelControlCategoriesCount.TabIndex = 50;
+			this.labelControlCategoriesCount.Text = " ";
+			this.labelControlCategoriesCount.UseMnemonic = false;
+			// 
+			// labelControlKeywordsCount
+			// 
+			this.labelControlKeywordsCount.AllowHtmlString = true;
+			this.labelControlKeywordsCount.Appearance.BackColor = System.Drawing.Color.White;
+			this.labelControlKeywordsCount.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.labelControlKeywordsCount.Appearance.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.labelControlKeywordsCount.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+			this.labelControlKeywordsCount.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+			this.labelControlKeywordsCount.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+			this.labelControlKeywordsCount.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+			this.labelControlKeywordsCount.ImageAlignToText = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+			this.labelControlKeywordsCount.Location = new System.Drawing.Point(806, 27);
+			this.labelControlKeywordsCount.Name = "labelControlKeywordsCount";
+			this.labelControlKeywordsCount.Size = new System.Drawing.Size(156, 16);
+			this.labelControlKeywordsCount.StyleController = this.layoutControl;
+			this.labelControlKeywordsCount.TabIndex = 62;
+			this.labelControlKeywordsCount.Text = " ";
+			this.labelControlKeywordsCount.UseMnemonic = false;
 			// 
 			// gridControlKeywords
 			// 
@@ -493,13 +489,13 @@
 			this.gridControlKeywords.EmbeddedNavigator.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.gridControlKeywords.EmbeddedNavigator.Appearance.Options.UseBackColor = true;
 			this.gridControlKeywords.EmbeddedNavigator.Appearance.Options.UseForeColor = true;
-			this.gridControlKeywords.Location = new System.Drawing.Point(11, 49);
+			this.gridControlKeywords.Location = new System.Drawing.Point(274, 145);
 			this.gridControlKeywords.MainView = this.gridViewKeywords;
 			this.gridControlKeywords.Name = "gridControlKeywords";
 			this.gridControlKeywords.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemButtonEditKeywordShared,
             this.repositoryItemButtonEditKeywordPartial});
-			this.gridControlKeywords.Size = new System.Drawing.Size(803, 421);
+			this.gridControlKeywords.Size = new System.Drawing.Size(836, 342);
 			this.gridControlKeywords.TabIndex = 7;
 			this.gridControlKeywords.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewKeywords});
@@ -561,7 +557,7 @@
 			this.repositoryItemButtonEditKeywordShared.AppearanceReadOnly.Options.UseFont = true;
 			this.repositoryItemButtonEditKeywordShared.AutoHeight = false;
 			this.repositoryItemButtonEditKeywordShared.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.FileManager.Properties.Resources.ButtonDelete, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject7, "Delete", "Delete", null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.FileManager.Properties.Resources.ButtonDelete, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "Delete", "Delete", null, true)});
 			this.repositoryItemButtonEditKeywordShared.Name = "repositoryItemButtonEditKeywordShared";
 			this.repositoryItemButtonEditKeywordShared.NullText = "Type Keyword...";
 			this.repositoryItemButtonEditKeywordShared.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.OnKeywordsEditorButtonClick);
@@ -570,142 +566,489 @@
 			// 
 			this.repositoryItemButtonEditKeywordPartial.AutoHeight = false;
 			this.repositoryItemButtonEditKeywordPartial.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.FileManager.Properties.Resources.ButtonApplyForAll, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject8, "Apply for ALL Links and Edit", "MakeShared", null, true),
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.FileManager.Properties.Resources.ButtonDelete, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject9, "Delete", "Delete", null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.FileManager.Properties.Resources.ButtonApplyForAll, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "Apply for ALL Links and Edit", "MakeShared", null, true),
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.FileManager.Properties.Resources.ButtonDelete, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "Delete", "Delete", null, true)});
 			this.repositoryItemButtonEditKeywordPartial.Name = "repositoryItemButtonEditKeywordPartial";
 			this.repositoryItemButtonEditKeywordPartial.NullText = "Type Keyword...";
 			this.repositoryItemButtonEditKeywordPartial.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
 			this.repositoryItemButtonEditKeywordPartial.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.OnKeywordsEditorButtonClick);
 			// 
-			// panelBottomControls
+			// buttonXAddKeyWord
 			// 
-			this.panelBottomControls.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.panelBottomControls.BackColor = System.Drawing.Color.Transparent;
-			this.panelBottomControls.Controls.Add(this.panelBottomControlsCategories);
-			this.panelBottomControls.ForeColor = System.Drawing.Color.Black;
-			this.panelBottomControls.Location = new System.Drawing.Point(1, 564);
-			this.panelBottomControls.Name = "panelBottomControls";
-			this.panelBottomControls.Size = new System.Drawing.Size(898, 34);
-			this.panelBottomControls.TabIndex = 53;
+			this.buttonXAddKeyWord.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXAddKeyWord.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXAddKeyWord.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.buttonXAddKeyWord.Image = global::SalesLibraries.FileManager.Properties.Resources.ButtonPlus;
+			this.buttonXAddKeyWord.ImageFixedSize = new System.Drawing.Size(24, 24);
+			this.buttonXAddKeyWord.Location = new System.Drawing.Point(274, 99);
+			this.buttonXAddKeyWord.Name = "buttonXAddKeyWord";
+			this.buttonXAddKeyWord.Size = new System.Drawing.Size(136, 32);
+			this.buttonXAddKeyWord.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXAddKeyWord.TabIndex = 8;
+			this.buttonXAddKeyWord.Text = "   Add Keyword";
+			this.buttonXAddKeyWord.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
+			this.buttonXAddKeyWord.TextColor = System.Drawing.Color.Green;
+			this.buttonXAddKeyWord.Click += new System.EventHandler(this.OnAddKeyWordClick);
 			// 
-			// panelBottomControlsCategories
+			// layoutControlGroupRoot
 			// 
-			this.panelBottomControlsCategories.BackColor = System.Drawing.Color.Transparent;
-			this.panelBottomControlsCategories.Controls.Add(this.hyperLinkEditRequestNewCategories);
-			this.panelBottomControlsCategories.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panelBottomControlsCategories.ForeColor = System.Drawing.Color.Black;
-			this.panelBottomControlsCategories.Location = new System.Drawing.Point(0, 0);
-			this.panelBottomControlsCategories.Name = "panelBottomControlsCategories";
-			this.panelBottomControlsCategories.Size = new System.Drawing.Size(898, 34);
-			this.panelBottomControlsCategories.TabIndex = 51;
+			this.layoutControlGroupRoot.AllowHtmlStringInCaption = true;
+			this.layoutControlGroupRoot.AppearanceGroup.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlGroupRoot.AppearanceGroup.Options.UseFont = true;
+			this.layoutControlGroupRoot.AppearanceItemCaption.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlGroupRoot.AppearanceItemCaption.Options.UseFont = true;
+			this.layoutControlGroupRoot.AppearanceTabPage.Header.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlGroupRoot.AppearanceTabPage.Header.Options.UseFont = true;
+			this.layoutControlGroupRoot.AppearanceTabPage.HeaderActive.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlGroupRoot.AppearanceTabPage.HeaderActive.Options.UseFont = true;
+			this.layoutControlGroupRoot.AppearanceTabPage.HeaderDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlGroupRoot.AppearanceTabPage.HeaderDisabled.Options.UseFont = true;
+			this.layoutControlGroupRoot.AppearanceTabPage.HeaderHotTracked.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlGroupRoot.AppearanceTabPage.HeaderHotTracked.Options.UseFont = true;
+			this.layoutControlGroupRoot.CustomizationFormText = "Root";
+			this.layoutControlGroupRoot.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+			this.layoutControlGroupRoot.GroupBordersVisible = false;
+			this.layoutControlGroupRoot.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItemTitle,
+            this.layoutControlGroupCategoriesHeader,
+            this.layoutControlGroupKeywordsHeader,
+            this.tabbedControlGroupMain,
+            this.layoutControlItemOK,
+            this.layoutControlItemCancel,
+            this.emptySpaceItem2,
+            this.layoutControlItemCategoriesRequestNew,
+            this.emptySpaceItem5,
+            this.layoutControlItemLinksTree});
+			this.layoutControlGroupRoot.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlGroupRoot.Name = "Root";
+			this.layoutControlGroupRoot.Size = new System.Drawing.Size(1134, 551);
+			this.layoutControlGroupRoot.TextVisible = false;
 			// 
-			// hyperLinkEditRequestNewCategories
+			// layoutControlItemTitle
 			// 
-			this.hyperLinkEditRequestNewCategories.EditValue = "<color=darkblue><u>Need a new tag category? Click here...</u></color>";
-			this.hyperLinkEditRequestNewCategories.Location = new System.Drawing.Point(3, 7);
-			this.hyperLinkEditRequestNewCategories.Name = "hyperLinkEditRequestNewCategories";
-			this.hyperLinkEditRequestNewCategories.Properties.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
-			this.hyperLinkEditRequestNewCategories.Properties.Appearance.BackColor = System.Drawing.Color.White;
-			this.hyperLinkEditRequestNewCategories.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.hyperLinkEditRequestNewCategories.Properties.Appearance.Options.UseBackColor = true;
-			this.hyperLinkEditRequestNewCategories.Properties.Appearance.Options.UseForeColor = true;
-			this.hyperLinkEditRequestNewCategories.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-			this.hyperLinkEditRequestNewCategories.Size = new System.Drawing.Size(251, 20);
-			this.hyperLinkEditRequestNewCategories.StyleController = this.styleController;
-			this.hyperLinkEditRequestNewCategories.TabIndex = 8;
-			this.hyperLinkEditRequestNewCategories.TabStop = false;
-			this.hyperLinkEditRequestNewCategories.OpenLink += new DevExpress.XtraEditors.Controls.OpenLinkEventHandler(this.OnRequestNewCategoriesOpenLink);
+			this.layoutControlItemTitle.Control = this.labelControlTitle;
+			this.layoutControlItemTitle.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+			this.layoutControlItemTitle.CustomizationFormText = "Title";
+			this.layoutControlItemTitle.FillControlToClientArea = false;
+			this.layoutControlItemTitle.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlItemTitle.MinSize = new System.Drawing.Size(17, 50);
+			this.layoutControlItemTitle.Name = "layoutControlItemTitle";
+			this.layoutControlItemTitle.Size = new System.Drawing.Size(534, 50);
+			this.layoutControlItemTitle.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.layoutControlItemTitle.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemTitle.TextVisible = false;
 			// 
-			// panelMainContainer
+			// layoutControlGroupCategoriesHeader
 			// 
-			this.panelMainContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.panelMainContainer.BackColor = System.Drawing.Color.Transparent;
-			this.panelMainContainer.Controls.Add(this.xtraTabControl);
-			this.panelMainContainer.Controls.Add(this.panelFilesContainer);
-			this.panelMainContainer.ForeColor = System.Drawing.Color.Black;
-			this.panelMainContainer.Location = new System.Drawing.Point(1, 54);
-			this.panelMainContainer.Name = "panelMainContainer";
-			this.panelMainContainer.Size = new System.Drawing.Size(1130, 504);
-			this.panelMainContainer.TabIndex = 54;
+			this.layoutControlGroupCategoriesHeader.CustomizationFormText = "Categories Header";
+			this.layoutControlGroupCategoriesHeader.GroupBordersVisible = false;
+			this.layoutControlGroupCategoriesHeader.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItemCategoriesHeaderInfo,
+            this.layoutControlItemCategoriesHeaderWipeButton});
+			this.layoutControlGroupCategoriesHeader.Location = new System.Drawing.Point(534, 0);
+			this.layoutControlGroupCategoriesHeader.Name = "layoutControlGroupCategoriesHeader";
+			this.layoutControlGroupCategoriesHeader.Size = new System.Drawing.Size(260, 50);
+			this.layoutControlGroupCategoriesHeader.TextVisible = false;
+			this.layoutControlGroupCategoriesHeader.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
 			// 
-			// panelFilesContainer
+			// layoutControlItemCategoriesHeaderInfo
 			// 
-			this.panelFilesContainer.BackColor = System.Drawing.Color.Transparent;
-			this.panelFilesContainer.Controls.Add(this.linksTreeSelector);
-			this.panelFilesContainer.Dock = System.Windows.Forms.DockStyle.Left;
-			this.panelFilesContainer.ForeColor = System.Drawing.Color.Black;
-			this.panelFilesContainer.Location = new System.Drawing.Point(0, 0);
-			this.panelFilesContainer.Name = "panelFilesContainer";
-			this.panelFilesContainer.Padding = new System.Windows.Forms.Padding(0, 0, 4, 0);
-			this.panelFilesContainer.Size = new System.Drawing.Size(300, 504);
-			this.panelFilesContainer.TabIndex = 54;
+			this.layoutControlItemCategoriesHeaderInfo.Control = this.labelControlCategoriesCount;
+			this.layoutControlItemCategoriesHeaderInfo.ControlAlignment = System.Drawing.ContentAlignment.MiddleRight;
+			this.layoutControlItemCategoriesHeaderInfo.CustomizationFormText = "Info";
+			this.layoutControlItemCategoriesHeaderInfo.FillControlToClientArea = false;
+			this.layoutControlItemCategoriesHeaderInfo.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlItemCategoriesHeaderInfo.MinSize = new System.Drawing.Size(160, 20);
+			this.layoutControlItemCategoriesHeaderInfo.Name = "layoutControlItemCategoriesHeaderInfo";
+			this.layoutControlItemCategoriesHeaderInfo.Size = new System.Drawing.Size(160, 50);
+			this.layoutControlItemCategoriesHeaderInfo.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.layoutControlItemCategoriesHeaderInfo.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemCategoriesHeaderInfo.TextVisible = false;
+			this.layoutControlItemCategoriesHeaderInfo.TrimClientAreaToControl = false;
 			// 
-			// linksTreeSelector
+			// layoutControlItemCategoriesHeaderWipeButton
 			// 
-			this.linksTreeSelector.BackColor = System.Drawing.Color.Transparent;
-			this.linksTreeSelector.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.linksTreeSelector.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.linksTreeSelector.ForeColor = System.Drawing.Color.Black;
-			this.linksTreeSelector.Location = new System.Drawing.Point(0, 0);
-			this.linksTreeSelector.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-			this.linksTreeSelector.Name = "linksTreeSelector";
-			this.linksTreeSelector.Size = new System.Drawing.Size(296, 504);
-			this.linksTreeSelector.TabIndex = 0;
+			this.layoutControlItemCategoriesHeaderWipeButton.Control = this.hyperLinkEditWipeCategories;
+			this.layoutControlItemCategoriesHeaderWipeButton.ControlAlignment = System.Drawing.ContentAlignment.MiddleRight;
+			this.layoutControlItemCategoriesHeaderWipeButton.CustomizationFormText = "Wipe Button";
+			this.layoutControlItemCategoriesHeaderWipeButton.FillControlToClientArea = false;
+			this.layoutControlItemCategoriesHeaderWipeButton.Location = new System.Drawing.Point(160, 0);
+			this.layoutControlItemCategoriesHeaderWipeButton.MinSize = new System.Drawing.Size(100, 24);
+			this.layoutControlItemCategoriesHeaderWipeButton.Name = "layoutControlItemCategoriesHeaderWipeButton";
+			this.layoutControlItemCategoriesHeaderWipeButton.Size = new System.Drawing.Size(100, 50);
+			this.layoutControlItemCategoriesHeaderWipeButton.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.layoutControlItemCategoriesHeaderWipeButton.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemCategoriesHeaderWipeButton.TextVisible = false;
+			this.layoutControlItemCategoriesHeaderWipeButton.TrimClientAreaToControl = false;
 			// 
-			// panelButtons
+			// layoutControlGroupKeywordsHeader
 			// 
-			this.panelButtons.BackColor = System.Drawing.Color.Transparent;
-			this.panelButtons.Controls.Add(this.buttonXCategoriesCollapseAll);
-			this.panelButtons.Controls.Add(this.buttonXCategoriesExpandAll);
-			this.panelButtons.Dock = System.Windows.Forms.DockStyle.Top;
-			this.panelButtons.Location = new System.Drawing.Point(0, 0);
-			this.panelButtons.Name = "panelButtons";
-			this.panelButtons.Size = new System.Drawing.Size(250, 38);
-			this.panelButtons.TabIndex = 56;
+			this.layoutControlGroupKeywordsHeader.CustomizationFormText = "Keywords Header";
+			this.layoutControlGroupKeywordsHeader.GroupBordersVisible = false;
+			this.layoutControlGroupKeywordsHeader.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItemKeywordsHeaderInfo,
+            this.layoutControlItemKeywordsWipeButton});
+			this.layoutControlGroupKeywordsHeader.Location = new System.Drawing.Point(794, 0);
+			this.layoutControlGroupKeywordsHeader.Name = "layoutControlGroupKeywordsHeader";
+			this.layoutControlGroupKeywordsHeader.Size = new System.Drawing.Size(320, 50);
+			this.layoutControlGroupKeywordsHeader.TextVisible = false;
+			this.layoutControlGroupKeywordsHeader.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
 			// 
-			// buttonXCategoriesCollapseAll
+			// layoutControlItemKeywordsHeaderInfo
 			// 
-			this.buttonXCategoriesCollapseAll.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-			this.buttonXCategoriesCollapseAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonXCategoriesCollapseAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXCategoriesCollapseAll.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.buttonXCategoriesCollapseAll.Location = new System.Drawing.Point(139, 0);
-			this.buttonXCategoriesCollapseAll.Name = "buttonXCategoriesCollapseAll";
-			this.buttonXCategoriesCollapseAll.Size = new System.Drawing.Size(111, 32);
-			this.buttonXCategoriesCollapseAll.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.buttonXCategoriesCollapseAll.TabIndex = 7;
-			this.buttonXCategoriesCollapseAll.Text = "Collapse All";
-			this.buttonXCategoriesCollapseAll.TextColor = System.Drawing.Color.Black;
-			this.buttonXCategoriesCollapseAll.Click += new System.EventHandler(this.buttonXCategoriesCollapseAll_Click);
+			this.layoutControlItemKeywordsHeaderInfo.Control = this.labelControlKeywordsCount;
+			this.layoutControlItemKeywordsHeaderInfo.ControlAlignment = System.Drawing.ContentAlignment.MiddleRight;
+			this.layoutControlItemKeywordsHeaderInfo.CustomizationFormText = "Info";
+			this.layoutControlItemKeywordsHeaderInfo.FillControlToClientArea = false;
+			this.layoutControlItemKeywordsHeaderInfo.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlItemKeywordsHeaderInfo.MinSize = new System.Drawing.Size(160, 50);
+			this.layoutControlItemKeywordsHeaderInfo.Name = "layoutControlItemKeywordsHeaderInfo";
+			this.layoutControlItemKeywordsHeaderInfo.Size = new System.Drawing.Size(160, 50);
+			this.layoutControlItemKeywordsHeaderInfo.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.layoutControlItemKeywordsHeaderInfo.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemKeywordsHeaderInfo.TextVisible = false;
+			this.layoutControlItemKeywordsHeaderInfo.TrimClientAreaToControl = false;
 			// 
-			// buttonXCategoriesExpandAll
+			// layoutControlItemKeywordsWipeButton
 			// 
-			this.buttonXCategoriesExpandAll.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-			this.buttonXCategoriesExpandAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXCategoriesExpandAll.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.buttonXCategoriesExpandAll.Location = new System.Drawing.Point(0, 0);
-			this.buttonXCategoriesExpandAll.Name = "buttonXCategoriesExpandAll";
-			this.buttonXCategoriesExpandAll.Size = new System.Drawing.Size(111, 32);
-			this.buttonXCategoriesExpandAll.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.buttonXCategoriesExpandAll.TabIndex = 6;
-			this.buttonXCategoriesExpandAll.Text = "Expand All";
-			this.buttonXCategoriesExpandAll.TextColor = System.Drawing.Color.Black;
-			this.buttonXCategoriesExpandAll.Click += new System.EventHandler(this.buttonXCategoriesExpandAll_Click);
+			this.layoutControlItemKeywordsWipeButton.Control = this.hyperLinkEditWipeKeywords;
+			this.layoutControlItemKeywordsWipeButton.ControlAlignment = System.Drawing.ContentAlignment.MiddleRight;
+			this.layoutControlItemKeywordsWipeButton.CustomizationFormText = "Wipe Button";
+			this.layoutControlItemKeywordsWipeButton.FillControlToClientArea = false;
+			this.layoutControlItemKeywordsWipeButton.Location = new System.Drawing.Point(160, 0);
+			this.layoutControlItemKeywordsWipeButton.MinSize = new System.Drawing.Size(160, 24);
+			this.layoutControlItemKeywordsWipeButton.Name = "layoutControlItemKeywordsWipeButton";
+			this.layoutControlItemKeywordsWipeButton.Size = new System.Drawing.Size(160, 50);
+			this.layoutControlItemKeywordsWipeButton.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.layoutControlItemKeywordsWipeButton.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemKeywordsWipeButton.TextVisible = false;
+			this.layoutControlItemKeywordsWipeButton.TrimClientAreaToControl = false;
+			// 
+			// tabbedControlGroupMain
+			// 
+			this.tabbedControlGroupMain.AppearanceTabPage.Header.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.tabbedControlGroupMain.AppearanceTabPage.Header.Options.UseFont = true;
+			this.tabbedControlGroupMain.AppearanceTabPage.HeaderActive.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.tabbedControlGroupMain.AppearanceTabPage.HeaderActive.Options.UseFont = true;
+			this.tabbedControlGroupMain.AppearanceTabPage.HeaderDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.tabbedControlGroupMain.AppearanceTabPage.HeaderDisabled.Options.UseFont = true;
+			this.tabbedControlGroupMain.AppearanceTabPage.HeaderHotTracked.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.tabbedControlGroupMain.AppearanceTabPage.HeaderHotTracked.Options.UseFont = true;
+			this.tabbedControlGroupMain.AppearanceTabPage.PageClient.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.tabbedControlGroupMain.AppearanceTabPage.PageClient.Options.UseFont = true;
+			this.tabbedControlGroupMain.CustomizationFormText = "Main Tabs";
+			this.tabbedControlGroupMain.Location = new System.Drawing.Point(250, 50);
+			this.tabbedControlGroupMain.Name = "tabbedControlGroupMain";
+			this.tabbedControlGroupMain.SelectedTabPage = this.layoutControlGroupKeywords;
+			this.tabbedControlGroupMain.SelectedTabPageIndex = 1;
+			this.tabbedControlGroupMain.Size = new System.Drawing.Size(864, 441);
+			this.tabbedControlGroupMain.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlGroupCategories,
+            this.layoutControlGroupKeywords});
+			this.tabbedControlGroupMain.SelectedPageChanged += new DevExpress.XtraLayout.LayoutTabPageChangedEventHandler(this.OnSelectedTabPageChanged);
+			// 
+			// layoutControlGroupCategories
+			// 
+			this.layoutControlGroupCategories.CustomizationFormText = "Categories";
+			this.layoutControlGroupCategories.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.splitterItem1,
+            this.layoutControlGroupCategoriesList,
+            this.layoutControlGroupCategoriesContent,
+            this.layoutControlGroupCategoriesInfo,
+            this.splitterItem2});
+			this.layoutControlGroupCategories.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlGroupCategories.Name = "layoutControlGroupCategories";
+			this.layoutControlGroupCategories.Size = new System.Drawing.Size(840, 392);
+			this.layoutControlGroupCategories.Text = "Category Tags";
+			// 
+			// splitterItem1
+			// 
+			this.splitterItem1.AllowHotTrack = true;
+			this.splitterItem1.Location = new System.Drawing.Point(270, 0);
+			this.splitterItem1.Name = "splitterItem1";
+			this.splitterItem1.Size = new System.Drawing.Size(5, 392);
+			// 
+			// layoutControlGroupCategoriesList
+			// 
+			this.layoutControlGroupCategoriesList.CustomizationFormText = " List";
+			this.layoutControlGroupCategoriesList.GroupBordersVisible = false;
+			this.layoutControlGroupCategoriesList.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItemCategoriesList,
+            this.layoutControlGroupCategoriesListButtons});
+			this.layoutControlGroupCategoriesList.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlGroupCategoriesList.Name = "layoutControlGroupCategoriesList";
+			this.layoutControlGroupCategoriesList.Size = new System.Drawing.Size(270, 392);
+			// 
+			// layoutControlItemCategoriesList
+			// 
+			this.layoutControlItemCategoriesList.Control = this.treeListCategories;
+			this.layoutControlItemCategoriesList.CustomizationFormText = "Categories List";
+			this.layoutControlItemCategoriesList.FillControlToClientArea = false;
+			this.layoutControlItemCategoriesList.Location = new System.Drawing.Point(0, 46);
+			this.layoutControlItemCategoriesList.MinSize = new System.Drawing.Size(250, 24);
+			this.layoutControlItemCategoriesList.Name = "layoutControlItemCategoriesList";
+			this.layoutControlItemCategoriesList.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 0);
+			this.layoutControlItemCategoriesList.Size = new System.Drawing.Size(270, 346);
+			this.layoutControlItemCategoriesList.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.layoutControlItemCategoriesList.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemCategoriesList.TextVisible = false;
+			this.layoutControlItemCategoriesList.TrimClientAreaToControl = false;
+			// 
+			// layoutControlGroupCategoriesListButtons
+			// 
+			this.layoutControlGroupCategoriesListButtons.CustomizationFormText = "Buttons";
+			this.layoutControlGroupCategoriesListButtons.GroupBordersVisible = false;
+			this.layoutControlGroupCategoriesListButtons.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItemCategoriesListExpandAll,
+            this.emptySpaceItem1,
+            this.layoutControlItemCategoriesListCollapseAll,
+            this.emptySpaceItem6});
+			this.layoutControlGroupCategoriesListButtons.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlGroupCategoriesListButtons.Name = "layoutControlGroupCategoriesListButtons";
+			this.layoutControlGroupCategoriesListButtons.Size = new System.Drawing.Size(270, 46);
+			this.layoutControlGroupCategoriesListButtons.TextVisible = false;
+			// 
+			// layoutControlItemCategoriesListExpandAll
+			// 
+			this.layoutControlItemCategoriesListExpandAll.Control = this.buttonXCategoriesExpandAll;
+			this.layoutControlItemCategoriesListExpandAll.CustomizationFormText = "Expand All";
+			this.layoutControlItemCategoriesListExpandAll.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlItemCategoriesListExpandAll.MaxSize = new System.Drawing.Size(120, 36);
+			this.layoutControlItemCategoriesListExpandAll.MinSize = new System.Drawing.Size(120, 36);
+			this.layoutControlItemCategoriesListExpandAll.Name = "layoutControlItemCategoriesListExpandAll";
+			this.layoutControlItemCategoriesListExpandAll.Size = new System.Drawing.Size(120, 36);
+			this.layoutControlItemCategoriesListExpandAll.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.layoutControlItemCategoriesListExpandAll.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemCategoriesListExpandAll.TextVisible = false;
+			// 
+			// emptySpaceItem1
+			// 
+			this.emptySpaceItem1.AllowHotTrack = false;
+			this.emptySpaceItem1.Location = new System.Drawing.Point(120, 0);
+			this.emptySpaceItem1.MinSize = new System.Drawing.Size(30, 10);
+			this.emptySpaceItem1.Name = "emptySpaceItem1";
+			this.emptySpaceItem1.Size = new System.Drawing.Size(30, 36);
+			this.emptySpaceItem1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// layoutControlItemCategoriesListCollapseAll
+			// 
+			this.layoutControlItemCategoriesListCollapseAll.Control = this.buttonXCategoriesCollapseAll;
+			this.layoutControlItemCategoriesListCollapseAll.CustomizationFormText = "Collapse All";
+			this.layoutControlItemCategoriesListCollapseAll.Location = new System.Drawing.Point(150, 0);
+			this.layoutControlItemCategoriesListCollapseAll.MaxSize = new System.Drawing.Size(120, 36);
+			this.layoutControlItemCategoriesListCollapseAll.MinSize = new System.Drawing.Size(120, 36);
+			this.layoutControlItemCategoriesListCollapseAll.Name = "layoutControlItemCategoriesListCollapseAll";
+			this.layoutControlItemCategoriesListCollapseAll.Padding = new DevExpress.XtraLayout.Utils.Padding(1, 1, 1, 1);
+			this.layoutControlItemCategoriesListCollapseAll.Size = new System.Drawing.Size(120, 36);
+			this.layoutControlItemCategoriesListCollapseAll.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.layoutControlItemCategoriesListCollapseAll.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemCategoriesListCollapseAll.TextVisible = false;
+			// 
+			// emptySpaceItem6
+			// 
+			this.emptySpaceItem6.AllowHotTrack = false;
+			this.emptySpaceItem6.Location = new System.Drawing.Point(0, 36);
+			this.emptySpaceItem6.MaxSize = new System.Drawing.Size(0, 10);
+			this.emptySpaceItem6.MinSize = new System.Drawing.Size(10, 10);
+			this.emptySpaceItem6.Name = "emptySpaceItem6";
+			this.emptySpaceItem6.Size = new System.Drawing.Size(270, 10);
+			this.emptySpaceItem6.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem6.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// layoutControlGroupCategoriesContent
+			// 
+			this.layoutControlGroupCategoriesContent.AppearanceGroup.BorderColor = System.Drawing.Color.Gray;
+			this.layoutControlGroupCategoriesContent.AppearanceGroup.Options.UseBorderColor = true;
+			this.layoutControlGroupCategoriesContent.CustomizationFormText = "Content";
+			this.layoutControlGroupCategoriesContent.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItemCategoriesContent});
+			this.layoutControlGroupCategoriesContent.Location = new System.Drawing.Point(275, 0);
+			this.layoutControlGroupCategoriesContent.Name = "layoutControlGroupCategoriesContent";
+			this.layoutControlGroupCategoriesContent.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+			this.layoutControlGroupCategoriesContent.Size = new System.Drawing.Size(308, 392);
+			this.layoutControlGroupCategoriesContent.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+			this.layoutControlGroupCategoriesContent.TextVisible = false;
+			// 
+			// layoutControlItemCategoriesContent
+			// 
+			this.layoutControlItemCategoriesContent.Control = this.panelCategoriesContent;
+			this.layoutControlItemCategoriesContent.CustomizationFormText = "Content";
+			this.layoutControlItemCategoriesContent.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlItemCategoriesContent.Name = "layoutControlItemCategoriesContent";
+			this.layoutControlItemCategoriesContent.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+			this.layoutControlItemCategoriesContent.Size = new System.Drawing.Size(306, 390);
+			this.layoutControlItemCategoriesContent.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemCategoriesContent.TextVisible = false;
+			// 
+			// layoutControlGroupCategoriesInfo
+			// 
+			this.layoutControlGroupCategoriesInfo.AppearanceGroup.BorderColor = System.Drawing.Color.Gray;
+			this.layoutControlGroupCategoriesInfo.AppearanceGroup.Options.UseBorderColor = true;
+			this.layoutControlGroupCategoriesInfo.CustomizationFormText = "Info";
+			this.layoutControlGroupCategoriesInfo.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItemCategoriesInfo});
+			this.layoutControlGroupCategoriesInfo.Location = new System.Drawing.Point(588, 0);
+			this.layoutControlGroupCategoriesInfo.Name = "layoutControlGroupCategoriesInfo";
+			this.layoutControlGroupCategoriesInfo.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+			this.layoutControlGroupCategoriesInfo.Size = new System.Drawing.Size(252, 392);
+			this.layoutControlGroupCategoriesInfo.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+			this.layoutControlGroupCategoriesInfo.TextVisible = false;
+			// 
+			// layoutControlItemCategoriesInfo
+			// 
+			this.layoutControlItemCategoriesInfo.Control = this.xtraScrollableControlCategoriesInfo;
+			this.layoutControlItemCategoriesInfo.CustomizationFormText = "Info";
+			this.layoutControlItemCategoriesInfo.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlItemCategoriesInfo.MinSize = new System.Drawing.Size(250, 5);
+			this.layoutControlItemCategoriesInfo.Name = "layoutControlItemCategoriesInfo";
+			this.layoutControlItemCategoriesInfo.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+			this.layoutControlItemCategoriesInfo.Size = new System.Drawing.Size(250, 390);
+			this.layoutControlItemCategoriesInfo.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.layoutControlItemCategoriesInfo.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemCategoriesInfo.TextVisible = false;
+			// 
+			// splitterItem2
+			// 
+			this.splitterItem2.AllowHotTrack = true;
+			this.splitterItem2.Location = new System.Drawing.Point(583, 0);
+			this.splitterItem2.Name = "splitterItem2";
+			this.splitterItem2.Size = new System.Drawing.Size(5, 392);
+			// 
+			// layoutControlGroupKeywords
+			// 
+			this.layoutControlGroupKeywords.CustomizationFormText = "Keywords";
+			this.layoutControlGroupKeywords.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItemKeywordsAdd,
+            this.emptySpaceItem3,
+            this.layoutControlItemKeywordsList,
+            this.emptySpaceItem4});
+			this.layoutControlGroupKeywords.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlGroupKeywords.Name = "layoutControlGroupKeywords";
+			this.layoutControlGroupKeywords.Size = new System.Drawing.Size(840, 392);
+			this.layoutControlGroupKeywords.Text = "Keyword Tags";
+			// 
+			// layoutControlItemKeywordsAdd
+			// 
+			this.layoutControlItemKeywordsAdd.Control = this.buttonXAddKeyWord;
+			this.layoutControlItemKeywordsAdd.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+			this.layoutControlItemKeywordsAdd.CustomizationFormText = "Add";
+			this.layoutControlItemKeywordsAdd.FillControlToClientArea = false;
+			this.layoutControlItemKeywordsAdd.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlItemKeywordsAdd.MaxSize = new System.Drawing.Size(140, 36);
+			this.layoutControlItemKeywordsAdd.MinSize = new System.Drawing.Size(140, 36);
+			this.layoutControlItemKeywordsAdd.Name = "layoutControlItemKeywordsAdd";
+			this.layoutControlItemKeywordsAdd.Size = new System.Drawing.Size(140, 36);
+			this.layoutControlItemKeywordsAdd.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.layoutControlItemKeywordsAdd.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemKeywordsAdd.TextVisible = false;
+			this.layoutControlItemKeywordsAdd.TrimClientAreaToControl = false;
+			// 
+			// emptySpaceItem3
+			// 
+			this.emptySpaceItem3.AllowHotTrack = false;
+			this.emptySpaceItem3.Location = new System.Drawing.Point(140, 0);
+			this.emptySpaceItem3.Name = "emptySpaceItem3";
+			this.emptySpaceItem3.Size = new System.Drawing.Size(700, 36);
+			this.emptySpaceItem3.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// layoutControlItemKeywordsList
+			// 
+			this.layoutControlItemKeywordsList.Control = this.gridControlKeywords;
+			this.layoutControlItemKeywordsList.CustomizationFormText = "List";
+			this.layoutControlItemKeywordsList.Location = new System.Drawing.Point(0, 46);
+			this.layoutControlItemKeywordsList.Name = "layoutControlItemKeywordsList";
+			this.layoutControlItemKeywordsList.Size = new System.Drawing.Size(840, 346);
+			this.layoutControlItemKeywordsList.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemKeywordsList.TextVisible = false;
+			// 
+			// emptySpaceItem4
+			// 
+			this.emptySpaceItem4.AllowHotTrack = false;
+			this.emptySpaceItem4.Location = new System.Drawing.Point(0, 36);
+			this.emptySpaceItem4.MaxSize = new System.Drawing.Size(0, 10);
+			this.emptySpaceItem4.MinSize = new System.Drawing.Size(10, 10);
+			this.emptySpaceItem4.Name = "emptySpaceItem4";
+			this.emptySpaceItem4.Size = new System.Drawing.Size(840, 10);
+			this.emptySpaceItem4.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem4.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// layoutControlItemOK
+			// 
+			this.layoutControlItemOK.Control = this.buttonXOK;
+			this.layoutControlItemOK.CustomizationFormText = "OK";
+			this.layoutControlItemOK.Location = new System.Drawing.Point(854, 491);
+			this.layoutControlItemOK.MaxSize = new System.Drawing.Size(120, 40);
+			this.layoutControlItemOK.MinSize = new System.Drawing.Size(120, 40);
+			this.layoutControlItemOK.Name = "layoutControlItemOK";
+			this.layoutControlItemOK.Size = new System.Drawing.Size(120, 40);
+			this.layoutControlItemOK.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.layoutControlItemOK.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemOK.TextVisible = false;
+			// 
+			// layoutControlItemCancel
+			// 
+			this.layoutControlItemCancel.Control = this.buttonXCancel;
+			this.layoutControlItemCancel.CustomizationFormText = "Cancel";
+			this.layoutControlItemCancel.Location = new System.Drawing.Point(994, 491);
+			this.layoutControlItemCancel.MaxSize = new System.Drawing.Size(120, 40);
+			this.layoutControlItemCancel.MinSize = new System.Drawing.Size(120, 40);
+			this.layoutControlItemCancel.Name = "layoutControlItemCancel";
+			this.layoutControlItemCancel.Size = new System.Drawing.Size(120, 40);
+			this.layoutControlItemCancel.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.layoutControlItemCancel.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemCancel.TextVisible = false;
+			// 
+			// emptySpaceItem2
+			// 
+			this.emptySpaceItem2.AllowHotTrack = false;
+			this.emptySpaceItem2.Location = new System.Drawing.Point(974, 491);
+			this.emptySpaceItem2.MaxSize = new System.Drawing.Size(20, 0);
+			this.emptySpaceItem2.MinSize = new System.Drawing.Size(20, 10);
+			this.emptySpaceItem2.Name = "emptySpaceItem2";
+			this.emptySpaceItem2.Size = new System.Drawing.Size(20, 40);
+			this.emptySpaceItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// layoutControlItemCategoriesRequestNew
+			// 
+			this.layoutControlItemCategoriesRequestNew.Control = this.hyperLinkEditRequestNewCategories;
+			this.layoutControlItemCategoriesRequestNew.CustomizationFormText = "Request New Categories";
+			this.layoutControlItemCategoriesRequestNew.Location = new System.Drawing.Point(0, 491);
+			this.layoutControlItemCategoriesRequestNew.Name = "layoutControlItemCategoriesRequestNew";
+			this.layoutControlItemCategoriesRequestNew.Size = new System.Drawing.Size(844, 40);
+			this.layoutControlItemCategoriesRequestNew.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemCategoriesRequestNew.TextVisible = false;
+			// 
+			// emptySpaceItem5
+			// 
+			this.emptySpaceItem5.AllowHotTrack = false;
+			this.emptySpaceItem5.Location = new System.Drawing.Point(844, 491);
+			this.emptySpaceItem5.Name = "emptySpaceItem5";
+			this.emptySpaceItem5.Size = new System.Drawing.Size(10, 40);
+			this.emptySpaceItem5.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// layoutControlItemLinksTree
+			// 
+			this.layoutControlItemLinksTree.Control = this.linksTreeSelector;
+			this.layoutControlItemLinksTree.CustomizationFormText = "Links Tree";
+			this.layoutControlItemLinksTree.FillControlToClientArea = false;
+			this.layoutControlItemLinksTree.Location = new System.Drawing.Point(0, 50);
+			this.layoutControlItemLinksTree.MinSize = new System.Drawing.Size(250, 24);
+			this.layoutControlItemLinksTree.Name = "layoutControlItemLinksTree";
+			this.layoutControlItemLinksTree.Size = new System.Drawing.Size(250, 441);
+			this.layoutControlItemLinksTree.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.layoutControlItemLinksTree.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemLinksTree.TextVisible = false;
+			this.layoutControlItemLinksTree.TrimClientAreaToControl = false;
 			// 
 			// FormEditLinkTags
 			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.BackColor = System.Drawing.Color.White;
-			this.ClientSize = new System.Drawing.Size(1134, 607);
-			this.Controls.Add(this.panelMainContainer);
-			this.Controls.Add(this.panelBottomControls);
-			this.Controls.Add(this.panelTopControls);
-			this.Controls.Add(this.labelControlTitle);
-			this.Controls.Add(this.buttonXCancel);
-			this.Controls.Add(this.buttonXOK);
+			this.ClientSize = new System.Drawing.Size(1134, 551);
+			this.Controls.Add(this.layoutControl);
 			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.MinimizeBox = false;
@@ -717,33 +1060,52 @@
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormEditLinkSettings_FormClosing);
 			this.Click += new System.EventHandler(this.OnFormClick);
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
-			this.panelTopControls.ResumeLayout(false);
-			this.panelTopControlsCategories.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.hyperLinkEditWipeCategories.Properties)).EndInit();
-			this.panelTopControlsKeywords.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.hyperLinkEditWipeKeywords.Properties)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.xtraTabControl)).EndInit();
-			this.xtraTabControl.ResumeLayout(false);
-			this.xtraTabPageCategories.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.splitContainerCategories)).EndInit();
-			this.splitContainerCategories.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.treeListCategories)).EndInit();
-			this.panelCategoriesInfo.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.panelControlCategoriesInfoInner)).EndInit();
-			this.panelControlCategoriesInfoInner.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.layoutControl)).EndInit();
+			this.layoutControl.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.hyperLinkEditRequestNewCategories.Properties)).EndInit();
 			this.xtraScrollableControlCategoriesInfo.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.imageCollectionCategories)).EndInit();
-			this.xtraTabPageKeywords.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.treeListCategories)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.hyperLinkEditWipeCategories.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.hyperLinkEditWipeKeywords.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlKeywords)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewKeywords)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditKeywordShared)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditKeywordPartial)).EndInit();
-			this.panelBottomControls.ResumeLayout(false);
-			this.panelBottomControlsCategories.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.hyperLinkEditRequestNewCategories.Properties)).EndInit();
-			this.panelMainContainer.ResumeLayout(false);
-			this.panelFilesContainer.ResumeLayout(false);
-			this.panelButtons.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupRoot)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemTitle)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupCategoriesHeader)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemCategoriesHeaderInfo)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemCategoriesHeaderWipeButton)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupKeywordsHeader)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemKeywordsHeaderInfo)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemKeywordsWipeButton)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.tabbedControlGroupMain)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupCategories)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.splitterItem1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupCategoriesList)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemCategoriesList)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupCategoriesListButtons)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemCategoriesListExpandAll)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemCategoriesListCollapseAll)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem6)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupCategoriesContent)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemCategoriesContent)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupCategoriesInfo)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemCategoriesInfo)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.splitterItem2)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupKeywords)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemKeywordsAdd)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemKeywordsList)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem4)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemOK)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemCancel)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemCategoriesRequestNew)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem5)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemLinksTree)).EndInit();
 			this.ResumeLayout(false);
 
         }
@@ -754,38 +1116,60 @@
 		private DevComponents.DotNetBar.ButtonX buttonXCancel;
 		private DevExpress.XtraEditors.StyleController styleController;
 		private DevExpress.XtraEditors.LabelControl labelControlTitle;
-		private System.Windows.Forms.Panel panelTopControls;
-		private DevExpress.XtraTab.XtraTabControl xtraTabControl;
-		private DevExpress.XtraTab.XtraTabPage xtraTabPageCategories;
-		private DevExpress.XtraTab.XtraTabPage xtraTabPageKeywords;
-		private System.Windows.Forms.Panel panelTopControlsCategories;
 		private DevExpress.XtraEditors.LabelControl labelControlCategoriesCount;
-		private System.Windows.Forms.Panel panelBottomControls;
-		private System.Windows.Forms.Panel panelBottomControlsCategories;
 		private DevExpress.XtraEditors.HyperLinkEdit hyperLinkEditRequestNewCategories;
 		private DevExpress.XtraEditors.HyperLinkEdit hyperLinkEditWipeCategories;
-		private System.Windows.Forms.Panel panelTopControlsKeywords;
 		private DevExpress.XtraEditors.HyperLinkEdit hyperLinkEditWipeKeywords;
-		private DevExpress.XtraEditors.LabelControl labelControlKeywordsCount;
 		private DevComponents.DotNetBar.ButtonX buttonXAddKeyWord;
 		private DevExpress.XtraGrid.GridControl gridControlKeywords;
 		private DevExpress.XtraGrid.Views.Grid.GridView gridViewKeywords;
 		private DevExpress.XtraGrid.Columns.GridColumn gridColumnKeywordsValue;
 		private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEditKeywordShared;
 		private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEditKeywordPartial;
-		private DevExpress.XtraEditors.SplitContainerControl splitContainerCategories;
 		private CommonGUI.CustomTreeList.EmptyImageTreeList treeListCategories;
 		private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumnName;
 		private DevExpress.XtraEditors.LabelControl labelControlCategoriesInfo;
-		private System.Windows.Forms.Panel panelCategoriesInfo;
-		private DevExpress.XtraEditors.PanelControl panelControlCategoriesInfoInner;
 		private DevExpress.XtraEditors.XtraScrollableControl xtraScrollableControlCategoriesInfo;
 		private DevExpress.Utils.ImageCollection imageCollectionCategories;
-		private System.Windows.Forms.Panel panelMainContainer;
-		private System.Windows.Forms.Panel panelFilesContainer;
-		private LinksTreeSelector.LinksTreeSelectorControl linksTreeSelector;
-		private System.Windows.Forms.Panel panelButtons;
 		private DevComponents.DotNetBar.ButtonX buttonXCategoriesCollapseAll;
 		private DevComponents.DotNetBar.ButtonX buttonXCategoriesExpandAll;
+		private DevExpress.XtraLayout.LayoutControl layoutControl;
+		private System.Windows.Forms.Panel panelCategoriesContent;
+		private DevExpress.XtraEditors.LabelControl labelControlKeywordsCount;
+		private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroupRoot;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemTitle;
+		private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroupCategoriesHeader;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemCategoriesHeaderInfo;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemCategoriesHeaderWipeButton;
+		private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroupKeywordsHeader;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemKeywordsHeaderInfo;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemKeywordsWipeButton;
+		private DevExpress.XtraLayout.TabbedControlGroup tabbedControlGroupMain;
+		private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroupCategories;
+		private DevExpress.XtraLayout.SplitterItem splitterItem1;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemCategoriesContent;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemCategoriesInfo;
+		private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroupCategoriesList;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemCategoriesListExpandAll;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemCategoriesListCollapseAll;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemCategoriesList;
+		private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroupKeywords;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem3;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
+		private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroupCategoriesListButtons;
+		private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroupCategoriesContent;
+		private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroupCategoriesInfo;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemKeywordsAdd;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemKeywordsList;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem4;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemOK;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemCancel;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemCategoriesRequestNew;
+		private DevExpress.XtraLayout.SplitterItem splitterItem2;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem5;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem6;
+		private LinksTreeSelector.LinksTreeSelectorControl linksTreeSelector;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemLinksTree;
 	}
 }

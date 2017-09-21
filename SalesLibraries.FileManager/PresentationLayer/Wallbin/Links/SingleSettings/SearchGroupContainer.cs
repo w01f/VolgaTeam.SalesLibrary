@@ -23,6 +23,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			ListBox = new CheckedListBoxControl();
 			ListBox.Appearance.Font = new Font("Arial", 9.75F, FontStyle.Regular);
 			ListBox.Appearance.Options.UseFont = true;
+			ListBox.BorderStyle = BorderStyles.NoBorder;
 			ListBox.CheckOnClick = true;
 			ListBox.ItemHeight = 30;
 			ListBox.SelectionMode = SelectionMode.None;

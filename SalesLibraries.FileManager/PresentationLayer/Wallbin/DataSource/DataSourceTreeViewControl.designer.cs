@@ -39,56 +39,88 @@
 			this.treeListSearchFiles = new DevExpress.XtraTreeList.TreeList();
 			this.treeListColumn1 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
 			this.treeListColumn2 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-			this.pnKeyWord = new System.Windows.Forms.Panel();
-			this.groupControlDateRange = new DevExpress.XtraEditors.GroupControl();
-			this.laStartDate = new System.Windows.Forms.Label();
 			this.dateEditEndDate = new DevExpress.XtraEditors.DateEdit();
-			this.laEndDate = new System.Windows.Forms.Label();
-			this.dateEditStartDate = new DevExpress.XtraEditors.DateEdit();
-			this.buttonXSearch = new DevComponents.DotNetBar.ButtonX();
-			this.checkEditDateRange = new DevExpress.XtraEditors.CheckEdit();
-			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
-			this.textEditKeyWord = new DevExpress.XtraEditors.TextEdit();
-			this.pnRefresh = new System.Windows.Forms.Panel();
-			this.buttonXRefresh = new DevComponents.DotNetBar.ButtonX();
-			this.laDoubleClick = new System.Windows.Forms.Label();
-			this.contextMenuStripFile = new System.Windows.Forms.ContextMenuStrip(this.components);
-			this.tmiFileOpen = new System.Windows.Forms.ToolStripMenuItem();
-			this.tmiFileDelete = new System.Windows.Forms.ToolStripMenuItem();
-			this.xtraTabControlFiles = new DevExpress.XtraTab.XtraTabControl();
-			this.xtraTabPageRegular = new DevExpress.XtraTab.XtraTabPage();
-			this.xtraTabPageExternal = new DevExpress.XtraTab.XtraTabPage();
+			this.layoutControl = new DevExpress.XtraLayout.LayoutControl();
 			this.treeListExternalFiles = new DevExpress.XtraTreeList.TreeList();
 			this.treeListColumn3 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
 			this.treeListColumn4 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-			this.xtraTabPageSearch = new DevExpress.XtraTab.XtraTabPage();
-			this.pnTreeViewProgress = new System.Windows.Forms.Panel();
-			this.laTreeViewProgressLabel = new System.Windows.Forms.Label();
+			this.dateEditStartDate = new DevExpress.XtraEditors.DateEdit();
+			this.checkEditDateRange = new DevExpress.XtraEditors.CheckEdit();
+			this.buttonXSearch = new DevComponents.DotNetBar.ButtonX();
+			this.labelControlProgress = new DevExpress.XtraEditors.LabelControl();
+			this.textEditKeyWord = new DevExpress.XtraEditors.TextEdit();
+			this.buttonXRefresh = new DevComponents.DotNetBar.ButtonX();
 			this.circularProgressTreeView = new DevComponents.DotNetBar.Controls.CircularProgress();
+			this.layoutControlGroupRoot = new DevExpress.XtraLayout.LayoutControlGroup();
+			this.layoutControlItemRefresh = new DevExpress.XtraLayout.LayoutControlItem();
+			this.layoutControlGroupProgress = new DevExpress.XtraLayout.LayoutControlGroup();
+			this.layoutControlItemProgressTreeView = new DevExpress.XtraLayout.LayoutControlItem();
+			this.layoutControlItemProgressTitle = new DevExpress.XtraLayout.LayoutControlItem();
+			this.layoutControlGroupFiles = new DevExpress.XtraLayout.LayoutControlGroup();
+			this.tabbedControlGroupFiles = new DevExpress.XtraLayout.TabbedControlGroup();
+			this.layoutControlGroupSearchFiles = new DevExpress.XtraLayout.LayoutControlGroup();
+			this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.layoutControlItemKeyWord = new DevExpress.XtraLayout.LayoutControlItem();
+			this.layoutControlItemEanbleDateRange = new DevExpress.XtraLayout.LayoutControlItem();
+			this.emptySpaceItem4 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.layoutControlItemSearchButton = new DevExpress.XtraLayout.LayoutControlItem();
+			this.emptySpaceItem5 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.layoutControlItemSearchFiles = new DevExpress.XtraLayout.LayoutControlItem();
+			this.layoutControlGroupDateRangeWrapper = new DevExpress.XtraLayout.LayoutControlGroup();
+			this.emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.layoutControlGroupDateRange = new DevExpress.XtraLayout.LayoutControlGroup();
+			this.layoutControlItemStartDate = new DevExpress.XtraLayout.LayoutControlItem();
+			this.emptySpaceItem6 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.layoutControlItemEndDate = new DevExpress.XtraLayout.LayoutControlItem();
+			this.layoutControlGroupRegularFiles = new DevExpress.XtraLayout.LayoutControlGroup();
+			this.layoutControlItemRegularFiles = new DevExpress.XtraLayout.LayoutControlItem();
+			this.layoutControlGroupExternalFiles = new DevExpress.XtraLayout.LayoutControlGroup();
+			this.layoutControlItemExternalFiles = new DevExpress.XtraLayout.LayoutControlItem();
+			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
+			this.contextMenuStripFile = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.tmiFileOpen = new System.Windows.Forms.ToolStripMenuItem();
+			this.tmiFileDelete = new System.Windows.Forms.ToolStripMenuItem();
 			this.pnMain = new System.Windows.Forms.Panel();
 			this.contextMenuStripFolder = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.tmiFolderCreate = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.treeListRegularFiles)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.treeListSearchFiles)).BeginInit();
-			this.pnKeyWord.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.groupControlDateRange)).BeginInit();
-			this.groupControlDateRange.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dateEditEndDate.Properties.CalendarTimeProperties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dateEditEndDate.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControl)).BeginInit();
+			this.layoutControl.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.treeListExternalFiles)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dateEditStartDate.Properties.CalendarTimeProperties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dateEditStartDate.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditDateRange.Properties)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditKeyWord.Properties)).BeginInit();
-			this.pnRefresh.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupRoot)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemRefresh)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupProgress)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemProgressTreeView)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemProgressTitle)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupFiles)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.tabbedControlGroupFiles)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupSearchFiles)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemKeyWord)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemEanbleDateRange)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem4)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemSearchButton)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem5)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemSearchFiles)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupDateRangeWrapper)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupDateRange)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemStartDate)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem6)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemEndDate)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupRegularFiles)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemRegularFiles)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupExternalFiles)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemExternalFiles)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			this.contextMenuStripFile.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlFiles)).BeginInit();
-			this.xtraTabControlFiles.SuspendLayout();
-			this.xtraTabPageRegular.SuspendLayout();
-			this.xtraTabPageExternal.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.treeListExternalFiles)).BeginInit();
-			this.xtraTabPageSearch.SuspendLayout();
-			this.pnTreeViewProgress.SuspendLayout();
 			this.pnMain.SuspendLayout();
 			this.contextMenuStripFolder.SuspendLayout();
 			this.SuspendLayout();
@@ -107,8 +139,7 @@
 			this.treeListRegularFiles.Columns.AddRange(new DevExpress.XtraTreeList.Columns.TreeListColumn[] {
             this.treeListColumnName,
             this.treeListColumnPath});
-			this.treeListRegularFiles.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.treeListRegularFiles.Location = new System.Drawing.Point(0, 0);
+			this.treeListRegularFiles.Location = new System.Drawing.Point(14, 89);
 			this.treeListRegularFiles.Name = "treeListRegularFiles";
 			this.treeListRegularFiles.OptionsBehavior.AutoChangeParent = false;
 			this.treeListRegularFiles.OptionsBehavior.Editable = false;
@@ -124,7 +155,7 @@
 			this.treeListRegularFiles.OptionsView.ShowIndicator = false;
 			this.treeListRegularFiles.OptionsView.ShowVertLines = false;
 			this.treeListRegularFiles.ShowButtonMode = DevExpress.XtraTreeList.ShowButtonModeEnum.ShowForFocusedRow;
-			this.treeListRegularFiles.Size = new System.Drawing.Size(293, 386);
+			this.treeListRegularFiles.Size = new System.Drawing.Size(271, 337);
 			this.treeListRegularFiles.StateImageList = this.imageListFiles;
 			this.treeListRegularFiles.TabIndex = 1;
 			this.treeListRegularFiles.AfterExpand += new DevExpress.XtraTreeList.NodeEventHandler(this.OnFilesTreeViewAfterExpand);
@@ -199,8 +230,7 @@
 			this.treeListSearchFiles.Columns.AddRange(new DevExpress.XtraTreeList.Columns.TreeListColumn[] {
             this.treeListColumn1,
             this.treeListColumn2});
-			this.treeListSearchFiles.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.treeListSearchFiles.Location = new System.Drawing.Point(0, 142);
+			this.treeListSearchFiles.Location = new System.Drawing.Point(14, 261);
 			this.treeListSearchFiles.Name = "treeListSearchFiles";
 			this.treeListSearchFiles.OptionsBehavior.AutoChangeParent = false;
 			this.treeListSearchFiles.OptionsBehavior.Editable = false;
@@ -216,7 +246,7 @@
 			this.treeListSearchFiles.OptionsView.ShowIndicator = false;
 			this.treeListSearchFiles.OptionsView.ShowVertLines = false;
 			this.treeListSearchFiles.ShowButtonMode = DevExpress.XtraTreeList.ShowButtonModeEnum.ShowForFocusedRow;
-			this.treeListSearchFiles.Size = new System.Drawing.Size(293, 244);
+			this.treeListSearchFiles.Size = new System.Drawing.Size(271, 165);
 			this.treeListSearchFiles.StateImageList = this.imageListFiles;
 			this.treeListSearchFiles.TabIndex = 2;
 			this.treeListSearchFiles.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OnFilesTreeViewMouseClick);
@@ -239,47 +269,11 @@
 			this.treeListColumn2.FieldName = "treeListColumn1";
 			this.treeListColumn2.Name = "treeListColumn2";
 			// 
-			// pnKeyWord
-			// 
-			this.pnKeyWord.Controls.Add(this.groupControlDateRange);
-			this.pnKeyWord.Controls.Add(this.buttonXSearch);
-			this.pnKeyWord.Controls.Add(this.checkEditDateRange);
-			this.pnKeyWord.Controls.Add(this.textEditKeyWord);
-			this.pnKeyWord.Dock = System.Windows.Forms.DockStyle.Top;
-			this.pnKeyWord.Location = new System.Drawing.Point(0, 0);
-			this.pnKeyWord.Name = "pnKeyWord";
-			this.pnKeyWord.Size = new System.Drawing.Size(293, 142);
-			this.pnKeyWord.TabIndex = 0;
-			// 
-			// groupControlDateRange
-			// 
-			this.groupControlDateRange.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.groupControlDateRange.Controls.Add(this.laStartDate);
-			this.groupControlDateRange.Controls.Add(this.dateEditEndDate);
-			this.groupControlDateRange.Controls.Add(this.laEndDate);
-			this.groupControlDateRange.Controls.Add(this.dateEditStartDate);
-			this.groupControlDateRange.Location = new System.Drawing.Point(6, 69);
-			this.groupControlDateRange.Name = "groupControlDateRange";
-			this.groupControlDateRange.ShowCaption = false;
-			this.groupControlDateRange.Size = new System.Drawing.Size(278, 64);
-			this.groupControlDateRange.TabIndex = 0;
-			// 
-			// laStartDate
-			// 
-			this.laStartDate.AutoSize = true;
-			this.laStartDate.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.laStartDate.Location = new System.Drawing.Point(5, 10);
-			this.laStartDate.Name = "laStartDate";
-			this.laStartDate.Size = new System.Drawing.Size(67, 16);
-			this.laStartDate.TabIndex = 2;
-			this.laStartDate.Text = "Start Date";
-			// 
 			// dateEditEndDate
 			// 
 			this.dateEditEndDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.dateEditEndDate.EditValue = null;
-			this.dateEditEndDate.Location = new System.Drawing.Point(153, 35);
+			this.dateEditEndDate.Location = new System.Drawing.Point(88, 213);
 			this.dateEditEndDate.Name = "dateEditEndDate";
 			this.dateEditEndDate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
 			this.dateEditEndDate.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -297,184 +291,44 @@
 			this.dateEditEndDate.Properties.ShowPopupShadow = false;
 			this.dateEditEndDate.Properties.ShowToday = false;
 			this.dateEditEndDate.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-			this.dateEditEndDate.Size = new System.Drawing.Size(120, 22);
+			this.dateEditEndDate.Size = new System.Drawing.Size(185, 22);
+			this.dateEditEndDate.StyleController = this.layoutControl;
 			this.dateEditEndDate.TabIndex = 7;
 			// 
-			// laEndDate
+			// layoutControl
 			// 
-			this.laEndDate.AutoSize = true;
-			this.laEndDate.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.laEndDate.Location = new System.Drawing.Point(5, 38);
-			this.laEndDate.Name = "laEndDate";
-			this.laEndDate.Size = new System.Drawing.Size(62, 16);
-			this.laEndDate.TabIndex = 4;
-			this.laEndDate.Text = "End Date";
-			// 
-			// dateEditStartDate
-			// 
-			this.dateEditStartDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.dateEditStartDate.EditValue = null;
-			this.dateEditStartDate.Location = new System.Drawing.Point(153, 7);
-			this.dateEditStartDate.Name = "dateEditStartDate";
-			this.dateEditStartDate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
-			this.dateEditStartDate.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.dateEditStartDate.Properties.Appearance.Options.UseFont = true;
-			this.dateEditStartDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditStartDate.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
-			this.dateEditStartDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
-			this.dateEditStartDate.Properties.DisplayFormat.FormatString = "MM/dd/yyyy";
-			this.dateEditStartDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
-			this.dateEditStartDate.Properties.EditFormat.FormatString = "MM/dd/yyyy";
-			this.dateEditStartDate.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Custom;
-			this.dateEditStartDate.Properties.Mask.EditMask = "MM/dd/yyyy";
-			this.dateEditStartDate.Properties.NullText = "Select";
-			this.dateEditStartDate.Properties.ShowPopupShadow = false;
-			this.dateEditStartDate.Properties.ShowToday = false;
-			this.dateEditStartDate.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-			this.dateEditStartDate.Size = new System.Drawing.Size(120, 22);
-			this.dateEditStartDate.TabIndex = 6;
-			// 
-			// buttonXSearch
-			// 
-			this.buttonXSearch.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-			this.buttonXSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonXSearch.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXSearch.Location = new System.Drawing.Point(209, 37);
-			this.buttonXSearch.Name = "buttonXSearch";
-			this.buttonXSearch.Size = new System.Drawing.Size(75, 28);
-			this.buttonXSearch.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.buttonXSearch.TabIndex = 5;
-			this.buttonXSearch.Text = "Search";
-			this.buttonXSearch.Click += new System.EventHandler(this.OnSearchClick);
-			// 
-			// checkEditDateRange
-			// 
-			this.checkEditDateRange.Location = new System.Drawing.Point(6, 41);
-			this.checkEditDateRange.Name = "checkEditDateRange";
-			this.checkEditDateRange.Properties.AutoWidth = true;
-			this.checkEditDateRange.Properties.Caption = "Set Date Range";
-			this.checkEditDateRange.Size = new System.Drawing.Size(114, 20);
-			this.checkEditDateRange.StyleController = this.styleController;
-			this.checkEditDateRange.TabIndex = 4;
-			this.checkEditDateRange.CheckedChanged += new System.EventHandler(this.OnDateRangeCheckedChanged);
-			// 
-			// styleController
-			// 
-			this.styleController.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.styleController.Appearance.Options.UseFont = true;
-			// 
-			// textEditKeyWord
-			// 
-			this.textEditKeyWord.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.textEditKeyWord.Location = new System.Drawing.Point(8, 7);
-			this.textEditKeyWord.Name = "textEditKeyWord";
-			this.textEditKeyWord.Properties.NullText = "Type keyword here...";
-			this.textEditKeyWord.Size = new System.Drawing.Size(276, 22);
-			this.textEditKeyWord.StyleController = this.styleController;
-			this.textEditKeyWord.TabIndex = 3;
-			this.textEditKeyWord.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnKeywordEditKeyDown);
-			// 
-			// pnRefresh
-			// 
-			this.pnRefresh.Controls.Add(this.buttonXRefresh);
-			this.pnRefresh.Controls.Add(this.laDoubleClick);
-			this.pnRefresh.Dock = System.Windows.Forms.DockStyle.Top;
-			this.pnRefresh.Location = new System.Drawing.Point(0, 0);
-			this.pnRefresh.Name = "pnRefresh";
-			this.pnRefresh.Padding = new System.Windows.Forms.Padding(5);
-			this.pnRefresh.Size = new System.Drawing.Size(299, 43);
-			this.pnRefresh.TabIndex = 6;
-			// 
-			// buttonXRefresh
-			// 
-			this.buttonXRefresh.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-			this.buttonXRefresh.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXRefresh.Location = new System.Drawing.Point(10, 7);
-			this.buttonXRefresh.Name = "buttonXRefresh";
-			this.buttonXRefresh.Size = new System.Drawing.Size(75, 28);
-			this.buttonXRefresh.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.buttonXRefresh.TabIndex = 4;
-			this.buttonXRefresh.Text = "Refresh";
-			this.buttonXRefresh.Click += new System.EventHandler(this.OnRefreshRegularFilesClick);
-			// 
-			// laDoubleClick
-			// 
-			this.laDoubleClick.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.laDoubleClick.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.laDoubleClick.Location = new System.Drawing.Point(93, 7);
-			this.laDoubleClick.Name = "laDoubleClick";
-			this.laDoubleClick.Size = new System.Drawing.Size(196, 28);
-			this.laDoubleClick.TabIndex = 3;
-			this.laDoubleClick.Text = "Double Click to Open";
-			this.laDoubleClick.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// contextMenuStripFile
-			// 
-			this.contextMenuStripFile.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tmiFileOpen,
-            this.tmiFileDelete});
-			this.contextMenuStripFile.Name = "contextMenuStrip";
-			this.contextMenuStripFile.ShowImageMargin = false;
-			this.contextMenuStripFile.Size = new System.Drawing.Size(176, 48);
-			// 
-			// tmiFileOpen
-			// 
-			this.tmiFileOpen.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.tmiFileOpen.Name = "tmiFileOpen";
-			this.tmiFileOpen.Size = new System.Drawing.Size(175, 22);
-			this.tmiFileOpen.Text = "Open";
-			this.tmiFileOpen.Click += new System.EventHandler(this.OnMenuItemFileOpenClick);
-			// 
-			// tmiFileDelete
-			// 
-			this.tmiFileDelete.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.tmiFileDelete.Name = "tmiFileDelete";
-			this.tmiFileDelete.Size = new System.Drawing.Size(175, 22);
-			this.tmiFileDelete.Text = "Delete this source file";
-			this.tmiFileDelete.Click += new System.EventHandler(this.OnMenuItemFileDeleteClick);
-			// 
-			// xtraTabControlFiles
-			// 
-			this.xtraTabControlFiles.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.xtraTabControlFiles.Appearance.Options.UseFont = true;
-			this.xtraTabControlFiles.AppearancePage.Header.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.xtraTabControlFiles.AppearancePage.Header.Options.UseFont = true;
-			this.xtraTabControlFiles.AppearancePage.HeaderActive.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.xtraTabControlFiles.AppearancePage.HeaderActive.Options.UseFont = true;
-			this.xtraTabControlFiles.AppearancePage.HeaderDisabled.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.xtraTabControlFiles.AppearancePage.HeaderDisabled.Options.UseFont = true;
-			this.xtraTabControlFiles.AppearancePage.HeaderHotTracked.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.xtraTabControlFiles.AppearancePage.HeaderHotTracked.Options.UseFont = true;
-			this.xtraTabControlFiles.AppearancePage.PageClient.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.xtraTabControlFiles.AppearancePage.PageClient.Options.UseFont = true;
-			this.xtraTabControlFiles.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.xtraTabControlFiles.Location = new System.Drawing.Point(0, 43);
-			this.xtraTabControlFiles.Name = "xtraTabControlFiles";
-			this.xtraTabControlFiles.SelectedTabPage = this.xtraTabPageRegular;
-			this.xtraTabControlFiles.Size = new System.Drawing.Size(299, 417);
-			this.xtraTabControlFiles.TabIndex = 7;
-			this.xtraTabControlFiles.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
-            this.xtraTabPageRegular,
-            this.xtraTabPageExternal,
-            this.xtraTabPageSearch});
-			this.xtraTabControlFiles.SelectedPageChanged += new DevExpress.XtraTab.TabPageChangedEventHandler(this.OnXtraTabControlFilesSelectedPageChanged);
-			// 
-			// xtraTabPageRegular
-			// 
-			this.xtraTabPageRegular.Controls.Add(this.treeListRegularFiles);
-			this.xtraTabPageRegular.Name = "xtraTabPageRegular";
-			this.xtraTabPageRegular.Size = new System.Drawing.Size(293, 386);
-			this.xtraTabPageRegular.Text = "Source Directory";
-			// 
-			// xtraTabPageExternal
-			// 
-			this.xtraTabPageExternal.Controls.Add(this.treeListExternalFiles);
-			this.xtraTabPageExternal.Name = "xtraTabPageExternal";
-			this.xtraTabPageExternal.Size = new System.Drawing.Size(293, 386);
-			this.xtraTabPageExternal.Text = "Computer";
+			this.layoutControl.Appearance.Control.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.layoutControl.Appearance.Control.Options.UseFont = true;
+			this.layoutControl.Appearance.ControlDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControl.Appearance.ControlDisabled.Options.UseFont = true;
+			this.layoutControl.Appearance.ControlDropDown.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControl.Appearance.ControlDropDown.Options.UseFont = true;
+			this.layoutControl.Appearance.ControlDropDownHeader.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControl.Appearance.ControlDropDownHeader.Options.UseFont = true;
+			this.layoutControl.Appearance.ControlFocused.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControl.Appearance.ControlFocused.Options.UseFont = true;
+			this.layoutControl.Appearance.ControlReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControl.Appearance.ControlReadOnly.Options.UseFont = true;
+			this.layoutControl.Controls.Add(this.treeListRegularFiles);
+			this.layoutControl.Controls.Add(this.treeListExternalFiles);
+			this.layoutControl.Controls.Add(this.treeListSearchFiles);
+			this.layoutControl.Controls.Add(this.dateEditEndDate);
+			this.layoutControl.Controls.Add(this.dateEditStartDate);
+			this.layoutControl.Controls.Add(this.checkEditDateRange);
+			this.layoutControl.Controls.Add(this.buttonXSearch);
+			this.layoutControl.Controls.Add(this.labelControlProgress);
+			this.layoutControl.Controls.Add(this.textEditKeyWord);
+			this.layoutControl.Controls.Add(this.buttonXRefresh);
+			this.layoutControl.Controls.Add(this.circularProgressTreeView);
+			this.layoutControl.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.layoutControl.Location = new System.Drawing.Point(0, 0);
+			this.layoutControl.Name = "layoutControl";
+			this.layoutControl.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(-765, 41, 250, 350);
+			this.layoutControl.Root = this.layoutControlGroupRoot;
+			this.layoutControl.Size = new System.Drawing.Size(299, 500);
+			this.layoutControl.StyleController = this.styleController;
+			this.layoutControl.TabIndex = 63;
+			this.layoutControl.Text = "layoutControl1";
 			// 
 			// treeListExternalFiles
 			// 
@@ -490,8 +344,7 @@
 			this.treeListExternalFiles.Columns.AddRange(new DevExpress.XtraTreeList.Columns.TreeListColumn[] {
             this.treeListColumn3,
             this.treeListColumn4});
-			this.treeListExternalFiles.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.treeListExternalFiles.Location = new System.Drawing.Point(0, 0);
+			this.treeListExternalFiles.Location = new System.Drawing.Point(14, 89);
 			this.treeListExternalFiles.Name = "treeListExternalFiles";
 			this.treeListExternalFiles.OptionsBehavior.AutoChangeParent = false;
 			this.treeListExternalFiles.OptionsBehavior.Editable = false;
@@ -507,7 +360,7 @@
 			this.treeListExternalFiles.OptionsView.ShowIndicator = false;
 			this.treeListExternalFiles.OptionsView.ShowVertLines = false;
 			this.treeListExternalFiles.ShowButtonMode = DevExpress.XtraTreeList.ShowButtonModeEnum.ShowForFocusedRow;
-			this.treeListExternalFiles.Size = new System.Drawing.Size(293, 386);
+			this.treeListExternalFiles.Size = new System.Drawing.Size(271, 337);
 			this.treeListExternalFiles.StateImageList = this.imageListFiles;
 			this.treeListExternalFiles.TabIndex = 2;
 			this.treeListExternalFiles.AfterExpand += new DevExpress.XtraTreeList.NodeEventHandler(this.OnFilesTreeViewAfterExpand);
@@ -534,36 +387,89 @@
 			this.treeListColumn4.FieldName = "treeListColumn1";
 			this.treeListColumn4.Name = "treeListColumn4";
 			// 
-			// xtraTabPageSearch
+			// dateEditStartDate
 			// 
-			this.xtraTabPageSearch.Controls.Add(this.treeListSearchFiles);
-			this.xtraTabPageSearch.Controls.Add(this.pnKeyWord);
-			this.xtraTabPageSearch.Name = "xtraTabPageSearch";
-			this.xtraTabPageSearch.Size = new System.Drawing.Size(293, 386);
-			this.xtraTabPageSearch.Text = "Search";
+			this.dateEditStartDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.dateEditStartDate.EditValue = null;
+			this.dateEditStartDate.Location = new System.Drawing.Point(88, 177);
+			this.dateEditStartDate.Name = "dateEditStartDate";
+			this.dateEditStartDate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+			this.dateEditStartDate.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.dateEditStartDate.Properties.Appearance.Options.UseFont = true;
+			this.dateEditStartDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditStartDate.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
+			this.dateEditStartDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+			this.dateEditStartDate.Properties.DisplayFormat.FormatString = "MM/dd/yyyy";
+			this.dateEditStartDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
+			this.dateEditStartDate.Properties.EditFormat.FormatString = "MM/dd/yyyy";
+			this.dateEditStartDate.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Custom;
+			this.dateEditStartDate.Properties.Mask.EditMask = "MM/dd/yyyy";
+			this.dateEditStartDate.Properties.NullText = "Select";
+			this.dateEditStartDate.Properties.ShowPopupShadow = false;
+			this.dateEditStartDate.Properties.ShowToday = false;
+			this.dateEditStartDate.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+			this.dateEditStartDate.Size = new System.Drawing.Size(185, 22);
+			this.dateEditStartDate.StyleController = this.layoutControl;
+			this.dateEditStartDate.TabIndex = 6;
 			// 
-			// pnTreeViewProgress
+			// checkEditDateRange
 			// 
-			this.pnTreeViewProgress.Controls.Add(this.laTreeViewProgressLabel);
-			this.pnTreeViewProgress.Controls.Add(this.circularProgressTreeView);
-			this.pnTreeViewProgress.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.pnTreeViewProgress.Location = new System.Drawing.Point(0, 460);
-			this.pnTreeViewProgress.Name = "pnTreeViewProgress";
-			this.pnTreeViewProgress.Padding = new System.Windows.Forms.Padding(5);
-			this.pnTreeViewProgress.Size = new System.Drawing.Size(299, 40);
-			this.pnTreeViewProgress.TabIndex = 13;
-			this.pnTreeViewProgress.Visible = false;
+			this.checkEditDateRange.Location = new System.Drawing.Point(14, 125);
+			this.checkEditDateRange.Name = "checkEditDateRange";
+			this.checkEditDateRange.Properties.AutoWidth = true;
+			this.checkEditDateRange.Properties.Caption = "Set Date Range";
+			this.checkEditDateRange.Size = new System.Drawing.Size(114, 20);
+			this.checkEditDateRange.StyleController = this.layoutControl;
+			this.checkEditDateRange.TabIndex = 4;
+			this.checkEditDateRange.CheckedChanged += new System.EventHandler(this.OnDateRangeCheckedChanged);
 			// 
-			// laTreeViewProgressLabel
+			// buttonXSearch
 			// 
-			this.laTreeViewProgressLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.laTreeViewProgressLabel.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.laTreeViewProgressLabel.Location = new System.Drawing.Point(68, 5);
-			this.laTreeViewProgressLabel.Name = "laTreeViewProgressLabel";
-			this.laTreeViewProgressLabel.Size = new System.Drawing.Size(226, 30);
-			this.laTreeViewProgressLabel.TabIndex = 0;
-			this.laTreeViewProgressLabel.Text = "label1";
-			this.laTreeViewProgressLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.buttonXSearch.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXSearch.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXSearch.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.buttonXSearch.Location = new System.Drawing.Point(178, 125);
+			this.buttonXSearch.Name = "buttonXSearch";
+			this.buttonXSearch.Size = new System.Drawing.Size(107, 26);
+			this.buttonXSearch.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXSearch.TabIndex = 5;
+			this.buttonXSearch.Text = "Search";
+			this.buttonXSearch.Click += new System.EventHandler(this.OnSearchClick);
+			// 
+			// labelControlProgress
+			// 
+			this.labelControlProgress.Location = new System.Drawing.Point(70, 462);
+			this.labelControlProgress.Name = "labelControlProgress";
+			this.labelControlProgress.Size = new System.Drawing.Size(52, 16);
+			this.labelControlProgress.StyleController = this.layoutControl;
+			this.labelControlProgress.TabIndex = 64;
+			this.labelControlProgress.Text = "Progress";
+			// 
+			// textEditKeyWord
+			// 
+			this.textEditKeyWord.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.textEditKeyWord.Location = new System.Drawing.Point(14, 89);
+			this.textEditKeyWord.Name = "textEditKeyWord";
+			this.textEditKeyWord.Properties.NullText = "Type keyword here...";
+			this.textEditKeyWord.Size = new System.Drawing.Size(271, 22);
+			this.textEditKeyWord.StyleController = this.layoutControl;
+			this.textEditKeyWord.TabIndex = 3;
+			this.textEditKeyWord.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnKeywordEditKeyDown);
+			// 
+			// buttonXRefresh
+			// 
+			this.buttonXRefresh.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXRefresh.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXRefresh.Location = new System.Drawing.Point(5, 10);
+			this.buttonXRefresh.Name = "buttonXRefresh";
+			this.buttonXRefresh.Size = new System.Drawing.Size(141, 30);
+			this.buttonXRefresh.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXRefresh.TabIndex = 4;
+			this.buttonXRefresh.Text = "Refresh";
+			this.buttonXRefresh.Click += new System.EventHandler(this.OnRefreshRegularFilesClick);
 			// 
 			// circularProgressTreeView
 			// 
@@ -572,22 +478,373 @@
 			// 
 			// 
 			this.circularProgressTreeView.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.circularProgressTreeView.Dock = System.Windows.Forms.DockStyle.Left;
 			this.circularProgressTreeView.FocusCuesEnabled = false;
-			this.circularProgressTreeView.Location = new System.Drawing.Point(5, 5);
+			this.circularProgressTreeView.Location = new System.Drawing.Point(10, 450);
 			this.circularProgressTreeView.Name = "circularProgressTreeView";
 			this.circularProgressTreeView.ProgressBarType = DevComponents.DotNetBar.eCircularProgressType.Dot;
 			this.circularProgressTreeView.ProgressTextFormat = "";
-			this.circularProgressTreeView.Size = new System.Drawing.Size(63, 30);
+			this.circularProgressTreeView.Size = new System.Drawing.Size(40, 40);
 			this.circularProgressTreeView.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP;
 			this.circularProgressTreeView.TabIndex = 1;
+			// 
+			// layoutControlGroupRoot
+			// 
+			this.layoutControlGroupRoot.AllowHtmlStringInCaption = true;
+			this.layoutControlGroupRoot.AppearanceGroup.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlGroupRoot.AppearanceGroup.Options.UseFont = true;
+			this.layoutControlGroupRoot.AppearanceItemCaption.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlGroupRoot.AppearanceItemCaption.Options.UseFont = true;
+			this.layoutControlGroupRoot.AppearanceTabPage.Header.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlGroupRoot.AppearanceTabPage.Header.Options.UseFont = true;
+			this.layoutControlGroupRoot.AppearanceTabPage.HeaderActive.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlGroupRoot.AppearanceTabPage.HeaderActive.Options.UseFont = true;
+			this.layoutControlGroupRoot.AppearanceTabPage.HeaderDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlGroupRoot.AppearanceTabPage.HeaderDisabled.Options.UseFont = true;
+			this.layoutControlGroupRoot.AppearanceTabPage.HeaderHotTracked.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlGroupRoot.AppearanceTabPage.HeaderHotTracked.Options.UseFont = true;
+			this.layoutControlGroupRoot.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+			this.layoutControlGroupRoot.GroupBordersVisible = false;
+			this.layoutControlGroupRoot.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItemRefresh,
+            this.layoutControlGroupProgress,
+            this.layoutControlGroupFiles});
+			this.layoutControlGroupRoot.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlGroupRoot.Name = "Root";
+			this.layoutControlGroupRoot.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+			this.layoutControlGroupRoot.Size = new System.Drawing.Size(299, 500);
+			this.layoutControlGroupRoot.TextVisible = false;
+			// 
+			// layoutControlItemRefresh
+			// 
+			this.layoutControlItemRefresh.Control = this.buttonXRefresh;
+			this.layoutControlItemRefresh.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+			this.layoutControlItemRefresh.FillControlToClientArea = false;
+			this.layoutControlItemRefresh.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlItemRefresh.MaxSize = new System.Drawing.Size(0, 50);
+			this.layoutControlItemRefresh.MinSize = new System.Drawing.Size(263, 50);
+			this.layoutControlItemRefresh.Name = "layoutControlItemRefresh";
+			this.layoutControlItemRefresh.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 10, 10, 10);
+			this.layoutControlItemRefresh.Size = new System.Drawing.Size(299, 50);
+			this.layoutControlItemRefresh.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.layoutControlItemRefresh.Text = "Double Click to Open";
+			this.layoutControlItemRefresh.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
+			this.layoutControlItemRefresh.TextLocation = DevExpress.Utils.Locations.Right;
+			this.layoutControlItemRefresh.TextSize = new System.Drawing.Size(123, 16);
+			this.layoutControlItemRefresh.TextToControlDistance = 20;
+			this.layoutControlItemRefresh.TrimClientAreaToControl = false;
+			// 
+			// layoutControlGroupProgress
+			// 
+			this.layoutControlGroupProgress.GroupBordersVisible = false;
+			this.layoutControlGroupProgress.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItemProgressTreeView,
+            this.layoutControlItemProgressTitle});
+			this.layoutControlGroupProgress.Location = new System.Drawing.Point(0, 440);
+			this.layoutControlGroupProgress.Name = "layoutControlGroupProgress";
+			this.layoutControlGroupProgress.Size = new System.Drawing.Size(299, 60);
+			this.layoutControlGroupProgress.Text = "Progress";
+			this.layoutControlGroupProgress.TextVisible = false;
+			this.layoutControlGroupProgress.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+			// 
+			// layoutControlItemProgressTreeView
+			// 
+			this.layoutControlItemProgressTreeView.Control = this.circularProgressTreeView;
+			this.layoutControlItemProgressTreeView.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+			this.layoutControlItemProgressTreeView.FillControlToClientArea = false;
+			this.layoutControlItemProgressTreeView.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlItemProgressTreeView.MaxSize = new System.Drawing.Size(60, 60);
+			this.layoutControlItemProgressTreeView.MinSize = new System.Drawing.Size(60, 60);
+			this.layoutControlItemProgressTreeView.Name = "layoutControlItemProgressTreeView";
+			this.layoutControlItemProgressTreeView.Padding = new DevExpress.XtraLayout.Utils.Padding(10, 10, 10, 10);
+			this.layoutControlItemProgressTreeView.Size = new System.Drawing.Size(60, 60);
+			this.layoutControlItemProgressTreeView.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.layoutControlItemProgressTreeView.Text = "Progress";
+			this.layoutControlItemProgressTreeView.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemProgressTreeView.TextVisible = false;
+			this.layoutControlItemProgressTreeView.TrimClientAreaToControl = false;
+			// 
+			// layoutControlItemProgressTitle
+			// 
+			this.layoutControlItemProgressTitle.Control = this.labelControlProgress;
+			this.layoutControlItemProgressTitle.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+			this.layoutControlItemProgressTitle.FillControlToClientArea = false;
+			this.layoutControlItemProgressTitle.Location = new System.Drawing.Point(60, 0);
+			this.layoutControlItemProgressTitle.Name = "layoutControlItemProgressTitle";
+			this.layoutControlItemProgressTitle.Padding = new DevExpress.XtraLayout.Utils.Padding(10, 2, 2, 2);
+			this.layoutControlItemProgressTitle.Size = new System.Drawing.Size(239, 60);
+			this.layoutControlItemProgressTitle.Text = "Progress Title";
+			this.layoutControlItemProgressTitle.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemProgressTitle.TextVisible = false;
+			this.layoutControlItemProgressTitle.TrimClientAreaToControl = false;
+			// 
+			// layoutControlGroupFiles
+			// 
+			this.layoutControlGroupFiles.GroupBordersVisible = false;
+			this.layoutControlGroupFiles.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.tabbedControlGroupFiles});
+			this.layoutControlGroupFiles.Location = new System.Drawing.Point(0, 50);
+			this.layoutControlGroupFiles.Name = "layoutControlGroupFiles";
+			this.layoutControlGroupFiles.Size = new System.Drawing.Size(299, 390);
+			this.layoutControlGroupFiles.Text = "Files";
+			this.layoutControlGroupFiles.TextVisible = false;
+			// 
+			// tabbedControlGroupFiles
+			// 
+			this.tabbedControlGroupFiles.Location = new System.Drawing.Point(0, 0);
+			this.tabbedControlGroupFiles.Name = "tabbedControlGroupFiles";
+			this.tabbedControlGroupFiles.SelectedTabPage = this.layoutControlGroupRegularFiles;
+			this.tabbedControlGroupFiles.SelectedTabPageIndex = 0;
+			this.tabbedControlGroupFiles.Size = new System.Drawing.Size(299, 390);
+			this.tabbedControlGroupFiles.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlGroupRegularFiles,
+            this.layoutControlGroupExternalFiles,
+            this.layoutControlGroupSearchFiles});
+			this.tabbedControlGroupFiles.Text = "Files";
+			this.tabbedControlGroupFiles.SelectedPageChanged += new DevExpress.XtraLayout.LayoutTabPageChangedEventHandler(this.OnSelectedPageChanged);
+			// 
+			// layoutControlGroupSearchFiles
+			// 
+			this.layoutControlGroupSearchFiles.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.emptySpaceItem2,
+            this.layoutControlItemKeyWord,
+            this.layoutControlItemEanbleDateRange,
+            this.emptySpaceItem4,
+            this.layoutControlItemSearchButton,
+            this.emptySpaceItem5,
+            this.layoutControlItemSearchFiles,
+            this.layoutControlGroupDateRangeWrapper});
+			this.layoutControlGroupSearchFiles.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlGroupSearchFiles.Name = "layoutControlGroupSearchFiles";
+			this.layoutControlGroupSearchFiles.Size = new System.Drawing.Size(275, 341);
+			this.layoutControlGroupSearchFiles.Text = "Search";
+			// 
+			// emptySpaceItem2
+			// 
+			this.emptySpaceItem2.AllowHotTrack = false;
+			this.emptySpaceItem2.Location = new System.Drawing.Point(0, 26);
+			this.emptySpaceItem2.MaxSize = new System.Drawing.Size(0, 10);
+			this.emptySpaceItem2.MinSize = new System.Drawing.Size(10, 10);
+			this.emptySpaceItem2.Name = "emptySpaceItem2";
+			this.emptySpaceItem2.Size = new System.Drawing.Size(275, 10);
+			this.emptySpaceItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// layoutControlItemKeyWord
+			// 
+			this.layoutControlItemKeyWord.Control = this.textEditKeyWord;
+			this.layoutControlItemKeyWord.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+			this.layoutControlItemKeyWord.FillControlToClientArea = false;
+			this.layoutControlItemKeyWord.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlItemKeyWord.Name = "layoutControlItemKeyWord";
+			this.layoutControlItemKeyWord.Size = new System.Drawing.Size(275, 26);
+			this.layoutControlItemKeyWord.Text = "Keyword";
+			this.layoutControlItemKeyWord.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemKeyWord.TextVisible = false;
+			this.layoutControlItemKeyWord.TrimClientAreaToControl = false;
+			// 
+			// layoutControlItemEanbleDateRange
+			// 
+			this.layoutControlItemEanbleDateRange.Control = this.checkEditDateRange;
+			this.layoutControlItemEanbleDateRange.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+			this.layoutControlItemEanbleDateRange.FillControlToClientArea = false;
+			this.layoutControlItemEanbleDateRange.Location = new System.Drawing.Point(0, 36);
+			this.layoutControlItemEanbleDateRange.Name = "layoutControlItemEanbleDateRange";
+			this.layoutControlItemEanbleDateRange.Size = new System.Drawing.Size(126, 30);
+			this.layoutControlItemEanbleDateRange.Text = "Enable Date Range";
+			this.layoutControlItemEanbleDateRange.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemEanbleDateRange.TextVisible = false;
+			this.layoutControlItemEanbleDateRange.TrimClientAreaToControl = false;
+			// 
+			// emptySpaceItem4
+			// 
+			this.emptySpaceItem4.AllowHotTrack = false;
+			this.emptySpaceItem4.Location = new System.Drawing.Point(126, 36);
+			this.emptySpaceItem4.Name = "emptySpaceItem4";
+			this.emptySpaceItem4.Size = new System.Drawing.Size(38, 30);
+			this.emptySpaceItem4.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// layoutControlItemSearchButton
+			// 
+			this.layoutControlItemSearchButton.Control = this.buttonXSearch;
+			this.layoutControlItemSearchButton.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+			this.layoutControlItemSearchButton.FillControlToClientArea = false;
+			this.layoutControlItemSearchButton.Location = new System.Drawing.Point(164, 36);
+			this.layoutControlItemSearchButton.MinSize = new System.Drawing.Size(104, 30);
+			this.layoutControlItemSearchButton.Name = "layoutControlItemSearchButton";
+			this.layoutControlItemSearchButton.Size = new System.Drawing.Size(111, 30);
+			this.layoutControlItemSearchButton.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.layoutControlItemSearchButton.Text = "Search Button";
+			this.layoutControlItemSearchButton.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemSearchButton.TextVisible = false;
+			this.layoutControlItemSearchButton.TrimClientAreaToControl = false;
+			// 
+			// emptySpaceItem5
+			// 
+			this.emptySpaceItem5.AllowHotTrack = false;
+			this.emptySpaceItem5.Location = new System.Drawing.Point(0, 162);
+			this.emptySpaceItem5.MaxSize = new System.Drawing.Size(0, 10);
+			this.emptySpaceItem5.MinSize = new System.Drawing.Size(10, 10);
+			this.emptySpaceItem5.Name = "emptySpaceItem5";
+			this.emptySpaceItem5.Size = new System.Drawing.Size(275, 10);
+			this.emptySpaceItem5.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem5.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// layoutControlItemSearchFiles
+			// 
+			this.layoutControlItemSearchFiles.Control = this.treeListSearchFiles;
+			this.layoutControlItemSearchFiles.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+			this.layoutControlItemSearchFiles.FillControlToClientArea = false;
+			this.layoutControlItemSearchFiles.Location = new System.Drawing.Point(0, 172);
+			this.layoutControlItemSearchFiles.Name = "layoutControlItemSearchFiles";
+			this.layoutControlItemSearchFiles.Size = new System.Drawing.Size(275, 169);
+			this.layoutControlItemSearchFiles.Text = "Search Files";
+			this.layoutControlItemSearchFiles.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemSearchFiles.TextVisible = false;
+			this.layoutControlItemSearchFiles.TrimClientAreaToControl = false;
+			// 
+			// layoutControlGroupDateRangeWrapper
+			// 
+			this.layoutControlGroupDateRangeWrapper.GroupBordersVisible = false;
+			this.layoutControlGroupDateRangeWrapper.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.emptySpaceItem3,
+            this.layoutControlGroupDateRange});
+			this.layoutControlGroupDateRangeWrapper.Location = new System.Drawing.Point(0, 66);
+			this.layoutControlGroupDateRangeWrapper.Name = "layoutControlGroupDateRangeWrapper";
+			this.layoutControlGroupDateRangeWrapper.Size = new System.Drawing.Size(275, 96);
+			this.layoutControlGroupDateRangeWrapper.Text = "Date Range Wrapper";
+			this.layoutControlGroupDateRangeWrapper.TextVisible = false;
+			this.layoutControlGroupDateRangeWrapper.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+			// 
+			// emptySpaceItem3
+			// 
+			this.emptySpaceItem3.AllowHotTrack = false;
+			this.emptySpaceItem3.Location = new System.Drawing.Point(0, 0);
+			this.emptySpaceItem3.MaxSize = new System.Drawing.Size(0, 10);
+			this.emptySpaceItem3.MinSize = new System.Drawing.Size(10, 10);
+			this.emptySpaceItem3.Name = "emptySpaceItem3";
+			this.emptySpaceItem3.Size = new System.Drawing.Size(275, 10);
+			this.emptySpaceItem3.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem3.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// layoutControlGroupDateRange
+			// 
+			this.layoutControlGroupDateRange.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItemStartDate,
+            this.emptySpaceItem6,
+            this.layoutControlItemEndDate});
+			this.layoutControlGroupDateRange.Location = new System.Drawing.Point(0, 10);
+			this.layoutControlGroupDateRange.Name = "layoutControlGroupDateRange";
+			this.layoutControlGroupDateRange.Size = new System.Drawing.Size(275, 86);
+			this.layoutControlGroupDateRange.Text = "Date Range";
+			this.layoutControlGroupDateRange.TextVisible = false;
+			// 
+			// layoutControlItemStartDate
+			// 
+			this.layoutControlItemStartDate.Control = this.dateEditStartDate;
+			this.layoutControlItemStartDate.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlItemStartDate.Name = "layoutControlItemStartDate";
+			this.layoutControlItemStartDate.Size = new System.Drawing.Size(251, 26);
+			this.layoutControlItemStartDate.Text = "Start Date";
+			this.layoutControlItemStartDate.TextSize = new System.Drawing.Size(59, 16);
+			// 
+			// emptySpaceItem6
+			// 
+			this.emptySpaceItem6.AllowHotTrack = false;
+			this.emptySpaceItem6.Location = new System.Drawing.Point(0, 26);
+			this.emptySpaceItem6.MaxSize = new System.Drawing.Size(0, 10);
+			this.emptySpaceItem6.MinSize = new System.Drawing.Size(10, 10);
+			this.emptySpaceItem6.Name = "emptySpaceItem6";
+			this.emptySpaceItem6.Size = new System.Drawing.Size(251, 10);
+			this.emptySpaceItem6.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem6.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// layoutControlItemEndDate
+			// 
+			this.layoutControlItemEndDate.Control = this.dateEditEndDate;
+			this.layoutControlItemEndDate.Location = new System.Drawing.Point(0, 36);
+			this.layoutControlItemEndDate.Name = "layoutControlItemEndDate";
+			this.layoutControlItemEndDate.Size = new System.Drawing.Size(251, 26);
+			this.layoutControlItemEndDate.Text = "End Date";
+			this.layoutControlItemEndDate.TextSize = new System.Drawing.Size(59, 16);
+			// 
+			// layoutControlGroupRegularFiles
+			// 
+			this.layoutControlGroupRegularFiles.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItemRegularFiles});
+			this.layoutControlGroupRegularFiles.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlGroupRegularFiles.Name = "layoutControlGroupRegularFiles";
+			this.layoutControlGroupRegularFiles.Size = new System.Drawing.Size(275, 341);
+			this.layoutControlGroupRegularFiles.Text = "Source Directory";
+			// 
+			// layoutControlItemRegularFiles
+			// 
+			this.layoutControlItemRegularFiles.Control = this.treeListRegularFiles;
+			this.layoutControlItemRegularFiles.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+			this.layoutControlItemRegularFiles.FillControlToClientArea = false;
+			this.layoutControlItemRegularFiles.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlItemRegularFiles.Name = "layoutControlItemRegularFiles";
+			this.layoutControlItemRegularFiles.Size = new System.Drawing.Size(275, 341);
+			this.layoutControlItemRegularFiles.Text = "Regular Files";
+			this.layoutControlItemRegularFiles.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemRegularFiles.TextVisible = false;
+			this.layoutControlItemRegularFiles.TrimClientAreaToControl = false;
+			// 
+			// layoutControlGroupExternalFiles
+			// 
+			this.layoutControlGroupExternalFiles.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItemExternalFiles});
+			this.layoutControlGroupExternalFiles.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlGroupExternalFiles.Name = "layoutControlGroupExternalFiles";
+			this.layoutControlGroupExternalFiles.Size = new System.Drawing.Size(275, 341);
+			this.layoutControlGroupExternalFiles.Text = "Computer";
+			// 
+			// layoutControlItemExternalFiles
+			// 
+			this.layoutControlItemExternalFiles.Control = this.treeListExternalFiles;
+			this.layoutControlItemExternalFiles.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+			this.layoutControlItemExternalFiles.FillControlToClientArea = false;
+			this.layoutControlItemExternalFiles.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlItemExternalFiles.Name = "layoutControlItemExternalFiles";
+			this.layoutControlItemExternalFiles.Size = new System.Drawing.Size(275, 341);
+			this.layoutControlItemExternalFiles.Text = "External Files";
+			this.layoutControlItemExternalFiles.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemExternalFiles.TextVisible = false;
+			this.layoutControlItemExternalFiles.TrimClientAreaToControl = false;
+			// 
+			// styleController
+			// 
+			this.styleController.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.styleController.Appearance.Options.UseFont = true;
+			// 
+			// contextMenuStripFile
+			// 
+			this.contextMenuStripFile.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tmiFileOpen,
+            this.tmiFileDelete});
+			this.contextMenuStripFile.Name = "contextMenuStrip";
+			this.contextMenuStripFile.ShowImageMargin = false;
+			this.contextMenuStripFile.Size = new System.Drawing.Size(176, 48);
+			// 
+			// tmiFileOpen
+			// 
+			this.tmiFileOpen.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.tmiFileOpen.Name = "tmiFileOpen";
+			this.tmiFileOpen.Size = new System.Drawing.Size(175, 22);
+			this.tmiFileOpen.Text = "Open";
+			this.tmiFileOpen.Click += new System.EventHandler(this.OnMenuItemFileOpenClick);
+			// 
+			// tmiFileDelete
+			// 
+			this.tmiFileDelete.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.tmiFileDelete.Name = "tmiFileDelete";
+			this.tmiFileDelete.Size = new System.Drawing.Size(175, 22);
+			this.tmiFileDelete.Text = "Delete this source file";
+			this.tmiFileDelete.Click += new System.EventHandler(this.OnMenuItemFileDeleteClick);
 			// 
 			// pnMain
 			// 
 			this.pnMain.BackColor = System.Drawing.Color.Transparent;
-			this.pnMain.Controls.Add(this.xtraTabControlFiles);
-			this.pnMain.Controls.Add(this.pnTreeViewProgress);
-			this.pnMain.Controls.Add(this.pnRefresh);
+			this.pnMain.Controls.Add(this.layoutControl);
 			this.pnMain.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pnMain.Location = new System.Drawing.Point(0, 0);
 			this.pnMain.Name = "pnMain";
@@ -612,6 +869,7 @@
 			// 
 			// DataSourceTreeViewControl
 			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.BackColor = System.Drawing.Color.White;
 			this.Controls.Add(this.pnMain);
@@ -620,27 +878,42 @@
 			this.Size = new System.Drawing.Size(299, 500);
 			((System.ComponentModel.ISupportInitialize)(this.treeListRegularFiles)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.treeListSearchFiles)).EndInit();
-			this.pnKeyWord.ResumeLayout(false);
-			this.pnKeyWord.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.groupControlDateRange)).EndInit();
-			this.groupControlDateRange.ResumeLayout(false);
-			this.groupControlDateRange.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dateEditEndDate.Properties.CalendarTimeProperties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.dateEditEndDate.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControl)).EndInit();
+			this.layoutControl.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.treeListExternalFiles)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.dateEditStartDate.Properties.CalendarTimeProperties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.dateEditStartDate.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditDateRange.Properties)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditKeyWord.Properties)).EndInit();
-			this.pnRefresh.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupRoot)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemRefresh)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupProgress)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemProgressTreeView)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemProgressTitle)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupFiles)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.tabbedControlGroupFiles)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupSearchFiles)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemKeyWord)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemEanbleDateRange)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem4)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemSearchButton)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem5)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemSearchFiles)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupDateRangeWrapper)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupDateRange)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemStartDate)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem6)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemEndDate)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupRegularFiles)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemRegularFiles)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupExternalFiles)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemExternalFiles)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			this.contextMenuStripFile.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlFiles)).EndInit();
-			this.xtraTabControlFiles.ResumeLayout(false);
-			this.xtraTabPageRegular.ResumeLayout(false);
-			this.xtraTabPageExternal.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.treeListExternalFiles)).EndInit();
-			this.xtraTabPageSearch.ResumeLayout(false);
-			this.pnTreeViewProgress.ResumeLayout(false);
 			this.pnMain.ResumeLayout(false);
 			this.contextMenuStripFolder.ResumeLayout(false);
 			this.ResumeLayout(false);
@@ -648,14 +921,8 @@
         }
 
         #endregion
-
-		private System.Windows.Forms.Panel pnKeyWord;
-        private System.Windows.Forms.Panel pnRefresh;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripFile;
         private System.Windows.Forms.ToolStripMenuItem tmiFileOpen;
-		private System.Windows.Forms.Label laDoubleClick;
-        private System.Windows.Forms.Label laEndDate;
-        private System.Windows.Forms.Label laStartDate;
         private System.Windows.Forms.ImageList imageListFiles;
         private DevExpress.XtraTreeList.TreeList treeListRegularFiles;
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumnName;
@@ -663,9 +930,6 @@
         private DevExpress.XtraTreeList.TreeList treeListSearchFiles;
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn1;
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn2;
-        private DevExpress.XtraTab.XtraTabControl xtraTabControlFiles;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPageRegular;
-		private DevExpress.XtraTab.XtraTabPage xtraTabPageSearch;
 		private System.Windows.Forms.Panel pnMain;
         private DevExpress.XtraEditors.StyleController styleController;
         private DevExpress.XtraEditors.CheckEdit checkEditDateRange;
@@ -674,16 +938,39 @@
 		private DevExpress.XtraEditors.DateEdit dateEditStartDate;
 		private DevComponents.DotNetBar.ButtonX buttonXSearch;
 		private DevComponents.DotNetBar.ButtonX buttonXRefresh;
-		private System.Windows.Forms.Panel pnTreeViewProgress;
-		private System.Windows.Forms.Label laTreeViewProgressLabel;
 		private DevComponents.DotNetBar.Controls.CircularProgress circularProgressTreeView;
-		private DevExpress.XtraEditors.GroupControl groupControlDateRange;
 		private System.Windows.Forms.ToolStripMenuItem tmiFileDelete;
 		private System.Windows.Forms.ContextMenuStrip contextMenuStripFolder;
 		private System.Windows.Forms.ToolStripMenuItem tmiFolderCreate;
-		private DevExpress.XtraTab.XtraTabPage xtraTabPageExternal;
 		private DevExpress.XtraTreeList.TreeList treeListExternalFiles;
 		private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn3;
 		private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn4;
+		private DevExpress.XtraLayout.LayoutControl layoutControl;
+		private DevExpress.XtraEditors.LabelControl labelControlProgress;
+		private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroupRoot;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemRefresh;
+		private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroupProgress;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemProgressTreeView;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemProgressTitle;
+		private DevExpress.XtraLayout.TabbedControlGroup tabbedControlGroupFiles;
+		private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroupSearchFiles;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemKeyWord;
+		private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroupRegularFiles;
+		private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroupExternalFiles;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem3;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemEanbleDateRange;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemRegularFiles;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemExternalFiles;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem4;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemSearchButton;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem5;
+		private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroupDateRange;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemStartDate;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem6;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemEndDate;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemSearchFiles;
+		private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroupFiles;
+		private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroupDateRangeWrapper;
 	}
 }

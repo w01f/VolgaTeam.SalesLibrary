@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
@@ -21,20 +20,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 		{
 			InitializeComponent();
 			Dock = DockStyle.Fill;
-			if (CreateGraphics().DpiX > 96)
-			{
-				var font = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2,
-					styleController.Appearance.Font.Style);
-				styleController.Appearance.Font = font;
-				styleController.AppearanceDisabled.Font = font;
-				styleController.AppearanceDropDown.Font = font;
-				styleController.AppearanceDropDownHeader.Font = font;
-				styleController.AppearanceFocused.Font = font;
-				styleController.AppearanceReadOnly.Font = font;
-
-				laLinkName.Font = new Font(laLinkName.Font.FontFamily, laLinkName.Font.Size - 2, laLinkName.Font.Style);
-				laLinkType.Font = new Font(laLinkType.Font.FontFamily, laLinkType.Font.Size - 2, laLinkType.Font.Style);
-			}
 		}
 
 		public void InitControl()

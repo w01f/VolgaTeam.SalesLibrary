@@ -111,8 +111,6 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		public virtual string AutoWidgetKey => String.Empty;
 		#endregion
 
-		protected virtual void AfterCreate() { }
-
 		public override void BeforeSave()
 		{
 			if (NeedToSave)

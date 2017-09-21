@@ -1,5 +1,7 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
+using SalesLibraries.Common.Helpers;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.ImageGallery
 {
@@ -8,7 +10,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.ImageGallery
 		public GalleryTreeView()
 		{
 			DrawMode = TreeViewDrawMode.OwnerDrawText;
-			ItemHeight = 25;
+			ItemHeight = (Int32)(25f * Utils.GetScaleFactor(CreateGraphics().DpiX).Height);
 			HideSelection = false;
 			Cursor = Cursors.Hand;
 			ShowLines = false;

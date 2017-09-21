@@ -34,18 +34,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Singl
 
 			Text = RevenueItem.ItemName;
 
-			if (CreateGraphics().DpiX > 96)
-			{
-				var font = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2,
-					styleController.Appearance.Font.Style);
-				styleController.Appearance.Font = font;
-				styleController.AppearanceDisabled.Font = font;
-				styleController.AppearanceDropDown.Font = font;
-				styleController.AppearanceDropDownHeader.Font = font;
-				styleController.AppearanceFocused.Font = font;
-				styleController.AppearanceReadOnly.Font = font;
-			}
-
 			var itemId = 100;
 			foreach (var infoType in RevenueInfo.AvailableInfoTypes)
 			{
@@ -164,13 +152,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Singl
 
 		private void OnAdditionalInfoCheckedChanged(object sender, EventArgs e)
 		{
-			memoEditAdditionalInfo.Enabled = checkEditAdditionalInfo.Checked;
-			labelControlTextColor.Enabled = checkEditAdditionalInfo.Checked;
-			colorEditTextColor.Enabled = checkEditAdditionalInfo.Checked;
-			labelControlBackColor.Enabled = checkEditAdditionalInfo.Checked;
-			colorEditBackColor.Enabled = checkEditAdditionalInfo.Checked;
-			labelControlTextFont.Enabled = checkEditAdditionalInfo.Checked;
-			buttonEditTextFont.Enabled = checkEditAdditionalInfo.Checked;
+			layoutControlItemAdditionalInfoEditor.Enabled = checkEditAdditionalInfo.Checked;
+			layoutControlItemTextColor.Enabled = checkEditAdditionalInfo.Checked;
+			layoutControlItemBackColor.Enabled = checkEditAdditionalInfo.Checked;
+			layoutControlItemTextFont.Enabled = checkEditAdditionalInfo.Checked;
 			if (!checkEditAdditionalInfo.Checked)
 				memoEditAdditionalInfo.EditValue = null;
 		}

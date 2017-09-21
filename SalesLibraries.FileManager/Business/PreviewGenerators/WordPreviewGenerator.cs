@@ -18,7 +18,7 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 		{
 			var wordContainer = (WordPreviewContainer)previewContainer;
 
-			var logger = new PreviewGenerationLogger(wordContainer);
+			var logger = new FilePreviewGenerationLogger(wordContainer);
 			logger.StartLogging();
 
 			var pdfDestination = Path.Combine(wordContainer.ContainerPath, PreviewFormats.Pdf);

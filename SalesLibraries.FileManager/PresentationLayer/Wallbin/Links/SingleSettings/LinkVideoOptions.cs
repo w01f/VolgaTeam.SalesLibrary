@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using DevExpress.Skins;
+using DevExpress.XtraLayout.Utils;
 using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
@@ -31,17 +32,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			InitializeComponent();
 			Text = "Admin";
 
-			if ((CreateGraphics()).DpiX > 96)
-			{
-				var styleControllerFont = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2, styleController.Appearance.Font.Style);
-				styleController.AppearanceDisabled.Font = styleControllerFont;
-				styleController.AppearanceDropDown.Font = styleControllerFont;
-				styleController.AppearanceDropDownHeader.Font = styleControllerFont;
-				styleController.AppearanceFocused.Font = styleControllerFont;
-				styleController.AppearanceReadOnly.Font = styleControllerFont;
-				ckForcePreview.Font = new Font(ckForcePreview.Font.FontFamily, ckForcePreview.Font.Size - 2, ckForcePreview.Font.Style);
-				ckDownloadSource.Font = new Font(ckDownloadSource.Font.FontFamily, ckDownloadSource.Font.Size - 2, ckDownloadSource.Font.Style);
-			}
+			layoutControlItemRefreshPreview.MinSize = RectangleHelper.ScaleSize(layoutControlItemRefreshPreview.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemRefreshPreview.MaxSize = RectangleHelper.ScaleSize(layoutControlItemRefreshPreview.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemOpenWV.MinSize = RectangleHelper.ScaleSize(layoutControlItemOpenWV.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemOpenWV.MaxSize = RectangleHelper.ScaleSize(layoutControlItemOpenWV.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
 		public LinkVideoOptions(FileTypes? defaultLinkType = null) : this() { }
@@ -50,21 +44,21 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		{
 			_data = (VideoLink)sourceLink;
 
-			ckForcePreview.Checked = ((VideoLinkSettings)_data.Settings).ForcePreview;
-			ckDownloadSource.Checked = ((VideoLinkSettings)_data.Settings).DownloadSource;
+			checkEditForcePreview.Checked = ((VideoLinkSettings)_data.Settings).ForcePreview;
+			checkEditDownloadSource.Checked = ((VideoLinkSettings)_data.Settings).DownloadSource;
 			if (Directory.Exists(_data.PreviewContainerPath))
 			{
-				buttonXOpenWV.Enabled = true;
+				layoutControlItemOpenWV.Visibility = LayoutVisibility.Always;
 				buttonXOpenWV.Text = String.Format("!WV Folder ({0})", _data.PreviewContainerName);
 			}
 			else
-				buttonXOpenWV.Enabled = false;
+				layoutControlItemOpenWV.Visibility = LayoutVisibility.Never;
 		}
 
 		public void SaveData()
 		{
-			((VideoLinkSettings)_data.Settings).ForcePreview = ckForcePreview.Checked;
-			((VideoLinkSettings)_data.Settings).DownloadSource = ckDownloadSource.Checked;
+			((VideoLinkSettings)_data.Settings).ForcePreview = checkEditForcePreview.Checked;
+			((VideoLinkSettings)_data.Settings).DownloadSource = checkEditDownloadSource.Checked;
 		}
 
 		private void buttonXRefreshPreview_Click(object sender, EventArgs e)

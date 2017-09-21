@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using DevComponents.DotNetBar;
 using DevComponents.DotNetBar.Metro;
+using DevExpress.Skins;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.HyperLinkInfo;
+using SalesLibraries.Common.Helpers;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEdit
 {
@@ -20,20 +21,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 		public FormAddHyperLink(BaseNetworkLinkInfo initialLinkInfo = null)
 		{
 			InitializeComponent();
-
-			if (CreateGraphics().DpiX > 96)
-			{
-				buttonXUrl.Font = new Font(buttonXUrl.Font.FontFamily, buttonXUrl.Font.Size - 2, buttonXUrl.Font.Style);
-				buttonXYouTube.Font = new Font(buttonXYouTube.Font.FontFamily, buttonXYouTube.Font.Size - 2, buttonXYouTube.Font.Style);
-				buttonXVimeo.Font = new Font(buttonXVimeo.Font.FontFamily, buttonXVimeo.Font.Size - 2, buttonXVimeo.Font.Style);
-				buttonXLan.Font = new Font(buttonXLan.Font.FontFamily, buttonXLan.Font.Size - 2, buttonXLan.Font.Style);
-				buttonXQuickSite.Font = new Font(buttonXQuickSite.Font.FontFamily, buttonXQuickSite.Font.Size - 2, buttonXQuickSite.Font.Style);
-				buttonXHtml5.Font = new Font(buttonXHtml5.Font.FontFamily, buttonXHtml5.Font.Size - 2, buttonXHtml5.Font.Style);
-				buttonXApp.Font = new Font(buttonXApp.Font.FontFamily, buttonXApp.Font.Size - 2, buttonXApp.Font.Style);
-				buttonXInternal.Font = new Font(buttonXInternal.Font.FontFamily, buttonXInternal.Font.Size - 2, buttonXInternal.Font.Style);
-				buttonXSave.Font = new Font(buttonXSave.Font.FontFamily, buttonXSave.Font.Size - 2, buttonXSave.Font.Style);
-				buttonXCancel.Font = new Font(buttonXCancel.Font.FontFamily, buttonXCancel.Font.Size - 2, buttonXCancel.Font.Style);
-			}
 
 			_editorSelectors = new List<ButtonX>(new[]
 			{
@@ -59,6 +46,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 
 			if (initialLinkInfo != null)
 				SelectedEditor.ApplyDataFromTemplate(initialLinkInfo);
+
+			layoutControlItemSave.MinSize = RectangleHelper.ScaleSize(layoutControlItemSave.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemSave.MaxSize = RectangleHelper.ScaleSize(layoutControlItemSave.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCancel.MinSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCancel.MaxSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
 		private void OnSelectEditorClick(Object sender, EventArgs e)

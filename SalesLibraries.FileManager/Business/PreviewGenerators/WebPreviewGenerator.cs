@@ -16,7 +16,7 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 	{
 		public void Generate(BasePreviewContainer previewContainer, CancellationToken cancellationToken)
 		{
-			var logger = new PreviewGenerationLogger(previewContainer);
+			var logger = new UrlPreviewGenerationLogger(previewContainer);
 			logger.StartLogging();
 
 			var thumbsDestination = Path.Combine(previewContainer.ContainerPath, PreviewFormats.Thumbnails);

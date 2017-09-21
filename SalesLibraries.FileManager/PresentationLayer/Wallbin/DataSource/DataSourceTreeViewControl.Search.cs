@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.XtraLayout.Utils;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
 using SalesLibraries.Common.Configuration;
 using SalesLibraries.FileManager.Controllers;
@@ -53,10 +54,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 		{
 			treeListSearchFiles.SuspendLayout();
 			treeListSearchFiles.Nodes.Clear();
-			laTreeViewProgressLabel.Text = "Searching Files...";
-			pnTreeViewProgress.Visible = true;
+			labelControlProgress.Text = "Searching Files...";
+			layoutControlGroupProgress.Visibility = LayoutVisibility.Always;
 			circularProgressTreeView.IsRunning = true;
-			xtraTabControlFiles.Enabled = false;
+			layoutControlGroupFiles.Enabled = false;
 
 			var files = new List<FileLink>();
 			await Task.Run(() =>
@@ -64,7 +65,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 				files.AddRange(_dataSources.SelectMany(ds => SearchFileInFolder(new FolderLink() { RootId = ds.DataSourceId, Path = ds.Path }, textEditKeyWord.EditValue as String)));
 				if (files.Count <= 0) return;
 				files.Sort((x, y) => x.Name.CompareTo(y.Name));
-				Invoke(new MethodInvoker(() =>
+				MainController.Instance.MainForm.Invoke(new MethodInvoker(() =>
 				{
 					foreach (var file in files)
 					{
@@ -75,10 +76,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 				}));
 			});
 
-			pnTreeViewProgress.Visible = false;
+			layoutControlGroupProgress.Visibility = LayoutVisibility.Never;
 			circularProgressTreeView.IsRunning = false;
 			treeListSearchFiles.ResumeLayout();
-			xtraTabControlFiles.Enabled = true;
+			layoutControlGroupFiles.Enabled = true;
 			if (files.Count == 0)
 				MainController.Instance.PopupMessages.ShowInfo("Files was not found");
 		}
@@ -91,10 +92,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 
 		private void OnDateRangeCheckedChanged(object sender, EventArgs e)
 		{
-			if (checkEditDateRange.Checked)
-				pnKeyWord.Height = groupControlDateRange.Bottom + 4;
-			else
-				pnKeyWord.Height = groupControlDateRange.Top;
+			layoutControlGroupDateRangeWrapper.Visibility = checkEditDateRange.Checked ? LayoutVisibility.Always : LayoutVisibility.Never;
 		}
 	}
 }

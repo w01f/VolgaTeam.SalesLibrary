@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Drawing;
-using System.IO;
 using System.Windows.Forms;
 using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkBundleSettings;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.FileManager.Controllers;
-
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.SingleBundle
 {
@@ -22,18 +20,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Singl
 			InitializeComponent();
 
 			Text = CoverItem.ItemName;
-
-			if (CreateGraphics().DpiX > 96)
-			{
-				var font = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2,
-					styleController.Appearance.Font.Style);
-				styleController.Appearance.Font = font;
-				styleController.AppearanceDisabled.Font = font;
-				styleController.AppearanceDropDown.Font = font;
-				styleController.AppearanceDropDownHeader.Font = font;
-				styleController.AppearanceFocused.Font = font;
-				styleController.AppearanceReadOnly.Font = font;
-			}
 		}
 
 		public void LoadData()
@@ -50,7 +36,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Singl
 		{
 			_bundleItem = null;
 		}
-
 
 		private void OnImageEditClick(object sender, EventArgs e)
 		{

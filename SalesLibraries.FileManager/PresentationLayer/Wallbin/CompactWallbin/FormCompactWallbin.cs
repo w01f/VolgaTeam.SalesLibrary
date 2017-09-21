@@ -1,11 +1,12 @@
 ﻿using System;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
+using DevExpress.Skins;
+using DevExpress.XtraLayout.Utils;
 using SalesLibraries.Common.DataState;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.CommonGUI.Common;
@@ -42,13 +43,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.CompactWallbin
 
 			DataStateObserver.Instance.DataChanged += OnLinksDeleted;
 
-			if (CreateGraphics().DpiX > 96)
-			{
-				buttonXCollapse.Font = new Font(buttonXCollapse.Font.FontFamily, buttonXCollapse.Font.Size - 2, buttonXCollapse.Font.Style);
-				buttonXExpand.Font = new Font(buttonXExpand.Font.FontFamily, buttonXExpand.Font.Size - 2, buttonXExpand.Font.Style);
-				buttonXBack.Font = new Font(buttonXBack.Font.FontFamily, buttonXBack.Font.Size - 2, buttonXBack.Font.Style);
-				buttonXExit.Font = new Font(buttonXExit.Font.FontFamily, buttonXExit.Font.Size - 2, buttonXExit.Font.Style);
-			}
+			layoutControlItemSyncProgress.MinSize = RectangleHelper.ScaleSize(layoutControlItemSyncProgress.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemSyncProgress.MaxSize = RectangleHelper.ScaleSize(layoutControlItemSyncProgress.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemTreeViewProgress.MinSize = RectangleHelper.ScaleSize(layoutControlItemTreeViewProgress.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemTreeViewProgress.MaxSize = RectangleHelper.ScaleSize(layoutControlItemTreeViewProgress.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			simpleLabelItemSyncInfo.MinSize = RectangleHelper.ScaleSize(simpleLabelItemSyncInfo.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			simpleLabelItemSyncInfo.MaxSize = RectangleHelper.ScaleSize(simpleLabelItemSyncInfo.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
 		private void RaiseDataChanged()
@@ -59,8 +59,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.CompactWallbin
 
 		private void UpdateSyncInfo()
 		{
-			labelControlSyncInfo.Text = String.Format("<color=gray>Site last updated: {0}</color>", ActiveWallbin.DataStorage.Library.SyncDate?.ToString("dd/MM/yy h:mm:tt"));
-			panelSyncInfo.Visible = true;
+			simpleLabelItemSyncInfo.Text = String.Format("<color=gray>Site last updated: {0}</color>", ActiveWallbin.DataStorage.Library.SyncDate?.ToString("dd/MM/yy h:mm:tt"));
+			simpleLabelItemSyncInfo.Visibility = LayoutVisibility.Always;
 		}
 
 		private void OnBackClick(object sender, EventArgs e)
@@ -87,11 +87,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.CompactWallbin
 				MainController.Instance.PopupMessages.ShowWarning("Some of your Upload Directories are Not connected. Your changes will still be saved in your Source Directory.");
 
 			barLargeButtonItemSync.Enabled =
-				panelTop.Enabled =
-				panelMain.Enabled =
-				panelBottom.Enabled = false;
-			panelSyncInfo.Visible = false;
-			panelSyncProgress.Visible = true;
+				layoutControlGroupTreeView.Enabled =
+				layoutControlGroupBottomButtons.Enabled = false;
+			simpleLabelItemSyncInfo.Visibility = LayoutVisibility.Never;
+			layoutControlGroupSyncProgress.Visibility = LayoutVisibility.Always;
 			circularProgressSyncProgress.IsRunning = true;
 
 			var cancellationTokenSource = new CancellationTokenSource();
@@ -108,11 +107,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.CompactWallbin
 			}
 
 			circularProgressSyncProgress.IsRunning = false;
-			panelSyncProgress.Visible = false;
+			layoutControlGroupSyncProgress.Visibility = LayoutVisibility.Never;
 			barLargeButtonItemSync.Enabled =
-			panelTop.Enabled =
-			panelMain.Enabled =
-			panelBottom.Enabled = true;
+				layoutControlGroupTreeView.Enabled =
+				layoutControlGroupBottomButtons.Enabled = true;
 			UpdateSyncInfo();
 		}
 

@@ -8,6 +8,7 @@ using SalesLibraries.Business.Contexts.Wallbin;
 using SalesLibraries.Business.Entities.Common;
 using SalesLibraries.Business.Entities.Helpers;
 using SalesLibraries.Business.Entities.Interfaces;
+using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers;
@@ -17,6 +18,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 	public class Library : WallbinEntity, IDataSource
 	{
 		#region Persistent Properties
+
 		public DateTime? SyncDate { get; set; }
 		public string SettingsEncoded { get; set; }
 		public string SyncSettingsEncoded { get; set; }
@@ -24,10 +26,14 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 		public virtual ICollection<LibraryPage> Pages { get; set; }
 		public virtual ICollection<BasePreviewContainer> PreviewContainers { get; set; }
 		public virtual ICollection<LinkBundle> LinkBundles { get; set; }
+		public virtual ICollection<LinkActionLog> LinkActions { get; set; }
+
 		#endregion
 
 		#region Nonpersistent Properties
+
 		private LibrarySettings _settings;
+
 		[NotMapped, JsonIgnore]
 		public LibrarySettings Settings
 		{
@@ -36,14 +42,19 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 		}
 
 		private SyncSettings _syncSettings;
+
 		[NotMapped, JsonIgnore]
 		public SyncSettings SyncSettings
 		{
-			get { return _syncSettings ?? (_syncSettings = SettingsContainer.CreateInstance<SyncSettings>(this, SyncSettingsEncoded)); }
+			get
+			{
+				return _syncSettings ?? (_syncSettings = SettingsContainer.CreateInstance<SyncSettings>(this, SyncSettingsEncoded));
+			}
 			set { _syncSettings = value; }
 		}
 
 		private CalendarSettings _calendar;
+
 		[NotMapped, JsonIgnore]
 		public CalendarSettings Calendar
 		{
@@ -73,6 +84,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 			Pages = new List<LibraryPage>();
 			PreviewContainers = new List<BasePreviewContainer>();
 			LinkBundles = new List<LinkBundle>();
+			LinkActions = new List<LinkActionLog>();
 		}
 
 		public override void BeforeSave()
@@ -89,6 +101,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 				previewContainer.BeforeSave();
 			foreach (var linkBundle in LinkBundles)
 				linkBundle.BeforeSave();
+			foreach (var linkActionLog in LinkActions)
+				linkActionLog.BeforeSave();
 			base.BeforeSave();
 		}
 
@@ -110,7 +124,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 			base.Save(context, current, withCommit);
 		}
 
-		public override void ResetParent() { }
+		public override void ResetParent()
+		{
+		}
 
 		public string GetRootPath()
 		{
@@ -118,6 +134,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 		}
 
 		#region Page Processing
+
 		public void AddPage()
 		{
 			var page = CreateEntity<LibraryPage>(p =>
@@ -128,16 +145,20 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 			Pages.AddItem(page);
 			page.Name = String.Format("Page {0}", page.Order + 1);
 		}
+
 		#endregion
 
 		#region Data Sorces Processing
+
 		public IEnumerable<IDataSource> GetDataSources()
 		{
 			return new[] { (IDataSource)this };
 		}
+
 		#endregion
 
 		#region Preview Container Processing
+
 		public IEnumerable<IPreviewableLink> GetPreviewableLinksBySourcePath(string sourcePath, bool onlyTopLevel = false)
 		{
 			return Pages
@@ -161,9 +182,11 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 			}
 			return previewContainer;
 		}
+
 		#endregion
 
 		#region Links Processing
+
 		public TLink GetLinkById<TLink>(Guid extId, bool onlyTopLevel = false) where TLink : BaseLibraryLink
 		{
 			return Pages
@@ -178,9 +201,11 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 				.SelectMany(p => onlyTopLevel ? p.TopLevelLinks : p.AllGroupLinks)
 				.FirstOrDefault(link => link.ExtId == extId);
 		}
+
 		#endregion
 
 		#region Link Bundles processing
+
 		public void AddLinkBundle(string name)
 		{
 			var linkBundle = CreateEntity<LinkBundle>(bundle =>
@@ -191,6 +216,34 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 			LinkBundles.AddItem(linkBundle);
 			linkBundle.Name = name;
 			MarkAsModified();
+		}
+
+		#endregion
+
+		#region Link Action Log Processing
+
+		public void LogLinklAction(LinkActionType actionType, BaseLibraryLink link)
+		{
+			var linkAction = new LinkActionLog();
+			linkAction.Library = this;
+			linkAction.ActionType = actionType;
+			linkAction.Order = LinkActions.Count;
+			linkAction.Settings.ExtId = link.ExtId;
+			linkAction.Settings.Name = link.LinkInfoDisplayName;
+			if (link is LibraryObjectLink)
+				linkAction.Settings.Path = ((LibraryObjectLink)link).FullPath;
+			LinkActions.AddItem(linkAction);
+		}
+
+		public void ClearLinkActionLog()
+		{
+			var actionLog = LinkActions.ToList();
+			foreach (var linkActionLog in actionLog)
+			{
+				linkActionLog.Delete(Context);
+				LinkActions.RemoveItem(linkActionLog);
+				linkActionLog.ResetParent();
+			}
 		}
 		#endregion
 

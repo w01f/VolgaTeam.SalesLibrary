@@ -31,20 +31,43 @@
 			this.components = new System.ComponentModel.Container();
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.styleController1 = new DevExpress.XtraEditors.StyleController(this.components);
-			this.checkEditBold = new DevExpress.XtraEditors.CheckEdit();
-			this.textEditName = new DevExpress.XtraEditors.TextEdit();
-			this.laPath = new System.Windows.Forms.Label();
-			this.laName = new System.Windows.Forms.Label();
-			this.textEditPath = new DevExpress.XtraEditors.TextEdit();
+			this.layoutControl = new DevExpress.XtraLayout.LayoutControl();
 			this.checkEditForcePreview = new DevExpress.XtraEditors.CheckEdit();
 			this.checkEditBlueHyperlink = new DevExpress.XtraEditors.CheckEdit();
+			this.checkEditBold = new DevExpress.XtraEditors.CheckEdit();
+			this.textEditName = new DevExpress.XtraEditors.TextEdit();
+			this.textEditPath = new DevExpress.XtraEditors.TextEdit();
+			this.layoutControlGroupRoot = new DevExpress.XtraLayout.LayoutControlGroup();
+			this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.layoutControlItemLinkName = new DevExpress.XtraLayout.LayoutControlItem();
+			this.layoutControlItemPath = new DevExpress.XtraLayout.LayoutControlItem();
+			this.emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.emptySpaceItem4 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.layoutControlItemBlueHyperlink = new DevExpress.XtraLayout.LayoutControlItem();
+			this.layoutControlItemBold = new DevExpress.XtraLayout.LayoutControlItem();
+			this.emptySpaceItem5 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.layoutControlItemForcePreview = new DevExpress.XtraLayout.LayoutControlItem();
+			this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControl)).BeginInit();
+			this.layoutControl.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditForcePreview.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditBlueHyperlink.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditBold.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditName.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditPath.Properties)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditForcePreview.Properties)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditBlueHyperlink.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupRoot)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemLinkName)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPath)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem4)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemBlueHyperlink)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemBold)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem5)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemForcePreview)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// styleController
@@ -77,123 +100,295 @@
 			this.styleController1.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.styleController1.AppearanceReadOnly.Options.UseFont = true;
 			// 
+			// layoutControl
+			// 
+			this.layoutControl.Appearance.Control.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.layoutControl.Appearance.Control.Options.UseFont = true;
+			this.layoutControl.Appearance.ControlDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControl.Appearance.ControlDisabled.Options.UseFont = true;
+			this.layoutControl.Appearance.ControlDropDown.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControl.Appearance.ControlDropDown.Options.UseFont = true;
+			this.layoutControl.Appearance.ControlDropDownHeader.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControl.Appearance.ControlDropDownHeader.Options.UseFont = true;
+			this.layoutControl.Appearance.ControlFocused.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControl.Appearance.ControlFocused.Options.UseFont = true;
+			this.layoutControl.Appearance.ControlReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControl.Appearance.ControlReadOnly.Options.UseFont = true;
+			this.layoutControl.Controls.Add(this.checkEditForcePreview);
+			this.layoutControl.Controls.Add(this.checkEditBlueHyperlink);
+			this.layoutControl.Controls.Add(this.checkEditBold);
+			this.layoutControl.Controls.Add(this.textEditName);
+			this.layoutControl.Controls.Add(this.textEditPath);
+			this.layoutControl.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.layoutControl.Location = new System.Drawing.Point(0, 0);
+			this.layoutControl.Name = "layoutControl";
+			this.layoutControl.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(802, 383, 250, 350);
+			this.layoutControl.Root = this.layoutControlGroupRoot;
+			this.layoutControl.Size = new System.Drawing.Size(350, 425);
+			this.layoutControl.StyleController = this.styleController;
+			this.layoutControl.TabIndex = 67;
+			this.layoutControl.Text = "layoutControl1";
+			// 
+			// checkEditForcePreview
+			// 
+			this.checkEditForcePreview.EditValue = true;
+			this.checkEditForcePreview.Location = new System.Drawing.Point(12, 183);
+			this.checkEditForcePreview.Name = "checkEditForcePreview";
+			this.checkEditForcePreview.Properties.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
+			this.checkEditForcePreview.Properties.Caption = "<b>Immediately Launch this URL when clicked</b>";
+			this.checkEditForcePreview.Size = new System.Drawing.Size(326, 20);
+			this.checkEditForcePreview.StyleController = this.layoutControl;
+			this.checkEditForcePreview.TabIndex = 41;
+			// 
+			// checkEditBlueHyperlink
+			// 
+			this.checkEditBlueHyperlink.EditValue = true;
+			this.checkEditBlueHyperlink.Location = new System.Drawing.Point(12, 257);
+			this.checkEditBlueHyperlink.Name = "checkEditBlueHyperlink";
+			this.checkEditBlueHyperlink.Properties.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
+			this.checkEditBlueHyperlink.Properties.Caption = "<color=blue><u>Blue Hyperlink</u></color>";
+			this.checkEditBlueHyperlink.Size = new System.Drawing.Size(170, 20);
+			this.checkEditBlueHyperlink.StyleController = this.layoutControl;
+			this.checkEditBlueHyperlink.TabIndex = 43;
+			// 
 			// checkEditBold
 			// 
-			this.checkEditBold.Location = new System.Drawing.Point(147, 279);
+			this.checkEditBold.Location = new System.Drawing.Point(186, 257);
 			this.checkEditBold.Name = "checkEditBold";
 			this.checkEditBold.Properties.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
 			this.checkEditBold.Properties.Caption = "<b>BOLD</b>";
-			this.checkEditBold.Size = new System.Drawing.Size(87, 20);
-			this.checkEditBold.StyleController = this.styleController1;
-			this.checkEditBold.TabIndex = 46;
+			this.checkEditBold.Size = new System.Drawing.Size(142, 20);
+			this.checkEditBold.StyleController = this.layoutControl;
+			this.checkEditBold.TabIndex = 44;
 			// 
 			// textEditName
 			// 
 			this.textEditName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.textEditName.Location = new System.Drawing.Point(79, 3);
+			this.textEditName.Location = new System.Drawing.Point(79, 12);
 			this.textEditName.Name = "textEditName";
 			this.textEditName.Properties.Appearance.BackColor = System.Drawing.Color.White;
 			this.textEditName.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.textEditName.Properties.Appearance.Options.UseBackColor = true;
 			this.textEditName.Properties.Appearance.Options.UseForeColor = true;
-			this.textEditName.Size = new System.Drawing.Size(268, 22);
-			this.textEditName.StyleController = this.styleController1;
-			this.textEditName.TabIndex = 40;
-			// 
-			// laPath
-			// 
-			this.laPath.AutoSize = true;
-			this.laPath.BackColor = System.Drawing.Color.White;
-			this.laPath.ForeColor = System.Drawing.Color.Black;
-			this.laPath.Location = new System.Drawing.Point(3, 89);
-			this.laPath.Name = "laPath";
-			this.laPath.Size = new System.Drawing.Size(63, 16);
-			this.laPath.TabIndex = 43;
-			this.laPath.Text = "Link Path";
-			// 
-			// laName
-			// 
-			this.laName.AutoSize = true;
-			this.laName.BackColor = System.Drawing.Color.White;
-			this.laName.ForeColor = System.Drawing.Color.Black;
-			this.laName.Location = new System.Drawing.Point(3, 6);
-			this.laName.Name = "laName";
-			this.laName.Size = new System.Drawing.Size(70, 16);
-			this.laName.TabIndex = 42;
-			this.laName.Text = "Link Name";
+			this.textEditName.Size = new System.Drawing.Size(259, 22);
+			this.textEditName.StyleController = this.layoutControl;
+			this.textEditName.TabIndex = 0;
 			// 
 			// textEditPath
 			// 
 			this.textEditPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.textEditPath.Location = new System.Drawing.Point(3, 108);
+			this.textEditPath.Location = new System.Drawing.Point(12, 107);
 			this.textEditPath.Name = "textEditPath";
 			this.textEditPath.Properties.Appearance.BackColor = System.Drawing.Color.White;
 			this.textEditPath.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.textEditPath.Properties.Appearance.Options.UseBackColor = true;
 			this.textEditPath.Properties.Appearance.Options.UseForeColor = true;
-			this.textEditPath.Size = new System.Drawing.Size(344, 22);
-			this.textEditPath.StyleController = this.styleController1;
-			this.textEditPath.TabIndex = 41;
+			this.textEditPath.Size = new System.Drawing.Size(326, 22);
+			this.textEditPath.StyleController = this.layoutControl;
+			this.textEditPath.TabIndex = 1;
 			// 
-			// checkEditForcePreview
+			// layoutControlGroupRoot
 			// 
-			this.checkEditForcePreview.EditValue = true;
-			this.checkEditForcePreview.Location = new System.Drawing.Point(3, 192);
-			this.checkEditForcePreview.Name = "checkEditForcePreview";
-			this.checkEditForcePreview.Properties.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
-			this.checkEditForcePreview.Properties.Caption = "<b>Immediately Launch this URL when clicked</b>";
-			this.checkEditForcePreview.Size = new System.Drawing.Size(326, 20);
-			this.checkEditForcePreview.StyleController = this.styleController1;
-			this.checkEditForcePreview.TabIndex = 45;
+			this.layoutControlGroupRoot.AllowHtmlStringInCaption = true;
+			this.layoutControlGroupRoot.AppearanceGroup.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlGroupRoot.AppearanceGroup.Options.UseFont = true;
+			this.layoutControlGroupRoot.AppearanceItemCaption.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlGroupRoot.AppearanceItemCaption.Options.UseFont = true;
+			this.layoutControlGroupRoot.AppearanceTabPage.Header.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlGroupRoot.AppearanceTabPage.Header.Options.UseFont = true;
+			this.layoutControlGroupRoot.AppearanceTabPage.HeaderActive.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlGroupRoot.AppearanceTabPage.HeaderActive.Options.UseFont = true;
+			this.layoutControlGroupRoot.AppearanceTabPage.HeaderDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlGroupRoot.AppearanceTabPage.HeaderDisabled.Options.UseFont = true;
+			this.layoutControlGroupRoot.AppearanceTabPage.HeaderHotTracked.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlGroupRoot.AppearanceTabPage.HeaderHotTracked.Options.UseFont = true;
+			this.layoutControlGroupRoot.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+			this.layoutControlGroupRoot.GroupBordersVisible = false;
+			this.layoutControlGroupRoot.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.emptySpaceItem1,
+            this.layoutControlItemLinkName,
+            this.layoutControlItemPath,
+            this.emptySpaceItem3,
+            this.emptySpaceItem4,
+            this.layoutControlItemBlueHyperlink,
+            this.layoutControlItemBold,
+            this.emptySpaceItem5,
+            this.layoutControlItemForcePreview,
+            this.emptySpaceItem2});
+			this.layoutControlGroupRoot.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlGroupRoot.Name = "Root";
+			this.layoutControlGroupRoot.Size = new System.Drawing.Size(350, 425);
+			this.layoutControlGroupRoot.TextVisible = false;
 			// 
-			// checkEditBlueHyperlink
+			// emptySpaceItem1
 			// 
-			this.checkEditBlueHyperlink.EditValue = true;
-			this.checkEditBlueHyperlink.Location = new System.Drawing.Point(3, 279);
-			this.checkEditBlueHyperlink.Name = "checkEditBlueHyperlink";
-			this.checkEditBlueHyperlink.Properties.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
-			this.checkEditBlueHyperlink.Properties.Caption = "<color=blue><u>Blue Hyperlink</u></color>";
-			this.checkEditBlueHyperlink.Size = new System.Drawing.Size(118, 20);
-			this.checkEditBlueHyperlink.StyleController = this.styleController1;
-			this.checkEditBlueHyperlink.TabIndex = 44;
+			this.emptySpaceItem1.AllowHotTrack = false;
+			this.emptySpaceItem1.Location = new System.Drawing.Point(0, 26);
+			this.emptySpaceItem1.MaxSize = new System.Drawing.Size(0, 50);
+			this.emptySpaceItem1.MinSize = new System.Drawing.Size(10, 50);
+			this.emptySpaceItem1.Name = "emptySpaceItem1";
+			this.emptySpaceItem1.Size = new System.Drawing.Size(330, 50);
+			this.emptySpaceItem1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// layoutControlItemLinkName
+			// 
+			this.layoutControlItemLinkName.Control = this.textEditName;
+			this.layoutControlItemLinkName.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+			this.layoutControlItemLinkName.FillControlToClientArea = false;
+			this.layoutControlItemLinkName.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlItemLinkName.Name = "layoutControlItemLinkName";
+			this.layoutControlItemLinkName.Size = new System.Drawing.Size(330, 26);
+			this.layoutControlItemLinkName.Text = "Link Name";
+			this.layoutControlItemLinkName.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
+			this.layoutControlItemLinkName.TextSize = new System.Drawing.Size(62, 16);
+			this.layoutControlItemLinkName.TextToControlDistance = 5;
+			this.layoutControlItemLinkName.TrimClientAreaToControl = false;
+			// 
+			// layoutControlItemPath
+			// 
+			this.layoutControlItemPath.Control = this.textEditPath;
+			this.layoutControlItemPath.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+			this.layoutControlItemPath.FillControlToClientArea = false;
+			this.layoutControlItemPath.Location = new System.Drawing.Point(0, 76);
+			this.layoutControlItemPath.Name = "layoutControlItemPath";
+			this.layoutControlItemPath.Size = new System.Drawing.Size(330, 45);
+			this.layoutControlItemPath.Text = "Link Path";
+			this.layoutControlItemPath.TextLocation = DevExpress.Utils.Locations.Top;
+			this.layoutControlItemPath.TextSize = new System.Drawing.Size(55, 16);
+			this.layoutControlItemPath.TrimClientAreaToControl = false;
+			// 
+			// emptySpaceItem3
+			// 
+			this.emptySpaceItem3.AllowHotTrack = false;
+			this.emptySpaceItem3.Location = new System.Drawing.Point(0, 195);
+			this.emptySpaceItem3.MaxSize = new System.Drawing.Size(0, 50);
+			this.emptySpaceItem3.MinSize = new System.Drawing.Size(10, 50);
+			this.emptySpaceItem3.Name = "emptySpaceItem3";
+			this.emptySpaceItem3.Size = new System.Drawing.Size(330, 50);
+			this.emptySpaceItem3.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem3.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// emptySpaceItem4
+			// 
+			this.emptySpaceItem4.AllowHotTrack = false;
+			this.emptySpaceItem4.Location = new System.Drawing.Point(0, 269);
+			this.emptySpaceItem4.Name = "emptySpaceItem4";
+			this.emptySpaceItem4.Size = new System.Drawing.Size(330, 136);
+			this.emptySpaceItem4.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// layoutControlItemBlueHyperlink
+			// 
+			this.layoutControlItemBlueHyperlink.Control = this.checkEditBlueHyperlink;
+			this.layoutControlItemBlueHyperlink.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+			this.layoutControlItemBlueHyperlink.FillControlToClientArea = false;
+			this.layoutControlItemBlueHyperlink.Location = new System.Drawing.Point(0, 245);
+			this.layoutControlItemBlueHyperlink.Name = "layoutControlItemBlueHyperlink";
+			this.layoutControlItemBlueHyperlink.Size = new System.Drawing.Size(174, 24);
+			this.layoutControlItemBlueHyperlink.Text = "Blue Hyperlink";
+			this.layoutControlItemBlueHyperlink.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemBlueHyperlink.TextVisible = false;
+			this.layoutControlItemBlueHyperlink.TrimClientAreaToControl = false;
+			// 
+			// layoutControlItemBold
+			// 
+			this.layoutControlItemBold.Control = this.checkEditBold;
+			this.layoutControlItemBold.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+			this.layoutControlItemBold.FillControlToClientArea = false;
+			this.layoutControlItemBold.Location = new System.Drawing.Point(174, 245);
+			this.layoutControlItemBold.Name = "layoutControlItemBold";
+			this.layoutControlItemBold.Size = new System.Drawing.Size(146, 24);
+			this.layoutControlItemBold.Text = "Bold";
+			this.layoutControlItemBold.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemBold.TextVisible = false;
+			this.layoutControlItemBold.TrimClientAreaToControl = false;
+			// 
+			// emptySpaceItem5
+			// 
+			this.emptySpaceItem5.AllowHotTrack = false;
+			this.emptySpaceItem5.Location = new System.Drawing.Point(320, 245);
+			this.emptySpaceItem5.Name = "emptySpaceItem5";
+			this.emptySpaceItem5.Size = new System.Drawing.Size(10, 24);
+			this.emptySpaceItem5.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// layoutControlItemForcePreview
+			// 
+			this.layoutControlItemForcePreview.Control = this.checkEditForcePreview;
+			this.layoutControlItemForcePreview.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+			this.layoutControlItemForcePreview.FillControlToClientArea = false;
+			this.layoutControlItemForcePreview.Location = new System.Drawing.Point(0, 171);
+			this.layoutControlItemForcePreview.Name = "layoutControlItemForcePreview";
+			this.layoutControlItemForcePreview.Size = new System.Drawing.Size(330, 24);
+			this.layoutControlItemForcePreview.Text = "Force Preview";
+			this.layoutControlItemForcePreview.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemForcePreview.TextVisible = false;
+			this.layoutControlItemForcePreview.TrimClientAreaToControl = false;
+			// 
+			// emptySpaceItem2
+			// 
+			this.emptySpaceItem2.AllowHotTrack = false;
+			this.emptySpaceItem2.Location = new System.Drawing.Point(0, 121);
+			this.emptySpaceItem2.MaxSize = new System.Drawing.Size(0, 50);
+			this.emptySpaceItem2.MinSize = new System.Drawing.Size(10, 50);
+			this.emptySpaceItem2.Name = "emptySpaceItem2";
+			this.emptySpaceItem2.Size = new System.Drawing.Size(330, 50);
+			this.emptySpaceItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
 			// 
 			// Html5EditControl
 			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.BackColor = System.Drawing.Color.White;
-			this.Controls.Add(this.checkEditBold);
-			this.Controls.Add(this.textEditName);
-			this.Controls.Add(this.laPath);
-			this.Controls.Add(this.laName);
-			this.Controls.Add(this.textEditPath);
-			this.Controls.Add(this.checkEditForcePreview);
-			this.Controls.Add(this.checkEditBlueHyperlink);
+			this.Controls.Add(this.layoutControl);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Name = "Html5EditControl";
 			this.Size = new System.Drawing.Size(350, 425);
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControl)).EndInit();
+			this.layoutControl.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.checkEditForcePreview.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditBlueHyperlink.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditBold.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditName.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditPath.Properties)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditForcePreview.Properties)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditBlueHyperlink.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupRoot)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemLinkName)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPath)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem4)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemBlueHyperlink)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemBold)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem5)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemForcePreview)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
 			this.ResumeLayout(false);
-			this.PerformLayout();
 
 		}
 
 		#endregion
 		private DevExpress.XtraEditors.StyleController styleController;
 		private DevExpress.XtraEditors.StyleController styleController1;
-		private DevExpress.XtraEditors.CheckEdit checkEditBold;
-		private DevExpress.XtraEditors.TextEdit textEditName;
-		private System.Windows.Forms.Label laPath;
-		private System.Windows.Forms.Label laName;
-		private DevExpress.XtraEditors.TextEdit textEditPath;
+		private DevExpress.XtraLayout.LayoutControl layoutControl;
 		private DevExpress.XtraEditors.CheckEdit checkEditForcePreview;
 		private DevExpress.XtraEditors.CheckEdit checkEditBlueHyperlink;
+		private DevExpress.XtraEditors.CheckEdit checkEditBold;
+		private DevExpress.XtraEditors.TextEdit textEditName;
+		private DevExpress.XtraEditors.TextEdit textEditPath;
+		private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroupRoot;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemLinkName;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemPath;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem3;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem4;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemBlueHyperlink;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemBold;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem5;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemForcePreview;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
 	}
 }

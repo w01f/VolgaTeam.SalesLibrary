@@ -269,6 +269,19 @@ namespace SalesLibraries.Business.Entities.Helpers
 				.Union(commonKeywords.Select(t => t.Name)));
 		}
 
+		public static IList<string> GetCommonSuperFilters(this IList<BaseLibraryLink> links)
+		{
+			var commonSuperFilters = new List<string>();
+			var allSuperFilters = links.SelectMany(l => l.Tags.SuperFilters).ToList();
+			foreach (var superFilter in allSuperFilters)
+			{
+				if (commonSuperFilters.Any(t => t.Equals(superFilter))) continue;
+				if (!links.All(l => l.Tags.SuperFilters.Any(t => t.Equals(superFilter)))) continue;
+				commonSuperFilters.Add(superFilter);
+			}
+			return commonSuperFilters;
+		}
+
 		public static IList<SearchGroup> GetAllCategories(this IList<BaseLibraryLink> links)
 		{
 			var distinctCategories = new List<SearchGroup>();

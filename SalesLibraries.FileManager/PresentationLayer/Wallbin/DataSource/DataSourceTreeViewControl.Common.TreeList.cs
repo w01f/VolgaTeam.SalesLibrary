@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.XtraLayout.Utils;
 using DevExpress.XtraTreeList;
 using DevExpress.XtraTreeList.Nodes;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
@@ -21,7 +22,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 		{
 			get
 			{
-				switch (xtraTabControlFiles.SelectedTabPageIndex)
+				switch (tabbedControlGroupFiles.SelectedTabPageIndex)
 				{
 					case 0:
 						return treeListRegularFiles;
@@ -253,11 +254,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 			{
 				foreach (var nodeToDelete in treeList.Nodes.Skip(1).ToList())
 					treeList.Nodes.Remove(nodeToDelete);
-				laTreeViewProgressLabel.Text = "Loading Tree View...";
-				pnTreeViewProgress.Visible = true;
+				labelControlProgress.Text = "Loading Tree View...";
+				layoutControlGroupProgress.Visibility = LayoutVisibility.Always;
 				circularProgressTreeView.IsRunning = true;
 
-				switch (xtraTabControlFiles.SelectedTabPageIndex)
+				switch (tabbedControlGroupFiles.SelectedTabPageIndex)
 				{
 					case 0:
 						await RefreshRegularFiles(true);
@@ -267,7 +268,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 						break;
 				}
 
-				pnTreeViewProgress.Visible = false;
+				layoutControlGroupProgress.Visibility = LayoutVisibility.Never;
 				circularProgressTreeView.IsRunning = false;
 				hitInfo.Node.SetValue(treeListColumnName, "Collapse All");
 				hitInfo.Node.SetValue(treeListColumnPath, "Collapse All");
@@ -373,10 +374,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 				return;
 
 			treeList.SuspendLayout();
-			laTreeViewProgressLabel.Text = "Copying Files...";
-			pnTreeViewProgress.Visible = true;
+			labelControlProgress.Text = "Copying Files...";
+			layoutControlGroupProgress.Visibility = LayoutVisibility.Always;
 			circularProgressTreeView.IsRunning = true;
-			xtraTabControlFiles.Enabled = false;
+			layoutControlGroupFiles.Enabled = false;
 
 			await Task.Run(() =>
 			{
@@ -394,9 +395,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 				}));
 			});
 
-			xtraTabControlFiles.Enabled = true;
+			layoutControlGroupFiles.Enabled = true;
 			circularProgressTreeView.IsRunning = false;
-			pnTreeViewProgress.Visible = false;
+			layoutControlGroupProgress.Visibility = LayoutVisibility.Never;
 			treeList.ResumeLayout();
 			treeList.Enabled = true;
 		}

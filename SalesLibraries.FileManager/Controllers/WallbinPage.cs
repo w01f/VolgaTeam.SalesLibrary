@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows.Forms;
 using DevComponents.DotNetBar;
 using DevExpress.Skins;
+using DevExpress.XtraLayout.Utils;
 using SalesLibraries.Business.Entities.Helpers;
 using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
@@ -41,19 +42,19 @@ namespace SalesLibraries.FileManager.Controllers
 			pnEmpty.BringToFront();
 			NeedToUpdate = true;
 
-			if (CreateGraphics().DpiX > 96)
-			{
-				var font = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2,
-					styleController.Appearance.Font.Style);
-				styleController.Appearance.Font = font;
-				styleController.AppearanceDisabled.Font = font;
-				styleController.AppearanceDropDown.Font = font;
-				styleController.AppearanceDropDownHeader.Font = font;
-				styleController.AppearanceFocused.Font = font;
-				styleController.AppearanceReadOnly.Font = font;
-
-				pnTagInfoContainer.Width = RectangleHelper.ScaleHorizontal(pnTagInfoContainer.Width, comboBoxEditPages.ScaleFactor.Width);
-			}
+			layoutControlItemSuperFilter.Visibility = MainController.Instance.Lists.SuperFilters.Items.Any() ? LayoutVisibility.Always : LayoutVisibility.Never;
+			layoutControlItemSuperFilter.MaxSize = new Size(
+				RectangleHelper.ScaleHorizontal(layoutControlItemSuperFilter.MaxSize.Width, superFilterControl.ScaleFactor.Width),
+				RectangleHelper.ScaleVertical(layoutControlItemSuperFilter.MaxSize.Height, superFilterControl.ScaleFactor.Height));
+			layoutControlItemTagInfoContainer.MaxSize = new Size(
+				RectangleHelper.ScaleHorizontal(layoutControlItemTagInfoContainer.MaxSize.Width, comboBoxEditPages.ScaleFactor.Width),
+				RectangleHelper.ScaleVertical(layoutControlItemTagInfoContainer.MaxSize.Height, comboBoxEditPages.ScaleFactor.Height));
+			layoutControlItemPages.MaxSize = new Size(
+				RectangleHelper.ScaleHorizontal(layoutControlItemPages.MaxSize.Width, comboBoxEditPages.ScaleFactor.Width),
+				RectangleHelper.ScaleVertical(layoutControlItemPages.MaxSize.Height, comboBoxEditPages.ScaleFactor.Height));
+			layoutControlItemLinksTagInfo.MaxSize = new Size(0, RectangleHelper.ScaleVertical(layoutControlItemLinksTagInfo.MaxSize.Height, comboBoxEditPages.ScaleFactor.Height));
+			retractableBar.Width = RectangleHelper.ScaleHorizontal(retractableBar.Width, comboBoxEditPages.ScaleFactor.Width);
+			retractableBar.ContentSize = RectangleHelper.ScaleHorizontal(retractableBar.ContentSize, comboBoxEditPages.ScaleFactor.Width);
 		}
 
 		public void InitController()
@@ -527,6 +528,11 @@ namespace SalesLibraries.FileManager.Controllers
 		#region Retractable Bar
 		private void UpdateRetractableBarContent()
 		{
+			if (MainController.Instance.WallbinViews.ActiveWallbin == null)
+			{
+				retractableBar.Visible = false;
+				return;
+			}
 			retractableBar.Visible = true;
 			laEditorTitle.Text = String.Empty;
 			if (MainController.Instance.WallbinViews.FormatState.ShowFiles)

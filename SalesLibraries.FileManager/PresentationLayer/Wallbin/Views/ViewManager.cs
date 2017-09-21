@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using DevExpress.XtraLayout.Utils;
 using SalesLibraries.Common.DataState;
 using SalesLibraries.FileManager.Controllers;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.Clipboard;
@@ -58,7 +59,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 
 		private void InitControls()
 		{
-			MainController.Instance.TabWallbin.pnPageSelector.Visible = !MainController.Instance.Settings.MultitabView;
+			MainController.Instance.TabWallbin.layoutControlItemPages.Visibility = !MainController.Instance.Settings.MultitabView ? LayoutVisibility.Always : LayoutVisibility.Never;
 			MainController.Instance.MainForm.ribbonBarHomeLogo.RecalcLayout();
 			MainController.Instance.MainForm.ribbonPanelHome.PerformLayout();
 		}

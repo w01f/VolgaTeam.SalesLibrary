@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
+using DevExpress.Skins;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using SalesLibraries.Common.Helpers;
@@ -32,24 +32,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			repositoryItemButtonEditWebSyncPath.EnableSelectAll();
 			repositoryItemButtonEditLocalSyncPath.EnableSelectAll();
 
-			if (CreateGraphics().DpiX > 96)
-			{
-				var font = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2,
-					styleController.Appearance.Font.Style);
-				styleController.Appearance.Font = font;
-				styleController.AppearanceDisabled.Font = font;
-				styleController.AppearanceDropDown.Font = font;
-				styleController.AppearanceDropDownHeader.Font = font;
-				styleController.AppearanceFocused.Font = font;
-				styleController.AppearanceReadOnly.Font = font;
-
-				laBackup.Font = new Font(laBackup.Font.FontFamily, laBackup.Font.Size - 2, laBackup.Font.Style);
-				laBackupDescription.Font = new Font(laBackupDescription.Font.FontFamily, laBackupDescription.Font.Size - 2, laBackupDescription.Font.Style);
-				buttonXWebSyncPathAdd.Font = new Font(buttonXWebSyncPathAdd.Font.FontFamily, buttonXWebSyncPathAdd.Font.Size - 2, buttonXWebSyncPathAdd.Font.Style);
-				buttonXLocalSyncPathAdd.Font = new Font(buttonXLocalSyncPathAdd.Font.FontFamily, buttonXLocalSyncPathAdd.Font.Size - 2, buttonXLocalSyncPathAdd.Font.Style);
-				buttonXOK.Font = new Font(buttonXOK.Font.FontFamily, buttonXOK.Font.Size - 2, buttonXOK.Font.Style);
-				buttonXCancel.Font = new Font(buttonXCancel.Font.FontFamily, buttonXCancel.Font.Size - 2, buttonXCancel.Font.Style);
-			}
+			layoutControlItemOK.MinSize = RectangleHelper.ScaleSize(layoutControlItemOK.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemOK.MaxSize = RectangleHelper.ScaleSize(layoutControlItemOK.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCancel.MinSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCancel.MaxSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
 		private void LoadLocalPaths()

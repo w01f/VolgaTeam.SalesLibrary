@@ -65,6 +65,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			return CreateEntity<LineBreak>(lineBreak =>
 			{
 				lineBreak.Folder = parentFolder;
+				lineBreak.AfterCreate();
 			});
 		}
 	}

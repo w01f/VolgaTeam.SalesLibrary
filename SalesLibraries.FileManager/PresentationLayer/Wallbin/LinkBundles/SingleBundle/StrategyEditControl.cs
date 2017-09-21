@@ -21,18 +21,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Singl
 
 			Text = StrategyItem.ItemName;
 
-			if (CreateGraphics().DpiX > 96)
-			{
-				var font = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2,
-					styleController.Appearance.Font.Style);
-				styleController.Appearance.Font = font;
-				styleController.AppearanceDisabled.Font = font;
-				styleController.AppearanceDropDown.Font = font;
-				styleController.AppearanceDropDownHeader.Font = font;
-				styleController.AppearanceFocused.Font = font;
-				styleController.AppearanceReadOnly.Font = font;
-			}
-
 			buttonEditTextFont.ButtonClick += EditorHelper.FontEdit_ButtonClick;
 			buttonEditTextFont.Click += EditorHelper.FontEdit_Click;
 		}
@@ -68,20 +56,17 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Singl
 
 		private void OnHeaderCheckedChanged(object sender, System.EventArgs e)
 		{
-			textEditHeader.Enabled = checkEditHeader.Checked;
+			layoutControlItemHeaderEditor.Enabled = checkEditHeader.Checked;
 			if (!checkEditHeader.Checked)
 				textEditHeader.EditValue = null;
 		}
 
 		private void OnBodyCheckedChanged(object sender, System.EventArgs e)
 		{
-			memoEditBody.Enabled = checkEditBody.Checked;
-			labelControlTextColor.Enabled = checkEditBody.Checked;
-			colorEditTextColor.Enabled = checkEditBody.Checked;
-			labelControlBackColor.Enabled = checkEditBody.Checked;
-			colorEditBackColor.Enabled = checkEditBody.Checked;
-			labelControlTextFont.Enabled = checkEditBody.Checked;
-			buttonEditTextFont.Enabled = checkEditBody.Checked;
+			layoutControlItemBodyEditor.Enabled = checkEditBody.Checked;
+			layoutControlItemTextColor.Enabled = checkEditBody.Checked;
+			layoutControlItemBackColor.Enabled = checkEditBody.Checked;
+			layoutControlItemTextFont.Enabled = checkEditBody.Checked;
 			if (!checkEditBody.Checked)
 				memoEditBody.EditValue = null;
 		}

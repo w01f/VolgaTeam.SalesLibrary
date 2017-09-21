@@ -4,10 +4,12 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using DevExpress.Skins;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using SalesLibraries.Business.Entities.Helpers;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
+using SalesLibraries.Common.Helpers;
 using SalesLibraries.FileManager.Business.Models.Security;
 using SalesLibraries.FileManager.Controllers;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Views;
@@ -29,7 +31,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 			get
 			{
 				_assignedUsers.Clear();
-				if (rbSecurityWhiteList.Checked)
+				if (checkEditSecurityWhiteList.Checked)
 					_assignedUsers.AddRange(_securityGroups.SelectMany(g => g.Users).Where(u => u.Selected).Select(u => u.Login));
 				return String.Join(",", _assignedUsers);
 			}
@@ -47,7 +49,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 			get
 			{
 				_deniedUsers.Clear();
-				if (rbSecurityBlackList.Checked)
+				if (checkEditSecurityBlackList.Checked)
 					_deniedUsers.AddRange(_securityGroups.SelectMany(g => g.Users).Where(u => u.Selected).Select(u => u.Login));
 				return String.Join(",", _deniedUsers);
 			}
@@ -70,20 +72,14 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 			gridViewSecurityGroups.MasterRowGetRelationName += OnGetGroupRelationName;
 			gridViewSecurityGroups.MasterRowGetChildList += OnGetGroupChildList;
 
-			if (!((CreateGraphics()).DpiX > 96)) return;
-			var styleControllerFont = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2, styleController.Appearance.Font.Style);
-			styleController.AppearanceDisabled.Font = styleControllerFont;
-			styleController.AppearanceDropDown.Font = styleControllerFont;
-			styleController.AppearanceDropDownHeader.Font = styleControllerFont;
-			styleController.AppearanceFocused.Font = styleControllerFont;
-			styleController.AppearanceReadOnly.Font = styleControllerFont;
-			buttonXReset.Font = new Font(buttonXReset.Font.FontFamily, buttonXReset.Font.Size - 2, buttonXReset.Font.Style);
-			rbSecurityAllowed.Font = new Font(rbSecurityAllowed.Font.FontFamily, rbSecurityAllowed.Font.Size - 2, rbSecurityAllowed.Font.Style);
-			rbSecurityDenied.Font = new Font(rbSecurityDenied.Font.FontFamily, rbSecurityDenied.Font.Size - 2, rbSecurityDenied.Font.Style);
-			rbSecurityWhiteList.Font = new Font(rbSecurityWhiteList.Font.FontFamily, rbSecurityWhiteList.Font.Size - 2, rbSecurityWhiteList.Font.Style);
-			rbSecurityBlackList.Font = new Font(rbSecurityBlackList.Font.FontFamily, rbSecurityBlackList.Font.Size - 2, rbSecurityBlackList.Font.Style);
-			rbSecurityForbidden.Font = new Font(rbSecurityForbidden.Font.FontFamily, rbSecurityForbidden.Font.Size - 2, rbSecurityForbidden.Font.Style);
-			ckSecurityShareLink.Font = new Font(ckSecurityShareLink.Font.FontFamily, ckSecurityShareLink.Font.Size - 2, ckSecurityShareLink.Font.Style);
+			layoutControlItemReset.MinSize = RectangleHelper.ScaleSize(layoutControlItemReset.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemReset.MaxSize = RectangleHelper.ScaleSize(layoutControlItemReset.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemSecurityUserListSelectAll.MinSize = RectangleHelper.ScaleSize(layoutControlItemSecurityUserListSelectAll.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemSecurityUserListSelectAll.MaxSize = RectangleHelper.ScaleSize(layoutControlItemSecurityUserListSelectAll.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemSecurityUserListClearAll.MinSize = RectangleHelper.ScaleSize(layoutControlItemSecurityUserListClearAll.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemSecurityUserListClearAll.MaxSize = RectangleHelper.ScaleSize(layoutControlItemSecurityUserListClearAll.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemImport.MinSize = RectangleHelper.ScaleSize(layoutControlItemImport.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemImport.MaxSize = RectangleHelper.ScaleSize(layoutControlItemImport.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
 		#region IGroupSettingsEditor Members
@@ -94,10 +90,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 		public void UpdateData()
 		{
 			_loading = true;
-			pnButtons.Enabled = false;
-			pnData.Enabled = false;
-			rbSecurityAllowed.Checked = true;
-			ckSecurityShareLink.Checked = true;
+			layoutControlItemReset.Enabled = false;
+			layoutControlGroupData.Enabled = false;
+			checkEditSecurityAllowed.Checked = true;
+			checkEditSecurityShareLink.Checked = true;
 			AssignedUsers = null;
 			DeniedUsers = null;
 			Enabled = false;
@@ -115,21 +111,21 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 					link.Security.DeniedUsers == defaultLink.Security.DeniedUsers &&
 					link.Security.NoShare == defaultLink.Security.NoShare);
 
-			pnButtons.Enabled = !noData;
-			pnData.Enabled = sameData || noData;
+			layoutControlItemReset.Enabled = !noData;
+			layoutControlGroupData.Enabled = sameData || noData;
 
 			if (sameData)
 			{
-				rbSecurityAllowed.Checked = !defaultLink.Security.IsRestricted;
-				rbSecurityDenied.Checked = defaultLink.Security.IsRestricted &&
+				checkEditSecurityAllowed.Checked = !defaultLink.Security.IsRestricted;
+				checkEditSecurityDenied.Checked = defaultLink.Security.IsRestricted &&
 					String.IsNullOrEmpty(defaultLink.Security.AssignedUsers) &&
 					String.IsNullOrEmpty(defaultLink.Security.DeniedUsers);
-				rbSecurityWhiteList.Checked = defaultLink.Security.IsRestricted &&
+				checkEditSecurityWhiteList.Checked = defaultLink.Security.IsRestricted &&
 					!String.IsNullOrEmpty(defaultLink.Security.AssignedUsers);
-				rbSecurityBlackList.Checked = defaultLink.Security.IsRestricted &&
+				checkEditSecurityBlackList.Checked = defaultLink.Security.IsRestricted &&
 					!String.IsNullOrEmpty(defaultLink.Security.DeniedUsers);
-				rbSecurityForbidden.Checked = defaultLink.Security.IsForbidden;
-				ckSecurityShareLink.Checked = defaultLink.Security.NoShare;
+				checkEditSecurityForbidden.Checked = defaultLink.Security.IsForbidden;
+				checkEditSecurityShareLink.Checked = defaultLink.Security.NoShare;
 				AssignedUsers = defaultLink.Security.IsRestricted &&
 					!String.IsNullOrEmpty(defaultLink.Security.AssignedUsers) ? defaultLink.Security.AssignedUsers : null;
 				DeniedUsers = defaultLink.Security.IsRestricted &&
@@ -138,7 +134,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 
 			LoadSecurityGroups(defaultLink.ParentLibrary.ExtId);
 
-			pnSecurityUserList.Enabled = pnSecurityUserList.Enabled && (rbSecurityWhiteList.Checked || rbSecurityBlackList.Checked);
+			layoutControlGroupSecurityUserList.Enabled = layoutControlGroupSecurityUserList.Enabled && (checkEditSecurityWhiteList.Checked || checkEditSecurityBlackList.Checked);
 			_loading = false;
 		}
 
@@ -148,11 +144,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 			var deniedUsers = DeniedUsers;
 			Selection.SelectedLinks.ApplySecurity(new SecuritySettings
 			{
-				IsForbidden = rbSecurityForbidden.Checked,
-				IsRestricted = rbSecurityDenied.Checked || rbSecurityWhiteList.Checked || rbSecurityBlackList.Checked,
-				NoShare = rbSecurityDenied.Checked,
-				AssignedUsers = rbSecurityWhiteList.Checked && !String.IsNullOrEmpty(assignedUsers) ? assignedUsers : null,
-				DeniedUsers = rbSecurityBlackList.Checked && !String.IsNullOrEmpty(deniedUsers) ? deniedUsers : null
+				IsForbidden = checkEditSecurityForbidden.Checked,
+				IsRestricted = checkEditSecurityDenied.Checked || checkEditSecurityWhiteList.Checked || checkEditSecurityBlackList.Checked,
+				NoShare = checkEditSecurityDenied.Checked,
+				AssignedUsers = checkEditSecurityWhiteList.Checked && !String.IsNullOrEmpty(assignedUsers) ? assignedUsers : null,
+				DeniedUsers = checkEditSecurityBlackList.Checked && !String.IsNullOrEmpty(deniedUsers) ? deniedUsers : null
 			});
 			EditorChanged?.Invoke(this, new EventArgs());
 		}
@@ -169,9 +165,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 
 		private void LoadSecurityGroups(Guid libraryId)
 		{
-			pnSecurityUserList.Enabled = false;
-			rbSecurityWhiteList.Enabled = false;
-			rbSecurityBlackList.Enabled = false;
+			layoutControlGroupSecurityUserList.Enabled = false;
+			layoutControlItemSecurityWhiteList.Enabled = false;
+			layoutControlItemSecurityBlackList.Enabled = false;
 			gridControlSecurityUserList.DataSource = null;
 			_securityGroups.Clear();
 
@@ -191,15 +187,15 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 				gridControlSecurityUserList.DataSource = _securityGroups.ToList();
 				ApplyAssignedUsers();
 				ApplyDeniedUsers();
-				pnSecurityUserList.Enabled = true;
-				rbSecurityWhiteList.Enabled = true;
-				rbSecurityBlackList.Enabled = true;
+				layoutControlGroupSecurityUserList.Enabled = true;
+				layoutControlItemSecurityWhiteList.Enabled = true;
+				layoutControlItemSecurityBlackList.Enabled = true;
 			}
 		}
 
 		private void ApplyAssignedUsers()
 		{
-			if (!rbSecurityWhiteList.Checked) return;
+			if (!checkEditSecurityWhiteList.Checked) return;
 			foreach (var groupModel in _securityGroups.Where(g => g.Users != null))
 			{
 				foreach (var userModel in groupModel.Users)
@@ -211,7 +207,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 
 		private void ApplyDeniedUsers()
 		{
-			if (!rbSecurityBlackList.Checked) return;
+			if (!checkEditSecurityBlackList.Checked) return;
 			foreach (var groupModel in _securityGroups.Where(g => g.Users != null))
 			{
 				foreach (var userModel in groupModel.Users)
@@ -228,13 +224,13 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 
 		private void OnSecurityOptionCheckedChanged(object sender, EventArgs e)
 		{
-			pnSecurityUserList.Enabled = rbSecurityWhiteList.Checked || rbSecurityBlackList.Checked; ;
+			layoutControlGroupSecurityUserList.Enabled = checkEditSecurityWhiteList.Checked || checkEditSecurityBlackList.Checked; ;
 			if (_loading) return;
 			var radioButton = sender as RadioButton;
 			if (radioButton == null || !radioButton.Checked) return;
-			if (!rbSecurityWhiteList.Checked)
+			if (!checkEditSecurityWhiteList.Checked)
 				_assignedUsers.Clear();
-			if (!rbSecurityBlackList.Checked)
+			if (!checkEditSecurityBlackList.Checked)
 				_assignedUsers.Clear();
 			ApplyAssignedUsers();
 			ApplyDeniedUsers();

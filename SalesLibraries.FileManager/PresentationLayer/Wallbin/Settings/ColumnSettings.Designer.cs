@@ -1,4 +1,6 @@
-﻿namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
+﻿using System.Drawing;
+
+namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 {
 	sealed partial class ColumnSettings
 	{
@@ -46,7 +48,6 @@
 			((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditWindowOperations)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit)).BeginInit();
-			this.SuspendLayout();
 			// 
 			// gridControl
 			// 
@@ -157,16 +158,11 @@
 			// 
 			// ColumnSettings
 			// 
-			this.Controls.Add(this.gridControl);
-			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.Size = new System.Drawing.Size(437, 404);
 			((System.ComponentModel.ISupportInitialize)(this.gridControl)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditWindowOperations)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit)).EndInit();
-			this.ResumeLayout(false);
-
 		}
 
 		#endregion

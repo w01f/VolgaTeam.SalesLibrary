@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using DevExpress.Skins;
+using DevExpress.XtraLayout.Utils;
 using DevExpress.XtraTreeList;
 using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
+using SalesLibraries.Common.Helpers;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.LinksTreeSelector
 {
@@ -21,11 +24,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.LinksTreeSe
 		{
 			InitializeComponent();
 
-			if (CreateGraphics().DpiX > 96)
-			{
-				buttonXExpandAll.Font = new Font(buttonXExpandAll.Font.FontFamily, buttonXExpandAll.Font.Size - 2, buttonXExpandAll.Font.Style);
-				buttonXCollapseAll.Font = new Font(buttonXCollapseAll.Font.FontFamily, buttonXCollapseAll.Font.Size - 2, buttonXCollapseAll.Font.Style);
-			}
+			layoutControlItemCollapseAll.MinSize = RectangleHelper.ScaleSize(layoutControlItemCollapseAll.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCollapseAll.MaxSize = RectangleHelper.ScaleSize(layoutControlItemCollapseAll.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemExpandAll.MinSize = RectangleHelper.ScaleSize(layoutControlItemExpandAll.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemExpandAll.MaxSize = RectangleHelper.ScaleSize(layoutControlItemExpandAll.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
 		public void LoadData(ILinksGroup linkGroup, FileTypes? defaultLinkType = null, IList<FileTypes> excludeFileTypes = null)
@@ -49,7 +51,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.LinksTreeSe
 
 			var linkGroupsWithLinks = linksTreeGroups.Where(g => g.Links.Any()).ToList();
 
-			panelButtons.Visible = linkGroupsWithLinks.Count > 1;
+			layoutControlGroupButtons.Visibility = linkGroupsWithLinks.Count > 1 ? LayoutVisibility.Always : LayoutVisibility.Never;
 
 			if (linkGroupsWithLinks.Count > 1)
 			{

@@ -117,9 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="styleController.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 368</value>
-  </metadata>
+  <data name="labelControlTitle.Text" xml:space="preserve">
+    <value>&lt;size=+2&gt;Enable a Link Reset Timer for specific Link Properties you have already assigned. When you enable a Link Reset Timer, then this link will reset back to its default state.&lt;br&gt;&lt;br&gt;This is helpful if you have a LOT of custom properties that often need to change.</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="dateEditExpirationDate.Properties.Buttons" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -182,8 +182,7 @@
         ChFFkciyRAReINRPeJ4nHMeRXC5HJCFHRD5DaDKJx+PqX1X+laFckjRnAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="labelControlTitle.Text" xml:space="preserve">
-    <value>&lt;size=+2&gt;Enable a Link Reset Timer for specific Link Properties you have already assigned. When you enable a Link Reset Timer, then this link will reset back to its default state.&lt;br&gt;&lt;br&gt;This is helpful if you have a LOT of custom properties that often need to change.
-&lt;/size&gt;</value>
-  </data>
+  <metadata name="styleController.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 368</value>
+  </metadata>
 </root>

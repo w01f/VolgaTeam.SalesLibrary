@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 using System.Windows.Forms;
 using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
@@ -33,18 +32,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			checkEditTitleLink.Text = QuickLinkSettings.PredefinedQuickLinkTitleLink;
 			checkEditTitleResources.Text = QuickLinkSettings.PredefinedQuickLinkTitleResources;
 
-			if ((base.CreateGraphics()).DpiX > 96)
-			{
-				var styleControllerFont = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2, styleController.Appearance.Font.Style);
-				styleController.AppearanceDisabled.Font = styleControllerFont;
-				styleController.AppearanceDropDown.Font = styleControllerFont;
-				styleController.AppearanceDropDownHeader.Font = styleControllerFont;
-				styleController.AppearanceFocused.Font = styleControllerFont;
-				styleController.AppearanceReadOnly.Font = styleControllerFont;
-			}
 			textEditUrl.Enter += EditorHelper.EditorEnter;
 			textEditUrl.MouseUp += EditorHelper.EditorMouseUp;
 			textEditUrl.MouseDown += EditorHelper.EditorMouseUp;
+
+			layoutControlGroupControls.Enabled = false;
 		}
 
 		public LinkQuickLinkOptions(FileTypes? defaultLinkType = null) : this() { }
@@ -82,12 +74,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		private void OnEnableCheckedChanged(object sender, EventArgs e)
 		{
-			textEditUrl.Enabled = checkEditEnable.Checked;
-			labelControlQuickLinkTitle.Enabled = checkEditEnable.Checked;
-			checkEditTitleInfo.Enabled = checkEditEnable.Checked;
-			checkEditTitleHtml5.Enabled = checkEditEnable.Checked;
-			checkEditTitleLink.Enabled = checkEditEnable.Checked;
-			checkEditTitleResources.Enabled = checkEditEnable.Checked;
+			layoutControlGroupControls.Enabled = checkEditEnable.Checked;
 			if (!checkEditEnable.Checked)
 				textEditUrl.EditValue = null;
 		}

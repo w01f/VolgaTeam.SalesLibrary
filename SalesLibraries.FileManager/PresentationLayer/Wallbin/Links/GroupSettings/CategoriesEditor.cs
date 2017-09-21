@@ -4,9 +4,11 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using DevExpress.Skins;
 using DevExpress.XtraTreeList;
 using DevExpress.XtraTreeList.Nodes;
 using SalesLibraries.Business.Entities.Helpers;
+using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.Objects.SearchTags;
 using SalesLibraries.FileManager.Controllers;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Views;
@@ -26,6 +28,13 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 		{
 			InitializeComponent();
 			Dock = DockStyle.Fill;
+
+			layoutControlItemReset.MinSize = RectangleHelper.ScaleSize(layoutControlItemReset.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemReset.MaxSize = RectangleHelper.ScaleSize(layoutControlItemReset.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemExpand.MinSize = RectangleHelper.ScaleSize(layoutControlItemExpand.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemExpand.MaxSize = RectangleHelper.ScaleSize(layoutControlItemExpand.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCollapse.MinSize = RectangleHelper.ScaleSize(layoutControlItemCollapse.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCollapse.MaxSize = RectangleHelper.ScaleSize(layoutControlItemCollapse.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 
 			_groupTemplates.AddRange(MainController.Instance.Lists.SearchTags.SearchSuperGroups);
 

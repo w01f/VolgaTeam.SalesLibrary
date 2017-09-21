@@ -120,6 +120,7 @@
     <Compile Include="Entities\Wallbin\Common\Enums\LinkBundleItemType.cs" />
     <Compile Include="Entities\Wallbin\Common\Enums\LinkBundleRevenueType.cs" />
     <Compile Include="Entities\Wallbin\Common\Enums\LinksGroupLevel.cs" />
+    <Compile Include="Entities\Wallbin\Common\Enums\LinkActionType.cs" />
     <Compile Include="Entities\Wallbin\Common\Enums\VerticalAlignment.cs" />
     <Compile Include="Entities\Wallbin\Common\Enums\HorizontalAlignment.cs" />
     <Compile Include="Entities\Interfaces\IChangable.cs" />
@@ -246,6 +247,7 @@
     <Compile Include="Entities\Wallbin\Persistent\PreviewContainers\WordPreviewContainer.cs" />
     <Compile Include="Entities\Wallbin\Persistent\PreviewContainers\PowerPointPreviewContainer.cs" />
     <Compile Include="Entities\Wallbin\Persistent\PreviewContainers\DocumentPreviewContainer.cs" />
+    <Compile Include="Entities\Wallbin\Persistent\LinkActionLog.cs" />
     <Compile Include="Entities\Wallbin\Persistent\WallbinCollectionEntity.cs" />
     <Compile Include="Entities\Wallbin\Persistent\WallbinEntity.cs" />
     <Compile Include="Mappers\Wallbin\PreviewContainerMap.cs" />
@@ -297,6 +299,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Schema\Wallbin\Version8\sequense.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Schema\Wallbin\Version9\link_action_log.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Schema\Wallbin\Version9\sequense.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

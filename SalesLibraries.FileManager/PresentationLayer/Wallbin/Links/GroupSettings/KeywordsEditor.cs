@@ -4,9 +4,11 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using DevExpress.Skins;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid;
 using SalesLibraries.Business.Entities.Helpers;
+using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.Objects.SearchTags;
 using SalesLibraries.CommonGUI.Common;
 using SalesLibraries.FileManager.Controllers;
@@ -30,15 +32,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 			repositoryItemButtonEditSharedKeyword.MouseUp += EditorHelper.EditorMouseUp;
 			repositoryItemButtonEditSharedKeyword.MouseDown += EditorHelper.EditorMouseUp;
 
-			if (!((CreateGraphics()).DpiX > 96)) return;
-			var styleControllerFont = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2, styleController.Appearance.Font.Style);
-			styleController.AppearanceDisabled.Font = styleControllerFont;
-			styleController.AppearanceDropDown.Font = styleControllerFont;
-			styleController.AppearanceDropDownHeader.Font = styleControllerFont;
-			styleController.AppearanceFocused.Font = styleControllerFont;
-			styleController.AppearanceReadOnly.Font = styleControllerFont;
-			buttonXAdd.Font = new Font(buttonXAdd.Font.FontFamily, buttonXAdd.Font.Size - 2, buttonXAdd.Font.Style);
-			buttonXReset.Font = new Font(buttonXReset.Font.FontFamily, buttonXReset.Font.Size - 2, buttonXReset.Font.Style);
+			layoutControlItemReset.MinSize = RectangleHelper.ScaleSize(layoutControlItemReset.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemReset.MaxSize = RectangleHelper.ScaleSize(layoutControlItemReset.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemAdd.MinSize = RectangleHelper.ScaleSize(layoutControlItemAdd.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemAdd.MaxSize = RectangleHelper.ScaleSize(layoutControlItemAdd.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
 		#region IGroupSettingsEditor Members
@@ -50,7 +47,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 		{
 			gridControl.DataSource = null;
 			_keywords.Clear();
-			Enabled = false;
 
 			Enabled = Selection.SelectedObjects.Any();
 

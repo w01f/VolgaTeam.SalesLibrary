@@ -1,6 +1,6 @@
-﻿using System;
-using System.Drawing;
-using DevComponents.DotNetBar.Metro;
+﻿using DevComponents.DotNetBar.Metro;
+using DevExpress.Skins;
+using SalesLibraries.Common.Helpers;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 {
@@ -10,20 +10,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 		{
 			InitializeComponent();
 
-			if (CreateGraphics().DpiX > 96)
-			{
-				var font = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2,
-					styleController.Appearance.Font.Style);
-				styleController.Appearance.Font = font;
-				styleController.AppearanceDisabled.Font = font;
-				styleController.AppearanceDropDown.Font = font;
-				styleController.AppearanceDropDownHeader.Font = font;
-				styleController.AppearanceFocused.Font = font;
-				styleController.AppearanceReadOnly.Font = font;
-
-				buttonXCancel.Font = new Font(buttonXCancel.Font.FontFamily, buttonXCancel.Font.Size - 2, buttonXCancel.Font.Style);
-				buttonXDeleteLink.Font = new Font(buttonXDeleteLink.Font.FontFamily, buttonXDeleteLink.Font.Size - 2, buttonXDeleteLink.Font.Style);
-			}
+			layoutControlItemDeleteLink.MinSize = RectangleHelper.ScaleSize(layoutControlItemDeleteLink.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemDeleteLink.MaxSize = RectangleHelper.ScaleSize(layoutControlItemDeleteLink.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemDeleteLinkAndRelatedLinks.MinSize = RectangleHelper.ScaleSize(layoutControlItemDeleteLinkAndRelatedLinks.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemDeleteLinkAndRelatedLinks.MaxSize = RectangleHelper.ScaleSize(layoutControlItemDeleteLinkAndRelatedLinks.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCancel.MinSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCancel.MaxSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 	}
 }

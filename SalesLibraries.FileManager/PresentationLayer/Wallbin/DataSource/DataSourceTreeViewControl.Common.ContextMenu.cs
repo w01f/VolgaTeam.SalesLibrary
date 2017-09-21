@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Forms;
+using DevExpress.Skins;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.CommonGUI.CustomDialog;
@@ -38,6 +39,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 			{
 				form.Width = 500;
 				form.Height = 170;
+				form.Size = RectangleHelper.ScaleSize(form.Size, Utils.GetScaleFactor(CreateGraphics().DpiX));
 				if (form.ShowDialog(MainController.Instance.MainForm) != DialogResult.OK) return;
 				if (Utils.MoveFileToArchive(fileLink.Path))
 					fileNode.ParentNode.Nodes.Remove(fileNode);

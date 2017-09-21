@@ -24,18 +24,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Singl
 
 			Text = LaunchScreenItem.ItemName;
 
-			if (CreateGraphics().DpiX > 96)
-			{
-				var font = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2,
-					styleController.Appearance.Font.Style);
-				styleController.Appearance.Font = font;
-				styleController.AppearanceDisabled.Font = font;
-				styleController.AppearanceDropDown.Font = font;
-				styleController.AppearanceDropDownHeader.Font = font;
-				styleController.AppearanceFocused.Font = font;
-				styleController.AppearanceReadOnly.Font = font;
-			}
-
 			memoEditHeader.EnableSelectAll();
 			memoEditFooter.EnableSelectAll();
 
@@ -50,7 +38,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Singl
 			memoEditHeader.EditValue = _bundleItem.Header;
 			memoEditFooter.EditValue = _bundleItem.Footer;
 
-			pictureEditLogo.Image = _bundleItem.Logo;
+			pictureEditLaunchScreenLogo.Image = _bundleItem.Logo;
 			pictureEditBanner.Image = _bundleItem.Banner;
 
 			colorEditHeaderTextColor.Color = _bundleItem.HeaderForeColor;
@@ -69,7 +57,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Singl
 			_bundleItem.Header = memoEditHeader.EditValue as String;
 			_bundleItem.Footer = memoEditFooter.EditValue as String;
 
-			_bundleItem.Logo = pictureEditLogo.Image;
+			_bundleItem.Logo = pictureEditLaunchScreenLogo.Image;
 			_bundleItem.Banner = pictureEditBanner.Image;
 
 			_bundleItem.HeaderForeColor = colorEditHeaderTextColor.Color;
@@ -91,7 +79,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Singl
 			using (var form = new FormImageGallery<Widget>(MainController.Instance.Lists.Banners))
 			{
 				if (form.ShowDialog() != DialogResult.OK) return;
-				pictureEditLogo.Image = (Image)form.OriginalImage.Clone(); 
+				pictureEditLaunchScreenLogo.Image = (Image)form.OriginalImage.Clone(); 
 			}
 		}
 
