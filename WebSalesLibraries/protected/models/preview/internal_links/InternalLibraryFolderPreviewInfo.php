@@ -20,6 +20,9 @@
 		/** @var  WallbinHeaderStyle */
 		public $header;
 
+		/** @var  \Padding */
+		public $contentPadding;
+
 		/**
 		 * @param $linkSettings InternalLibraryFolderLinkSettings
 		 * @param bool $isPhone
@@ -48,11 +51,19 @@
 				$queryResult = $xpath->query('//Config/LinksOnly');
 				$this->linksOnly = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : $this->linksOnly;
 
-				$queryResult = $xpath->query('//Config//Header');
+				$queryResult = $xpath->query('//Config/Style/Header');
+				if ($queryResult->length == 0)
+					$queryResult = $xpath->query('//Config/Header');
 				if ($queryResult->length > 0)
 					$this->header = WallbinHeaderStyle::fromXml($xpath, $queryResult->item(0));
 				else
 					$this->header = WallbinHeaderStyle::createDefault();
+
+				$queryResult = $xpath->query('//Config/Style/Content/Padding');
+				if ($queryResult->length > 0)
+					$this->contentPadding = \Padding::fromXml($xpath, $queryResult->item(0));
+				else
+					$this->contentPadding = new \Padding(30);
 
 				$queryResult = $xpath->query('//Config/Actions/Action');
 				$this->initActions($xpath, $queryResult);

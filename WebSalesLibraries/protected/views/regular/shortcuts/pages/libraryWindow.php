@@ -22,22 +22,38 @@
 	else
 		$content = $this->renderFile(Yii::getPathOfAlias($this->pathPrefix . 'wallbin') . '/folderLinks.php', array('folder' => $window), true);
 ?>
+<style>
+    <? if ($shortcut->searchBar->configured): ?>
+
+    <? if (isset($shortcut->header->padding) && $shortcut->header->padding->isConfigured): ?>
+    #content .wallbin-header-container {
+
+        padding-top: <? echo $shortcut->header->padding->top; ?>px !important;
+        padding-left: <? echo $shortcut->header->padding->left; ?>px !important;
+        padding-bottom: <? echo $shortcut->header->padding->bottom; ?>px !important;
+        padding-right: <? echo $shortcut->header->padding->right; ?>px !important;
+    }
+
+    <?endif;?>
+
+    #content .wallbin-header .wallbin-header-cell {
+        border-bottom: 1px <? echo Utils::formatColor($shortcut->header->headerBorderColor); ?> solid !important;
+    }
+
+    <? endif; ?>
+
+    <? if (isset($shortcut->contentPadding) && $shortcut->contentPadding->isConfigured): ?>
+    #content .window-container {
+
+        padding-top: <? echo $shortcut->contentPadding->top; ?>px !important;
+        padding-left: <? echo $shortcut->contentPadding->left; ?>px !important;
+        padding-bottom: <? echo $shortcut->contentPadding->bottom; ?>px !important;
+        padding-right: <? echo $shortcut->contentPadding->right; ?>px !important;
+    }
+
+    <?endif;?>
+</style>
 <? if ($shortcut->searchBar->configured): ?>
-    <style>
-        <? if (isset($shortcut->header->padding) && $shortcut->header->padding->isConfigured): ?>
-        #content .wallbin-header-container {
-
-            padding-top: <? echo $shortcut->header->padding->top; ?>px !important;
-            padding-left: <? echo $shortcut->header->padding->left; ?>px !important;
-            padding-bottom: <? echo $shortcut->header->padding->bottom; ?>px !important;
-            padding-right: <? echo $shortcut->header->padding->right; ?>px !important;
-        }
-        <?endif;?>
-
-        #content .wallbin-header .wallbin-header-cell {
-            border-bottom: 1px <? echo Utils::formatColor($shortcut->header->headerBorderColor); ?> solid !important;
-        }
-    </style>
     <div class="wallbin-header-container">
         <table class="wallbin-header">
             <tr>
@@ -48,7 +64,7 @@
         </table>
     </div>
 <? endif; ?>
-<div class='padding'>
+<div class='window-container'>
 	<? if ($shortcut->column < 0): ?>
 		<? echo $content; ?>
 	<? else: ?>

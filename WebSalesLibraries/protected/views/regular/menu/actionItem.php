@@ -3,8 +3,8 @@
 	$identifier = 'shortcut-action-' . $action->id;
 ?>
 <style>
-	<?echo '#'.$identifier;?> {background-color:<?echo Utils::formatColor($action->backColor);?> !important;}
-	<?echo '#'.$identifier;?>:hover {background-color:<?echo Utils::formatColor($action->backColor);?> !important;}
+	<?echo '#'.$identifier;?> {background-color: <?echo Utils::formatColor($action->backColor);?> !important;}
+	<?echo '#'.$identifier;?>:hover {background-color: <?echo Utils::formatColor($action->backColor);?> !important;}
 	<?echo '#'.$identifier;?> .icon	{color: <?echo Utils::formatColor($action->iconColor);?> !important;}
 	<?echo '#'.$identifier;?> .text {color: <?echo Utils::formatColor($action->textColor);?> !important;}
 </style>

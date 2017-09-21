@@ -37,12 +37,7 @@
 
 			$.SalesPortal.Content.fillContent({
 				content: appData.content,
-				headerOptions: {
-					title: appData.options.headerTitle,
-					icon: appData.options.headerIcon,
-					titleHideCondition: appData.options.headerTitleHideCondition,
-					iconHideCondition: appData.options.headerIconHideCondition
-				},
+				headerOptions: appData.options.headerOptions,
 				actions: appData.actions,
 				navigationPanel: appData.navigationPanel,
 				resizeCallback: updateContentSize

@@ -41,10 +41,10 @@
 			$instance->backColor = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : Yii::app()->params['menu']['BarColor'];
 
 			$queryResult = $xpath->query('./TextColor', $contextNode);
-			$instance->textColor = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : 'FFFFFF';
+			$instance->textColor = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : Yii::app()->params['menu']['MenuItemsColor'];
 
 			$queryResult = $xpath->query('./IconColor', $contextNode);
-			$instance->iconColor = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : 'FFFFFF';
+			$instance->iconColor = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : Yii::app()->params['menu']['MenuItemsColor'];
 
 			$queryResult = $xpath->query('./ShadowColor', $contextNode);
 			$instance->shadowColor = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : 'FFFFFF';

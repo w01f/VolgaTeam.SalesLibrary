@@ -16,7 +16,7 @@
 		public $textColor;
 		public $iconColor;
 
-		/** @var $parentShortcut BaseShortcut */
+		/** @var $parentShortcut PageContentShortcut */
 		private $parentShortcut;
 
 		public function __construct($tag)
@@ -28,8 +28,8 @@
 			$this->group = '';
 			$this->title = 'No Title';
 			$this->backColor = Yii::app()->params['menu']['BarColor'];
-			$this->textColor = 'FFF';
-			$this->iconColor = 'FFF';
+			$this->textColor = Yii::app()->params['menu']['MenuItemsColor'];
+			$this->iconColor = Yii::app()->params['menu']['MenuItemsColor'];
 		}
 
 		/**
@@ -72,6 +72,15 @@
 			return $instance;
 		}
 
+		/** @param $parentShortcut PageContentShortcut */
+		public function configureFromparentShortcut($parentShortcut)
+		{
+			$this->parentShortcut = $parentShortcut;
+			$this->backColor = $this->parentShortcut->headerSettings->barBackColor;
+			$this->textColor = $this->parentShortcut->headerSettings->shortcutGroupsColor;
+
+		}
+
 		/**
 		 * @return string
 		 */
@@ -90,7 +99,7 @@
 		}
 
 		/**
-		 * @param $shortcut BaseShortcut
+		 * @param $shortcut PageContentShortcut
 		 * @return array[]
 		 */
 		public static function getShortcutActions($shortcut)
@@ -99,7 +108,7 @@
 			foreach ($customActions as $tag => $action)
 			{
 				/** @var $action ShortcutAction */
-				$action->parentShortcut = $shortcut;
+				$action->configureFromparentShortcut($shortcut);
 			}
 			return $customActions;
 		}

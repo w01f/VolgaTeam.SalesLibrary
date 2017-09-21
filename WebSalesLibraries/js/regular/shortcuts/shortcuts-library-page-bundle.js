@@ -10,12 +10,7 @@
 
 			$.SalesPortal.Content.fillContent({
 				content: bundleData.content,
-				headerOptions: {
-					title: bundleData.options.headerTitle,
-					icon: bundleData.options.headerIcon,
-					titleHideCondition: bundleData.options.headerTitleHideCondition,
-					iconHideCondition: bundleData.options.headerIconHideCondition
-				},
+				headerOptions: bundleData.options.headerOptions,
 				actions: bundleData.actions,
 				navigationPanel: bundleData.navigationPanel,
 				resizeCallback: updateContentSize

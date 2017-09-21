@@ -1,12 +1,10 @@
-(function ($)
-{
+(function ($) {
 	window.BaseUrl = window.BaseUrl || '';
 	$.SalesPortal = $.SalesPortal || {};
-	$.SalesPortal.InternalLinkViewer = function (parameters)
-	{
+	$.SalesPortal.InternalLinkViewer = function (parameters) {
 		var viewerData = new $.SalesPortal.InternalLinkViewerData(parameters.data);
-		this.show = function ()
-		{
+		this.show = function () {
+			var headerOptions = undefined;
 			switch (viewerData.previewInfo.internalLinkType)
 			{
 				case 1:
@@ -17,15 +15,14 @@
 								linkId: viewerData.linkId,
 								isQuickSite: false
 							});
+					headerOptions  = viewerData.previewInfo.headerSettings;
+					headerOptions.title = viewerData.previewInfo.showHeaderText ? viewerData.name : '';
 					new $.SalesPortal.ShortcutsWallbin().init({
 						content: parameters.content,
 						actions: viewerData.previewInfo.actionsContent,
 						navigationPanel: viewerData.previewInfo.navigationPanel,
 						options: {
-							headerTitle: viewerData.previewInfo.showHeaderText ? viewerData.name : '',
-							headerIcon: viewerData.previewInfo.headerIcon,
-							headerTitleHideCondition: viewerData.previewInfo.hideTextCondition,
-							headerIconHideCondition: viewerData.previewInfo.hideIconCondition,
+							headerOptions: headerOptions,
 							libraryId: viewerData.previewInfo.libraryId,
 							pageSelectorMode: viewerData.previewInfo.pageSelectorMode,
 							pageViewType: viewerData.previewInfo.pageViewType
@@ -40,15 +37,14 @@
 								linkId: viewerData.linkId,
 								isQuickSite: false
 							});
+					headerOptions  = viewerData.previewInfo.headerSettings;
+					headerOptions.title = viewerData.previewInfo.showHeaderText ? viewerData.name : '';
 					new $.SalesPortal.ShortcutsLibraryPage().init({
 						content: parameters.content,
 						actions: viewerData.previewInfo.actionsContent,
 						navigationPanel: viewerData.previewInfo.navigationPanel,
 						options: {
-							headerTitle: viewerData.previewInfo.showHeaderText ? viewerData.name : '',
-							headerIcon: viewerData.previewInfo.headerIcon,
-							headerTitleHideCondition: viewerData.previewInfo.hideTextCondition,
-							headerIconHideCondition: viewerData.previewInfo.hideIconCondition,
+							headerOptions: headerOptions,
 							pageViewType: viewerData.previewInfo.pageViewType
 						}
 					});
@@ -61,15 +57,14 @@
 								linkId: viewerData.linkId,
 								isQuickSite: false
 							});
+					headerOptions  = viewerData.previewInfo.headerSettings;
+					headerOptions.title = viewerData.previewInfo.showHeaderText ? viewerData.name : '';
 					new $.SalesPortal.ShortcutsLibraryWindow().init({
 						content: parameters.content,
 						actions: viewerData.previewInfo.actionsContent,
 						navigationPanel: viewerData.previewInfo.navigationPanel,
 						options: {
-							headerTitle: viewerData.previewInfo.showHeaderText ? viewerData.name : '',
-							headerIcon: viewerData.previewInfo.headerIcon,
-							headerTitleHideCondition: viewerData.previewInfo.hideTextCondition,
-							headerIconHideCondition: viewerData.previewInfo.hideIconCondition,
+							headerOptions: headerOptions,
 							windowViewType: viewerData.previewInfo.windowViewType
 						}
 					});
@@ -93,8 +88,7 @@
 									tag: 'close',
 									title: 'Close',
 									width: 80,
-									clickHandler: function ()
-									{
+									clickHandler: function () {
 										modalDialog.close();
 									}
 								}

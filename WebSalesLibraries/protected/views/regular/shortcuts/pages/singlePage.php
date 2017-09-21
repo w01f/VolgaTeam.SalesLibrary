@@ -16,15 +16,15 @@
 		$this->renderPartial('../menu/mainMenu',
 			array(
 				'menuGroups' => $menuGroups,
-				'showMainSiteUrl' => $shortcut->showMainSiteUrl
+				'showMainSiteUrl' => $shortcut->headerSettings->showMainSiteUrl
 			)
 		);
 	else
 		$this->renderPartial('../menu/singlePageMenu',
 			array(
-				'iconClass' => $shortcut->headerIcon,
+				'iconClass' => $shortcut->headerSettings->icon,
 				'headerText' => $shortcut->headerTitle,
-				'showMainSiteUrl' => $shortcut->showMainSiteUrl
+				'showMainSiteUrl' => $shortcut->headerSettings->showMainSiteUrl
 			)
 		);
 ?>

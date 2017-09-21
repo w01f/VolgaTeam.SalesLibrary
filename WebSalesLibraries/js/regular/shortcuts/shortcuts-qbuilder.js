@@ -15,12 +15,7 @@
 
 			$.SalesPortal.Content.fillContent({
 				content: qBuilderData.content,
-				headerOptions: {
-					title: qBuilderData.options.headerTitle,
-					icon: qBuilderData.options.headerIcon,
-					titleHideCondition: qBuilderData.options.headerTitleHideCondition,
-					iconHideCondition: qBuilderData.options.headerIconHideCondition
-				},
+				headerOptions: qBuilderData.options.headerOptions,
 				actions: qBuilderData.actions,
 				navigationPanel: qBuilderData.navigationPanel,
 				resizeCallback: updateContentSize

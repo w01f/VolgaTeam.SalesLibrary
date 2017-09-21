@@ -89,9 +89,9 @@
 				$this->defaultItemAppearance->size = 'regular';
 				$this->defaultItemAppearance->textAlign = 'center';
 				$this->defaultItemAppearance->backColor = Yii::app()->params['menu']['BarColor'];
-				$this->defaultItemAppearance->textColor = 'FFFFFF';
-				$this->defaultItemAppearance->iconColor = 'FFFFFF';
-				$this->defaultItemAppearance->shadowColor = 'FFFFFF';
+				$this->defaultItemAppearance->textColor = Yii::app()->params['menu']['MenuItemsColor'];
+				$this->defaultItemAppearance->iconColor = Yii::app()->params['menu']['MenuItemsColor'];
+				$this->defaultItemAppearance->shadowColor = Yii::app()->params['menu']['MenuItemsColor'];
 				$this->defaultItemAppearance->useGradient = false;
 			}
 

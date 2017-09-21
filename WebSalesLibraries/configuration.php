@@ -104,6 +104,11 @@
 				),
 				'menu' => array(
 					'BarColor' => '2C84EE',
+					'MenuButtonColor' => 'ffffff',
+					'HeaderIconColor' => 'ffffff',
+					'HeaderTextColor' => 'ffffff',
+					'MenuItemsColor' => 'ffffff',
+					'ActionMenuButtonColor' => 'ffffff  ',
 					'IconSeparation' => 5,
 					'SaveSuperGroup' => true
 				),

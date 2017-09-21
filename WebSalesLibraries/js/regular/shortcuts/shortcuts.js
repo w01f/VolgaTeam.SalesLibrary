@@ -240,12 +240,7 @@
 				default :
 					$.SalesPortal.Content.fillContent({
 						content: result.content,
-						headerOptions: {
-							title: result.options.headerTitle,
-							icon: result.options.headerIcon,
-							titleHideCondition: result.options.headerTitleHideCondition,
-							iconHideCondition: result.options.headerIconHideCondition
-						},
+						headerOptions: result.options.headerOptions,
 						actions: result.actions,
 						navigationPanel: result.navigationPanel,
 						loadCallback: function ()

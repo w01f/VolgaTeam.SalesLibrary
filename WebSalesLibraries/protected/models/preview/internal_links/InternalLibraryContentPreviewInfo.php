@@ -9,13 +9,10 @@
 
 		public $styleSettingsEncoded;
 
-		public $headerIcon;
 		public $showHeaderText;
 
-		/** @var  HideCondition */
-		public $hideIconCondition;
-		/** @var  HideCondition */
-		public $hideTextCondition;
+		/** @var  PageHeaderSettings */
+		public $headerSettings;
 
 		/** @var  ShortcutAction[] */
 		public $actions;
@@ -36,6 +33,7 @@
 			$this->styleSettingsEncoded = !empty($linkSettings->styleSettingsEncoded) ? base64_decode($linkSettings->styleSettingsEncoded) : null;
 			$this->showHeaderText = $linkSettings->showHeaderText;
 			$this->searchBar = SearchBar::createEmpty();
+			$this->headerSettings = PageHeaderSettings::createEmpty();
 
 			if (!empty($this->styleSettingsEncoded))
 			{
@@ -43,20 +41,9 @@
 				$styleConfig->loadXML($this->styleSettingsEncoded);
 				$xpath = new DomXPath($styleConfig);
 
-				$queryResult = $xpath->query('//Config/HeaderIcon');
-				$this->headerIcon = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : $this->headerIcon;
-
-				$queryResult = $xpath->query('//Config/Regular/HideHeaderIcon');
+				$queryResult = $xpath->query('//Config/Regular/HeaderSettings');
 				if ($queryResult->length > 0)
-					$this->hideIconCondition = HideCondition::fromXml($xpath, $queryResult->item(0));
-				else
-					$this->hideIconCondition = new HideCondition();
-
-				$queryResult = $xpath->query('//Config/Regular/HideHeaderTitle');
-				if ($queryResult->length > 0)
-					$this->hideTextCondition = HideCondition::fromXml($xpath, $queryResult->item(0));
-				else
-					$this->hideTextCondition = new HideCondition();
+					$this->headerSettings = PageHeaderSettings::fromXml($xpath, $queryResult->item(0));
 
 				$queryResult = $xpath->query('//Config/ShowLeftPanel');
 				$showNavigationPanel = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
@@ -119,7 +106,13 @@
 				if ($queryResult->length == 0) continue;
 				$tag = trim($queryResult->item(0)->nodeValue);
 				if (array_key_exists($tag, $actionsByKey))
-					ShortcutAction::configureFromXml($actionsByKey[$tag], $xpath, $configNode);
+				{
+					/** @var ShortcutAction $action */
+					$action = $actionsByKey[$tag];
+					$action->backColor = $this->headerSettings->barBackColor;
+					$action->textColor = $this->headerSettings->shortcutGroupsColor;
+					ShortcutAction::configureFromXml($action, $xpath, $configNode);
+				}
 			}
 		}
 

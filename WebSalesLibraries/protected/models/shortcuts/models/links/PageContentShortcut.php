@@ -5,9 +5,6 @@
 	 */
 	abstract class PageContentShortcut extends CustomHandledShortcut implements IShortcutActionContainer
 	{
-		public $headerIcon;
-		public $showMainSiteUrl;
-
 		/** @var  ShortcutAction[] */
 		public $actions;
 
@@ -17,10 +14,8 @@
 		public $allowPublicAccess;
 		public $publicPassword;
 
-		/** @var  HideCondition */
-		public $hideIconCondition;
-		/** @var  HideCondition */
-		public $hideTextCondition;
+		/** @var  PageHeaderSettings */
+		public $headerSettings;
 
 		/**
 		 * @param $linkRecord
@@ -28,11 +23,31 @@
 		 */
 		public function __construct($linkRecord, $isPhone)
 		{
+			$linkConfig = new DOMDocument();
+			$linkConfig->loadXML($linkRecord->config);
+			$xpath = new DomXPath($linkConfig);
+
+			if ($this->isPhone)
+				$this->headerSettings = PageHeaderSettings::createEmpty();
+			else
+			{
+				$queryResult = $xpath->query('//Config/Regular/HeaderSettings');
+				if ($queryResult->length > 0)
+					$this->headerSettings = PageHeaderSettings::fromXml($xpath, $queryResult->item(0));
+				else
+					$this->headerSettings = PageHeaderSettings::createEmpty();
+			}
+
 			parent::__construct($linkRecord, $isPhone);
 
-			$linkConfig = new DOMDocument();
-			$linkConfig->loadXML($this->linkRecord->config);
-			$xpath = new DomXPath($linkConfig);
+			if ($this->isPhone)
+			{
+				$this->headerSettings->title = $this->headerTitle != '' ?
+					$this->headerTitle :
+					($this->title != '' ? $this->title : $this->description);
+			}
+			else
+				$this->headerSettings->title = $this->description;
 
 			$queryResult = $xpath->query('//Config/OpenOnSamePage');
 			$this->samePage = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
@@ -43,24 +58,6 @@
 			$linkConfig = new DOMDocument();
 			$linkConfig->loadXML($this->linkRecord->config);
 			$xpath = new DomXPath($linkConfig);
-
-			$queryResult = $xpath->query('//Config/Fullsitelink');
-			$this->showMainSiteUrl = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
-
-			$queryResult = $xpath->query('//Config/HeaderIcon');
-			$this->headerIcon = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '';
-
-			$queryResult = $xpath->query('//Config/Regular/HideHeaderIcon');
-			if ($queryResult->length > 0)
-				$this->hideIconCondition = HideCondition::fromXml($xpath, $queryResult->item(0));
-			else
-				$this->hideIconCondition = new HideCondition();
-
-			$queryResult = $xpath->query('//Config/Regular/HideHeaderTitle');
-			if ($queryResult->length > 0)
-				$this->hideTextCondition = HideCondition::fromXml($xpath, $queryResult->item(0));
-			else
-				$this->hideTextCondition = new HideCondition();
 
 			$queryResult = $xpath->query('//Config/ShowLeftPanel');
 			$this->showNavigationPanel = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
@@ -120,7 +117,11 @@
 				if ($queryResult->length == 0) continue;
 				$tag = trim($queryResult->item(0)->nodeValue);
 				if (array_key_exists($tag, $actionsByKey))
-					ShortcutAction::configureFromXml($actionsByKey[$tag], $xpath, $configNode);
+				{
+					/** @var ShortcutAction $action */
+					$action = $actionsByKey[$tag];
+					ShortcutAction::configureFromXml($action, $xpath, $configNode);
+				}
 			}
 		}
 
@@ -160,26 +161,21 @@
 		{
 			$data = parent::getPageData();
 
-			if ($this->isPhone)
-				$data['headerTitle'] = $this->headerTitle != '' ?
-					$this->headerTitle :
-					($this->title != '' ? $this->title : $this->description);
-			else
-				$data['headerTitle'] = $this->description;
-			$data['headerIcon'] = $this->headerIcon;
+			$data['headerOptions'] = $this->headerSettings;
 
+			$data['headerIcon'] = $this->headerSettings->icon;
 			$data['headerIconHideCondition'] = array(
-				'extraSmall' => $this->hideIconCondition->extraSmall,
-				'small' => $this->hideIconCondition->small,
-				'medium' => $this->hideIconCondition->medium,
-				'large' => $this->hideIconCondition->large,
+				'extraSmall' => $this->headerSettings->hideIconCondition->extraSmall,
+				'small' => $this->headerSettings->hideIconCondition->small,
+				'medium' => $this->headerSettings->hideIconCondition->medium,
+				'large' => $this->headerSettings->hideIconCondition->large,
 			);
 
 			$data['headerTitleHideCondition'] = array(
-				'extraSmall' => $this->hideTextCondition->extraSmall,
-				'small' => $this->hideTextCondition->small,
-				'medium' => $this->hideTextCondition->medium,
-				'large' => $this->hideTextCondition->large,
+				'extraSmall' => $this->headerSettings->hideTextCondition->extraSmall,
+				'small' => $this->headerSettings->hideTextCondition->small,
+				'medium' => $this->headerSettings->hideTextCondition->medium,
+				'large' => $this->headerSettings->hideTextCondition->large,
 			);
 
 			return $data;

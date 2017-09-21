@@ -1,4 +1,5 @@
 <?
+
 	use application\models\wallbin\models\web\LibraryManager as LibraryManager;
 	use application\models\wallbin\models\web\LibraryPage as LibraryPage;
 	use application\models\wallbin\models\web\LibraryFolder as LibraryFolder;
@@ -18,6 +19,9 @@
 
 		/** @var  WallbinHeaderStyle */
 		public $header;
+
+		/** @var  \Padding */
+		public $contentPadding;
 
 		/**
 		 * @param $linkRecord
@@ -77,11 +81,19 @@
 			$queryResult = $xpath->query('//Config/LinksOnly');
 			$this->linksOnly = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
 
-			$queryResult = $xpath->query('//Config//Header');
+			$queryResult = $xpath->query('//Config/Style/Header');
+			if ($queryResult->length == 0)
+				$queryResult = $xpath->query('//Config/Header');
 			if ($queryResult->length > 0)
 				$this->header = WallbinHeaderStyle::fromXml($xpath, $queryResult->item(0));
 			else
 				$this->header = WallbinHeaderStyle::createDefault();
+
+			$queryResult = $xpath->query('//Config/Style/Content/Padding');
+			if ($queryResult->length > 0)
+				$this->contentPadding = \Padding::fromXml($xpath, $queryResult->item(0));
+			else
+				$this->contentPadding = new \Padding(30);
 		}
 
 		/**

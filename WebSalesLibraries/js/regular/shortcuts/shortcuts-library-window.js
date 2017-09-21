@@ -9,12 +9,7 @@
 			libraryWindowData = data;
 			$.SalesPortal.Content.fillContent({
 				content: libraryWindowData.content,
-				headerOptions: {
-					title: libraryWindowData.options.headerTitle,
-					icon: libraryWindowData.options.headerIcon,
-					titleHideCondition: libraryWindowData.options.headerTitleHideCondition,
-					iconHideCondition: libraryWindowData.options.headerIconHideCondition
-				},
+				headerOptions: libraryWindowData.options.headerOptions,
 				actions: libraryWindowData.actions,
 				navigationPanel: libraryWindowData.navigationPanel,
 				resizeCallback: updateContentSize

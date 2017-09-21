@@ -12,12 +12,7 @@
 
 			$.SalesPortal.Content.fillContent({
 				content: gridData.content,
-				headerOptions: {
-					title: gridData.options.headerTitle,
-					icon: gridData.options.headerIcon,
-					titleHideCondition: gridData.options.headerTitleHideCondition,
-					iconHideCondition: gridData.options.headerIconHideCondition
-				},
+				headerOptions: gridData.options.headerOptions,
 				actions: gridData.actions,
 				navigationPanel: gridData.navigationPanel,
 				resizeCallback: updateContentSize

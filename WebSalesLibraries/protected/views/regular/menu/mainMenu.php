@@ -25,7 +25,7 @@
 		<div class="om-controlitems">
 			<div class="om-controlitem menu-icon-holder menu-header row">
 				<div class="col col-xs-8">
-					<i class="white-icon icon-menu9"></i>
+					<i class="white-icon icon-menu9 open-main-menu-button"></i>
 					<i class="header-icon <? echo isset($iconClass) ? $iconClass : ''; ?>"></i>
 					<span class="header-text"><? echo !empty($headerText) ? $headerText : ''; ?></span>
 				</div>

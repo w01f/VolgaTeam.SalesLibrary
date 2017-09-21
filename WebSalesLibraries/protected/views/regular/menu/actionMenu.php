@@ -3,7 +3,7 @@
 		<div class="main-level">
 			<div class="menu transparent shortcut-menu-header" data-opening-id="shortcut-action-container" style="display: none">
 				<div class="icon">
-					<i class="icon-mouse2"></i>
+					<i class="icon-mouse2 open-action-menu-button"></i>
 				</div>
 			</div>
 			<div id="shortcut-action-container" class="first-level level">

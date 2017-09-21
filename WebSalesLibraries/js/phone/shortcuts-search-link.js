@@ -9,7 +9,7 @@
 		this.init = function ()
 		{
 			var searchShortcutOptions = new $.SalesPortal.SearchOptions(shortcutData.options.searchOptions);
-			var shortcutLinkTitle = shortcutData.options.headerTitle;
+			var shortcutLinkTitle = shortcutData.options.headerOptions.title;
 			var pageIdentifier = '#search-results-'+shortcutData.options.linkId;
 			var searchResultsPage = $(pageIdentifier);
 			searchResultsPage.find('.page-header .header-title').html(shortcutLinkTitle);

@@ -33,12 +33,7 @@
 						{
 							$.SalesPortal.Content.fillContent({
 								content: parentSearchData.content,
-								headerOptions: {
-									title: parentSearchData.options.headerTitle,
-									icon: parentSearchData.options.headerIcon,
-									titleHideCondition: parentSearchData.options.headerTitleHideCondition,
-									iconHideCondition: parentSearchData.options.headerIconHideCondition
-								},
+								headerOptions: parentSearchData.options.headerOptions,
 								actions: parentSearchData.actions,
 								navigationPanel: parentSearchData.navigationPanel,
 								resizeCallback: function () {

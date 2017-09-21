@@ -29,12 +29,7 @@
 
 			$.SalesPortal.Content.fillContent({
 				content: favoritesData.content,
-				headerOptions: {
-					title: favoritesData.options.headerTitle,
-					icon: favoritesData.options.headerIcon,
-					titleHideCondition: favoritesData.options.headerTitleHideCondition,
-					iconHideCondition: favoritesData.options.headerIconHideCondition
-				},
+				headerOptions: favoritesData.options.headerOptions,
 				actions: favoritesData.actions,
 				navigationPanel: favoritesData.navigationPanel,
 				resizeCallback: updateContentSize
@@ -207,12 +202,7 @@
 							{
 								$.SalesPortal.Content.fillContent({
 									content: msg,
-									headerOptions: {
-										title: favoritesData.options.headerTitle,
-										icon: favoritesData.options.headerIcon,
-										titleHideCondition: favoritesData.options.headerTitleHideCondition,
-										iconHideCondition: favoritesData.options.headerIconHideCondition
-									},
+									headerOptions: favoritesData.options.headerOptions,
 									actions: favoritesData.actions,
 									navigationPanel: favoritesData.navigationPanel,
 									resizeCallback: updateContentSize
