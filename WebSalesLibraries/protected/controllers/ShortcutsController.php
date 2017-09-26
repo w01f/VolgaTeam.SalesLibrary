@@ -23,6 +23,7 @@
 		public function actionGetSinglePage()
 		{
 			$shortcutId = Yii::app()->request->getQuery('linkId');
+			$useForThumbnail = Yii::app()->request->getQuery('useForThumbnail') !== null;
 			/** @var  $shortcutRecord ShortcutLinkRecord */
 			$shortcutRecord = ShortcutLinkRecord::model()->findByPk($shortcutId);
 			if (isset($shortcutRecord))
@@ -31,7 +32,7 @@
 				$shortcut = $shortcutRecord->getModel($this->isPhone);
 				$shortcut->loadPageConfig();
 
-				if (UserIdentity::isUserAuthorized() || ($shortcut->allowPublicAccess && !isset($shortcut->publicPassword)))
+				if ($useForThumbnail || UserIdentity::isUserAuthorized() || ($shortcut->allowPublicAccess && !isset($shortcut->publicPassword)))
 					$this->renderSinglePage($shortcut);
 				else if ($shortcut->allowPublicAccess && isset($shortcut->publicPassword))
 				{
@@ -67,11 +68,16 @@
 			}
 		}
 
-		/** @var $shortcut BaseShortcut */
+		/**
+		 * @param $shortcut BaseShortcut
+		 */
 		protected function renderSinglePage($shortcut)
 		{
 			$this->pageTitle = sprintf('%s - %s', $shortcut->title, $shortcut->description);
-			$menuGroups = ShortcutsManager::getAvailableGroups($this->isPhone);
+			if (UserIdentity::isUserAuthorized())
+				$menuGroups = ShortcutsManager::getAvailableGroups($this->isPhone);
+			else
+				$menuGroups = array();
 			$this->render('pages/singlePage', array('menuGroups' => $menuGroups, 'shortcut' => $shortcut));
 		}
 

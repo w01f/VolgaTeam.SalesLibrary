@@ -15,5 +15,6 @@
 
 		public $isDraggable;
 		public $dragHeader;
-		public $dragUrl;
+		public $url;
+		public $isDirectUrl;
 	}

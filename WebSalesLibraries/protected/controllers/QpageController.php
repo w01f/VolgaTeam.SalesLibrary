@@ -14,6 +14,27 @@
 			);
 		}
 
+		protected function beforeAction($action)
+		{
+			/** @var CHttpRequest $request */
+			$request = Yii::app()->request;
+
+			if (UserIdentity::isUserAuthorized())
+				return true;
+
+			if (!(in_array($action->id, $this->getPublicActionIds())))
+			{
+				$useForThumbnail = $request->getQuery('useForThumbnail') !== null;
+				if (!$useForThumbnail)
+				{
+					Yii::app()->user->loginRequired();
+					return false;
+				}
+			}
+
+			return true;
+		}
+
 		public function getViewPath()
 		{
 			return YiiBase::getPathOfAlias($this->pathPrefix . 'qpage');
@@ -32,7 +53,7 @@
 				{
 					/** @var $page QPageRecord */
 					$page = QPageRecord::model()->findByPk($pinCodedModel->pageId);
-					$this->redirect($page->getUrlInternal());
+					$this->redirect($page->getUrlInternal(false));
 				}
 				else
 				{
@@ -45,19 +66,20 @@
 			{
 				$accessed = false;
 				$pageId = Yii::app()->request->getQuery('id');
+				$useForThumbnail = Yii::app()->request->getQuery('useForThumbnail') !== null;
 				if (isset($pageId))
 				{
 					/** @var $page QPageRecord */
 					$page = QPageRecord::model()->findByPk($pageId);
 					if (isset($page) && !$page->isExpired())
 					{
-						if (isset($page->pin_code))
+						if (!$useForThumbnail && isset($page->pin_code))
 						{
 							$pinCodedModel->pageId = $pageId;
 							$this->render('login', array('formData' => $pinCodedModel, 'page' => $page));
 						}
 						else
-							$this->redirect($page->getUrlInternal());
+							$this->redirect($page->getUrlInternal($useForThumbnail));
 						$accessed = true;
 					}
 				}
@@ -72,15 +94,16 @@
 		public function actionGetProtected()
 		{
 			$pageId = Yii::app()->request->getQuery('id');
+			$useForThumbnail = Yii::app()->request->getQuery('useForThumbnail') !== null;
 			if (isset($pageId))
-				$this->renderPage($pageId, true);
+				$this->renderPage($pageId, true, $useForThumbnail);
 		}
 
 		public function actionGetPublic()
 		{
 			$pageId = Yii::app()->request->getQuery('id');
 			if (isset($pageId))
-				$this->renderPage($pageId, false);
+				$this->renderPage($pageId, false, true);
 		}
 
 		public function actionRecordActivity()
@@ -115,10 +138,11 @@
 		}
 
 		/**
-		 * @param $pageId
-		 * @param $protected
+		 * @param $pageId string
+		 * @param $protected boolean
+		 * @param $useForThumbnail boolean
 		 */
-		private function renderPage($pageId, $protected)
+		private function renderPage($pageId, $protected, $useForThumbnail)
 		{
 			/** @var $page QPageRecord */
 			$page = QPageRecord::model()->findByPk($pageId);
@@ -128,10 +152,10 @@
 					'qsite title' => $page->title,
 					'url' => $page->getUrl(),
 				));
-			if (isset($page) && (($page->restricted && $protected) || !$page->restricted))
+			if (isset($page) && (($page->restricted && $protected) || !$page->restricted || $useForThumbnail))
 			{
 				$this->pageTitle = $page->title;
-				if ($protected)
+				if ($protected && !$useForThumbnail)
 					$menuGroups = ShortcutsManager::getAvailableGroups($this->isPhone);
 				else
 					$menuGroups = array();

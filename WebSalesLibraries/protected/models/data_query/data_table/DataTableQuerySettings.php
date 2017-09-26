@@ -265,12 +265,14 @@
 						$this->baseQueryFields['thumbnail'] = "case 
 							when link.original_format='jpeg' or link.original_format='gif' or link.original_format='png' then
 								concat(lib.path,'/',link.file_relative_path)
-							when link.original_format='url' then
+							when link.original_format='url' or link.original_format='html5' or link.original_format='youtube' or link.original_format='vimeo' or link.original_format='quicksite' then
 								(select concat(lib.path,'/',pv.relative_path) from tbl_preview pv where pv.id_container=link.id_preview and pv.type='thumbs_datatable' " . $thumbnailCondition . ")								
 							when link.original_format='video' then
 								(select concat(lib.path,'/',pv.relative_path) from tbl_preview pv where pv.id_container=link.id_preview and pv.type='thumbs_datatable' " . $thumbnailCondition . ")										
 							when link.original_format='ppt' or link.original_format='doc' or link.original_format='pdf' then
 								(select concat(lib.path,'/',pv.relative_path) from tbl_preview pv where pv.id_container=link.id_preview and pv.type='thumbs_datatable' " . $thumbnailCondition . ")
+							when link.original_format='internal link' then
+								(select concat(pv_lib.path,'/',pv.relative_path) from tbl_preview pv join tbl_library pv_lib on pv_lib.id=pv.id_library join tbl_link child_link on child_link.id_preview=pv.id_container join tbl_link_internal_link l_i_l on l_i_l.id_original = child_link.id where l_i_l.id_internal=link.id and pv.type='thumbs_datatable' " . $thumbnailCondition . ")
 							when link.original_format='link bundle' then
 								(select concat(pv_lib.path,'/',pv.relative_path) from tbl_preview pv join tbl_library pv_lib on pv_lib.id=pv.id_library join tbl_link child_link on child_link.id_preview=pv.id_container join (select lb.id_link as id_link, lb.id_bundle as id_bundle, lb.use_as_thumbnail as use_as_thumbnail from tbl_link_bundle lb union select l_i_l.id_original as id_link, lb.id_bundle as id_bundle, lb.use_as_thumbnail as use_as_thumbnail from tbl_link_bundle lb join tbl_link_internal_link l_i_l on l_i_l.id_internal = lb.id_link) link_set on link_set.id_link=child_link.id where link_set.id_bundle=link.id and link_set.use_as_thumbnail=1 and pv.type='thumbs_datatable' " . $thumbnailCondition . ")
 							end as thumbnail";

@@ -117,21 +117,6 @@
 							$previewRecord->thumb_height = $previewContainer['thumbsHeight'];
 						$previewRecord->save();
 					}
-			if (array_key_exists('thumbsLinks', $previewContainer))
-				if (isset($previewContainer['thumbsLinks']))
-					foreach ($previewContainer['thumbsLinks'] as $link)
-					{
-						$previewRecord = new PreviewRecord();
-						$previewRecord->id_container = $previewContainer['id'];
-						$previewRecord->id_library = $previewContainer['libraryId'];
-						$previewRecord->type = 'thumbs';
-						$previewRecord->relative_path = $link;
-						if (array_key_exists('thumbsWidth', $previewContainer))
-							$previewRecord->thumb_width = $previewContainer['thumbsWidth'];
-						if (array_key_exists('thumbsHeight', $previewContainer))
-							$previewRecord->thumb_height = $previewContainer['thumbsHeight'];
-						$previewRecord->save();
-					}
 			if (array_key_exists('thumbsPhoneLinks', $previewContainer))
 				if (isset($previewContainer['thumbsPhoneLinks']))
 					foreach ($previewContainer['thumbsPhoneLinks'] as $link)

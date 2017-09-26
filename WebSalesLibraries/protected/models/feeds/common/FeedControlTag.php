@@ -8,6 +8,7 @@
 		const ControlTagLinkFormatPowerPoint = 'ppt';
 		const ControlTagLinkFormatVideo = 'video';
 		const ControlTagLinkFormatDocuments = 'document';
+		const ControlTagLinkFormatHyperlinks = 'links';
 
 		const ControlTagDateToday = 'today';
 		const ControlTagDateWeek = 'week';

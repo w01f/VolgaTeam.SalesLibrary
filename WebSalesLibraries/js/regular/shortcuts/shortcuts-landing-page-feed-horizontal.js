@@ -273,7 +273,7 @@
 				}
 			});
 
-			feedContainer.find('.carousel-links .item .portfolio_utube_item').off('click').on('click', function (e) {
+			feedContainer.find('.carousel-links .item .previewable').off('click').on('click', function (e) {
 				e.stopPropagation();
 				var linkId = $(this).find('.service-data .link-id').text();
 				$.SalesPortal.LinkManager.requestViewDialog({

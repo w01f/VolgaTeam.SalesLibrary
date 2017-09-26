@@ -255,7 +255,7 @@
 				}
 			});
 			$.SalesPortal.ShortcutsManager.assignShortcutItemHandlers(feedItemsList);
-			feedItemsList.find('.library-link-block').off('click').on('click', function (e)
+			feedItemsList.find('.library-link-block.previewable').off('click').on('click', function (e)
 			{
 				e.stopPropagation();
 				var linkId = $(this).find('.service-data .link-id').text();

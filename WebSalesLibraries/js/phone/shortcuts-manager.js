@@ -123,13 +123,13 @@
 								pageContent.find('.main-content .content-header .back a').prop('href', parentShortcutId);
 
 							var navigationToggleButton = pageContent.find('.navigation-panel-toggle');
-							var navigationItemsConteiner = pageContent.find('.navigation-items-container');
+							var navigationItemsContainer = pageContent.find('.navigation-items-container');
 							if (!(result.navigationPanel && result.navigationPanel.content !== ''))
 								navigationToggleButton.hide();
-							navigationItemsConteiner.html(result.navigationPanel.content);
+							navigationItemsContainer.html(result.navigationPanel.content);
 							$(window).one("pagecontainerchange.navigation-items", function ()
 							{
-								navigationItemsConteiner.find('.shortcuts-link').off('click').on('click', function (e)
+								navigationItemsContainer.find('.shortcuts-link').off('click').on('click', function (e)
 								{
 									var data = $(this).find('.service-data');
 									$.SalesPortal.ShortcutsManager.trackActivity(data);

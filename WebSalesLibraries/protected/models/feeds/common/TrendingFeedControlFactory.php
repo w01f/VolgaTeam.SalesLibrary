@@ -15,6 +15,7 @@
 			FeedControlTag::ControlTagLinkFormatPowerPoint,
 			FeedControlTag::ControlTagLinkFormatDocuments,
 			FeedControlTag::ControlTagLinkFormatVideo,
+			FeedControlTag::ControlTagLinkFormatHyperlinks,
 			FeedControlTag::ControlTagDetailsButton
 		);
 

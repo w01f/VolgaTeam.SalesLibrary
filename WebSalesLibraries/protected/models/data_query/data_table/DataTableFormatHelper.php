@@ -195,6 +195,98 @@
 												if (empty($imageUrl))
 													$imageUrl = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/grid/thumbnail-placeholder/vimeo.png');
 												break;
+											case 'internal library':
+												if (!isset($internalLibraryThumbnailFiles))
+												{
+													$internalLibraryThumbnailFiles = array();
+													$folderPath = \Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'internal-links' . DIRECTORY_SEPARATOR . 'datatables' . DIRECTORY_SEPARATOR . 'library';
+													if (is_dir($folderPath))
+													{
+														if ($dh = opendir($folderPath))
+														{
+															while (($file = readdir($dh)) !== false)
+															{
+																if ($file !== '.' && $file !== '..')
+																	$internalLibraryThumbnailFiles[] = $file;
+															}
+															closedir($dh);
+														}
+													}
+												}
+												if (count($internalLibraryThumbnailFiles) > 0)
+													$imageUrl = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/internal-links/datatables/library/' . $internalLibraryThumbnailFiles[array_rand($internalLibraryThumbnailFiles)]);
+												else
+													$imageFileName = $linkRecord['search_format'];
+												break;
+											case 'internal page':
+												if (!isset($internalPageThumbnailFiles))
+												{
+													$internalPageThumbnailFiles = array();
+													$folderPath = \Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'internal-links' . DIRECTORY_SEPARATOR . 'datatables' . DIRECTORY_SEPARATOR . 'page';
+													if (is_dir($folderPath))
+													{
+														if ($dh = opendir($folderPath))
+														{
+															while (($file = readdir($dh)) !== false)
+															{
+																if ($file !== '.' && $file !== '..')
+																	$internalPageThumbnailFiles[] = $file;
+															}
+															closedir($dh);
+														}
+													}
+												}
+												if (count($internalPageThumbnailFiles) > 0)
+													$imageUrl = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/internal-links/datatables/page/' . $internalPageThumbnailFiles[array_rand($internalPageThumbnailFiles)]);
+												else
+													$imageFileName = $linkRecord['search_format'];
+												break;
+											case 'internal window':
+												if (!isset($internalWindowThumbnailFiles))
+												{
+													$internalWindowThumbnailFiles = array();
+													$folderPath = \Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'internal-links' . DIRECTORY_SEPARATOR . 'datatables' . DIRECTORY_SEPARATOR . 'window';
+													if (is_dir($folderPath))
+													{
+														if ($dh = opendir($folderPath))
+														{
+															while (($file = readdir($dh)) !== false)
+															{
+																if ($file !== '.' && $file !== '..')
+																	$internalWindowThumbnailFiles[] = $file;
+															}
+															closedir($dh);
+														}
+													}
+												}
+												if (count($internalWindowThumbnailFiles) > 0)
+													$imageUrl = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/internal-links/datatables/window/' . $internalWindowThumbnailFiles[array_rand($internalWindowThumbnailFiles)]);
+												else
+													$imageFileName = $linkRecord['search_format'];
+												break;
+											case 'internal shortcut':
+												if (!isset($internalShortcutThumbnailFiles))
+												{
+													$internalShortcutThumbnailFiles = array();
+													$folderPath = \Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'internal-links' . DIRECTORY_SEPARATOR . 'datatables' . DIRECTORY_SEPARATOR . 'shortcut';
+													if (is_dir($folderPath))
+													{
+														if ($dh = opendir($folderPath))
+														{
+															while (($file = readdir($dh)) !== false)
+															{
+																if ($file !== '.' && $file !== '..')
+																	$internalShortcutThumbnailFiles[] = $file;
+															}
+															closedir($dh);
+														}
+													}
+												}
+												if (count($internalShortcutThumbnailFiles) > 0)
+													$imageUrl = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/internal-links/datatables/shortcut/' . $internalShortcutThumbnailFiles[array_rand($internalShortcutThumbnailFiles)]);
+												else
+													$imageFileName = $linkRecord['search_format'];
+												break;
 											case 'app':
 											case 'doc':
 											case 'html5':
@@ -208,10 +300,6 @@
 											case 'url':
 											case 'video':
 											case 'xls':
-											case 'internal library':
-											case 'internal page':
-											case 'internal shortcut':
-											case 'internal window':
 											case 'internal link':
 												$imageFileName = $linkRecord['search_format'];
 												break;

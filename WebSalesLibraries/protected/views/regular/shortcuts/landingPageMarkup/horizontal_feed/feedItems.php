@@ -88,10 +88,11 @@
                 <div class="row">
 					<? endif; ?>
 					<? for ($j = $i; $j < ($i + $linksPerSlide) && $j < $linksCount; $j++): ?>
-                        <div class="portfolio_utube_item <? echo $itemColumnClass; ?><? if ($feedItems[$j]->isDraggable): ?> draggable<? endif; ?>"
+                        <div class="portfolio_utube_item <? echo $itemColumnClass; ?><? if ($feedItems[$j]->isDraggable): ?> draggable<? endif; ?><? if (!$feedItems[$j]->isDirectUrl): ?> previewable<? endif; ?>"
 						     <? if ($feedItems[$j]->isDraggable): ?>draggable="true"
                              data-url-header="<? echo $feedItems[$j]->dragHeader; ?>"
-                             data-url="<? echo $feedItems[$j]->dragUrl; ?>"<? endif; ?>>
+                             data-url="<? echo $feedItems[$j]->url; ?>"<? endif; ?>>
+	                        <? if ($feedItems[$j]->isDirectUrl): ?><a href="<? echo $feedItems[$j]->url; ?>" target="_blank"><? endif; ?>
                             <div class="portfolio_utube_item_image">
                                 <img src="<? echo $feedItems[$j]->thumbnail; ?>"/>
                             </div>
@@ -155,6 +156,7 @@
                             <div class="service-data">
                                 <div class="link-id"><? echo $feedItems[$j]->linkId; ?></div>
                             </div>
+		                    <? if ($feedItems[$j]->isDirectUrl): ?></a><? endif; ?>
                         </div>
 					<? endfor; ?>
 					<? if ($linksPerSlide > 1): ?>

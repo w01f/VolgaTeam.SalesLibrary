@@ -168,6 +168,22 @@
             </button>
 		<? endif; ?>
 	    <?
+		    /** @var FeedControlSettings $control */
+		    $control = $viewSettings->controlSettings->{FeedControlTag::ControlTagLinkFormatHyperlinks};
+	    ?>
+	    <? if ($control->enabled): ?>
+            <button type="button"
+                    class="btn btn-default link-format-toggle<? if (in_array(LinkFeedQuerySettings::LinkFormatHyperlink, $querySettings->linkFormats)): ?> active<? endif; ?><? if ($control->hideCondition->large): ?> hidden-lg<? endif; ?>
+                            <? if ($control->hideCondition->medium): ?> hidden-md<? endif; ?>
+                            <? if ($control->hideCondition->small): ?> hidden-sm<? endif; ?>
+                            <? if ($control->hideCondition->extraSmall): ?> hidden-xs<? endif; ?>">
+                <span class="title"><? echo $control->title; ?></span>
+                <span class="service-data">
+                                <span class="link-format-tag"><? echo LinkFeedQuerySettings::LinkFormatHyperlink; ?></span>
+                            </span>
+            </button>
+	    <? endif; ?>
+	    <?
 		    /** @var FeedDetailsControlSettings $control */
 		    $control = $viewSettings->controlSettings->{FeedControlTag::ControlTagDetailsButton};
 	    ?>

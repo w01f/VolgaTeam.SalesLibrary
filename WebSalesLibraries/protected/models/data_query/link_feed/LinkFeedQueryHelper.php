@@ -52,18 +52,38 @@
 					case LinkFeedQuerySettings::LinkFormatPdf:
 					case LinkFeedQuerySettings::LinkFormatWord:
 					case LinkFeedQuerySettings::LinkFormatUrl:
+					case LinkFeedQuerySettings::LinkFormatHtml5:
+					case LinkFeedQuerySettings::LinkFormatQuicksite:
+					case LinkFeedQuerySettings::LinkFormatYouTube:
+					case LinkFeedQuerySettings::LinkFormatVimeo:
+					case LinkFeedQuerySettings::LinkFormatInternalLibrary:
+					case LinkFeedQuerySettings::LinkFormatInternalPage:
+					case LinkFeedQuerySettings::LinkFormatInternalWindow:
+					case LinkFeedQuerySettings::LinkFormatInternalShortcut:
+					case LinkFeedQuerySettings::LinkFormatInternalLink:
 						$queryFormats[] = $linkFormat;
 						break;
 					case LinkFeedQuerySettings::LinkFormatDocument:
 						$queryFormats[] = LinkFeedQuerySettings::LinkFormatWord;
 						$queryFormats[] = LinkFeedQuerySettings::LinkFormatPdf;
-						$queryFormats[] = LinkFeedQuerySettings::LinkFormatUrl;
 						break;
 					case LinkFeedQuerySettings::LinkFormatVideo:
 						$queryFormats[] = $linkFormat;
 						$queryFormats[] = LinkFeedQuerySettings::LinkFormatYouTube;
 						$queryFormats[] = LinkFeedQuerySettings::LinkFormatVimeo;
 						$queryFormats[] = LinkFeedQuerySettings::LinkFormatVideo;
+						break;
+					case LinkFeedQuerySettings::LinkFormatHyperlink:
+						$queryFormats[] = LinkFeedQuerySettings::LinkFormatUrl;
+						$queryFormats[] = LinkFeedQuerySettings::LinkFormatHtml5;
+						$queryFormats[] = LinkFeedQuerySettings::LinkFormatQuicksite;
+						$queryFormats[] = LinkFeedQuerySettings::LinkFormatYouTube;
+						$queryFormats[] = LinkFeedQuerySettings::LinkFormatVimeo;
+						$queryFormats[] = LinkFeedQuerySettings::LinkFormatInternalLibrary;
+						$queryFormats[] = LinkFeedQuerySettings::LinkFormatInternalPage;
+						$queryFormats[] = LinkFeedQuerySettings::LinkFormatInternalWindow;
+						$queryFormats[] = LinkFeedQuerySettings::LinkFormatInternalShortcut;
+						$queryFormats[] = LinkFeedQuerySettings::LinkFormatInternalLink;
 						break;
 				}
 
@@ -104,24 +124,28 @@
 							        then (case
 							              when link.original_format='jpeg' or link.original_format='gif' or link.original_format='png' then
 							                concat(lib.path,'/',link.file_relative_path)
-							              when link.original_format='url' then
+							              when link.original_format='url' or link.original_format='html5' or link.original_format='youtube' or link.original_format='vimeo' or link.original_format='quicksite' then
 							                (select concat(lib.path,'/',pv.relative_path) from tbl_preview pv where pv.id_container=link.id_preview and pv.type='thumbs' order by pv.relative_path limit 1)
 							              when link.original_format='video' then
 							                (select concat(lib.path,'/',pv.relative_path) from tbl_preview pv where pv.id_container=link.id_preview and pv.type='mp4 thumb' order by pv.relative_path limit 1)
 							              when link.original_format='ppt' or link.original_format='doc' or link.original_format='pdf' then
 							                (select concat(lib.path,'/',pv.relative_path) from tbl_preview pv where pv.id_container=link.id_preview and pv.type='png_phone' order by pv.relative_path limit 1)
+							              when link.original_format='internal link' then
+							                (select concat(pv_lib.path,'/',pv.relative_path) from tbl_preview pv join tbl_library pv_lib on pv_lib.id=pv.id_library join tbl_link child_link on child_link.id_preview=pv.id_container join tbl_link_internal_link l_i_l on l_i_l.id_original = child_link.id where l_i_l.id_internal=link.id and (pv.type='png_phone' or pv.type='mp4 thumb') order by pv.relative_path limit 1)
 							              when link.original_format='link bundle' then
 							                (select concat(pv_lib.path,'/',pv.relative_path) from tbl_preview pv join tbl_library pv_lib on pv_lib.id=pv.id_library join tbl_link child_link on child_link.id_preview=pv.id_container join (select lb.id_link as id_link, lb.id_bundle as id_bundle, lb.use_as_thumbnail as use_as_thumbnail from tbl_link_bundle lb union select l_i_l.id_original as id_link, lb.id_bundle as id_bundle, lb.use_as_thumbnail as use_as_thumbnail from tbl_link_bundle lb join tbl_link_internal_link l_i_l on l_i_l.id_internal = lb.id_link) link_set on link_set.id_link=child_link.id where link_set.id_bundle=link.id and link_set.use_as_thumbnail=1 and (pv.type='png_phone' or pv.type='mp4 thumb') order by pv.relative_path limit 1)
 							              end)
 							      else (case
 							            when link.original_format='jpeg' or link.original_format='gif' or link.original_format='png' then
 							              concat(lib.path,'/',link.file_relative_path)
-										when link.original_format='url' then
+										when link.original_format='url' or link.original_format='html5' or link.original_format='youtube' or link.original_format='vimeo' or link.original_format='quicksite' then
 							              (select concat(lib.path,'/',pv.relative_path) from tbl_preview pv where pv.id_container=link.id_preview and pv.type='thumbs' order by rand() limit 1)							              
 							            when link.original_format='video' then
 							              (select concat(lib.path,'/',pv.relative_path) from tbl_preview pv where pv.id_container=link.id_preview and pv.type='mp4 thumb' order by rand() limit 1)
 							            when link.original_format='ppt' or link.original_format='doc' or link.original_format='pdf' then
 							              (select concat(lib.path,'/',pv.relative_path) from tbl_preview pv where pv.id_container=link.id_preview and pv.type='png_phone' order by rand() limit 1)
+							            when link.original_format='internal link' then
+							              (select concat(pv_lib.path,'/',pv.relative_path) from tbl_preview pv join tbl_library pv_lib on pv_lib.id=pv.id_library join tbl_link child_link on child_link.id_preview=pv.id_container join tbl_link_internal_link l_i_l on l_i_l.id_original = child_link.id where l_i_l.id_internal=link.id and (pv.type='png_phone' or pv.type='mp4 thumb') order by rand() limit 1)  
 							            when link.original_format='link bundle' then
 							              (select concat(pv_lib.path,'/',pv.relative_path) from tbl_preview pv join tbl_library pv_lib on pv_lib.id=pv.id_library join tbl_link child_link on child_link.id_preview=pv.id_container join (select lb.id_link as id_link, lb.id_bundle as id_bundle, lb.use_as_thumbnail as use_as_thumbnail from tbl_link_bundle lb union select l_i_l.id_original as id_link, lb.id_bundle as id_bundle, lb.use_as_thumbnail as use_as_thumbnail from tbl_link_bundle lb join tbl_link_internal_link l_i_l on l_i_l.id_internal = lb.id_link) link_set on link_set.id_link=child_link.id where link_set.id_bundle=link.id and link_set.use_as_thumbnail=1 and (pv.type='png_phone' or pv.type='mp4 thumb') order by rand() limit 1)
 							            end)
@@ -303,40 +327,53 @@
 				if ($isHyperlink)
 				{
 					$feedItem->dragHeader = 'URL';
-					$feedItem->dragUrl = $fileInfo->link;
+					$feedItem->url = $fileInfo->link;
+					$feedItem->isDirectUrl = true;
 				}
 				else if ($fileInfo->isFile || $isLinkBundle)
 				{
 					$feedItem->dragHeader = 'DownloadURL';
-					$feedItem->dragUrl = \FileInfo::getFileMIME($resultRecord['original_format']) . ':' .
+					$feedItem->url = \FileInfo::getFileMIME($resultRecord['original_format']) . ':' .
 						$fileInfo->name . ':' .
 						str_replace('SalesLibraries/SalesLibraries', 'SalesLibraries', $fileInfo->link);
+					$feedItem->isDirectUrl = false;
 				}
 
 				switch ($resultRecord['search_format'])
 				{
 					case LinkFeedQuerySettings::LinkFormatYouTube:
-						if (preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $resultRecord['path'], $match))
+						if (!isset($resultRecord['thumbnail']))
 						{
-							$youTubeId = $match[1];
-							$feedItem->thumbnail = sprintf("https://img.youtube.com/vi/%s/0.jpg", $youTubeId);
+							if (preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $resultRecord['path'], $match))
+							{
+								$youTubeId = $match[1];
+								$feedItem->thumbnail = sprintf("https://img.youtube.com/vi/%s/0.jpg", $youTubeId);
+							}
 						}
+						else
+							$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '//' . 'sd_cache' . '//' . $resultRecord['thumbnail']);
 						break;
 					case LinkFeedQuerySettings::LinkFormatVimeo:
-						if (preg_match('/https?:\/\/(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|(\w*\/)*review\/|)(\d+)(?:$|\/|\?)/', $resultRecord['path'], $match))
+						if (!isset($resultRecord['thumbnail']))
 						{
-							try
+
+							if (preg_match('/https?:\/\/(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|(\w*\/)*review\/|)(\d+)(?:$|\/|\?)/', $resultRecord['path'], $match))
 							{
-								$vimeoId = $match[4];
-								$vimeoInfo = \CJSON::decode(@file_get_contents(sprintf("http://vimeo.com/api/v2/video/%s.json", $vimeoId)), true);
-								$feedItem->thumbnail = $vimeoInfo[0]["thumbnail_large"];
+								try
+								{
+									$vimeoId = $match[4];
+									$vimeoInfo = \CJSON::decode(@file_get_contents(sprintf("http://vimeo.com/api/v2/video/%s.json", $vimeoId)), true);
+									$feedItem->thumbnail = $vimeoInfo[0]["thumbnail_large"];
+								}
+								catch (\Exception $ex)
+								{
+								}
 							}
-							catch (\Exception $ex)
-							{
-							}
+							if (empty($feedItem->thumbnail))
+								$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/grid/thumbnail-placeholder/vimeo.png');
 						}
-						if (empty($feedItem->thumbnail))
-							$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/grid/thumbnail-placeholder/vimeo.png');
+						else
+							$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '//' . 'sd_cache' . '//' . $resultRecord['thumbnail']);
 						break;
 					case LinkFeedQuerySettings::LinkFormatUrl:
 						if (!empty($resultRecord['thumbnail']))
@@ -346,6 +383,98 @@
 						}
 						else
 							$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/grid/thumbnail-placeholder/url.png');
+						break;
+					case LinkFeedQuerySettings::LinkFormatInternalLibrary:
+						if (!isset($internalLibraryThumbnailFiles))
+						{
+							$internalLibraryThumbnailFiles = array();
+							$folderPath = \Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'internal-links' . DIRECTORY_SEPARATOR . 'blocks' . DIRECTORY_SEPARATOR . 'library';
+							if (is_dir($folderPath))
+							{
+								if ($dh = opendir($folderPath))
+								{
+									while (($file = readdir($dh)) !== false)
+									{
+										if ($file !== '.' && $file !== '..')
+											$internalLibraryThumbnailFiles[] = $file;
+									}
+									closedir($dh);
+								}
+							}
+						}
+						if (count($internalLibraryThumbnailFiles) > 0)
+							$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/internal-links/blocks/library/' . $internalLibraryThumbnailFiles[array_rand($internalLibraryThumbnailFiles)]);
+						else
+							$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/grid/thumbnail-placeholder/internal library.png');
+						break;
+					case LinkFeedQuerySettings::LinkFormatInternalPage:
+						if (!isset($internalPageThumbnailFiles))
+						{
+							$internalPageThumbnailFiles = array();
+							$folderPath = \Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'internal-links' . DIRECTORY_SEPARATOR . 'blocks' . DIRECTORY_SEPARATOR . 'page';
+							if (is_dir($folderPath))
+							{
+								if ($dh = opendir($folderPath))
+								{
+									while (($file = readdir($dh)) !== false)
+									{
+										if ($file !== '.' && $file !== '..')
+											$internalPageThumbnailFiles[] = $file;
+									}
+									closedir($dh);
+								}
+							}
+						}
+						if (count($internalPageThumbnailFiles) > 0)
+							$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/internal-links/blocks/page/' . $internalPageThumbnailFiles[array_rand($internalPageThumbnailFiles)]);
+						else
+							$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/grid/thumbnail-placeholder/internal page.png');
+						break;
+					case LinkFeedQuerySettings::LinkFormatInternalWindow:
+						if (!isset($internalWindowThumbnailFiles))
+						{
+							$internalWindowThumbnailFiles = array();
+							$folderPath = \Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'internal-links' . DIRECTORY_SEPARATOR . 'blocks' . DIRECTORY_SEPARATOR . 'window';
+							if (is_dir($folderPath))
+							{
+								if ($dh = opendir($folderPath))
+								{
+									while (($file = readdir($dh)) !== false)
+									{
+										if ($file !== '.' && $file !== '..')
+											$internalWindowThumbnailFiles[] = $file;
+									}
+									closedir($dh);
+								}
+							}
+						}
+						if (count($internalWindowThumbnailFiles) > 0)
+							$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/internal-links/blocks/window/' . $internalWindowThumbnailFiles[array_rand($internalWindowThumbnailFiles)]);
+						else
+							$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/grid/thumbnail-placeholder/internal window.png');
+						break;
+					case LinkFeedQuerySettings::LinkFormatInternalShortcut:
+						if (!isset($internalShortcutThumbnailFiles))
+						{
+							$internalShortcutThumbnailFiles = array();
+							$folderPath = \Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'internal-links' . DIRECTORY_SEPARATOR . 'blocks' . DIRECTORY_SEPARATOR . 'shortcut';
+							if (is_dir($folderPath))
+							{
+								if ($dh = opendir($folderPath))
+								{
+									while (($file = readdir($dh)) !== false)
+									{
+										if ($file !== '.' && $file !== '..')
+											$internalShortcutThumbnailFiles[] = $file;
+									}
+									closedir($dh);
+								}
+							}
+						}
+						if (count($internalShortcutThumbnailFiles) > 0)
+							$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/internal-links/blocks/shortcut/' . $internalShortcutThumbnailFiles[array_rand($internalShortcutThumbnailFiles)]);
+						else
+							$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/grid/thumbnail-placeholder/internal shortcut.png');
 						break;
 					default:
 						$thumbnailRelativePath = $resultRecord['thumbnail'];
@@ -376,6 +505,15 @@
 					case LinkFeedQuerySettings::LinkFormatPdf:
 					case LinkFeedQuerySettings::LinkFormatWord:
 					case LinkFeedQuerySettings::LinkFormatUrl:
+					case LinkFeedQuerySettings::LinkFormatHtml5:
+					case LinkFeedQuerySettings::LinkFormatQuicksite:
+					case LinkFeedQuerySettings::LinkFormatYouTube:
+					case LinkFeedQuerySettings::LinkFormatVimeo:
+					case LinkFeedQuerySettings::LinkFormatInternalLibrary:
+					case LinkFeedQuerySettings::LinkFormatInternalPage:
+					case LinkFeedQuerySettings::LinkFormatInternalWindow:
+					case LinkFeedQuerySettings::LinkFormatInternalShortcut:
+					case LinkFeedQuerySettings::LinkFormatInternalLink:
 						$feedSettings->conditions->fileTypes[] = $linkFormat;
 						break;
 					case LinkFeedQuerySettings::LinkFormatVideo:
@@ -386,7 +524,18 @@
 					case LinkFeedQuerySettings::LinkFormatDocument:
 						$feedSettings->conditions->fileTypes[] = LinkFeedQuerySettings::LinkFormatWord;
 						$feedSettings->conditions->fileTypes[] = LinkFeedQuerySettings::LinkFormatPdf;
+						break;
+					case LinkFeedQuerySettings::LinkFormatHyperlink:
 						$feedSettings->conditions->fileTypes[] = LinkFeedQuerySettings::LinkFormatUrl;
+						$feedSettings->conditions->fileTypes[] = LinkFeedQuerySettings::LinkFormatHtml5;
+						$feedSettings->conditions->fileTypes[] = LinkFeedQuerySettings::LinkFormatQuicksite;
+						$feedSettings->conditions->fileTypes[] = LinkFeedQuerySettings::LinkFormatYouTube;
+						$feedSettings->conditions->fileTypes[] = LinkFeedQuerySettings::LinkFormatVimeo;
+						$feedSettings->conditions->fileTypes[] = LinkFeedQuerySettings::LinkFormatInternalLibrary;
+						$feedSettings->conditions->fileTypes[] = LinkFeedQuerySettings::LinkFormatInternalPage;
+						$feedSettings->conditions->fileTypes[] = LinkFeedQuerySettings::LinkFormatInternalWindow;
+						$feedSettings->conditions->fileTypes[] = LinkFeedQuerySettings::LinkFormatInternalShortcut;
+						$feedSettings->conditions->fileTypes[] = LinkFeedQuerySettings::LinkFormatInternalLink;
 						break;
 				}
 
@@ -423,40 +572,53 @@
 					if ($isHyperlink)
 					{
 						$feedItem->dragHeader = 'URL';
-						$feedItem->dragUrl = $fileInfo->link;
+						$feedItem->url = $fileInfo->link;
+						$feedItem->isDirectUrl = true;
 					}
 					else if ($fileInfo->isFile || $isLinkBundle)
 					{
 						$feedItem->dragHeader = 'DownloadURL';
-						$feedItem->dragUrl = \FileInfo::getFileMIME($resultRecord['original_format']) . ':' .
+						$feedItem->url = \FileInfo::getFileMIME($resultRecord['original_format']) . ':' .
 							$fileInfo->name . ':' .
 							str_replace('SalesLibraries/SalesLibraries', 'SalesLibraries', $fileInfo->link);
+						$feedItem->isDirectUrl = false;
 					}
 
 					switch ($resultRecord['original_format'])
 					{
 						case LinkFeedQuerySettings::LinkFormatYouTube:
-							if (preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $resultRecord['path'], $match))
+							if (!isset($resultRecord['thumbnail']))
 							{
-								$youTubeId = $match[1];
-								$feedItem->thumbnail = sprintf("https://img.youtube.com/vi/%s/0.jpg", $youTubeId);
+								if (preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $resultRecord['path'], $match))
+								{
+									$youTubeId = $match[1];
+									$feedItem->thumbnail = sprintf("https://img.youtube.com/vi/%s/0.jpg", $youTubeId);
+								}
 							}
+							else
+								$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '//' . 'sd_cache' . '//' . $resultRecord['thumbnail']);
 							break;
 						case LinkFeedQuerySettings::LinkFormatVimeo:
-							if (preg_match('/https?:\/\/(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|(\w*\/)*review\/|)(\d+)(?:$|\/|\?)/', $resultRecord['path'], $match))
+							if (!isset($resultRecord['thumbnail']))
 							{
-								try
+
+								if (preg_match('/https?:\/\/(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|(\w*\/)*review\/|)(\d+)(?:$|\/|\?)/', $resultRecord['path'], $match))
 								{
-									$vimeoId = $match[4];
-									$vimeoInfo = \CJSON::decode(@file_get_contents(sprintf("http://vimeo.com/api/v2/video/%s.json", $vimeoId)), true);
-									$feedItem->thumbnail = $vimeoInfo[0]["thumbnail_large"];
+									try
+									{
+										$vimeoId = $match[4];
+										$vimeoInfo = \CJSON::decode(@file_get_contents(sprintf("http://vimeo.com/api/v2/video/%s.json", $vimeoId)), true);
+										$feedItem->thumbnail = $vimeoInfo[0]["thumbnail_large"];
+									}
+									catch (\Exception $ex)
+									{
+									}
 								}
-								catch (\Exception $ex)
-								{
-								}
+								if (empty($feedItem->thumbnail))
+									$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/grid/thumbnail-placeholder/vimeo.png');
 							}
-							if (empty($feedItem->thumbnail))
-								$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/grid/thumbnail-placeholder/vimeo.png');
+							else
+								$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '//' . 'sd_cache' . '//' . $resultRecord['thumbnail']);
 							break;
 						case LinkFeedQuerySettings::LinkFormatUrl:
 							if (!empty($resultRecord['thumbnail']))
@@ -466,6 +628,98 @@
 							}
 							else
 								$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/grid/thumbnail-placeholder/url.png');
+							break;
+						case LinkFeedQuerySettings::LinkFormatInternalLibrary:
+							if (!isset($internalLibraryThumbnailFiles))
+							{
+								$internalLibraryThumbnailFiles = array();
+								$folderPath = \Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'internal-links' . DIRECTORY_SEPARATOR . 'blocks' . DIRECTORY_SEPARATOR . 'library';
+								if (is_dir($folderPath))
+								{
+									if ($dh = opendir($folderPath))
+									{
+										while (($file = readdir($dh)) !== false)
+										{
+											if ($file !== '.' && $file !== '..')
+												$internalLibraryThumbnailFiles[] = $file;
+										}
+										closedir($dh);
+									}
+								}
+							}
+							if (count($internalLibraryThumbnailFiles) > 0)
+								$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/internal-links/blocks/library/' . $internalLibraryThumbnailFiles[array_rand($internalLibraryThumbnailFiles)]);
+							else
+								$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/grid/thumbnail-placeholder/internal library.png');
+							break;
+						case LinkFeedQuerySettings::LinkFormatInternalPage:
+							if (!isset($internalPageThumbnailFiles))
+							{
+								$internalPageThumbnailFiles = array();
+								$folderPath = \Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'internal-links' . DIRECTORY_SEPARATOR . 'blocks' . DIRECTORY_SEPARATOR . 'page';
+								if (is_dir($folderPath))
+								{
+									if ($dh = opendir($folderPath))
+									{
+										while (($file = readdir($dh)) !== false)
+										{
+											if ($file !== '.' && $file !== '..')
+												$internalPageThumbnailFiles[] = $file;
+										}
+										closedir($dh);
+									}
+								}
+							}
+							if (count($internalPageThumbnailFiles) > 0)
+								$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/internal-links/blocks/page/' . $internalPageThumbnailFiles[array_rand($internalPageThumbnailFiles)]);
+							else
+								$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/grid/thumbnail-placeholder/internal page.png');
+							break;
+						case LinkFeedQuerySettings::LinkFormatInternalWindow:
+							if (!isset($internalWindowThumbnailFiles))
+							{
+								$internalWindowThumbnailFiles = array();
+								$folderPath = \Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'internal-links' . DIRECTORY_SEPARATOR . 'blocks' . DIRECTORY_SEPARATOR . 'window';
+								if (is_dir($folderPath))
+								{
+									if ($dh = opendir($folderPath))
+									{
+										while (($file = readdir($dh)) !== false)
+										{
+											if ($file !== '.' && $file !== '..')
+												$internalWindowThumbnailFiles[] = $file;
+										}
+										closedir($dh);
+									}
+								}
+							}
+							if (count($internalWindowThumbnailFiles) > 0)
+								$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/internal-links/blocks/window/' . $internalWindowThumbnailFiles[array_rand($internalWindowThumbnailFiles)]);
+							else
+								$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/grid/thumbnail-placeholder/internal window.png');
+							break;
+						case LinkFeedQuerySettings::LinkFormatInternalShortcut:
+							if (!isset($internalShortcutThumbnailFiles))
+							{
+								$internalShortcutThumbnailFiles = array();
+								$folderPath = \Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'internal-links' . DIRECTORY_SEPARATOR . 'blocks' . DIRECTORY_SEPARATOR . 'shortcut';
+								if (is_dir($folderPath))
+								{
+									if ($dh = opendir($folderPath))
+									{
+										while (($file = readdir($dh)) !== false)
+										{
+											if ($file !== '.' && $file !== '..')
+												$internalShortcutThumbnailFiles[] = $file;
+										}
+										closedir($dh);
+									}
+								}
+							}
+							if (count($internalShortcutThumbnailFiles) > 0)
+								$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/internal-links/blocks/shortcut/' . $internalShortcutThumbnailFiles[array_rand($internalShortcutThumbnailFiles)]);
+							else
+								$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/grid/thumbnail-placeholder/internal shortcut.png');
 							break;
 						default:
 							$thumbnailRelativePath = $resultRecord['thumbnail'];
@@ -566,12 +820,14 @@
 				'thumbnail' => "case 
 							when link.original_format='jpeg' or link.original_format='gif' or link.original_format='png' then
 								concat(lib.path,'/',link.file_relative_path)
-							when link.original_format='url' then
+							when link.original_format='url' or link.original_format='html5' or link.original_format='youtube' or link.original_format='vimeo' or link.original_format='quicksite' then
 								(select concat(lib.path,'/',pv.relative_path) from tbl_preview pv where pv.id_container=link.id_preview and pv.type='thumbs' " . $thumbnailCondition . ")								
 							when link.original_format='video' then
 								(select concat(lib.path,'/',pv.relative_path) from tbl_preview pv where pv.id_container=link.id_preview and pv.type='mp4 thumb' " . $thumbnailCondition . ")										
 							when link.original_format='ppt' or link.original_format='doc' or link.original_format='pdf' then
 								(select concat(lib.path,'/',pv.relative_path) from tbl_preview pv where pv.id_container=link.id_preview and pv.type='png_phone' " . $thumbnailCondition . ")
+							when link.original_format='internal link' then
+								(select concat(pv_lib.path,'/',pv.relative_path) from tbl_preview pv join tbl_library pv_lib on pv_lib.id=pv.id_library join tbl_link child_link on child_link.id_preview=pv.id_container join tbl_link_internal_link l_i_l on l_i_l.id_original = child_link.id where l_i_l.id_internal=link.id and (pv.type='png_phone' or pv.type='mp4 thumb') " . $thumbnailCondition . ")								
 							when link.original_format='link bundle' then
 								(select concat(pv_lib.path,'/',pv.relative_path) from tbl_preview pv join tbl_library pv_lib on pv_lib.id=pv.id_library join tbl_link child_link on child_link.id_preview=pv.id_container join (select lb.id_link as id_link, lb.id_bundle as id_bundle, lb.use_as_thumbnail as use_as_thumbnail from tbl_link_bundle lb union select l_i_l.id_original as id_link, lb.id_bundle as id_bundle, lb.use_as_thumbnail as use_as_thumbnail from tbl_link_bundle lb join tbl_link_internal_link l_i_l on l_i_l.id_internal = lb.id_link) link_set on link_set.id_link=child_link.id where link_set.id_bundle=link.id and link_set.use_as_thumbnail=1 and (pv.type='png_phone' or pv.type='mp4 thumb') " . $thumbnailCondition . ")
 							end as thumbnail"
@@ -589,18 +845,38 @@
 					case LinkFeedQuerySettings::LinkFormatPdf:
 					case LinkFeedQuerySettings::LinkFormatWord:
 					case LinkFeedQuerySettings::LinkFormatUrl:
+					case LinkFeedQuerySettings::LinkFormatHtml5:
+					case LinkFeedQuerySettings::LinkFormatQuicksite:
+					case LinkFeedQuerySettings::LinkFormatYouTube:
+					case LinkFeedQuerySettings::LinkFormatVimeo:
+					case LinkFeedQuerySettings::LinkFormatInternalLibrary:
+					case LinkFeedQuerySettings::LinkFormatInternalPage:
+					case LinkFeedQuerySettings::LinkFormatInternalWindow:
+					case LinkFeedQuerySettings::LinkFormatInternalShortcut:
+					case LinkFeedQuerySettings::LinkFormatInternalLink:
 						$queryFormats[] = $linkFormat;
 						break;
 					case LinkFeedQuerySettings::LinkFormatDocument:
 						$queryFormats[] = LinkFeedQuerySettings::LinkFormatWord;
 						$queryFormats[] = LinkFeedQuerySettings::LinkFormatPdf;
-						$queryFormats[] = LinkFeedQuerySettings::LinkFormatUrl;
 						break;
 					case LinkFeedQuerySettings::LinkFormatVideo:
 						$queryFormats[] = $linkFormat;
 						$queryFormats[] = LinkFeedQuerySettings::LinkFormatYouTube;
 						$queryFormats[] = LinkFeedQuerySettings::LinkFormatVimeo;
 						$queryFormats[] = LinkFeedQuerySettings::LinkFormatVideo;
+						break;
+					case LinkFeedQuerySettings::LinkFormatHyperlink:
+						$queryFormats[] = LinkFeedQuerySettings::LinkFormatUrl;
+						$queryFormats[] = LinkFeedQuerySettings::LinkFormatHtml5;
+						$queryFormats[] = LinkFeedQuerySettings::LinkFormatQuicksite;
+						$queryFormats[] = LinkFeedQuerySettings::LinkFormatYouTube;
+						$queryFormats[] = LinkFeedQuerySettings::LinkFormatVimeo;
+						$queryFormats[] = LinkFeedQuerySettings::LinkFormatInternalLibrary;
+						$queryFormats[] = LinkFeedQuerySettings::LinkFormatInternalPage;
+						$queryFormats[] = LinkFeedQuerySettings::LinkFormatInternalWindow;
+						$queryFormats[] = LinkFeedQuerySettings::LinkFormatInternalShortcut;
+						$queryFormats[] = LinkFeedQuerySettings::LinkFormatInternalLink;
 						break;
 				}
 
@@ -683,40 +959,52 @@
 					if ($isHyperlink)
 					{
 						$feedItem->dragHeader = 'URL';
-						$feedItem->dragUrl = $fileInfo->link;
+						$feedItem->url = $fileInfo->link;
+						$feedItem->isDirectUrl = true;
 					}
 					else if ($fileInfo->isFile || $isLinkBundle)
 					{
 						$feedItem->dragHeader = 'DownloadURL';
-						$feedItem->dragUrl = \FileInfo::getFileMIME($resultRecord['original_format']) . ':' .
+						$feedItem->url = \FileInfo::getFileMIME($resultRecord['original_format']) . ':' .
 							$fileInfo->name . ':' .
 							str_replace('SalesLibraries/SalesLibraries', 'SalesLibraries', $fileInfo->link);
+						$feedItem->isDirectUrl = false;
 					}
 
 					switch ($resultRecord['original_format'])
 					{
 						case LinkFeedQuerySettings::LinkFormatYouTube:
-							if (preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $resultRecord['path'], $match))
+							if (!isset($resultRecord['thumbnail']))
 							{
-								$youTubeId = $match[1];
-								$feedItem->thumbnail = sprintf("https://img.youtube.com/vi/%s/0.jpg", $youTubeId);
+								if (preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $resultRecord['path'], $match))
+								{
+									$youTubeId = $match[1];
+									$feedItem->thumbnail = sprintf("https://img.youtube.com/vi/%s/0.jpg", $youTubeId);
+								}
 							}
+							else
+								$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '//' . 'sd_cache' . '//' . $resultRecord['thumbnail']);
 							break;
 						case LinkFeedQuerySettings::LinkFormatVimeo:
-							if (preg_match('/https?:\/\/(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|(\w*\/)*review\/|)(\d+)(?:$|\/|\?)/', $resultRecord['path'], $match))
+							if (!isset($resultRecord['thumbnail']))
 							{
-								try
+								if (preg_match('/https?:\/\/(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|(\w*\/)*review\/|)(\d+)(?:$|\/|\?)/', $resultRecord['path'], $match))
 								{
-									$vimeoId = $match[4];
-									$vimeoInfo = \CJSON::decode(@file_get_contents(sprintf("http://vimeo.com/api/v2/video/%s.json", $vimeoId)), true);
-									$feedItem->thumbnail = $vimeoInfo[0]["thumbnail_large"];
+									try
+									{
+										$vimeoId = $match[4];
+										$vimeoInfo = \CJSON::decode(@file_get_contents(sprintf("http://vimeo.com/api/v2/video/%s.json", $vimeoId)), true);
+										$feedItem->thumbnail = $vimeoInfo[0]["thumbnail_large"];
+									}
+									catch (\Exception $ex)
+									{
+									}
 								}
-								catch (\Exception $ex)
-								{
-								}
+								if (empty($feedItem->thumbnail))
+									$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/grid/thumbnail-placeholder/vimeo.png');
 							}
-							if (empty($feedItem->thumbnail))
-								$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/grid/thumbnail-placeholder/vimeo.png');
+							else
+								$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '//' . 'sd_cache' . '//' . $resultRecord['thumbnail']);
 							break;
 						case LinkFeedQuerySettings::LinkFormatUrl:
 							if (!empty($resultRecord['thumbnail']))
@@ -726,6 +1014,98 @@
 							}
 							else
 								$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/grid/thumbnail-placeholder/url.png');
+							break;
+						case LinkFeedQuerySettings::LinkFormatInternalLibrary:
+							if (!isset($internalLibraryThumbnailFiles))
+							{
+								$internalLibraryThumbnailFiles = array();
+								$folderPath = \Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'internal-links' . DIRECTORY_SEPARATOR . 'blocks' . DIRECTORY_SEPARATOR . 'library';
+								if (is_dir($folderPath))
+								{
+									if ($dh = opendir($folderPath))
+									{
+										while (($file = readdir($dh)) !== false)
+										{
+											if ($file !== '.' && $file !== '..')
+												$internalLibraryThumbnailFiles[] = $file;
+										}
+										closedir($dh);
+									}
+								}
+							}
+							if (count($internalLibraryThumbnailFiles) > 0)
+								$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/internal-links/blocks/library/' . $internalLibraryThumbnailFiles[array_rand($internalLibraryThumbnailFiles)]);
+							else
+								$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/grid/thumbnail-placeholder/internal library.png');
+							break;
+						case LinkFeedQuerySettings::LinkFormatInternalPage:
+							if (!isset($internalPageThumbnailFiles))
+							{
+								$internalPageThumbnailFiles = array();
+								$folderPath = \Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'internal-links' . DIRECTORY_SEPARATOR . 'blocks' . DIRECTORY_SEPARATOR . 'page';
+								if (is_dir($folderPath))
+								{
+									if ($dh = opendir($folderPath))
+									{
+										while (($file = readdir($dh)) !== false)
+										{
+											if ($file !== '.' && $file !== '..')
+												$internalPageThumbnailFiles[] = $file;
+										}
+										closedir($dh);
+									}
+								}
+							}
+							if (count($internalPageThumbnailFiles) > 0)
+								$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/internal-links/blocks/page/' . $internalPageThumbnailFiles[array_rand($internalPageThumbnailFiles)]);
+							else
+								$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/grid/thumbnail-placeholder/internal page.png');
+							break;
+						case LinkFeedQuerySettings::LinkFormatInternalWindow:
+							if (!isset($internalWindowThumbnailFiles))
+							{
+								$internalWindowThumbnailFiles = array();
+								$folderPath = \Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'internal-links' . DIRECTORY_SEPARATOR . 'blocks' . DIRECTORY_SEPARATOR . 'window';
+								if (is_dir($folderPath))
+								{
+									if ($dh = opendir($folderPath))
+									{
+										while (($file = readdir($dh)) !== false)
+										{
+											if ($file !== '.' && $file !== '..')
+												$internalWindowThumbnailFiles[] = $file;
+										}
+										closedir($dh);
+									}
+								}
+							}
+							if (count($internalWindowThumbnailFiles) > 0)
+								$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/internal-links/blocks/window/' . $internalWindowThumbnailFiles[array_rand($internalWindowThumbnailFiles)]);
+							else
+								$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/grid/thumbnail-placeholder/internal window.png');
+							break;
+						case LinkFeedQuerySettings::LinkFormatInternalShortcut:
+							if (!isset($internalShortcutThumbnailFiles))
+							{
+								$internalShortcutThumbnailFiles = array();
+								$folderPath = \Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'internal-links' . DIRECTORY_SEPARATOR . 'blocks' . DIRECTORY_SEPARATOR . 'shortcut';
+								if (is_dir($folderPath))
+								{
+									if ($dh = opendir($folderPath))
+									{
+										while (($file = readdir($dh)) !== false)
+										{
+											if ($file !== '.' && $file !== '..')
+												$internalShortcutThumbnailFiles[] = $file;
+										}
+										closedir($dh);
+									}
+								}
+							}
+							if (count($internalShortcutThumbnailFiles) > 0)
+								$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/internal-links/blocks/shortcut/' . $internalShortcutThumbnailFiles[array_rand($internalShortcutThumbnailFiles)]);
+							else
+								$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/grid/thumbnail-placeholder/internal shortcut.png');
 							break;
 						default:
 							$thumbnailRelativePath = $resultRecord['thumbnail'];

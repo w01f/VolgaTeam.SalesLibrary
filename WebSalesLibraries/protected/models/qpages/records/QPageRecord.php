@@ -1,4 +1,5 @@
 <?
+
 	use application\models\data_query\data_table\DataTableQueryHelper;
 	use application\models\data_query\data_table\DataTableQuerySettings;
 	use application\models\data_query\data_table\DataTableFormatHelper;
@@ -61,14 +62,20 @@
 		}
 
 		/**
+		 * @param $useForThumbnail boolean
 		 * @return string
 		 */
-		public function getUrlInternal()
+		public function getUrlInternal($useForThumbnail)
 		{
-			if ($this->restricted == true)
-				return Yii::app()->createAbsoluteUrl('qpage/getProtected', array('id' => $this->id));
+			if ($useForThumbnail)
+				$params = array('id' => $this->id, 'useForThumbnail' => $useForThumbnail);
 			else
-				return Yii::app()->createAbsoluteUrl('qpage/getPublic', array('id' => $this->id));
+				$params = array('id' => $this->id);
+
+			if ($this->restricted == true)
+				return Yii::app()->createAbsoluteUrl('qpage/getProtected', $params);
+			else
+				return Yii::app()->createAbsoluteUrl('qpage/getPublic', $params);
 		}
 
 		/**

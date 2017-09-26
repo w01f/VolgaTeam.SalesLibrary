@@ -34,6 +34,11 @@
 					$control->enabled = true;
 					$control->title = 'video';
 					return $control;
+				case FeedControlTag::ControlTagLinkFormatHyperlinks:
+					$control = new FeedControlSettings();
+					$control->enabled = true;
+					$control->title = 'links';
+					return $control;
 				case FeedControlTag::ControlTagDetailsButton:
 					$control = new FeedDetailsControlSettings();
 					$control->enabled = false;

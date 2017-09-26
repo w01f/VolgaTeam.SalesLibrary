@@ -16,10 +16,18 @@
 		const LinkFormatDocument = 'document';
 		const LinkFormatWord = 'doc';
 		const LinkFormatPdf = 'pdf';
-		const LinkFormatUrl = 'url';
 		const LinkFormatVideo = 'video';
+		const LinkFormatHyperlink = 'links';
+		const LinkFormatUrl = 'url';
+		const LinkFormatQuicksite = 'quicksite';
+		const LinkFormatHtml5 = 'html5';
 		const LinkFormatYouTube = 'youtube';
 		const LinkFormatVimeo = 'vimeo';
+		const LinkFormatInternalLibrary = 'internal library';
+		const LinkFormatInternalPage = 'internal page';
+		const LinkFormatInternalWindow = 'internal window';
+		const LinkFormatInternalShortcut = 'internal shortcut';
+		const LinkFormatInternalLink = 'internal link';
 
 		public $feedType;
 
@@ -30,7 +38,7 @@
 
 		public function __construct()
 		{
-			$this->linkFormats = array(self::LinkFormatPowerPoint, self::LinkFormatDocument, self::LinkFormatVideo);
+			$this->linkFormats = array(self::LinkFormatPowerPoint, self::LinkFormatDocument, self::LinkFormatVideo, self::LinkFormatHyperlink);
 			$this->thumbnailSettings = new ThumbnailQuerySettings();
 			$this->maxLinks = 30;
 		}
@@ -111,10 +119,8 @@
 					{
 						case self::LinkFormatPowerPoint:
 						case self::LinkFormatVideo:
-						case self::LinkFormatPdf:
-						case self::LinkFormatWord:
 						case self::LinkFormatDocument:
-						case self::LinkFormatUrl:
+						case self::LinkFormatHyperlink:
 							$this->linkFormats[] = $format;
 							break;
 					}
