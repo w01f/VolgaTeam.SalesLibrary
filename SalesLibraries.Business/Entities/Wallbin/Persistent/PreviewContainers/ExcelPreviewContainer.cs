@@ -17,33 +17,45 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 		protected override string PreviewSubFolder => DocumentSubFolderName;
 
 		[NotMapped, JsonIgnore]
-		public override string[] AvailablePreviewFormats => new[] { PreviewFormats.Text };
+		public override string[] AvailablePreviewFormats => new[] { PreviewFormats.Text }.Union(ImagePreviewFormats).ToArray();
 
 		[NotMapped, JsonIgnore]
 		public bool GenerateText { get; private set; }
+
+		[NotMapped, JsonIgnore]
+		private IEnumerable<string> ImagePreviewFormats => new[]
+		{
+			PreviewFormats.Thumbnails,
+			PreviewFormats.ThumbnailsForDatatable
+		};
 		#endregion
 
-		protected override void UpdateState(IEnumerable<IPreviewableLink> associatedLinks)
+		protected override void UpdateState(IList<IPreviewableLink> associatedLinks)
 		{
-			var associatedLinksList = associatedLinks.ToList();
-			GenerateText = associatedLinksList
+			GenerateText = associatedLinks
 				.OfType<PreviewableFileLink>()
 				.Select(link => link.Settings)
 				.OfType<ExcelLinkSettings>()
 				.Any(set => set.GenerateContentText);
-			if (!GenerateText)
-			{
-				IsUpToDate = IsAlive = false;
-				return;
-			}
-			base.UpdateState(associatedLinksList);
+			base.UpdateState(associatedLinks);
 			if (!IsUpToDate)
 				return;
-			IsUpToDate = AvailablePreviewFormats.All(previewFormat =>
-			{
-				var previewFolderPath = Path.Combine(ContainerPath, previewFormat);
-				return Directory.Exists(previewFolderPath) && Directory.GetFiles(previewFolderPath).Any();
-			});
+			IsUpToDate = IsAlive &&
+				ImagePreviewFormats.All(previewFormat =>
+				{
+					var previewFolderPath = Path.Combine(ContainerPath, previewFormat);
+					return Directory.Exists(previewFolderPath) && Directory.GetFiles(previewFolderPath).Any();
+				})
+				&&
+				((!GenerateText && !Directory.Exists(Path.Combine(ContainerPath, PreviewFormats.Text)))
+					||
+					(GenerateText && new[] { PreviewFormats.Text }.All(previewFormat =>
+					{
+						var previewFolderPath = Path.Combine(ContainerPath, previewFormat);
+						return Directory.Exists(previewFolderPath) && Directory.GetFiles(previewFolderPath).Any();
+					}))
+				);
+
 		}
 	}
 }

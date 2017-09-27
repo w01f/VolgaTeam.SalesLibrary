@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using ceTe.DynamicPDF.Rasterizer;
@@ -20,14 +21,18 @@ namespace SalesLibraries.FileManager.Business.Services
 			var thumbsSizeFormat = new PercentageImageSize(10);
 			if (onlyOneFile && rasterizer.Pages.Count > 0)
 			{
-				rasterizer.Pages[0].Draw(Path.Combine(destinationPngPath, Constants.SinglePreviewFilePrefixName + "Page" + ".png"), pngImageFormat, imageSizeFormat);
-				rasterizer.Pages[0].Draw(Path.Combine(destinationThumbsPath, Constants.SinglePreviewFilePrefixName + "Page" + ".png"), pngImageFormat, thumbsSizeFormat);
+				if (!String.IsNullOrEmpty(destinationPngPath))
+					rasterizer.Pages[0].Draw(Path.Combine(destinationPngPath, Constants.SinglePreviewFilePrefixName + "Page" + ".png"), pngImageFormat, imageSizeFormat);
+				if (!String.IsNullOrEmpty(destinationThumbsPath))
+					rasterizer.Pages[0].Draw(Path.Combine(destinationThumbsPath, Constants.SinglePreviewFilePrefixName + "Page" + ".png"), pngImageFormat, thumbsSizeFormat);
 			}
 			else
 				for (var i = 0; i < rasterizer.Pages.Count; i++)
 				{
-					rasterizer.Pages[i].Draw(Path.Combine(destinationPngPath, "Page" + (i + 1) + ".png"), pngImageFormat, imageSizeFormat);
-					rasterizer.Pages[i].Draw(Path.Combine(destinationThumbsPath, "Page" + (i + 1) + ".png"), pngImageFormat, thumbsSizeFormat);
+					if (!String.IsNullOrEmpty(destinationPngPath))
+						rasterizer.Pages[i].Draw(Path.Combine(destinationPngPath, "Page" + (i + 1) + ".png"), pngImageFormat, imageSizeFormat);
+					if (!String.IsNullOrEmpty(destinationThumbsPath))
+						rasterizer.Pages[i].Draw(Path.Combine(destinationThumbsPath, "Page" + (i + 1) + ".png"), pngImageFormat, thumbsSizeFormat);
 				}
 			rasterizer.Dispose();
 		}
@@ -42,14 +47,18 @@ namespace SalesLibraries.FileManager.Business.Services
 
 			if (onlyOneFile && rasterizer.Pages.Count > 0)
 			{
-				rasterizer.Pages[0].Draw(Path.Combine(destinationPngPath, Constants.SinglePreviewFilePrefixName + "Page" + ".png"), pngImageFormat, imageSizeFormat);
-				rasterizer.Pages[0].Draw(Path.Combine(destinationThumbsPath, Constants.SinglePreviewFilePrefixName + "Page" + ".png"), pngImageFormat, thumbsSizeFormat);
+				if (!String.IsNullOrEmpty(destinationPngPath))
+					rasterizer.Pages[0].Draw(Path.Combine(destinationPngPath, Constants.SinglePreviewFilePrefixName + "Page" + ".png"), pngImageFormat, imageSizeFormat);
+				if (!String.IsNullOrEmpty(destinationThumbsPath))
+					rasterizer.Pages[0].Draw(Path.Combine(destinationThumbsPath, Constants.SinglePreviewFilePrefixName + "Page" + ".png"), pngImageFormat, thumbsSizeFormat);
 			}
 			else
 				for (var i = 0; i < rasterizer.Pages.Count; i++)
 				{
-					rasterizer.Pages[i].Draw(Path.Combine(destinationPngPath, "Page" + (i + 1) + ".png"), pngImageFormat, imageSizeFormat);
-					rasterizer.Pages[i].Draw(Path.Combine(destinationThumbsPath, "Page" + (i + 1) + ".png"), pngImageFormat, thumbsSizeFormat);
+					if (!String.IsNullOrEmpty(destinationPngPath))
+						rasterizer.Pages[i].Draw(Path.Combine(destinationPngPath, "Page" + (i + 1) + ".png"), pngImageFormat, imageSizeFormat);
+					if (!String.IsNullOrEmpty(destinationThumbsPath))
+						rasterizer.Pages[i].Draw(Path.Combine(destinationThumbsPath, "Page" + (i + 1) + ".png"), pngImageFormat, thumbsSizeFormat);
 				}
 			rasterizer.Dispose();
 		}

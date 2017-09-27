@@ -763,6 +763,15 @@ namespace SalesLibraries.FileManager.Business.Services
 					.Select(path => path.Replace(source.Library.Path, String.Empty))
 					.ToArray();
 			}
+			if (source is ExcelPreviewContainer)
+			{
+				var thumbnails = source.GetPreviewLinksByFormat(PreviewFormats.Thumbnails).ToList();
+				target.thumbsLinks = thumbnails.Select(path => path.Replace(source.Library.Path, String.Empty)).ToArray();
+				target.thumbsDatatableLinks = source
+					.GetPreviewLinksByFormat(PreviewFormats.ThumbnailsForDatatable)
+					.Select(path => path.Replace(source.Library.Path, String.Empty))
+					.ToArray();
+			}
 			if (source is HyperlinkPreviewContainer)
 			{
 				var thumbnails = source.GetPreviewLinksByFormat(PreviewFormats.Thumbnails).ToList();

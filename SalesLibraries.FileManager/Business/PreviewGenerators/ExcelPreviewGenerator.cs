@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using Microsoft.Office.Interop.Excel;
@@ -7,6 +8,7 @@ using SalesLibraries.Business.Entities.Wallbin.Common.Constants;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.OfficeInterops;
+using SalesLibraries.FileManager.Business.Services;
 
 namespace SalesLibraries.FileManager.Business.PreviewGenerators
 {
@@ -21,12 +23,22 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 			logger.StartLogging();
 
 			var txtDestination = Path.Combine(excelContainer.ContainerPath, PreviewFormats.Text);
-			var updateTxt = !(Directory.Exists(txtDestination) && Directory.GetFiles(txtDestination).Any());
-			if (!Directory.Exists(txtDestination))
+			var updateTxt = !(Directory.Exists(txtDestination) && Directory.GetFiles(txtDestination).Any()) && excelContainer.GenerateText;
+			if (updateTxt && !Directory.Exists(txtDestination))
 				Directory.CreateDirectory(txtDestination);
 
-			var updated = updateTxt;
-			if (updated)
+			var thumbsDestination = Path.Combine(excelContainer.ContainerPath, PreviewFormats.Thumbnails);
+			var updateThumbs = !(Directory.Exists(thumbsDestination) && Directory.GetFiles(thumbsDestination).Any());
+			if (!Directory.Exists(thumbsDestination))
+				Directory.CreateDirectory(thumbsDestination);
+
+			var thumbsDatatableDestination = Path.Combine(excelContainer.ContainerPath, PreviewFormats.ThumbnailsForDatatable);
+			var updateThumbsDatatable = !(Directory.Exists(thumbsDatatableDestination) && Directory.GetFiles(thumbsDatatableDestination).Any());
+			if (!Directory.Exists(thumbsDatatableDestination))
+				Directory.CreateDirectory(thumbsDatatableDestination);
+
+			var needToUpdate = updateTxt || updateThumbs || updateThumbsDatatable;
+			if (needToUpdate)
 			{
 				try
 				{
@@ -34,23 +46,47 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 					{
 						MessageFilter.Register();
 						var workbook = ExcelHelper.Instance.ExcelObject.Workbooks.Open(excelContainer.SourcePath, ReadOnly: true);
-						string txtFileName = Path.Combine(txtDestination, Path.ChangeExtension(Path.GetFileName(excelContainer.SourcePath), "txt"));
-						workbook.SaveAs(txtFileName, XlFileFormat.xlTextWindows);
+
+						if (updateThumbs || updateThumbsDatatable)
+						{
+							var pdfFileName = Path.ChangeExtension(Path.GetTempFileName(), ".pdf");
+							workbook.ActiveSheet.ExportAsFixedFormat(XlFixedFormatType.xlTypePDF, pdfFileName);
+							PdfHelper.ExportPdf(pdfFileName, thumbsDestination, null, true);
+							JpegGenerator.GenerateDatatableJpegs(thumbsDestination, thumbsDatatableDestination);
+							logger.LogStage(PreviewFormats.Thumbnails);
+							logger.LogStage(PreviewFormats.ThumbnailsForDatatable);
+							if (File.Exists(pdfFileName))
+								try
+								{
+									File.Delete(pdfFileName);
+								}
+								catch { }
+						}
+
+						if (updateTxt)
+						{
+							var txtFileName = Path.Combine(txtDestination,
+								Path.ChangeExtension(Path.GetFileName(excelContainer.SourcePath), "txt"));
+							workbook.SaveAs(txtFileName, XlFileFormat.xlTextWindows);
+							logger.LogStage(PreviewFormats.Text);
+						}
+
 						workbook.Close();
 						Utils.ReleaseComObject(workbook);
 					}
 				}
-				catch { }
+				catch (Exception ex)
+				{
+					//throw ex;
+				}
 				finally
 				{
 					MessageFilter.Revoke();
 					ExcelHelper.Instance.Disconnect();
 				}
-
-				logger.LogStage(PreviewFormats.Text);
 			}
 
-			if (updated)
+			if (needToUpdate)
 				previewContainer.MarkAsModified();
 
 			logger.FinishLogging();
