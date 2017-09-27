@@ -55,6 +55,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		[NotMapped, JsonIgnore]
 		public string TargetLink => ((InternalLibraryObjectLinkSettings)Settings).LinkName;
+
+		[NotMapped, JsonIgnore]
+		public override string AutoWidgetKey => "internal link";
 		#endregion
 
 		public static InternalLibraryObjectLink Create(InternalLibraryObjectLinkInfo linkInfo, LibraryFolder parentFolder)

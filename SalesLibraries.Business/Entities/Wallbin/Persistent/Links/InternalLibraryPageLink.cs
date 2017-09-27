@@ -47,6 +47,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		[NotMapped, JsonIgnore]
 		public string TargetPage => ((InternalLibraryPageLinkSettings)Settings).PageName;
+
+		[NotMapped, JsonIgnore]
+		public override string AutoWidgetKey => "internal page";
 		#endregion
 
 		public static InternalLibraryPageLink Create(InternalLibraryPageLinkInfo linkInfo, LibraryFolder parentFolder)

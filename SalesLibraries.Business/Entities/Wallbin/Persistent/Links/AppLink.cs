@@ -55,6 +55,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		[NotMapped, JsonIgnore]
 		public string SecondPath => ((AppLinkSettings)Settings).SecondPath;
 
+		[NotMapped, JsonIgnore]
+		public override string AutoWidgetKey => "app";
 		#endregion
 
 		public AppLink()

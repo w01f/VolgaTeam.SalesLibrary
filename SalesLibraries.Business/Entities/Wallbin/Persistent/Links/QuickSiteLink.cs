@@ -26,6 +26,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		[NotMapped, JsonIgnore]
 		public override string PreviewSourcePath => String.Format("{0}&useForThumbnail=true", FullPath);
+
+		[NotMapped, JsonIgnore]
+		public override string AutoWidgetKey => "quicksite";
 		#endregion
 
 		public QuickSiteLink()

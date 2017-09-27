@@ -39,6 +39,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 				return String.Join(Environment.NewLine, lines);
 			}
 		}
+
+		[NotMapped, JsonIgnore]
+		public override string AutoWidgetKey => "internal shortcut";
 		#endregion
 
 		public static InternalShortcutLink Create(InternalShortcutLinkInfo linkInfo, LibraryFolder parentFolder)

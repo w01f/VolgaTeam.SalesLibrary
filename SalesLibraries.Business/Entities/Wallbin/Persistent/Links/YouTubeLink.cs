@@ -22,6 +22,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		[NotMapped, JsonIgnore]
 		public override string WebFormat => WebFormats.YouTube;
+
+		[NotMapped, JsonIgnore]
+		public override string AutoWidgetKey => "youtube";
 		#endregion
 
 		public YouTubeLink()

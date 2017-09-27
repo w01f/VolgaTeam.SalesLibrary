@@ -51,8 +51,11 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		[NotMapped, JsonIgnore]
 		public string TargetFolder => ((InternalLibraryFolderLinkSettings)Settings).WindowName;
+
+		[NotMapped, JsonIgnore]
+		public override string AutoWidgetKey => "internal window";
 		#endregion
-		
+
 		public static InternalLibraryFolderLink Create(InternalLibraryFolderLinkInfo linkInfo, LibraryFolder parentFolder)
 		{
 			var link = CreateEntity<InternalLibraryFolderLink>();

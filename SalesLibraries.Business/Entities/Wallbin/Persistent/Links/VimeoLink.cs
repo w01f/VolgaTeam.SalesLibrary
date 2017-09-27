@@ -22,6 +22,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		[NotMapped, JsonIgnore]
 		public override string WebFormat => WebFormats.Vimeo;
+
+		[NotMapped, JsonIgnore]
+		public override string AutoWidgetKey => "vimeo";
 		#endregion
 
 		public VimeoLink()

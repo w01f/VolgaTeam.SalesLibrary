@@ -38,6 +38,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 				return String.Join(Environment.NewLine, lines);
 			}
 		}
+
+		[NotMapped, JsonIgnore]
+		public override string AutoWidgetKey => "lan";
 		#endregion
 
 		public NetworkLink()

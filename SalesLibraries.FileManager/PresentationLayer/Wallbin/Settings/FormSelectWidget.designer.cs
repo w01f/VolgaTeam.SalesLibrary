@@ -166,7 +166,7 @@
 			this.labelControlExtension.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
 			this.labelControlExtension.Location = new System.Drawing.Point(12, 517);
 			this.labelControlExtension.Name = "labelControlExtension";
-			this.labelControlExtension.Size = new System.Drawing.Size(136, 16);
+			this.labelControlExtension.Size = new System.Drawing.Size(217, 16);
 			this.labelControlExtension.StyleController = this.layoutControl;
 			this.labelControlExtension.TabIndex = 63;
 			this.labelControlExtension.Text = "<size=+1><b>{0}</b></size>";
@@ -279,7 +279,7 @@
 			this.colorEditInversionColor.Color = System.Drawing.Color.Empty;
 			this.colorEditInversionColor.EditValue = System.Drawing.Color.Empty;
 			this.colorEditInversionColor.Enabled = false;
-			this.colorEditInversionColor.Location = new System.Drawing.Point(233, 514);
+			this.colorEditInversionColor.Location = new System.Drawing.Point(314, 514);
 			this.colorEditInversionColor.Name = "colorEditInversionColor";
 			this.colorEditInversionColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
 			this.colorEditInversionColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -296,7 +296,7 @@
 			// checkEditInvert
 			// 
 			this.checkEditInvert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.checkEditInvert.Location = new System.Drawing.Point(160, 507);
+			this.checkEditInvert.Location = new System.Drawing.Point(241, 507);
 			this.checkEditInvert.Name = "checkEditInvert";
 			this.checkEditInvert.Properties.AllowFocused = false;
 			this.checkEditInvert.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -423,9 +423,9 @@
 			// emptySpaceItem3
 			// 
 			this.emptySpaceItem3.AllowHotTrack = false;
-			this.emptySpaceItem3.Location = new System.Drawing.Point(351, 0);
+			this.emptySpaceItem3.Location = new System.Drawing.Point(432, 0);
 			this.emptySpaceItem3.Name = "emptySpaceItem3";
-			this.emptySpaceItem3.Size = new System.Drawing.Size(348, 40);
+			this.emptySpaceItem3.Size = new System.Drawing.Size(267, 40);
 			this.emptySpaceItem3.TextSize = new System.Drawing.Size(0, 0);
 			// 
 			// layoutControlItemOK
@@ -462,7 +462,7 @@
 			this.layoutControlItemWidgetColorizeToggle.Control = this.checkEditInvert;
 			this.layoutControlItemWidgetColorizeToggle.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
 			this.layoutControlItemWidgetColorizeToggle.CustomizationFormText = "Colorize Widget Toggle";
-			this.layoutControlItemWidgetColorizeToggle.Location = new System.Drawing.Point(140, 0);
+			this.layoutControlItemWidgetColorizeToggle.Location = new System.Drawing.Point(221, 0);
 			this.layoutControlItemWidgetColorizeToggle.MaxSize = new System.Drawing.Size(81, 0);
 			this.layoutControlItemWidgetColorizeToggle.MinSize = new System.Drawing.Size(81, 24);
 			this.layoutControlItemWidgetColorizeToggle.Name = "layoutControlItemWidgetColorizeToggle";
@@ -478,7 +478,7 @@
 			this.layoutControlItemWidgetColorizeEditor.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
 			this.layoutControlItemWidgetColorizeEditor.CustomizationFormText = "Colorize Widget Editor";
 			this.layoutControlItemWidgetColorizeEditor.FillControlToClientArea = false;
-			this.layoutControlItemWidgetColorizeEditor.Location = new System.Drawing.Point(221, 0);
+			this.layoutControlItemWidgetColorizeEditor.Location = new System.Drawing.Point(302, 0);
 			this.layoutControlItemWidgetColorizeEditor.MaxSize = new System.Drawing.Size(130, 0);
 			this.layoutControlItemWidgetColorizeEditor.MinSize = new System.Drawing.Size(130, 36);
 			this.layoutControlItemWidgetColorizeEditor.Name = "layoutControlItemWidgetColorizeEditor";
@@ -494,7 +494,7 @@
 			this.layoutControlItemExtension.FillControlToClientArea = false;
 			this.layoutControlItemExtension.Location = new System.Drawing.Point(0, 0);
 			this.layoutControlItemExtension.Name = "layoutControlItemExtension";
-			this.layoutControlItemExtension.Size = new System.Drawing.Size(140, 40);
+			this.layoutControlItemExtension.Size = new System.Drawing.Size(221, 40);
 			this.layoutControlItemExtension.Text = "Extension";
 			this.layoutControlItemExtension.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutControlItemExtension.TextVisible = false;
@@ -579,6 +579,7 @@
 			this.Controls.Add(this.layoutControl);
 			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.ForeColor = System.Drawing.Color.Black;
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;

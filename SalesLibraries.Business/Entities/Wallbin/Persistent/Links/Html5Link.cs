@@ -23,6 +23,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		[NotMapped, JsonIgnore]
 		public override string WebFormat => WebFormats.Html5;
 
+		[NotMapped, JsonIgnore]
+		public override string AutoWidgetKey => "html5";
 		#endregion
 
 		public Html5Link()

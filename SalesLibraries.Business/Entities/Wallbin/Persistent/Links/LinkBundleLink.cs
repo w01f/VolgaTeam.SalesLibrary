@@ -30,6 +30,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		[NotMapped, JsonIgnore]
 		public override string WebFormat => WebFormats.LinkBundle;
+
+		[NotMapped, JsonIgnore]
+		public override string AutoWidgetKey => "link bundle";
 		#endregion
 
 		public LinkBundleLink()

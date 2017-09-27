@@ -43,8 +43,11 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		[NotMapped, JsonIgnore]
 		public string TargetLibrary => ((InternalWallbinLinkSettings)Settings).LibraryName;
+
+		[NotMapped, JsonIgnore]
+		public override string AutoWidgetKey => "internal library";
 		#endregion
-		
+
 		public static InternalWallbinLink Create(InternalWallbinLinkInfo linkInfo, LibraryFolder parentFolder)
 		{
 			var link = CreateEntity<InternalWallbinLink>();
