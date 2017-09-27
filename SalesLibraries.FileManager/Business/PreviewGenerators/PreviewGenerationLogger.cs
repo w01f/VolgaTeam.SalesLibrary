@@ -3,7 +3,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers;
-using SalesLibraries.Common.Helpers;
 
 namespace SalesLibraries.FileManager.Business.PreviewGenerators
 {

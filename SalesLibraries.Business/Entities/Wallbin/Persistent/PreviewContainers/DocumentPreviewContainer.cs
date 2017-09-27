@@ -47,25 +47,24 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 		public bool GenerateText { get; private set; }
 		#endregion
 
-		protected override void UpdateState(IEnumerable<IPreviewableLink> associatedLinks)
+		protected override void UpdateState(IList<IPreviewableLink> associatedLinks)
 		{
-			var associatedLinksList = associatedLinks.ToList();
-			GenerateFullImages = associatedLinksList
+			GenerateFullImages = associatedLinks
 				.OfType<PreviewableFileLink>()
 				.Select(link => link.Settings)
 				.OfType<DocumentLinkSettings>()
 				.Any(set => set.GeneratePreviewImages);
-			GenerateSingleImage = associatedLinksList
+			GenerateSingleImage = associatedLinks
 				.OfType<PreviewableFileLink>()
 				.Select(link => link.Settings)
 				.OfType<DocumentLinkSettings>()
 				.All(set => !set.GeneratePreviewImages);
-			GenerateText = associatedLinksList
+			GenerateText = associatedLinks
 				.OfType<PreviewableFileLink>()
 				.Select(link => link.Settings)
 				.OfType<DocumentLinkSettings>()
 				.Any(set => set.GenerateContentText);
-			base.UpdateState(associatedLinksList);
+			base.UpdateState(associatedLinks);
 			if (!IsUpToDate)
 				return;
 			IsUpToDate = BasePreviewFormats.All(previewFormat =>

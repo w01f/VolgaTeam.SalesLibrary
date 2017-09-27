@@ -9,7 +9,7 @@ using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 
 namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 {
-	public class Html5Link : HyperLink
+	public class Html5Link : PreviewableHyperLink
 	{
 		#region Nonpersistent Properties
 		private Html5LinkSettings _settings;

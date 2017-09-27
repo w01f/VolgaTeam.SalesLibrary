@@ -11,20 +11,20 @@ using SalesLibraries.FileManager.Controllers;
 
 namespace SalesLibraries.FileManager.Business.PreviewGenerators
 {
-	[IntendForClass(typeof(WebLinkPreviewContainer))]
-	class WebPreviewGenerator : IPreviewGenerator
+	[IntendForClass(typeof(ColdFusionLinkPreviewContainer))]
+	class ColdFusionPreviewGenerator : IPreviewGenerator
 	{
 		public void Generate(BasePreviewContainer previewContainer, CancellationToken cancellationToken)
 		{
-			var webPreviewContainer = (WebLinkPreviewContainer)previewContainer;
+			var coldFusionLinkPreviewContainer = (ColdFusionLinkPreviewContainer)previewContainer;
 
-			var logger = new UrlPreviewGenerationLogger(webPreviewContainer);
+			var logger = new UrlPreviewGenerationLogger(coldFusionLinkPreviewContainer);
 			logger.StartLogging();
 
-			var thumbsDestination = Path.Combine(webPreviewContainer.ContainerPath, PreviewFormats.Thumbnails);
+			var thumbsDestination = Path.Combine(coldFusionLinkPreviewContainer.ContainerPath, PreviewFormats.Thumbnails);
 			var updateThumbs = !(Directory.Exists(thumbsDestination) && Directory.GetFiles(thumbsDestination).Any());
 
-			var thumbsDatatableDestination = Path.Combine(webPreviewContainer.ContainerPath, PreviewFormats.ThumbnailsForDatatable);
+			var thumbsDatatableDestination = Path.Combine(coldFusionLinkPreviewContainer.ContainerPath, PreviewFormats.ThumbnailsForDatatable);
 			var updateThumbsDatatable = !(Directory.Exists(thumbsDatatableDestination) && Directory.GetFiles(thumbsDatatableDestination).Any());
 
 			if (!(updateThumbs || updateThumbsDatatable)) return;
@@ -35,17 +35,14 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 			if (!Directory.Exists(thumbsDatatableDestination))
 				Directory.CreateDirectory(thumbsDatatableDestination);
 
-			MainController.Instance.MainForm.Invoke(new MethodInvoker(() =>
-			{
-				var thumbnailGenerator = new RegularBrowserThumbnailGenerator();
-				thumbnailGenerator.GenerateThumbnail(webPreviewContainer.SourcePath, thumbsDestination);
-			}));
+			var thumbnailGenerator = new EOBrowserThumbnailGenerator();
+			thumbnailGenerator.GenerateThumbnail(coldFusionLinkPreviewContainer.SourcePath, thumbsDestination);
 			JpegGenerator.GenerateDatatableJpegs(thumbsDestination, thumbsDatatableDestination);
 
 			logger.LogStage(PreviewFormats.Thumbnails);
 			logger.LogStage(PreviewFormats.ThumbnailsForDatatable);
 
-			webPreviewContainer.MarkAsModified();
+			coldFusionLinkPreviewContainer.MarkAsModified();
 
 			logger.FinishLogging();
 		}

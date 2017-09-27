@@ -1,4 +1,4 @@
 ﻿namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 {
-	public class WebLinkPreviewContainer : HyperlinkPreviewContainer { }
+	public class ColdFusionLinkPreviewContainer : HyperlinkPreviewContainer { }
 }

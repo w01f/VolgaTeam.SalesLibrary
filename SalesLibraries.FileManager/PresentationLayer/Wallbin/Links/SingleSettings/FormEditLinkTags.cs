@@ -127,7 +127,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				: Resources.LinkSettingsTagsLogoKeywords;
 			labelControlTitle.Text = String.Format(HeaderTitleTemplate,
 				_selectedLinks.Count > 1 ?
-					linksTreeSelector.SelectedGroup?.Title :
+					String.Format("{0} ({1})", linksTreeSelector.SelectedGroup?.Title, linksTreeSelector.SelectedGroup?.Links.OfType<LibraryObjectLink>().Count()) :
 					_selectedLinks.FirstOrDefault()?.ToString());
 		}
 

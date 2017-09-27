@@ -45,7 +45,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.LinksTreeSe
 
 			treeList.Nodes.Clear();
 
-			var rootNode = treeList.AppendNode(new object[] { rootGroup.Title }, null);
+			var rootNode = treeList.AppendNode(new object[] { rootGroup.TitleAndLinksCount }, null);
 			rootNode.Tag = rootGroup;
 			rootNode.StateImageIndex = 0;
 
@@ -57,7 +57,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.LinksTreeSe
 			{
 				foreach (var formatTreeGroup in linksTreeGroups.Where(g => g.Links.Any()))
 				{
-					var formatGroupNode = treeList.AppendNode(new object[] { formatTreeGroup.Title }, rootNode);
+					var formatGroupNode = treeList.AppendNode(new object[] { formatTreeGroup.TitleAndLinksCount }, rootNode);
 					formatGroupNode.Tag = formatTreeGroup;
 					formatGroupNode.StateImageIndex = 0;
 

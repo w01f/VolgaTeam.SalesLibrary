@@ -15,14 +15,20 @@ using Timer = System.Threading.Timer;
 
 namespace SalesLibraries.FileManager.Business.Services
 {
-	class WebLinkThumbnailGenerator
+	class RegularBrowserThumbnailGenerator
 	{
+		const int BrowserWidth = 1280;
+		const int BrowserHeight = 1024;
+		const int ThumbWidth = 800;
+		const int ThumbHeight = 600;
+
+
 		private bool _complited;
 		private readonly List<Link> _loadingLinks = new List<Link>();
 		private readonly ExtendedWebBrowser _webBrowser;
 		private Timer _compliteTimer;
 
-		public WebLinkThumbnailGenerator()
+		public RegularBrowserThumbnailGenerator()
 		{
 			_webBrowser = new ExtendedWebBrowser();
 			_webBrowser.ScrollBarsEnabled = false;
@@ -32,38 +38,42 @@ namespace SalesLibraries.FileManager.Business.Services
 			_webBrowser.DocumentCompleted += OnWebBrowserDocumentCompleted;
 		}
 
-		public void GenerateThumbnail(string url, string destinationPath)
+		public void GenerateThumbnail(string url, string destinationPath, int delaySeconds = 10)
 		{
-			var width = 1280;
-			var height = 1024;
-			var thumbWidth = 800;
-			var thumbHeight = 600;
-
 			try
 			{
 				_complited = false;
 				_compliteTimer = null;
 				_loadingLinks.Clear();
+				_webBrowser.Height = BrowserHeight;
+				_webBrowser.Width = BrowserWidth;
 				_webBrowser.Navigate(url);
 				long timeStart = Environment.TickCount;
-				const long timeout = 6000;
+				const long timeout = 10000;
 				while (!_complited)
 				{
 					Application.DoEvents();
 					if (Environment.TickCount - timeStart <= timeout) continue;
 					break;
 				}
+
+				while (delaySeconds > 0)
+				{
+					Thread.Sleep(1000);
+					Application.DoEvents();
+					delaySeconds--;
+				}
 			}
-			catch { }
+			catch (Exception ex)
+			{
+				//throw ex;
+			}
 			finally
 			{
 				_webBrowser.Stop();
 				if (_webBrowser?.Document?.Body != null)
 				{
-					_webBrowser.Height = height;
-					_webBrowser.Width = width;
-
-					var rectangle = new Rectangle(0, 0, thumbWidth, thumbHeight);
+					var rectangle = new Rectangle(0, 0, ThumbWidth, ThumbHeight);
 					var bitmap = new Bitmap(rectangle.Width, rectangle.Height, PixelFormat.Format32bppArgb);
 					using (var graphics = Graphics.FromImage(bitmap))
 					{
@@ -80,6 +90,7 @@ namespace SalesLibraries.FileManager.Business.Services
 						bitmap.Save(Path.Combine(destinationPath, "thumbnail.png"), ImageFormat.Png);
 					}
 				}
+				_webBrowser.Dispose();
 			}
 		}
 

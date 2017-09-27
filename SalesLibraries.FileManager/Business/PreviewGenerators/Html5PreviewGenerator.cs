@@ -11,20 +11,20 @@ using SalesLibraries.FileManager.Controllers;
 
 namespace SalesLibraries.FileManager.Business.PreviewGenerators
 {
-	[IntendForClass(typeof(WebLinkPreviewContainer))]
-	class WebPreviewGenerator : IPreviewGenerator
+	[IntendForClass(typeof(Html5PreviewContainer))]
+	class Html5PreviewGenerator : IPreviewGenerator
 	{
 		public void Generate(BasePreviewContainer previewContainer, CancellationToken cancellationToken)
 		{
-			var webPreviewContainer = (WebLinkPreviewContainer)previewContainer;
+			var html5PreviewContainer = (Html5PreviewContainer)previewContainer;
 
-			var logger = new UrlPreviewGenerationLogger(webPreviewContainer);
+			var logger = new UrlPreviewGenerationLogger(html5PreviewContainer);
 			logger.StartLogging();
 
-			var thumbsDestination = Path.Combine(webPreviewContainer.ContainerPath, PreviewFormats.Thumbnails);
+			var thumbsDestination = Path.Combine(html5PreviewContainer.ContainerPath, PreviewFormats.Thumbnails);
 			var updateThumbs = !(Directory.Exists(thumbsDestination) && Directory.GetFiles(thumbsDestination).Any());
 
-			var thumbsDatatableDestination = Path.Combine(webPreviewContainer.ContainerPath, PreviewFormats.ThumbnailsForDatatable);
+			var thumbsDatatableDestination = Path.Combine(html5PreviewContainer.ContainerPath, PreviewFormats.ThumbnailsForDatatable);
 			var updateThumbsDatatable = !(Directory.Exists(thumbsDatatableDestination) && Directory.GetFiles(thumbsDatatableDestination).Any());
 
 			if (!(updateThumbs || updateThumbsDatatable)) return;
@@ -38,14 +38,14 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 			MainController.Instance.MainForm.Invoke(new MethodInvoker(() =>
 			{
 				var thumbnailGenerator = new RegularBrowserThumbnailGenerator();
-				thumbnailGenerator.GenerateThumbnail(webPreviewContainer.SourcePath, thumbsDestination);
+				thumbnailGenerator.GenerateThumbnail(html5PreviewContainer.ThumnailUrl, thumbsDestination);
 			}));
 			JpegGenerator.GenerateDatatableJpegs(thumbsDestination, thumbsDatatableDestination);
 
 			logger.LogStage(PreviewFormats.Thumbnails);
 			logger.LogStage(PreviewFormats.ThumbnailsForDatatable);
 
-			webPreviewContainer.MarkAsModified();
+			html5PreviewContainer.MarkAsModified();
 
 			logger.FinishLogging();
 		}

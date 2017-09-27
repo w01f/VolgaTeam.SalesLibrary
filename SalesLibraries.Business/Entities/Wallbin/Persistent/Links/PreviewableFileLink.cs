@@ -13,6 +13,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		[NotMapped, JsonIgnore]
 		public string PreviewName => NameWithExtension;
 		[NotMapped, JsonIgnore]
+		public string PreviewSourcePath => FullPath;
+		[NotMapped, JsonIgnore]
 		public string PreviewContainerPath => GetPreviewContainer().ContainerPath;
 		[NotMapped, JsonIgnore]
 		public string PreviewContainerName => GetPreviewContainer().ExtId.ToString("D");
@@ -26,7 +28,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		public BasePreviewContainer GetPreviewContainer()
 		{
-			return ParentLibrary.GetPreviewContainerBySourcePath(FullPath);
+			return ParentLibrary.GetPreviewContainerBySourcePath(PreviewSourcePath);
 		}
 
 		public void ClearPreviewContainer()

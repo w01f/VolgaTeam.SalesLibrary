@@ -343,7 +343,7 @@ namespace SalesLibraries.FileManager.Business.Services
 			if (source is IPreviewableLink)
 			{
 				var sourcePreviewObject = (IPreviewableLink)source;
-				var previewContainer = source.ParentLibrary.GetPreviewContainerBySourcePath(sourcePreviewObject.FullPath);
+				var previewContainer = source.ParentLibrary.GetPreviewContainerBySourcePath(sourcePreviewObject.PreviewSourcePath);
 				if (previewContainer != null)
 				{
 					target.previewId = previewContainer.ExtId.ToString();
@@ -763,7 +763,7 @@ namespace SalesLibraries.FileManager.Business.Services
 					.Select(path => path.Replace(source.Library.Path, String.Empty))
 					.ToArray();
 			}
-			if (source is WebLinkPreviewContainer)
+			if (source is HyperlinkPreviewContainer)
 			{
 				var thumbnails = source.GetPreviewLinksByFormat(PreviewFormats.Thumbnails).ToList();
 				target.thumbsLinks = thumbnails.Select(path => path.Replace(source.Library.Path, String.Empty)).ToArray();

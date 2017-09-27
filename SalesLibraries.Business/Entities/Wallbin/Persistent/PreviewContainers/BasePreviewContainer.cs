@@ -68,7 +68,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 			Library = null;
 		}
 
-		protected virtual void UpdateState(IEnumerable<IPreviewableLink> associatedLinks)
+		protected virtual void UpdateState(IList<IPreviewableLink> associatedLinks)
 		{
 			IsAlive = true;
 		}
@@ -134,15 +134,25 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 			else if (FileFormatHelper.IsExcelFile(sourceFile))
 				previewContainer = CreateEntity<ExcelPreviewContainer>();
 			else if (FileFormatHelper.IsVideoFile(sourceFile))
-			{
 				previewContainer = CreateEntity<VideoPreviewContainer>();
-			}
+			else if (FileFormatHelper.IsVideoFile(sourceFile))
+				previewContainer = CreateEntity<VideoPreviewContainer>();
+			else if (sourceFile.Contains("youtu"))
+				previewContainer = CreateEntity<YoutubePreviewContainer>();
+			else if (sourceFile.Contains("vimeo"))
+				previewContainer = CreateEntity<VimeoPreviewContainer>();
+			else if (sourceFile.Contains("secure_links"))
+				previewContainer = CreateEntity<Html5PreviewContainer>();
+			else if (sourceFile.Contains(".cfm"))
+				previewContainer = CreateEntity<ColdFusionLinkPreviewContainer>();
 			else
 				previewContainer = CreateEntity<WebLinkPreviewContainer>();
+
 			var relativePath = sourceFile.Replace(parent.Path, String.Empty);
 			if (relativePath.StartsWith(@"\"))
 				relativePath = relativePath.Substring(1);
 			previewContainer.RelativePath = relativePath;
+
 			return previewContainer;
 		}
 	}

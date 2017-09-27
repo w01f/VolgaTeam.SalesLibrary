@@ -243,6 +243,11 @@
     <Compile Include="Entities\Wallbin\Persistent\PreviewContainers\VideoPreviewContainer.cs" />
     <Compile Include="Entities\Wallbin\Persistent\PreviewContainers\ExcelPreviewContainer.cs" />
     <Compile Include="Entities\Wallbin\Persistent\PreviewContainers\PdfPreviewContainer.cs" />
+    <Compile Include="Entities\Wallbin\Persistent\PreviewContainers\HyperlinkPreviewContainer.cs" />
+    <Compile Include="Entities\Wallbin\Persistent\PreviewContainers\VimeoPreviewContainer.cs" />
+    <Compile Include="Entities\Wallbin\Persistent\PreviewContainers\Html5PreviewContainer.cs" />
+    <Compile Include="Entities\Wallbin\Persistent\PreviewContainers\ColdFusionLinkPreviewContainer.cs" />
+    <Compile Include="Entities\Wallbin\Persistent\PreviewContainers\YoutubePreviewContainer.cs" />
     <Compile Include="Entities\Wallbin\Persistent\PreviewContainers\WebLinkPreviewContainer.cs" />
     <Compile Include="Entities\Wallbin\Persistent\PreviewContainers\WordPreviewContainer.cs" />
     <Compile Include="Entities\Wallbin\Persistent\PreviewContainers\PowerPointPreviewContainer.cs" />

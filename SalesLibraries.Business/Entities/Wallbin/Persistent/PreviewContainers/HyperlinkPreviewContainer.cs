@@ -1,15 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
 using SalesLibraries.Business.Entities.Common;
 using SalesLibraries.Business.Entities.Interfaces;
+using SalesLibraries.Business.Entities.Wallbin.Common.Constants;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.PreviewContainerSettings;
 
 namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 {
-	public abstract class FilePreviewContainer : BasePreviewContainer
+	public abstract class HyperlinkPreviewContainer : BasePreviewContainer
 	{
 		#region Nonpersistent Properties
 		private CommonPreviewContainerSettings _settings;
@@ -21,22 +23,31 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 		}
 
 		[NotMapped, JsonIgnore]
-		public override string SourcePath => Path.Combine(Library.Path, RelativePath);
+		public override String SourcePath => RelativePath;
+
+		[NotMapped, JsonIgnore]
+		protected override string PreviewSubFolder => DocumentSubFolderName;
+
+		[NotMapped, JsonIgnore]
+		public override string[] AvailablePreviewFormats => new[]
+		{
+			PreviewFormats.Thumbnails,
+			PreviewFormats.ThumbnailsForDatatable,
+		};
+
+		[NotMapped, JsonIgnore]
+		public string ThumbnailUrl => DocumentSubFolderName;
 		#endregion
 
 		protected override void UpdateState(IList<IPreviewableLink> associatedLinks)
 		{
 			base.UpdateState(associatedLinks);
-			if (!File.Exists(SourcePath) || associatedLinks.All(link => link.IsDead))
+			IsAlive = associatedLinks.Any();
+			IsUpToDate = IsAlive && AvailablePreviewFormats.All(previewFormat =>
 			{
-				IsUpToDate = false;
-				IsAlive = false;
-				return;
-			}
-			var sourceFileActualDate = File.GetLastWriteTime(SourcePath);
-			var containerActualDate = Directory.GetLastWriteTime(ContainerPath);
-			var time = sourceFileActualDate.Subtract(containerActualDate);
-			IsUpToDate = time.Minutes <= 0;
+				var previewFolderPath = Path.Combine(ContainerPath, previewFormat);
+				return Directory.Exists(previewFolderPath) && Directory.GetFiles(previewFolderPath).Any();
+			});
 		}
 	}
 }

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Drawing;
 using Newtonsoft.Json;
 using SalesLibraries.Business.Entities.Common;
@@ -9,7 +10,7 @@ using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 
 namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 {
-	public class QuickSiteLink : HyperLink
+	public class QuickSiteLink : PreviewableHyperLink
 	{
 		#region Nonpersistent Properties
 		private QuickSiteSettings _settings;
@@ -23,6 +24,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		[NotMapped, JsonIgnore]
 		public override string WebFormat => WebFormats.QuickSite;
 
+		[NotMapped, JsonIgnore]
+		public override string PreviewSourcePath => String.Format("{0}&useForThumbnail=true", FullPath);
 		#endregion
 
 		public QuickSiteLink()

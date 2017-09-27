@@ -9,7 +9,7 @@ using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 
 namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 {
-	public class YouTubeLink : HyperLink
+	public class YouTubeLink : PreviewableHyperLink
 	{
 		#region Nonpersistent Properties
 		private YouTubeSettings _settings;
@@ -22,7 +22,6 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		[NotMapped, JsonIgnore]
 		public override string WebFormat => WebFormats.YouTube;
-
 		#endregion
 
 		public YouTubeLink()

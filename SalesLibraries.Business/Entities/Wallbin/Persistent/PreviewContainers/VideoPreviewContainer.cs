@@ -75,10 +75,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 		};
 		#endregion
 
-		protected override void UpdateState(IEnumerable<IPreviewableLink> associatedLinks)
+		protected override void UpdateState(IList<IPreviewableLink> associatedLinks)
 		{
-			var associatedLinksList = associatedLinks.ToList();
-			base.UpdateState(associatedLinksList);
+			base.UpdateState(associatedLinks);
 			if (!IsUpToDate)
 				return;
 			IsUpToDate = IsConverted;

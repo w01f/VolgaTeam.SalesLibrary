@@ -11,6 +11,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.LinksTreeSe
 	public abstract class TreeGroup
 	{
 		public abstract string Title { get; }
+		public string TitleAndLinksCount => String.Format("{0} ({1})", Title, Links.Count);
+
 		public List<BaseLibraryLink> Links { get; } = new List<BaseLibraryLink>();
 	}
 
@@ -38,7 +40,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.LinksTreeSe
 	class RootTreeGroup : TreeGroup
 	{
 		private readonly ILinksGroup _linksGroup;
-		public override string Title => String.Format("{0} (All Files) ({1})", _linksGroup.LinkGroupName, Links.Count);
+		public override string Title => String.Format("{0} (All Files)", _linksGroup.LinkGroupName);
 
 		public RootTreeGroup(ILinksGroup linksGroup, FileTypes? defaultLinkType = null)
 		{
@@ -49,7 +51,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.LinksTreeSe
 
 	class PowerPointTreeGroup : LinksFormatTreeGroup
 	{
-		public override string Title => String.Format("PowerPoint Files ({0})", Links.Count);
+		public override string Title => "PowerPoint Files";
 
 		public override string[] TargetLinkFormats => new[] { WebFormats.PowerPoint };
 
@@ -58,7 +60,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.LinksTreeSe
 
 	class WordTreeGroup : LinksFormatTreeGroup
 	{
-		public override string Title => String.Format("Document Files ({0})", Links.Count);
+		public override string Title => "Document Files";
 
 		public override string[] TargetLinkFormats => new[] { WebFormats.Word };
 
@@ -67,7 +69,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.LinksTreeSe
 
 	class ExcelTreeGroup : LinksFormatTreeGroup
 	{
-		public override string Title => String.Format("Excel Files ({0})", Links.Count);
+		public override string Title => "Excel Files";
 
 		public override string[] TargetLinkFormats => new[] { WebFormats.Excel };
 
@@ -76,7 +78,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.LinksTreeSe
 
 	class PdfTreeGroup : LinksFormatTreeGroup
 	{
-		public override string Title => String.Format("PDF Files ({0})", Links.Count);
+		public override string Title => "PDF Files";
 
 		public override string[] TargetLinkFormats => new[] { WebFormats.Pdf };
 
@@ -85,7 +87,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.LinksTreeSe
 
 	class VideoTreeGroup : LinksFormatTreeGroup
 	{
-		public override string Title => String.Format("Video Files ({0})", Links.Count);
+		public override string Title => "Video Files";
 
 		public override string[] TargetLinkFormats => new[] { WebFormats.Video };
 
@@ -94,7 +96,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.LinksTreeSe
 
 	class ImageTreeGroup : LinksFormatTreeGroup
 	{
-		public override string Title => String.Format("Image Files ({0})", Links.Count);
+		public override string Title => "Image Files";
 
 		public override string[] TargetLinkFormats => new[]
 		{
@@ -108,7 +110,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.LinksTreeSe
 
 	class UrlTreeGroup : LinksFormatTreeGroup
 	{
-		public override string Title => String.Format("Hyperlinks ({0})", Links.Count);
+		public override string Title => "Hyperlinks";
 
 		public override string[] TargetLinkFormats => new[]
 		{
@@ -130,7 +132,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.LinksTreeSe
 
 	class UndefinedTreeGroup : LinksFormatTreeGroup
 	{
-		public override string Title => String.Format("Other Files ({0})", Links.Count);
+		public override string Title => "Other Files";
 
 		public override string[] TargetLinkFormats => new string[] { };
 

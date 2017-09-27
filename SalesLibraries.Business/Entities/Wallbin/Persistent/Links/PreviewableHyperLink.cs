@@ -14,6 +14,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 	public abstract class PreviewableHyperLink : HyperLink, IPreviewableLink, IThumbnailSettingsHolder
 	{
 		#region Nonpersistent Properties
+
+		[NotMapped, JsonIgnore]
+		public virtual string PreviewSourcePath => FullPath;
 		[NotMapped, JsonIgnore]
 		public bool IsDead => false;
 		[NotMapped, JsonIgnore]
@@ -24,7 +27,6 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		public string PreviewContainerName => GetPreviewContainer().ExtId.ToString("D");
 		[NotMapped, JsonIgnore]
 		public Color ThumbnailBackColor => Folder.Settings.BackgroundWindowColor;
-
 		[NotMapped, JsonIgnore]
 		public bool ShowSourceFilesList => true;
 		#endregion
@@ -37,7 +39,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		public BasePreviewContainer GetPreviewContainer()
 		{
-			return ParentLibrary.GetPreviewContainerBySourcePath(FullPath);
+			return ParentLibrary.GetPreviewContainerBySourcePath(PreviewSourcePath);
 		}
 
 		public void ClearPreviewContainer()

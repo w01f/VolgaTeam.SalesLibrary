@@ -40,12 +40,9 @@
 			this.layoutControl = new DevExpress.XtraLayout.LayoutControl();
 			this.linksTreeSelector = new SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.LinksTreeSelector.LinksTreeSelectorControl();
 			this.hyperLinkEditRequestNewCategories = new DevExpress.XtraEditors.HyperLinkEdit();
-			this.buttonXCategoriesCollapseAll = new DevComponents.DotNetBar.ButtonX();
 			this.xtraScrollableControlCategoriesInfo = new DevExpress.XtraEditors.XtraScrollableControl();
 			this.labelControlCategoriesInfo = new DevExpress.XtraEditors.LabelControl();
 			this.imageCollectionCategories = new DevExpress.Utils.ImageCollection(this.components);
-			this.buttonXCategoriesExpandAll = new DevComponents.DotNetBar.ButtonX();
-			this.panelCategoriesContent = new System.Windows.Forms.Panel();
 			this.treeListCategories = new SalesLibraries.CommonGUI.CustomTreeList.EmptyImageTreeList();
 			this.treeListColumnName = new DevExpress.XtraTreeList.Columns.TreeListColumn();
 			this.hyperLinkEditWipeCategories = new DevExpress.XtraEditors.HyperLinkEdit();
@@ -58,6 +55,9 @@
 			this.repositoryItemButtonEditKeywordShared = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
 			this.repositoryItemButtonEditKeywordPartial = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
 			this.buttonXAddKeyWord = new DevComponents.DotNetBar.ButtonX();
+			this.buttonXCategoriesCollapseAll = new DevComponents.DotNetBar.ButtonX();
+			this.buttonXCategoriesExpandAll = new DevComponents.DotNetBar.ButtonX();
+			this.panelCategoriesContent = new System.Windows.Forms.Panel();
 			this.layoutControlGroupRoot = new DevExpress.XtraLayout.LayoutControlGroup();
 			this.layoutControlItemTitle = new DevExpress.XtraLayout.LayoutControlItem();
 			this.layoutControlGroupCategoriesHeader = new DevExpress.XtraLayout.LayoutControlGroup();
@@ -224,17 +224,17 @@
 			this.layoutControl.Controls.Add(this.linksTreeSelector);
 			this.layoutControl.Controls.Add(this.hyperLinkEditRequestNewCategories);
 			this.layoutControl.Controls.Add(this.buttonXCancel);
-			this.layoutControl.Controls.Add(this.buttonXCategoriesCollapseAll);
 			this.layoutControl.Controls.Add(this.buttonXOK);
 			this.layoutControl.Controls.Add(this.xtraScrollableControlCategoriesInfo);
-			this.layoutControl.Controls.Add(this.buttonXCategoriesExpandAll);
-			this.layoutControl.Controls.Add(this.panelCategoriesContent);
 			this.layoutControl.Controls.Add(this.treeListCategories);
 			this.layoutControl.Controls.Add(this.hyperLinkEditWipeCategories);
 			this.layoutControl.Controls.Add(this.hyperLinkEditWipeKeywords);
 			this.layoutControl.Controls.Add(this.labelControlCategoriesCount);
 			this.layoutControl.Controls.Add(this.labelControlKeywordsCount);
 			this.layoutControl.Controls.Add(this.labelControlTitle);
+			this.layoutControl.Controls.Add(this.buttonXCategoriesCollapseAll);
+			this.layoutControl.Controls.Add(this.buttonXCategoriesExpandAll);
+			this.layoutControl.Controls.Add(this.panelCategoriesContent);
 			this.layoutControl.Controls.Add(this.gridControlKeywords);
 			this.layoutControl.Controls.Add(this.buttonXAddKeyWord);
 			this.layoutControl.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -256,7 +256,7 @@
 			this.linksTreeSelector.Location = new System.Drawing.Point(12, 62);
 			this.linksTreeSelector.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.linksTreeSelector.Name = "linksTreeSelector";
-			this.linksTreeSelector.Size = new System.Drawing.Size(246, 437);
+			this.linksTreeSelector.Size = new System.Drawing.Size(266, 437);
 			this.linksTreeSelector.TabIndex = 63;
 			// 
 			// hyperLinkEditRequestNewCategories
@@ -276,21 +276,6 @@
 			this.hyperLinkEditRequestNewCategories.TabIndex = 8;
 			this.hyperLinkEditRequestNewCategories.TabStop = false;
 			this.hyperLinkEditRequestNewCategories.OpenLink += new DevExpress.XtraEditors.Controls.OpenLinkEventHandler(this.OnRequestNewCategoriesOpenLink);
-			// 
-			// buttonXCategoriesCollapseAll
-			// 
-			this.buttonXCategoriesCollapseAll.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-			this.buttonXCategoriesCollapseAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonXCategoriesCollapseAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXCategoriesCollapseAll.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.buttonXCategoriesCollapseAll.Location = new System.Drawing.Point(423, 98);
-			this.buttonXCategoriesCollapseAll.Name = "buttonXCategoriesCollapseAll";
-			this.buttonXCategoriesCollapseAll.Size = new System.Drawing.Size(118, 34);
-			this.buttonXCategoriesCollapseAll.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.buttonXCategoriesCollapseAll.TabIndex = 7;
-			this.buttonXCategoriesCollapseAll.Text = "Collapse All";
-			this.buttonXCategoriesCollapseAll.TextColor = System.Drawing.Color.Black;
-			this.buttonXCategoriesCollapseAll.Click += new System.EventHandler(this.buttonXCategoriesCollapseAll_Click);
 			// 
 			// xtraScrollableControlCategoriesInfo
 			// 
@@ -332,29 +317,6 @@
 			this.imageCollectionCategories.ImageStream = ((DevExpress.Utils.ImageCollectionStreamer)(resources.GetObject("imageCollectionCategories.ImageStream")));
 			this.imageCollectionCategories.Images.SetKeyName(0, "LinkSettingsTagsIconCategories.png");
 			// 
-			// buttonXCategoriesExpandAll
-			// 
-			this.buttonXCategoriesExpandAll.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-			this.buttonXCategoriesExpandAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXCategoriesExpandAll.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.buttonXCategoriesExpandAll.Location = new System.Drawing.Point(274, 99);
-			this.buttonXCategoriesExpandAll.Name = "buttonXCategoriesExpandAll";
-			this.buttonXCategoriesExpandAll.Size = new System.Drawing.Size(116, 32);
-			this.buttonXCategoriesExpandAll.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.buttonXCategoriesExpandAll.TabIndex = 6;
-			this.buttonXCategoriesExpandAll.Text = "Expand All";
-			this.buttonXCategoriesExpandAll.TextColor = System.Drawing.Color.Black;
-			this.buttonXCategoriesExpandAll.Click += new System.EventHandler(this.buttonXCategoriesExpandAll_Click);
-			// 
-			// panelCategoriesContent
-			// 
-			this.panelCategoriesContent.BackColor = System.Drawing.Color.Transparent;
-			this.panelCategoriesContent.ForeColor = System.Drawing.Color.Black;
-			this.panelCategoriesContent.Location = new System.Drawing.Point(548, 98);
-			this.panelCategoriesContent.Name = "panelCategoriesContent";
-			this.panelCategoriesContent.Size = new System.Drawing.Size(306, 390);
-			this.panelCategoriesContent.TabIndex = 0;
-			// 
 			// treeListCategories
 			// 
 			this.treeListCategories.AllowCheckMinLevel = 0;
@@ -368,7 +330,7 @@
 			this.treeListCategories.Appearance.SelectedRow.Options.UseFont = true;
 			this.treeListCategories.Columns.AddRange(new DevExpress.XtraTreeList.Columns.TreeListColumn[] {
             this.treeListColumnName});
-			this.treeListCategories.Location = new System.Drawing.Point(274, 145);
+			this.treeListCategories.Location = new System.Drawing.Point(294, 145);
 			this.treeListCategories.Name = "treeListCategories";
 			this.treeListCategories.OptionsBehavior.AutoChangeParent = false;
 			this.treeListCategories.OptionsBehavior.Editable = false;
@@ -489,13 +451,13 @@
 			this.gridControlKeywords.EmbeddedNavigator.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.gridControlKeywords.EmbeddedNavigator.Appearance.Options.UseBackColor = true;
 			this.gridControlKeywords.EmbeddedNavigator.Appearance.Options.UseForeColor = true;
-			this.gridControlKeywords.Location = new System.Drawing.Point(274, 145);
+			this.gridControlKeywords.Location = new System.Drawing.Point(294, 145);
 			this.gridControlKeywords.MainView = this.gridViewKeywords;
 			this.gridControlKeywords.Name = "gridControlKeywords";
 			this.gridControlKeywords.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemButtonEditKeywordShared,
             this.repositoryItemButtonEditKeywordPartial});
-			this.gridControlKeywords.Size = new System.Drawing.Size(836, 342);
+			this.gridControlKeywords.Size = new System.Drawing.Size(816, 342);
 			this.gridControlKeywords.TabIndex = 7;
 			this.gridControlKeywords.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewKeywords});
@@ -580,7 +542,7 @@
 			this.buttonXAddKeyWord.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.buttonXAddKeyWord.Image = global::SalesLibraries.FileManager.Properties.Resources.ButtonPlus;
 			this.buttonXAddKeyWord.ImageFixedSize = new System.Drawing.Size(24, 24);
-			this.buttonXAddKeyWord.Location = new System.Drawing.Point(274, 99);
+			this.buttonXAddKeyWord.Location = new System.Drawing.Point(294, 99);
 			this.buttonXAddKeyWord.Name = "buttonXAddKeyWord";
 			this.buttonXAddKeyWord.Size = new System.Drawing.Size(136, 32);
 			this.buttonXAddKeyWord.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -589,6 +551,44 @@
 			this.buttonXAddKeyWord.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
 			this.buttonXAddKeyWord.TextColor = System.Drawing.Color.Green;
 			this.buttonXAddKeyWord.Click += new System.EventHandler(this.OnAddKeyWordClick);
+			// 
+			// buttonXCategoriesCollapseAll
+			// 
+			this.buttonXCategoriesCollapseAll.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXCategoriesCollapseAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXCategoriesCollapseAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXCategoriesCollapseAll.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.buttonXCategoriesCollapseAll.Location = new System.Drawing.Point(443, 98);
+			this.buttonXCategoriesCollapseAll.Name = "buttonXCategoriesCollapseAll";
+			this.buttonXCategoriesCollapseAll.Size = new System.Drawing.Size(118, 34);
+			this.buttonXCategoriesCollapseAll.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXCategoriesCollapseAll.TabIndex = 7;
+			this.buttonXCategoriesCollapseAll.Text = "Collapse All";
+			this.buttonXCategoriesCollapseAll.TextColor = System.Drawing.Color.Black;
+			this.buttonXCategoriesCollapseAll.Click += new System.EventHandler(this.buttonXCategoriesCollapseAll_Click);
+			// 
+			// buttonXCategoriesExpandAll
+			// 
+			this.buttonXCategoriesExpandAll.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXCategoriesExpandAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXCategoriesExpandAll.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.buttonXCategoriesExpandAll.Location = new System.Drawing.Point(294, 99);
+			this.buttonXCategoriesExpandAll.Name = "buttonXCategoriesExpandAll";
+			this.buttonXCategoriesExpandAll.Size = new System.Drawing.Size(116, 32);
+			this.buttonXCategoriesExpandAll.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXCategoriesExpandAll.TabIndex = 6;
+			this.buttonXCategoriesExpandAll.Text = "Expand All";
+			this.buttonXCategoriesExpandAll.TextColor = System.Drawing.Color.Black;
+			this.buttonXCategoriesExpandAll.Click += new System.EventHandler(this.buttonXCategoriesExpandAll_Click);
+			// 
+			// panelCategoriesContent
+			// 
+			this.panelCategoriesContent.BackColor = System.Drawing.Color.Transparent;
+			this.panelCategoriesContent.ForeColor = System.Drawing.Color.Black;
+			this.panelCategoriesContent.Location = new System.Drawing.Point(568, 98);
+			this.panelCategoriesContent.Name = "panelCategoriesContent";
+			this.panelCategoriesContent.Size = new System.Drawing.Size(286, 390);
+			this.panelCategoriesContent.TabIndex = 0;
 			// 
 			// layoutControlGroupRoot
 			// 
@@ -737,11 +737,11 @@
 			this.tabbedControlGroupMain.AppearanceTabPage.PageClient.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.tabbedControlGroupMain.AppearanceTabPage.PageClient.Options.UseFont = true;
 			this.tabbedControlGroupMain.CustomizationFormText = "Main Tabs";
-			this.tabbedControlGroupMain.Location = new System.Drawing.Point(250, 50);
+			this.tabbedControlGroupMain.Location = new System.Drawing.Point(270, 50);
 			this.tabbedControlGroupMain.Name = "tabbedControlGroupMain";
-			this.tabbedControlGroupMain.SelectedTabPage = this.layoutControlGroupKeywords;
-			this.tabbedControlGroupMain.SelectedTabPageIndex = 1;
-			this.tabbedControlGroupMain.Size = new System.Drawing.Size(864, 441);
+			this.tabbedControlGroupMain.SelectedTabPage = this.layoutControlGroupCategories;
+			this.tabbedControlGroupMain.SelectedTabPageIndex = 0;
+			this.tabbedControlGroupMain.Size = new System.Drawing.Size(844, 441);
 			this.tabbedControlGroupMain.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlGroupCategories,
             this.layoutControlGroupKeywords});
@@ -758,7 +758,7 @@
             this.splitterItem2});
 			this.layoutControlGroupCategories.Location = new System.Drawing.Point(0, 0);
 			this.layoutControlGroupCategories.Name = "layoutControlGroupCategories";
-			this.layoutControlGroupCategories.Size = new System.Drawing.Size(840, 392);
+			this.layoutControlGroupCategories.Size = new System.Drawing.Size(820, 392);
 			this.layoutControlGroupCategories.Text = "Category Tags";
 			// 
 			// splitterItem1
@@ -866,7 +866,7 @@
 			this.layoutControlGroupCategoriesContent.Location = new System.Drawing.Point(275, 0);
 			this.layoutControlGroupCategoriesContent.Name = "layoutControlGroupCategoriesContent";
 			this.layoutControlGroupCategoriesContent.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-			this.layoutControlGroupCategoriesContent.Size = new System.Drawing.Size(308, 392);
+			this.layoutControlGroupCategoriesContent.Size = new System.Drawing.Size(288, 392);
 			this.layoutControlGroupCategoriesContent.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
 			this.layoutControlGroupCategoriesContent.TextVisible = false;
 			// 
@@ -877,7 +877,7 @@
 			this.layoutControlItemCategoriesContent.Location = new System.Drawing.Point(0, 0);
 			this.layoutControlItemCategoriesContent.Name = "layoutControlItemCategoriesContent";
 			this.layoutControlItemCategoriesContent.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-			this.layoutControlItemCategoriesContent.Size = new System.Drawing.Size(306, 390);
+			this.layoutControlItemCategoriesContent.Size = new System.Drawing.Size(286, 390);
 			this.layoutControlItemCategoriesContent.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutControlItemCategoriesContent.TextVisible = false;
 			// 
@@ -888,7 +888,7 @@
 			this.layoutControlGroupCategoriesInfo.CustomizationFormText = "Info";
 			this.layoutControlGroupCategoriesInfo.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItemCategoriesInfo});
-			this.layoutControlGroupCategoriesInfo.Location = new System.Drawing.Point(588, 0);
+			this.layoutControlGroupCategoriesInfo.Location = new System.Drawing.Point(568, 0);
 			this.layoutControlGroupCategoriesInfo.Name = "layoutControlGroupCategoriesInfo";
 			this.layoutControlGroupCategoriesInfo.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
 			this.layoutControlGroupCategoriesInfo.Size = new System.Drawing.Size(252, 392);
@@ -911,7 +911,7 @@
 			// splitterItem2
 			// 
 			this.splitterItem2.AllowHotTrack = true;
-			this.splitterItem2.Location = new System.Drawing.Point(583, 0);
+			this.splitterItem2.Location = new System.Drawing.Point(563, 0);
 			this.splitterItem2.Name = "splitterItem2";
 			this.splitterItem2.Size = new System.Drawing.Size(5, 392);
 			// 
@@ -925,7 +925,7 @@
             this.emptySpaceItem4});
 			this.layoutControlGroupKeywords.Location = new System.Drawing.Point(0, 0);
 			this.layoutControlGroupKeywords.Name = "layoutControlGroupKeywords";
-			this.layoutControlGroupKeywords.Size = new System.Drawing.Size(840, 392);
+			this.layoutControlGroupKeywords.Size = new System.Drawing.Size(820, 392);
 			this.layoutControlGroupKeywords.Text = "Keyword Tags";
 			// 
 			// layoutControlItemKeywordsAdd
@@ -949,7 +949,7 @@
 			this.emptySpaceItem3.AllowHotTrack = false;
 			this.emptySpaceItem3.Location = new System.Drawing.Point(140, 0);
 			this.emptySpaceItem3.Name = "emptySpaceItem3";
-			this.emptySpaceItem3.Size = new System.Drawing.Size(700, 36);
+			this.emptySpaceItem3.Size = new System.Drawing.Size(680, 36);
 			this.emptySpaceItem3.TextSize = new System.Drawing.Size(0, 0);
 			// 
 			// layoutControlItemKeywordsList
@@ -958,7 +958,7 @@
 			this.layoutControlItemKeywordsList.CustomizationFormText = "List";
 			this.layoutControlItemKeywordsList.Location = new System.Drawing.Point(0, 46);
 			this.layoutControlItemKeywordsList.Name = "layoutControlItemKeywordsList";
-			this.layoutControlItemKeywordsList.Size = new System.Drawing.Size(840, 346);
+			this.layoutControlItemKeywordsList.Size = new System.Drawing.Size(820, 346);
 			this.layoutControlItemKeywordsList.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutControlItemKeywordsList.TextVisible = false;
 			// 
@@ -969,7 +969,7 @@
 			this.emptySpaceItem4.MaxSize = new System.Drawing.Size(0, 10);
 			this.emptySpaceItem4.MinSize = new System.Drawing.Size(10, 10);
 			this.emptySpaceItem4.Name = "emptySpaceItem4";
-			this.emptySpaceItem4.Size = new System.Drawing.Size(840, 10);
+			this.emptySpaceItem4.Size = new System.Drawing.Size(820, 10);
 			this.emptySpaceItem4.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
 			this.emptySpaceItem4.TextSize = new System.Drawing.Size(0, 0);
 			// 
@@ -1034,9 +1034,9 @@
 			this.layoutControlItemLinksTree.CustomizationFormText = "Links Tree";
 			this.layoutControlItemLinksTree.FillControlToClientArea = false;
 			this.layoutControlItemLinksTree.Location = new System.Drawing.Point(0, 50);
-			this.layoutControlItemLinksTree.MinSize = new System.Drawing.Size(250, 24);
+			this.layoutControlItemLinksTree.MinSize = new System.Drawing.Size(270, 24);
 			this.layoutControlItemLinksTree.Name = "layoutControlItemLinksTree";
-			this.layoutControlItemLinksTree.Size = new System.Drawing.Size(250, 441);
+			this.layoutControlItemLinksTree.Size = new System.Drawing.Size(270, 441);
 			this.layoutControlItemLinksTree.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
 			this.layoutControlItemLinksTree.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutControlItemLinksTree.TextVisible = false;

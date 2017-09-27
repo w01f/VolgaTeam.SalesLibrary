@@ -164,7 +164,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 			return Pages
 				.SelectMany(p => onlyTopLevel ? p.TopLevelLinks : p.AllGroupLinks)
 				.OfType<IPreviewableLink>()
-				.Where(link => String.Equals(link.FullPath, sourcePath, StringComparison.InvariantCultureIgnoreCase));
+				.Where(link => String.Equals(link.PreviewSourcePath, sourcePath, StringComparison.InvariantCultureIgnoreCase));
 		}
 
 		public BasePreviewContainer GetPreviewContainerBySourcePath(string sourcePath)

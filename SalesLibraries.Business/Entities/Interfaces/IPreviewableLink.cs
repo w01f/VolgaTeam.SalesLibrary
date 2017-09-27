@@ -6,9 +6,9 @@ namespace SalesLibraries.Business.Entities.Interfaces
 {
 	public interface IPreviewableLink
 	{
+		string PreviewSourcePath { get; }
 		string PreviewContainerPath { get; }
 		string PreviewContainerName { get; }
-		string FullPath { get; }
 		bool IsDead { get; }
 		string PreviewName { get; }
 		BasePreviewContainer GetPreviewContainer();

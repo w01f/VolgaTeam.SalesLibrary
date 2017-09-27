@@ -9,7 +9,7 @@ using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 
 namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 {
-	public class VimeoLink : HyperLink
+	public class VimeoLink : PreviewableHyperLink
 	{
 		#region Nonpersistent Properties
 		private VimeoSettings _settings;
@@ -22,7 +22,6 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		[NotMapped, JsonIgnore]
 		public override string WebFormat => WebFormats.Vimeo;
-
 		#endregion
 
 		public VimeoLink()
