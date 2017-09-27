@@ -51,6 +51,7 @@
 					case LinkFeedQuerySettings::LinkFormatPowerPoint:
 					case LinkFeedQuerySettings::LinkFormatPdf:
 					case LinkFeedQuerySettings::LinkFormatWord:
+					case LinkFeedQuerySettings::LinkFormatExcel:
 					case LinkFeedQuerySettings::LinkFormatUrl:
 					case LinkFeedQuerySettings::LinkFormatHtml5:
 					case LinkFeedQuerySettings::LinkFormatQuicksite:
@@ -66,6 +67,7 @@
 					case LinkFeedQuerySettings::LinkFormatDocument:
 						$queryFormats[] = LinkFeedQuerySettings::LinkFormatWord;
 						$queryFormats[] = LinkFeedQuerySettings::LinkFormatPdf;
+						$queryFormats[] = LinkFeedQuerySettings::LinkFormatExcel;
 						break;
 					case LinkFeedQuerySettings::LinkFormatVideo:
 						$queryFormats[] = $linkFormat;
@@ -130,6 +132,8 @@
 							                (select concat(lib.path,'/',pv.relative_path) from tbl_preview pv where pv.id_container=link.id_preview and pv.type='mp4 thumb' order by pv.relative_path limit 1)
 							              when link.original_format='ppt' or link.original_format='doc' or link.original_format='pdf' then
 							                (select concat(lib.path,'/',pv.relative_path) from tbl_preview pv where pv.id_container=link.id_preview and pv.type='png_phone' order by pv.relative_path limit 1)
+							              when link.original_format='xls' then
+							                (select concat(lib.path,'/',pv.relative_path) from tbl_preview pv where pv.id_container=link.id_preview and pv.type='thumbs' order by pv.relative_path limit 1)
 							              when link.original_format='internal link' then
 							                (select concat(pv_lib.path,'/',pv.relative_path) from tbl_preview pv join tbl_library pv_lib on pv_lib.id=pv.id_library join tbl_link child_link on child_link.id_preview=pv.id_container join tbl_link_internal_link l_i_l on l_i_l.id_original = child_link.id where l_i_l.id_internal=link.id and (pv.type='png_phone' or pv.type='mp4 thumb') order by pv.relative_path limit 1)
 							              when link.original_format='link bundle' then
@@ -144,6 +148,8 @@
 							              (select concat(lib.path,'/',pv.relative_path) from tbl_preview pv where pv.id_container=link.id_preview and pv.type='mp4 thumb' order by rand() limit 1)
 							            when link.original_format='ppt' or link.original_format='doc' or link.original_format='pdf' then
 							              (select concat(lib.path,'/',pv.relative_path) from tbl_preview pv where pv.id_container=link.id_preview and pv.type='png_phone' order by rand() limit 1)
+										when link.original_format='xls' then
+							              (select concat(lib.path,'/',pv.relative_path) from tbl_preview pv where pv.id_container=link.id_preview and pv.type='thumbs' order by rand() limit 1)							              
 							            when link.original_format='internal link' then
 							              (select concat(pv_lib.path,'/',pv.relative_path) from tbl_preview pv join tbl_library pv_lib on pv_lib.id=pv.id_library join tbl_link child_link on child_link.id_preview=pv.id_container join tbl_link_internal_link l_i_l on l_i_l.id_original = child_link.id where l_i_l.id_internal=link.id and (pv.type='png_phone' or pv.type='mp4 thumb') order by rand() limit 1)  
 							            when link.original_format='link bundle' then
@@ -504,6 +510,7 @@
 					case LinkFeedQuerySettings::LinkFormatPowerPoint:
 					case LinkFeedQuerySettings::LinkFormatPdf:
 					case LinkFeedQuerySettings::LinkFormatWord:
+					case LinkFeedQuerySettings::LinkFormatExcel:
 					case LinkFeedQuerySettings::LinkFormatUrl:
 					case LinkFeedQuerySettings::LinkFormatHtml5:
 					case LinkFeedQuerySettings::LinkFormatQuicksite:
@@ -524,6 +531,7 @@
 					case LinkFeedQuerySettings::LinkFormatDocument:
 						$feedSettings->conditions->fileTypes[] = LinkFeedQuerySettings::LinkFormatWord;
 						$feedSettings->conditions->fileTypes[] = LinkFeedQuerySettings::LinkFormatPdf;
+						$feedSettings->conditions->fileTypes[] = LinkFeedQuerySettings::LinkFormatExcel;
 						break;
 					case LinkFeedQuerySettings::LinkFormatHyperlink:
 						$feedSettings->conditions->fileTypes[] = LinkFeedQuerySettings::LinkFormatUrl;
@@ -826,6 +834,8 @@
 								(select concat(lib.path,'/',pv.relative_path) from tbl_preview pv where pv.id_container=link.id_preview and pv.type='mp4 thumb' " . $thumbnailCondition . ")										
 							when link.original_format='ppt' or link.original_format='doc' or link.original_format='pdf' then
 								(select concat(lib.path,'/',pv.relative_path) from tbl_preview pv where pv.id_container=link.id_preview and pv.type='png_phone' " . $thumbnailCondition . ")
+							when link.original_format='xls' then
+								(select concat(lib.path,'/',pv.relative_path) from tbl_preview pv where pv.id_container=link.id_preview and pv.type='thumbs' " . $thumbnailCondition . ")
 							when link.original_format='internal link' then
 								(select concat(pv_lib.path,'/',pv.relative_path) from tbl_preview pv join tbl_library pv_lib on pv_lib.id=pv.id_library join tbl_link child_link on child_link.id_preview=pv.id_container join tbl_link_internal_link l_i_l on l_i_l.id_original = child_link.id where l_i_l.id_internal=link.id and (pv.type='png_phone' or pv.type='mp4 thumb') " . $thumbnailCondition . ")								
 							when link.original_format='link bundle' then
@@ -844,6 +854,7 @@
 					case LinkFeedQuerySettings::LinkFormatPowerPoint:
 					case LinkFeedQuerySettings::LinkFormatPdf:
 					case LinkFeedQuerySettings::LinkFormatWord:
+					case LinkFeedQuerySettings::LinkFormatExcel:
 					case LinkFeedQuerySettings::LinkFormatUrl:
 					case LinkFeedQuerySettings::LinkFormatHtml5:
 					case LinkFeedQuerySettings::LinkFormatQuicksite:
@@ -859,6 +870,7 @@
 					case LinkFeedQuerySettings::LinkFormatDocument:
 						$queryFormats[] = LinkFeedQuerySettings::LinkFormatWord;
 						$queryFormats[] = LinkFeedQuerySettings::LinkFormatPdf;
+						$queryFormats[] = LinkFeedQuerySettings::LinkFormatExcel;
 						break;
 					case LinkFeedQuerySettings::LinkFormatVideo:
 						$queryFormats[] = $linkFormat;

@@ -46,6 +46,18 @@
 		)
 		, true);
 ?>
+<style>
+    <? if (isset($contentBlock->shortcut->contentPadding) && $contentBlock->shortcut->contentPadding->isConfigured): ?>
+    <? echo '#'.$blockId; ?> {
+
+        padding-top: <? echo $contentBlock->shortcut->contentPadding->top; ?>px !important;
+        padding-left: <? echo $contentBlock->shortcut->contentPadding->left; ?>px !important;
+        padding-bottom: <? echo $contentBlock->shortcut->contentPadding->bottom; ?>px !important;
+        padding-right: <? echo $contentBlock->shortcut->contentPadding->right; ?>px !important;
+    }
+
+    <?endif;?>
+</style>
 <div id="<? echo $blockId; ?>" class="library-window-block">
     <div class="service-data wallbin-settings">
         <div class="encoded-data">

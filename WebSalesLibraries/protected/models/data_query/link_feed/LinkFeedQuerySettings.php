@@ -16,6 +16,7 @@
 		const LinkFormatDocument = 'document';
 		const LinkFormatWord = 'doc';
 		const LinkFormatPdf = 'pdf';
+		const LinkFormatExcel = 'xls';
 		const LinkFormatVideo = 'video';
 		const LinkFormatHyperlink = 'links';
 		const LinkFormatUrl = 'url';
