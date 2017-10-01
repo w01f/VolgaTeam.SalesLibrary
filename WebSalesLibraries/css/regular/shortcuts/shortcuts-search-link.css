@@ -1,4 +1,4 @@
-#right-navbar
+.search-side-bar
 {
 	width: 200px;
 	padding: 0;
@@ -7,10 +7,23 @@
 	border-right: 2px #999 solid;
 }
 
-#right-navbar .logo-list
+.search-side-bar .logo-list
 {
 	border: none;
 	margin-left: 0;
+}
+
+.search-side-bar .logo-list li
+{
+	margin-top: 10px;
+	float: none;
+	text-align: center;
+}
+
+.search-side-bar .logo-list li.disabled img
+{
+	opacity: 0.4;
+	filter: alpha(opacity=40);
 }
 
 .sub-search-conditions-pane
@@ -28,20 +41,12 @@
 	padding-bottom: 10px;
 }
 
-#right-navbar .logo-list li
-{
-	margin-top: 10px;
-	float: none;
-	text-align: center;
-}
-
-#right-navbar .logo-list li.disabled img
-{
-	opacity: 0.4;
-	filter: alpha(opacity=40);
-}
-
-.shortcuts-search-link-data-table-container
+.search-results-data-table-container
 {
 	margin: 30px;
+}
+
+table.search-results-container > tbody > tr > td
+{
+	vertical-align: top;
 }

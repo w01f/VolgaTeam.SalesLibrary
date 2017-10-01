@@ -1,9 +1,7 @@
-(function ($)
-{
+(function ($) {
 	window.BaseUrl = window.BaseUrl || '';
 	$.SalesPortal = $.SalesPortal || {};
-	$.SalesPortal.SearchDataTable = function (tableOptions)
-	{
+	$.SalesPortal.SearchDataTable = function (tableOptions) {
 		const ColumnTagCategory = 'tag';
 		const ColumnTagLibrary = 'library';
 		const ColumnTagType = 'type';
@@ -34,35 +32,41 @@
 		var useExcelExport = tableOptions !== undefined && tableOptions.excelExport !== undefined ?
 			tableOptions.excelExport :
 			true;
+		var defaultLength = tableOptions !== undefined && tableOptions.defaultLength !== undefined ?
+			tableOptions.defaultLength :
+			15;
+		var sizeSettings = tableOptions !== undefined && tableOptions.sizeSettings !== undefined ?
+			tableOptions.sizeSettings :
+			{
+				useFixedSize: true,
+				size: 'screen'
+			};
 		var deleteHandler = tableOptions !== undefined && tableOptions.deleteHandler !== undefined ?
 			tableOptions.deleteHandler :
-			function ()
-			{
+			function () {
 			};
 		var backHandler = tableOptions !== undefined && tableOptions.backHandler !== undefined ?
 			tableOptions.backHandler :
 			undefined;
 		var logHandler = tableOptions !== undefined && tableOptions.logHandler !== undefined ?
 			tableOptions.logHandler :
-			function ()
-			{
+			function () {
 			};
 
 		var dataTable = undefined;
 
-		this.init = function (data)
-		{
+		this.init = function (data) {
 			destroy();
 
 			if (data === undefined)
 				data = {
 					dataset: undefined,
-					dataOptions: undefined,
+					dataViewOptions: undefined,
 					sortColumnTag: undefined,
 					sortDirection: undefined
 				};
 			data.dataset = data.dataset !== undefined ? data.dataset : [];
-			data.dataOptions = data.dataOptions !== undefined ? data.dataOptions : {
+			data.dataViewOptions = data.dataViewOptions !== undefined ? data.dataViewOptions : {
 				columnSettings: undefined,
 				showDeleteButton: false,
 				reorderSourceField: undefined
@@ -81,9 +85,8 @@
 			var table = $("#" + tableIdentifier);
 
 			var hasCategories = false;
-			if (data.dataOptions.columnSettings[ColumnTagCategory].enable)
-				$.each(data.dataset, function (index, value)
-				{
+			if (data.dataViewOptions.columnSettings[ColumnTagCategory].enable)
+				$.each(data.dataset, function (index, value) {
 					if (value.tag !== null && value.tag !== '')
 					{
 						hasCategories = true;
@@ -94,9 +97,9 @@
 			var columnSettings = [];
 			var exportColumnsIndexes = [];
 
-			if (data.dataOptions.reorderSourceField !== undefined)
+			if (data.dataViewOptions.reorderSourceField !== undefined)
 				columnSettings.push({
-					"data": 'extended_data.' + data.dataOptions.reorderSourceField,
+					"data": 'extended_data.' + data.dataViewOptions.reorderSourceField,
 					"visible": false,
 					"searchable": false,
 					"orderable": true
@@ -104,13 +107,12 @@
 
 			var sortColumnIndex = 0;
 			var columnIndex = 0;
-			$.each(data.dataOptions.columnSettings, function (key, value)
-			{
-				if (data.dataOptions.reorderSourceField === undefined && key === data.sortColumnTag)
+			$.each(data.dataViewOptions.columnSettings, function (key, value) {
+				if (data.dataViewOptions.reorderSourceField === undefined && key === data.sortColumnTag)
 					sortColumnIndex = columnIndex;
 				if (value.enable)
 				{
-					exportColumnsIndexes[key] = (columnIndex + (data.dataOptions.reorderSourceField === undefined ? 0 : 1));
+					exportColumnsIndexes[key] = (columnIndex + (data.dataViewOptions.reorderSourceField === undefined ? 0 : 1));
 				}
 				switch (key)
 				{
@@ -119,7 +121,7 @@
 						{
 							columnSettings.push({
 								"data": "tag",
-								"orderable": data.dataOptions.reorderSourceField === undefined,
+								"orderable": data.dataViewOptions.reorderSourceField === undefined,
 								"title": value.title,
 								"class": "tag-text-container allow-export allow-reorder" + (value.fullWidth ? ' none' : ' all'),
 								"width": value.width > 0 ? (value.width + "px") : "15%",
@@ -133,7 +135,7 @@
 						{
 							columnSettings.push({
 								"data": "library.name",
-								"orderable": data.dataOptions.reorderSourceField === undefined,
+								"orderable": data.dataViewOptions.reorderSourceField === undefined,
 								"title": value.title,
 								"class": "centered allow-export allow-reorder" + (value.fullWidth ? ' none' : ' all'),
 								"width": value.width > 0 ? (value.width + "px") : "10%",
@@ -147,7 +149,7 @@
 						{
 							columnSettings.push({
 								"data": "file_type",
-								"orderable": data.dataOptions.reorderSourceField === undefined,
+								"orderable": data.dataViewOptions.reorderSourceField === undefined,
 								"title": value.title,
 								"class": "centered allow-export allow-reorder" + (value.fullWidth ? ' none' : ' all'),
 								"width": value.width > 0 ? (value.width + "px") : "70px",
@@ -161,7 +163,7 @@
 						{
 							columnSettings.push({
 								"data": "name",
-								"orderable": data.dataOptions.reorderSourceField === undefined,
+								"orderable": data.dataViewOptions.reorderSourceField === undefined,
 								"title": value.title,
 								"class": "link-name-text-container allow-export" + (value.fullWidth ? ' none' : ' all'),
 								"width": value.width > 0 ? (value.width + "px") : null,
@@ -177,7 +179,7 @@
 						{
 							columnSettings.push({
 								"data": "thumbnail",
-								"orderable": data.dataOptions.reorderSourceField === undefined,
+								"orderable": data.dataViewOptions.reorderSourceField === undefined,
 								"title": value.title,
 								"width": value.width > 0 ? (value.width + "px") : "90px",
 								"class": "centered" + (value.fullWidth ? ' none' : ' all'),
@@ -191,7 +193,7 @@
 						{
 							columnSettings.push({
 								"data": "views",
-								"orderable": data.dataOptions.reorderSourceField === undefined,
+								"orderable": data.dataViewOptions.reorderSourceField === undefined,
 								"title": value.title,
 								"class": "centered allow-reorder allow-export" + (value.fullWidth ? ' none' : ' all'),
 								"width": value.width > 0 ? (value.width + "px") : "50px",
@@ -209,13 +211,12 @@
 						{
 							columnSettings.push({
 								"data": "rate",
-								"orderable": data.dataOptions.reorderSourceField === undefined,
+								"orderable": data.dataViewOptions.reorderSourceField === undefined,
 								"title": value.title,
 								"width": value.width > 0 ? (value.width + "px") : "90px",
 								"class": "centered rate-image-container" + (value.fullWidth ? ' none' : ' all'),
 								"render": {
-									_: function (columnData)
-									{
+									_: function (columnData) {
 										var cellContent = '';
 										if (columnData.image !== '')
 											cellContent = '<img src="' + columnData.image + '">';
@@ -232,7 +233,7 @@
 						{
 							columnSettings.push({
 								"data": "date",
-								"orderable": data.dataOptions.reorderSourceField === undefined,
+								"orderable": data.dataViewOptions.reorderSourceField === undefined,
 								"title": value.title,
 								"class": "centered allow-reorder allow-export" + (value.fullWidth ? ' none' : ' all'),
 								"width": value.width > 0 ? (value.width + "px") : "80px",
@@ -255,7 +256,7 @@
 				}
 			});
 
-			if (data.dataOptions.showDeleteButton)
+			if (data.dataViewOptions.showDeleteButton)
 				columnSettings.push({
 					"data": null,
 					"title": '',
@@ -289,13 +290,11 @@
 			var tableHeaderBackItemClass = useExcelExport ? 'col-lg-1 col-md-1 hidden-sm hidden-xs' : 'col-lg-3 col-md-2 hidden-sm hidden-xs';
 			var tableHeaderPaginationItemClass = backHandler ? 'col-lg-4 col-md-6 col-sm-8 col-xs-12' : (useExcelExport ? 'col-lg-4 col-md-6 col-sm-8 col-xs-12' : 'col-lg-7 col-md-8 col-sm-8 col-xs-12');
 
-			jQuery.fn.dataTableExt.oSort['natural-asc'] = function (a, b)
-			{
+			jQuery.fn.dataTableExt.oSort['natural-asc'] = function (a, b) {
 				return naturalSort(a, b);
 			};
 
-			jQuery.fn.dataTableExt.oSort['natural-desc'] = function (a, b)
-			{
+			jQuery.fn.dataTableExt.oSort['natural-desc'] = function (a, b) {
 				return naturalSort(a, b) * -1;
 			};
 
@@ -306,10 +305,10 @@
 				paging: usePaginate,
 				searching: useSubSearch,
 				order: sortColumnIndex >= 0 ? [[sortColumnIndex, data.sortDirection]] : [],
-				rowReorder: data.dataOptions.reorderSourceField !== undefined ?
+				rowReorder: data.dataViewOptions.reorderSourceField !== undefined ?
 					{
 						update: true,
-						dataSrc: 'extended_data.' + data.dataOptions.reorderSourceField,
+						dataSrc: 'extended_data.' + data.dataViewOptions.reorderSourceField,
 						selector: '.allow-reorder',
 						snapX: 0
 					} :
@@ -325,26 +324,25 @@
 					exportOptions: {
 						columns: '.allow-export'
 					},
-					customize: function (xlsx)
-					{
+					customize: function (xlsx) {
 						var sheet = xlsx.xl.worksheets['sheet1.xml'];
 						var col = $('col', sheet);
 						$(col[exportColumnsIndexes[ColumnTagCategory]]).attr('width', 50);
 						$(col[exportColumnsIndexes[ColumnTagName]]).attr('width', 50);
 					}
 				}],
-				"scrollY": $.SalesPortal.Content.isMobileDevice() ? getNativeTableSize() : getBootstrapTableSize(),
+				"scrollY": getTableSize(),
 				"scrollCollapse": false,
 				"aLengthMenu": data.dataset.length < 500 ?
 					[
-						[15, 25, 50, 100, -1],
-						[15, 25, 50, 100, "All"]
+						[5, 15, 25, 50, 100, -1],
+						[5, 15, 25, 50, 100, "All"]
 					] :
 					[
-						[15, 25, 50, 100, 200],
-						[15, 25, 50, 100, 200]
+						[5, 15, 25, 50, 100, 200],
+						[5, 15, 25, 50, 100, 200]
 					],
-				"iDisplayLength": 15,
+				"iDisplayLength": defaultLength,
 				"oLanguage": {
 					"sEmptyTable": "",
 					"sZeroRecords": "",
@@ -358,15 +356,13 @@
 					"<'row'<'col-xs-12 back-url text-center'>>") +
 				"<'row table-content-row'<'col-xs-12'tr>>" +
 				"<'row table-footer-row'<'col-xs-6'i>>",
-				"fnRowCallback": function (nRow)
-				{
+				"fnRowCallback": function (nRow) {
 					$(nRow).addClass(tableIdentifier + '-row');
 					return nRow;
 				}
 			});
 
-			table.find('img').load(function ()
-			{
+			table.find('img').load(function () {
 				dataTable.api().columns.adjust().draw();
 			});
 
@@ -380,8 +376,7 @@
 				var excelExportActionContent = tableWrapper.find('.excel-export-action');
 				excelExportActionContent.append('<a href="#" style="color: green">Excel (Beta)</a>');
 				excelExportActionContent.find('.dt-buttons').hide();
-				excelExportActionContent.find('>a').on('click', function ()
-				{
+				excelExportActionContent.find('>a').on('click', function () {
 					excelExportActionContent.find('.buttons-excel').click();
 				});
 			}
@@ -395,34 +390,30 @@
 				backUrlContent.find('a').on('click', backHandler);
 			}
 
-			if (data.dataOptions.showDeleteButton)
+			if (data.dataViewOptions.showDeleteButton)
 			{
-				table.on('click', '.link-delete-button', function (e)
-				{
+				table.on('click', '.link-delete-button', function (e) {
 					var linkInfo = dataTable.api().row(getDataRowElement($(this))).data();
 					deleteHandler(linkInfo);
 					e.stopPropagation();
 				});
 			}
 
-			table.on('click', '.rate-image-container', function (e)
-			{
+			table.on('click', '.rate-image-container', function (e) {
 				e.stopPropagation();
 
 				var linkRow = dataTable.api().row(getDataRowElement($(this)));
 				var linkData = linkRow.data();
 				var linkId = linkData.id;
 
-				$.SalesPortal.LinkManager.requestRateDialog(linkId, function ()
-				{
+				$.SalesPortal.LinkManager.requestRateDialog(linkId, function () {
 					$.ajax({
 						type: "POST",
 						url: window.BaseUrl + "rate/getRate",
 						data: {
 							linkId: linkData.id
 						},
-						success: function (msg)
-						{
+						success: function (msg) {
 							var scrollBody = $(".dataTables_scrollBody");
 							var scrollPos = scrollBody.scrollTop();
 							linkData.rate.value = msg.totalRate;
@@ -430,8 +421,7 @@
 							linkRow.invalidate().draw();
 							scrollBody.scrollTop(scrollPos);
 						},
-						error: function ()
-						{
+						error: function () {
 						},
 						async: true,
 						dataType: 'json'
@@ -441,8 +431,7 @@
 
 			if ($.SalesPortal.Content.isMobileDevice())
 			{
-				table.find('.link-file, .link-common').hammer().on('tap', function ()
-				{
+				table.find('.link-file, .link-common').hammer().on('tap', function () {
 					var linkId = dataTable.api().row(getDataRowElement($(this))).data().id;
 					$.SalesPortal.LinkManager.requestViewDialog({
 						linkId: linkId,
@@ -450,8 +439,7 @@
 					});
 				});
 
-				table.find('.link-url').hammer().on('tap', function ()
-				{
+				table.find('.link-url').hammer().on('tap', function () {
 					var linkId = dataTable.api().row(getDataRowElement($(this))).data().id;
 					var url = $(this).find('.link-content').prop('href');
 					$.SalesPortal.LogHelper.write({
@@ -464,8 +452,7 @@
 					});
 				});
 
-				table.find('.link-file, .link-url, .link-common').hammer().on('hold', function (event)
-				{
+				table.find('.link-file, .link-url, .link-common').hammer().on('hold', function (event) {
 					var linkId = dataTable.api().row(getDataRowElement($(this))).data().id;
 					$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, event.gesture.center.pageX, event.gesture.center.pageY);
 					event.gesture.stopPropagation();
@@ -474,8 +461,7 @@
 			}
 			else
 			{
-				table.on('click', '.link-file, .link-common', function ()
-				{
+				table.on('click', '.link-file, .link-common', function () {
 					var linkId = dataTable.api().row(getDataRowElement($(this))).data().id;
 					$.SalesPortal.LinkManager.requestViewDialog({
 						linkId: linkId,
@@ -483,8 +469,7 @@
 					});
 				});
 
-				table.on('click', '.link-url', function ()
-				{
+				table.on('click', '.link-url', function () {
 					var url = $(this).find('.link-content').prop('href');
 					var linkId = dataTable.api().row(getDataRowElement($(this))).data().id;
 					$.SalesPortal.LogHelper.write({
@@ -497,8 +482,7 @@
 					});
 				});
 
-				table.on('contextmenu', '.link-file, .link-url-internal, .link-common', function (event)
-				{
+				table.on('contextmenu', '.link-file, .link-url-internal, .link-common', function (event) {
 					var linkId = dataTable.api().row(getDataRowElement($(this))).data().id;
 					$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, event.clientX, event.clientY);
 					return false;
@@ -506,16 +490,14 @@
 
 				if (!$.SalesPortal.Content.isEOBrowser())
 				{
-					table.on('contextmenu', '.link-url-external', function (event)
-					{
+					table.on('contextmenu', '.link-url-external', function (event) {
 						var linkId = dataTable.api().row(getDataRowElement($(this))).data().id;
 						$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, event.clientX, event.clientY);
 						return false;
 					});
 				}
 
-				table.on('dragstart', '.is-draggable', function (e)
-				{
+				table.on('dragstart', '.is-draggable', function (e) {
 					var urlHeader = $(this).find('.link-content').data("url-header");
 					var url = $(this).find('.link-content').data('url');
 					if (url !== '')
@@ -526,46 +508,45 @@
 			table.on('search.dt', logHandler).on('page.dt', logHandler).on('length.dt', logHandler);
 		};
 
-		this.updateSize = function ()
-		{
+		this.updateSize = function () {
 			if (dataTable !== undefined)
 			{
-				var content = $.SalesPortal.Content.getContentObject();
-				if (parentContainerSelector !== undefined)
-					content = $.SalesPortal.Content.getContentObject().find(parentContainerSelector);
+				if (sizeSettings.useFixedSize)
+				{
+					var content = $.SalesPortal.Content.getContentObject();
+					if (parentContainerSelector !== undefined)
+						content = $.SalesPortal.Content.getContentObject().find(parentContainerSelector);
 
-				var height = $.SalesPortal.Content.isMobileDevice() ? getNativeTableSize() : getBootstrapTableSize();
-				content.find("#" + tableIdentifier + "_wrapper").find('.dataTables_scrollBody').css({
-					'height': height + 'px'
-				});
-				var oSettings = dataTable.fnSettings();
-				if (oSettings)
-					oSettings.oScroll.sY = height + 'px';
+					var height = getTableSize();
+					content.find("#" + tableIdentifier + "_wrapper").find('.dataTables_scrollBody').css({
+						'height': height + 'px'
+					});
+					var oSettings = dataTable.fnSettings();
+					if (oSettings)
+						oSettings.oScroll.sY = height + 'px';
+				}
 				dataTable.api().columns.adjust().draw();
 			}
+
 		};
 
-		this.clear = function ()
-		{
+		this.clear = function () {
 			if (dataTable !== undefined)
 				dataTable.api().state.clear();
 		};
 
-		this.getTable = function ()
-		{
+		this.getTable = function () {
 			return dataTable.api();
 		};
 
-		var getDataRowElement = function (cellItem)
-		{
+		var getDataRowElement = function (cellItem) {
 			var tableRow = cellItem.closest("tr");
 			if (tableRow.hasClass('child'))
 				return tableRow.prev('tr.parent');
 			return tableRow;
 		};
 
-		var cellRenderer = function (data, type, row, meta)
-		{
+		var cellRenderer = function (data, type, row) {
 			if (type === "display")
 			{
 				var content = '';
@@ -609,8 +590,7 @@
 				return data;
 		};
 
-		var naturalSort = function (a, b)
-		{
+		var naturalSort = function (a, b) {
 			// setup temp-scope variables for comparison evauluation
 			var x = a.toString().toLowerCase() || '', y = b.toString().toLowerCase() || '',
 				nC = String.fromCharCode(0),
@@ -631,14 +611,24 @@
 			return 0;
 		};
 
-		var destroy = function ()
-		{
+		var destroy = function () {
 			if (dataTable !== undefined)
 				dataTable.fnDestroy();
 		};
 
-		var getBootstrapTableSize = function ()
-		{
+		var getTableSize = function () {
+			if (sizeSettings.useFixedSize)
+			{
+				if (sizeSettings.size === 'screen')
+					return $.SalesPortal.Content.isMobileDevice() ? getNativeTableSize() : getBootstrapTableSize();
+				else
+					return sizeSettings.size;
+			}
+			else
+				return undefined;
+		};
+
+		var getBootstrapTableSize = function () {
 			var content = $.SalesPortal.Content.getContentObject();
 			if (parentContainerSelector !== undefined)
 				content = $.SalesPortal.Content.getContentObject().find(parentContainerSelector);
@@ -661,8 +651,7 @@
 			return content.outerHeight(true) - (topHeight + bottomHeight + tableHeaderHeight + conditionDescriptionContent + (containerOuterHeight - containerInnerHeight));
 		};
 
-		var getNativeTableSize = function ()
-		{
+		var getNativeTableSize = function () {
 			var content = $.SalesPortal.Content.getContentObject();
 			if (parentContainerSelector !== undefined)
 				content = $.SalesPortal.Content.getContentObject().find(parentContainerSelector);

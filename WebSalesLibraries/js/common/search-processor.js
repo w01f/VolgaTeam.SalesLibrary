@@ -1,11 +1,8 @@
-(function ($)
-{
+(function ($) {
 	window.BaseUrl = window.BaseUrl || '';
 	$.SalesPortal = $.SalesPortal || {};
-	var SearchHelper = function ()
-	{
-		this.runSearch = function (searchCondition, beforeSearch, completeCallback, successCallBack)
-		{
+	var SearchHelper = function () {
+		this.runSearch = function (searchCondition, beforeSearch, completeCallback, successCallBack) {
 			$.ajax({
 				type: "POST",
 				url: window.BaseUrl + "search/search",
@@ -21,26 +18,22 @@
 	};
 	$.SalesPortal.SearchHelper = new SearchHelper();
 
-	$.SalesPortal.SearchConditions = function (onChange)
-	{
+	$.SalesPortal.SearchConditions = function (onChange) {
 		var that = this;
 		var data = undefined;
 
 		var onChangeHandler = undefined;
 
-		this.set = function (optionName, value)
-		{
+		this.set = function (optionName, value) {
 			data.simpleProperties[optionName] = value;
 			that.raiseOnChange();
 		};
 
-		this.get = function (optionName)
-		{
+		this.get = function (optionName) {
 			return data.simpleProperties[optionName];
 		};
 
-		this.clear = function ()
-		{
+		this.clear = function () {
 			data =
 				{
 					simpleProperties: {
@@ -62,8 +55,7 @@
 						showExcel: true,
 						showImages: true,
 						showUrls: true,
-						selectedTypeDescriptions: function ()
-						{
+						selectedTypeDescriptions: function () {
 							var descriptions = [];
 							if (this.showPowerPoint &&
 								this.showVideo &&
@@ -92,8 +84,7 @@
 							}
 							return descriptions;
 						},
-						selectedTypeTags: function ()
-						{
+						selectedTypeTags: function () {
 							var tags = [];
 							if (this.showPowerPoint &&
 								this.showWord &&
@@ -142,11 +133,9 @@
 							}
 							return tags;
 						},
-						loadFromTags: function (tags)
-						{
+						loadFromTags: function (tags) {
 							var thatData = this;
-							$.each(tags, function (index, value)
-							{
+							$.each(tags, function (index, value) {
 								if (value === 'ppt')
 									thatData.showPowerPoint = true;
 								else if (value === 'doc')
@@ -184,15 +173,12 @@
 
 					categories: {
 						items: [],
-						selectedCategoriesDescriptions: function ()
-						{
+						selectedCategoriesDescriptions: function () {
 							if (this.items.length === 0)
 								return [];
 							var categories = [];
-							$.each(this.items, function (groupIndex, group)
-							{
-								$.each(group.items, function (itemIndex, item)
-								{
+							$.each(this.items, function (groupIndex, group) {
+								$.each(group.items, function (itemIndex, item) {
 									categories.push(item);
 								});
 							});
@@ -203,13 +189,11 @@
 					superFilters: [],
 					libraries: {
 						items: [],
-						selectedLibrariesDescriptions: function ()
-						{
+						selectedLibrariesDescriptions: function () {
 							if (this.items.length === 0)
 								return [];
 							var libraryNames = [];
-							$.each(this.items, function (index, value)
-							{
+							$.each(this.items, function (index, value) {
 								libraryNames.push(value.name);
 							});
 							return libraryNames;
@@ -221,14 +205,12 @@
 				onChangeHandler();
 		};
 
-		this.raiseOnChange = function ()
-		{
+		this.raiseOnChange = function () {
 			if (onChangeHandler !== undefined)
 				onChangeHandler();
 		};
 
-		this.getConditionsFormatted = function ()
-		{
+		this.getConditionsFormatted = function () {
 			var startDate = data.simpleProperties.dateStart;
 			var endDate = data.simpleProperties.dateEnd;
 			if (startDate === null &&
@@ -264,8 +246,7 @@
 			};
 		};
 
-		this.loadFromConditionsFormatted = function (source)
-		{
+		this.loadFromConditionsFormatted = function (source) {
 			data.simpleProperties.text = source.text;
 			data.simpleProperties.exactMatch = source.textExactMatch;
 			data.fileTypes.loadFromTags(source.fileTypes);
@@ -286,18 +267,15 @@
 
 		};
 
-		this.getFileTypesDescription = function ()
-		{
+		this.getFileTypesDescription = function () {
 			return data.fileTypes.selectedTypeDescriptions();
 		};
 
-		this.getFileTypesSettings = function ()
-		{
+		this.getFileTypesSettings = function () {
 			return data.fileTypes;
 		};
 
-		this.setFileTypesSettings = function (fileTypeSettings)
-		{
+		this.setFileTypesSettings = function (fileTypeSettings) {
 			data.fileTypes.showPowerPoint = fileTypeSettings.showPowerPoint;
 			data.fileTypes.showVideo = fileTypeSettings.showVideo;
 			data.fileTypes.showPdf = fileTypeSettings.showPdf;
@@ -308,56 +286,46 @@
 			that.raiseOnChange();
 		};
 
-		this.getCategoryFilters = function ()
-		{
+		this.getCategoryFilters = function () {
 			return data.categoryFilters;
 		};
 
-		this.setCategoryFilters = function (items)
-		{
+		this.setCategoryFilters = function (items) {
 			data.categoryFilters = items;
 			that.raiseOnChange();
 		};
 
-		this.getCategoryDescription = function ()
-		{
+		this.getCategoryDescription = function () {
 			return data.categories.selectedCategoriesDescriptions();
 		};
 
-		this.getCategorySettings = function ()
-		{
+		this.getCategorySettings = function () {
 			return data.categories.items;
 		};
 
-		this.setCategorySettings = function (items)
-		{
+		this.setCategorySettings = function (items) {
 			data.categories.items = items;
 			that.raiseOnChange();
 		};
 
-		this.getSuperFiltersSettings = function ()
-		{
+		this.getSuperFiltersSettings = function () {
 			return data.superFilters;
 		};
 
-		this.setSuperFiltersSettings = function (items)
-		{
+		this.setSuperFiltersSettings = function (items) {
 			data.superFilters = items;
 			that.raiseOnChange();
 		};
 
-		this.getLibrariesDescription = function ()
-		{
+		this.getLibrariesDescription = function () {
 			return data.libraries.selectedLibrariesDescriptions();
 		};
 
-		this.getLibrarySettings = function ()
-		{
+		this.getLibrarySettings = function () {
 			return data.libraries.items;
 		};
 
-		this.setLibrarySettings = function (items)
-		{
+		this.setLibrarySettings = function (items) {
 			data.libraries.items = items;
 			that.raiseOnChange();
 		};
@@ -366,25 +334,23 @@
 		onChangeHandler = onChange;
 	};
 
-	$.SalesPortal.SearchResult = function (datasetKey, dataset)
-	{
+	$.SalesPortal.SearchResult = function (datasetKey, dataset) {
 		this.datasetKey = datasetKey;
 		this.dataset = dataset;
 	};
 
-	$.SalesPortal.SearchViewOptions = function (source)
-	{
+	$.SalesPortal.SearchResultsDataViewOptions = function (source) {
 		this.columnSettings = undefined;
 		this.showDeleteButton = undefined;
 		this.reorderSourceField = undefined;
+		this.defaultPageLength = undefined;
 
 		for (var prop in source)
-			if (source.hasOwnProperty(prop))
+			if (source.hasOwnProperty(prop) && source[prop] !== undefined && source[prop] !== null)
 				this[prop] = source[prop];
 	};
 
-	$.SalesPortal.SearchOptions = function (data)
-	{
+	$.SalesPortal.SearchOptions = function (data) {
 		this.title = undefined;
 		this.isSearchBar = undefined;
 		this.openInSamePage = undefined;

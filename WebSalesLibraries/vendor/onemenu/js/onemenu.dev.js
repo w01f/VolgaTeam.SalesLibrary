@@ -230,7 +230,7 @@
 			}
 			else
 			{ // Screen Width > 960px
-				$ctrlitemsWidth = 768;
+				$ctrlitemsWidth = $winWidth - 144;
 				$ctrlitemsMargin = 48;
 			}
 

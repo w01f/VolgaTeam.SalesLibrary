@@ -1,4 +1,5 @@
 <?
+
 	namespace application\models\data_query\conditions;
 
 	use application\models\data_query\data_table\DataTableColumnSettings;
@@ -92,13 +93,13 @@
 						$this->startDate = date(\Yii::app()->params['outputDateFormat'], strtotime('last monday', strtotime('tomorrow')));
 						break;
 					case "last week":
-						$this->startDate = date(\Yii::app()->params['outputDateFormat'], strtotime("Monday last week",strtotime('tomorrow')));
+						$this->startDate = date(\Yii::app()->params['outputDateFormat'], strtotime("Monday last week", strtotime('tomorrow')));
 						break;
 					case "current month":
 						$this->startDate = date(\Yii::app()->params['outputDateFormat'], strtotime(date('Y-m-1')));
 						break;
 					case "last month":
-						$this->startDate =date(\Yii::app()->params['outputDateFormat'], mktime(0, 0, 0, date("m")-1, 1));
+						$this->startDate = date(\Yii::app()->params['outputDateFormat'], mktime(0, 0, 0, date("m") - 1, 1));
 						break;
 					default:
 						if (strstr($startDateText, ' days ago'))
@@ -129,7 +130,7 @@
 						$this->endDate = date(\Yii::app()->params['mysqlDateFormat'], strtotime('last monday', strtotime('tomorrow')));
 						break;
 					case "last month":
-						$this->endDate =date(\Yii::app()->params['outputDateFormat'], mktime(0, 0, 0, date("m"), 0));
+						$this->endDate = date(\Yii::app()->params['outputDateFormat'], mktime(0, 0, 0, date("m"), 0));
 						break;
 					default:
 						if (strstr($endDateText, ' days ago'))

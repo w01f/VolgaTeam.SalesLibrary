@@ -16,6 +16,7 @@
 		public $label;
 		public $samePage;
 		public $showTagsSelector;
+		public $defaultPageLength;
 
 		/** @var  TableQueryConditions */
 		public $conditions;
@@ -68,6 +69,8 @@
 				$this->samePage = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
 				$queryResult = $xpath->query('./ShowTagsSelector', $rootNode);
 				$this->showTagsSelector = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
+				$queryResult = $xpath->query('./DefaultPageLength');
+				$this->defaultPageLength = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue)) : null;
 
 				$queryResult = $xpath->query('./SearchCondition', $rootNode);
 				$this->conditions = TableQueryConditions::fromXml($xpath, $queryResult->item(0));
@@ -135,6 +138,7 @@
 			$options->title = $this->title;
 			$options->isSearchBar = true;
 			$options->openInSamePage = $this->samePage;
+			$options->defaultPageLength = $this->defaultPageLength;
 
 			$options->enableSubSearch = $this->enableSubSearch;
 			$options->showSubSearchAll = $this->showSubSearchAll;

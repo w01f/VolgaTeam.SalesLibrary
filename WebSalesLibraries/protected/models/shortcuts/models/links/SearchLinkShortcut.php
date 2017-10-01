@@ -22,6 +22,8 @@
 
 		public $conditionNotMatchLogoPath;
 
+		public $defaultPageLength;
+
 		/**
 		 * @param $linkRecord
 		 * @param $isPhone boolean
@@ -61,17 +63,21 @@
 			$xpath = new DomXPath($linkConfig);
 			$this->conditions = TableQueryConditions::fromXml($xpath, $xpath->query('//Config/SearchCondition')->item(0));
 
+			/** @var SubSearchTemplate[] $subSearchConditions */
 			$subSearchConditions = array();
 			$subSearchConditionNodes = $xpath->query('//Config/SubSearchCondition/Item');
 			foreach ($subSearchConditionNodes as $conditionNode)
 				$subSearchConditions[] = new SubSearchTemplate($xpath, $conditionNode, $baseUrl . $this->relativeLink);
 			foreach ($subSearchConditions as $subSearchCondition)
-				$subSearchCondition->image_path .= '?' . $this->linkRecord->id_group . $this->linkRecord->id;
+				$subSearchCondition->imagePath .= '?' . $this->linkRecord->id_group . $this->linkRecord->id;
 			$sortHelper = new ObjectSortHelper('imageName', 'asc');
 			usort($subSearchConditions, array($sortHelper, 'sort'));
 			$this->subConditions = $subSearchConditions;
 
 			$this->subSearchBar = SearchBar::fromShortcut($this);
+
+			$queryResult = $xpath->query('//Config/DefaultPageLength');
+			$this->defaultPageLength = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue)) : null;
 		}
 
 		/**
@@ -89,6 +95,7 @@
 			$options->showSubSearchSearch = $this->showSubSearchSearch && $this->subSearchBar->configured;
 			$options->showSubSearchTemplates = $this->showSubSearchTemplates && count($this->subConditions) > 0;
 			$options->subSearchDefaultView = $this->subSearchDefaultView;
+			$options->defaultPageLength = $this->defaultPageLength;
 
 			$options->emptyResultLogo = $this->conditionNotMatchLogoPath;
 

@@ -38,6 +38,7 @@
 			$options = new ShortcutsSearchOptions();
 			$options->isSearchBar = false;
 			$options->openInSamePage = true;
+			$options->defaultPageLength = null;
 			$options->conditions = $this->conditions;
 			return $options;
 		}

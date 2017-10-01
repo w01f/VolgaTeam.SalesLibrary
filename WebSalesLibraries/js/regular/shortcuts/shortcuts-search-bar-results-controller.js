@@ -14,13 +14,13 @@
 			var objectId = serviceData.find('.object-id').html();
 
 			var searchBarOptions = new $.SalesPortal.SearchOptions($.parseJSON(serviceData.find('.search-conditions .encoded-object').text()));
-			var searchViewOptions = new $.SalesPortal.SearchViewOptions($.parseJSON(serviceData.find('.search-view-options .encoded-object').text()));
+			var searchViewOptions = new $.SalesPortal.SearchResultsDataViewOptions($.parseJSON(serviceData.find('.search-view-options .encoded-object').text()));
 
 			$.SalesPortal.MainMenu.init();
 			$.SalesPortal.Content.init();
 			$.SalesPortal.HistoryManager.init();
 
-			if (searchBarOptions != '' && searchViewOptions != '')
+			if (searchBarOptions !== '' && searchViewOptions !== '')
 			{
 				var options = $('<div>' +
 					'<div class="search-conditions" style="display: none;"><div class="encoded-object">' + $.toJSON(searchBarOptions) + '</div></div>' +

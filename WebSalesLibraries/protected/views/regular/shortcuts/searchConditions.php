@@ -12,7 +12,8 @@
 			$columnSettings = $searchOptions->conditions->columnSettings;
 			echo CJSON::encode(array(
 				'columnSettings' => $columnSettings,
-				'showDeleteButton' => false
+				'showDeleteButton' => false,
+				'defaultPageLength' => $searchOptions->defaultPageLength
 			)); ?>
     </div>
 </div>

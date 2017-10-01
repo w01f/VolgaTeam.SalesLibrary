@@ -232,6 +232,8 @@
 					return 'wallbin/libraryPage';
 				case 'library-window':
 					return 'wallbin/libraryWindow';
+				case 'search-results':
+					return 'common/searchResults';
 				default:
 					return 'common/undefinedBlock';
 			}
@@ -378,6 +380,10 @@
 					$libraryWindow = new LibraryWindowBlock($parentShortcut, $parentBlock);
 					$libraryWindow->configureFromXml($xpath, $contextNode);
 					return $libraryWindow;
+				case "search-table":
+					$searchResults = new SearchResultsBlock($parentShortcut, $parentBlock);
+					$searchResults->configureFromXml($xpath, $contextNode);
+					return $searchResults;
 				default:
 					return new UndefinedBlock($parentShortcut, $parentBlock);
 			}

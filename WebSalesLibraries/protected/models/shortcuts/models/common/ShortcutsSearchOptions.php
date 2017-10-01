@@ -19,6 +19,8 @@
 
 		public $emptyResultLogo;
 
+		public $defaultPageLength;
+
 		/**
 		 * @var $searchConditions TableQueryConditions
 		 */

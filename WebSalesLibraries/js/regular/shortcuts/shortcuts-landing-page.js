@@ -1,13 +1,12 @@
-(function ($)
-{
+(function ($) {
 	window.BaseUrl = window.BaseUrl || '';
 	$.SalesPortal = $.SalesPortal || {};
-	$.SalesPortal.ShortcutsLandingPage = function ()
-	{
+	$.SalesPortal.ShortcutsLandingPage = function () {
 		var pageData = undefined;
 
-		this.init = function (data)
-		{
+		var updateSizeDelegates = [];
+
+		this.init = function (data) {
 			pageData = data;
 
 			$.SalesPortal.Content.fillContent({
@@ -27,8 +26,7 @@
 
 			$.SalesPortal.ShortcutsManager.assignShortcutItemHandlers(landingPage);
 
-			$.each(landingPage.find('.horizontal-feed'), function (key, value)
-			{
+			$.each(landingPage.find('.horizontal-feed'), function (key, value) {
 				var linkFeed = $(value);
 				var feedId = linkFeed.prop('id').replace('horizontal-feed-', '');
 				var querySettingsEncoded = linkFeed.find('>.service-data .encoded-object .query-settings').text();
@@ -42,8 +40,7 @@
 				}).init();
 			});
 
-			$.each(landingPage.find('.vertical-feed'), function (key, value)
-			{
+			$.each(landingPage.find('.vertical-feed'), function (key, value) {
 				var linkFeed = $(value);
 				var feedId = linkFeed.prop('id').replace('vertical-feed-', '');
 				var querySettingsEncoded = linkFeed.find('>.service-data .encoded-object .query-settings').text();
@@ -57,15 +54,13 @@
 				}).init();
 			});
 
-			$.each(landingPage.find('.scroll-stripe'), function (key, value)
-			{
+			$.each(landingPage.find('.scroll-stripe'), function (key, value) {
 				var stripeBlock = $(value);
 				stripeBlock.scrollTabs();
 				$.SalesPortal.ShortcutsManager.assignShortcutItemHandlers(stripeBlock);
 			});
 
-			$.each(landingPage.find('.masonry-container'), function (key, value)
-			{
+			$.each(landingPage.find('.masonry-container'), function (key, value) {
 				var masonryBlock = $(value);
 				var masonryId = masonryBlock.prop('id').replace('masonry-container-', '');
 				var querySettingsEncoded = masonryBlock.find('>.service-data .encoded-object .query-settings').text();
@@ -79,8 +74,7 @@
 				}).init();
 			});
 
-			$.each(landingPage.find('.toggle-panel'), function (key, value)
-			{
+			$.each(landingPage.find('.toggle-panel'), function (key, value) {
 				var togglePanelBlock = $(value);
 				var togglePanelId = togglePanelBlock.prop('id').replace('toggle-panel-', '');
 
@@ -89,8 +83,7 @@
 				}).init();
 			});
 
-			$.each(landingPage.find('.library-block'), function (key, value)
-			{
+			$.each(landingPage.find('.library-block'), function (key, value) {
 				var libraryBlock = $(value);
 				var libraryBlockId = libraryBlock.prop('id').replace('library-block-', '');
 
@@ -99,8 +92,7 @@
 				}).init();
 			});
 
-			$.each(landingPage.find('.library-page-bundle-block'), function (key, value)
-			{
+			$.each(landingPage.find('.library-page-bundle-block'), function (key, value) {
 				var libraryPageBundleBlock = $(value);
 				var libraryPageBundleBlockId = libraryPageBundleBlock.prop('id').replace('library-page-bundle-block-', '');
 
@@ -109,8 +101,7 @@
 				}).init();
 			});
 
-			$.each(landingPage.find('.library-page-block'), function (key, value)
-			{
+			$.each(landingPage.find('.library-page-block'), function (key, value) {
 				var libraryPageBlock = $(value);
 				var libraryPageBlockId = libraryPageBlock.prop('id').replace('library-page-block-', '');
 
@@ -119,8 +110,7 @@
 				}).init();
 			});
 
-			$.each(landingPage.find('.library-window-block'), function (key, value)
-			{
+			$.each(landingPage.find('.library-window-block'), function (key, value) {
 				var libraryWindowBlock = $(value);
 				var libraryWindowBlockId = libraryWindowBlock.prop('id').replace('library-window-block-', '');
 
@@ -129,19 +119,39 @@
 				}).init();
 			});
 
+			$.each(landingPage.find('.search-results-block'), function (key, value) {
+				var searchResultsBlock = $(value);
+				var searchResultsBlockId = searchResultsBlock.prop('id').replace('search-results-block-', '');
+
+				var searchResultsBlockManager = new $.SalesPortal.LandingPage.SearchResultsBlock({
+					containerId: searchResultsBlockId
+				});
+				searchResultsBlockManager.init();
+				updateSizeDelegates.push(function () {
+					searchResultsBlockManager.updateContentSize();
+				});
+			});
+
 			landingPage.find('[data-bs-hover-animate]')
-				.mouseenter(function ()
-				{
+				.mouseenter(function () {
 					var elem = $(this);
 					elem.addClass('animated ' + elem.attr('data-bs-hover-animate'))
 				})
-				.mouseleave(function ()
-				{
+				.mouseleave(function () {
 					var elem = $(this);
 					elem.removeClass('animated ' + elem.attr('data-bs-hover-animate'))
 				});
 
 			landingPage.find('.landing-carousel.carousel-slide-show').carousel();
+
+			updateSizeDelegates.push(function () {
+				var content = $.SalesPortal.Content.getContentObject();
+				var shortcutsPage = content.find('.shortcuts-page-content');
+				var height = content.outerHeight(true) - content.find('.shortcuts-search-bar-container').outerHeight(true) - 20;
+				shortcutsPage.css({
+					'height': height + 'px'
+				});
+			});
 
 			initActionButtons();
 
@@ -149,22 +159,16 @@
 			updateContentSize();
 		};
 
-		var initActionButtons = function ()
-		{
+		var initActionButtons = function () {
 			var shortcutActionsContainer = $('#shortcut-action-container');
 			shortcutActionsContainer.find('.hide-search, .show-search').addClass('hidden-xs');
 		};
 
-		var updateContentSize = function ()
-		{
+		var updateContentSize = function () {
 			$.SalesPortal.ShortcutsManager.updateContentSize();
 
-			var content = $.SalesPortal.Content.getContentObject();
-
-			var shortcutsPage = content.find('.shortcuts-page-content');
-			var height = content.outerHeight(true) - content.find('.shortcuts-search-bar-container').outerHeight(true) - 20;
-			shortcutsPage.css({
-				'height': height + 'px'
+			$.each(updateSizeDelegates, function (i, val) {
+				val();
 			});
 		};
 	};

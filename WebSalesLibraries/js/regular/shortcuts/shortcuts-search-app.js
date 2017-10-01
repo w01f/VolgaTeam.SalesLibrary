@@ -33,7 +33,7 @@
 		{
 			appData = data;
 
-			viewOptions = new $.SalesPortal.SearchViewOptions(appData.options.viewOptions);
+			viewOptions = new $.SalesPortal.SearchResultsDataViewOptions(appData.options.viewOptions);
 
 			$.SalesPortal.Content.fillContent({
 				content: appData.content,

@@ -583,7 +583,7 @@
 
 			var parentShortcutData = parameters.shortcutData;
 			var searchBarOptions = new $.SalesPortal.SearchOptions($.parseJSON(searchBar.find('.search-conditions .encoded-object').text()));
-			var searchViewOptions = new $.SalesPortal.SearchViewOptions($.parseJSON(searchBar.find('.search-view-options .encoded-object').text()));
+			var searchViewOptions = new $.SalesPortal.SearchResultsDataViewOptions($.parseJSON(searchBar.find('.search-view-options .encoded-object').text()));
 			var searchBarConditions = new $.SalesPortal.SearchConditions(function ()
 			{
 			});

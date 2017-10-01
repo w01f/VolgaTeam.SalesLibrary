@@ -115,7 +115,6 @@
 						expires: (60 * 60 * 24 * 7)
 					});
 				}
-				parameters.sizeChangedCallback();
 			});
 
 			updateSize();
@@ -135,7 +134,9 @@
 			}, 300);
 			navigationPanelObject.find('.navigation-item-list').animate({
 				width: '150px'
-			}, 300);
+			}, 300, function () {
+				parameters.sizeChangedCallback();
+			});
 		};
 
 		var collapsePanel = function () {
@@ -147,7 +148,9 @@
 			}, 300);
 			navigationPanelObject.find('.navigation-item-list').animate({
 				width: '64px'
-			}, 300);
+			}, 300, function () {
+				parameters.sizeChangedCallback();
+			});
 		};
 
 		var updateSize = function () {
