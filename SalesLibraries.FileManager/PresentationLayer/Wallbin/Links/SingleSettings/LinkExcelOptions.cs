@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
+using DevExpress.Skins;
 using DevExpress.XtraLayout.Utils;
 using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Common;
@@ -11,6 +13,8 @@ using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Helpers;
+using SalesLibraries.FileManager.Business.PreviewGenerators;
+using SalesLibraries.FileManager.Controllers;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings
 {
@@ -20,11 +24,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 	{
 		private readonly List<ExcelLink> _sourceLinks = new List<ExcelLink>();
 		private readonly ILinksGroup _linksGroup;
-		private readonly FileTypes? _defaultLinkType;
+		private readonly LinkType? _defaultLinkType;
 
 		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.Notes, LinkSettingsType.AdminSettings };
 		public int Order => 6;
-		public bool AvailableForEmbedded => true;
 		public SettingsEditorHeaderInfo HeaderInfo => new SettingsEditorHeaderInfo { Title = "<size=+4>Excel Settings</size>" };
 
 		public event EventHandler<EventArgs> ForceCloseRequested;
@@ -33,11 +36,16 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		{
 			InitializeComponent();
 			Text = "Admin";
+
+			layoutControlItemRefreshPreview.MinSize = RectangleHelper.ScaleSize(layoutControlItemRefreshPreview.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemRefreshPreview.MaxSize = RectangleHelper.ScaleSize(layoutControlItemRefreshPreview.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemOpenWV.MinSize = RectangleHelper.ScaleSize(layoutControlItemOpenWV.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemOpenWV.MaxSize = RectangleHelper.ScaleSize(layoutControlItemOpenWV.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
-		public LinkExcelOptions(FileTypes? defaultLinkType = null) : this() { }
+		public LinkExcelOptions(LinkType? defaultLinkType = null) : this() { }
 
-		public LinkExcelOptions(ILinksGroup linksGroup, FileTypes? defaultLinkType = null) : this()
+		public LinkExcelOptions(ILinksGroup linksGroup, LinkType? defaultLinkType = null) : this()
 		{
 			_linksGroup = linksGroup;
 			_defaultLinkType = defaultLinkType;
@@ -107,6 +115,16 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 				checkEditSaveAsTemplate.Checked = false;
 			}
+
+			if (_sourceLinks.Count == 1)
+			{
+				layoutControlItemOpenWV.Visibility = LayoutVisibility.Always;
+				buttonXOpenWV.Text = String.Format("!WV Folder ({0})", _sourceLinks.First().PreviewContainerName);
+			}
+			else
+				layoutControlItemOpenWV.Visibility = LayoutVisibility.Never;
+
+			layoutControlItemRefreshPreview.Enabled = _sourceLinks.Any();
 		}
 
 		public void SaveData()
@@ -165,6 +183,36 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				checkEditDoNotGenerateText.Checked =
 					checkEditForceDownload.Checked = true;
 			}
+		}
+
+		private void buttonXRefreshPreview_Click(object sender, EventArgs e)
+		{
+			if (MainController.Instance.PopupMessages.ShowWarningQuestion(String.Format("Are you sure you want to refresh the server files for:{1}{0}?", _sourceLinks.Count == 1 ? _sourceLinks.First().NameWithExtension : "links", Environment.NewLine)) != DialogResult.Yes) return;
+
+			MainController.Instance.ProcessManager.Run("Updating Preview files...", (cancelationToken, formProgess) =>
+			{
+				foreach (var link in _sourceLinks)
+				{
+					link.ClearPreviewContainer();
+					var previewContainer = link.GetPreviewContainer();
+					var previewGenerator = previewContainer.GetPreviewGenerator();
+					try
+					{
+						previewContainer.UpdateContent(previewGenerator, cancelationToken);
+					}
+					catch { }
+				}
+			});
+			MainController.Instance.PopupMessages.ShowInfo(String.Format("{0}{1} now updated for the server!", _sourceLinks.Count == 1 ? _sourceLinks.First().NameWithExtension : "Links", Environment.NewLine));
+		}
+
+		private void buttonXOpenWV_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				Process.Start(_sourceLinks.First().PreviewContainerPath);
+			}
+			catch { }
 		}
 	}
 }

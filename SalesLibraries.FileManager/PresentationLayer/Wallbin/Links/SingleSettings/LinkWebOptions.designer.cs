@@ -46,6 +46,19 @@
 			this.layoutControlItemPath = new DevExpress.XtraLayout.LayoutControlItem();
 			this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+			this.labelControlTitleButtons = new DevExpress.XtraEditors.LabelControl();
+			this.buttonXOpenWV = new DevComponents.DotNetBar.ButtonX();
+			this.buttonXRefreshPreview = new DevComponents.DotNetBar.ButtonX();
+			this.emptySpaceItem4 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.emptySpaceItem6 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.layoutControlItemRefreshPreview = new DevExpress.XtraLayout.LayoutControlItem();
+			this.emptySpaceItem10 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.layoutControlItemOpenWV = new DevExpress.XtraLayout.LayoutControlItem();
+			this.emptySpaceItem7 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.layoutControlItemButtonsTitle = new DevExpress.XtraLayout.LayoutControlItem();
+			this.emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.emptySpaceItem8 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.emptySpaceItem9 = new DevExpress.XtraLayout.EmptySpaceItem();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControl)).BeginInit();
 			this.layoutControl.SuspendLayout();
@@ -62,6 +75,16 @@
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPath)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem4)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem6)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemRefreshPreview)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem10)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemOpenWV)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem7)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemButtonsTitle)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem8)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem9)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// styleController
@@ -98,6 +121,9 @@
 			this.layoutControl.Controls.Add(this.pictureBoxLogo);
 			this.layoutControl.Controls.Add(this.labelControlTitle);
 			this.layoutControl.Controls.Add(this.textEditName);
+			this.layoutControl.Controls.Add(this.buttonXRefreshPreview);
+			this.layoutControl.Controls.Add(this.buttonXOpenWV);
+			this.layoutControl.Controls.Add(this.labelControlTitleButtons);
 			this.layoutControl.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.layoutControl.Location = new System.Drawing.Point(0, 0);
 			this.layoutControl.Name = "layoutControl";
@@ -184,8 +210,18 @@
             this.layoutControlItemName,
             this.emptySpaceItem1,
             this.layoutControlItemPath,
-            this.emptySpaceItem2,
-            this.layoutControlItem1});
+            this.layoutControlItem1,
+            this.emptySpaceItem4,
+            this.emptySpaceItem6,
+            this.layoutControlItemRefreshPreview,
+            this.emptySpaceItem10,
+            this.layoutControlItemOpenWV,
+            this.emptySpaceItem7,
+            this.layoutControlItemButtonsTitle,
+            this.emptySpaceItem3,
+            this.emptySpaceItem8,
+            this.emptySpaceItem9,
+            this.emptySpaceItem2});
 			this.layoutControlGroupRoot.Location = new System.Drawing.Point(0, 0);
 			this.layoutControlGroupRoot.Name = "Root";
 			this.layoutControlGroupRoot.Size = new System.Drawing.Size(531, 541);
@@ -275,9 +311,9 @@
 			// emptySpaceItem2
 			// 
 			this.emptySpaceItem2.AllowHotTrack = false;
-			this.emptySpaceItem2.Location = new System.Drawing.Point(0, 294);
+			this.emptySpaceItem2.Location = new System.Drawing.Point(0, 474);
 			this.emptySpaceItem2.Name = "emptySpaceItem2";
-			this.emptySpaceItem2.Size = new System.Drawing.Size(511, 227);
+			this.emptySpaceItem2.Size = new System.Drawing.Size(511, 47);
 			this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
 			// 
 			// layoutControlItem1
@@ -288,6 +324,181 @@
 			this.layoutControlItem1.Size = new System.Drawing.Size(511, 24);
 			this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutControlItem1.TextVisible = false;
+			// 
+			// labelControlTitleButtons
+			// 
+			this.labelControlTitleButtons.Location = new System.Drawing.Point(12, 356);
+			this.labelControlTitleButtons.Name = "labelControlTitleButtons";
+			this.labelControlTitleButtons.Size = new System.Drawing.Size(121, 16);
+			this.labelControlTitleButtons.StyleController = this.layoutControl;
+			this.labelControlTitleButtons.TabIndex = 62;
+			this.labelControlTitleButtons.Text = "Link Archive Folders:";
+			// 
+			// buttonXOpenWV
+			// 
+			this.buttonXOpenWV.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXOpenWV.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXOpenWV.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXOpenWV.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.buttonXOpenWV.Location = new System.Drawing.Point(62, 451);
+			this.buttonXOpenWV.Name = "buttonXOpenWV";
+			this.buttonXOpenWV.Size = new System.Drawing.Size(407, 31);
+			this.buttonXOpenWV.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXOpenWV.TabIndex = 59;
+			this.buttonXOpenWV.Text = "!WV Folder";
+			this.buttonXOpenWV.TextColor = System.Drawing.Color.Black;
+			this.buttonXOpenWV.Click += new System.EventHandler(this.buttonXOpenWV_Click);
+			// 
+			// buttonXRefreshPreview
+			// 
+			this.buttonXRefreshPreview.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXRefreshPreview.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXRefreshPreview.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXRefreshPreview.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.buttonXRefreshPreview.Location = new System.Drawing.Point(62, 396);
+			this.buttonXRefreshPreview.Name = "buttonXRefreshPreview";
+			this.buttonXRefreshPreview.Size = new System.Drawing.Size(407, 31);
+			this.buttonXRefreshPreview.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXRefreshPreview.TabIndex = 60;
+			this.buttonXRefreshPreview.Text = "Refresh WV";
+			this.buttonXRefreshPreview.TextColor = System.Drawing.Color.Black;
+			this.buttonXRefreshPreview.Click += new System.EventHandler(this.buttonXRefreshPreview_Click);
+			// 
+			// emptySpaceItem4
+			// 
+			this.emptySpaceItem4.AllowHotTrack = false;
+			this.emptySpaceItem4.CustomizationFormText = "emptySpaceItem4";
+			this.emptySpaceItem4.Location = new System.Drawing.Point(0, 364);
+			this.emptySpaceItem4.MaxSize = new System.Drawing.Size(0, 20);
+			this.emptySpaceItem4.MinSize = new System.Drawing.Size(10, 20);
+			this.emptySpaceItem4.Name = "emptySpaceItem4";
+			this.emptySpaceItem4.Size = new System.Drawing.Size(511, 20);
+			this.emptySpaceItem4.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem4.Text = "emptySpaceItem4";
+			this.emptySpaceItem4.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// emptySpaceItem6
+			// 
+			this.emptySpaceItem6.AllowHotTrack = false;
+			this.emptySpaceItem6.CustomizationFormText = "emptySpaceItem6";
+			this.emptySpaceItem6.Location = new System.Drawing.Point(0, 384);
+			this.emptySpaceItem6.MaxSize = new System.Drawing.Size(50, 0);
+			this.emptySpaceItem6.MinSize = new System.Drawing.Size(50, 35);
+			this.emptySpaceItem6.Name = "emptySpaceItem6";
+			this.emptySpaceItem6.Size = new System.Drawing.Size(50, 35);
+			this.emptySpaceItem6.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem6.Text = "emptySpaceItem6";
+			this.emptySpaceItem6.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// layoutControlItemRefreshPreview
+			// 
+			this.layoutControlItemRefreshPreview.Control = this.buttonXRefreshPreview;
+			this.layoutControlItemRefreshPreview.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+			this.layoutControlItemRefreshPreview.CustomizationFormText = "Refresh Preview";
+			this.layoutControlItemRefreshPreview.Location = new System.Drawing.Point(50, 384);
+			this.layoutControlItemRefreshPreview.MaxSize = new System.Drawing.Size(0, 35);
+			this.layoutControlItemRefreshPreview.MinSize = new System.Drawing.Size(1, 35);
+			this.layoutControlItemRefreshPreview.Name = "layoutControlItemRefreshPreview";
+			this.layoutControlItemRefreshPreview.Size = new System.Drawing.Size(411, 35);
+			this.layoutControlItemRefreshPreview.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.layoutControlItemRefreshPreview.Text = "Refresh Preview";
+			this.layoutControlItemRefreshPreview.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemRefreshPreview.TextVisible = false;
+			this.layoutControlItemRefreshPreview.TrimClientAreaToControl = false;
+			// 
+			// emptySpaceItem10
+			// 
+			this.emptySpaceItem10.AllowHotTrack = false;
+			this.emptySpaceItem10.CustomizationFormText = "emptySpaceItem10";
+			this.emptySpaceItem10.Location = new System.Drawing.Point(0, 419);
+			this.emptySpaceItem10.MaxSize = new System.Drawing.Size(0, 20);
+			this.emptySpaceItem10.MinSize = new System.Drawing.Size(10, 20);
+			this.emptySpaceItem10.Name = "emptySpaceItem10";
+			this.emptySpaceItem10.Size = new System.Drawing.Size(511, 20);
+			this.emptySpaceItem10.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem10.Text = "emptySpaceItem10";
+			this.emptySpaceItem10.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// layoutControlItemOpenWV
+			// 
+			this.layoutControlItemOpenWV.Control = this.buttonXOpenWV;
+			this.layoutControlItemOpenWV.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+			this.layoutControlItemOpenWV.CustomizationFormText = "Open WV";
+			this.layoutControlItemOpenWV.Location = new System.Drawing.Point(50, 439);
+			this.layoutControlItemOpenWV.MaxSize = new System.Drawing.Size(0, 35);
+			this.layoutControlItemOpenWV.MinSize = new System.Drawing.Size(1, 35);
+			this.layoutControlItemOpenWV.Name = "layoutControlItemOpenWV";
+			this.layoutControlItemOpenWV.Size = new System.Drawing.Size(411, 35);
+			this.layoutControlItemOpenWV.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.layoutControlItemOpenWV.Text = "Open WV";
+			this.layoutControlItemOpenWV.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemOpenWV.TextVisible = false;
+			this.layoutControlItemOpenWV.TrimClientAreaToControl = false;
+			// 
+			// emptySpaceItem7
+			// 
+			this.emptySpaceItem7.AllowHotTrack = false;
+			this.emptySpaceItem7.CustomizationFormText = "emptySpaceItem7";
+			this.emptySpaceItem7.Location = new System.Drawing.Point(0, 439);
+			this.emptySpaceItem7.MaxSize = new System.Drawing.Size(50, 0);
+			this.emptySpaceItem7.MinSize = new System.Drawing.Size(50, 35);
+			this.emptySpaceItem7.Name = "emptySpaceItem7";
+			this.emptySpaceItem7.Size = new System.Drawing.Size(50, 35);
+			this.emptySpaceItem7.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem7.Text = "emptySpaceItem7";
+			this.emptySpaceItem7.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// layoutControlItemButtonsTitle
+			// 
+			this.layoutControlItemButtonsTitle.Control = this.labelControlTitleButtons;
+			this.layoutControlItemButtonsTitle.CustomizationFormText = "Buttons Title";
+			this.layoutControlItemButtonsTitle.Location = new System.Drawing.Point(0, 344);
+			this.layoutControlItemButtonsTitle.Name = "layoutControlItemButtonsTitle";
+			this.layoutControlItemButtonsTitle.Size = new System.Drawing.Size(511, 20);
+			this.layoutControlItemButtonsTitle.Text = "Buttons Title";
+			this.layoutControlItemButtonsTitle.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemButtonsTitle.TextVisible = false;
+			// 
+			// emptySpaceItem3
+			// 
+			this.emptySpaceItem3.AllowHotTrack = false;
+			this.emptySpaceItem3.CustomizationFormText = "emptySpaceItem3";
+			this.emptySpaceItem3.Location = new System.Drawing.Point(0, 294);
+			this.emptySpaceItem3.MaxSize = new System.Drawing.Size(0, 50);
+			this.emptySpaceItem3.MinSize = new System.Drawing.Size(10, 50);
+			this.emptySpaceItem3.Name = "emptySpaceItem3";
+			this.emptySpaceItem3.Size = new System.Drawing.Size(511, 50);
+			this.emptySpaceItem3.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem3.Text = "emptySpaceItem3";
+			this.emptySpaceItem3.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// emptySpaceItem8
+			// 
+			this.emptySpaceItem8.AllowHotTrack = false;
+			this.emptySpaceItem8.CustomizationFormText = "emptySpaceItem8";
+			this.emptySpaceItem8.Location = new System.Drawing.Point(461, 384);
+			this.emptySpaceItem8.MaxSize = new System.Drawing.Size(50, 0);
+			this.emptySpaceItem8.MinSize = new System.Drawing.Size(50, 35);
+			this.emptySpaceItem8.Name = "emptySpaceItem8";
+			this.emptySpaceItem8.Size = new System.Drawing.Size(50, 35);
+			this.emptySpaceItem8.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem8.Text = "emptySpaceItem8";
+			this.emptySpaceItem8.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// emptySpaceItem9
+			// 
+			this.emptySpaceItem9.AllowHotTrack = false;
+			this.emptySpaceItem9.CustomizationFormText = "emptySpaceItem9";
+			this.emptySpaceItem9.Location = new System.Drawing.Point(461, 439);
+			this.emptySpaceItem9.MaxSize = new System.Drawing.Size(50, 0);
+			this.emptySpaceItem9.MinSize = new System.Drawing.Size(50, 35);
+			this.emptySpaceItem9.Name = "emptySpaceItem9";
+			this.emptySpaceItem9.Size = new System.Drawing.Size(50, 35);
+			this.emptySpaceItem9.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem9.Text = "emptySpaceItem9";
+			this.emptySpaceItem9.TextSize = new System.Drawing.Size(0, 0);
 			// 
 			// LinkWebOptions
 			// 
@@ -310,6 +521,16 @@
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPath)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem4)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem6)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemRefreshPreview)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem10)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemOpenWV)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem7)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemButtonsTitle)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem8)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem9)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -332,5 +553,18 @@
 		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemPath;
 		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
 		private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+		private DevComponents.DotNetBar.ButtonX buttonXRefreshPreview;
+		private DevComponents.DotNetBar.ButtonX buttonXOpenWV;
+		private DevExpress.XtraEditors.LabelControl labelControlTitleButtons;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem4;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem6;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemRefreshPreview;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem10;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemOpenWV;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem7;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemButtonsTitle;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem3;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem8;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem9;
 	}
 }

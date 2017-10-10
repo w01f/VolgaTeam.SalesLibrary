@@ -226,32 +226,32 @@ namespace SalesLibraries.FileManager.Business.Services
 
 			switch (source.Type)
 			{
-				case FileTypes.Video:
+				case LinkType.Video:
 					target.extendedProperties = new VideoLinkSettings();
 					((VideoLinkSettings)target.extendedProperties).ImportData(
 						(SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.VideoLinkSettings)source.Settings);
 					break;
-				case FileTypes.PowerPoint:
+				case LinkType.PowerPoint:
 					target.extendedProperties = new PowerPointLinkSettings();
 					((PowerPointLinkSettings)target.extendedProperties).ImportData(
 						(SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.PowerPointLinkSettings)source.Settings);
 					break;
-				case FileTypes.Word:
-				case FileTypes.Pdf:
+				case LinkType.Word:
+				case LinkType.Pdf:
 					target.extendedProperties = new DocumentLinkSettings();
 					((DocumentLinkSettings)target.extendedProperties).ImportData(
 						(SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.DocumentLinkSettings)source.Settings);
 					break;
-				case FileTypes.Excel:
+				case LinkType.Excel:
 					target.extendedProperties = new ExcelLinkSettings();
 					((ExcelLinkSettings)target.extendedProperties).ImportData(
 						(SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.ExcelLinkSettings)source.Settings);
 					break;
-				case FileTypes.Url:
-				case FileTypes.YouTube:
-				case FileTypes.Vimeo:
-				case FileTypes.QPageLink:
-				case FileTypes.Html5:
+				case LinkType.Url:
+				case LinkType.YouTube:
+				case LinkType.Vimeo:
+				case LinkType.QPageLink:
+				case LinkType.Html5:
 					if (source is QuickSiteLink)
 					{
 						target.extendedProperties = new QPageLinkSettings();
@@ -265,12 +265,12 @@ namespace SalesLibraries.FileManager.Business.Services
 							(SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.HyperLinkSettings)source.Settings);
 					}
 					break;
-				case FileTypes.AppLink:
+				case LinkType.AppLink:
 					target.extendedProperties = new AppLinkSettings();
 					((AppLinkSettings)target.extendedProperties).ImportData(
 						(SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.AppLinkSettings)source.Settings);
 					break;
-				case FileTypes.InternalLink:
+				case LinkType.InternalLink:
 					if (source is InternalWallbinLink)
 					{
 						target.extendedProperties = new InternalWallbinLinkSettings();
@@ -306,7 +306,7 @@ namespace SalesLibraries.FileManager.Business.Services
 								source.Settings);
 					}
 					break;
-				case FileTypes.LinkBundle:
+				case LinkType.LinkBundle:
 					target.extendedProperties = new LinkBundleLinkSettings();
 					target.searchFormat =
 						((SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.LinkBundleLinkSettings)source.Settings)

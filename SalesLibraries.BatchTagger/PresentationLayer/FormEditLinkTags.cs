@@ -81,7 +81,7 @@ namespace SalesLibraries.BatchTagger.PresentationLayer
 
 					LoadData();
 				};
-				linksTreeSelector.LoadData(_linkGroup, new[] { FileTypes.LineBreak });
+				linksTreeSelector.LoadData(_linkGroup, new[] { LinkType.LineBreak });
 			}
 			else
 				LoadData();

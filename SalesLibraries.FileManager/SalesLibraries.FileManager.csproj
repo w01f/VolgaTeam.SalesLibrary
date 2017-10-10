@@ -234,12 +234,6 @@
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Controllers\TabPageEnum.cs" />
     <Compile Include="Controllers\VideoPage.cs" />
-    <Compile Include="Controllers\WallbinPageOld.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controllers\WallbinPageOld.Designer.cs">
-      <DependentUpon>WallbinPageOld.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controllers\WallbinPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -460,11 +454,18 @@
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkTags.designer.cs">
       <DependentUpon>FormEditLinkTags.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\ILinkSettingsByTypeEditForm.cs" />
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkBundleOptions.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkBundleOptions.designer.cs">
       <DependentUpon>LinkBundleOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkFolderOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkFolderOptions.designer.cs">
+      <DependentUpon>LinkFolderOptions.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkTagsInfoControl.cs">
       <SubType>Component</SubType>
@@ -529,6 +530,68 @@
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\ImageGallery\BaseLinkImagesContainer.designer.cs">
       <DependentUpon>BaseLinkImagesContainer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\ResetLinks\FormResetLibraryLinks.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\ResetLinks\FormResetLibraryLinks.designer.cs">
+      <DependentUpon>FormResetLibraryLinks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\ResetLinks\FormResetLineBreaksConfirmation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\ResetLinks\FormResetLineBreaksConfirmation.Designer.cs">
+      <DependentUpon>FormResetLineBreaksConfirmation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\ResetLinks\FormResetLibraryLinksConfirmation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\ResetLinks\FormResetLibraryLinksConfirmation.Designer.cs">
+      <DependentUpon>FormResetLibraryLinksConfirmation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\ResetLinks\FormResetPreviewContentConfirmation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\ResetLinks\FormResetPreviewContentConfirmation.Designer.cs">
+      <DependentUpon>FormResetPreviewContentConfirmation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\ResetLinks\IResetLibraryContentControl.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Settings\ResetLinks\IResetLibraryLinkSettingsControl.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Settings\ResetLinks\ResetAllControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\ResetLinks\ResetAllControl.Designer.cs">
+      <DependentUpon>ResetAllControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\ResetLinks\ResetPreviewContentControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\ResetLinks\ResetPreviewContentControl.Designer.cs">
+      <DependentUpon>ResetPreviewContentControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\ResetLinks\ResetLineBreaksControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\ResetLinks\ResetLineBreaksControl.Designer.cs">
+      <DependentUpon>ResetLineBreaksControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\ResetLinks\ResetTagsControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\ResetLinks\ResetTagsControl.Designer.cs">
+      <DependentUpon>ResetTagsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\ResetLinks\ResetInfoControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\ResetLinks\ResetInfoControl.Designer.cs">
+      <DependentUpon>ResetInfoControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\ResetLinks\ResetImagesControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\ResetLinks\ResetImagesControl.Designer.cs">
+      <DependentUpon>ResetImagesControl.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Settings\WidgetSettingsControl.cs">
       <SubType>UserControl</SubType>
@@ -846,12 +909,6 @@
     <Compile Include="PresentationLayer\Wallbin\Settings\FormPaths.designer.cs">
       <DependentUpon>FormPaths.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Settings\FormResetLibraryContent.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Settings\FormResetLibraryContent.designer.cs">
-      <DependentUpon>FormResetLibraryContent.cs</DependentUpon>
-    </Compile>
     <Compile Include="PresentationLayer\Wallbin\Settings\FormWallbinSettings.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -964,9 +1021,6 @@
     <Compile Include="PresentationLayer\Wallbin\Views\WallbinViewFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Controllers\WallbinPageOld.resx">
-      <DependentUpon>WallbinPageOld.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controllers\WallbinPage.resx">
       <DependentUpon>WallbinPage.cs</DependentUpon>
     </EmbeddedResource>
@@ -1036,6 +1090,9 @@
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkBundleOptions.resx">
       <DependentUpon>LinkBundleOptions.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkFolderOptions.resx">
+      <DependentUpon>LinkFolderOptions.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkTagsInfoControl.resx">
       <DependentUpon>LinkTagsInfoControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -1062,6 +1119,36 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\ImageGallery\BaseLinkImagesContainer.resx">
       <DependentUpon>BaseLinkImagesContainer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\ResetLinks\FormResetLibraryLinks.resx">
+      <DependentUpon>FormResetLibraryLinks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\ResetLinks\FormResetLineBreaksConfirmation.resx">
+      <DependentUpon>FormResetLineBreaksConfirmation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\ResetLinks\FormResetLibraryLinksConfirmation.resx">
+      <DependentUpon>FormResetLibraryLinksConfirmation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\ResetLinks\FormResetPreviewContentConfirmation.resx">
+      <DependentUpon>FormResetPreviewContentConfirmation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\ResetLinks\ResetAllControl.resx">
+      <DependentUpon>ResetAllControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\ResetLinks\ResetPreviewContentControl.resx">
+      <DependentUpon>ResetPreviewContentControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\ResetLinks\ResetLineBreaksControl.resx">
+      <DependentUpon>ResetLineBreaksControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\ResetLinks\ResetTagsControl.resx">
+      <DependentUpon>ResetTagsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\ResetLinks\ResetInfoControl.resx">
+      <DependentUpon>ResetInfoControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\ResetLinks\ResetImagesControl.resx">
+      <DependentUpon>ResetImagesControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\WidgetSettingsControl.resx">
       <DependentUpon>WidgetSettingsControl.cs</DependentUpon>
@@ -1224,9 +1311,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\FormPaths.resx">
       <DependentUpon>FormPaths.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\FormResetLibraryContent.resx">
-      <DependentUpon>FormResetLibraryContent.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\FormSelectWidget.resx">
       <DependentUpon>FormSelectWidget.cs</DependentUpon>

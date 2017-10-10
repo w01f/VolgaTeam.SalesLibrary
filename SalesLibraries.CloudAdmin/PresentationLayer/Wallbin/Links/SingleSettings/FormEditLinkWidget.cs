@@ -73,7 +73,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			_sourceLink = sourceLink;
 		}
 
-		public FormEditLinkWidget(ILinksGroup linkGroup, FileTypes? defaultLinkType = null) : this()
+		public FormEditLinkWidget(ILinksGroup linkGroup, LinkType? defaultLinkType = null) : this()
 		{
 			_sourceLinkGroup = linkGroup;
 			_sourceLink = _sourceLinkGroup.AllGroupLinks

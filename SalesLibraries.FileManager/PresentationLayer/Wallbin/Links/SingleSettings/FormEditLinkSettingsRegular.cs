@@ -16,11 +16,11 @@ using SalesLibraries.CommonGUI.Common;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings
 {
-	public partial class FormEditLinkSettingsRegular : MetroForm, ILinkSetSettingsEditForm
+	public partial class FormEditLinkSettingsRegular : MetroForm, ILinkSettingsByTypeEditForm, ILinkSetSettingsEditForm
 	{
 		private readonly BaseLibraryLink _sourceLink;
 		private readonly ILinksGroup _sourceLinkGroup;
-		private readonly FileTypes? _defaultLinkType;
+		private readonly LinkType? _defaultLinkType;
 
 		public LinkSettingsType[] EditableSettings => new[]
 		{
@@ -40,15 +40,19 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			layoutControlItemCancel.MaxSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
-		public FormEditLinkSettingsRegular(BaseLibraryLink sourceLink, FileTypes? defaultLinkType = null) : this()
+		public FormEditLinkSettingsRegular(BaseLibraryLink sourceLink) : this()
 		{
 			_sourceLink = sourceLink;
-			_defaultLinkType = defaultLinkType;
 			Width = Width - layoutControlItemLinksTree.Width;
 			layoutControlItemLinksTree.Visibility = LayoutVisibility.Never;
 		}
 
-		public FormEditLinkSettingsRegular(ILinksGroup linkGroup, FileTypes? defaultLinkType = null) : this()
+		public FormEditLinkSettingsRegular(BaseLibraryLink sourceLink, LinkType? defaultLinkType = null) : this(sourceLink)
+		{
+			_defaultLinkType = defaultLinkType;
+		}
+
+		public FormEditLinkSettingsRegular(ILinksGroup linkGroup, LinkType? defaultLinkType = null) : this()
 		{
 			_sourceLinkGroup = linkGroup;
 			_sourceLink = _sourceLinkGroup.AllGroupLinks

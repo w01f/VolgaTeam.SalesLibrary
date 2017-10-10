@@ -74,7 +74,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.Security };
 		public int Order => 0;
-		public bool AvailableForEmbedded => true;
 		public SettingsEditorHeaderInfo HeaderInfo => null;
 
 		public event EventHandler<EventArgs> ForceCloseRequested;
@@ -89,9 +88,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			gridViewSecurityGroups.MasterRowGetChildList += OnGetGroupChildList;
 		}
 
-		public SecurityOptions(FileTypes? defaultLinkType = null) : this() { }
+		public SecurityOptions(LinkType? defaultLinkType = null) : this() { }
 
-		public SecurityOptions(ILinksGroup linksGroup, FileTypes? defaultLinkType = null) : this() { }
+		public SecurityOptions(ILinksGroup linksGroup, LinkType? defaultLinkType = null) : this() { }
 
 		public void LoadData(BaseLibraryLink sourceLink)
 		{

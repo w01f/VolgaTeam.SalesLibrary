@@ -66,10 +66,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 			barButtonItemMultiLinkPropertiesExpirationDate.Visibility = SelectionManager.SelectedLinks.OfType<LibraryObjectLink>().Any()
 					? BarItemVisibility.Always
 					: BarItemVisibility.Never;
-			barButtonItemMultiLinkPropertiesRefreshPreviewFiles.Visibility = SelectionManager.SelectedLinks.OfType<IPreviewableLink>().Any()
+			barButtonItemMultiLinkPropertiesRefreshPreviewFiles.Visibility =
+				SelectionManager.SelectedLinks.OfType<IPreviewableLink>().Any() || SelectionManager.SelectedLinks.OfType<LibraryFolderLink>().SelectMany(folderLink => folderLink.AllLinks).OfType<PreviewableFileLink>().Any()
 					? BarItemVisibility.Always
 					: BarItemVisibility.Never;
-			
+
 			LoadMultiLinkContextMenuEditors(SelectionManager.SelectedLinks.ToList());
 			popupMenuMultiLinkProperties.ShowPopup(Cursor.Position);
 		}
@@ -141,7 +142,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 		private void barButtonItemMultiLinkPropertiesRefreshPreviewFiles_ItemClick(object sender, ItemClickEventArgs e)
 		{
 			if (MainController.Instance.PopupMessages.ShowWarningQuestion("Are you sure you want to refresh the server files for selected links?") != DialogResult.Yes) return;
-			RefreshPreviewFiles(SelectionManager.SelectedLinks.OfType<IPreviewableLink>().ToList());
+			var sourceLinks = new List<IPreviewableLink>();
+			sourceLinks.AddRange(SelectionManager.SelectedLinks.OfType<IPreviewableLink>());
+			sourceLinks.AddRange(SelectionManager.SelectedLinks.OfType<LibraryFolderLink>().SelectMany(folderLink => folderLink.AllLinks).OfType<PreviewableFileLink>());
+			RefreshPreviewFiles(sourceLinks);
 			MainController.Instance.PopupMessages.ShowInfo("Links are now updated for the server!");
 		}
 	}

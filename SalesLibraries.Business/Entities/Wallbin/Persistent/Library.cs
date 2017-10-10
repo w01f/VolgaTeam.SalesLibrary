@@ -124,9 +124,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 			base.Save(context, current, withCommit);
 		}
 
-		public override void ResetParent()
-		{
-		}
+		public override void ResetParent() { }
 
 		public string GetRootPath()
 		{
@@ -200,6 +198,13 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 			return Pages
 				.SelectMany(p => onlyTopLevel ? p.TopLevelLinks : p.AllGroupLinks)
 				.FirstOrDefault(link => link.ExtId == extId);
+		}
+
+		public void ResetLinksToDefault(IList<LinkSettingsGroupType> groupsForReset, Func<BaseLibraryLink, bool> linksFilter)
+		{
+			var linksToProcess = Pages.SelectMany(p => p.AllGroupLinks).Where(linksFilter).ToList();
+			foreach (var libraryLink in linksToProcess)
+				libraryLink.ResetToDefault(groupsForReset);
 		}
 
 		#endregion

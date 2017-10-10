@@ -21,7 +21,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 	{
 		#region Persistent Properties
 		[Required]
-		public FileTypes Type { get; set; }
+		public LinkType Type { get; set; }
 
 		private string _name;
 		public string Name
@@ -154,6 +154,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		public virtual string WebFormat => WebFormats.Other;
 
 		[NotMapped, JsonIgnore]
+		public virtual LinkFileType SubType => LinkFileType.NotFile;
+
+		[NotMapped, JsonIgnore]
 		public virtual string DisplayName => DisplayNameWithoutNote;
 
 		[NotMapped, JsonIgnore]
@@ -252,7 +255,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		protected BaseLibraryLink()
 		{
-			Type = FileTypes.Other;
+			Type = LinkType.Other;
 			AddDate = DateTime.Now;
 		}
 
@@ -435,13 +438,13 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			return link;
 		}
 
-		public static Type GetObjectTypeByLinkType(FileTypes linkType)
+		public static Type GetObjectTypeByLinkType(LinkType linkType)
 		{
 			switch (linkType)
 			{
-				case FileTypes.Pdf:
+				case LinkType.Pdf:
 					return typeof(PdfLink);
-				case FileTypes.Excel:
+				case LinkType.Excel:
 					return typeof(ExcelLink);
 				default:
 					return typeof(BaseLibraryLink);

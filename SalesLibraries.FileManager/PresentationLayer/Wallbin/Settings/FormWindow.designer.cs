@@ -36,7 +36,6 @@
 			this.buttonXSave = new DevComponents.DotNetBar.ButtonX();
 			this.labelControlLocation = new DevExpress.XtraEditors.LabelControl();
 			this.buttonXCancel = new DevComponents.DotNetBar.ButtonX();
-			this.checkEditApllyForAllWindowsBanner = new DevExpress.XtraEditors.CheckEdit();
 			this.checkEditApllyForAllWindowsAppearance = new DevExpress.XtraEditors.CheckEdit();
 			this.checkEditWindowHeaderAlignmentCenter = new DevExpress.XtraEditors.CheckEdit();
 			this.checkEditWindowHeaderAlignmentLeft = new DevExpress.XtraEditors.CheckEdit();
@@ -48,6 +47,7 @@
 			this.colorEditWindowHeaderBackColor = new SalesLibraries.CommonGUI.Common.HtmlColorEdit();
 			this.colorEditWindowBackColor = new SalesLibraries.CommonGUI.Common.HtmlColorEdit();
 			this.colorEditWindowHeaderForeColor = new SalesLibraries.CommonGUI.Common.HtmlColorEdit();
+			this.checkEditApllyForAllWindowsBanner = new DevExpress.XtraEditors.CheckEdit();
 			this.checkEditApllyForAllWindowsWidgetColor = new DevExpress.XtraEditors.CheckEdit();
 			this.checkEditApllyForAllWindowsWidget = new DevExpress.XtraEditors.CheckEdit();
 			this.layoutControlGroupRoot = new DevExpress.XtraLayout.LayoutControlGroup();
@@ -96,7 +96,6 @@
 			((System.ComponentModel.ISupportInitialize)(this.checkEditWindowHeaderAlignmentRight.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControl)).BeginInit();
 			this.layoutControl.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditApllyForAllWindowsBanner.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditApllyForAllWindowsAppearance.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditWindowHeaderAlignmentCenter.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditWindowHeaderAlignmentLeft.Properties)).BeginInit();
@@ -108,6 +107,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.colorEditWindowHeaderBackColor.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.colorEditWindowBackColor.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.colorEditWindowHeaderForeColor.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditApllyForAllWindowsBanner.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditApllyForAllWindowsWidgetColor.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditApllyForAllWindowsWidget.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupRoot)).BeginInit();
@@ -271,17 +271,6 @@
 			this.buttonXCancel.TabIndex = 100;
 			this.buttonXCancel.Text = "Cancel";
 			// 
-			// checkEditApllyForAllWindowsBanner
-			// 
-			this.checkEditApllyForAllWindowsBanner.Location = new System.Drawing.Point(14, 318);
-			this.checkEditApllyForAllWindowsBanner.Name = "checkEditApllyForAllWindowsBanner";
-			this.checkEditApllyForAllWindowsBanner.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.checkEditApllyForAllWindowsBanner.Properties.Appearance.Options.UseForeColor = true;
-			this.checkEditApllyForAllWindowsBanner.Properties.Caption = "Apply Clipart Logo to All Windows";
-			this.checkEditApllyForAllWindowsBanner.Size = new System.Drawing.Size(636, 20);
-			this.checkEditApllyForAllWindowsBanner.StyleController = this.layoutControl;
-			this.checkEditApllyForAllWindowsBanner.TabIndex = 65;
-			// 
 			// checkEditApllyForAllWindowsAppearance
 			// 
 			this.checkEditApllyForAllWindowsAppearance.Location = new System.Drawing.Point(14, 318);
@@ -327,7 +316,9 @@
 			this.colorEditWindowBorderColor.EditValue = System.Drawing.Color.Empty;
 			this.colorEditWindowBorderColor.Location = new System.Drawing.Point(132, 187);
 			this.colorEditWindowBorderColor.Name = "colorEditWindowBorderColor";
-			this.colorEditWindowBorderColor.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+			this.colorEditWindowBorderColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.colorEditWindowBorderColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.colorEditWindowBorderColor.Properties.Appearance.Options.UseBackColor = true;
 			this.colorEditWindowBorderColor.Properties.Appearance.Options.UseForeColor = true;
 			this.colorEditWindowBorderColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
@@ -386,7 +377,9 @@
 			this.colorEditWindowForeColor.EditValue = System.Drawing.Color.Empty;
 			this.colorEditWindowForeColor.Location = new System.Drawing.Point(554, 151);
 			this.colorEditWindowForeColor.Name = "colorEditWindowForeColor";
-			this.colorEditWindowForeColor.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+			this.colorEditWindowForeColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.colorEditWindowForeColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.colorEditWindowForeColor.Properties.Appearance.Options.UseBackColor = true;
 			this.colorEditWindowForeColor.Properties.Appearance.Options.UseForeColor = true;
 			this.colorEditWindowForeColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
@@ -401,7 +394,9 @@
 			this.colorEditWindowHeaderBackColor.EditValue = System.Drawing.Color.Empty;
 			this.colorEditWindowHeaderBackColor.Location = new System.Drawing.Point(132, 115);
 			this.colorEditWindowHeaderBackColor.Name = "colorEditWindowHeaderBackColor";
-			this.colorEditWindowHeaderBackColor.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+			this.colorEditWindowHeaderBackColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.colorEditWindowHeaderBackColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.colorEditWindowHeaderBackColor.Properties.Appearance.Options.UseBackColor = true;
 			this.colorEditWindowHeaderBackColor.Properties.Appearance.Options.UseForeColor = true;
 			this.colorEditWindowHeaderBackColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
@@ -417,7 +412,9 @@
 			this.colorEditWindowBackColor.EditValue = System.Drawing.Color.Empty;
 			this.colorEditWindowBackColor.Location = new System.Drawing.Point(554, 115);
 			this.colorEditWindowBackColor.Name = "colorEditWindowBackColor";
-			this.colorEditWindowBackColor.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+			this.colorEditWindowBackColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.colorEditWindowBackColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.colorEditWindowBackColor.Properties.Appearance.Options.UseBackColor = true;
 			this.colorEditWindowBackColor.Properties.Appearance.Options.UseForeColor = true;
 			this.colorEditWindowBackColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
@@ -432,7 +429,9 @@
 			this.colorEditWindowHeaderForeColor.EditValue = System.Drawing.Color.Empty;
 			this.colorEditWindowHeaderForeColor.Location = new System.Drawing.Point(132, 151);
 			this.colorEditWindowHeaderForeColor.Name = "colorEditWindowHeaderForeColor";
-			this.colorEditWindowHeaderForeColor.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+			this.colorEditWindowHeaderForeColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.colorEditWindowHeaderForeColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.colorEditWindowHeaderForeColor.Properties.Appearance.Options.UseBackColor = true;
 			this.colorEditWindowHeaderForeColor.Properties.Appearance.Options.UseForeColor = true;
 			this.colorEditWindowHeaderForeColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
@@ -441,6 +440,17 @@
 			this.colorEditWindowHeaderForeColor.StyleController = this.layoutControl;
 			this.colorEditWindowHeaderForeColor.TabIndex = 3;
 			this.colorEditWindowHeaderForeColor.EditValueChanged += new System.EventHandler(this.colorEditWindowHeaderForeColor_EditValueChanged);
+			// 
+			// checkEditApllyForAllWindowsBanner
+			// 
+			this.checkEditApllyForAllWindowsBanner.Location = new System.Drawing.Point(14, 318);
+			this.checkEditApllyForAllWindowsBanner.Name = "checkEditApllyForAllWindowsBanner";
+			this.checkEditApllyForAllWindowsBanner.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.checkEditApllyForAllWindowsBanner.Properties.Appearance.Options.UseForeColor = true;
+			this.checkEditApllyForAllWindowsBanner.Properties.Caption = "Apply Clipart Logo to All Windows";
+			this.checkEditApllyForAllWindowsBanner.Size = new System.Drawing.Size(636, 20);
+			this.checkEditApllyForAllWindowsBanner.StyleController = this.layoutControl;
+			this.checkEditApllyForAllWindowsBanner.TabIndex = 65;
 			// 
 			// checkEditApllyForAllWindowsWidgetColor
 			// 
@@ -962,6 +972,7 @@
 			// 
 			this.emptySpaceItem3.AllowHotTrack = false;
 			this.emptySpaceItem3.Location = new System.Drawing.Point(524, 0);
+			this.emptySpaceItem3.MaxSize = new System.Drawing.Size(20, 0);
 			this.emptySpaceItem3.MinSize = new System.Drawing.Size(20, 40);
 			this.emptySpaceItem3.Name = "emptySpaceItem3";
 			this.emptySpaceItem3.Size = new System.Drawing.Size(20, 40);
@@ -1019,7 +1030,6 @@
 			((System.ComponentModel.ISupportInitialize)(this.checkEditWindowHeaderAlignmentRight.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControl)).EndInit();
 			this.layoutControl.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.checkEditApllyForAllWindowsBanner.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditApllyForAllWindowsAppearance.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditWindowHeaderAlignmentCenter.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditWindowHeaderAlignmentLeft.Properties)).EndInit();
@@ -1031,6 +1041,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.colorEditWindowHeaderBackColor.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.colorEditWindowBackColor.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.colorEditWindowHeaderForeColor.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditApllyForAllWindowsBanner.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditApllyForAllWindowsWidgetColor.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditApllyForAllWindowsWidget.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupRoot)).EndInit();

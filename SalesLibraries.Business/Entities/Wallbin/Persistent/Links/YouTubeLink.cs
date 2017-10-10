@@ -29,7 +29,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		public YouTubeLink()
 		{
-			Type = FileTypes.YouTube;
+			Type = LinkType.YouTube;
 		}
 
 		public static YouTubeLink Create(YouTubeLinkInfo linkInfo, LibraryFolder parentFolder)

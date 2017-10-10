@@ -96,49 +96,53 @@
 			this.layoutControlItemColorizeToggle = new DevExpress.XtraLayout.LayoutControlItem();
 			this.layoutControlItemColorizeEditor = new DevExpress.XtraLayout.LayoutControlItem();
 			this.layoutControlItemGalleryContent = new DevExpress.XtraLayout.LayoutControlItem();
+			this.emptySpaceItem19 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.emptySpaceItem20 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.layoutControlGroupImageSettings = new DevExpress.XtraLayout.LayoutControlGroup();
+			this.emptySpaceItem23 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.layoutControlGroupPadding = new DevExpress.XtraLayout.LayoutControlGroup();
-			this.layoutControlGroupPaddingLeft = new DevExpress.XtraLayout.LayoutControlGroup();
-			this.layoutControlItemPaddingLeftTitle = new DevExpress.XtraLayout.LayoutControlItem();
-			this.layoutControlItemPaddingLeftNone = new DevExpress.XtraLayout.LayoutControlItem();
-			this.layoutControlItemPaddingLeft2 = new DevExpress.XtraLayout.LayoutControlItem();
-			this.layoutControlItemPaddingLeft6 = new DevExpress.XtraLayout.LayoutControlItem();
-			this.layoutControlItemPaddingLeft10 = new DevExpress.XtraLayout.LayoutControlItem();
-			this.emptySpaceItem16 = new DevExpress.XtraLayout.EmptySpaceItem();
-			this.emptySpaceItem7 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.layoutControlGroupPaddingTop = new DevExpress.XtraLayout.LayoutControlGroup();
 			this.layoutControlItemPaddingTopTitle = new DevExpress.XtraLayout.LayoutControlItem();
 			this.layoutControlItemPaddingTopNone = new DevExpress.XtraLayout.LayoutControlItem();
 			this.layoutControlItemPaddingTop2 = new DevExpress.XtraLayout.LayoutControlItem();
 			this.layoutControlItemPaddingTop6 = new DevExpress.XtraLayout.LayoutControlItem();
 			this.layoutControlItemPaddingTop10 = new DevExpress.XtraLayout.LayoutControlItem();
-			this.layoutControlGroupPaddingRight = new DevExpress.XtraLayout.LayoutControlGroup();
-			this.layoutControlItemPaddingRightTitle = new DevExpress.XtraLayout.LayoutControlItem();
-			this.layoutControlItemPaddingRightNone = new DevExpress.XtraLayout.LayoutControlItem();
-			this.layoutControlItemPaddingRight2 = new DevExpress.XtraLayout.LayoutControlItem();
-			this.layoutControlItemPaddingRight6 = new DevExpress.XtraLayout.LayoutControlItem();
-			this.layoutControlItemPaddingRight10 = new DevExpress.XtraLayout.LayoutControlItem();
-			this.emptySpaceItem17 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.layoutControlItemPaddingTitle = new DevExpress.XtraLayout.LayoutControlItem();
+			this.emptySpaceItem21 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.layoutControlGroupPaddingBottom = new DevExpress.XtraLayout.LayoutControlGroup();
 			this.layoutControlItemPaddingBottomTitle = new DevExpress.XtraLayout.LayoutControlItem();
 			this.layoutControlItemPaddingBottomNone = new DevExpress.XtraLayout.LayoutControlItem();
 			this.layoutControlItemPaddingBottom2 = new DevExpress.XtraLayout.LayoutControlItem();
 			this.layoutControlItemPaddingBottom6 = new DevExpress.XtraLayout.LayoutControlItem();
 			this.layoutControlItemPaddingBottom10 = new DevExpress.XtraLayout.LayoutControlItem();
-			this.layoutControlItemPaddingTitle = new DevExpress.XtraLayout.LayoutControlItem();
-			this.emptySpaceItem21 = new DevExpress.XtraLayout.EmptySpaceItem();
-			this.emptySpaceItem9 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.emptySpaceItem18 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.layoutControlGroupPaddingLeft = new DevExpress.XtraLayout.LayoutControlGroup();
+			this.layoutControlItemPaddingLeftTitle = new DevExpress.XtraLayout.LayoutControlItem();
+			this.layoutControlItemPaddingLeftNone = new DevExpress.XtraLayout.LayoutControlItem();
+			this.layoutControlItemPaddingLeft2 = new DevExpress.XtraLayout.LayoutControlItem();
+			this.layoutControlItemPaddingLeft6 = new DevExpress.XtraLayout.LayoutControlItem();
+			this.layoutControlItemPaddingLeft10 = new DevExpress.XtraLayout.LayoutControlItem();
+			this.emptySpaceItem24 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.emptySpaceItem25 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.layoutControlGroupPaddingRight = new DevExpress.XtraLayout.LayoutControlGroup();
+			this.layoutControlItemPaddingRightTitle = new DevExpress.XtraLayout.LayoutControlItem();
+			this.layoutControlItemPaddingRightNone = new DevExpress.XtraLayout.LayoutControlItem();
+			this.layoutControlItemPaddingRight2 = new DevExpress.XtraLayout.LayoutControlItem();
+			this.layoutControlItemPaddingRight6 = new DevExpress.XtraLayout.LayoutControlItem();
+			this.layoutControlItemPaddingRight10 = new DevExpress.XtraLayout.LayoutControlItem();
+			this.emptySpaceItem8 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.layoutControlGroupAlignment = new DevExpress.XtraLayout.LayoutControlGroup();
 			this.layoutControlItemAlignmentLeft = new DevExpress.XtraLayout.LayoutControlItem();
 			this.layoutControlItemAlignmentCenter = new DevExpress.XtraLayout.LayoutControlItem();
 			this.layoutControlItemAlignmentRight = new DevExpress.XtraLayout.LayoutControlItem();
-			this.emptySpaceItem18 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.layoutControlItemAlignmentTitle = new DevExpress.XtraLayout.LayoutControlItem();
 			this.emptySpaceItem22 = new DevExpress.XtraLayout.EmptySpaceItem();
-			this.emptySpaceItem8 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.emptySpaceItem26 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.layoutControlItemVerticalAlignmentTop1 = new DevExpress.XtraLayout.LayoutControlItem();
-			this.emptySpaceItem15 = new DevExpress.XtraLayout.EmptySpaceItem();
-			this.emptySpaceItem19 = new DevExpress.XtraLayout.EmptySpaceItem();
-			this.emptySpaceItem20 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.emptySpaceItem16 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.emptySpaceItem17 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.emptySpaceItem7 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.simpleLabelItemImageSettingsDescription = new DevExpress.XtraLayout.SimpleLabelItem();
 			this.layoutControlGroupTextSettings = new DevExpress.XtraLayout.LayoutControlGroup();
 			this.layoutControlItemTextDescription = new DevExpress.XtraLayout.LayoutControlItem();
 			this.layoutControlItemTextEditor = new DevExpress.XtraLayout.LayoutControlItem();
@@ -218,49 +222,53 @@
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemColorizeToggle)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemColorizeEditor)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemGalleryContent)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem19)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem20)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupImageSettings)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem23)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupPadding)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupPaddingLeft)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingLeftTitle)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingLeftNone)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingLeft2)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingLeft6)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingLeft10)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem16)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem7)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupPaddingTop)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingTopTitle)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingTopNone)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingTop2)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingTop6)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingTop10)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupPaddingRight)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingRightTitle)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingRightNone)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingRight2)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingRight6)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingRight10)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem17)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingTitle)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem21)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupPaddingBottom)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingBottomTitle)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingBottomNone)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingBottom2)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingBottom6)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingBottom10)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingTitle)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem21)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem9)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem18)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupPaddingLeft)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingLeftTitle)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingLeftNone)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingLeft2)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingLeft6)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingLeft10)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem24)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem25)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupPaddingRight)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingRightTitle)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingRightNone)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingRight2)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingRight6)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingRight10)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem8)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupAlignment)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemAlignmentLeft)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemAlignmentCenter)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemAlignmentRight)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem18)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemAlignmentTitle)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem22)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem8)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem26)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemVerticalAlignmentTop1)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem15)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem19)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem20)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem16)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem17)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem7)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemImageSettingsDescription)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupTextSettings)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemTextDescription)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemTextEditor)).BeginInit();
@@ -346,7 +354,7 @@
 			this.colorEditBannerTextColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.colorEditBannerTextColor.Color = System.Drawing.Color.Empty;
 			this.colorEditBannerTextColor.EditValue = System.Drawing.Color.Empty;
-			this.colorEditBannerTextColor.Location = new System.Drawing.Point(496, 480);
+			this.colorEditBannerTextColor.Location = new System.Drawing.Point(486, 480);
 			this.colorEditBannerTextColor.Name = "colorEditBannerTextColor";
 			this.colorEditBannerTextColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
 			this.colorEditBannerTextColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -355,7 +363,7 @@
 			this.colorEditBannerTextColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.colorEditBannerTextColor.Properties.Color = System.Drawing.Color.Empty;
-			this.colorEditBannerTextColor.Size = new System.Drawing.Size(153, 22);
+			this.colorEditBannerTextColor.Size = new System.Drawing.Size(149, 22);
 			this.colorEditBannerTextColor.StyleController = this.layoutControl;
 			this.colorEditBannerTextColor.TabIndex = 44;
 			this.colorEditBannerTextColor.EditValueChanged += new System.EventHandler(this.OnTextColorEditValueChanged);
@@ -439,24 +447,24 @@
 			// checkEditSaveAsTemplate
 			// 
 			this.checkEditSaveAsTemplate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.checkEditSaveAsTemplate.Location = new System.Drawing.Point(662, 526);
+			this.checkEditSaveAsTemplate.Location = new System.Drawing.Point(648, 526);
 			this.checkEditSaveAsTemplate.Name = "checkEditSaveAsTemplate";
 			this.checkEditSaveAsTemplate.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditSaveAsTemplate.Properties.Appearance.Options.UseForeColor = true;
 			this.checkEditSaveAsTemplate.Properties.Caption = "Save these settings as my Default template";
-			this.checkEditSaveAsTemplate.Size = new System.Drawing.Size(282, 20);
+			this.checkEditSaveAsTemplate.Size = new System.Drawing.Size(296, 20);
 			this.checkEditSaveAsTemplate.StyleController = this.layoutControl;
 			this.checkEditSaveAsTemplate.TabIndex = 58;
 			// 
 			// checkEditVerticalAlignmentTop2
 			// 
 			this.checkEditVerticalAlignmentTop2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.checkEditVerticalAlignmentTop2.Location = new System.Drawing.Point(308, 526);
+			this.checkEditVerticalAlignmentTop2.Location = new System.Drawing.Point(302, 526);
 			this.checkEditVerticalAlignmentTop2.Name = "checkEditVerticalAlignmentTop2";
 			this.checkEditVerticalAlignmentTop2.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditVerticalAlignmentTop2.Properties.Appearance.Options.UseForeColor = true;
 			this.checkEditVerticalAlignmentTop2.Properties.Caption = "Image Position Top (for Responsive Text)";
-			this.checkEditVerticalAlignmentTop2.Size = new System.Drawing.Size(332, 20);
+			this.checkEditVerticalAlignmentTop2.Size = new System.Drawing.Size(324, 20);
 			this.checkEditVerticalAlignmentTop2.StyleController = this.layoutControl;
 			this.checkEditVerticalAlignmentTop2.TabIndex = 59;
 			this.checkEditVerticalAlignmentTop2.CheckedChanged += new System.EventHandler(this.OnVerticalAlignmentTopCheckedChanged);
@@ -469,7 +477,7 @@
 			this.checkEditTextWordWrap.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditTextWordWrap.Properties.Appearance.Options.UseForeColor = true;
 			this.checkEditTextWordWrap.Properties.Caption = "Make Text Responsive";
-			this.checkEditTextWordWrap.Size = new System.Drawing.Size(256, 20);
+			this.checkEditTextWordWrap.Size = new System.Drawing.Size(250, 20);
 			this.checkEditTextWordWrap.StyleController = this.layoutControl;
 			this.checkEditTextWordWrap.TabIndex = 57;
 			// 
@@ -481,9 +489,9 @@
 			this.labelControlTextColor.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.labelControlTextColor.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
 			this.labelControlTextColor.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-			this.labelControlTextColor.Location = new System.Drawing.Point(496, 460);
+			this.labelControlTextColor.Location = new System.Drawing.Point(486, 460);
 			this.labelControlTextColor.Name = "labelControlTextColor";
-			this.labelControlTextColor.Size = new System.Drawing.Size(448, 16);
+			this.labelControlTextColor.Size = new System.Drawing.Size(458, 16);
 			this.labelControlTextColor.StyleController = this.layoutControl;
 			this.labelControlTextColor.TabIndex = 56;
 			this.labelControlTextColor.Text = "<b>Text Color:</b>";
@@ -498,7 +506,7 @@
 			this.labelControlTextFont.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
 			this.labelControlTextFont.Location = new System.Drawing.Point(30, 460);
 			this.labelControlTextFont.Name = "labelControlTextFont";
-			this.labelControlTextFont.Size = new System.Drawing.Size(462, 16);
+			this.labelControlTextFont.Size = new System.Drawing.Size(452, 16);
 			this.labelControlTextFont.StyleController = this.layoutControl;
 			this.labelControlTextFont.TabIndex = 55;
 			this.labelControlTextFont.Text = "<b>Format Text:</b>";
@@ -517,7 +525,7 @@
 			this.buttonEditBannerTextFont.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.buttonEditBannerTextFont.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-			this.buttonEditBannerTextFont.Size = new System.Drawing.Size(374, 22);
+			this.buttonEditBannerTextFont.Size = new System.Drawing.Size(366, 22);
 			this.buttonEditBannerTextFont.StyleController = this.layoutControl;
 			this.buttonEditBannerTextFont.TabIndex = 43;
 			this.buttonEditBannerTextFont.EditValueChanged += new System.EventHandler(this.OnTextFontEditValueChanged);
@@ -626,12 +634,12 @@
 			// checkEditVerticalAlignmentTop1
 			// 
 			this.checkEditVerticalAlignmentTop1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.checkEditVerticalAlignmentTop1.Location = new System.Drawing.Point(649, 526);
+			this.checkEditVerticalAlignmentTop1.Location = new System.Drawing.Point(562, 263);
 			this.checkEditVerticalAlignmentTop1.Name = "checkEditVerticalAlignmentTop1";
 			this.checkEditVerticalAlignmentTop1.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditVerticalAlignmentTop1.Properties.Appearance.Options.UseForeColor = true;
 			this.checkEditVerticalAlignmentTop1.Properties.Caption = "Image Position Top (for Responsive Text)";
-			this.checkEditVerticalAlignmentTop1.Size = new System.Drawing.Size(297, 20);
+			this.checkEditVerticalAlignmentTop1.Size = new System.Drawing.Size(399, 20);
 			this.checkEditVerticalAlignmentTop1.StyleController = this.layoutControl;
 			this.checkEditVerticalAlignmentTop1.TabIndex = 49;
 			this.checkEditVerticalAlignmentTop1.CheckedChanged += new System.EventHandler(this.OnVerticalAlignmentTopCheckedChanged);
@@ -639,7 +647,7 @@
 			// checkEditHorizontalAlignmentRight
 			// 
 			this.checkEditHorizontalAlignmentRight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.checkEditHorizontalAlignmentRight.Location = new System.Drawing.Point(862, 482);
+			this.checkEditHorizontalAlignmentRight.Location = new System.Drawing.Point(787, 201);
 			this.checkEditHorizontalAlignmentRight.Name = "checkEditHorizontalAlignmentRight";
 			this.checkEditHorizontalAlignmentRight.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditHorizontalAlignmentRight.Properties.Appearance.Options.UseForeColor = true;
@@ -661,9 +669,9 @@
 			this.labelControlImageAlignment.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.labelControlImageAlignment.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
 			this.labelControlImageAlignment.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-			this.labelControlImageAlignment.Location = new System.Drawing.Point(651, 452);
+			this.labelControlImageAlignment.Location = new System.Drawing.Point(564, 161);
 			this.labelControlImageAlignment.Name = "labelControlImageAlignment";
-			this.labelControlImageAlignment.Size = new System.Drawing.Size(293, 16);
+			this.labelControlImageAlignment.Size = new System.Drawing.Size(395, 16);
 			this.labelControlImageAlignment.StyleController = this.layoutControl;
 			this.labelControlImageAlignment.TabIndex = 55;
 			this.labelControlImageAlignment.Text = "<b>Alignment:</b>";
@@ -672,7 +680,7 @@
 			// checkEditHorizontalAlignmentCenter
 			// 
 			this.checkEditHorizontalAlignmentCenter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.checkEditHorizontalAlignmentCenter.Location = new System.Drawing.Point(760, 482);
+			this.checkEditHorizontalAlignmentCenter.Location = new System.Drawing.Point(671, 201);
 			this.checkEditHorizontalAlignmentCenter.Name = "checkEditHorizontalAlignmentCenter";
 			this.checkEditHorizontalAlignmentCenter.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditHorizontalAlignmentCenter.Properties.Appearance.Options.UseForeColor = true;
@@ -689,7 +697,7 @@
 			// checkEditHorizontalAlignmentLeft
 			// 
 			this.checkEditHorizontalAlignmentLeft.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.checkEditHorizontalAlignmentLeft.Location = new System.Drawing.Point(651, 482);
+			this.checkEditHorizontalAlignmentLeft.Location = new System.Drawing.Point(564, 201);
 			this.checkEditHorizontalAlignmentLeft.Name = "checkEditHorizontalAlignmentLeft";
 			this.checkEditHorizontalAlignmentLeft.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditHorizontalAlignmentLeft.Properties.Appearance.Options.UseForeColor = true;
@@ -706,14 +714,14 @@
 			// checkEditPaddingBottom10
 			// 
 			this.checkEditPaddingBottom10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.checkEditPaddingBottom10.Location = new System.Drawing.Point(513, 526);
+			this.checkEditPaddingBottom10.Location = new System.Drawing.Point(319, 245);
 			this.checkEditPaddingBottom10.Name = "checkEditPaddingBottom10";
 			this.checkEditPaddingBottom10.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditPaddingBottom10.Properties.Appearance.Options.UseForeColor = true;
 			this.checkEditPaddingBottom10.Properties.Caption = "10";
 			this.checkEditPaddingBottom10.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
 			this.checkEditPaddingBottom10.Properties.RadioGroupIndex = 5;
-			this.checkEditPaddingBottom10.Size = new System.Drawing.Size(83, 20);
+			this.checkEditPaddingBottom10.Size = new System.Drawing.Size(94, 20);
 			this.checkEditPaddingBottom10.StyleController = this.layoutControl;
 			this.checkEditPaddingBottom10.TabIndex = 93;
 			this.checkEditPaddingBottom10.TabStop = false;
@@ -721,14 +729,14 @@
 			// checkEditPaddingBottomNone
 			// 
 			this.checkEditPaddingBottomNone.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.checkEditPaddingBottomNone.Location = new System.Drawing.Point(382, 526);
+			this.checkEditPaddingBottomNone.Location = new System.Drawing.Point(125, 245);
 			this.checkEditPaddingBottomNone.Name = "checkEditPaddingBottomNone";
 			this.checkEditPaddingBottomNone.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditPaddingBottomNone.Properties.Appearance.Options.UseForeColor = true;
 			this.checkEditPaddingBottomNone.Properties.Caption = "None";
 			this.checkEditPaddingBottomNone.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
 			this.checkEditPaddingBottomNone.Properties.RadioGroupIndex = 5;
-			this.checkEditPaddingBottomNone.Size = new System.Drawing.Size(61, 20);
+			this.checkEditPaddingBottomNone.Size = new System.Drawing.Size(74, 20);
 			this.checkEditPaddingBottomNone.StyleController = this.layoutControl;
 			this.checkEditPaddingBottomNone.TabIndex = 94;
 			this.checkEditPaddingBottomNone.TabStop = false;
@@ -736,14 +744,14 @@
 			// checkEditPaddingBottom6
 			// 
 			this.checkEditPaddingBottom6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.checkEditPaddingBottom6.Location = new System.Drawing.Point(480, 526);
+			this.checkEditPaddingBottom6.Location = new System.Drawing.Point(262, 245);
 			this.checkEditPaddingBottom6.Name = "checkEditPaddingBottom6";
 			this.checkEditPaddingBottom6.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditPaddingBottom6.Properties.Appearance.Options.UseForeColor = true;
 			this.checkEditPaddingBottom6.Properties.Caption = "6";
 			this.checkEditPaddingBottom6.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
 			this.checkEditPaddingBottom6.Properties.RadioGroupIndex = 5;
-			this.checkEditPaddingBottom6.Size = new System.Drawing.Size(29, 20);
+			this.checkEditPaddingBottom6.Size = new System.Drawing.Size(53, 20);
 			this.checkEditPaddingBottom6.StyleController = this.layoutControl;
 			this.checkEditPaddingBottom6.TabIndex = 92;
 			this.checkEditPaddingBottom6.TabStop = false;
@@ -751,14 +759,14 @@
 			// checkEditPaddingBottom2
 			// 
 			this.checkEditPaddingBottom2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.checkEditPaddingBottom2.Location = new System.Drawing.Point(447, 526);
+			this.checkEditPaddingBottom2.Location = new System.Drawing.Point(203, 245);
 			this.checkEditPaddingBottom2.Name = "checkEditPaddingBottom2";
 			this.checkEditPaddingBottom2.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditPaddingBottom2.Properties.Appearance.Options.UseForeColor = true;
 			this.checkEditPaddingBottom2.Properties.Caption = "2";
 			this.checkEditPaddingBottom2.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
 			this.checkEditPaddingBottom2.Properties.RadioGroupIndex = 5;
-			this.checkEditPaddingBottom2.Size = new System.Drawing.Size(29, 20);
+			this.checkEditPaddingBottom2.Size = new System.Drawing.Size(55, 20);
 			this.checkEditPaddingBottom2.StyleController = this.layoutControl;
 			this.checkEditPaddingBottom2.TabIndex = 91;
 			this.checkEditPaddingBottom2.TabStop = false;
@@ -766,14 +774,14 @@
 			// checkEditPaddingRight10
 			// 
 			this.checkEditPaddingRight10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.checkEditPaddingRight10.Location = new System.Drawing.Point(513, 482);
+			this.checkEditPaddingRight10.Location = new System.Drawing.Point(319, 333);
 			this.checkEditPaddingRight10.Name = "checkEditPaddingRight10";
 			this.checkEditPaddingRight10.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditPaddingRight10.Properties.Appearance.Options.UseForeColor = true;
 			this.checkEditPaddingRight10.Properties.Caption = "10";
 			this.checkEditPaddingRight10.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
 			this.checkEditPaddingRight10.Properties.RadioGroupIndex = 3;
-			this.checkEditPaddingRight10.Size = new System.Drawing.Size(83, 20);
+			this.checkEditPaddingRight10.Size = new System.Drawing.Size(94, 20);
 			this.checkEditPaddingRight10.StyleController = this.layoutControl;
 			this.checkEditPaddingRight10.TabIndex = 89;
 			this.checkEditPaddingRight10.TabStop = false;
@@ -781,14 +789,14 @@
 			// checkEditPaddingRightNone
 			// 
 			this.checkEditPaddingRightNone.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.checkEditPaddingRightNone.Location = new System.Drawing.Point(382, 482);
+			this.checkEditPaddingRightNone.Location = new System.Drawing.Point(125, 333);
 			this.checkEditPaddingRightNone.Name = "checkEditPaddingRightNone";
 			this.checkEditPaddingRightNone.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditPaddingRightNone.Properties.Appearance.Options.UseForeColor = true;
 			this.checkEditPaddingRightNone.Properties.Caption = "None";
 			this.checkEditPaddingRightNone.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
 			this.checkEditPaddingRightNone.Properties.RadioGroupIndex = 3;
-			this.checkEditPaddingRightNone.Size = new System.Drawing.Size(61, 20);
+			this.checkEditPaddingRightNone.Size = new System.Drawing.Size(72, 20);
 			this.checkEditPaddingRightNone.StyleController = this.layoutControl;
 			this.checkEditPaddingRightNone.TabIndex = 90;
 			this.checkEditPaddingRightNone.TabStop = false;
@@ -796,14 +804,14 @@
 			// checkEditPaddingRight6
 			// 
 			this.checkEditPaddingRight6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.checkEditPaddingRight6.Location = new System.Drawing.Point(480, 482);
+			this.checkEditPaddingRight6.Location = new System.Drawing.Point(261, 333);
 			this.checkEditPaddingRight6.Name = "checkEditPaddingRight6";
 			this.checkEditPaddingRight6.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditPaddingRight6.Properties.Appearance.Options.UseForeColor = true;
 			this.checkEditPaddingRight6.Properties.Caption = "6";
 			this.checkEditPaddingRight6.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
 			this.checkEditPaddingRight6.Properties.RadioGroupIndex = 3;
-			this.checkEditPaddingRight6.Size = new System.Drawing.Size(29, 20);
+			this.checkEditPaddingRight6.Size = new System.Drawing.Size(54, 20);
 			this.checkEditPaddingRight6.StyleController = this.layoutControl;
 			this.checkEditPaddingRight6.TabIndex = 88;
 			this.checkEditPaddingRight6.TabStop = false;
@@ -811,14 +819,14 @@
 			// checkEditPaddingRight2
 			// 
 			this.checkEditPaddingRight2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.checkEditPaddingRight2.Location = new System.Drawing.Point(447, 482);
+			this.checkEditPaddingRight2.Location = new System.Drawing.Point(201, 333);
 			this.checkEditPaddingRight2.Name = "checkEditPaddingRight2";
 			this.checkEditPaddingRight2.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditPaddingRight2.Properties.Appearance.Options.UseForeColor = true;
 			this.checkEditPaddingRight2.Properties.Caption = "2";
 			this.checkEditPaddingRight2.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
 			this.checkEditPaddingRight2.Properties.RadioGroupIndex = 3;
-			this.checkEditPaddingRight2.Size = new System.Drawing.Size(29, 20);
+			this.checkEditPaddingRight2.Size = new System.Drawing.Size(56, 20);
 			this.checkEditPaddingRight2.StyleController = this.layoutControl;
 			this.checkEditPaddingRight2.TabIndex = 87;
 			this.checkEditPaddingRight2.TabStop = false;
@@ -831,9 +839,9 @@
 			this.labelControlPaddingBottom.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.labelControlPaddingBottom.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
 			this.labelControlPaddingBottom.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-			this.labelControlPaddingBottom.Location = new System.Drawing.Point(312, 528);
+			this.labelControlPaddingBottom.Location = new System.Drawing.Point(30, 245);
 			this.labelControlPaddingBottom.Name = "labelControlPaddingBottom";
-			this.labelControlPaddingBottom.Size = new System.Drawing.Size(66, 16);
+			this.labelControlPaddingBottom.Size = new System.Drawing.Size(91, 20);
 			this.labelControlPaddingBottom.StyleController = this.layoutControl;
 			this.labelControlPaddingBottom.TabIndex = 86;
 			this.labelControlPaddingBottom.Text = "Bottom:";
@@ -847,9 +855,9 @@
 			this.labelControlPaddingRight.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.labelControlPaddingRight.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
 			this.labelControlPaddingRight.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-			this.labelControlPaddingRight.Location = new System.Drawing.Point(312, 484);
+			this.labelControlPaddingRight.Location = new System.Drawing.Point(30, 333);
 			this.labelControlPaddingRight.Name = "labelControlPaddingRight";
-			this.labelControlPaddingRight.Size = new System.Drawing.Size(66, 16);
+			this.labelControlPaddingRight.Size = new System.Drawing.Size(91, 20);
 			this.labelControlPaddingRight.StyleController = this.layoutControl;
 			this.labelControlPaddingRight.TabIndex = 85;
 			this.labelControlPaddingRight.Text = "Right:";
@@ -858,14 +866,14 @@
 			// checkEditPaddingTop10
 			// 
 			this.checkEditPaddingTop10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.checkEditPaddingTop10.Location = new System.Drawing.Point(231, 526);
+			this.checkEditPaddingTop10.Location = new System.Drawing.Point(320, 201);
 			this.checkEditPaddingTop10.Name = "checkEditPaddingTop10";
 			this.checkEditPaddingTop10.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditPaddingTop10.Properties.Appearance.Options.UseForeColor = true;
 			this.checkEditPaddingTop10.Properties.Caption = "10";
 			this.checkEditPaddingTop10.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
 			this.checkEditPaddingTop10.Properties.RadioGroupIndex = 4;
-			this.checkEditPaddingTop10.Size = new System.Drawing.Size(57, 20);
+			this.checkEditPaddingTop10.Size = new System.Drawing.Size(93, 20);
 			this.checkEditPaddingTop10.StyleController = this.layoutControl;
 			this.checkEditPaddingTop10.TabIndex = 83;
 			this.checkEditPaddingTop10.TabStop = false;
@@ -873,14 +881,14 @@
 			// checkEditPaddingTopNone
 			// 
 			this.checkEditPaddingTopNone.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.checkEditPaddingTopNone.Location = new System.Drawing.Point(100, 526);
+			this.checkEditPaddingTopNone.Location = new System.Drawing.Point(125, 201);
 			this.checkEditPaddingTopNone.Name = "checkEditPaddingTopNone";
 			this.checkEditPaddingTopNone.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditPaddingTopNone.Properties.Appearance.Options.UseForeColor = true;
 			this.checkEditPaddingTopNone.Properties.Caption = "None";
 			this.checkEditPaddingTopNone.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
 			this.checkEditPaddingTopNone.Properties.RadioGroupIndex = 4;
-			this.checkEditPaddingTopNone.Size = new System.Drawing.Size(61, 20);
+			this.checkEditPaddingTopNone.Size = new System.Drawing.Size(75, 20);
 			this.checkEditPaddingTopNone.StyleController = this.layoutControl;
 			this.checkEditPaddingTopNone.TabIndex = 84;
 			this.checkEditPaddingTopNone.TabStop = false;
@@ -888,14 +896,14 @@
 			// checkEditPaddingTop6
 			// 
 			this.checkEditPaddingTop6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.checkEditPaddingTop6.Location = new System.Drawing.Point(198, 526);
+			this.checkEditPaddingTop6.Location = new System.Drawing.Point(262, 201);
 			this.checkEditPaddingTop6.Name = "checkEditPaddingTop6";
 			this.checkEditPaddingTop6.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditPaddingTop6.Properties.Appearance.Options.UseForeColor = true;
 			this.checkEditPaddingTop6.Properties.Caption = "6";
 			this.checkEditPaddingTop6.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
 			this.checkEditPaddingTop6.Properties.RadioGroupIndex = 4;
-			this.checkEditPaddingTop6.Size = new System.Drawing.Size(29, 20);
+			this.checkEditPaddingTop6.Size = new System.Drawing.Size(54, 20);
 			this.checkEditPaddingTop6.StyleController = this.layoutControl;
 			this.checkEditPaddingTop6.TabIndex = 82;
 			this.checkEditPaddingTop6.TabStop = false;
@@ -903,14 +911,14 @@
 			// checkEditPaddingTop2
 			// 
 			this.checkEditPaddingTop2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.checkEditPaddingTop2.Location = new System.Drawing.Point(165, 526);
+			this.checkEditPaddingTop2.Location = new System.Drawing.Point(204, 201);
 			this.checkEditPaddingTop2.Name = "checkEditPaddingTop2";
 			this.checkEditPaddingTop2.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditPaddingTop2.Properties.Appearance.Options.UseForeColor = true;
 			this.checkEditPaddingTop2.Properties.Caption = "2";
 			this.checkEditPaddingTop2.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
 			this.checkEditPaddingTop2.Properties.RadioGroupIndex = 4;
-			this.checkEditPaddingTop2.Size = new System.Drawing.Size(29, 20);
+			this.checkEditPaddingTop2.Size = new System.Drawing.Size(54, 20);
 			this.checkEditPaddingTop2.StyleController = this.layoutControl;
 			this.checkEditPaddingTop2.TabIndex = 81;
 			this.checkEditPaddingTop2.TabStop = false;
@@ -918,14 +926,14 @@
 			// checkEditPaddingLeft10
 			// 
 			this.checkEditPaddingLeft10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.checkEditPaddingLeft10.Location = new System.Drawing.Point(231, 482);
+			this.checkEditPaddingLeft10.Location = new System.Drawing.Point(318, 289);
 			this.checkEditPaddingLeft10.Name = "checkEditPaddingLeft10";
 			this.checkEditPaddingLeft10.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditPaddingLeft10.Properties.Appearance.Options.UseForeColor = true;
 			this.checkEditPaddingLeft10.Properties.Caption = "10";
 			this.checkEditPaddingLeft10.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
 			this.checkEditPaddingLeft10.Properties.RadioGroupIndex = 2;
-			this.checkEditPaddingLeft10.Size = new System.Drawing.Size(57, 20);
+			this.checkEditPaddingLeft10.Size = new System.Drawing.Size(95, 20);
 			this.checkEditPaddingLeft10.StyleController = this.layoutControl;
 			this.checkEditPaddingLeft10.TabIndex = 79;
 			this.checkEditPaddingLeft10.TabStop = false;
@@ -933,14 +941,14 @@
 			// checkEditPaddingLeft6
 			// 
 			this.checkEditPaddingLeft6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.checkEditPaddingLeft6.Location = new System.Drawing.Point(198, 482);
+			this.checkEditPaddingLeft6.Location = new System.Drawing.Point(262, 289);
 			this.checkEditPaddingLeft6.Name = "checkEditPaddingLeft6";
 			this.checkEditPaddingLeft6.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditPaddingLeft6.Properties.Appearance.Options.UseForeColor = true;
 			this.checkEditPaddingLeft6.Properties.Caption = "6";
 			this.checkEditPaddingLeft6.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
 			this.checkEditPaddingLeft6.Properties.RadioGroupIndex = 2;
-			this.checkEditPaddingLeft6.Size = new System.Drawing.Size(29, 20);
+			this.checkEditPaddingLeft6.Size = new System.Drawing.Size(52, 20);
 			this.checkEditPaddingLeft6.StyleController = this.layoutControl;
 			this.checkEditPaddingLeft6.TabIndex = 78;
 			this.checkEditPaddingLeft6.TabStop = false;
@@ -948,14 +956,14 @@
 			// checkEditPaddingLeft2
 			// 
 			this.checkEditPaddingLeft2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.checkEditPaddingLeft2.Location = new System.Drawing.Point(165, 482);
+			this.checkEditPaddingLeft2.Location = new System.Drawing.Point(202, 289);
 			this.checkEditPaddingLeft2.Name = "checkEditPaddingLeft2";
 			this.checkEditPaddingLeft2.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditPaddingLeft2.Properties.Appearance.Options.UseForeColor = true;
 			this.checkEditPaddingLeft2.Properties.Caption = "2";
 			this.checkEditPaddingLeft2.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
 			this.checkEditPaddingLeft2.Properties.RadioGroupIndex = 2;
-			this.checkEditPaddingLeft2.Size = new System.Drawing.Size(29, 20);
+			this.checkEditPaddingLeft2.Size = new System.Drawing.Size(56, 20);
 			this.checkEditPaddingLeft2.StyleController = this.layoutControl;
 			this.checkEditPaddingLeft2.TabIndex = 77;
 			this.checkEditPaddingLeft2.TabStop = false;
@@ -963,14 +971,14 @@
 			// checkEditPaddingLeftNone
 			// 
 			this.checkEditPaddingLeftNone.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.checkEditPaddingLeftNone.Location = new System.Drawing.Point(100, 482);
+			this.checkEditPaddingLeftNone.Location = new System.Drawing.Point(125, 289);
 			this.checkEditPaddingLeftNone.Name = "checkEditPaddingLeftNone";
 			this.checkEditPaddingLeftNone.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditPaddingLeftNone.Properties.Appearance.Options.UseForeColor = true;
 			this.checkEditPaddingLeftNone.Properties.Caption = "None";
 			this.checkEditPaddingLeftNone.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
 			this.checkEditPaddingLeftNone.Properties.RadioGroupIndex = 2;
-			this.checkEditPaddingLeftNone.Size = new System.Drawing.Size(61, 20);
+			this.checkEditPaddingLeftNone.Size = new System.Drawing.Size(73, 20);
 			this.checkEditPaddingLeftNone.StyleController = this.layoutControl;
 			this.checkEditPaddingLeftNone.TabIndex = 80;
 			this.checkEditPaddingLeftNone.TabStop = false;
@@ -985,7 +993,7 @@
 			this.labelControlImageDescription.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
 			this.labelControlImageDescription.Location = new System.Drawing.Point(30, 105);
 			this.labelControlImageDescription.Name = "labelControlImageDescription";
-			this.labelControlImageDescription.Size = new System.Drawing.Size(363, 36);
+			this.labelControlImageDescription.Size = new System.Drawing.Size(355, 36);
 			this.labelControlImageDescription.StyleController = this.layoutControl;
 			this.labelControlImageDescription.TabIndex = 50;
 			this.labelControlImageDescription.Text = "<size=+2><color=gray>Show a clipart image or logo with this link…</color></size>";
@@ -993,13 +1001,13 @@
 			// 
 			// textEditSearch
 			// 
-			this.textEditSearch.Location = new System.Drawing.Point(635, 112);
+			this.textEditSearch.Location = new System.Drawing.Point(651, 112);
 			this.textEditSearch.Name = "textEditSearch";
 			this.textEditSearch.Properties.Appearance.BackColor = System.Drawing.Color.White;
 			this.textEditSearch.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.textEditSearch.Properties.Appearance.Options.UseBackColor = true;
 			this.textEditSearch.Properties.Appearance.Options.UseForeColor = true;
-			this.textEditSearch.Size = new System.Drawing.Size(197, 22);
+			this.textEditSearch.Size = new System.Drawing.Size(181, 22);
 			this.textEditSearch.StyleController = this.layoutControl;
 			this.textEditSearch.TabIndex = 0;
 			this.textEditSearch.EditValueChanged += new System.EventHandler(this.OnSearchEditValueChanged);
@@ -1028,9 +1036,9 @@
 			this.labelControlPaddingTop.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.labelControlPaddingTop.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
 			this.labelControlPaddingTop.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-			this.labelControlPaddingTop.Location = new System.Drawing.Point(30, 528);
+			this.labelControlPaddingTop.Location = new System.Drawing.Point(30, 201);
 			this.labelControlPaddingTop.Name = "labelControlPaddingTop";
-			this.labelControlPaddingTop.Size = new System.Drawing.Size(66, 16);
+			this.labelControlPaddingTop.Size = new System.Drawing.Size(91, 20);
 			this.labelControlPaddingTop.StyleController = this.layoutControl;
 			this.labelControlPaddingTop.TabIndex = 66;
 			this.labelControlPaddingTop.Text = "Top:";
@@ -1039,7 +1047,7 @@
 			// checkEditInvert
 			// 
 			this.checkEditInvert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.checkEditInvert.Location = new System.Drawing.Point(397, 113);
+			this.checkEditInvert.Location = new System.Drawing.Point(389, 113);
 			this.checkEditInvert.Name = "checkEditInvert";
 			this.checkEditInvert.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditInvert.Properties.Appearance.Options.UseForeColor = true;
@@ -1058,9 +1066,9 @@
 			this.labelControlPaddingLeft.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.labelControlPaddingLeft.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
 			this.labelControlPaddingLeft.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-			this.labelControlPaddingLeft.Location = new System.Drawing.Point(30, 484);
+			this.labelControlPaddingLeft.Location = new System.Drawing.Point(30, 289);
 			this.labelControlPaddingLeft.Name = "labelControlPaddingLeft";
-			this.labelControlPaddingLeft.Size = new System.Drawing.Size(66, 16);
+			this.labelControlPaddingLeft.Size = new System.Drawing.Size(91, 20);
 			this.labelControlPaddingLeft.StyleController = this.layoutControl;
 			this.labelControlPaddingLeft.TabIndex = 65;
 			this.labelControlPaddingLeft.Text = "Left:";
@@ -1072,7 +1080,7 @@
 			this.colorEditInversionColor.Color = System.Drawing.Color.Empty;
 			this.colorEditInversionColor.EditValue = System.Drawing.Color.Empty;
 			this.colorEditInversionColor.Enabled = false;
-			this.colorEditInversionColor.Location = new System.Drawing.Point(470, 112);
+			this.colorEditInversionColor.Location = new System.Drawing.Point(462, 112);
 			this.colorEditInversionColor.Name = "colorEditInversionColor";
 			this.colorEditInversionColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
 			this.colorEditInversionColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -1081,7 +1089,7 @@
 			this.colorEditInversionColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.colorEditInversionColor.Properties.Color = System.Drawing.Color.Empty;
-			this.colorEditInversionColor.Size = new System.Drawing.Size(80, 22);
+			this.colorEditInversionColor.Size = new System.Drawing.Size(102, 22);
 			this.colorEditInversionColor.StyleController = this.layoutControl;
 			this.colorEditInversionColor.TabIndex = 63;
 			this.colorEditInversionColor.EditValueChanged += new System.EventHandler(this.OnInversionColorEditValueChanged);
@@ -1094,9 +1102,9 @@
 			this.labelControlPadding.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.labelControlPadding.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
 			this.labelControlPadding.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-			this.labelControlPadding.Location = new System.Drawing.Point(30, 452);
+			this.labelControlPadding.Location = new System.Drawing.Point(30, 161);
 			this.labelControlPadding.Name = "labelControlPadding";
-			this.labelControlPadding.Size = new System.Drawing.Size(566, 16);
+			this.labelControlPadding.Size = new System.Drawing.Size(383, 16);
 			this.labelControlPadding.StyleController = this.layoutControl;
 			this.labelControlPadding.TabIndex = 64;
 			this.labelControlPadding.Text = "<b>Padding</b>";
@@ -1113,7 +1121,7 @@
 			this.pnGallery.ForeColor = System.Drawing.Color.Black;
 			this.pnGallery.Location = new System.Drawing.Point(30, 145);
 			this.pnGallery.Name = "pnGallery";
-			this.pnGallery.Size = new System.Drawing.Size(914, 283);
+			this.pnGallery.Size = new System.Drawing.Size(914, 421);
 			this.pnGallery.TabIndex = 56;
 			// 
 			// xtraTabControlGallery
@@ -1136,7 +1144,7 @@
 			this.xtraTabControlGallery.Location = new System.Drawing.Point(300, 0);
 			this.xtraTabControlGallery.Name = "xtraTabControlGallery";
 			this.xtraTabControlGallery.ShowTabHeader = DevExpress.Utils.DefaultBoolean.False;
-			this.xtraTabControlGallery.Size = new System.Drawing.Size(614, 283);
+			this.xtraTabControlGallery.Size = new System.Drawing.Size(614, 421);
 			this.xtraTabControlGallery.TabIndex = 46;
 			// 
 			// retractableBarGallery
@@ -1151,7 +1159,7 @@
 			this.retractableBarGallery.Content.ForeColor = System.Drawing.Color.Black;
 			this.retractableBarGallery.Content.Location = new System.Drawing.Point(2, 42);
 			this.retractableBarGallery.Content.Name = "Content";
-			this.retractableBarGallery.Content.Size = new System.Drawing.Size(296, 239);
+			this.retractableBarGallery.Content.Size = new System.Drawing.Size(296, 377);
 			this.retractableBarGallery.Content.TabIndex = 1;
 			this.retractableBarGallery.ContentSize = 300;
 			this.retractableBarGallery.Dock = System.Windows.Forms.DockStyle.Left;
@@ -1171,7 +1179,7 @@
 			this.retractableBarGallery.Location = new System.Drawing.Point(0, 0);
 			this.retractableBarGallery.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.retractableBarGallery.Name = "retractableBarGallery";
-			this.retractableBarGallery.Size = new System.Drawing.Size(300, 283);
+			this.retractableBarGallery.Size = new System.Drawing.Size(300, 421);
 			this.retractableBarGallery.TabIndex = 47;
 			// 
 			// treeViewGallery
@@ -1184,10 +1192,11 @@
 			this.treeViewGallery.ForeColor = System.Drawing.Color.Black;
 			this.treeViewGallery.HideSelection = false;
 			this.treeViewGallery.Indent = 16;
+			this.treeViewGallery.ItemHeight = 25;
 			this.treeViewGallery.Location = new System.Drawing.Point(0, 0);
 			this.treeViewGallery.Name = "treeViewGallery";
 			this.treeViewGallery.ShowLines = false;
-			this.treeViewGallery.Size = new System.Drawing.Size(296, 239);
+			this.treeViewGallery.Size = new System.Drawing.Size(296, 377);
 			this.treeViewGallery.TabIndex = 0;
 			// 
 			// labelControlSelectedGalleryName
@@ -1317,7 +1326,9 @@
 			this.tabbedControlGroupSettings.Size = new System.Drawing.Size(954, 496);
 			this.tabbedControlGroupSettings.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlGroupGallery,
+            this.layoutControlGroupImageSettings,
             this.layoutControlGroupTextSettings});
+			this.tabbedControlGroupSettings.SelectedPageChanging += new DevExpress.XtraLayout.LayoutTabPageChangingEventHandler(this.OnTabControlSettingsSelectedPageChanging);
 			// 
 			// layoutControlGroupGallery
 			// 
@@ -1328,12 +1339,6 @@
             this.layoutControlItemColorizeToggle,
             this.layoutControlItemColorizeEditor,
             this.layoutControlItemGalleryContent,
-            this.layoutControlGroupPadding,
-            this.emptySpaceItem9,
-            this.layoutControlGroupAlignment,
-            this.emptySpaceItem8,
-            this.layoutControlItemVerticalAlignmentTop1,
-            this.emptySpaceItem15,
             this.emptySpaceItem19,
             this.emptySpaceItem20});
 			this.layoutControlGroupGallery.Location = new System.Drawing.Point(0, 0);
@@ -1349,7 +1354,7 @@
 			this.layoutControlItemGalleryDescription.MaxSize = new System.Drawing.Size(0, 40);
 			this.layoutControlItemGalleryDescription.MinSize = new System.Drawing.Size(17, 40);
 			this.layoutControlItemGalleryDescription.Name = "layoutControlItemGalleryDescription";
-			this.layoutControlItemGalleryDescription.Size = new System.Drawing.Size(367, 40);
+			this.layoutControlItemGalleryDescription.Size = new System.Drawing.Size(359, 40);
 			this.layoutControlItemGalleryDescription.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
 			this.layoutControlItemGalleryDescription.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutControlItemGalleryDescription.TextVisible = false;
@@ -1362,11 +1367,12 @@
 			this.layoutControlGroupSearch.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItemSearchButton,
             this.layoutControlItemSearchEdit});
-			this.layoutControlGroupSearch.Location = new System.Drawing.Point(557, 0);
+			this.layoutControlGroupSearch.Location = new System.Drawing.Point(571, 0);
 			this.layoutControlGroupSearch.Name = "layoutControlGroupSearch";
 			this.layoutControlGroupSearch.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-			this.layoutControlGroupSearch.Size = new System.Drawing.Size(376, 40);
+			this.layoutControlGroupSearch.Size = new System.Drawing.Size(362, 40);
 			this.layoutControlGroupSearch.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+			this.layoutControlGroupSearch.Text = "Search";
 			this.layoutControlGroupSearch.TextVisible = false;
 			// 
 			// layoutControlItemSearchButton
@@ -1375,7 +1381,7 @@
 			this.layoutControlItemSearchButton.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
 			this.layoutControlItemSearchButton.CustomizationFormText = "Keyword Button";
 			this.layoutControlItemSearchButton.FillControlToClientArea = false;
-			this.layoutControlItemSearchButton.Location = new System.Drawing.Point(264, 0);
+			this.layoutControlItemSearchButton.Location = new System.Drawing.Point(250, 0);
 			this.layoutControlItemSearchButton.MaxSize = new System.Drawing.Size(112, 40);
 			this.layoutControlItemSearchButton.MinSize = new System.Drawing.Size(112, 40);
 			this.layoutControlItemSearchButton.Name = "layoutControlItemSearchButton";
@@ -1394,9 +1400,11 @@
 			this.layoutControlItemSearchEdit.FillControlToClientArea = false;
 			this.layoutControlItemSearchEdit.Location = new System.Drawing.Point(0, 0);
 			this.layoutControlItemSearchEdit.Name = "layoutControlItemSearchEdit";
-			this.layoutControlItemSearchEdit.Size = new System.Drawing.Size(264, 40);
+			this.layoutControlItemSearchEdit.Size = new System.Drawing.Size(250, 40);
 			this.layoutControlItemSearchEdit.Text = "<b>Keyword:</b>";
+			this.layoutControlItemSearchEdit.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
 			this.layoutControlItemSearchEdit.TextSize = new System.Drawing.Size(60, 16);
+			this.layoutControlItemSearchEdit.TextToControlDistance = 5;
 			this.layoutControlItemSearchEdit.TrimClientAreaToControl = false;
 			// 
 			// layoutControlItemColorizeToggle
@@ -1405,7 +1413,7 @@
 			this.layoutControlItemColorizeToggle.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
 			this.layoutControlItemColorizeToggle.CustomizationFormText = "Colorize Toggle";
 			this.layoutControlItemColorizeToggle.FillControlToClientArea = false;
-			this.layoutControlItemColorizeToggle.Location = new System.Drawing.Point(382, 0);
+			this.layoutControlItemColorizeToggle.Location = new System.Drawing.Point(374, 0);
 			this.layoutControlItemColorizeToggle.Name = "layoutControlItemColorizeToggle";
 			this.layoutControlItemColorizeToggle.Size = new System.Drawing.Size(73, 40);
 			this.layoutControlItemColorizeToggle.TextSize = new System.Drawing.Size(0, 0);
@@ -1418,10 +1426,10 @@
 			this.layoutControlItemColorizeEditor.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
 			this.layoutControlItemColorizeEditor.CustomizationFormText = "Colorize Editor";
 			this.layoutControlItemColorizeEditor.FillControlToClientArea = false;
-			this.layoutControlItemColorizeEditor.Location = new System.Drawing.Point(455, 0);
+			this.layoutControlItemColorizeEditor.Location = new System.Drawing.Point(447, 0);
 			this.layoutControlItemColorizeEditor.Name = "layoutControlItemColorizeEditor";
 			this.layoutControlItemColorizeEditor.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 20, 2, 2);
-			this.layoutControlItemColorizeEditor.Size = new System.Drawing.Size(102, 40);
+			this.layoutControlItemColorizeEditor.Size = new System.Drawing.Size(124, 40);
 			this.layoutControlItemColorizeEditor.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutControlItemColorizeEditor.TextVisible = false;
 			this.layoutControlItemColorizeEditor.TrimClientAreaToControl = false;
@@ -1432,480 +1440,9 @@
 			this.layoutControlItemGalleryContent.CustomizationFormText = "Gallery Content";
 			this.layoutControlItemGalleryContent.Location = new System.Drawing.Point(15, 40);
 			this.layoutControlItemGalleryContent.Name = "layoutControlItemGalleryContent";
-			this.layoutControlItemGalleryContent.Size = new System.Drawing.Size(918, 287);
+			this.layoutControlItemGalleryContent.Size = new System.Drawing.Size(918, 425);
 			this.layoutControlItemGalleryContent.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutControlItemGalleryContent.TextVisible = false;
-			// 
-			// layoutControlGroupPadding
-			// 
-			this.layoutControlGroupPadding.CustomizationFormText = "Padding";
-			this.layoutControlGroupPadding.GroupBordersVisible = false;
-			this.layoutControlGroupPadding.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlGroupPaddingLeft,
-            this.emptySpaceItem7,
-            this.layoutControlGroupPaddingTop,
-            this.layoutControlGroupPaddingRight,
-            this.layoutControlGroupPaddingBottom,
-            this.layoutControlItemPaddingTitle,
-            this.emptySpaceItem21});
-			this.layoutControlGroupPadding.Location = new System.Drawing.Point(15, 347);
-			this.layoutControlGroupPadding.Name = "layoutControlGroupPadding";
-			this.layoutControlGroupPadding.Size = new System.Drawing.Size(570, 98);
-			this.layoutControlGroupPadding.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-			this.layoutControlGroupPadding.TextVisible = false;
-			// 
-			// layoutControlGroupPaddingLeft
-			// 
-			this.layoutControlGroupPaddingLeft.CustomizationFormText = "Padding Left";
-			this.layoutControlGroupPaddingLeft.GroupBordersVisible = false;
-			this.layoutControlGroupPaddingLeft.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItemPaddingLeftTitle,
-            this.layoutControlItemPaddingLeftNone,
-            this.layoutControlItemPaddingLeft2,
-            this.layoutControlItemPaddingLeft6,
-            this.layoutControlItemPaddingLeft10,
-            this.emptySpaceItem16});
-			this.layoutControlGroupPaddingLeft.Location = new System.Drawing.Point(0, 30);
-			this.layoutControlGroupPaddingLeft.Name = "layoutControlGroupPaddingLeft";
-			this.layoutControlGroupPaddingLeft.Size = new System.Drawing.Size(262, 44);
-			this.layoutControlGroupPaddingLeft.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-			this.layoutControlGroupPaddingLeft.TextVisible = false;
-			// 
-			// layoutControlItemPaddingLeftTitle
-			// 
-			this.layoutControlItemPaddingLeftTitle.Control = this.labelControlPaddingLeft;
-			this.layoutControlItemPaddingLeftTitle.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-			this.layoutControlItemPaddingLeftTitle.CustomizationFormText = "Title";
-			this.layoutControlItemPaddingLeftTitle.Location = new System.Drawing.Point(0, 0);
-			this.layoutControlItemPaddingLeftTitle.Name = "layoutControlItemPaddingLeftTitle";
-			this.layoutControlItemPaddingLeftTitle.Size = new System.Drawing.Size(70, 24);
-			this.layoutControlItemPaddingLeftTitle.TextSize = new System.Drawing.Size(0, 0);
-			this.layoutControlItemPaddingLeftTitle.TextVisible = false;
-			this.layoutControlItemPaddingLeftTitle.TrimClientAreaToControl = false;
-			// 
-			// layoutControlItemPaddingLeftNone
-			// 
-			this.layoutControlItemPaddingLeftNone.Control = this.checkEditPaddingLeftNone;
-			this.layoutControlItemPaddingLeftNone.CustomizationFormText = "None";
-			this.layoutControlItemPaddingLeftNone.Location = new System.Drawing.Point(70, 0);
-			this.layoutControlItemPaddingLeftNone.Name = "layoutControlItemPaddingLeftNone";
-			this.layoutControlItemPaddingLeftNone.Size = new System.Drawing.Size(65, 24);
-			this.layoutControlItemPaddingLeftNone.TextSize = new System.Drawing.Size(0, 0);
-			this.layoutControlItemPaddingLeftNone.TextVisible = false;
-			// 
-			// layoutControlItemPaddingLeft2
-			// 
-			this.layoutControlItemPaddingLeft2.Control = this.checkEditPaddingLeft2;
-			this.layoutControlItemPaddingLeft2.CustomizationFormText = "2";
-			this.layoutControlItemPaddingLeft2.Location = new System.Drawing.Point(135, 0);
-			this.layoutControlItemPaddingLeft2.Name = "layoutControlItemPaddingLeft2";
-			this.layoutControlItemPaddingLeft2.Size = new System.Drawing.Size(33, 24);
-			this.layoutControlItemPaddingLeft2.TextSize = new System.Drawing.Size(0, 0);
-			this.layoutControlItemPaddingLeft2.TextVisible = false;
-			// 
-			// layoutControlItemPaddingLeft6
-			// 
-			this.layoutControlItemPaddingLeft6.Control = this.checkEditPaddingLeft6;
-			this.layoutControlItemPaddingLeft6.CustomizationFormText = "6";
-			this.layoutControlItemPaddingLeft6.Location = new System.Drawing.Point(168, 0);
-			this.layoutControlItemPaddingLeft6.Name = "layoutControlItemPaddingLeft6";
-			this.layoutControlItemPaddingLeft6.Size = new System.Drawing.Size(33, 24);
-			this.layoutControlItemPaddingLeft6.TextSize = new System.Drawing.Size(0, 0);
-			this.layoutControlItemPaddingLeft6.TextVisible = false;
-			// 
-			// layoutControlItemPaddingLeft10
-			// 
-			this.layoutControlItemPaddingLeft10.Control = this.checkEditPaddingLeft10;
-			this.layoutControlItemPaddingLeft10.CustomizationFormText = "10";
-			this.layoutControlItemPaddingLeft10.Location = new System.Drawing.Point(201, 0);
-			this.layoutControlItemPaddingLeft10.Name = "layoutControlItemPaddingLeft10";
-			this.layoutControlItemPaddingLeft10.Size = new System.Drawing.Size(61, 24);
-			this.layoutControlItemPaddingLeft10.TextSize = new System.Drawing.Size(0, 0);
-			this.layoutControlItemPaddingLeft10.TextVisible = false;
-			// 
-			// emptySpaceItem16
-			// 
-			this.emptySpaceItem16.AllowHotTrack = false;
-			this.emptySpaceItem16.Location = new System.Drawing.Point(0, 24);
-			this.emptySpaceItem16.MaxSize = new System.Drawing.Size(0, 20);
-			this.emptySpaceItem16.MinSize = new System.Drawing.Size(10, 20);
-			this.emptySpaceItem16.Name = "emptySpaceItem16";
-			this.emptySpaceItem16.Size = new System.Drawing.Size(262, 20);
-			this.emptySpaceItem16.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-			this.emptySpaceItem16.TextSize = new System.Drawing.Size(0, 0);
-			// 
-			// emptySpaceItem7
-			// 
-			this.emptySpaceItem7.AllowHotTrack = false;
-			this.emptySpaceItem7.Location = new System.Drawing.Point(262, 30);
-			this.emptySpaceItem7.MaxSize = new System.Drawing.Size(20, 0);
-			this.emptySpaceItem7.MinSize = new System.Drawing.Size(20, 10);
-			this.emptySpaceItem7.Name = "emptySpaceItem7";
-			this.emptySpaceItem7.Size = new System.Drawing.Size(20, 68);
-			this.emptySpaceItem7.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-			this.emptySpaceItem7.TextSize = new System.Drawing.Size(0, 0);
-			// 
-			// layoutControlGroupPaddingTop
-			// 
-			this.layoutControlGroupPaddingTop.CustomizationFormText = "Padding Top";
-			this.layoutControlGroupPaddingTop.GroupBordersVisible = false;
-			this.layoutControlGroupPaddingTop.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItemPaddingTopTitle,
-            this.layoutControlItemPaddingTopNone,
-            this.layoutControlItemPaddingTop2,
-            this.layoutControlItemPaddingTop6,
-            this.layoutControlItemPaddingTop10});
-			this.layoutControlGroupPaddingTop.Location = new System.Drawing.Point(0, 74);
-			this.layoutControlGroupPaddingTop.Name = "layoutControlGroupPaddingTop";
-			this.layoutControlGroupPaddingTop.Size = new System.Drawing.Size(262, 24);
-			this.layoutControlGroupPaddingTop.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-			this.layoutControlGroupPaddingTop.TextVisible = false;
-			// 
-			// layoutControlItemPaddingTopTitle
-			// 
-			this.layoutControlItemPaddingTopTitle.Control = this.labelControlPaddingTop;
-			this.layoutControlItemPaddingTopTitle.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-			this.layoutControlItemPaddingTopTitle.CustomizationFormText = "Title";
-			this.layoutControlItemPaddingTopTitle.Location = new System.Drawing.Point(0, 0);
-			this.layoutControlItemPaddingTopTitle.Name = "layoutControlItemPaddingTopTitle";
-			this.layoutControlItemPaddingTopTitle.Size = new System.Drawing.Size(70, 24);
-			this.layoutControlItemPaddingTopTitle.TextSize = new System.Drawing.Size(0, 0);
-			this.layoutControlItemPaddingTopTitle.TextVisible = false;
-			this.layoutControlItemPaddingTopTitle.TrimClientAreaToControl = false;
-			// 
-			// layoutControlItemPaddingTopNone
-			// 
-			this.layoutControlItemPaddingTopNone.Control = this.checkEditPaddingTopNone;
-			this.layoutControlItemPaddingTopNone.CustomizationFormText = "None";
-			this.layoutControlItemPaddingTopNone.Location = new System.Drawing.Point(70, 0);
-			this.layoutControlItemPaddingTopNone.Name = "layoutControlItemPaddingTopNone";
-			this.layoutControlItemPaddingTopNone.Size = new System.Drawing.Size(65, 24);
-			this.layoutControlItemPaddingTopNone.TextSize = new System.Drawing.Size(0, 0);
-			this.layoutControlItemPaddingTopNone.TextVisible = false;
-			// 
-			// layoutControlItemPaddingTop2
-			// 
-			this.layoutControlItemPaddingTop2.Control = this.checkEditPaddingTop2;
-			this.layoutControlItemPaddingTop2.CustomizationFormText = "2";
-			this.layoutControlItemPaddingTop2.Location = new System.Drawing.Point(135, 0);
-			this.layoutControlItemPaddingTop2.Name = "layoutControlItemPaddingTop2";
-			this.layoutControlItemPaddingTop2.Size = new System.Drawing.Size(33, 24);
-			this.layoutControlItemPaddingTop2.TextSize = new System.Drawing.Size(0, 0);
-			this.layoutControlItemPaddingTop2.TextVisible = false;
-			// 
-			// layoutControlItemPaddingTop6
-			// 
-			this.layoutControlItemPaddingTop6.Control = this.checkEditPaddingTop6;
-			this.layoutControlItemPaddingTop6.CustomizationFormText = "6";
-			this.layoutControlItemPaddingTop6.Location = new System.Drawing.Point(168, 0);
-			this.layoutControlItemPaddingTop6.Name = "layoutControlItemPaddingTop6";
-			this.layoutControlItemPaddingTop6.Size = new System.Drawing.Size(33, 24);
-			this.layoutControlItemPaddingTop6.TextSize = new System.Drawing.Size(0, 0);
-			this.layoutControlItemPaddingTop6.TextVisible = false;
-			// 
-			// layoutControlItemPaddingTop10
-			// 
-			this.layoutControlItemPaddingTop10.Control = this.checkEditPaddingTop10;
-			this.layoutControlItemPaddingTop10.CustomizationFormText = "10";
-			this.layoutControlItemPaddingTop10.Location = new System.Drawing.Point(201, 0);
-			this.layoutControlItemPaddingTop10.Name = "layoutControlItemPaddingTop10";
-			this.layoutControlItemPaddingTop10.Size = new System.Drawing.Size(61, 24);
-			this.layoutControlItemPaddingTop10.TextSize = new System.Drawing.Size(0, 0);
-			this.layoutControlItemPaddingTop10.TextVisible = false;
-			// 
-			// layoutControlGroupPaddingRight
-			// 
-			this.layoutControlGroupPaddingRight.CustomizationFormText = "PaddingRight";
-			this.layoutControlGroupPaddingRight.GroupBordersVisible = false;
-			this.layoutControlGroupPaddingRight.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItemPaddingRightTitle,
-            this.layoutControlItemPaddingRightNone,
-            this.layoutControlItemPaddingRight2,
-            this.layoutControlItemPaddingRight6,
-            this.layoutControlItemPaddingRight10,
-            this.emptySpaceItem17});
-			this.layoutControlGroupPaddingRight.Location = new System.Drawing.Point(282, 30);
-			this.layoutControlGroupPaddingRight.Name = "layoutControlGroupPaddingRight";
-			this.layoutControlGroupPaddingRight.Size = new System.Drawing.Size(288, 44);
-			this.layoutControlGroupPaddingRight.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-			this.layoutControlGroupPaddingRight.TextVisible = false;
-			// 
-			// layoutControlItemPaddingRightTitle
-			// 
-			this.layoutControlItemPaddingRightTitle.Control = this.labelControlPaddingRight;
-			this.layoutControlItemPaddingRightTitle.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-			this.layoutControlItemPaddingRightTitle.CustomizationFormText = "Title";
-			this.layoutControlItemPaddingRightTitle.Location = new System.Drawing.Point(0, 0);
-			this.layoutControlItemPaddingRightTitle.Name = "layoutControlItemPaddingRightTitle";
-			this.layoutControlItemPaddingRightTitle.Size = new System.Drawing.Size(70, 24);
-			this.layoutControlItemPaddingRightTitle.TextSize = new System.Drawing.Size(0, 0);
-			this.layoutControlItemPaddingRightTitle.TextVisible = false;
-			this.layoutControlItemPaddingRightTitle.TrimClientAreaToControl = false;
-			// 
-			// layoutControlItemPaddingRightNone
-			// 
-			this.layoutControlItemPaddingRightNone.Control = this.checkEditPaddingRightNone;
-			this.layoutControlItemPaddingRightNone.CustomizationFormText = "None";
-			this.layoutControlItemPaddingRightNone.Location = new System.Drawing.Point(70, 0);
-			this.layoutControlItemPaddingRightNone.Name = "layoutControlItemPaddingRightNone";
-			this.layoutControlItemPaddingRightNone.Size = new System.Drawing.Size(65, 24);
-			this.layoutControlItemPaddingRightNone.TextSize = new System.Drawing.Size(0, 0);
-			this.layoutControlItemPaddingRightNone.TextVisible = false;
-			// 
-			// layoutControlItemPaddingRight2
-			// 
-			this.layoutControlItemPaddingRight2.Control = this.checkEditPaddingRight2;
-			this.layoutControlItemPaddingRight2.CustomizationFormText = "2";
-			this.layoutControlItemPaddingRight2.Location = new System.Drawing.Point(135, 0);
-			this.layoutControlItemPaddingRight2.Name = "layoutControlItemPaddingRight2";
-			this.layoutControlItemPaddingRight2.Size = new System.Drawing.Size(33, 24);
-			this.layoutControlItemPaddingRight2.TextSize = new System.Drawing.Size(0, 0);
-			this.layoutControlItemPaddingRight2.TextVisible = false;
-			// 
-			// layoutControlItemPaddingRight6
-			// 
-			this.layoutControlItemPaddingRight6.Control = this.checkEditPaddingRight6;
-			this.layoutControlItemPaddingRight6.CustomizationFormText = "6";
-			this.layoutControlItemPaddingRight6.Location = new System.Drawing.Point(168, 0);
-			this.layoutControlItemPaddingRight6.Name = "layoutControlItemPaddingRight6";
-			this.layoutControlItemPaddingRight6.Size = new System.Drawing.Size(33, 24);
-			this.layoutControlItemPaddingRight6.TextSize = new System.Drawing.Size(0, 0);
-			this.layoutControlItemPaddingRight6.TextVisible = false;
-			// 
-			// layoutControlItemPaddingRight10
-			// 
-			this.layoutControlItemPaddingRight10.Control = this.checkEditPaddingRight10;
-			this.layoutControlItemPaddingRight10.CustomizationFormText = "10";
-			this.layoutControlItemPaddingRight10.Location = new System.Drawing.Point(201, 0);
-			this.layoutControlItemPaddingRight10.Name = "layoutControlItemPaddingRight10";
-			this.layoutControlItemPaddingRight10.Size = new System.Drawing.Size(87, 24);
-			this.layoutControlItemPaddingRight10.TextSize = new System.Drawing.Size(0, 0);
-			this.layoutControlItemPaddingRight10.TextVisible = false;
-			// 
-			// emptySpaceItem17
-			// 
-			this.emptySpaceItem17.AllowHotTrack = false;
-			this.emptySpaceItem17.Location = new System.Drawing.Point(0, 24);
-			this.emptySpaceItem17.MaxSize = new System.Drawing.Size(0, 20);
-			this.emptySpaceItem17.MinSize = new System.Drawing.Size(104, 20);
-			this.emptySpaceItem17.Name = "emptySpaceItem17";
-			this.emptySpaceItem17.Size = new System.Drawing.Size(288, 20);
-			this.emptySpaceItem17.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-			this.emptySpaceItem17.TextSize = new System.Drawing.Size(0, 0);
-			// 
-			// layoutControlGroupPaddingBottom
-			// 
-			this.layoutControlGroupPaddingBottom.CustomizationFormText = "Padding Bottom";
-			this.layoutControlGroupPaddingBottom.GroupBordersVisible = false;
-			this.layoutControlGroupPaddingBottom.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItemPaddingBottomTitle,
-            this.layoutControlItemPaddingBottomNone,
-            this.layoutControlItemPaddingBottom2,
-            this.layoutControlItemPaddingBottom6,
-            this.layoutControlItemPaddingBottom10});
-			this.layoutControlGroupPaddingBottom.Location = new System.Drawing.Point(282, 74);
-			this.layoutControlGroupPaddingBottom.Name = "layoutControlGroupPaddingBottom";
-			this.layoutControlGroupPaddingBottom.Size = new System.Drawing.Size(288, 24);
-			this.layoutControlGroupPaddingBottom.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-			this.layoutControlGroupPaddingBottom.TextVisible = false;
-			// 
-			// layoutControlItemPaddingBottomTitle
-			// 
-			this.layoutControlItemPaddingBottomTitle.Control = this.labelControlPaddingBottom;
-			this.layoutControlItemPaddingBottomTitle.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-			this.layoutControlItemPaddingBottomTitle.CustomizationFormText = "Title";
-			this.layoutControlItemPaddingBottomTitle.Location = new System.Drawing.Point(0, 0);
-			this.layoutControlItemPaddingBottomTitle.Name = "layoutControlItemPaddingBottomTitle";
-			this.layoutControlItemPaddingBottomTitle.Size = new System.Drawing.Size(70, 24);
-			this.layoutControlItemPaddingBottomTitle.TextSize = new System.Drawing.Size(0, 0);
-			this.layoutControlItemPaddingBottomTitle.TextVisible = false;
-			this.layoutControlItemPaddingBottomTitle.TrimClientAreaToControl = false;
-			// 
-			// layoutControlItemPaddingBottomNone
-			// 
-			this.layoutControlItemPaddingBottomNone.Control = this.checkEditPaddingBottomNone;
-			this.layoutControlItemPaddingBottomNone.CustomizationFormText = "None";
-			this.layoutControlItemPaddingBottomNone.Location = new System.Drawing.Point(70, 0);
-			this.layoutControlItemPaddingBottomNone.Name = "layoutControlItemPaddingBottomNone";
-			this.layoutControlItemPaddingBottomNone.Size = new System.Drawing.Size(65, 24);
-			this.layoutControlItemPaddingBottomNone.TextSize = new System.Drawing.Size(0, 0);
-			this.layoutControlItemPaddingBottomNone.TextVisible = false;
-			// 
-			// layoutControlItemPaddingBottom2
-			// 
-			this.layoutControlItemPaddingBottom2.Control = this.checkEditPaddingBottom2;
-			this.layoutControlItemPaddingBottom2.CustomizationFormText = "2";
-			this.layoutControlItemPaddingBottom2.Location = new System.Drawing.Point(135, 0);
-			this.layoutControlItemPaddingBottom2.Name = "layoutControlItemPaddingBottom2";
-			this.layoutControlItemPaddingBottom2.Size = new System.Drawing.Size(33, 24);
-			this.layoutControlItemPaddingBottom2.TextSize = new System.Drawing.Size(0, 0);
-			this.layoutControlItemPaddingBottom2.TextVisible = false;
-			// 
-			// layoutControlItemPaddingBottom6
-			// 
-			this.layoutControlItemPaddingBottom6.Control = this.checkEditPaddingBottom6;
-			this.layoutControlItemPaddingBottom6.CustomizationFormText = "6";
-			this.layoutControlItemPaddingBottom6.Location = new System.Drawing.Point(168, 0);
-			this.layoutControlItemPaddingBottom6.Name = "layoutControlItemPaddingBottom6";
-			this.layoutControlItemPaddingBottom6.Size = new System.Drawing.Size(33, 24);
-			this.layoutControlItemPaddingBottom6.TextSize = new System.Drawing.Size(0, 0);
-			this.layoutControlItemPaddingBottom6.TextVisible = false;
-			// 
-			// layoutControlItemPaddingBottom10
-			// 
-			this.layoutControlItemPaddingBottom10.Control = this.checkEditPaddingBottom10;
-			this.layoutControlItemPaddingBottom10.CustomizationFormText = "10";
-			this.layoutControlItemPaddingBottom10.Location = new System.Drawing.Point(201, 0);
-			this.layoutControlItemPaddingBottom10.Name = "layoutControlItemPaddingBottom10";
-			this.layoutControlItemPaddingBottom10.Size = new System.Drawing.Size(87, 24);
-			this.layoutControlItemPaddingBottom10.TextSize = new System.Drawing.Size(0, 0);
-			this.layoutControlItemPaddingBottom10.TextVisible = false;
-			// 
-			// layoutControlItemPaddingTitle
-			// 
-			this.layoutControlItemPaddingTitle.Control = this.labelControlPadding;
-			this.layoutControlItemPaddingTitle.CustomizationFormText = "Title";
-			this.layoutControlItemPaddingTitle.Location = new System.Drawing.Point(0, 0);
-			this.layoutControlItemPaddingTitle.Name = "layoutControlItemPaddingTitle";
-			this.layoutControlItemPaddingTitle.Size = new System.Drawing.Size(570, 20);
-			this.layoutControlItemPaddingTitle.TextSize = new System.Drawing.Size(0, 0);
-			this.layoutControlItemPaddingTitle.TextVisible = false;
-			this.layoutControlItemPaddingTitle.TrimClientAreaToControl = false;
-			// 
-			// emptySpaceItem21
-			// 
-			this.emptySpaceItem21.AllowHotTrack = false;
-			this.emptySpaceItem21.Location = new System.Drawing.Point(0, 20);
-			this.emptySpaceItem21.MaxSize = new System.Drawing.Size(0, 10);
-			this.emptySpaceItem21.MinSize = new System.Drawing.Size(10, 10);
-			this.emptySpaceItem21.Name = "emptySpaceItem21";
-			this.emptySpaceItem21.Size = new System.Drawing.Size(570, 10);
-			this.emptySpaceItem21.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-			this.emptySpaceItem21.TextSize = new System.Drawing.Size(0, 0);
-			// 
-			// emptySpaceItem9
-			// 
-			this.emptySpaceItem9.AllowHotTrack = false;
-			this.emptySpaceItem9.Location = new System.Drawing.Point(15, 327);
-			this.emptySpaceItem9.MaxSize = new System.Drawing.Size(0, 20);
-			this.emptySpaceItem9.MinSize = new System.Drawing.Size(10, 20);
-			this.emptySpaceItem9.Name = "emptySpaceItem9";
-			this.emptySpaceItem9.Size = new System.Drawing.Size(918, 20);
-			this.emptySpaceItem9.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-			this.emptySpaceItem9.TextSize = new System.Drawing.Size(0, 0);
-			// 
-			// layoutControlGroupAlignment
-			// 
-			this.layoutControlGroupAlignment.CustomizationFormText = "Alignment";
-			this.layoutControlGroupAlignment.GroupBordersVisible = false;
-			this.layoutControlGroupAlignment.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItemAlignmentLeft,
-            this.layoutControlItemAlignmentCenter,
-            this.layoutControlItemAlignmentRight,
-            this.emptySpaceItem18,
-            this.layoutControlItemAlignmentTitle,
-            this.emptySpaceItem22});
-			this.layoutControlGroupAlignment.Location = new System.Drawing.Point(636, 347);
-			this.layoutControlGroupAlignment.Name = "layoutControlGroupAlignment";
-			this.layoutControlGroupAlignment.Size = new System.Drawing.Size(297, 74);
-			this.layoutControlGroupAlignment.TextVisible = false;
-			// 
-			// layoutControlItemAlignmentLeft
-			// 
-			this.layoutControlItemAlignmentLeft.Control = this.checkEditHorizontalAlignmentLeft;
-			this.layoutControlItemAlignmentLeft.CustomizationFormText = "Left";
-			this.layoutControlItemAlignmentLeft.Location = new System.Drawing.Point(0, 30);
-			this.layoutControlItemAlignmentLeft.Name = "layoutControlItemAlignmentLeft";
-			this.layoutControlItemAlignmentLeft.Size = new System.Drawing.Size(109, 24);
-			this.layoutControlItemAlignmentLeft.TextSize = new System.Drawing.Size(0, 0);
-			this.layoutControlItemAlignmentLeft.TextVisible = false;
-			// 
-			// layoutControlItemAlignmentCenter
-			// 
-			this.layoutControlItemAlignmentCenter.Control = this.checkEditHorizontalAlignmentCenter;
-			this.layoutControlItemAlignmentCenter.CustomizationFormText = "Center";
-			this.layoutControlItemAlignmentCenter.Location = new System.Drawing.Point(109, 30);
-			this.layoutControlItemAlignmentCenter.Name = "layoutControlItemAlignmentCenter";
-			this.layoutControlItemAlignmentCenter.Size = new System.Drawing.Size(102, 24);
-			this.layoutControlItemAlignmentCenter.TextSize = new System.Drawing.Size(0, 0);
-			this.layoutControlItemAlignmentCenter.TextVisible = false;
-			// 
-			// layoutControlItemAlignmentRight
-			// 
-			this.layoutControlItemAlignmentRight.Control = this.checkEditHorizontalAlignmentRight;
-			this.layoutControlItemAlignmentRight.CustomizationFormText = "Right";
-			this.layoutControlItemAlignmentRight.Location = new System.Drawing.Point(211, 30);
-			this.layoutControlItemAlignmentRight.Name = "layoutControlItemAlignmentRight";
-			this.layoutControlItemAlignmentRight.Size = new System.Drawing.Size(86, 24);
-			this.layoutControlItemAlignmentRight.TextSize = new System.Drawing.Size(0, 0);
-			this.layoutControlItemAlignmentRight.TextVisible = false;
-			// 
-			// emptySpaceItem18
-			// 
-			this.emptySpaceItem18.AllowHotTrack = false;
-			this.emptySpaceItem18.Location = new System.Drawing.Point(0, 54);
-			this.emptySpaceItem18.MaxSize = new System.Drawing.Size(0, 20);
-			this.emptySpaceItem18.MinSize = new System.Drawing.Size(10, 20);
-			this.emptySpaceItem18.Name = "emptySpaceItem18";
-			this.emptySpaceItem18.Size = new System.Drawing.Size(297, 20);
-			this.emptySpaceItem18.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-			this.emptySpaceItem18.TextSize = new System.Drawing.Size(0, 0);
-			// 
-			// layoutControlItemAlignmentTitle
-			// 
-			this.layoutControlItemAlignmentTitle.Control = this.labelControlImageAlignment;
-			this.layoutControlItemAlignmentTitle.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-			this.layoutControlItemAlignmentTitle.CustomizationFormText = "Title";
-			this.layoutControlItemAlignmentTitle.FillControlToClientArea = false;
-			this.layoutControlItemAlignmentTitle.Location = new System.Drawing.Point(0, 0);
-			this.layoutControlItemAlignmentTitle.Name = "layoutControlItemAlignmentTitle";
-			this.layoutControlItemAlignmentTitle.Size = new System.Drawing.Size(297, 20);
-			this.layoutControlItemAlignmentTitle.TextSize = new System.Drawing.Size(0, 0);
-			this.layoutControlItemAlignmentTitle.TextVisible = false;
-			this.layoutControlItemAlignmentTitle.TrimClientAreaToControl = false;
-			// 
-			// emptySpaceItem22
-			// 
-			this.emptySpaceItem22.AllowHotTrack = false;
-			this.emptySpaceItem22.Location = new System.Drawing.Point(0, 20);
-			this.emptySpaceItem22.MaxSize = new System.Drawing.Size(0, 10);
-			this.emptySpaceItem22.MinSize = new System.Drawing.Size(10, 10);
-			this.emptySpaceItem22.Name = "emptySpaceItem22";
-			this.emptySpaceItem22.Size = new System.Drawing.Size(297, 10);
-			this.emptySpaceItem22.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-			this.emptySpaceItem22.TextSize = new System.Drawing.Size(0, 0);
-			// 
-			// emptySpaceItem8
-			// 
-			this.emptySpaceItem8.AllowHotTrack = false;
-			this.emptySpaceItem8.Location = new System.Drawing.Point(585, 347);
-			this.emptySpaceItem8.Name = "emptySpaceItem8";
-			this.emptySpaceItem8.Size = new System.Drawing.Size(51, 98);
-			this.emptySpaceItem8.TextSize = new System.Drawing.Size(0, 0);
-			// 
-			// layoutControlItemVerticalAlignmentTop1
-			// 
-			this.layoutControlItemVerticalAlignmentTop1.Control = this.checkEditVerticalAlignmentTop1;
-			this.layoutControlItemVerticalAlignmentTop1.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-			this.layoutControlItemVerticalAlignmentTop1.CustomizationFormText = "Vertical Alignment Top 1";
-			this.layoutControlItemVerticalAlignmentTop1.Location = new System.Drawing.Point(636, 421);
-			this.layoutControlItemVerticalAlignmentTop1.Name = "layoutControlItemVerticalAlignmentTop1";
-			this.layoutControlItemVerticalAlignmentTop1.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-			this.layoutControlItemVerticalAlignmentTop1.Size = new System.Drawing.Size(297, 24);
-			this.layoutControlItemVerticalAlignmentTop1.TextSize = new System.Drawing.Size(0, 0);
-			this.layoutControlItemVerticalAlignmentTop1.TextVisible = false;
-			this.layoutControlItemVerticalAlignmentTop1.TrimClientAreaToControl = false;
-			// 
-			// emptySpaceItem15
-			// 
-			this.emptySpaceItem15.AllowHotTrack = false;
-			this.emptySpaceItem15.Location = new System.Drawing.Point(15, 445);
-			this.emptySpaceItem15.MaxSize = new System.Drawing.Size(0, 20);
-			this.emptySpaceItem15.MinSize = new System.Drawing.Size(10, 20);
-			this.emptySpaceItem15.Name = "emptySpaceItem15";
-			this.emptySpaceItem15.Size = new System.Drawing.Size(918, 20);
-			this.emptySpaceItem15.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-			this.emptySpaceItem15.TextSize = new System.Drawing.Size(0, 0);
 			// 
 			// emptySpaceItem19
 			// 
@@ -1928,6 +1465,533 @@
 			this.emptySpaceItem20.Size = new System.Drawing.Size(15, 465);
 			this.emptySpaceItem20.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
 			this.emptySpaceItem20.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// layoutControlGroupImageSettings
+			// 
+			this.layoutControlGroupImageSettings.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.emptySpaceItem23,
+            this.layoutControlGroupPadding,
+            this.emptySpaceItem8,
+            this.layoutControlGroupAlignment,
+            this.layoutControlItemVerticalAlignmentTop1,
+            this.emptySpaceItem16,
+            this.emptySpaceItem17,
+            this.emptySpaceItem7,
+            this.simpleLabelItemImageSettingsDescription});
+			this.layoutControlGroupImageSettings.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlGroupImageSettings.Name = "layoutControlGroupImageSettings";
+			this.layoutControlGroupImageSettings.Size = new System.Drawing.Size(948, 465);
+			this.layoutControlGroupImageSettings.Text = "Image";
+			// 
+			// emptySpaceItem23
+			// 
+			this.emptySpaceItem23.AllowHotTrack = false;
+			this.emptySpaceItem23.Location = new System.Drawing.Point(15, 252);
+			this.emptySpaceItem23.Name = "emptySpaceItem23";
+			this.emptySpaceItem23.Size = new System.Drawing.Size(933, 213);
+			this.emptySpaceItem23.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// layoutControlGroupPadding
+			// 
+			this.layoutControlGroupPadding.CustomizationFormText = "Padding";
+			this.layoutControlGroupPadding.GroupBordersVisible = false;
+			this.layoutControlGroupPadding.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlGroupPaddingTop,
+            this.layoutControlItemPaddingTitle,
+            this.emptySpaceItem21,
+            this.layoutControlGroupPaddingBottom,
+            this.layoutControlGroupPaddingLeft,
+            this.layoutControlGroupPaddingRight});
+			this.layoutControlGroupPadding.Location = new System.Drawing.Point(15, 56);
+			this.layoutControlGroupPadding.Name = "layoutControlGroupPadding";
+			this.layoutControlGroupPadding.Size = new System.Drawing.Size(387, 196);
+			this.layoutControlGroupPadding.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+			this.layoutControlGroupPadding.TextVisible = false;
+			// 
+			// layoutControlGroupPaddingTop
+			// 
+			this.layoutControlGroupPaddingTop.CustomizationFormText = "Padding Top";
+			this.layoutControlGroupPaddingTop.GroupBordersVisible = false;
+			this.layoutControlGroupPaddingTop.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItemPaddingTopTitle,
+            this.layoutControlItemPaddingTopNone,
+            this.layoutControlItemPaddingTop2,
+            this.layoutControlItemPaddingTop6,
+            this.layoutControlItemPaddingTop10});
+			this.layoutControlGroupPaddingTop.Location = new System.Drawing.Point(0, 40);
+			this.layoutControlGroupPaddingTop.Name = "layoutControlGroupPaddingTop";
+			this.layoutControlGroupPaddingTop.Size = new System.Drawing.Size(387, 24);
+			this.layoutControlGroupPaddingTop.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+			this.layoutControlGroupPaddingTop.TextVisible = false;
+			// 
+			// layoutControlItemPaddingTopTitle
+			// 
+			this.layoutControlItemPaddingTopTitle.Control = this.labelControlPaddingTop;
+			this.layoutControlItemPaddingTopTitle.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+			this.layoutControlItemPaddingTopTitle.CustomizationFormText = "Title";
+			this.layoutControlItemPaddingTopTitle.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlItemPaddingTopTitle.MinSize = new System.Drawing.Size(95, 20);
+			this.layoutControlItemPaddingTopTitle.Name = "layoutControlItemPaddingTopTitle";
+			this.layoutControlItemPaddingTopTitle.Size = new System.Drawing.Size(95, 24);
+			this.layoutControlItemPaddingTopTitle.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.layoutControlItemPaddingTopTitle.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemPaddingTopTitle.TextVisible = false;
+			this.layoutControlItemPaddingTopTitle.TrimClientAreaToControl = false;
+			// 
+			// layoutControlItemPaddingTopNone
+			// 
+			this.layoutControlItemPaddingTopNone.Control = this.checkEditPaddingTopNone;
+			this.layoutControlItemPaddingTopNone.CustomizationFormText = "None";
+			this.layoutControlItemPaddingTopNone.Location = new System.Drawing.Point(95, 0);
+			this.layoutControlItemPaddingTopNone.Name = "layoutControlItemPaddingTopNone";
+			this.layoutControlItemPaddingTopNone.Size = new System.Drawing.Size(79, 24);
+			this.layoutControlItemPaddingTopNone.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemPaddingTopNone.TextVisible = false;
+			// 
+			// layoutControlItemPaddingTop2
+			// 
+			this.layoutControlItemPaddingTop2.Control = this.checkEditPaddingTop2;
+			this.layoutControlItemPaddingTop2.CustomizationFormText = "2";
+			this.layoutControlItemPaddingTop2.Location = new System.Drawing.Point(174, 0);
+			this.layoutControlItemPaddingTop2.Name = "layoutControlItemPaddingTop2";
+			this.layoutControlItemPaddingTop2.Size = new System.Drawing.Size(58, 24);
+			this.layoutControlItemPaddingTop2.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemPaddingTop2.TextVisible = false;
+			// 
+			// layoutControlItemPaddingTop6
+			// 
+			this.layoutControlItemPaddingTop6.Control = this.checkEditPaddingTop6;
+			this.layoutControlItemPaddingTop6.CustomizationFormText = "6";
+			this.layoutControlItemPaddingTop6.Location = new System.Drawing.Point(232, 0);
+			this.layoutControlItemPaddingTop6.Name = "layoutControlItemPaddingTop6";
+			this.layoutControlItemPaddingTop6.Size = new System.Drawing.Size(58, 24);
+			this.layoutControlItemPaddingTop6.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemPaddingTop6.TextVisible = false;
+			// 
+			// layoutControlItemPaddingTop10
+			// 
+			this.layoutControlItemPaddingTop10.Control = this.checkEditPaddingTop10;
+			this.layoutControlItemPaddingTop10.CustomizationFormText = "10";
+			this.layoutControlItemPaddingTop10.Location = new System.Drawing.Point(290, 0);
+			this.layoutControlItemPaddingTop10.Name = "layoutControlItemPaddingTop10";
+			this.layoutControlItemPaddingTop10.Size = new System.Drawing.Size(97, 24);
+			this.layoutControlItemPaddingTop10.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemPaddingTop10.TextVisible = false;
+			// 
+			// layoutControlItemPaddingTitle
+			// 
+			this.layoutControlItemPaddingTitle.Control = this.labelControlPadding;
+			this.layoutControlItemPaddingTitle.CustomizationFormText = "Title";
+			this.layoutControlItemPaddingTitle.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlItemPaddingTitle.Name = "layoutControlItemPaddingTitle";
+			this.layoutControlItemPaddingTitle.Size = new System.Drawing.Size(387, 20);
+			this.layoutControlItemPaddingTitle.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemPaddingTitle.TextVisible = false;
+			this.layoutControlItemPaddingTitle.TrimClientAreaToControl = false;
+			// 
+			// emptySpaceItem21
+			// 
+			this.emptySpaceItem21.AllowHotTrack = false;
+			this.emptySpaceItem21.Location = new System.Drawing.Point(0, 20);
+			this.emptySpaceItem21.MaxSize = new System.Drawing.Size(0, 20);
+			this.emptySpaceItem21.MinSize = new System.Drawing.Size(10, 20);
+			this.emptySpaceItem21.Name = "emptySpaceItem21";
+			this.emptySpaceItem21.Size = new System.Drawing.Size(387, 20);
+			this.emptySpaceItem21.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem21.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// layoutControlGroupPaddingBottom
+			// 
+			this.layoutControlGroupPaddingBottom.CustomizationFormText = "Padding Bottom";
+			this.layoutControlGroupPaddingBottom.GroupBordersVisible = false;
+			this.layoutControlGroupPaddingBottom.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItemPaddingBottomTitle,
+            this.layoutControlItemPaddingBottomNone,
+            this.layoutControlItemPaddingBottom2,
+            this.layoutControlItemPaddingBottom6,
+            this.layoutControlItemPaddingBottom10,
+            this.emptySpaceItem18});
+			this.layoutControlGroupPaddingBottom.Location = new System.Drawing.Point(0, 64);
+			this.layoutControlGroupPaddingBottom.Name = "layoutControlGroupPaddingBottom";
+			this.layoutControlGroupPaddingBottom.Size = new System.Drawing.Size(387, 44);
+			this.layoutControlGroupPaddingBottom.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+			this.layoutControlGroupPaddingBottom.TextVisible = false;
+			// 
+			// layoutControlItemPaddingBottomTitle
+			// 
+			this.layoutControlItemPaddingBottomTitle.Control = this.labelControlPaddingBottom;
+			this.layoutControlItemPaddingBottomTitle.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+			this.layoutControlItemPaddingBottomTitle.CustomizationFormText = "Title";
+			this.layoutControlItemPaddingBottomTitle.Location = new System.Drawing.Point(0, 20);
+			this.layoutControlItemPaddingBottomTitle.MinSize = new System.Drawing.Size(95, 20);
+			this.layoutControlItemPaddingBottomTitle.Name = "layoutControlItemPaddingBottomTitle";
+			this.layoutControlItemPaddingBottomTitle.Size = new System.Drawing.Size(95, 24);
+			this.layoutControlItemPaddingBottomTitle.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.layoutControlItemPaddingBottomTitle.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemPaddingBottomTitle.TextVisible = false;
+			this.layoutControlItemPaddingBottomTitle.TrimClientAreaToControl = false;
+			// 
+			// layoutControlItemPaddingBottomNone
+			// 
+			this.layoutControlItemPaddingBottomNone.Control = this.checkEditPaddingBottomNone;
+			this.layoutControlItemPaddingBottomNone.CustomizationFormText = "None";
+			this.layoutControlItemPaddingBottomNone.Location = new System.Drawing.Point(95, 20);
+			this.layoutControlItemPaddingBottomNone.Name = "layoutControlItemPaddingBottomNone";
+			this.layoutControlItemPaddingBottomNone.Size = new System.Drawing.Size(78, 24);
+			this.layoutControlItemPaddingBottomNone.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemPaddingBottomNone.TextVisible = false;
+			// 
+			// layoutControlItemPaddingBottom2
+			// 
+			this.layoutControlItemPaddingBottom2.Control = this.checkEditPaddingBottom2;
+			this.layoutControlItemPaddingBottom2.CustomizationFormText = "2";
+			this.layoutControlItemPaddingBottom2.Location = new System.Drawing.Point(173, 20);
+			this.layoutControlItemPaddingBottom2.Name = "layoutControlItemPaddingBottom2";
+			this.layoutControlItemPaddingBottom2.Size = new System.Drawing.Size(59, 24);
+			this.layoutControlItemPaddingBottom2.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemPaddingBottom2.TextVisible = false;
+			// 
+			// layoutControlItemPaddingBottom6
+			// 
+			this.layoutControlItemPaddingBottom6.Control = this.checkEditPaddingBottom6;
+			this.layoutControlItemPaddingBottom6.CustomizationFormText = "6";
+			this.layoutControlItemPaddingBottom6.Location = new System.Drawing.Point(232, 20);
+			this.layoutControlItemPaddingBottom6.Name = "layoutControlItemPaddingBottom6";
+			this.layoutControlItemPaddingBottom6.Size = new System.Drawing.Size(57, 24);
+			this.layoutControlItemPaddingBottom6.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemPaddingBottom6.TextVisible = false;
+			// 
+			// layoutControlItemPaddingBottom10
+			// 
+			this.layoutControlItemPaddingBottom10.Control = this.checkEditPaddingBottom10;
+			this.layoutControlItemPaddingBottom10.CustomizationFormText = "10";
+			this.layoutControlItemPaddingBottom10.Location = new System.Drawing.Point(289, 20);
+			this.layoutControlItemPaddingBottom10.Name = "layoutControlItemPaddingBottom10";
+			this.layoutControlItemPaddingBottom10.Size = new System.Drawing.Size(98, 24);
+			this.layoutControlItemPaddingBottom10.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemPaddingBottom10.TextVisible = false;
+			// 
+			// emptySpaceItem18
+			// 
+			this.emptySpaceItem18.AllowHotTrack = false;
+			this.emptySpaceItem18.Location = new System.Drawing.Point(0, 0);
+			this.emptySpaceItem18.MaxSize = new System.Drawing.Size(0, 20);
+			this.emptySpaceItem18.MinSize = new System.Drawing.Size(10, 20);
+			this.emptySpaceItem18.Name = "emptySpaceItem18";
+			this.emptySpaceItem18.Size = new System.Drawing.Size(387, 20);
+			this.emptySpaceItem18.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem18.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// layoutControlGroupPaddingLeft
+			// 
+			this.layoutControlGroupPaddingLeft.CustomizationFormText = "Padding Left";
+			this.layoutControlGroupPaddingLeft.GroupBordersVisible = false;
+			this.layoutControlGroupPaddingLeft.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItemPaddingLeftTitle,
+            this.layoutControlItemPaddingLeftNone,
+            this.layoutControlItemPaddingLeft2,
+            this.layoutControlItemPaddingLeft6,
+            this.layoutControlItemPaddingLeft10,
+            this.emptySpaceItem24,
+            this.emptySpaceItem25});
+			this.layoutControlGroupPaddingLeft.Location = new System.Drawing.Point(0, 108);
+			this.layoutControlGroupPaddingLeft.Name = "layoutControlGroupPaddingLeft";
+			this.layoutControlGroupPaddingLeft.Size = new System.Drawing.Size(387, 64);
+			this.layoutControlGroupPaddingLeft.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+			this.layoutControlGroupPaddingLeft.TextVisible = false;
+			// 
+			// layoutControlItemPaddingLeftTitle
+			// 
+			this.layoutControlItemPaddingLeftTitle.Control = this.labelControlPaddingLeft;
+			this.layoutControlItemPaddingLeftTitle.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+			this.layoutControlItemPaddingLeftTitle.CustomizationFormText = "Title";
+			this.layoutControlItemPaddingLeftTitle.Location = new System.Drawing.Point(0, 20);
+			this.layoutControlItemPaddingLeftTitle.MinSize = new System.Drawing.Size(95, 20);
+			this.layoutControlItemPaddingLeftTitle.Name = "layoutControlItemPaddingLeftTitle";
+			this.layoutControlItemPaddingLeftTitle.Size = new System.Drawing.Size(95, 24);
+			this.layoutControlItemPaddingLeftTitle.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.layoutControlItemPaddingLeftTitle.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemPaddingLeftTitle.TextVisible = false;
+			this.layoutControlItemPaddingLeftTitle.TrimClientAreaToControl = false;
+			// 
+			// layoutControlItemPaddingLeftNone
+			// 
+			this.layoutControlItemPaddingLeftNone.Control = this.checkEditPaddingLeftNone;
+			this.layoutControlItemPaddingLeftNone.CustomizationFormText = "None";
+			this.layoutControlItemPaddingLeftNone.Location = new System.Drawing.Point(95, 20);
+			this.layoutControlItemPaddingLeftNone.Name = "layoutControlItemPaddingLeftNone";
+			this.layoutControlItemPaddingLeftNone.Size = new System.Drawing.Size(77, 24);
+			this.layoutControlItemPaddingLeftNone.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemPaddingLeftNone.TextVisible = false;
+			// 
+			// layoutControlItemPaddingLeft2
+			// 
+			this.layoutControlItemPaddingLeft2.Control = this.checkEditPaddingLeft2;
+			this.layoutControlItemPaddingLeft2.CustomizationFormText = "2";
+			this.layoutControlItemPaddingLeft2.Location = new System.Drawing.Point(172, 20);
+			this.layoutControlItemPaddingLeft2.Name = "layoutControlItemPaddingLeft2";
+			this.layoutControlItemPaddingLeft2.Size = new System.Drawing.Size(60, 24);
+			this.layoutControlItemPaddingLeft2.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemPaddingLeft2.TextVisible = false;
+			// 
+			// layoutControlItemPaddingLeft6
+			// 
+			this.layoutControlItemPaddingLeft6.Control = this.checkEditPaddingLeft6;
+			this.layoutControlItemPaddingLeft6.CustomizationFormText = "6";
+			this.layoutControlItemPaddingLeft6.Location = new System.Drawing.Point(232, 20);
+			this.layoutControlItemPaddingLeft6.Name = "layoutControlItemPaddingLeft6";
+			this.layoutControlItemPaddingLeft6.Size = new System.Drawing.Size(56, 24);
+			this.layoutControlItemPaddingLeft6.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemPaddingLeft6.TextVisible = false;
+			// 
+			// layoutControlItemPaddingLeft10
+			// 
+			this.layoutControlItemPaddingLeft10.Control = this.checkEditPaddingLeft10;
+			this.layoutControlItemPaddingLeft10.CustomizationFormText = "10";
+			this.layoutControlItemPaddingLeft10.Location = new System.Drawing.Point(288, 20);
+			this.layoutControlItemPaddingLeft10.Name = "layoutControlItemPaddingLeft10";
+			this.layoutControlItemPaddingLeft10.Size = new System.Drawing.Size(99, 24);
+			this.layoutControlItemPaddingLeft10.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemPaddingLeft10.TextVisible = false;
+			// 
+			// emptySpaceItem24
+			// 
+			this.emptySpaceItem24.AllowHotTrack = false;
+			this.emptySpaceItem24.Location = new System.Drawing.Point(0, 0);
+			this.emptySpaceItem24.MaxSize = new System.Drawing.Size(0, 20);
+			this.emptySpaceItem24.MinSize = new System.Drawing.Size(10, 20);
+			this.emptySpaceItem24.Name = "emptySpaceItem24";
+			this.emptySpaceItem24.Size = new System.Drawing.Size(387, 20);
+			this.emptySpaceItem24.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem24.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// emptySpaceItem25
+			// 
+			this.emptySpaceItem25.AllowHotTrack = false;
+			this.emptySpaceItem25.Location = new System.Drawing.Point(0, 44);
+			this.emptySpaceItem25.MaxSize = new System.Drawing.Size(0, 20);
+			this.emptySpaceItem25.MinSize = new System.Drawing.Size(10, 20);
+			this.emptySpaceItem25.Name = "emptySpaceItem25";
+			this.emptySpaceItem25.Size = new System.Drawing.Size(387, 20);
+			this.emptySpaceItem25.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem25.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// layoutControlGroupPaddingRight
+			// 
+			this.layoutControlGroupPaddingRight.CustomizationFormText = "PaddingRight";
+			this.layoutControlGroupPaddingRight.GroupBordersVisible = false;
+			this.layoutControlGroupPaddingRight.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItemPaddingRightTitle,
+            this.layoutControlItemPaddingRightNone,
+            this.layoutControlItemPaddingRight2,
+            this.layoutControlItemPaddingRight6,
+            this.layoutControlItemPaddingRight10});
+			this.layoutControlGroupPaddingRight.Location = new System.Drawing.Point(0, 172);
+			this.layoutControlGroupPaddingRight.Name = "layoutControlGroupPaddingRight";
+			this.layoutControlGroupPaddingRight.Size = new System.Drawing.Size(387, 24);
+			this.layoutControlGroupPaddingRight.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+			this.layoutControlGroupPaddingRight.TextVisible = false;
+			// 
+			// layoutControlItemPaddingRightTitle
+			// 
+			this.layoutControlItemPaddingRightTitle.Control = this.labelControlPaddingRight;
+			this.layoutControlItemPaddingRightTitle.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+			this.layoutControlItemPaddingRightTitle.CustomizationFormText = "Title";
+			this.layoutControlItemPaddingRightTitle.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlItemPaddingRightTitle.MinSize = new System.Drawing.Size(95, 20);
+			this.layoutControlItemPaddingRightTitle.Name = "layoutControlItemPaddingRightTitle";
+			this.layoutControlItemPaddingRightTitle.Size = new System.Drawing.Size(95, 24);
+			this.layoutControlItemPaddingRightTitle.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.layoutControlItemPaddingRightTitle.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemPaddingRightTitle.TextVisible = false;
+			this.layoutControlItemPaddingRightTitle.TrimClientAreaToControl = false;
+			// 
+			// layoutControlItemPaddingRightNone
+			// 
+			this.layoutControlItemPaddingRightNone.Control = this.checkEditPaddingRightNone;
+			this.layoutControlItemPaddingRightNone.CustomizationFormText = "None";
+			this.layoutControlItemPaddingRightNone.Location = new System.Drawing.Point(95, 0);
+			this.layoutControlItemPaddingRightNone.Name = "layoutControlItemPaddingRightNone";
+			this.layoutControlItemPaddingRightNone.Size = new System.Drawing.Size(76, 24);
+			this.layoutControlItemPaddingRightNone.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemPaddingRightNone.TextVisible = false;
+			// 
+			// layoutControlItemPaddingRight2
+			// 
+			this.layoutControlItemPaddingRight2.Control = this.checkEditPaddingRight2;
+			this.layoutControlItemPaddingRight2.CustomizationFormText = "2";
+			this.layoutControlItemPaddingRight2.Location = new System.Drawing.Point(171, 0);
+			this.layoutControlItemPaddingRight2.Name = "layoutControlItemPaddingRight2";
+			this.layoutControlItemPaddingRight2.Size = new System.Drawing.Size(60, 24);
+			this.layoutControlItemPaddingRight2.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemPaddingRight2.TextVisible = false;
+			// 
+			// layoutControlItemPaddingRight6
+			// 
+			this.layoutControlItemPaddingRight6.Control = this.checkEditPaddingRight6;
+			this.layoutControlItemPaddingRight6.CustomizationFormText = "6";
+			this.layoutControlItemPaddingRight6.Location = new System.Drawing.Point(231, 0);
+			this.layoutControlItemPaddingRight6.Name = "layoutControlItemPaddingRight6";
+			this.layoutControlItemPaddingRight6.Size = new System.Drawing.Size(58, 24);
+			this.layoutControlItemPaddingRight6.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemPaddingRight6.TextVisible = false;
+			// 
+			// layoutControlItemPaddingRight10
+			// 
+			this.layoutControlItemPaddingRight10.Control = this.checkEditPaddingRight10;
+			this.layoutControlItemPaddingRight10.CustomizationFormText = "10";
+			this.layoutControlItemPaddingRight10.Location = new System.Drawing.Point(289, 0);
+			this.layoutControlItemPaddingRight10.Name = "layoutControlItemPaddingRight10";
+			this.layoutControlItemPaddingRight10.Size = new System.Drawing.Size(98, 24);
+			this.layoutControlItemPaddingRight10.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemPaddingRight10.TextVisible = false;
+			// 
+			// emptySpaceItem8
+			// 
+			this.emptySpaceItem8.AllowHotTrack = false;
+			this.emptySpaceItem8.Location = new System.Drawing.Point(402, 56);
+			this.emptySpaceItem8.Name = "emptySpaceItem8";
+			this.emptySpaceItem8.Size = new System.Drawing.Size(147, 196);
+			this.emptySpaceItem8.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// layoutControlGroupAlignment
+			// 
+			this.layoutControlGroupAlignment.CustomizationFormText = "Alignment";
+			this.layoutControlGroupAlignment.GroupBordersVisible = false;
+			this.layoutControlGroupAlignment.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItemAlignmentLeft,
+            this.layoutControlItemAlignmentCenter,
+            this.layoutControlItemAlignmentRight,
+            this.layoutControlItemAlignmentTitle,
+            this.emptySpaceItem22,
+            this.emptySpaceItem26});
+			this.layoutControlGroupAlignment.Location = new System.Drawing.Point(549, 56);
+			this.layoutControlGroupAlignment.Name = "layoutControlGroupAlignment";
+			this.layoutControlGroupAlignment.Size = new System.Drawing.Size(399, 104);
+			this.layoutControlGroupAlignment.TextVisible = false;
+			// 
+			// layoutControlItemAlignmentLeft
+			// 
+			this.layoutControlItemAlignmentLeft.Control = this.checkEditHorizontalAlignmentLeft;
+			this.layoutControlItemAlignmentLeft.CustomizationFormText = "Left";
+			this.layoutControlItemAlignmentLeft.Location = new System.Drawing.Point(0, 40);
+			this.layoutControlItemAlignmentLeft.Name = "layoutControlItemAlignmentLeft";
+			this.layoutControlItemAlignmentLeft.Size = new System.Drawing.Size(107, 24);
+			this.layoutControlItemAlignmentLeft.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemAlignmentLeft.TextVisible = false;
+			// 
+			// layoutControlItemAlignmentCenter
+			// 
+			this.layoutControlItemAlignmentCenter.Control = this.checkEditHorizontalAlignmentCenter;
+			this.layoutControlItemAlignmentCenter.CustomizationFormText = "Center";
+			this.layoutControlItemAlignmentCenter.Location = new System.Drawing.Point(107, 40);
+			this.layoutControlItemAlignmentCenter.Name = "layoutControlItemAlignmentCenter";
+			this.layoutControlItemAlignmentCenter.Size = new System.Drawing.Size(116, 24);
+			this.layoutControlItemAlignmentCenter.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemAlignmentCenter.TextVisible = false;
+			// 
+			// layoutControlItemAlignmentRight
+			// 
+			this.layoutControlItemAlignmentRight.Control = this.checkEditHorizontalAlignmentRight;
+			this.layoutControlItemAlignmentRight.CustomizationFormText = "Right";
+			this.layoutControlItemAlignmentRight.Location = new System.Drawing.Point(223, 40);
+			this.layoutControlItemAlignmentRight.Name = "layoutControlItemAlignmentRight";
+			this.layoutControlItemAlignmentRight.Size = new System.Drawing.Size(176, 24);
+			this.layoutControlItemAlignmentRight.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemAlignmentRight.TextVisible = false;
+			// 
+			// layoutControlItemAlignmentTitle
+			// 
+			this.layoutControlItemAlignmentTitle.Control = this.labelControlImageAlignment;
+			this.layoutControlItemAlignmentTitle.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+			this.layoutControlItemAlignmentTitle.CustomizationFormText = "Title";
+			this.layoutControlItemAlignmentTitle.FillControlToClientArea = false;
+			this.layoutControlItemAlignmentTitle.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlItemAlignmentTitle.Name = "layoutControlItemAlignmentTitle";
+			this.layoutControlItemAlignmentTitle.Size = new System.Drawing.Size(399, 20);
+			this.layoutControlItemAlignmentTitle.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemAlignmentTitle.TextVisible = false;
+			this.layoutControlItemAlignmentTitle.TrimClientAreaToControl = false;
+			// 
+			// emptySpaceItem22
+			// 
+			this.emptySpaceItem22.AllowHotTrack = false;
+			this.emptySpaceItem22.Location = new System.Drawing.Point(0, 20);
+			this.emptySpaceItem22.MaxSize = new System.Drawing.Size(0, 20);
+			this.emptySpaceItem22.MinSize = new System.Drawing.Size(10, 20);
+			this.emptySpaceItem22.Name = "emptySpaceItem22";
+			this.emptySpaceItem22.Size = new System.Drawing.Size(399, 20);
+			this.emptySpaceItem22.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem22.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// emptySpaceItem26
+			// 
+			this.emptySpaceItem26.AllowHotTrack = false;
+			this.emptySpaceItem26.Location = new System.Drawing.Point(0, 64);
+			this.emptySpaceItem26.MaxSize = new System.Drawing.Size(0, 40);
+			this.emptySpaceItem26.MinSize = new System.Drawing.Size(10, 40);
+			this.emptySpaceItem26.Name = "emptySpaceItem26";
+			this.emptySpaceItem26.Size = new System.Drawing.Size(399, 40);
+			this.emptySpaceItem26.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem26.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// layoutControlItemVerticalAlignmentTop1
+			// 
+			this.layoutControlItemVerticalAlignmentTop1.Control = this.checkEditVerticalAlignmentTop1;
+			this.layoutControlItemVerticalAlignmentTop1.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+			this.layoutControlItemVerticalAlignmentTop1.CustomizationFormText = "Vertical Alignment Top 1";
+			this.layoutControlItemVerticalAlignmentTop1.Location = new System.Drawing.Point(549, 160);
+			this.layoutControlItemVerticalAlignmentTop1.Name = "layoutControlItemVerticalAlignmentTop1";
+			this.layoutControlItemVerticalAlignmentTop1.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+			this.layoutControlItemVerticalAlignmentTop1.Size = new System.Drawing.Size(399, 20);
+			this.layoutControlItemVerticalAlignmentTop1.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemVerticalAlignmentTop1.TextVisible = false;
+			this.layoutControlItemVerticalAlignmentTop1.TrimClientAreaToControl = false;
+			// 
+			// emptySpaceItem16
+			// 
+			this.emptySpaceItem16.AllowHotTrack = false;
+			this.emptySpaceItem16.Location = new System.Drawing.Point(15, 36);
+			this.emptySpaceItem16.MaxSize = new System.Drawing.Size(0, 20);
+			this.emptySpaceItem16.MinSize = new System.Drawing.Size(10, 20);
+			this.emptySpaceItem16.Name = "emptySpaceItem16";
+			this.emptySpaceItem16.Size = new System.Drawing.Size(933, 20);
+			this.emptySpaceItem16.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem16.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// emptySpaceItem17
+			// 
+			this.emptySpaceItem17.AllowHotTrack = false;
+			this.emptySpaceItem17.Location = new System.Drawing.Point(0, 0);
+			this.emptySpaceItem17.MaxSize = new System.Drawing.Size(15, 0);
+			this.emptySpaceItem17.MinSize = new System.Drawing.Size(15, 10);
+			this.emptySpaceItem17.Name = "emptySpaceItem17";
+			this.emptySpaceItem17.Size = new System.Drawing.Size(15, 465);
+			this.emptySpaceItem17.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem17.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// emptySpaceItem7
+			// 
+			this.emptySpaceItem7.AllowHotTrack = false;
+			this.emptySpaceItem7.Location = new System.Drawing.Point(549, 180);
+			this.emptySpaceItem7.Name = "emptySpaceItem7";
+			this.emptySpaceItem7.Size = new System.Drawing.Size(399, 72);
+			this.emptySpaceItem7.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// simpleLabelItemImageSettingsDescription
+			// 
+			this.simpleLabelItemImageSettingsDescription.AllowHotTrack = false;
+			this.simpleLabelItemImageSettingsDescription.AllowHtmlStringInCaption = true;
+			this.simpleLabelItemImageSettingsDescription.AppearanceItemCaption.Options.UseTextOptions = true;
+			this.simpleLabelItemImageSettingsDescription.AppearanceItemCaption.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.None;
+			this.simpleLabelItemImageSettingsDescription.Location = new System.Drawing.Point(15, 0);
+			this.simpleLabelItemImageSettingsDescription.MaxSize = new System.Drawing.Size(0, 36);
+			this.simpleLabelItemImageSettingsDescription.MinSize = new System.Drawing.Size(136, 36);
+			this.simpleLabelItemImageSettingsDescription.Name = "simpleLabelItemImageSettingsDescription";
+			this.simpleLabelItemImageSettingsDescription.Size = new System.Drawing.Size(933, 36);
+			this.simpleLabelItemImageSettingsDescription.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.simpleLabelItemImageSettingsDescription.Text = "<size=+2>Image Padding & Alignment Settings</size>";
+			this.simpleLabelItemImageSettingsDescription.TextSize = new System.Drawing.Size(255, 18);
 			// 
 			// layoutControlGroupTextSettings
 			// 
@@ -1953,7 +2017,7 @@
 			this.layoutControlGroupTextSettings.Location = new System.Drawing.Point(0, 0);
 			this.layoutControlGroupTextSettings.Name = "layoutControlGroupTextSettings";
 			this.layoutControlGroupTextSettings.Size = new System.Drawing.Size(948, 465);
-			this.layoutControlGroupTextSettings.Text = "Show Text";
+			this.layoutControlGroupTextSettings.Text = "Text";
 			// 
 			// layoutControlItemTextDescription
 			// 
@@ -2069,7 +2133,7 @@
 			this.layoutControlItemTextWordWrap.Enabled = false;
 			this.layoutControlItemTextWordWrap.Location = new System.Drawing.Point(15, 421);
 			this.layoutControlItemTextWordWrap.Name = "layoutControlItemTextWordWrap";
-			this.layoutControlItemTextWordWrap.Size = new System.Drawing.Size(260, 24);
+			this.layoutControlItemTextWordWrap.Size = new System.Drawing.Size(254, 24);
 			this.layoutControlItemTextWordWrap.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutControlItemTextWordWrap.TextVisible = false;
 			// 
@@ -2077,10 +2141,10 @@
 			// 
 			this.layoutControlItemVerticalAlignmentTop2.Control = this.checkEditVerticalAlignmentTop2;
 			this.layoutControlItemVerticalAlignmentTop2.CustomizationFormText = "Vertical Alignment Top 2";
-			this.layoutControlItemVerticalAlignmentTop2.Location = new System.Drawing.Point(275, 421);
+			this.layoutControlItemVerticalAlignmentTop2.Location = new System.Drawing.Point(269, 421);
 			this.layoutControlItemVerticalAlignmentTop2.Name = "layoutControlItemVerticalAlignmentTop2";
 			this.layoutControlItemVerticalAlignmentTop2.Padding = new DevExpress.XtraLayout.Utils.Padding(20, 2, 2, 2);
-			this.layoutControlItemVerticalAlignmentTop2.Size = new System.Drawing.Size(354, 24);
+			this.layoutControlItemVerticalAlignmentTop2.Size = new System.Drawing.Size(346, 24);
 			this.layoutControlItemVerticalAlignmentTop2.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutControlItemVerticalAlignmentTop2.TextVisible = false;
 			// 
@@ -2088,10 +2152,10 @@
 			// 
 			this.layoutControlItemSaveAsTemplate.Control = this.checkEditSaveAsTemplate;
 			this.layoutControlItemSaveAsTemplate.CustomizationFormText = "SaveAsTemplate";
-			this.layoutControlItemSaveAsTemplate.Location = new System.Drawing.Point(629, 421);
+			this.layoutControlItemSaveAsTemplate.Location = new System.Drawing.Point(615, 421);
 			this.layoutControlItemSaveAsTemplate.Name = "layoutControlItemSaveAsTemplate";
 			this.layoutControlItemSaveAsTemplate.Padding = new DevExpress.XtraLayout.Utils.Padding(20, 2, 2, 2);
-			this.layoutControlItemSaveAsTemplate.Size = new System.Drawing.Size(304, 24);
+			this.layoutControlItemSaveAsTemplate.Size = new System.Drawing.Size(318, 24);
 			this.layoutControlItemSaveAsTemplate.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutControlItemSaveAsTemplate.TextVisible = false;
 			// 
@@ -2130,7 +2194,7 @@
 			this.layoutControlItemTextFontTitle.FillControlToClientArea = false;
 			this.layoutControlItemTextFontTitle.Location = new System.Drawing.Point(0, 0);
 			this.layoutControlItemTextFontTitle.Name = "layoutControlItemTextFontTitle";
-			this.layoutControlItemTextFontTitle.Size = new System.Drawing.Size(466, 20);
+			this.layoutControlItemTextFontTitle.Size = new System.Drawing.Size(456, 20);
 			this.layoutControlItemTextFontTitle.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutControlItemTextFontTitle.TextVisible = false;
 			this.layoutControlItemTextFontTitle.TrimClientAreaToControl = false;
@@ -2143,7 +2207,7 @@
 			this.layoutControlItemTextFontEditor.FillControlToClientArea = false;
 			this.layoutControlItemTextFontEditor.Location = new System.Drawing.Point(0, 20);
 			this.layoutControlItemTextFontEditor.Name = "layoutControlItemTextFontEditor";
-			this.layoutControlItemTextFontEditor.Size = new System.Drawing.Size(378, 26);
+			this.layoutControlItemTextFontEditor.Size = new System.Drawing.Size(370, 26);
 			this.layoutControlItemTextFontEditor.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutControlItemTextFontEditor.TextVisible = false;
 			this.layoutControlItemTextFontEditor.TrimClientAreaToControl = false;
@@ -2154,9 +2218,9 @@
 			this.layoutControlItemTextColorTitle.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
 			this.layoutControlItemTextColorTitle.CustomizationFormText = "Text Color Title";
 			this.layoutControlItemTextColorTitle.FillControlToClientArea = false;
-			this.layoutControlItemTextColorTitle.Location = new System.Drawing.Point(466, 0);
+			this.layoutControlItemTextColorTitle.Location = new System.Drawing.Point(456, 0);
 			this.layoutControlItemTextColorTitle.Name = "layoutControlItemTextColorTitle";
-			this.layoutControlItemTextColorTitle.Size = new System.Drawing.Size(452, 20);
+			this.layoutControlItemTextColorTitle.Size = new System.Drawing.Size(462, 20);
 			this.layoutControlItemTextColorTitle.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutControlItemTextColorTitle.TextVisible = false;
 			this.layoutControlItemTextColorTitle.TrimClientAreaToControl = false;
@@ -2167,9 +2231,9 @@
 			this.layoutControlItemTextColorEditor.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
 			this.layoutControlItemTextColorEditor.CustomizationFormText = "Text Color Editor";
 			this.layoutControlItemTextColorEditor.FillControlToClientArea = false;
-			this.layoutControlItemTextColorEditor.Location = new System.Drawing.Point(466, 20);
+			this.layoutControlItemTextColorEditor.Location = new System.Drawing.Point(456, 20);
 			this.layoutControlItemTextColorEditor.Name = "layoutControlItemTextColorEditor";
-			this.layoutControlItemTextColorEditor.Size = new System.Drawing.Size(157, 26);
+			this.layoutControlItemTextColorEditor.Size = new System.Drawing.Size(153, 26);
 			this.layoutControlItemTextColorEditor.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutControlItemTextColorEditor.TextVisible = false;
 			this.layoutControlItemTextColorEditor.TrimClientAreaToControl = false;
@@ -2177,17 +2241,17 @@
 			// emptySpaceItem10
 			// 
 			this.emptySpaceItem10.AllowHotTrack = false;
-			this.emptySpaceItem10.Location = new System.Drawing.Point(378, 20);
+			this.emptySpaceItem10.Location = new System.Drawing.Point(370, 20);
 			this.emptySpaceItem10.Name = "emptySpaceItem10";
-			this.emptySpaceItem10.Size = new System.Drawing.Size(88, 26);
+			this.emptySpaceItem10.Size = new System.Drawing.Size(86, 26);
 			this.emptySpaceItem10.TextSize = new System.Drawing.Size(0, 0);
 			// 
 			// emptySpaceItem12
 			// 
 			this.emptySpaceItem12.AllowHotTrack = false;
-			this.emptySpaceItem12.Location = new System.Drawing.Point(623, 20);
+			this.emptySpaceItem12.Location = new System.Drawing.Point(609, 20);
 			this.emptySpaceItem12.Name = "emptySpaceItem12";
-			this.emptySpaceItem12.Size = new System.Drawing.Size(295, 26);
+			this.emptySpaceItem12.Size = new System.Drawing.Size(309, 26);
 			this.emptySpaceItem12.TextSize = new System.Drawing.Size(0, 0);
 			// 
 			// emptySpaceItem11
@@ -2391,49 +2455,53 @@
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemColorizeToggle)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemColorizeEditor)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemGalleryContent)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem19)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem20)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupImageSettings)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem23)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupPadding)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupPaddingLeft)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingLeftTitle)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingLeftNone)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingLeft2)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingLeft6)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingLeft10)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem16)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem7)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupPaddingTop)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingTopTitle)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingTopNone)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingTop2)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingTop6)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingTop10)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupPaddingRight)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingRightTitle)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingRightNone)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingRight2)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingRight6)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingRight10)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem17)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingTitle)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem21)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupPaddingBottom)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingBottomTitle)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingBottomNone)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingBottom2)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingBottom6)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingBottom10)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingTitle)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem21)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem9)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem18)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupPaddingLeft)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingLeftTitle)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingLeftNone)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingLeft2)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingLeft6)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingLeft10)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem24)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem25)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupPaddingRight)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingRightTitle)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingRightNone)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingRight2)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingRight6)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPaddingRight10)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem8)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupAlignment)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemAlignmentLeft)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemAlignmentCenter)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemAlignmentRight)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem18)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemAlignmentTitle)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem22)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem8)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem26)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemVerticalAlignmentTop1)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem15)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem19)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem20)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem16)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem17)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem7)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemImageSettingsDescription)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupTextSettings)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemTextDescription)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemTextEditor)).EndInit();
@@ -2556,7 +2624,6 @@
 		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemPaddingLeft2;
 		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemPaddingLeft6;
 		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemPaddingLeft10;
-		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem7;
 		private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroupPaddingTop;
 		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemPaddingTopTitle;
 		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemPaddingTopNone;
@@ -2575,7 +2642,6 @@
 		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemPaddingBottom2;
 		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemPaddingBottom6;
 		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemPaddingBottom10;
-		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem9;
 		private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroupAlignment;
 		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemAlignmentTitle;
 		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemAlignmentLeft;
@@ -2603,15 +2669,21 @@
 		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem11;
 		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem10;
 		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem12;
-		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem16;
-		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem17;
 		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem21;
-		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem18;
 		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem22;
-		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem15;
 		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem19;
 		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem20;
 		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem13;
 		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem14;
+		private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroupImageSettings;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem23;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem18;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem24;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem25;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem26;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem16;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem17;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem7;
+		private DevExpress.XtraLayout.SimpleLabelItem simpleLabelItemImageSettingsDescription;
 	}
 }

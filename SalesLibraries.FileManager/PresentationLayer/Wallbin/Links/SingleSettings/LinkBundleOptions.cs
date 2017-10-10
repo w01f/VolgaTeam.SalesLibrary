@@ -17,7 +17,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.Notes, LinkSettingsType.AdminSettings };
 		public int Order => 6;
-		public bool AvailableForEmbedded => true;
 		public SettingsEditorHeaderInfo HeaderInfo => null;
 
 		public event EventHandler<EventArgs> ForceCloseRequested;
@@ -28,7 +27,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			Text = "Admin";
 		}
 
-		public LinkBundleOptions(FileTypes? defaultLinkType = null) : this() { }
+		public LinkBundleOptions(LinkType? defaultLinkType = null) : this() { }
 
 		public void LoadData(BaseLibraryLink sourceLink)
 		{

@@ -19,7 +19,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.Notes };
 		public int Order => 2;
-		public bool AvailableForEmbedded => false;
 		public SettingsEditorHeaderInfo HeaderInfo => null;
 
 		public event EventHandler<EventArgs> ForceCloseRequested;
@@ -33,7 +32,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			buttonEditLinkSpecialFont.Click += EditorHelper.FontEdit_Click;
 		}
 
-		public LinkTextOptions(FileTypes? defaultLinkType = null) : this() { }
+		public LinkTextOptions(LinkType? defaultLinkType = null) : this() { }
 
 		public void LoadData(BaseLibraryLink sourceLink)
 		{

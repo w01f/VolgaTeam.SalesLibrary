@@ -114,12 +114,12 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 
 		private void barButtonItemFolderPropertiesLinkAdminSetingsExcel_ItemClick(object sender, ItemClickEventArgs e)
 		{
-			EditAllLinksInFolderSettings(LinkSettingsType.AdminSettings, FileTypes.Excel);
+			EditAllLinksInFolderSettings(LinkSettingsType.AdminSettings, LinkType.Excel);
 		}
 
 		private void barButtonItemFolderPropertiesLinkAdminSetingsPdf_ItemClick(object sender, ItemClickEventArgs e)
 		{
-			EditAllLinksInFolderSettings(LinkSettingsType.AdminSettings, FileTypes.Pdf);
+			EditAllLinksInFolderSettings(LinkSettingsType.AdminSettings, LinkType.Pdf);
 		}
 
 		private void barButtonItemFolderPropertiesMultiLinksResetSettings_ItemClick(object sender, ItemClickEventArgs e)

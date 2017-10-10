@@ -36,7 +36,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		public VideoLink()
 		{
-			Type = FileTypes.Video;
+			Type = LinkType.Video;
 		}
 
 		public IList<string> GetThumbnailSourceFiles()

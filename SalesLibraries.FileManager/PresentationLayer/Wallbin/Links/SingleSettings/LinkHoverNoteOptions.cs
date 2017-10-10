@@ -18,7 +18,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.Notes };
 		public int Order => 1;
-		public bool AvailableForEmbedded => false;
 		public SettingsEditorHeaderInfo HeaderInfo => null;
 
 		public event EventHandler<EventArgs> ForceCloseRequested;
@@ -35,7 +34,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			layoutControlGroupControls.Enabled = false;
 		}
 
-		public LinkHoverNoteOptions(FileTypes? defaultLinkType = null) : this() { }
+		public LinkHoverNoteOptions(LinkType? defaultLinkType = null) : this() { }
 
 		public void LoadData(BaseLibraryLink sourceLink)
 		{

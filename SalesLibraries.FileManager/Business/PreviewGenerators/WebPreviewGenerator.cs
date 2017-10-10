@@ -12,6 +12,7 @@ using SalesLibraries.FileManager.Controllers;
 namespace SalesLibraries.FileManager.Business.PreviewGenerators
 {
 	[IntendForClass(typeof(WebLinkPreviewContainer))]
+	[IntendForClass(typeof(QuickSitePreviewContainer))]
 	class WebPreviewGenerator : IPreviewGenerator
 	{
 		public void Generate(BasePreviewContainer previewContainer, CancellationToken cancellationToken)

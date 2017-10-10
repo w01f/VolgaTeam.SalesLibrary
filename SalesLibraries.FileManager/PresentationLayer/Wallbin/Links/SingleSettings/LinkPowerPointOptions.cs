@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.IO;
 using System.Windows.Forms;
 using DevExpress.Skins;
 using DevExpress.XtraLayout.Utils;
@@ -23,7 +22,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.Notes, LinkSettingsType.AdminSettings };
 		public int Order => 6;
-		public bool AvailableForEmbedded => true;
 		public SettingsEditorHeaderInfo HeaderInfo => null;
 
 		public event EventHandler<EventArgs> ForceCloseRequested;
@@ -41,7 +39,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			layoutControlItemOpenQV.MaxSize = RectangleHelper.ScaleSize(layoutControlItemOpenQV.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
-		public LinkPowerPointOptions(FileTypes? defaultLinkType = null) : this() { }
+		public LinkPowerPointOptions(LinkType? defaultLinkType = null) : this() { }
 
 		public void LoadData(BaseLibraryLink sourceLink)
 		{
@@ -50,8 +48,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			checkEditDoNotGeneratePreview.Checked = !((DocumentLinkSettings)_data.Settings).GeneratePreviewImages;
 			checkEditDoNotGenerateText.Checked = !((DocumentLinkSettings)_data.Settings).GenerateContentText;
 
-			if (MainController.Instance.Settings.EnableLocalSync &&
-				Directory.Exists(((PowerPointLinkSettings)_data.Settings).ContainerPath))
+			if (MainController.Instance.Settings.EnableLocalSync)
 			{
 				layoutControlItemOpenQV.Visibility = LayoutVisibility.Always;
 				buttonXOpenQV.Text = String.Format("!QV Folder ({0})", ((PowerPointLinkSettings)_data.Settings).Id.ToString("D"));
@@ -59,14 +56,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			else
 				layoutControlItemOpenQV.Visibility = LayoutVisibility.Never;
 
-
-			if (Directory.Exists(_data.PreviewContainerPath))
-			{
-				layoutControlItemOpenWV.Visibility = LayoutVisibility.Always;
-				buttonXOpenWV.Text = String.Format("!WV Folder ({0})", _data.PreviewContainerName);
-			}
-			else
-				layoutControlItemOpenWV.Visibility = LayoutVisibility.Never;
+			buttonXOpenWV.Text = String.Format("!WV Folder ({0})", _data.PreviewContainerName);
 		}
 
 		public void SaveData()
@@ -82,11 +72,14 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			MainController.Instance.ProcessManager.Run("Updating Preview files...", (cancelationToken, formProgess) =>
 			{
 				((PowerPointLinkSettings)_data.Settings).ClearQuickViewContent();
-				using (var powerPointProcessor = new PowerPointHidden())
+				if (MainController.Instance.Settings.EnableLocalSync)
 				{
-					if (!powerPointProcessor.Connect(true)) return;
-					((PowerPointLinkSettings)_data.Settings).UpdateQuickViewContent(powerPointProcessor);
-					((PowerPointLinkSettings)_data.Settings).UpdatePresentationInfo(powerPointProcessor);
+					using (var powerPointProcessor = new PowerPointHidden())
+					{
+						if (!powerPointProcessor.Connect(true)) return;
+						((PowerPointLinkSettings) _data.Settings).UpdateQuickViewContent(powerPointProcessor);
+						((PowerPointLinkSettings) _data.Settings).UpdatePresentationInfo(powerPointProcessor);
+					}
 				}
 
 				_data.ClearPreviewContainer();

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using DevExpress.Skins;
@@ -25,14 +24,13 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 	{
 		private readonly List<DocumentLink> _sourceLinks = new List<DocumentLink>();
 		private readonly ILinksGroup _linksGroup;
-		private readonly FileTypes? _defaultLinkType;
+		private readonly LinkType? _defaultLinkType;
 
 		private DocumentLink DefaultLink => _sourceLinks.First();
 
 		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.Notes, LinkSettingsType.AdminSettings };
 		public int Order => 6;
-		public bool AvailableForEmbedded => true;
-		public SettingsEditorHeaderInfo HeaderInfo => new SettingsEditorHeaderInfo { Title = String.Format("<size=+4>{0} Settings</size>", _defaultLinkType == FileTypes.Pdf ? "PDF" : "Document") };
+		public SettingsEditorHeaderInfo HeaderInfo => new SettingsEditorHeaderInfo { Title = String.Format("<size=+4>{0} Settings</size>", _defaultLinkType == LinkType.Pdf ? "PDF" : "Document") };
 
 		public event EventHandler<EventArgs> ForceCloseRequested;
 
@@ -47,12 +45,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			layoutControlItemOpenWV.MaxSize = RectangleHelper.ScaleSize(layoutControlItemOpenWV.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
-		public LinkDocumentOptions(FileTypes? defaultLinkType = null) : this()
+		public LinkDocumentOptions(LinkType? defaultLinkType = null) : this()
 		{
 			_defaultLinkType = defaultLinkType;
 		}
 
-		public LinkDocumentOptions(ILinksGroup linksGroup, FileTypes? defaultLinkType = null) : this()
+		public LinkDocumentOptions(ILinksGroup linksGroup, LinkType? defaultLinkType = null) : this()
 		{
 			_linksGroup = linksGroup;
 			_defaultLinkType = defaultLinkType;
@@ -123,7 +121,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				checkEditSaveAsTemplate.Checked = false;
 			}
 
-			if (_sourceLinks.Count == 1 && Directory.Exists(_sourceLinks.First().PreviewContainerPath))
+			if (_sourceLinks.Count == 1)
 			{
 				layoutControlItemOpenWV.Visibility = LayoutVisibility.Always;
 				buttonXOpenWV.Text = String.Format("!WV Folder ({0})", _sourceLinks.First().PreviewContainerName);

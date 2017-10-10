@@ -105,7 +105,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.EmailBin
 						Application.DoEvents();
 						switch (item.Type)
 						{
-							case FileTypes.PowerPoint:
+							case LinkType.PowerPoint:
 								var pdfFileName = Path.Combine(RemoteResourceManager.Instance.TempFolder.LocalPath, Path.GetFileNameWithoutExtension(item.FullPath) + ".pdf");
 								if (powerPointProcessor.ExportPresentationAsPdf(item.FullPath, pdfFileName))
 								{

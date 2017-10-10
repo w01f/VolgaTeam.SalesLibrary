@@ -19,6 +19,7 @@ using SalesLibraries.FileManager.Business.Synchronization;
 using SalesLibraries.FileManager.PresentationLayer.Sync;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettings;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings;
+using SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings.ResetLinks;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Views;
 using SalesLibraries.FileManager.Properties;
 
@@ -490,8 +491,8 @@ namespace SalesLibraries.FileManager.Controllers
 
 		private void buttonItemSettingsAdvanced_Click(object sender, EventArgs e)
 		{
-			var library = MainController.Instance.WallbinViews.ActiveWallbin.DataStorage.Library;
-			using (var form = new FormResetLibraryContent(library.Path))
+			MainController.Instance.ProcessChanges();
+			using (var form = new FormResetLibraryLinks())
 			{
 				form.ShowDialog(MainController.Instance.MainForm);
 			}

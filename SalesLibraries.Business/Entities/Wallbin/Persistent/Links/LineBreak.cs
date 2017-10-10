@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Drawing;
 using Newtonsoft.Json;
@@ -52,12 +53,19 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		public LineBreak()
 		{
-			Type = FileTypes.LineBreak;
+			Type = LinkType.LineBreak;
 		}
 
 		public override string ToString()
 		{
 			return "Line Break";
+		}
+
+		public override void ResetToDefault(IList<LinkSettingsGroupType> groupsForReset = null)
+		{
+			if (groupsForReset == null || groupsForReset.Contains(LinkSettingsGroupType.TextNote))
+				Name = null;
+			base.ResetToDefault(groupsForReset);
 		}
 
 		public static LineBreak Create(LibraryFolder parentFolder)

@@ -42,11 +42,11 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		{
 			if (!useUniversalSettings)
 			{
-				SettingsTemplates.RemoveAll(st => st.SettingsType == settingsType && st.FileType == templateLink.Type);
+				SettingsTemplates.RemoveAll(st => st.SettingsType == settingsType && st.LinkType == templateLink.Type);
 				return;
 			}
 
-			if (!SettingsTemplates.Any(st => st.SettingsType == settingsType && st.FileType == templateLink.Type))
+			if (!SettingsTemplates.Any(st => st.SettingsType == settingsType && st.LinkType == templateLink.Type))
 				SettingsTemplates.Add(LinkFileSettingsTemplate.Create(settingsType, templateLink.Type));
 
 			foreach (var targetLink in ParentFolder.AllLinks.Where(l => l.Type == templateLink.Type && l != templateLink).ToList())
@@ -59,7 +59,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 			{
 				if (templateLink == null)
 					templateLink = ParentFolder.AllLinks
-						.FirstOrDefault(link => link.Type == template.FileType &&
+						.FirstOrDefault(link => link.Type == template.LinkType &&
 						targetLinks.All(tl => tl != link));
 
 				if (templateLink == null) continue;

@@ -19,7 +19,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 	{
 		private readonly BaseLibraryLink _sourceLink;
 		private readonly ILinksGroup _sourceLinkGroup;
-		private readonly FileTypes? _defaultLinkType;
+		private readonly LinkType? _defaultLinkType;
 
 		public LinkSettingsType[] EditableSettings => new[]
 		{
@@ -61,7 +61,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			panelFilesContainer.Visible = false;
 		}
 
-		public FormEditLinkSettingsRegular(ILinksGroup linkGroup, FileTypes? defaultLinkType = null) : this()
+		public FormEditLinkSettingsRegular(ILinksGroup linkGroup, LinkType? defaultLinkType = null) : this()
 		{
 			_sourceLinkGroup = linkGroup;
 			_sourceLink = _sourceLinkGroup.AllGroupLinks

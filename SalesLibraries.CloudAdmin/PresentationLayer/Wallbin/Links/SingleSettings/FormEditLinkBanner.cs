@@ -91,7 +91,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			labelControlTitle.Text = String.Format(ImageTitleFormat, BannerTitle, String.Empty);
 		}
 
-		public FormEditLinkBanner(ILinksGroup linkGroup, FileTypes? defaultLinkType = null) : this()
+		public FormEditLinkBanner(ILinksGroup linkGroup, LinkType? defaultLinkType = null) : this()
 		{
 			_sourceLinkGroup = linkGroup;
 			_sourceLink = _sourceLinkGroup.AllGroupLinks

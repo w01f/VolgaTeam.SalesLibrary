@@ -5,7 +5,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkGroupSettin
 	public class LinkGroupSettingsTemplate
 	{
 		public LinkSettingsGroupType SettingsType { get; set; }
-		public FileTypes? LinkType { get; set; }
+		public LinkType? LinkType { get; set; }
 		public string TemplateEncoded { get; set; }
 
 		public void GetSettings()

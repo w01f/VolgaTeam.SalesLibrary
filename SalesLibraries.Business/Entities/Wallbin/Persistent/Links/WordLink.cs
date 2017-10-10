@@ -15,7 +15,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		public WordLink()
 		{
-			Type = FileTypes.Word;
+			Type = LinkType.Word;
 		}
 	}
 }

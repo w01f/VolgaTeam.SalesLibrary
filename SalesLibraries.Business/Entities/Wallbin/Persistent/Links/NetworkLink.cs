@@ -45,7 +45,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		public NetworkLink()
 		{
-			Type = FileTypes.Network;
+			Type = LinkType.Network;
 		}
 
 		public static NetworkLink Create(LanLinkInfo linkInfo, LibraryFolder parentFolder)

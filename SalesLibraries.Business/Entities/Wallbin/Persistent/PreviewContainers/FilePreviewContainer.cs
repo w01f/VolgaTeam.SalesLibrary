@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.IO;
 using System.Linq;
@@ -22,6 +23,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 
 		[NotMapped, JsonIgnore]
 		public override string SourcePath => Path.Combine(Library.Path, RelativePath);
+
+		[NotMapped, JsonIgnore]
+		public string SourceSubType => !String.IsNullOrEmpty(SourcePath) && File.Exists(SourcePath) ? Path.GetExtension(SourcePath).Replace(".", String.Empty).ToLower() : null;
 		#endregion
 
 		protected override void UpdateState(IList<IPreviewableLink> associatedLinks)

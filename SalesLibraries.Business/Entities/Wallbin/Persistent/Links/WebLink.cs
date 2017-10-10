@@ -29,7 +29,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		public WebLink()
 		{
-			Type = FileTypes.Url;
+			Type = LinkType.Url;
 		}
 
 		public static WebLink Create(UrlLinkInfo linkInfo, LibraryFolder parentFolder)

@@ -50,7 +50,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 				barSubItemFolderPropertiesFolderCopy,
 				barSubItemFolderPropertiesFolderMove);
 			_folderClipboardManager.FolderMoved += OnFolderMoved;
-			
+
 			InitFolderLinksContextMenuEditors();
 			InitSingleLinkContextMenuEditors();
 			InitMultiLinksContextMenuEditors();
@@ -123,8 +123,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 			row.Selected = true;
 			_outsideChangesInProgress = oldOutsideChangesInProgress;
 
-			if (DataSource.Links.Count<=1)
-			OnGridSelectionChanged(grFiles, EventArgs.Empty);
+			if (DataSource.Links.Count <= 1)
+				OnGridSelectionChanged(grFiles, EventArgs.Empty);
 		}
 
 		private void OnSelectionChanged(object sender, SelectionEventArgs e)
@@ -210,6 +210,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 		{
 			if (e.ColumnIndex != 0) return;
 			var linkRow = (LinkRow)grFiles.Rows[e.RowIndex];
+			if (linkRow.Source.Parent == null) return;
 			base.OnGridCellPainting(sender, e);
 			if (DataSource.Links.Any() &&
 				(IsSourceLinksDragged || IsLinkRowDragged || IsLinkBundleDragged || IsNativeFilesDragged))

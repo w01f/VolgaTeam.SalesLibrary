@@ -28,7 +28,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 
 		private bool _allowHandleEvents;
 		private readonly ILinksGroup _linkGroup;
-		private readonly FileTypes? _defaultLinkType;
+		private readonly LinkType? _defaultLinkType;
 		private readonly List<BaseLibraryLink> _selectedLinks = new List<BaseLibraryLink>();
 
 		public LinkSettingsType[] EditableSettings => new[]
@@ -69,7 +69,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			Width = 950;
 		}
 
-		public FormEditLinkTags(ILinksGroup linkGroup, FileTypes? defaultLinkType = null) : this()
+		public FormEditLinkTags(ILinksGroup linkGroup, LinkType? defaultLinkType = null) : this()
 		{
 			_linkGroup = linkGroup;
 			_defaultLinkType = defaultLinkType;
@@ -97,7 +97,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 
 					LoadData();
 				};
-				linksTreeSelector.LoadData(_linkGroup, _defaultLinkType, new[] { FileTypes.LineBreak });
+				linksTreeSelector.LoadData(_linkGroup, _defaultLinkType, new[] { LinkType.LineBreak });
 			}
 			else
 				LoadData();

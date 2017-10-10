@@ -16,7 +16,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.Notes, LinkSettingsType.AdminSettings };
 		public int Order => 6;
-		public bool AvailableForEmbedded => true;
 		public SettingsEditorHeaderInfo HeaderInfo => new SettingsEditorHeaderInfo { Title = "<size=+4>LAN</size>", Logo = Resources.LinkAddNetwork };
 
 		public event EventHandler<EventArgs> ForceCloseRequested;
@@ -27,7 +26,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			Text = "Admin";
 		}
 
-		public LinkLanOptions(FileTypes? defaultLinkType = null) : this() { }
+		public LinkLanOptions(LinkType? defaultLinkType = null) : this() { }
 
 		public void LoadData(BaseLibraryLink sourceLink)
 		{

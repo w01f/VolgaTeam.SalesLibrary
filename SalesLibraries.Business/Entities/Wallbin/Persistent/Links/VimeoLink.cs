@@ -29,7 +29,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		public VimeoLink()
 		{
-			Type = FileTypes.Vimeo;
+			Type = LinkType.Vimeo;
 		}
 
 		public static VimeoLink Create(VimeoLinkInfo linkInfo, LibraryFolder parentFolder)

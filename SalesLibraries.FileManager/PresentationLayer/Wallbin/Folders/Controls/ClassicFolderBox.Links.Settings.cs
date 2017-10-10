@@ -18,7 +18,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 			LinkSettingsType.AdminSettings,
 		};
 
-		public void EditSingleLinkSettings(LinkSettingsType settingsType, FileTypes? defaultLinkType = null)
+		public void EditSingleLinkSettings(LinkSettingsType settingsType, LinkType? defaultLinkType = null)
 		{
 			var selectedRow = SelectedLinkRow;
 			if (selectedRow == null) return;
@@ -31,7 +31,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 			}
 		}
 
-		public void EditLinksGroupSettings(ILinksGroup linkGroup, LinkSettingsType settingsType, FileTypes? defaultLinkType = null)
+		public void EditLinksGroupSettings(ILinksGroup linkGroup, LinkSettingsType settingsType, LinkType? defaultLinkType = null)
 		{
 			if (SettingsEditorFactory.Run(linkGroup, settingsType, defaultLinkType) == DialogResult.OK)
 			{
@@ -40,7 +40,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 			}
 		}
 
-		public void EditAllLinksInFolderSettings(LinkSettingsType settingsType, FileTypes? defaultLinkType = null)
+		public void EditAllLinksInFolderSettings(LinkSettingsType settingsType, LinkType? defaultLinkType = null)
 		{
 			EditLinksGroupSettings(DataSource, settingsType, defaultLinkType);
 		}

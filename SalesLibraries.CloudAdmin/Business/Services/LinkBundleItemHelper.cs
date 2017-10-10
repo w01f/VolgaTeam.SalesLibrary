@@ -17,43 +17,43 @@ namespace SalesLibraries.CloudAdmin.Business.Services
 						break;
 					switch (((LibraryLinkItem)target).TargetLink.Type)
 					{
-						case FileTypes.PowerPoint:
+						case LinkType.PowerPoint:
 							target.Image = MainController.Instance.Lists.LinkBundleImages.DefaultPowerPointLogo.ExistsLocal()
 								? Image.FromFile(MainController.Instance.Lists.LinkBundleImages.DefaultPowerPointLogo.LocalPath)
 								: null;
 							break;
-						case FileTypes.Word:
+						case LinkType.Word:
 							target.Image = MainController.Instance.Lists.LinkBundleImages.DefaultWordLogo.ExistsLocal()
 								? Image.FromFile(MainController.Instance.Lists.LinkBundleImages.DefaultWordLogo.LocalPath)
 								: null;
 							break;
-						case FileTypes.Excel:
+						case LinkType.Excel:
 							target.Image = MainController.Instance.Lists.LinkBundleImages.DefaultExcelLogo.ExistsLocal()
 								? Image.FromFile(MainController.Instance.Lists.LinkBundleImages.DefaultExcelLogo.LocalPath)
 								: null;
 							break;
-						case FileTypes.Pdf:
+						case LinkType.Pdf:
 							target.Image = MainController.Instance.Lists.LinkBundleImages.DefaultPdfLogo.ExistsLocal()
 								? Image.FromFile(MainController.Instance.Lists.LinkBundleImages.DefaultPdfLogo.LocalPath)
 								: null;
 							break;
-						case FileTypes.Video:
+						case LinkType.Video:
 							target.Image = MainController.Instance.Lists.LinkBundleImages.DefaultVideoLogo.ExistsLocal()
 								? Image.FromFile(MainController.Instance.Lists.LinkBundleImages.DefaultVideoLogo.LocalPath)
 								: null;
 							break;
-						case FileTypes.Url:
-						case FileTypes.Html5:
-						case FileTypes.YouTube:
-						case FileTypes.Vimeo:
-						case FileTypes.InternalLink:
-						case FileTypes.AppLink:
-						case FileTypes.QPageLink:
+						case LinkType.Url:
+						case LinkType.Html5:
+						case LinkType.YouTube:
+						case LinkType.Vimeo:
+						case LinkType.InternalLink:
+						case LinkType.AppLink:
+						case LinkType.QPageLink:
 							target.Image = MainController.Instance.Lists.LinkBundleImages.DefaultUrlLogo.ExistsLocal()
 								? Image.FromFile(MainController.Instance.Lists.LinkBundleImages.DefaultUrlLogo.LocalPath)
 								: null;
 							break;
-						case FileTypes.Other:
+						case LinkType.Other:
 							target.Image = MainController.Instance.Lists.LinkBundleImages.DefaultImageLogo.ExistsLocal() &&
 									(FileFormatHelper.IsPngFile(((LibraryLinkItem)target).TargetLink.FullPath) ||
 									FileFormatHelper.IsJpegFile(((LibraryLinkItem)target).TargetLink.FullPath))

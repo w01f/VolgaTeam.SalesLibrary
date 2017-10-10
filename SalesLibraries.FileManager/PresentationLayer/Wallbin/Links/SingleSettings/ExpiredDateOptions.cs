@@ -21,7 +21,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.ExpirationDate };
 		public int Order => 0;
-		public bool AvailableForEmbedded => false;
 		public SettingsEditorHeaderInfo HeaderInfo => null;
 
 		public event EventHandler<EventArgs> ForceCloseRequested;
@@ -33,9 +32,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			dateEditExpirationDate.Properties.NullDate = DateTime.MinValue;
 		}
 
-		public ExpiredDateOptions(FileTypes? defaultLinkType = null) : this() { }
+		public ExpiredDateOptions(LinkType? defaultLinkType = null) : this() { }
 
-		public ExpiredDateOptions(ILinksGroup linksGroup, FileTypes? defaultLinkType = null) : this() { }
+		public ExpiredDateOptions(ILinksGroup linksGroup, LinkType? defaultLinkType = null) : this() { }
 
 		public void LoadData(BaseLibraryLink sourceLink)
 		{

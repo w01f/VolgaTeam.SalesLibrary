@@ -58,6 +58,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			spinEditImageSize.EnableSelectAll();
 			spinEditImagePadding.EnableSelectAll();
 
+			layoutControlGroupGallery.Enabled = false;
+			layoutControlGroupTextSettings.Enabled = false;
 			layoutControlGroupTextFont.Enabled = false;
 			layoutControlGroupTextColor.Enabled = false;
 			layoutControlGroupTextPosition.Enabled = false;
@@ -84,10 +86,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			layoutControlItemCancel.MaxSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
-		public FormEditLinkThumbnail(BaseLibraryLink sourceLink, FileTypes? defaultLinkType = null) : this()
+		public FormEditLinkThumbnail(BaseLibraryLink sourceLink) : this()
 		{
 			_sourceLink = sourceLink as IThumbnailSettingsHolder;
 		}
+
+		public FormEditLinkThumbnail(ILinksGroup linkGroup, LinkType? defaultLinkType = null) : this() { }
 
 		public void InitForm<TEditControl>(LinkSettingsType settingsType) where TEditControl : ILinkSettingsEditControl
 		{
@@ -408,6 +412,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		{
 			var button = (ButtonX)sender;
 			if (!button.Checked) return;
+			layoutControlGroupGallery.Enabled = buttonXEnable.Checked;
 			layoutControlGroupTextSettings.Enabled = buttonXEnable.Checked;
 			layoutControlItemPreviewImage.Enabled = buttonXEnable.Checked && imageListView.SelectedItems.Any();
 			if (buttonXEnable.Checked && !imageListView.Items.Any())
@@ -537,6 +542,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		private void OnTabControlSettingsSelectedPageChanged(object sender, LayoutTabPageChangedEventArgs e)
 		{
 			layoutControlItemPreviewImage.Visibility = tabbedControlSettings.SelectedTabPage == layoutControlGroupGallery ? LayoutVisibility.Always : LayoutVisibility.Never;
+		}
+
+		private void OnTabControlSettingsSelectedPageChanging(object sender, LayoutTabPageChangingEventArgs e)
+		{
+			e.Cancel = !buttonXEnable.Checked;
 		}
 	}
 }

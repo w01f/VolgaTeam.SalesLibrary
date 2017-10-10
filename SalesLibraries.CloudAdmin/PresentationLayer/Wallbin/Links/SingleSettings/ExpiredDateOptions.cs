@@ -41,7 +41,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			}
 		}
 
-		public ExpiredDateOptions(ILinksGroup linksGroup, FileTypes? defaultLinkType = null) : this() { }
+		public ExpiredDateOptions(ILinksGroup linksGroup, LinkType? defaultLinkType = null) : this() { }
 
 		public void LoadData(BaseLibraryLink sourceLink)
 		{

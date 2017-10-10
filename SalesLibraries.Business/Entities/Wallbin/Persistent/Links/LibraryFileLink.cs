@@ -9,6 +9,8 @@ using Newtonsoft.Json;
 using SalesLibraries.Business.Entities.Common;
 using SalesLibraries.Business.Entities.Helpers;
 using SalesLibraries.Business.Entities.Interfaces;
+using SalesLibraries.Business.Entities.Wallbin.Common.Constants;
+using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 
@@ -55,6 +57,80 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		{
 			get { return _settings ?? (_settings = SettingsContainer.CreateInstance<LibraryFileLinkSettings>(this, SettingsEncoded)); }
 			set { _settings = value as LibraryFileLinkSettings; }
+		}
+
+		[NotMapped, JsonIgnore]
+		public override LinkFileType SubType
+		{
+			get
+			{
+				var subTypeKey = Extension.Replace(".", String.Empty).ToLower();
+				switch (subTypeKey)
+				{
+					case FileTypes.Ppt:
+						return LinkFileType.Ppt;
+					case FileTypes.Pptx:
+						return LinkFileType.Pptx;
+					case FileTypes.Pps:
+						return LinkFileType.Pps;
+					case FileTypes.Pdf:
+						return LinkFileType.Pdf;
+					case FileTypes.Doc:
+						return LinkFileType.Doc;
+					case FileTypes.Docx:
+						return LinkFileType.Docx;
+					case FileTypes.Xls:
+						return LinkFileType.Xls;
+					case FileTypes.Xlsx:
+						return LinkFileType.Xlsx;
+					case FileTypes.Txt:
+						return LinkFileType.Txt;
+					case FileTypes.Jpg:
+						return LinkFileType.Jpg;
+					case FileTypes.Jpeg:
+						return LinkFileType.Jpeg;
+					case FileTypes.Png:
+						return LinkFileType.Png;
+					case FileTypes.Svg:
+						return LinkFileType.Svg;
+					case FileTypes.Mp4:
+						return LinkFileType.Mp4;
+					case FileTypes.M4v:
+						return LinkFileType.M4v;
+					case FileTypes.Mov:
+						return LinkFileType.Mov;
+					case FileTypes.Wmv:
+						return LinkFileType.Wmv;
+					case FileTypes.Key:
+						return LinkFileType.Key;
+					case FileTypes.Mp3:
+						return LinkFileType.Mp3;
+					case FileTypes.Xml:
+						return LinkFileType.Xml;
+					case FileTypes.Eps:
+						return LinkFileType.Eps;
+					case FileTypes.Ait:
+						return LinkFileType.Ait;
+					case FileTypes.Ai:
+						return LinkFileType.Ai;
+					case FileTypes.Psd:
+						return LinkFileType.Psd;
+					case FileTypes.Pdd:
+						return LinkFileType.Pdd;
+					case FileTypes.Aep:
+						return LinkFileType.Aep;
+					case FileTypes.Aet:
+						return LinkFileType.Aet;
+					case FileTypes.Zip:
+						return LinkFileType.Zip;
+					case FileTypes.SevenZip:
+						return LinkFileType.SevenZip;
+					case FileTypes.Rar:
+						return LinkFileType.Rar;
+					default:
+						return LinkFileType.Other;
+				}
+			}
 		}
 
 		[NotMapped, JsonIgnore]

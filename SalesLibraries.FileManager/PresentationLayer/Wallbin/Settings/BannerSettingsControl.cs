@@ -59,6 +59,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 				});
 
 			layoutControlGroupGallery.Enabled = false;
+			layoutControlGroupImageSettings.Enabled = false;
 			layoutControlGroupTextSettings.Enabled = false;
 			layoutControlGroupTextFont.Enabled = false;
 
@@ -404,8 +405,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 		{
 			var button = (ButtonX)sender;
 			if (!button.Checked) return;
-			layoutControlGroupGallery.Enabled = 
-			layoutControlGroupTextSettings.Enabled =  buttonXEnable.Checked;
+			layoutControlGroupGallery.Enabled =
+			layoutControlGroupImageSettings.Enabled =
+			layoutControlGroupTextSettings.Enabled = buttonXEnable.Checked;
 			if (_allowHandleEvents)
 			{
 				_allowHandleEvents = false;
@@ -536,6 +538,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			if (labelControlTitle.Appearance.Image == null) return;
 			var favoritesContainer = xtraTabControlGallery.TabPages.OfType<FavoritesImagesContainer>().FirstOrDefault();
 			((FavoriteImageGroup)favoritesContainer?.ParentImageGroup)?.AddImage<Banner>(labelControlTitle.Appearance.Image, String.Format("{0}_{1}", _originalImageName, colorEditInversionColor.Color.ToHex()));
+		}
+
+		private void OnTabControlSettingsSelectedPageChanging(object sender, DevExpress.XtraLayout.LayoutTabPageChangingEventArgs e)
+		{
+			e.Cancel = !buttonXEnable.Checked;
 		}
 	}
 }

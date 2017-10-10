@@ -93,17 +93,20 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.CompactWallbin
 		{
 			MainController.Instance.ProcessManager.Run("Updating Preview files...", (cancelationToken, formProgess) =>
 			{
-				var powerPointLinks = links.OfType<PowerPointLink>().ToList();
-				if (powerPointLinks.Any())
+				if (MainController.Instance.Settings.EnableLocalSync)
 				{
-					using (var powerPointProcessor = new PowerPointHidden())
+					var powerPointLinks = links.OfType<PowerPointLink>().ToList();
+					if (powerPointLinks.Any())
 					{
-						if (!powerPointProcessor.Connect(true)) return;
-						foreach (var powerPointLink in powerPointLinks)
+						using (var powerPointProcessor = new PowerPointHidden())
 						{
-							((PowerPointLinkSettings)powerPointLink.Settings).ClearQuickViewContent();
-							((PowerPointLinkSettings)powerPointLink.Settings).UpdateQuickViewContent(powerPointProcessor);
-							((PowerPointLinkSettings)powerPointLink.Settings).UpdatePresentationInfo(powerPointProcessor);
+							if (!powerPointProcessor.Connect(true)) return;
+							foreach (var powerPointLink in powerPointLinks)
+							{
+								((PowerPointLinkSettings) powerPointLink.Settings).ClearQuickViewContent();
+								((PowerPointLinkSettings) powerPointLink.Settings).UpdateQuickViewContent(powerPointProcessor);
+								((PowerPointLinkSettings) powerPointLink.Settings).UpdatePresentationInfo(powerPointProcessor);
+							}
 						}
 					}
 				}
@@ -119,7 +122,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.CompactWallbin
 		}
 
 
-		private void EditSingleLinkSettings(TreeListNode targetLinkNode, LinkSettingsType settingsType, FileTypes? defaultLinkType = null)
+		private void EditSingleLinkSettings(TreeListNode targetLinkNode, LinkSettingsType settingsType, LinkType? defaultLinkType = null)
 		{
 			var sourceLink = (targetLinkNode?.Tag as WallbinItem)?.Source as BaseLibraryLink;
 			if (sourceLink == null) return;

@@ -182,20 +182,22 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 					: BarItemVisibility.Never;
 				barSubItemSingleLinkPropertiesFolderLinkSettings.Visibility = !linkRow.Inaccessable &&
 																		 linkRow.Source is LibraryFolderLink &&
-																		 ((LibraryFolderLink)linkRow.Source).AllLinks.Any(l => l.Type == FileTypes.Excel || l.Type == FileTypes.Pdf)
+																		 ((LibraryFolderLink)linkRow.Source).AllLinks.Any(l => l.Type == LinkType.Excel || l.Type == LinkType.Pdf)
 					? BarItemVisibility.Always
 					: BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesFolderLinkPdfSettings.Enabled = !linkRow.Inaccessable &&
 																				 linkRow.Source is LibraryFolderLink &&
 																				 ((LibraryFolderLink)linkRow.Source).AllLinks.Any(
-																					 l => l.Type == FileTypes.Pdf);
+																					 l => l.Type == LinkType.Pdf);
 				barButtonItemSingleLinkPropertiesFolderLinkExcelSettings.Enabled = !linkRow.Inaccessable &&
 																				 linkRow.Source is LibraryFolderLink &&
 																				 ((LibraryFolderLink)linkRow.Source).AllLinks.Any(
-																					 l => l.Type == FileTypes.Excel);
-				barButtonItemSingleLinkPropertiesRefreshPreview.Visibility = !linkRow.Inaccessable && linkRow.Source is IPreviewableLink
-					? BarItemVisibility.Always
-					: BarItemVisibility.Never;
+																					 l => l.Type == LinkType.Excel);
+				barButtonItemSingleLinkPropertiesRefreshPreview.Visibility =
+					!linkRow.Inaccessable &&
+						(linkRow.Source is IPreviewableLink || (linkRow.Source is LibraryFolderLink && ((LibraryFolderLink)linkRow.Source).AllLinks.OfType<PreviewableFileLink>().Any()))
+						? BarItemVisibility.Always
+						: BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesTags.Visibility = !linkRow.Inaccessable &&
 															 MainController.Instance.Settings.EditorSettings.EnableTagsEdit
 					? BarItemVisibility.Always
@@ -276,11 +278,23 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 
 		private void barButtonItemLinkPropertiesRefreshPreview_ItemClick(object sender, ItemClickEventArgs e)
 		{
-			var sourceLink = SelectedLinkRow?.Source as IPreviewableLink;
-			if (sourceLink == null) return;
-			if (MainController.Instance.PopupMessages.ShowWarningQuestion(String.Format("Are you sure you want to refresh the server files for:{1}{0}?", sourceLink.PreviewName, Environment.NewLine)) != DialogResult.Yes) return;
-			RefreshPreviewFiles(new[] { sourceLink });
-			MainController.Instance.PopupMessages.ShowInfo(String.Format("{0}{1}Is now updated for the server!", sourceLink.PreviewName, Environment.NewLine));
+			var sourceLinks = new List<IPreviewableLink>();
+			var linkTitle = String.Empty;
+			if (SelectedLinkRow?.Source is IPreviewableLink)
+			{
+				linkTitle = ((IPreviewableLink)SelectedLinkRow?.Source).PreviewName;
+				sourceLinks.Add((IPreviewableLink)SelectedLinkRow?.Source);
+			}
+			else if (SelectedLinkRow?.Source is LibraryFolderLink)
+			{
+				linkTitle = SelectedLinkRow?.Source.LinkInfoDisplayName;
+				sourceLinks.AddRange(((LibraryFolderLink)SelectedLinkRow?.Source).AllLinks.OfType<PreviewableFileLink>());
+			}
+
+			if (!sourceLinks.Any()) return;
+			if (MainController.Instance.PopupMessages.ShowWarningQuestion(String.Format("Are you sure you want to refresh the server files for:{1}{0}?", linkTitle, Environment.NewLine)) != DialogResult.Yes) return;
+			RefreshPreviewFiles(sourceLinks);
+			MainController.Instance.PopupMessages.ShowInfo(String.Format("{0}{1}Is now updated for the server!", linkTitle, Environment.NewLine));
 		}
 
 		private void barButtonItemLinkPropertiesEditImageSettings_ItemClick(object sender, ItemClickEventArgs e)
@@ -370,21 +384,21 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 
 		private void barButtonItemSingleLinkPropertiesFolderLinkPdfSettings_ItemClick(object sender, ItemClickEventArgs e)
 		{
-			EditSingleLinkSettings(LinkSettingsType.AdminSettings, FileTypes.Pdf);
+			EditSingleLinkSettings(LinkSettingsType.AdminSettings, LinkType.Pdf);
 		}
 
 		private void barButtonItemSingleLinkPropertiesFolderLinkExcelSettings_ItemClick(object sender, ItemClickEventArgs e)
 		{
-			EditSingleLinkSettings(LinkSettingsType.AdminSettings, FileTypes.Excel);
+			EditSingleLinkSettings(LinkSettingsType.AdminSettings, LinkType.Excel);
 		}
 
 		private void barButtonItemSingleLinkPropertiesAdminSettings_ItemClick(object sender, ItemClickEventArgs e)
 		{
 			var sourceLink = SelectedLinkRow?.Source as IPreviewableLink;
 			if (sourceLink is PdfLink)
-				EditSingleLinkSettings(LinkSettingsType.AdminSettings, FileTypes.Pdf);
+				EditSingleLinkSettings(LinkSettingsType.AdminSettings, LinkType.Pdf);
 			else if (sourceLink is ExcelLink)
-				EditSingleLinkSettings(LinkSettingsType.AdminSettings, FileTypes.Excel);
+				EditSingleLinkSettings(LinkSettingsType.AdminSettings, LinkType.Excel);
 		}
 	}
 }

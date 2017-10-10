@@ -17,7 +17,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.Notes };
 		public int Order => 0;
-		public bool AvailableForEmbedded => false;
 		public SettingsEditorHeaderInfo HeaderInfo => new SettingsEditorHeaderInfo { Title = "<size=+4>Line Break Settings</size>" };
 
 		public event EventHandler<EventArgs> ForceCloseRequested;
@@ -32,7 +31,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			buttonEditLineBreakFont.Click += EditorHelper.FontEdit_Click;
 		}
 
-		public LineBreakOptions(FileTypes? defaultLinkType = null) : this() { }
+		public LineBreakOptions(LinkType? defaultLinkType = null) : this() { }
 
 		public void LoadData(BaseLibraryLink sourceLink)
 		{

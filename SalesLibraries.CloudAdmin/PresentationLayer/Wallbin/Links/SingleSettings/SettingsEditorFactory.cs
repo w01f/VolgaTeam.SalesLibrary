@@ -41,7 +41,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			return dilogResult;
 		}
 
-		public static DialogResult Run(ILinksGroup linksGroup, LinkSettingsType settingsType, FileTypes? defaultLinkType = null)
+		public static DialogResult Run(ILinksGroup linksGroup, LinkSettingsType settingsType, LinkType? defaultLinkType = null)
 		{
 			var dilogResult = DialogResult.Cancel;
 

@@ -12,7 +12,7 @@ namespace SalesLibraries.Business.Entities.Helpers
 		public static TSettings GetSettingsTemplate< TSettings>(
 			this ILinkGroupSettingsContainer container,
 			LinkSettingsGroupType settingsType,
-			FileTypes? linkType)
+			LinkType? linkType)
 			where TSettings : BaseLinkSettings
 		{
 			var template = container.LinkSettingsTemplates.FirstOrDefault(t => t.SettingsType == settingsType && t.LinkType == linkType);
@@ -26,7 +26,7 @@ namespace SalesLibraries.Business.Entities.Helpers
 		public static void SaveSettingsTemplate<TSettings>(
 			this ILinkGroupSettingsContainer container,
 			LinkSettingsGroupType settingsType,
-			FileTypes? linkType,
+			LinkType? linkType,
 			TSettings settings)
 			where TSettings : BaseLinkSettings
 		{

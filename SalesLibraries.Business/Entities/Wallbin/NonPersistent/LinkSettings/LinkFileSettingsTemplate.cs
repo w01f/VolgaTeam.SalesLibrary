@@ -5,11 +5,11 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 	public class LinkFileSettingsTemplate
 	{
 		public LinkSettingsType SettingsType { get; set; }
-		public FileTypes FileType { get; set; }
+		public LinkType LinkType { get; set; }
 
-		public static LinkFileSettingsTemplate Create(LinkSettingsType settingsType, FileTypes fileType)
+		public static LinkFileSettingsTemplate Create(LinkSettingsType settingsType, LinkType linkType)
 		{
-			return new LinkFileSettingsTemplate { SettingsType = settingsType, FileType = fileType };
+			return new LinkFileSettingsTemplate { SettingsType = settingsType, LinkType = linkType };
 		}
 	}
 }

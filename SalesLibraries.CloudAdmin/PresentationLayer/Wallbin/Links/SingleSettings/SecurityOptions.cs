@@ -99,7 +99,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			}
 		}
 
-		public SecurityOptions(ILinksGroup linksGroup, FileTypes? defaultLinkType = null) : this() { }
+		public SecurityOptions(ILinksGroup linksGroup, LinkType? defaultLinkType = null) : this() { }
 
 		public void LoadData(BaseLibraryLink sourceLink)
 		{

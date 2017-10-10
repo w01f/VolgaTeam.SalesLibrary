@@ -37,7 +37,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		public LinkBundleLink()
 		{
-			Type = FileTypes.LinkBundle;
+			Type = LinkType.LinkBundle;
 		}
 
 		public override string ToString()

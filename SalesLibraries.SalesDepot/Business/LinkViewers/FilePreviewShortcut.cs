@@ -14,17 +14,17 @@ namespace SalesLibraries.SalesDepot.Business.LinkViewers
 			{
 				switch (SourceFileLink.Type)
 				{
-					case FileTypes.PowerPoint:
+					case LinkType.PowerPoint:
 						return Properties.Resources.FolderContentPptx;
-					case FileTypes.Excel:
+					case LinkType.Excel:
 						return Properties.Resources.FolderContentXlsx;
-					case FileTypes.Folder:
+					case LinkType.Folder:
 						return Properties.Resources.FolderContentFolder;
-					case FileTypes.Video:
+					case LinkType.Video:
 						return Properties.Resources.FolderContentVideo;
-					case FileTypes.Pdf:
+					case LinkType.Pdf:
 						return Properties.Resources.FolderContentPdf;
-					case FileTypes.Word:
+					case LinkType.Word:
 						return Properties.Resources.FolderContentDocx;
 				}
 				return null;

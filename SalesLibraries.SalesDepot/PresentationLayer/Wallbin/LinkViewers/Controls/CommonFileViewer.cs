@@ -29,7 +29,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Contro
 
 			switch (Link.Type)
 			{
-				case FileTypes.PowerPoint:
+				case LinkType.PowerPoint:
 					laMessage.Text = "Double-Click PowerPoint files to preview";
 					break;
 				default:
@@ -45,23 +45,23 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Contro
 		{
 			switch (Link.Type)
 			{
-				case FileTypes.Other:
+				case LinkType.Other:
 					LinkManager.OpenCopyOfFile((LibraryFileLink)Link);
 					break;
-				case FileTypes.Folder:
+				case LinkType.Folder:
 					LinkManager.OpenFolderLink((LibraryFolderLink)Link);
 					break;
-				case FileTypes.Url:
-				case FileTypes.YouTube:
-				case FileTypes.Html5:
-				case FileTypes.QPageLink:
-				case FileTypes.Vimeo:
+				case LinkType.Url:
+				case LinkType.YouTube:
+				case LinkType.Html5:
+				case LinkType.QPageLink:
+				case LinkType.Vimeo:
 					Utils.OpenFile(((HyperLink)Link).Url);
 					break;
-				case FileTypes.Network:
+				case LinkType.Network:
 					Utils.OpenFile(Link.FullPath);
 					break;
-				case FileTypes.AppLink:
+				case LinkType.AppLink:
 					Utils.OpenFile(new[] { Link.FullPath, ((AppLink)Link).SecondPath });
 					break;
 				default:

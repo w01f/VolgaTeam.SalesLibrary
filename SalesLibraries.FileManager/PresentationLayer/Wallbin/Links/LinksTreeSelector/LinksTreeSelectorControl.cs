@@ -30,7 +30,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.LinksTreeSe
 			layoutControlItemExpandAll.MaxSize = RectangleHelper.ScaleSize(layoutControlItemExpandAll.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
-		public void LoadData(ILinksGroup linkGroup, FileTypes? defaultLinkType = null, IList<FileTypes> excludeFileTypes = null)
+		public void LoadData(ILinksGroup linkGroup, LinkType? defaultLinkType = null, IList<LinkType> excludeFileTypes = null)
 		{
 			var rootGroup = new RootTreeGroup(linkGroup, defaultLinkType);
 			var linksTreeGroups = new List<LinksFormatTreeGroup>();

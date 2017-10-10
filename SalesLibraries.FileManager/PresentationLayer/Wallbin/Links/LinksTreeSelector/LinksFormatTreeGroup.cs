@@ -42,7 +42,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.LinksTreeSe
 		private readonly ILinksGroup _linksGroup;
 		public override string Title => String.Format("{0} (All Files)", _linksGroup.LinkGroupName);
 
-		public RootTreeGroup(ILinksGroup linksGroup, FileTypes? defaultLinkType = null)
+		public RootTreeGroup(ILinksGroup linksGroup, LinkType? defaultLinkType = null)
 		{
 			_linksGroup = linksGroup;
 			Links.AddRange(linksGroup.AllGroupLinks.Where(link => defaultLinkType == null || link.Type == defaultLinkType));

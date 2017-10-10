@@ -65,6 +65,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				});
 
 			layoutControlGroupGallery.Enabled = false;
+			layoutControlGroupImageSettings.Enabled = false;
 			layoutControlGroupTextSettings.Enabled = false;
 			layoutControlGroupTextFont.Enabled = false;
 
@@ -80,13 +81,13 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			layoutControlItemButtonCancel.MaxSize = RectangleHelper.ScaleSize(layoutControlItemButtonCancel.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
-		public FormEditLinkBanner(BaseLibraryLink sourceLink, FileTypes? defaultLinkType = null) : this()
+		public FormEditLinkBanner(BaseLibraryLink sourceLink) : this()
 		{
 			_sourceLink = sourceLink;
 			labelControlTitle.Text = String.Format(ImageTitleFormat, BannerTitle, String.Empty);
 		}
 
-		public FormEditLinkBanner(ILinksGroup linkGroup, FileTypes? defaultLinkType = null) : this()
+		public FormEditLinkBanner(ILinksGroup linkGroup, LinkType? defaultLinkType = null) : this()
 		{
 			_sourceLinkGroup = linkGroup;
 			_sourceLink = _sourceLinkGroup.AllGroupLinks
@@ -447,6 +448,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			var button = (ButtonX)sender;
 			if (!button.Checked) return;
 			layoutControlGroupGallery.Enabled = buttonXEnable.Checked;
+			layoutControlGroupImageSettings.Enabled = buttonXEnable.Checked;
 			layoutControlGroupTextSettings.Enabled = buttonXEnable.Checked;
 			if (_allowHandleEvents)
 			{
@@ -591,6 +593,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			if (labelControlTitle.Appearance.Image == null) return;
 			var favoritesContainer = xtraTabControlGallery.TabPages.OfType<FavoritesImagesContainer>().FirstOrDefault();
 			((FavoriteImageGroup)favoritesContainer?.ParentImageGroup)?.AddImage<Banner>(labelControlTitle.Appearance.Image, String.Format("{0}_{1}", _originalImageName, colorEditInversionColor.Color.ToHex()));
+		}
+
+		private void OnTabControlSettingsSelectedPageChanging(object sender, DevExpress.XtraLayout.LayoutTabPageChangingEventArgs e)
+		{
+			e.Cancel = !buttonXEnable.Checked;
 		}
 	}
 }

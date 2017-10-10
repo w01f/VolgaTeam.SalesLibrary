@@ -20,7 +20,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 	{
 		private readonly List<ExcelLink> _sourceLinks = new List<ExcelLink>();
 		private readonly ILinksGroup _linksGroup;
-		private readonly FileTypes? _defaultLinkType;
+		private readonly LinkType? _defaultLinkType;
 
 		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.Notes, LinkSettingsType.AdminSettings };
 		public int Order => 6;
@@ -50,7 +50,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			}
 		}
 
-		public LinkExcelOptions(ILinksGroup linksGroup, FileTypes? defaultLinkType = null) : this()
+		public LinkExcelOptions(ILinksGroup linksGroup, LinkType? defaultLinkType = null) : this()
 		{
 			_linksGroup = linksGroup;
 			_defaultLinkType = defaultLinkType;

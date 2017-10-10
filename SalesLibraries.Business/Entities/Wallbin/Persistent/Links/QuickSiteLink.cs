@@ -33,7 +33,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		public QuickSiteLink()
 		{
-			Type = FileTypes.QPageLink;
+			Type = LinkType.QPageLink;
 		}
 
 		public static QuickSiteLink Create(QuickSiteLinkInfo linkInfo, LibraryFolder parentFolder)

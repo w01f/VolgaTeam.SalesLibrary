@@ -12,13 +12,15 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 {
 	static class SettingsEditorFactory
 	{
-		public static DialogResult Run(BaseLibraryLink link, LinkSettingsType settingsType, FileTypes? defaultLinkType = null)
+		public static DialogResult Run(BaseLibraryLink link, LinkSettingsType settingsType, LinkType? defaultLinkType = null)
 		{
 			var dilogResult = DialogResult.Cancel;
 			link.PerformTransaction(link.ParentLibrary.Context,
 				linkCopy =>
 				{
-					var editForm = ObjectIntendHelper.GetObjectInstances(typeof(ILinkSettingsEditForm), null, linkCopy, defaultLinkType)
+					var editForm = (defaultLinkType != null ?
+							ObjectIntendHelper.GetObjectInstances(typeof(ILinkSettingsByTypeEditForm), null, linkCopy, defaultLinkType) :
+							ObjectIntendHelper.GetObjectInstances(typeof(ILinkSettingsEditForm), null, linkCopy))
 						.OfType<ILinkSettingsEditForm>()
 						.FirstOrDefault(form => form.EditableSettings.Any(st => st == settingsType));
 					if (editForm != null)
@@ -41,7 +43,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			return dilogResult;
 		}
 
-		public static DialogResult Run(ILinksGroup linksGroup, LinkSettingsType settingsType, FileTypes? defaultLinkType = null)
+		public static DialogResult Run(ILinksGroup linksGroup, LinkSettingsType settingsType, LinkType? defaultLinkType = null)
 		{
 			var dilogResult = DialogResult.Cancel;
 

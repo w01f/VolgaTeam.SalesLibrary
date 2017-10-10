@@ -61,7 +61,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		public AppLink()
 		{
-			Type = FileTypes.AppLink;
+			Type = LinkType.AppLink;
 		}
 
 		public static AppLink Create(AppLinkInfo linkInfo, LibraryFolder parentFolder)

@@ -17,7 +17,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.Notes };
 		public int Order => 0;
-		public bool AvailableForEmbedded => false;
 		public SettingsEditorHeaderInfo HeaderInfo => new SettingsEditorHeaderInfo { Title = "<size=+4>Link Settings</size>" };
 
 		public event EventHandler<EventArgs> ForceCloseRequested;
@@ -39,7 +38,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			textEditCustomNote.MouseDown += EditorHelper.EditorMouseUp;
 		}
 
-		public LinkObjectOptions(FileTypes? defaultLinkType = null) : this() { }
+		public LinkObjectOptions(LinkType? defaultLinkType = null) : this() { }
 
 		public void LoadData(BaseLibraryLink sourceLink)
 		{

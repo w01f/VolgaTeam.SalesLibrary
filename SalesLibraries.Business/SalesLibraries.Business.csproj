@@ -110,8 +110,10 @@
     <Compile Include="Entities\Interfaces\ICollectionItem.cs" />
     <Compile Include="Entities\Interfaces\IThumbnailSettingsHolder.cs" />
     <Compile Include="Entities\Interfaces\IWidgetSetingsHolder.cs" />
+    <Compile Include="Entities\Wallbin\Common\Constants\FileTypes.cs" />
     <Compile Include="Entities\Wallbin\Common\Constants\PreviewFormats.cs" />
     <Compile Include="Entities\Wallbin\Common\Constants\WebFormats.cs" />
+    <Compile Include="Entities\Wallbin\Common\Enums\LinkFileType.cs" />
     <Compile Include="Entities\Wallbin\Common\Enums\ThumbnailTextMode.cs" />
     <Compile Include="Entities\Wallbin\Common\Enums\ThumbnailTextPosition.cs" />
     <Compile Include="Entities\Wallbin\Common\Enums\BannerTextMode.cs" />
@@ -125,7 +127,7 @@
     <Compile Include="Entities\Wallbin\Common\Enums\HorizontalAlignment.cs" />
     <Compile Include="Entities\Interfaces\IChangable.cs" />
     <Compile Include="Entities\Interfaces\IExtKeyHolder.cs" />
-    <Compile Include="Entities\Wallbin\Common\Enums\FileTypes.cs" />
+    <Compile Include="Entities\Wallbin\Common\Enums\LinkType.cs" />
     <Compile Include="Entities\Wallbin\Common\Enums\LinkSettingsGroupType.cs" />
     <Compile Include="Entities\Wallbin\Common\Enums\LinkSettingsType.cs" />
     <Compile Include="Entities\Wallbin\Common\Enums\WidgetType.cs" />
@@ -247,6 +249,7 @@
     <Compile Include="Entities\Wallbin\Persistent\PreviewContainers\VimeoPreviewContainer.cs" />
     <Compile Include="Entities\Wallbin\Persistent\PreviewContainers\Html5PreviewContainer.cs" />
     <Compile Include="Entities\Wallbin\Persistent\PreviewContainers\ColdFusionLinkPreviewContainer.cs" />
+    <Compile Include="Entities\Wallbin\Persistent\PreviewContainers\QuickSitePreviewContainer.cs" />
     <Compile Include="Entities\Wallbin\Persistent\PreviewContainers\YoutubePreviewContainer.cs" />
     <Compile Include="Entities\Wallbin\Persistent\PreviewContainers\WebLinkPreviewContainer.cs" />
     <Compile Include="Entities\Wallbin\Persistent\PreviewContainers\WordPreviewContainer.cs" />

@@ -28,7 +28,7 @@ namespace SalesLibraries.BatchTagger.PresentationLayer
 			}
 		}
 
-		public void LoadData(ILinksGroup linkGroup, IList<FileTypes> excludeFileTypes = null)
+		public void LoadData(ILinksGroup linkGroup, IList<LinkType> excludeFileTypes = null)
 		{
 			var rootGroup = new RootTreeGroup(linkGroup);
 			var linksTreeGroups = new List<LinksFormatTreeGroup>();

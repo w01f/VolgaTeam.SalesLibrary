@@ -8,7 +8,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 	{
 		LinkSettingsType[] SupportedSettingsTypes { get; }
 		int Order { get; }
-		bool AvailableForEmbedded { get; }
 		SettingsEditorHeaderInfo HeaderInfo { get; }
 		event EventHandler<EventArgs> ForceCloseRequested;
 		void LoadData(BaseLibraryLink sourceLink);

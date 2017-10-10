@@ -81,7 +81,7 @@
 			this.xtraTabControl.Location = new System.Drawing.Point(260, 60);
 			this.xtraTabControl.Name = "xtraTabControl";
 			this.xtraTabControl.ShowTabHeader = DevExpress.Utils.DefaultBoolean.False;
-			this.xtraTabControl.Size = new System.Drawing.Size(594, 511);
+			this.xtraTabControl.Size = new System.Drawing.Size(594, 591);
 			this.xtraTabControl.TabIndex = 4;
 			// 
 			// buttonXOK
@@ -90,7 +90,7 @@
 			this.buttonXOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXOK.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.buttonXOK.Location = new System.Drawing.Point(596, 583);
+			this.buttonXOK.Location = new System.Drawing.Point(596, 663);
 			this.buttonXOK.Name = "buttonXOK";
 			this.buttonXOK.Size = new System.Drawing.Size(116, 36);
 			this.buttonXOK.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -104,7 +104,7 @@
 			this.buttonXCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXCancel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.buttonXCancel.Location = new System.Drawing.Point(736, 583);
+			this.buttonXCancel.Location = new System.Drawing.Point(736, 663);
 			this.buttonXCancel.Name = "buttonXCancel";
 			this.buttonXCancel.Size = new System.Drawing.Size(116, 36);
 			this.buttonXCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -171,7 +171,7 @@
 			this.layoutControl.Name = "layoutControl";
 			this.layoutControl.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(-1132, 123, 616, 350);
 			this.layoutControl.Root = this.layoutControlGroupRoot;
-			this.layoutControl.Size = new System.Drawing.Size(864, 631);
+			this.layoutControl.Size = new System.Drawing.Size(864, 711);
 			this.layoutControl.StyleController = this.styleController;
 			this.layoutControl.TabIndex = 61;
 			this.layoutControl.Text = "layoutControl1";
@@ -184,7 +184,7 @@
 			this.linksTreeSelector.Location = new System.Drawing.Point(10, 60);
 			this.linksTreeSelector.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.linksTreeSelector.Name = "linksTreeSelector";
-			this.linksTreeSelector.Size = new System.Drawing.Size(250, 511);
+			this.linksTreeSelector.Size = new System.Drawing.Size(250, 591);
 			this.linksTreeSelector.TabIndex = 0;
 			// 
 			// layoutControlGroupRoot
@@ -215,7 +215,7 @@
             this.emptySpaceItem3});
 			this.layoutControlGroupRoot.Location = new System.Drawing.Point(0, 0);
 			this.layoutControlGroupRoot.Name = "Root";
-			this.layoutControlGroupRoot.Size = new System.Drawing.Size(864, 631);
+			this.layoutControlGroupRoot.Size = new System.Drawing.Size(864, 711);
 			this.layoutControlGroupRoot.TextVisible = false;
 			// 
 			// layoutControlItemTitle
@@ -243,7 +243,7 @@
 			this.layoutControlItemTabControl.Location = new System.Drawing.Point(250, 50);
 			this.layoutControlItemTabControl.Name = "layoutControlItemTabControl";
 			this.layoutControlItemTabControl.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-			this.layoutControlItemTabControl.Size = new System.Drawing.Size(594, 511);
+			this.layoutControlItemTabControl.Size = new System.Drawing.Size(594, 591);
 			this.layoutControlItemTabControl.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutControlItemTabControl.TextVisible = false;
 			this.layoutControlItemTabControl.TrimClientAreaToControl = false;
@@ -256,7 +256,7 @@
 			this.layoutControlItemLinksTree.MinSize = new System.Drawing.Size(250, 24);
 			this.layoutControlItemLinksTree.Name = "layoutControlItemLinksTree";
 			this.layoutControlItemLinksTree.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-			this.layoutControlItemLinksTree.Size = new System.Drawing.Size(250, 511);
+			this.layoutControlItemLinksTree.Size = new System.Drawing.Size(250, 591);
 			this.layoutControlItemLinksTree.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
 			this.layoutControlItemLinksTree.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutControlItemLinksTree.TextVisible = false;
@@ -264,7 +264,7 @@
 			// emptySpaceItem2
 			// 
 			this.emptySpaceItem2.AllowHotTrack = false;
-			this.emptySpaceItem2.Location = new System.Drawing.Point(0, 571);
+			this.emptySpaceItem2.Location = new System.Drawing.Point(0, 651);
 			this.emptySpaceItem2.Name = "emptySpaceItem2";
 			this.emptySpaceItem2.Size = new System.Drawing.Size(584, 40);
 			this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
@@ -273,7 +273,7 @@
 			// 
 			this.layoutControlItemOK.Control = this.buttonXOK;
 			this.layoutControlItemOK.CustomizationFormText = "OK";
-			this.layoutControlItemOK.Location = new System.Drawing.Point(584, 571);
+			this.layoutControlItemOK.Location = new System.Drawing.Point(584, 651);
 			this.layoutControlItemOK.MaxSize = new System.Drawing.Size(120, 40);
 			this.layoutControlItemOK.MinSize = new System.Drawing.Size(120, 40);
 			this.layoutControlItemOK.Name = "layoutControlItemOK";
@@ -286,7 +286,7 @@
 			// 
 			this.layoutControlItemCancel.Control = this.buttonXCancel;
 			this.layoutControlItemCancel.CustomizationFormText = "Cancel";
-			this.layoutControlItemCancel.Location = new System.Drawing.Point(724, 571);
+			this.layoutControlItemCancel.Location = new System.Drawing.Point(724, 651);
 			this.layoutControlItemCancel.MaxSize = new System.Drawing.Size(120, 40);
 			this.layoutControlItemCancel.MinSize = new System.Drawing.Size(120, 40);
 			this.layoutControlItemCancel.Name = "layoutControlItemCancel";
@@ -298,7 +298,7 @@
 			// emptySpaceItem1
 			// 
 			this.emptySpaceItem1.AllowHotTrack = false;
-			this.emptySpaceItem1.Location = new System.Drawing.Point(704, 571);
+			this.emptySpaceItem1.Location = new System.Drawing.Point(704, 651);
 			this.emptySpaceItem1.MaxSize = new System.Drawing.Size(20, 0);
 			this.emptySpaceItem1.MinSize = new System.Drawing.Size(20, 10);
 			this.emptySpaceItem1.Name = "emptySpaceItem1";
@@ -309,7 +309,7 @@
 			// emptySpaceItem3
 			// 
 			this.emptySpaceItem3.AllowHotTrack = false;
-			this.emptySpaceItem3.Location = new System.Drawing.Point(0, 561);
+			this.emptySpaceItem3.Location = new System.Drawing.Point(0, 641);
 			this.emptySpaceItem3.MaxSize = new System.Drawing.Size(0, 10);
 			this.emptySpaceItem3.MinSize = new System.Drawing.Size(10, 10);
 			this.emptySpaceItem3.Name = "emptySpaceItem3";
@@ -322,10 +322,11 @@
 			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.BackColor = System.Drawing.Color.White;
-			this.ClientSize = new System.Drawing.Size(864, 631);
+			this.ClientSize = new System.Drawing.Size(864, 711);
 			this.Controls.Add(this.layoutControl);
 			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.ForeColor = System.Drawing.Color.Black;
 			this.MinimizeBox = false;
 			this.Name = "FormEditLinkSettingsRegular";
 			this.ShowIcon = false;

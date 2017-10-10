@@ -40,7 +40,7 @@ namespace SalesLibraries.BatchTagger.PresentationLayer
 		private readonly ILinksGroup _linksGroup;
 		public override string Title => String.Format("{0} (All Files) ({1})", _linksGroup.LinkGroupName, Links.Count);
 
-		public RootTreeGroup(ILinksGroup linksGroup, FileTypes? defaultLinkType = null)
+		public RootTreeGroup(ILinksGroup linksGroup, LinkType? defaultLinkType = null)
 		{
 			_linksGroup = linksGroup;
 			Links.AddRange(linksGroup.AllGroupLinks.Where(link => defaultLinkType == null || link.Type == defaultLinkType));

@@ -23,14 +23,14 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 	{
 		private readonly List<DocumentLink> _sourceLinks = new List<DocumentLink>();
 		private readonly ILinksGroup _linksGroup;
-		private readonly FileTypes? _defaultLinkType;
+		private readonly LinkType? _defaultLinkType;
 
 		private DocumentLink DefaultLink => _sourceLinks.First();
 
 		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.Notes, LinkSettingsType.AdminSettings };
 		public int Order => 6;
 		public bool AvailableForEmbedded => true;
-		public SettingsEditorHeaderInfo HeaderInfo => new SettingsEditorHeaderInfo { Title = String.Format("<size=+4>{0} Settings</size>", _defaultLinkType == FileTypes.Pdf ? "PDF" : "Document") };
+		public SettingsEditorHeaderInfo HeaderInfo => new SettingsEditorHeaderInfo { Title = String.Format("<size=+4>{0} Settings</size>", _defaultLinkType == LinkType.Pdf ? "PDF" : "Document") };
 
 		public event EventHandler<EventArgs> ForceCloseRequested;
 
@@ -58,7 +58,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			}
 		}
 
-		public LinkDocumentOptions(ILinksGroup linksGroup, FileTypes? defaultLinkType = null) : this()
+		public LinkDocumentOptions(ILinksGroup linksGroup, LinkType? defaultLinkType = null) : this()
 		{
 			_linksGroup = linksGroup;
 			_defaultLinkType = defaultLinkType;

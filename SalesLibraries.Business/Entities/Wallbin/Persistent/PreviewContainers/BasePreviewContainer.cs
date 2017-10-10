@@ -143,6 +143,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 				previewContainer = CreateEntity<VimeoPreviewContainer>();
 			else if (sourceFile.Contains("secure_links"))
 				previewContainer = CreateEntity<Html5PreviewContainer>();
+			else if (sourceFile.Contains("qpage"))
+				previewContainer = CreateEntity<Html5PreviewContainer>();
 			else if (sourceFile.Contains(".cfm"))
 				previewContainer = CreateEntity<ColdFusionLinkPreviewContainer>();
 			else

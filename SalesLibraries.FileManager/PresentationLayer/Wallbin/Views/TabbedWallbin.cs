@@ -323,7 +323,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 		{
 			var selectedPage = _menuHitInfo.Page as TabPage;
 			if (selectedPage == null) return;
-			selectedPage.Content.EditLinksGroupSettings(LinkSettingsType.AdminSettings, FileTypes.Excel, false);
+			selectedPage.Content.EditLinksGroupSettings(LinkSettingsType.AdminSettings, LinkType.Excel, false);
 			IsDataChanged = true;
 		}
 
@@ -331,7 +331,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 		{
 			var selectedPage = _menuHitInfo.Page as TabPage;
 			if (selectedPage == null) return;
-			selectedPage.Content.EditLinksGroupSettings(LinkSettingsType.AdminSettings, FileTypes.Pdf, false);
+			selectedPage.Content.EditLinksGroupSettings(LinkSettingsType.AdminSettings, LinkType.Pdf, false);
 			IsDataChanged = true;
 		}
 

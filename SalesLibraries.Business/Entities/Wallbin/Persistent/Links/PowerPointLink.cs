@@ -46,7 +46,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		public PowerPointLink()
 		{
-			Type = FileTypes.PowerPoint;
+			Type = LinkType.PowerPoint;
 		}
 
 		public override void Delete(LibraryContext context)

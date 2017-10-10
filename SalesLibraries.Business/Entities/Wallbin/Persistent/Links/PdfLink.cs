@@ -24,7 +24,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		public PdfLink()
 		{
-			Type = FileTypes.Pdf;
+			Type = LinkType.Pdf;
 		}
 
 		protected override void AfterCreate()

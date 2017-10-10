@@ -29,7 +29,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		public Html5Link()
 		{
-			Type = FileTypes.Html5;
+			Type = LinkType.Html5;
 		}
 
 		public static Html5Link Create(Html5LinkInfo linkInfo, LibraryFolder parentFolder)

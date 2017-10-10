@@ -1513,6 +1513,7 @@
             this.layoutControlGroupGallery,
             this.layoutControlGroupTextSettings});
 			this.tabbedControlSettings.SelectedPageChanged += new DevExpress.XtraLayout.LayoutTabPageChangedEventHandler(this.OnTabControlSettingsSelectedPageChanged);
+			this.tabbedControlSettings.SelectedPageChanging += new DevExpress.XtraLayout.LayoutTabPageChangingEventHandler(this.OnTabControlSettingsSelectedPageChanging);
 			// 
 			// layoutControlGroupGallery
 			// 
@@ -1534,7 +1535,7 @@
 			this.layoutControlGroupGallery.Location = new System.Drawing.Point(0, 0);
 			this.layoutControlGroupGallery.Name = "layoutControlGroupGallery";
 			this.layoutControlGroupGallery.Size = new System.Drawing.Size(950, 502);
-			this.layoutControlGroupGallery.Text = "Gallery";
+			this.layoutControlGroupGallery.Text = "Thumbnail";
 			// 
 			// emptySpaceItem5
 			// 
@@ -2161,7 +2162,7 @@
 			this.layoutControlGroupTextSettings.Location = new System.Drawing.Point(0, 0);
 			this.layoutControlGroupTextSettings.Name = "layoutControlGroupTextSettings";
 			this.layoutControlGroupTextSettings.Size = new System.Drawing.Size(950, 502);
-			this.layoutControlGroupTextSettings.Text = "Show Text";
+			this.layoutControlGroupTextSettings.Text = "Text";
 			// 
 			// layoutControlItemTextDescription
 			// 

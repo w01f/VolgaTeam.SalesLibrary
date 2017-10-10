@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
-using System.IO;
 using System.Windows.Forms;
 using DevExpress.Skins;
-using DevExpress.XtraLayout.Utils;
 using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
@@ -22,7 +20,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.Notes, LinkSettingsType.AdminSettings };
 		public int Order => 6;
-		public bool AvailableForEmbedded => true;
 		public SettingsEditorHeaderInfo HeaderInfo => null;
 
 		public event EventHandler<EventArgs> ForceCloseRequested;
@@ -38,7 +35,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			layoutControlItemOpenWV.MaxSize = RectangleHelper.ScaleSize(layoutControlItemOpenWV.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
-		public LinkVideoOptions(FileTypes? defaultLinkType = null) : this() { }
+		public LinkVideoOptions(LinkType? defaultLinkType = null) : this() { }
 
 		public void LoadData(BaseLibraryLink sourceLink)
 		{
@@ -46,13 +43,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 			checkEditForcePreview.Checked = ((VideoLinkSettings)_data.Settings).ForcePreview;
 			checkEditDownloadSource.Checked = ((VideoLinkSettings)_data.Settings).DownloadSource;
-			if (Directory.Exists(_data.PreviewContainerPath))
-			{
-				layoutControlItemOpenWV.Visibility = LayoutVisibility.Always;
-				buttonXOpenWV.Text = String.Format("!WV Folder ({0})", _data.PreviewContainerName);
-			}
-			else
-				layoutControlItemOpenWV.Visibility = LayoutVisibility.Never;
+			buttonXOpenWV.Text = String.Format("!WV Folder ({0})", _data.PreviewContainerName);
 		}
 
 		public void SaveData()

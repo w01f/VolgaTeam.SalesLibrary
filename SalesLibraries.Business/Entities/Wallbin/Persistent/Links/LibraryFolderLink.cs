@@ -36,6 +36,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		public override string WebFormat => WebFormats.Folder;
 
 		[NotMapped, JsonIgnore]
+		public override LinkFileType SubType => LinkFileType.Folder;
+
+		[NotMapped, JsonIgnore]
 		public IEnumerable<LibraryFileLink> AllLinks
 		{
 			get { return Links.Union(Links.OfType<LibraryFolderLink>().SelectMany(lf => lf.AllLinks)); }
@@ -62,7 +65,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		public LibraryFolderLink()
 		{
-			Type = FileTypes.Folder;
+			Type = LinkType.Folder;
 			Links = new List<LibraryFileLink>();
 		}
 

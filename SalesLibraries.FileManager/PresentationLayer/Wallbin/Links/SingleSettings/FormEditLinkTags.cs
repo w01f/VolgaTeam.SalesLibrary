@@ -31,7 +31,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		private bool _allowHandleEvents;
 		private readonly ILinksGroup _linkGroup;
-		private readonly FileTypes? _defaultLinkType;
+		private readonly LinkType? _defaultLinkType;
 		private readonly List<BaseLibraryLink> _selectedLinks = new List<BaseLibraryLink>();
 
 		public LinkSettingsType[] EditableSettings => new[]
@@ -62,14 +62,14 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			layoutControlItemCancel.MaxSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
-		public FormEditLinkTags(BaseLibraryLink sourceLink, FileTypes? defaultLinkType = null) : this()
+		public FormEditLinkTags(BaseLibraryLink sourceLink) : this()
 		{
 			_selectedLinks.Add(sourceLink);
 			Width = Width - layoutControlItemLinksTree.Width;
 			layoutControlItemLinksTree.Visibility = LayoutVisibility.Never;
 		}
 
-		public FormEditLinkTags(ILinksGroup linkGroup, FileTypes? defaultLinkType = null) : this()
+		public FormEditLinkTags(ILinksGroup linkGroup, LinkType? defaultLinkType = null) : this()
 		{
 			_linkGroup = linkGroup;
 			_defaultLinkType = defaultLinkType;
@@ -95,7 +95,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 					LoadData();
 				};
-				linksTreeSelector.LoadData(_linkGroup, _defaultLinkType, new[] { FileTypes.LineBreak });
+				linksTreeSelector.LoadData(_linkGroup, _defaultLinkType, new[] { LinkType.LineBreak });
 			}
 			else
 				LoadData();

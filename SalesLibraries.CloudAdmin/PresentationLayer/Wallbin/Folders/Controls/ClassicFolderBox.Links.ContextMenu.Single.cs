@@ -190,17 +190,17 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 					: BarItemVisibility.Never;
 				barSubItemSingleLinkPropertiesFolderLinkSettings.Visibility = !linkRow.Inaccessable &&
 																		 linkRow.Source is LibraryFolderLink &&
-																		 ((LibraryFolderLink)linkRow.Source).AllLinks.Any(l => l.Type == FileTypes.Excel || l.Type == FileTypes.Pdf)
+																		 ((LibraryFolderLink)linkRow.Source).AllLinks.Any(l => l.Type == LinkType.Excel || l.Type == LinkType.Pdf)
 					? BarItemVisibility.Always
 					: BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesFolderLinkPdfSettings.Enabled = !linkRow.Inaccessable &&
 																				 linkRow.Source is LibraryFolderLink &&
 																				 ((LibraryFolderLink)linkRow.Source).AllLinks.Any(
-																					 l => l.Type == FileTypes.Pdf);
+																					 l => l.Type == LinkType.Pdf);
 				barButtonItemSingleLinkPropertiesFolderLinkExcelSettings.Enabled = !linkRow.Inaccessable &&
 																				 linkRow.Source is LibraryFolderLink &&
 																				 ((LibraryFolderLink)linkRow.Source).AllLinks.Any(
-																					 l => l.Type == FileTypes.Excel);
+																					 l => l.Type == LinkType.Excel);
 				barButtonItemSingleLinkPropertiesRefreshPreview.Visibility = !linkRow.Inaccessable && linkRow.Source is IPreviewableLink
 					? BarItemVisibility.Always
 					: BarItemVisibility.Never;
@@ -373,12 +373,12 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 
 		private void barButtonItemSingleLinkPropertiesFolderLinkPdfSettings_ItemClick(object sender, ItemClickEventArgs e)
 		{
-			EditSingleLinkSettings(LinkSettingsType.AdminSettings, FileTypes.Pdf);
+			EditSingleLinkSettings(LinkSettingsType.AdminSettings, LinkType.Pdf);
 		}
 
 		private void barButtonItemSingleLinkPropertiesFolderLinkExcelSettings_ItemClick(object sender, ItemClickEventArgs e)
 		{
-			EditSingleLinkSettings(LinkSettingsType.AdminSettings, FileTypes.Excel);
+			EditSingleLinkSettings(LinkSettingsType.AdminSettings, LinkType.Excel);
 		}
 	}
 }

@@ -66,12 +66,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			layoutControlItemCancel.MaxSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
-		public FormEditLinkWidget(BaseLibraryLink sourceLink, FileTypes? defaultLinkType = null) : this()
+		public FormEditLinkWidget(BaseLibraryLink sourceLink) : this()
 		{
 			_sourceLink = sourceLink;
 		}
 
-		public FormEditLinkWidget(ILinksGroup linkGroup, FileTypes? defaultLinkType = null) : this()
+		public FormEditLinkWidget(ILinksGroup linkGroup, LinkType? defaultLinkType = null) : this()
 		{
 			_sourceLinkGroup = linkGroup;
 			_sourceLink = _sourceLinkGroup.AllGroupLinks

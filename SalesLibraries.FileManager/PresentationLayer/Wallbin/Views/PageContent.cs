@@ -82,7 +82,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			_folderBoxes.ForEach(folderBoxControl => folderBoxControl.SelectAll(false));
 		}
 
-		public void EditLinksGroupSettings(LinkSettingsType settingsType, FileTypes? defaultLinkType = null, bool updateContent = true)
+		public void EditLinksGroupSettings(LinkSettingsType settingsType, LinkType? defaultLinkType = null, bool updateContent = true)
 		{
 			MainController.Instance.WallbinViews.Selection.Reset();
 			if (SettingsEditorFactory.Run(PageContainer.Page, settingsType, defaultLinkType) == DialogResult.OK && updateContent)
@@ -114,17 +114,20 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			var links = PageContainer.Page.AllGroupLinks.OfType<IPreviewableLink>().ToList();
 			MainController.Instance.ProcessManager.Run("Updating Preview files...", (cancelationToken, formProgess) =>
 			{
-				var powerPointLinks = links.OfType<PowerPointLink>().ToList();
-				if (powerPointLinks.Any())
+				if (MainController.Instance.Settings.EnableLocalSync)
 				{
-					using (var powerPointProcessor = new PowerPointHidden())
+					var powerPointLinks = links.OfType<PowerPointLink>().ToList();
+					if (powerPointLinks.Any())
 					{
-						if (!powerPointProcessor.Connect(true)) return;
-						foreach (var powerPointLink in powerPointLinks)
+						using (var powerPointProcessor = new PowerPointHidden())
 						{
-							((PowerPointLinkSettings)powerPointLink.Settings).ClearQuickViewContent();
-							((PowerPointLinkSettings)powerPointLink.Settings).UpdateQuickViewContent(powerPointProcessor);
-							((PowerPointLinkSettings)powerPointLink.Settings).UpdatePresentationInfo(powerPointProcessor);
+							if (!powerPointProcessor.Connect(true)) return;
+							foreach (var powerPointLink in powerPointLinks)
+							{
+								((PowerPointLinkSettings)powerPointLink.Settings).ClearQuickViewContent();
+								((PowerPointLinkSettings)powerPointLink.Settings).UpdateQuickViewContent(powerPointProcessor);
+								((PowerPointLinkSettings)powerPointLink.Settings).UpdatePresentationInfo(powerPointProcessor);
+							}
 						}
 					}
 				}

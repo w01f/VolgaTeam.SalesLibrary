@@ -19,7 +19,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		protected InternalLink()
 		{
-			Type = FileTypes.InternalLink;
+			Type = LinkType.InternalLink;
 		}
 	}
 }

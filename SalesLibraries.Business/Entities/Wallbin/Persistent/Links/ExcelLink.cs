@@ -26,7 +26,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		public ExcelLink()
 		{
-			Type = FileTypes.Excel;
+			Type = LinkType.Excel;
 		}
 
 		protected override void AfterCreate()

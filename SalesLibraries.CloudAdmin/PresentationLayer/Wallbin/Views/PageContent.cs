@@ -81,7 +81,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			_folderBoxes.ForEach(folderBoxControl => folderBoxControl.SelectAll(false));
 		}
 
-		public void EditLinksGroupSettings(LinkSettingsType settingsType, FileTypes? defaultLinkType = null, bool updateContent = true)
+		public void EditLinksGroupSettings(LinkSettingsType settingsType, LinkType? defaultLinkType = null, bool updateContent = true)
 		{
 			MainController.Instance.WallbinViews.Selection.Reset();
 			if (SettingsEditorFactory.Run(PageContainer.Page, settingsType, defaultLinkType) == DialogResult.OK && updateContent)

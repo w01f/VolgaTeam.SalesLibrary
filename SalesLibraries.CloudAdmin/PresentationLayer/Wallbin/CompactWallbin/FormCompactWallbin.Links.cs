@@ -118,7 +118,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.CompactWallbin
 		}
 
 
-		private void EditSingleLinkSettings(TreeListNode targetLinkNode, LinkSettingsType settingsType, FileTypes? defaultLinkType = null)
+		private void EditSingleLinkSettings(TreeListNode targetLinkNode, LinkSettingsType settingsType, LinkType? defaultLinkType = null)
 		{
 			var sourceLink = (targetLinkNode?.Tag as WallbinItem)?.Source as BaseLibraryLink;
 			if (sourceLink == null) return;
