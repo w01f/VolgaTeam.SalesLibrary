@@ -160,7 +160,7 @@
 								"&textExactMatch=" + searchBarConditions.get('exactMatch') +
 								"&onlyFiles=" + searchBarConditions.get('onlyFileNames') +
 								"&onlyNewFiles=" + searchBarConditions.get('onlyNewFiles') +
-								"&fileTypes=" + $.toJSON(searchBarConditions.getFileTypesSettings().selectedTypeTags()) +
+								"&fileTypesInclude=" + $.toJSON(searchBarConditions.getFileTypesSettings().selectedTypeTags()) +
 								"&superFilters=" + $.toJSON(searchBarConditions.getSuperFiltersSettings()) +
 								"&categories=" + $.toJSON(searchBarConditions.getCategorySettings()));
 						}

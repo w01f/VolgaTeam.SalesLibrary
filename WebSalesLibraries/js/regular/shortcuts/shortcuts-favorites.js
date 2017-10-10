@@ -254,7 +254,7 @@
 				{
 					dataTable.init({
 						dataset: result.links,
-						dataOptions: result.viewOptions
+						dataViewOptions: result.viewOptions
 					});
 					updateContentSize();
 				},

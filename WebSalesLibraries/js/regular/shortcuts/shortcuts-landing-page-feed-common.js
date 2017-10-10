@@ -7,7 +7,7 @@
 	{
 		this.feedType = undefined;
 		this.maxLinks = undefined;
-		this.linkFormats = undefined;
+		this.linkFormatsInclude = undefined;
 		this.libraries = undefined;
 		this.dateRangeType = undefined;
 		this.text = undefined;

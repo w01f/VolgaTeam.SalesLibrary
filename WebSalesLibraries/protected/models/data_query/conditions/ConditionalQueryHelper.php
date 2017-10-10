@@ -89,7 +89,7 @@
 							$aliasNodes = $node->getElementsByTagName('Item');
 
 							$useAsAlias = false;
-							if($target === strtolower($conditionPart))
+							if ($target === strtolower($conditionPart))
 							{
 								$useAsAlias = true;
 							}
@@ -98,7 +98,7 @@
 								foreach ($aliasNodes as $aliasNode)
 								{
 									$aliasValue = strtolower(trim($aliasNode->nodeValue));
-									if($aliasValue === strtolower($conditionPart))
+									if ($aliasValue === strtolower($conditionPart))
 									{
 										$useAsAlias = true;
 										$result[] = sprintf('"%s"', $target);
@@ -107,7 +107,7 @@
 								}
 							}
 
-							if($useAsAlias)
+							if ($useAsAlias)
 							{
 								foreach ($aliasNodes as $aliasNode)
 									$result[] = sprintf('"%s"', str_replace($conditionPart, trim($aliasNode->nodeValue), $conditionPart));
@@ -184,17 +184,20 @@
 					implode("','", $libraryIds));
 			}
 
-			$count = count($queryConditions->fileTypes);
-			switch ($count)
+			if (count($queryConditions->fileTypesInclude) > 0)
+				$fileTypeIncludeCondition = sprintf("link.search_format in ('%s')", implode("','", $queryConditions->fileTypesInclude));
+			else
+				$fileTypeIncludeCondition = '1 = 1';
+
+			if (count($queryConditions->fileTypesExclude) > 0)
 			{
-				case 0:
-					$fileTypeCondition = '1 = 1';
-					break;
-				default:
-					$fileTypeCondition = sprintf("link.search_format in ('%s')",
-						implode("','", $queryConditions->fileTypes));;
-					break;
+				$fileTypeExcludeConditionParts = array();
+				$fileTypeExcludeConditionParts[] = sprintf("link.search_format not in ('%s')", implode("','", $queryConditions->fileTypesExclude));
+				$fileTypeExcludeConditionParts[] = sprintf("link.file_extension not in ('%s')", implode("','", $queryConditions->fileTypesExclude));
+				$fileTypeExcludeCondition = implode(" and ", $fileTypeExcludeConditionParts);
 			}
+			else
+				$fileTypeExcludeCondition = '1 = 1';
 
 			$dateCondition = '1 = 1';
 			$additionalDateCondition = '';
@@ -358,7 +361,8 @@
 				$contentCondition,
 				$baseLinksCondition,
 				$libraryCondition,
-				$fileTypeCondition,
+				$fileTypeIncludeCondition,
+				$fileTypeExcludeCondition,
 				$dateCondition,
 				$categoryCondition,
 				$superFilterCondition,

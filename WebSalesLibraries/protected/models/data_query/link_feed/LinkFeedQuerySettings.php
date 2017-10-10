@@ -32,14 +32,16 @@
 
 		public $feedType;
 
-		public $linkFormats;
+		public $linkFormatsInclude;
+		public $linkFormatsExclude;
 		public $maxLinks;
 		/** @var  ThumbnailQuerySettings */
 		public $thumbnailSettings;
 
 		public function __construct()
 		{
-			$this->linkFormats = array(self::LinkFormatPowerPoint, self::LinkFormatDocument, self::LinkFormatVideo, self::LinkFormatHyperlink);
+			$this->linkFormatsInclude = array(self::LinkFormatPowerPoint, self::LinkFormatDocument, self::LinkFormatVideo, self::LinkFormatHyperlink);
+			$this->linkFormatsExclude = array();
 			$this->thumbnailSettings = new ThumbnailQuerySettings();
 			$this->maxLinks = 30;
 		}
@@ -112,7 +114,7 @@
 			$queryResult = $xpath->query('./Formats/Item', $contextNode);
 			if ($queryResult->length > 0)
 			{
-				$this->linkFormats = array();
+				$this->linkFormatsInclude = array();
 				foreach ($queryResult as $node)
 				{
 					$format = strtolower(trim($node->nodeValue));
@@ -122,10 +124,18 @@
 						case self::LinkFormatVideo:
 						case self::LinkFormatDocument:
 						case self::LinkFormatHyperlink:
-							$this->linkFormats[] = $format;
+							$this->linkFormatsInclude[] = $format;
 							break;
 					}
 				}
+			}
+
+			$queryResult = $xpath->query('./Formats/Exclude/Item', $contextNode);
+			if ($queryResult->length > 0)
+			{
+				$this->linkFormatsExclude = array();
+				foreach ($queryResult as $node)
+					$this->linkFormatsExclude[] = strtolower(trim($node->nodeValue));
 			}
 
 			$queryResult = $xpath->query('./ThumbnailSettings', $contextNode);

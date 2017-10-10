@@ -80,11 +80,11 @@
 				else
 					$(this).addClass('active');
 
-				querySettings.linkFormats = [];
+				querySettings.linkFormatsInclude = [];
 				$.each(masonryContainer.find('.link-format-toggle.active'), function ()
 				{
 					var button = $(this);
-					querySettings.linkFormats.push(button.find('.service-data .link-format-tag').text());
+					querySettings.linkFormatsInclude.push(button.find('.service-data .link-format-tag').text());
 				});
 
 				reloadLinks(true);

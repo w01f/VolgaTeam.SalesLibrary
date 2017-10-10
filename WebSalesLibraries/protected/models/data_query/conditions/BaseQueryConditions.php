@@ -13,7 +13,8 @@
 		public $baseDatasetKey;
 
 		public $text;
-		public $fileTypes;
+		public $fileTypesInclude;
+		public $fileTypesExclude;
 		public $startDate;
 		public $endDate;
 		public $libraries;
@@ -46,7 +47,8 @@
 
 		public function __construct()
 		{
-			$this->fileTypes = array();
+			$this->fileTypesInclude = array();
+			$this->fileTypesExclude = array();
 			$this->libraries = array();
 			$this->superFilters = array();
 			$this->categories = array();
@@ -150,21 +152,25 @@
 				switch ($fileTypeDescription)
 				{
 					case 'video':
-						$this->fileTypes[] = 'mp3';
-						$this->fileTypes[] = 'mp4';
-						$this->fileTypes[] = 'wmv';
-						$this->fileTypes[] = 'video';
+						$this->fileTypesInclude[] = 'mp3';
+						$this->fileTypesInclude[] = 'mp4';
+						$this->fileTypesInclude[] = 'wmv';
+						$this->fileTypesInclude[] = 'video';
 						break;
 					case 'image':
-						$this->fileTypes[] = 'png';
-						$this->fileTypes[] = 'jpeg';
-						$this->fileTypes[] = 'gif';
+						$this->fileTypesInclude[] = 'png';
+						$this->fileTypesInclude[] = 'jpeg';
+						$this->fileTypesInclude[] = 'gif';
 						break;
 					default:
-						$this->fileTypes[] = $fileTypeDescription;
+						$this->fileTypesInclude[] = $fileTypeDescription;
 						break;
 				}
 			}
+
+			$queryResult = $xpath->query('./FileTypeExclude', $contextNode);
+			foreach ($queryResult as $node)
+				$this->fileTypesExclude[] = trim($node->nodeValue);
 
 			$queryResult = $xpath->query('./Library', $contextNode);
 			if ($queryResult->length > 0)

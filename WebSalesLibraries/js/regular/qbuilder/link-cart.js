@@ -49,7 +49,7 @@
 				{
 					lincCartTable.init({
 						dataset: result.links,
-						dataOptions: result.viewOptions
+						dataViewOptions: result.viewOptions
 					});
 					initLinks();
 				},

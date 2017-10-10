@@ -47,7 +47,7 @@
 						onlyNewFiles: false
 					},
 
-					fileTypes: {
+					fileTypesInclude: {
 						showPowerPoint: true,
 						showVideo: true,
 						showPdf: true,
@@ -169,6 +169,8 @@
 						}
 					},
 
+					fileTypesExclude: [],
+
 					categoryFilters: [],
 
 					categories: {
@@ -225,7 +227,8 @@
 			return {
 				text: data.simpleProperties.text,
 				textExactMatch: data.simpleProperties.exactMatch,
-				fileTypes: data.fileTypes.selectedTypeTags(),
+				fileTypesInclude: data.fileTypesInclude.selectedTypeTags(),
+				fileTypesExclude: data.fileTypesExclude,
 				startDate: startDate,
 				endDate: endDate,
 				libraries: data.libraries.items,
@@ -249,7 +252,8 @@
 		this.loadFromConditionsFormatted = function (source) {
 			data.simpleProperties.text = source.text;
 			data.simpleProperties.exactMatch = source.textExactMatch;
-			data.fileTypes.loadFromTags(source.fileTypes);
+			data.fileTypesInclude.loadFromTags(source.fileTypesInclude);
+			data.fileTypesExclude = source.fileTypesExclude;
 			data.simpleProperties.dateStart = source.startDate;
 			data.simpleProperties.dateEnd = source.endDate;
 			data.libraries.items = source.libraries;
@@ -268,21 +272,21 @@
 		};
 
 		this.getFileTypesDescription = function () {
-			return data.fileTypes.selectedTypeDescriptions();
+			return data.fileTypesInclude.selectedTypeDescriptions();
 		};
 
 		this.getFileTypesSettings = function () {
-			return data.fileTypes;
+			return data.fileTypesInclude;
 		};
 
 		this.setFileTypesSettings = function (fileTypeSettings) {
-			data.fileTypes.showPowerPoint = fileTypeSettings.showPowerPoint;
-			data.fileTypes.showVideo = fileTypeSettings.showVideo;
-			data.fileTypes.showPdf = fileTypeSettings.showPdf;
-			data.fileTypes.showWord = fileTypeSettings.showWord;
-			data.fileTypes.showExcel = fileTypeSettings.showExcel;
-			data.fileTypes.showImages = fileTypeSettings.showImages;
-			data.fileTypes.showUrls = fileTypeSettings.showUrls;
+			data.fileTypesInclude.showPowerPoint = fileTypeSettings.showPowerPoint;
+			data.fileTypesInclude.showVideo = fileTypeSettings.showVideo;
+			data.fileTypesInclude.showPdf = fileTypeSettings.showPdf;
+			data.fileTypesInclude.showWord = fileTypeSettings.showWord;
+			data.fileTypesInclude.showExcel = fileTypeSettings.showExcel;
+			data.fileTypesInclude.showImages = fileTypeSettings.showImages;
+			data.fileTypesInclude.showUrls = fileTypeSettings.showUrls;
 			that.raiseOnChange();
 		};
 

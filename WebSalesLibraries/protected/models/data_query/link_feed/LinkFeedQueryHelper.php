@@ -45,7 +45,7 @@
 			$feedItems = array();
 
 			$queryFormats = array();
-			foreach ($feedSettings->linkFormats as $linkFormat)
+			foreach ($feedSettings->linkFormatsInclude as $linkFormat)
 				switch ($linkFormat)
 				{
 					case LinkFeedQuerySettings::LinkFormatPowerPoint:
@@ -211,6 +211,12 @@
 				'AND',
 				sprintf('link.search_format in (\'%s\')', implode("','", $queryFormats)),
 			);
+
+			if (count($feedSettings->linkFormatsExclude) > 0)
+			{
+				$whereConditions[] = sprintf('link.search_format not in (\'%s\')', implode("','", $feedSettings->linkFormatsExclude));
+				$whereConditions[] = sprintf('link.file_extension not in (\'%s\')', implode("','", $feedSettings->linkFormatsExclude));
+			}
 
 			if (count($textConditions) > 0)
 			{
@@ -503,8 +509,8 @@
 		{
 			$feedItems = array();
 
-			$feedSettings->conditions->fileTypes = array();
-			foreach ($feedSettings->linkFormats as $linkFormat)
+			$feedSettings->conditions->fileTypesInclude = array();
+			foreach ($feedSettings->linkFormatsInclude as $linkFormat)
 				switch ($linkFormat)
 				{
 					case LinkFeedQuerySettings::LinkFormatPowerPoint:
@@ -521,31 +527,32 @@
 					case LinkFeedQuerySettings::LinkFormatInternalWindow:
 					case LinkFeedQuerySettings::LinkFormatInternalShortcut:
 					case LinkFeedQuerySettings::LinkFormatInternalLink:
-						$feedSettings->conditions->fileTypes[] = $linkFormat;
+						$feedSettings->conditions->fileTypesInclude[] = $linkFormat;
 						break;
 					case LinkFeedQuerySettings::LinkFormatVideo:
-						$feedSettings->conditions->fileTypes[] = $linkFormat;
-						$feedSettings->conditions->fileTypes[] = LinkFeedQuerySettings::LinkFormatYouTube;
-						$feedSettings->conditions->fileTypes[] = LinkFeedQuerySettings::LinkFormatVimeo;
+						$feedSettings->conditions->fileTypesInclude[] = $linkFormat;
+						$feedSettings->conditions->fileTypesInclude[] = LinkFeedQuerySettings::LinkFormatYouTube;
+						$feedSettings->conditions->fileTypesInclude[] = LinkFeedQuerySettings::LinkFormatVimeo;
 						break;
 					case LinkFeedQuerySettings::LinkFormatDocument:
-						$feedSettings->conditions->fileTypes[] = LinkFeedQuerySettings::LinkFormatWord;
-						$feedSettings->conditions->fileTypes[] = LinkFeedQuerySettings::LinkFormatPdf;
-						$feedSettings->conditions->fileTypes[] = LinkFeedQuerySettings::LinkFormatExcel;
+						$feedSettings->conditions->fileTypesInclude[] = LinkFeedQuerySettings::LinkFormatWord;
+						$feedSettings->conditions->fileTypesInclude[] = LinkFeedQuerySettings::LinkFormatPdf;
+						$feedSettings->conditions->fileTypesInclude[] = LinkFeedQuerySettings::LinkFormatExcel;
 						break;
 					case LinkFeedQuerySettings::LinkFormatHyperlink:
-						$feedSettings->conditions->fileTypes[] = LinkFeedQuerySettings::LinkFormatUrl;
-						$feedSettings->conditions->fileTypes[] = LinkFeedQuerySettings::LinkFormatHtml5;
-						$feedSettings->conditions->fileTypes[] = LinkFeedQuerySettings::LinkFormatQuicksite;
-						$feedSettings->conditions->fileTypes[] = LinkFeedQuerySettings::LinkFormatYouTube;
-						$feedSettings->conditions->fileTypes[] = LinkFeedQuerySettings::LinkFormatVimeo;
-						$feedSettings->conditions->fileTypes[] = LinkFeedQuerySettings::LinkFormatInternalLibrary;
-						$feedSettings->conditions->fileTypes[] = LinkFeedQuerySettings::LinkFormatInternalPage;
-						$feedSettings->conditions->fileTypes[] = LinkFeedQuerySettings::LinkFormatInternalWindow;
-						$feedSettings->conditions->fileTypes[] = LinkFeedQuerySettings::LinkFormatInternalShortcut;
-						$feedSettings->conditions->fileTypes[] = LinkFeedQuerySettings::LinkFormatInternalLink;
+						$feedSettings->conditions->fileTypesInclude[] = LinkFeedQuerySettings::LinkFormatUrl;
+						$feedSettings->conditions->fileTypesInclude[] = LinkFeedQuerySettings::LinkFormatHtml5;
+						$feedSettings->conditions->fileTypesInclude[] = LinkFeedQuerySettings::LinkFormatQuicksite;
+						$feedSettings->conditions->fileTypesInclude[] = LinkFeedQuerySettings::LinkFormatYouTube;
+						$feedSettings->conditions->fileTypesInclude[] = LinkFeedQuerySettings::LinkFormatVimeo;
+						$feedSettings->conditions->fileTypesInclude[] = LinkFeedQuerySettings::LinkFormatInternalLibrary;
+						$feedSettings->conditions->fileTypesInclude[] = LinkFeedQuerySettings::LinkFormatInternalPage;
+						$feedSettings->conditions->fileTypesInclude[] = LinkFeedQuerySettings::LinkFormatInternalWindow;
+						$feedSettings->conditions->fileTypesInclude[] = LinkFeedQuerySettings::LinkFormatInternalShortcut;
+						$feedSettings->conditions->fileTypesInclude[] = LinkFeedQuerySettings::LinkFormatInternalLink;
 						break;
 				}
+			$feedSettings->conditions->fileTypesExclude = $feedSettings->linkFormatsExclude;
 
 			$feedSettings->conditions->limit = $feedSettings->maxLinks;
 
@@ -845,7 +852,7 @@
 			$dbCommand = $dbCommand->join('tbl_library lib', 'lib.id=p.id_library');
 
 			$queryFormats = array();
-			foreach ($feedSettings->linkFormats as $linkFormat)
+			foreach ($feedSettings->linkFormatsInclude as $linkFormat)
 				switch ($linkFormat)
 				{
 					case LinkFeedQuerySettings::LinkFormatPowerPoint:
@@ -893,6 +900,12 @@
 				'AND',
 				sprintf('link.search_format in (\'%s\')', implode("','", $queryFormats)),
 			);
+
+			if (count($feedSettings->linkFormatsExclude) > 0)
+			{
+				$whereConditions[] = sprintf('link.search_format not in (\'%s\')', implode("','", $feedSettings->linkFormatsExclude));
+				$whereConditions[] = sprintf('link.file_extension not in (\'%s\')', implode("','", $feedSettings->linkFormatsExclude));
+			}
 
 			$isAdmin = \UserIdentity::isUserAdmin();
 			if (!$isAdmin)

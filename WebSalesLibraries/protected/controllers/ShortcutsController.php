@@ -318,7 +318,7 @@
 			$text = Yii::app()->request->getQuery('text');
 			$onlyFiles = filter_var(trim(Yii::app()->request->getQuery('onlyFiles')), FILTER_VALIDATE_BOOLEAN);
 			$onlyNewFiles = filter_var(trim(Yii::app()->request->getQuery('onlyNewFiles')), FILTER_VALIDATE_BOOLEAN);
-			$fileTypes = Yii::app()->request->getQuery('fileTypes');
+			$fileTypes = Yii::app()->request->getQuery('fileTypesInclude');
 			if (isset($fileTypes))
 				$fileTypes = CJSON::decode($fileTypes);
 			else
@@ -354,7 +354,7 @@
 					$searchBar->conditions->endDate = date("Y-m-d");
 				}
 
-				$searchBar->conditions->fileTypes = $fileTypes;
+				$searchBar->conditions->fileTypesInclude = $fileTypes;
 				$searchBar->conditions->superFilters = $superFilters;
 
 				unset($searchBar->conditions->categories);

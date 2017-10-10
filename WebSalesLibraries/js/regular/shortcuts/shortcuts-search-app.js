@@ -699,7 +699,7 @@
 		{
 			dataTable.init({
 				dataset: existedSearchResults !== undefined ? existedSearchResults.dataset : undefined,
-				dataOptions: viewOptions
+				dataViewOptions: viewOptions
 			});
 		};
 

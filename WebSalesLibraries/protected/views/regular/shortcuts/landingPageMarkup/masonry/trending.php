@@ -125,7 +125,7 @@
 		?>
 		<? if ($control->enabled): ?>
             <button type="button"
-                    class="btn btn-default link-format-toggle<? if (in_array(LinkFeedQuerySettings::LinkFormatPowerPoint, $querySettings->linkFormats)): ?> active<? endif; ?><? if ($control->hideCondition->large): ?> hidden-lg<? endif; ?>
+                    class="btn btn-default link-format-toggle<? if (in_array(LinkFeedQuerySettings::LinkFormatPowerPoint, $querySettings->linkFormatsInclude)): ?> active<? endif; ?><? if ($control->hideCondition->large): ?> hidden-lg<? endif; ?>
                             <? if ($control->hideCondition->medium): ?> hidden-md<? endif; ?>
                             <? if ($control->hideCondition->small): ?> hidden-sm<? endif; ?>
                             <? if ($control->hideCondition->extraSmall): ?> hidden-xs<? endif; ?>">
@@ -141,7 +141,7 @@
 		?>
 		<? if ($control->enabled): ?>
             <button type="button"
-                    class="btn btn-default link-format-toggle<? if (in_array(LinkFeedQuerySettings::LinkFormatVideo, $querySettings->linkFormats)): ?> active<? endif; ?><? if ($control->hideCondition->large): ?> hidden-lg<? endif; ?>
+                    class="btn btn-default link-format-toggle<? if (in_array(LinkFeedQuerySettings::LinkFormatVideo, $querySettings->linkFormatsInclude)): ?> active<? endif; ?><? if ($control->hideCondition->large): ?> hidden-lg<? endif; ?>
                             <? if ($control->hideCondition->medium): ?> hidden-md<? endif; ?>
                             <? if ($control->hideCondition->small): ?> hidden-sm<? endif; ?>
                             <? if ($control->hideCondition->extraSmall): ?> hidden-xs<? endif; ?>">
@@ -157,7 +157,7 @@
 		?>
 		<? if ($control->enabled): ?>
             <button type="button"
-                    class="btn btn-default link-format-toggle<? if (in_array(LinkFeedQuerySettings::LinkFormatDocument, $querySettings->linkFormats)): ?> active<? endif; ?><? if ($control->hideCondition->large): ?> hidden-lg<? endif; ?>
+                    class="btn btn-default link-format-toggle<? if (in_array(LinkFeedQuerySettings::LinkFormatDocument, $querySettings->linkFormatsInclude)): ?> active<? endif; ?><? if ($control->hideCondition->large): ?> hidden-lg<? endif; ?>
                             <? if ($control->hideCondition->medium): ?> hidden-md<? endif; ?>
                             <? if ($control->hideCondition->small): ?> hidden-sm<? endif; ?>
                             <? if ($control->hideCondition->extraSmall): ?> hidden-xs<? endif; ?>">
@@ -173,7 +173,7 @@
 	    ?>
 	    <? if ($control->enabled): ?>
             <button type="button"
-                    class="btn btn-default link-format-toggle<? if (in_array(LinkFeedQuerySettings::LinkFormatHyperlink, $querySettings->linkFormats)): ?> active<? endif; ?><? if ($control->hideCondition->large): ?> hidden-lg<? endif; ?>
+                    class="btn btn-default link-format-toggle<? if (in_array(LinkFeedQuerySettings::LinkFormatHyperlink, $querySettings->linkFormatsInclude)): ?> active<? endif; ?><? if ($control->hideCondition->large): ?> hidden-lg<? endif; ?>
                             <? if ($control->hideCondition->medium): ?> hidden-md<? endif; ?>
                             <? if ($control->hideCondition->small): ?> hidden-sm<? endif; ?>
                             <? if ($control->hideCondition->extraSmall): ?> hidden-xs<? endif; ?>">

@@ -35,8 +35,8 @@
 			$searchResultInfo = array();
 			if (isset($conditions->text) && $conditions->text != '')
 				$searchResultInfo['condition'] = sprintf('%s (%s)', $conditions->text, ($conditions->textExactMatch ? 'exact match' : 'partial match'));
-			if (count($conditions->fileTypes) > 0)
-				$searchResultInfo['types'] = implode(', ', $conditions->fileTypes);
+			if (count($conditions->fileTypesInclude) > 0)
+				$searchResultInfo['types'] = implode(', ', $conditions->fileTypesInclude);
 			if (isset($conditions->startDate) && isset($conditions->endDate) && $conditions->startDate != '' && $conditions->endDate != '')
 				$searchResultInfo['dates'] = sprintf('%s - %s', $conditions->startDate, $conditions->endDate);
 			if (count($conditions->superFilters) > 0)

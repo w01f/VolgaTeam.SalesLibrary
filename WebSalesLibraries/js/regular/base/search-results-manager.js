@@ -131,7 +131,8 @@
 						conditions: $.toJSON({
 							text: customSearchConditions.text,
 							textExactMatch: customSearchConditions.textExactMatch,
-							fileTypes: customSearchConditions.fileTypes,
+							fileTypesInclude: customSearchConditions.fileTypesInclude,
+							fileTypesExclude: [],
 							libraries: searchResultsSettings.baseSearchConditions.libraries,
 							superFilters: customSearchConditions.superFilters,
 							categories: customSearchConditions.categories,
@@ -385,7 +386,7 @@
 				var selectedTemplateConditions = new $.SalesPortal.SearchOptions($.parseJSON(sideBar.find('a.opened .search-conditions .encoded-object').text()));
 
 				var textCondition = selectedTemplateConditions.conditions.text;
-				var templateFileTypes = selectedTemplateConditions.conditions.fileTypes;
+				var templateFileTypes = selectedTemplateConditions.conditions.fileTypesInclude;
 				var templateStartDate = selectedTemplateConditions.conditions.startDate;
 				var templateEndDate = selectedTemplateConditions.conditions.endDate;
 
@@ -401,7 +402,8 @@
 						conditions: $.toJSON({
 							text: textCondition,
 							textExactMatch: false,
-							fileTypes: templateFileTypes,
+							fileTypesInclude: templateFileTypes,
+							fileTypesExclude: [],
 							startDate: templateStartDate,
 							endDate: templateEndDate,
 							libraries: templateLibraries,
