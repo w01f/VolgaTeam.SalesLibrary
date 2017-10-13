@@ -33,6 +33,7 @@ namespace SalesLibraries.Business.Entities.Helpers
 			switch (GetExtension(filePath))
 			{
 				case ".DOCX":
+				case ".DOCM":
 					return true;
 				default:
 					return false;
@@ -56,6 +57,7 @@ namespace SalesLibraries.Business.Entities.Helpers
 			{
 				case ".XLS":
 				case ".XLSX":
+				case ".XLSM":
 					return true;
 				default:
 					return false;

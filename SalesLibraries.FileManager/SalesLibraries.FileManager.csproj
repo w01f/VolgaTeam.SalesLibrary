@@ -189,6 +189,7 @@
     <Compile Include="Business\Models\ExternalShortcuts\ShortcutLink.cs" />
     <Compile Include="Business\Models\Security\LibraryUser.cs" />
     <Compile Include="Business\Models\WebLinkThumbnails\Link.cs" />
+    <Compile Include="Business\PreviewGenerators\ImagePreviewGenerator.cs" />
     <Compile Include="Business\PreviewGenerators\UrlPreviewGenerationLogger.cs" />
     <Compile Include="Business\PreviewGenerators\FilePreviewGenerationLogger.cs" />
     <Compile Include="Business\PreviewGenerators\PowerPointPreviewGenerator.cs" />
@@ -1382,11 +1383,11 @@
       <Name>SalesLibraries.Business</Name>
     </ProjectReference>
     <ProjectReference Include="..\SalesLibraries.CommonGUI\SalesLibraries.CommonGUI.csproj">
-      <Project>{03639419-D148-4814-B8C1-CF0AB550D136}</Project>
+      <Project>{03639419-d148-4814-b8c1-cf0ab550d136}</Project>
       <Name>SalesLibraries.CommonGUI</Name>
     </ProjectReference>
     <ProjectReference Include="..\SalesLibraries.Common\SalesLibraries.Common.csproj">
-      <Project>{F35DC0D8-6816-4033-A5E2-D446C7A956FE}</Project>
+      <Project>{f35dc0d8-6816-4033-a5e2-d446c7a956fe}</Project>
       <Name>SalesLibraries.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\SalesLibraries.Legacy\SalesLibraries.Legacy.csproj">

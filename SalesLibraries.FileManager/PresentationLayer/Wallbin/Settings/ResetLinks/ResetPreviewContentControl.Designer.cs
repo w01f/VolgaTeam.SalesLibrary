@@ -30,6 +30,20 @@
 		{
 			this.components = new System.ComponentModel.Container();
 			this.layoutControl = new DevExpress.XtraLayout.LayoutControl();
+			this.checkEditVimeo = new DevExpress.XtraEditors.CheckEdit();
+			this.checkEditYoutube = new DevExpress.XtraEditors.CheckEdit();
+			this.checkEditM4v = new DevExpress.XtraEditors.CheckEdit();
+			this.checkEditWmv = new DevExpress.XtraEditors.CheckEdit();
+			this.checkEditMov = new DevExpress.XtraEditors.CheckEdit();
+			this.checkEditMp4 = new DevExpress.XtraEditors.CheckEdit();
+			this.checkEditQuicksite = new DevExpress.XtraEditors.CheckEdit();
+			this.checkEditHtml5 = new DevExpress.XtraEditors.CheckEdit();
+			this.checkEditUrl = new DevExpress.XtraEditors.CheckEdit();
+			this.checkEditExcel = new DevExpress.XtraEditors.CheckEdit();
+			this.checkEditPdf = new DevExpress.XtraEditors.CheckEdit();
+			this.checkEditWord = new DevExpress.XtraEditors.CheckEdit();
+			this.checkEditPowerPoint = new DevExpress.XtraEditors.CheckEdit();
+			this.checkEditAllFiles = new DevExpress.XtraEditors.CheckEdit();
 			this.buttonXDeleteQV = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXRefreshQV = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXDeleteWV = new DevComponents.DotNetBar.ButtonX();
@@ -40,106 +54,96 @@
 			this.layoutControlItemRefreshWV = new DevExpress.XtraLayout.LayoutControlItem();
 			this.emptySpaceItem28 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
-			this.emptySpaceItem4 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.layoutControlItemDeleteWV = new DevExpress.XtraLayout.LayoutControlItem();
 			this.emptySpaceItem8 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.layoutControlItemRefreshQV = new DevExpress.XtraLayout.LayoutControlItem();
 			this.emptySpaceItem9 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.layoutControlItemDeleteQV = new DevExpress.XtraLayout.LayoutControlItem();
-			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
-			this.checkEditAllFiles = new DevExpress.XtraEditors.CheckEdit();
+			this.layoutControlGroupWVSettings = new DevExpress.XtraLayout.LayoutControlGroup();
 			this.simpleLabelItemWVSettingsTitle = new DevExpress.XtraLayout.SimpleLabelItem();
+			this.emptySpaceItem6 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.emptySpaceItem5 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.layoutControlItemAllFiles = new DevExpress.XtraLayout.LayoutControlItem();
-			this.emptySpaceItem6 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.emptySpaceItem4 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.simpleLabelItemWVSettingsDescription = new DevExpress.XtraLayout.SimpleLabelItem();
 			this.emptySpaceItem7 = new DevExpress.XtraLayout.EmptySpaceItem();
-			this.checkEditPowerPoint = new DevExpress.XtraEditors.CheckEdit();
+			this.layoutControlGroupWVFileFormats = new DevExpress.XtraLayout.LayoutControlGroup();
 			this.layoutControlItemPowerPoint = new DevExpress.XtraLayout.LayoutControlItem();
-			this.checkEditWord = new DevExpress.XtraEditors.CheckEdit();
 			this.layoutControlItemWord = new DevExpress.XtraLayout.LayoutControlItem();
-			this.checkEditPdf = new DevExpress.XtraEditors.CheckEdit();
 			this.layoutControlItemPdf = new DevExpress.XtraLayout.LayoutControlItem();
-			this.checkEditExcel = new DevExpress.XtraEditors.CheckEdit();
 			this.layoutControlItemExcel = new DevExpress.XtraLayout.LayoutControlItem();
-			this.checkEditUrl = new DevExpress.XtraEditors.CheckEdit();
 			this.layoutControlItemUrl = new DevExpress.XtraLayout.LayoutControlItem();
-			this.checkEditHtml5 = new DevExpress.XtraEditors.CheckEdit();
 			this.layoutControlItemHtml5 = new DevExpress.XtraLayout.LayoutControlItem();
-			this.checkEditQuicksite = new DevExpress.XtraEditors.CheckEdit();
 			this.layoutControlItemQuicksite = new DevExpress.XtraLayout.LayoutControlItem();
 			this.emptySpaceItem10 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.emptySpaceItem11 = new DevExpress.XtraLayout.EmptySpaceItem();
-			this.checkEditMp4 = new DevExpress.XtraEditors.CheckEdit();
 			this.layoutControlItemMp4 = new DevExpress.XtraLayout.LayoutControlItem();
-			this.checkEditMov = new DevExpress.XtraEditors.CheckEdit();
 			this.layoutControlItemMov = new DevExpress.XtraLayout.LayoutControlItem();
-			this.checkEditWmv = new DevExpress.XtraEditors.CheckEdit();
 			this.layoutControlItemWmv = new DevExpress.XtraLayout.LayoutControlItem();
-			this.checkEditM4v = new DevExpress.XtraEditors.CheckEdit();
 			this.layoutControlItemM4v = new DevExpress.XtraLayout.LayoutControlItem();
-			this.checkEditYoutube = new DevExpress.XtraEditors.CheckEdit();
 			this.layoutControlItemYoutube = new DevExpress.XtraLayout.LayoutControlItem();
-			this.checkEditVimeo = new DevExpress.XtraEditors.CheckEdit();
 			this.layoutControlItemVimeo = new DevExpress.XtraLayout.LayoutControlItem();
 			this.emptySpaceItem12 = new DevExpress.XtraLayout.EmptySpaceItem();
-			this.layoutControlGroupWVSettings = new DevExpress.XtraLayout.LayoutControlGroup();
-			this.layoutControlGroupWVFileFormats = new DevExpress.XtraLayout.LayoutControlGroup();
+			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
+			this.checkEditImages = new DevExpress.XtraEditors.CheckEdit();
+			this.layoutControlItemImages = new DevExpress.XtraLayout.LayoutControlItem();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControl)).BeginInit();
 			this.layoutControl.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditVimeo.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditYoutube.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditM4v.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditWmv.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditMov.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditMp4.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditQuicksite.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditHtml5.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditUrl.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditExcel.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditPdf.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditWord.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditPowerPoint.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditAllFiles.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupRoot)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem25)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemRefreshWV)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem28)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem4)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemDeleteWV)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem8)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemRefreshQV)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem9)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemDeleteQV)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditAllFiles.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupWVSettings)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemWVSettingsTitle)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem6)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem5)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemAllFiles)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem6)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem4)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemWVSettingsDescription)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem7)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditPowerPoint.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupWVFileFormats)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPowerPoint)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditWord.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemWord)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditPdf.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPdf)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditExcel.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemExcel)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditUrl.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemUrl)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditHtml5.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemHtml5)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditQuicksite.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemQuicksite)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem10)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem11)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditMp4.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemMp4)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditMov.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemMov)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditWmv.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemWmv)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditM4v.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemM4v)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditYoutube.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemYoutube)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditVimeo.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemVimeo)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem12)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupWVSettings)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupWVFileFormats)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditImages.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemImages)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// layoutControl
@@ -160,6 +164,7 @@
 			this.layoutControl.Appearance.DisabledLayoutGroupCaption.Options.UseFont = true;
 			this.layoutControl.Appearance.DisabledLayoutItem.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.layoutControl.Appearance.DisabledLayoutItem.Options.UseFont = true;
+			this.layoutControl.Controls.Add(this.checkEditImages);
 			this.layoutControl.Controls.Add(this.checkEditVimeo);
 			this.layoutControl.Controls.Add(this.checkEditYoutube);
 			this.layoutControl.Controls.Add(this.checkEditM4v);
@@ -187,6 +192,146 @@
 			this.layoutControl.StyleController = this.styleController;
 			this.layoutControl.TabIndex = 0;
 			this.layoutControl.Text = "layoutControl1";
+			// 
+			// checkEditVimeo
+			// 
+			this.checkEditVimeo.Location = new System.Drawing.Point(495, 260);
+			this.checkEditVimeo.Name = "checkEditVimeo";
+			this.checkEditVimeo.Properties.Caption = "Vimeo";
+			this.checkEditVimeo.Size = new System.Drawing.Size(95, 20);
+			this.checkEditVimeo.StyleController = this.layoutControl;
+			this.checkEditVimeo.TabIndex = 16;
+			this.checkEditVimeo.CheckedChanged += new System.EventHandler(this.OnSelectionChanged);
+			// 
+			// checkEditYoutube
+			// 
+			this.checkEditYoutube.Location = new System.Drawing.Point(409, 260);
+			this.checkEditYoutube.Name = "checkEditYoutube";
+			this.checkEditYoutube.Properties.Caption = "YouTube";
+			this.checkEditYoutube.Size = new System.Drawing.Size(82, 20);
+			this.checkEditYoutube.StyleController = this.layoutControl;
+			this.checkEditYoutube.TabIndex = 15;
+			this.checkEditYoutube.CheckedChanged += new System.EventHandler(this.OnSelectionChanged);
+			// 
+			// checkEditM4v
+			// 
+			this.checkEditM4v.Location = new System.Drawing.Point(316, 260);
+			this.checkEditM4v.Name = "checkEditM4v";
+			this.checkEditM4v.Properties.Caption = "m4v";
+			this.checkEditM4v.Size = new System.Drawing.Size(89, 20);
+			this.checkEditM4v.StyleController = this.layoutControl;
+			this.checkEditM4v.TabIndex = 14;
+			this.checkEditM4v.CheckedChanged += new System.EventHandler(this.OnSelectionChanged);
+			// 
+			// checkEditWmv
+			// 
+			this.checkEditWmv.Location = new System.Drawing.Point(226, 260);
+			this.checkEditWmv.Name = "checkEditWmv";
+			this.checkEditWmv.Properties.Caption = "wmv";
+			this.checkEditWmv.Size = new System.Drawing.Size(86, 20);
+			this.checkEditWmv.StyleController = this.layoutControl;
+			this.checkEditWmv.TabIndex = 13;
+			this.checkEditWmv.CheckedChanged += new System.EventHandler(this.OnSelectionChanged);
+			// 
+			// checkEditMov
+			// 
+			this.checkEditMov.Location = new System.Drawing.Point(134, 260);
+			this.checkEditMov.Name = "checkEditMov";
+			this.checkEditMov.Properties.Caption = "mov";
+			this.checkEditMov.Size = new System.Drawing.Size(88, 20);
+			this.checkEditMov.StyleController = this.layoutControl;
+			this.checkEditMov.TabIndex = 12;
+			this.checkEditMov.CheckedChanged += new System.EventHandler(this.OnSelectionChanged);
+			// 
+			// checkEditMp4
+			// 
+			this.checkEditMp4.Location = new System.Drawing.Point(22, 260);
+			this.checkEditMp4.Name = "checkEditMp4";
+			this.checkEditMp4.Properties.Caption = "mp4";
+			this.checkEditMp4.Size = new System.Drawing.Size(108, 20);
+			this.checkEditMp4.StyleController = this.layoutControl;
+			this.checkEditMp4.TabIndex = 11;
+			this.checkEditMp4.CheckedChanged += new System.EventHandler(this.OnSelectionChanged);
+			// 
+			// checkEditQuicksite
+			// 
+			this.checkEditQuicksite.Location = new System.Drawing.Point(594, 226);
+			this.checkEditQuicksite.Name = "checkEditQuicksite";
+			this.checkEditQuicksite.Properties.Caption = "Quicksite";
+			this.checkEditQuicksite.Size = new System.Drawing.Size(97, 20);
+			this.checkEditQuicksite.StyleController = this.layoutControl;
+			this.checkEditQuicksite.TabIndex = 10;
+			this.checkEditQuicksite.CheckedChanged += new System.EventHandler(this.OnSelectionChanged);
+			// 
+			// checkEditHtml5
+			// 
+			this.checkEditHtml5.Location = new System.Drawing.Point(495, 226);
+			this.checkEditHtml5.Name = "checkEditHtml5";
+			this.checkEditHtml5.Properties.Caption = "HTML5";
+			this.checkEditHtml5.Size = new System.Drawing.Size(95, 20);
+			this.checkEditHtml5.StyleController = this.layoutControl;
+			this.checkEditHtml5.TabIndex = 9;
+			this.checkEditHtml5.CheckedChanged += new System.EventHandler(this.OnSelectionChanged);
+			// 
+			// checkEditUrl
+			// 
+			this.checkEditUrl.Location = new System.Drawing.Point(409, 226);
+			this.checkEditUrl.Name = "checkEditUrl";
+			this.checkEditUrl.Properties.Caption = "URL";
+			this.checkEditUrl.Size = new System.Drawing.Size(82, 20);
+			this.checkEditUrl.StyleController = this.layoutControl;
+			this.checkEditUrl.TabIndex = 8;
+			this.checkEditUrl.CheckedChanged += new System.EventHandler(this.OnSelectionChanged);
+			// 
+			// checkEditExcel
+			// 
+			this.checkEditExcel.Location = new System.Drawing.Point(316, 226);
+			this.checkEditExcel.Name = "checkEditExcel";
+			this.checkEditExcel.Properties.Caption = "Excel";
+			this.checkEditExcel.Size = new System.Drawing.Size(89, 20);
+			this.checkEditExcel.StyleController = this.layoutControl;
+			this.checkEditExcel.TabIndex = 7;
+			this.checkEditExcel.CheckedChanged += new System.EventHandler(this.OnSelectionChanged);
+			// 
+			// checkEditPdf
+			// 
+			this.checkEditPdf.Location = new System.Drawing.Point(226, 226);
+			this.checkEditPdf.Name = "checkEditPdf";
+			this.checkEditPdf.Properties.Caption = "PDF";
+			this.checkEditPdf.Size = new System.Drawing.Size(86, 20);
+			this.checkEditPdf.StyleController = this.layoutControl;
+			this.checkEditPdf.TabIndex = 6;
+			this.checkEditPdf.CheckedChanged += new System.EventHandler(this.OnSelectionChanged);
+			// 
+			// checkEditWord
+			// 
+			this.checkEditWord.Location = new System.Drawing.Point(134, 226);
+			this.checkEditWord.Name = "checkEditWord";
+			this.checkEditWord.Properties.Caption = "Word";
+			this.checkEditWord.Size = new System.Drawing.Size(88, 20);
+			this.checkEditWord.StyleController = this.layoutControl;
+			this.checkEditWord.TabIndex = 5;
+			this.checkEditWord.CheckedChanged += new System.EventHandler(this.OnSelectionChanged);
+			// 
+			// checkEditPowerPoint
+			// 
+			this.checkEditPowerPoint.Location = new System.Drawing.Point(22, 226);
+			this.checkEditPowerPoint.Name = "checkEditPowerPoint";
+			this.checkEditPowerPoint.Properties.Caption = "Power Point";
+			this.checkEditPowerPoint.Size = new System.Drawing.Size(108, 20);
+			this.checkEditPowerPoint.StyleController = this.layoutControl;
+			this.checkEditPowerPoint.TabIndex = 4;
+			this.checkEditPowerPoint.CheckedChanged += new System.EventHandler(this.OnSelectionChanged);
+			// 
+			// checkEditAllFiles
+			// 
+			this.checkEditAllFiles.Location = new System.Drawing.Point(22, 162);
+			this.checkEditAllFiles.Name = "checkEditAllFiles";
+			this.checkEditAllFiles.Properties.Caption = "ALL Files";
+			this.checkEditAllFiles.Size = new System.Drawing.Size(755, 20);
+			this.checkEditAllFiles.StyleController = this.layoutControl;
+			this.checkEditAllFiles.TabIndex = 3;
+			this.checkEditAllFiles.CheckedChanged += new System.EventHandler(this.OnWVAllFilesCheckedChanged);
 			// 
 			// buttonXDeleteQV
 			// 
@@ -322,17 +467,6 @@
 			this.emptySpaceItem3.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
 			this.emptySpaceItem3.TextSize = new System.Drawing.Size(0, 0);
 			// 
-			// emptySpaceItem4
-			// 
-			this.emptySpaceItem4.AllowHotTrack = false;
-			this.emptySpaceItem4.Location = new System.Drawing.Point(10, 54);
-			this.emptySpaceItem4.MaxSize = new System.Drawing.Size(0, 10);
-			this.emptySpaceItem4.MinSize = new System.Drawing.Size(10, 10);
-			this.emptySpaceItem4.Name = "emptySpaceItem4";
-			this.emptySpaceItem4.Size = new System.Drawing.Size(759, 10);
-			this.emptySpaceItem4.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-			this.emptySpaceItem4.TextSize = new System.Drawing.Size(0, 0);
-			// 
 			// emptySpaceItem2
 			// 
 			this.emptySpaceItem2.AllowHotTrack = false;
@@ -416,32 +550,23 @@
 			this.layoutControlItemDeleteQV.TextVisible = false;
 			this.layoutControlItemDeleteQV.TrimClientAreaToControl = false;
 			// 
-			// styleController
+			// layoutControlGroupWVSettings
 			// 
-			this.styleController.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.styleController.Appearance.Options.UseFont = true;
-			this.styleController.AppearanceDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.styleController.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
-			this.styleController.AppearanceDisabled.Options.UseFont = true;
-			this.styleController.AppearanceDisabled.Options.UseForeColor = true;
-			this.styleController.AppearanceDropDown.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.styleController.AppearanceDropDown.Options.UseFont = true;
-			this.styleController.AppearanceDropDownHeader.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.styleController.AppearanceDropDownHeader.Options.UseFont = true;
-			this.styleController.AppearanceFocused.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.styleController.AppearanceFocused.Options.UseFont = true;
-			this.styleController.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.styleController.AppearanceReadOnly.Options.UseFont = true;
-			// 
-			// checkEditAllFiles
-			// 
-			this.checkEditAllFiles.Location = new System.Drawing.Point(22, 162);
-			this.checkEditAllFiles.Name = "checkEditAllFiles";
-			this.checkEditAllFiles.Properties.Caption = "ALL Files";
-			this.checkEditAllFiles.Size = new System.Drawing.Size(755, 20);
-			this.checkEditAllFiles.StyleController = this.layoutControl;
-			this.checkEditAllFiles.TabIndex = 3;
-			this.checkEditAllFiles.CheckedChanged += new System.EventHandler(this.OnWVAllFilesCheckedChanged);
+			this.layoutControlGroupWVSettings.GroupBordersVisible = false;
+			this.layoutControlGroupWVSettings.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.simpleLabelItemWVSettingsTitle,
+            this.emptySpaceItem6,
+            this.emptySpaceItem5,
+            this.layoutControlItemAllFiles,
+            this.emptySpaceItem4,
+            this.simpleLabelItemWVSettingsDescription,
+            this.emptySpaceItem7,
+            this.layoutControlGroupWVFileFormats});
+			this.layoutControlGroupWVSettings.Location = new System.Drawing.Point(0, 120);
+			this.layoutControlGroupWVSettings.Name = "layoutControlGroupWVSettings";
+			this.layoutControlGroupWVSettings.Size = new System.Drawing.Size(769, 152);
+			this.layoutControlGroupWVSettings.Text = "WV Settings";
+			this.layoutControlGroupWVSettings.TextVisible = false;
 			// 
 			// simpleLabelItemWVSettingsTitle
 			// 
@@ -453,6 +578,14 @@
 			this.simpleLabelItemWVSettingsTitle.Size = new System.Drawing.Size(769, 20);
 			this.simpleLabelItemWVSettingsTitle.Text = "Select WV Folder for:";
 			this.simpleLabelItemWVSettingsTitle.TextSize = new System.Drawing.Size(125, 16);
+			// 
+			// emptySpaceItem6
+			// 
+			this.emptySpaceItem6.AllowHotTrack = false;
+			this.emptySpaceItem6.Location = new System.Drawing.Point(0, 20);
+			this.emptySpaceItem6.Name = "emptySpaceItem6";
+			this.emptySpaceItem6.Size = new System.Drawing.Size(10, 132);
+			this.emptySpaceItem6.TextSize = new System.Drawing.Size(0, 0);
 			// 
 			// emptySpaceItem5
 			// 
@@ -478,13 +611,16 @@
 			this.layoutControlItemAllFiles.TextVisible = false;
 			this.layoutControlItemAllFiles.TrimClientAreaToControl = false;
 			// 
-			// emptySpaceItem6
+			// emptySpaceItem4
 			// 
-			this.emptySpaceItem6.AllowHotTrack = false;
-			this.emptySpaceItem6.Location = new System.Drawing.Point(0, 20);
-			this.emptySpaceItem6.Name = "emptySpaceItem6";
-			this.emptySpaceItem6.Size = new System.Drawing.Size(10, 132);
-			this.emptySpaceItem6.TextSize = new System.Drawing.Size(0, 0);
+			this.emptySpaceItem4.AllowHotTrack = false;
+			this.emptySpaceItem4.Location = new System.Drawing.Point(10, 54);
+			this.emptySpaceItem4.MaxSize = new System.Drawing.Size(0, 10);
+			this.emptySpaceItem4.MinSize = new System.Drawing.Size(10, 10);
+			this.emptySpaceItem4.Name = "emptySpaceItem4";
+			this.emptySpaceItem4.Size = new System.Drawing.Size(759, 10);
+			this.emptySpaceItem4.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem4.TextSize = new System.Drawing.Size(0, 0);
 			// 
 			// simpleLabelItemWVSettingsDescription
 			// 
@@ -508,15 +644,32 @@
 			this.emptySpaceItem7.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
 			this.emptySpaceItem7.TextSize = new System.Drawing.Size(0, 0);
 			// 
-			// checkEditPowerPoint
+			// layoutControlGroupWVFileFormats
 			// 
-			this.checkEditPowerPoint.Location = new System.Drawing.Point(22, 226);
-			this.checkEditPowerPoint.Name = "checkEditPowerPoint";
-			this.checkEditPowerPoint.Properties.Caption = "Power Point";
-			this.checkEditPowerPoint.Size = new System.Drawing.Size(108, 20);
-			this.checkEditPowerPoint.StyleController = this.layoutControl;
-			this.checkEditPowerPoint.TabIndex = 4;
-			this.checkEditPowerPoint.CheckedChanged += new System.EventHandler(this.OnSelectionChanged);
+			this.layoutControlGroupWVFileFormats.GroupBordersVisible = false;
+			this.layoutControlGroupWVFileFormats.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItemPowerPoint,
+            this.layoutControlItemWord,
+            this.layoutControlItemPdf,
+            this.layoutControlItemExcel,
+            this.layoutControlItemUrl,
+            this.layoutControlItemHtml5,
+            this.layoutControlItemQuicksite,
+            this.emptySpaceItem10,
+            this.emptySpaceItem11,
+            this.layoutControlItemMp4,
+            this.layoutControlItemMov,
+            this.layoutControlItemWmv,
+            this.layoutControlItemM4v,
+            this.layoutControlItemYoutube,
+            this.layoutControlItemVimeo,
+            this.emptySpaceItem12,
+            this.layoutControlItemImages});
+			this.layoutControlGroupWVFileFormats.Location = new System.Drawing.Point(10, 94);
+			this.layoutControlGroupWVFileFormats.Name = "layoutControlGroupWVFileFormats";
+			this.layoutControlGroupWVFileFormats.Size = new System.Drawing.Size(759, 58);
+			this.layoutControlGroupWVFileFormats.Text = "WV File Formats";
+			this.layoutControlGroupWVFileFormats.TextVisible = false;
 			// 
 			// layoutControlItemPowerPoint
 			// 
@@ -531,16 +684,6 @@
 			this.layoutControlItemPowerPoint.TextVisible = false;
 			this.layoutControlItemPowerPoint.TrimClientAreaToControl = false;
 			// 
-			// checkEditWord
-			// 
-			this.checkEditWord.Location = new System.Drawing.Point(134, 226);
-			this.checkEditWord.Name = "checkEditWord";
-			this.checkEditWord.Properties.Caption = "Word";
-			this.checkEditWord.Size = new System.Drawing.Size(88, 20);
-			this.checkEditWord.StyleController = this.layoutControl;
-			this.checkEditWord.TabIndex = 5;
-			this.checkEditWord.CheckedChanged += new System.EventHandler(this.OnSelectionChanged);
-			// 
 			// layoutControlItemWord
 			// 
 			this.layoutControlItemWord.Control = this.checkEditWord;
@@ -553,16 +696,6 @@
 			this.layoutControlItemWord.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutControlItemWord.TextVisible = false;
 			this.layoutControlItemWord.TrimClientAreaToControl = false;
-			// 
-			// checkEditPdf
-			// 
-			this.checkEditPdf.Location = new System.Drawing.Point(226, 226);
-			this.checkEditPdf.Name = "checkEditPdf";
-			this.checkEditPdf.Properties.Caption = "PDF";
-			this.checkEditPdf.Size = new System.Drawing.Size(86, 20);
-			this.checkEditPdf.StyleController = this.layoutControl;
-			this.checkEditPdf.TabIndex = 6;
-			this.checkEditPdf.CheckedChanged += new System.EventHandler(this.OnSelectionChanged);
 			// 
 			// layoutControlItemPdf
 			// 
@@ -577,16 +710,6 @@
 			this.layoutControlItemPdf.TextVisible = false;
 			this.layoutControlItemPdf.TrimClientAreaToControl = false;
 			// 
-			// checkEditExcel
-			// 
-			this.checkEditExcel.Location = new System.Drawing.Point(316, 226);
-			this.checkEditExcel.Name = "checkEditExcel";
-			this.checkEditExcel.Properties.Caption = "Excel";
-			this.checkEditExcel.Size = new System.Drawing.Size(89, 20);
-			this.checkEditExcel.StyleController = this.layoutControl;
-			this.checkEditExcel.TabIndex = 7;
-			this.checkEditExcel.CheckedChanged += new System.EventHandler(this.OnSelectionChanged);
-			// 
 			// layoutControlItemExcel
 			// 
 			this.layoutControlItemExcel.Control = this.checkEditExcel;
@@ -599,16 +722,6 @@
 			this.layoutControlItemExcel.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutControlItemExcel.TextVisible = false;
 			this.layoutControlItemExcel.TrimClientAreaToControl = false;
-			// 
-			// checkEditUrl
-			// 
-			this.checkEditUrl.Location = new System.Drawing.Point(409, 226);
-			this.checkEditUrl.Name = "checkEditUrl";
-			this.checkEditUrl.Properties.Caption = "URL";
-			this.checkEditUrl.Size = new System.Drawing.Size(82, 20);
-			this.checkEditUrl.StyleController = this.layoutControl;
-			this.checkEditUrl.TabIndex = 8;
-			this.checkEditUrl.CheckedChanged += new System.EventHandler(this.OnSelectionChanged);
 			// 
 			// layoutControlItemUrl
 			// 
@@ -623,16 +736,6 @@
 			this.layoutControlItemUrl.TextVisible = false;
 			this.layoutControlItemUrl.TrimClientAreaToControl = false;
 			// 
-			// checkEditHtml5
-			// 
-			this.checkEditHtml5.Location = new System.Drawing.Point(495, 226);
-			this.checkEditHtml5.Name = "checkEditHtml5";
-			this.checkEditHtml5.Properties.Caption = "HTML5";
-			this.checkEditHtml5.Size = new System.Drawing.Size(95, 20);
-			this.checkEditHtml5.StyleController = this.layoutControl;
-			this.checkEditHtml5.TabIndex = 9;
-			this.checkEditHtml5.CheckedChanged += new System.EventHandler(this.OnSelectionChanged);
-			// 
 			// layoutControlItemHtml5
 			// 
 			this.layoutControlItemHtml5.Control = this.checkEditHtml5;
@@ -645,16 +748,6 @@
 			this.layoutControlItemHtml5.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutControlItemHtml5.TextVisible = false;
 			this.layoutControlItemHtml5.TrimClientAreaToControl = false;
-			// 
-			// checkEditQuicksite
-			// 
-			this.checkEditQuicksite.Location = new System.Drawing.Point(594, 226);
-			this.checkEditQuicksite.Name = "checkEditQuicksite";
-			this.checkEditQuicksite.Properties.Caption = "Quicksite";
-			this.checkEditQuicksite.Size = new System.Drawing.Size(97, 20);
-			this.checkEditQuicksite.StyleController = this.layoutControl;
-			this.checkEditQuicksite.TabIndex = 10;
-			this.checkEditQuicksite.CheckedChanged += new System.EventHandler(this.OnSelectionChanged);
 			// 
 			// layoutControlItemQuicksite
 			// 
@@ -688,16 +781,6 @@
 			this.emptySpaceItem11.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
 			this.emptySpaceItem11.TextSize = new System.Drawing.Size(0, 0);
 			// 
-			// checkEditMp4
-			// 
-			this.checkEditMp4.Location = new System.Drawing.Point(22, 260);
-			this.checkEditMp4.Name = "checkEditMp4";
-			this.checkEditMp4.Properties.Caption = "mp4";
-			this.checkEditMp4.Size = new System.Drawing.Size(108, 20);
-			this.checkEditMp4.StyleController = this.layoutControl;
-			this.checkEditMp4.TabIndex = 11;
-			this.checkEditMp4.CheckedChanged += new System.EventHandler(this.OnSelectionChanged);
-			// 
 			// layoutControlItemMp4
 			// 
 			this.layoutControlItemMp4.Control = this.checkEditMp4;
@@ -710,16 +793,6 @@
 			this.layoutControlItemMp4.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutControlItemMp4.TextVisible = false;
 			this.layoutControlItemMp4.TrimClientAreaToControl = false;
-			// 
-			// checkEditMov
-			// 
-			this.checkEditMov.Location = new System.Drawing.Point(134, 260);
-			this.checkEditMov.Name = "checkEditMov";
-			this.checkEditMov.Properties.Caption = "mov";
-			this.checkEditMov.Size = new System.Drawing.Size(88, 20);
-			this.checkEditMov.StyleController = this.layoutControl;
-			this.checkEditMov.TabIndex = 12;
-			this.checkEditMov.CheckedChanged += new System.EventHandler(this.OnSelectionChanged);
 			// 
 			// layoutControlItemMov
 			// 
@@ -734,16 +807,6 @@
 			this.layoutControlItemMov.TextVisible = false;
 			this.layoutControlItemMov.TrimClientAreaToControl = false;
 			// 
-			// checkEditWmv
-			// 
-			this.checkEditWmv.Location = new System.Drawing.Point(226, 260);
-			this.checkEditWmv.Name = "checkEditWmv";
-			this.checkEditWmv.Properties.Caption = "wmv";
-			this.checkEditWmv.Size = new System.Drawing.Size(86, 20);
-			this.checkEditWmv.StyleController = this.layoutControl;
-			this.checkEditWmv.TabIndex = 13;
-			this.checkEditWmv.CheckedChanged += new System.EventHandler(this.OnSelectionChanged);
-			// 
 			// layoutControlItemWmv
 			// 
 			this.layoutControlItemWmv.Control = this.checkEditWmv;
@@ -756,16 +819,6 @@
 			this.layoutControlItemWmv.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutControlItemWmv.TextVisible = false;
 			this.layoutControlItemWmv.TrimClientAreaToControl = false;
-			// 
-			// checkEditM4v
-			// 
-			this.checkEditM4v.Location = new System.Drawing.Point(316, 260);
-			this.checkEditM4v.Name = "checkEditM4v";
-			this.checkEditM4v.Properties.Caption = "m4v";
-			this.checkEditM4v.Size = new System.Drawing.Size(89, 20);
-			this.checkEditM4v.StyleController = this.layoutControl;
-			this.checkEditM4v.TabIndex = 14;
-			this.checkEditM4v.CheckedChanged += new System.EventHandler(this.OnSelectionChanged);
 			// 
 			// layoutControlItemM4v
 			// 
@@ -780,16 +833,6 @@
 			this.layoutControlItemM4v.TextVisible = false;
 			this.layoutControlItemM4v.TrimClientAreaToControl = false;
 			// 
-			// checkEditYoutube
-			// 
-			this.checkEditYoutube.Location = new System.Drawing.Point(409, 260);
-			this.checkEditYoutube.Name = "checkEditYoutube";
-			this.checkEditYoutube.Properties.Caption = "YouTube";
-			this.checkEditYoutube.Size = new System.Drawing.Size(82, 20);
-			this.checkEditYoutube.StyleController = this.layoutControl;
-			this.checkEditYoutube.TabIndex = 15;
-			this.checkEditYoutube.CheckedChanged += new System.EventHandler(this.OnSelectionChanged);
-			// 
 			// layoutControlItemYoutube
 			// 
 			this.layoutControlItemYoutube.Control = this.checkEditYoutube;
@@ -802,16 +845,6 @@
 			this.layoutControlItemYoutube.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutControlItemYoutube.TextVisible = false;
 			this.layoutControlItemYoutube.TrimClientAreaToControl = false;
-			// 
-			// checkEditVimeo
-			// 
-			this.checkEditVimeo.Location = new System.Drawing.Point(495, 260);
-			this.checkEditVimeo.Name = "checkEditVimeo";
-			this.checkEditVimeo.Properties.Caption = "Vimeo";
-			this.checkEditVimeo.Size = new System.Drawing.Size(95, 20);
-			this.checkEditVimeo.StyleController = this.layoutControl;
-			this.checkEditVimeo.TabIndex = 16;
-			this.checkEditVimeo.CheckedChanged += new System.EventHandler(this.OnSelectionChanged);
 			// 
 			// layoutControlItemVimeo
 			// 
@@ -829,54 +862,47 @@
 			// emptySpaceItem12
 			// 
 			this.emptySpaceItem12.AllowHotTrack = false;
-			this.emptySpaceItem12.Location = new System.Drawing.Point(572, 34);
+			this.emptySpaceItem12.Location = new System.Drawing.Point(673, 34);
 			this.emptySpaceItem12.Name = "emptySpaceItem12";
-			this.emptySpaceItem12.Size = new System.Drawing.Size(187, 24);
+			this.emptySpaceItem12.Size = new System.Drawing.Size(86, 24);
 			this.emptySpaceItem12.TextSize = new System.Drawing.Size(0, 0);
 			// 
-			// layoutControlGroupWVSettings
+			// styleController
 			// 
-			this.layoutControlGroupWVSettings.GroupBordersVisible = false;
-			this.layoutControlGroupWVSettings.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.simpleLabelItemWVSettingsTitle,
-            this.emptySpaceItem6,
-            this.emptySpaceItem5,
-            this.layoutControlItemAllFiles,
-            this.emptySpaceItem4,
-            this.simpleLabelItemWVSettingsDescription,
-            this.emptySpaceItem7,
-            this.layoutControlGroupWVFileFormats});
-			this.layoutControlGroupWVSettings.Location = new System.Drawing.Point(0, 120);
-			this.layoutControlGroupWVSettings.Name = "layoutControlGroupWVSettings";
-			this.layoutControlGroupWVSettings.Size = new System.Drawing.Size(769, 152);
-			this.layoutControlGroupWVSettings.Text = "WV Settings";
-			this.layoutControlGroupWVSettings.TextVisible = false;
+			this.styleController.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.styleController.Appearance.Options.UseFont = true;
+			this.styleController.AppearanceDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
+			this.styleController.AppearanceDisabled.Options.UseFont = true;
+			this.styleController.AppearanceDisabled.Options.UseForeColor = true;
+			this.styleController.AppearanceDropDown.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceDropDown.Options.UseFont = true;
+			this.styleController.AppearanceDropDownHeader.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceDropDownHeader.Options.UseFont = true;
+			this.styleController.AppearanceFocused.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceFocused.Options.UseFont = true;
+			this.styleController.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceReadOnly.Options.UseFont = true;
 			// 
-			// layoutControlGroupWVFileFormats
+			// checkEditImages
 			// 
-			this.layoutControlGroupWVFileFormats.GroupBordersVisible = false;
-			this.layoutControlGroupWVFileFormats.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItemPowerPoint,
-            this.layoutControlItemWord,
-            this.layoutControlItemPdf,
-            this.layoutControlItemExcel,
-            this.layoutControlItemUrl,
-            this.layoutControlItemHtml5,
-            this.layoutControlItemQuicksite,
-            this.emptySpaceItem10,
-            this.emptySpaceItem11,
-            this.layoutControlItemMp4,
-            this.layoutControlItemMov,
-            this.layoutControlItemWmv,
-            this.layoutControlItemM4v,
-            this.layoutControlItemYoutube,
-            this.layoutControlItemVimeo,
-            this.emptySpaceItem12});
-			this.layoutControlGroupWVFileFormats.Location = new System.Drawing.Point(10, 94);
-			this.layoutControlGroupWVFileFormats.Name = "layoutControlGroupWVFileFormats";
-			this.layoutControlGroupWVFileFormats.Size = new System.Drawing.Size(759, 58);
-			this.layoutControlGroupWVFileFormats.Text = "WV File Formats";
-			this.layoutControlGroupWVFileFormats.TextVisible = false;
+			this.checkEditImages.Location = new System.Drawing.Point(594, 260);
+			this.checkEditImages.Name = "checkEditImages";
+			this.checkEditImages.Properties.Caption = "Images";
+			this.checkEditImages.Size = new System.Drawing.Size(97, 20);
+			this.checkEditImages.StyleController = this.layoutControl;
+			this.checkEditImages.TabIndex = 17;
+			this.checkEditImages.CheckedChanged += new System.EventHandler(this.OnSelectionChanged);
+			// 
+			// layoutControlItemImages
+			// 
+			this.layoutControlItemImages.Control = this.checkEditImages;
+			this.layoutControlItemImages.Location = new System.Drawing.Point(572, 34);
+			this.layoutControlItemImages.Name = "layoutControlItemImages";
+			this.layoutControlItemImages.Size = new System.Drawing.Size(101, 24);
+			this.layoutControlItemImages.Text = "Images";
+			this.layoutControlItemImages.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemImages.TextVisible = false;
 			// 
 			// ResetPreviewContentControl
 			// 
@@ -887,58 +913,60 @@
 			this.Size = new System.Drawing.Size(789, 522);
 			((System.ComponentModel.ISupportInitialize)(this.layoutControl)).EndInit();
 			this.layoutControl.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.checkEditVimeo.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditYoutube.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditM4v.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditWmv.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditMov.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditMp4.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditQuicksite.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditHtml5.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditUrl.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditExcel.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditPdf.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditWord.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditPowerPoint.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditAllFiles.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupRoot)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem25)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemRefreshWV)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem28)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem4)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemDeleteWV)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem8)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemRefreshQV)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem9)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemDeleteQV)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditAllFiles.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupWVSettings)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemWVSettingsTitle)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem6)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem5)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemAllFiles)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem6)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem4)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemWVSettingsDescription)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem7)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditPowerPoint.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupWVFileFormats)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPowerPoint)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditWord.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemWord)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditPdf.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPdf)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditExcel.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemExcel)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditUrl.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemUrl)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditHtml5.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemHtml5)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditQuicksite.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemQuicksite)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem10)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem11)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditMp4.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemMp4)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditMov.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemMov)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditWmv.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemWmv)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditM4v.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemM4v)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditYoutube.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemYoutube)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditVimeo.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemVimeo)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem12)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupWVSettings)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupWVFileFormats)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditImages.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemImages)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -1002,5 +1030,7 @@
 		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem12;
 		private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroupWVSettings;
 		private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroupWVFileFormats;
+		private DevExpress.XtraEditors.CheckEdit checkEditImages;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemImages;
 	}
 }

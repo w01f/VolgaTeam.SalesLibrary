@@ -137,6 +137,10 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 				previewContainer = CreateEntity<VideoPreviewContainer>();
 			else if (FileFormatHelper.IsVideoFile(sourceFile))
 				previewContainer = CreateEntity<VideoPreviewContainer>();
+			else if (FileFormatHelper.IsPngFile(sourceFile) ||
+				FileFormatHelper.IsJpegFile(sourceFile) ||
+				FileFormatHelper.IsGifFile(sourceFile))
+				previewContainer = CreateEntity<ImagePreviewContainer>();
 			else if (sourceFile.Contains("youtu"))
 				previewContainer = CreateEntity<YoutubePreviewContainer>();
 			else if (sourceFile.Contains("vimeo"))

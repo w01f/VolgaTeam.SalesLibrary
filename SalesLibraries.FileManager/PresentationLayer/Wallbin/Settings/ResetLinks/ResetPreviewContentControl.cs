@@ -52,7 +52,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings.ResetLin
 				checkEditWmv,
 				checkEditM4v,
 				checkEditYoutube,
-				checkEditVimeo
+				checkEditVimeo,
+				checkEditImages
 			});
 
 			layoutControlItemRefreshQV.Visibility =
@@ -127,6 +128,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings.ResetLin
 						previewContainers.AddRange(library.PreviewContainers.OfType<YoutubePreviewContainer>());
 					if (checkEditVimeo.Checked)
 						previewContainers.AddRange(library.PreviewContainers.OfType<VimeoPreviewContainer>());
+					if (checkEditImages.Checked)
+						previewContainers.AddRange(library.PreviewContainers.OfType<ImagePreviewContainer>());
 				}
 				MainController.Instance.ProcessManager.Run("Updating WV files...", (cancelationToken, formProgess) =>
 				{
@@ -190,6 +193,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings.ResetLin
 						previewContainers.AddRange(library.PreviewContainers.OfType<YoutubePreviewContainer>());
 					if (checkEditVimeo.Checked)
 						previewContainers.AddRange(library.PreviewContainers.OfType<VimeoPreviewContainer>());
+					if (checkEditImages.Checked)
+						previewContainers.AddRange(library.PreviewContainers.OfType<ImagePreviewContainer>());
 					MainController.Instance.ProcessManager.Run("Deleting WV files...", (cancelationToken, formProgess) =>
 					{
 						foreach (var previewContainer in previewContainers)

@@ -144,6 +144,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 				case ".AIT":
 					return 7;
 				case ".DOC":
+				case ".DOCM":
 					return 8;
 				case ".DOCX":
 					return 9;
@@ -197,6 +198,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 				case ".XLS":
 				case ".XLT":
 				case ".XLTX":
+				case ".XLSM":
 					return 26;
 				case ".XLSX":
 					return 27;
