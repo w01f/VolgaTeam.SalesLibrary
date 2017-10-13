@@ -125,7 +125,7 @@
 				'thumbnail' => sprintf("case when '%s' = 0
 							        then (case
 							              when link.original_format='jpeg' or link.original_format='gif' or link.original_format='png' then
-							                concat(lib.path,'/',link.file_relative_path)
+							                (select concat(lib.path,'/',pv.relative_path) from tbl_preview pv where pv.id_container=link.id_preview and pv.type='thumbs' order by pv.relative_path limit 1)
 							              when link.original_format='url' or link.original_format='html5' or link.original_format='youtube' or link.original_format='vimeo' or link.original_format='quicksite' then
 							                (select concat(lib.path,'/',pv.relative_path) from tbl_preview pv where pv.id_container=link.id_preview and pv.type='thumbs' order by pv.relative_path limit 1)
 							              when link.original_format='video' then
@@ -141,7 +141,7 @@
 							              end)
 							      else (case
 							            when link.original_format='jpeg' or link.original_format='gif' or link.original_format='png' then
-							              concat(lib.path,'/',link.file_relative_path)
+							              (select concat(lib.path,'/',pv.relative_path) from tbl_preview pv where pv.id_container=link.id_preview and pv.type='thumbs' order by rand() limit 1)
 										when link.original_format='url' or link.original_format='html5' or link.original_format='youtube' or link.original_format='vimeo' or link.original_format='quicksite' then
 							              (select concat(lib.path,'/',pv.relative_path) from tbl_preview pv where pv.id_container=link.id_preview and pv.type='thumbs' order by rand() limit 1)							              
 							            when link.original_format='video' then
@@ -831,7 +831,7 @@
 								) as total_views',
 				'thumbnail' => "case 
 							when link.original_format='jpeg' or link.original_format='gif' or link.original_format='png' then
-								concat(lib.path,'/',link.file_relative_path)
+								(select concat(lib.path,'/',pv.relative_path) from tbl_preview pv where pv.id_container=link.id_preview and pv.type='thumbs' " . $thumbnailCondition . ")
 							when link.original_format='url' or link.original_format='html5' or link.original_format='youtube' or link.original_format='vimeo' or link.original_format='quicksite' then
 								(select concat(lib.path,'/',pv.relative_path) from tbl_preview pv where pv.id_container=link.id_preview and pv.type='thumbs' " . $thumbnailCondition . ")								
 							when link.original_format='video' then
