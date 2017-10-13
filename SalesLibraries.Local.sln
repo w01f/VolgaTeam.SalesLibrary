@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesLibraries.Cloner", "Sa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesLibraries.BatchTagger", "SalesLibraries.BatchTagger\SalesLibraries.BatchTagger.csproj", "{801A2603-B5CA-4178-AD30-0F6F2F9FC0C7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesLibraries.WVSummary", "SalesLibraries.WVSummary\SalesLibraries.WVSummary.csproj", "{2007BE14-FEF4-4A43-A0B2-62A3BB11D0A4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +79,10 @@ Global
 		{801A2603-B5CA-4178-AD30-0F6F2F9FC0C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{801A2603-B5CA-4178-AD30-0F6F2F9FC0C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{801A2603-B5CA-4178-AD30-0F6F2F9FC0C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2007BE14-FEF4-4A43-A0B2-62A3BB11D0A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2007BE14-FEF4-4A43-A0B2-62A3BB11D0A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2007BE14-FEF4-4A43-A0B2-62A3BB11D0A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2007BE14-FEF4-4A43-A0B2-62A3BB11D0A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
