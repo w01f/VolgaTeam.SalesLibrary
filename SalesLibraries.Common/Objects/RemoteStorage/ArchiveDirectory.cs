@@ -6,9 +6,8 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using SalesLibraries.Common.Extensions;
 using SalesLibraries.Common.Helpers;
-using SharpCompress.Common;
-using SharpCompress.Reader;
-using SharpCompress.Reader.Rar;
+using SharpCompress.Readers;
+using SharpCompress.Readers.Rar;
 using WebDAVClient.Helpers;
 
 namespace SalesLibraries.Common.Objects.RemoteStorage
@@ -112,7 +111,7 @@ namespace SalesLibraries.Common.Objects.RemoteStorage
 							while (reader.MoveToNextEntry())
 							{
 								alreadyRead += reader.Entry.CompressedSize;
-								reader.WriteEntryToDirectory(targetPath, ExtractOptions.ExtractFullPath | ExtractOptions.Overwrite);
+								reader.WriteEntryToDirectory(targetPath, new ExtractionOptions() { ExtractFullPath = true, Overwrite = true });
 								FileStorageManager.Instance.ShowExtractionProgress(new FileProcessingProgressEventArgs(NameOnly, contentLenght,
 									alreadyRead));
 							}
