@@ -15,14 +15,26 @@
 ?>
 <style>
     <? if (isset($style->padding) && $style->padding->isConfigured): ?>
-    <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .content-container {
+        <? if (isset($libraryPage->columns) && $libraryPage->enableColumns && !$style->columnStyleEnabled): ?>
+            <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .header-container {
+                padding-top: <? echo $style->padding->top; ?>px !important;
+                padding-left: <? echo $style->padding->left; ?>px !important;
+                padding-right: <? echo $style->padding->right; ?>px !important;
+            }
+            <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .content-container {
+                padding-left: <? echo $style->padding->left; ?>px !important;
+                padding-bottom: <? echo $style->padding->bottom; ?>px !important;
+                padding-right: <? echo $style->padding->right; ?>px !important;
+            }
+        <?else:?>
+            <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .content-container {
 
-        padding-top: <? echo $style->padding->top; ?>px !important;
-        padding-left: <? echo $style->padding->left; ?>px !important;
-        padding-bottom: <? echo $style->padding->bottom; ?>px !important;
-        padding-right: <? echo $style->padding->right; ?>px !important;
-    }
-
+                padding-top: <? echo $style->padding->top; ?>px !important;
+                padding-left: <? echo $style->padding->left; ?>px !important;
+                padding-bottom: <? echo $style->padding->bottom; ?>px !important;
+                padding-right: <? echo $style->padding->right; ?>px !important;
+            }
+        <?endif;?>
     <?endif;?>
     <? if (!$style->columnStyleEnabled): ?>
 
@@ -165,45 +177,47 @@
 <div class="page-container" id="page-<? echo $libraryPage->id; ?>">
 	<? if (isset($libraryPage->columns) && $libraryPage->enableColumns && !$style->columnStyleEnabled): ?>
 		<div class="header-container">
-			<? for ($i = 0; $i < 3; $i++): ?>
-				<? if (isset($libraryPage->columns[$i])): ?>
-					<? $column = $libraryPage->columns[$i]; ?>
-					<div class="column-header-container column-header-container-<? echo $i; ?>"
-					     style="font-family: <? echo FontReplacementHelper::replaceFont(isset($column->banner) && $column->banner->isEnabled ? $column->banner->font->name : $column->font->name); ?>;
-						     font-size: <? echo isset($column->banner) && $column->banner->isEnabled ? $column->banner->font->size : $column->font->size; ?>pt;
-						     font-weight: <? echo (isset($column->banner) && $column->banner->isEnabled ? $column->banner->font->isBold : $column->font->isBold) ? ' bold' : ' normal'; ?>;
-						     font-style: <? echo (isset($column->banner) && $column->banner->isEnabled ? $column->banner->font->isItalic : $column->font->isItalic) ? ' italic' : ' normal'; ?>;
-						     text-decoration: <? echo (isset($column->banner) && $column->banner->isEnabled ? $column->banner->font->isUnderlined : $column->font->isUnderlined) ? ' underline' : ' inherit'; ?>;
-						     text-align: <? echo isset($column->banner) && $column->banner->isEnabled ? $column->banner->imageAlignment : $column->alignment; ?>;
-						     background-color: <? echo $column->backColor; ?>;
-						     color: <? echo isset($column->banner) && $column->banner->isEnabled ? $column->banner->foreColor : $column->foreColor; ?>;">
-						<? if (isset($column->banner) && $column->banner->isEnabled): ?>
-							<table style="height: 100%; display: inline;">
-								<tr>
-									<td><img src="data:image/png;base64,<? echo $column->banner->image; ?>"></td>
-									<? if ($column->banner->showText): ?>
-										<td>
-											<span style="text-align: <? echo $column->banner->imageAlignment; ?>;">
-												<? echo nl2br($column->banner->text); ?>
-											</span>
-										</td>
-									<? endif; ?>
-								</tr>
-							</table>
-						<? else: ?>
-							<? $widget = $column->getWidget(); ?>
-							<? if (isset($widget)): ?>
-								<img class="column-widget" src="data:image/png;base64,<? echo $widget; ?>">
-							<? endif; ?>
-							<? if ($column->showText): ?>
-								<span class="column-header"><? echo $column->name; ?></span>
-							<? endif; ?>
-						<? endif; ?>
-					</div>
-				<? else: ?>
-					<div class="column-header-container"></div>
-				<? endif; ?>
-			<? endfor; ?>
+            <div>
+                <? for ($i = 0; $i < 3; $i++): ?>
+                    <? if (isset($libraryPage->columns[$i])): ?>
+                        <? $column = $libraryPage->columns[$i]; ?>
+                        <div class="column-header-container column-header-container-<? echo $i; ?>"
+                             style="font-family: <? echo FontReplacementHelper::replaceFont(isset($column->banner) && $column->banner->isEnabled ? $column->banner->font->name : $column->font->name); ?>;
+                                 font-size: <? echo isset($column->banner) && $column->banner->isEnabled ? $column->banner->font->size : $column->font->size; ?>pt;
+                                 font-weight: <? echo (isset($column->banner) && $column->banner->isEnabled ? $column->banner->font->isBold : $column->font->isBold) ? ' bold' : ' normal'; ?>;
+                                 font-style: <? echo (isset($column->banner) && $column->banner->isEnabled ? $column->banner->font->isItalic : $column->font->isItalic) ? ' italic' : ' normal'; ?>;
+                                 text-decoration: <? echo (isset($column->banner) && $column->banner->isEnabled ? $column->banner->font->isUnderlined : $column->font->isUnderlined) ? ' underline' : ' inherit'; ?>;
+                                 text-align: <? echo isset($column->banner) && $column->banner->isEnabled ? $column->banner->imageAlignment : $column->alignment; ?>;
+                                 background-color: <? echo $column->backColor; ?>;
+                                 color: <? echo isset($column->banner) && $column->banner->isEnabled ? $column->banner->foreColor : $column->foreColor; ?>;">
+                            <? if (isset($column->banner) && $column->banner->isEnabled): ?>
+                                <table style="height: 100%; display: inline;">
+                                    <tr>
+                                        <td><img src="data:image/png;base64,<? echo $column->banner->image; ?>"></td>
+                                        <? if ($column->banner->showText): ?>
+                                            <td>
+                                                <span style="text-align: <? echo $column->banner->imageAlignment; ?>;">
+                                                    <? echo nl2br($column->banner->text); ?>
+                                                </span>
+                                            </td>
+                                        <? endif; ?>
+                                    </tr>
+                                </table>
+                            <? else: ?>
+                                <? $widget = $column->getWidget(); ?>
+                                <? if (isset($widget)): ?>
+                                    <img class="column-widget" src="data:image/png;base64,<? echo $widget; ?>">
+                                <? endif; ?>
+                                <? if ($column->showText): ?>
+                                    <span class="column-header"><? echo $column->name; ?></span>
+                                <? endif; ?>
+                            <? endif; ?>
+                        </div>
+                    <? else: ?>
+                        <div class="column-header-container"></div>
+                    <? endif; ?>
+                <? endfor; ?>
+            </div>
 		</div>
 	<? endif; ?>
 	<div class="content-container">

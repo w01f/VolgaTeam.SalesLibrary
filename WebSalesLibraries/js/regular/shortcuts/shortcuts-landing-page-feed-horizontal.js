@@ -282,6 +282,19 @@
 				});
 			});
 
+			feedContainer.find('.carousel-links .item .direct-url').off('click').on('click', function (e) {
+				var linkId = $(this).find('.service-data .link-id').text();
+				var url = $(this).data('url');
+				$.SalesPortal.LogHelper.write({
+					type: 'Link',
+					subType: 'Open',
+					linkId: linkId,
+					data: {
+						file: url
+					}
+				});
+			});
+
 			feedContainer.find('.carousel-links .item .draggable').off('dragstart').on('dragstart', function (e) {
 				var urlHeader = $(this).data("url-header");
 				var url = $(this).data('url');

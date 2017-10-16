@@ -3,9 +3,14 @@
 	/** @var $downloadInfoList FileDownloadInfo[] */
 ?>
 <style>
+    .zip-files-form legend {
+        font-size: 19px;
+        color: #999999;
+    }
     .zip-files-form .total-files-info {
         margin-top: 10px;
         margin-bottom: 10px;
+        color: #999999;
     }
 
     .zip-files-form .zip-files-list {

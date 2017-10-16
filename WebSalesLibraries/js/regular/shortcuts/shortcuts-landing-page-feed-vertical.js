@@ -254,7 +254,9 @@
 					});
 				}
 			});
+
 			$.SalesPortal.ShortcutsManager.assignShortcutItemHandlers(feedItemsList);
+
 			feedItemsList.find('.library-link-block.previewable').off('click').on('click', function (e)
 			{
 				e.stopPropagation();
@@ -262,6 +264,20 @@
 				$.SalesPortal.LinkManager.requestViewDialog({
 					linkId: linkId,
 					isQuickSite: false
+				});
+			});
+
+			feedItemsList.find('.library-link-block.direct-url').off('click').on('click', function (e)
+			{
+				var linkId = $(this).find('.service-data .link-id').text();
+				var url = $(this).data('url');
+				$.SalesPortal.LogHelper.write({
+					type: 'Link',
+					subType: 'Open',
+					linkId: linkId,
+					data: {
+						file: url
+					}
 				});
 			});
 

@@ -10,7 +10,7 @@
 	 */
 ?>
 <? foreach ($feedItems as $masonryItem): ?>
-    <a href="<? echo $masonryItem->isDirectUrl ? $masonryItem->url : '#'; ?>"<? if ($masonryItem->isDirectUrl): ?> target="_blank"<? endif; ?>  class="cbp-item library-link-item<? if ($masonryItem->isDraggable): ?> draggable<? endif; ?><? if (!$masonryItem->isDirectUrl): ?> previewable<? endif; ?>"
+    <a href="<? echo $masonryItem->isDirectUrl ? $masonryItem->url : '#'; ?>"<? if ($masonryItem->isDirectUrl): ?> target="_blank"<? endif; ?>  class="cbp-item library-link-item<? if ($masonryItem->isDraggable): ?> draggable<? endif; ?><? if (!$masonryItem->isDirectUrl): ?> previewable<? else:?> direct-url<? endif; ?>"
 	   <? if ($masonryItem->isDraggable): ?>draggable="true"
        data-url-header="<? echo $masonryItem->dragHeader; ?>"
        data-url="<? echo $masonryItem->url; ?>"<? endif; ?>

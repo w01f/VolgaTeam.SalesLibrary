@@ -138,3 +138,7 @@
 #m_excelEmbedRenderer_m_ewaEmbedViewerBar {
     display: none !important;
 }
+
+.link-viewer .image-button .dropdown-menu {
+    left: -40px;
+}

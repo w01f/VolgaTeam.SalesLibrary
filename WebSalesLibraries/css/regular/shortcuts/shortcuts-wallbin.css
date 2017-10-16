@@ -128,11 +128,15 @@
 	display: none;
 }
 
+#content .wallbin-container .page-container
+{
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
 #content .wallbin-container .page-container .content-container
 {
 	width: 100%;
-	overflow-y: auto;
-	-webkit-overflow-scrolling: touch;
 }
 
 #content .wallbin-container .page-container .content-columns-container
@@ -143,7 +147,7 @@
     table-layout: fixed;
 }
 /*Columns------------------------------------*/
-#content .wallbin-container .page-container .header-container
+#content .wallbin-container .page-container .header-container > div
 {
 	width: 100%;
 	display: table;
