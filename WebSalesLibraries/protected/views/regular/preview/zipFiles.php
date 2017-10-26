@@ -37,7 +37,7 @@
     }
 </style>
 <div class="zip-files-form logger-form" data-log-group="Link" data-log-action="Preview Activity">
-    <legend>Preparing your download…</legend>
+    <legend style="border: 0">Preparing your download…</legend>
     <div class="row">
         <div class="col-xs-6 text-left">
             <button id="zip-files-select-all" class="btn btn-default log-action" type="button" style="width: 130px;">

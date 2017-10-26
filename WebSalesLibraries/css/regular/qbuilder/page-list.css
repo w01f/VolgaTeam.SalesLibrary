@@ -1,5 +1,8 @@
-#page-list-buttons
+#page-list-buttons,
+#link-cart-buttons
 {
+	padding-left: 10px;
+	padding-right: 10px;
 	padding-bottom: 5px;
 	border-bottom: 1px #999 solid;
 }
@@ -7,6 +10,15 @@
 #page-list-container
 {
 	overflow-y: auto;
+	padding-top: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+#link-cart-grid
+{
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
 #page-list .grid
@@ -15,6 +27,7 @@
 	margin: 0;
 	width: 100%;
 	border-collapse: collapse;
+	border: 1px #ddd solid;
 }
 
 #page-list .grid tr

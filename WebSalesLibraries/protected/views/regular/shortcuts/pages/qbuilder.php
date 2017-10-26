@@ -6,7 +6,7 @@
 <div id="main-page">
     <div id="service-panel" class="left logger-form" data-log-group="QBuilder" data-log-action="QBuilder Activity">
         <div class="row headers">
-            <div class="col-xs-6">
+            <div class="col-xs-6" style="padding-left: 10px">
                 <button class="btn btn-default btn-block log-action<? if (!$shortcut->showLinkCart): ?> selected<? endif; ?>"
                         type="button">
                     My Sites
@@ -15,7 +15,7 @@
 					</span>
                 </button>
             </div>
-            <div class="col-xs-6">
+            <div class="col-xs-6" style="padding-right: 10px">
                 <button class="btn btn-default btn-block log-action<? if ($shortcut->showLinkCart): ?> selected<? endif; ?>"
                         type="button">
                     Link Cart
