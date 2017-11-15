@@ -46,13 +46,13 @@
 			this.emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.layoutControlItemOK = new DevExpress.XtraLayout.LayoutControlItem();
 			this.layoutControlItemCancel = new DevExpress.XtraLayout.LayoutControlItem();
+			this.emptySpaceItem4 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.layoutControlGroupSearch = new DevExpress.XtraLayout.LayoutControlGroup();
 			this.layoutControlItemSearchEdit = new DevExpress.XtraLayout.LayoutControlItem();
 			this.layoutControlItemSearchButton = new DevExpress.XtraLayout.LayoutControlItem();
 			this.layoutControlItemGallery = new DevExpress.XtraLayout.LayoutControlItem();
 			this.emptySpaceItem6 = new DevExpress.XtraLayout.EmptySpaceItem();
-			this.emptySpaceItem4 = new DevExpress.XtraLayout.EmptySpaceItem();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControl)).BeginInit();
 			this.layoutControl.SuspendLayout();
@@ -67,13 +67,13 @@
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemOK)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemCancel)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem4)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupSearch)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemSearchEdit)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemSearchButton)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemGallery)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem6)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem4)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// styleController
@@ -215,8 +215,13 @@
 			this.labelControlSelectedGalleryName.AllowHtmlString = true;
 			this.labelControlSelectedGalleryName.Appearance.BackColor = System.Drawing.Color.Transparent;
 			this.labelControlSelectedGalleryName.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.labelControlSelectedGalleryName.Appearance.Options.UseBackColor = true;
+			this.labelControlSelectedGalleryName.Appearance.Options.UseForeColor = true;
+			this.labelControlSelectedGalleryName.Appearance.Options.UseTextOptions = true;
 			this.labelControlSelectedGalleryName.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
 			this.labelControlSelectedGalleryName.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
+			this.labelControlSelectedGalleryName.AppearanceDisabled.Options.UseForeColor = true;
+			this.labelControlSelectedGalleryName.AppearanceDisabled.Options.UseTextOptions = true;
 			this.labelControlSelectedGalleryName.AppearanceDisabled.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
 			this.labelControlSelectedGalleryName.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
 			this.labelControlSelectedGalleryName.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -373,6 +378,17 @@
 			this.layoutControlItemCancel.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutControlItemCancel.TextVisible = false;
 			// 
+			// emptySpaceItem4
+			// 
+			this.emptySpaceItem4.AllowHotTrack = false;
+			this.emptySpaceItem4.Location = new System.Drawing.Point(781, 0);
+			this.emptySpaceItem4.MaxSize = new System.Drawing.Size(20, 0);
+			this.emptySpaceItem4.MinSize = new System.Drawing.Size(20, 10);
+			this.emptySpaceItem4.Name = "emptySpaceItem4";
+			this.emptySpaceItem4.Size = new System.Drawing.Size(20, 40);
+			this.emptySpaceItem4.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem4.TextSize = new System.Drawing.Size(0, 0);
+			// 
 			// emptySpaceItem1
 			// 
 			this.emptySpaceItem1.AllowHotTrack = false;
@@ -443,17 +459,6 @@
 			this.emptySpaceItem6.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
 			this.emptySpaceItem6.TextSize = new System.Drawing.Size(0, 0);
 			// 
-			// emptySpaceItem4
-			// 
-			this.emptySpaceItem4.AllowHotTrack = false;
-			this.emptySpaceItem4.Location = new System.Drawing.Point(781, 0);
-			this.emptySpaceItem4.MaxSize = new System.Drawing.Size(20, 0);
-			this.emptySpaceItem4.MinSize = new System.Drawing.Size(20, 10);
-			this.emptySpaceItem4.Name = "emptySpaceItem4";
-			this.emptySpaceItem4.Size = new System.Drawing.Size(20, 40);
-			this.emptySpaceItem4.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-			this.emptySpaceItem4.TextSize = new System.Drawing.Size(0, 0);
-			// 
 			// FormImageGallery
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -485,13 +490,13 @@
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemOK)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemCancel)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem4)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupSearch)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemSearchEdit)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemSearchButton)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemGallery)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem6)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem4)).EndInit();
 			this.ResumeLayout(false);
 
 		}

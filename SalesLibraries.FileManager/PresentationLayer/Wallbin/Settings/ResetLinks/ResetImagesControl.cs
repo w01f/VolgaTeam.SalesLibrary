@@ -153,12 +153,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings.ResetLin
 			layoutControlGroupLinksFiles.Enabled =
 				layoutControlGroupLinksAllOthers.Enabled = false;
 
-			layoutControlItemWidget.MinSize = RectangleHelper.ScaleSize(layoutControlItemWidget.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemWidget.MaxSize = RectangleHelper.ScaleSize(layoutControlItemWidget.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemBanner.MinSize = RectangleHelper.ScaleSize(layoutControlItemBanner.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemWidget.MinSize = RectangleHelper.ScaleSize(layoutControlItemWidget.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemBanner.MaxSize = RectangleHelper.ScaleSize(layoutControlItemBanner.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemThumbnails.MinSize = RectangleHelper.ScaleSize(layoutControlItemThumbnails.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemBanner.MinSize = RectangleHelper.ScaleSize(layoutControlItemBanner.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemThumbnails.MaxSize = RectangleHelper.ScaleSize(layoutControlItemThumbnails.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemThumbnails.MinSize = RectangleHelper.ScaleSize(layoutControlItemThumbnails.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
 		public IList<LinkSettingsGroupType> GetSelectedSettingsGroups()

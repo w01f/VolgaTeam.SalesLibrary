@@ -31,5 +31,18 @@ namespace SalesLibraries.SalesDepot.Controllers
 		{
 			MainController.Instance.HelpManager.OpenHelpLink("settings");
 		}
+
+		private void InitializeComponent()
+		{
+			this.SuspendLayout();
+			// 
+			// SettingsPage
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+			this.Name = "SettingsPage";
+			this.Size = new System.Drawing.Size(972, 904);
+			this.ResumeLayout(false);
+
+		}
 	}
 }

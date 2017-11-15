@@ -1,4 +1,6 @@
 ﻿using DevComponents.DotNetBar.Metro;
+using DevExpress.Skins;
+using SalesLibraries.Common.Helpers;
 
 namespace SalesLibraries.SalesDepot.PresentationLayer.EmailBin
 {
@@ -7,10 +9,10 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.EmailBin
 		public FormZipFileName()
 		{
 			InitializeComponent();
-			if (!((CreateGraphics()).DpiX > 96)) return;
-			laLogo.Font = new System.Drawing.Font(laLogo.Font.FontFamily, laLogo.Font.Size - 2, laLogo.Font.Style);
-			buttonXOK.Font = new System.Drawing.Font(buttonXOK.Font.FontFamily, buttonXOK.Font.Size - 2, buttonXOK.Font.Style);
-			buttonXCancel.Font = new System.Drawing.Font(buttonXCancel.Font.FontFamily, buttonXCancel.Font.Size - 2, buttonXCancel.Font.Style);
+			layoutControlItemOK.MaxSize = RectangleHelper.ScaleSize(layoutControlItemOK.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemOK.MinSize = RectangleHelper.ScaleSize(layoutControlItemOK.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCancel.MaxSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCancel.MinSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
 		public string FileName => textEditFileName.EditValue != null ? textEditFileName.EditValue.ToString() : null;

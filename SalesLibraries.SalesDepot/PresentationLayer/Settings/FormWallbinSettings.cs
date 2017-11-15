@@ -2,6 +2,8 @@
 using System.Windows.Forms;
 using DevComponents.DotNetBar;
 using DevComponents.DotNetBar.Metro;
+using DevExpress.Skins;
+using SalesLibraries.Common.Helpers;
 using SalesLibraries.SalesDepot.Controllers;
 
 namespace SalesLibraries.SalesDepot.PresentationLayer.Settings
@@ -11,6 +13,10 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Settings
 		public FormWallbinSettings()
 		{
 			InitializeComponent();
+			layoutControlItemOK.MaxSize = RectangleHelper.ScaleSize(layoutControlItemOK.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemOK.MinSize = RectangleHelper.ScaleSize(layoutControlItemOK.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCancel.MaxSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCancel.MinSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
 		private void FormFileSettings_Load(object sender, EventArgs e)

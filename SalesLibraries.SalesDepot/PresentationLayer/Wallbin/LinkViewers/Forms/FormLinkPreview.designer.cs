@@ -69,8 +69,15 @@
 			this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
 			this.repositoryItemTextEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
 			this.pnPreview = new System.Windows.Forms.Panel();
+			this.layoutControl = new DevExpress.XtraLayout.LayoutControl();
+			this.layoutControlGroupRoot = new DevExpress.XtraLayout.LayoutControlGroup();
+			this.layoutControlItemPreview = new DevExpress.XtraLayout.LayoutControlItem();
 			((System.ComponentModel.ISupportInitialize)(this.barManager)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControl)).BeginInit();
+			this.layoutControl.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupRoot)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPreview)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// barManager
@@ -127,8 +134,8 @@
 			// 
 			this.barLargeButtonItemOpen.Border = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
 			this.barLargeButtonItemOpen.Caption = "Open";
-			this.barLargeButtonItemOpen.Glyph = global::SalesLibraries.SalesDepot.Properties.Resources.QuickViewOpen;
 			this.barLargeButtonItemOpen.Id = 1;
+			this.barLargeButtonItemOpen.ImageOptions.Image = global::SalesLibraries.SalesDepot.Properties.Resources.QuickViewOpen;
 			this.barLargeButtonItemOpen.Name = "barLargeButtonItemOpen";
 			toolTipTitleItem1.Text = "Open";
 			toolTipItem1.LeftIndent = 6;
@@ -142,8 +149,8 @@
 			// 
 			this.barLargeButtonItemInsert.Border = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
 			this.barLargeButtonItemInsert.Caption = "Insert";
-			this.barLargeButtonItemInsert.Glyph = global::SalesLibraries.SalesDepot.Properties.Resources.QuickViewAdd;
 			this.barLargeButtonItemInsert.Id = 11;
+			this.barLargeButtonItemInsert.ImageOptions.Image = global::SalesLibraries.SalesDepot.Properties.Resources.QuickViewAdd;
 			this.barLargeButtonItemInsert.Name = "barLargeButtonItemInsert";
 			toolTipTitleItem2.Text = "Insert this video";
 			toolTipItem2.LeftIndent = 6;
@@ -157,8 +164,8 @@
 			// 
 			this.barLargeButtonItemSave.Border = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
 			this.barLargeButtonItemSave.Caption = "Save";
-			this.barLargeButtonItemSave.Glyph = global::SalesLibraries.SalesDepot.Properties.Resources.QuickViewSave;
 			this.barLargeButtonItemSave.Id = 2;
+			this.barLargeButtonItemSave.ImageOptions.Image = global::SalesLibraries.SalesDepot.Properties.Resources.QuickViewSave;
 			this.barLargeButtonItemSave.Name = "barLargeButtonItemSave";
 			toolTipTitleItem3.Text = "Save";
 			toolTipItem3.LeftIndent = 6;
@@ -172,8 +179,8 @@
 			// 
 			this.barLargeButtonItemEmail.Border = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
 			this.barLargeButtonItemEmail.Caption = "Email";
-			this.barLargeButtonItemEmail.Glyph = global::SalesLibraries.SalesDepot.Properties.Resources.QuickViewEmail;
 			this.barLargeButtonItemEmail.Id = 4;
+			this.barLargeButtonItemEmail.ImageOptions.Image = global::SalesLibraries.SalesDepot.Properties.Resources.QuickViewEmail;
 			this.barLargeButtonItemEmail.Name = "barLargeButtonItemEmail";
 			toolTipTitleItem4.Text = "Email this file";
 			toolTipItem4.LeftIndent = 6;
@@ -187,8 +194,8 @@
 			// 
 			this.barLargeButtonItemPrint.Border = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
 			this.barLargeButtonItemPrint.Caption = "Print";
-			this.barLargeButtonItemPrint.Glyph = global::SalesLibraries.SalesDepot.Properties.Resources.QuickViewPrint;
 			this.barLargeButtonItemPrint.Id = 5;
+			this.barLargeButtonItemPrint.ImageOptions.Image = global::SalesLibraries.SalesDepot.Properties.Resources.QuickViewPrint;
 			this.barLargeButtonItemPrint.Name = "barLargeButtonItemPrint";
 			toolTipTitleItem5.Text = "Print";
 			toolTipItem5.LeftIndent = 6;
@@ -202,8 +209,8 @@
 			// 
 			this.barLargeButtonItemSettings.Border = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
 			this.barLargeButtonItemSettings.Caption = "Settings";
-			this.barLargeButtonItemSettings.Glyph = global::SalesLibraries.SalesDepot.Properties.Resources.QuickViewUserSettings;
 			this.barLargeButtonItemSettings.Id = 14;
+			this.barLargeButtonItemSettings.ImageOptions.Image = global::SalesLibraries.SalesDepot.Properties.Resources.QuickViewUserSettings;
 			this.barLargeButtonItemSettings.Name = "barLargeButtonItemSettings";
 			toolTipTitleItem6.Text = "Settings";
 			toolTipItem6.LeftIndent = 6;
@@ -217,8 +224,8 @@
 			// 
 			this.barLargeButtonItemHelp.Border = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
 			this.barLargeButtonItemHelp.Caption = "Help";
-			this.barLargeButtonItemHelp.Glyph = global::SalesLibraries.SalesDepot.Properties.Resources.Help;
 			this.barLargeButtonItemHelp.Id = 6;
+			this.barLargeButtonItemHelp.ImageOptions.Image = global::SalesLibraries.SalesDepot.Properties.Resources.Help;
 			this.barLargeButtonItemHelp.Name = "barLargeButtonItemHelp";
 			toolTipTitleItem7.Text = "Help";
 			toolTipItem7.LeftIndent = 6;
@@ -232,8 +239,8 @@
 			// 
 			this.barLargeButtonItemExit.Border = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
 			this.barLargeButtonItemExit.Caption = "Exit";
-			this.barLargeButtonItemExit.Glyph = global::SalesLibraries.SalesDepot.Properties.Resources.Exit;
 			this.barLargeButtonItemExit.Id = 7;
+			this.barLargeButtonItemExit.ImageOptions.Image = global::SalesLibraries.SalesDepot.Properties.Resources.Exit;
 			this.barLargeButtonItemExit.Name = "barLargeButtonItemExit";
 			toolTipTitleItem8.Text = "Exit";
 			toolTipItem8.LeftIndent = 6;
@@ -249,7 +256,8 @@
 			this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
 			this.barDockControlTop.ForeColor = System.Drawing.Color.Black;
 			this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-			this.barDockControlTop.Size = new System.Drawing.Size(934, 106);
+			this.barDockControlTop.Manager = this.barManager;
+			this.barDockControlTop.Size = new System.Drawing.Size(934, 109);
 			// 
 			// barDockControlBottom
 			// 
@@ -257,6 +265,7 @@
 			this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.barDockControlBottom.ForeColor = System.Drawing.Color.Black;
 			this.barDockControlBottom.Location = new System.Drawing.Point(0, 562);
+			this.barDockControlBottom.Manager = this.barManager;
 			this.barDockControlBottom.Size = new System.Drawing.Size(934, 0);
 			// 
 			// barDockControlLeft
@@ -264,16 +273,18 @@
 			this.barDockControlLeft.CausesValidation = false;
 			this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
 			this.barDockControlLeft.ForeColor = System.Drawing.Color.Black;
-			this.barDockControlLeft.Location = new System.Drawing.Point(0, 106);
-			this.barDockControlLeft.Size = new System.Drawing.Size(0, 456);
+			this.barDockControlLeft.Location = new System.Drawing.Point(0, 109);
+			this.barDockControlLeft.Manager = this.barManager;
+			this.barDockControlLeft.Size = new System.Drawing.Size(0, 453);
 			// 
 			// barDockControlRight
 			// 
 			this.barDockControlRight.CausesValidation = false;
 			this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
 			this.barDockControlRight.ForeColor = System.Drawing.Color.Black;
-			this.barDockControlRight.Location = new System.Drawing.Point(934, 106);
-			this.barDockControlRight.Size = new System.Drawing.Size(0, 456);
+			this.barDockControlRight.Location = new System.Drawing.Point(934, 109);
+			this.barDockControlRight.Manager = this.barManager;
+			this.barDockControlRight.Size = new System.Drawing.Size(0, 453);
 			// 
 			// repositoryItemTextEdit1
 			// 
@@ -283,19 +294,82 @@
 			// pnPreview
 			// 
 			this.pnPreview.BackColor = System.Drawing.Color.Transparent;
-			this.pnPreview.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pnPreview.ForeColor = System.Drawing.Color.Black;
-			this.pnPreview.Location = new System.Drawing.Point(0, 106);
+			this.pnPreview.Location = new System.Drawing.Point(2, 2);
 			this.pnPreview.Name = "pnPreview";
-			this.pnPreview.Size = new System.Drawing.Size(934, 456);
+			this.pnPreview.Size = new System.Drawing.Size(930, 449);
 			this.pnPreview.TabIndex = 10;
+			// 
+			// layoutControl
+			// 
+			this.layoutControl.Appearance.Control.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.layoutControl.Appearance.Control.Options.UseFont = true;
+			this.layoutControl.Appearance.ControlDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControl.Appearance.ControlDisabled.Options.UseFont = true;
+			this.layoutControl.Appearance.ControlDropDown.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControl.Appearance.ControlDropDown.Options.UseFont = true;
+			this.layoutControl.Appearance.ControlDropDownHeader.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControl.Appearance.ControlDropDownHeader.Options.UseFont = true;
+			this.layoutControl.Appearance.ControlFocused.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControl.Appearance.ControlFocused.Options.UseFont = true;
+			this.layoutControl.Appearance.ControlReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControl.Appearance.ControlReadOnly.Options.UseFont = true;
+			this.layoutControl.BackColor = System.Drawing.Color.White;
+			this.layoutControl.Controls.Add(this.pnPreview);
+			this.layoutControl.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.layoutControl.ForeColor = System.Drawing.Color.Black;
+			this.layoutControl.Location = new System.Drawing.Point(0, 109);
+			this.layoutControl.Name = "layoutControl";
+			this.layoutControl.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(802, 383, 250, 350);
+			this.layoutControl.Root = this.layoutControlGroupRoot;
+			this.layoutControl.Size = new System.Drawing.Size(934, 453);
+			this.layoutControl.TabIndex = 65;
+			this.layoutControl.Text = "layoutControl1";
+			// 
+			// layoutControlGroupRoot
+			// 
+			this.layoutControlGroupRoot.AllowHtmlStringInCaption = true;
+			this.layoutControlGroupRoot.AppearanceGroup.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlGroupRoot.AppearanceGroup.Options.UseFont = true;
+			this.layoutControlGroupRoot.AppearanceItemCaption.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlGroupRoot.AppearanceItemCaption.Options.UseFont = true;
+			this.layoutControlGroupRoot.AppearanceTabPage.Header.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlGroupRoot.AppearanceTabPage.Header.Options.UseFont = true;
+			this.layoutControlGroupRoot.AppearanceTabPage.HeaderActive.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlGroupRoot.AppearanceTabPage.HeaderActive.Options.UseFont = true;
+			this.layoutControlGroupRoot.AppearanceTabPage.HeaderDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlGroupRoot.AppearanceTabPage.HeaderDisabled.Options.UseFont = true;
+			this.layoutControlGroupRoot.AppearanceTabPage.HeaderHotTracked.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlGroupRoot.AppearanceTabPage.HeaderHotTracked.Options.UseFont = true;
+			this.layoutControlGroupRoot.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+			this.layoutControlGroupRoot.GroupBordersVisible = false;
+			this.layoutControlGroupRoot.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItemPreview});
+			this.layoutControlGroupRoot.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlGroupRoot.Name = "Root";
+			this.layoutControlGroupRoot.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+			this.layoutControlGroupRoot.Size = new System.Drawing.Size(934, 453);
+			this.layoutControlGroupRoot.TextVisible = false;
+			// 
+			// layoutControlItemPreview
+			// 
+			this.layoutControlItemPreview.Control = this.pnPreview;
+			this.layoutControlItemPreview.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+			this.layoutControlItemPreview.FillControlToClientArea = false;
+			this.layoutControlItemPreview.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlItemPreview.Name = "layoutControlItemPreview";
+			this.layoutControlItemPreview.Size = new System.Drawing.Size(934, 453);
+			this.layoutControlItemPreview.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemPreview.TextVisible = false;
+			this.layoutControlItemPreview.TrimClientAreaToControl = false;
 			// 
 			// FormLinkPreview
 			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.BackColor = System.Drawing.Color.White;
 			this.ClientSize = new System.Drawing.Size(934, 562);
-			this.Controls.Add(this.pnPreview);
+			this.Controls.Add(this.layoutControl);
 			this.Controls.Add(this.barDockControlLeft);
 			this.Controls.Add(this.barDockControlRight);
 			this.Controls.Add(this.barDockControlBottom);
@@ -311,7 +385,12 @@
 			this.Shown += new System.EventHandler(this.FormQuickView_Shown);
 			((System.ComponentModel.ISupportInitialize)(this.barManager)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControl)).EndInit();
+			this.layoutControl.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupRoot)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPreview)).EndInit();
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
         }
 
@@ -333,6 +412,8 @@
         private DevExpress.XtraBars.BarLargeButtonItem barLargeButtonItemInsert;
 		private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repositoryItemTextEdit1;
 		private DevExpress.XtraBars.BarLargeButtonItem barLargeButtonItemSettings;
-
-    }
+		private DevExpress.XtraLayout.LayoutControl layoutControl;
+		private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroupRoot;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemPreview;
+	}
 }

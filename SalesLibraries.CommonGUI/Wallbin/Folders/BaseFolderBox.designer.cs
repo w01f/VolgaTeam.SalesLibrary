@@ -34,6 +34,7 @@
 			this.pnHeaderBorder = new System.Windows.Forms.Panel();
 			this.pnHeader = new System.Windows.Forms.Panel();
 			this.pnBorders = new System.Windows.Forms.Panel();
+			this.pnSeparator = new System.Windows.Forms.Panel();
 			((System.ComponentModel.ISupportInitialize)(this.grFiles)).BeginInit();
 			this.pnHeaderBorder.SuspendLayout();
 			this.pnBorders.SuspendLayout();
@@ -56,7 +57,7 @@
             this.colDisplayName});
 			this.grFiles.Dock = System.Windows.Forms.DockStyle.Top;
 			this.grFiles.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-			this.grFiles.Location = new System.Drawing.Point(1, 52);
+			this.grFiles.Location = new System.Drawing.Point(1, 53);
 			this.grFiles.Name = "grFiles";
 			this.grFiles.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
 			this.grFiles.RowHeadersVisible = false;
@@ -98,6 +99,7 @@
 			// 
 			this.pnBorders.AllowDrop = true;
 			this.pnBorders.Controls.Add(this.grFiles);
+			this.pnBorders.Controls.Add(this.pnSeparator);
 			this.pnBorders.Controls.Add(this.pnHeaderBorder);
 			this.pnBorders.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pnBorders.Location = new System.Drawing.Point(0, 0);
@@ -106,9 +108,18 @@
 			this.pnBorders.Size = new System.Drawing.Size(311, 308);
 			this.pnBorders.TabIndex = 6;
 			// 
+			// panelSeparator
+			// 
+			this.pnSeparator.Dock = System.Windows.Forms.DockStyle.Top;
+			this.pnSeparator.Location = new System.Drawing.Point(1, 52);
+			this.pnSeparator.Name = "pnSeparator";
+			this.pnSeparator.Size = new System.Drawing.Size(309, 1);
+			this.pnSeparator.TabIndex = 6;
+			// 
 			// BaseFolderBox
 			// 
 			this.AllowDrop = true;
+			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.Controls.Add(this.pnBorders);
 			this.Name = "BaseFolderBox";
@@ -127,5 +138,6 @@
 		protected System.Windows.Forms.Panel pnHeader;
 		protected System.Windows.Forms.Panel pnHeaderBorder;
 		protected System.Windows.Forms.Panel pnBorders;
+		private System.Windows.Forms.Panel pnSeparator;
 	}
 }

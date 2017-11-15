@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using DevExpress.Skins;
 using DevExpress.XtraEditors.Controls;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
@@ -20,6 +21,11 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.EmailBin
 		public EmailBinControl()
 		{
 			InitializeComponent();
+
+			layoutControlItemEmptyEmailBin.MaxSize = RectangleHelper.ScaleSize(layoutControlItemEmptyEmailBin.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemEmptyEmailBin.MinSize = RectangleHelper.ScaleSize(layoutControlItemEmptyEmailBin.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCreateEmail.MaxSize = RectangleHelper.ScaleSize(layoutControlItemCreateEmail.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCreateEmail.MinSize = RectangleHelper.ScaleSize(layoutControlItemCreateEmail.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
 		public void InitControl()

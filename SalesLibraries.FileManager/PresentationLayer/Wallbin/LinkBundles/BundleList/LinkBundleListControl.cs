@@ -48,8 +48,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Bundl
 				LoadBundleItems();
 			};
 
-			layoutControlItemSwitchBundleItems.MinSize = RectangleHelper.ScaleSize(layoutControlItemSwitchBundleItems.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemSwitchBundleItems.MaxSize = RectangleHelper.ScaleSize(layoutControlItemSwitchBundleItems.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemSwitchBundleItems.MinSize = RectangleHelper.ScaleSize(layoutControlItemSwitchBundleItems.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
 		public void LoadData(Library library)

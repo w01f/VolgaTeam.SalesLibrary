@@ -47,7 +47,7 @@
 			this.emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.emptySpaceItem4 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.simpleLabelItemWarning = new DevExpress.XtraLayout.SimpleLabelItem();
-			this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+			this.layoutControlItemPages = new DevExpress.XtraLayout.LayoutControlItem();
 			this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.layoutControlItemAdd = new DevExpress.XtraLayout.LayoutControlItem();
 			this.emptySpaceItem7 = new DevExpress.XtraLayout.EmptySpaceItem();
@@ -66,7 +66,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem4)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemWarning)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPages)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemAdd)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem7)).BeginInit();
@@ -217,7 +217,6 @@
 			this.buttonXRemove.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXRemove.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.buttonXRemove.Image = global::SalesLibraries.FileManager.Properties.Resources.ButtonDelete;
-			this.buttonXRemove.ImageFixedSize = new System.Drawing.Size(24, 24);
 			this.buttonXRemove.Location = new System.Drawing.Point(392, 70);
 			this.buttonXRemove.Name = "buttonXRemove";
 			this.buttonXRemove.Size = new System.Drawing.Size(44, 44);
@@ -293,7 +292,7 @@
             this.emptySpaceItem3,
             this.emptySpaceItem4,
             this.simpleLabelItemWarning,
-            this.layoutControlItem1,
+            this.layoutControlItemPages,
             this.emptySpaceItem1,
             this.layoutControlItemAdd,
             this.emptySpaceItem7,
@@ -374,7 +373,6 @@
 			this.simpleLabelItemWarning.AppearanceItemCaption.Options.UseTextOptions = true;
 			this.simpleLabelItemWarning.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
 			this.simpleLabelItemWarning.AppearanceItemCaption.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-			this.simpleLabelItemWarning.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
 			this.simpleLabelItemWarning.CustomizationFormText = "Warning";
 			this.simpleLabelItemWarning.Location = new System.Drawing.Point(0, 346);
 			this.simpleLabelItemWarning.Name = "simpleLabelItemWarning";
@@ -383,18 +381,18 @@
     "be LOST FOREVER!</b></size>";
 			this.simpleLabelItemWarning.TextSize = new System.Drawing.Size(337, 57);
 			// 
-			// layoutControlItem1
+			// layoutControlItemPages
 			// 
-			this.layoutControlItem1.Control = this.gridControlPages;
-			this.layoutControlItem1.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-			this.layoutControlItem1.FillControlToClientArea = false;
-			this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
-			this.layoutControlItem1.Name = "layoutControlItem1";
-			this.layoutControlItem1.Size = new System.Drawing.Size(370, 336);
-			this.layoutControlItem1.Text = "Pages";
-			this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
-			this.layoutControlItem1.TextVisible = false;
-			this.layoutControlItem1.TrimClientAreaToControl = false;
+			this.layoutControlItemPages.Control = this.gridControlPages;
+			this.layoutControlItemPages.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+			this.layoutControlItemPages.FillControlToClientArea = false;
+			this.layoutControlItemPages.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlItemPages.Name = "layoutControlItemPages";
+			this.layoutControlItemPages.Size = new System.Drawing.Size(370, 336);
+			this.layoutControlItemPages.Text = "Pages";
+			this.layoutControlItemPages.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemPages.TextVisible = false;
+			this.layoutControlItemPages.TrimClientAreaToControl = false;
 			// 
 			// emptySpaceItem1
 			// 
@@ -500,7 +498,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem4)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemWarning)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPages)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemAdd)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem7)).EndInit();
@@ -529,7 +527,7 @@
 		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem3;
 		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem4;
 		private DevExpress.XtraLayout.SimpleLabelItem simpleLabelItemWarning;
-		private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemPages;
 		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
 		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemAdd;
 		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem7;

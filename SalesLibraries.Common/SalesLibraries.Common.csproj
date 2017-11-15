@@ -90,6 +90,7 @@
     <Compile Include="Helpers\AppProfileManager.cs" />
     <Compile Include="Helpers\ColorHelper.cs" />
     <Compile Include="Helpers\FileSizeFormatProvider.cs" />
+    <Compile Include="Helpers\JpegHelper.cs" />
     <Compile Include="Helpers\SharedAssemblyHelper.cs" />
     <Compile Include="Helpers\AsyncHelper.cs" />
     <Compile Include="Authorization\AuthManager.cs" />

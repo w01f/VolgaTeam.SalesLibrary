@@ -29,12 +29,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 			InitializeComponent();
 			Dock = DockStyle.Fill;
 
-			layoutControlItemReset.MinSize = RectangleHelper.ScaleSize(layoutControlItemReset.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemReset.MaxSize = RectangleHelper.ScaleSize(layoutControlItemReset.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemExpand.MinSize = RectangleHelper.ScaleSize(layoutControlItemExpand.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemReset.MinSize = RectangleHelper.ScaleSize(layoutControlItemReset.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemExpand.MaxSize = RectangleHelper.ScaleSize(layoutControlItemExpand.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemCollapse.MinSize = RectangleHelper.ScaleSize(layoutControlItemCollapse.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemExpand.MinSize = RectangleHelper.ScaleSize(layoutControlItemExpand.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemCollapse.MaxSize = RectangleHelper.ScaleSize(layoutControlItemCollapse.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCollapse.MinSize = RectangleHelper.ScaleSize(layoutControlItemCollapse.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 
 			_groupTemplates.AddRange(MainController.Instance.Lists.SearchTags.SearchSuperGroups);
 

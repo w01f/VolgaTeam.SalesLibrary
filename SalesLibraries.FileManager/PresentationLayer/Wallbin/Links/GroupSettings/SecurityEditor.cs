@@ -72,14 +72,14 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 			gridViewSecurityGroups.MasterRowGetRelationName += OnGetGroupRelationName;
 			gridViewSecurityGroups.MasterRowGetChildList += OnGetGroupChildList;
 
-			layoutControlItemReset.MinSize = RectangleHelper.ScaleSize(layoutControlItemReset.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemReset.MaxSize = RectangleHelper.ScaleSize(layoutControlItemReset.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemSecurityUserListSelectAll.MinSize = RectangleHelper.ScaleSize(layoutControlItemSecurityUserListSelectAll.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemReset.MinSize = RectangleHelper.ScaleSize(layoutControlItemReset.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemSecurityUserListSelectAll.MaxSize = RectangleHelper.ScaleSize(layoutControlItemSecurityUserListSelectAll.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemSecurityUserListClearAll.MinSize = RectangleHelper.ScaleSize(layoutControlItemSecurityUserListClearAll.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemSecurityUserListSelectAll.MinSize = RectangleHelper.ScaleSize(layoutControlItemSecurityUserListSelectAll.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemSecurityUserListClearAll.MaxSize = RectangleHelper.ScaleSize(layoutControlItemSecurityUserListClearAll.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemImport.MinSize = RectangleHelper.ScaleSize(layoutControlItemImport.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemSecurityUserListSelectAll.MinSize = RectangleHelper.ScaleSize(layoutControlItemSecurityUserListSelectAll.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemImport.MaxSize = RectangleHelper.ScaleSize(layoutControlItemImport.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemImport.MinSize = RectangleHelper.ScaleSize(layoutControlItemImport.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
 		#region IGroupSettingsEditor Members

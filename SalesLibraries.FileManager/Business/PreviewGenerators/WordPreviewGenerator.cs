@@ -99,7 +99,7 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 						if (updatePng || updateThumbs || updateThumbsDatatable)
 						{
 							PdfHelper.ExportPdf(pdfFileName, pngDestination, thumbsDestination, wordContainer.GenerateSingleImage);
-							JpegGenerator.GenerateDatatableJpegs(pngDestination, thumbsDatatableDestination);
+							JpegHelper.ConvertFiles(thumbsDestination, thumbsDatatableDestination);
 							logger.LogStage(PreviewFormats.Png);
 							logger.LogStage(PreviewFormats.Thumbnails);
 							logger.LogStage(PreviewFormats.ThumbnailsForDatatable);

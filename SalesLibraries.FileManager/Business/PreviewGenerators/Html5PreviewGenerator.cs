@@ -40,7 +40,7 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 				var thumbnailGenerator = new RegularBrowserThumbnailGenerator();
 				thumbnailGenerator.GenerateThumbnail(html5PreviewContainer.ThumnailUrl, thumbsDestination);
 			}));
-			JpegGenerator.GenerateDatatableJpegs(thumbsDestination, thumbsDatatableDestination);
+			JpegHelper.ConvertFiles(thumbsDestination, thumbsDatatableDestination);
 
 			logger.LogStage(PreviewFormats.Thumbnails);
 			logger.LogStage(PreviewFormats.ThumbnailsForDatatable);

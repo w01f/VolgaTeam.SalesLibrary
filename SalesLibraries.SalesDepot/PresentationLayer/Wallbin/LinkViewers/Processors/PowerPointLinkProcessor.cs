@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using DevExpress.XtraLayout.Utils;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.OfficeInterops;
@@ -40,7 +41,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Proces
 			{
 				form.PowerPointLink = _powerPointLink;
 				form.ActiveSlide = 1;
-				form.rbActiveSlide.Visible = false;
+				form.layoutControlItemActiveSlide.Visibility = LayoutVisibility.Never;
 				form.ShowDialog(MainController.Instance.MainForm);
 			}
 		}

@@ -12,15 +12,13 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 {
 	static class SettingsEditorFactory
 	{
-		public static DialogResult Run(BaseLibraryLink link, LinkSettingsType settingsType, LinkType? defaultLinkType = null)
+		public static DialogResult Run(BaseLibraryLink link, LinkSettingsType settingsType)
 		{
 			var dilogResult = DialogResult.Cancel;
 			link.PerformTransaction(link.ParentLibrary.Context,
 				linkCopy =>
 				{
-					var editForm = (defaultLinkType != null ?
-							ObjectIntendHelper.GetObjectInstances(typeof(ILinkSettingsByTypeEditForm), null, linkCopy, defaultLinkType) :
-							ObjectIntendHelper.GetObjectInstances(typeof(ILinkSettingsEditForm), null, linkCopy))
+					var editForm = ObjectIntendHelper.GetObjectInstances(typeof(ILinkSettingsEditForm), null, linkCopy)
 						.OfType<ILinkSettingsEditForm>()
 						.FirstOrDefault(form => form.EditableSettings.Any(st => st == settingsType));
 					if (editForm != null)

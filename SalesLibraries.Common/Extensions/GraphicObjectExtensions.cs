@@ -9,7 +9,7 @@ namespace SalesLibraries.Common.Extensions
 {
 	public static class GraphicObjectExtensions
 	{
-		public static Color DefaultInversionColor = Color.White;
+		public static Color DefaultReplaceColor = ColorTranslator.FromHtml("#0000FF");
 
 		public static Point GetCenter(this Rectangle control)
 		{

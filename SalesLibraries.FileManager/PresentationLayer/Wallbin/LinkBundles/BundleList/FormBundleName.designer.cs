@@ -186,6 +186,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Bundl
 			this.pictureEditLogo.EditValue = global::SalesLibraries.FileManager.Properties.Resources.BundlesFormNew;
 			this.pictureEditLogo.Location = new System.Drawing.Point(7, 7);
 			this.pictureEditLogo.Name = "pictureEditLogo";
+			this.pictureEditLogo.Properties.AllowFocused = false;
 			this.pictureEditLogo.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
 			this.pictureEditLogo.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
 			this.pictureEditLogo.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Zoom;

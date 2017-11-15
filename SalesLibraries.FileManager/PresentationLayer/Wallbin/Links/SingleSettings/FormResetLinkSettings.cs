@@ -4,6 +4,7 @@ using System.Linq;
 using DevComponents.DotNetBar.Metro;
 using DevExpress.Skins;
 using DevExpress.XtraEditors.Controls;
+using DevExpress.XtraLayout.Utils;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
@@ -23,14 +24,16 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		{
 			InitializeComponent();
 			checkedListBoxControlItems.ItemHeight = (Int32)(checkedListBoxControlItems.ItemHeight * Utils.GetScaleFactor(CreateGraphics().DpiX).Height);
-			layoutControlItemSelectAll.MinSize = RectangleHelper.ScaleSize(layoutControlItemSelectAll.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemTitle.MaxSize = RectangleHelper.ScaleSize(layoutControlItemTitle.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemTitle.MinSize = RectangleHelper.ScaleSize(layoutControlItemTitle.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemSelectAll.MaxSize = RectangleHelper.ScaleSize(layoutControlItemSelectAll.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemSelectNone.MinSize = RectangleHelper.ScaleSize(layoutControlItemSelectNone.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemSelectAll.MinSize = RectangleHelper.ScaleSize(layoutControlItemSelectAll.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemSelectNone.MaxSize = RectangleHelper.ScaleSize(layoutControlItemSelectNone.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemReset.MinSize = RectangleHelper.ScaleSize(layoutControlItemReset.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemSelectNone.MinSize = RectangleHelper.ScaleSize(layoutControlItemSelectNone.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemReset.MaxSize = RectangleHelper.ScaleSize(layoutControlItemReset.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemCancel.MinSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemReset.MinSize = RectangleHelper.ScaleSize(layoutControlItemReset.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemCancel.MaxSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCancel.MinSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
 		public FormResetLinkSettings(BaseLibraryLink targetLink) : this()
@@ -46,7 +49,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		public FormResetLinkSettings(IList<BaseLibraryLink> targetLinks) : this()
 		{
 			Text = "Reset these Links";
-			labelControlTitle.Visible = false;
+			layoutControlItemTitle.Visibility = LayoutVisibility.Never;
 
 			LoadSettingsGroups(GetLinksCustomizedSettings(targetLinks));
 		}

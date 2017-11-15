@@ -45,14 +45,18 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 					}
 				});
 
+			retractableBarGallery.ContentSize = retractableBarGallery.Width;
+
 			layoutControlGroupSearch.Enabled = false;
 			layoutControlItemGallery.Enabled = false;
 			layoutControlGroupCustomWidget.Enabled = false;
 
-			layoutControlItemWidgetNone.MaxSize = RectangleHelper.ScaleSize(layoutControlItemWidgetNone.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemWidgetCustom.MaxSize = RectangleHelper.ScaleSize(layoutControlItemWidgetCustom.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemWidgetColorizeToggle.MaxSize = RectangleHelper.ScaleSize(layoutControlItemWidgetColorizeToggle.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemWidgetNone.MaxSize = RectangleHelper.ScaleSize(layoutControlItemWidgetNone.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemWidgetColorizeEditor.MaxSize = RectangleHelper.ScaleSize(layoutControlItemWidgetColorizeEditor.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemWidgetColorizeEditor.MinSize = RectangleHelper.ScaleSize(layoutControlItemWidgetColorizeEditor.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemWidgetColorizeToggle.MaxSize = RectangleHelper.ScaleSize(layoutControlItemWidgetColorizeToggle.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemWidgetColorizeToggle.MinSize = RectangleHelper.ScaleSize(layoutControlItemWidgetColorizeToggle.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
 		public void LoadData()
@@ -136,9 +140,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 				_data.Inverted = checkEditInvert.Checked;
 				if (_data.WidgetHolder != null)
 					_data.WidgetHolder.UseTextColorForWidget = checkEditUseTextColor.Checked;
-				_data.InversionColor = colorEditInversionColor.Color != GraphicObjectExtensions.DefaultInversionColor
+				_data.InversionColor = checkEditInvert.Checked
 					? colorEditInversionColor.Color
-					: GraphicObjectExtensions.DefaultInversionColor;
+					: GraphicObjectExtensions.DefaultReplaceColor;
 				_data.Image = _originalImage;
 				_data.ImageName = _originalImageName;
 			}
@@ -170,9 +174,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			if (_originalImage != null && checkEditInvert.Checked)
 			{
 				var imageClone = (Image)_originalImage.Clone();
-				pictureEditCustomWidget.Image = colorEditInversionColor.Color != GraphicObjectExtensions.DefaultInversionColor
-					? imageClone.ReplaceColor(colorEditInversionColor.Color)
-					: imageClone.Invert();
+				pictureEditCustomWidget.Image = imageClone.ReplaceColor(colorEditInversionColor.Color);
 			}
 			else
 				pictureEditCustomWidget.Image = _originalImage;

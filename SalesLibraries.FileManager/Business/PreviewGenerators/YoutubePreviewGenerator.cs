@@ -61,7 +61,7 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 					var thumbnailGenerator = new RegularBrowserThumbnailGenerator();
 					thumbnailGenerator.GenerateThumbnail(youtubePreviewContainer.SourcePath, thumbsDestination);
 				}
-				JpegGenerator.GenerateDatatableJpegs(thumbsDestination, thumbsDatatableDestination);
+				JpegHelper.ConvertFiles(thumbsDestination, thumbsDatatableDestination);
 			}));
 
 			logger.LogStage(PreviewFormats.Thumbnails);

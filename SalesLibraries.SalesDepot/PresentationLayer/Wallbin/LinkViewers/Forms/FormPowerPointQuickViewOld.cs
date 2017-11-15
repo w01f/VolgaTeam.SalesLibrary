@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
 using DevExpress.XtraBars;
 using DevExpress.XtraEditors.Controls;
+using DevExpress.XtraLayout.Utils;
 using Microsoft.Office.Core;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Helpers;
@@ -31,12 +32,6 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 		public FormPowerPointQuickViewOld()
 		{
 			InitializeComponent();
-			if ((base.CreateGraphics()).DpiX > 96)
-			{
-				checkEditChangeSlideTemplate.Font = new Font(checkEditChangeSlideTemplate.Font.FontFamily, checkEditChangeSlideTemplate.Font.Size - 1, checkEditChangeSlideTemplate.Font.Style);
-				checkEditKeepSlideTemplate.Font = new Font(checkEditKeepSlideTemplate.Font.FontFamily, checkEditKeepSlideTemplate.Font.Size - 1, checkEditKeepSlideTemplate.Font.Style);
-				labelControlSlideTemplate.Font = new Font(labelControlSlideTemplate.Font.FontFamily, labelControlSlideTemplate.Font.Size - 2, labelControlSlideTemplate.Font.Style);
-			}
 		}
 
 		public PowerPointLink PowerPointLink { get; set; }
@@ -59,7 +54,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 				_originalFile = new FileInfo(PowerPointLink.FullPath);
 				_viewedFile = _originalFile.CopyTo(Path.Combine(RemoteResourceManager.Instance.TempFolder.LocalPath, DateTime.Now.ToString("yyyyMMdd-hmmsstt.PPT")), true);
 				Text = "QuickView - " + PowerPointLink.NameWithExtension;
-				laFileInfo.Text = "File Added: " + PowerPointLink.AddDate.ToString("MM/dd/yy");
+				simpleLabelItemFileInfo.Text = "File Added: " + PowerPointLink.AddDate.ToString("MM/dd/yy");
 				MainController.Instance.MainForm.TopMost = true;
 				PowerPointSingleton.Instance.SetVisibility(true);
 				_scaleK = IsLargeFont() ? 1.67 : 1.35;
@@ -71,17 +66,17 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 				var availableThemes = themeManager.GetThemes(SlideType.SalesDepot).ToList();
 				if (availableThemes.Any())
 				{
-					pnSlideTemplate.Visible = true;
+					layoutControlGroupSlideTemplate.Visibility = LayoutVisibility.Always;
 					comboBoxEditSlideTemplate.Properties.Items.Clear();
 					comboBoxEditSlideTemplate.Properties.Items.AddRange(availableThemes);
 					comboBoxEditSlideTemplate.SelectedIndex = 0;
 				}
 				else
-					pnSlideTemplate.Visible = false;
+					layoutControlGroupSlideTemplate.Visibility = LayoutVisibility.Never;
 
-				var containerHandle = pnPreview.Handle;
-				var containerHeight = pnPreview.Height;
-				var containerWidth = pnPreview.Width;
+				var containerHandle = layoutControlItemPreview.Control.Handle;
+				var containerHeight = layoutControlItemPreview.Height;
+				var containerWidth = layoutControlItemPreview.Width;
 
 				MainController.Instance.ProcessManager.Run("Loading the presentation...", (cancelletionToken, formProgress) =>
 				{
@@ -126,12 +121,11 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 
 		private void FormQuickView_Resize(object sender, EventArgs e)
 		{
-			comboBoxEditSlides.Left = (pnNavigationArea.Width - comboBoxEditSlides.Width) / 2;
 			MainController.Instance.MainForm.TopMost = true;
 
-			var containerHandle = pnPreview.Handle;
-			var containerHeight = pnPreview.Height;
-			var containerWidth = pnPreview.Width;
+			var containerHandle = layoutControlItemPreview.Control.Handle;
+			var containerHeight = layoutControlItemPreview.Height;
+			var containerWidth = layoutControlItemPreview.Width;
 
 			MainController.Instance.ProcessManager.Run("Resizing the presentation...",
 				(cancelletionToken, formProgress) =>
@@ -241,7 +235,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 		private void comboBoxEditSlides_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			PowerPointSingleton.Instance.SlideShowWindow.View.GotoSlide(comboBoxEditSlides.SelectedIndex + 1, MsoTriState.msoFalse);
-			laSlideNumber.Text = string.Format("Slide {0} of {1}", new object[] { (comboBoxEditSlides.SelectedIndex + 1).ToString(), comboBoxEditSlides.Properties.Items.Count.ToString() });
+			simpleLabelItemSlideNumber.Text = string.Format("Slide {0} of {1}", new object[] { (comboBoxEditSlides.SelectedIndex + 1).ToString(), comboBoxEditSlides.Properties.Items.Count.ToString() });
 		}
 
 		private void comboBoxEditSlides_ButtonClick(object sender, ButtonPressedEventArgs e)

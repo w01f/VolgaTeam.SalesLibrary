@@ -31,13 +31,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings.ResetLin
 			this.components = new System.ComponentModel.Container();
 			this.layoutControl = new DevExpress.XtraLayout.LayoutControl();
 			this.xtraTabControl = new DevExpress.XtraTab.XtraTabControl();
-			this.labelControlTitle = new DevExpress.XtraEditors.LabelControl();
 			this.buttonXDisable = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXEnable = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXCancel = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXReset = new DevComponents.DotNetBar.ButtonX();
 			this.layoutControlGroupRoot = new DevExpress.XtraLayout.LayoutControlGroup();
-			this.layoutControlItemTitle = new DevExpress.XtraLayout.LayoutControlItem();
 			this.layoutControlItemDisableToggle = new DevExpress.XtraLayout.LayoutControlItem();
 			this.layoutControlItemToggleEnable = new DevExpress.XtraLayout.LayoutControlItem();
 			this.emptySpaceItem4 = new DevExpress.XtraLayout.EmptySpaceItem();
@@ -47,12 +45,13 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings.ResetLin
 			this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.layoutControlItemTabControl = new DevExpress.XtraLayout.LayoutControlItem();
 			this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.simpleLabelItemTitle = new DevExpress.XtraLayout.SimpleLabelItem();
+			this.emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.layoutControl)).BeginInit();
 			this.layoutControl.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControl)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupRoot)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemTitle)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemDisableToggle)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemToggleEnable)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem4)).BeginInit();
@@ -62,6 +61,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings.ResetLin
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemTabControl)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemTitle)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -81,7 +82,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings.ResetLin
 			this.layoutControl.Appearance.ControlReadOnly.Options.UseFont = true;
 			this.layoutControl.BackColor = System.Drawing.Color.White;
 			this.layoutControl.Controls.Add(this.xtraTabControl);
-			this.layoutControl.Controls.Add(this.labelControlTitle);
 			this.layoutControl.Controls.Add(this.buttonXDisable);
 			this.layoutControl.Controls.Add(this.buttonXEnable);
 			this.layoutControl.Controls.Add(this.buttonXCancel);
@@ -115,29 +115,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings.ResetLin
 			this.xtraTabControl.AppearancePage.HeaderHotTracked.Options.UseFont = true;
 			this.xtraTabControl.AppearancePage.PageClient.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.xtraTabControl.AppearancePage.PageClient.Options.UseFont = true;
-			this.xtraTabControl.Location = new System.Drawing.Point(12, 79);
+			this.xtraTabControl.Location = new System.Drawing.Point(12, 62);
 			this.xtraTabControl.Name = "xtraTabControl";
-			this.xtraTabControl.Size = new System.Drawing.Size(910, 620);
+			this.xtraTabControl.Size = new System.Drawing.Size(910, 637);
 			this.xtraTabControl.TabIndex = 64;
 			this.xtraTabControl.SelectedPageChanged += new DevExpress.XtraTab.TabPageChangedEventHandler(this.OnSelectedControlTabChanged);
-			// 
-			// labelControlTitle
-			// 
-			this.labelControlTitle.AllowHtmlString = true;
-			this.labelControlTitle.Appearance.BackColor = System.Drawing.Color.White;
-			this.labelControlTitle.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.labelControlTitle.Appearance.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			this.labelControlTitle.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-			this.labelControlTitle.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-			this.labelControlTitle.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-			this.labelControlTitle.ImageAlignToText = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-			this.labelControlTitle.Location = new System.Drawing.Point(12, 12);
-			this.labelControlTitle.Name = "labelControlTitle";
-			this.labelControlTitle.Size = new System.Drawing.Size(650, 63);
-			this.labelControlTitle.StyleController = this.layoutControl;
-			this.labelControlTitle.TabIndex = 48;
-			this.labelControlTitle.Text = "<size=+4><b>Advanced Links Cleanup</b></size>";
-			this.labelControlTitle.UseMnemonic = false;
 			// 
 			// buttonXDisable
 			// 
@@ -146,8 +128,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings.ResetLin
 			this.buttonXDisable.Checked = true;
 			this.buttonXDisable.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXDisable.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.buttonXDisable.Location = new System.Drawing.Point(806, 25);
-			this.buttonXDisable.MaximumSize = new System.Drawing.Size(0, 35);
+			this.buttonXDisable.Location = new System.Drawing.Point(806, 12);
 			this.buttonXDisable.Name = "buttonXDisable";
 			this.buttonXDisable.Size = new System.Drawing.Size(116, 35);
 			this.buttonXDisable.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -162,8 +143,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings.ResetLin
 			this.buttonXEnable.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXEnable.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXEnable.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.buttonXEnable.Location = new System.Drawing.Point(666, 25);
-			this.buttonXEnable.MaximumSize = new System.Drawing.Size(0, 35);
+			this.buttonXEnable.Location = new System.Drawing.Point(666, 12);
 			this.buttonXEnable.Name = "buttonXEnable";
 			this.buttonXEnable.Size = new System.Drawing.Size(116, 35);
 			this.buttonXEnable.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -221,7 +201,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings.ResetLin
 			this.layoutControlGroupRoot.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
 			this.layoutControlGroupRoot.GroupBordersVisible = false;
 			this.layoutControlGroupRoot.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItemTitle,
             this.layoutControlItemDisableToggle,
             this.layoutControlItemToggleEnable,
             this.emptySpaceItem4,
@@ -230,25 +209,13 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings.ResetLin
             this.emptySpaceItem5,
             this.emptySpaceItem1,
             this.layoutControlItemTabControl,
-            this.emptySpaceItem2});
+            this.emptySpaceItem2,
+            this.simpleLabelItemTitle,
+            this.emptySpaceItem3});
 			this.layoutControlGroupRoot.Location = new System.Drawing.Point(0, 0);
 			this.layoutControlGroupRoot.Name = "Root";
 			this.layoutControlGroupRoot.Size = new System.Drawing.Size(934, 761);
 			this.layoutControlGroupRoot.TextVisible = false;
-			// 
-			// layoutControlItemTitle
-			// 
-			this.layoutControlItemTitle.Control = this.labelControlTitle;
-			this.layoutControlItemTitle.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-			this.layoutControlItemTitle.CustomizationFormText = "Title";
-			this.layoutControlItemTitle.FillControlToClientArea = false;
-			this.layoutControlItemTitle.Location = new System.Drawing.Point(0, 0);
-			this.layoutControlItemTitle.Name = "layoutControlItemTitle";
-			this.layoutControlItemTitle.Size = new System.Drawing.Size(654, 67);
-			this.layoutControlItemTitle.Text = "Title";
-			this.layoutControlItemTitle.TextSize = new System.Drawing.Size(0, 0);
-			this.layoutControlItemTitle.TextVisible = false;
-			this.layoutControlItemTitle.TrimClientAreaToControl = false;
 			// 
 			// layoutControlItemDisableToggle
 			// 
@@ -259,7 +226,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings.ResetLin
 			this.layoutControlItemDisableToggle.MaxSize = new System.Drawing.Size(120, 40);
 			this.layoutControlItemDisableToggle.MinSize = new System.Drawing.Size(120, 40);
 			this.layoutControlItemDisableToggle.Name = "layoutControlItemDisableToggle";
-			this.layoutControlItemDisableToggle.Size = new System.Drawing.Size(120, 67);
+			this.layoutControlItemDisableToggle.Size = new System.Drawing.Size(120, 40);
 			this.layoutControlItemDisableToggle.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
 			this.layoutControlItemDisableToggle.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutControlItemDisableToggle.TextVisible = false;
@@ -274,7 +241,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings.ResetLin
 			this.layoutControlItemToggleEnable.MaxSize = new System.Drawing.Size(120, 40);
 			this.layoutControlItemToggleEnable.MinSize = new System.Drawing.Size(120, 40);
 			this.layoutControlItemToggleEnable.Name = "layoutControlItemToggleEnable";
-			this.layoutControlItemToggleEnable.Size = new System.Drawing.Size(120, 67);
+			this.layoutControlItemToggleEnable.Size = new System.Drawing.Size(120, 40);
 			this.layoutControlItemToggleEnable.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
 			this.layoutControlItemToggleEnable.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutControlItemToggleEnable.TextVisible = false;
@@ -351,9 +318,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings.ResetLin
 			this.layoutControlItemTabControl.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
 			this.layoutControlItemTabControl.Enabled = false;
 			this.layoutControlItemTabControl.FillControlToClientArea = false;
-			this.layoutControlItemTabControl.Location = new System.Drawing.Point(0, 67);
+			this.layoutControlItemTabControl.Location = new System.Drawing.Point(0, 50);
 			this.layoutControlItemTabControl.Name = "layoutControlItemTabControl";
-			this.layoutControlItemTabControl.Size = new System.Drawing.Size(914, 624);
+			this.layoutControlItemTabControl.Size = new System.Drawing.Size(914, 641);
 			this.layoutControlItemTabControl.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutControlItemTabControl.TextVisible = false;
 			this.layoutControlItemTabControl.TrimClientAreaToControl = false;
@@ -365,9 +332,30 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings.ResetLin
 			this.emptySpaceItem2.MaxSize = new System.Drawing.Size(20, 0);
 			this.emptySpaceItem2.MinSize = new System.Drawing.Size(20, 10);
 			this.emptySpaceItem2.Name = "emptySpaceItem2";
-			this.emptySpaceItem2.Size = new System.Drawing.Size(20, 67);
+			this.emptySpaceItem2.Size = new System.Drawing.Size(20, 40);
 			this.emptySpaceItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
 			this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// simpleLabelItemTitle
+			// 
+			this.simpleLabelItemTitle.AllowHotTrack = false;
+			this.simpleLabelItemTitle.AllowHtmlStringInCaption = true;
+			this.simpleLabelItemTitle.Location = new System.Drawing.Point(0, 0);
+			this.simpleLabelItemTitle.Name = "simpleLabelItemTitle";
+			this.simpleLabelItemTitle.Size = new System.Drawing.Size(654, 40);
+			this.simpleLabelItemTitle.Text = "<size=+4><b>Advanced Links Cleanup</b></size>";
+			this.simpleLabelItemTitle.TextSize = new System.Drawing.Size(217, 21);
+			// 
+			// emptySpaceItem3
+			// 
+			this.emptySpaceItem3.AllowHotTrack = false;
+			this.emptySpaceItem3.Location = new System.Drawing.Point(0, 40);
+			this.emptySpaceItem3.MaxSize = new System.Drawing.Size(0, 10);
+			this.emptySpaceItem3.MinSize = new System.Drawing.Size(10, 10);
+			this.emptySpaceItem3.Name = "emptySpaceItem3";
+			this.emptySpaceItem3.Size = new System.Drawing.Size(914, 10);
+			this.emptySpaceItem3.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem3.TextSize = new System.Drawing.Size(0, 0);
 			// 
 			// styleController
 			// 
@@ -394,7 +382,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings.ResetLin
 			this.Controls.Add(this.layoutControl);
 			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.ForeColor = System.Drawing.Color.Black;
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.MaximizeBox = false;
@@ -408,7 +395,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings.ResetLin
 			this.layoutControl.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControl)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupRoot)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemTitle)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemDisableToggle)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemToggleEnable)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem4)).EndInit();
@@ -418,6 +404,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings.ResetLin
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemTabControl)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemTitle)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			this.ResumeLayout(false);
 
@@ -426,10 +414,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings.ResetLin
 		#endregion
 		private DevExpress.XtraLayout.LayoutControl layoutControl;
 		private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroupRoot;
-		private DevExpress.XtraEditors.LabelControl labelControlTitle;
 		private DevComponents.DotNetBar.ButtonX buttonXDisable;
 		private DevComponents.DotNetBar.ButtonX buttonXEnable;
-		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemTitle;
 		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemDisableToggle;
 		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemToggleEnable;
 		private DevComponents.DotNetBar.ButtonX buttonXCancel;
@@ -443,5 +429,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings.ResetLin
 		private DevExpress.XtraEditors.StyleController styleController;
 		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemTabControl;
 		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
+		private DevExpress.XtraLayout.SimpleLabelItem simpleLabelItemTitle;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem3;
 	}
 }

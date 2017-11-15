@@ -29,9 +29,9 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject9 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
 			this.gridControl = new DevExpress.XtraGrid.GridControl();
 			this.gridView = new DevExpress.XtraGrid.Views.Grid.GridView();
 			this.gridColumnValue = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -44,9 +44,9 @@
 			this.layoutControlGroupRoot = new DevExpress.XtraLayout.LayoutControlGroup();
 			this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.layoutControlItemReset = new DevExpress.XtraLayout.LayoutControlItem();
-			this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.layoutControlItemAdd = new DevExpress.XtraLayout.LayoutControlItem();
 			this.emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.layoutControlItemGrid = new DevExpress.XtraLayout.LayoutControlItem();
 			((System.ComponentModel.ISupportInitialize)(this.gridControl)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
@@ -58,9 +58,9 @@
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupRoot)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemReset)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemAdd)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemGrid)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -70,13 +70,13 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.gridControl.Cursor = System.Windows.Forms.Cursors.Default;
-			this.gridControl.Location = new System.Drawing.Point(12, 102);
+			this.gridControl.Location = new System.Drawing.Point(12, 107);
 			this.gridControl.MainView = this.gridView;
 			this.gridControl.Name = "gridControl";
 			this.gridControl.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemButtonEditSharedKeyword,
             this.repositoryItemButtonEditPartialKeyword});
-			this.gridControl.Size = new System.Drawing.Size(326, 290);
+			this.gridControl.Size = new System.Drawing.Size(326, 285);
 			this.gridControl.TabIndex = 8;
 			this.gridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView});
@@ -131,8 +131,8 @@
 			// 
 			this.repositoryItemButtonEditPartialKeyword.AutoHeight = false;
 			this.repositoryItemButtonEditPartialKeyword.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.FileManager.Properties.Resources.ButtonApplyForAll, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject7, "Apply for ALL Links and Edit", "MakeShared", null, true),
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.FileManager.Properties.Resources.ButtonDelete, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject8, "Delete", "Delete", null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.FileManager.Properties.Resources.ButtonApplyForAll, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "Apply for ALL Links and Edit", "MakeShared", null, true),
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.FileManager.Properties.Resources.ButtonDelete, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "Delete", "Delete", null, true)});
 			this.repositoryItemButtonEditPartialKeyword.Name = "repositoryItemButtonEditPartialKeyword";
 			this.repositoryItemButtonEditPartialKeyword.NullText = "Type Keyword...";
 			this.repositoryItemButtonEditPartialKeyword.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
@@ -150,7 +150,7 @@
 			this.repositoryItemButtonEditSharedKeyword.AppearanceReadOnly.Options.UseFont = true;
 			this.repositoryItemButtonEditSharedKeyword.AutoHeight = false;
 			this.repositoryItemButtonEditSharedKeyword.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.FileManager.Properties.Resources.ButtonDelete, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject9, "Delete", "Delete", null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.FileManager.Properties.Resources.ButtonDelete, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "Delete", "Delete", null, true)});
 			this.repositoryItemButtonEditSharedKeyword.Name = "repositoryItemButtonEditSharedKeyword";
 			this.repositoryItemButtonEditSharedKeyword.NullText = "Type Keyword...";
 			this.repositoryItemButtonEditSharedKeyword.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.OnKeywordEditorButtonClick);
@@ -160,10 +160,9 @@
 			this.buttonXAdd.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXAdd.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXAdd.Image = global::SalesLibraries.FileManager.Properties.Resources.ButtonPlus;
-			this.buttonXAdd.ImageFixedSize = new System.Drawing.Size(24, 24);
 			this.buttonXAdd.Location = new System.Drawing.Point(12, 57);
 			this.buttonXAdd.Name = "buttonXAdd";
-			this.buttonXAdd.Size = new System.Drawing.Size(155, 31);
+			this.buttonXAdd.Size = new System.Drawing.Size(155, 36);
 			this.buttonXAdd.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXAdd.TabIndex = 7;
 			this.buttonXAdd.Text = "   Add Keyword";
@@ -284,22 +283,14 @@
 			this.layoutControlItemReset.TextVisible = false;
 			this.layoutControlItemReset.TrimClientAreaToControl = false;
 			// 
-			// emptySpaceItem2
-			// 
-			this.emptySpaceItem2.AllowHotTrack = false;
-			this.emptySpaceItem2.Location = new System.Drawing.Point(159, 45);
-			this.emptySpaceItem2.Name = "emptySpaceItem2";
-			this.emptySpaceItem2.Size = new System.Drawing.Size(171, 35);
-			this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
-			// 
 			// layoutControlItemAdd
 			// 
 			this.layoutControlItemAdd.Control = this.buttonXAdd;
 			this.layoutControlItemAdd.Location = new System.Drawing.Point(0, 45);
-			this.layoutControlItemAdd.MaxSize = new System.Drawing.Size(0, 35);
-			this.layoutControlItemAdd.MinSize = new System.Drawing.Size(104, 35);
+			this.layoutControlItemAdd.MaxSize = new System.Drawing.Size(0, 40);
+			this.layoutControlItemAdd.MinSize = new System.Drawing.Size(104, 40);
 			this.layoutControlItemAdd.Name = "layoutControlItemAdd";
-			this.layoutControlItemAdd.Size = new System.Drawing.Size(159, 35);
+			this.layoutControlItemAdd.Size = new System.Drawing.Size(159, 40);
 			this.layoutControlItemAdd.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
 			this.layoutControlItemAdd.Text = "Add";
 			this.layoutControlItemAdd.TextSize = new System.Drawing.Size(0, 0);
@@ -309,7 +300,7 @@
 			// emptySpaceItem3
 			// 
 			this.emptySpaceItem3.AllowHotTrack = false;
-			this.emptySpaceItem3.Location = new System.Drawing.Point(0, 80);
+			this.emptySpaceItem3.Location = new System.Drawing.Point(0, 85);
 			this.emptySpaceItem3.MaxSize = new System.Drawing.Size(0, 10);
 			this.emptySpaceItem3.MinSize = new System.Drawing.Size(10, 10);
 			this.emptySpaceItem3.Name = "emptySpaceItem3";
@@ -317,14 +308,22 @@
 			this.emptySpaceItem3.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
 			this.emptySpaceItem3.TextSize = new System.Drawing.Size(0, 0);
 			// 
+			// emptySpaceItem2
+			// 
+			this.emptySpaceItem2.AllowHotTrack = false;
+			this.emptySpaceItem2.Location = new System.Drawing.Point(159, 45);
+			this.emptySpaceItem2.Name = "emptySpaceItem2";
+			this.emptySpaceItem2.Size = new System.Drawing.Size(171, 40);
+			this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
+			// 
 			// layoutControlItemGrid
 			// 
 			this.layoutControlItemGrid.Control = this.gridControl;
 			this.layoutControlItemGrid.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
 			this.layoutControlItemGrid.FillControlToClientArea = false;
-			this.layoutControlItemGrid.Location = new System.Drawing.Point(0, 90);
+			this.layoutControlItemGrid.Location = new System.Drawing.Point(0, 95);
 			this.layoutControlItemGrid.Name = "layoutControlItemGrid";
-			this.layoutControlItemGrid.Size = new System.Drawing.Size(330, 294);
+			this.layoutControlItemGrid.Size = new System.Drawing.Size(330, 289);
 			this.layoutControlItemGrid.Text = "Grid";
 			this.layoutControlItemGrid.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutControlItemGrid.TextVisible = false;
@@ -349,9 +348,9 @@
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupRoot)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemReset)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemAdd)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemGrid)).EndInit();
 			this.ResumeLayout(false);
 

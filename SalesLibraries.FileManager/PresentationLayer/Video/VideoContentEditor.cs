@@ -31,15 +31,19 @@ namespace SalesLibraries.FileManager.PresentationLayer.Video
 			InitializeComponent();
 			Dock = DockStyle.Fill;
 
-			layoutControlItemMp4ConversionWarning.MinSize = RectangleHelper.ScaleSize(layoutControlItemMp4ConversionWarning.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemMp4ConversionWarning.MaxSize = RectangleHelper.ScaleSize(layoutControlItemMp4ConversionWarning.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemSelectAll.MinSize = RectangleHelper.ScaleSize(layoutControlItemSelectAll.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemMp4ConversionWarning.MinSize = RectangleHelper.ScaleSize(layoutControlItemMp4ConversionWarning.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemSelectAll.MaxSize = RectangleHelper.ScaleSize(layoutControlItemSelectAll.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemSelectMissing.MinSize = RectangleHelper.ScaleSize(layoutControlItemSelectMissing.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemSelectAll.MinSize = RectangleHelper.ScaleSize(layoutControlItemSelectAll.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemSelectMissing.MaxSize = RectangleHelper.ScaleSize(layoutControlItemSelectMissing.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemClearAll.MinSize = RectangleHelper.ScaleSize(layoutControlItemClearAll.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemSelectMissing.MinSize = RectangleHelper.ScaleSize(layoutControlItemSelectMissing.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemClearAll.MaxSize = RectangleHelper.ScaleSize(layoutControlItemClearAll.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemClearAll.MinSize = RectangleHelper.ScaleSize(layoutControlItemClearAll.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 
+			gridColumnVideoSelected.Width =
+				RectangleHelper.ScaleHorizontal(gridColumnVideoSelected.Width, gridControlVideo.ScaleFactor.Width);
+			gridColumnVideoIndex.Width =
+				RectangleHelper.ScaleHorizontal(gridColumnVideoIndex.Width, gridControlVideo.ScaleFactor.Width);
 			gridColumnVideoMp4FileInfo.Width =
 				RectangleHelper.ScaleHorizontal(gridColumnVideoMp4FileInfo.Width, gridControlVideo.ScaleFactor.Width);
 			gridColumnVideoConvert.Width =

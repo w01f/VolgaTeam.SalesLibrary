@@ -22,10 +22,17 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 		{
 			InitializeComponent();
 
-			layoutControlItemSave.MinSize = RectangleHelper.ScaleSize(layoutControlItemSave.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemAdd.MaxSize = RectangleHelper.ScaleSize(layoutControlItemAdd.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemAdd.MinSize = RectangleHelper.ScaleSize(layoutControlItemAdd.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemAlignByColumns.MaxSize = RectangleHelper.ScaleSize(layoutControlItemAlignByColumns.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemAlignByColumns.MinSize = RectangleHelper.ScaleSize(layoutControlItemAlignByColumns.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemAlignByRows.MaxSize = RectangleHelper.ScaleSize(layoutControlItemAlignByRows.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemAlignByRows.MinSize = RectangleHelper.ScaleSize(layoutControlItemAlignByRows.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+
 			layoutControlItemSave.MaxSize = RectangleHelper.ScaleSize(layoutControlItemSave.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemCancel.MinSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemSave.MinSize = RectangleHelper.ScaleSize(layoutControlItemSave.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemCancel.MaxSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCancel.MinSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
 		#region Base Methods

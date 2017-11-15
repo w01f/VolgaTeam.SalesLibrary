@@ -1,5 +1,7 @@
 ﻿using System;
 using DevComponents.DotNetBar;
+using DevExpress.Skins;
+using SalesLibraries.Common.Helpers;
 using SalesLibraries.SalesDepot.Controllers;
 
 namespace SalesLibraries.SalesDepot.PresentationLayer.Settings
@@ -11,6 +13,10 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Settings
 		public PowerPointStartupSettingsControl()
 		{
 			InitializeComponent();
+			layoutControlItemEnabled.MaxSize = RectangleHelper.ScaleSize(layoutControlItemEnabled.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemEnabled.MinSize = RectangleHelper.ScaleSize(layoutControlItemEnabled.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemDisabled.MaxSize = RectangleHelper.ScaleSize(layoutControlItemDisabled.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemDisabled.MinSize = RectangleHelper.ScaleSize(layoutControlItemDisabled.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
 		public override void LoadData()

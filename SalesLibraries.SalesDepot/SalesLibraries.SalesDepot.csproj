@@ -185,6 +185,12 @@
     <Compile Include="PresentationLayer\Settings\PowerPointStartupSettingsControl.designer.cs">
       <DependentUpon>PowerPointStartupSettingsControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationLayer\Settings\SettingsBorderControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Settings\SettingsBorderControl.Designer.cs">
+      <DependentUpon>SettingsBorderControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationLayer\Wallbin\Folders\FolderBoxInitializer.cs" />
     <Compile Include="PresentationLayer\Wallbin\LinkViewers\Processors\ILinkViewProcessor.cs" />
     <Compile Include="PresentationLayer\Wallbin\LinkViewers\Processors\LinkProcessorFactory.cs" />
@@ -495,6 +501,12 @@
     <Compile Include="PresentationLayer\Wallbin\Views\WallbinViewFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Controllers\SettingsPage.resx">
+      <DependentUpon>SettingsPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controllers\WallbinPage.resx">
+      <DependentUpon>WallbinPage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
@@ -542,6 +554,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Settings\SaveSettingsControl.resx">
       <DependentUpon>SaveSettingsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Settings\SettingsBorderControl.resx">
+      <DependentUpon>SettingsBorderControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Settings\SettingsContainer.resx">
       <DependentUpon>SettingsContainer.cs</DependentUpon>
@@ -793,9 +808,6 @@
     <None Include="Resources\QuickViewUserSettings.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Cancel.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\FolderContentDocx.png" />
   </ItemGroup>
   <ItemGroup>
@@ -821,6 +833,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\MenuSave.png" />
+    <None Include="Resources\MenuPrint.png" />
+    <None Include="Resources\MenuOpen.png" />
+    <None Include="Resources\MenuEmail.png" />
+    <None Include="Resources\MenuCancel.png" />
+    <None Include="Resources\MenuAdd.png" />
     <None Include="Resources\CalendarLogo.png" />
     <None Include="Resources\WallbinZoomOut.png" />
     <None Include="Resources\WallbinZoomIn.png" />
@@ -831,9 +849,7 @@
     <None Include="Resources\WallbinSettingsColumns.png" />
     <None Include="Resources\WallbinSettingsAccordion.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Business\Dictionaries\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>robocopy /s /z /r:100 "$(SolutionDir)SalesLibraries.Business\$(OutDir)\" "d:\WorkingFiles\SalesDepot\Release\Sales Library.exe" "*.sql" "sequense.txt"

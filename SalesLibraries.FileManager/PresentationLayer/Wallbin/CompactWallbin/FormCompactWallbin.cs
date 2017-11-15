@@ -42,13 +42,20 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.CompactWallbin
 			InitSingleLinkContextMenuEditors();
 
 			DataStateObserver.Instance.DataChanged += OnLinksDeleted;
-
-			layoutControlItemSyncProgress.MinSize = RectangleHelper.ScaleSize(layoutControlItemSyncProgress.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCollapse.MaxSize = RectangleHelper.ScaleSize(layoutControlItemCollapse.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCollapse.MinSize = RectangleHelper.ScaleSize(layoutControlItemCollapse.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemExpand.MaxSize = RectangleHelper.ScaleSize(layoutControlItemExpand.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemExpand.MinSize = RectangleHelper.ScaleSize(layoutControlItemExpand.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemSyncProgress.MaxSize = RectangleHelper.ScaleSize(layoutControlItemSyncProgress.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemTreeViewProgress.MinSize = RectangleHelper.ScaleSize(layoutControlItemTreeViewProgress.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemSyncProgress.MinSize = RectangleHelper.ScaleSize(layoutControlItemSyncProgress.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemTreeViewProgress.MaxSize = RectangleHelper.ScaleSize(layoutControlItemTreeViewProgress.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			simpleLabelItemSyncInfo.MinSize = RectangleHelper.ScaleSize(simpleLabelItemSyncInfo.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemTreeViewProgress.MinSize = RectangleHelper.ScaleSize(layoutControlItemTreeViewProgress.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			simpleLabelItemSyncInfo.MaxSize = RectangleHelper.ScaleSize(simpleLabelItemSyncInfo.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			simpleLabelItemSyncInfo.MinSize = RectangleHelper.ScaleSize(simpleLabelItemSyncInfo.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemBack.MaxSize = RectangleHelper.ScaleSize(layoutControlItemBack.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemBack.MinSize = RectangleHelper.ScaleSize(layoutControlItemBack.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemExit.MaxSize = RectangleHelper.ScaleSize(layoutControlItemExit.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemExit.MinSize = RectangleHelper.ScaleSize(layoutControlItemExit.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
 		private void RaiseDataChanged()

@@ -250,7 +250,7 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 
 						if (!cancellationToken.IsCancellationRequested && updateThumbsDatatable)
 						{
-							JpegGenerator.GenerateDatatableJpegs(pngDestination, thumbsDatatableDestination);
+							JpegHelper.ConvertFiles(pngDestination, thumbsDatatableDestination);
 							logger.LogStage(PreviewFormats.ThumbnailsForDatatable);
 						}
 

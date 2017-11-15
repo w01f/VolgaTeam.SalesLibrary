@@ -44,7 +44,7 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 			if (updatePng || updateThumbs || updateThumbsDatatable)
 			{
 				PdfHelper.ExportPdf(pdfContainer.SourcePath, pngDestination, thumbsDestination, pdfContainer.GenerateSingleImage);
-				JpegGenerator.GenerateDatatableJpegs(pngDestination, thumbsDatatableDestination);
+				JpegHelper.ConvertFiles(pngDestination, thumbsDatatableDestination);
 				logger.LogStage(PreviewFormats.Png);
 				logger.LogStage(PreviewFormats.Thumbnails);
 				logger.LogStage(PreviewFormats.ThumbnailsForDatatable);

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Forms;
+using DevExpress.Skins;
+using SalesLibraries.Common.Helpers;
 using SalesLibraries.CommonGUI.Common;
 using SalesLibraries.CommonGUI.RetractableBar;
 using SalesLibraries.SalesDepot.Configuration;
@@ -21,6 +23,9 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.Views
 			pnEmpty.Dock = DockStyle.Fill;
 			pnContainer.Dock = DockStyle.Fill;
 			pnEmpty.BringToFront();
+
+			retractableBar.Width = RectangleHelper.ScaleHorizontal(retractableBar.Width, Utils.GetScaleFactor(CreateGraphics().DpiX).Width);
+			retractableBar.ContentSize = RectangleHelper.ScaleHorizontal(retractableBar.ContentSize, Utils.GetScaleFactor(CreateGraphics().DpiX).Width);
 		}
 
 		public void InitControl()

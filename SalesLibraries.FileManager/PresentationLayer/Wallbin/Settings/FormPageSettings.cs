@@ -33,10 +33,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			textEditPageName.EnableSelectAll();
 			textEditPageName.Focus();
 
-			layoutControlItemApply.MinSize = RectangleHelper.ScaleSize(layoutControlItemApply.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemApply.MaxSize = RectangleHelper.ScaleSize(layoutControlItemApply.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemCancel.MinSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemCancel.MaxSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCancel.MinSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 	}
 }

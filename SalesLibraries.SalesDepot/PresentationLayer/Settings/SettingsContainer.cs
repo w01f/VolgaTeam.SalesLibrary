@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
+using DevExpress.Skins;
+using SalesLibraries.Common.Helpers;
 
 namespace SalesLibraries.SalesDepot.PresentationLayer.Settings
 {
@@ -28,6 +30,27 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Settings
 			_settingsControls.Add(emailSettingsControl);
 			_settingsControls.Add(saveSettingsControl);
 			_settingsControls.Add(powerPointStartupSettingsControl);
+
+			//layoutControlItemSettingsPowerPoint.MaxSize = RectangleHelper.ScaleSize(layoutControlItemSettingsPowerPoint.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			//layoutControlItemSettingsPowerPoint.MinSize = RectangleHelper.ScaleSize(layoutControlItemSettingsPowerPoint.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			//layoutControlItemSettingsWord.MaxSize = RectangleHelper.ScaleSize(layoutControlItemSettingsWord.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			//layoutControlItemSettingsWord.MinSize = RectangleHelper.ScaleSize(layoutControlItemSettingsWord.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			//layoutControlItemSettingsPdf.MaxSize = RectangleHelper.ScaleSize(layoutControlItemSettingsPdf.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			//layoutControlItemSettingsPdf.MinSize = RectangleHelper.ScaleSize(layoutControlItemSettingsPdf.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			//layoutControlItemSettingsExcel.MaxSize = RectangleHelper.ScaleSize(layoutControlItemSettingsExcel.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			//layoutControlItemSettingsExcel.MinSize = RectangleHelper.ScaleSize(layoutControlItemSettingsExcel.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			//layoutControlItemSettingsVideo.MaxSize = RectangleHelper.ScaleSize(layoutControlItemSettingsVideo.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			//layoutControlItemSettingsVideo.MinSize = RectangleHelper.ScaleSize(layoutControlItemSettingsVideo.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			//layoutControlItemSettingsFolder.MaxSize = RectangleHelper.ScaleSize(layoutControlItemSettingsFolder.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			//layoutControlItemSettingsFolder.MinSize = RectangleHelper.ScaleSize(layoutControlItemSettingsFolder.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			//layoutControlItemSettingsQuickView.MaxSize = RectangleHelper.ScaleSize(layoutControlItemSettingsQuickView.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			//layoutControlItemSettingsQuickView.MinSize = RectangleHelper.ScaleSize(layoutControlItemSettingsQuickView.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			//layoutControlItemSettingsEmail.MaxSize = RectangleHelper.ScaleSize(layoutControlItemSettingsEmail.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			//layoutControlItemSettingsEmail.MinSize = RectangleHelper.ScaleSize(layoutControlItemSettingsEmail.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			//layoutControlItemSettingsSave.MaxSize = RectangleHelper.ScaleSize(layoutControlItemSettingsSave.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			//layoutControlItemSettingsSave.MinSize = RectangleHelper.ScaleSize(layoutControlItemSettingsSave.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			//layoutControlItemSettingsStartup.MaxSize = RectangleHelper.ScaleSize(layoutControlItemSettingsStartup.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			//layoutControlItemSettingsStartup.MinSize = RectangleHelper.ScaleSize(layoutControlItemSettingsStartup.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
 		public void InitControl()
@@ -55,11 +78,6 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Settings
 				else
 					currentColumn++;
 			}
-		}
-
-		private void xtraScrollableControl_MouseMove(object sender, MouseEventArgs e)
-		{
-			xtraScrollableControl.Focus();
 		}
 	}
 }

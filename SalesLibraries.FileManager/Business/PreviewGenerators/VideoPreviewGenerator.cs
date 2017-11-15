@@ -83,7 +83,7 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 				if (updateThumbs || updateThumbsDatatable)
 				{
 					VideoHelper.GenerateThumbnails(sourceFile, thumbDestination, videoData, cancellationToken);
-					JpegGenerator.GenerateDatatableJpegs(thumbDestination, thumbDatatableDestination);
+					JpegHelper.ConvertFiles(thumbDestination, thumbDatatableDestination);
 					PngHelper.ConvertFiles(thumbDestination);
 					logger.LogStage(PreviewFormats.VideoThumbnail);
 					logger.LogStage(PreviewFormats.ThumbnailsForDatatable);

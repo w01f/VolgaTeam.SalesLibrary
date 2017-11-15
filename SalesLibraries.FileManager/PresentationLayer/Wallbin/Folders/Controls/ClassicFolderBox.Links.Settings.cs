@@ -24,7 +24,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 			if (selectedRow == null) return;
 			if ((selectedRow.Source is ILinksGroup && LinkGroupSettings.Contains(settingsType) ?
 				SettingsEditorFactory.Run((ILinksGroup)selectedRow.Source, settingsType, defaultLinkType) :
-				SettingsEditorFactory.Run(selectedRow.Source, settingsType, defaultLinkType)) == DialogResult.OK)
+				SettingsEditorFactory.Run(selectedRow.Source, settingsType)) == DialogResult.OK)
 			{
 				UpdateContent(true);
 				DataChanged?.Invoke(this, EventArgs.Empty);

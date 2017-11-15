@@ -172,6 +172,7 @@
 			this.pictureEditLogo.EditValue = global::SalesLibraries.FileManager.Properties.Resources.LinkAddExternalFolder;
 			this.pictureEditLogo.Location = new System.Drawing.Point(12, 12);
 			this.pictureEditLogo.Name = "pictureEditLogo";
+			this.pictureEditLogo.Properties.AllowFocused = false;
 			this.pictureEditLogo.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
 			this.pictureEditLogo.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.pictureEditLogo.Properties.Appearance.Options.UseBackColor = true;

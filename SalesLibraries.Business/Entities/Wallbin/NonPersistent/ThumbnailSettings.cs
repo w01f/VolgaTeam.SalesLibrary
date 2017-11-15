@@ -11,6 +11,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 	{
 		public const int DefaultShadowSize = 7;
 
+		public static Color DefaultShadowColor = ColorTranslator.FromHtml("#C0C0C0");
+
 		private bool _enable;
 		public bool Enable
 		{
@@ -95,7 +97,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 			}
 		}
 
-		private Color _borderColor = Color.Black;
+		private Color _borderColor = ColorTranslator.FromHtml("#C0C0C0");
 		public Color BorderColor
 		{
 			get { return _borderColor; }
@@ -107,7 +109,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 			}
 		}
 
-		private Color _shadowColor = Color.White;
+		private Color _shadowColor = DefaultShadowColor;
 		public Color ShadowColor
 		{
 			get { return _shadowColor; }

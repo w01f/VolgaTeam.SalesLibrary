@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows.Forms;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
+using SalesLibraries.Common.Helpers;
 using SalesLibraries.CommonGUI.Common;
 using SalesLibraries.CommonGUI.Wallbin.Views;
 
@@ -49,6 +50,12 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 		public BaseFolderBox()
 		{
 			InitializeComponent();
+
+			var scaleFactor = pnSeparator.Height * Utils.GetScaleFactor(CreateGraphics().DpiX).Height;
+			if (scaleFactor > 1)
+				pnSeparator.Height = (Int32) Math.Ceiling(5 * scaleFactor);
+			else
+				pnSeparator.Height = 0;
 		}
 
 		public BaseFolderBox(LibraryFolder dataSource)
@@ -132,6 +139,7 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 			pnHeaderBorder.BackColor = DataSource.Settings.BorderColor;
 			pnBorders.BackColor = DataSource.Settings.BorderColor;
 			pnHeader.BackColor = DataSource.Settings.BackgroundHeaderColor;
+			pnSeparator.BackColor = DataSource.Settings.BackgroundWindowColor;
 			grFiles.BackgroundColor = DataSource.Settings.BackgroundWindowColor;
 			grFiles.DefaultCellStyle.BackColor = DataSource.Settings.BackgroundWindowColor;
 			grFiles.DefaultCellStyle.SelectionBackColor = SelectedRowBackColor;
@@ -153,7 +161,7 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 					.Max(row => row.Info.RowWidth) :
 					0;
 
-			height += (int)(BoldRowFont.Size + 5);
+			height += (int)((BoldRowFont.Size + 5) * Utils.GetScaleFactor(CreateGraphics().DpiX).Height);
 			if (height < 90) height = 90;
 			grFiles.Height = height;
 			colDisplayName.Width = maxColumnWidth > grFiles.Width ? maxColumnWidth : grFiles.Width;
@@ -165,6 +173,7 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 		protected virtual void UpdateControlHeight()
 		{
 			Height = pnHeaderBorder.Height +
+				pnSeparator.Height +
 				grFiles.Height +
 				pnBorders.Padding.Top +
 				pnBorders.Padding.Bottom +

@@ -29,7 +29,7 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
 			this.buttonXCancel = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXOK = new DevComponents.DotNetBar.ButtonX();
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
@@ -247,7 +247,7 @@
 			this.gridColumnBundleItemsImage.OptionsColumn.ReadOnly = true;
 			this.gridColumnBundleItemsImage.Visible = true;
 			this.gridColumnBundleItemsImage.VisibleIndex = 0;
-			this.gridColumnBundleItemsImage.Width = 64;
+			this.gridColumnBundleItemsImage.Width = 80;
 			// 
 			// repositoryItemPictureEditBundelItems
 			// 
@@ -265,6 +265,7 @@
 			this.repositoryItemPictureEditBundelItems.ReadOnly = true;
 			this.repositoryItemPictureEditBundelItems.ShowMenu = false;
 			this.repositoryItemPictureEditBundelItems.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Zoom;
+			this.repositoryItemPictureEditBundelItems.ZoomAccelerationFactor = 1D;
 			// 
 			// gridColumnBundleItemsName
 			// 
@@ -274,7 +275,7 @@
 			this.gridColumnBundleItemsName.ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowForFocusedRow;
 			this.gridColumnBundleItemsName.Visible = true;
 			this.gridColumnBundleItemsName.VisibleIndex = 1;
-			this.gridColumnBundleItemsName.Width = 304;
+			this.gridColumnBundleItemsName.Width = 276;
 			// 
 			// gridColumnBundleItemsTitle
 			// 
@@ -284,7 +285,7 @@
 			this.gridColumnBundleItemsTitle.Name = "gridColumnBundleItemsTitle";
 			this.gridColumnBundleItemsTitle.Visible = true;
 			this.gridColumnBundleItemsTitle.VisibleIndex = 2;
-			this.gridColumnBundleItemsTitle.Width = 173;
+			this.gridColumnBundleItemsTitle.Width = 156;
 			// 
 			// repositoryItemTextEditBundleItems
 			// 
@@ -301,7 +302,7 @@
 			this.gridColumnBundleItemsHoverTip.Name = "gridColumnBundleItemsHoverTip";
 			this.gridColumnBundleItemsHoverTip.Visible = true;
 			this.gridColumnBundleItemsHoverTip.VisibleIndex = 3;
-			this.gridColumnBundleItemsHoverTip.Width = 167;
+			this.gridColumnBundleItemsHoverTip.Width = 156;
 			// 
 			// repositoryItemMemoEditBundleItems
 			// 
@@ -320,7 +321,7 @@
 			this.gridColumnBundleItemsUseAsThumbnail.OptionsColumn.FixedWidth = true;
 			this.gridColumnBundleItemsUseAsThumbnail.Visible = true;
 			this.gridColumnBundleItemsUseAsThumbnail.VisibleIndex = 4;
-			this.gridColumnBundleItemsUseAsThumbnail.Width = 80;
+			this.gridColumnBundleItemsUseAsThumbnail.Width = 100;
 			// 
 			// repositoryItemCheckEditBundleItems
 			// 
@@ -341,7 +342,7 @@
 			this.gridColumnBundleItemsVisible.OptionsColumn.FixedWidth = true;
 			this.gridColumnBundleItemsVisible.Visible = true;
 			this.gridColumnBundleItemsVisible.VisibleIndex = 5;
-			this.gridColumnBundleItemsVisible.Width = 80;
+			this.gridColumnBundleItemsVisible.Width = 100;
 			// 
 			// gridColumnBundleItemsActions
 			// 
@@ -350,7 +351,7 @@
 			this.gridColumnBundleItemsActions.OptionsColumn.FixedWidth = true;
 			this.gridColumnBundleItemsActions.Visible = true;
 			this.gridColumnBundleItemsActions.VisibleIndex = 6;
-			this.gridColumnBundleItemsActions.Width = 40;
+			this.gridColumnBundleItemsActions.Width = 60;
 			// 
 			// repositoryItemButtonEditBundleItemsActions
 			// 
@@ -364,7 +365,7 @@
 			this.repositoryItemButtonEditBundleItemsActions.AppearanceReadOnly.Options.UseFont = true;
 			this.repositoryItemButtonEditBundleItemsActions.AutoHeight = false;
 			this.repositoryItemButtonEditBundleItemsActions.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.FileManager.Properties.Resources.ButtonDelete, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "Delete", "Delete", null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.FileManager.Properties.Resources.ButtonDelete, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "Delete", "Delete", null, true)});
 			this.repositoryItemButtonEditBundleItemsActions.Name = "repositoryItemButtonEditBundleItemsActions";
 			this.repositoryItemButtonEditBundleItemsActions.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
 			this.repositoryItemButtonEditBundleItemsActions.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.OnGridBundleItemsActionsButtonClick);
@@ -388,6 +389,7 @@
 			this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
 			this.barDockControlLeft.ForeColor = System.Drawing.Color.Black;
 			this.barDockControlLeft.Location = new System.Drawing.Point(2, 2);
+			this.barDockControlLeft.Manager = this.barManager;
 			this.barDockControlLeft.Size = new System.Drawing.Size(0, 200);
 			// 
 			// barDockControlRight
@@ -396,6 +398,7 @@
 			this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
 			this.barDockControlRight.ForeColor = System.Drawing.Color.Black;
 			this.barDockControlRight.Location = new System.Drawing.Point(239, 134);
+			this.barDockControlRight.Manager = this.barManager;
 			this.barDockControlRight.Size = new System.Drawing.Size(0, 68);
 			// 
 			// barDockControlBottom
@@ -404,6 +407,7 @@
 			this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.barDockControlBottom.ForeColor = System.Drawing.Color.Black;
 			this.barDockControlBottom.Location = new System.Drawing.Point(239, 182);
+			this.barDockControlBottom.Manager = this.barManager;
 			this.barDockControlBottom.Size = new System.Drawing.Size(663, 0);
 			// 
 			// barDockControlTop
@@ -411,6 +415,7 @@
 			this.barDockControlTop.CausesValidation = false;
 			this.barDockControlTop.ForeColor = System.Drawing.Color.Black;
 			this.barDockControlTop.Location = new System.Drawing.Point(2, 74);
+			this.barDockControlTop.Manager = this.barManager;
 			this.barDockControlTop.Size = new System.Drawing.Size(910, 44);
 			// 
 			// barManager
@@ -451,8 +456,8 @@
 			// barSubItemLinksAdd
 			// 
 			this.barSubItemLinksAdd.Caption = "Add Link";
-			this.barSubItemLinksAdd.Glyph = global::SalesLibraries.FileManager.Properties.Resources.BundlesEditorLinksAdd;
 			this.barSubItemLinksAdd.Id = 3;
+			this.barSubItemLinksAdd.ImageOptions.Image = global::SalesLibraries.FileManager.Properties.Resources.BundlesEditorLinksAdd;
 			this.barSubItemLinksAdd.ItemClickFireMode = DevExpress.XtraBars.BarItemEventFireMode.Immediate;
 			this.barSubItemLinksAdd.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.barLargeButtonItemLinksAddCover),
@@ -466,48 +471,48 @@
 			// barLargeButtonItemLinksAddCover
 			// 
 			this.barLargeButtonItemLinksAddCover.Caption = "Cover Art";
-			this.barLargeButtonItemLinksAddCover.Glyph = global::SalesLibraries.FileManager.Properties.Resources.BundlesEditorLinksAddCover;
 			this.barLargeButtonItemLinksAddCover.Id = 15;
+			this.barLargeButtonItemLinksAddCover.ImageOptions.Image = global::SalesLibraries.FileManager.Properties.Resources.BundlesEditorLinksAddCover;
 			this.barLargeButtonItemLinksAddCover.Name = "barLargeButtonItemLinksAddCover";
 			this.barLargeButtonItemLinksAddCover.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.OnAddCoverItemClick);
 			// 
 			// barLargeButtonItemLinksAddLaunchScreen
 			// 
 			this.barLargeButtonItemLinksAddLaunchScreen.Caption = "Launch Screen";
-			this.barLargeButtonItemLinksAddLaunchScreen.Glyph = global::SalesLibraries.FileManager.Properties.Resources.BundlesEditorLinksAddInfo;
 			this.barLargeButtonItemLinksAddLaunchScreen.Id = 14;
+			this.barLargeButtonItemLinksAddLaunchScreen.ImageOptions.Image = global::SalesLibraries.FileManager.Properties.Resources.BundlesEditorLinksAddInfo;
 			this.barLargeButtonItemLinksAddLaunchScreen.Name = "barLargeButtonItemLinksAddLaunchScreen";
 			this.barLargeButtonItemLinksAddLaunchScreen.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.OnAddLaunchScreebItemClick);
 			// 
 			// barLargeButtonItemLinksAddInfo
 			// 
 			this.barLargeButtonItemLinksAddInfo.Caption = "Info";
-			this.barLargeButtonItemLinksAddInfo.Glyph = global::SalesLibraries.FileManager.Properties.Resources.BundlesEditorLinksAddInfo;
 			this.barLargeButtonItemLinksAddInfo.Id = 5;
+			this.barLargeButtonItemLinksAddInfo.ImageOptions.Image = global::SalesLibraries.FileManager.Properties.Resources.BundlesEditorLinksAddInfo;
 			this.barLargeButtonItemLinksAddInfo.Name = "barLargeButtonItemLinksAddInfo";
 			this.barLargeButtonItemLinksAddInfo.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.OnAddInfoItemClick);
 			// 
 			// barLargeButtonItemLinksAddRevenue
 			// 
 			this.barLargeButtonItemLinksAddRevenue.Caption = "Revenue";
-			this.barLargeButtonItemLinksAddRevenue.Glyph = global::SalesLibraries.FileManager.Properties.Resources.BundlesEditorLinksAddRevenue;
 			this.barLargeButtonItemLinksAddRevenue.Id = 6;
+			this.barLargeButtonItemLinksAddRevenue.ImageOptions.Image = global::SalesLibraries.FileManager.Properties.Resources.BundlesEditorLinksAddRevenue;
 			this.barLargeButtonItemLinksAddRevenue.Name = "barLargeButtonItemLinksAddRevenue";
 			this.barLargeButtonItemLinksAddRevenue.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.OnAddRevenueItemClick);
 			// 
 			// barLargeButtonItemLinksAddStrategy
 			// 
 			this.barLargeButtonItemLinksAddStrategy.Caption = "Sales Strategy";
-			this.barLargeButtonItemLinksAddStrategy.Glyph = global::SalesLibraries.FileManager.Properties.Resources.BundlesEditorLinksAddStrategy;
 			this.barLargeButtonItemLinksAddStrategy.Id = 7;
+			this.barLargeButtonItemLinksAddStrategy.ImageOptions.Image = global::SalesLibraries.FileManager.Properties.Resources.BundlesEditorLinksAddStrategy;
 			this.barLargeButtonItemLinksAddStrategy.Name = "barLargeButtonItemLinksAddStrategy";
 			this.barLargeButtonItemLinksAddStrategy.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.OnAddStrategyItemClick);
 			// 
 			// barLargeButtonItemLinksAddUrls
 			// 
 			this.barLargeButtonItemLinksAddUrls.Caption = "Url";
-			this.barLargeButtonItemLinksAddUrls.Glyph = global::SalesLibraries.FileManager.Properties.Resources.BundlesEditorLinksAddUrl;
 			this.barLargeButtonItemLinksAddUrls.Id = 8;
+			this.barLargeButtonItemLinksAddUrls.ImageOptions.Image = global::SalesLibraries.FileManager.Properties.Resources.BundlesEditorLinksAddUrl;
 			this.barLargeButtonItemLinksAddUrls.Name = "barLargeButtonItemLinksAddUrls";
 			this.barLargeButtonItemLinksAddUrls.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.OnAddUrlsItemClick);
 			// 
@@ -548,10 +553,12 @@
 			// 
 			// pictureEditLogo
 			// 
+			this.pictureEditLogo.Cursor = System.Windows.Forms.Cursors.Default;
 			this.pictureEditLogo.EditValue = global::SalesLibraries.FileManager.Properties.Resources.BundlesEditorLinksLogo;
 			this.pictureEditLogo.Location = new System.Drawing.Point(4, 4);
 			this.pictureEditLogo.MenuManager = this.barManager;
 			this.pictureEditLogo.Name = "pictureEditLogo";
+			this.pictureEditLogo.Properties.AllowFocused = false;
 			this.pictureEditLogo.Properties.Appearance.BackColor = System.Drawing.Color.White;
 			this.pictureEditLogo.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.pictureEditLogo.Properties.Appearance.Options.UseBackColor = true;
@@ -559,6 +566,7 @@
 			this.pictureEditLogo.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
 			this.pictureEditLogo.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
 			this.pictureEditLogo.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Zoom;
+			this.pictureEditLogo.Properties.ZoomAccelerationFactor = 1D;
 			this.pictureEditLogo.Size = new System.Drawing.Size(64, 64);
 			this.pictureEditLogo.StyleController = this.layoutControlLinks;
 			this.pictureEditLogo.TabIndex = 64;
@@ -646,8 +654,6 @@
 			this.simpleLabelItemTitle.AllowHtmlStringInCaption = true;
 			this.simpleLabelItemTitle.AppearanceItemCaption.Options.UseTextOptions = true;
 			this.simpleLabelItemTitle.AppearanceItemCaption.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.None;
-			this.simpleLabelItemTitle.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-			this.simpleLabelItemTitle.FillControlToClientArea = false;
 			this.simpleLabelItemTitle.Location = new System.Drawing.Point(72, 0);
 			this.simpleLabelItemTitle.MaxSize = new System.Drawing.Size(0, 72);
 			this.simpleLabelItemTitle.MinSize = new System.Drawing.Size(226, 72);
@@ -656,7 +662,6 @@
 			this.simpleLabelItemTitle.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
 			this.simpleLabelItemTitle.Text = "<size=+4>Drag & Drop the <b><u>Link Order:</u></b></size>";
 			this.simpleLabelItemTitle.TextSize = new System.Drawing.Size(234, 21);
-			this.simpleLabelItemTitle.TrimClientAreaToControl = false;
 			// 
 			// layoutControlItemBarDockControlTop
 			// 

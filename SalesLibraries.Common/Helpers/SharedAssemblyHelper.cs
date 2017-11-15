@@ -6,7 +6,7 @@ namespace SalesLibraries.Common.Helpers
 {
 	public class SharedAssemblyHelper
 	{
-		public static string SharedAssemblyLocationPath { get; private set; }
+		public static string SharedAssemblyLocationPath { get; }
 
 		static SharedAssemblyHelper()
 		{

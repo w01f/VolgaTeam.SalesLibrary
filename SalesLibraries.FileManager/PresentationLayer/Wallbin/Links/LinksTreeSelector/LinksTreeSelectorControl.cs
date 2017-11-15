@@ -15,6 +15,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.LinksTreeSe
 {
 	public partial class LinksTreeSelectorControl : UserControl
 	{
+		private bool _dataLoading;
+
 		public List<BaseLibraryLink> SelectedLinks { get; } = new List<BaseLibraryLink>();
 		public TreeGroup SelectedGroup => treeList.FocusedNode?.Tag as TreeGroup;
 
@@ -24,14 +26,16 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.LinksTreeSe
 		{
 			InitializeComponent();
 
-			layoutControlItemCollapseAll.MinSize = RectangleHelper.ScaleSize(layoutControlItemCollapseAll.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemCollapseAll.MaxSize = RectangleHelper.ScaleSize(layoutControlItemCollapseAll.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemExpandAll.MinSize = RectangleHelper.ScaleSize(layoutControlItemExpandAll.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCollapseAll.MinSize = RectangleHelper.ScaleSize(layoutControlItemCollapseAll.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemExpandAll.MaxSize = RectangleHelper.ScaleSize(layoutControlItemExpandAll.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemExpandAll.MinSize = RectangleHelper.ScaleSize(layoutControlItemExpandAll.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
 		public void LoadData(ILinksGroup linkGroup, LinkType? defaultLinkType = null, IList<LinkType> excludeFileTypes = null)
 		{
+			_dataLoading = true;
+
 			var rootGroup = new RootTreeGroup(linkGroup, defaultLinkType);
 			var linksTreeGroups = new List<LinksFormatTreeGroup>();
 			linksTreeGroups.AddRange(LinksFormatTreeGroup.GetDefaultGroups());
@@ -84,6 +88,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.LinksTreeSe
 			}
 			rootNode.Expanded = true;
 			treeList.SetFocusedNode(rootNode);
+
+			_dataLoading = false;
+
 			OnTreeViewFocusedNodeChanged(treeList, new FocusedNodeChangedEventArgs(null, rootNode));
 		}
 
@@ -109,7 +116,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.LinksTreeSe
 				SelectedLinks.AddRange(((TreeGroup)e.Node.Tag).Links);
 			if (e.Node.Tag is BaseLibraryLink)
 				SelectedLinks.Add((BaseLibraryLink)e.Node.Tag);
-			LinkSelected?.Invoke(this, EventArgs.Empty);
+			if (!_dataLoading)
+				LinkSelected?.Invoke(this, EventArgs.Empty);
 		}
 
 		private void OnTreeViewNodeCellStyle(object sender, GetCustomNodeCellStyleEventArgs e)

@@ -153,10 +153,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings.ResetLin
 			layoutControlGroupLinksFiles.Enabled =
 				layoutControlGroupLinksAllOthers.Enabled = false;
 
-			layoutControlItemCategories.MinSize = RectangleHelper.ScaleSize(layoutControlItemCategories.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemCategories.MaxSize = RectangleHelper.ScaleSize(layoutControlItemCategories.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemKeywords.MinSize = RectangleHelper.ScaleSize(layoutControlItemKeywords.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCategories.MinSize = RectangleHelper.ScaleSize(layoutControlItemCategories.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemKeywords.MaxSize = RectangleHelper.ScaleSize(layoutControlItemKeywords.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemKeywords.MinSize = RectangleHelper.ScaleSize(layoutControlItemKeywords.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
 		public IList<LinkSettingsGroupType> GetSelectedSettingsGroups()

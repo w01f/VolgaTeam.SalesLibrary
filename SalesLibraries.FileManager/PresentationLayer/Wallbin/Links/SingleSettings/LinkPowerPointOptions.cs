@@ -31,12 +31,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			InitializeComponent();
 			Text = "Admin";
 
-			layoutControlItemRefreshPreview.MinSize = RectangleHelper.ScaleSize(layoutControlItemRefreshPreview.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemRefreshPreview.MaxSize = RectangleHelper.ScaleSize(layoutControlItemRefreshPreview.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemOpenWV.MinSize = RectangleHelper.ScaleSize(layoutControlItemOpenWV.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemRefreshPreview.MinSize = RectangleHelper.ScaleSize(layoutControlItemRefreshPreview.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemOpenWV.MaxSize = RectangleHelper.ScaleSize(layoutControlItemOpenWV.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemOpenQV.MinSize = RectangleHelper.ScaleSize(layoutControlItemOpenQV.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemOpenWV.MinSize = RectangleHelper.ScaleSize(layoutControlItemOpenWV.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemOpenQV.MaxSize = RectangleHelper.ScaleSize(layoutControlItemOpenQV.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemOpenQV.MinSize = RectangleHelper.ScaleSize(layoutControlItemOpenQV.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
 		public LinkPowerPointOptions(LinkType? defaultLinkType = null) : this() { }

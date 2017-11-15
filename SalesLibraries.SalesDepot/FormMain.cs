@@ -29,7 +29,8 @@ namespace SalesLibraries.SalesDepot
 			get
 			{
 				var floaterLogo = labelItemSettingsLogo.Image;
-				if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemHome || ribbonControl.SelectedRibbonTabItem == ribbonTabItemSearch)
+				if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemHome ||
+				    ribbonControl.SelectedRibbonTabItem == ribbonTabItemSearch)
 					floaterLogo = labelItemHomeWallbinLogo.Image;
 				if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemSearch)
 					floaterLogo = labelItemSearchLogo.Image;
@@ -46,7 +47,8 @@ namespace SalesLibraries.SalesDepot
 			base.OnHandleCreated(e);
 			if (Environment.OSVersion.Version.Major < 6) return;
 			var attrValue = 1;
-			var res = WinAPIHelper.DwmSetWindowAttribute(Handle, WinAPIHelper.DWMWA_TRANSITIONS_FORCEDISABLED, ref attrValue, sizeof(int));
+			var res = WinAPIHelper.DwmSetWindowAttribute(Handle, WinAPIHelper.DWMWA_TRANSITIONS_FORCEDISABLED, ref attrValue,
+				sizeof(int));
 			if (res < 0)
 				throw new Exception("Can't disable aero animation");
 		}
@@ -144,6 +146,7 @@ namespace SalesLibraries.SalesDepot
 		}
 
 		#region Form Event Handlers
+
 		private void FormMain_Shown(object sender, EventArgs e)
 		{
 			ribbonControl.Enabled = false;
@@ -162,6 +165,7 @@ namespace SalesLibraries.SalesDepot
 			MainController.Instance.ActivityManager.AddUserActivity("Application started");
 			PowerPointSingleton.Instance.Disconnect();
 		}
+
 		#endregion
 	}
 }

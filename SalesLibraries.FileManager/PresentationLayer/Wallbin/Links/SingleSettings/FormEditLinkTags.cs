@@ -50,16 +50,16 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				LayoutVisibility.Always :
 				LayoutVisibility.Never;
 
-			layoutControlItemCategoriesListExpandAll.MinSize = RectangleHelper.ScaleSize(layoutControlItemCategoriesListExpandAll.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemCategoriesListExpandAll.MaxSize = RectangleHelper.ScaleSize(layoutControlItemCategoriesListExpandAll.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemCategoriesListCollapseAll.MinSize = RectangleHelper.ScaleSize(layoutControlItemCategoriesListCollapseAll.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCategoriesListExpandAll.MinSize = RectangleHelper.ScaleSize(layoutControlItemCategoriesListExpandAll.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemCategoriesListCollapseAll.MaxSize = RectangleHelper.ScaleSize(layoutControlItemCategoriesListCollapseAll.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemKeywordsAdd.MinSize = RectangleHelper.ScaleSize(layoutControlItemKeywordsAdd.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCategoriesListCollapseAll.MinSize = RectangleHelper.ScaleSize(layoutControlItemCategoriesListCollapseAll.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemKeywordsAdd.MaxSize = RectangleHelper.ScaleSize(layoutControlItemKeywordsAdd.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemOK.MinSize = RectangleHelper.ScaleSize(layoutControlItemOK.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemKeywordsAdd.MinSize = RectangleHelper.ScaleSize(layoutControlItemKeywordsAdd.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemOK.MaxSize = RectangleHelper.ScaleSize(layoutControlItemOK.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemCancel.MinSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemOK.MinSize = RectangleHelper.ScaleSize(layoutControlItemOK.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemCancel.MaxSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCancel.MinSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
 		public FormEditLinkTags(BaseLibraryLink sourceLink) : this()

@@ -18,10 +18,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 		{
 			InitializeComponent();
 
-			layoutControlItemOK.MinSize = RectangleHelper.ScaleSize(layoutControlItemOK.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemOK.MaxSize = RectangleHelper.ScaleSize(layoutControlItemOK.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemCancel.MinSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemOK.MinSize = RectangleHelper.ScaleSize(layoutControlItemOK.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemCancel.MaxSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCancel.MinSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
 		public Library Library { get; set; }
@@ -56,14 +56,14 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 				case 1:
 					using (var form = new FormSelectWidget())
 					{
-						form.labelControlExtension.Text =String.Format(form.labelControlExtension.Text, autoWidget.Extension.ToUpper()) ;
+						form.simpleLabelItemTitle.Text =String.Format(form.simpleLabelItemTitle.Text, autoWidget.Extension.ToUpper()) ;
 						form.checkEditInvert.Checked = autoWidget.Inverted;
 						form.colorEditInversionColor.Color = autoWidget.InversionColor;
 						form.OriginalImage = autoWidget.Widget;
 						form.OriginalImageName = autoWidget.WidgetName;
 						if (form.ShowDialog() != DialogResult.OK) return;
 						autoWidget.Inverted = form.checkEditInvert.Checked;
-						autoWidget.InversionColor = form.checkEditInvert.Checked ? form.colorEditInversionColor.Color : GraphicObjectExtensions.DefaultInversionColor;
+						autoWidget.InversionColor = form.checkEditInvert.Checked ? form.colorEditInversionColor.Color : GraphicObjectExtensions.DefaultReplaceColor;
 						autoWidget.Widget = form.OriginalImage;
 						autoWidget.WidgetName = form.OriginalImageName;
 						gridViewAutoWidgets.UpdateCurrentRow();

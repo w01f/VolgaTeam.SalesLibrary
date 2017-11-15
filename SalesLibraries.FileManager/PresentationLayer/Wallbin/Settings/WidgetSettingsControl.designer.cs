@@ -304,6 +304,7 @@
 			// 
 			this.pictureEditCustomWidget.Location = new System.Drawing.Point(199, 508);
 			this.pictureEditCustomWidget.Name = "pictureEditCustomWidget";
+	        this.pictureEditCustomWidget.Properties.AllowFocused = false;
 			this.pictureEditCustomWidget.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
 			this.pictureEditCustomWidget.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.pictureEditCustomWidget.Properties.Appearance.Options.UseBackColor = true;

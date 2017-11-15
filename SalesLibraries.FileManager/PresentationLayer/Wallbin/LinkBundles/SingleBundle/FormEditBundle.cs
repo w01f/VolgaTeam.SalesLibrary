@@ -49,12 +49,20 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Singl
 			barLargeButtonItemLinksAddRevenue.Caption = RevenueItem.ItemName;
 			barLargeButtonItemLinksAddStrategy.Caption = StrategyItem.ItemName;
 
-			gridColumnBundleItemsImage.Width = RectangleHelper.ScaleHorizontal(gridColumnBundleItemsImage.Width, gridControlBundleItems.ScaleFactor.Width);
+			gridColumnBundleItemsImage.Width = (Int32)(gridColumnBundleItemsImage.Width * Utils.GetScaleFactor(CreateGraphics().DpiX).Width);
+			gridColumnBundleItemsUseAsThumbnail.Width = (Int32)(gridColumnBundleItemsUseAsThumbnail.Width * Utils.GetScaleFactor(CreateGraphics().DpiX).Width);
+			gridColumnBundleItemsVisible.Width = (Int32)(gridColumnBundleItemsVisible.Width * Utils.GetScaleFactor(CreateGraphics().DpiX).Width);
+			gridColumnBundleItemsActions.Width = (Int32)(gridColumnBundleItemsActions.Width * Utils.GetScaleFactor(CreateGraphics().DpiX).Width);
+
+			layoutControlItemLogo.MaxSize = RectangleHelper.ScaleSize(layoutControlItemLogo.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemLogo.MinSize = RectangleHelper.ScaleSize(layoutControlItemLogo.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			simpleLabelItemTitle.MaxSize = RectangleHelper.ScaleSize(simpleLabelItemTitle.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			simpleLabelItemTitle.MinSize = RectangleHelper.ScaleSize(simpleLabelItemTitle.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemBarDockControlTop.MaxSize = RectangleHelper.ScaleSize(layoutControlItemBarDockControlTop.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemOK.MinSize = RectangleHelper.ScaleSize(layoutControlItemOK.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemOK.MaxSize = RectangleHelper.ScaleSize(layoutControlItemOK.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemCancel.MinSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemOK.MinSize = RectangleHelper.ScaleSize(layoutControlItemOK.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemCancel.MaxSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCancel.MinSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
 		public static DialogResult Run(LinkBundle linkBundle)

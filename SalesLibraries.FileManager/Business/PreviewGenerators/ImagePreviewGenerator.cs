@@ -46,7 +46,7 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 								.Resize(new Size(800, 600))
 								.Save(pngFileName, ImageFormat.Png);
 						}
-						JpegGenerator.GenerateDatatableJpegs(thumbsDestination, thumbsDatatableDestination);
+						JpegHelper.ConvertFiles(thumbsDestination, thumbsDatatableDestination);
 						logger.LogStage(PreviewFormats.Thumbnails);
 						logger.LogStage(PreviewFormats.ThumbnailsForDatatable);
 					}

@@ -26,8 +26,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 			checkedListBoxControl.Items.Clear();
 			checkedListBoxControl.Items.AddRange(MainController.Instance.Lists.SuperFilters.Items.ToArray());
 
-			layoutControlItemReset.MinSize = RectangleHelper.ScaleSize(layoutControlItemReset.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemReset.MaxSize = RectangleHelper.ScaleSize(layoutControlItemReset.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemReset.MinSize = RectangleHelper.ScaleSize(layoutControlItemReset.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			checkedListBoxControl.ItemHeight = (Int32)(checkedListBoxControl.ItemHeight * Utils.GetScaleFactor(CreateGraphics().DpiX).Height);
 		}
 

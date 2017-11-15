@@ -38,20 +38,20 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Contro
 			Visible = false;
 
 			Link = link;
-			if (System.IO.File.Exists(Link.FullPath))
+			if (File.Exists(Link.FullPath))
 			{
 				string tempPath = Path.Combine(RemoteResourceManager.Instance.TempFolder.LocalPath, DateTime.Now.ToString("yyyyMMdd-hmmsstt") + Path.GetExtension(Link.FullPath));
-				System.IO.File.Copy(Link.FullPath, tempPath, true);
+				File.Copy(Link.FullPath, tempPath, true);
 				_tempCopy = new FileInfo(tempPath);
 			}
 
-			pictureBoxPreview.Image = null;
-			laSlideNumber.Text = string.Empty;
+			pictureEditPreview.Image = null;
+			simpleLabelItemSlideNumber.Text = string.Empty;
 
 			_previewData = new PresentationPreviewContainer(PowerPointLink);
 			_previewData.GetPreviewImages();
 
-			laFileInfo.Text = "File Added: " + Link.AddDate.ToString("MM/dd/yy");
+			simpleLabelItemFileInfo.Text = "File Added: " + Link.AddDate.ToString("MM/dd/yy");
 			comboBoxEditSlides.SelectedIndexChanged -= comboBoxEditSlides_SelectedIndexChanged;
 			comboBoxEditSlides.Properties.Items.Clear();
 			comboBoxEditSlides.Properties.Items.AddRange(_previewData.Thumbnails);
@@ -64,7 +64,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Contro
 		#region IFileViewer Methods
 		public void ReleaseResources()
 		{
-			pictureBoxPreview.Image = null;
+			pictureEditPreview.Image = null;
 			_previewData.ReleaseThumbnails();
 		}
 
@@ -176,8 +176,8 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Contro
 		#region GUI Event Handlers
 		private void comboBoxEditSlides_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			pictureBoxPreview.Image = SelectedThumbnail.SlideImage;
-			laSlideNumber.Text = string.Format("Slide {0} of {1}", SelectedThumbnail.Index, _previewData.Thumbnails.Count);
+			pictureEditPreview.Image = SelectedThumbnail.SlideImage;
+			simpleLabelItemSlideNumber.Text = String.Format("<size=+6>Slide {0} of {1}</size>", SelectedThumbnail.Index, _previewData.Thumbnails.Count);
 		}
 
 		private void comboBoxEditSlides_ButtonClick(object sender, ButtonPressedEventArgs e)
@@ -199,12 +199,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Contro
 			}
 		}
 
-		private void pnNavigationArea_Resize(object sender, EventArgs e)
-		{
-			comboBoxEditSlides.Left = (pnNavigationArea.Width - comboBoxEditSlides.Width) / 2;
-		}
-
-		private void pictureBoxPreview_DoubleClick(object sender, EventArgs e)
+		private void OnPreviewDoubleClick(object sender, EventArgs e)
 		{
 			OpenInQuickView();
 		}

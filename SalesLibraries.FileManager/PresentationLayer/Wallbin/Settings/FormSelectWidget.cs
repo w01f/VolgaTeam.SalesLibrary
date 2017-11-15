@@ -84,10 +84,16 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 
 			_loading = false;
 
-			layoutControlItemOK.MinSize = RectangleHelper.ScaleSize(layoutControlItemOK.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			retractableBarGallery.ContentSize = retractableBarGallery.Width;
+
+			simpleLabelItemTitle.MaxSize = RectangleHelper.ScaleSize(simpleLabelItemTitle.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			simpleLabelItemTitle.MinSize = RectangleHelper.ScaleSize(simpleLabelItemTitle.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemExtension.MaxSize = RectangleHelper.ScaleSize(layoutControlItemExtension.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemExtension.MinSize = RectangleHelper.ScaleSize(layoutControlItemExtension.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemOK.MaxSize = RectangleHelper.ScaleSize(layoutControlItemOK.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemCancel.MinSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemOK.MinSize = RectangleHelper.ScaleSize(layoutControlItemOK.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemCancel.MaxSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCancel.MinSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
 		private void UpdateDisplayImage()
@@ -95,12 +101,13 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			if (OriginalImage != null && checkEditInvert.Checked)
 			{
 				var imageClone = (Image)OriginalImage.Clone();
-				labelControlExtension.Appearance.Image = colorEditInversionColor.Color != GraphicObjectExtensions.DefaultInversionColor
-					? imageClone.ReplaceColor(colorEditInversionColor.Color)
-					: imageClone.Invert();
+				labelControlExtension.Appearance.Image = imageClone.ReplaceColor(colorEditInversionColor.Color);
 			}
 			else
 				labelControlExtension.Appearance.Image = OriginalImage;
+			simpleLabelItemTitle.AppearanceItemCaption.ForeColor = OriginalImage != null && checkEditInvert.Checked
+				? colorEditInversionColor.Color
+				: Color.Black;
 		}
 
 		private void OnImageDoubleClick(object sender, EventArgs e)

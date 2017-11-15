@@ -52,7 +52,7 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 							var pdfFileName = Path.ChangeExtension(Path.GetTempFileName(), ".pdf");
 							workbook.ActiveSheet.ExportAsFixedFormat(XlFixedFormatType.xlTypePDF, pdfFileName);
 							PdfHelper.ExportPdf(pdfFileName, thumbsDestination, null, true);
-							JpegGenerator.GenerateDatatableJpegs(thumbsDestination, thumbsDatatableDestination);
+							JpegHelper.ConvertFiles(thumbsDestination, thumbsDatatableDestination);
 							logger.LogStage(PreviewFormats.Thumbnails);
 							logger.LogStage(PreviewFormats.ThumbnailsForDatatable);
 							if (File.Exists(pdfFileName))

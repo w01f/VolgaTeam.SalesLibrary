@@ -15,10 +15,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 		{
 			InitializeComponent();
 
-			layoutControlItemCreate.MinSize = RectangleHelper.ScaleSize(layoutControlItemCreate.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemCreate.MaxSize = RectangleHelper.ScaleSize(layoutControlItemCreate.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemCancel.MinSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCreate.MinSize = RectangleHelper.ScaleSize(layoutControlItemCreate.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemCancel.MaxSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCancel.MinSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
 		private void FormCreateFolder_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)

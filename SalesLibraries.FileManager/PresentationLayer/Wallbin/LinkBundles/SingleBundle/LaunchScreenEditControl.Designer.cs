@@ -215,6 +215,7 @@
 			this.pictureEdit1.EditValue = global::SalesLibraries.FileManager.Properties.Resources.BundlesEditorInfoLogo;
 			this.pictureEdit1.Location = new System.Drawing.Point(4, 4);
 			this.pictureEdit1.Name = "pictureEdit1";
+			this.pictureEdit1.Properties.AllowFocused = false;
 			this.pictureEdit1.Properties.Appearance.BackColor = System.Drawing.Color.White;
 			this.pictureEdit1.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.pictureEdit1.Properties.Appearance.Options.UseBackColor = true;

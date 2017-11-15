@@ -39,7 +39,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 			}
 		}
 
-		private Color _inversionColor = GraphicObjectExtensions.DefaultInversionColor;
+		private Color _inversionColor = GraphicObjectExtensions.DefaultReplaceColor;
 		public Color InversionColor
 		{
 			get { return _inversionColor; }
@@ -91,11 +91,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 				if (Inverted)
 				{
 					if (_invertedImage == null)
-					{
-						_invertedImage = (InversionColor != GraphicObjectExtensions.DefaultInversionColor ?
-							((Image)Image?.Clone()).ReplaceColor(InversionColor) :
-							((Image)Image?.Clone()).Invert()).DrawPadding(new Padding(ImagePaddingLeft, ImagePaddingTop, ImagePaddingRight, ImagePaddingBottom));
-					}
+						_invertedImage = ((Image)Image?.Clone()).ReplaceColor(InversionColor).DrawPadding(new Padding(ImagePaddingLeft, ImagePaddingTop, ImagePaddingRight, ImagePaddingBottom));
 					return _invertedImage;
 				}
 				return ((Image)Image?.Clone()).DrawPadding(new Padding(ImagePaddingLeft, ImagePaddingTop, ImagePaddingRight, ImagePaddingBottom));

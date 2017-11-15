@@ -142,12 +142,12 @@
 			this.layoutControl.Controls.Add(this.checkEditDoNotGeneratePreview);
 			this.layoutControl.Controls.Add(this.pictureBoxLogo);
 			this.layoutControl.Controls.Add(this.labelControlTitle);
-			this.layoutControl.Dock = System.Windows.Forms.DockStyle.Top;
+			this.layoutControl.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.layoutControl.Location = new System.Drawing.Point(0, 0);
 			this.layoutControl.Name = "layoutControl";
 			this.layoutControl.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(802, 383, 445, 553);
 			this.layoutControl.Root = this.layoutControlGroupRoot;
-			this.layoutControl.Size = new System.Drawing.Size(531, 557);
+			this.layoutControl.Size = new System.Drawing.Size(531, 541);
 			this.layoutControl.StyleController = this.styleController;
 			this.layoutControl.TabIndex = 67;
 			this.layoutControl.Text = "layoutControl1";
@@ -159,7 +159,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXOpenQV.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXOpenQV.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.buttonXOpenQV.Location = new System.Drawing.Point(62, 385);
+			this.buttonXOpenQV.Location = new System.Drawing.Point(62, 440);
 			this.buttonXOpenQV.Name = "buttonXOpenQV";
 			this.buttonXOpenQV.Size = new System.Drawing.Size(408, 31);
 			this.buttonXOpenQV.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -175,7 +175,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXOpenWV.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXOpenWV.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.buttonXOpenWV.Location = new System.Drawing.Point(62, 440);
+			this.buttonXOpenWV.Location = new System.Drawing.Point(62, 385);
 			this.buttonXOpenWV.Name = "buttonXOpenWV";
 			this.buttonXOpenWV.Size = new System.Drawing.Size(408, 31);
 			this.buttonXOpenWV.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -241,6 +241,7 @@
 			// labelControlTitle
 			// 
 			this.labelControlTitle.AllowHtmlString = true;
+			this.labelControlTitle.Appearance.Options.UseTextOptions = true;
 			this.labelControlTitle.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
 			this.labelControlTitle.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
 			this.labelControlTitle.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
@@ -282,18 +283,18 @@
             this.layoutControlItemRefreshPreview,
             this.emptySpaceItem8,
             this.emptySpaceItem10,
-            this.layoutControlItemOpenWV,
             this.emptySpaceItem7,
             this.emptySpaceItem11,
             this.layoutControlItemSettingsTitle,
-            this.layoutControlItemOpenQV,
             this.emptySpaceItem2,
             this.emptySpaceItem12,
             this.emptySpaceItem9,
-            this.emptySpaceItem13});
+            this.emptySpaceItem13,
+            this.layoutControlItemOpenQV,
+            this.layoutControlItemOpenWV});
 			this.layoutControlGroupRoot.Location = new System.Drawing.Point(0, 0);
 			this.layoutControlGroupRoot.Name = "Root";
-			this.layoutControlGroupRoot.Size = new System.Drawing.Size(532, 540);
+			this.layoutControlGroupRoot.Size = new System.Drawing.Size(532, 524);
 			this.layoutControlGroupRoot.TextVisible = false;
 			// 
 			// layoutControlItemTitle
@@ -438,7 +439,7 @@
 			this.emptySpaceItem8.CustomizationFormText = "emptySpaceItem6";
 			this.emptySpaceItem8.Location = new System.Drawing.Point(0, 463);
 			this.emptySpaceItem8.Name = "emptySpaceItem8";
-			this.emptySpaceItem8.Size = new System.Drawing.Size(512, 57);
+			this.emptySpaceItem8.Size = new System.Drawing.Size(512, 41);
 			this.emptySpaceItem8.Text = "emptySpaceItem6";
 			this.emptySpaceItem8.TextSize = new System.Drawing.Size(0, 0);
 			// 
@@ -458,7 +459,7 @@
 			this.layoutControlItemOpenWV.Control = this.buttonXOpenWV;
 			this.layoutControlItemOpenWV.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
 			this.layoutControlItemOpenWV.FillControlToClientArea = false;
-			this.layoutControlItemOpenWV.Location = new System.Drawing.Point(50, 428);
+			this.layoutControlItemOpenWV.Location = new System.Drawing.Point(50, 373);
 			this.layoutControlItemOpenWV.MaxSize = new System.Drawing.Size(0, 35);
 			this.layoutControlItemOpenWV.MinSize = new System.Drawing.Size(1, 35);
 			this.layoutControlItemOpenWV.Name = "layoutControlItemOpenWV";
@@ -509,7 +510,7 @@
 			this.layoutControlItemOpenQV.Control = this.buttonXOpenQV;
 			this.layoutControlItemOpenQV.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
 			this.layoutControlItemOpenQV.FillControlToClientArea = false;
-			this.layoutControlItemOpenQV.Location = new System.Drawing.Point(50, 373);
+			this.layoutControlItemOpenQV.Location = new System.Drawing.Point(50, 428);
 			this.layoutControlItemOpenQV.MaxSize = new System.Drawing.Size(0, 35);
 			this.layoutControlItemOpenQV.MinSize = new System.Drawing.Size(1, 35);
 			this.layoutControlItemOpenQV.Name = "layoutControlItemOpenQV";

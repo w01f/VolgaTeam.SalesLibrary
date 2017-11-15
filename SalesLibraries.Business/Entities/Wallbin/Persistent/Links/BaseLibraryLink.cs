@@ -357,7 +357,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		{
 			if (groupsForReset == null)
 			{
+				Settings = null;
 				SettingsEncoded = null;
+				Tags = null;
 				TagsEncoded = null;
 			}
 			else
@@ -370,20 +372,34 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			}
 
 			if (groupsForReset == null || groupsForReset.Contains(LinkSettingsGroupType.Security))
+			{
+				Security = null;
 				SecurityEncoded = null;
+			}
 			if (groupsForReset == null || groupsForReset.Contains(LinkSettingsGroupType.Widgets))
+			{
+				Widget = null;
 				WidgetEncoded = null;
+			}
 			if (groupsForReset == null || groupsForReset.Contains(LinkSettingsGroupType.AutoWidgets))
 			{
+				Widget = null;
 				Widget.WidgetType = WidgetType.NoWidget;
 				WidgetEncoded = Widget.Serialize();
 			}
 			if (groupsForReset == null || groupsForReset.Contains(LinkSettingsGroupType.Banners))
+			{
+				Banner = null;
 				BannerEncoded = null;
+			}
 			if (groupsForReset == null || groupsForReset.Contains(LinkSettingsGroupType.Thumbnails))
+			{
+				Thumbnail = null;
 				ThumbnailEncoded = null;
+			}
 			if (groupsForReset == null || groupsForReset.Contains(LinkSettingsGroupType.SearchTags))
 			{
+				Tags = null;
 				TagsEncoded = null;
 			}
 

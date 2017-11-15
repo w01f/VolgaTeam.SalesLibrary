@@ -93,16 +93,6 @@ namespace SalesLibraries.SalesDepot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Cancel {
-            get {
-                object obj = ResourceManager.GetObject("Cancel", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap EmailBinBarButtonLogo {
             get {
                 object obj = ResourceManager.GetObject("EmailBinBarButtonLogo", resourceCulture);
@@ -306,6 +296,66 @@ namespace SalesLibraries.SalesDepot.Properties {
         internal static System.Drawing.Bitmap HelpSmall {
             get {
                 object obj = ResourceManager.GetObject("HelpSmall", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap MenuAdd {
+            get {
+                object obj = ResourceManager.GetObject("MenuAdd", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap MenuCancel {
+            get {
+                object obj = ResourceManager.GetObject("MenuCancel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap MenuEmail {
+            get {
+                object obj = ResourceManager.GetObject("MenuEmail", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap MenuOpen {
+            get {
+                object obj = ResourceManager.GetObject("MenuOpen", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap MenuPrint {
+            get {
+                object obj = ResourceManager.GetObject("MenuPrint", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap MenuSave {
+            get {
+                object obj = ResourceManager.GetObject("MenuSave", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

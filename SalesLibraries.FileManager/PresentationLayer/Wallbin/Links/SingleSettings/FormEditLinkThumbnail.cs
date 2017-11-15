@@ -65,25 +65,29 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			layoutControlGroupTextPosition.Enabled = false;
 			layoutControlGroupTextAlignment.Enabled = false;
 			layoutControlGroupTextSettings.Enabled = false;
-			layoutControlGroupBorderColor.Enabled = false;
 
 			retractableBarGallery.ContentSize = (Int32)(retractableBarGallery.ContentSize * Utils.GetScaleFactor(CreateGraphics().DpiX).Width);
-			layoutControlItemToggleEnable.MinSize = RectangleHelper.ScaleSize(layoutControlItemToggleEnable.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+
+			emptySpaceItemBorder.MinSize = RectangleHelper.ScaleSize(emptySpaceItemBorder.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+
 			layoutControlItemToggleEnable.MaxSize = RectangleHelper.ScaleSize(layoutControlItemToggleEnable.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemToggleDisable.MinSize = RectangleHelper.ScaleSize(layoutControlItemToggleDisable.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemToggleEnable.MinSize = RectangleHelper.ScaleSize(layoutControlItemToggleEnable.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemToggleDisable.MaxSize = RectangleHelper.ScaleSize(layoutControlItemToggleDisable.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemTextToggleNone.MinSize = RectangleHelper.ScaleSize(layoutControlItemTextToggleNone.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemToggleDisable.MinSize = RectangleHelper.ScaleSize(layoutControlItemToggleDisable.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			simpleLabelItemSettingsDescription.MaxSize = RectangleHelper.ScaleSize(simpleLabelItemSettingsDescription.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			simpleLabelItemSettingsDescription.MinSize = RectangleHelper.ScaleSize(simpleLabelItemSettingsDescription.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemTextToggleNone.MaxSize = RectangleHelper.ScaleSize(layoutControlItemTextToggleNone.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemTextToggleCustom.MinSize = RectangleHelper.ScaleSize(layoutControlItemTextToggleCustom.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemTextToggleNone.MinSize = RectangleHelper.ScaleSize(layoutControlItemTextToggleNone.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemTextToggleCustom.MaxSize = RectangleHelper.ScaleSize(layoutControlItemTextToggleCustom.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemTextToggleLinkName.MinSize = RectangleHelper.ScaleSize(layoutControlItemTextToggleLinkName.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemTextToggleCustom.MinSize = RectangleHelper.ScaleSize(layoutControlItemTextToggleCustom.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemTextToggleLinkName.MaxSize = RectangleHelper.ScaleSize(layoutControlItemTextToggleLinkName.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemPreviewImage.MinSize = RectangleHelper.ScaleSize(layoutControlItemPreviewImage.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemTextToggleLinkName.MinSize = RectangleHelper.ScaleSize(layoutControlItemTextToggleLinkName.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemPreviewImage.MaxSize = RectangleHelper.ScaleSize(layoutControlItemPreviewImage.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemOK.MinSize = RectangleHelper.ScaleSize(layoutControlItemOK.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemPreviewImage.MinSize = RectangleHelper.ScaleSize(layoutControlItemPreviewImage.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemOK.MaxSize = RectangleHelper.ScaleSize(layoutControlItemOK.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemCancel.MinSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemOK.MinSize = RectangleHelper.ScaleSize(layoutControlItemOK.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemCancel.MaxSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCancel.MinSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
 		public FormEditLinkThumbnail(BaseLibraryLink sourceLink) : this()
@@ -122,9 +126,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				case 300:
 					checkEditImageSize300.Checked = true;
 					break;
-				case 400:
-					checkEditImageSize400.Checked = true;
-					break;
 				default:
 					checkEditImageSizeCustom.Checked = true;
 					spinEditImageSize.EditValue = _sourceLink.Thumbnail.ImageWidth;
@@ -135,9 +136,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			{
 				case 0:
 					checkEditImagePaddingNone.Checked = true;
-					break;
-				case 6:
-					checkEditImagePadding6.Checked = true;
 					break;
 				case 8:
 					checkEditImagePadding8.Checked = true;
@@ -176,21 +174,18 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 					checkEditBorderSize10.Checked = true;
 					break;
 			}
-
-			if (_sourceLink.Thumbnail.BorderColor == Color.Black)
-				checkEditBorderColorBlack.Checked = true;
-			else
-				checkEditBorderColorCustom.Checked = true;
 			colorEditBorderColor.Color = _sourceLink.Thumbnail.BorderColor;
 
 			if (_sourceLink.Thumbnail.ShadowColor == Color.White)
-				checkEditShadowColorNone.Checked = true;
-			else if (_sourceLink.Thumbnail.ShadowColor == Color.Black)
-				checkEditShadowColorBlack.Checked = true;
+			{
+				checkEditShadowColor.Checked = false;
+				colorEditShadowColor.Color = ThumbnailSettings.DefaultShadowColor;
+			}
 			else
-				checkEditShadowColorCustom.Checked = true;
-			colorEditShadowColor.Color = _sourceLink.Thumbnail.ShadowColor;
-
+			{
+				checkEditShadowColor.Checked = true;
+				colorEditShadowColor.Color = _sourceLink.Thumbnail.ShadowColor;
+			}
 
 			memoEditBannerText.BackColor = _sourceLink.ThumbnailBackColor;
 			buttonXShowTextNone.Checked = _sourceLink.Thumbnail.TextMode == ThumbnailTextMode.NoText;
@@ -265,15 +260,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 					_sourceLink.Thumbnail.ImageWidth = 200;
 				else if (checkEditImageSize300.Checked)
 					_sourceLink.Thumbnail.ImageWidth = 300;
-				else if (checkEditImageSize400.Checked)
-					_sourceLink.Thumbnail.ImageWidth = 400;
 				else
 					_sourceLink.Thumbnail.ImageWidth = (Int32)spinEditImageSize.Value;
 
 				if (checkEditImagePaddingNone.Checked)
 					_sourceLink.Thumbnail.ImagePadding = 0;
-				else if (checkEditImagePadding6.Checked)
-					_sourceLink.Thumbnail.ImagePadding = 6;
 				else if (checkEditImagePadding8.Checked)
 					_sourceLink.Thumbnail.ImagePadding = 8;
 				else if (checkEditImagePadding10.Checked)
@@ -295,18 +286,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				else if (checkEditBorderSize10.Checked)
 					_sourceLink.Thumbnail.BorderSize = 10;
 
-				if (!checkEditBorderSizeNone.Checked && checkEditBorderColorBlack.Checked)
-					_sourceLink.Thumbnail.BorderColor = Color.Black;
-				else if (!checkEditBorderSizeNone.Checked && checkEditBorderColorCustom.Checked)
-					_sourceLink.Thumbnail.BorderColor = colorEditBorderColor.Color;
-				else
-					_sourceLink.Thumbnail.BorderColor = Color.Black;
+				_sourceLink.Thumbnail.BorderColor = colorEditBorderColor.Color;
 
-				if (checkEditShadowColorNone.Checked)
-					_sourceLink.Thumbnail.ShadowColor = Color.White;
-				else if (checkEditShadowColorBlack.Checked)
-					_sourceLink.Thumbnail.ShadowColor = Color.Black;
-				else if (checkEditShadowColorCustom.Checked)
+				if (!checkEditBorderSizeNone.Checked && checkEditShadowColor.Checked)
 					_sourceLink.Thumbnail.ShadowColor = colorEditShadowColor.Color;
 				else
 					_sourceLink.Thumbnail.ShadowColor = Color.White;
@@ -369,9 +351,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				{
 					image = image.Resize(new Size(_sourceLink.Thumbnail.ImageWidth, tempImage.Height));
 					if (_sourceLink.Thumbnail.BorderSize > 0)
+					{
 						image = image.DrawBorder(_sourceLink.Thumbnail.BorderSize, _sourceLink.Thumbnail.BorderColor);
-					if (_sourceLink.Thumbnail.ShadowColor != Color.White)
-						image = image.DrawShadow(ThumbnailSettings.DefaultShadowSize, _sourceLink.Thumbnail.ShadowColor);
+						if (_sourceLink.Thumbnail.ShadowColor != Color.White)
+							image = image.DrawShadow(ThumbnailSettings.DefaultShadowSize, _sourceLink.Thumbnail.ShadowColor);
+					}
 					if (_sourceLink.Thumbnail.ImagePadding > 0)
 						image = image.DrawPadding(_sourceLink.Thumbnail.TextEnabled ?
 						new Padding(
@@ -415,6 +399,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			layoutControlGroupGallery.Enabled = buttonXEnable.Checked;
 			layoutControlGroupTextSettings.Enabled = buttonXEnable.Checked;
 			layoutControlItemPreviewImage.Enabled = buttonXEnable.Checked && imageListView.SelectedItems.Any();
+			layoutControlItemGalleryContent.Enabled= imageListView.Visible = buttonXEnable.Checked;
 			if (buttonXEnable.Checked && !imageListView.Items.Any())
 				OnRefreshSourceFilesClick(sender, EventArgs.Empty);
 		}
@@ -431,17 +416,13 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		private void OnBorderSizeCheckedChanged(object sender, EventArgs e)
 		{
-			layoutControlGroupBorderColor.Enabled = !checkEditBorderSizeNone.Checked;
-		}
-
-		private void OnBorderColorCheckedChanged(object sender, EventArgs e)
-		{
-			layoutControlItemBorderColorCustomEditor.Enabled = checkEditBorderColorCustom.Checked;
+			layoutControlItemBorderColorEditor.Visibility = !checkEditBorderSizeNone.Checked?LayoutVisibility.Always : LayoutVisibility.Never;
+			layoutControlGroupShadowColor.Visibility = !checkEditBorderSizeNone.Checked ? LayoutVisibility.Always : LayoutVisibility.Never;
 		}
 
 		private void OnShadowColorCheckedChanged(object sender, EventArgs e)
 		{
-			layoutControlItemShadowColorCustomEditor.Enabled = checkEditShadowColorCustom.Checked;
+			layoutControlItemShadowColorCustomEditor.Enabled = checkEditShadowColor.Checked;
 		}
 
 		private void OnSourceImagesSelectionChanged(object sender, EventArgs e)

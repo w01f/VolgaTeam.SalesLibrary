@@ -91,11 +91,11 @@
 			this.buttonXTabPages.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
 			this.buttonXTabPages.Location = new System.Drawing.Point(12, 12);
 			this.buttonXTabPages.Name = "buttonXTabPages";
-			this.buttonXTabPages.Size = new System.Drawing.Size(86, 76);
+			this.buttonXTabPages.Size = new System.Drawing.Size(96, 96);
 			this.buttonXTabPages.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.superTooltip.SetSuperTooltip(this.buttonXTabPages, new DevComponents.DotNetBar.SuperTooltipInfo("Tabs", "", "Select library pages with tabs…", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
 			this.buttonXTabPages.TabIndex = 11;
-			this.buttonXTabPages.Text = "Tabs";
+			this.buttonXTabPages.Text = "\r\nTabs";
 			this.buttonXTabPages.Click += new System.EventHandler(this.OnPageSelectorTypeButtonClick);
 			// 
 			// buttonXComboboxes
@@ -105,13 +105,13 @@
 			this.buttonXComboboxes.Image = global::SalesLibraries.FileManager.Properties.Resources.WallbinSettingsComboboxes;
 			this.buttonXComboboxes.ImageFixedSize = new System.Drawing.Size(48, 48);
 			this.buttonXComboboxes.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-			this.buttonXComboboxes.Location = new System.Drawing.Point(205, 12);
+			this.buttonXComboboxes.Location = new System.Drawing.Point(195, 12);
 			this.buttonXComboboxes.Name = "buttonXComboboxes";
-			this.buttonXComboboxes.Size = new System.Drawing.Size(86, 76);
+			this.buttonXComboboxes.Size = new System.Drawing.Size(96, 96);
 			this.buttonXComboboxes.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.superTooltip.SetSuperTooltip(this.buttonXComboboxes, new DevComponents.DotNetBar.SuperTooltipInfo("Dropdown", "", "Select library pages with dropdown selections…", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
 			this.buttonXComboboxes.TabIndex = 12;
-			this.buttonXComboboxes.Text = "Dropdown";
+			this.buttonXComboboxes.Text = "\r\nDropdown";
 			this.buttonXComboboxes.Click += new System.EventHandler(this.OnPageSelectorTypeButtonClick);
 			// 
 			// superTooltip
@@ -181,17 +181,17 @@
 			// emptySpaceItem1
 			// 
 			this.emptySpaceItem1.AllowHotTrack = false;
-			this.emptySpaceItem1.Location = new System.Drawing.Point(90, 0);
+			this.emptySpaceItem1.Location = new System.Drawing.Point(100, 0);
 			this.emptySpaceItem1.Name = "emptySpaceItem1";
-			this.emptySpaceItem1.Size = new System.Drawing.Size(103, 80);
+			this.emptySpaceItem1.Size = new System.Drawing.Size(83, 100);
 			this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
 			// 
 			// emptySpaceItem2
 			// 
 			this.emptySpaceItem2.AllowHotTrack = false;
-			this.emptySpaceItem2.Location = new System.Drawing.Point(0, 80);
+			this.emptySpaceItem2.Location = new System.Drawing.Point(0, 100);
 			this.emptySpaceItem2.Name = "emptySpaceItem2";
-			this.emptySpaceItem2.Size = new System.Drawing.Size(283, 30);
+			this.emptySpaceItem2.Size = new System.Drawing.Size(283, 10);
 			this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
 			// 
 			// layoutControlItemTabPages
@@ -200,9 +200,9 @@
 			this.layoutControlItemTabPages.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
 			this.layoutControlItemTabPages.FillControlToClientArea = false;
 			this.layoutControlItemTabPages.Location = new System.Drawing.Point(0, 0);
-			this.layoutControlItemTabPages.MinSize = new System.Drawing.Size(90, 80);
+			this.layoutControlItemTabPages.MinSize = new System.Drawing.Size(100, 100);
 			this.layoutControlItemTabPages.Name = "layoutControlItemTabPages";
-			this.layoutControlItemTabPages.Size = new System.Drawing.Size(90, 80);
+			this.layoutControlItemTabPages.Size = new System.Drawing.Size(100, 100);
 			this.layoutControlItemTabPages.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
 			this.layoutControlItemTabPages.Text = "Tab Pages";
 			this.layoutControlItemTabPages.TextSize = new System.Drawing.Size(0, 0);
@@ -214,10 +214,10 @@
 			this.layoutControlItemComboboxes.Control = this.buttonXComboboxes;
 			this.layoutControlItemComboboxes.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
 			this.layoutControlItemComboboxes.FillControlToClientArea = false;
-			this.layoutControlItemComboboxes.Location = new System.Drawing.Point(193, 0);
-			this.layoutControlItemComboboxes.MinSize = new System.Drawing.Size(90, 80);
+			this.layoutControlItemComboboxes.Location = new System.Drawing.Point(183, 0);
+			this.layoutControlItemComboboxes.MinSize = new System.Drawing.Size(100, 100);
 			this.layoutControlItemComboboxes.Name = "layoutControlItemComboboxes";
-			this.layoutControlItemComboboxes.Size = new System.Drawing.Size(90, 80);
+			this.layoutControlItemComboboxes.Size = new System.Drawing.Size(100, 100);
 			this.layoutControlItemComboboxes.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
 			this.layoutControlItemComboboxes.Text = "Comboboxes";
 			this.layoutControlItemComboboxes.TextSize = new System.Drawing.Size(0, 0);

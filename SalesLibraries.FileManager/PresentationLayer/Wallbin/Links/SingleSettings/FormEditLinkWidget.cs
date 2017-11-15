@@ -25,6 +25,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 {
 	public partial class FormEditLinkWidget : MetroForm, ILinkSetSettingsEditForm
 	{
+		private const string ImageTitleFormat = "<size=+4>{0}</size><br><color=lightgray>{1}</color>";
+
 		private bool _allowHandleEvents;
 		private Image _originalImage;
 		private string _originalImageName;
@@ -35,6 +37,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		{
 			LinkSettingsType.Widget,
 		};
+
+		private string WidgetTitle
+			=>
+				_sourceLinkGroup != null
+					? String.Format("Library links ({0})", _sourceLinkGroup.AllGroupLinks.Count())
+					: _sourceLink.LinkInfoDisplayName;
 
 		public FormEditLinkWidget()
 		{
@@ -49,26 +57,24 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 					}
 				});
 
+			retractableBarGallery.ContentSize = retractableBarGallery.Width;
+
 			layoutControlGroupSearch.Enabled = false;
 			layoutControlItemGallery.Enabled = false;
-			layoutControlItemWiggetAutoImage.Enabled = false;
-			layoutControlGroupCustomWidget.Enabled = false;
+			layoutControlGroupColorize.Enabled = false;
 
-			layoutControlItemWidgetNone.MaxSize = RectangleHelper.ScaleSize(layoutControlItemWidgetNone.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemWidgetCustom.MaxSize = RectangleHelper.ScaleSize(layoutControlItemWidgetCustom.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemWidgetAuto.MaxSize = RectangleHelper.ScaleSize(layoutControlItemWidgetAuto.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemWidgetColorizeToggle.MaxSize = RectangleHelper.ScaleSize(layoutControlItemWidgetColorizeToggle.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemWidgetColorizeEditor.MaxSize = RectangleHelper.ScaleSize(layoutControlItemWidgetColorizeEditor.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemWiggetAutoImage.MaxSize = RectangleHelper.ScaleSize(layoutControlItemWiggetAutoImage.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemOK.MinSize = RectangleHelper.ScaleSize(layoutControlItemOK.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemTitle.MaxSize = RectangleHelper.ScaleSize(layoutControlItemTitle.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemTitle.MinSize = RectangleHelper.ScaleSize(layoutControlItemTitle.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemOK.MaxSize = RectangleHelper.ScaleSize(layoutControlItemOK.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemCancel.MinSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemOK.MinSize = RectangleHelper.ScaleSize(layoutControlItemOK.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemCancel.MaxSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCancel.MinSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
 		public FormEditLinkWidget(BaseLibraryLink sourceLink) : this()
 		{
 			_sourceLink = sourceLink;
+			labelControlTitle.Text = String.Format(ImageTitleFormat, WidgetTitle, String.Empty);
 		}
 
 		public FormEditLinkWidget(ILinksGroup linkGroup, LinkType? defaultLinkType = null) : this()
@@ -76,6 +82,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			_sourceLinkGroup = linkGroup;
 			_sourceLink = _sourceLinkGroup.AllGroupLinks
 				.FirstOrDefault(link => !defaultLinkType.HasValue || link.Type == defaultLinkType.Value);
+			labelControlTitle.Text = String.Format(ImageTitleFormat, WidgetTitle, String.Empty);
 		}
 
 		public void InitForm<TEditControl>(LinkSettingsType settingsType) where TEditControl : ILinkSettingsEditControl
@@ -147,25 +154,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			}
 			else
 				objectLink = _sourceLink as LibraryObjectLink;
-			if (!String.IsNullOrEmpty(objectLink?.AutoWidgetKey))
-			{
-				layoutControlGroupAutoWidget.Visibility = LayoutVisibility.Always;
-				if (objectLink.Widget.HasAutoWidget)
-				{
-					layoutControlItemWiggetAutoImage.Visibility = LayoutVisibility.Always;
-					pictureEditAutoWidget.Image = objectLink.Widget.AutoWidget;
-					layoutControlItemWiggetAutoImage.Text = objectLink.AutoWidgetKey.ToLower();
-				}
-				else
-				{
-					layoutControlItemWiggetAutoImage.Visibility = LayoutVisibility.Never;
-					layoutControlItemWiggetAutoImage.Text = "Not Assigned";
-				}
-			}
-			else
-			{
-				layoutControlGroupAutoWidget.Visibility = LayoutVisibility.Never;
-			}
+			layoutControlItemWidgetAuto.Visibility = !String.IsNullOrEmpty(objectLink?.AutoWidgetKey) ?
+				LayoutVisibility.Always :
+				LayoutVisibility.Never;
 
 			checkEditInvert.Checked = _sourceLink.Widget.Inverted;
 			colorEditInversionColor.EditValue = _sourceLink.Widget.InversionColor;
@@ -189,6 +180,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 					checkEditWidgetNone.Checked = true;
 					break;
 			}
+
 			UpdateCustomDisplayImage();
 
 			_allowHandleEvents = true;
@@ -208,9 +200,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				{
 					link.Widget.WidgetType = WidgetType.CustomWidget;
 					link.Widget.Inverted = checkEditInvert.Checked;
-					link.Widget.InversionColor = colorEditInversionColor.Color != GraphicObjectExtensions.DefaultInversionColor
+					link.Widget.InversionColor = checkEditInvert.Checked
 						? colorEditInversionColor.Color
-						: GraphicObjectExtensions.DefaultInversionColor;
+						: GraphicObjectExtensions.DefaultReplaceColor;
 					link.Widget.Image = _originalImage;
 					link.Widget.ImageName = _originalImageName;
 				}
@@ -227,15 +219,39 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		private void UpdateCustomDisplayImage()
 		{
-			if (_originalImage != null && checkEditInvert.Checked)
+			Image displayImage = null;
+			var displayImageName = String.Empty;
+			if (checkEditWidgetCustom.Checked)
 			{
-				var imageClone = (Image)_originalImage.Clone();
-				pictureEditCustomWidget.Image = colorEditInversionColor.Color != GraphicObjectExtensions.DefaultInversionColor
-					? imageClone.ReplaceColor(colorEditInversionColor.Color)
-					: imageClone.Invert();
+				if (_originalImage != null && checkEditInvert.Checked)
+				{
+					var imageClone = (Image)_originalImage.Clone();
+					displayImage = imageClone.ReplaceColor(colorEditInversionColor.Color);
+				}
+				else
+					displayImage = _originalImage;
+				displayImageName = _originalImageName;
 			}
-			else
-				pictureEditCustomWidget.Image = _originalImage;
+			else if (checkEditWidgetAuto.Checked)
+			{
+				LibraryObjectLink objectLink;
+				if (_sourceLinkGroup != null)
+				{
+					objectLink = _sourceLinkGroup.AllGroupLinks.All(link => link.Type == _sourceLink.Type)
+						? _sourceLink as LibraryObjectLink
+						: null;
+				}
+				else
+					objectLink = _sourceLink as LibraryObjectLink;
+				if (!String.IsNullOrEmpty(objectLink?.AutoWidgetKey) && objectLink.Widget.HasAutoWidget)
+				{
+					displayImage = objectLink.Widget.AutoWidget;
+					displayImageName = objectLink?.AutoWidgetKey;
+				}
+			}
+			labelControlTitle.Appearance.Image = displayImage;
+			labelControlTitle.Text = String.Format(ImageTitleFormat, WidgetTitle, displayImageName);
+			labelControlTitle.ForeColor = checkEditWidgetCustom.Checked && displayImage != null && checkEditInvert.Checked ? colorEditInversionColor.Color : Color.Black;
 		}
 
 		private void FormEditLinkSettings_FormClosing(object sender, FormClosingEventArgs e)
@@ -246,11 +262,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		private void OnWidgetTypeChanged(object sender, EventArgs e)
 		{
-			layoutControlItemWiggetAutoImage.Enabled = checkEditWidgetAuto.Checked;
-
 			layoutControlItemGallery.Enabled = checkEditWidgetCustom.Checked;
-			layoutControlGroupCustomWidget.Enabled = checkEditWidgetCustom.Checked;
 			layoutControlGroupSearch.Enabled = checkEditWidgetCustom.Checked;
+			layoutControlGroupColorize.Enabled = checkEditWidgetCustom.Checked;
 
 			colorEditInversionColor.Enabled = checkEditInvert.Checked;
 
@@ -303,24 +317,25 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			buttonXOK.Focus();
 		}
 
-		private void OnWidgetPictureMouseClick(object sender, MouseEventArgs e)
+		private void labelControlTitle_MouseClick(object sender, MouseEventArgs e)
 		{
 			if (e.Button != MouseButtons.Right) return;
-			var pictureEdit = sender as PictureEdit;
-			if (checkEditInvert.Checked && pictureEdit?.Image != null && colorEditInversionColor.Color != Color.White)
+			var viewInfo = labelControlTitle.GetViewInfo() as LabelControlViewInfo;
+			if (viewInfo == null) return;
+			if (viewInfo.ImageBounds.Contains(e.Location) && checkEditInvert.Checked && labelControlTitle.Appearance.Image != null && colorEditInversionColor.Color != Color.White)
 				contextMenuStripImage.Show(Cursor.Position);
 		}
 
 		private void toolStripMenuItemImageAddToFavorites_Click(object sender, EventArgs e)
 		{
-			if (pictureEditCustomWidget.Image == null) return;
+			if (labelControlTitle.Appearance.Image == null) return;
 			var favoritesContainer = xtraTabControlGallery.TabPages.OfType<FavoritesImagesContainer>().FirstOrDefault();
-			((FavoriteImageGroup)favoritesContainer?.ParentImageGroup)?.AddImage<Widget>(pictureEditCustomWidget.Image, String.Format("{0}_{1}", _originalImageName, colorEditInversionColor.Color.ToHex()));
+			((FavoriteImageGroup)favoritesContainer?.ParentImageGroup)?.AddImage<Banner>(labelControlTitle.Appearance.Image, String.Format("{0}_{1}", _originalImageName, colorEditInversionColor.Color.ToHex()));
 		}
 
 		private void contextMenuStripImage_Opening(object sender, CancelEventArgs e)
 		{
-			e.Cancel = !checkEditInvert.Checked || pictureEditCustomWidget.Image == null || colorEditInversionColor.Color == Color.White;
+			e.Cancel = !checkEditInvert.Checked || labelControlTitle.Appearance.Image == null || colorEditInversionColor.Color == Color.White;
 		}
 	}
 }

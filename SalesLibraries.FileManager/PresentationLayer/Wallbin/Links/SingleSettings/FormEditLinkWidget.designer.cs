@@ -36,42 +36,37 @@
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.textEditSearch = new DevExpress.XtraEditors.TextEdit();
 			this.layoutControl = new DevExpress.XtraLayout.LayoutControl();
+			this.labelControlTitle = new DevExpress.XtraEditors.LabelControl();
 			this.pnGallery = new System.Windows.Forms.Panel();
 			this.xtraTabControlGallery = new DevExpress.XtraTab.XtraTabControl();
 			this.retractableBarGallery = new SalesLibraries.CommonGUI.RetractableBar.RetractableBarLeft();
 			this.treeViewGallery = new SalesLibraries.FileManager.PresentationLayer.Wallbin.ImageGallery.GalleryTreeView();
 			this.labelControlSelectedGalleryName = new DevExpress.XtraEditors.LabelControl();
-			this.pictureEditAutoWidget = new DevExpress.XtraEditors.PictureEdit();
 			this.checkEditWidgetAuto = new DevExpress.XtraEditors.CheckEdit();
 			this.colorEditInversionColor = new SalesLibraries.CommonGUI.Common.HtmlColorEdit();
-			this.pictureEditCustomWidget = new DevExpress.XtraEditors.PictureEdit();
 			this.checkEditWidgetCustom = new DevExpress.XtraEditors.CheckEdit();
 			this.checkEditWidgetNone = new DevExpress.XtraEditors.CheckEdit();
 			this.checkEditInvert = new DevExpress.XtraEditors.CheckEdit();
 			this.buttonXSearch = new DevComponents.DotNetBar.ButtonX();
 			this.layoutControlGroupRoot = new DevExpress.XtraLayout.LayoutControlGroup();
-			this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.layoutControlGroupBottom = new DevExpress.XtraLayout.LayoutControlGroup();
 			this.emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.layoutControlItemOK = new DevExpress.XtraLayout.LayoutControlItem();
 			this.layoutControlItemCancel = new DevExpress.XtraLayout.LayoutControlItem();
 			this.layoutControlItemWidgetNone = new DevExpress.XtraLayout.LayoutControlItem();
 			this.layoutControlItemWidgetCustom = new DevExpress.XtraLayout.LayoutControlItem();
-			this.layoutControlGroupAutoWidget = new DevExpress.XtraLayout.LayoutControlGroup();
 			this.layoutControlItemWidgetAuto = new DevExpress.XtraLayout.LayoutControlItem();
-			this.layoutControlItemWiggetAutoImage = new DevExpress.XtraLayout.LayoutControlItem();
-			this.layoutControlGroupCustomWidget = new DevExpress.XtraLayout.LayoutControlGroup();
-			this.layoutControlItemWidgetCustomImage = new DevExpress.XtraLayout.LayoutControlItem();
-			this.layoutControlItemWidgetColorizeToggle = new DevExpress.XtraLayout.LayoutControlItem();
-			this.layoutControlItemWidgetColorizeEditor = new DevExpress.XtraLayout.LayoutControlItem();
-			this.emptySpaceItem5 = new DevExpress.XtraLayout.EmptySpaceItem();
-			this.emptySpaceItem4 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.layoutControlGroupSearch = new DevExpress.XtraLayout.LayoutControlGroup();
 			this.layoutControlItemSearchEdit = new DevExpress.XtraLayout.LayoutControlItem();
 			this.layoutControlItemSearchButton = new DevExpress.XtraLayout.LayoutControlItem();
 			this.layoutControlItemGallery = new DevExpress.XtraLayout.LayoutControlItem();
 			this.emptySpaceItem6 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.layoutControlItemWidgetColorizeToggle = new DevExpress.XtraLayout.LayoutControlItem();
+			this.layoutControlItemWidgetColorizeEditor = new DevExpress.XtraLayout.LayoutControlItem();
+			this.layoutControlItemTitle = new DevExpress.XtraLayout.LayoutControlItem();
+			this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.layoutControlGroupColorize = new DevExpress.XtraLayout.LayoutControlGroup();
 			this.contextMenuStripImage.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditSearch.Properties)).BeginInit();
@@ -81,36 +76,30 @@
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlGallery)).BeginInit();
 			this.retractableBarGallery.Content.SuspendLayout();
 			this.retractableBarGallery.Header.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.pictureEditAutoWidget.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditWidgetAuto.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.colorEditInversionColor.Properties)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.pictureEditCustomWidget.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditWidgetCustom.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditWidgetNone.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditInvert.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupRoot)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupBottom)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemOK)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemCancel)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemWidgetNone)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemWidgetCustom)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupAutoWidget)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemWidgetAuto)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemWiggetAutoImage)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupCustomWidget)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemWidgetCustomImage)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemWidgetColorizeToggle)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemWidgetColorizeEditor)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem5)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem4)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupSearch)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemSearchEdit)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemSearchButton)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemGallery)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem6)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemWidgetColorizeToggle)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemWidgetColorizeEditor)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemTitle)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupColorize)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// buttonXOK
@@ -178,13 +167,13 @@
 			// 
 			// textEditSearch
 			// 
-			this.textEditSearch.Location = new System.Drawing.Point(606, 17);
+			this.textEditSearch.Location = new System.Drawing.Point(623, 82);
 			this.textEditSearch.Name = "textEditSearch";
 			this.textEditSearch.Properties.Appearance.BackColor = System.Drawing.Color.White;
 			this.textEditSearch.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.textEditSearch.Properties.Appearance.Options.UseBackColor = true;
 			this.textEditSearch.Properties.Appearance.Options.UseForeColor = true;
-			this.textEditSearch.Size = new System.Drawing.Size(239, 22);
+			this.textEditSearch.Size = new System.Drawing.Size(222, 22);
 			this.textEditSearch.StyleController = this.layoutControl;
 			this.textEditSearch.TabIndex = 0;
 			this.textEditSearch.EditValueChanged += new System.EventHandler(this.OnSearchEditValueChanged);
@@ -205,11 +194,10 @@
 			this.layoutControl.Appearance.ControlReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.layoutControl.Appearance.ControlReadOnly.Options.UseFont = true;
 			this.layoutControl.BackColor = System.Drawing.Color.White;
+			this.layoutControl.Controls.Add(this.labelControlTitle);
 			this.layoutControl.Controls.Add(this.pnGallery);
-			this.layoutControl.Controls.Add(this.pictureEditAutoWidget);
 			this.layoutControl.Controls.Add(this.checkEditWidgetAuto);
 			this.layoutControl.Controls.Add(this.colorEditInversionColor);
-			this.layoutControl.Controls.Add(this.pictureEditCustomWidget);
 			this.layoutControl.Controls.Add(this.checkEditWidgetCustom);
 			this.layoutControl.Controls.Add(this.checkEditWidgetNone);
 			this.layoutControl.Controls.Add(this.checkEditInvert);
@@ -228,15 +216,38 @@
 			this.layoutControl.TabIndex = 59;
 			this.layoutControl.Text = "layoutControl1";
 			// 
+			// labelControlTitle
+			// 
+			this.labelControlTitle.AllowHtmlString = true;
+			this.labelControlTitle.Appearance.BackColor = System.Drawing.Color.White;
+			this.labelControlTitle.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.labelControlTitle.Appearance.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.labelControlTitle.Appearance.Options.UseBackColor = true;
+			this.labelControlTitle.Appearance.Options.UseForeColor = true;
+			this.labelControlTitle.Appearance.Options.UseImageAlign = true;
+			this.labelControlTitle.Appearance.Options.UseTextOptions = true;
+			this.labelControlTitle.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+			this.labelControlTitle.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+			this.labelControlTitle.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+			this.labelControlTitle.ImageAlignToText = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+			this.labelControlTitle.Location = new System.Drawing.Point(12, 32);
+			this.labelControlTitle.Name = "labelControlTitle";
+			this.labelControlTitle.Size = new System.Drawing.Size(950, 21);
+			this.labelControlTitle.StyleController = this.layoutControl;
+			this.labelControlTitle.TabIndex = 49;
+			this.labelControlTitle.Text = "<size=+4><b>{0}</b></size>";
+			this.labelControlTitle.UseMnemonic = false;
+			this.labelControlTitle.MouseClick += new System.Windows.Forms.MouseEventHandler(this.labelControlTitle_MouseClick);
+			// 
 			// pnGallery
 			// 
 			this.pnGallery.BackColor = System.Drawing.Color.Transparent;
 			this.pnGallery.Controls.Add(this.xtraTabControlGallery);
 			this.pnGallery.Controls.Add(this.retractableBarGallery);
 			this.pnGallery.ForeColor = System.Drawing.Color.Black;
-			this.pnGallery.Location = new System.Drawing.Point(10, 56);
+			this.pnGallery.Location = new System.Drawing.Point(10, 121);
 			this.pnGallery.Name = "pnGallery";
-			this.pnGallery.Size = new System.Drawing.Size(954, 435);
+			this.pnGallery.Size = new System.Drawing.Size(954, 370);
 			this.pnGallery.TabIndex = 3;
 			// 
 			// xtraTabControlGallery
@@ -259,7 +270,7 @@
 			this.xtraTabControlGallery.Location = new System.Drawing.Point(300, 0);
 			this.xtraTabControlGallery.Name = "xtraTabControlGallery";
 			this.xtraTabControlGallery.ShowTabHeader = DevExpress.Utils.DefaultBoolean.False;
-			this.xtraTabControlGallery.Size = new System.Drawing.Size(654, 435);
+			this.xtraTabControlGallery.Size = new System.Drawing.Size(654, 370);
 			this.xtraTabControlGallery.TabIndex = 61;
 			// 
 			// retractableBarGallery
@@ -274,7 +285,7 @@
 			this.retractableBarGallery.Content.ForeColor = System.Drawing.Color.Black;
 			this.retractableBarGallery.Content.Location = new System.Drawing.Point(2, 42);
 			this.retractableBarGallery.Content.Name = "Content";
-			this.retractableBarGallery.Content.Size = new System.Drawing.Size(296, 391);
+			this.retractableBarGallery.Content.Size = new System.Drawing.Size(296, 326);
 			this.retractableBarGallery.Content.TabIndex = 1;
 			this.retractableBarGallery.Dock = System.Windows.Forms.DockStyle.Left;
 			this.retractableBarGallery.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -293,7 +304,7 @@
 			this.retractableBarGallery.Location = new System.Drawing.Point(0, 0);
 			this.retractableBarGallery.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.retractableBarGallery.Name = "retractableBarGallery";
-			this.retractableBarGallery.Size = new System.Drawing.Size(300, 435);
+			this.retractableBarGallery.Size = new System.Drawing.Size(300, 370);
 			this.retractableBarGallery.TabIndex = 47;
 			// 
 			// treeViewGallery
@@ -309,7 +320,7 @@
 			this.treeViewGallery.Location = new System.Drawing.Point(0, 0);
 			this.treeViewGallery.Name = "treeViewGallery";
 			this.treeViewGallery.ShowLines = false;
-			this.treeViewGallery.Size = new System.Drawing.Size(296, 391);
+			this.treeViewGallery.Size = new System.Drawing.Size(296, 326);
 			this.treeViewGallery.TabIndex = 1;
 			// 
 			// labelControlSelectedGalleryName
@@ -317,8 +328,13 @@
 			this.labelControlSelectedGalleryName.AllowHtmlString = true;
 			this.labelControlSelectedGalleryName.Appearance.BackColor = System.Drawing.Color.Transparent;
 			this.labelControlSelectedGalleryName.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.labelControlSelectedGalleryName.Appearance.Options.UseBackColor = true;
+			this.labelControlSelectedGalleryName.Appearance.Options.UseForeColor = true;
+			this.labelControlSelectedGalleryName.Appearance.Options.UseTextOptions = true;
 			this.labelControlSelectedGalleryName.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
 			this.labelControlSelectedGalleryName.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
+			this.labelControlSelectedGalleryName.AppearanceDisabled.Options.UseForeColor = true;
+			this.labelControlSelectedGalleryName.AppearanceDisabled.Options.UseTextOptions = true;
 			this.labelControlSelectedGalleryName.AppearanceDisabled.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
 			this.labelControlSelectedGalleryName.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
 			this.labelControlSelectedGalleryName.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -329,25 +345,9 @@
 			this.labelControlSelectedGalleryName.TabIndex = 53;
 			this.labelControlSelectedGalleryName.UseMnemonic = false;
 			// 
-			// pictureEditAutoWidget
-			// 
-			this.pictureEditAutoWidget.Location = new System.Drawing.Point(599, 503);
-			this.pictureEditAutoWidget.Name = "pictureEditAutoWidget";
-			this.pictureEditAutoWidget.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
-			this.pictureEditAutoWidget.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.pictureEditAutoWidget.Properties.Appearance.Options.UseBackColor = true;
-			this.pictureEditAutoWidget.Properties.Appearance.Options.UseForeColor = true;
-			this.pictureEditAutoWidget.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-			this.pictureEditAutoWidget.Properties.NullText = " ";
-			this.pictureEditAutoWidget.Properties.ShowMenu = false;
-			this.pictureEditAutoWidget.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Squeeze;
-			this.pictureEditAutoWidget.Size = new System.Drawing.Size(34, 36);
-			this.pictureEditAutoWidget.StyleController = this.layoutControl;
-			this.pictureEditAutoWidget.TabIndex = 1;
-			// 
 			// checkEditWidgetAuto
 			// 
-			this.checkEditWidgetAuto.Location = new System.Drawing.Point(497, 503);
+			this.checkEditWidgetAuto.Location = new System.Drawing.Point(398, 503);
 			this.checkEditWidgetAuto.Name = "checkEditWidgetAuto";
 			this.checkEditWidgetAuto.Properties.AllowFocused = false;
 			this.checkEditWidgetAuto.Properties.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
@@ -357,7 +357,7 @@
 			this.checkEditWidgetAuto.Properties.Caption = "Auto Widget:";
 			this.checkEditWidgetAuto.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
 			this.checkEditWidgetAuto.Properties.RadioGroupIndex = 1;
-			this.checkEditWidgetAuto.Size = new System.Drawing.Size(98, 36);
+			this.checkEditWidgetAuto.Size = new System.Drawing.Size(268, 36);
 			this.checkEditWidgetAuto.StyleController = this.layoutControl;
 			this.checkEditWidgetAuto.TabIndex = 1;
 			this.checkEditWidgetAuto.TabStop = false;
@@ -369,9 +369,11 @@
 			this.colorEditInversionColor.Color = System.Drawing.Color.Empty;
 			this.colorEditInversionColor.EditValue = System.Drawing.Color.Empty;
 			this.colorEditInversionColor.Enabled = false;
-			this.colorEditInversionColor.Location = new System.Drawing.Point(339, 510);
+			this.colorEditInversionColor.Location = new System.Drawing.Point(104, 82);
 			this.colorEditInversionColor.Name = "colorEditInversionColor";
-			this.colorEditInversionColor.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+			this.colorEditInversionColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.colorEditInversionColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.colorEditInversionColor.Properties.Appearance.Options.UseBackColor = true;
 			this.colorEditInversionColor.Properties.Appearance.Options.UseForeColor = true;
 			this.colorEditInversionColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
@@ -381,26 +383,9 @@
 			this.colorEditInversionColor.TabIndex = 5;
 			this.colorEditInversionColor.EditValueChanged += new System.EventHandler(this.colorEditInversionColor_EditValueChanged);
 			// 
-			// pictureEditCustomWidget
-			// 
-			this.pictureEditCustomWidget.Location = new System.Drawing.Point(218, 503);
-			this.pictureEditCustomWidget.Name = "pictureEditCustomWidget";
-			this.pictureEditCustomWidget.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
-			this.pictureEditCustomWidget.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.pictureEditCustomWidget.Properties.Appearance.Options.UseBackColor = true;
-			this.pictureEditCustomWidget.Properties.Appearance.Options.UseForeColor = true;
-			this.pictureEditCustomWidget.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-			this.pictureEditCustomWidget.Properties.NullText = " ";
-			this.pictureEditCustomWidget.Properties.ShowMenu = false;
-			this.pictureEditCustomWidget.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Squeeze;
-			this.pictureEditCustomWidget.Size = new System.Drawing.Size(36, 36);
-			this.pictureEditCustomWidget.StyleController = this.layoutControl;
-			this.pictureEditCustomWidget.TabIndex = 1;
-			this.pictureEditCustomWidget.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OnWidgetPictureMouseClick);
-			// 
 			// checkEditWidgetCustom
 			// 
-			this.checkEditWidgetCustom.Location = new System.Drawing.Point(142, 503);
+			this.checkEditWidgetCustom.Location = new System.Drawing.Point(215, 503);
 			this.checkEditWidgetCustom.Name = "checkEditWidgetCustom";
 			this.checkEditWidgetCustom.Properties.AllowFocused = false;
 			this.checkEditWidgetCustom.Properties.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
@@ -410,7 +395,7 @@
 			this.checkEditWidgetCustom.Properties.Caption = "Custom:";
 			this.checkEditWidgetCustom.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
 			this.checkEditWidgetCustom.Properties.RadioGroupIndex = 1;
-			this.checkEditWidgetCustom.Size = new System.Drawing.Size(72, 36);
+			this.checkEditWidgetCustom.Size = new System.Drawing.Size(179, 36);
 			this.checkEditWidgetCustom.StyleController = this.layoutControl;
 			this.checkEditWidgetCustom.TabIndex = 1;
 			this.checkEditWidgetCustom.TabStop = false;
@@ -428,7 +413,7 @@
 			this.checkEditWidgetNone.Properties.Caption = "No Widget";
 			this.checkEditWidgetNone.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
 			this.checkEditWidgetNone.Properties.RadioGroupIndex = 1;
-			this.checkEditWidgetNone.Size = new System.Drawing.Size(96, 36);
+			this.checkEditWidgetNone.Size = new System.Drawing.Size(199, 36);
 			this.checkEditWidgetNone.StyleController = this.layoutControl;
 			this.checkEditWidgetNone.TabIndex = 1;
 			this.checkEditWidgetNone.TabStop = false;
@@ -437,14 +422,14 @@
 			// checkEditInvert
 			// 
 			this.checkEditInvert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.checkEditInvert.Location = new System.Drawing.Point(266, 503);
+			this.checkEditInvert.Location = new System.Drawing.Point(12, 77);
 			this.checkEditInvert.Name = "checkEditInvert";
 			this.checkEditInvert.Properties.AllowFocused = false;
 			this.checkEditInvert.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditInvert.Properties.Appearance.Options.UseForeColor = true;
 			this.checkEditInvert.Properties.AutoHeight = false;
 			this.checkEditInvert.Properties.Caption = "Colorize";
-			this.checkEditInvert.Size = new System.Drawing.Size(69, 36);
+			this.checkEditInvert.Size = new System.Drawing.Size(88, 32);
 			this.checkEditInvert.StyleController = this.layoutControl;
 			this.checkEditInvert.TabIndex = 4;
 			this.checkEditInvert.CheckedChanged += new System.EventHandler(this.OnWidgetTypeChanged);
@@ -454,7 +439,7 @@
 			this.buttonXSearch.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXSearch.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXSearch.Enabled = false;
-			this.buttonXSearch.Location = new System.Drawing.Point(854, 12);
+			this.buttonXSearch.Location = new System.Drawing.Point(854, 77);
 			this.buttonXSearch.Name = "buttonXSearch";
 			this.buttonXSearch.Size = new System.Drawing.Size(108, 32);
 			this.buttonXSearch.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -481,24 +466,18 @@
 			this.layoutControlGroupRoot.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
 			this.layoutControlGroupRoot.GroupBordersVisible = false;
 			this.layoutControlGroupRoot.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.emptySpaceItem2,
             this.layoutControlGroupBottom,
             this.emptySpaceItem1,
             this.layoutControlGroupSearch,
             this.layoutControlItemGallery,
-            this.emptySpaceItem6});
+            this.emptySpaceItem6,
+            this.layoutControlItemTitle,
+            this.emptySpaceItem2,
+            this.layoutControlGroupColorize});
 			this.layoutControlGroupRoot.Location = new System.Drawing.Point(0, 0);
 			this.layoutControlGroupRoot.Name = "Root";
 			this.layoutControlGroupRoot.Size = new System.Drawing.Size(974, 551);
 			this.layoutControlGroupRoot.TextVisible = false;
-			// 
-			// emptySpaceItem2
-			// 
-			this.emptySpaceItem2.AllowHotTrack = false;
-			this.emptySpaceItem2.Location = new System.Drawing.Point(0, 0);
-			this.emptySpaceItem2.Name = "emptySpaceItem2";
-			this.emptySpaceItem2.Size = new System.Drawing.Size(530, 36);
-			this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
 			// 
 			// layoutControlGroupBottom
 			// 
@@ -511,9 +490,7 @@
             this.layoutControlItemCancel,
             this.layoutControlItemWidgetNone,
             this.layoutControlItemWidgetCustom,
-            this.layoutControlGroupAutoWidget,
-            this.layoutControlGroupCustomWidget,
-            this.emptySpaceItem4});
+            this.layoutControlItemWidgetAuto});
 			this.layoutControlGroupBottom.Location = new System.Drawing.Point(0, 491);
 			this.layoutControlGroupBottom.Name = "layoutControlGroupBottom";
 			this.layoutControlGroupBottom.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 10, 0);
@@ -524,9 +501,9 @@
 			// emptySpaceItem3
 			// 
 			this.emptySpaceItem3.AllowHotTrack = false;
-			this.emptySpaceItem3.Location = new System.Drawing.Point(688, 0);
+			this.emptySpaceItem3.Location = new System.Drawing.Point(658, 0);
 			this.emptySpaceItem3.Name = "emptySpaceItem3";
-			this.emptySpaceItem3.Size = new System.Drawing.Size(44, 40);
+			this.emptySpaceItem3.Size = new System.Drawing.Size(74, 40);
 			this.emptySpaceItem3.TextSize = new System.Drawing.Size(0, 0);
 			// 
 			// layoutControlItemOK
@@ -564,11 +541,8 @@
 			this.layoutControlItemWidgetNone.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
 			this.layoutControlItemWidgetNone.CustomizationFormText = "No Widget Toggle";
 			this.layoutControlItemWidgetNone.Location = new System.Drawing.Point(0, 0);
-			this.layoutControlItemWidgetNone.MaxSize = new System.Drawing.Size(100, 0);
-			this.layoutControlItemWidgetNone.MinSize = new System.Drawing.Size(100, 24);
 			this.layoutControlItemWidgetNone.Name = "layoutControlItemWidgetNone";
-			this.layoutControlItemWidgetNone.Size = new System.Drawing.Size(100, 40);
-			this.layoutControlItemWidgetNone.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.layoutControlItemWidgetNone.Size = new System.Drawing.Size(203, 40);
 			this.layoutControlItemWidgetNone.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutControlItemWidgetNone.TextVisible = false;
 			// 
@@ -577,137 +551,22 @@
 			this.layoutControlItemWidgetCustom.Control = this.checkEditWidgetCustom;
 			this.layoutControlItemWidgetCustom.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
 			this.layoutControlItemWidgetCustom.CustomizationFormText = "Custom Widget Toggle ";
-			this.layoutControlItemWidgetCustom.Location = new System.Drawing.Point(130, 0);
-			this.layoutControlItemWidgetCustom.MaxSize = new System.Drawing.Size(76, 0);
-			this.layoutControlItemWidgetCustom.MinSize = new System.Drawing.Size(76, 24);
+			this.layoutControlItemWidgetCustom.Location = new System.Drawing.Point(203, 0);
 			this.layoutControlItemWidgetCustom.Name = "layoutControlItemWidgetCustom";
-			this.layoutControlItemWidgetCustom.Size = new System.Drawing.Size(76, 40);
-			this.layoutControlItemWidgetCustom.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.layoutControlItemWidgetCustom.Size = new System.Drawing.Size(183, 40);
 			this.layoutControlItemWidgetCustom.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutControlItemWidgetCustom.TextVisible = false;
-			// 
-			// layoutControlGroupAutoWidget
-			// 
-			this.layoutControlGroupAutoWidget.AppearanceGroup.BorderColor = System.Drawing.Color.Transparent;
-			this.layoutControlGroupAutoWidget.AppearanceGroup.Options.UseBorderColor = true;
-			this.layoutControlGroupAutoWidget.GroupBordersVisible = false;
-			this.layoutControlGroupAutoWidget.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItemWidgetAuto,
-            this.layoutControlItemWiggetAutoImage});
-			this.layoutControlGroupAutoWidget.Location = new System.Drawing.Point(485, 0);
-			this.layoutControlGroupAutoWidget.Name = "layoutControlGroupAutoWidget";
-			this.layoutControlGroupAutoWidget.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-			this.layoutControlGroupAutoWidget.Size = new System.Drawing.Size(203, 40);
-			this.layoutControlGroupAutoWidget.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-			this.layoutControlGroupAutoWidget.TextVisible = false;
 			// 
 			// layoutControlItemWidgetAuto
 			// 
 			this.layoutControlItemWidgetAuto.Control = this.checkEditWidgetAuto;
 			this.layoutControlItemWidgetAuto.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
 			this.layoutControlItemWidgetAuto.CustomizationFormText = "Auto Widget Toggle";
-			this.layoutControlItemWidgetAuto.Location = new System.Drawing.Point(0, 0);
-			this.layoutControlItemWidgetAuto.MaxSize = new System.Drawing.Size(102, 0);
-			this.layoutControlItemWidgetAuto.MinSize = new System.Drawing.Size(102, 24);
+			this.layoutControlItemWidgetAuto.Location = new System.Drawing.Point(386, 0);
 			this.layoutControlItemWidgetAuto.Name = "layoutControlItemWidgetAuto";
-			this.layoutControlItemWidgetAuto.Size = new System.Drawing.Size(102, 40);
-			this.layoutControlItemWidgetAuto.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.layoutControlItemWidgetAuto.Size = new System.Drawing.Size(272, 40);
 			this.layoutControlItemWidgetAuto.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutControlItemWidgetAuto.TextVisible = false;
-			// 
-			// layoutControlItemWiggetAutoImage
-			// 
-			this.layoutControlItemWiggetAutoImage.Control = this.pictureEditAutoWidget;
-			this.layoutControlItemWiggetAutoImage.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-			this.layoutControlItemWiggetAutoImage.CustomizationFormText = "Auto Widget Image";
-			this.layoutControlItemWiggetAutoImage.Location = new System.Drawing.Point(102, 0);
-			this.layoutControlItemWiggetAutoImage.MaxSize = new System.Drawing.Size(101, 0);
-			this.layoutControlItemWiggetAutoImage.MinSize = new System.Drawing.Size(101, 24);
-			this.layoutControlItemWiggetAutoImage.Name = "layoutControlItemWiggetAutoImage";
-			this.layoutControlItemWiggetAutoImage.Size = new System.Drawing.Size(101, 40);
-			this.layoutControlItemWiggetAutoImage.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-			this.layoutControlItemWiggetAutoImage.Text = "Not Set";
-			this.layoutControlItemWiggetAutoImage.TextLocation = DevExpress.Utils.Locations.Right;
-			this.layoutControlItemWiggetAutoImage.TextSize = new System.Drawing.Size(60, 16);
-			// 
-			// layoutControlGroupCustomWidget
-			// 
-			this.layoutControlGroupCustomWidget.GroupBordersVisible = false;
-			this.layoutControlGroupCustomWidget.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItemWidgetCustomImage,
-            this.layoutControlItemWidgetColorizeToggle,
-            this.layoutControlItemWidgetColorizeEditor,
-            this.emptySpaceItem5});
-			this.layoutControlGroupCustomWidget.Location = new System.Drawing.Point(206, 0);
-			this.layoutControlGroupCustomWidget.Name = "layoutControlGroupCustomWidget";
-			this.layoutControlGroupCustomWidget.Size = new System.Drawing.Size(279, 40);
-			this.layoutControlGroupCustomWidget.TextVisible = false;
-			// 
-			// layoutControlItemWidgetCustomImage
-			// 
-			this.layoutControlItemWidgetCustomImage.Control = this.pictureEditCustomWidget;
-			this.layoutControlItemWidgetCustomImage.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-			this.layoutControlItemWidgetCustomImage.CustomizationFormText = "Custom Widget Image";
-			this.layoutControlItemWidgetCustomImage.Location = new System.Drawing.Point(0, 0);
-			this.layoutControlItemWidgetCustomImage.MaxSize = new System.Drawing.Size(40, 0);
-			this.layoutControlItemWidgetCustomImage.MinSize = new System.Drawing.Size(40, 24);
-			this.layoutControlItemWidgetCustomImage.Name = "layoutControlItemWidgetCustomImage";
-			this.layoutControlItemWidgetCustomImage.Size = new System.Drawing.Size(40, 40);
-			this.layoutControlItemWidgetCustomImage.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-			this.layoutControlItemWidgetCustomImage.TextSize = new System.Drawing.Size(0, 0);
-			this.layoutControlItemWidgetCustomImage.TextVisible = false;
-			// 
-			// layoutControlItemWidgetColorizeToggle
-			// 
-			this.layoutControlItemWidgetColorizeToggle.Control = this.checkEditInvert;
-			this.layoutControlItemWidgetColorizeToggle.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-			this.layoutControlItemWidgetColorizeToggle.CustomizationFormText = "Colorize Widget Toggle";
-			this.layoutControlItemWidgetColorizeToggle.Location = new System.Drawing.Point(40, 0);
-			this.layoutControlItemWidgetColorizeToggle.MaxSize = new System.Drawing.Size(81, 0);
-			this.layoutControlItemWidgetColorizeToggle.MinSize = new System.Drawing.Size(81, 24);
-			this.layoutControlItemWidgetColorizeToggle.Name = "layoutControlItemWidgetColorizeToggle";
-			this.layoutControlItemWidgetColorizeToggle.Padding = new DevExpress.XtraLayout.Utils.Padding(10, 2, 2, 2);
-			this.layoutControlItemWidgetColorizeToggle.Size = new System.Drawing.Size(81, 40);
-			this.layoutControlItemWidgetColorizeToggle.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-			this.layoutControlItemWidgetColorizeToggle.TextSize = new System.Drawing.Size(0, 0);
-			this.layoutControlItemWidgetColorizeToggle.TextVisible = false;
-			// 
-			// layoutControlItemWidgetColorizeEditor
-			// 
-			this.layoutControlItemWidgetColorizeEditor.Control = this.colorEditInversionColor;
-			this.layoutControlItemWidgetColorizeEditor.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-			this.layoutControlItemWidgetColorizeEditor.CustomizationFormText = "Colorize Widget Editor";
-			this.layoutControlItemWidgetColorizeEditor.FillControlToClientArea = false;
-			this.layoutControlItemWidgetColorizeEditor.Location = new System.Drawing.Point(121, 0);
-			this.layoutControlItemWidgetColorizeEditor.MaxSize = new System.Drawing.Size(130, 0);
-			this.layoutControlItemWidgetColorizeEditor.MinSize = new System.Drawing.Size(130, 36);
-			this.layoutControlItemWidgetColorizeEditor.Name = "layoutControlItemWidgetColorizeEditor";
-			this.layoutControlItemWidgetColorizeEditor.Size = new System.Drawing.Size(130, 40);
-			this.layoutControlItemWidgetColorizeEditor.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-			this.layoutControlItemWidgetColorizeEditor.TextSize = new System.Drawing.Size(0, 0);
-			this.layoutControlItemWidgetColorizeEditor.TextVisible = false;
-			// 
-			// emptySpaceItem5
-			// 
-			this.emptySpaceItem5.AllowHotTrack = false;
-			this.emptySpaceItem5.Location = new System.Drawing.Point(251, 0);
-			this.emptySpaceItem5.MaxSize = new System.Drawing.Size(28, 0);
-			this.emptySpaceItem5.MinSize = new System.Drawing.Size(28, 10);
-			this.emptySpaceItem5.Name = "emptySpaceItem5";
-			this.emptySpaceItem5.Size = new System.Drawing.Size(28, 40);
-			this.emptySpaceItem5.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-			this.emptySpaceItem5.TextSize = new System.Drawing.Size(0, 0);
-			// 
-			// emptySpaceItem4
-			// 
-			this.emptySpaceItem4.AllowHotTrack = false;
-			this.emptySpaceItem4.Location = new System.Drawing.Point(100, 0);
-			this.emptySpaceItem4.MaxSize = new System.Drawing.Size(30, 0);
-			this.emptySpaceItem4.MinSize = new System.Drawing.Size(30, 10);
-			this.emptySpaceItem4.Name = "emptySpaceItem4";
-			this.emptySpaceItem4.Size = new System.Drawing.Size(30, 40);
-			this.emptySpaceItem4.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-			this.emptySpaceItem4.TextSize = new System.Drawing.Size(0, 0);
 			// 
 			// emptySpaceItem1
 			// 
@@ -726,9 +585,9 @@
 			this.layoutControlGroupSearch.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItemSearchEdit,
             this.layoutControlItemSearchButton});
-			this.layoutControlGroupSearch.Location = new System.Drawing.Point(530, 0);
+			this.layoutControlGroupSearch.Location = new System.Drawing.Point(547, 65);
 			this.layoutControlGroupSearch.Name = "layoutControlGroupSearch";
-			this.layoutControlGroupSearch.Size = new System.Drawing.Size(424, 36);
+			this.layoutControlGroupSearch.Size = new System.Drawing.Size(407, 36);
 			this.layoutControlGroupSearch.TextVisible = false;
 			// 
 			// layoutControlItemSearchEdit
@@ -740,7 +599,7 @@
 			this.layoutControlItemSearchEdit.Location = new System.Drawing.Point(0, 0);
 			this.layoutControlItemSearchEdit.Name = "layoutControlItemSearchEdit";
 			this.layoutControlItemSearchEdit.Padding = new DevExpress.XtraLayout.Utils.Padding(3, 7, 7, 7);
-			this.layoutControlItemSearchEdit.Size = new System.Drawing.Size(312, 36);
+			this.layoutControlItemSearchEdit.Size = new System.Drawing.Size(295, 36);
 			this.layoutControlItemSearchEdit.Text = "<b>Keyword:</b>";
 			this.layoutControlItemSearchEdit.TextSize = new System.Drawing.Size(60, 16);
 			// 
@@ -748,7 +607,7 @@
 			// 
 			this.layoutControlItemSearchButton.Control = this.buttonXSearch;
 			this.layoutControlItemSearchButton.CustomizationFormText = "Keyword Button";
-			this.layoutControlItemSearchButton.Location = new System.Drawing.Point(312, 0);
+			this.layoutControlItemSearchButton.Location = new System.Drawing.Point(295, 0);
 			this.layoutControlItemSearchButton.MaxSize = new System.Drawing.Size(112, 0);
 			this.layoutControlItemSearchButton.MinSize = new System.Drawing.Size(112, 36);
 			this.layoutControlItemSearchButton.Name = "layoutControlItemSearchButton";
@@ -761,23 +620,82 @@
 			// 
 			this.layoutControlItemGallery.Control = this.pnGallery;
 			this.layoutControlItemGallery.CustomizationFormText = "Gallery";
-			this.layoutControlItemGallery.Location = new System.Drawing.Point(0, 46);
+			this.layoutControlItemGallery.Location = new System.Drawing.Point(0, 111);
 			this.layoutControlItemGallery.Name = "layoutControlItemGallery";
 			this.layoutControlItemGallery.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-			this.layoutControlItemGallery.Size = new System.Drawing.Size(954, 435);
+			this.layoutControlItemGallery.Size = new System.Drawing.Size(954, 370);
 			this.layoutControlItemGallery.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutControlItemGallery.TextVisible = false;
 			// 
 			// emptySpaceItem6
 			// 
 			this.emptySpaceItem6.AllowHotTrack = false;
-			this.emptySpaceItem6.Location = new System.Drawing.Point(0, 36);
+			this.emptySpaceItem6.Location = new System.Drawing.Point(0, 101);
 			this.emptySpaceItem6.MaxSize = new System.Drawing.Size(0, 10);
 			this.emptySpaceItem6.MinSize = new System.Drawing.Size(10, 10);
 			this.emptySpaceItem6.Name = "emptySpaceItem6";
 			this.emptySpaceItem6.Size = new System.Drawing.Size(954, 10);
 			this.emptySpaceItem6.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
 			this.emptySpaceItem6.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// layoutControlItemWidgetColorizeToggle
+			// 
+			this.layoutControlItemWidgetColorizeToggle.Control = this.checkEditInvert;
+			this.layoutControlItemWidgetColorizeToggle.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+			this.layoutControlItemWidgetColorizeToggle.CustomizationFormText = "Colorize Widget Toggle";
+			this.layoutControlItemWidgetColorizeToggle.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlItemWidgetColorizeToggle.Name = "layoutControlItemWidgetColorizeToggle";
+			this.layoutControlItemWidgetColorizeToggle.Size = new System.Drawing.Size(92, 36);
+			this.layoutControlItemWidgetColorizeToggle.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemWidgetColorizeToggle.TextVisible = false;
+			// 
+			// layoutControlItemWidgetColorizeEditor
+			// 
+			this.layoutControlItemWidgetColorizeEditor.Control = this.colorEditInversionColor;
+			this.layoutControlItemWidgetColorizeEditor.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+			this.layoutControlItemWidgetColorizeEditor.CustomizationFormText = "Colorize Widget Editor";
+			this.layoutControlItemWidgetColorizeEditor.FillControlToClientArea = false;
+			this.layoutControlItemWidgetColorizeEditor.Location = new System.Drawing.Point(92, 0);
+			this.layoutControlItemWidgetColorizeEditor.Name = "layoutControlItemWidgetColorizeEditor";
+			this.layoutControlItemWidgetColorizeEditor.Size = new System.Drawing.Size(130, 36);
+			this.layoutControlItemWidgetColorizeEditor.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemWidgetColorizeEditor.TextVisible = false;
+			this.layoutControlItemWidgetColorizeEditor.TrimClientAreaToControl = false;
+			// 
+			// layoutControlItemTitle
+			// 
+			this.layoutControlItemTitle.Control = this.labelControlTitle;
+			this.layoutControlItemTitle.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+			this.layoutControlItemTitle.FillControlToClientArea = false;
+			this.layoutControlItemTitle.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlItemTitle.MaxSize = new System.Drawing.Size(0, 65);
+			this.layoutControlItemTitle.MinSize = new System.Drawing.Size(17, 65);
+			this.layoutControlItemTitle.Name = "layoutControlItemTitle";
+			this.layoutControlItemTitle.Size = new System.Drawing.Size(954, 65);
+			this.layoutControlItemTitle.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.layoutControlItemTitle.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemTitle.TextVisible = false;
+			this.layoutControlItemTitle.TrimClientAreaToControl = false;
+			// 
+			// emptySpaceItem2
+			// 
+			this.emptySpaceItem2.AllowHotTrack = false;
+			this.emptySpaceItem2.Location = new System.Drawing.Point(222, 65);
+			this.emptySpaceItem2.Name = "emptySpaceItem2";
+			this.emptySpaceItem2.Size = new System.Drawing.Size(325, 36);
+			this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// layoutControlGroupColorize
+			// 
+			this.layoutControlGroupColorize.GroupBordersVisible = false;
+			this.layoutControlGroupColorize.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItemWidgetColorizeEditor,
+            this.layoutControlItemWidgetColorizeToggle});
+			this.layoutControlGroupColorize.Location = new System.Drawing.Point(0, 65);
+			this.layoutControlGroupColorize.Name = "layoutControlGroupColorize";
+			this.layoutControlGroupColorize.Size = new System.Drawing.Size(222, 36);
+			this.layoutControlGroupColorize.Text = "Colorize";
+			this.layoutControlGroupColorize.TextVisible = false;
 			// 
 			// FormEditLinkWidget
 			// 
@@ -805,36 +723,30 @@
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlGallery)).EndInit();
 			this.retractableBarGallery.Content.ResumeLayout(false);
 			this.retractableBarGallery.Header.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.pictureEditAutoWidget.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditWidgetAuto.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.colorEditInversionColor.Properties)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.pictureEditCustomWidget.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditWidgetCustom.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditWidgetNone.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditInvert.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupRoot)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupBottom)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemOK)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemCancel)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemWidgetNone)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemWidgetCustom)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupAutoWidget)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemWidgetAuto)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemWiggetAutoImage)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupCustomWidget)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemWidgetCustomImage)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemWidgetColorizeToggle)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemWidgetColorizeEditor)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem5)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem4)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupSearch)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemSearchEdit)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemSearchButton)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemGallery)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem6)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemWidgetColorizeToggle)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemWidgetColorizeEditor)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemTitle)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupColorize)).EndInit();
 			this.ResumeLayout(false);
 
         }
@@ -858,7 +770,6 @@
 		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemSearchEdit;
 		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemSearchButton;
 		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
-		private DevExpress.XtraEditors.PictureEdit pictureEditCustomWidget;
 		private DevExpress.XtraEditors.CheckEdit checkEditWidgetCustom;
 		private DevExpress.XtraEditors.CheckEdit checkEditWidgetNone;
 		private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroupBottom;
@@ -867,22 +778,18 @@
 		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemCancel;
 		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemWidgetNone;
 		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemWidgetCustom;
-		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemWidgetCustomImage;
 		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemWidgetColorizeToggle;
 		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemWidgetColorizeEditor;
-		private DevExpress.XtraEditors.PictureEdit pictureEditAutoWidget;
 		private DevExpress.XtraEditors.CheckEdit checkEditWidgetAuto;
-		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemWidgetAuto;
-		private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroupAutoWidget;
 		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
-		private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroupCustomWidget;
 		private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroupSearch;
-		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem5;
-		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem4;
 		private System.Windows.Forms.Panel pnGallery;
 		private DevExpress.XtraTab.XtraTabControl xtraTabControlGallery;
 		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemGallery;
 		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem6;
-		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemWiggetAutoImage;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemWidgetAuto;
+		private DevExpress.XtraEditors.LabelControl labelControlTitle;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemTitle;
+		private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroupColorize;
 	}
 }

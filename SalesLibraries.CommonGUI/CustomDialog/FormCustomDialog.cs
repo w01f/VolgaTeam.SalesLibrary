@@ -15,8 +15,8 @@ namespace SalesLibraries.CommonGUI.CustomDialog
 		{
 			InitializeComponent();
 
-			layoutControlItemButtons.MinSize = RectangleHelper.ScaleSize(layoutControlItemButtons.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemButtons.MaxSize = RectangleHelper.ScaleSize(layoutControlItemButtons.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemButtons.MinSize = RectangleHelper.ScaleSize(layoutControlItemButtons.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 
 			simpleLabelItemMessage.Text = String.Format("<color=white>{0}</color>", message);
 			LoadButtons(buttons);
@@ -37,7 +37,7 @@ namespace SalesLibraries.CommonGUI.CustomDialog
 				button.DialogResult = buttonInfo.DialogResult;
 				button.TextColor = Color.Black;
 				button.Height = buttonHeight;
-				button.Width = buttonInfo.Width;
+				button.Width = (Int32)(buttonInfo.Width* Utils.GetScaleFactor(CreateGraphics().DpiX).Width);
 				button.Style = eDotNetBarStyle.StyleManagerControlled;
 				button.Top = topPosition;
 				button.Anchor = AnchorStyles.Top | AnchorStyles.Right;

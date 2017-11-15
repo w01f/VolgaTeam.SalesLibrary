@@ -16,7 +16,7 @@ using SalesLibraries.CommonGUI.Common;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings
 {
-	public partial class FormEditLinkSettingsRegular : MetroForm, ILinkSettingsByTypeEditForm, ILinkSetSettingsEditForm
+	public partial class FormEditLinkSettingsRegular : MetroForm, ILinkSetSettingsEditForm
 	{
 		private readonly BaseLibraryLink _sourceLink;
 		private readonly ILinksGroup _sourceLinkGroup;
@@ -34,10 +34,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		{
 			InitializeComponent();
 
-			layoutControlItemOK.MinSize = RectangleHelper.ScaleSize(layoutControlItemOK.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemOK.MaxSize = RectangleHelper.ScaleSize(layoutControlItemOK.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemCancel.MinSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemOK.MinSize = RectangleHelper.ScaleSize(layoutControlItemOK.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemCancel.MaxSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCancel.MinSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
 		public FormEditLinkSettingsRegular(BaseLibraryLink sourceLink) : this()
@@ -45,11 +45,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			_sourceLink = sourceLink;
 			Width = Width - layoutControlItemLinksTree.Width;
 			layoutControlItemLinksTree.Visibility = LayoutVisibility.Never;
-		}
-
-		public FormEditLinkSettingsRegular(BaseLibraryLink sourceLink, LinkType? defaultLinkType = null) : this(sourceLink)
-		{
-			_defaultLinkType = defaultLinkType;
 		}
 
 		public FormEditLinkSettingsRegular(ILinksGroup linkGroup, LinkType? defaultLinkType = null) : this()

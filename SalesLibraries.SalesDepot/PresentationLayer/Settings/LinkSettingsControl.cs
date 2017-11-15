@@ -1,4 +1,6 @@
 ﻿using DevComponents.DotNetBar;
+using DevExpress.Skins;
+using SalesLibraries.Common.Helpers;
 using SalesLibraries.SalesDepot.Configuration;
 using SalesLibraries.SalesDepot.Controllers;
 using SalesLibraries.SalesDepot.Properties;
@@ -12,6 +14,12 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Settings
 		public LinkSettingsControl()
 		{
 			InitializeComponent();
+			layoutControlItemViewer.MaxSize = RectangleHelper.ScaleSize(layoutControlItemViewer.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemViewer.MinSize = RectangleHelper.ScaleSize(layoutControlItemViewer.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemMenu.MaxSize = RectangleHelper.ScaleSize(layoutControlItemMenu.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemMenu.MinSize = RectangleHelper.ScaleSize(layoutControlItemMenu.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemLaunch.MaxSize = RectangleHelper.ScaleSize(layoutControlItemLaunch.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemLaunch.MinSize = RectangleHelper.ScaleSize(layoutControlItemLaunch.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
 		private void Button_Click(object sender, System.EventArgs e)
@@ -34,8 +42,8 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Settings
 	{
 		public PowerPointSettingsControl()
 		{
-			laTitle.Text = "How will PowerPoint files open?";
-			pbLogo.Image = Resources.SettingsPowerPoint;
+			simpleLabelItemTitle.Text = "<size=+2>How will PowerPoint files open?</size>";
+			pictureEditLogo.Image = Resources.SettingsPowerPoint;
 		}
 
 		public override void LoadData()
@@ -76,8 +84,8 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Settings
 	{
 		public PDFSettingsControl()
 		{
-			laTitle.Text = "How will PDF files open?";
-			pbLogo.Image = Resources.SettingsPDF;
+			simpleLabelItemTitle.Text = "<size=+2>How will PDF files open?</size>";
+			pictureEditLogo.Image = Resources.SettingsPDF;
 		}
 
 		public override void LoadData()
@@ -118,8 +126,8 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Settings
 	{
 		public WordSettingsControl()
 		{
-			laTitle.Text = "How will Word files open?";
-			pbLogo.Image = Resources.SettingsWord;
+			simpleLabelItemTitle.Text = "<size=+2>How will Word files open?</size>";
+			pictureEditLogo.Image = Resources.SettingsWord;
 		}
 
 		public override void LoadData()
@@ -160,8 +168,8 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Settings
 	{
 		public ExcelSettingsControl()
 		{
-			laTitle.Text = "How will Excel files open?";
-			pbLogo.Image = Resources.SettingsExcel;
+			simpleLabelItemTitle.Text = "<size=+2>How will Excel files open?</size>";
+			pictureEditLogo.Image = Resources.SettingsExcel;
 		}
 
 		public override void LoadData()
@@ -202,8 +210,8 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Settings
 	{
 		public VideoSettingsControl()
 		{
-			laTitle.Text = "How will Video files open?";
-			pbLogo.Image = Resources.SettingsVideo;
+			simpleLabelItemTitle.Text = "<size=+2>How will Video files open?</size>";
+			pictureEditLogo.Image = Resources.SettingsVideo;
 		}
 
 		public override void LoadData()
@@ -244,8 +252,8 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Settings
 	{
 		public FolderSettingsControl()
 		{
-			laTitle.Text = "How will Folders open?";
-			pbLogo.Image = Resources.SettingsFolder;
+			simpleLabelItemTitle.Text = "<size=+2>How will Folders open?</size>";
+			pictureEditLogo.Image = Resources.SettingsFolder;
 		}
 
 		public override void LoadData()

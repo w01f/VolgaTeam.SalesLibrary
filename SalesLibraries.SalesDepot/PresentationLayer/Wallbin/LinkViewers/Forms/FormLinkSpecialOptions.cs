@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
 using SalesLibraries.SalesDepot.Business.LinkViewers;
@@ -15,8 +14,6 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 		public FormLinkSpecialOptions()
 		{
 			InitializeComponent();
-			if ((CreateGraphics()).DpiX > 96)
-				buttonXClose.Font = new Font(buttonXClose.Font.FontFamily, buttonXClose.Font.Size - 3, buttonXClose.Font.Style);
 		}
 
 		private void FormLinkSpecialOptions_Load(object sender, EventArgs e)

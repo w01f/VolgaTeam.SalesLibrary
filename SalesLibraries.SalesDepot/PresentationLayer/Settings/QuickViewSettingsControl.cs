@@ -1,4 +1,6 @@
 ﻿using DevComponents.DotNetBar;
+using DevExpress.Skins;
+using SalesLibraries.Common.Helpers;
 using SalesLibraries.SalesDepot.Controllers;
 
 namespace SalesLibraries.SalesDepot.PresentationLayer.Settings
@@ -10,6 +12,10 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Settings
 		public QuickViewSettingsControl()
 		{
 			InitializeComponent();
+			layoutControlItemImages.MaxSize = RectangleHelper.ScaleSize(layoutControlItemImages.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemImages.MinSize = RectangleHelper.ScaleSize(layoutControlItemImages.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemSlides.MaxSize = RectangleHelper.ScaleSize(layoutControlItemSlides.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemSlides.MinSize = RectangleHelper.ScaleSize(layoutControlItemSlides.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
 		public override void LoadData()

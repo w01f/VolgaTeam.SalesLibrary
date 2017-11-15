@@ -117,4 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="simpleLabelItemTitle.Text" xml:space="preserve">
+    <value>&lt;size=+2&gt;Do you want to go ahead and START&lt;br&gt;a New PowerPoint Presentation?&lt;br&gt;&lt;br&gt;Click &lt;b&gt;LAUNCH&lt;/b&gt; to go ahead and open&lt;br&gt;PowerPoint.&lt;br&gt;&lt;br&gt;Click &lt;b&gt;IGNORE&lt;/b&gt; if you don’t really give a rip&lt;br&gt;either way…&lt;/size&gt;</value>
+  </data>
 </root>

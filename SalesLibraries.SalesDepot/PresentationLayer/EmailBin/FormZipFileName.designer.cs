@@ -28,47 +28,44 @@
         /// </summary>
         private void InitializeComponent()
         {
-			this.pbLogo = new System.Windows.Forms.PictureBox();
-			this.laLogo = new System.Windows.Forms.Label();
+			this.components = new System.ComponentModel.Container();
 			this.buttonXOK = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXCancel = new DevComponents.DotNetBar.ButtonX();
 			this.textEditFileName = new DevExpress.XtraEditors.TextEdit();
-			this.styleController = new DevExpress.XtraEditors.StyleController();
-			((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
+			this.layoutControl = new DevExpress.XtraLayout.LayoutControl();
+			this.pictureEditLogo = new DevExpress.XtraEditors.PictureEdit();
+			this.layoutControlGroupRoot = new DevExpress.XtraLayout.LayoutControlGroup();
+			this.layoutControlItemLogo = new DevExpress.XtraLayout.LayoutControlItem();
+			this.layoutControlItemFileName = new DevExpress.XtraLayout.LayoutControlItem();
+			this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.layoutControlItemCancel = new DevExpress.XtraLayout.LayoutControlItem();
+			this.layoutControlItemOK = new DevExpress.XtraLayout.LayoutControlItem();
+			this.emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.textEditFileName.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControl)).BeginInit();
+			this.layoutControl.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pictureEditLogo.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupRoot)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemLogo)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemFileName)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemCancel)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemOK)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			this.SuspendLayout();
-			// 
-			// pbLogo
-			// 
-			this.pbLogo.BackColor = System.Drawing.Color.White;
-			this.pbLogo.ForeColor = System.Drawing.Color.Black;
-			this.pbLogo.Image = global::SalesLibraries.SalesDepot.Properties.Resources.EmailBinLogo;
-			this.pbLogo.Location = new System.Drawing.Point(12, 12);
-			this.pbLogo.Name = "pbLogo";
-			this.pbLogo.Size = new System.Drawing.Size(72, 65);
-			this.pbLogo.TabIndex = 0;
-			this.pbLogo.TabStop = false;
-			// 
-			// laLogo
-			// 
-			this.laLogo.BackColor = System.Drawing.Color.White;
-			this.laLogo.ForeColor = System.Drawing.Color.Black;
-			this.laLogo.Location = new System.Drawing.Point(90, 12);
-			this.laLogo.Name = "laLogo";
-			this.laLogo.Size = new System.Drawing.Size(282, 29);
-			this.laLogo.TabIndex = 1;
-			this.laLogo.Text = "File Name:";
-			this.laLogo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// buttonXOK
 			// 
 			this.buttonXOK.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXOK.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.buttonXOK.Location = new System.Drawing.Point(65, 94);
+			this.buttonXOK.Location = new System.Drawing.Point(12, 89);
 			this.buttonXOK.Name = "buttonXOK";
-			this.buttonXOK.Size = new System.Drawing.Size(117, 30);
+			this.buttonXOK.Size = new System.Drawing.Size(116, 36);
 			this.buttonXOK.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXOK.TabIndex = 1;
 			this.buttonXOK.Text = "Generate Email";
@@ -79,9 +76,9 @@
 			this.buttonXCancel.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXCancel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.buttonXCancel.Location = new System.Drawing.Point(202, 94);
+			this.buttonXCancel.Location = new System.Drawing.Point(256, 89);
 			this.buttonXCancel.Name = "buttonXCancel";
-			this.buttonXCancel.Size = new System.Drawing.Size(117, 30);
+			this.buttonXCancel.Size = new System.Drawing.Size(116, 36);
 			this.buttonXCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXCancel.TabIndex = 2;
 			this.buttonXCancel.Text = "Cancel";
@@ -89,7 +86,7 @@
 			// 
 			// textEditFileName
 			// 
-			this.textEditFileName.Location = new System.Drawing.Point(90, 55);
+			this.textEditFileName.Location = new System.Drawing.Point(103, 44);
 			this.textEditFileName.Name = "textEditFileName";
 			this.textEditFileName.Properties.Appearance.BackColor = System.Drawing.Color.White;
 			this.textEditFileName.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -98,9 +95,173 @@
 			this.textEditFileName.Properties.Appearance.Options.UseFont = true;
 			this.textEditFileName.Properties.Appearance.Options.UseForeColor = true;
 			this.textEditFileName.Properties.NullText = "Type here";
-			this.textEditFileName.Size = new System.Drawing.Size(282, 22);
-			this.textEditFileName.StyleController = this.styleController;
+			this.textEditFileName.Size = new System.Drawing.Size(269, 22);
+			this.textEditFileName.StyleController = this.layoutControl;
 			this.textEditFileName.TabIndex = 0;
+			// 
+			// layoutControl
+			// 
+			this.layoutControl.Appearance.Control.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.layoutControl.Appearance.Control.Options.UseFont = true;
+			this.layoutControl.Appearance.ControlDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControl.Appearance.ControlDisabled.Options.UseFont = true;
+			this.layoutControl.Appearance.ControlDropDown.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControl.Appearance.ControlDropDown.Options.UseFont = true;
+			this.layoutControl.Appearance.ControlDropDownHeader.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControl.Appearance.ControlDropDownHeader.Options.UseFont = true;
+			this.layoutControl.Appearance.ControlFocused.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControl.Appearance.ControlFocused.Options.UseFont = true;
+			this.layoutControl.Appearance.ControlReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControl.Appearance.ControlReadOnly.Options.UseFont = true;
+			this.layoutControl.BackColor = System.Drawing.Color.White;
+			this.layoutControl.Controls.Add(this.buttonXOK);
+			this.layoutControl.Controls.Add(this.buttonXCancel);
+			this.layoutControl.Controls.Add(this.textEditFileName);
+			this.layoutControl.Controls.Add(this.pictureEditLogo);
+			this.layoutControl.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.layoutControl.ForeColor = System.Drawing.Color.Black;
+			this.layoutControl.Location = new System.Drawing.Point(0, 0);
+			this.layoutControl.Name = "layoutControl";
+			this.layoutControl.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(802, 383, 250, 350);
+			this.layoutControl.Root = this.layoutControlGroupRoot;
+			this.layoutControl.Size = new System.Drawing.Size(384, 137);
+			this.layoutControl.StyleController = this.styleController;
+			this.layoutControl.TabIndex = 65;
+			this.layoutControl.Text = "layoutControl1";
+			// 
+			// pictureEditLogo
+			// 
+			this.pictureEditLogo.Cursor = System.Windows.Forms.Cursors.Default;
+			this.pictureEditLogo.EditValue = global::SalesLibraries.SalesDepot.Properties.Resources.EmailBinLogo;
+			this.pictureEditLogo.Location = new System.Drawing.Point(12, 12);
+			this.pictureEditLogo.Name = "pictureEditLogo";
+			this.pictureEditLogo.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.pictureEditLogo.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.pictureEditLogo.Properties.Appearance.Options.UseBackColor = true;
+			this.pictureEditLogo.Properties.Appearance.Options.UseForeColor = true;
+			this.pictureEditLogo.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
+			this.pictureEditLogo.Properties.ShowMenu = false;
+			this.pictureEditLogo.Properties.ZoomAccelerationFactor = 1D;
+			this.pictureEditLogo.Size = new System.Drawing.Size(76, 56);
+			this.pictureEditLogo.StyleController = this.layoutControl;
+			this.pictureEditLogo.TabIndex = 4;
+			// 
+			// layoutControlGroupRoot
+			// 
+			this.layoutControlGroupRoot.AllowHtmlStringInCaption = true;
+			this.layoutControlGroupRoot.AppearanceGroup.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlGroupRoot.AppearanceGroup.Options.UseFont = true;
+			this.layoutControlGroupRoot.AppearanceItemCaption.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlGroupRoot.AppearanceItemCaption.Options.UseFont = true;
+			this.layoutControlGroupRoot.AppearanceTabPage.Header.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlGroupRoot.AppearanceTabPage.Header.Options.UseFont = true;
+			this.layoutControlGroupRoot.AppearanceTabPage.HeaderActive.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlGroupRoot.AppearanceTabPage.HeaderActive.Options.UseFont = true;
+			this.layoutControlGroupRoot.AppearanceTabPage.HeaderDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlGroupRoot.AppearanceTabPage.HeaderDisabled.Options.UseFont = true;
+			this.layoutControlGroupRoot.AppearanceTabPage.HeaderHotTracked.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControlGroupRoot.AppearanceTabPage.HeaderHotTracked.Options.UseFont = true;
+			this.layoutControlGroupRoot.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+			this.layoutControlGroupRoot.GroupBordersVisible = false;
+			this.layoutControlGroupRoot.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItemLogo,
+            this.layoutControlItemFileName,
+            this.emptySpaceItem2,
+            this.emptySpaceItem1,
+            this.layoutControlItemCancel,
+            this.layoutControlItemOK,
+            this.emptySpaceItem3});
+			this.layoutControlGroupRoot.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlGroupRoot.Name = "Root";
+			this.layoutControlGroupRoot.Size = new System.Drawing.Size(384, 137);
+			this.layoutControlGroupRoot.TextVisible = false;
+			// 
+			// layoutControlItemLogo
+			// 
+			this.layoutControlItemLogo.Control = this.pictureEditLogo;
+			this.layoutControlItemLogo.ControlAlignment = System.Drawing.ContentAlignment.TopCenter;
+			this.layoutControlItemLogo.FillControlToClientArea = false;
+			this.layoutControlItemLogo.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlItemLogo.MaxSize = new System.Drawing.Size(80, 60);
+			this.layoutControlItemLogo.MinSize = new System.Drawing.Size(80, 60);
+			this.layoutControlItemLogo.Name = "layoutControlItemLogo";
+			this.layoutControlItemLogo.Size = new System.Drawing.Size(80, 60);
+			this.layoutControlItemLogo.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.layoutControlItemLogo.Text = "Logo";
+			this.layoutControlItemLogo.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemLogo.TextVisible = false;
+			this.layoutControlItemLogo.TrimClientAreaToControl = false;
+			// 
+			// layoutControlItemFileName
+			// 
+			this.layoutControlItemFileName.Control = this.textEditFileName;
+			this.layoutControlItemFileName.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+			this.layoutControlItemFileName.FillControlToClientArea = false;
+			this.layoutControlItemFileName.Location = new System.Drawing.Point(91, 0);
+			this.layoutControlItemFileName.Name = "layoutControlItemFileName";
+			this.layoutControlItemFileName.Size = new System.Drawing.Size(273, 60);
+			this.layoutControlItemFileName.Text = "File Name:";
+			this.layoutControlItemFileName.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
+			this.layoutControlItemFileName.TextLocation = DevExpress.Utils.Locations.Top;
+			this.layoutControlItemFileName.TextSize = new System.Drawing.Size(50, 20);
+			this.layoutControlItemFileName.TextToControlDistance = 10;
+			this.layoutControlItemFileName.TrimClientAreaToControl = false;
+			// 
+			// emptySpaceItem2
+			// 
+			this.emptySpaceItem2.AllowHotTrack = false;
+			this.emptySpaceItem2.Location = new System.Drawing.Point(80, 0);
+			this.emptySpaceItem2.Name = "emptySpaceItem2";
+			this.emptySpaceItem2.Size = new System.Drawing.Size(11, 60);
+			this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// emptySpaceItem1
+			// 
+			this.emptySpaceItem1.AllowHotTrack = false;
+			this.emptySpaceItem1.Location = new System.Drawing.Point(0, 60);
+			this.emptySpaceItem1.Name = "emptySpaceItem1";
+			this.emptySpaceItem1.Size = new System.Drawing.Size(364, 17);
+			this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// layoutControlItemCancel
+			// 
+			this.layoutControlItemCancel.Control = this.buttonXCancel;
+			this.layoutControlItemCancel.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+			this.layoutControlItemCancel.FillControlToClientArea = false;
+			this.layoutControlItemCancel.Location = new System.Drawing.Point(244, 77);
+			this.layoutControlItemCancel.MaxSize = new System.Drawing.Size(120, 40);
+			this.layoutControlItemCancel.MinSize = new System.Drawing.Size(120, 40);
+			this.layoutControlItemCancel.Name = "layoutControlItemCancel";
+			this.layoutControlItemCancel.Size = new System.Drawing.Size(120, 40);
+			this.layoutControlItemCancel.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.layoutControlItemCancel.Text = "Cancel";
+			this.layoutControlItemCancel.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemCancel.TextVisible = false;
+			this.layoutControlItemCancel.TrimClientAreaToControl = false;
+			// 
+			// layoutControlItemOK
+			// 
+			this.layoutControlItemOK.Control = this.buttonXOK;
+			this.layoutControlItemOK.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+			this.layoutControlItemOK.FillControlToClientArea = false;
+			this.layoutControlItemOK.Location = new System.Drawing.Point(0, 77);
+			this.layoutControlItemOK.MaxSize = new System.Drawing.Size(120, 40);
+			this.layoutControlItemOK.MinSize = new System.Drawing.Size(120, 40);
+			this.layoutControlItemOK.Name = "layoutControlItemOK";
+			this.layoutControlItemOK.Size = new System.Drawing.Size(120, 40);
+			this.layoutControlItemOK.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.layoutControlItemOK.Text = "OK";
+			this.layoutControlItemOK.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemOK.TextVisible = false;
+			this.layoutControlItemOK.TrimClientAreaToControl = false;
+			// 
+			// emptySpaceItem3
+			// 
+			this.emptySpaceItem3.AllowHotTrack = false;
+			this.emptySpaceItem3.Location = new System.Drawing.Point(120, 77);
+			this.emptySpaceItem3.Name = "emptySpaceItem3";
+			this.emptySpaceItem3.Size = new System.Drawing.Size(124, 40);
+			this.emptySpaceItem3.TextSize = new System.Drawing.Size(0, 0);
 			// 
 			// styleController
 			// 
@@ -119,14 +280,11 @@
 			// 
 			// FormZipFileName
 			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.BackColor = System.Drawing.Color.White;
 			this.ClientSize = new System.Drawing.Size(384, 137);
-			this.Controls.Add(this.textEditFileName);
-			this.Controls.Add(this.buttonXCancel);
-			this.Controls.Add(this.buttonXOK);
-			this.Controls.Add(this.laLogo);
-			this.Controls.Add(this.pbLogo);
+			this.Controls.Add(this.layoutControl);
 			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -136,20 +294,37 @@
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Name the Zip File Before you Send it:";
-			((System.ComponentModel.ISupportInitialize)(this.pbLogo)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditFileName.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControl)).EndInit();
+			this.layoutControl.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.pictureEditLogo.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupRoot)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemLogo)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemFileName)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemCancel)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemOK)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox pbLogo;
-        private System.Windows.Forms.Label laLogo;
         private DevComponents.DotNetBar.ButtonX buttonXOK;
         private DevComponents.DotNetBar.ButtonX buttonXCancel;
         private DevExpress.XtraEditors.TextEdit textEditFileName;
 		private DevExpress.XtraEditors.StyleController styleController;
-    }
+		private DevExpress.XtraLayout.LayoutControl layoutControl;
+		private DevExpress.XtraEditors.PictureEdit pictureEditLogo;
+		private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroupRoot;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemLogo;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemFileName;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemCancel;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemOK;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem3;
+	}
 }

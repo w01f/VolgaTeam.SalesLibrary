@@ -75,7 +75,7 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 					thumbnailGenerator.GenerateThumbnail(vimeoPreviewContainer.SourcePath, thumbsDestination);
 				}));
 			}
-			JpegGenerator.GenerateDatatableJpegs(thumbsDestination, thumbsDatatableDestination);
+			JpegHelper.ConvertFiles(thumbsDestination, thumbsDatatableDestination);
 
 			logger.LogStage(PreviewFormats.Thumbnails);
 			logger.LogStage(PreviewFormats.ThumbnailsForDatatable);

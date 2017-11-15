@@ -1,6 +1,7 @@
-﻿using System.Drawing;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
+using DevExpress.Skins;
+using SalesLibraries.Common.Helpers;
 
 namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 {
@@ -9,18 +10,17 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 		public FormSaveAsPDF()
 		{
 			InitializeComponent();
-			if ((base.CreateGraphics()).DpiX > 96)
-			{
-				rbFile.Font = new Font(rbFile.Font.FontFamily, rbFile.Font.Size - 2, rbFile.Font.Style);
-				rbSlide.Font = new Font(rbSlide.Font.FontFamily, rbSlide.Font.Size - 2, rbSlide.Font.Style);
-			}
+			layoutControlItemOK.MaxSize = RectangleHelper.ScaleSize(layoutControlItemOK.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemOK.MinSize = RectangleHelper.ScaleSize(layoutControlItemOK.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCancel.MaxSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCancel.MinSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
 		public bool WholeFile { get; set; }
 
 		private void FormSaveAsPDF_FormClosed(object sender, FormClosedEventArgs e)
 		{
-			WholeFile = rbFile.Checked;
+			WholeFile = checkEditFile.Checked;
 		}
 	}
 }

@@ -43,7 +43,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			InitializeComponent();
 
 			labelControlTitle.Text = String.Format(ImageTitleFormat, bannerHolder.Name, String.Empty);
-			labelControlTextDescription.Text = String.Format(labelControlTextDescription.Text, bannerHolder.ObjectDisplayName);
+			simpleLabelItemTextDescription.Text = String.Format(simpleLabelItemTextDescription.Text, bannerHolder.ObjectDisplayName);
 			buttonXShowTextHolderObjectName.Text = String.Format(buttonXShowTextHolderObjectName.Text, bannerHolder.ObjectDisplayName);
 
 			buttonEditBannerTextFont.ButtonClick += EditorHelper.FontEdit_ButtonClick;
@@ -58,17 +58,31 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 					}
 				});
 
+			retractableBarGallery.ContentSize = retractableBarGallery.Width;
+
 			layoutControlGroupGallery.Enabled = false;
 			layoutControlGroupImageSettings.Enabled = false;
 			layoutControlGroupTextSettings.Enabled = false;
 			layoutControlGroupTextFont.Enabled = false;
 
-			layoutControlItemTextToggleNone.MinSize = RectangleHelper.ScaleSize(layoutControlItemTextToggleNone.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemTitle.MaxSize = RectangleHelper.ScaleSize(layoutControlItemTitle.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemTitle.MinSize = RectangleHelper.ScaleSize(layoutControlItemTitle.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemToggleEnable.MaxSize = RectangleHelper.ScaleSize(layoutControlItemToggleEnable.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemToggleEnable.MinSize = RectangleHelper.ScaleSize(layoutControlItemToggleEnable.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemDisableToggle.MaxSize = RectangleHelper.ScaleSize(layoutControlItemDisableToggle.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemDisableToggle.MinSize = RectangleHelper.ScaleSize(layoutControlItemDisableToggle.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemSearchButton.MaxSize = RectangleHelper.ScaleSize(layoutControlItemSearchButton.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemSearchButton.MinSize = RectangleHelper.ScaleSize(layoutControlItemSearchButton.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			simpleLabelItemImageDescription.MaxSize = RectangleHelper.ScaleSize(simpleLabelItemImageDescription.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			simpleLabelItemImageDescription.MinSize = RectangleHelper.ScaleSize(simpleLabelItemImageDescription.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			simpleLabelItemTextDescription.MaxSize = RectangleHelper.ScaleSize(simpleLabelItemTextDescription.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			simpleLabelItemTextDescription.MinSize = RectangleHelper.ScaleSize(simpleLabelItemTextDescription.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemTextToggleNone.MaxSize = RectangleHelper.ScaleSize(layoutControlItemTextToggleNone.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemTextToggleCustom.MinSize = RectangleHelper.ScaleSize(layoutControlItemTextToggleCustom.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemTextToggleNone.MinSize = RectangleHelper.ScaleSize(layoutControlItemTextToggleNone.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemTextToggleCustom.MaxSize = RectangleHelper.ScaleSize(layoutControlItemTextToggleCustom.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemTextToggleLinkName.MinSize = RectangleHelper.ScaleSize(layoutControlItemTextToggleLinkName.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemTextToggleCustom.MinSize = RectangleHelper.ScaleSize(layoutControlItemTextToggleCustom.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemTextToggleLinkName.MaxSize = RectangleHelper.ScaleSize(layoutControlItemTextToggleLinkName.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemTextToggleLinkName.MinSize = RectangleHelper.ScaleSize(layoutControlItemTextToggleLinkName.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
 		public void LoadData()
@@ -135,9 +149,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 				_bannerHolder.Banner.Enable = true;
 
 				_bannerHolder.Banner.Inverted = checkEditInvert.Checked;
-				_bannerHolder.Banner.InversionColor = colorEditInversionColor.Color != GraphicObjectExtensions.DefaultInversionColor
+				_bannerHolder.Banner.InversionColor = checkEditInvert.Checked
 					? colorEditInversionColor.Color
-					: GraphicObjectExtensions.DefaultInversionColor;
+					: GraphicObjectExtensions.DefaultReplaceColor;
 				_bannerHolder.Banner.Image = labelControlTitle.Tag as Image;
 				_bannerHolder.Banner.ImageName = _originalImageName;
 				if (checkEditHorizontalAlignmentLeft.Checked)
@@ -384,9 +398,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			if (originalImage != null && checkEditInvert.Checked)
 			{
 				var imageClone = (Image)displayImage.Clone();
-				displayImage = colorEditInversionColor.Color != GraphicObjectExtensions.DefaultInversionColor
-					? imageClone.ReplaceColor(colorEditInversionColor.Color)
-					: imageClone.Invert();
+				displayImage = imageClone.ReplaceColor(colorEditInversionColor.Color);
 			}
 			labelControlTitle.Appearance.Image = displayImage;
 			labelControlTitle.Text = String.Format(ImageTitleFormat, _bannerHolder.Name, _originalImageName);

@@ -155,14 +155,14 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings.ResetLin
 			layoutControlGroupLinksFiles.Enabled =
 				layoutControlGroupLinksAllOthers.Enabled = false;
 
-			layoutControlItemNotes.MinSize = RectangleHelper.ScaleSize(layoutControlItemNotes.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemNotes.MaxSize = RectangleHelper.ScaleSize(layoutControlItemNotes.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemHoverNotes.MinSize = RectangleHelper.ScaleSize(layoutControlItemHoverNotes.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemNotes.MinSize = RectangleHelper.ScaleSize(layoutControlItemNotes.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemHoverNotes.MaxSize = RectangleHelper.ScaleSize(layoutControlItemHoverNotes.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemExpirationDates.MinSize = RectangleHelper.ScaleSize(layoutControlItemExpirationDates.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemHoverNotes.MinSize = RectangleHelper.ScaleSize(layoutControlItemHoverNotes.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemExpirationDates.MaxSize = RectangleHelper.ScaleSize(layoutControlItemExpirationDates.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemSecurity.MinSize = RectangleHelper.ScaleSize(layoutControlItemSecurity.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemExpirationDates.MinSize = RectangleHelper.ScaleSize(layoutControlItemExpirationDates.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemSecurity.MaxSize = RectangleHelper.ScaleSize(layoutControlItemSecurity.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemSecurity.MinSize = RectangleHelper.ScaleSize(layoutControlItemSecurity.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 
 			layoutControlItemSecurity.Visibility = MainController.Instance.Settings.EditorSettings.EnableSecurityEdit
 				? LayoutVisibility.Always

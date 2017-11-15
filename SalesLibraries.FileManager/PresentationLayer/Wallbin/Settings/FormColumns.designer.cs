@@ -113,7 +113,6 @@
 			this.buttonXColumnTitleSettings.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXColumnTitleSettings.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.buttonXColumnTitleSettings.Image = global::SalesLibraries.FileManager.Properties.Resources.SettingsColumns;
-			this.buttonXColumnTitleSettings.ImageFixedSize = new System.Drawing.Size(24, 24);
 			this.buttonXColumnTitleSettings.Location = new System.Drawing.Point(35, 569);
 			this.buttonXColumnTitleSettings.Name = "buttonXColumnTitleSettings";
 			this.buttonXColumnTitleSettings.Size = new System.Drawing.Size(179, 36);
@@ -131,7 +130,6 @@
 			this.buttonXAlignByColumns.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXAlignByColumns.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.buttonXAlignByColumns.Image = global::SalesLibraries.FileManager.Properties.Resources.SettingsColumnsAlignByColumns;
-			this.buttonXAlignByColumns.ImageFixedSize = new System.Drawing.Size(24, 24);
 			this.buttonXAlignByColumns.Location = new System.Drawing.Point(649, 132);
 			this.buttonXAlignByColumns.Name = "buttonXAlignByColumns";
 			this.buttonXAlignByColumns.Size = new System.Drawing.Size(44, 44);
@@ -162,7 +160,6 @@
 			this.buttonXAlignByRows.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXAlignByRows.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.buttonXAlignByRows.Image = global::SalesLibraries.FileManager.Properties.Resources.SettingsColumnsAlignByRows;
-			this.buttonXAlignByRows.ImageFixedSize = new System.Drawing.Size(24, 24);
 			this.buttonXAlignByRows.Location = new System.Drawing.Point(649, 190);
 			this.buttonXAlignByRows.Name = "buttonXAlignByRows";
 			this.buttonXAlignByRows.Size = new System.Drawing.Size(44, 44);

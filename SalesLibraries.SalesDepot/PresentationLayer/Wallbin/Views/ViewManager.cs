@@ -57,6 +57,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.Views
 
 			MainController.Instance.MainForm.itemContainerHomeWallbinLibrary.Visible = Views.Count > 1;
 			MainController.Instance.MainForm.itemContainerHomeWallbinPage.Visible = !MainController.Instance.Settings.WallbinViewSettings.MultitabView;
+			MainController.Instance.MainForm.itemContainerHomeWallbin.Visible = Views.Count > 1 || !MainController.Instance.Settings.WallbinViewSettings.MultitabView;
 			MainController.Instance.MainForm.ribbonBarHomeWallbin.RecalcLayout();
 			MainController.Instance.MainForm.ribbonPanelHome.PerformLayout();
 		}

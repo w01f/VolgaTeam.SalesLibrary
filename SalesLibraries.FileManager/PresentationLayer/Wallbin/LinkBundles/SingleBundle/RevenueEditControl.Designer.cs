@@ -32,7 +32,7 @@
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.checkEditAdditionalInfo = new DevExpress.XtraEditors.CheckEdit();
-			this.memoEditAdditionalInfo = new DevExpress.XtraEditors.MemoEdit();
+			this.layoutControl = new DevExpress.XtraLayout.LayoutControl();
 			this.pnRevenueInfo = new DevExpress.XtraEditors.PanelControl();
 			this.gridControlInfoItems = new DevExpress.XtraGrid.GridControl();
 			this.gridViewInfoItems = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -45,26 +45,23 @@
 			this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
+			this.colorEditBackColor = new SalesLibraries.CommonGUI.Common.HtmlColorEdit();
+			this.buttonEditTextFont = new DevExpress.XtraEditors.ButtonEdit();
+			this.pictureEditLogo = new DevExpress.XtraEditors.PictureEdit();
+			this.colorEditTextColor = new SalesLibraries.CommonGUI.Common.HtmlColorEdit();
 			this.checkEditRevenueGenerated = new DevExpress.XtraEditors.CheckEdit();
 			this.checkEditRevenueGoal = new DevExpress.XtraEditors.CheckEdit();
-			this.barManager = new DevExpress.XtraBars.BarManager(this.components);
-			this.barToolbar = new DevExpress.XtraBars.Bar();
-			this.barSubItemInfoAdd = new DevExpress.XtraBars.BarSubItem();
-			this.colorEditBackColor = new SalesLibraries.CommonGUI.Common.HtmlColorEdit();
-			this.colorEditTextColor = new SalesLibraries.CommonGUI.Common.HtmlColorEdit();
-			this.buttonEditTextFont = new DevExpress.XtraEditors.ButtonEdit();
-			this.layoutControl = new DevExpress.XtraLayout.LayoutControl();
-			this.pictureEditLogo = new DevExpress.XtraEditors.PictureEdit();
+			this.memoEditAdditionalInfo = new DevExpress.XtraEditors.MemoEdit();
 			this.layoutControlGroupRoot = new DevExpress.XtraLayout.LayoutControlGroup();
 			this.layoutControlItemLogo = new DevExpress.XtraLayout.LayoutControlItem();
 			this.simpleLabelItemTitle = new DevExpress.XtraLayout.SimpleLabelItem();
 			this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.layoutControlItemRevenueGenerated = new DevExpress.XtraLayout.LayoutControlItem();
 			this.layoutControlItemRevenueGoal = new DevExpress.XtraLayout.LayoutControlItem();
-			this.emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.layoutControlItemAdditionalInfoToggle = new DevExpress.XtraLayout.LayoutControlItem();
-			this.emptySpaceItem4 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.emptySpaceItem5 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.emptySpaceItem4 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.layoutControlItemAdditionalInfoEditor = new DevExpress.XtraLayout.LayoutControlItem();
 			this.layoutControlItemTextColor = new DevExpress.XtraLayout.LayoutControlItem();
 			this.emptySpaceItem7 = new DevExpress.XtraLayout.EmptySpaceItem();
@@ -73,34 +70,36 @@
 			this.layoutControlItemTextFont = new DevExpress.XtraLayout.LayoutControlItem();
 			this.layoutControlItemRevenueInfo = new DevExpress.XtraLayout.LayoutControlItem();
 			this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.barManager = new DevExpress.XtraBars.BarManager(this.components);
+			this.barToolbar = new DevExpress.XtraBars.Bar();
+			this.barSubItemInfoAdd = new DevExpress.XtraBars.BarSubItem();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditAdditionalInfo.Properties)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.memoEditAdditionalInfo.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControl)).BeginInit();
+			this.layoutControl.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pnRevenueInfo)).BeginInit();
 			this.pnRevenueInfo.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlInfoItems)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewInfoItems)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEditInfoItems)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditInfoItemsActions)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.colorEditBackColor.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.buttonEditTextFont.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureEditLogo.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.colorEditTextColor.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditRevenueGenerated.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditRevenueGoal.Properties)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.barManager)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.colorEditBackColor.Properties)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.colorEditTextColor.Properties)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.buttonEditTextFont.Properties)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControl)).BeginInit();
-			this.layoutControl.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.pictureEditLogo.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.memoEditAdditionalInfo.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupRoot)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemLogo)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemTitle)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemRevenueGenerated)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemRevenueGoal)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemAdditionalInfoToggle)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem4)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem5)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem4)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemAdditionalInfoEditor)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemTextColor)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem7)).BeginInit();
@@ -109,6 +108,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemTextFont)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemRevenueInfo)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.barManager)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// styleController
@@ -142,15 +142,39 @@
 			this.checkEditAdditionalInfo.TabIndex = 8;
 			this.checkEditAdditionalInfo.CheckedChanged += new System.EventHandler(this.OnAdditionalInfoCheckedChanged);
 			// 
-			// memoEditAdditionalInfo
+			// layoutControl
 			// 
-			this.memoEditAdditionalInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.memoEditAdditionalInfo.Location = new System.Drawing.Point(382, 128);
-			this.memoEditAdditionalInfo.Name = "memoEditAdditionalInfo";
-			this.memoEditAdditionalInfo.Size = new System.Drawing.Size(361, 321);
-			this.memoEditAdditionalInfo.StyleController = this.layoutControl;
-			this.memoEditAdditionalInfo.TabIndex = 9;
+			this.layoutControl.Appearance.Control.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.layoutControl.Appearance.Control.Options.UseFont = true;
+			this.layoutControl.Appearance.ControlDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControl.Appearance.ControlDisabled.Options.UseFont = true;
+			this.layoutControl.Appearance.ControlDropDown.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControl.Appearance.ControlDropDown.Options.UseFont = true;
+			this.layoutControl.Appearance.ControlDropDownHeader.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControl.Appearance.ControlDropDownHeader.Options.UseFont = true;
+			this.layoutControl.Appearance.ControlFocused.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControl.Appearance.ControlFocused.Options.UseFont = true;
+			this.layoutControl.Appearance.ControlReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.layoutControl.Appearance.ControlReadOnly.Options.UseFont = true;
+			this.layoutControl.Controls.Add(this.pnRevenueInfo);
+			this.layoutControl.Controls.Add(this.colorEditBackColor);
+			this.layoutControl.Controls.Add(this.buttonEditTextFont);
+			this.layoutControl.Controls.Add(this.pictureEditLogo);
+			this.layoutControl.Controls.Add(this.colorEditTextColor);
+			this.layoutControl.Controls.Add(this.checkEditRevenueGenerated);
+			this.layoutControl.Controls.Add(this.checkEditRevenueGoal);
+			this.layoutControl.Controls.Add(this.checkEditAdditionalInfo);
+			this.layoutControl.Controls.Add(this.memoEditAdditionalInfo);
+			this.layoutControl.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.layoutControl.ForeColor = System.Drawing.Color.Black;
+			this.layoutControl.Location = new System.Drawing.Point(0, 0);
+			this.layoutControl.Name = "layoutControl";
+			this.layoutControl.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(802, 383, 250, 350);
+			this.layoutControl.Root = this.layoutControlGroupRoot;
+			this.layoutControl.Size = new System.Drawing.Size(745, 523);
+			this.layoutControl.StyleController = this.styleController;
+			this.layoutControl.TabIndex = 69;
+			this.layoutControl.Text = "layoutControl1";
 			// 
 			// pnRevenueInfo
 			// 
@@ -298,6 +322,7 @@
 			this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
 			this.barDockControlLeft.ForeColor = System.Drawing.Color.Black;
 			this.barDockControlLeft.Location = new System.Drawing.Point(2, 49);
+			this.barDockControlLeft.Manager = this.barManager;
 			this.barDockControlLeft.Size = new System.Drawing.Size(0, 342);
 			// 
 			// barDockControlRight
@@ -306,6 +331,7 @@
 			this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
 			this.barDockControlRight.ForeColor = System.Drawing.Color.Black;
 			this.barDockControlRight.Location = new System.Drawing.Point(354, 49);
+			this.barDockControlRight.Manager = this.barManager;
 			this.barDockControlRight.Size = new System.Drawing.Size(0, 342);
 			// 
 			// barDockControlBottom
@@ -314,6 +340,7 @@
 			this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.barDockControlBottom.ForeColor = System.Drawing.Color.Black;
 			this.barDockControlBottom.Location = new System.Drawing.Point(2, 391);
+			this.barDockControlBottom.Manager = this.barManager;
 			this.barDockControlBottom.Size = new System.Drawing.Size(352, 0);
 			// 
 			// barDockControlTop
@@ -322,7 +349,79 @@
 			this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
 			this.barDockControlTop.ForeColor = System.Drawing.Color.Black;
 			this.barDockControlTop.Location = new System.Drawing.Point(2, 2);
+			this.barDockControlTop.Manager = this.barManager;
 			this.barDockControlTop.Size = new System.Drawing.Size(352, 47);
+			// 
+			// colorEditBackColor
+			// 
+			this.colorEditBackColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.colorEditBackColor.Color = System.Drawing.Color.Empty;
+			this.colorEditBackColor.EditValue = System.Drawing.Color.Empty;
+			this.colorEditBackColor.Location = new System.Drawing.Point(648, 463);
+			this.colorEditBackColor.Name = "colorEditBackColor";
+			this.colorEditBackColor.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+			this.colorEditBackColor.Properties.Appearance.Options.UseForeColor = true;
+			this.colorEditBackColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+			this.colorEditBackColor.Properties.Color = System.Drawing.Color.Empty;
+			this.colorEditBackColor.Size = new System.Drawing.Size(95, 22);
+			this.colorEditBackColor.StyleController = this.layoutControl;
+			this.colorEditBackColor.TabIndex = 67;
+			this.colorEditBackColor.EditValueChanged += new System.EventHandler(this.OnBackColorEditValueChanged);
+			// 
+			// buttonEditTextFont
+			// 
+			this.buttonEditTextFont.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonEditTextFont.Location = new System.Drawing.Point(450, 499);
+			this.buttonEditTextFont.Name = "buttonEditTextFont";
+			this.buttonEditTextFont.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.buttonEditTextFont.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.buttonEditTextFont.Properties.Appearance.Options.UseBackColor = true;
+			this.buttonEditTextFont.Properties.Appearance.Options.UseForeColor = true;
+			this.buttonEditTextFont.Properties.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
+			this.buttonEditTextFont.Properties.AppearanceDisabled.Options.UseForeColor = true;
+			this.buttonEditTextFont.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+			this.buttonEditTextFont.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+			this.buttonEditTextFont.Size = new System.Drawing.Size(293, 22);
+			this.buttonEditTextFont.StyleController = this.layoutControl;
+			this.buttonEditTextFont.TabIndex = 63;
+			this.buttonEditTextFont.EditValueChanged += new System.EventHandler(this.OnFontEditValueChanged);
+			// 
+			// pictureEditLogo
+			// 
+			this.pictureEditLogo.EditValue = global::SalesLibraries.FileManager.Properties.Resources.BundlesEditorRevenueLogo;
+			this.pictureEditLogo.Location = new System.Drawing.Point(4, 4);
+			this.pictureEditLogo.Name = "pictureEditLogo";
+			this.pictureEditLogo.Properties.AllowFocused = false;
+			this.pictureEditLogo.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.pictureEditLogo.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.pictureEditLogo.Properties.Appearance.Options.UseBackColor = true;
+			this.pictureEditLogo.Properties.Appearance.Options.UseForeColor = true;
+			this.pictureEditLogo.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+			this.pictureEditLogo.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
+			this.pictureEditLogo.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Zoom;
+			this.pictureEditLogo.Properties.ZoomAccelerationFactor = 1D;
+			this.pictureEditLogo.Size = new System.Drawing.Size(64, 64);
+			this.pictureEditLogo.StyleController = this.layoutControl;
+			this.pictureEditLogo.TabIndex = 64;
+			// 
+			// colorEditTextColor
+			// 
+			this.colorEditTextColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.colorEditTextColor.Color = System.Drawing.Color.Empty;
+			this.colorEditTextColor.EditValue = System.Drawing.Color.Empty;
+			this.colorEditTextColor.Location = new System.Drawing.Point(450, 463);
+			this.colorEditTextColor.Name = "colorEditTextColor";
+			this.colorEditTextColor.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+			this.colorEditTextColor.Properties.Appearance.Options.UseForeColor = true;
+			this.colorEditTextColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+			this.colorEditTextColor.Properties.Color = System.Drawing.Color.Empty;
+			this.colorEditTextColor.Size = new System.Drawing.Size(92, 22);
+			this.colorEditTextColor.StyleController = this.layoutControl;
+			this.colorEditTextColor.TabIndex = 64;
+			this.colorEditTextColor.EditValueChanged += new System.EventHandler(this.OnTextColorEditValueChanged);
 			// 
 			// checkEditRevenueGenerated
 			// 
@@ -350,145 +449,15 @@
 			this.checkEditRevenueGoal.TabIndex = 12;
 			this.checkEditRevenueGoal.TabStop = false;
 			// 
-			// barManager
+			// memoEditAdditionalInfo
 			// 
-			this.barManager.Bars.AddRange(new DevExpress.XtraBars.Bar[] {
-            this.barToolbar});
-			this.barManager.DockControls.Add(this.barDockControlTop);
-			this.barManager.DockControls.Add(this.barDockControlBottom);
-			this.barManager.DockControls.Add(this.barDockControlLeft);
-			this.barManager.DockControls.Add(this.barDockControlRight);
-			this.barManager.Form = this.pnRevenueInfo;
-			this.barManager.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
-            this.barSubItemInfoAdd});
-			this.barManager.MaxItemId = 14;
-			// 
-			// barToolbar
-			// 
-			this.barToolbar.BarName = "Tools";
-			this.barToolbar.CanDockStyle = DevExpress.XtraBars.BarCanDockStyle.Top;
-			this.barToolbar.DockCol = 0;
-			this.barToolbar.DockRow = 0;
-			this.barToolbar.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
-			this.barToolbar.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barSubItemInfoAdd, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
-			this.barToolbar.OptionsBar.AllowQuickCustomization = false;
-			this.barToolbar.OptionsBar.DisableClose = true;
-			this.barToolbar.OptionsBar.DisableCustomization = true;
-			this.barToolbar.OptionsBar.DrawDragBorder = false;
-			this.barToolbar.OptionsBar.UseWholeRow = true;
-			this.barToolbar.Text = "Tools";
-			// 
-			// barSubItemInfoAdd
-			// 
-			this.barSubItemInfoAdd.Caption = "Add Revenue Info";
-			this.barSubItemInfoAdd.Glyph = global::SalesLibraries.FileManager.Properties.Resources.BundlesEditorRevenueAdd;
-			this.barSubItemInfoAdd.Id = 3;
-			this.barSubItemInfoAdd.ItemClickFireMode = DevExpress.XtraBars.BarItemEventFireMode.Immediate;
-			this.barSubItemInfoAdd.Name = "barSubItemInfoAdd";
-			// 
-			// colorEditBackColor
-			// 
-			this.colorEditBackColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.colorEditBackColor.Color = System.Drawing.Color.Empty;
-			this.colorEditBackColor.EditValue = System.Drawing.Color.Empty;
-			this.colorEditBackColor.Location = new System.Drawing.Point(648, 463);
-			this.colorEditBackColor.Name = "colorEditBackColor";
-			this.colorEditBackColor.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-			this.colorEditBackColor.Properties.Appearance.Options.UseForeColor = true;
-			this.colorEditBackColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
-			this.colorEditBackColor.Properties.Color = System.Drawing.Color.Empty;
-			this.colorEditBackColor.Size = new System.Drawing.Size(95, 22);
-			this.colorEditBackColor.StyleController = this.layoutControl;
-			this.colorEditBackColor.TabIndex = 67;
-			this.colorEditBackColor.EditValueChanged += new System.EventHandler(this.OnBackColorEditValueChanged);
-			// 
-			// colorEditTextColor
-			// 
-			this.colorEditTextColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.colorEditTextColor.Color = System.Drawing.Color.Empty;
-			this.colorEditTextColor.EditValue = System.Drawing.Color.Empty;
-			this.colorEditTextColor.Location = new System.Drawing.Point(450, 463);
-			this.colorEditTextColor.Name = "colorEditTextColor";
-			this.colorEditTextColor.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-			this.colorEditTextColor.Properties.Appearance.Options.UseForeColor = true;
-			this.colorEditTextColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
-			this.colorEditTextColor.Properties.Color = System.Drawing.Color.Empty;
-			this.colorEditTextColor.Size = new System.Drawing.Size(92, 22);
-			this.colorEditTextColor.StyleController = this.layoutControl;
-			this.colorEditTextColor.TabIndex = 64;
-			this.colorEditTextColor.EditValueChanged += new System.EventHandler(this.OnTextColorEditValueChanged);
-			// 
-			// buttonEditTextFont
-			// 
-			this.buttonEditTextFont.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonEditTextFont.Location = new System.Drawing.Point(450, 499);
-			this.buttonEditTextFont.Name = "buttonEditTextFont";
-			this.buttonEditTextFont.Properties.Appearance.BackColor = System.Drawing.Color.White;
-			this.buttonEditTextFont.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.buttonEditTextFont.Properties.Appearance.Options.UseBackColor = true;
-			this.buttonEditTextFont.Properties.Appearance.Options.UseForeColor = true;
-			this.buttonEditTextFont.Properties.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
-			this.buttonEditTextFont.Properties.AppearanceDisabled.Options.UseForeColor = true;
-			this.buttonEditTextFont.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
-			this.buttonEditTextFont.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-			this.buttonEditTextFont.Size = new System.Drawing.Size(293, 22);
-			this.buttonEditTextFont.StyleController = this.layoutControl;
-			this.buttonEditTextFont.TabIndex = 63;
-			this.buttonEditTextFont.EditValueChanged += new System.EventHandler(this.OnFontEditValueChanged);
-			// 
-			// layoutControl
-			// 
-			this.layoutControl.Appearance.Control.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.layoutControl.Appearance.Control.Options.UseFont = true;
-			this.layoutControl.Appearance.ControlDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.layoutControl.Appearance.ControlDisabled.Options.UseFont = true;
-			this.layoutControl.Appearance.ControlDropDown.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.layoutControl.Appearance.ControlDropDown.Options.UseFont = true;
-			this.layoutControl.Appearance.ControlDropDownHeader.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.layoutControl.Appearance.ControlDropDownHeader.Options.UseFont = true;
-			this.layoutControl.Appearance.ControlFocused.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.layoutControl.Appearance.ControlFocused.Options.UseFont = true;
-			this.layoutControl.Appearance.ControlReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.layoutControl.Appearance.ControlReadOnly.Options.UseFont = true;
-			this.layoutControl.Controls.Add(this.pnRevenueInfo);
-			this.layoutControl.Controls.Add(this.colorEditBackColor);
-			this.layoutControl.Controls.Add(this.buttonEditTextFont);
-			this.layoutControl.Controls.Add(this.pictureEditLogo);
-			this.layoutControl.Controls.Add(this.colorEditTextColor);
-			this.layoutControl.Controls.Add(this.checkEditRevenueGenerated);
-			this.layoutControl.Controls.Add(this.checkEditRevenueGoal);
-			this.layoutControl.Controls.Add(this.checkEditAdditionalInfo);
-			this.layoutControl.Controls.Add(this.memoEditAdditionalInfo);
-			this.layoutControl.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.layoutControl.ForeColor = System.Drawing.Color.Black;
-			this.layoutControl.Location = new System.Drawing.Point(0, 0);
-			this.layoutControl.Name = "layoutControl";
-			this.layoutControl.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(802, 383, 250, 350);
-			this.layoutControl.Root = this.layoutControlGroupRoot;
-			this.layoutControl.Size = new System.Drawing.Size(745, 523);
-			this.layoutControl.StyleController = this.styleController;
-			this.layoutControl.TabIndex = 69;
-			this.layoutControl.Text = "layoutControl1";
-			// 
-			// pictureEditLogo
-			// 
-			this.pictureEditLogo.EditValue = global::SalesLibraries.FileManager.Properties.Resources.BundlesEditorRevenueLogo;
-			this.pictureEditLogo.Location = new System.Drawing.Point(4, 4);
-			this.pictureEditLogo.Name = "pictureEditLogo";
-			this.pictureEditLogo.Properties.Appearance.BackColor = System.Drawing.Color.White;
-			this.pictureEditLogo.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.pictureEditLogo.Properties.Appearance.Options.UseBackColor = true;
-			this.pictureEditLogo.Properties.Appearance.Options.UseForeColor = true;
-			this.pictureEditLogo.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-			this.pictureEditLogo.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
-			this.pictureEditLogo.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Zoom;
-			this.pictureEditLogo.Size = new System.Drawing.Size(64, 64);
-			this.pictureEditLogo.StyleController = this.layoutControl;
-			this.pictureEditLogo.TabIndex = 64;
+			this.memoEditAdditionalInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.memoEditAdditionalInfo.Location = new System.Drawing.Point(382, 128);
+			this.memoEditAdditionalInfo.Name = "memoEditAdditionalInfo";
+			this.memoEditAdditionalInfo.Size = new System.Drawing.Size(361, 321);
+			this.memoEditAdditionalInfo.StyleController = this.layoutControl;
+			this.memoEditAdditionalInfo.TabIndex = 9;
 			// 
 			// layoutControlGroupRoot
 			// 
@@ -555,8 +524,6 @@
 			this.simpleLabelItemTitle.AppearanceItemCaption.Options.UseTextOptions = true;
 			this.simpleLabelItemTitle.AppearanceItemCaption.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.None;
 			this.simpleLabelItemTitle.AppearanceItemCaption.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-			this.simpleLabelItemTitle.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-			this.simpleLabelItemTitle.FillControlToClientArea = false;
 			this.simpleLabelItemTitle.Location = new System.Drawing.Point(72, 0);
 			this.simpleLabelItemTitle.MaxSize = new System.Drawing.Size(0, 72);
 			this.simpleLabelItemTitle.MinSize = new System.Drawing.Size(226, 72);
@@ -566,7 +533,6 @@
 			this.simpleLabelItemTitle.Text = "<size=+2>Do you want to show: \"Revenue Goal\" or \"Revenue Generated\"?</size>";
 			this.simpleLabelItemTitle.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
 			this.simpleLabelItemTitle.TextSize = new System.Drawing.Size(442, 18);
-			this.simpleLabelItemTitle.TrimClientAreaToControl = false;
 			// 
 			// emptySpaceItem1
 			// 
@@ -605,6 +571,16 @@
 			this.layoutControlItemRevenueGoal.TextVisible = false;
 			this.layoutControlItemRevenueGoal.TrimClientAreaToControl = false;
 			// 
+			// layoutControlItemAdditionalInfoToggle
+			// 
+			this.layoutControlItemAdditionalInfoToggle.Control = this.checkEditAdditionalInfo;
+			this.layoutControlItemAdditionalInfoToggle.Location = new System.Drawing.Point(380, 92);
+			this.layoutControlItemAdditionalInfoToggle.Name = "layoutControlItemAdditionalInfoToggle";
+			this.layoutControlItemAdditionalInfoToggle.Size = new System.Drawing.Size(365, 24);
+			this.layoutControlItemAdditionalInfoToggle.Text = "Additional Info Toggle";
+			this.layoutControlItemAdditionalInfoToggle.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemAdditionalInfoToggle.TextVisible = false;
+			// 
 			// emptySpaceItem3
 			// 
 			this.emptySpaceItem3.AllowHotTrack = false;
@@ -616,15 +592,16 @@
 			this.emptySpaceItem3.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
 			this.emptySpaceItem3.TextSize = new System.Drawing.Size(0, 0);
 			// 
-			// layoutControlItemAdditionalInfoToggle
+			// emptySpaceItem5
 			// 
-			this.layoutControlItemAdditionalInfoToggle.Control = this.checkEditAdditionalInfo;
-			this.layoutControlItemAdditionalInfoToggle.Location = new System.Drawing.Point(380, 92);
-			this.layoutControlItemAdditionalInfoToggle.Name = "layoutControlItemAdditionalInfoToggle";
-			this.layoutControlItemAdditionalInfoToggle.Size = new System.Drawing.Size(365, 24);
-			this.layoutControlItemAdditionalInfoToggle.Text = "Additional Info Toggle";
-			this.layoutControlItemAdditionalInfoToggle.TextSize = new System.Drawing.Size(0, 0);
-			this.layoutControlItemAdditionalInfoToggle.TextVisible = false;
+			this.emptySpaceItem5.AllowHotTrack = false;
+			this.emptySpaceItem5.Location = new System.Drawing.Point(360, 92);
+			this.emptySpaceItem5.MaxSize = new System.Drawing.Size(20, 0);
+			this.emptySpaceItem5.MinSize = new System.Drawing.Size(20, 10);
+			this.emptySpaceItem5.Name = "emptySpaceItem5";
+			this.emptySpaceItem5.Size = new System.Drawing.Size(20, 431);
+			this.emptySpaceItem5.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem5.TextSize = new System.Drawing.Size(0, 0);
 			// 
 			// emptySpaceItem4
 			// 
@@ -636,17 +613,6 @@
 			this.emptySpaceItem4.Size = new System.Drawing.Size(365, 10);
 			this.emptySpaceItem4.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
 			this.emptySpaceItem4.TextSize = new System.Drawing.Size(0, 0);
-			// 
-			// emptySpaceItem5
-			// 
-			this.emptySpaceItem5.AllowHotTrack = false;
-			this.emptySpaceItem5.Location = new System.Drawing.Point(360, 92);
-			this.emptySpaceItem5.MaxSize = new System.Drawing.Size(20, 0);
-			this.emptySpaceItem5.MinSize = new System.Drawing.Size(20, 10);
-			this.emptySpaceItem5.Name = "emptySpaceItem5";
-			this.emptySpaceItem5.Size = new System.Drawing.Size(20, 431);
-			this.emptySpaceItem5.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-			this.emptySpaceItem5.TextSize = new System.Drawing.Size(0, 0);
 			// 
 			// layoutControlItemAdditionalInfoEditor
 			// 
@@ -740,6 +706,43 @@
 			this.emptySpaceItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
 			this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
 			// 
+			// barManager
+			// 
+			this.barManager.Bars.AddRange(new DevExpress.XtraBars.Bar[] {
+            this.barToolbar});
+			this.barManager.DockControls.Add(this.barDockControlTop);
+			this.barManager.DockControls.Add(this.barDockControlBottom);
+			this.barManager.DockControls.Add(this.barDockControlLeft);
+			this.barManager.DockControls.Add(this.barDockControlRight);
+			this.barManager.Form = this.pnRevenueInfo;
+			this.barManager.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
+            this.barSubItemInfoAdd});
+			this.barManager.MaxItemId = 14;
+			// 
+			// barToolbar
+			// 
+			this.barToolbar.BarName = "Tools";
+			this.barToolbar.CanDockStyle = DevExpress.XtraBars.BarCanDockStyle.Top;
+			this.barToolbar.DockCol = 0;
+			this.barToolbar.DockRow = 0;
+			this.barToolbar.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
+			this.barToolbar.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barSubItemInfoAdd, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
+			this.barToolbar.OptionsBar.AllowQuickCustomization = false;
+			this.barToolbar.OptionsBar.DisableClose = true;
+			this.barToolbar.OptionsBar.DisableCustomization = true;
+			this.barToolbar.OptionsBar.DrawDragBorder = false;
+			this.barToolbar.OptionsBar.UseWholeRow = true;
+			this.barToolbar.Text = "Tools";
+			// 
+			// barSubItemInfoAdd
+			// 
+			this.barSubItemInfoAdd.Caption = "Add Revenue Info";
+			this.barSubItemInfoAdd.Id = 3;
+			this.barSubItemInfoAdd.ImageOptions.Image = global::SalesLibraries.FileManager.Properties.Resources.BundlesEditorRevenueAdd;
+			this.barSubItemInfoAdd.ItemClickFireMode = DevExpress.XtraBars.BarItemEventFireMode.Immediate;
+			this.barSubItemInfoAdd.Name = "barSubItemInfoAdd";
+			// 
 			// RevenueEditControl
 			// 
 			this.BackColor = System.Drawing.Color.White;
@@ -750,7 +753,8 @@
 			this.Size = new System.Drawing.Size(745, 523);
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditAdditionalInfo.Properties)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.memoEditAdditionalInfo.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControl)).EndInit();
+			this.layoutControl.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.pnRevenueInfo)).EndInit();
 			this.pnRevenueInfo.ResumeLayout(false);
 			this.pnRevenueInfo.PerformLayout();
@@ -758,25 +762,23 @@
 			((System.ComponentModel.ISupportInitialize)(this.gridViewInfoItems)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEditInfoItems)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditInfoItemsActions)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.colorEditBackColor.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.buttonEditTextFont.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureEditLogo.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.colorEditTextColor.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditRevenueGenerated.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditRevenueGoal.Properties)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.barManager)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.colorEditBackColor.Properties)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.colorEditTextColor.Properties)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.buttonEditTextFont.Properties)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControl)).EndInit();
-			this.layoutControl.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.pictureEditLogo.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.memoEditAdditionalInfo.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupRoot)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemLogo)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemTitle)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemRevenueGenerated)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemRevenueGoal)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemAdditionalInfoToggle)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem4)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem5)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem4)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemAdditionalInfoEditor)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemTextColor)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem7)).EndInit();
@@ -785,6 +787,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemTextFont)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemRevenueInfo)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.barManager)).EndInit();
 			this.ResumeLayout(false);
 
 		}

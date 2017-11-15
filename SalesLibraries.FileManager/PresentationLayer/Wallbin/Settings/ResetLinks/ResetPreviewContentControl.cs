@@ -60,14 +60,14 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings.ResetLin
 				layoutControlItemDeleteQV.Visibility =
 					MainController.Instance.Settings.EnableLocalSync ? LayoutVisibility.Always : LayoutVisibility.Never;
 
-			layoutControlItemRefreshWV.MinSize = RectangleHelper.ScaleSize(layoutControlItemRefreshWV.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemRefreshWV.MaxSize = RectangleHelper.ScaleSize(layoutControlItemRefreshWV.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemDeleteWV.MinSize = RectangleHelper.ScaleSize(layoutControlItemDeleteWV.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemRefreshWV.MinSize = RectangleHelper.ScaleSize(layoutControlItemRefreshWV.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemDeleteWV.MaxSize = RectangleHelper.ScaleSize(layoutControlItemDeleteWV.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemRefreshQV.MinSize = RectangleHelper.ScaleSize(layoutControlItemRefreshQV.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemDeleteWV.MinSize = RectangleHelper.ScaleSize(layoutControlItemDeleteWV.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemRefreshQV.MaxSize = RectangleHelper.ScaleSize(layoutControlItemRefreshQV.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemDeleteQV.MinSize = RectangleHelper.ScaleSize(layoutControlItemDeleteQV.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemRefreshQV.MinSize = RectangleHelper.ScaleSize(layoutControlItemRefreshQV.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemDeleteQV.MaxSize = RectangleHelper.ScaleSize(layoutControlItemDeleteQV.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemDeleteQV.MinSize = RectangleHelper.ScaleSize(layoutControlItemDeleteQV.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 
 			layoutControlGroupWVSettings.Enabled = false;
 		}

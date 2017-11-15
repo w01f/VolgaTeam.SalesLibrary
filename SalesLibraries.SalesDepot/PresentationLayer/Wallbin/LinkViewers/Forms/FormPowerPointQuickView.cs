@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
 using DevExpress.XtraBars;
 using DevExpress.XtraEditors.Controls;
+using DevExpress.XtraLayout.Utils;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.OfficeInterops;
@@ -32,18 +33,14 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 		public FormPowerPointQuickView()
 		{
 			InitializeComponent();
-			if (!((CreateGraphics()).DpiX > 96)) return;
-			checkEditChangeSlideTemplate.Font = new Font(checkEditChangeSlideTemplate.Font.FontFamily, checkEditChangeSlideTemplate.Font.Size - 1, checkEditChangeSlideTemplate.Font.Style);
-			checkEditKeepSlideTemplate.Font = new Font(checkEditKeepSlideTemplate.Font.FontFamily, checkEditKeepSlideTemplate.Font.Size - 1, checkEditKeepSlideTemplate.Font.Style);
-			labelControlSlideTemplate.Font = new Font(labelControlSlideTemplate.Font.FontFamily, labelControlSlideTemplate.Font.Size - 2, labelControlSlideTemplate.Font.Style);
 		}
 
 		protected override void OnHandleCreated(EventArgs e)
 		{
 			base.OnHandleCreated(e);
 			if (Environment.OSVersion.Version.Major < 6) return;
-			int attrValue = 1;
-			int res = WinAPIHelper.DwmSetWindowAttribute(Handle, WinAPIHelper.DWMWA_TRANSITIONS_FORCEDISABLED, ref attrValue, sizeof(int));
+			var attrValue = 1;
+			var res = WinAPIHelper.DwmSetWindowAttribute(Handle, WinAPIHelper.DWMWA_TRANSITIONS_FORCEDISABLED, ref attrValue, sizeof(int));
 			if (res < 0)
 				throw new Exception("Can't disable aero animation");
 		}
@@ -63,20 +60,20 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 
 
 				Text = "QuickView - " + PowerPointLink.NameWithExtension;
-				laFileInfo.Text = "File Added: " + PowerPointLink.AddDate.ToString("MM/dd/yy");
+				simpleLabelItemFileInfo.Text = "File Added: " + PowerPointLink.AddDate.ToString("MM/dd/yy");
 
 				var themeManager = new ThemeManager();
 				MainController.Instance.ProcessManager.Run("Loading Themes...", (cancelletionToken, formProgress) => themeManager.Load());
 				var availableThemes = themeManager.GetThemes(SlideType.SalesDepot).ToList();
 				if (availableThemes.Any())
 				{
-					pnSlideTemplate.Visible = true;
+					layoutControlGroupSlideTemplate.Visibility = LayoutVisibility.Always;
 					comboBoxEditSlideTemplate.Properties.Items.Clear();
 					comboBoxEditSlideTemplate.Properties.Items.AddRange(availableThemes);
 					comboBoxEditSlideTemplate.SelectedIndex = 0;
 				}
 				else
-					pnSlideTemplate.Visible = false;
+					layoutControlGroupSlideTemplate.Visibility = LayoutVisibility.Never;
 
 				_previewData = new PresentationPreviewContainer(PowerPointLink);
 				MainController.Instance.ProcessManager.Run("Loading Presentation...", (cancelletionToken, formProgress) => _previewData.GetPreviewImages());
@@ -97,13 +94,8 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 
 		private void FormPowerPointQuickView_FormClosed(object sender, FormClosedEventArgs e)
 		{
-			pictureBoxPreview.Image = null;
+			pictureEditPreview.Image = null;
 			_previewData.ReleaseThumbnails();
-		}
-
-		private void FormQuickView_Resize(object sender, EventArgs e)
-		{
-			comboBoxEditSlides.Left = (pnNavigationArea.Width - comboBoxEditSlides.Width) / 2;
 		}
 		#endregion
 
@@ -204,9 +196,9 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 		#region Other Event Handlers
 		private void comboBoxEditSlides_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			pictureBoxPreview.Image = SelectedThumbnail.SlideImage;
-			pictureBoxPreview.BackColor = Color.WhiteSmoke;
-			laSlideNumber.Text = string.Format("Slide {0} of {1}", SelectedThumbnail.Index, _previewData.Thumbnails.Count);
+			pictureEditPreview.Image = SelectedThumbnail.SlideImage;
+			pictureEditPreview.BackColor = Color.WhiteSmoke;
+			simpleLabelItemSlideNumber.Text = String.Format("<size=+6>Slide {0} of {1}</size>", SelectedThumbnail.Index, _previewData.Thumbnails.Count);
 		}
 
 		private void comboBoxEditSlides_ButtonClick(object sender, ButtonPressedEventArgs e)
