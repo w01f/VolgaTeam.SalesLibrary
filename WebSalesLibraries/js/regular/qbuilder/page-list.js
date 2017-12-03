@@ -12,7 +12,7 @@
 		this.load = function (pageToSelectId)
 		{
 			var pageList = $('#page-list-container');
-			if (pageToSelectId == undefined && that.selectedPage != undefined)
+			if (pageToSelectId === undefined && that.selectedPage !== undefined)
 				pageToSelectId = that.selectedPage.pageId;
 			$.ajax({
 				type: "POST",
@@ -23,7 +23,7 @@
 				beforeSend: function ()
 				{
 					pageList.html('');
-					if (that.selectedPage != undefined)
+					if (that.selectedPage !== undefined)
 						that.selectedPage.clear();
 					that.selectedPage = undefined;
 					$.SalesPortal.Overlay.show();
@@ -47,13 +47,13 @@
 
 		this.addPage = function (parameters)
 		{
-			if (parameters == undefined)
+			if (parameters === undefined)
 				parameters = {};
 			$.ajax({
 				type: "POST",
 				url: window.BaseUrl + "qBuilder/addPageDialog",
 				data: {
-					isCloning: parameters.templatePageId != undefined
+					isCloning: parameters.templatePageId !== undefined
 				},
 				beforeSend: function ()
 				{
@@ -83,7 +83,7 @@
 								title: $('#add-page-name').val(),
 								createDate: now.toLocaleDateString() + ' ' + now.toLocaleTimeString(),
 								templatePageId: parameters.templatePageId,
-								populateFromLinkCart: parameters.populateFromLinkCart != undefined && parameters.populateFromLinkCart ? parameters.populateFromLinkCart : false
+								populateFromLinkCart: parameters.populateFromLinkCart !== undefined && parameters.populateFromLinkCart ? parameters.populateFromLinkCart : false
 							},
 							beforeSend: function ()
 							{
@@ -96,7 +96,7 @@
 							success: function (msg)
 							{
 								that.load(msg);
-								if (parameters.populateFromLinkCart != undefined && parameters.populateFromLinkCart)
+								if (parameters.populateFromLinkCart !== undefined && parameters.populateFromLinkCart)
 									$.SalesPortal.QBuilder.LinkCart.load();
 							},
 							error: function ()
@@ -114,7 +114,7 @@
 
 					$.fancybox({
 						content: addPageContent,
-						title: parameters.templatePageId == undefined ? "Add quickSITE" : "Clone quickSITE",
+						title: parameters.templatePageId === undefined ? "Add quickSITE" : "Clone quickSITE",
 						scrolling: 'no',
 						autoSize: true,
 						openEffect: 'none',
@@ -132,7 +132,7 @@
 		this.deletePage = function (pageId)
 		{
 			var selectedPageId = that.selectedPage.pageId;
-			if (pageId != undefined)
+			if (pageId !== undefined)
 				selectedPageId = pageId;
 			if (selectedPageId != null)
 			{
@@ -201,6 +201,7 @@
 					disableBanners: $('#page-content-disable-banners').is(':checked'),
 					disableWidgets: $('#page-content-disable-widgets').is(':checked'),
 					showLinksAsUrl: $('#page-content-show-links-as-url').is(':checked'),
+					autoLaunch: $('#page-content-auto-launch').is(':checked'),
 					recordActivity: $('#page-content-record-activity').is(':checked'),
 					activityEmailCopy: $('#page-content-activity-email-copy').val(),
 					header: $('#page-content-header-text').val(),
@@ -262,7 +263,7 @@
 			$('#page-list-container').css({
 				'height': height + 'px'
 			});
-			if (that.selectedPage != undefined)
+			if (that.selectedPage !== undefined)
 				that.selectedPage.updateContentSize();
 		};
 
@@ -276,7 +277,7 @@
 				formContent: pageList
 			});
 
-			if (pageList.find('tr.selected').length == 0)
+			if (pageList.find('tr.selected').length === 0)
 				pageList.find('tr').first().addClass('selected');
 
 			if (pageList.find('tr').length > 0)

@@ -142,9 +142,14 @@
 							<input type="checkbox" id="page-content-show-links-as-url" class="log-action" value="" <? echo $page->show_links_as_url ? 'checked' : '' ?>> F. Blue Hyperlinks
 						</label>
 					</div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" id="page-content-auto-launch" class="log-action" value="" <? echo $page->auto_launch ? 'checked' : '' ?>> G. Auto Launch
+                        </label>
+                    </div>
 					<div class="checkbox">
 						<label>
-							<input type="checkbox" id="page-content-record-activity" class="log-action" value="" <? echo $page->record_activity ? 'checked' : '' ?>> G. Email me each time someone clicks a link on this quickSITE
+							<input type="checkbox" id="page-content-record-activity" class="log-action" value="" <? echo $page->record_activity ? 'checked' : '' ?>> H. Email me each time someone clicks a link on this quickSITE
 						</label>
 					</div>
 					<div class="form-group">

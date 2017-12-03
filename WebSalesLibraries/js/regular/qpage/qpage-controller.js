@@ -1,11 +1,8 @@
-(function ($)
-{
+(function ($) {
 	window.BaseUrl = window.BaseUrl || '';
 	$.SalesPortal = $.SalesPortal || {};
-	var QPageManager = function ()
-	{
-		this.init = function ()
-		{
+	var QPageManager = function () {
+		this.init = function () {
 			$.SalesPortal.MainMenu.init();
 
 			$('#main-menu').find('.main-site-url').hide();
@@ -16,37 +13,40 @@
 			initActionButtons();
 			updateSize();
 			$(window).on('resize', updateSize);
+
+			var defaultLinkData = $('.default-link-data .link-id');
+			if (defaultLinkData.length > 0)
+			{
+				$.SalesPortal.LinkManager.requestViewDialog({
+					linkId: defaultLinkData.text(),
+					isQuickSite: true
+				});
+			}
 		};
 
-		var updateSize = function ()
-		{
+		var updateSize = function () {
 			$.SalesPortal.Content.updateSize();
 		};
 
-		var assignLinkEvents = function (container)
-		{
+		var assignLinkEvents = function (container) {
 			if ($.SalesPortal.Content.isMobileDevice())
 			{
-				container.find('.line-break').on('click', function (event)
-				{
+				container.find('.line-break').on('click', function (event) {
 					event.stopPropagation();
 					event.preventDefault();
 				});
-				container.find('.line-break').hammer().on('tap', function (event)
-				{
+				container.find('.line-break').hammer().on('tap', function (event) {
 					$.SalesPortal.LinkManager.cleanupContextMenu();
 					event.gesture.stopPropagation();
 					event.gesture.preventDefault();
 				});
 
 
-				container.find('.clickable').on('click', function (event)
-				{
+				container.find('.clickable').on('click', function (event) {
 					event.stopPropagation();
 					event.preventDefault();
 				});
-				container.find('.clickable').hammer().on('tap', function (event)
-				{
+				container.find('.clickable').hammer().on('tap', function (event) {
 					if (checkEmail())
 					{
 						var linkId = $(this).attr('id').replace('link', '');
@@ -60,8 +60,7 @@
 					event.gesture.preventDefault();
 				});
 
-				container.find('.clickable, .folder-link, .line-break, .url').hammer().on('hold', function (event)
-				{
+				container.find('.clickable, .folder-link, .line-break, .url').hammer().on('hold', function (event) {
 					if (checkEmail())
 					{
 						var linkId = $(this).attr('id').replace('link', '');
@@ -71,21 +70,18 @@
 					event.gesture.stopPropagation();
 					event.gesture.preventDefault();
 				});
-				container.find('.url').hammer().on('tap', function (event)
-				{
+				container.find('.url').hammer().on('tap', function (event) {
 					event.gesture.stopPropagation();
 				});
 
 
-				container.find('.folder-link').on('click', function (event)
-				{
+				container.find('.folder-link').on('click', function (event) {
 					event.preventDefault();
 					event.stopPropagation();
 				});
 
 
-				container.find('.folder-link').hammer().on('tap', function (event)
-				{
+				container.find('.folder-link').hammer().on('tap', function (event) {
 					$.SalesPortal.LinkManager.cleanupContextMenu();
 					if (checkEmail())
 						loadFolderLinkContent($(this));
@@ -95,15 +91,13 @@
 			}
 			else
 			{
-				container.find('.line-break').off('click.open').on('click.open', function (event)
-				{
+				container.find('.line-break').off('click.open').on('click.open', function (event) {
 					$.SalesPortal.LinkManager.cleanupContextMenu();
 					event.stopPropagation();
 					event.preventDefault();
 				});
 
-				container.find('.clickable').off('click.open').on('click.open', function (event)
-				{
+				container.find('.clickable').off('click.open').on('click.open', function (event) {
 					if (checkEmail())
 					{
 						var linkId = $(this).attr('id').replace('link', '');
@@ -117,8 +111,7 @@
 					event.preventDefault();
 				});
 
-				container.find('.clickable, .folder-link, .line-break').off('contextmenu').on('contextmenu', function (event)
-				{
+				container.find('.clickable, .folder-link, .line-break').off('contextmenu').on('contextmenu', function (event) {
 					if (checkEmail())
 					{
 						var linkId = $(this).attr('id').replace('link', '');
@@ -128,12 +121,10 @@
 					return false;
 				});
 
-				container.find('.url').off('click.open').on('click.open', function (event)
-				{
+				container.find('.url').off('click.open').on('click.open', function (event) {
 					event.stopPropagation();
 				});
-				container.find('.url-internal').off('contextmenu').on('contextmenu', function (event)
-				{
+				container.find('.url-internal').off('contextmenu').on('contextmenu', function (event) {
 					if (checkEmail())
 					{
 						var linkId = $(this).attr('id').replace('link', '');
@@ -145,8 +136,7 @@
 
 				if (!$.SalesPortal.Content.isEOBrowser())
 				{
-					container.find('.url-external').off('contextmenu').on('contextmenu', function (event)
-					{
+					container.find('.url-external').off('contextmenu').on('contextmenu', function (event) {
 						if (checkEmail())
 						{
 							var linkId = $(this).attr('id').replace('link', '');
@@ -157,8 +147,7 @@
 					});
 				}
 
-				container.find('.folder-link').off('click.open').on('click.open', function (event)
-				{
+				container.find('.folder-link').off('click.open').on('click.open', function (event) {
 					$.SalesPortal.LinkManager.cleanupContextMenu();
 					if (checkEmail())
 						loadFolderLinkContent($(this));
@@ -167,16 +156,14 @@
 				});
 			}
 
-			container.find('.clickable, .url').off('dragstart').on('dragstart', function (event)
-			{
+			container.find('.clickable, .url').off('dragstart').on('dragstart', function (event) {
 				var header = $(this).find('.service-data .download-header').text();
 				var url = $(this).find('.service-data .download-link').text();
 				if (url != '')
 					event.originalEvent.dataTransfer.setData(header, url.replace(/\/\/+/g, '/'));
 			});
 
-			container.find('.log-activity').off('click.log').on('click.log', function ()
-			{
+			container.find('.log-activity').off('click.log').on('click.log', function () {
 				var data = $(this).children('.service-data');
 				var activityData = $.parseJSON(data.find('.activity-data').text());
 
@@ -193,8 +180,7 @@
 			});
 		};
 
-		var loadFolderLinkContent = function (linkObject)
-		{
+		var loadFolderLinkContent = function (linkObject) {
 			if (!linkObject.hasClass('active'))
 			{
 				linkObject.addClass('active');
@@ -211,17 +197,14 @@
 						data: {
 							linkId: linkId
 						},
-						beforeSend: function ()
-						{
+						beforeSend: function () {
 							$.SalesPortal.Overlay.show();
 							folderLinkContent.html('');
 						},
-						complete: function ()
-						{
+						complete: function () {
 							$.SalesPortal.Overlay.hide();
 						},
-						success: function (msg)
-						{
+						success: function (msg) {
 							folderLinkContent.html(msg);
 
 							assignLinkEvents(folderLinkContent);
@@ -232,8 +215,7 @@
 							linkObject.children('.link-text-container').find('.base-image').hide();
 							linkObject.children('.link-text-container').find('.alternative-image').show();
 						},
-						error: function ()
-						{
+						error: function () {
 							folderLinkContent.html('');
 						},
 						async: true,
@@ -260,8 +242,7 @@
 			}
 		};
 
-		var recordActivity = function (linkId)
-		{
+		var recordActivity = function (linkId) {
 			var pageId = $('#page-id').html();
 			var email = $('#user-email').val();
 			if (email != undefined && email.length > 0)
@@ -298,17 +279,14 @@
 			return true;
 		}
 
-		var initActionButtons = function ()
-		{
-			$('#login-button').off('click.action').on('click.action', function ()
-			{
+		var initActionButtons = function () {
+			$('#login-button').off('click.action').on('click.action', function () {
 				window.location = "getProtected?id=" + $('#page-id').html();
 			});
 		}
 	};
 	$.SalesPortal.QPage = new QPageManager();
-	$(document).ready(function ()
-	{
+	$(document).ready(function () {
 		$.SalesPortal.QPage.init();
 	});
 })(jQuery);

@@ -159,6 +159,9 @@
 			$showLinksAsUrl = Yii::app()->request->getPost('showLinksAsUrl');
 			$showLinksAsUrl = isset($showLinksAsUrl) && $showLinksAsUrl == "true";
 
+			$autoLaunch = Yii::app()->request->getPost('autoLaunch');
+			$autoLaunch = isset($autoLaunch) && $autoLaunch == "true";
+
 			$recordActivity = Yii::app()->request->getPost('recordActivity');
 			$recordActivity = isset($recordActivity) && $recordActivity == "true";
 
@@ -171,7 +174,7 @@
 				$activityEmailCopy = null;
 
 			if (isset($selectedPageId))
-				QPageRecord::savePage($selectedPageId, $title, $description, $expirationDate, $logo, $header, $footer, $requireLogin, $disableBanners, $disableWidgets, $showLinksAsUrl, $recordActivity, $pinCode, $activityEmailCopy);
+				QPageRecord::savePage($selectedPageId, $title, $description, $expirationDate, $logo, $header, $footer, $requireLogin, $disableBanners, $disableWidgets, $showLinksAsUrl, $autoLaunch, $recordActivity, $pinCode, $activityEmailCopy);
 		}
 
 		public function actionSetPageOrder()

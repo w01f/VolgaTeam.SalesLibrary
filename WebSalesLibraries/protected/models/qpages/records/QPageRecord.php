@@ -24,6 +24,7 @@
 	 * @property bool disable_banners
 	 * @property bool disable_widgets
 	 * @property bool show_links_as_url
+	 * @property bool auto_launch
 	 * @property bool record_activity
 	 * @property bool activity_email_copy
 	 * @property string pin_code
@@ -119,6 +120,7 @@
 		/**
 		 * @param $columnSettings
 		 * @return array
+		 * @throws CException
 		 */
 		public function getPageLinks($columnSettings)
 		{
@@ -175,6 +177,7 @@
 		/**
 		 * @param $linkInCartId string
 		 * @param $order int
+		 * @throws CDbException
 		 */
 		public function addLink($linkInCartId, $order)
 		{
@@ -182,7 +185,7 @@
 				$this->rebuildLinkList($order);
 			else
 				$order = QPageLinkRecord::getMaxLinkIndex($this->id) + 1;
-			/** @var $linkInCartRecord UserLinkCartRecord */
+			/** @var UserLinkCartRecord $linkInCartRecord*/
 			$linkInCartRecord = UserLinkCartRecord::model()->findByPk($linkInCartId);
 			$linkInPageRecord = new QPageLinkRecord();
 			$linkInPageRecord->id = uniqid();
@@ -231,6 +234,8 @@
 		 * @param $createDate string
 		 * @param $linkCartIds string[]
 		 * @return string
+		 * @throws CDbException
+		 * @throws CException
 		 */
 		public static function addPage($ownerId, $pageTitle, $createDate, $linkCartIds)
 		{
@@ -266,6 +271,7 @@
 		 * @param $activityEmailCopy boolean
 		 * @param $linkId string
 		 * @return QPageRecord
+		 * @throws CException
 		 */
 		public static function addPageLite($ownerId, $createDate, $subtitle, $logo, $expirationDate, $restricted, $disableBanners, $disableWidgets, $showLinksAsUrl, $recordActivity, $pinCode, $activityEmailCopy, $linkId)
 		{
@@ -287,6 +293,7 @@
 			$pageRecord->record_activity = $recordActivity;
 			$pageRecord->pin_code = $pinCode;
 			$pageRecord->activity_email_copy = $activityEmailCopy;
+			$pageRecord->auto_launch = true;
 			$pageRecord->save();
 
 			$linkInPageRecord = new QPageLinkRecord();
@@ -304,6 +311,7 @@
 		 * @param $createDate
 		 * @param $clonePageId
 		 * @return null|string
+		 * @throws CException
 		 */
 		public static function clonePage($ownerId, $pageTitle, $createDate, $clonePageId)
 		{
@@ -329,6 +337,7 @@
 				$pageRecord->record_activity = $clonedPageRecord->record_activity;
 				$pageRecord->pin_code = $clonedPageRecord->pin_code;
 				$pageRecord->activity_email_copy = $clonedPageRecord->activity_email_copy;
+				$pageRecord->auto_launch = $clonedPageRecord->auto_launch;
 				$pageRecord->save();
 
 				$clonedPageLinks = QPageLinkRecord::model()->findAll('id_page=?', array($clonePageId));
@@ -360,11 +369,12 @@
 		 * @param $disableBanners
 		 * @param $disableWidgets
 		 * @param $showLinksAsUrl
+		 * @param $autoLaunch
 		 * @param $recordActivity
 		 * @param $pinCode
 		 * @param $activityEmailCopy
 		 */
-		public static function savePage($pageId, $title, $description, $expirationDate, $logo, $header, $footer, $requireLogin, $disableBanners, $disableWidgets, $showLinksAsUrl, $recordActivity, $pinCode, $activityEmailCopy)
+		public static function savePage($pageId, $title, $description, $expirationDate, $logo, $header, $footer, $requireLogin, $disableBanners, $disableWidgets, $showLinksAsUrl, $autoLaunch, $recordActivity, $pinCode, $activityEmailCopy)
 		{
 			/** @var $pageRecord QPageRecord */
 			$pageRecord = self::model()->findByPk($pageId);
@@ -380,6 +390,7 @@
 				$pageRecord->disable_banners = $disableBanners;
 				$pageRecord->disable_widgets = $disableWidgets;
 				$pageRecord->show_links_as_url = $showLinksAsUrl;
+				$pageRecord->auto_launch = $autoLaunch;
 				$pageRecord->record_activity = $recordActivity;
 				$pageRecord->pin_code = $pinCode;
 				$pageRecord->activity_email_copy = $activityEmailCopy;
@@ -389,6 +400,7 @@
 
 		/**
 		 * @param $pageId
+		 * @throws CDbException
 		 */
 		public static function deletePage($pageId)
 		{
@@ -403,9 +415,11 @@
 
 		/**
 		 * @param $ownerId
+		 * @throws CDbException
 		 */
 		public static function deletePagesByOwner($ownerId)
 		{
+			/** @var QPageRecord $pageRecords */
 			$pageRecords = self::model()->findAll('id_owner=?', array($ownerId));
 			foreach ($pageRecords as $pageRecord)
 				self::deletePage($pageRecord->id);
@@ -446,6 +460,7 @@
 
 		/**
 		 * @return int|mixed
+		 * @throws CException
 		 */
 		public static function getMaxPageIndex()
 		{

@@ -69,7 +69,7 @@
 		});
 		dialogContent.find("#add-page-access-code").keydown(function (event)
 		{
-			if (event.keyCode == 46 || event.keyCode == 8)
+			if (event.keyCode === 46 || event.keyCode === 8)
 			{
 			}
 			else
@@ -121,10 +121,10 @@
 				},
 				success: function (msg)
 				{
-					if (subtitle != '')
-						window.open('mailto:?subject=' + subtitle.replace(/&/g, '%26').replace(' ', '%20') + '&body=' + '%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A' + msg + (pinCode != undefined && pinCode.length > 0 ? ("%0D%0APin-code: " + pinCode) : ''), "_self");
+					if (subtitle !== '')
+						window.open('mailto:?subject=' + subtitle.replace(/&/g, '%26').replace(' ', '%20') + '&body=' + '%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A' + msg + (pinCode !== undefined && pinCode.length > 0 ? ("%0D%0APin-code: " + pinCode) : ''), "_self");
 					else
-						window.open('mailto:?body=' + '%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A' + msg + (pinCode != undefined && pinCode.length > 0 ? ("%0D%0APin-code: " + pinCode) : ''), "_self");
+						window.open('mailto:?body=' + '%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A' + msg + (pinCode !== undefined && pinCode.length > 0 ? ("%0D%0APin-code: " + pinCode) : ''), "_self");
 				},
 				error: function ()
 				{

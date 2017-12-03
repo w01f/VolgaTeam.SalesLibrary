@@ -13,6 +13,8 @@
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/qpage/qpage-controller.js?' . Yii::app()->params['version'], CClientScript::POS_END);
 	$authorized = UserIdentity::isUserAuthorized();
 
+	$links = $page->getLibraryLinks();
+
 	if ($page->is_email)
 		$headerText = trim(strip_tags($page->subtitle));
 	else
@@ -39,49 +41,48 @@
         }
     </style>
 <? endif; ?>
-<table id="content">
-    <tr>
-        <td class="content-inner">
-            <div class="content-scrollable-area">
-                <div id="page-id" style="display: none;"><? echo $page->id; ?></div>
-				<? if (isset($page->logo) || $page->record_activity): ?>
-                    <div class="qpage-header">
-                        <div>
-							<? if (isset($page->logo)): ?>
-                                <img src="<? echo $page->logo; ?>">
-							<? endif; ?>
-                        </div>
-                        <div class="email logger-form">
-							<? if ($page->record_activity): ?>
-                                <div class="row">
-                                    <div class="col-xs-8">
-                                        <p class="email-description">
-                                            <strong>To view the links on this site, enter your email address:</strong>
-                                        </p>
+    <table id="content">
+        <tr>
+            <td class="content-inner">
+                <div class="content-scrollable-area">
+                    <div id="page-id" style="display: none;"><? echo $page->id; ?></div>
+					<? if (isset($page->logo) || $page->record_activity): ?>
+                        <div class="qpage-header">
+                            <div>
+								<? if (isset($page->logo)): ?>
+                                    <img src="<? echo $page->logo; ?>">
+								<? endif; ?>
+                            </div>
+                            <div class="email logger-form">
+								<? if ($page->record_activity): ?>
+                                    <div class="row">
+                                        <div class="col-xs-8">
+                                            <p class="email-description">
+                                                <strong>To view the links on this site, enter your email
+                                                    address:</strong>
+                                            </p>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <input type="email" id="user-email" class="form-control" placeholder="Email"
+                                                   required
+											       <? if (isset(Yii::app()->user->email)): ?>value="<? echo Yii::app()->user->email; ?>" <? endif; ?>>
+                                        </div>
                                     </div>
-                                    <div class="col-xs-4">
-                                        <input type="email" id="user-email" class="form-control" placeholder="Email"
-                                               required
-										       <? if (isset(Yii::app()->user->email)): ?>value="<? echo Yii::app()->user->email; ?>" <? endif; ?>>
-                                    </div>
-                                </div>
-							<? endif; ?>
+								<? endif; ?>
+                            </div>
                         </div>
-                    </div>
-				<? endif; ?>
-                <div class="padding">
-					<? if (!$page->is_email && !empty($page->subtitle)): ?>
-                        <div id="page-title"><? echo $page->subtitle; ?></div>
 					<? endif; ?>
-					<? if (!empty($page->header)): ?>
-                        <div id="page-header"><? echo nl2br($page->header); ?></div>
-					<? endif; ?>
-                    <div id="page-links-container" class="folder-links-container">
-						<? if ($page->show_links_as_url): ?>
-                        <ul class="nav nav-pills nav-stacked">
-							<? endif; ?>
-							<? $links = $page->getLibraryLinks() ?>
-							<? if (isset($links)): ?>
+                    <div class="padding">
+						<? if (!$page->is_email && !empty($page->subtitle)): ?>
+                            <div id="page-title"><? echo $page->subtitle; ?></div>
+						<? endif; ?>
+						<? if (!empty($page->header)): ?>
+                            <div id="page-header"><? echo nl2br($page->header); ?></div>
+						<? endif; ?>
+                        <div id="page-links-container" class="folder-links-container">
+							<? if ($page->show_links_as_url): ?>
+                            <ul class="nav nav-pills nav-stacked">
+								<? endif; ?>
 								<?php foreach ($links as $link): ?>
 									<? if ($page->show_links_as_url): ?>
 										<? if ($link->isLineBreak): ?>
@@ -109,14 +110,18 @@
 											)); ?>
 									<? endif; ?>
 								<?php endforeach; ?>
-							<? endif; ?>
-							<? if ($page->show_links_as_url): ?>
-                        </ul>
-					<? endif; ?>
+								<? if ($page->show_links_as_url): ?>
+                            </ul>
+						<? endif; ?>
+                        </div>
+                        <div id="page-footer"><? echo nl2br($page->footer); ?></div>
                     </div>
-                    <div id="page-footer"><? echo nl2br($page->footer); ?></div>
                 </div>
-            </div>
-        </td>
-    </tr>
-</table>
+            </td>
+        </tr>
+    </table>
+<? if ($page->auto_launch && count($links) > 0): ?>
+    <div class="service-data default-link-data">
+        <div class="link-id"><? echo $links[0]->id; ?></div>
+    </div>
+<? endif; ?>
