@@ -32,6 +32,9 @@
 					});
 
 					updateContentSize();
+
+					if (data.autoLoadLinkiCallback !== undefined)
+						data.autoLoadLinkiCallback();
 				},
 				resizeCallback: updateContentSize
 			});

@@ -13,31 +13,35 @@
 				headerOptions: libraryData.options.headerOptions,
 				actions: libraryData.actions,
 				navigationPanel: libraryData.navigationPanel,
-				resizeCallback: updateContentSize
-			});
+				resizeCallback: updateContentSize,
+				loadCallback: function () {
+					var contentObject = $.SalesPortal.Content.getContentObject();
+					wallbinManager = new $.SalesPortal.WallbinManager({
+						contentObject: contentObject,
+						shortcutId: libraryData.options.linkId,
+						wallbinId: libraryData.options.libraryId,
+						wallbinName: libraryData.options.headerTitle,
+						pageViewType: libraryData.options.pageViewType,
+						pageSelectorMode: libraryData.options.pageSelectorMode,
+						fitWallbinToWholeScreen: true
+					});
+					wallbinManager.initPageSelector();
+					wallbinManager.initContent();
+					initActionButtons();
+					contentObject.find('.page-container').addClass('selected').show();
 
-			var contentObject = $.SalesPortal.Content.getContentObject();
-			wallbinManager = new $.SalesPortal.WallbinManager({
-				contentObject: contentObject,
-				shortcutId: libraryData.options.linkId,
-				wallbinId: libraryData.options.libraryId,
-				wallbinName: libraryData.options.headerTitle,
-				pageViewType: libraryData.options.pageViewType,
-				pageSelectorMode:libraryData.options.pageSelectorMode,
-				fitWallbinToWholeScreen: true
-			});
-			wallbinManager.initPageSelector();
-			wallbinManager.initContent();
-			initActionButtons();
-			contentObject.find('.page-container').addClass('selected').show();
+					new $.SalesPortal.ShortcutsSearchBar({
+						shortcutData: libraryData,
+						sizeChangedCallback: updateContentSize
+					});
 
-			new $.SalesPortal.ShortcutsSearchBar({
-				shortcutData: libraryData,
-				sizeChangedCallback: updateContentSize
-			});
+					updateContentSize();
+					$(window).off('resize.library').on('resize.library', updateContentSize);
 
-			updateContentSize();
-			$(window).off('resize.library').on('resize.library', updateContentSize);
+					if (data.autoLoadLinkiCallback !== undefined)
+						data.autoLoadLinkiCallback();
+				}
+			});
 		};
 
 		var initActionButtons = function () {

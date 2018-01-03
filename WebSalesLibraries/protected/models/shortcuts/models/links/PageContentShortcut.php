@@ -17,6 +17,8 @@
 		/** @var  PageHeaderSettings */
 		public $headerSettings;
 
+		public $autolLoadLinkId;
+
 		/**
 		 * @param $linkRecord
 		 * @param $isPhone boolean
@@ -70,6 +72,10 @@
 
 			$queryResult = $xpath->query('//Config/PublicPassword');
 			$this->publicPassword = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
+
+			$queryResult = $xpath->query('//Config/AutoLoadLink');
+			if ($queryResult->length > 0)
+				$this->configureAutoLoadLink($xpath, $queryResult->item(0));
 
 			$queryResult = $xpath->query('//Config/Actions/Action');
 			$this->initActions($xpath, $queryResult);
@@ -161,6 +167,9 @@
 		{
 			$data = parent::getPageData();
 
+			if (!empty($this->autolLoadLinkId))
+				$data['autolLoadLinkId'] = $this->autolLoadLinkId;
+
 			$data['headerOptions'] = $this->headerSettings;
 
 			$data['headerIcon'] = $this->headerSettings->icon;
@@ -200,5 +209,27 @@
 				return Yii::app()->createAbsoluteUrl('shortcuts/getSamePage');
 			else
 				return Yii::app()->createAbsoluteUrl('shortcuts/getSinglePage', array('linkId' => $linkId));
+		}
+
+		/**
+		 * @param $xpath \DOMXPath
+		 * @param $contextNode \DOMNode
+		 */
+		private function configureAutoLoadLink($xpath, $contextNode)
+		{
+			$queryResult = $xpath->query('./LibraryName', $contextNode);
+			$libraryName = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
+			$queryResult = $xpath->query('./PageName', $contextNode);
+			$pageName = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
+			$queryResult = $xpath->query('./WindowName', $contextNode);
+			$windowName = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
+			$queryResult = $xpath->query('./LinkName', $contextNode);
+			$linkName = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
+			if (!empty($libraryName) && !empty($pageName) && !empty($windowName) && !empty($linkName))
+			{
+				$linkRecord = LinkRecord::getLinkByName($libraryName, $pageName, $windowName, $linkName);
+				if (isset($linkRecord))
+					$this->autolLoadLinkId = $linkRecord->id;
+			}
 		}
 	}

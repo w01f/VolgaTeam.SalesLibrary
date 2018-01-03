@@ -777,11 +777,10 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SalesLibraries.ServiceConnector\SalesLibraries.ServiceConnector.csproj">
-      <Project>{900ccf99-921a-4e35-8686-c85d48263785}</Project>
+      <Project>{900CCF99-921A-4E35-8686-C85D48263785}</Project>
       <Name>SalesLibraries.ServiceConnector</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>robocopy /z /r:100 "$(TargetDir)\" "d:\WorkingFiles\SalesDepot\Release\SiteManager.exe" "*.dll" "SiteManager.exe"

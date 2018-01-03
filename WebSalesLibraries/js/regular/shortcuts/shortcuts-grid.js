@@ -15,23 +15,27 @@
 				headerOptions: gridData.options.headerOptions,
 				actions: gridData.actions,
 				navigationPanel: gridData.navigationPanel,
-				resizeCallback: updateContentSize
+				resizeCallback: updateContentSize,
+				loadCallback: function () {
+					new $.SalesPortal.ShortcutsSearchBar({
+						shortcutData: gridData.options
+					});
+
+					var pageContent = $.SalesPortal.Content.getContentObject();
+					var grid = pageContent.find('.shortcuts-links-grid');
+					grid.cubeportfolio(gridData.options.displayParameters);
+
+					$.SalesPortal.ShortcutsManager.assignShortcutItemHandlers(grid);
+
+					initActionButtons();
+
+					$(window).off('resize.grid').on('resize.grid', updateContentSize);
+					updateContentSize();
+
+					if (data.autoLoadLinkiCallback !== undefined)
+						data.autoLoadLinkiCallback();
+				}
 			});
-
-			new $.SalesPortal.ShortcutsSearchBar({
-				shortcutData: gridData.options
-			});
-
-			var pageContent = $.SalesPortal.Content.getContentObject();
-			var grid = pageContent.find('.shortcuts-links-grid');
-			grid.cubeportfolio(gridData.options.displayParameters);
-
-			$.SalesPortal.ShortcutsManager.assignShortcutItemHandlers(grid);
-
-			initActionButtons();
-
-			$(window).off('resize.grid').on('resize.grid', updateContentSize);
-			updateContentSize();
 		};
 
 		var initActionButtons = function ()

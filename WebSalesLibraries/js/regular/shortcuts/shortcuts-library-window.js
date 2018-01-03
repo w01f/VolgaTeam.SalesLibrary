@@ -12,27 +12,31 @@
 				headerOptions: libraryWindowData.options.headerOptions,
 				actions: libraryWindowData.actions,
 				navigationPanel: libraryWindowData.navigationPanel,
-				resizeCallback: updateContentSize
+				resizeCallback: updateContentSize,
+				loadCallback: function () {
+					var pageContent = $.SalesPortal.Content.getContentObject();
+					wallbinManager = new $.SalesPortal.WallbinManager({
+						contentObject: pageContent,
+						shortcutId: libraryWindowData.options.linkId,
+						pageViewType: libraryWindowData.options.windowViewType,
+						fitWallbinToWholeScreen: true
+					});
+					wallbinManager.initContent();
+
+					initActionButtons();
+
+					new $.SalesPortal.ShortcutsSearchBar({
+						shortcutData: libraryWindowData,
+						sizeChangedCallback: updateContentSize
+					});
+
+					updateContentSize();
+					$(window).off('resize.library-page').on('resize.library-page', updateContentSize);
+
+					if (data.autoLoadLinkiCallback !== undefined)
+						data.autoLoadLinkiCallback();
+				}
 			});
-
-			var pageContent = $.SalesPortal.Content.getContentObject();
-			wallbinManager = new $.SalesPortal.WallbinManager({
-				contentObject: pageContent,
-				shortcutId: libraryWindowData.options.linkId,
-				pageViewType: libraryWindowData.options.windowViewType,
-				fitWallbinToWholeScreen: true
-			});
-			wallbinManager.initContent();
-
-			initActionButtons();
-
-			new $.SalesPortal.ShortcutsSearchBar({
-				shortcutData: libraryWindowData,
-				sizeChangedCallback: updateContentSize
-			});
-
-			updateContentSize();
-			$(window).off('resize.library-page').on('resize.library-page', updateContentSize);
 		};
 
 		var initActionButtons = function () {

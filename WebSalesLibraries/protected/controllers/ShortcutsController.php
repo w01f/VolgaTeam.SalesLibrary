@@ -1,5 +1,11 @@
 <?php
-	Yii::import('application.extensions.phpQuery.phpQuery.phpQuery');
+	try
+	{
+		Yii::import('application.extensions.phpQuery.phpQuery.phpQuery');
+	}
+	catch (CException $e)
+	{
+	}
 
 	/**
 	 * Class ShortcutsController
@@ -86,7 +92,13 @@
 			$linkId = Yii::app()->request->getPost('linkId');
 			$linkParameters = Yii::app()->request->getPost('parameters');
 
-			echo CJSON::encode($this->buildShortcutPage($linkId, $linkParameters));
+			try
+			{
+				echo CJSON::encode($this->buildShortcutPage($linkId, $linkParameters));
+			}
+			catch (CException $e)
+			{
+			}
 		}
 
 		public function actionGetShortcutDataById()
@@ -120,7 +132,13 @@
 				$link = $linkRecord->getModel($this->isPhone);
 				$fileName = $link->fileName;
 				$path = $link->sourcePath;
-				Yii::app()->getRequest()->sendFile($fileName, @file_get_contents($path));
+				try
+				{
+					Yii::app()->getRequest()->sendFile($fileName, @file_get_contents($path));
+				}
+				catch (CHttpException $e)
+				{
+				}
 			}
 			Yii::app()->end();
 		}
@@ -129,6 +147,7 @@
 		 * @param $linkId string
 		 * @param $parameters array
 		 * @return array
+		 * @throws CException
 		 */
 		private function buildShortcutPage($linkId, $parameters)
 		{
@@ -308,7 +327,13 @@
 				$linkRecord = ShortcutLinkRecord::model()->findByPk($linkId);
 				/**@var $link DownloadShortcut */
 				$link = $linkRecord->getModel($this->isPhone);
-				$this->renderPartial('downloadDialog', array('link' => $link));
+				try
+				{
+					$this->renderPartial('downloadDialog', array('link' => $link));
+				}
+				catch (CException $e)
+				{
+				}
 			}
 		}
 
@@ -391,7 +416,13 @@
 				$searchLink->loadPageConfig();
 				$searchBar = $searchLink->subSearchBar;
 			}
-			$this->renderPartial('subSearchBar/customSearchPanel', array('searchBar' => $searchBar));
+			try
+			{
+				$this->renderPartial('subSearchBar/customSearchPanel', array('searchBar' => $searchBar));
+			}
+			catch (CException $e)
+			{
+			}
 		}
 
 		public function actionGetSubSearchTemplatesPanel()
@@ -417,17 +448,35 @@
 				$templates = $link->subConditions;
 				$id = $linkId;
 			}
-			$this->renderPartial('subSearchBar/searchTemplatesPanel', array('templates' => $templates, 'id' => $id));
+			try
+			{
+				$this->renderPartial('subSearchBar/searchTemplatesPanel', array('templates' => $templates, 'id' => $id));
+			}
+			catch (CException $e)
+			{
+			}
 		}
 
 		public function actionEditSearchBarSettings()
 		{
-			$this->renderPartial('searchBar/settings');
+			try
+			{
+				$this->renderPartial('searchBar/settings');
+			}
+			catch (CException $e)
+			{
+			}
 		}
 
 		public function actionConfirmSearchBarSearch()
 		{
-			$this->renderPartial('searchBar/confirmation');
+			try
+			{
+				$this->renderPartial('searchBar/confirmation');
+			}
+			catch (CException $e)
+			{
+			}
 		}
 
 		public function actionSetSuperGroup()

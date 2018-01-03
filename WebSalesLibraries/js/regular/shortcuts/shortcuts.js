@@ -191,58 +191,69 @@
 			}
 		};
 
-		var openShortcutOnSamePage = function (result)
+		var openShortcutOnSamePage = function (parameters)
 		{
-			switch (result.options.shortcutType)
+			parameters.autoLoadLinkiCallback = undefined;
+			if (parameters.options.autolLoadLinkId !== undefined)
+			{
+				parameters.autoLoadLinkiCallback = function () {
+					$.SalesPortal.LinkManager.requestViewDialog({
+						linkId: parameters.options.autolLoadLinkId,
+						isQuickSite: false
+					});
+				}
+			}
+				
+			switch (parameters.options.shortcutType)
 			{
 				case 'gridbundle':
-					new $.SalesPortal.ShortcutsGrid().init(result);
+					new $.SalesPortal.ShortcutsGrid().init(parameters);
 					updatedAllContentNecessary = true;
 					break;
 				case 'carouselbundle':
-					new $.SalesPortal.ShortcutsCarousel().init(result);
+					new $.SalesPortal.ShortcutsCarousel().init(parameters);
 					updatedAllContentNecessary = true;
 					break;
 				case 'search':
-					$.SalesPortal.ShortcutsSearchLink(result).runSearch();
+					$.SalesPortal.ShortcutsSearchLink(parameters).runSearch(parameters.autoLoadLinkiCallback);
 					break;
 				case 'window':
-					new $.SalesPortal.ShortcutsLibraryWindow().init(result);
+					new $.SalesPortal.ShortcutsLibraryWindow().init(parameters);
 					break;
 				case 'page':
-					new $.SalesPortal.ShortcutsLibraryPage().init(result);
+					new $.SalesPortal.ShortcutsLibraryPage().init(parameters);
 					break;
 				case 'pagebundle':
-					new $.SalesPortal.ShortcutsLibraryPageBundle().init(result);
+					new $.SalesPortal.ShortcutsLibraryPageBundle().init(parameters);
 					break;
 				case 'library':
-					new $.SalesPortal.ShortcutsWallbin().init(result);
+					new $.SalesPortal.ShortcutsWallbin().init(parameters);
 					break;
 				case 'download':
-					new $.SalesPortal.ShortcutsDownload().init(result);
+					new $.SalesPortal.ShortcutsDownload().init(parameters);
 					break;
 				case 'searchapp':
-					new $.SalesPortal.ShortcutsSearchApp().init(result);
+					new $.SalesPortal.ShortcutsSearchApp().init(parameters);
 					break;
 				case 'qbuilder':
-					new $.SalesPortal.ShortcutsQBuilder().init(result);
+					new $.SalesPortal.ShortcutsQBuilder().init(parameters);
 					break;
 				case 'quizzes':
-					new $.SalesPortal.ShortcutsQuizzes().init(result);
+					new $.SalesPortal.ShortcutsQuizzes().init(parameters);
 					break;
 				case 'favorites':
-					new $.SalesPortal.ShortcutsFavorites().init(result);
+					new $.SalesPortal.ShortcutsFavorites().init(parameters);
 					break;
 				case 'landing':
-					new $.SalesPortal.ShortcutsLandingPage().init(result);
+					new $.SalesPortal.ShortcutsLandingPage().init(parameters);
 					updatedAllContentNecessary = true;
 					break;
 				default :
 					$.SalesPortal.Content.fillContent({
-						content: result.content,
-						headerOptions: result.options.headerOptions,
-						actions: result.actions,
-						navigationPanel: result.navigationPanel,
+						content: parameters.content,
+						headerOptions: parameters.options.headerOptions,
+						actions: parameters.actions,
+						navigationPanel: parameters.navigationPanel,
 						loadCallback: function ()
 						{
 							$.SalesPortal.ShortcutsManager.updateContentSize();

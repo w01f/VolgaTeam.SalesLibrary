@@ -47,7 +47,7 @@ namespace SalesLibraries.CommonGUI.Common
 	//
 
 	//[Designer("System.Windows.Forms.Design.FolderBrowserDialogDesigner, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"), DefaultEvent("HelpRequest"), SRDescription("DescriptionFolderBrowserDialog"), DefaultProperty("SelectedPath")]
-	public class FolderBrowserDialogEx : System.Windows.Forms.CommonDialog
+	public class FolderBrowserDialogEx : CommonDialog
 	{
 		private static readonly int MAX_PATH = 260;
 

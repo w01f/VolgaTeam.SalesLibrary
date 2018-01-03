@@ -42,19 +42,11 @@
 				$windowName = str_replace("'", "''", $linkSettings->windowName);
 				$linkName = str_replace("'", "''", $linkSettings->linkName);
 
-				if (isset($libraryName) && isset($pageName) && isset($linkName) && isset($windowName))
+				if (isset($libraryName) && isset($pageName) && isset($windowName) && isset($linkName))
 				{
-					$linkRecord = Yii::app()->db->createCommand()
-						->select("l.*")
-						->from('tbl_link l')
-						->join('tbl_folder f', 'f.id = l.id_folder')
-						->join('tbl_page p', 'p.id = f.id_page')
-						->join('tbl_library lb', 'lb.id = p.id_library')
-						->where("(l.file_name='" . $linkName . "' or l.name='" . $linkName . "') and f.name='" . $windowName . "' and p.name='" . $pageName . "' and lb.name='" . $libraryName . "'")
-						->queryRow();
-					if ($linkRecord != false)
+					$linkRecord = LinkRecord::getLinkByName($libraryName, $pageName, $windowName, $linkName);
+					if (isset($linkRecord))
 					{
-						$linkRecord = (object)$linkRecord;
 						/** @var LibraryLinkBundleItem $bundleItem */
 						$internalLinkRecord = new self();
 						$internalLinkRecord->id = uniqid();

@@ -187,19 +187,32 @@
 		/**
 		 * @param $libraryName
 		 * @param $pageName
+		 * @param $windowName
 		 * @param $linkName
-		 * @return mixed
+		 * @return object
 		 */
-		public static function getLinkByLibraryAndPageAndName($libraryName, $pageName, $linkName)
+		public static function getLinkByName($libraryName, $pageName, $windowName, $linkName)
 		{
-			return Yii::app()->db->createCommand()
-				->select('link.id as link_id')
-				->from('tbl_link link')
-				->join('tbl_folder fol', 'fol.id = link.id_folder')
-				->join('tbl_page pg', 'pg.id = fol.id_page')
-				->join('tbl_library lib', 'lib.id = pg.id_library')
-				->where('link.name = :linkName and pg.name = :pageName and lib.name = :libraryName', array(':linkName' => $linkName, ':pageName' => $pageName, ':libraryName' => $libraryName))
-				->queryRow();
+			try
+			{
+				$linkRecord = Yii::app()->db->createCommand()
+					->select('link.*')
+					->from('tbl_link link')
+					->join('tbl_folder f', 'f.id = link.id_folder')
+					->join('tbl_page pg', 'pg.id = f.id_page')
+					->join('tbl_library lib', 'lib.id = pg.id_library')
+					->where("(link.name = :linkName or link.file_name = :linkName) and f.name = :windowName and pg.name = :pageName and lib.name = :libraryName", array(':linkName' => $linkName, ':windowName' => $windowName, ':pageName' => $pageName, ':libraryName' => $libraryName))
+					->queryRow();
+				if ($linkRecord !== false)
+					$linkRecord = (object)$linkRecord;
+				else
+					$linkRecord = null;
+				return $linkRecord;
+			}
+			catch (Exception $e)
+			{
+				return null;
+			}
 		}
 
 		/**

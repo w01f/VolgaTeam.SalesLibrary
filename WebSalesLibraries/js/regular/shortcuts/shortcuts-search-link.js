@@ -18,7 +18,7 @@
 			searchShortcutId: parentSearchData.options.linkId,
 			searchShortcutTitle: searchShortcutOptions.title,
 			isSearchBar: searchShortcutOptions.isSearchBar,
-			backHandler: parentSearchData.backHandler,
+			backHandler: parentSearchData.backHandler
 		});
 
 		this.runSearch = function (resultCallback) {

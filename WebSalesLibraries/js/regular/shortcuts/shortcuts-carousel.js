@@ -17,68 +17,68 @@
 				headerOptions: carouselData.options.headerOptions,
 				actions: carouselData.actions,
 				navigationPanel: carouselData.navigationPanel,
-				resizeCallback: updateContentSize
-			});
+				resizeCallback: updateContentSize,
+				loadCallback: function () {
+					new $.SalesPortal.ShortcutsSearchBar({
+						shortcutData: carouselData.options
+					});
 
-			new $.SalesPortal.ShortcutsSearchBar({
-				shortcutData: carouselData.options
-			});
+					FWDU3DCarUtils.checkIfHasTransforms();
+					carousel = new FWDUltimate3DCarousel(carouselData.options.displayParameters);
+					carouselData.options.displayParameters.predefinedDataList.forEach(function (category) {
+						category.dataItems.forEach(function (dataItem) {
+							if (dataItem.mediaType === 'func')
+								dataItem.onClick = function () {
+									var shortcutData = $('<div>' + dataItem.dataContent + '</div>');
+									var activityData = $.parseJSON(shortcutData.find('.activity-data').text());
+									$.SalesPortal.ShortcutsManager.trackActivity(activityData);
 
-			FWDU3DCarUtils.checkIfHasTransforms();
-			carousel = new FWDUltimate3DCarousel(carouselData.options.displayParameters);
-			carouselData.options.displayParameters.predefinedDataList.forEach(function (category)
-			{
-				category.dataItems.forEach(function (dataItem)
-				{
-					if (dataItem.mediaType === 'func')
-						dataItem.onClick = function ()
-						{
-							var shortcutData = $('<div>' + dataItem.dataContent + '</div>');
-							var activityData = $.parseJSON(shortcutData.find('.activity-data').text());
-							$.SalesPortal.ShortcutsManager.trackActivity(activityData);
+									var hasCustomHandler = shortcutData.find('.has-custom-handler').length > 0;
+									var samePage = dataItem.samePage;
+									var url = dataItem.url;
 
-							var hasCustomHandler = shortcutData.find('.has-custom-handler').length > 0;
-							var samePage = dataItem.samePage;
-							var url = dataItem.url;
-
-							if (hasCustomHandler && samePage)
-								$.SalesPortal.ShortcutsManager.openShortcutByMenuItemData(shortcutData, {pushHistory: true});
-							else
-								window.open(url.replace(/&amp;/g, '%26'), "_blank");
-						};
-				});
-			});
-			carousel.addListener(FWDUltimate3DCarousel.CATEGORY_CHANGE, function (ev)
-			{
-				updateContentSize();
-
-				if (!justLoaded)
-				{
-					var shortcutData = $('<div>' + carouselData.options.serviceData + '</div>');
-					$.SalesPortal.HistoryManager.pushShortcut(
-						shortcutData,
-						{
-							pushHistory: true,
-							pageViewType: 'carouselbundle',
-							defaultCategoryIndex: (ev.id + 1)
+									if (hasCustomHandler && samePage)
+										$.SalesPortal.ShortcutsManager.openShortcutByMenuItemData(shortcutData, {pushHistory: true});
+									else
+										window.open(url.replace(/&amp;/g, '%26'), "_blank");
+								};
 						});
+					});
+					carousel.addListener(FWDUltimate3DCarousel.CATEGORY_CHANGE, function (ev) {
+						updateContentSize();
+
+						if (!justLoaded)
+						{
+							var shortcutData = $('<div>' + carouselData.options.serviceData + '</div>');
+							$.SalesPortal.HistoryManager.pushShortcut(
+								shortcutData,
+								{
+									pushHistory: true,
+									pageViewType: 'carouselbundle',
+									defaultCategoryIndex: (ev.id + 1)
+								});
+						}
+
+						justLoaded = false;
+
+						$.SalesPortal.LogHelper.write({
+							type: 'Navigation',
+							subType: 'Carousel Group Select',
+							data: {
+								file: carouselData.options.displayParameters.predefinedDataList[ev.id].name
+							}
+						});
+					});
+
+					initActionButtons();
+
+					$(window).off('resize.carousel').on('resize.carousel', updateContentSize);
+					updateContentSize();
+
+					if (data.autoLoadLinkiCallback !== undefined)
+						data.autoLoadLinkiCallback();
 				}
-
-				justLoaded = false;
-
-				$.SalesPortal.LogHelper.write({
-					type: 'Navigation',
-					subType: 'Carousel Group Select',
-					data: {
-						file: carouselData.options.displayParameters.predefinedDataList[ev.id].name
-					}
-				});
 			});
-
-			initActionButtons();
-
-			$(window).off('resize.carousel').on('resize.carousel', updateContentSize);
-			updateContentSize();
 		};
 
 		var initActionButtons = function ()

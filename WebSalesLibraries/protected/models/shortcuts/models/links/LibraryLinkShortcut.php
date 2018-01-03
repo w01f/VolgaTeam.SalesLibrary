@@ -23,19 +23,9 @@
 			$fileName = str_replace("'", "''", trim($linkConfig->getElementsByTagName("File")->item(0)->nodeValue));
 			if (isset($libraryName) && isset($pageName) && isset($windowName) && isset($fileName))
 			{
-				$linkRecord = Yii::app()->db->createCommand()
-					->select("l.*")
-					->from('tbl_link l')
-					->join('tbl_folder f', 'f.id = l.id_folder')
-					->join('tbl_page p', 'p.id = f.id_page')
-					->join('tbl_library lb', 'lb.id = p.id_library')
-					->where("(trim(l.file_name)='" . $fileName . "' or trim(l.name)='" . $fileName . "') and trim(f.name)='" . $windowName . "' and trim(p.name)='" . $pageName . "' and trim(lb.name)='" . $libraryName . "'")
-					->queryRow();
-				if ($linkRecord != false)
-				{
-					$linkRecord = (object)$linkRecord;
+				$linkRecord = LinkRecord::getLinkByName($libraryName, $pageName, $windowName, $fileName);
+				if (isset($linkRecord))
 					$this->linkId = $linkRecord->id;
-				}
 			}
 		}
 

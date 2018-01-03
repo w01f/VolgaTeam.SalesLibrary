@@ -13,33 +13,37 @@
 				headerOptions: bundleData.options.headerOptions,
 				actions: bundleData.actions,
 				navigationPanel: bundleData.navigationPanel,
-				resizeCallback: updateContentSize
+				resizeCallback: updateContentSize,
+				loadCallback: function () {
+					var contentObject = $.SalesPortal.Content.getContentObject();
+
+					wallbinManager = new $.SalesPortal.WallbinManager({
+						contentObject: contentObject,
+						shortcutId: bundleData.options.linkId,
+						wallbinId: bundleData.options.bundleId,
+						wallbinName: bundleData.options.headerTitle,
+						pageViewType: bundleData.options.pageViewType,
+						pageSelectorMode: bundleData.options.pageSelectorMode,
+						fitWallbinToWholeScreen: true
+					});
+					wallbinManager.initPageSelector();
+					wallbinManager.initContent();
+					initActionButtons();
+
+					contentObject.find('.page-container').addClass('selected').show();
+
+					new $.SalesPortal.ShortcutsSearchBar({
+						shortcutData: bundleData,
+						sizeChangedCallback: updateContentSize
+					});
+
+					updateContentSize();
+					$(window).off('resize.library-page-bundle').on('resize.library-page-bundle', updateContentSize);
+
+					if (data.autoLoadLinkiCallback !== undefined)
+						data.autoLoadLinkiCallback();
+				}
 			});
-
-			var contentObject = $.SalesPortal.Content.getContentObject();
-
-			wallbinManager = new $.SalesPortal.WallbinManager({
-				contentObject: contentObject,
-				shortcutId: bundleData.options.linkId,
-				wallbinId: bundleData.options.bundleId,
-				wallbinName: bundleData.options.headerTitle,
-				pageViewType:bundleData.options.pageViewType,
-				pageSelectorMode:bundleData.options.pageSelectorMode,
-				fitWallbinToWholeScreen: true
-			});
-			wallbinManager.initPageSelector();
-			wallbinManager.initContent();
-			initActionButtons();
-
-			contentObject.find('.page-container').addClass('selected').show();
-
-			new $.SalesPortal.ShortcutsSearchBar({
-				shortcutData: bundleData,
-				sizeChangedCallback: updateContentSize
-			});
-
-			updateContentSize();
-			$(window).off('resize.library-page-bundle').on('resize.library-page-bundle', updateContentSize);
 		};
 
 		var initActionButtons = function () {
