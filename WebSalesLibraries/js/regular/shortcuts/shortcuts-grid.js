@@ -16,7 +16,8 @@
 				actions: gridData.actions,
 				navigationPanel: gridData.navigationPanel,
 				resizeCallback: updateContentSize,
-				loadCallback: function () {
+				loadCallback: function ()
+				{
 					new $.SalesPortal.ShortcutsSearchBar({
 						shortcutData: gridData.options
 					});

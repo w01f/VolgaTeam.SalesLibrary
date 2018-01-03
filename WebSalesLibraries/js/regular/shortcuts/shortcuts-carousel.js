@@ -18,7 +18,8 @@
 				actions: carouselData.actions,
 				navigationPanel: carouselData.navigationPanel,
 				resizeCallback: updateContentSize,
-				loadCallback: function () {
+				loadCallback: function ()
+				{
 					new $.SalesPortal.ShortcutsSearchBar({
 						shortcutData: carouselData.options
 					});

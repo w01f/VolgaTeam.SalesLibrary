@@ -1,4 +1,4 @@
-<?php
+<?
 	try
 	{
 		Yii::import('application.extensions.phpQuery.phpQuery.phpQuery');

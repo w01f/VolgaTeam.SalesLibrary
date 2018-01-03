@@ -1,5 +1,4 @@
 <?
-
 	/**
 	 * Class LinkRecord
 	 * @property mixed id_parent_link

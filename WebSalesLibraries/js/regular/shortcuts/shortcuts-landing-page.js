@@ -1,4 +1,5 @@
-(function ($) {
+(function ($)
+{
 	window.BaseUrl = window.BaseUrl || '';
 	$.SalesPortal = $.SalesPortal || {};
 	$.SalesPortal.ShortcutsLandingPage = function () {

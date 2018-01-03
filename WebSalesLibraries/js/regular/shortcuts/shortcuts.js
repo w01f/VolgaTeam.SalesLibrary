@@ -203,7 +203,6 @@
 					});
 				}
 			}
-				
 			switch (parameters.options.shortcutType)
 			{
 				case 'gridbundle':

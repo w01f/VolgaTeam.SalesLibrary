@@ -1,5 +1,4 @@
 <?
-
 	/**
 	 * Class LinkInternalLinkRecord
 	 * @property mixed id
