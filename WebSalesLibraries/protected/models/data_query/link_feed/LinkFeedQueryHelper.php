@@ -346,7 +346,7 @@
 				{
 					$feedItem->dragHeader = 'DownloadURL';
 					$feedItem->url = \FileInfo::getFileMIME($resultRecord['original_format']) . ':' .
-						$fileInfo->name . ':' .
+						$fileInfo->dragDownloadName . ':' .
 						str_replace('SalesLibraries/SalesLibraries', 'SalesLibraries', $fileInfo->link);
 					$feedItem->isDirectUrl = false;
 				}
@@ -592,7 +592,7 @@
 				{
 					$feedItem->dragHeader = 'DownloadURL';
 					$feedItem->url = \FileInfo::getFileMIME($resultRecord['original_format']) . ':' .
-						$fileInfo->name . ':' .
+						$fileInfo->dragDownloadName . ':' .
 						str_replace('SalesLibraries/SalesLibraries', 'SalesLibraries', $fileInfo->link);
 					$feedItem->isDirectUrl = false;
 				}
@@ -986,7 +986,7 @@
 				{
 					$feedItem->dragHeader = 'DownloadURL';
 					$feedItem->url = \FileInfo::getFileMIME($resultRecord['original_format']) . ':' .
-						$fileInfo->name . ':' .
+						$fileInfo->dragDownloadName . ':' .
 						str_replace('SalesLibraries/SalesLibraries', 'SalesLibraries', $fileInfo->link);
 					$feedItem->isDirectUrl = false;
 				}

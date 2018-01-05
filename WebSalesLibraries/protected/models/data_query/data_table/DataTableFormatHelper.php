@@ -127,7 +127,7 @@
 					{
 						$record['url_header'] = 'DownloadURL';
 						$record['url'] = \FileInfo::getFileMIME($linkRecord['original_format']) . ':' .
-							(isset($fileInfo->name) ? $fileInfo->name : $linkRecord['file_name']) . ':' .
+							(isset($fileInfo->dragDownloadName) ? $fileInfo->dragDownloadName : $linkRecord['file_name']) . ':' .
 							str_replace('SalesLibraries/SalesLibraries', 'SalesLibraries', $fileInfo->link);
 					}
 

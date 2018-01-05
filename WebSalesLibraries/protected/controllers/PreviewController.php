@@ -237,7 +237,7 @@
 						$this->renderPartial(
 							'zipFiles',
 							array(
-								'zipName' => $link->name,
+								'zipName' => sprintf("%s.zip", $link->name),
 								'downloadInfoList' => $downloadInfoList
 							),
 							false, true);

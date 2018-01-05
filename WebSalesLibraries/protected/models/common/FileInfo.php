@@ -13,6 +13,8 @@
 
 		public $isFile;
 
+		public $dragDownloadName;
+
 		/**
 		 * @param LinkRecord $linkRecord
 		 * @param Library $parentLibrary
@@ -45,7 +47,7 @@
 			switch ($type)
 			{
 				case 5:
-					$fileInfo->name = str_replace('\\', '', $relativePath);
+					$fileInfo->name = $fileInfo->dragDownloadName = str_replace('\\', '', $relativePath);
 					$fileInfo->path = str_replace('//', DIRECTORY_SEPARATOR, str_replace('\\', DIRECTORY_SEPARATOR, $parentLibrary->storagePath . $relativePath));
 					break;
 				case 6:
@@ -53,20 +55,20 @@
 				case 8:
 				case 17:
 				case 18:
-					$fileInfo->name = $fileInfo->link = str_replace('\\', '', $relativePath);
+					$fileInfo->name = $fileInfo->dragDownloadName = $fileInfo->link = str_replace('\\', '', $relativePath);
 					break;
 				case 9:
 				case 15:
-					$fileInfo->name = $name;
+					$fileInfo->name = $fileInfo->dragDownloadName = $name;
 					$fileInfo->link = $relativePath;
 					break;
 				case 14:
 				case 20:
-					$fileInfo->name = $name;
+					$fileInfo->name = $fileInfo->dragDownloadName = $name;
 					$fileInfo->link = str_replace('\\', '', $relativePath);
 					break;
 				case 16:
-					$fileInfo->name = $name;
+					$fileInfo->name = $fileInfo->dragDownloadName = $name;
 					/** @var InternalLibraryFolderLinkSettings|InternalLibraryObjectLinkSettings|InternalLibraryPageLinkSettings|InternalShortcutLinkSettings|InternalWallbinLinkSettings $extendedProperties */
 					switch ($extendedProperties->internalLinkType)
 					{
@@ -82,12 +84,13 @@
 					}
 					break;
 				case 19:
-					$fileInfo->name = sprintf("%s.zip", $name);
+					$fileInfo->name = $name;
+					$fileInfo->dragDownloadName = sprintf("%s.zip", $name);
 					$fileInfo->link = Yii::app()->createAbsoluteUrl('preview/zipAndDownloadLinkBundle', array('linkId' => $id));
 					break;
 				default:
 					$fileInfo->path = str_replace('//', DIRECTORY_SEPARATOR, str_replace('\\', DIRECTORY_SEPARATOR, $parentLibrary->storagePath . $relativePath));
-					$fileInfo->name = basename($fileInfo->path);
+					$fileInfo->name = $fileInfo->dragDownloadName = basename($fileInfo->path);
 					$fileInfo->link = Utils::formatUrl($parentLibrary->storageLink . $relativePath);
 					$fileInfo->size = file_exists($fileInfo->path) ? filesize($fileInfo->path) : 0;
 					$fileInfo->isFile = true;

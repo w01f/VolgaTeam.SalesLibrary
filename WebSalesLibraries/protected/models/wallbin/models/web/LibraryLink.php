@@ -15,6 +15,7 @@
 		public $name;
 		public $fileRelativePath;
 		public $fileName;
+		public $dragDownloadName;
 		public $fileExtension;
 		public $fileDate;
 		public $fileSize;
@@ -146,6 +147,7 @@
 
 			$fileInfo = \FileInfo::fromLinkRecord($linkRecord, $this->parent->parent->parent);
 			$this->fileName = isset($fileInfo->name) ? $fileInfo->name : $this->fileName;
+			$this->dragDownloadName = isset($fileInfo->dragDownloadName) ? $fileInfo->dragDownloadName : $this->name;
 			$this->filePath = isset($fileInfo->path) ? $fileInfo->path : $this->filePath;
 			$this->fileLink = isset($fileInfo->link) ? $fileInfo->link : $this->fileLink;
 			$this->fileSize = !isset($this->fileSize) ? $fileInfo->size : $this->fileSize;
@@ -400,7 +402,7 @@
 				{
 					$downloadHeader = 'DownloadURL';
 					$downloadLink = \FileInfo::getFileMIME($this->originalFormat) . ':' .
-						$this->fileName . ':' .
+						$this->dragDownloadName . ':' .
 						str_replace('SalesLibraries/SalesLibraries', 'SalesLibraries', $this->fileLink);
 				}
 				$result .= '<div class="download-header">' . $downloadHeader . '</div>';

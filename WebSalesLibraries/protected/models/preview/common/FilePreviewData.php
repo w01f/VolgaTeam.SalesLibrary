@@ -71,7 +71,7 @@
 			$fileInfo = FileInfo::fromLinkData($link->id, $link->type, $link->name, $link->fileRelativePath, $link->extendedProperties, $link->parent->parent->parent);
 			if ($fileInfo->isFile)
 				$this->dragUrl = \FileInfo::getFileMIME($link->originalFormat) . ':' .
-					$fileInfo->name . ':' . $fileInfo->link;
+					$fileInfo->dragDownloadName . ':' . $fileInfo->link;
 		}
 
 		/**
