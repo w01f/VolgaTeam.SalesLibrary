@@ -85,7 +85,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 			}
 		}
 
-		private int _borderSize = 0;
+		private int _borderSize = 2;
 		public int BorderSize
 		{
 			get { return _borderSize; }
@@ -157,7 +157,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 			}
 		}
 
-		private Color _foreColor = Color.Black;
+		private Color _foreColor = ColorTranslator.FromHtml("#828282");
 		public Color ForeColor
 		{
 			get { return _foreColor; }
@@ -169,7 +169,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 			}
 		}
 
-		private Font _font = new Font("Arial", 12, FontStyle.Regular, GraphicsUnit.Point);
+		private Font _font = new Font("Arial", 10, FontStyle.Regular, GraphicsUnit.Point);
 		public Font Font
 		{
 			get { return _font; }

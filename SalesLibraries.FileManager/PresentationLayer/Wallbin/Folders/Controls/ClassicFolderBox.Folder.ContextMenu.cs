@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraBars;
@@ -34,6 +35,25 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 			_folderLinksContextMenuEditors.Add(lineBreakFormatEditor);
 
 			popupMenuFolderProperties.CloseUp += OnFolderLinkPropertiesMenuCloseUp;
+		}
+
+		private void popupMenuFolderProperties_BeforePopup(object sender, CancelEventArgs e)
+		{
+			barButtonItemFolderPropertiesMultiLinksThumbnail.Visibility = DataSource.AllGroupLinks.OfType<IThumbnailSettingsHolder>().Any()
+				? BarItemVisibility.Always
+				: BarItemVisibility.Never;
+			barButtonItemFolderPropertiesMultiLinksSecurity.Visibility = MainController.Instance.Settings.EditorSettings.EnableSecurityEdit
+				? BarItemVisibility.Always
+				: BarItemVisibility.Never;
+			barButtonItemFolderPropertiesMultiLinksTags.Visibility = MainController.Instance.Settings.EditorSettings.EnableTagsEdit && DataSource.AllGroupLinks.OfType<LibraryObjectLink>().Any()
+				? BarItemVisibility.Always
+				: BarItemVisibility.Never;
+			barButtonItemFolderPropertiesMultiLinksExpirationDate.Visibility = DataSource.AllGroupLinks.OfType<LibraryObjectLink>().Any()
+				? BarItemVisibility.Always
+				: BarItemVisibility.Never;
+			barButtonItemFolderPropertiesMultiLinksRefreshPreviewFiles.Visibility = DataSource.AllGroupLinks.OfType<IPreviewableLink>().Any()
+				? BarItemVisibility.Always
+				: BarItemVisibility.Never;
 		}
 
 		private void LoadFolderLinksContextMenuEditors(IList<BaseLibraryLink> links)
@@ -140,6 +160,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 		private void barButtonItemFolderPropertiesMultiLinksBanner_ItemClick(object sender, ItemClickEventArgs e)
 		{
 			EditAllLinksInFolderSettings(LinkSettingsType.Banner);
+		}
+
+		private void barButtonItemFolderPropertiesMultiLinksThumbnail_ItemClick(object sender, ItemClickEventArgs e)
+		{
+			EditAllLinksInFolderSettings(LinkSettingsType.Thumbnail);
 		}
 
 		private void barButtonItemFolderPropertiesMultiLinksTags_ItemClick(object sender, ItemClickEventArgs e)

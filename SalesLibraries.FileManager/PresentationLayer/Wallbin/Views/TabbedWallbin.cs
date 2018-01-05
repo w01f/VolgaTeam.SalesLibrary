@@ -174,6 +174,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			var selectedPage = _menuHitInfo.Page as TabPage;
 			if (selectedPage == null) return;
 
+			barButtonItemPagePropertiesMultiLinksThumbnail.Visibility = selectedPage.Page.AllGroupLinks.OfType<IThumbnailSettingsHolder>().Any()
+				? BarItemVisibility.Always
+				: BarItemVisibility.Never;
 			barButtonItemPagePropertiesMultiLinksSecurity.Visibility = MainController.Instance.Settings.EditorSettings.EnableSecurityEdit
 				? BarItemVisibility.Always
 				: BarItemVisibility.Never;
@@ -374,6 +377,14 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			var selectedPage = _menuHitInfo.Page as TabPage;
 			if (selectedPage == null) return;
 			selectedPage.Content.EditLinksGroupSettings(LinkSettingsType.Banner);
+			IsDataChanged = true;
+		}
+
+		private void barButtonItemPagePropertiesMultiLinksThumbnail_ItemClick(object sender, ItemClickEventArgs e)
+		{
+			var selectedPage = _menuHitInfo.Page as TabPage;
+			if (selectedPage == null) return;
+			selectedPage.Content.EditLinksGroupSettings(LinkSettingsType.Thumbnail);
 			IsDataChanged = true;
 		}
 

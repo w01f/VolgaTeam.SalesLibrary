@@ -152,6 +152,7 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 
 		protected void UpdateGridSize()
 		{
+			if(IsDisposed) return;
 			var height = grFiles.Rows
 				.OfType<LinkRow>()
 				.Sum(row => row.Info.RowHeight);

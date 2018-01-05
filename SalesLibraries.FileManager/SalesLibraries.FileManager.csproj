@@ -153,6 +153,7 @@
       <HintPath>..\packages\System.Data.SQLite.Linq.1.0.105.2\lib\net451\System.Data.SQLite.Linq.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Design" />
     <Reference Include="System.Printing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
@@ -1375,28 +1376,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SalesLibraries.Business\SalesLibraries.Business.csproj">
-      <Project>{526944f8-7b85-48ce-81f1-43ae041a321f}</Project>
-      <Name>SalesLibraries.Business</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SalesLibraries.CommonGUI\SalesLibraries.CommonGUI.csproj">
-      <Project>{03639419-d148-4814-b8c1-cf0ab550d136}</Project>
-      <Name>SalesLibraries.CommonGUI</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SalesLibraries.Common\SalesLibraries.Common.csproj">
-      <Project>{f35dc0d8-6816-4033-a5e2-d446c7a956fe}</Project>
-      <Name>SalesLibraries.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SalesLibraries.Legacy\SalesLibraries.Legacy.csproj">
-      <Project>{E689F89C-294F-45F3-85EB-1CC60DFAFDCF}</Project>
-      <Name>SalesLibraries.Legacy</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SalesLibraries.ServiceConnector\SalesLibraries.ServiceConnector.csproj">
-      <Project>{900ccf99-921a-4e35-8686-c85d48263785}</Project>
-      <Name>SalesLibraries.ServiceConnector</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="icon.ico" />
     <None Include="Resources\LinkSettingsSecurityWhiteList.png" />
     <None Include="Resources\LinkSettingsSecurityVisible.png" />
@@ -1537,7 +1516,24 @@
     <None Include="Resources\ArrowLeft.png" />
     <None Include="Resources\ArrowDown.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\SalesLibraries.Business\SalesLibraries.Business.csproj">
+      <Project>{526944F8-7B85-48CE-81F1-43AE041A321F}</Project>
+      <Name>SalesLibraries.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SalesLibraries.CommonGUI\SalesLibraries.CommonGUI.csproj">
+      <Project>{03639419-D148-4814-B8C1-CF0AB550D136}</Project>
+      <Name>SalesLibraries.CommonGUI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SalesLibraries.Common\SalesLibraries.Common.csproj">
+      <Project>{F35DC0D8-6816-4033-A5E2-D446C7A956FE}</Project>
+      <Name>SalesLibraries.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SalesLibraries.ServiceConnector\SalesLibraries.ServiceConnector.csproj">
+      <Project>{900CCF99-921A-4E35-8686-C85D48263785}</Project>
+      <Name>SalesLibraries.ServiceConnector</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>robocopy /s /z /r:100 "$(SolutionDir)SalesLibraries.Business\$(OutDir)\" "d:\WorkingFiles\SalesDepot\Release\Site Admin.exe" "*.sql" "sequense.txt"

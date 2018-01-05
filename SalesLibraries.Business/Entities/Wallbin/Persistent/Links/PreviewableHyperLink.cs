@@ -26,7 +26,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		[NotMapped, JsonIgnore]
 		public string PreviewContainerName => GetPreviewContainer().ExtId.ToString("D");
 		[NotMapped, JsonIgnore]
-		public Color ThumbnailBackColor => Folder.Settings.BackgroundWindowColor;
+		public Color ThumbnailBackColor => ParentFolder.Settings.BackgroundWindowColor;
 		[NotMapped, JsonIgnore]
 		public bool ShowSourceFilesList => true;
 		#endregion

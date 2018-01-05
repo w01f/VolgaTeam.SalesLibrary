@@ -138,16 +138,13 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			xtraTabControlGallery.SelectedPageChanged += (o, e) =>
 			{
 				((BaseLinkImagesContainer)e.Page).Init();
-				var galleryNode = e.Page.Tag as TreeNode;
-				if (galleryNode == null)
-				{
-					galleryNode = treeViewGallery.Nodes.Insert(xtraTabControlGallery.TabPages.IndexOf(e.Page), e.Page.Text);
-					galleryNode.Tag = e.Page;
-					e.Page.Tag = galleryNode;
-					_allowHandleEvents = false;
-					treeViewGallery.SelectedNode = galleryNode;
-					_allowHandleEvents = true;
-				}
+				if (e.Page.Tag is TreeNode galleryNode) return;
+				galleryNode = treeViewGallery.Nodes.Insert(xtraTabControlGallery.TabPages.IndexOf(e.Page), e.Page.Text);
+				galleryNode.Tag = e.Page;
+				e.Page.Tag = galleryNode;
+				_allowHandleEvents = false;
+				treeViewGallery.SelectedNode = galleryNode;
+				_allowHandleEvents = true;
 			};
 			((BaseLinkImagesContainer)xtraTabControlGallery.SelectedTabPage).Init();
 			foreach (var galleryPage in xtraTabControlGallery.TabPages.OfType<BaseLinkImagesContainer>().ToList())

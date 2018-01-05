@@ -1,13 +1,20 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Drawing;
+using System.IO;
+using System.Linq;
 using Newtonsoft.Json;
 using SalesLibraries.Business.Entities.Common;
+using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Constants;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
+using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkBundleSettings;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
+using SalesLibraries.Common.Helpers;
 
 namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 {
-	public class LinkBundleLink : LibraryObjectLink
+	public class LinkBundleLink : LibraryObjectLink, IThumbnailSettingsHolder
 	{
 		#region Nonpersistent Properties
 
@@ -33,6 +40,12 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		[NotMapped, JsonIgnore]
 		public override string AutoWidgetKey => "link bundle";
+
+		[NotMapped, JsonIgnore]
+		public Color ThumbnailBackColor => ParentFolder.Settings.BackgroundWindowColor;
+
+		[NotMapped, JsonIgnore]
+		public bool ShowSourceFilesList => true;
 		#endregion
 
 		public LinkBundleLink()
@@ -53,6 +66,21 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 				linkBundleLink.Folder = parentFolder;
 				((LinkBundleLinkSettings)linkBundleLink.Settings).BundleId = bundle.ExtId;
 			});
+		}
+
+		public IList<string> GetThumbnailSourceFiles()
+		{
+			var previewFiles = new List<string>();
+			foreach (var previewableLink in ((LinkBundleLinkSettings)Settings).Bundle.Settings.Items
+				.OfType<LibraryLinkItem>()
+				.Select(item => item.TargetLink)
+				.OfType<IThumbnailSettingsHolder>())
+			{
+				var tempList = previewableLink.GetThumbnailSourceFiles().ToList();
+				tempList.Sort(WinAPIHelper.StrCmpLogicalW);
+				previewFiles.AddRange(tempList);
+			}
+			return previewFiles;
 		}
 	}
 }

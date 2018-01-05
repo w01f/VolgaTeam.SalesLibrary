@@ -33,8 +33,6 @@
 			this.styleManager = new DevComponents.DotNetBar.StyleManager(this.components);
 			this.ribbonControl = new DevComponents.DotNetBar.RibbonControl();
 			this.ribbonPanelHome = new DevComponents.DotNetBar.RibbonPanel();
-			this.ribbonBarHomeExit = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemHomeExit = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarHomeSync = new DevComponents.DotNetBar.RibbonBar();
 			this.buttonItemHomeSync = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarHomeView = new DevComponents.DotNetBar.RibbonBar();
@@ -56,8 +54,6 @@
 			this.ribbonBarHomeLogo = new DevComponents.DotNetBar.RibbonBar();
 			this.labelItemHomeLogo = new DevComponents.DotNetBar.LabelItem();
 			this.ribbonPanelTags = new DevComponents.DotNetBar.RibbonPanel();
-			this.ribbonBarTagsExit = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemTagsExit = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarTagsSync = new DevComponents.DotNetBar.RibbonBar();
 			this.buttonItemTagsSync = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarTagsView = new DevComponents.DotNetBar.RibbonBar();
@@ -72,8 +68,6 @@
 			this.ribbonBarTagsLogo = new DevComponents.DotNetBar.RibbonBar();
 			this.labelItemTagsLogo = new DevComponents.DotNetBar.LabelItem();
 			this.ribbonPanelSettings = new DevComponents.DotNetBar.RibbonPanel();
-			this.ribbonBarSettingsExit = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemSettingsExit = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarSettingsSync = new DevComponents.DotNetBar.RibbonBar();
 			this.buttonItemSettingsSync = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarSettingsView = new DevComponents.DotNetBar.RibbonBar();
@@ -90,8 +84,6 @@
 			this.ribbonBarSettingsLogo = new DevComponents.DotNetBar.RibbonBar();
 			this.labelItemSettingsLogo = new DevComponents.DotNetBar.LabelItem();
 			this.ribbonPanelBundles = new DevComponents.DotNetBar.RibbonPanel();
-			this.ribbonBarBundlesExit = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemBundlesExit = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarBundlesSync = new DevComponents.DotNetBar.RibbonBar();
 			this.buttonItemBundlesSync = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarBundlesView = new DevComponents.DotNetBar.RibbonBar();
@@ -102,8 +94,6 @@
 			this.ribbonBarBundlesLogo = new DevComponents.DotNetBar.RibbonBar();
 			this.labelItemBundlesLogo = new DevComponents.DotNetBar.LabelItem();
 			this.ribbonPanelSecurity = new DevComponents.DotNetBar.RibbonPanel();
-			this.ribbonBarSecurityExit = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemSecurityExit = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarSecuritySync = new DevComponents.DotNetBar.RibbonBar();
 			this.buttonItemSecuritySync = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarSecurityView = new DevComponents.DotNetBar.RibbonBar();
@@ -116,8 +106,6 @@
 			this.ribbonBarSecurityLogo = new DevComponents.DotNetBar.RibbonBar();
 			this.labelItemSecurityLogo = new DevComponents.DotNetBar.LabelItem();
 			this.ribbonPanelVideo = new DevComponents.DotNetBar.RibbonPanel();
-			this.ribbonBarVideoExit = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemVideoExit = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarVideoSync = new DevComponents.DotNetBar.RibbonBar();
 			this.buttonItemVideoSync = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarVideoView = new DevComponents.DotNetBar.RibbonBar();
@@ -130,8 +118,6 @@
 			this.ribbonBarVideoLogo = new DevComponents.DotNetBar.RibbonBar();
 			this.labelItemVideoLogo = new DevComponents.DotNetBar.LabelItem();
 			this.ribbonPanelCalendar = new DevComponents.DotNetBar.RibbonPanel();
-			this.ribbonBarCalendarExit = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemCalendarExit = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarCalendarSync = new DevComponents.DotNetBar.RibbonBar();
 			this.buttonItemCalendarSync = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarCalendarView = new DevComponents.DotNetBar.RibbonBar();
@@ -158,8 +144,6 @@
 			this.ribbonBarCalendarLogo = new DevComponents.DotNetBar.RibbonBar();
 			this.labelItemCalendarLogo = new DevComponents.DotNetBar.LabelItem();
 			this.ribbonPanelPreferences = new DevComponents.DotNetBar.RibbonPanel();
-			this.ribbonBarPreferencesExit = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemPreferencesExit = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarPreferencesSync = new DevComponents.DotNetBar.RibbonBar();
 			this.buttonItemPreferencesSync = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarPreferencesView = new DevComponents.DotNetBar.RibbonBar();
@@ -214,10 +198,10 @@
 			this.ribbonControl.CanCustomize = false;
 			this.ribbonControl.CaptionVisible = true;
 			this.ribbonControl.Controls.Add(this.ribbonPanelHome);
-			this.ribbonControl.Controls.Add(this.ribbonPanelTags);
 			this.ribbonControl.Controls.Add(this.ribbonPanelSettings);
 			this.ribbonControl.Controls.Add(this.ribbonPanelBundles);
 			this.ribbonControl.Controls.Add(this.ribbonPanelSecurity);
+			this.ribbonControl.Controls.Add(this.ribbonPanelTags);
 			this.ribbonControl.Controls.Add(this.ribbonPanelVideo);
 			this.ribbonControl.Controls.Add(this.ribbonPanelCalendar);
 			this.ribbonControl.Controls.Add(this.ribbonPanelPreferences);
@@ -263,7 +247,6 @@
 			// ribbonPanelHome
 			// 
 			this.ribbonPanelHome.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.ribbonPanelHome.Controls.Add(this.ribbonBarHomeExit);
 			this.ribbonPanelHome.Controls.Add(this.ribbonBarHomeSync);
 			this.ribbonPanelHome.Controls.Add(this.ribbonBarHomeView);
 			this.ribbonPanelHome.Controls.Add(this.ribbonBarHomeLinkSettings);
@@ -288,47 +271,6 @@
 			// 
 			this.ribbonPanelHome.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			this.ribbonPanelHome.TabIndex = 1;
-			// 
-			// ribbonBarHomeExit
-			// 
-			this.ribbonBarHomeExit.AutoOverflowEnabled = false;
-			// 
-			// 
-			// 
-			this.ribbonBarHomeExit.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// 
-			// 
-			this.ribbonBarHomeExit.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.ribbonBarHomeExit.ContainerControlProcessDialogKey = true;
-			this.ribbonBarHomeExit.Dock = System.Windows.Forms.DockStyle.Left;
-			this.ribbonBarHomeExit.DragDropSupport = true;
-			this.ribbonBarHomeExit.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.buttonItemHomeExit});
-			this.ribbonBarHomeExit.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarHomeExit.Location = new System.Drawing.Point(841, 0);
-			this.ribbonBarHomeExit.Name = "ribbonBarHomeExit";
-			this.ribbonBarHomeExit.Size = new System.Drawing.Size(83, 101);
-			this.ribbonBarHomeExit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.ribbonBarHomeExit.TabIndex = 16;
-			this.ribbonBarHomeExit.Text = "EXIT";
-			// 
-			// 
-			// 
-			this.ribbonBarHomeExit.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// 
-			// 
-			this.ribbonBarHomeExit.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemHomeExit
-			// 
-			this.buttonItemHomeExit.Image = global::SalesLibraries.FileManager.Properties.Resources.RibbonExit;
-			this.buttonItemHomeExit.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-			this.buttonItemHomeExit.Name = "buttonItemHomeExit";
-			this.buttonItemHomeExit.SubItemsExpandWidth = 14;
-			this.superTooltip.SetSuperTooltip(this.buttonItemHomeExit, new DevComponents.DotNetBar.SuperTooltipInfo("EXIT", "", "Close this application", null, null, DevComponents.DotNetBar.eTooltipColor.Default));
-			this.buttonItemHomeExit.Click += new System.EventHandler(this.OnExitClick);
 			// 
 			// ribbonBarHomeSync
 			// 
@@ -675,7 +617,6 @@
 			// ribbonPanelTags
 			// 
 			this.ribbonPanelTags.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.ribbonPanelTags.Controls.Add(this.ribbonBarTagsExit);
 			this.ribbonPanelTags.Controls.Add(this.ribbonBarTagsSync);
 			this.ribbonPanelTags.Controls.Add(this.ribbonBarTagsView);
 			this.ribbonPanelTags.Controls.Add(this.ribbonBarTagsKeywords);
@@ -701,47 +642,6 @@
 			this.ribbonPanelTags.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			this.ribbonPanelTags.TabIndex = 4;
 			this.ribbonPanelTags.Visible = false;
-			// 
-			// ribbonBarTagsExit
-			// 
-			this.ribbonBarTagsExit.AutoOverflowEnabled = true;
-			// 
-			// 
-			// 
-			this.ribbonBarTagsExit.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// 
-			// 
-			this.ribbonBarTagsExit.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.ribbonBarTagsExit.ContainerControlProcessDialogKey = true;
-			this.ribbonBarTagsExit.Dock = System.Windows.Forms.DockStyle.Left;
-			this.ribbonBarTagsExit.DragDropSupport = true;
-			this.ribbonBarTagsExit.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.buttonItemTagsExit});
-			this.ribbonBarTagsExit.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarTagsExit.Location = new System.Drawing.Point(650, 0);
-			this.ribbonBarTagsExit.Name = "ribbonBarTagsExit";
-			this.ribbonBarTagsExit.Size = new System.Drawing.Size(77, 101);
-			this.ribbonBarTagsExit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.ribbonBarTagsExit.TabIndex = 28;
-			this.ribbonBarTagsExit.Text = "EXIT";
-			// 
-			// 
-			// 
-			this.ribbonBarTagsExit.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// 
-			// 
-			this.ribbonBarTagsExit.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemTagsExit
-			// 
-			this.buttonItemTagsExit.Image = global::SalesLibraries.FileManager.Properties.Resources.RibbonExit;
-			this.buttonItemTagsExit.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-			this.buttonItemTagsExit.Name = "buttonItemTagsExit";
-			this.buttonItemTagsExit.SubItemsExpandWidth = 14;
-			this.superTooltip.SetSuperTooltip(this.buttonItemTagsExit, new DevComponents.DotNetBar.SuperTooltipInfo("EXIT", "", "Close this application", null, null, DevComponents.DotNetBar.eTooltipColor.Default));
-			this.buttonItemTagsExit.Click += new System.EventHandler(this.OnExitClick);
 			// 
 			// ribbonBarTagsSync
 			// 
@@ -1000,7 +900,6 @@
 			// ribbonPanelSettings
 			// 
 			this.ribbonPanelSettings.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.ribbonPanelSettings.Controls.Add(this.ribbonBarSettingsExit);
 			this.ribbonPanelSettings.Controls.Add(this.ribbonBarSettingsSync);
 			this.ribbonPanelSettings.Controls.Add(this.ribbonBarSettingsView);
 			this.ribbonPanelSettings.Controls.Add(this.ribbonBarSettingsWallbin);
@@ -1027,47 +926,6 @@
 			this.ribbonPanelSettings.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			this.ribbonPanelSettings.TabIndex = 3;
 			this.ribbonPanelSettings.Visible = false;
-			// 
-			// ribbonBarSettingsExit
-			// 
-			this.ribbonBarSettingsExit.AutoOverflowEnabled = true;
-			// 
-			// 
-			// 
-			this.ribbonBarSettingsExit.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// 
-			// 
-			this.ribbonBarSettingsExit.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.ribbonBarSettingsExit.ContainerControlProcessDialogKey = true;
-			this.ribbonBarSettingsExit.Dock = System.Windows.Forms.DockStyle.Left;
-			this.ribbonBarSettingsExit.DragDropSupport = true;
-			this.ribbonBarSettingsExit.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.buttonItemSettingsExit});
-			this.ribbonBarSettingsExit.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarSettingsExit.Location = new System.Drawing.Point(707, 0);
-			this.ribbonBarSettingsExit.Name = "ribbonBarSettingsExit";
-			this.ribbonBarSettingsExit.Size = new System.Drawing.Size(79, 101);
-			this.ribbonBarSettingsExit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.ribbonBarSettingsExit.TabIndex = 30;
-			this.ribbonBarSettingsExit.Text = "EXIT";
-			// 
-			// 
-			// 
-			this.ribbonBarSettingsExit.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// 
-			// 
-			this.ribbonBarSettingsExit.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemSettingsExit
-			// 
-			this.buttonItemSettingsExit.Image = global::SalesLibraries.FileManager.Properties.Resources.RibbonExit;
-			this.buttonItemSettingsExit.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-			this.buttonItemSettingsExit.Name = "buttonItemSettingsExit";
-			this.buttonItemSettingsExit.SubItemsExpandWidth = 14;
-			this.superTooltip.SetSuperTooltip(this.buttonItemSettingsExit, new DevComponents.DotNetBar.SuperTooltipInfo("EXIT", "", "Close this application", null, null, DevComponents.DotNetBar.eTooltipColor.Default));
-			this.buttonItemSettingsExit.Click += new System.EventHandler(this.OnExitClick);
 			// 
 			// ribbonBarSettingsSync
 			// 
@@ -1366,7 +1224,6 @@
 			// ribbonPanelBundles
 			// 
 			this.ribbonPanelBundles.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.ribbonPanelBundles.Controls.Add(this.ribbonBarBundlesExit);
 			this.ribbonPanelBundles.Controls.Add(this.ribbonBarBundlesSync);
 			this.ribbonPanelBundles.Controls.Add(this.ribbonBarBundlesView);
 			this.ribbonPanelBundles.Controls.Add(this.ribbonBarBundlesNew);
@@ -1390,47 +1247,6 @@
 			this.ribbonPanelBundles.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			this.ribbonPanelBundles.TabIndex = 10;
 			this.ribbonPanelBundles.Visible = false;
-			// 
-			// ribbonBarBundlesExit
-			// 
-			this.ribbonBarBundlesExit.AutoOverflowEnabled = true;
-			// 
-			// 
-			// 
-			this.ribbonBarBundlesExit.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// 
-			// 
-			this.ribbonBarBundlesExit.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.ribbonBarBundlesExit.ContainerControlProcessDialogKey = true;
-			this.ribbonBarBundlesExit.Dock = System.Windows.Forms.DockStyle.Left;
-			this.ribbonBarBundlesExit.DragDropSupport = true;
-			this.ribbonBarBundlesExit.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.buttonItemBundlesExit});
-			this.ribbonBarBundlesExit.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarBundlesExit.Location = new System.Drawing.Point(466, 0);
-			this.ribbonBarBundlesExit.Name = "ribbonBarBundlesExit";
-			this.ribbonBarBundlesExit.Size = new System.Drawing.Size(74, 101);
-			this.ribbonBarBundlesExit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.ribbonBarBundlesExit.TabIndex = 33;
-			this.ribbonBarBundlesExit.Text = "EXIT";
-			// 
-			// 
-			// 
-			this.ribbonBarBundlesExit.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// 
-			// 
-			this.ribbonBarBundlesExit.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemBundlesExit
-			// 
-			this.buttonItemBundlesExit.Image = global::SalesLibraries.FileManager.Properties.Resources.RibbonExit;
-			this.buttonItemBundlesExit.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-			this.buttonItemBundlesExit.Name = "buttonItemBundlesExit";
-			this.buttonItemBundlesExit.SubItemsExpandWidth = 14;
-			this.superTooltip.SetSuperTooltip(this.buttonItemBundlesExit, new DevComponents.DotNetBar.SuperTooltipInfo("EXIT", "", "Close this application", null, null, DevComponents.DotNetBar.eTooltipColor.Default));
-			this.buttonItemBundlesExit.Click += new System.EventHandler(this.OnExitClick);
 			// 
 			// ribbonBarBundlesSync
 			// 
@@ -1610,7 +1426,6 @@
 			// ribbonPanelSecurity
 			// 
 			this.ribbonPanelSecurity.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.ribbonPanelSecurity.Controls.Add(this.ribbonBarSecurityExit);
 			this.ribbonPanelSecurity.Controls.Add(this.ribbonBarSecuritySync);
 			this.ribbonPanelSecurity.Controls.Add(this.ribbonBarSecurityView);
 			this.ribbonPanelSecurity.Controls.Add(this.ribbonBarSecurityReset);
@@ -1635,47 +1450,6 @@
 			this.ribbonPanelSecurity.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			this.ribbonPanelSecurity.TabIndex = 5;
 			this.ribbonPanelSecurity.Visible = false;
-			// 
-			// ribbonBarSecurityExit
-			// 
-			this.ribbonBarSecurityExit.AutoOverflowEnabled = true;
-			// 
-			// 
-			// 
-			this.ribbonBarSecurityExit.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// 
-			// 
-			this.ribbonBarSecurityExit.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.ribbonBarSecurityExit.ContainerControlProcessDialogKey = true;
-			this.ribbonBarSecurityExit.Dock = System.Windows.Forms.DockStyle.Left;
-			this.ribbonBarSecurityExit.DragDropSupport = true;
-			this.ribbonBarSecurityExit.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.buttonItemSecurityExit});
-			this.ribbonBarSecurityExit.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarSecurityExit.Location = new System.Drawing.Point(560, 0);
-			this.ribbonBarSecurityExit.Name = "ribbonBarSecurityExit";
-			this.ribbonBarSecurityExit.Size = new System.Drawing.Size(74, 101);
-			this.ribbonBarSecurityExit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.ribbonBarSecurityExit.TabIndex = 29;
-			this.ribbonBarSecurityExit.Text = "EXIT";
-			// 
-			// 
-			// 
-			this.ribbonBarSecurityExit.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// 
-			// 
-			this.ribbonBarSecurityExit.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemSecurityExit
-			// 
-			this.buttonItemSecurityExit.Image = global::SalesLibraries.FileManager.Properties.Resources.RibbonExit;
-			this.buttonItemSecurityExit.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-			this.buttonItemSecurityExit.Name = "buttonItemSecurityExit";
-			this.buttonItemSecurityExit.SubItemsExpandWidth = 14;
-			this.superTooltip.SetSuperTooltip(this.buttonItemSecurityExit, new DevComponents.DotNetBar.SuperTooltipInfo("EXIT", "", "Close this application", null, null, DevComponents.DotNetBar.eTooltipColor.Default));
-			this.buttonItemSecurityExit.Click += new System.EventHandler(this.OnExitClick);
 			// 
 			// ribbonBarSecuritySync
 			// 
@@ -1894,7 +1668,6 @@
 			// ribbonPanelVideo
 			// 
 			this.ribbonPanelVideo.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.ribbonPanelVideo.Controls.Add(this.ribbonBarVideoExit);
 			this.ribbonPanelVideo.Controls.Add(this.ribbonBarVideoSync);
 			this.ribbonPanelVideo.Controls.Add(this.ribbonBarVideoView);
 			this.ribbonPanelVideo.Controls.Add(this.ribbonBarVideoDelete);
@@ -1919,47 +1692,6 @@
 			this.ribbonPanelVideo.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			this.ribbonPanelVideo.TabIndex = 9;
 			this.ribbonPanelVideo.Visible = false;
-			// 
-			// ribbonBarVideoExit
-			// 
-			this.ribbonBarVideoExit.AutoOverflowEnabled = true;
-			// 
-			// 
-			// 
-			this.ribbonBarVideoExit.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// 
-			// 
-			this.ribbonBarVideoExit.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.ribbonBarVideoExit.ContainerControlProcessDialogKey = true;
-			this.ribbonBarVideoExit.Dock = System.Windows.Forms.DockStyle.Left;
-			this.ribbonBarVideoExit.DragDropSupport = true;
-			this.ribbonBarVideoExit.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.buttonItemVideoExit});
-			this.ribbonBarVideoExit.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarVideoExit.Location = new System.Drawing.Point(562, 0);
-			this.ribbonBarVideoExit.Name = "ribbonBarVideoExit";
-			this.ribbonBarVideoExit.Size = new System.Drawing.Size(83, 101);
-			this.ribbonBarVideoExit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.ribbonBarVideoExit.TabIndex = 27;
-			this.ribbonBarVideoExit.Text = "EXIT";
-			// 
-			// 
-			// 
-			this.ribbonBarVideoExit.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// 
-			// 
-			this.ribbonBarVideoExit.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemVideoExit
-			// 
-			this.buttonItemVideoExit.Image = global::SalesLibraries.FileManager.Properties.Resources.RibbonExit;
-			this.buttonItemVideoExit.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-			this.buttonItemVideoExit.Name = "buttonItemVideoExit";
-			this.buttonItemVideoExit.SubItemsExpandWidth = 14;
-			this.superTooltip.SetSuperTooltip(this.buttonItemVideoExit, new DevComponents.DotNetBar.SuperTooltipInfo("EXIT", "", "Close this application", null, null, DevComponents.DotNetBar.eTooltipColor.Default));
-			this.buttonItemVideoExit.Click += new System.EventHandler(this.OnExitClick);
 			// 
 			// ribbonBarVideoSync
 			// 
@@ -2178,7 +1910,6 @@
 			// ribbonPanelCalendar
 			// 
 			this.ribbonPanelCalendar.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.ribbonPanelCalendar.Controls.Add(this.ribbonBarCalendarExit);
 			this.ribbonPanelCalendar.Controls.Add(this.ribbonBarCalendarSync);
 			this.ribbonPanelCalendar.Controls.Add(this.ribbonBarCalendarView);
 			this.ribbonPanelCalendar.Controls.Add(this.ribbonBarCalendarFont);
@@ -2206,47 +1937,6 @@
 			this.ribbonPanelCalendar.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			this.ribbonPanelCalendar.TabIndex = 6;
 			this.ribbonPanelCalendar.Visible = false;
-			// 
-			// ribbonBarCalendarExit
-			// 
-			this.ribbonBarCalendarExit.AutoOverflowEnabled = true;
-			// 
-			// 
-			// 
-			this.ribbonBarCalendarExit.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// 
-			// 
-			this.ribbonBarCalendarExit.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.ribbonBarCalendarExit.ContainerControlProcessDialogKey = true;
-			this.ribbonBarCalendarExit.Dock = System.Windows.Forms.DockStyle.Left;
-			this.ribbonBarCalendarExit.DragDropSupport = true;
-			this.ribbonBarCalendarExit.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.buttonItemCalendarExit});
-			this.ribbonBarCalendarExit.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarCalendarExit.Location = new System.Drawing.Point(1005, 0);
-			this.ribbonBarCalendarExit.Name = "ribbonBarCalendarExit";
-			this.ribbonBarCalendarExit.Size = new System.Drawing.Size(76, 101);
-			this.ribbonBarCalendarExit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.ribbonBarCalendarExit.TabIndex = 25;
-			this.ribbonBarCalendarExit.Text = "EXIT";
-			// 
-			// 
-			// 
-			this.ribbonBarCalendarExit.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// 
-			// 
-			this.ribbonBarCalendarExit.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemCalendarExit
-			// 
-			this.buttonItemCalendarExit.Image = global::SalesLibraries.FileManager.Properties.Resources.RibbonExit;
-			this.buttonItemCalendarExit.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-			this.buttonItemCalendarExit.Name = "buttonItemCalendarExit";
-			this.buttonItemCalendarExit.SubItemsExpandWidth = 14;
-			this.superTooltip.SetSuperTooltip(this.buttonItemCalendarExit, new DevComponents.DotNetBar.SuperTooltipInfo("EXIT", "", "Close this application", null, null, DevComponents.DotNetBar.eTooltipColor.Default));
-			this.buttonItemCalendarExit.Click += new System.EventHandler(this.OnExitClick);
 			// 
 			// ribbonBarCalendarSync
 			// 
@@ -2392,6 +2082,10 @@
 			// 
 			// 
 			// 
+			this.itemContainerCalendarFont.TitleMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// 
+			// 
 			this.itemContainerCalendarFont.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			this.itemContainerCalendarFont.VerticalItemAlignment = DevComponents.DotNetBar.eVerticalItemsAlignment.Middle;
 			// 
@@ -2527,7 +2221,7 @@
 			// 
 			// buttonEditCalendarLocation
 			// 
-			this.buttonEditCalendarLocation.Location = new System.Drawing.Point(4, 51);
+			this.buttonEditCalendarLocation.Location = new System.Drawing.Point(4, 50);
 			this.buttonEditCalendarLocation.Name = "buttonEditCalendarLocation";
 			this.buttonEditCalendarLocation.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
@@ -2551,6 +2245,10 @@
 			this.itemContainerCalendarLocation.Name = "itemContainerCalendarLocation";
 			this.itemContainerCalendarLocation.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.controlContainerItemCalendarLocation});
+			// 
+			// 
+			// 
+			this.itemContainerCalendarLocation.TitleMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			// 
 			// 
 			// 
@@ -2610,6 +2308,10 @@
 			// 
 			// 
 			// 
+			this.itemContainerSyncStatus.TitleMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// 
+			// 
 			this.itemContainerSyncStatus.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			// 
 			// buttonItemCalendarSyncStatusEnabled
@@ -2666,7 +2368,6 @@
 			// ribbonPanelPreferences
 			// 
 			this.ribbonPanelPreferences.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.ribbonPanelPreferences.Controls.Add(this.ribbonBarPreferencesExit);
 			this.ribbonPanelPreferences.Controls.Add(this.ribbonBarPreferencesSync);
 			this.ribbonPanelPreferences.Controls.Add(this.ribbonBarPreferencesView);
 			this.ribbonPanelPreferences.Controls.Add(this.ribbonBarPreferencesAutoWidgets);
@@ -2692,47 +2393,6 @@
 			this.ribbonPanelPreferences.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			this.ribbonPanelPreferences.TabIndex = 2;
 			this.ribbonPanelPreferences.Visible = false;
-			// 
-			// ribbonBarPreferencesExit
-			// 
-			this.ribbonBarPreferencesExit.AutoOverflowEnabled = true;
-			// 
-			// 
-			// 
-			this.ribbonBarPreferencesExit.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// 
-			// 
-			this.ribbonBarPreferencesExit.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.ribbonBarPreferencesExit.ContainerControlProcessDialogKey = true;
-			this.ribbonBarPreferencesExit.Dock = System.Windows.Forms.DockStyle.Left;
-			this.ribbonBarPreferencesExit.DragDropSupport = true;
-			this.ribbonBarPreferencesExit.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.buttonItemPreferencesExit});
-			this.ribbonBarPreferencesExit.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarPreferencesExit.Location = new System.Drawing.Point(656, 0);
-			this.ribbonBarPreferencesExit.Name = "ribbonBarPreferencesExit";
-			this.ribbonBarPreferencesExit.Size = new System.Drawing.Size(83, 101);
-			this.ribbonBarPreferencesExit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.ribbonBarPreferencesExit.TabIndex = 24;
-			this.ribbonBarPreferencesExit.Text = "EXIT";
-			// 
-			// 
-			// 
-			this.ribbonBarPreferencesExit.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// 
-			// 
-			this.ribbonBarPreferencesExit.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemPreferencesExit
-			// 
-			this.buttonItemPreferencesExit.Image = global::SalesLibraries.FileManager.Properties.Resources.RibbonExit;
-			this.buttonItemPreferencesExit.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-			this.buttonItemPreferencesExit.Name = "buttonItemPreferencesExit";
-			this.buttonItemPreferencesExit.SubItemsExpandWidth = 14;
-			this.superTooltip.SetSuperTooltip(this.buttonItemPreferencesExit, new DevComponents.DotNetBar.SuperTooltipInfo("EXIT", "", "Close this application", null, null, DevComponents.DotNetBar.eTooltipColor.Default));
-			this.buttonItemPreferencesExit.Click += new System.EventHandler(this.OnExitClick);
 			// 
 			// ribbonBarPreferencesSync
 			// 
@@ -3102,8 +2762,6 @@
 		private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel;
 		private DevExpress.XtraEditors.StyleController styleController;
 		private DevComponents.DotNetBar.SuperTooltip superTooltip;
-		private DevComponents.DotNetBar.RibbonBar ribbonBarHomeExit;
-		public DevComponents.DotNetBar.ButtonItem buttonItemHomeExit;
 		private DevComponents.DotNetBar.RibbonBar ribbonBarHomeSync;
 		public DevComponents.DotNetBar.ButtonItem buttonItemHomeSync;
 		public DevComponents.DotNetBar.RibbonBar ribbonBarHomeLogo;
@@ -3179,22 +2837,8 @@
 		public DevComponents.DotNetBar.ButtonItem buttonItemSecuritySync;
 		private DevComponents.DotNetBar.RibbonBar ribbonBarTagsSync;
 		public DevComponents.DotNetBar.ButtonItem buttonItemTagsSync;
-		private DevComponents.DotNetBar.RibbonBar ribbonBarSettingsExit;
-		public DevComponents.DotNetBar.ButtonItem buttonItemSettingsExit;
-		private DevComponents.DotNetBar.RibbonBar ribbonBarSecurityExit;
-		public DevComponents.DotNetBar.ButtonItem buttonItemSecurityExit;
-		private DevComponents.DotNetBar.RibbonBar ribbonBarTagsExit;
-		public DevComponents.DotNetBar.ButtonItem buttonItemTagsExit;
-		private DevComponents.DotNetBar.RibbonBar ribbonBarVideoExit;
-		public DevComponents.DotNetBar.ButtonItem buttonItemVideoExit;
-		private DevComponents.DotNetBar.RibbonBar ribbonBarCalendarExit;
-		public DevComponents.DotNetBar.ButtonItem buttonItemCalendarExit;
-		private DevComponents.DotNetBar.RibbonBar ribbonBarPreferencesExit;
-		public DevComponents.DotNetBar.ButtonItem buttonItemPreferencesExit;
 		private DevComponents.DotNetBar.RibbonPanel ribbonPanelBundles;
 		private DevComponents.DotNetBar.RibbonTabItem ribbonTabItemBundles;
-		private DevComponents.DotNetBar.RibbonBar ribbonBarBundlesExit;
-		public DevComponents.DotNetBar.ButtonItem buttonItemBundlesExit;
 		private DevComponents.DotNetBar.RibbonBar ribbonBarBundlesSync;
 		public DevComponents.DotNetBar.ButtonItem buttonItemBundlesSync;
 		private DevComponents.DotNetBar.RibbonBar ribbonBarBundlesNew;

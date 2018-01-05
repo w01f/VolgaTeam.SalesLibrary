@@ -38,7 +38,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			Environment.NewLine);
 
 		[NotMapped, JsonIgnore]
-		public Color ThumbnailBackColor => Folder.Settings.BackgroundWindowColor;
+		public Color ThumbnailBackColor => ParentFolder.Settings.BackgroundWindowColor;
 
 		[NotMapped, JsonIgnore]
 		public bool ShowSourceFilesList => true;

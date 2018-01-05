@@ -28,7 +28,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		public override string WebFormat => WebFormats.Video;
 
 		[NotMapped, JsonIgnore]
-		public Color ThumbnailBackColor => Folder.Settings.BackgroundWindowColor;
+		public Color ThumbnailBackColor => ParentFolder.Settings.BackgroundWindowColor;
 
 		[NotMapped, JsonIgnore]
 		public bool ShowSourceFilesList => true;

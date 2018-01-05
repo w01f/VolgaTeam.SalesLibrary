@@ -161,7 +161,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 				barSubItemSingleLinkPropertiesFolderLinkSettings.Visibility = BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesRefreshPreview.Visibility = BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesAdminSettings.Visibility = BarItemVisibility.Never;
-				barButtonItemSingleLinkPropertiesThumbnail.Visibility = BarItemVisibility.Never;
+				barButtonItemSingleLinkPropertiesThumbnail.Visibility = BarItemVisibility.Always;
 				barButtonItemSingleLinkPropertiesTags.Visibility = MainController.Instance.Settings.EditorSettings.EnableTagsEdit
 					? BarItemVisibility.Always
 					: BarItemVisibility.Never;

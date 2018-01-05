@@ -106,12 +106,14 @@
 			this.barSubItemMultiLinkPropertiesImages = new DevExpress.XtraBars.BarSubItem();
 			this.barButtonItemMultiLinkPropertiesWidget = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemMultiLinkPropertiesBanner = new DevExpress.XtraBars.BarButtonItem();
+			this.barButtonItemMultiLinkPropertiesThumbnail = new DevExpress.XtraBars.BarButtonItem();
 			this.barSubItemFolderPropertiesMultiLinks = new DevExpress.XtraBars.BarSubItem();
 			this.barButtonItemFolderPropertiesMultiLinksResetSettings = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemFolderPropertiesMultiLinksDelete = new DevExpress.XtraBars.BarButtonItem();
 			this.barSubItemFolderPropertiesMultiLinksImageSettings = new DevExpress.XtraBars.BarSubItem();
 			this.barButtonItemFolderPropertiesMultiLinksWidget = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemFolderPropertiesMultiLinksBanner = new DevExpress.XtraBars.BarButtonItem();
+			this.barButtonItemFolderPropertiesMultiLinksThumbnail = new DevExpress.XtraBars.BarButtonItem();
 			this.barSubItemFolderPropertiesMultiLinksNotesObjects = new DevExpress.XtraBars.BarSubItem();
 			this.barSubItemFolderPropertiesMultiLinksNotesLineBreaks = new DevExpress.XtraBars.BarSubItem();
 			this.barButtonItemFolderPropertiesMultiLinksTags = new DevExpress.XtraBars.BarButtonItem();
@@ -135,6 +137,7 @@
 			// 
 			// labelControlText
 			// 
+			this.labelControlText.Appearance.Options.UseTextOptions = true;
 			this.labelControlText.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
 			// 
 			// contextMenuStripSecurity
@@ -587,14 +590,17 @@
             this.barSubItemSingleLinkPropertiesFolderLinkSettings,
             this.barButtonItemSingleLinkPropertiesFolderLinkExcelSettings,
             this.barButtonItemSingleLinkPropertiesFolderLinkPdfSettings,
-            this.barButtonItemSingleLinkPropertiesAdminSettings});
-			this.barManager.MaxItemId = 111;
+            this.barButtonItemSingleLinkPropertiesAdminSettings,
+            this.barButtonItemMultiLinkPropertiesThumbnail,
+            this.barButtonItemFolderPropertiesMultiLinksThumbnail});
+			this.barManager.MaxItemId = 113;
 			// 
 			// barDockControlTop
 			// 
 			this.barDockControlTop.CausesValidation = false;
 			this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
 			this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
+			this.barDockControlTop.Manager = this.barManager;
 			this.barDockControlTop.Size = new System.Drawing.Size(311, 0);
 			// 
 			// barDockControlBottom
@@ -602,6 +608,7 @@
 			this.barDockControlBottom.CausesValidation = false;
 			this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.barDockControlBottom.Location = new System.Drawing.Point(0, 308);
+			this.barDockControlBottom.Manager = this.barManager;
 			this.barDockControlBottom.Size = new System.Drawing.Size(311, 0);
 			// 
 			// barDockControlLeft
@@ -609,6 +616,7 @@
 			this.barDockControlLeft.CausesValidation = false;
 			this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
 			this.barDockControlLeft.Location = new System.Drawing.Point(0, 0);
+			this.barDockControlLeft.Manager = this.barManager;
 			this.barDockControlLeft.Size = new System.Drawing.Size(0, 308);
 			// 
 			// barDockControlRight
@@ -616,6 +624,7 @@
 			this.barDockControlRight.CausesValidation = false;
 			this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
 			this.barDockControlRight.Location = new System.Drawing.Point(311, 0);
+			this.barDockControlRight.Manager = this.barManager;
 			this.barDockControlRight.Size = new System.Drawing.Size(0, 308);
 			// 
 			// barButtonItemFolderPropertiesFolderSettings
@@ -853,7 +862,8 @@
 			this.barSubItemMultiLinkPropertiesImages.Id = 88;
 			this.barSubItemMultiLinkPropertiesImages.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemMultiLinkPropertiesWidget),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemMultiLinkPropertiesBanner)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemMultiLinkPropertiesBanner),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemMultiLinkPropertiesThumbnail)});
 			this.barSubItemMultiLinkPropertiesImages.Name = "barSubItemMultiLinkPropertiesImages";
 			// 
 			// barButtonItemMultiLinkPropertiesWidget
@@ -871,6 +881,14 @@
 			this.barButtonItemMultiLinkPropertiesBanner.Id = 90;
 			this.barButtonItemMultiLinkPropertiesBanner.Name = "barButtonItemMultiLinkPropertiesBanner";
 			this.barButtonItemMultiLinkPropertiesBanner.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemMultiLinkPropertiesBanner_ItemClick);
+			// 
+			// barButtonItemMultiLinkPropertiesThumbnail
+			// 
+			this.barButtonItemMultiLinkPropertiesThumbnail.Caption = "Thumbnail";
+			this.barButtonItemMultiLinkPropertiesThumbnail.CategoryGuid = new System.Guid("6c8e0da8-e302-4333-8e7e-3f6d0d1f60db");
+			this.barButtonItemMultiLinkPropertiesThumbnail.Id = 111;
+			this.barButtonItemMultiLinkPropertiesThumbnail.Name = "barButtonItemMultiLinkPropertiesThumbnail";
+			this.barButtonItemMultiLinkPropertiesThumbnail.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemMultiLinkPropertiesThumbnail_ItemClick);
 			// 
 			// barSubItemFolderPropertiesMultiLinks
 			// 
@@ -914,7 +932,8 @@
 			this.barSubItemFolderPropertiesMultiLinksImageSettings.Id = 94;
 			this.barSubItemFolderPropertiesMultiLinksImageSettings.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemFolderPropertiesMultiLinksWidget),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemFolderPropertiesMultiLinksBanner)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemFolderPropertiesMultiLinksBanner),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemFolderPropertiesMultiLinksThumbnail)});
 			this.barSubItemFolderPropertiesMultiLinksImageSettings.Name = "barSubItemFolderPropertiesMultiLinksImageSettings";
 			// 
 			// barButtonItemFolderPropertiesMultiLinksWidget
@@ -932,6 +951,13 @@
 			this.barButtonItemFolderPropertiesMultiLinksBanner.Id = 104;
 			this.barButtonItemFolderPropertiesMultiLinksBanner.Name = "barButtonItemFolderPropertiesMultiLinksBanner";
 			this.barButtonItemFolderPropertiesMultiLinksBanner.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemFolderPropertiesMultiLinksBanner_ItemClick);
+			// 
+			// barButtonItemFolderPropertiesMultiLinksThumbnail
+			// 
+			this.barButtonItemFolderPropertiesMultiLinksThumbnail.Caption = "Thumbnail";
+			this.barButtonItemFolderPropertiesMultiLinksThumbnail.Id = 112;
+			this.barButtonItemFolderPropertiesMultiLinksThumbnail.Name = "barButtonItemFolderPropertiesMultiLinksThumbnail";
+			this.barButtonItemFolderPropertiesMultiLinksThumbnail.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemFolderPropertiesMultiLinksThumbnail_ItemClick);
 			// 
 			// barSubItemFolderPropertiesMultiLinksNotesObjects
 			// 
@@ -1024,6 +1050,7 @@
 			this.popupMenuFolderProperties.MenuAppearance.AppearanceMenu.Pressed.Options.UseTextOptions = true;
 			this.popupMenuFolderProperties.MenuAppearance.AppearanceMenu.Pressed.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.None;
 			this.popupMenuFolderProperties.Name = "popupMenuFolderProperties";
+			this.popupMenuFolderProperties.BeforePopup += new System.ComponentModel.CancelEventHandler(this.popupMenuFolderProperties_BeforePopup);
 			// 
 			// popupMenuMultiLinkProperties
 			// 
@@ -1172,5 +1199,7 @@
 		private DevExpress.XtraBars.BarButtonItem barButtonItemSingleLinkPropertiesFolderLinkExcelSettings;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemSingleLinkPropertiesFolderLinkPdfSettings;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemSingleLinkPropertiesAdminSettings;
+		private DevExpress.XtraBars.BarButtonItem barButtonItemMultiLinkPropertiesThumbnail;
+		private DevExpress.XtraBars.BarButtonItem barButtonItemFolderPropertiesMultiLinksThumbnail;
 	}
 }

@@ -357,9 +357,7 @@
 			this.colorEditBannerTextColor.EditValue = System.Drawing.Color.Empty;
 			this.colorEditBannerTextColor.Location = new System.Drawing.Point(486, 480);
 			this.colorEditBannerTextColor.Name = "colorEditBannerTextColor";
-			this.colorEditBannerTextColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
-			this.colorEditBannerTextColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.colorEditBannerTextColor.Properties.Appearance.Options.UseBackColor = true;
+			this.colorEditBannerTextColor.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
 			this.colorEditBannerTextColor.Properties.Appearance.Options.UseForeColor = true;
 			this.colorEditBannerTextColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
@@ -1054,9 +1052,7 @@
 			this.colorEditInversionColor.Enabled = false;
 			this.colorEditInversionColor.Location = new System.Drawing.Point(470, 117);
 			this.colorEditInversionColor.Name = "colorEditInversionColor";
-			this.colorEditInversionColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
-			this.colorEditInversionColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.colorEditInversionColor.Properties.Appearance.Options.UseBackColor = true;
+			this.colorEditInversionColor.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
 			this.colorEditInversionColor.Properties.Appearance.Options.UseForeColor = true;
 			this.colorEditInversionColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
@@ -1167,6 +1163,7 @@
 			this.treeViewGallery.ForeColor = System.Drawing.Color.Black;
 			this.treeViewGallery.HideSelection = false;
 			this.treeViewGallery.Indent = 16;
+			this.treeViewGallery.ItemHeight = 25;
 			this.treeViewGallery.Location = new System.Drawing.Point(0, 0);
 			this.treeViewGallery.Name = "treeViewGallery";
 			this.treeViewGallery.ShowLines = false;

@@ -136,6 +136,8 @@
 			this.labelControlTitle.AllowHtmlString = true;
 			this.labelControlTitle.Appearance.BackColor = System.Drawing.Color.White;
 			this.labelControlTitle.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.labelControlTitle.Appearance.Options.UseBackColor = true;
+			this.labelControlTitle.Appearance.Options.UseForeColor = true;
 			this.labelControlTitle.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
 			this.labelControlTitle.ImageAlignToText = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
 			this.labelControlTitle.Location = new System.Drawing.Point(20, 27);
@@ -326,7 +328,6 @@
 			this.Controls.Add(this.layoutControl);
 			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.ForeColor = System.Drawing.Color.Black;
 			this.MinimizeBox = false;
 			this.Name = "FormEditLinkSettingsRegular";
 			this.ShowIcon = false;

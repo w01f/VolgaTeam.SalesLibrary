@@ -57,6 +57,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 
 			_defaultMultuLinkRow = (LinkRow)grFiles.Rows[e.RowIndex];
 
+			barButtonItemMultiLinkPropertiesThumbnail.Visibility =
+				SelectionManager.SelectedLinks.OfType<IThumbnailSettingsHolder>().Any()
+					? BarItemVisibility.Always
+					: BarItemVisibility.Never;
 			barButtonItemMultiLinkPropertiesSecurity.Visibility = MainController.Instance.Settings.EditorSettings.EnableSecurityEdit
 					? BarItemVisibility.Always
 					: BarItemVisibility.Never;
@@ -111,6 +115,16 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 				.Union(SelectionManager.SelectedLinks.Where(link => link.ExtId != _defaultMultuLinkRow.Source.ExtId))
 				.ToMultiLinkSet();
 			EditLinksGroupSettings(linkGroup, LinkSettingsType.Banner);
+		}
+
+		private void barButtonItemMultiLinkPropertiesThumbnail_ItemClick(object sender, ItemClickEventArgs e)
+		{
+			var linkGroup = new[] { _defaultMultuLinkRow.Source }
+				.Union(SelectionManager.SelectedLinks.Where(link => link.ExtId != _defaultMultuLinkRow.Source.ExtId))
+				.OfType<IThumbnailSettingsHolder>()
+				.OfType<BaseLibraryLink>()
+				.ToMultiLinkSet();
+			EditLinksGroupSettings(linkGroup, LinkSettingsType.Thumbnail);
 		}
 
 		private void barButtonItemMultiLinkPropertiesTags_ItemClick(object sender, ItemClickEventArgs e)

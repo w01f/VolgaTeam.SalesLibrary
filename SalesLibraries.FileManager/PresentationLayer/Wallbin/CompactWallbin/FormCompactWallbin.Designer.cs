@@ -92,9 +92,6 @@
 			this.layoutControlGroupTreeViewProgress = new DevExpress.XtraLayout.LayoutControlGroup();
 			this.simpleLabelItemTreeViewProgressLabel = new DevExpress.XtraLayout.SimpleLabelItem();
 			this.layoutControlItemTreeViewProgress = new DevExpress.XtraLayout.LayoutControlItem();
-			this.emptySpaceItem5 = new DevExpress.XtraLayout.EmptySpaceItem();
-			this.layoutControlItemExit = new DevExpress.XtraLayout.LayoutControlItem();
-			this.layoutControlItemBack = new DevExpress.XtraLayout.LayoutControlItem();
 			this.layoutControlGroupTreeView = new DevExpress.XtraLayout.LayoutControlGroup();
 			this.emptySpaceItem6 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.layoutControlItemExpand = new DevExpress.XtraLayout.LayoutControlItem();
@@ -104,6 +101,9 @@
 			this.layoutControlItemWallbinItems = new DevExpress.XtraLayout.LayoutControlItem();
 			this.emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.layoutControlGroupBottomButtons = new DevExpress.XtraLayout.LayoutControlGroup();
+			this.layoutControlItemExit = new DevExpress.XtraLayout.LayoutControlItem();
+			this.layoutControlItemBack = new DevExpress.XtraLayout.LayoutControlItem();
+			this.emptySpaceItem5 = new DevExpress.XtraLayout.EmptySpaceItem();
 			((System.ComponentModel.ISupportInitialize)(this.barManager)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
@@ -120,9 +120,6 @@
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupTreeViewProgress)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemTreeViewProgressLabel)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemTreeViewProgress)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem5)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemExit)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemBack)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupTreeView)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem6)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemExpand)).BeginInit();
@@ -132,6 +129,9 @@
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemWallbinItems)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupBottomButtons)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemExit)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemBack)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem5)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// buttonXExit
@@ -229,8 +229,8 @@
 			// 
 			// barStaticItemLogo
 			// 
-			this.barStaticItemLogo.Glyph = global::SalesLibraries.FileManager.Properties.Resources.HomeLogo;
 			this.barStaticItemLogo.Id = 16;
+			this.barStaticItemLogo.ImageOptions.Image = global::SalesLibraries.FileManager.Properties.Resources.HomeLogo;
 			this.barStaticItemLogo.Name = "barStaticItemLogo";
 			this.barStaticItemLogo.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionInMenu;
 			this.barStaticItemLogo.TextAlignment = System.Drawing.StringAlignment.Near;
@@ -239,8 +239,8 @@
 			// 
 			this.barLargeButtonItemSync.Alignment = DevExpress.XtraBars.BarItemLinkAlignment.Right;
 			this.barLargeButtonItemSync.Caption = "Sync";
-			this.barLargeButtonItemSync.Glyph = global::SalesLibraries.FileManager.Properties.Resources.RibbonSync;
 			this.barLargeButtonItemSync.Id = 14;
+			this.barLargeButtonItemSync.ImageOptions.Image = global::SalesLibraries.FileManager.Properties.Resources.RibbonSync;
 			this.barLargeButtonItemSync.Name = "barLargeButtonItemSync";
 			this.barLargeButtonItemSync.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.OnSyncClick);
 			// 
@@ -250,6 +250,7 @@
 			this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
 			this.barDockControlTop.ForeColor = System.Drawing.Color.Black;
 			this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
+			this.barDockControlTop.Manager = this.barManager;
 			this.barDockControlTop.Size = new System.Drawing.Size(398, 95);
 			// 
 			// barDockControlBottom
@@ -258,6 +259,7 @@
 			this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.barDockControlBottom.ForeColor = System.Drawing.Color.Black;
 			this.barDockControlBottom.Location = new System.Drawing.Point(0, 555);
+			this.barDockControlBottom.Manager = this.barManager;
 			this.barDockControlBottom.Size = new System.Drawing.Size(398, 0);
 			// 
 			// barDockControlLeft
@@ -266,6 +268,7 @@
 			this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
 			this.barDockControlLeft.ForeColor = System.Drawing.Color.Black;
 			this.barDockControlLeft.Location = new System.Drawing.Point(0, 95);
+			this.barDockControlLeft.Manager = this.barManager;
 			this.barDockControlLeft.Size = new System.Drawing.Size(0, 460);
 			// 
 			// barDockControlRight
@@ -274,6 +277,7 @@
 			this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
 			this.barDockControlRight.ForeColor = System.Drawing.Color.Black;
 			this.barDockControlRight.Location = new System.Drawing.Point(398, 95);
+			this.barDockControlRight.Manager = this.barManager;
 			this.barDockControlRight.Size = new System.Drawing.Size(0, 460);
 			// 
 			// barButtonItemSingleLinkPropertiesOpenLink
@@ -552,6 +556,7 @@
 			// repositoryItemPictureEdit1
 			// 
 			this.repositoryItemPictureEdit1.Name = "repositoryItemPictureEdit1";
+			this.repositoryItemPictureEdit1.ZoomAccelerationFactor = 1D;
 			// 
 			// styleController
 			// 
@@ -806,15 +811,12 @@
 			// 
 			this.simpleLabelItemSyncProgress.AllowHotTrack = false;
 			this.simpleLabelItemSyncProgress.AllowHtmlStringInCaption = true;
-			this.simpleLabelItemSyncProgress.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
 			this.simpleLabelItemSyncProgress.CustomizationFormText = "Sync Progress Label";
-			this.simpleLabelItemSyncProgress.FillControlToClientArea = false;
 			this.simpleLabelItemSyncProgress.Location = new System.Drawing.Point(57, 0);
 			this.simpleLabelItemSyncProgress.Name = "simpleLabelItemSyncProgress";
 			this.simpleLabelItemSyncProgress.Size = new System.Drawing.Size(341, 35);
 			this.simpleLabelItemSyncProgress.Text = "<color=green><size=+1>Uploading your HTML5 Site…</size></color>";
 			this.simpleLabelItemSyncProgress.TextSize = new System.Drawing.Size(186, 16);
-			this.simpleLabelItemSyncProgress.TrimClientAreaToControl = false;
 			// 
 			// layoutControlItemSyncProgress
 			// 
@@ -835,9 +837,7 @@
 			// 
 			this.simpleLabelItemSyncInfo.AllowHotTrack = false;
 			this.simpleLabelItemSyncInfo.AllowHtmlStringInCaption = true;
-			this.simpleLabelItemSyncInfo.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
 			this.simpleLabelItemSyncInfo.CustomizationFormText = "Sync Info";
-			this.simpleLabelItemSyncInfo.FillControlToClientArea = false;
 			this.simpleLabelItemSyncInfo.Location = new System.Drawing.Point(0, 335);
 			this.simpleLabelItemSyncInfo.MaxSize = new System.Drawing.Size(0, 40);
 			this.simpleLabelItemSyncInfo.MinSize = new System.Drawing.Size(1, 40);
@@ -846,7 +846,6 @@
 			this.simpleLabelItemSyncInfo.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
 			this.simpleLabelItemSyncInfo.Text = " ";
 			this.simpleLabelItemSyncInfo.TextSize = new System.Drawing.Size(186, 16);
-			this.simpleLabelItemSyncInfo.TrimClientAreaToControl = false;
 			// 
 			// layoutControlGroupTreeViewProgress
 			// 
@@ -864,15 +863,12 @@
 			// simpleLabelItemTreeViewProgressLabel
 			// 
 			this.simpleLabelItemTreeViewProgressLabel.AllowHotTrack = false;
-			this.simpleLabelItemTreeViewProgressLabel.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
 			this.simpleLabelItemTreeViewProgressLabel.CustomizationFormText = "TreeView Progress Label";
-			this.simpleLabelItemTreeViewProgressLabel.FillControlToClientArea = false;
 			this.simpleLabelItemTreeViewProgressLabel.Location = new System.Drawing.Point(57, 0);
 			this.simpleLabelItemTreeViewProgressLabel.Name = "simpleLabelItemTreeViewProgressLabel";
 			this.simpleLabelItemTreeViewProgressLabel.Size = new System.Drawing.Size(341, 35);
 			this.simpleLabelItemTreeViewProgressLabel.Text = " ";
 			this.simpleLabelItemTreeViewProgressLabel.TextSize = new System.Drawing.Size(186, 16);
-			this.simpleLabelItemTreeViewProgressLabel.TrimClientAreaToControl = false;
 			// 
 			// layoutControlItemTreeViewProgress
 			// 
@@ -888,46 +884,6 @@
 			this.layoutControlItemTreeViewProgress.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutControlItemTreeViewProgress.TextVisible = false;
 			this.layoutControlItemTreeViewProgress.TrimClientAreaToControl = false;
-			// 
-			// emptySpaceItem5
-			// 
-			this.emptySpaceItem5.AllowHotTrack = false;
-			this.emptySpaceItem5.Location = new System.Drawing.Point(120, 0);
-			this.emptySpaceItem5.Name = "emptySpaceItem5";
-			this.emptySpaceItem5.Size = new System.Drawing.Size(158, 40);
-			this.emptySpaceItem5.TextSize = new System.Drawing.Size(0, 0);
-			// 
-			// layoutControlItemExit
-			// 
-			this.layoutControlItemExit.Control = this.buttonXExit;
-			this.layoutControlItemExit.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-			this.layoutControlItemExit.FillControlToClientArea = false;
-			this.layoutControlItemExit.Location = new System.Drawing.Point(278, 0);
-			this.layoutControlItemExit.MaxSize = new System.Drawing.Size(120, 40);
-			this.layoutControlItemExit.MinSize = new System.Drawing.Size(120, 40);
-			this.layoutControlItemExit.Name = "layoutControlItemExit";
-			this.layoutControlItemExit.Size = new System.Drawing.Size(120, 40);
-			this.layoutControlItemExit.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-			this.layoutControlItemExit.Text = "Exit";
-			this.layoutControlItemExit.TextSize = new System.Drawing.Size(0, 0);
-			this.layoutControlItemExit.TextVisible = false;
-			this.layoutControlItemExit.TrimClientAreaToControl = false;
-			// 
-			// layoutControlItemBack
-			// 
-			this.layoutControlItemBack.Control = this.buttonXBack;
-			this.layoutControlItemBack.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-			this.layoutControlItemBack.FillControlToClientArea = false;
-			this.layoutControlItemBack.Location = new System.Drawing.Point(0, 0);
-			this.layoutControlItemBack.MaxSize = new System.Drawing.Size(120, 40);
-			this.layoutControlItemBack.MinSize = new System.Drawing.Size(120, 40);
-			this.layoutControlItemBack.Name = "layoutControlItemBack";
-			this.layoutControlItemBack.Size = new System.Drawing.Size(120, 40);
-			this.layoutControlItemBack.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-			this.layoutControlItemBack.Text = "Back";
-			this.layoutControlItemBack.TextSize = new System.Drawing.Size(0, 0);
-			this.layoutControlItemBack.TextVisible = false;
-			this.layoutControlItemBack.TrimClientAreaToControl = false;
 			// 
 			// layoutControlGroupTreeView
 			// 
@@ -1044,6 +1000,46 @@
 			this.layoutControlGroupBottomButtons.Text = "Bottom Buttons";
 			this.layoutControlGroupBottomButtons.TextVisible = false;
 			// 
+			// layoutControlItemExit
+			// 
+			this.layoutControlItemExit.Control = this.buttonXExit;
+			this.layoutControlItemExit.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+			this.layoutControlItemExit.FillControlToClientArea = false;
+			this.layoutControlItemExit.Location = new System.Drawing.Point(278, 0);
+			this.layoutControlItemExit.MaxSize = new System.Drawing.Size(120, 40);
+			this.layoutControlItemExit.MinSize = new System.Drawing.Size(120, 40);
+			this.layoutControlItemExit.Name = "layoutControlItemExit";
+			this.layoutControlItemExit.Size = new System.Drawing.Size(120, 40);
+			this.layoutControlItemExit.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.layoutControlItemExit.Text = "Exit";
+			this.layoutControlItemExit.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemExit.TextVisible = false;
+			this.layoutControlItemExit.TrimClientAreaToControl = false;
+			// 
+			// layoutControlItemBack
+			// 
+			this.layoutControlItemBack.Control = this.buttonXBack;
+			this.layoutControlItemBack.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+			this.layoutControlItemBack.FillControlToClientArea = false;
+			this.layoutControlItemBack.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlItemBack.MaxSize = new System.Drawing.Size(120, 40);
+			this.layoutControlItemBack.MinSize = new System.Drawing.Size(120, 40);
+			this.layoutControlItemBack.Name = "layoutControlItemBack";
+			this.layoutControlItemBack.Size = new System.Drawing.Size(120, 40);
+			this.layoutControlItemBack.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.layoutControlItemBack.Text = "Back";
+			this.layoutControlItemBack.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemBack.TextVisible = false;
+			this.layoutControlItemBack.TrimClientAreaToControl = false;
+			// 
+			// emptySpaceItem5
+			// 
+			this.emptySpaceItem5.AllowHotTrack = false;
+			this.emptySpaceItem5.Location = new System.Drawing.Point(120, 0);
+			this.emptySpaceItem5.Name = "emptySpaceItem5";
+			this.emptySpaceItem5.Size = new System.Drawing.Size(158, 40);
+			this.emptySpaceItem5.TextSize = new System.Drawing.Size(0, 0);
+			// 
 			// FormCompactWallbin
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -1079,9 +1075,6 @@
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupTreeViewProgress)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemTreeViewProgressLabel)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemTreeViewProgress)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem5)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemExit)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemBack)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupTreeView)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem6)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemExpand)).EndInit();
@@ -1091,6 +1084,9 @@
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemWallbinItems)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupBottomButtons)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemExit)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemBack)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem5)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

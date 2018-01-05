@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -14,6 +15,7 @@ using SalesLibraries.Business.Entities.Common;
 using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
+using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkBundleSettings;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Extensions;
@@ -29,10 +31,15 @@ using Padding = System.Windows.Forms.Padding;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings
 {
-	public partial class FormEditLinkThumbnail : MetroForm, ILinkSettingsEditForm
+	public partial class FormEditLinkThumbnail : MetroForm, ILinkSetSettingsEditForm
 	{
+		private bool _allowHandleEvents = false;
 		private string _tempThumbnailText;
-		private readonly IThumbnailSettingsHolder _sourceLink;
+		private readonly List<IThumbnailSettingsHolder> _selectedLinks = new List<IThumbnailSettingsHolder>();
+		private readonly ILinksGroup _linkGroup;
+		private readonly LinkType? _defaultLinkType;
+
+		private IThumbnailSettingsHolder SingleLink => _selectedLinks.FirstOrDefault();
 
 		public LinkSettingsType[] EditableSettings => new[]
 		{
@@ -43,10 +50,17 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		{
 			InitializeComponent();
 
-			buttonEditBannerTextFont.ButtonClick += EditorHelper.FontEdit_ButtonClick;
-			buttonEditBannerTextFont.Click += EditorHelper.FontEdit_Click;
+			buttonEditSingleTextFont.ButtonClick += EditorHelper.FontEdit_ButtonClick;
+			buttonEditSingleTextFont.Click += EditorHelper.FontEdit_Click;
+			buttonEditLinkSetTextFont.ButtonClick += EditorHelper.FontEdit_ButtonClick;
+			buttonEditLinkSetTextFont.Click += EditorHelper.FontEdit_Click;
 
-			retractableBarGallery.AddButtons(new[]
+			spinEditSingleImagePadding.EnableSelectAll();
+			spinEditSingleImageSize.EnableSelectAll();
+			spinEditLinkSetImagePadding.EnableSelectAll();
+			spinEditLinkSetImageSize.EnableSelectAll();
+
+			retractableBarSingleGallery.AddButtons(new[]
 			{
 				new ButtonInfo
 				{
@@ -55,332 +69,127 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				}
 			});
 
-			spinEditImageSize.EnableSelectAll();
-			spinEditImagePadding.EnableSelectAll();
+			spinEditSingleImageSize.EnableSelectAll();
+			spinEditSingleImagePadding.EnableSelectAll();
 
-			layoutControlGroupGallery.Enabled = false;
-			layoutControlGroupTextSettings.Enabled = false;
-			layoutControlGroupTextFont.Enabled = false;
-			layoutControlGroupTextColor.Enabled = false;
-			layoutControlGroupTextPosition.Enabled = false;
-			layoutControlGroupTextAlignment.Enabled = false;
-			layoutControlGroupTextSettings.Enabled = false;
+			layoutControlGroupSingleGallery.Enabled = false;
+			layoutControlGroupSingleTextSettings.Enabled = false;
+			layoutControlGroupSingleTextFont.Enabled = false;
+			layoutControlGroupSingleTextColor.Enabled = false;
+			layoutControlGroupSingleTextPosition.Enabled = false;
+			layoutControlGroupSingleTextAlignment.Enabled = false;
+			layoutControlGroupSingleTextSettings.Enabled = false;
 
-			retractableBarGallery.ContentSize = (Int32)(retractableBarGallery.ContentSize * Utils.GetScaleFactor(CreateGraphics().DpiX).Width);
+			var scaleFactor = Utils.GetScaleFactor(CreateGraphics().DpiX);
+
+			retractableBarSingleGallery.ContentSize = (Int32)(retractableBarSingleGallery.ContentSize * scaleFactor.Width);
 
 			emptySpaceItemBorder.MinSize = RectangleHelper.ScaleSize(emptySpaceItemBorder.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 
-			layoutControlItemToggleEnable.MaxSize = RectangleHelper.ScaleSize(layoutControlItemToggleEnable.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemToggleEnable.MinSize = RectangleHelper.ScaleSize(layoutControlItemToggleEnable.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemToggleDisable.MaxSize = RectangleHelper.ScaleSize(layoutControlItemToggleDisable.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemToggleDisable.MinSize = RectangleHelper.ScaleSize(layoutControlItemToggleDisable.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			simpleLabelItemSettingsDescription.MaxSize = RectangleHelper.ScaleSize(simpleLabelItemSettingsDescription.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			simpleLabelItemSettingsDescription.MinSize = RectangleHelper.ScaleSize(simpleLabelItemSettingsDescription.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemTextToggleNone.MaxSize = RectangleHelper.ScaleSize(layoutControlItemTextToggleNone.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemTextToggleNone.MinSize = RectangleHelper.ScaleSize(layoutControlItemTextToggleNone.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemTextToggleCustom.MaxSize = RectangleHelper.ScaleSize(layoutControlItemTextToggleCustom.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemTextToggleCustom.MinSize = RectangleHelper.ScaleSize(layoutControlItemTextToggleCustom.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemTextToggleLinkName.MaxSize = RectangleHelper.ScaleSize(layoutControlItemTextToggleLinkName.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemTextToggleLinkName.MinSize = RectangleHelper.ScaleSize(layoutControlItemTextToggleLinkName.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemPreviewImage.MaxSize = RectangleHelper.ScaleSize(layoutControlItemPreviewImage.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemPreviewImage.MinSize = RectangleHelper.ScaleSize(layoutControlItemPreviewImage.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemOK.MaxSize = RectangleHelper.ScaleSize(layoutControlItemOK.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemOK.MinSize = RectangleHelper.ScaleSize(layoutControlItemOK.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemCancel.MaxSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemCancel.MinSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemLinksTree.MaxSize = RectangleHelper.ScaleSize(layoutControlItemLinksTree.MaxSize, scaleFactor);
+			layoutControlItemLinksTree.MinSize = RectangleHelper.ScaleSize(layoutControlItemLinksTree.MinSize, scaleFactor);
+			layoutControlItemToggleEnable.MaxSize = RectangleHelper.ScaleSize(layoutControlItemToggleEnable.MaxSize, scaleFactor);
+			layoutControlItemToggleEnable.MinSize = RectangleHelper.ScaleSize(layoutControlItemToggleEnable.MinSize, scaleFactor);
+			layoutControlItemToggleDisable.MaxSize = RectangleHelper.ScaleSize(layoutControlItemToggleDisable.MaxSize, scaleFactor);
+			layoutControlItemToggleDisable.MinSize = RectangleHelper.ScaleSize(layoutControlItemToggleDisable.MinSize, scaleFactor);
+			simpleLabelItemSingleSettingsDescription.MaxSize = RectangleHelper.ScaleSize(simpleLabelItemSingleSettingsDescription.MaxSize, scaleFactor);
+			simpleLabelItemSingleSettingsDescription.MinSize = RectangleHelper.ScaleSize(simpleLabelItemSingleSettingsDescription.MinSize, scaleFactor);
+			layoutControlItemSingleTextToggleNone.MaxSize = RectangleHelper.ScaleSize(layoutControlItemSingleTextToggleNone.MaxSize, scaleFactor);
+			layoutControlItemSingleTextToggleNone.MinSize = RectangleHelper.ScaleSize(layoutControlItemSingleTextToggleNone.MinSize, scaleFactor);
+			layoutControlItemSingleTextToggleCustom.MaxSize = RectangleHelper.ScaleSize(layoutControlItemSingleTextToggleCustom.MaxSize, scaleFactor);
+			layoutControlItemSingleTextToggleCustom.MinSize = RectangleHelper.ScaleSize(layoutControlItemSingleTextToggleCustom.MinSize, scaleFactor);
+			layoutControlItemSingleTextToggleLinkName.MaxSize = RectangleHelper.ScaleSize(layoutControlItemSingleTextToggleLinkName.MaxSize, scaleFactor);
+			layoutControlItemSingleTextToggleLinkName.MinSize = RectangleHelper.ScaleSize(layoutControlItemSingleTextToggleLinkName.MinSize, scaleFactor);
+			layoutControlItemPreviewImage.MaxSize = RectangleHelper.ScaleSize(layoutControlItemPreviewImage.MaxSize, scaleFactor);
+			layoutControlItemPreviewImage.MinSize = RectangleHelper.ScaleSize(layoutControlItemPreviewImage.MinSize, scaleFactor);
+			layoutControlItemOK.MaxSize = RectangleHelper.ScaleSize(layoutControlItemOK.MaxSize, scaleFactor);
+			layoutControlItemOK.MinSize = RectangleHelper.ScaleSize(layoutControlItemOK.MinSize, scaleFactor);
+			layoutControlItemCancel.MaxSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MaxSize, scaleFactor);
+			layoutControlItemCancel.MinSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MinSize, scaleFactor);
 		}
 
 		public FormEditLinkThumbnail(BaseLibraryLink sourceLink) : this()
 		{
-			_sourceLink = sourceLink as IThumbnailSettingsHolder;
+			_selectedLinks.Add(sourceLink as IThumbnailSettingsHolder);
+			Width = Width - layoutControlItemLinksTree.Width;
+			layoutControlItemLinksTree.Visibility = LayoutVisibility.Never;
 		}
 
-		public FormEditLinkThumbnail(ILinksGroup linkGroup, LinkType? defaultLinkType = null) : this() { }
+		public FormEditLinkThumbnail(ILinksGroup linkGroup, LinkType? defaultLinkType = null) : this()
+		{
+			_linkGroup = linkGroup;
+			_defaultLinkType = defaultLinkType;
+			layoutControlItemLinksTree.Visibility = LayoutVisibility.Always;
+		}
 
 		public void InitForm<TEditControl>(LinkSettingsType settingsType) where TEditControl : ILinkSettingsEditControl
 		{
 			FormStateHelper.Init(this, RemoteResourceManager.Instance.AppAliasSettingsFolder, "Site Admin-Link-Thumbnail", false, false);
-			Text = String.Format(Text, _sourceLink);
+			Text = String.Format(Text,
+				_linkGroup != null ?
+					String.Format("{0} links", _linkGroup.AllGroupLinks.Count()) :
+					_selectedLinks.FirstOrDefault()?.ToString());
 			StartPosition = FormStartPosition.CenterParent;
 
-			LoadSourceImages();
-			LoadData();
+			if (_linkGroup != null)
+			{
+				linksTreeSelector.LinkSelected += (o, e) =>
+				{
+					if (_allowHandleEvents)
+						SaveData();
+
+					_selectedLinks.Clear();
+					_selectedLinks.AddRange(linksTreeSelector.SelectedLinks.OfType<IThumbnailSettingsHolder>());
+
+					LoadData();
+				};
+				linksTreeSelector.LoadData(_linkGroup, _defaultLinkType, new[] { LinkType.LineBreak });
+			}
+			else
+				LoadData();
 		}
 
 		private void LoadData()
 		{
-			retractableBarGallery.Visible = _sourceLink.ShowSourceFilesList;
+			simpleLabelItemLinkName.Text = String.Format("<size=+4>{0}</size>",
+				_selectedLinks.Count > 1 ?
+					String.Format("{0} ({1})", linksTreeSelector.SelectedGroup?.Title, linksTreeSelector.SelectedGroup?.Links.OfType<LibraryObjectLink>().Count()) :
+					_selectedLinks.FirstOrDefault()?.ToString());
 
-			layoutControlItemToggleEnable.Enabled = MainController.Instance.Lists.Banners.MainFolder.ExistsLocal();
-
-			buttonXEnable.Checked = _sourceLink.Thumbnail.Enable;
-			buttonXDisable.Checked = !buttonXEnable.Checked;
-
-			pictureEditImage.Image = _sourceLink.Thumbnail.Image ?? pictureEditImage.Image;
-
-			switch (_sourceLink.Thumbnail.ImageWidth)
-			{
-				case 200:
-					checkEditImageSize200.Checked = true;
-					break;
-				case 300:
-					checkEditImageSize300.Checked = true;
-					break;
-				default:
-					checkEditImageSizeCustom.Checked = true;
-					spinEditImageSize.EditValue = _sourceLink.Thumbnail.ImageWidth;
-					break;
-			}
-
-			switch (_sourceLink.Thumbnail.ImagePadding)
-			{
-				case 0:
-					checkEditImagePaddingNone.Checked = true;
-					break;
-				case 8:
-					checkEditImagePadding8.Checked = true;
-					break;
-				case 10:
-					checkEditImagePadding10.Checked = true;
-					break;
-				default:
-					checkEditImagePaddingCustom.Checked = true;
-					spinEditImagePadding.EditValue = _sourceLink.Thumbnail.ImagePadding;
-					break;
-			}
-
-			switch (_sourceLink.Thumbnail.ImageAlignement)
-			{
-				case HorizontalAlignment.Left:
-					checkEditImageAlignmentLeft.Checked = true;
-					break;
-				case HorizontalAlignment.Center:
-					checkEditImageAlignmentCenter.Checked = true;
-					break;
-				case HorizontalAlignment.Right:
-					checkEditImageAlignmentRight.Checked = true;
-					break;
-			}
-
-			switch (_sourceLink.Thumbnail.BorderSize)
-			{
-				case 0:
-					checkEditBorderSizeNone.Checked = true;
-					break;
-				case 2:
-					checkEditBorderSize2.Checked = true;
-					break;
-				case 10:
-					checkEditBorderSize10.Checked = true;
-					break;
-			}
-			colorEditBorderColor.Color = _sourceLink.Thumbnail.BorderColor;
-
-			if (_sourceLink.Thumbnail.ShadowColor == Color.White)
-			{
-				checkEditShadowColor.Checked = false;
-				colorEditShadowColor.Color = ThumbnailSettings.DefaultShadowColor;
-			}
+			if (_selectedLinks.Count > 1)
+				LoadLinkSetData();
 			else
-			{
-				checkEditShadowColor.Checked = true;
-				colorEditShadowColor.Color = _sourceLink.Thumbnail.ShadowColor;
-			}
-
-			memoEditBannerText.BackColor = _sourceLink.ThumbnailBackColor;
-			buttonXShowTextNone.Checked = _sourceLink.Thumbnail.TextMode == ThumbnailTextMode.NoText;
-			buttonXShowTextLinkName.Checked = _sourceLink.Thumbnail.TextMode == ThumbnailTextMode.LinkName;
-			buttonXShowTextCustom.Checked = _sourceLink.Thumbnail.TextMode == ThumbnailTextMode.CustomText;
-			buttonEditBannerTextFont.Tag = _sourceLink.Thumbnail.Font;
-			buttonEditBannerTextFont.EditValue = Utils.FontToString(_sourceLink.Thumbnail.Font);
-			colorEditTextColor.Color = _sourceLink.Thumbnail.ForeColor;
-			switch (_sourceLink.Thumbnail.TextMode)
-			{
-				case ThumbnailTextMode.LinkName:
-					memoEditBannerText.EditValue = _sourceLink.Name;
-					break;
-				case ThumbnailTextMode.CustomText:
-					memoEditBannerText.EditValue = _sourceLink.Thumbnail.Text;
-					break;
-				default:
-					memoEditBannerText.EditValue = null;
-					break;
-			}
-			memoEditBannerText.Font = _sourceLink.Thumbnail.Font;
-			memoEditBannerText.Properties.Appearance.Font = _sourceLink.Thumbnail.Font;
-			memoEditBannerText.Properties.AppearanceDisabled.Font = _sourceLink.Thumbnail.Font;
-			memoEditBannerText.Properties.AppearanceFocused.Font = _sourceLink.Thumbnail.Font;
-			memoEditBannerText.Properties.AppearanceReadOnly.Font = _sourceLink.Thumbnail.Font;
-			memoEditBannerText.ForeColor = _sourceLink.Thumbnail.ForeColor;
-			switch (_sourceLink.Thumbnail.TextPosition)
-			{
-				case ThumbnailTextPosition.Top:
-					checkEditTextPositionTop.Checked = true;
-					break;
-				case ThumbnailTextPosition.Bottom:
-					checkEditTextPositionBottom.Checked = true;
-					break;
-			}
-			switch (_sourceLink.Thumbnail.TextAlignement)
-			{
-				case HorizontalAlignment.Left:
-					checkEditTextAlignmentLeft.Checked = true;
-					break;
-				case HorizontalAlignment.Center:
-					checkEditTextAlignmentCenter.Checked = true;
-					break;
-				case HorizontalAlignment.Right:
-					checkEditTextAlignmentRight.Checked = true;
-					break;
-			}
-
-			_tempThumbnailText = _sourceLink.Thumbnail.Text;
-
-			var defaultItem = imageListView.Items.FirstOrDefault(item => item.FileName == _sourceLink.Thumbnail.SourcePath) ??
-				imageListView.Items.FirstOrDefault();
-			if (defaultItem != null)
-				defaultItem.Selected = true;
-			if (pictureEditImage.Image == null)
-				GeneratePreview();
-			imageListView.Focus();
+				LoadSingleLinkData();
 		}
 
 		private void SaveData()
 		{
-			var libraryLink = (BaseLibraryLink)_sourceLink;
-
-			if (buttonXEnable.Checked)
-			{
-				_sourceLink.Thumbnail.Enable = true;
-
-				_sourceLink.Thumbnail.Image = (Image)pictureEditImage.Image.Clone();
-				_sourceLink.Thumbnail.SourcePath = imageListView.SelectedItems.Select(item => item.FileName).FirstOrDefault();
-
-				if (checkEditImageSize200.Checked)
-					_sourceLink.Thumbnail.ImageWidth = 200;
-				else if (checkEditImageSize300.Checked)
-					_sourceLink.Thumbnail.ImageWidth = 300;
-				else
-					_sourceLink.Thumbnail.ImageWidth = (Int32)spinEditImageSize.Value;
-
-				if (checkEditImagePaddingNone.Checked)
-					_sourceLink.Thumbnail.ImagePadding = 0;
-				else if (checkEditImagePadding8.Checked)
-					_sourceLink.Thumbnail.ImagePadding = 8;
-				else if (checkEditImagePadding10.Checked)
-					_sourceLink.Thumbnail.ImagePadding = 10;
-				else
-					_sourceLink.Thumbnail.ImagePadding = (Int32)spinEditImagePadding.Value;
-
-				if (checkEditImageAlignmentLeft.Checked)
-					_sourceLink.Thumbnail.ImageAlignement = HorizontalAlignment.Left;
-				else if (checkEditImageAlignmentCenter.Checked)
-					_sourceLink.Thumbnail.ImageAlignement = HorizontalAlignment.Center;
-				else if (checkEditImageAlignmentRight.Checked)
-					_sourceLink.Thumbnail.ImageAlignement = HorizontalAlignment.Right;
-
-				if (checkEditBorderSizeNone.Checked)
-					_sourceLink.Thumbnail.BorderSize = 0;
-				else if (checkEditBorderSize2.Checked)
-					_sourceLink.Thumbnail.BorderSize = 2;
-				else if (checkEditBorderSize10.Checked)
-					_sourceLink.Thumbnail.BorderSize = 10;
-
-				_sourceLink.Thumbnail.BorderColor = colorEditBorderColor.Color;
-
-				if (!checkEditBorderSizeNone.Checked && checkEditShadowColor.Checked)
-					_sourceLink.Thumbnail.ShadowColor = colorEditShadowColor.Color;
-				else
-					_sourceLink.Thumbnail.ShadowColor = Color.White;
-
-				if (buttonXShowTextLinkName.Checked)
-					_sourceLink.Thumbnail.TextMode = ThumbnailTextMode.LinkName;
-				else if (buttonXShowTextCustom.Checked)
-				{
-					_sourceLink.Thumbnail.TextMode = ThumbnailTextMode.CustomText;
-					_sourceLink.Thumbnail.Text = _tempThumbnailText;
-				}
-				else
-					_sourceLink.Thumbnail.TextMode = ThumbnailTextMode.NoText;
-				_sourceLink.Thumbnail.Font = buttonEditBannerTextFont.Tag as Font;
-				_sourceLink.Thumbnail.ForeColor = colorEditTextColor.Color;
-				if (checkEditTextPositionTop.Checked)
-					_sourceLink.Thumbnail.TextPosition = ThumbnailTextPosition.Top;
-				else if (checkEditTextPositionBottom.Checked)
-					_sourceLink.Thumbnail.TextPosition = ThumbnailTextPosition.Bottom;
-				if (checkEditTextAlignmentLeft.Checked)
-					_sourceLink.Thumbnail.TextAlignement = HorizontalAlignment.Left;
-				else if (checkEditTextAlignmentCenter.Checked)
-					_sourceLink.Thumbnail.TextAlignement = HorizontalAlignment.Center;
-				else if (checkEditTextAlignmentRight.Checked)
-					_sourceLink.Thumbnail.TextAlignement = HorizontalAlignment.Right;
-			}
+			if (_selectedLinks.Count > 1)
+				SaveLinkSetData();
 			else
-				_sourceLink.Thumbnail = SettingsContainer.CreateInstance<ThumbnailSettings>(libraryLink);
-
-			libraryLink.Widget.WidgetType = _sourceLink.Thumbnail.Enable ? libraryLink.Widget.DefaultWidgetType : libraryLink.Widget.WidgetType;
-			libraryLink.Banner.Enable = !_sourceLink.Thumbnail.Enable && libraryLink.Banner.Enable;
-		}
-
-		private void LoadSourceImages()
-		{
-			imageListView.Items.Clear();
-			var sourceImageFiles = _sourceLink.GetThumbnailSourceFiles();
-			if (!sourceImageFiles.Any()) return;
-			imageListView.Items.AddRange(sourceImageFiles
-				.Select(filePath => new ImageListViewItem(
-					filePath,
-					Path.GetFileName(filePath))
-				{
-					Tag = filePath,
-					Text = Regex.Match(Path.GetFileNameWithoutExtension(filePath), @"\d+$").Value,
-				}).ToArray());
-			imageListView.SelectionChanged -= OnSourceImagesSelectionChanged;
-			imageListView.SelectionChanged += OnSourceImagesSelectionChanged;
-			layoutControlItemPreviewImage.Enabled = buttonXEnable.Checked && imageListView.SelectedItems.Any();
-		}
-
-		private void GeneratePreview()
-		{
-			var selectedImageFilePath = imageListView.SelectedItems.Select(item => item.FileName).FirstOrDefault();
-			if (selectedImageFilePath == null) return;
-
-			using (var tempImage = Image.FromFile(selectedImageFilePath))
 			{
-				var tranformAction = new Func<Image, Image>(image =>
-				{
-					image = image.Resize(new Size(_sourceLink.Thumbnail.ImageWidth, tempImage.Height));
-					if (_sourceLink.Thumbnail.BorderSize > 0)
-					{
-						image = image.DrawBorder(_sourceLink.Thumbnail.BorderSize, _sourceLink.Thumbnail.BorderColor);
-						if (_sourceLink.Thumbnail.ShadowColor != Color.White)
-							image = image.DrawShadow(ThumbnailSettings.DefaultShadowSize, _sourceLink.Thumbnail.ShadowColor);
-					}
-					if (_sourceLink.Thumbnail.ImagePadding > 0)
-						image = image.DrawPadding(_sourceLink.Thumbnail.TextEnabled ?
-						new Padding(
-							_sourceLink.Thumbnail.ImagePadding,
-							_sourceLink.Thumbnail.TextPosition == ThumbnailTextPosition.Top ? 0 : _sourceLink.Thumbnail.ImagePadding,
-							_sourceLink.Thumbnail.ImagePadding,
-							_sourceLink.Thumbnail.TextPosition == ThumbnailTextPosition.Bottom ? 0 : _sourceLink.Thumbnail.ImagePadding) :
-						new Padding(_sourceLink.Thumbnail.ImagePadding));
-					return image;
-				});
-				using (var changedImage = tranformAction(tempImage))
-					pictureEditImage.Image = (Image)changedImage.Clone();
+				SaveSingleLinkData();
+				GeneratePreview();
+				SaveSingleLinkData();
+			}
+
+			foreach (var selectedLink in _selectedLinks)
+			{
+				var libraryLink = (BaseLibraryLink)selectedLink;
+				libraryLink.Widget.WidgetType = selectedLink.Thumbnail.Enable ? libraryLink.Widget.DefaultWidgetType : libraryLink.Widget.WidgetType;
+				libraryLink.Banner.Enable = !selectedLink.Thumbnail.Enable && libraryLink.Banner.Enable;
 			}
 		}
 
 		private void OnFormClosing(object sender, FormClosingEventArgs e)
 		{
-			if (DialogResult == DialogResult.OK)
-			{
-				SaveData();
+			if (DialogResult != DialogResult.OK) return;
+			SaveData();
+		}
 
-				GeneratePreview();
-
-				SaveData();
-			}
+		private void OnFormClick(object sender, EventArgs e)
+		{
+			buttonXOK.Focus();
 		}
 
 		private void OnEnableButtonClick(object sender, EventArgs e)
@@ -396,122 +205,328 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		{
 			var button = (ButtonX)sender;
 			if (!button.Checked) return;
-			layoutControlGroupGallery.Enabled = buttonXEnable.Checked;
-			layoutControlGroupTextSettings.Enabled = buttonXEnable.Checked;
-			layoutControlItemPreviewImage.Enabled = buttonXEnable.Checked && imageListView.SelectedItems.Any();
-			layoutControlItemGalleryContent.Enabled= imageListView.Visible = buttonXEnable.Checked;
-			if (buttonXEnable.Checked && !imageListView.Items.Any())
+			layoutControlGroupSingleGallery.Enabled = buttonXEnable.Checked;
+			layoutControlGroupSingleTextSettings.Enabled = buttonXEnable.Checked;
+			layoutControlGroupLinkSetSettings.Enabled = buttonXEnable.Checked;
+			layoutControlItemPreviewImage.Enabled = buttonXEnable.Checked && imageListViewSingle.SelectedItems.Any();
+			layoutControlItemSingleGalleryContent.Enabled = imageListViewSingle.Visible = buttonXEnable.Checked;
+			if (!(_selectedLinks.Count > 1) && buttonXEnable.Checked && !imageListViewSingle.Items.Any())
 				OnRefreshSourceFilesClick(sender, EventArgs.Empty);
 		}
 
-		private void OnImageSizeCheckedChanged(object sender, EventArgs e)
+		#region Single Settings Processing
+		private void LoadSingleLinkData()
 		{
-			layoutControlItemImageSizeCustomEditor.Enabled = checkEditImageSizeCustom.Checked;
+			layoutControlGroupSingleGallery.Visibility = LayoutVisibility.Always;
+			layoutControlGroupSingleTextSettings.Visibility = LayoutVisibility.Always;
+			layoutControlGroupLinkSetSettings.Visibility = LayoutVisibility.Never;
+			tabbedControlSingleSettings.SelectedTabPage = layoutControlGroupSingleGallery;
+
+			if (SingleLink == null) return;
+
+			LoadSourceImages();
+
+			buttonXEnable.Checked = SingleLink.Thumbnail.Enable;
+			buttonXDisable.Checked = !buttonXEnable.Checked;
+
+			retractableBarSingleGallery.Visible = SingleLink.ShowSourceFilesList;
+
+			pictureEditSingleImage.Image = SingleLink.Thumbnail.Image ?? pictureEditSingleImage.Image;
+
+			switch (SingleLink.Thumbnail.ImageWidth)
+			{
+				case 200:
+					checkEditSingleImageSize200.Checked = true;
+					break;
+				case 300:
+					checkEditSingleImageSize300.Checked = true;
+					break;
+				default:
+					checkEditSingleImageSizeCustom.Checked = true;
+					spinEditSingleImageSize.EditValue = SingleLink.Thumbnail.ImageWidth;
+					break;
+			}
+
+			switch (SingleLink.Thumbnail.ImagePadding)
+			{
+				case 0:
+					checkEditSingleImagePaddingNone.Checked = true;
+					break;
+				case 8:
+					checkEditSingleImagePadding8.Checked = true;
+					break;
+				case 10:
+					checkEditSingleImagePadding10.Checked = true;
+					break;
+				default:
+					checkEditSingleImagePaddingCustom.Checked = true;
+					spinEditSingleImagePadding.EditValue = SingleLink.Thumbnail.ImagePadding;
+					break;
+			}
+
+			switch (SingleLink.Thumbnail.ImageAlignement)
+			{
+				case HorizontalAlignment.Left:
+					checkEditSingleImageAlignmentLeft.Checked = true;
+					break;
+				case HorizontalAlignment.Center:
+					checkEditSingleImageAlignmentCenter.Checked = true;
+					break;
+				case HorizontalAlignment.Right:
+					checkEditSingleImageAlignmentRight.Checked = true;
+					break;
+			}
+
+			switch (SingleLink.Thumbnail.BorderSize)
+			{
+				case 0:
+					checkEditSingleBorderSizeNone.Checked = true;
+					break;
+				case 2:
+					checkEditSingleBorderSize2.Checked = true;
+					break;
+				case 10:
+					checkEditSingleBorderSize10.Checked = true;
+					break;
+			}
+			colorEditSingleBorderColor.Color = SingleLink.Thumbnail.BorderColor;
+
+			if (SingleLink.Thumbnail.ShadowColor == Color.White)
+			{
+				checkEditSingleShadowColor.Checked = false;
+				colorEditSingleShadowColor.Color = ThumbnailSettings.DefaultShadowColor;
+			}
+			else
+			{
+				checkEditSingleShadowColor.Checked = true;
+				colorEditSingleShadowColor.Color = SingleLink.Thumbnail.ShadowColor;
+			}
+
+			memoEditBannerText.BackColor = SingleLink.ThumbnailBackColor;
+			buttonXSingleShowTextNone.Checked = SingleLink.Thumbnail.TextMode == ThumbnailTextMode.NoText;
+			buttonXSingleShowTextLinkName.Checked = SingleLink.Thumbnail.TextMode == ThumbnailTextMode.LinkName;
+			buttonXSingleShowTextCustom.Checked = SingleLink.Thumbnail.TextMode == ThumbnailTextMode.CustomText;
+			buttonEditSingleTextFont.Tag = SingleLink.Thumbnail.Font;
+			buttonEditSingleTextFont.EditValue = Utils.FontToString(SingleLink.Thumbnail.Font);
+			colorEditSingleTextColor.Color = SingleLink.Thumbnail.ForeColor;
+			switch (SingleLink.Thumbnail.TextMode)
+			{
+				case ThumbnailTextMode.LinkName:
+					memoEditBannerText.EditValue = SingleLink.Name;
+					break;
+				case ThumbnailTextMode.CustomText:
+					memoEditBannerText.EditValue = SingleLink.Thumbnail.Text;
+					break;
+				default:
+					memoEditBannerText.EditValue = null;
+					break;
+			}
+			memoEditBannerText.Font = SingleLink.Thumbnail.Font;
+			memoEditBannerText.Properties.Appearance.Font = SingleLink.Thumbnail.Font;
+			memoEditBannerText.Properties.AppearanceDisabled.Font = SingleLink.Thumbnail.Font;
+			memoEditBannerText.Properties.AppearanceFocused.Font = SingleLink.Thumbnail.Font;
+			memoEditBannerText.Properties.AppearanceReadOnly.Font = SingleLink.Thumbnail.Font;
+			memoEditBannerText.ForeColor = SingleLink.Thumbnail.ForeColor;
+			switch (SingleLink.Thumbnail.TextPosition)
+			{
+				case ThumbnailTextPosition.Top:
+					checkEditSingleTextPositionTop.Checked = true;
+					break;
+				case ThumbnailTextPosition.Bottom:
+					checkEditSingleTextPositionBottom.Checked = true;
+					break;
+			}
+			switch (SingleLink.Thumbnail.TextAlignement)
+			{
+				case HorizontalAlignment.Left:
+					checkEditSingleTextAlignmentLeft.Checked = true;
+					break;
+				case HorizontalAlignment.Center:
+					checkEditSingleTextAlignmentCenter.Checked = true;
+					break;
+				case HorizontalAlignment.Right:
+					checkEditSingleTextAlignmentRight.Checked = true;
+					break;
+			}
+
+			_tempThumbnailText = SingleLink.Thumbnail.Text;
+
+			var defaultItem = imageListViewSingle.Items.FirstOrDefault(item => item.FileName == SingleLink.Thumbnail.SourcePath) ??
+				imageListViewSingle.Items.FirstOrDefault();
+			if (defaultItem != null)
+				defaultItem.Selected = true;
+			if (pictureEditSingleImage.Image == null)
+				GeneratePreview();
+			imageListViewSingle.Focus();
 		}
 
-		private void OnImagePaddingCheckedChanged(object sender, EventArgs e)
+		private void SaveSingleLinkData()
 		{
-			layoutControlItemImagePaddingCustomEditor.Enabled = checkEditImagePaddingCustom.Checked;
+			if (SingleLink == null) return;
+			if (buttonXEnable.Checked)
+			{
+				SingleLink.Thumbnail.Enable = true;
+				SingleLink.Thumbnail.Image = (Image)pictureEditSingleImage.Image.Clone();
+				SingleLink.Thumbnail.SourcePath = imageListViewSingle.SelectedItems.Select(item => item.FileName).FirstOrDefault();
+
+				if (checkEditSingleImageSize200.Checked)
+					SingleLink.Thumbnail.ImageWidth = 200;
+				else if (checkEditSingleImageSize300.Checked)
+					SingleLink.Thumbnail.ImageWidth = 300;
+				else
+					SingleLink.Thumbnail.ImageWidth = (Int32)spinEditSingleImageSize.Value;
+
+				if (checkEditSingleImagePaddingNone.Checked)
+					SingleLink.Thumbnail.ImagePadding = 0;
+				else if (checkEditSingleImagePadding8.Checked)
+					SingleLink.Thumbnail.ImagePadding = 8;
+				else if (checkEditSingleImagePadding10.Checked)
+					SingleLink.Thumbnail.ImagePadding = 10;
+				else
+					SingleLink.Thumbnail.ImagePadding = (Int32)spinEditSingleImagePadding.Value;
+
+				if (checkEditSingleImageAlignmentLeft.Checked)
+					SingleLink.Thumbnail.ImageAlignement = HorizontalAlignment.Left;
+				else if (checkEditSingleImageAlignmentCenter.Checked)
+					SingleLink.Thumbnail.ImageAlignement = HorizontalAlignment.Center;
+				else if (checkEditSingleImageAlignmentRight.Checked)
+					SingleLink.Thumbnail.ImageAlignement = HorizontalAlignment.Right;
+
+				if (checkEditSingleBorderSizeNone.Checked)
+					SingleLink.Thumbnail.BorderSize = 0;
+				else if (checkEditSingleBorderSize2.Checked)
+					SingleLink.Thumbnail.BorderSize = 2;
+				else if (checkEditSingleBorderSize10.Checked)
+					SingleLink.Thumbnail.BorderSize = 10;
+
+				SingleLink.Thumbnail.BorderColor = colorEditSingleBorderColor.Color;
+
+				if (!checkEditSingleBorderSizeNone.Checked && checkEditSingleShadowColor.Checked)
+					SingleLink.Thumbnail.ShadowColor = colorEditSingleShadowColor.Color;
+				else
+					SingleLink.Thumbnail.ShadowColor = Color.White;
+
+				if (buttonXSingleShowTextLinkName.Checked)
+					SingleLink.Thumbnail.TextMode = ThumbnailTextMode.LinkName;
+				else if (buttonXSingleShowTextCustom.Checked)
+				{
+					SingleLink.Thumbnail.TextMode = ThumbnailTextMode.CustomText;
+					SingleLink.Thumbnail.Text = _tempThumbnailText;
+				}
+				else
+					SingleLink.Thumbnail.TextMode = ThumbnailTextMode.NoText;
+				SingleLink.Thumbnail.Font = buttonEditSingleTextFont.Tag as Font;
+				SingleLink.Thumbnail.ForeColor = colorEditSingleTextColor.Color;
+				if (checkEditSingleTextPositionTop.Checked)
+					SingleLink.Thumbnail.TextPosition = ThumbnailTextPosition.Top;
+				else if (checkEditSingleTextPositionBottom.Checked)
+					SingleLink.Thumbnail.TextPosition = ThumbnailTextPosition.Bottom;
+				if (checkEditSingleTextAlignmentLeft.Checked)
+					SingleLink.Thumbnail.TextAlignement = HorizontalAlignment.Left;
+				else if (checkEditSingleTextAlignmentCenter.Checked)
+					SingleLink.Thumbnail.TextAlignement = HorizontalAlignment.Center;
+				else if (checkEditSingleTextAlignmentRight.Checked)
+					SingleLink.Thumbnail.TextAlignement = HorizontalAlignment.Right;
+			}
+			else
+				SingleLink.Thumbnail = SettingsContainer.CreateInstance<ThumbnailSettings>((BaseLibraryLink)SingleLink);
 		}
 
-		private void OnBorderSizeCheckedChanged(object sender, EventArgs e)
+		private void LoadSourceImages()
 		{
-			layoutControlItemBorderColorEditor.Visibility = !checkEditBorderSizeNone.Checked?LayoutVisibility.Always : LayoutVisibility.Never;
-			layoutControlGroupShadowColor.Visibility = !checkEditBorderSizeNone.Checked ? LayoutVisibility.Always : LayoutVisibility.Never;
+			if (SingleLink == null) return;
+
+			imageListViewSingle.Items.Clear();
+			var sourceImageFiles = SingleLink.GetThumbnailSourceFiles();
+			if (!sourceImageFiles.Any()) return;
+			imageListViewSingle.Items.AddRange(sourceImageFiles
+				.Select(filePath => new ImageListViewItem(
+					filePath,
+					Path.GetFileName(filePath))
+				{
+					Tag = filePath,
+					Text = Regex.Match(Path.GetFileNameWithoutExtension(filePath), @"\d+$").Value,
+				}).ToArray());
+			imageListViewSingle.SelectionChanged -= OnSingleSourceImagesSelectionChanged;
+			imageListViewSingle.SelectionChanged += OnSingleSourceImagesSelectionChanged;
+			layoutControlItemPreviewImage.Enabled = buttonXEnable.Checked && imageListViewSingle.SelectedItems.Any();
 		}
 
-		private void OnShadowColorCheckedChanged(object sender, EventArgs e)
+		private void GeneratePreview()
 		{
-			layoutControlItemShadowColorCustomEditor.Enabled = checkEditShadowColor.Checked;
-		}
+			if (SingleLink == null) return;
 
-		private void OnSourceImagesSelectionChanged(object sender, EventArgs e)
-		{
-			layoutControlItemPreviewImage.Enabled = buttonXEnable.Checked && imageListView.SelectedItems.Any();
-		}
+			var selectedImageFilePath = imageListViewSingle.SelectedItems.Select(item => item.FileName).FirstOrDefault();
+			if (selectedImageFilePath == null) return;
 
-		private void OnPreviewImageClick(object sender, EventArgs e)
-		{
-			SaveData();
-			GeneratePreview();
-		}
-
-		private void OnTextModeButtonClick(object sender, EventArgs e)
-		{
-			var button = (ButtonX)sender;
-			if (button.Checked) return;
-			buttonXShowTextNone.Checked = false;
-			buttonXShowTextLinkName.Checked = false;
-			buttonXShowTextCustom.Checked = false;
-			button.Checked = true;
-		}
-
-		private void OnTextModeButtonCheckedChanged(object sender, EventArgs e)
-		{
-			layoutControlItemBannerText.Enabled = buttonXShowTextLinkName.Checked || buttonXShowTextCustom.Checked;
-			memoEditBannerText.ReadOnly = buttonXShowTextLinkName.Checked;
-
-			layoutControlGroupTextFont.Enabled = buttonXShowTextLinkName.Checked || buttonXShowTextCustom.Checked;
-			layoutControlGroupTextColor.Enabled = buttonXShowTextLinkName.Checked || buttonXShowTextCustom.Checked;
-			layoutControlGroupTextPosition.Enabled = buttonXShowTextLinkName.Checked || buttonXShowTextCustom.Checked;
-			layoutControlGroupTextAlignment.Enabled = buttonXShowTextLinkName.Checked || buttonXShowTextCustom.Checked;
-
-			if (buttonXShowTextNone.Checked)
-				memoEditBannerText.EditValue = null;
-			else if (buttonXShowTextLinkName.Checked)
-				memoEditBannerText.EditValue = _sourceLink.Name;
-			else if (buttonXShowTextCustom.Checked && !String.IsNullOrEmpty(_tempThumbnailText))
-				memoEditBannerText.EditValue = _tempThumbnailText;
-		}
-
-		private void OnTextColorEditValueChanged(object sender, EventArgs e)
-		{
-			memoEditBannerText.ForeColor = colorEditTextColor.Color;
-		}
-
-		private void OnTextFontEditValueChanged(object sender, EventArgs e)
-		{
-			memoEditBannerText.Font = (Font)buttonEditBannerTextFont.Tag;
-			memoEditBannerText.Properties.Appearance.Font = memoEditBannerText.Font;
-			memoEditBannerText.Properties.AppearanceDisabled.Font = memoEditBannerText.Font;
-			memoEditBannerText.Properties.AppearanceFocused.Font = memoEditBannerText.Font;
-			memoEditBannerText.Properties.AppearanceReadOnly.Font = memoEditBannerText.Font;
-		}
-
-		private void OnBannerTextEditValueChanged(object sender, EventArgs e)
-		{
-			if (buttonXShowTextCustom.Checked)
-				_tempThumbnailText = memoEditBannerText.EditValue as String ?? _tempThumbnailText;
-		}
-
-		private void OnFormClick(object sender, EventArgs e)
-		{
-			buttonXOK.Focus();
+			using (var tempImage = Image.FromFile(selectedImageFilePath))
+			{
+				var tranformAction = new Func<Image, Image>(image =>
+				{
+					image = image.Resize(new Size(SingleLink.Thumbnail.ImageWidth, tempImage.Height));
+					if (SingleLink.Thumbnail.BorderSize > 0)
+					{
+						image = image.DrawBorder(SingleLink.Thumbnail.BorderSize, SingleLink.Thumbnail.BorderColor);
+						if (SingleLink.Thumbnail.ShadowColor != Color.White)
+							image = image.DrawShadow(ThumbnailSettings.DefaultShadowSize, SingleLink.Thumbnail.ShadowColor);
+					}
+					if (SingleLink.Thumbnail.ImagePadding > 0)
+						image = image.DrawPadding(SingleLink.Thumbnail.TextEnabled ?
+						new Padding(
+							SingleLink.Thumbnail.ImagePadding,
+							SingleLink.Thumbnail.TextPosition == ThumbnailTextPosition.Top ? 0 : SingleLink.Thumbnail.ImagePadding,
+							SingleLink.Thumbnail.ImagePadding,
+							SingleLink.Thumbnail.TextPosition == ThumbnailTextPosition.Bottom ? 0 : SingleLink.Thumbnail.ImagePadding) :
+						new Padding(SingleLink.Thumbnail.ImagePadding));
+					return image;
+				});
+				using (var changedImage = tranformAction(tempImage))
+					pictureEditSingleImage.Image = (Image)changedImage.Clone();
+			}
 		}
 
 		private void OnRefreshSourceFilesClick(object sender, EventArgs e)
 		{
+			if (SingleLink == null) return;
+
 			MainController.Instance.ProcessManager.Run("Updating Images...", (cancelationToken, formProgess) =>
 			{
-				if (_sourceLink is PreviewableFileLink)
+				var sourceLinks = new List<IPreviewableLink>();
+				if (SingleLink is LinkBundleLink linkBundleLink)
 				{
-					var settings = ((PreviewableFileLink)_sourceLink).Settings as DocumentLinkSettings;
-					if (settings != null)
+					if (linkBundleLink.Settings is LinkBundleLinkSettings settings)
 					{
-						settings.IsArchiveResource = false;
-						settings.GeneratePreviewImages = true;
+						sourceLinks.AddRange(settings.Bundle.Settings.Items
+							.OfType<LibraryLinkItem>()
+							.Select(item => item.TargetLink)
+							.OfType<IPreviewableLink>());
 					}
 				}
-				var previewableLink = (IPreviewableLink)_sourceLink;
-				var previewGenerator = previewableLink.GetPreviewContainer().GetPreviewGenerator();
-				previewableLink.UpdatePreviewContainer(previewGenerator, cancelationToken);
+				else if (SingleLink is IPreviewableLink previewableLink)
+				{
+					sourceLinks.Add(previewableLink);
+				}
+
+				foreach (var previewableLink in sourceLinks)
+				{
+					if (SingleLink is PreviewableFileLink previewableFileLink)
+					{
+						if (previewableFileLink.Settings is DocumentLinkSettings settings)
+						{
+							settings.IsArchiveResource = false;
+							settings.GeneratePreviewImages = true;
+						}
+					}
+					var previewGenerator = previewableLink.GetPreviewContainer().GetPreviewGenerator();
+					previewableLink.UpdatePreviewContainer(previewGenerator, cancelationToken);
+				}
 			});
 
 			LoadSourceImages();
 
-			if (pictureEditImage.Image == null)
+			if (pictureEditSingleImage.Image == null)
 			{
-				var defaultItem = imageListView.Items.FirstOrDefault();
+				var defaultItem = imageListViewSingle.Items.FirstOrDefault();
 				if (defaultItem != null)
 				{
 					defaultItem.Selected = true;
@@ -520,14 +535,338 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			}
 		}
 
-		private void OnTabControlSettingsSelectedPageChanged(object sender, LayoutTabPageChangedEventArgs e)
+		private void OnSingleImageSizeCheckedChanged(object sender, EventArgs e)
 		{
-			layoutControlItemPreviewImage.Visibility = tabbedControlSettings.SelectedTabPage == layoutControlGroupGallery ? LayoutVisibility.Always : LayoutVisibility.Never;
+			layoutControlItemSingleImageSizeCustomEditor.Enabled = checkEditSingleImageSizeCustom.Checked;
 		}
 
-		private void OnTabControlSettingsSelectedPageChanging(object sender, LayoutTabPageChangingEventArgs e)
+		private void OnSingleImagePaddingCheckedChanged(object sender, EventArgs e)
+		{
+			layoutControlItemSingleImagePaddingCustomEditor.Enabled = checkEditSingleImagePaddingCustom.Checked;
+		}
+
+		private void OnSingleBorderSizeCheckedChanged(object sender, EventArgs e)
+		{
+			layoutControlItemSingleBorderColorEditor.Visibility = !checkEditSingleBorderSizeNone.Checked ? LayoutVisibility.Always : LayoutVisibility.Never;
+			layoutControlGroupSingleShadowColor.Visibility = !checkEditSingleBorderSizeNone.Checked ? LayoutVisibility.Always : LayoutVisibility.Never;
+		}
+
+		private void OnSingleShadowColorCheckedChanged(object sender, EventArgs e)
+		{
+			layoutControlItemSingleShadowColorCustomEditor.Enabled = checkEditSingleShadowColor.Checked;
+		}
+
+		private void OnSingleSourceImagesSelectionChanged(object sender, EventArgs e)
+		{
+			layoutControlItemPreviewImage.Enabled = buttonXEnable.Checked && imageListViewSingle.SelectedItems.Any();
+		}
+
+		private void OnSinglePreviewImageClick(object sender, EventArgs e)
+		{
+			SaveData();
+			GeneratePreview();
+		}
+
+		private void OnSingleTextModeButtonClick(object sender, EventArgs e)
+		{
+			var button = (ButtonX)sender;
+			if (button.Checked) return;
+			buttonXSingleShowTextNone.Checked = false;
+			buttonXSingleShowTextLinkName.Checked = false;
+			buttonXSingleShowTextCustom.Checked = false;
+			button.Checked = true;
+		}
+
+		private void OnSingleTextModeButtonCheckedChanged(object sender, EventArgs e)
+		{
+			layoutControlItemSingleThumbnailText.Enabled = buttonXSingleShowTextLinkName.Checked || buttonXSingleShowTextCustom.Checked;
+			memoEditBannerText.ReadOnly = buttonXSingleShowTextLinkName.Checked;
+
+			layoutControlGroupSingleTextFont.Enabled = buttonXSingleShowTextLinkName.Checked || buttonXSingleShowTextCustom.Checked;
+			layoutControlGroupSingleTextColor.Enabled = buttonXSingleShowTextLinkName.Checked || buttonXSingleShowTextCustom.Checked;
+			layoutControlGroupSingleTextPosition.Enabled = buttonXSingleShowTextLinkName.Checked || buttonXSingleShowTextCustom.Checked;
+			layoutControlGroupSingleTextAlignment.Enabled = buttonXSingleShowTextLinkName.Checked || buttonXSingleShowTextCustom.Checked;
+
+			if (buttonXSingleShowTextNone.Checked)
+				memoEditBannerText.EditValue = null;
+			else if (buttonXSingleShowTextLinkName.Checked)
+				memoEditBannerText.EditValue = SingleLink.Name;
+			else if (buttonXSingleShowTextCustom.Checked && !String.IsNullOrEmpty(_tempThumbnailText))
+				memoEditBannerText.EditValue = _tempThumbnailText;
+		}
+
+		private void OnSingleTextColorEditValueChanged(object sender, EventArgs e)
+		{
+			memoEditBannerText.ForeColor = colorEditSingleTextColor.Color;
+		}
+
+		private void OnSingleTextFontEditValueChanged(object sender, EventArgs e)
+		{
+			memoEditBannerText.Font = (Font)buttonEditSingleTextFont.Tag;
+			memoEditBannerText.Properties.Appearance.Font = memoEditBannerText.Font;
+			memoEditBannerText.Properties.AppearanceDisabled.Font = memoEditBannerText.Font;
+			memoEditBannerText.Properties.AppearanceFocused.Font = memoEditBannerText.Font;
+			memoEditBannerText.Properties.AppearanceReadOnly.Font = memoEditBannerText.Font;
+		}
+
+		private void OnSingleBannerTextEditValueChanged(object sender, EventArgs e)
+		{
+			if (buttonXSingleShowTextCustom.Checked)
+				_tempThumbnailText = memoEditBannerText.EditValue as String ?? _tempThumbnailText;
+		}
+
+		private void OnTabControlSingleSettingsSelectedPageChanged(object sender, LayoutTabPageChangedEventArgs e)
+		{
+			layoutControlItemPreviewImage.Visibility = tabbedControlSingleSettings.SelectedTabPage == layoutControlGroupSingleGallery ? LayoutVisibility.Always : LayoutVisibility.Never;
+		}
+
+		private void OnTabControlSingleSettingsSelectedPageChanging(object sender, LayoutTabPageChangingEventArgs e)
 		{
 			e.Cancel = !buttonXEnable.Checked;
 		}
+		#endregion
+
+		#region Link Set Settings Processing
+		private void LoadLinkSetData()
+		{
+			layoutControlGroupSingleGallery.Visibility = LayoutVisibility.Never;
+			layoutControlGroupSingleTextSettings.Visibility = LayoutVisibility.Never;
+			layoutControlGroupLinkSetSettings.Visibility = LayoutVisibility.Always;
+
+			var defaultLink = _selectedLinks.First();
+
+			buttonXEnable.Checked = defaultLink.Thumbnail.Enable;
+			buttonXDisable.Checked = !buttonXEnable.Checked;
+
+			switch (defaultLink.Thumbnail.ImageWidth)
+			{
+				case 200:
+					checkEditLinkSetImageSize200.Checked = true;
+					break;
+				case 300:
+					checkEditLinkSetImageSize300.Checked = true;
+					break;
+				default:
+					checkEditLinkSetImageSizeCustom.Checked = true;
+					spinEditLinkSetImageSize.EditValue = defaultLink.Thumbnail.ImageWidth;
+					break;
+			}
+
+			switch (defaultLink.Thumbnail.ImagePadding)
+			{
+				case 0:
+					checkEditLinkSetImagePaddingNone.Checked = true;
+					break;
+				case 8:
+					checkEditLinkSetImagePadding8.Checked = true;
+					break;
+				case 10:
+					checkEditLinkSetImagePadding10.Checked = true;
+					break;
+				default:
+					checkEditLinkSetImagePaddingCustom.Checked = true;
+					spinEditLinkSetImagePadding.EditValue = defaultLink.Thumbnail.ImagePadding;
+					break;
+			}
+
+			switch (defaultLink.Thumbnail.ImageAlignement)
+			{
+				case HorizontalAlignment.Left:
+					checkEditLinkSetImageAlignmentLeft.Checked = true;
+					break;
+				case HorizontalAlignment.Center:
+					checkEditLinkSetImageAlignmentCenter.Checked = true;
+					break;
+				case HorizontalAlignment.Right:
+					checkEditLinkSetImageAlignmentRight.Checked = true;
+					break;
+			}
+
+			switch (defaultLink.Thumbnail.BorderSize)
+			{
+				case 0:
+					checkEditLinkSetBorderNone.Checked = true;
+					break;
+				case 2:
+					checkEditLinkSetBorder2.Checked = true;
+					break;
+				case 10:
+					checkEditLinkSetBorder10.Checked = true;
+					break;
+			}
+			colorEditLinkSetBorderColor.Color = defaultLink.Thumbnail.BorderColor;
+
+			if (defaultLink.Thumbnail.ShadowColor == Color.White)
+			{
+				checkEditLinkSetShadowColor.Checked = false;
+				colorEditLinkSetShadowColor.Color = ThumbnailSettings.DefaultShadowColor;
+			}
+			else
+			{
+				checkEditLinkSetShadowColor.Checked = true;
+				colorEditLinkSetShadowColor.Color = defaultLink.Thumbnail.ShadowColor;
+			}
+
+
+			checkEditLinkSetShowText.Checked = defaultLink.Thumbnail.TextMode == ThumbnailTextMode.LinkName ||
+											defaultLink.Thumbnail.TextMode == ThumbnailTextMode.CustomText;
+			buttonEditLinkSetTextFont.Tag = defaultLink.Thumbnail.Font;
+			buttonEditLinkSetTextFont.EditValue = Utils.FontToString(defaultLink.Thumbnail.Font);
+			colorEditLinkSetTextColor.Color = defaultLink.Thumbnail.ForeColor;
+			switch (defaultLink.Thumbnail.TextMode)
+			{
+				case ThumbnailTextMode.LinkName:
+					memoEditBannerText.EditValue = defaultLink.Name;
+					break;
+				case ThumbnailTextMode.CustomText:
+					memoEditBannerText.EditValue = defaultLink.Thumbnail.Text;
+					break;
+				default:
+					memoEditBannerText.EditValue = null;
+					break;
+			}
+
+			switch (defaultLink.Thumbnail.TextPosition)
+			{
+				case ThumbnailTextPosition.Top:
+					checkEditLinkSetTextPositionTop.Checked = true;
+					break;
+				case ThumbnailTextPosition.Bottom:
+					checkEditLinkSetTextPositionBottom.Checked = true;
+					break;
+			}
+			switch (defaultLink.Thumbnail.TextAlignement)
+			{
+				case HorizontalAlignment.Left:
+					checkEditLinkSetTextAlignmentLeft.Checked = true;
+					break;
+				case HorizontalAlignment.Center:
+					checkEditLinkSetTextAlignmentCenter.Checked = true;
+					break;
+				case HorizontalAlignment.Right:
+					checkEditLinkSetTextAlignmentRight.Checked = true;
+					break;
+			}
+		}
+
+		private void SaveLinkSetData()
+		{
+			foreach (var selectedLink in _selectedLinks)
+			{
+				if (buttonXEnable.Checked)
+				{
+					selectedLink.Thumbnail.Enable = true;
+
+					if (checkEditLinkSetImageSize200.Checked)
+						selectedLink.Thumbnail.ImageWidth = 200;
+					else if (checkEditLinkSetImageSize300.Checked)
+						selectedLink.Thumbnail.ImageWidth = 300;
+					else
+						selectedLink.Thumbnail.ImageWidth = (Int32)spinEditLinkSetImageSize.Value;
+
+					if (checkEditLinkSetImagePaddingNone.Checked)
+						selectedLink.Thumbnail.ImagePadding = 0;
+					else if (checkEditLinkSetImagePadding8.Checked)
+						selectedLink.Thumbnail.ImagePadding = 8;
+					else if (checkEditLinkSetImagePadding10.Checked)
+						selectedLink.Thumbnail.ImagePadding = 10;
+					else
+						selectedLink.Thumbnail.ImagePadding = (Int32)spinEditLinkSetImagePadding.Value;
+
+					if (checkEditLinkSetImageAlignmentLeft.Checked)
+						selectedLink.Thumbnail.ImageAlignement = HorizontalAlignment.Left;
+					else if (checkEditLinkSetImageAlignmentCenter.Checked)
+						selectedLink.Thumbnail.ImageAlignement = HorizontalAlignment.Center;
+					else if (checkEditLinkSetImageAlignmentRight.Checked)
+						selectedLink.Thumbnail.ImageAlignement = HorizontalAlignment.Right;
+
+					if (checkEditLinkSetBorderNone.Checked)
+						selectedLink.Thumbnail.BorderSize = 0;
+					else if (checkEditLinkSetBorder2.Checked)
+						selectedLink.Thumbnail.BorderSize = 2;
+					else if (checkEditLinkSetBorder10.Checked)
+						selectedLink.Thumbnail.BorderSize = 10;
+
+					selectedLink.Thumbnail.BorderColor = colorEditLinkSetBorderColor.Color;
+
+					if (!checkEditLinkSetBorderNone.Checked && checkEditLinkSetShadowColor.Checked)
+						selectedLink.Thumbnail.ShadowColor = colorEditLinkSetShadowColor.Color;
+					else
+						selectedLink.Thumbnail.ShadowColor = Color.White;
+
+					selectedLink.Thumbnail.TextMode = checkEditLinkSetShowText.Checked ? ThumbnailTextMode.LinkName : ThumbnailTextMode.NoText;
+					selectedLink.Thumbnail.Font = buttonEditLinkSetTextFont.Tag as Font;
+					selectedLink.Thumbnail.ForeColor = colorEditLinkSetTextColor.Color;
+					if (checkEditLinkSetTextPositionTop.Checked)
+						selectedLink.Thumbnail.TextPosition = ThumbnailTextPosition.Top;
+					else if (checkEditLinkSetTextPositionBottom.Checked)
+						selectedLink.Thumbnail.TextPosition = ThumbnailTextPosition.Bottom;
+					if (checkEditLinkSetTextAlignmentLeft.Checked)
+						selectedLink.Thumbnail.TextAlignement = HorizontalAlignment.Left;
+					else if (checkEditLinkSetTextAlignmentCenter.Checked)
+						selectedLink.Thumbnail.TextAlignement = HorizontalAlignment.Center;
+					else if (checkEditLinkSetTextAlignmentRight.Checked)
+						selectedLink.Thumbnail.TextAlignement = HorizontalAlignment.Right;
+
+					var defaultImageFilePath = selectedLink.GetThumbnailSourceFiles().FirstOrDefault();
+					if (defaultImageFilePath != null)
+						using (var tempImage = Image.FromFile(defaultImageFilePath))
+						{
+							var tranformAction = new Func<Image, Image>(image =>
+							{
+								image = image.Resize(new Size(selectedLink.Thumbnail.ImageWidth, tempImage.Height));
+								if (selectedLink.Thumbnail.BorderSize > 0)
+								{
+									image = image.DrawBorder(selectedLink.Thumbnail.BorderSize, selectedLink.Thumbnail.BorderColor);
+									if (selectedLink.Thumbnail.ShadowColor != Color.White)
+										image = image.DrawShadow(ThumbnailSettings.DefaultShadowSize, selectedLink.Thumbnail.ShadowColor);
+								}
+								if (selectedLink.Thumbnail.ImagePadding > 0)
+									image = image.DrawPadding(selectedLink.Thumbnail.TextEnabled ?
+										new Padding(
+											selectedLink.Thumbnail.ImagePadding,
+											selectedLink.Thumbnail.TextPosition == ThumbnailTextPosition.Top ? 0 : selectedLink.Thumbnail.ImagePadding,
+											selectedLink.Thumbnail.ImagePadding,
+											selectedLink.Thumbnail.TextPosition == ThumbnailTextPosition.Bottom ? 0 : selectedLink.Thumbnail.ImagePadding) :
+										new Padding(selectedLink.Thumbnail.ImagePadding));
+								return image;
+							});
+							using (var changedImage = tranformAction(tempImage))
+								selectedLink.Thumbnail.Image = (Image)changedImage.Clone();
+						}
+					selectedLink.Thumbnail.SourcePath = defaultImageFilePath;
+				}
+				else
+					selectedLink.Thumbnail = SettingsContainer.CreateInstance<ThumbnailSettings>((BaseLibraryLink)selectedLink);
+			}
+		}
+
+		private void OnLinkSetImageSizeCheckedChanged(object sender, EventArgs e)
+		{
+			layoutControlItemLinkSetImageSizeCustomEditor.Enabled = checkEditLinkSetImageSizeCustom.Checked;
+		}
+
+		private void OnLinkSetImagePaddingCheckedChanged(object sender, EventArgs e)
+		{
+			layoutControlItemLinkSetImagePaddingCustomEditor.Enabled = checkEditLinkSetImagePaddingCustom.Checked;
+		}
+
+		private void OnLinkSetBorderCheckedChanged(object sender, EventArgs e)
+		{
+			layoutControlItemLinkSetBorderColorEditor.Visibility = !checkEditLinkSetBorderNone.Checked ? LayoutVisibility.Always : LayoutVisibility.Never;
+			layoutControlItemLinkSetShadowColorToggle.Visibility = !checkEditLinkSetBorderNone.Checked ? LayoutVisibility.Always : LayoutVisibility.Never;
+			layoutControlItemLinkSetShadowColorEditor.Visibility = !checkEditLinkSetBorderNone.Checked ? LayoutVisibility.Always : LayoutVisibility.Never;
+		}
+
+		private void OnLinkSetShadowColorCheckedChanged(object sender, EventArgs e)
+		{
+			layoutControlItemLinkSetShadowColorEditor.Enabled = checkEditLinkSetShadowColor.Checked;
+		}
+
+		private void OnLinkSetShowTextCheckedChanged(object sender, EventArgs e)
+		{
+			layoutControlGroupLinkSetTextSettings.Enabled = checkEditLinkSetShowText.Checked;
+		}
+		#endregion
 	}
 }
