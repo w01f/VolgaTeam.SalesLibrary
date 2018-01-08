@@ -1,4 +1,5 @@
 <?
+
 	/**
 	 * Class PageContentShortcut
 	 */
@@ -16,7 +17,8 @@
 		/** @var  PageHeaderSettings */
 		public $headerSettings;
 
-		public $autolLoadLinkId;
+		public $autoLoadLinkId;
+		public $autoLoadLinkShowDelayHours;
 
 		/**
 		 * @param $linkRecord
@@ -166,8 +168,8 @@
 		{
 			$data = parent::getPageData();
 
-			if (!empty($this->autolLoadLinkId))
-				$data['autolLoadLinkId'] = $this->autolLoadLinkId;
+			if (!empty($this->autoLoadLinkId))
+				$data['autoLoadLinkId'] = $this->autoLoadLinkId;
 
 			$data['headerOptions'] = $this->headerSettings;
 
@@ -216,19 +218,39 @@
 		 */
 		private function configureAutoLoadLink($xpath, $contextNode)
 		{
-			$queryResult = $xpath->query('./LibraryName', $contextNode);
-			$libraryName = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
-			$queryResult = $xpath->query('./PageName', $contextNode);
-			$pageName = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
-			$queryResult = $xpath->query('./WindowName', $contextNode);
-			$windowName = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
-			$queryResult = $xpath->query('./LinkName', $contextNode);
-			$linkName = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
-			if (!empty($libraryName) && !empty($pageName) && !empty($windowName) && !empty($linkName))
+			$queryResult = $xpath->query('./HourSeparation', $contextNode);
+			$hoursSeparation = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue)) : 0;
+			$cookieValue = null;
+			if ($hoursSeparation > 0)
 			{
-				$linkRecord = LinkRecord::getLinkByName($libraryName, $pageName, $windowName, $linkName);
-				if (isset($linkRecord))
-					$this->autolLoadLinkId = $linkRecord->id;
+				$cookieTag = sprintf("autoload-link-hours-separation-%s", $this->id);
+				$cookieValue = isset(Yii::app()->request->cookies[$cookieTag]) ? Yii::app()->request->cookies[$cookieTag]->value : null;
+			}
+			if (!isset($cookieValue))
+			{
+
+				$queryResult = $xpath->query('./LibraryName', $contextNode);
+				$libraryName = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
+				$queryResult = $xpath->query('./PageName', $contextNode);
+				$pageName = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
+				$queryResult = $xpath->query('./WindowName', $contextNode);
+				$windowName = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
+				$queryResult = $xpath->query('./LinkName', $contextNode);
+				$linkName = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
+				if (!empty($libraryName) && !empty($pageName) && !empty($windowName) && !empty($linkName))
+				{
+					$linkRecord = LinkRecord::getLinkByName($libraryName, $pageName, $windowName, $linkName);
+					if (isset($linkRecord))
+					{
+						$this->autoLoadLinkId = $linkRecord->id;
+						if ($hoursSeparation > 0)
+						{
+							$cookie = new CHttpCookie($cookieTag, $hoursSeparation);
+							$cookie->expire = time() + (60 * 60 * $hoursSeparation);
+							Yii::app()->request->cookies[$cookieTag] = $cookie;
+						}
+					}
+				}
 			}
 		}
 	}

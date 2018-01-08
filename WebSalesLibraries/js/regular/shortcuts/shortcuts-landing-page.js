@@ -158,8 +158,8 @@
 					$(window).off('resize.landing-page').on('resize.landing-page', updateContentSize);
 					updateContentSize();
 
-					if (data.autoLoadLinkiCallback !== undefined)
-						data.autoLoadLinkiCallback();
+					if (data.autoLoadLinkCallback !== undefined)
+						data.autoLoadLinkCallback();
 				}
 			});
 

@@ -34,8 +34,8 @@
 
 					updateContentSize();
 
-					if (data.autoLoadLinkiCallback !== undefined)
-						data.autoLoadLinkiCallback();
+					if (data.autoLoadLinkCallback !== undefined)
+						data.autoLoadLinkCallback();
 				},
 				resizeCallback: updateContentSize
 			});

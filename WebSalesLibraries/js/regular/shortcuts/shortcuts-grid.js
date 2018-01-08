@@ -33,8 +33,8 @@
 					$(window).off('resize.grid').on('resize.grid', updateContentSize);
 					updateContentSize();
 
-					if (data.autoLoadLinkiCallback !== undefined)
-						data.autoLoadLinkiCallback();
+					if (data.autoLoadLinkCallback !== undefined)
+						data.autoLoadLinkCallback();
 				}
 			});
 		};

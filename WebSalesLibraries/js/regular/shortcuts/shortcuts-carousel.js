@@ -76,8 +76,8 @@
 					$(window).off('resize.carousel').on('resize.carousel', updateContentSize);
 					updateContentSize();
 
-					if (data.autoLoadLinkiCallback !== undefined)
-						data.autoLoadLinkiCallback();
+					if (data.autoLoadLinkCallback !== undefined)
+						data.autoLoadLinkCallback();
 				}
 			});
 		};

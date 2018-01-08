@@ -193,12 +193,12 @@
 
 		var openShortcutOnSamePage = function (parameters)
 		{
-			parameters.autoLoadLinkiCallback = undefined;
-			if (parameters.options.autolLoadLinkId !== undefined)
+			parameters.autoLoadLinkCallback = undefined;
+			if (parameters.options.autoLoadLinkId !== undefined)
 			{
-				parameters.autoLoadLinkiCallback = function () {
+				parameters.autoLoadLinkCallback = function () {
 					$.SalesPortal.LinkManager.requestViewDialog({
-						linkId: parameters.options.autolLoadLinkId,
+						linkId: parameters.options.autoLoadLinkId,
 						isQuickSite: false
 					});
 				}
@@ -214,7 +214,7 @@
 					updatedAllContentNecessary = true;
 					break;
 				case 'search':
-					$.SalesPortal.ShortcutsSearchLink(parameters).runSearch(parameters.autoLoadLinkiCallback);
+					$.SalesPortal.ShortcutsSearchLink(parameters).runSearch(parameters.autoLoadLinkCallback);
 					break;
 				case 'window':
 					new $.SalesPortal.ShortcutsLibraryWindow().init(parameters);
