@@ -338,6 +338,18 @@
     <Compile Include="PresentationLayer\Wallbin\Folders\Controls\FormAddExternalFolder.Designer.cs">
       <DependentUpon>FormAddExternalFolder.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Folders\Controls\FormAddImage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Folders\Controls\FormAddImage.Designer.cs">
+      <DependentUpon>FormAddImage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Folders\Controls\FormAddImageRequest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Folders\Controls\FormAddImageRequest.Designer.cs">
+      <DependentUpon>FormAddImageRequest.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationLayer\Wallbin\ImageGallery\FormImageGallery.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1040,6 +1052,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Folders\Controls\FormAddExternalFolder.resx">
       <DependentUpon>FormAddExternalFolder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Folders\Controls\FormAddImage.resx">
+      <DependentUpon>FormAddImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Folders\Controls\FormAddImageRequest.resx">
+      <DependentUpon>FormAddImageRequest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\ImageGallery\FormImageGallery.resx">
       <DependentUpon>FormImageGallery.cs</DependentUpon>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using SalesLibraries.Business.Entities.Helpers;
@@ -135,6 +136,26 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 
 			_outsideChangesInProgress = true;
 			var newLink = LineBreak.Create(DataSource);
+			if (position >= 0)
+				((List<BaseLibraryLink>)DataSource.Links).InsertItem(newLink, position);
+			else
+				DataSource.Links.AddItem(newLink);
+			var newRow = InsertLinkRow(newLink, position);
+			_outsideChangesInProgress = false;
+
+			UpdateGridSize();
+
+			SelectSingleRow(newRow);
+
+			DataChanged?.Invoke(this, EventArgs.Empty);
+		}
+
+		public void AddImageAsLineBreak(Image image, int position)
+		{
+			_outsideChangesInProgress = true;
+			var newLink = LineBreak.Create(DataSource);
+			newLink.Banner.Enable = true;
+			newLink.Banner.Image = image;
 			if (position >= 0)
 				((List<BaseLibraryLink>)DataSource.Links).InsertItem(newLink, position);
 			else

@@ -12,6 +12,7 @@ using SalesLibraries.Business.Entities.Wallbin.Persistent;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.JsonConverters;
+using SalesLibraries.Common.Objects.Graphics;
 using SalesLibraries.CommonGUI.CustomDialog;
 using SalesLibraries.CommonGUI.Wallbin.Folders;
 using SalesLibraries.FileManager.Controllers;
@@ -135,7 +136,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 					{
 						var confirmDrop = true;
 						if (!sourceLinks.OfType<FolderLink>().Any() && sourceLinks.OfType<FileLink>().Count() == 1 &&
-						    FileFormatHelper.IsUrlFile(sourceLinks.OfType<FileLink>().Single().Path))
+							FileFormatHelper.IsUrlFile(sourceLinks.OfType<FileLink>().Single().Path))
 						{
 							AddHyperLink(UrlLinkInfo.FromFile(sourceLinks.OfType<FileLink>().Single().Path));
 							confirmDrop = false;
@@ -175,14 +176,50 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 						sourceLinks =
 							droppedItemsPaths.Select(itemPath => SourceLink.FromExternalPath(itemPath, DataSource.Page.Library)).ToList();
 					}
-					if (sourceLinks.Any(link => link.IsExternal))
+					var extrernalLinks = sourceLinks.Where(link => link.IsExternal).ToList();
+					if (extrernalLinks.Any())
 					{
 						var confirmDrop = true;
-						foreach (var folderLink in sourceLinks.OfType<FolderLink>().ToList())
-							using (var form = new FormAddExternalFolder(folderLink))
-								confirmDrop = form.ShowDialog(MainController.Instance.MainForm) == DialogResult.OK;
+						if (extrernalLinks.Count == 1 && extrernalLinks.All(link =>
+								FileFormatHelper.IsJpegFile(link.Path) || FileFormatHelper.IsPngFile(link.Path)))
+						{
+							using (var form = new FormAddImageRequest())
+							{
+								if (form.ShowDialog(MainController.Instance.MainForm) == DialogResult.OK)
+								{
+									if (form.checkEditFile.Checked)
+										confirmDrop = true;
+									else if (form.checkEditLinebreak.Checked)
+									{
+										var imageFilePath = extrernalLinks.Select(link => link.Path).First();
+										using (var formEditImage = new FormAddImage(imageFilePath))
+										{
+											if (formEditImage.ShowDialog(MainController.Instance.MainForm) == DialogResult.OK)
+											{
+												AddImageAsLineBreak(formEditImage.pictureEditImage.Image, _mouseDragOverHitInfo.RowIndex);
+												MainController.Instance.Lists.Banners.ImportedImages.AddImage<Banner>(imageFilePath);
+												MainController.Instance.Lists.Widgets.ImportedImages.AddImage<Widget>(imageFilePath);
+												confirmDrop = false;
+											}
+											else
+												confirmDrop = false;
+										}
+									}
+									else
+										confirmDrop = false;
+								}
+								else
+									confirmDrop = false;
+							}
+						}
+						else
+						{
+							foreach (var folderLink in extrernalLinks.OfType<FolderLink>().ToList())
+								using (var form = new FormAddExternalFolder(folderLink))
+									confirmDrop = form.ShowDialog(MainController.Instance.MainForm) == DialogResult.OK;
+						}
 						if (confirmDrop)
-							InsertDataSourceLinks(sourceLinks, _mouseDragOverHitInfo.RowIndex);
+							InsertDataSourceLinks(extrernalLinks, _mouseDragOverHitInfo.RowIndex);
 					}
 				}
 			}
@@ -193,14 +230,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 			}
 			else if (IsLinkRowDragged)
 			{
-				var droppedRow = DataDraggedOver?.GetData(typeof(LinkRow)) as LinkRow;
-				if (droppedRow != null)
+				if (DataDraggedOver?.GetData(typeof(LinkRow)) is LinkRow droppedRow)
 					ProcessLinkRowMoving(droppedRow, _mouseDragOverHitInfo.RowIndex);
 			}
 			else if (IsFolderBoxDragged)
 			{
-				var droppedFolder = DataDraggedOver?.GetData(typeof(ClassicFolderBox)) as ClassicFolderBox;
-				if (droppedFolder != null && droppedFolder != this)
+				if (DataDraggedOver?.GetData(typeof(ClassicFolderBox)) is ClassicFolderBox droppedFolder && droppedFolder != this)
 					FolderContainer.ProcessFolderMoving(droppedFolder, DataSource.ColumnOrder, DataSource.RowOrder);
 			}
 			ResetDragInfo();

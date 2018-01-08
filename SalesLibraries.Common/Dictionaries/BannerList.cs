@@ -14,9 +14,12 @@ namespace SalesLibraries.Common.Dictionaries
 		public StorageDirectory MainFolder { get; set; }
 		public StorageDirectory AdditionalFolder { get; set; }
 		public StorageDirectory FavsFolder { get; set; }
+		public StorageDirectory ImportedFolder { get; set; }
 		public List<ImageSourceGroup> Items { get; }
 
 		public SearchResultsImageGroup SearchResults => Items.OfType<SearchResultsImageGroup>().Single();
+
+		public ImportedBannerImageGroup ImportedImages => Items.OfType<ImportedBannerImageGroup>().Single();
 
 		public BannerList()
 		{
@@ -28,21 +31,27 @@ namespace SalesLibraries.Common.Dictionaries
 			MainFolder = new StorageDirectory(RemoteResourceManager.Instance.ArtworkFolder.RelativePathParts.Merge("Banners"));
 			AdditionalFolder = new StorageDirectory(RemoteResourceManager.Instance.ArtworkFolder.RelativePathParts.Merge("Banners_2"));
 			FavsFolder = new StorageDirectory(RemoteResourceManager.Instance.AppSharedSettingsFolder.RelativePathParts.Merge("Favorite_Banners"));
+			ImportedFolder = new StorageDirectory(RemoteResourceManager.Instance.AppSharedSettingsFolder.RelativePathParts.Merge("Imported_Banners"));
 
 			Items.Clear();
 
 			SourceFolderImageGroup sourceFolderImageGroup = new RegularImageGroup(this, MainFolder.LocalPath);
 			sourceFolderImageGroup.Name = "Gallery";
-			sourceFolderImageGroup.Order = -3;
+			sourceFolderImageGroup.Order = -4;
 			Items.Add(sourceFolderImageGroup);
 
 			var searchResultsimageGroup = new SearchResultsImageGroup(this);
 			searchResultsimageGroup.Name = "Search Results";
-			searchResultsimageGroup.Order = -2;
+			searchResultsimageGroup.Order = -3;
 			Items.Add(searchResultsimageGroup);
 
 			sourceFolderImageGroup = new FavoriteImageGroup(this, FavsFolder.LocalPath);
 			sourceFolderImageGroup.Name = "My Favorites";
+			sourceFolderImageGroup.Order = -2;
+			Items.Add(sourceFolderImageGroup);
+
+			sourceFolderImageGroup = new ImportedBannerImageGroup(this, ImportedFolder.LocalPath);
+			sourceFolderImageGroup.Name = "Imported";
 			sourceFolderImageGroup.Order = -1;
 			Items.Add(sourceFolderImageGroup);
 

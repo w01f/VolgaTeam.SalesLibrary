@@ -54,6 +54,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.ImageGallery
 				return new RegularImagesContainer(parent);
 			if (parent is SearchResultsImageGroup)
 				return new SearchResultsImagesContainer(parent);
+			if (parent is ImportedImageGroup)
+				return new RegularImagesContainer(parent);
 			throw new ArgumentOutOfRangeException("There is no container control for image group");
 		}
 

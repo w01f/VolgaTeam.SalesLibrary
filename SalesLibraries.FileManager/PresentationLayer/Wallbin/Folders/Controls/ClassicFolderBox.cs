@@ -186,11 +186,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 		{
 			if (FormatState.ShowSelectedFolder && IsActive)
 			{
-				Rectangle rect = e.ClipRectangle.Top == 0 ?
+				var rect = e.ClipRectangle.Top == 0 ?
 					new Rectangle(e.ClipRectangle.Left, e.ClipRectangle.Top, e.ClipRectangle.Width, Height) :
 					new Rectangle(e.ClipRectangle.Left, 0, e.ClipRectangle.Width, e.ClipRectangle.Bottom);
 				const int borderWidth = 3;
-				for (int i = 0; i < borderWidth; i++)
+				for (var i = 0; i < borderWidth; i++)
 				{
 					ControlPaint.DrawBorder(e.Graphics,
 						rect,

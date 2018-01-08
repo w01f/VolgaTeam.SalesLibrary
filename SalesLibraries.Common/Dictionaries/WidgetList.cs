@@ -13,9 +13,12 @@ namespace SalesLibraries.Common.Dictionaries
 		public StorageDirectory MainFolder { get; private set; }
 		public StorageDirectory AdditionalFolder { get; private set; }
 		public StorageDirectory FavsFolder { get; private set; }
+		public StorageDirectory ImportedFolder { get; set; }
 		public List<ImageSourceGroup> Items { get; }
 
 		public SearchResultsImageGroup SearchResults => Items.OfType<SearchResultsImageGroup>().Single();
+
+		public ImportedWidgetImageGroup ImportedImages => Items.OfType<ImportedWidgetImageGroup>().Single();
 
 		public WidgetList()
 		{
@@ -27,21 +30,28 @@ namespace SalesLibraries.Common.Dictionaries
 			MainFolder = new StorageDirectory(RemoteResourceManager.Instance.ArtworkFolder.RelativePathParts.Merge("Widgets"));
 			AdditionalFolder = new StorageDirectory(RemoteResourceManager.Instance.ArtworkFolder.RelativePathParts.Merge("Widgets_2"));
 			FavsFolder = new StorageDirectory(RemoteResourceManager.Instance.AppSharedSettingsFolder.RelativePathParts.Merge("Favorite_Widgets"));
+			FavsFolder = new StorageDirectory(RemoteResourceManager.Instance.AppSharedSettingsFolder.RelativePathParts.Merge("Imported_Widgets"));
+			ImportedFolder = new StorageDirectory(RemoteResourceManager.Instance.AppSharedSettingsFolder.RelativePathParts.Merge("Imported_Widgets"));
 
 			Items.Clear();
 
 			SourceFolderImageGroup sourceFolderImageGroup = new RegularImageGroup(this, MainFolder.LocalPath);
 			sourceFolderImageGroup.Name = "Gallery";
-			sourceFolderImageGroup.Order = -3;
+			sourceFolderImageGroup.Order = -4;
 			Items.Add(sourceFolderImageGroup);
 
 			var searchResultsimageGroup = new SearchResultsImageGroup(this);
 			searchResultsimageGroup.Name = "Search Results";
-			searchResultsimageGroup.Order = -2;
+			searchResultsimageGroup.Order = -3;
 			Items.Add(searchResultsimageGroup);
 
 			sourceFolderImageGroup = new FavoriteImageGroup(this, FavsFolder.LocalPath);
 			sourceFolderImageGroup.Name = "My Favorites";
+			sourceFolderImageGroup.Order = -2;
+			Items.Add(sourceFolderImageGroup);
+
+			sourceFolderImageGroup = new ImportedWidgetImageGroup(this, ImportedFolder.LocalPath);
+			sourceFolderImageGroup.Name = "Imported";
 			sourceFolderImageGroup.Order = -1;
 			Items.Add(sourceFolderImageGroup);
 

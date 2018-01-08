@@ -50,9 +50,6 @@
 			this.labelControlSingleTextColor = new DevExpress.XtraEditors.LabelControl();
 			this.labelControlSingleTextFont = new DevExpress.XtraEditors.LabelControl();
 			this.memoEditBannerText = new DevExpress.XtraEditors.MemoEdit();
-			this.buttonXSingleShowTextNone = new DevComponents.DotNetBar.ButtonX();
-			this.buttonXSingleShowTextLinkName = new DevComponents.DotNetBar.ButtonX();
-			this.buttonXSingleShowTextCustom = new DevComponents.DotNetBar.ButtonX();
 			this.checkEditLinkSetShowText = new DevExpress.XtraEditors.CheckEdit();
 			this.checkEditLinkSetImageSize200 = new DevExpress.XtraEditors.CheckEdit();
 			this.checkEditLinkSetImageSize300 = new DevExpress.XtraEditors.CheckEdit();
@@ -111,6 +108,9 @@
 			this.checkEditSingleImagePadding8 = new DevExpress.XtraEditors.CheckEdit();
 			this.checkEditSingleImageSizeCustom = new DevExpress.XtraEditors.CheckEdit();
 			this.spinEditSingleImageSize = new DevExpress.XtraEditors.SpinEdit();
+			this.buttonXSingleShowTextNone = new DevComponents.DotNetBar.ButtonX();
+			this.buttonXSingleShowTextLinkName = new DevComponents.DotNetBar.ButtonX();
+			this.buttonXSingleShowTextCustom = new DevComponents.DotNetBar.ButtonX();
 			this.layoutControlGroupRootMain = new DevExpress.XtraLayout.LayoutControlGroup();
 			this.layoutControlItemToggleEnable = new DevExpress.XtraLayout.LayoutControlItem();
 			this.layoutControlItemToggleDisable = new DevExpress.XtraLayout.LayoutControlItem();
@@ -849,51 +849,6 @@
 			this.memoEditBannerText.TabIndex = 7;
 			this.memoEditBannerText.EditValueChanged += new System.EventHandler(this.OnSingleBannerTextEditValueChanged);
 			// 
-			// buttonXSingleShowTextNone
-			// 
-			this.buttonXSingleShowTextNone.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-			this.buttonXSingleShowTextNone.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXSingleShowTextNone.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.buttonXSingleShowTextNone.Location = new System.Drawing.Point(314, 129);
-			this.buttonXSingleShowTextNone.Name = "buttonXSingleShowTextNone";
-			this.buttonXSingleShowTextNone.Size = new System.Drawing.Size(138, 36);
-			this.buttonXSingleShowTextNone.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.buttonXSingleShowTextNone.TabIndex = 4;
-			this.buttonXSingleShowTextNone.Text = "No Text";
-			this.buttonXSingleShowTextNone.TextColor = System.Drawing.Color.Black;
-			this.buttonXSingleShowTextNone.CheckedChanged += new System.EventHandler(this.OnSingleTextModeButtonCheckedChanged);
-			this.buttonXSingleShowTextNone.Click += new System.EventHandler(this.OnSingleTextModeButtonClick);
-			// 
-			// buttonXSingleShowTextLinkName
-			// 
-			this.buttonXSingleShowTextLinkName.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-			this.buttonXSingleShowTextLinkName.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXSingleShowTextLinkName.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.buttonXSingleShowTextLinkName.Location = new System.Drawing.Point(474, 129);
-			this.buttonXSingleShowTextLinkName.Name = "buttonXSingleShowTextLinkName";
-			this.buttonXSingleShowTextLinkName.Size = new System.Drawing.Size(138, 36);
-			this.buttonXSingleShowTextLinkName.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.buttonXSingleShowTextLinkName.TabIndex = 5;
-			this.buttonXSingleShowTextLinkName.Text = "Link Name";
-			this.buttonXSingleShowTextLinkName.TextColor = System.Drawing.Color.Black;
-			this.buttonXSingleShowTextLinkName.CheckedChanged += new System.EventHandler(this.OnSingleTextModeButtonCheckedChanged);
-			this.buttonXSingleShowTextLinkName.Click += new System.EventHandler(this.OnSingleTextModeButtonClick);
-			// 
-			// buttonXSingleShowTextCustom
-			// 
-			this.buttonXSingleShowTextCustom.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-			this.buttonXSingleShowTextCustom.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXSingleShowTextCustom.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.buttonXSingleShowTextCustom.Location = new System.Drawing.Point(634, 129);
-			this.buttonXSingleShowTextCustom.Name = "buttonXSingleShowTextCustom";
-			this.buttonXSingleShowTextCustom.Size = new System.Drawing.Size(138, 36);
-			this.buttonXSingleShowTextCustom.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.buttonXSingleShowTextCustom.TabIndex = 6;
-			this.buttonXSingleShowTextCustom.Text = "Custom Text";
-			this.buttonXSingleShowTextCustom.TextColor = System.Drawing.Color.Black;
-			this.buttonXSingleShowTextCustom.CheckedChanged += new System.EventHandler(this.OnSingleTextModeButtonCheckedChanged);
-			this.buttonXSingleShowTextCustom.Click += new System.EventHandler(this.OnSingleTextModeButtonClick);
-			// 
 			// checkEditLinkSetShowText
 			// 
 			this.checkEditLinkSetShowText.Location = new System.Drawing.Point(314, 471);
@@ -1240,7 +1195,7 @@
 			this.checkEditLinkSetTextPositionTop.Properties.Appearance.Options.UseForeColor = true;
 			this.checkEditLinkSetTextPositionTop.Properties.Caption = "Top";
 			this.checkEditLinkSetTextPositionTop.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
-			this.checkEditLinkSetTextPositionTop.Properties.RadioGroupIndex = 7;
+			this.checkEditLinkSetTextPositionTop.Properties.RadioGroupIndex = 13;
 			this.checkEditLinkSetTextPositionTop.Size = new System.Drawing.Size(76, 20);
 			this.checkEditLinkSetTextPositionTop.StyleController = this.layoutControlMain;
 			this.checkEditLinkSetTextPositionTop.TabIndex = 1;
@@ -1255,7 +1210,7 @@
 			this.checkEditLinkSetTextPositionBottom.Properties.Appearance.Options.UseForeColor = true;
 			this.checkEditLinkSetTextPositionBottom.Properties.Caption = "Bottom";
 			this.checkEditLinkSetTextPositionBottom.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
-			this.checkEditLinkSetTextPositionBottom.Properties.RadioGroupIndex = 7;
+			this.checkEditLinkSetTextPositionBottom.Properties.RadioGroupIndex = 13;
 			this.checkEditLinkSetTextPositionBottom.Size = new System.Drawing.Size(76, 20);
 			this.checkEditLinkSetTextPositionBottom.StyleController = this.layoutControlMain;
 			this.checkEditLinkSetTextPositionBottom.TabIndex = 1;
@@ -1271,7 +1226,7 @@
 			this.checkEditLinkSetTextAlignmentLeft.Properties.AutoWidth = true;
 			this.checkEditLinkSetTextAlignmentLeft.Properties.Caption = "Left";
 			this.checkEditLinkSetTextAlignmentLeft.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
-			this.checkEditLinkSetTextAlignmentLeft.Properties.RadioGroupIndex = 8;
+			this.checkEditLinkSetTextAlignmentLeft.Properties.RadioGroupIndex = 14;
 			this.checkEditLinkSetTextAlignmentLeft.Size = new System.Drawing.Size(43, 20);
 			this.checkEditLinkSetTextAlignmentLeft.StyleController = this.layoutControlMain;
 			this.checkEditLinkSetTextAlignmentLeft.TabIndex = 1;
@@ -1287,7 +1242,7 @@
 			this.checkEditLinkSetTextAlignmentCenter.Properties.AutoWidth = true;
 			this.checkEditLinkSetTextAlignmentCenter.Properties.Caption = "Center";
 			this.checkEditLinkSetTextAlignmentCenter.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
-			this.checkEditLinkSetTextAlignmentCenter.Properties.RadioGroupIndex = 8;
+			this.checkEditLinkSetTextAlignmentCenter.Properties.RadioGroupIndex = 14;
 			this.checkEditLinkSetTextAlignmentCenter.Size = new System.Drawing.Size(61, 20);
 			this.checkEditLinkSetTextAlignmentCenter.StyleController = this.layoutControlMain;
 			this.checkEditLinkSetTextAlignmentCenter.TabIndex = 1;
@@ -1303,7 +1258,7 @@
 			this.checkEditLinkSetTextAlignmentRight.Properties.AutoWidth = true;
 			this.checkEditLinkSetTextAlignmentRight.Properties.Caption = "Right";
 			this.checkEditLinkSetTextAlignmentRight.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
-			this.checkEditLinkSetTextAlignmentRight.Properties.RadioGroupIndex = 8;
+			this.checkEditLinkSetTextAlignmentRight.Properties.RadioGroupIndex = 14;
 			this.checkEditLinkSetTextAlignmentRight.Size = new System.Drawing.Size(52, 20);
 			this.checkEditLinkSetTextAlignmentRight.StyleController = this.layoutControlMain;
 			this.checkEditLinkSetTextAlignmentRight.TabIndex = 1;
@@ -1880,6 +1835,51 @@
 			this.spinEditSingleImageSize.Size = new System.Drawing.Size(53, 22);
 			this.spinEditSingleImageSize.StyleController = this.layoutControlMain;
 			this.spinEditSingleImageSize.TabIndex = 1;
+			// 
+			// buttonXSingleShowTextNone
+			// 
+			this.buttonXSingleShowTextNone.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXSingleShowTextNone.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXSingleShowTextNone.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.buttonXSingleShowTextNone.Location = new System.Drawing.Point(314, 129);
+			this.buttonXSingleShowTextNone.Name = "buttonXSingleShowTextNone";
+			this.buttonXSingleShowTextNone.Size = new System.Drawing.Size(138, 36);
+			this.buttonXSingleShowTextNone.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXSingleShowTextNone.TabIndex = 4;
+			this.buttonXSingleShowTextNone.Text = "No Text";
+			this.buttonXSingleShowTextNone.TextColor = System.Drawing.Color.Black;
+			this.buttonXSingleShowTextNone.CheckedChanged += new System.EventHandler(this.OnSingleTextModeButtonCheckedChanged);
+			this.buttonXSingleShowTextNone.Click += new System.EventHandler(this.OnSingleTextModeButtonClick);
+			// 
+			// buttonXSingleShowTextLinkName
+			// 
+			this.buttonXSingleShowTextLinkName.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXSingleShowTextLinkName.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXSingleShowTextLinkName.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.buttonXSingleShowTextLinkName.Location = new System.Drawing.Point(474, 129);
+			this.buttonXSingleShowTextLinkName.Name = "buttonXSingleShowTextLinkName";
+			this.buttonXSingleShowTextLinkName.Size = new System.Drawing.Size(138, 36);
+			this.buttonXSingleShowTextLinkName.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXSingleShowTextLinkName.TabIndex = 5;
+			this.buttonXSingleShowTextLinkName.Text = "Link Name";
+			this.buttonXSingleShowTextLinkName.TextColor = System.Drawing.Color.Black;
+			this.buttonXSingleShowTextLinkName.CheckedChanged += new System.EventHandler(this.OnSingleTextModeButtonCheckedChanged);
+			this.buttonXSingleShowTextLinkName.Click += new System.EventHandler(this.OnSingleTextModeButtonClick);
+			// 
+			// buttonXSingleShowTextCustom
+			// 
+			this.buttonXSingleShowTextCustom.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXSingleShowTextCustom.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXSingleShowTextCustom.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.buttonXSingleShowTextCustom.Location = new System.Drawing.Point(634, 129);
+			this.buttonXSingleShowTextCustom.Name = "buttonXSingleShowTextCustom";
+			this.buttonXSingleShowTextCustom.Size = new System.Drawing.Size(138, 36);
+			this.buttonXSingleShowTextCustom.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXSingleShowTextCustom.TabIndex = 6;
+			this.buttonXSingleShowTextCustom.Text = "Custom Text";
+			this.buttonXSingleShowTextCustom.TextColor = System.Drawing.Color.Black;
+			this.buttonXSingleShowTextCustom.CheckedChanged += new System.EventHandler(this.OnSingleTextModeButtonCheckedChanged);
+			this.buttonXSingleShowTextCustom.Click += new System.EventHandler(this.OnSingleTextModeButtonClick);
 			// 
 			// layoutControlGroupRootMain
 			// 
