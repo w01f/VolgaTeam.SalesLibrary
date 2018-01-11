@@ -50,9 +50,6 @@
 			this.repositoryItemButtonEditBundleItemsDisabledText = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
 			this.repositoryItemCheckEditBundleItemsDisabled = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
 			this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
-			this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-			this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
-			this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
 			this.barManager = new DevExpress.XtraBars.BarManager(this.components);
 			this.barToolbar = new DevExpress.XtraBars.Bar();
 			this.barSubItemLinksAdd = new DevExpress.XtraBars.BarSubItem();
@@ -62,6 +59,9 @@
 			this.barLargeButtonItemLinksAddRevenue = new DevExpress.XtraBars.BarLargeButtonItem();
 			this.barLargeButtonItemLinksAddStrategy = new DevExpress.XtraBars.BarLargeButtonItem();
 			this.barLargeButtonItemLinksAddUrls = new DevExpress.XtraBars.BarLargeButtonItem();
+			this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
+			this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
+			this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
 			this.layoutControlLinks = new DevExpress.XtraLayout.LayoutControl();
 			this.pictureEditLogo = new DevExpress.XtraEditors.PictureEdit();
 			this.layoutControlItemBarDockControlLeft = new DevExpress.XtraLayout.LayoutControlItem();
@@ -392,32 +392,6 @@
 			this.barDockControlLeft.Manager = this.barManager;
 			this.barDockControlLeft.Size = new System.Drawing.Size(0, 200);
 			// 
-			// barDockControlRight
-			// 
-			this.barDockControlRight.CausesValidation = false;
-			this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-			this.barDockControlRight.ForeColor = System.Drawing.Color.Black;
-			this.barDockControlRight.Location = new System.Drawing.Point(239, 134);
-			this.barDockControlRight.Manager = this.barManager;
-			this.barDockControlRight.Size = new System.Drawing.Size(0, 68);
-			// 
-			// barDockControlBottom
-			// 
-			this.barDockControlBottom.CausesValidation = false;
-			this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.barDockControlBottom.ForeColor = System.Drawing.Color.Black;
-			this.barDockControlBottom.Location = new System.Drawing.Point(239, 182);
-			this.barDockControlBottom.Manager = this.barManager;
-			this.barDockControlBottom.Size = new System.Drawing.Size(663, 0);
-			// 
-			// barDockControlTop
-			// 
-			this.barDockControlTop.CausesValidation = false;
-			this.barDockControlTop.ForeColor = System.Drawing.Color.Black;
-			this.barDockControlTop.Location = new System.Drawing.Point(2, 74);
-			this.barDockControlTop.Manager = this.barManager;
-			this.barDockControlTop.Size = new System.Drawing.Size(910, 44);
-			// 
 			// barManager
 			// 
 			this.barManager.Bars.AddRange(new DevExpress.XtraBars.Bar[] {
@@ -515,6 +489,32 @@
 			this.barLargeButtonItemLinksAddUrls.ImageOptions.Image = global::SalesLibraries.FileManager.Properties.Resources.BundlesEditorLinksAddUrl;
 			this.barLargeButtonItemLinksAddUrls.Name = "barLargeButtonItemLinksAddUrls";
 			this.barLargeButtonItemLinksAddUrls.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.OnAddUrlsItemClick);
+			// 
+			// barDockControlTop
+			// 
+			this.barDockControlTop.CausesValidation = false;
+			this.barDockControlTop.ForeColor = System.Drawing.Color.Black;
+			this.barDockControlTop.Location = new System.Drawing.Point(2, 74);
+			this.barDockControlTop.Manager = this.barManager;
+			this.barDockControlTop.Size = new System.Drawing.Size(910, 44);
+			// 
+			// barDockControlBottom
+			// 
+			this.barDockControlBottom.CausesValidation = false;
+			this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.barDockControlBottom.ForeColor = System.Drawing.Color.Black;
+			this.barDockControlBottom.Location = new System.Drawing.Point(239, 182);
+			this.barDockControlBottom.Manager = this.barManager;
+			this.barDockControlBottom.Size = new System.Drawing.Size(663, 0);
+			// 
+			// barDockControlRight
+			// 
+			this.barDockControlRight.CausesValidation = false;
+			this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
+			this.barDockControlRight.ForeColor = System.Drawing.Color.Black;
+			this.barDockControlRight.Location = new System.Drawing.Point(239, 134);
+			this.barDockControlRight.Manager = this.barManager;
+			this.barDockControlRight.Size = new System.Drawing.Size(0, 68);
 			// 
 			// layoutControlLinks
 			// 
@@ -869,8 +869,6 @@
 			this.Controls.Add(this.layoutControlMain);
 			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "FormEditBundle";
 			this.ShowIcon = false;

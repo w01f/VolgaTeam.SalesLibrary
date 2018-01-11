@@ -34,7 +34,7 @@
 			this.layoutControl = new DevExpress.XtraLayout.LayoutControl();
 			this.buttonEditFooterTextFont = new DevExpress.XtraEditors.ButtonEdit();
 			this.colorEditFooterBackColor = new SalesLibraries.CommonGUI.Common.HtmlColorEdit();
-			this.pictureEdit1 = new DevExpress.XtraEditors.PictureEdit();
+			this.pictureEditLogo = new DevExpress.XtraEditors.PictureEdit();
 			this.pictureEditLaunchScreenLogo = new DevExpress.XtraEditors.PictureEdit();
 			this.colorEditFooterTextColor = new SalesLibraries.CommonGUI.Common.HtmlColorEdit();
 			this.memoEditFooter = new DevExpress.XtraEditors.MemoEdit();
@@ -72,7 +72,7 @@
 			this.layoutControl.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.buttonEditFooterTextFont.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.colorEditFooterBackColor.Properties)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.pictureEdit1.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureEditLogo.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureEditLaunchScreenLogo.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.colorEditFooterTextColor.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.memoEditFooter.Properties)).BeginInit();
@@ -151,7 +151,7 @@
 			this.layoutControl.Appearance.ControlReadOnly.Options.UseFont = true;
 			this.layoutControl.Controls.Add(this.buttonEditFooterTextFont);
 			this.layoutControl.Controls.Add(this.colorEditFooterBackColor);
-			this.layoutControl.Controls.Add(this.pictureEdit1);
+			this.layoutControl.Controls.Add(this.pictureEditLogo);
 			this.layoutControl.Controls.Add(this.pictureEditLaunchScreenLogo);
 			this.layoutControl.Controls.Add(this.colorEditFooterTextColor);
 			this.layoutControl.Controls.Add(this.memoEditHeader);
@@ -210,36 +210,43 @@
 			this.colorEditFooterBackColor.TabIndex = 71;
 			this.colorEditFooterBackColor.EditValueChanged += new System.EventHandler(this.OnFooterBackColorEditValueChanged);
 			// 
-			// pictureEdit1
+			// pictureEditLogo
 			// 
-			this.pictureEdit1.EditValue = global::SalesLibraries.FileManager.Properties.Resources.BundlesEditorInfoLogo;
-			this.pictureEdit1.Location = new System.Drawing.Point(4, 4);
-			this.pictureEdit1.Name = "pictureEdit1";
-			this.pictureEdit1.Properties.AllowFocused = false;
-			this.pictureEdit1.Properties.Appearance.BackColor = System.Drawing.Color.White;
-			this.pictureEdit1.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.pictureEdit1.Properties.Appearance.Options.UseBackColor = true;
-			this.pictureEdit1.Properties.Appearance.Options.UseForeColor = true;
-			this.pictureEdit1.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-			this.pictureEdit1.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
-			this.pictureEdit1.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Zoom;
-			this.pictureEdit1.Size = new System.Drawing.Size(64, 64);
-			this.pictureEdit1.StyleController = this.layoutControl;
-			this.pictureEdit1.TabIndex = 64;
+			this.pictureEditLogo.Cursor = System.Windows.Forms.Cursors.Default;
+			this.pictureEditLogo.EditValue = global::SalesLibraries.FileManager.Properties.Resources.BundlesEditorInfoLogo;
+			this.pictureEditLogo.Location = new System.Drawing.Point(4, 4);
+			this.pictureEditLogo.Name = "pictureEditLogo";
+			this.pictureEditLogo.Properties.AllowFocused = false;
+			this.pictureEditLogo.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.pictureEditLogo.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.pictureEditLogo.Properties.Appearance.Options.UseBackColor = true;
+			this.pictureEditLogo.Properties.Appearance.Options.UseForeColor = true;
+			this.pictureEditLogo.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+			this.pictureEditLogo.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
+			this.pictureEditLogo.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Zoom;
+			this.pictureEditLogo.Properties.ZoomAccelerationFactor = 1D;
+			this.pictureEditLogo.Size = new System.Drawing.Size(64, 64);
+			this.pictureEditLogo.StyleController = this.layoutControl;
+			this.pictureEditLogo.TabIndex = 64;
 			// 
 			// pictureEditLaunchScreenLogo
 			// 
+			this.pictureEditLaunchScreenLogo.AllowDrop = true;
 			this.pictureEditLaunchScreenLogo.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.pictureEditLaunchScreenLogo.Location = new System.Drawing.Point(2, 94);
 			this.pictureEditLaunchScreenLogo.Name = "pictureEditLaunchScreenLogo";
+			this.pictureEditLaunchScreenLogo.Properties.AllowFocused = false;
 			this.pictureEditLaunchScreenLogo.Properties.NullText = "Add Logo...";
 			this.pictureEditLaunchScreenLogo.Properties.ReadOnly = true;
 			this.pictureEditLaunchScreenLogo.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
 			this.pictureEditLaunchScreenLogo.Properties.ShowMenu = false;
+			this.pictureEditLaunchScreenLogo.Properties.ZoomAccelerationFactor = 1D;
 			this.pictureEditLaunchScreenLogo.Size = new System.Drawing.Size(96, 96);
 			this.pictureEditLaunchScreenLogo.StyleController = this.layoutControl;
 			this.pictureEditLaunchScreenLogo.TabIndex = 10;
-			this.pictureEditLaunchScreenLogo.Click += new System.EventHandler(this.OnLogoEditClick);
+			this.pictureEditLaunchScreenLogo.Click += new System.EventHandler(this.OnLaunchScreenLogoEditClick);
+			this.pictureEditLaunchScreenLogo.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnLaunchScreenLogoDragDrop);
+			this.pictureEditLaunchScreenLogo.DragOver += new System.Windows.Forms.DragEventHandler(this.OnImageDragOver);
 			// 
 			// colorEditFooterTextColor
 			// 
@@ -290,20 +297,26 @@
 			// 
 			// pictureEditBanner
 			// 
+			this.pictureEditBanner.AllowDrop = true;
 			this.pictureEditBanner.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.pictureEditBanner.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.pictureEditBanner.Location = new System.Drawing.Point(122, 250);
 			this.pictureEditBanner.Name = "pictureEditBanner";
+			this.pictureEditBanner.Properties.AllowFocused = false;
 			this.pictureEditBanner.Properties.NullText = "Add Logo...";
 			this.pictureEditBanner.Properties.ReadOnly = true;
 			this.pictureEditBanner.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
 			this.pictureEditBanner.Properties.ShowMenu = false;
+			this.pictureEditBanner.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Squeeze;
+			this.pictureEditBanner.Properties.ZoomAccelerationFactor = 1D;
 			this.pictureEditBanner.Size = new System.Drawing.Size(508, 99);
 			this.pictureEditBanner.StyleController = this.layoutControl;
 			this.pictureEditBanner.TabIndex = 11;
 			this.pictureEditBanner.Click += new System.EventHandler(this.OnBannerEditClick);
+			this.pictureEditBanner.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnBannerDragDrop);
+			this.pictureEditBanner.DragOver += new System.Windows.Forms.DragEventHandler(this.OnImageDragOver);
 			// 
 			// buttonEditHeaderTextFont
 			// 
@@ -393,7 +406,7 @@
 			// 
 			// layoutControlItemLogo
 			// 
-			this.layoutControlItemLogo.Control = this.pictureEdit1;
+			this.layoutControlItemLogo.Control = this.pictureEditLogo;
 			this.layoutControlItemLogo.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
 			this.layoutControlItemLogo.FillControlToClientArea = false;
 			this.layoutControlItemLogo.Location = new System.Drawing.Point(0, 0);
@@ -415,8 +428,6 @@
 			this.simpleLabelItemTitle.AppearanceItemCaption.Options.UseTextOptions = true;
 			this.simpleLabelItemTitle.AppearanceItemCaption.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.None;
 			this.simpleLabelItemTitle.AppearanceItemCaption.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-			this.simpleLabelItemTitle.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-			this.simpleLabelItemTitle.FillControlToClientArea = false;
 			this.simpleLabelItemTitle.Location = new System.Drawing.Point(72, 0);
 			this.simpleLabelItemTitle.MaxSize = new System.Drawing.Size(0, 72);
 			this.simpleLabelItemTitle.MinSize = new System.Drawing.Size(226, 72);
@@ -426,7 +437,6 @@
 			this.simpleLabelItemTitle.Text = "<size=+2>Setup your Bundle Launch Screen...</size>";
 			this.simpleLabelItemTitle.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
 			this.simpleLabelItemTitle.TextSize = new System.Drawing.Size(246, 18);
-			this.simpleLabelItemTitle.TrimClientAreaToControl = false;
 			// 
 			// layoutControlItemLaunchScreenLogo
 			// 
@@ -674,7 +684,6 @@
 			// 
 			this.Controls.Add(this.layoutControl);
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-			this.Name = "LaunchScreenEditControl";
 			this.Size = new System.Drawing.Size(632, 507);
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.memoEditHeader.Properties)).EndInit();
@@ -682,7 +691,7 @@
 			this.layoutControl.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.buttonEditFooterTextFont.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.colorEditFooterBackColor.Properties)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.pictureEdit1.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureEditLogo.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureEditLaunchScreenLogo.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.colorEditFooterTextColor.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.memoEditFooter.Properties)).EndInit();
@@ -732,7 +741,7 @@
 		private CommonGUI.Common.HtmlColorEdit colorEditFooterBackColor;
 		private CommonGUI.Common.HtmlColorEdit colorEditFooterTextColor;
 		private DevExpress.XtraLayout.LayoutControl layoutControl;
-		private DevExpress.XtraEditors.PictureEdit pictureEdit1;
+		private DevExpress.XtraEditors.PictureEdit pictureEditLogo;
 		private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroupRoot;
 		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemLogo;
 		private DevExpress.XtraLayout.SimpleLabelItem simpleLabelItemTitle;

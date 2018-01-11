@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using DevExpress.Skins;
 using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkBundleSettings;
+using SalesLibraries.Common.Extensions;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.Objects.Graphics;
 using SalesLibraries.CommonGUI.Common;
@@ -82,22 +84,55 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Singl
 			_bundleItem = null;
 		}
 
-		private void OnLogoEditClick(object sender, EventArgs e)
+		private void OnLaunchScreenLogoEditClick(object sender, EventArgs e)
 		{
-			using (var form = new FormImageGallery<Widget>(MainController.Instance.Lists.Banners))
+			using (var form = new FormImageGallery<Banner>(MainController.Instance.Lists.Banners))
 			{
 				if (form.ShowDialog() != DialogResult.OK) return;
-				pictureEditLaunchScreenLogo.Image = (Image)form.OriginalImage.Clone(); 
+				pictureEditLaunchScreenLogo.Image = (Image)form.OriginalImage.Clone();
 			}
 		}
 
 		private void OnBannerEditClick(object sender, EventArgs e)
 		{
-			using (var form = new FormImageGallery<Widget>(MainController.Instance.Lists.Banners))
+			using (var form = new FormImageGallery<Banner>(MainController.Instance.Lists.Banners))
 			{
 				if (form.ShowDialog() != DialogResult.OK) return;
 				pictureEditBanner.Image = (Image)form.OriginalImage.Clone();
 			}
+		}
+
+		private void OnLaunchScreenLogoDragDrop(object sender, DragEventArgs e)
+		{
+			if (e.Data != null && e.Data.GetDataPresent(DataFormats.FileDrop, true) &&
+				e.Data.GetData(DataFormats.FileDrop, true) is String[])
+			{
+				var imageFilePath = (e.Data.GetData(DataFormats.FileDrop) as String[] ?? new string[] { }).FirstOrDefault();
+				if (imageFilePath == null) return;
+				using (var originalImage = Image.FromFile(imageFilePath))
+				{
+					pictureEditLaunchScreenLogo.Image = originalImage.Height > 100 ? originalImage.Resize(new Size(originalImage.Width, 100)) : Image.FromFile(imageFilePath);
+				}
+			}
+		}
+
+		private void OnBannerDragDrop(object sender, DragEventArgs e)
+		{
+			if (e.Data != null && e.Data.GetDataPresent(DataFormats.FileDrop, true) &&
+				e.Data.GetData(DataFormats.FileDrop, true) is String[])
+			{
+				var imageFilePath = (e.Data.GetData(DataFormats.FileDrop) as String[] ?? new string[] { }).FirstOrDefault();
+				if (imageFilePath == null) return;
+				pictureEditBanner.Image = Image.FromFile(imageFilePath);
+			}
+		}
+
+		private void OnImageDragOver(object sender, DragEventArgs e)
+		{
+			if (e.Data != null && e.Data.GetDataPresent(DataFormats.FileDrop, true) && e.Data.GetData(DataFormats.FileDrop, true) is String[])
+				e.Effect = DragDropEffects.Copy;
+			else
+				e.Effect = DragDropEffects.None;
 		}
 
 		private void OnHeaderTextColorEditValueChanged(object sender, EventArgs e)

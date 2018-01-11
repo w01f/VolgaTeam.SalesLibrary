@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using DevExpress.Skins;
 using DevExpress.XtraTab;
@@ -50,6 +51,25 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Singl
 			{
 				pictureEditImage.Image = Image.FromFile(openFileDialog.FileName);
 			}
+		}
+
+		private void OnImageDragDrop(object sender, DragEventArgs e)
+		{
+			if (e.Data != null && e.Data.GetDataPresent(DataFormats.FileDrop, true) &&
+				e.Data.GetData(DataFormats.FileDrop, true) is String[])
+			{
+				var imageFilePath = (e.Data.GetData(DataFormats.FileDrop) as String[] ?? new string[] { }).FirstOrDefault();
+				if (imageFilePath == null) return;
+				pictureEditImage.Image = Image.FromFile(imageFilePath);
+			}
+		}
+
+		private void OnImageDragOver(object sender, DragEventArgs e)
+		{
+			if (e.Data != null && e.Data.GetDataPresent(DataFormats.FileDrop, true) && e.Data.GetData(DataFormats.FileDrop, true) is String[])
+				e.Effect = DragDropEffects.Copy;
+			else
+				e.Effect = DragDropEffects.None;
 		}
 	}
 }

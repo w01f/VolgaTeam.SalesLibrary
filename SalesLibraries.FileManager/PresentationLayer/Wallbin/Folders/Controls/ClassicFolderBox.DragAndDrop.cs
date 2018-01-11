@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using DevExpress.Skins;
@@ -183,22 +184,32 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 						if (extrernalLinks.Count == 1 && extrernalLinks.All(link =>
 								FileFormatHelper.IsJpegFile(link.Path) || FileFormatHelper.IsPngFile(link.Path)))
 						{
+							var imageFilePath = extrernalLinks.Select(link => link.Path).First();
 							using (var form = new FormAddImageRequest())
 							{
+								form.simpleLabelItemTitle.Text =
+									String.Format("<color=gray>Add:<br>{0}</color>", Path.GetFileName(imageFilePath));
 								if (form.ShowDialog(MainController.Instance.MainForm) == DialogResult.OK)
 								{
-									if (form.checkEditFile.Checked)
+									var addToGallery = false;
+									if (form.checkEditGallery.Checked)
+									{
+										confirmDrop = false;
+										addToGallery = true;
+									}
+									else if (form.checkEditFile.Checked)
+									{
 										confirmDrop = true;
+										addToGallery = true;
+									}
 									else if (form.checkEditLinebreak.Checked)
 									{
-										var imageFilePath = extrernalLinks.Select(link => link.Path).First();
 										using (var formEditImage = new FormAddImage(imageFilePath))
 										{
 											if (formEditImage.ShowDialog(MainController.Instance.MainForm) == DialogResult.OK)
 											{
 												AddImageAsLineBreak(formEditImage.pictureEditImage.Image, _mouseDragOverHitInfo.RowIndex);
-												MainController.Instance.Lists.Banners.ImportedImages.AddImage<Banner>(imageFilePath);
-												MainController.Instance.Lists.Widgets.ImportedImages.AddImage<Widget>(imageFilePath);
+												addToGallery = true;
 												confirmDrop = false;
 											}
 											else
@@ -207,6 +218,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 									}
 									else
 										confirmDrop = false;
+									if (addToGallery)
+									{
+										MainController.Instance.Lists.Banners.ImportedImages.AddImage<Banner>(imageFilePath);
+										MainController.Instance.Lists.Widgets.ImportedImages.AddImage<Widget>(imageFilePath);
+									}
 								}
 								else
 									confirmDrop = false;

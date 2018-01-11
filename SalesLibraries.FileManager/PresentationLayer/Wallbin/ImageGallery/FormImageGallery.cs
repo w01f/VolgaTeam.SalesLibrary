@@ -49,8 +49,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.ImageGallery
 			xtraTabControlGallery.SelectedPageChanged += (o, e) =>
 			{
 				((BaseLinkImagesContainer)e.Page).Init();
-				var galleryNode = e.Page.Tag as TreeNode;
-				if (galleryNode == null)
+				if (!(e.Page.Tag is TreeNode galleryNode))
 				{
 					galleryNode = treeViewGallery.Nodes.Insert(xtraTabControlGallery.TabPages.IndexOf(e.Page), e.Page.Text);
 					galleryNode.Tag = e.Page;
