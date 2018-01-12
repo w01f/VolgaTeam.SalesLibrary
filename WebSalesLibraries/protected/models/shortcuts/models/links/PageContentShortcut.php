@@ -218,9 +218,9 @@
 		 */
 		private function configureAutoLoadLink($xpath, $contextNode)
 		{
-			$queryResult = $xpath->query('./Enabled');
+			$queryResult = $xpath->query('./Enabled', $contextNode);
 			$enabled = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
-
+			$cookieTag = sprintf("autoload-link-hours-separation-%s", $this->id);
 			if ($enabled)
 			{
 				$queryResult = $xpath->query('./HourSeparation', $contextNode);
@@ -228,7 +228,6 @@
 				$cookieValue = null;
 				if ($hoursSeparation > 0)
 				{
-					$cookieTag = sprintf("autoload-link-hours-separation-%s", $this->id);
 					$cookieValue = isset(Yii::app()->request->cookies[$cookieTag]) ? Yii::app()->request->cookies[$cookieTag]->value : null;
 				}
 				if (!isset($cookieValue))
@@ -257,5 +256,7 @@
 					}
 				}
 			}
+			else
+				unset(Yii::app()->request->cookies[$cookieTag]);
 		}
 	}

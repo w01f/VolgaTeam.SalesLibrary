@@ -235,6 +235,7 @@
 		{
 			var documentBar = new $.SalesPortal.ViewerBar();
 			var images = viewerData.galleryPagesInPng;
+			var dragAndDropSource = dialogContent.find('.preview-gallery .page-preview-image');
 
 			$.fancybox.close();
 			$.fancybox(images,
@@ -265,6 +266,15 @@
 						$.SalesPortal.SalesLibraryExtensions.switchDocumentPage(this.index);
 						imageViewerStartIndex = this.index;
 						documentBar.resize();
+
+						$('#' + this.id).off('dragstart').on('dragstart', function (e)
+						{
+							var urlHeader = dragAndDropSource.data("url-header");
+							var url = dragAndDropSource.data('url');
+							if (url !== '')
+								e.originalEvent.dataTransfer.setData(urlHeader, url);
+						});
+
 						if (viewerData.config.enableLogging)
 						{
 							$.SalesPortal.LogHelper.write({

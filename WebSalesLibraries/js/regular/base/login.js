@@ -4,6 +4,7 @@
 	$.SalesPortal = $.SalesPortal || { };
 	var AuthManager = function ()
 	{
+		var that = this;
 		this.init = function ()
 		{
 			var passwordRequirementsTag = $('#password-requirements');
@@ -17,7 +18,7 @@
 			});
 
 			var modeSwitchButton = $('#button-switch-version');
-			if (typeof(modeSwitchButton.bootstrapSwitch) == "function")
+			if (typeof(modeSwitchButton.bootstrapSwitch) === "function")
 				modeSwitchButton.bootstrapSwitch().on('switchChange.bootstrapSwitch', function ()
 				{
 					switchVersion();
@@ -64,7 +65,6 @@
 			$('#form-login-data').off('submit').on('submit', function ()
 			{
 				var disclaimer = $('.disclaimer-text');
-				var continueLogin = false;
 				if (disclaimer.length > 0)
 				{
 					$.fancybox({
@@ -123,6 +123,50 @@
 			});
 		};
 
+		this.requestRefreshDueToInactivity = function ()
+		{
+			var modalDialog = new $.SalesPortal.ModalDialog({
+				title: 'Site Notification',
+				description: 'Your current session is expired. Click the button below to refresh your page',
+				closeBtn: false,
+				buttons: [
+					{
+						tag: 'ok',
+						title: 'Refresh this page',
+						width: 160,
+						clickHandler: function ()
+						{
+							modalDialog.close();
+							location.reload();
+						}
+					}
+				]
+			});
+			modalDialog.show();
+		};
+
+		this.requestLogoutDueToInactivity = function ()
+		{
+			var modalDialog = new $.SalesPortal.ModalDialog({
+				title: 'Site Notification',
+				description: 'Your current session is expired. Click the button below to refresh your page',
+				closeBtn: false,
+				buttons: [
+					{
+						tag: 'ok',
+						title: 'Refresh this page',
+						width: 160,
+						clickHandler: function ()
+						{
+							modalDialog.close();
+							that.logout();
+						}
+					}
+				]
+			});
+			modalDialog.show();
+		};
+
 		var resetPassword = function ()
 		{
 			$.ajax({
@@ -159,7 +203,7 @@
 							},
 							success: function (msg)
 							{
-								if (msg != '')
+								if (msg !== '')
 									content.find('.error-message').html(msg);
 								else
 								{

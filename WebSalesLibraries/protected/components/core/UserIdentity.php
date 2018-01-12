@@ -48,6 +48,7 @@
 		/**
 		 * @param $newPassword
 		 * @return bool
+		 * @throws CDbException
 		 */
 		public function changePassword($newPassword)
 		{

@@ -156,34 +156,56 @@
 		$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/data-table/bootstrap/js/datatables.min.js?' . Yii::app()->params['version'], CClientScript::POS_END);
 	}
 ?>
-    <style id="main-menu-common-style">
-        #main-menu .shortcut-menu-group-item {
-            margin-right: <? echo Yii::app()->params['menu']['IconSeparation'];?>px;
-        }
-    </style>
-    <style id="main-menu-custom-page-style">
-        .menu-back-colored {
-            background-color: <?echo Utils::formatColor(Yii::app()->params['menu']['BarColor']);?> !important;
-        }
+<style id="main-menu-common-style">
+    #main-menu .shortcut-menu-group-item {
+        margin-right: <? echo Yii::app()->params['menu']['IconSeparation'];?>px;
+    }
+</style>
+<style id="main-menu-custom-page-style">
+    .menu-back-colored {
+        background-color: <?echo Utils::formatColor(Yii::app()->params['menu']['BarColor']);?> !important;
+    }
 
-        #shortcut-action-menu,
-        #shortcut-action-menu .main-level,
-        #shortcut-action-menu .level {
-            background-color: <? echo Utils::formatColor(Yii::app()->params['menu']['BarColor']);?>;
-        }
+    #shortcut-action-menu,
+    #shortcut-action-menu .main-level,
+    #shortcut-action-menu .level {
+        background-color: <? echo Utils::formatColor(Yii::app()->params['menu']['BarColor']);?>;
+    }
 
-        #shortcut-action-menu .main-level .shortcut-menu-header:hover {
-            background-color: <? echo Utils::formatColor(Yii::app()->params['menu']['BarColor']);?>;
-        }
-    </style>
-    <script type="text/javascript">
-		$.Editable.DEFAULTS.key = '<?echo Yii::app()->params['froala_editor']['key'];?>';
-    </script>
+    #shortcut-action-menu .main-level .shortcut-menu-header:hover {
+        background-color: <? echo Utils::formatColor(Yii::app()->params['menu']['BarColor']);?>;
+    }
+</style>
+<script type="text/javascript">
+	$.Editable.DEFAULTS.key = '<?echo Yii::app()->params['froala_editor']['key'];?>';
+</script>
 
 <? if (array_key_exists('refresh_popup', Yii::app()->params->getKeys()) && Yii::app()->params['refresh_popup']['enabled'] === true): ?>
     <script type="text/javascript">
 		$(document).ready(function () {
 			setTimeout($.SalesPortal.MainMenu.checkIfShortcutsUpdated, 60000);
+		});
+    </script>
+<? endif; ?>
+<? if (UserIdentity::isUserAuthorized() && array_key_exists('inactivity_refresh_timeout', Yii::app()->params['login']) && Yii::app()->params['login']['inactivity_refresh_timeout'] > 0): ?>
+    <script type="text/javascript">
+		$(document).ready(function () {
+			var wait = setTimeout($.SalesPortal.Auth.requestRefreshDueToInactivity, <? echo Yii::app()->params['login']['inactivity_refresh_timeout'];?>* 1000);
+			$( "body" ).on('mousemove',function(){
+				clearTimeout(wait);
+				wait = setTimeout($.SalesPortal.Auth.requestRefreshDueToInactivity, <? echo Yii::app()->params['login']['inactivity_refresh_timeout'];?>* 1000);
+			});
+		});
+    </script>
+<? endif; ?>
+<? if (UserIdentity::isUserAuthorized() && array_key_exists('inactivity_logout_timeout', Yii::app()->params['login']) && Yii::app()->params['login']['inactivity_logout_timeout'] > 0): ?>
+    <script type="text/javascript">
+		$(document).ready(function () {
+			var wait = setTimeout($.SalesPortal.Auth.requestLogoutDueToInactivity, <? echo Yii::app()->params['login']['inactivity_logout_timeout'];?>* 1000);
+			$( "body" ).on('mousemove',function(){
+				clearTimeout(wait);
+				wait = setTimeout($.SalesPortal.Auth.requestLogoutDueToInactivity, <? echo Yii::app()->params['login']['inactivity_logout_timeout'];?>* 1000);
+			});
 		});
     </script>
 <? endif; ?>

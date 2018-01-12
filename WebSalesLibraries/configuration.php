@@ -23,6 +23,8 @@
 					'tempPasswordExpiredIn' => '7',
 					'complex_password' => false,
 					'jqmlogintext' => 'Welcome to Raycom Results for Smartphones',
+					'inactivity_refresh_timeout' => -1,
+					'inactivity_logout_timeout' => -1,
 				),
 				'stations' => array(
 					'tab_name' => 'Libraries',

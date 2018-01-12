@@ -7,6 +7,7 @@
 	{
 		/**
 		 * @param CComponent $owner
+		 * @throws CException
 		 */
 		public function attach($owner)
 		{
