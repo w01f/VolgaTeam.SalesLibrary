@@ -5,14 +5,12 @@ namespace SalesLibraries.Common.Objects.Graphics
 {
 	public abstract class ImageSourceGroup
 	{
-		protected const string IgnoredListFileName = "ignored.txt";
-
 		protected string _sourcePath;
-		protected IImageSourceList ParentList { get; private set; }
+		protected IImageSourceList ParentList { get; }
 		public string Name { get; set; }
 		public int Order { get; set; }
 
-		public List<BaseImageSource> Images { get; private set; }
+		public List<BaseImageSource> Images { get; }
 
 		public EventHandler<EventArgs> DataChanged;
 

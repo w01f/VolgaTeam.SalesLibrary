@@ -29,16 +29,17 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			DevExpress.XtraLayout.ColumnDefinition columnDefinition7 = new DevExpress.XtraLayout.ColumnDefinition();
-			DevExpress.XtraLayout.ColumnDefinition columnDefinition8 = new DevExpress.XtraLayout.ColumnDefinition();
-			DevExpress.XtraLayout.ColumnDefinition columnDefinition9 = new DevExpress.XtraLayout.ColumnDefinition();
-			DevExpress.XtraLayout.RowDefinition rowDefinition3 = new DevExpress.XtraLayout.RowDefinition();
+			DevExpress.XtraLayout.ColumnDefinition columnDefinition1 = new DevExpress.XtraLayout.ColumnDefinition();
+			DevExpress.XtraLayout.ColumnDefinition columnDefinition2 = new DevExpress.XtraLayout.ColumnDefinition();
+			DevExpress.XtraLayout.ColumnDefinition columnDefinition3 = new DevExpress.XtraLayout.ColumnDefinition();
+			DevExpress.XtraLayout.RowDefinition rowDefinition1 = new DevExpress.XtraLayout.RowDefinition();
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.buttonXCancel = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXAdd = new DevComponents.DotNetBar.ButtonX();
 			this.layoutControl = new DevExpress.XtraLayout.LayoutControl();
 			this.checkEditLinebreak = new DevExpress.XtraEditors.CheckEdit();
 			this.checkEditFile = new DevExpress.XtraEditors.CheckEdit();
+			this.checkEditGallery = new DevExpress.XtraEditors.CheckEdit();
 			this.layoutControlGroupRoot = new DevExpress.XtraLayout.LayoutControlGroup();
 			this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
@@ -46,16 +47,16 @@
 			this.layoutControlItemCancel = new DevExpress.XtraLayout.LayoutControlItem();
 			this.simpleLabelItemTitle = new DevExpress.XtraLayout.SimpleLabelItem();
 			this.emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.layoutControlGroupAddType = new DevExpress.XtraLayout.LayoutControlGroup();
 			this.layoutControlItemFile = new DevExpress.XtraLayout.LayoutControlItem();
 			this.layoutControlItemLinebreak = new DevExpress.XtraLayout.LayoutControlItem();
-			this.layoutControlGroupAddType = new DevExpress.XtraLayout.LayoutControlGroup();
-			this.checkEditGallery = new DevExpress.XtraEditors.CheckEdit();
 			this.layoutControlItemFile1 = new DevExpress.XtraLayout.LayoutControlItem();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControl)).BeginInit();
 			this.layoutControl.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditLinebreak.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditFile.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditGallery.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupRoot)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
@@ -63,10 +64,9 @@
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemCancel)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemTitle)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupAddType)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemFile)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemLinebreak)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupAddType)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditGallery.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemFile1)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -147,7 +147,7 @@
 			// 
 			// checkEditLinebreak
 			// 
-			this.checkEditLinebreak.Location = new System.Drawing.Point(338, 58);
+			this.checkEditLinebreak.Location = new System.Drawing.Point(338, 75);
 			this.checkEditLinebreak.Name = "checkEditLinebreak";
 			this.checkEditLinebreak.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditLinebreak.Properties.Appearance.Options.UseForeColor = true;
@@ -161,7 +161,7 @@
 			// 
 			// checkEditFile
 			// 
-			this.checkEditFile.Location = new System.Drawing.Point(175, 58);
+			this.checkEditFile.Location = new System.Drawing.Point(175, 75);
 			this.checkEditFile.Name = "checkEditFile";
 			this.checkEditFile.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditFile.Properties.Appearance.Options.UseForeColor = true;
@@ -171,6 +171,21 @@
 			this.checkEditFile.Size = new System.Drawing.Size(159, 20);
 			this.checkEditFile.StyleController = this.layoutControl;
 			this.checkEditFile.TabIndex = 4;
+			this.checkEditFile.TabStop = false;
+			// 
+			// checkEditGallery
+			// 
+			this.checkEditGallery.EditValue = true;
+			this.checkEditGallery.Location = new System.Drawing.Point(12, 75);
+			this.checkEditGallery.Name = "checkEditGallery";
+			this.checkEditGallery.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.checkEditGallery.Properties.Appearance.Options.UseForeColor = true;
+			this.checkEditGallery.Properties.Caption = "to my Gallery";
+			this.checkEditGallery.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
+			this.checkEditGallery.Properties.RadioGroupIndex = 1;
+			this.checkEditGallery.Size = new System.Drawing.Size(159, 20);
+			this.checkEditGallery.StyleController = this.layoutControl;
+			this.checkEditGallery.TabIndex = 4;
 			// 
 			// layoutControlGroupRoot
 			// 
@@ -205,7 +220,7 @@
 			// emptySpaceItem1
 			// 
 			this.emptySpaceItem1.AllowHotTrack = false;
-			this.emptySpaceItem1.Location = new System.Drawing.Point(0, 26);
+			this.emptySpaceItem1.Location = new System.Drawing.Point(0, 43);
 			this.emptySpaceItem1.MaxSize = new System.Drawing.Size(0, 20);
 			this.emptySpaceItem1.MinSize = new System.Drawing.Size(10, 20);
 			this.emptySpaceItem1.Name = "emptySpaceItem1";
@@ -216,7 +231,7 @@
 			// emptySpaceItem2
 			// 
 			this.emptySpaceItem2.AllowHotTrack = false;
-			this.emptySpaceItem2.Location = new System.Drawing.Point(120, 96);
+			this.emptySpaceItem2.Location = new System.Drawing.Point(120, 105);
 			this.emptySpaceItem2.Name = "emptySpaceItem2";
 			this.emptySpaceItem2.Size = new System.Drawing.Size(250, 40);
 			this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
@@ -265,7 +280,7 @@
 			this.simpleLabelItemTitle.Location = new System.Drawing.Point(0, 0);
 			this.simpleLabelItemTitle.MinSize = new System.Drawing.Size(1, 26);
 			this.simpleLabelItemTitle.Name = "simpleLabelItemTitle";
-			this.simpleLabelItemTitle.Size = new System.Drawing.Size(490, 26);
+			this.simpleLabelItemTitle.Size = new System.Drawing.Size(490, 43);
 			this.simpleLabelItemTitle.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
 			this.simpleLabelItemTitle.Text = "How do you want to ad this image?";
 			this.simpleLabelItemTitle.TextSize = new System.Drawing.Size(203, 16);
@@ -273,10 +288,38 @@
 			// emptySpaceItem3
 			// 
 			this.emptySpaceItem3.AllowHotTrack = false;
-			this.emptySpaceItem3.Location = new System.Drawing.Point(0, 70);
+			this.emptySpaceItem3.Location = new System.Drawing.Point(0, 87);
 			this.emptySpaceItem3.Name = "emptySpaceItem3";
-			this.emptySpaceItem3.Size = new System.Drawing.Size(490, 26);
+			this.emptySpaceItem3.Size = new System.Drawing.Size(490, 18);
 			this.emptySpaceItem3.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// layoutControlGroupAddType
+			// 
+			this.layoutControlGroupAddType.GroupBordersVisible = false;
+			this.layoutControlGroupAddType.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItemFile,
+            this.layoutControlItemLinebreak,
+            this.layoutControlItemFile1});
+			this.layoutControlGroupAddType.LayoutMode = DevExpress.XtraLayout.Utils.LayoutMode.Table;
+			this.layoutControlGroupAddType.Location = new System.Drawing.Point(0, 63);
+			this.layoutControlGroupAddType.Name = "layoutControlGroupAddType";
+			columnDefinition1.SizeType = System.Windows.Forms.SizeType.Percent;
+			columnDefinition1.Width = 33.333333333333329D;
+			columnDefinition2.SizeType = System.Windows.Forms.SizeType.Percent;
+			columnDefinition2.Width = 33.333333333333329D;
+			columnDefinition3.SizeType = System.Windows.Forms.SizeType.Percent;
+			columnDefinition3.Width = 33.333333333333329D;
+			this.layoutControlGroupAddType.OptionsTableLayoutGroup.ColumnDefinitions.AddRange(new DevExpress.XtraLayout.ColumnDefinition[] {
+            columnDefinition1,
+            columnDefinition2,
+            columnDefinition3});
+			rowDefinition1.Height = 24D;
+			rowDefinition1.SizeType = System.Windows.Forms.SizeType.AutoSize;
+			this.layoutControlGroupAddType.OptionsTableLayoutGroup.RowDefinitions.AddRange(new DevExpress.XtraLayout.RowDefinition[] {
+            rowDefinition1});
+			this.layoutControlGroupAddType.Size = new System.Drawing.Size(490, 24);
+			this.layoutControlGroupAddType.Text = "Add Type";
+			this.layoutControlGroupAddType.TextVisible = false;
 			// 
 			// layoutControlItemFile
 			// 
@@ -303,48 +346,6 @@
 			this.layoutControlItemLinebreak.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutControlItemLinebreak.TextVisible = false;
 			this.layoutControlItemLinebreak.TrimClientAreaToControl = false;
-			// 
-			// layoutControlGroupAddType
-			// 
-			this.layoutControlGroupAddType.GroupBordersVisible = false;
-			this.layoutControlGroupAddType.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItemFile,
-            this.layoutControlItemLinebreak,
-            this.layoutControlItemFile1});
-			this.layoutControlGroupAddType.LayoutMode = DevExpress.XtraLayout.Utils.LayoutMode.Table;
-			this.layoutControlGroupAddType.Location = new System.Drawing.Point(0, 46);
-			this.layoutControlGroupAddType.Name = "layoutControlGroupAddType";
-			columnDefinition7.SizeType = System.Windows.Forms.SizeType.Percent;
-			columnDefinition7.Width = 33.333333333333329D;
-			columnDefinition8.SizeType = System.Windows.Forms.SizeType.Percent;
-			columnDefinition8.Width = 33.333333333333329D;
-			columnDefinition9.SizeType = System.Windows.Forms.SizeType.Percent;
-			columnDefinition9.Width = 33.333333333333329D;
-			this.layoutControlGroupAddType.OptionsTableLayoutGroup.ColumnDefinitions.AddRange(new DevExpress.XtraLayout.ColumnDefinition[] {
-            columnDefinition7,
-            columnDefinition8,
-            columnDefinition9});
-			rowDefinition3.Height = 24D;
-			rowDefinition3.SizeType = System.Windows.Forms.SizeType.AutoSize;
-			this.layoutControlGroupAddType.OptionsTableLayoutGroup.RowDefinitions.AddRange(new DevExpress.XtraLayout.RowDefinition[] {
-            rowDefinition3});
-			this.layoutControlGroupAddType.Size = new System.Drawing.Size(490, 24);
-			this.layoutControlGroupAddType.Text = "Add Type";
-			this.layoutControlGroupAddType.TextVisible = false;
-			// 
-			// checkEditGallery
-			// 
-			this.checkEditGallery.EditValue = true;
-			this.checkEditGallery.Location = new System.Drawing.Point(12, 58);
-			this.checkEditGallery.Name = "checkEditGallery";
-			this.checkEditGallery.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.checkEditGallery.Properties.Appearance.Options.UseForeColor = true;
-			this.checkEditGallery.Properties.Caption = "to my Gallery";
-			this.checkEditGallery.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
-			this.checkEditGallery.Properties.RadioGroupIndex = 1;
-			this.checkEditGallery.Size = new System.Drawing.Size(159, 20);
-			this.checkEditGallery.StyleController = this.layoutControl;
-			this.checkEditGallery.TabIndex = 4;
 			// 
 			// layoutControlItemFile1
 			// 
@@ -381,6 +382,7 @@
 			this.layoutControl.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.checkEditLinebreak.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditFile.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditGallery.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupRoot)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
@@ -388,10 +390,9 @@
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemCancel)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemTitle)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupAddType)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemFile)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemLinebreak)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupAddType)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditGallery.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemFile1)).EndInit();
 			this.ResumeLayout(false);
 

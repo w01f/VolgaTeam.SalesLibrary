@@ -126,7 +126,6 @@
     <Compile Include="Objects\Graphics\IImageSourceList.cs" />
     <Compile Include="Objects\Graphics\ImportedWidgetImageGroup.cs" />
     <Compile Include="Objects\Graphics\ImportedBannerImageGroup.cs" />
-    <Compile Include="Objects\Graphics\LinkBundleItemImageSource.cs" />
     <Compile Include="Objects\Graphics\ImageSourceGroup.cs" />
     <Compile Include="Objects\Graphics\ImportedImageGroup.cs" />
     <Compile Include="Objects\Graphics\RegularImageGroup.cs" />

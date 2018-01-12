@@ -7,10 +7,11 @@ namespace SalesLibraries.Common.Objects.Graphics
 	{
 		public Guid Identifier { get; set; }
 		public string FileName { get; set; }
-		public string FilePath { get; private set; }
+		public string FilePath { get; }
 
 		public event EventHandler<EventArgs> AddToFavs;
 		public event EventHandler<EventArgs> RemoveFromFavs;
+		public event EventHandler<EventArgs> RemoveFromImported;
 
 		protected BaseImageSource(string filePath)
 		{
@@ -27,6 +28,11 @@ namespace SalesLibraries.Common.Objects.Graphics
 		public virtual void DeleteFromFavs()
 		{
 			RemoveFromFavs?.Invoke(this, EventArgs.Empty);
+		}
+
+		public virtual void DeleteFromImported()
+		{
+			RemoveFromImported?.Invoke(this, EventArgs.Empty);
 		}
 	}
 }
