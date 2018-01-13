@@ -4,6 +4,7 @@ using System.IO;
 using System.Windows.Forms;
 using DevComponents.DotNetBar;
 using DevExpress.XtraEditors;
+using SalesLibraries.CommonGUI.Common;
 using SalesLibraries.SiteManager.ConfigurationClasses;
 using SalesLibraries.SiteManager.Controllers;
 
@@ -17,15 +18,12 @@ namespace SalesLibraries.SiteManager
 		{
 			InitializeComponent();
 
-			if (SettingsManager.Instance.AppWindowSettings.Existed)
-			{
-				StartPosition = FormStartPosition.Manual;
-				WindowState = SettingsManager.Instance.AppWindowSettings.Maximized ? FormWindowState.Maximized : FormWindowState.Normal;
-				Top = SettingsManager.Instance.AppWindowSettings.Top;
-				Left = SettingsManager.Instance.AppWindowSettings.Left;
-				Height = SettingsManager.Instance.AppWindowSettings.Height;
-				Width = SettingsManager.Instance.AppWindowSettings.Width;
-			}
+			Width = (Int32)(Screen.PrimaryScreen.Bounds.Width * 0.8);
+			Height = (Int32)(Screen.PrimaryScreen.Bounds.Height * 0.8);
+			Left = (Screen.PrimaryScreen.Bounds.Width - Width) / 2;
+			Top = (Screen.PrimaryScreen.Bounds.Height - Height) / 2;
+
+			FormStateHelper.Init(this, Path.GetDirectoryName(typeof(SettingsManager).Assembly.Location), "Site Manager", false, true);
 		}
 
 		public static FormMain Instance => _instance ?? (_instance = new FormMain());
@@ -95,17 +93,6 @@ namespace SalesLibraries.SiteManager
 		private void buttonItemExit_Click(object sender, EventArgs e)
 		{
 			Close();
-		}
-
-		private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
-		{
-			StartPosition = FormStartPosition.Manual;
-			SettingsManager.Instance.AppWindowSettings.Maximized = WindowState == FormWindowState.Maximized;
-			SettingsManager.Instance.AppWindowSettings.Top = Top;
-			SettingsManager.Instance.AppWindowSettings.Left = Left;
-			SettingsManager.Instance.AppWindowSettings.Height = Height;
-			SettingsManager.Instance.AppWindowSettings.Width = Width;
-			SettingsManager.Instance.AppWindowSettings.Save();
 		}
 
 		#region Select All in Editor Handlers

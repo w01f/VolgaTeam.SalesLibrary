@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Text;
 using System.Xml;
 
@@ -6,8 +7,6 @@ namespace SalesLibraries.SiteManager.ConfigurationClasses
 {
 	public class SettingsManager
 	{
-		private static readonly SettingsManager _instance = new SettingsManager();
-
 		#region Path
 		private readonly string _settingsFilePath;
 		public string ApplicationRootsPath { get; private set; }
@@ -20,7 +19,6 @@ namespace SalesLibraries.SiteManager.ConfigurationClasses
 		public string SelectedSiteName { get; set; }
 		public int SelectedTab { get; set; }
 		public InactiveUsersSettings InactiveUsersSettings { get; private set; }
-		public AppWindowSettings AppWindowSettings { get; private set; }
 		#endregion
 
 		private SettingsManager()
@@ -31,35 +29,31 @@ namespace SalesLibraries.SiteManager.ConfigurationClasses
 			LogoPath = Path.Combine(ApplicationRootsPath, "logo.png");
 			IconPath = Path.Combine(ApplicationRootsPath, "icon.ico");
 			InactiveUsersSettings = new InactiveUsersSettings();
-			AppWindowSettings = new AppWindowSettings();
 			Load();
 		}
 
-		public static SettingsManager Instance => _instance;
+		public static SettingsManager Instance { get; } = new SettingsManager();
 
 		public void Load()
 		{
-			XmlNode node;
 			if (File.Exists(_settingsFilePath))
 			{
 				var document = new XmlDocument();
 				document.Load(_settingsFilePath);
 
 				#region Local Settings
-				node = document.SelectSingleNode(@"/LocalSettings/SelectedSiteName");
+				var node = document.SelectSingleNode(@"/LocalSettings/SelectedSiteName");
 				if (node != null)
 					SelectedSiteName = node.InnerText;
 
-				int tempInt;
 				node = document.SelectSingleNode(@"/LocalSettings/SelectedTab");
 				if (node != null)
-					if (int.TryParse(node.InnerText, out tempInt))
+					if (int.TryParse(node.InnerText, out var tempInt))
 						SelectedTab = tempInt;
 				#endregion
 			}
 
 			InactiveUsersSettings.Load();
-			AppWindowSettings.Load();
 		}
 
 		public void Save()

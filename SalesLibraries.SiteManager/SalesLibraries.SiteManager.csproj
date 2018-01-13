@@ -111,11 +111,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SalesLibraries.CommonGUI\Common\FormStateHelper.cs">
+      <Link>ToolClasses\FormStateHelper.cs</Link>
+    </Compile>
     <Compile Include="AppManager.cs" />
     <Compile Include="BusinessClasses\ImportManager.cs" />
     <Compile Include="BusinessClasses\LinkConfigProfilesDataHelper.cs" />
     <Compile Include="BusinessClasses\WebSiteManager.cs" />
-    <Compile Include="ConfigurationClasses\AppWindowSettings.cs" />
     <Compile Include="ConfigurationClasses\InactiveUsersSettings.cs" />
     <Compile Include="ConfigurationClasses\SettingsManager.cs" />
     <Compile Include="Controllers\ActivitiesController.cs" />
