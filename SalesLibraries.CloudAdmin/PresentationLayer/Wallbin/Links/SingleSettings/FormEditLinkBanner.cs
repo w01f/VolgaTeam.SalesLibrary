@@ -103,7 +103,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 		{
 			Width = 990;
 			Height = 670;
-			FormStateHelper.Init(this, RemoteResourceManager.Instance.AppAliasSettingsFolder, "Site Admin-Link-Banner", false, false);
+			FormStateHelper.Init(this, RemoteResourceManager.Instance.AppAliasSettingsFolder.LocalPath, "Site Admin-Link-Banner", false, false);
 			Text = String.Format(Text,
 				_sourceLinkGroup != null ?
 					String.Format("{0} links", _sourceLinkGroup.AllGroupLinks.Count()) :
@@ -332,9 +332,9 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 					link.Banner.Enable = true;
 
 					link.Banner.Inverted = checkEditInvert.Checked;
-					link.Banner.InversionColor = colorEditInversionColor.Color != GraphicObjectExtensions.DefaultInversionColor
+					link.Banner.InversionColor = colorEditInversionColor.Color != GraphicObjectExtensions.DefaultReplaceColor
 						? colorEditInversionColor.Color
-						: GraphicObjectExtensions.DefaultInversionColor;
+						: GraphicObjectExtensions.DefaultReplaceColor;
 					link.Banner.ImageVerticalAlignement = checkEditVerticalAlignmentTop1.Checked
 						? VerticalAlignment.Top
 						: VerticalAlignment.Middle;
@@ -426,7 +426,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			if (originalImage != null && checkEditInvert.Checked)
 			{
 				var imageClone = (Image)displayImage.Clone();
-				displayImage = colorEditInversionColor.Color != GraphicObjectExtensions.DefaultInversionColor
+				displayImage = colorEditInversionColor.Color != GraphicObjectExtensions.DefaultReplaceColor
 					? imageClone.ReplaceColor(colorEditInversionColor.Color)
 					: imageClone.Invert();
 			}

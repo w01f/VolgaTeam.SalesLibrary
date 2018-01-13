@@ -84,7 +84,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 		{
 			Width = 990;
 			Height = 670;
-			FormStateHelper.Init(this, RemoteResourceManager.Instance.AppAliasSettingsFolder, "Site Admin-Link-Thumbnail", false, false);
+			FormStateHelper.Init(this, RemoteResourceManager.Instance.AppAliasSettingsFolder.LocalPath, "Site Admin-Link-Thumbnail", false, false);
 			Text = String.Format(Text, _sourceLink);
 			StartPosition = FormStartPosition.CenterParent;
 

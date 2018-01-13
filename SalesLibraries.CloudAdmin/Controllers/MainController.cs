@@ -199,7 +199,7 @@ namespace SalesLibraries.CloudAdmin.Controllers
 
 			if (appReady)
 			{
-				FormStateHelper.Init(MainForm, Common.Helpers.RemoteResourceManager.Instance.AppAliasSettingsFolder, "Cloud Admin-Main-Form", true, true);
+				FormStateHelper.Init(MainForm, Common.Helpers.RemoteResourceManager.Instance.AppAliasSettingsFolder.LocalPath, "Cloud Admin-Main-Form", true, true);
 				MainForm.Shown += (o, e) =>
 				{
 					MainForm.InitForm();

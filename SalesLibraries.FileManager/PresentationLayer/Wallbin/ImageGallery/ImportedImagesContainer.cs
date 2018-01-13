@@ -14,11 +14,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.ImageGallery
 			var menuItemRemoveFromImported = new ToolStripMenuItem();
 			menuItemRemoveFromImported.Text = "Remove from Imported";
 			menuItemRemoveFromImported.Image = Properties.Resources.ButtonDelete;
-			menuItemRemoveFromImported.Click += OnRemoveFromFavorites;
+			menuItemRemoveFromImported.Click += OnRemoveFromImported;
 			contextMenuStrip.Items.Add(menuItemRemoveFromImported);
 		}
 
-		private void OnRemoveFromFavorites(object sender, EventArgs e)
+		private void OnRemoveFromImported(object sender, EventArgs e)
 		{
 			if (_menuHitInfo == null) return;
 			var imageItem = imageListView.Items[_menuHitInfo.ItemIndex];

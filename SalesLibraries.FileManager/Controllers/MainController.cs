@@ -199,7 +199,7 @@ namespace SalesLibraries.FileManager.Controllers
 			if (stopRun) return;
 			if (appReady)
 			{
-				FormStateHelper.Init(MainForm, Common.Helpers.RemoteResourceManager.Instance.AppAliasSettingsFolder, "Site Admin-Main-Form", true, true);
+				FormStateHelper.Init(MainForm, Common.Helpers.RemoteResourceManager.Instance.AppAliasSettingsFolder.LocalPath, "Site Admin-Main-Form", true, true);
 				MainForm.Shown += (o, e) =>
 				{
 					MainForm.InitForm();

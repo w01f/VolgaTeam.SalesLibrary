@@ -87,7 +87,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		public void InitForm<TEditControl>(LinkSettingsType settingsType) where TEditControl : ILinkSettingsEditControl
 		{
-			FormStateHelper.Init(this, RemoteResourceManager.Instance.AppAliasSettingsFolder, "Site Admin-Link-Widget", false, false);
+			FormStateHelper.Init(this, RemoteResourceManager.Instance.AppAliasSettingsFolder.LocalPath, "Site Admin-Link-Widget", false, false);
 			Text = String.Format(Text,
 				_sourceLinkGroup != null ?
 					String.Format("{0} links", _sourceLinkGroup.AllGroupLinks.Count()) :

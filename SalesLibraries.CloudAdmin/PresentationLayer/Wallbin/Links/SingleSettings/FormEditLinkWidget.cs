@@ -84,7 +84,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 		{
 			Width = 960;
 			Height = 590;
-			FormStateHelper.Init(this, RemoteResourceManager.Instance.AppAliasSettingsFolder, "Site Admin-Link-Widget", false, false);
+			FormStateHelper.Init(this, RemoteResourceManager.Instance.AppAliasSettingsFolder.LocalPath, "Site Admin-Link-Widget", false, false);
 			Text = String.Format(Text,
 				_sourceLinkGroup != null ?
 					String.Format("{0} links", _sourceLinkGroup.AllGroupLinks.Count()) :
@@ -214,9 +214,9 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 				{
 					link.Widget.WidgetType = WidgetType.CustomWidget;
 					link.Widget.Inverted = checkEditInvert.Checked;
-					link.Widget.InversionColor = colorEditInversionColor.Color != GraphicObjectExtensions.DefaultInversionColor
+					link.Widget.InversionColor = colorEditInversionColor.Color != GraphicObjectExtensions.DefaultReplaceColor
 						? colorEditInversionColor.Color
-						: GraphicObjectExtensions.DefaultInversionColor;
+						: GraphicObjectExtensions.DefaultReplaceColor;
 					link.Widget.Image = _originalImage;
 					link.Widget.ImageName = _originalImageName;
 				}
@@ -236,7 +236,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			if (_originalImage != null && checkEditInvert.Checked)
 			{
 				var imageClone = (Image)_originalImage.Clone();
-				pbCustomWidget.Image = colorEditInversionColor.Color != GraphicObjectExtensions.DefaultInversionColor
+				pbCustomWidget.Image = colorEditInversionColor.Color != GraphicObjectExtensions.DefaultReplaceColor
 					? imageClone.ReplaceColor(colorEditInversionColor.Color)
 					: imageClone.Invert();
 			}

@@ -15,7 +15,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private bool _enable;
 		public bool Enable
 		{
-			get { return _enable; }
+			get => _enable;
 			set
 			{
 				if (_enable != value)
@@ -27,12 +27,12 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private bool _inverted;
 		public bool Inverted
 		{
-			get { return _inverted; }
+			get => _inverted;
 			set
 			{
 				if (_inverted != value)
 				{
-					_invertedImage = null;
+					_displayedImage = null;
 					OnSettingsChanged();
 				}
 				_inverted = value;
@@ -42,12 +42,12 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private Color _inversionColor = GraphicObjectExtensions.DefaultReplaceColor;
 		public Color InversionColor
 		{
-			get { return _inversionColor; }
+			get => _inversionColor;
 			set
 			{
 				if (_inversionColor != value)
 				{
-					_invertedImage = null;
+					_displayedImage = null;
 					OnSettingsChanged();
 				}
 				_inversionColor = value;
@@ -57,12 +57,12 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private Image _image;
 		public Image Image
 		{
-			get { return _image; }
+			get => _image;
 			set
 			{
 				if (_image != value)
 				{
-					_invertedImage = null;
+					_displayedImage = null;
 					OnSettingsChanged();
 				}
 				_image = value;
@@ -72,7 +72,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private string _imageName;
 		public string ImageName
 		{
-			get { return _imageName; }
+			get => _imageName;
 			set
 			{
 				if (_imageName != value)
@@ -81,27 +81,32 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 			}
 		}
 
-		private Image _invertedImage;
+		private Image _displayedImage;
 		[JsonIgnore]
 		public Image DisplayedImage
 		{
 			get
 			{
 				if (Image == null) return null;
-				if (Inverted)
+				if (_displayedImage != null)
+					return _displayedImage;
+				_displayedImage = (Image)Image.Clone();
+				if (ImageScaleFactor > 0 && ImageScaleFactor < 100)
 				{
-					if (_invertedImage == null)
-						_invertedImage = ((Image)Image?.Clone()).ReplaceColor(InversionColor).DrawPadding(new Padding(ImagePaddingLeft, ImagePaddingTop, ImagePaddingRight, ImagePaddingBottom));
-					return _invertedImage;
+					var size = new Size(_displayedImage.Width * ImageScaleFactor/100, _displayedImage.Height * ImageScaleFactor / 100);
+					_displayedImage = _displayedImage.Resize(size);
 				}
-				return ((Image)Image?.Clone()).DrawPadding(new Padding(ImagePaddingLeft, ImagePaddingTop, ImagePaddingRight, ImagePaddingBottom));
+				if (Inverted)
+					_displayedImage = _displayedImage.ReplaceColor(InversionColor);
+				_displayedImage = _displayedImage.DrawPadding(new Padding(ImagePaddingLeft, ImagePaddingTop, ImagePaddingRight, ImagePaddingBottom));
+				return _displayedImage;
 			}
 		}
 
 		private BannerTextMode _textMode;
 		public BannerTextMode TextMode
 		{
-			get { return _textMode; }
+			get => _textMode;
 			set
 			{
 				if (_textMode != value)
@@ -113,7 +118,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private HorizontalAlignment _imageAlignement = HorizontalAlignment.Left;
 		public HorizontalAlignment ImageAlignement
 		{
-			get { return _imageAlignement; }
+			get => _imageAlignement;
 			set
 			{
 				if (_imageAlignement != value)
@@ -125,7 +130,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private VerticalAlignment _imageVerticalAlignement = VerticalAlignment.Middle;
 		public VerticalAlignment ImageVerticalAlignement
 		{
-			get { return _imageVerticalAlignement; }
+			get => _imageVerticalAlignement;
 			set
 			{
 				if (_imageVerticalAlignement != value)
@@ -137,7 +142,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private string _text = String.Empty;
 		public string Text
 		{
-			get { return _text; }
+			get => _text;
 			set
 			{
 				if (_text != value)
@@ -149,7 +154,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private Color _foreColor = Color.Black;
 		public Color ForeColor
 		{
-			get { return _foreColor; }
+			get => _foreColor;
 			set
 			{
 				if (_foreColor != value)
@@ -161,7 +166,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private Font _font = new Font("Arial", 12, FontStyle.Regular, GraphicsUnit.Point);
 		public Font Font
 		{
-			get { return _font; }
+			get => _font;
 			set
 			{
 				if (_font != value)
@@ -173,12 +178,12 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private int _imagePaddingLeft = 2;
 		public int ImagePaddingLeft
 		{
-			get { return _imagePaddingLeft; }
+			get => _imagePaddingLeft;
 			set
 			{
 				if (_imagePaddingLeft != value)
 				{
-					_invertedImage = null;
+					_displayedImage = null;
 					OnSettingsChanged();
 				}
 				_imagePaddingLeft = value;
@@ -188,12 +193,12 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private int _imagePaddingTop = 2;
 		public int ImagePaddingTop
 		{
-			get { return _imagePaddingTop; }
+			get => _imagePaddingTop;
 			set
 			{
 				if (_imagePaddingTop != value)
 				{
-					_invertedImage = null;
+					_displayedImage = null;
 					OnSettingsChanged();
 				}
 				_imagePaddingTop = value;
@@ -203,12 +208,12 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private int _imagePaddingRight = 2;
 		public int ImagePaddingRight
 		{
-			get { return _imagePaddingRight; }
+			get => _imagePaddingRight;
 			set
 			{
 				if (_imagePaddingRight != value)
 				{
-					_invertedImage = null;
+					_displayedImage = null;
 					OnSettingsChanged();
 				}
 				_imagePaddingRight = value;
@@ -218,15 +223,30 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private int _imagePaddingBottom = 2;
 		public int ImagePaddingBottom
 		{
-			get { return _imagePaddingBottom; }
+			get => _imagePaddingBottom;
 			set
 			{
 				if (_imagePaddingBottom != value)
 				{
-					_invertedImage = null;
+					_displayedImage = null;
 					OnSettingsChanged();
 				}
 				_imagePaddingBottom = value;
+			}
+		}
+
+		private int _imageScaleFactor = 100;
+		public int ImageScaleFactor
+		{
+			get => _imageScaleFactor;
+			set
+			{
+				if (_imageScaleFactor != value)
+				{
+					_displayedImage = null;
+					OnSettingsChanged();
+				}
+				_imageScaleFactor = value;
 			}
 		}
 

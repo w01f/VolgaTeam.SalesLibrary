@@ -5,7 +5,6 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
-using SalesLibraries.Common.Objects.RemoteStorage;
 
 namespace SalesLibraries.CommonGUI.Common
 {
@@ -30,12 +29,7 @@ namespace SalesLibraries.CommonGUI.Common
 			_saveSate = saveSate;
 			_form.Load += (o, e) => LoadState();
 		}
-
-		public static FormStateHelper Init(Form targetForm, StorageDirectory storagePath, string filePrefix, bool showMaximized, bool saveSate)
-		{
-			return new FormStateHelper(targetForm, storagePath.LocalPath, filePrefix, showMaximized, saveSate);
-		}
-
+	
 		public static FormStateHelper Init(Form targetForm, string storagePath, string filePrefix, bool showMaximized, bool saveSate)
 		{
 			return new FormStateHelper(targetForm, storagePath, filePrefix, showMaximized, saveSate);
@@ -112,36 +106,31 @@ namespace SalesLibraries.CommonGUI.Common
 					var node = document.SelectSingleNode(@"/Location/X");
 					if (node != null)
 					{
-						int temp;
-						if (Int32.TryParse(node.InnerText, out temp))
+						if (Int32.TryParse(node.InnerText, out var temp))
 							state.Left = temp;
 					}
 					node = document.SelectSingleNode(@"/Location/Y");
 					if (node != null)
 					{
-						int temp;
-						if (Int32.TryParse(node.InnerText, out temp))
+						if (Int32.TryParse(node.InnerText, out var temp))
 							state.Top = temp;
 					}
 					node = document.SelectSingleNode(@"/Location/Width");
 					if (node != null)
 					{
-						int temp;
-						if (Int32.TryParse(node.InnerText, out temp))
+						if (Int32.TryParse(node.InnerText, out var temp))
 							state.Width = temp;
 					}
 					node = document.SelectSingleNode(@"/Location/Height");
 					if (node != null)
 					{
-						int temp;
-						if (Int32.TryParse(node.InnerText, out temp))
+						if (Int32.TryParse(node.InnerText, out var temp))
 							state.Height = temp;
 					}
 					node = document.SelectSingleNode(@"/Location/State");
 					if (node != null)
 					{
-						int temp;
-						if (Int32.TryParse(node.InnerText, out temp))
+						if (Int32.TryParse(node.InnerText, out var temp))
 							state.WindowState = (FormWindowState)temp;
 					}
 				}

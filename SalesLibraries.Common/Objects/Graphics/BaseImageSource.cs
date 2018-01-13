@@ -12,6 +12,7 @@ namespace SalesLibraries.Common.Objects.Graphics
 		public event EventHandler<EventArgs> AddToFavs;
 		public event EventHandler<EventArgs> RemoveFromFavs;
 		public event EventHandler<EventArgs> RemoveFromImported;
+		public event EventHandler<EventArgs> RemoveFromResized;
 
 		protected BaseImageSource(string filePath)
 		{
@@ -33,6 +34,11 @@ namespace SalesLibraries.Common.Objects.Graphics
 		public virtual void DeleteFromImported()
 		{
 			RemoveFromImported?.Invoke(this, EventArgs.Empty);
+		}
+
+		public virtual void DeleteFromResized()
+		{
+			RemoveFromResized?.Invoke(this, EventArgs.Empty);
 		}
 	}
 }

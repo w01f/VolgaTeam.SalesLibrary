@@ -124,6 +124,7 @@
     <Compile Include="Objects\Graphics\BaseImageSource.cs" />
     <Compile Include="Objects\Graphics\FavoriteImageGroup.cs" />
     <Compile Include="Objects\Graphics\IImageSourceList.cs" />
+    <Compile Include="Objects\Graphics\ResizedImageGroup.cs" />
     <Compile Include="Objects\Graphics\ImportedWidgetImageGroup.cs" />
     <Compile Include="Objects\Graphics\ImportedBannerImageGroup.cs" />
     <Compile Include="Objects\Graphics\ImageSourceGroup.cs" />

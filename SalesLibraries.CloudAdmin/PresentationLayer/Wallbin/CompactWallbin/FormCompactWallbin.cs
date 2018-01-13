@@ -34,7 +34,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.CompactWallbin
 			Top = Screen.PrimaryScreen.WorkingArea.Top + 20;
 			Height = Screen.PrimaryScreen.WorkingArea.Height - 40;
 
-			FormStateHelper.Init(this, RemoteResourceManager.Instance.AppAliasSettingsFolder, "Site Admin-Compact-Walbin-Form", false, true);
+			FormStateHelper.Init(this, RemoteResourceManager.Instance.AppAliasSettingsFolder.LocalPath, "Site Admin-Compact-Walbin-Form", false, true);
 
 			InitSingleLinkContextMenuEditors();
 

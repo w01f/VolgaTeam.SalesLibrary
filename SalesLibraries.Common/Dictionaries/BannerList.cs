@@ -15,11 +15,14 @@ namespace SalesLibraries.Common.Dictionaries
 		public StorageDirectory AdditionalFolder { get; set; }
 		public StorageDirectory FavsFolder { get; set; }
 		public StorageDirectory ImportedFolder { get; set; }
+		public StorageDirectory ResizedFolder { get; set; }
 		public List<ImageSourceGroup> Items { get; }
 
 		public SearchResultsImageGroup SearchResults => Items.OfType<SearchResultsImageGroup>().Single();
 
 		public ImportedBannerImageGroup ImportedImages => Items.OfType<ImportedBannerImageGroup>().Single();
+
+		public ResizedImageGroup ResizedImages => Items.OfType<ResizedImageGroup>().Single();
 
 		public BannerList()
 		{
@@ -32,26 +35,32 @@ namespace SalesLibraries.Common.Dictionaries
 			AdditionalFolder = new StorageDirectory(RemoteResourceManager.Instance.ArtworkFolder.RelativePathParts.Merge("Banners_2"));
 			FavsFolder = new StorageDirectory(RemoteResourceManager.Instance.AppSharedSettingsFolder.RelativePathParts.Merge("Favorite_Banners"));
 			ImportedFolder = new StorageDirectory(RemoteResourceManager.Instance.AppSharedSettingsFolder.RelativePathParts.Merge("Imported_Banners"));
+			ResizedFolder = new StorageDirectory(RemoteResourceManager.Instance.AppSharedSettingsFolder.RelativePathParts.Merge("Resized_Banners"));
 
 			Items.Clear();
 
 			SourceFolderImageGroup sourceFolderImageGroup = new RegularImageGroup(this, MainFolder.LocalPath);
 			sourceFolderImageGroup.Name = "Gallery";
-			sourceFolderImageGroup.Order = -4;
+			sourceFolderImageGroup.Order = -5;
 			Items.Add(sourceFolderImageGroup);
 
 			var searchResultsimageGroup = new SearchResultsImageGroup(this);
 			searchResultsimageGroup.Name = "Search Results";
-			searchResultsimageGroup.Order = -3;
+			searchResultsimageGroup.Order = -4;
 			Items.Add(searchResultsimageGroup);
 
 			sourceFolderImageGroup = new FavoriteImageGroup(this, FavsFolder.LocalPath);
 			sourceFolderImageGroup.Name = "My Favorites";
-			sourceFolderImageGroup.Order = -2;
+			sourceFolderImageGroup.Order = -3;
 			Items.Add(sourceFolderImageGroup);
 
 			sourceFolderImageGroup = new ImportedBannerImageGroup(this, ImportedFolder.LocalPath);
 			sourceFolderImageGroup.Name = "Imported";
+			sourceFolderImageGroup.Order = -2;
+			Items.Add(sourceFolderImageGroup);
+
+			sourceFolderImageGroup = new ResizedImageGroup(this, ResizedFolder.LocalPath);
+			sourceFolderImageGroup.Name = "Re-Sized";
 			sourceFolderImageGroup.Order = -1;
 			Items.Add(sourceFolderImageGroup);
 

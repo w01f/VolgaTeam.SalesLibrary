@@ -153,9 +153,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 		public void AddImageAsLineBreak(Image image, int position)
 		{
 			_outsideChangesInProgress = true;
-			var newLink = LineBreak.Create(DataSource);
-			newLink.Banner.Enable = true;
-			newLink.Banner.Image = image;
+			var newLink = LineBreak.CreateWithBanner(DataSource, image);
 			if (position >= 0)
 				((List<BaseLibraryLink>)DataSource.Links).InsertItem(newLink, position);
 			else
@@ -393,6 +391,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 
 		private void RefreshPreviewFiles(IList<IPreviewableLink> links)
 		{
+			var thubnailHolders = links.OfType<IThumbnailSettingsHolder>().ToList();
 			MainController.Instance.ProcessManager.Run("Updating Preview files...", (cancelationToken, formProgess) =>
 			{
 				if (MainController.Instance.Settings.EnableLocalSync)
@@ -423,9 +422,20 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 						previewContainer.UpdateContent(previewGenerator, cancelationToken);
 					}
 					catch { }
+				}
 
+				foreach (var thumbnailSettingsHolder in thubnailHolders.OfType<BaseLibraryLink>().ToList())
+				{
+					thumbnailSettingsHolder.Thumbnail = null;
+					thumbnailSettingsHolder.ThumbnailEncoded = null;
 				}
 			});
+
+			if (thubnailHolders.Any())
+			{
+				UpdateContent(true);
+				DataChanged?.Invoke(this, EventArgs.Empty);
+			}
 		}
 
 		private void CopyLinks()

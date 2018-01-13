@@ -112,6 +112,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 		public void RefreshPreviewFiles()
 		{
 			var links = PageContainer.Page.AllGroupLinks.OfType<IPreviewableLink>().ToList();
+			var thubnailHolders = links.OfType<IThumbnailSettingsHolder>().ToList();
 			MainController.Instance.ProcessManager.Run("Updating Preview files...", (cancelationToken, formProgess) =>
 			{
 				if (MainController.Instance.Settings.EnableLocalSync)
@@ -143,7 +144,16 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 					}
 					catch { }
 				}
+
+				foreach (var thumbnailSettingsHolder in thubnailHolders.OfType<BaseLibraryLink>().ToList())
+				{
+					thumbnailSettingsHolder.Thumbnail = null;
+					thumbnailSettingsHolder.ThumbnailEncoded = null;
+				}
 			});
+
+			if (thubnailHolders.Any())
+				MainController.Instance.ProcessManager.Run("Updating Page...", (cancelationToken, formProgess) => MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(UpdateContent)));
 		}
 
 		public void ResetExpirationDates()

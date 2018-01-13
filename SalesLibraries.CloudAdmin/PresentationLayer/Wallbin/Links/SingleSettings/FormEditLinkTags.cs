@@ -80,7 +80,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 		public void InitForm<TEditControl>(LinkSettingsType settingsType) where TEditControl : ILinkSettingsEditControl
 		{
 			Height = 590;
-			FormStateHelper.Init(this, RemoteResourceManager.Instance.AppAliasSettingsFolder, String.Format("Site Admin-Link-Tags-{0}", _linkGroup != null ? "Link-Group" : "Single-Link"), false, false);
+			FormStateHelper.Init(this, RemoteResourceManager.Instance.AppAliasSettingsFolder.LocalPath, String.Format("Site Admin-Link-Tags-{0}", _linkGroup != null ? "Link-Group" : "Single-Link"), false, false);
 			StartPosition = FormStartPosition.CenterParent;
 
 			LoadTreeView();

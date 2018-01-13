@@ -76,5 +76,19 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 				lineBreak.AfterCreate();
 			});
 		}
+
+		public static LineBreak CreateWithBanner(LibraryFolder parentFolder, Image banner)
+		{
+			var lineBreak = Create(parentFolder);
+
+			lineBreak.Banner.Enable = true;
+			lineBreak.Banner.Image = banner;
+			lineBreak.Banner.ImagePaddingTop =
+				lineBreak.Banner.ImagePaddingBottom =
+					lineBreak.Banner.ImagePaddingLeft =
+						lineBreak.Banner.ImagePaddingRight = 10;
+
+			return lineBreak;
+		}
 	}
 }

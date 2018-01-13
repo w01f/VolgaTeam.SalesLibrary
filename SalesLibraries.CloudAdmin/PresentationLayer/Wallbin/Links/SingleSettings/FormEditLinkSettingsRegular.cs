@@ -77,7 +77,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			Height = 670;
 			StartPosition = FormStartPosition.CenterParent;
 
-			FormStateHelper.Init(this, RemoteResourceManager.Instance.AppAliasSettingsFolder, String.Format("Site Admin-Link-Settings-{0}", _sourceLinkGroup != null ? "Link-Group" : "Single-Link"), false, false);
+			FormStateHelper.Init(this, RemoteResourceManager.Instance.AppAliasSettingsFolder.LocalPath, String.Format("Site Admin-Link-Settings-{0}", _sourceLinkGroup != null ? "Link-Group" : "Single-Link"), false, false);
 
 			Text = _sourceLinkGroup == null ? _sourceLink.ToString() : _sourceLinkGroup.LinkGroupName ?? "Multi-Link Settings";
 

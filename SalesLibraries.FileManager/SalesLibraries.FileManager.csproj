@@ -350,6 +350,9 @@
     <Compile Include="PresentationLayer\Wallbin\Folders\Controls\FormAddImageRequest.Designer.cs">
       <DependentUpon>FormAddImageRequest.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationLayer\Wallbin\ImageGallery\ResizedImagesContainer.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Wallbin\ImageGallery\ImportedImagesContainer.cs">
       <SubType>Component</SubType>
     </Compile>

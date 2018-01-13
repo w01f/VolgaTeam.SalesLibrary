@@ -71,30 +71,31 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			layoutControlGroupTextSettings.Enabled = false;
 			layoutControlGroupTextFont.Enabled = false;
 
-			layoutControlItemTitle.MaxSize = RectangleHelper.ScaleSize(layoutControlItemTitle.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemTitle.MinSize = RectangleHelper.ScaleSize(layoutControlItemTitle.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemToggleEnable.MaxSize = RectangleHelper.ScaleSize(layoutControlItemToggleEnable.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemToggleEnable.MinSize = RectangleHelper.ScaleSize(layoutControlItemToggleEnable.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemDisableToggle.MaxSize = RectangleHelper.ScaleSize(layoutControlItemDisableToggle.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemDisableToggle.MinSize = RectangleHelper.ScaleSize(layoutControlItemDisableToggle.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemSearchButton.MaxSize = RectangleHelper.ScaleSize(layoutControlItemSearchButton.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemSearchButton.MinSize = RectangleHelper.ScaleSize(layoutControlItemSearchButton.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			simpleLabelItemGalleryDescription.MaxSize = RectangleHelper.ScaleSize(simpleLabelItemGalleryDescription.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			simpleLabelItemGalleryDescription.MinSize = RectangleHelper.ScaleSize(simpleLabelItemGalleryDescription.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			simpleLabelItemImageDescription.MaxSize = RectangleHelper.ScaleSize(simpleLabelItemImageDescription.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			simpleLabelItemImageDescription.MinSize = RectangleHelper.ScaleSize(simpleLabelItemImageDescription.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			simpleLabelItemTextDescription.MaxSize = RectangleHelper.ScaleSize(simpleLabelItemTextDescription.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			simpleLabelItemTextDescription.MinSize = RectangleHelper.ScaleSize(simpleLabelItemTextDescription.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemTextToggleNone.MaxSize = RectangleHelper.ScaleSize(layoutControlItemTextToggleNone.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemTextToggleNone.MinSize = RectangleHelper.ScaleSize(layoutControlItemTextToggleNone.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemTextToggleCustom.MaxSize = RectangleHelper.ScaleSize(layoutControlItemTextToggleCustom.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemTextToggleCustom.MinSize = RectangleHelper.ScaleSize(layoutControlItemTextToggleCustom.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemTextToggleLinkName.MaxSize = RectangleHelper.ScaleSize(layoutControlItemTextToggleLinkName.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemTextToggleLinkName.MinSize = RectangleHelper.ScaleSize(layoutControlItemTextToggleLinkName.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemButtonOK.MaxSize = RectangleHelper.ScaleSize(layoutControlItemButtonOK.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemButtonOK.MinSize = RectangleHelper.ScaleSize(layoutControlItemButtonOK.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemButtonCancel.MaxSize = RectangleHelper.ScaleSize(layoutControlItemButtonCancel.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemButtonCancel.MinSize = RectangleHelper.ScaleSize(layoutControlItemButtonCancel.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			var scaleFactor = Utils.GetScaleFactor(CreateGraphics().DpiX);
+			layoutControlItemTitle.MaxSize = RectangleHelper.ScaleSize(layoutControlItemTitle.MaxSize, scaleFactor);
+			layoutControlItemTitle.MinSize = RectangleHelper.ScaleSize(layoutControlItemTitle.MinSize, scaleFactor);
+			layoutControlItemToggleEnable.MaxSize = RectangleHelper.ScaleSize(layoutControlItemToggleEnable.MaxSize, scaleFactor);
+			layoutControlItemToggleEnable.MinSize = RectangleHelper.ScaleSize(layoutControlItemToggleEnable.MinSize, scaleFactor);
+			layoutControlItemDisableToggle.MaxSize = RectangleHelper.ScaleSize(layoutControlItemDisableToggle.MaxSize, scaleFactor);
+			layoutControlItemDisableToggle.MinSize = RectangleHelper.ScaleSize(layoutControlItemDisableToggle.MinSize, scaleFactor);
+			layoutControlItemSearchButton.MaxSize = RectangleHelper.ScaleSize(layoutControlItemSearchButton.MaxSize, scaleFactor);
+			layoutControlItemSearchButton.MinSize = RectangleHelper.ScaleSize(layoutControlItemSearchButton.MinSize, scaleFactor);
+			simpleLabelItemGalleryDescription.MaxSize = RectangleHelper.ScaleSize(simpleLabelItemGalleryDescription.MaxSize, scaleFactor);
+			simpleLabelItemGalleryDescription.MinSize = RectangleHelper.ScaleSize(simpleLabelItemGalleryDescription.MinSize, scaleFactor);
+			simpleLabelItemImageDescription.MaxSize = RectangleHelper.ScaleSize(simpleLabelItemImageDescription.MaxSize, scaleFactor);
+			simpleLabelItemImageDescription.MinSize = RectangleHelper.ScaleSize(simpleLabelItemImageDescription.MinSize, scaleFactor);
+			simpleLabelItemTextDescription.MaxSize = RectangleHelper.ScaleSize(simpleLabelItemTextDescription.MaxSize, scaleFactor);
+			simpleLabelItemTextDescription.MinSize = RectangleHelper.ScaleSize(simpleLabelItemTextDescription.MinSize, scaleFactor);
+			layoutControlItemTextToggleNone.MaxSize = RectangleHelper.ScaleSize(layoutControlItemTextToggleNone.MaxSize, scaleFactor);
+			layoutControlItemTextToggleNone.MinSize = RectangleHelper.ScaleSize(layoutControlItemTextToggleNone.MinSize, scaleFactor);
+			layoutControlItemTextToggleCustom.MaxSize = RectangleHelper.ScaleSize(layoutControlItemTextToggleCustom.MaxSize, scaleFactor);
+			layoutControlItemTextToggleCustom.MinSize = RectangleHelper.ScaleSize(layoutControlItemTextToggleCustom.MinSize, scaleFactor);
+			layoutControlItemTextToggleLinkName.MaxSize = RectangleHelper.ScaleSize(layoutControlItemTextToggleLinkName.MaxSize, scaleFactor);
+			layoutControlItemTextToggleLinkName.MinSize = RectangleHelper.ScaleSize(layoutControlItemTextToggleLinkName.MinSize, scaleFactor);
+			layoutControlItemButtonOK.MaxSize = RectangleHelper.ScaleSize(layoutControlItemButtonOK.MaxSize, scaleFactor);
+			layoutControlItemButtonOK.MinSize = RectangleHelper.ScaleSize(layoutControlItemButtonOK.MinSize, scaleFactor);
+			layoutControlItemButtonCancel.MaxSize = RectangleHelper.ScaleSize(layoutControlItemButtonCancel.MaxSize, scaleFactor);
+			layoutControlItemButtonCancel.MinSize = RectangleHelper.ScaleSize(layoutControlItemButtonCancel.MinSize, scaleFactor);
 		}
 
 		public FormEditLinkBanner(BaseLibraryLink sourceLink) : this()
@@ -113,7 +114,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		public void InitForm<TEditControl>(LinkSettingsType settingsType) where TEditControl : ILinkSettingsEditControl
 		{
-			FormStateHelper.Init(this, RemoteResourceManager.Instance.AppAliasSettingsFolder, "Site Admin-Link-Banner", false, false);
+			FormStateHelper.Init(this, RemoteResourceManager.Instance.AppAliasSettingsFolder.LocalPath, "Site Admin-Link-Banner", false, false);
 			Text = String.Format(Text,
 				_sourceLinkGroup != null ?
 					String.Format("{0} links", _sourceLinkGroup.AllGroupLinks.Count()) :
@@ -228,6 +229,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 					checkEditHorizontalAlignmentRight.Checked = true;
 					break;
 			}
+
 			buttonXShowTextNone.Checked = banner.TextMode == BannerTextMode.NoText || banner.ImageAlignement != HorizontalAlignment.Left;
 			buttonXShowTextLinkName.Checked = banner.ImageAlignement == HorizontalAlignment.Left && banner.TextMode == BannerTextMode.LinkName;
 			buttonXShowTextCustom.Checked = banner.ImageAlignement == HorizontalAlignment.Left && banner.TextMode == BannerTextMode.CustomText;
@@ -307,6 +309,24 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 					checkEditPaddingBottom2.Checked = true;
 					break;
 			}
+
+			checkEditImageScale.Checked = banner.ImageScaleFactor > 0 && banner.ImageScaleFactor < 100;
+			if (banner.ImageScaleFactor == 20)
+				checkEditImageScale20.Checked = true;
+			else if (banner.ImageScaleFactor == 30)
+				checkEditImageScale30.Checked = true;
+			else if (banner.ImageScaleFactor == 40)
+				checkEditImageScale40.Checked = true;
+			else if (banner.ImageScaleFactor == 50)
+				checkEditImageScale50.Checked = true;
+			else if (banner.ImageScaleFactor == 60)
+				checkEditImageScale60.Checked = true;
+			else if (banner.ImageScaleFactor == 70)
+				checkEditImageScale70.Checked = true;
+			else if (banner.ImageScaleFactor == 80)
+				checkEditImageScale80.Checked = true;
+			else if (banner.ImageScaleFactor == 90)
+				checkEditImageScale90.Checked = true;
 
 			switch (banner.TextMode)
 			{
@@ -393,6 +413,30 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 					else
 						_sourceLink.Banner.ImagePaddingBottom = 2;
 
+					if (checkEditImageScale.Checked)
+					{
+						if (checkEditImageScale20.Checked)
+							_sourceLink.Banner.ImageScaleFactor = 20;
+						else if (checkEditImageScale30.Checked)
+							_sourceLink.Banner.ImageScaleFactor = 30;
+						else if (checkEditImageScale40.Checked)
+							_sourceLink.Banner.ImageScaleFactor = 40;
+						else if (checkEditImageScale50.Checked)
+							_sourceLink.Banner.ImageScaleFactor = 50;
+						else if (checkEditImageScale60.Checked)
+							_sourceLink.Banner.ImageScaleFactor = 60;
+						else if (checkEditImageScale70.Checked)
+							_sourceLink.Banner.ImageScaleFactor = 70;
+						else if (checkEditImageScale80.Checked)
+							_sourceLink.Banner.ImageScaleFactor = 80;
+						else if (checkEditImageScale90.Checked)
+							_sourceLink.Banner.ImageScaleFactor = 90;
+
+						MainController.Instance.Lists.Banners.ResizedImages.AddImage<Banner>(link.Banner.Image, link.Banner.ImageName, _sourceLink.Banner.ImageScaleFactor);
+					}
+					else
+						_sourceLink.Banner.ImageScaleFactor = 100;
+
 
 					link.Banner.TextMode = BannerTextMode.NoText;
 					if (link.Banner.ImageAlignement == HorizontalAlignment.Left)
@@ -404,8 +448,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 					}
 					link.Banner.Font = buttonEditBannerTextFont.Tag as Font;
 					link.Banner.ForeColor = colorEditBannerTextColor.Color;
-
-
 				}
 				else
 				{
@@ -496,6 +538,24 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			layoutControlGroupTextSettings.PageEnabled = enableText;
 			if (!enableText)
 				OnTextModeButtonClick(buttonXShowTextNone, EventArgs.Empty);
+		}
+
+		private void OnImageScaleCheckedChanged(object sender, EventArgs e)
+		{
+			layoutControlGroupImageScale.Enabled = checkEditImageScale.Checked;
+			if (checkEditImageScale.Checked)
+				checkEditImageScale20.Checked = true;
+			else
+			{
+				checkEditImageScale20.Checked = false;
+				checkEditImageScale30.Checked = false;
+				checkEditImageScale40.Checked = false;
+				checkEditImageScale50.Checked = false;
+				checkEditImageScale60.Checked = false;
+				checkEditImageScale70.Checked = false;
+				checkEditImageScale80.Checked = false;
+				checkEditImageScale90.Checked = false;
+			}
 		}
 
 		private void OnTextModeButtonClick(object sender, EventArgs e)
@@ -589,7 +649,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			buttonXOK.Focus();
 		}
 
-		private void labelControlTitle_MouseClick(object sender, MouseEventArgs e)
+		private void OnTitleMouseClick(object sender, MouseEventArgs e)
 		{
 			if (e.Button != MouseButtons.Right) return;
 			var viewInfo = labelControlTitle.GetViewInfo() as LabelControlViewInfo;
@@ -598,7 +658,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				contextMenuStripImage.Show(Cursor.Position);
 		}
 
-		private void toolStripMenuItemImageAddToFavorites_Click(object sender, EventArgs e)
+		private void OnMenuItemImageAddToFavoritesClick(object sender, EventArgs e)
 		{
 			if (labelControlTitle.Appearance.Image == null) return;
 			var favoritesContainer = xtraTabControlGallery.TabPages.OfType<FavoritesImagesContainer>().FirstOrDefault();
