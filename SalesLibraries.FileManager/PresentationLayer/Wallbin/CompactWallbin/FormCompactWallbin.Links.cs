@@ -118,10 +118,16 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.CompactWallbin
 					var previewGenerator = previewContainer.GetPreviewGenerator();
 					previewContainer.UpdateContent(previewGenerator, cancelationToken);
 				}
+
+				var thubnailHolders = links.OfType<IThumbnailSettingsHolder>().ToList();
+				foreach (var thumbnailSettingsHolder in thubnailHolders.OfType<BaseLibraryLink>().ToList())
+				{
+					thumbnailSettingsHolder.Thumbnail = null;
+					thumbnailSettingsHolder.ThumbnailEncoded = null;
+				}
 			});
 		}
-
-
+		
 		private void EditSingleLinkSettings(TreeListNode targetLinkNode, LinkSettingsType settingsType, LinkType? defaultLinkType = null)
 		{
 			var sourceLink = (targetLinkNode?.Tag as WallbinItem)?.Source as BaseLibraryLink;

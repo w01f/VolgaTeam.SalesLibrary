@@ -59,7 +59,7 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 				if (!Directory.GetFiles(thumbsDestination).Any())
 				{
 					var thumbnailGenerator = new RegularBrowserThumbnailGenerator();
-					thumbnailGenerator.GenerateThumbnail(youtubePreviewContainer.SourcePath, thumbsDestination);
+					thumbnailGenerator.GenerateThumbnail(youtubePreviewContainer.SourcePath, thumbsDestination, alternativeUrl: MainController.Instance.Settings.WebServiceSite);
 				}
 				JpegHelper.ConvertFiles(thumbsDestination, thumbsDatatableDestination);
 			}));

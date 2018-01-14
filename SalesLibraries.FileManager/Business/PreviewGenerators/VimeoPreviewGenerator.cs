@@ -72,7 +72,7 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 				MainController.Instance.MainForm.Invoke(new MethodInvoker(() =>
 				{
 					var thumbnailGenerator = new RegularBrowserThumbnailGenerator();
-					thumbnailGenerator.GenerateThumbnail(vimeoPreviewContainer.SourcePath, thumbsDestination);
+					thumbnailGenerator.GenerateThumbnail(vimeoPreviewContainer.SourcePath, thumbsDestination, alternativeUrl: MainController.Instance.Settings.WebServiceSite);
 				}));
 			}
 			JpegHelper.ConvertFiles(thumbsDestination, thumbsDatatableDestination);

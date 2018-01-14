@@ -84,7 +84,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 
 		public void EditLinksGroupSettings(LinkSettingsType settingsType, LinkType? defaultLinkType = null, bool updateContent = true)
 		{
-			MainController.Instance.WallbinViews.Selection.Reset();
+			MainController.Instance.WallbinViews.Selection.ResetAll();
 			if (SettingsEditorFactory.Run(PageContainer.Page, settingsType, defaultLinkType) == DialogResult.OK && updateContent)
 				MainController.Instance.ProcessManager.Run("Updating Page...",
 					(cancelationToken, formProgess) => MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(UpdateContent)));
@@ -93,7 +93,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 		public void DeleteLinks()
 		{
 			PageContainer.Suspend();
-			MainController.Instance.WallbinViews.Selection.Reset();
+			MainController.Instance.WallbinViews.Selection.ResetAll();
 			MainController.Instance.ProcessManager.Run("Deleting Links...",
 			(cancelationToken, formProgess) =>
 			{
@@ -159,20 +159,20 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 		public void ResetExpirationDates()
 		{
 			PageContainer.Page.AllGroupLinks.ResetExpirationSettings();
-			MainController.Instance.WallbinViews.Selection.Reset();
+			MainController.Instance.WallbinViews.Selection.ResetAll();
 			MainController.Instance.ProcessManager.Run("Updating Page...", (cancelationToken, formProgess) => MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(UpdateContent)));
 		}
 
 		public void ResetSecurity()
 		{
 			PageContainer.Page.AllGroupLinks.ResetSecurity();
-			MainController.Instance.WallbinViews.Selection.Reset();
+			MainController.Instance.WallbinViews.Selection.ResetAll();
 			MainController.Instance.ProcessManager.Run("Updating Page...", (cancelationToken, formProgess) => MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(UpdateContent)));
 		}
 
 		public void ResetTags()
 		{
-			MainController.Instance.WallbinViews.Selection.Reset();
+			MainController.Instance.WallbinViews.Selection.ResetAll();
 			PageContainer.Page.AllGroupLinks.ApplyCategories(new SearchGroup[] { });
 			PageContainer.Page.AllGroupLinks.ApplyKeywords(new SearchTag[] { });
 			PageContainer.Page.AllGroupLinks.ApplySuperFilters(new string[] { });
@@ -183,7 +183,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 		public void ResetWidgets()
 		{
 			PageContainer.Page.AllGroupLinks.ResetWidgets();
-			MainController.Instance.WallbinViews.Selection.Reset();
+			MainController.Instance.WallbinViews.Selection.ResetAll();
 			MainController.Instance.ProcessManager.Run("Updating Page...",
 				(cancelationToken, formProgess) => MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(UpdateContent)));
 		}
@@ -191,7 +191,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 		public void ResetBanners()
 		{
 			PageContainer.Page.AllGroupLinks.ResetBanners();
-			MainController.Instance.WallbinViews.Selection.Reset();
+			MainController.Instance.WallbinViews.Selection.ResetAll();
 			MainController.Instance.ProcessManager.Run("Updating Page...",
 				(cancelationToken, formProgess) => MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(UpdateContent)));
 		}
@@ -199,7 +199,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 		public void ResetAllSettings(IList<LinkSettingsGroupType> groupsForReset)
 		{
 			PageContainer.Page.AllGroupLinks.ResetToDefault(groupsForReset);
-			MainController.Instance.WallbinViews.Selection.Reset();
+			MainController.Instance.WallbinViews.Selection.ResetAll();
 			MainController.Instance.ProcessManager.Run("Updating Page...",
 				(cancelationToken, formProgess) => MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(UpdateContent)));
 		}
@@ -207,7 +207,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 		public void SetLinkTextWordWrap()
 		{
 			PageContainer.Page.AllGroupLinks.SetLinkTextWordWrap();
-			MainController.Instance.WallbinViews.Selection.Reset();
+			MainController.Instance.WallbinViews.Selection.ResetAll();
 			MainController.Instance.ProcessManager.Run("Updating Page...",
 				(cancelationToken, formProgess) => MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(UpdateContent)));
 		}
@@ -233,6 +233,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 		private void OnMouseMove(object sender, MouseEventArgs e)
 		{
 			Focus();
+		}
+
+		private void OnPageContentClick(object sender, EventArgs e)
+		{
+			MainController.Instance.WallbinViews.Selection.ResetAll();
+			UpdateContent();
 		}
 		#endregion
 

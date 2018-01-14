@@ -30,6 +30,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Singl
 {
 	public partial class FormEditBundle : MetroForm
 	{
+		private bool _allowToSave = false;
 		private readonly LinkBundle _linkBundle;
 
 		private FormEditBundle(LinkBundle linkBundle)
@@ -90,11 +91,16 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Singl
 
 		private void LoadData()
 		{
+			_allowToSave = false;
+			barEditItemApplydefaultHoverNotes.EditValue = _linkBundle.Settings.ApplyDefaultHoverNotes;
+			_allowToSave = true;
+
 			LoadBundleItems();
 		}
 
 		private void SaveData()
 		{
+			_linkBundle.Settings.ApplyDefaultHoverNotes = (bool)barEditItemApplydefaultHoverNotes.EditValue;
 			SaveBundleItems();
 			xtraTabControl.TabPages.OfType<ILinkBundleInfoEditControl>().ToList().ForEach(infoEditor => infoEditor.SaveData());
 		}
@@ -248,6 +254,13 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Singl
 				else
 					e.RepositoryItem = repositoryItemButtonEditBundleItemsDisabledText;
 			}
+			if (e.Column == gridColumnBundleItemsHoverTip)
+			{
+				if ((bool)barEditItemApplydefaultHoverNotes.EditValue)
+					e.RepositoryItem = repositoryItemButtonEditBundleItemsDisabledText;
+				else
+					e.RepositoryItem = repositoryItemMemoEditBundleItems;
+			}
 			if (e.Column == gridColumnBundleItemsUseAsThumbnail)
 			{
 				if (bundleItem is LibraryLinkItem && ((LibraryLinkItem)bundleItem).ThumbnailAvailable)
@@ -297,9 +310,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Singl
 
 		private void OnGridBundleItemsRowCellStyle(object sender, RowCellStyleEventArgs e)
 		{
-			var bundleItem = ((GridView)sender).GetRow(e.RowHandle) as LibraryLinkItem;
-			if (bundleItem != null && bundleItem.IsDead)
+			var bundleItem = gridViewBundleItems.GetRow(e.RowHandle) as BaseBundleItem;
+			if (bundleItem == null) return;
+			if (bundleItem is LibraryLinkItem && ((LibraryLinkItem)bundleItem).IsDead)
 				e.Appearance.ForeColor = Color.Red;
+			else if (e.Column == gridColumnBundleItemsHoverTip && (bool)barEditItemApplydefaultHoverNotes.EditValue)
+				e.Appearance.ForeColor = Color.Gray;
 		}
 
 		private void OnGridBundleItemsActionsButtonClick(object sender, ButtonPressedEventArgs e)
@@ -336,15 +352,38 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Singl
 
 		private void OnBundleItemsCellValueChanged(object sender, CellValueChangedEventArgs e)
 		{
-			if (e.Column == gridColumnBundleItemsUseAsThumbnail)
+			var bundleItem = gridViewBundleItems.GetRow(e.RowHandle) as BaseBundleItem;
+			if (bundleItem == null) return;
+			if (e.Column == gridColumnBundleItemsTitle)
 			{
-				var bundleItem = gridViewBundleItems.GetRow(e.RowHandle) as BaseBundleItem;
-				if (bundleItem != null && bundleItem.UseAsThumbnail)
+				var applyDefaultHoverTips = (bool)barEditItemApplydefaultHoverNotes.EditValue;
+				if (applyDefaultHoverTips)
+				{
+					bundleItem.HoverTip = bundleItem.Title;
+					gridViewBundleItems.RefreshData();
+				}
+			}
+			else if (e.Column == gridColumnBundleItemsUseAsThumbnail)
+			{
+				if (bundleItem.UseAsThumbnail)
 				{
 					foreach (var item in _linkBundle.Settings.Items.Where(item => item != bundleItem).ToList())
 						item.UseAsThumbnail = false;
 					gridViewBundleItems.RefreshData();
 				}
+			}
+		}
+
+		private void OnApplyDefaultHoverNotesEditValueChanged(object sender, EventArgs e)
+		{
+			var applyDefaultHoverTips = (bool)barEditItemApplydefaultHoverNotes.EditValue;
+			gridColumnBundleItemsHoverTip.OptionsColumn.AllowEdit = !applyDefaultHoverTips;
+			if (_allowToSave && applyDefaultHoverTips)
+			{
+				gridViewBundleItems.CloseEditor();
+				foreach (var bundleItem in _linkBundle.Settings.Items)
+					bundleItem.HoverTip = bundleItem.Title;
+				gridViewBundleItems.RefreshData();
 			}
 		}
 

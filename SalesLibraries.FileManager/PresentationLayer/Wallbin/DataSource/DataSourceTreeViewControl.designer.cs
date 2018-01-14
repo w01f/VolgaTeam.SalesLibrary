@@ -58,6 +58,10 @@
 			this.layoutControlItemProgressTitle = new DevExpress.XtraLayout.LayoutControlItem();
 			this.layoutControlGroupFiles = new DevExpress.XtraLayout.LayoutControlGroup();
 			this.tabbedControlGroupFiles = new DevExpress.XtraLayout.TabbedControlGroup();
+			this.layoutControlGroupRegularFiles = new DevExpress.XtraLayout.LayoutControlGroup();
+			this.layoutControlItemRegularFiles = new DevExpress.XtraLayout.LayoutControlItem();
+			this.layoutControlGroupExternalFiles = new DevExpress.XtraLayout.LayoutControlGroup();
+			this.layoutControlItemExternalFiles = new DevExpress.XtraLayout.LayoutControlItem();
 			this.layoutControlGroupSearchFiles = new DevExpress.XtraLayout.LayoutControlGroup();
 			this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.layoutControlItemKeyWord = new DevExpress.XtraLayout.LayoutControlItem();
@@ -72,10 +76,6 @@
 			this.layoutControlItemStartDate = new DevExpress.XtraLayout.LayoutControlItem();
 			this.emptySpaceItem6 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.layoutControlItemEndDate = new DevExpress.XtraLayout.LayoutControlItem();
-			this.layoutControlGroupRegularFiles = new DevExpress.XtraLayout.LayoutControlGroup();
-			this.layoutControlItemRegularFiles = new DevExpress.XtraLayout.LayoutControlItem();
-			this.layoutControlGroupExternalFiles = new DevExpress.XtraLayout.LayoutControlGroup();
-			this.layoutControlItemExternalFiles = new DevExpress.XtraLayout.LayoutControlItem();
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.contextMenuStripFile = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.tmiFileOpen = new System.Windows.Forms.ToolStripMenuItem();
@@ -101,6 +101,10 @@
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemProgressTitle)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupFiles)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.tabbedControlGroupFiles)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupRegularFiles)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemRegularFiles)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupExternalFiles)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemExternalFiles)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupSearchFiles)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemKeyWord)).BeginInit();
@@ -115,10 +119,6 @@
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemStartDate)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem6)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemEndDate)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupRegularFiles)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemRegularFiles)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupExternalFiles)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemExternalFiles)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			this.contextMenuStripFile.SuspendLayout();
 			this.pnMain.SuspendLayout();
@@ -160,6 +160,7 @@
 			this.treeListRegularFiles.TabIndex = 1;
 			this.treeListRegularFiles.AfterExpand += new DevExpress.XtraTreeList.NodeEventHandler(this.OnFilesTreeViewAfterExpand);
 			this.treeListRegularFiles.AfterCollapse += new DevExpress.XtraTreeList.NodeEventHandler(this.OnFilesTreeViewAfterCollapse);
+			this.treeListRegularFiles.Click += new System.EventHandler(this.OnOutsideClick);
 			this.treeListRegularFiles.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnFilesTreeViewDragDrop);
 			this.treeListRegularFiles.DragOver += new System.Windows.Forms.DragEventHandler(this.OnFilesTreeViewDragOver);
 			this.treeListRegularFiles.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OnFilesTreeViewMouseClick);
@@ -171,7 +172,7 @@
 			// 
 			this.treeListColumnName.Caption = "treeListColumn1";
 			this.treeListColumnName.FieldName = "treeListColumn1";
-			this.treeListColumnName.MinWidth = 33;
+			this.treeListColumnName.MinWidth = 34;
 			this.treeListColumnName.Name = "treeListColumnName";
 			this.treeListColumnName.Visible = true;
 			this.treeListColumnName.VisibleIndex = 0;
@@ -249,6 +250,7 @@
 			this.treeListSearchFiles.Size = new System.Drawing.Size(271, 165);
 			this.treeListSearchFiles.StateImageList = this.imageListFiles;
 			this.treeListSearchFiles.TabIndex = 2;
+			this.treeListSearchFiles.Click += new System.EventHandler(this.OnOutsideClick);
 			this.treeListSearchFiles.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OnFilesTreeViewMouseClick);
 			this.treeListSearchFiles.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.OnFilesTreeViewMouseDoubleClick);
 			this.treeListSearchFiles.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OnFilesTreeViewMouseDown);
@@ -258,7 +260,7 @@
 			// 
 			this.treeListColumn1.Caption = "treeListColumn1";
 			this.treeListColumn1.FieldName = "treeListColumn1";
-			this.treeListColumn1.MinWidth = 33;
+			this.treeListColumn1.MinWidth = 34;
 			this.treeListColumn1.Name = "treeListColumn1";
 			this.treeListColumn1.Visible = true;
 			this.treeListColumn1.VisibleIndex = 0;
@@ -365,6 +367,7 @@
 			this.treeListExternalFiles.TabIndex = 2;
 			this.treeListExternalFiles.AfterExpand += new DevExpress.XtraTreeList.NodeEventHandler(this.OnFilesTreeViewAfterExpand);
 			this.treeListExternalFiles.AfterCollapse += new DevExpress.XtraTreeList.NodeEventHandler(this.OnFilesTreeViewAfterCollapse);
+			this.treeListExternalFiles.Click += new System.EventHandler(this.OnOutsideClick);
 			this.treeListExternalFiles.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnFilesTreeViewDragDrop);
 			this.treeListExternalFiles.DragOver += new System.Windows.Forms.DragEventHandler(this.OnFilesTreeViewDragOver);
 			this.treeListExternalFiles.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OnFilesTreeViewMouseClick);
@@ -376,7 +379,7 @@
 			// 
 			this.treeListColumn3.Caption = "treeListColumn1";
 			this.treeListColumn3.FieldName = "treeListColumn1";
-			this.treeListColumn3.MinWidth = 33;
+			this.treeListColumn3.MinWidth = 34;
 			this.treeListColumn3.Name = "treeListColumn3";
 			this.treeListColumn3.Visible = true;
 			this.treeListColumn3.VisibleIndex = 0;
@@ -532,6 +535,7 @@
 			this.layoutControlItemRefresh.TextSize = new System.Drawing.Size(123, 16);
 			this.layoutControlItemRefresh.TextToControlDistance = 20;
 			this.layoutControlItemRefresh.TrimClientAreaToControl = false;
+			this.layoutControlItemRefresh.Click += new System.EventHandler(this.OnOutsideClick);
 			// 
 			// layoutControlGroupProgress
 			// 
@@ -601,6 +605,51 @@
             this.layoutControlGroupSearchFiles});
 			this.tabbedControlGroupFiles.Text = "Files";
 			this.tabbedControlGroupFiles.SelectedPageChanged += new DevExpress.XtraLayout.LayoutTabPageChangedEventHandler(this.OnSelectedPageChanged);
+			this.tabbedControlGroupFiles.Click += new System.EventHandler(this.OnOutsideClick);
+			// 
+			// layoutControlGroupRegularFiles
+			// 
+			this.layoutControlGroupRegularFiles.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItemRegularFiles});
+			this.layoutControlGroupRegularFiles.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlGroupRegularFiles.Name = "layoutControlGroupRegularFiles";
+			this.layoutControlGroupRegularFiles.Size = new System.Drawing.Size(275, 341);
+			this.layoutControlGroupRegularFiles.Text = "Source Directory";
+			// 
+			// layoutControlItemRegularFiles
+			// 
+			this.layoutControlItemRegularFiles.Control = this.treeListRegularFiles;
+			this.layoutControlItemRegularFiles.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+			this.layoutControlItemRegularFiles.FillControlToClientArea = false;
+			this.layoutControlItemRegularFiles.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlItemRegularFiles.Name = "layoutControlItemRegularFiles";
+			this.layoutControlItemRegularFiles.Size = new System.Drawing.Size(275, 341);
+			this.layoutControlItemRegularFiles.Text = "Regular Files";
+			this.layoutControlItemRegularFiles.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemRegularFiles.TextVisible = false;
+			this.layoutControlItemRegularFiles.TrimClientAreaToControl = false;
+			// 
+			// layoutControlGroupExternalFiles
+			// 
+			this.layoutControlGroupExternalFiles.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItemExternalFiles});
+			this.layoutControlGroupExternalFiles.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlGroupExternalFiles.Name = "layoutControlGroupExternalFiles";
+			this.layoutControlGroupExternalFiles.Size = new System.Drawing.Size(275, 341);
+			this.layoutControlGroupExternalFiles.Text = "Computer";
+			// 
+			// layoutControlItemExternalFiles
+			// 
+			this.layoutControlItemExternalFiles.Control = this.treeListExternalFiles;
+			this.layoutControlItemExternalFiles.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+			this.layoutControlItemExternalFiles.FillControlToClientArea = false;
+			this.layoutControlItemExternalFiles.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlItemExternalFiles.Name = "layoutControlItemExternalFiles";
+			this.layoutControlItemExternalFiles.Size = new System.Drawing.Size(275, 341);
+			this.layoutControlItemExternalFiles.Text = "External Files";
+			this.layoutControlItemExternalFiles.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemExternalFiles.TextVisible = false;
+			this.layoutControlItemExternalFiles.TrimClientAreaToControl = false;
 			// 
 			// layoutControlGroupSearchFiles
 			// 
@@ -767,50 +816,6 @@
 			this.layoutControlItemEndDate.Text = "End Date";
 			this.layoutControlItemEndDate.TextSize = new System.Drawing.Size(59, 16);
 			// 
-			// layoutControlGroupRegularFiles
-			// 
-			this.layoutControlGroupRegularFiles.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItemRegularFiles});
-			this.layoutControlGroupRegularFiles.Location = new System.Drawing.Point(0, 0);
-			this.layoutControlGroupRegularFiles.Name = "layoutControlGroupRegularFiles";
-			this.layoutControlGroupRegularFiles.Size = new System.Drawing.Size(275, 341);
-			this.layoutControlGroupRegularFiles.Text = "Source Directory";
-			// 
-			// layoutControlItemRegularFiles
-			// 
-			this.layoutControlItemRegularFiles.Control = this.treeListRegularFiles;
-			this.layoutControlItemRegularFiles.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-			this.layoutControlItemRegularFiles.FillControlToClientArea = false;
-			this.layoutControlItemRegularFiles.Location = new System.Drawing.Point(0, 0);
-			this.layoutControlItemRegularFiles.Name = "layoutControlItemRegularFiles";
-			this.layoutControlItemRegularFiles.Size = new System.Drawing.Size(275, 341);
-			this.layoutControlItemRegularFiles.Text = "Regular Files";
-			this.layoutControlItemRegularFiles.TextSize = new System.Drawing.Size(0, 0);
-			this.layoutControlItemRegularFiles.TextVisible = false;
-			this.layoutControlItemRegularFiles.TrimClientAreaToControl = false;
-			// 
-			// layoutControlGroupExternalFiles
-			// 
-			this.layoutControlGroupExternalFiles.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItemExternalFiles});
-			this.layoutControlGroupExternalFiles.Location = new System.Drawing.Point(0, 0);
-			this.layoutControlGroupExternalFiles.Name = "layoutControlGroupExternalFiles";
-			this.layoutControlGroupExternalFiles.Size = new System.Drawing.Size(275, 341);
-			this.layoutControlGroupExternalFiles.Text = "Computer";
-			// 
-			// layoutControlItemExternalFiles
-			// 
-			this.layoutControlItemExternalFiles.Control = this.treeListExternalFiles;
-			this.layoutControlItemExternalFiles.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-			this.layoutControlItemExternalFiles.FillControlToClientArea = false;
-			this.layoutControlItemExternalFiles.Location = new System.Drawing.Point(0, 0);
-			this.layoutControlItemExternalFiles.Name = "layoutControlItemExternalFiles";
-			this.layoutControlItemExternalFiles.Size = new System.Drawing.Size(275, 341);
-			this.layoutControlItemExternalFiles.Text = "External Files";
-			this.layoutControlItemExternalFiles.TextSize = new System.Drawing.Size(0, 0);
-			this.layoutControlItemExternalFiles.TextVisible = false;
-			this.layoutControlItemExternalFiles.TrimClientAreaToControl = false;
-			// 
 			// styleController
 			// 
 			this.styleController.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -894,6 +899,10 @@
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemProgressTitle)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupFiles)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.tabbedControlGroupFiles)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupRegularFiles)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemRegularFiles)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupExternalFiles)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemExternalFiles)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupSearchFiles)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemKeyWord)).EndInit();
@@ -908,10 +917,6 @@
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemStartDate)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem6)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemEndDate)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupRegularFiles)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemRegularFiles)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupExternalFiles)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemExternalFiles)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			this.contextMenuStripFile.ResumeLayout(false);
 			this.pnMain.ResumeLayout(false);

@@ -205,7 +205,7 @@ namespace SalesLibraries.FileManager
 		private void OnFormKeyUp(object sender, KeyEventArgs e)
 		{
 			if (e.KeyCode == Keys.Escape)
-				MainController.Instance.WallbinViews.Selection.Reset();
+				MainController.Instance.WallbinViews.Selection.ResetAll();
 		}
 
 		private void ribbonControl_SelectedRibbonTabChanged(object sender, EventArgs e)

@@ -106,7 +106,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 
 		public void SaveData(bool runInQueue)
 		{
-			MainController.Instance.WallbinViews.Selection.Reset();
+			MainController.Instance.WallbinViews.Selection.ResetAll();
 			CorruptedLinksHelper.DeleteCorruptedLinks(DataStorage.Library);
 			if (!IsDataChanged) return;
 			if (runInQueue)

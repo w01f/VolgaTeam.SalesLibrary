@@ -7,6 +7,8 @@ using System.Windows.Forms;
 using DevExpress.Skins;
 using DevExpress.XtraLayout.Utils;
 using SalesLibraries.Business.Entities.Interfaces;
+using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
+using SalesLibraries.FileManager.Controllers;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 {
@@ -66,6 +68,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 			layoutControlGroupFiles.Enabled = true;
 			circularProgressTreeView.IsRunning = false;
 			layoutControlGroupProgress.Visibility = LayoutVisibility.Never;
+		}
+
+		private void OnOutsideClick(object sender, EventArgs e)
+		{
+			MainController.Instance.WallbinViews.Selection.ResetAll();
 		}
 	}
 }

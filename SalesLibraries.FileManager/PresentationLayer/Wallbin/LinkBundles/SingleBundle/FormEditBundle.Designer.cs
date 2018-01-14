@@ -59,6 +59,8 @@
 			this.barLargeButtonItemLinksAddRevenue = new DevExpress.XtraBars.BarLargeButtonItem();
 			this.barLargeButtonItemLinksAddStrategy = new DevExpress.XtraBars.BarLargeButtonItem();
 			this.barLargeButtonItemLinksAddUrls = new DevExpress.XtraBars.BarLargeButtonItem();
+			this.barEditItemApplydefaultHoverNotes = new DevExpress.XtraBars.BarEditItem();
+			this.repositoryItemCheckEdit = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
 			this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
@@ -93,6 +95,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditBundleItemsDisabledText)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEditBundleItemsDisabled)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.barManager)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlLinks)).BeginInit();
 			this.layoutControlLinks.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureEditLogo.Properties)).BeginInit();
@@ -408,8 +411,11 @@
             this.barLargeButtonItemLinksAddStrategy,
             this.barLargeButtonItemLinksAddUrls,
             this.barLargeButtonItemLinksAddLaunchScreen,
-            this.barLargeButtonItemLinksAddCover});
-			this.barManager.MaxItemId = 16;
+            this.barLargeButtonItemLinksAddCover,
+            this.barEditItemApplydefaultHoverNotes});
+			this.barManager.MaxItemId = 20;
+			this.barManager.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repositoryItemCheckEdit});
 			// 
 			// barToolbar
 			// 
@@ -419,7 +425,8 @@
 			this.barToolbar.DockRow = 0;
 			this.barToolbar.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
 			this.barToolbar.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barSubItemLinksAdd, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barSubItemLinksAdd, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(((DevExpress.XtraBars.BarLinkUserDefines)((DevExpress.XtraBars.BarLinkUserDefines.PaintStyle | DevExpress.XtraBars.BarLinkUserDefines.Width))), this.barEditItemApplydefaultHoverNotes, "", false, true, true, 20, null, DevExpress.XtraBars.BarItemPaintStyle.Caption)});
 			this.barToolbar.OptionsBar.AllowQuickCustomization = false;
 			this.barToolbar.OptionsBar.DisableClose = true;
 			this.barToolbar.OptionsBar.DisableCustomization = true;
@@ -489,6 +496,21 @@
 			this.barLargeButtonItemLinksAddUrls.ImageOptions.Image = global::SalesLibraries.FileManager.Properties.Resources.BundlesEditorLinksAddUrl;
 			this.barLargeButtonItemLinksAddUrls.Name = "barLargeButtonItemLinksAddUrls";
 			this.barLargeButtonItemLinksAddUrls.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.OnAddUrlsItemClick);
+			// 
+			// barEditItemApplydefaultHoverNotes
+			// 
+			this.barEditItemApplydefaultHoverNotes.Alignment = DevExpress.XtraBars.BarItemLinkAlignment.Right;
+			this.barEditItemApplydefaultHoverNotes.Caption = "Hover Tip = Icon Label";
+			this.barEditItemApplydefaultHoverNotes.Edit = this.repositoryItemCheckEdit;
+			this.barEditItemApplydefaultHoverNotes.Id = 19;
+			this.barEditItemApplydefaultHoverNotes.Name = "barEditItemApplydefaultHoverNotes";
+			this.barEditItemApplydefaultHoverNotes.EditValueChanged += new System.EventHandler(this.OnApplyDefaultHoverNotesEditValueChanged);
+			// 
+			// repositoryItemCheckEdit
+			// 
+			this.repositoryItemCheckEdit.AllowFocused = false;
+			this.repositoryItemCheckEdit.AutoHeight = false;
+			this.repositoryItemCheckEdit.Name = "repositoryItemCheckEdit";
 			// 
 			// barDockControlTop
 			// 
@@ -888,6 +910,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditBundleItemsDisabledText)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEditBundleItemsDisabled)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.barManager)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlLinks)).EndInit();
 			this.layoutControlLinks.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.pictureEditLogo.Properties)).EndInit();
@@ -968,5 +991,7 @@
 		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem3;
 		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemOK;
 		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
+		private DevExpress.XtraBars.BarEditItem barEditItemApplydefaultHoverNotes;
+		private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit;
 	}
 }

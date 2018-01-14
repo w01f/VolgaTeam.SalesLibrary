@@ -7,7 +7,9 @@ using DevExpress.Skins;
 using DevExpress.XtraLayout.Utils;
 using DevExpress.XtraTreeList;
 using SalesLibraries.Business.Entities.Interfaces;
+using SalesLibraries.Business.Entities.Wallbin.Common.Constants;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
+using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Helpers;
 
@@ -36,7 +38,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.LinksTreeSe
 		{
 			_dataLoading = true;
 
-			var rootGroup = new RootTreeGroup(linkGroup, defaultLinkType);
+			var rootGroup = new RootTreeGroup(linkGroup, defaultLinkType, excludeFileTypes);
 			var linksTreeGroups = new List<LinksFormatTreeGroup>();
 			linksTreeGroups.AddRange(LinksFormatTreeGroup.GetDefaultGroups());
 
@@ -69,7 +71,38 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.LinksTreeSe
 					{
 						var linkNode = treeList.AppendNode(new object[] { (libraryLink as LibraryFileLink)?.NameWithExtension ?? libraryLink.LinkInfoDisplayName }, formatGroupNode);
 						linkNode.Tag = libraryLink;
-						linkNode.StateImageIndex = formatTreeGroup.StateImageIndex;
+						if (formatTreeGroup.StateImageIndex.HasValue)
+							linkNode.StateImageIndex = formatTreeGroup.StateImageIndex.Value;
+						else if (libraryLink is LinkBundleLink)
+						{
+							switch (((LinkBundleLinkSettings)((LinkBundleLink)libraryLink).Settings).CustomWebFormat)
+							{
+								case WebFormats.PowerPoint:
+									linkNode.StateImageIndex = 7;
+									break;
+								case WebFormats.Video:
+									linkNode.StateImageIndex = 4;
+									break;
+								case WebFormats.Pdf:
+									linkNode.StateImageIndex = 5;
+									break;
+								case WebFormats.Word:
+									linkNode.StateImageIndex = 3;
+									break;
+								case WebFormats.Excel:
+									linkNode.StateImageIndex = 7;
+									break;
+								case WebFormats.Url:
+									linkNode.StateImageIndex = 8;
+									break;
+								case WebFormats.Png:
+								case WebFormats.Jpeg:
+									linkNode.StateImageIndex = 6;
+									break;
+							}
+						}
+						else
+							linkNode.StateImageIndex = 2;
 					}
 				}
 			}
@@ -82,7 +115,38 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.LinksTreeSe
 					{
 						var linkNode = treeList.AppendNode(new object[] { (libraryLink as LibraryFileLink)?.NameWithExtension ?? libraryLink.LinkInfoDisplayName }, rootNode);
 						linkNode.Tag = libraryLink;
-						linkNode.StateImageIndex = defaultGroup.StateImageIndex;
+						if (defaultGroup.StateImageIndex.HasValue)
+							linkNode.StateImageIndex = defaultGroup.StateImageIndex.Value;
+						else if (libraryLink is LinkBundleLink)
+						{
+							switch (((LinkBundleLinkSettings)((LinkBundleLink)libraryLink).Settings).CustomWebFormat)
+							{
+								case WebFormats.PowerPoint:
+									linkNode.StateImageIndex = 7;
+									break;
+								case WebFormats.Video:
+									linkNode.StateImageIndex = 4;
+									break;
+								case WebFormats.Pdf:
+									linkNode.StateImageIndex = 5;
+									break;
+								case WebFormats.Word:
+									linkNode.StateImageIndex = 3;
+									break;
+								case WebFormats.Excel:
+									linkNode.StateImageIndex = 7;
+									break;
+								case WebFormats.Url:
+									linkNode.StateImageIndex = 8;
+									break;
+								case WebFormats.Png:
+								case WebFormats.Jpeg:
+									linkNode.StateImageIndex = 6;
+									break;
+							}
+						}
+						else
+							linkNode.StateImageIndex = 2;
 					}
 				}
 			}

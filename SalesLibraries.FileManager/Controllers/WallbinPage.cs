@@ -162,7 +162,7 @@ namespace SalesLibraries.FileManager.Controllers
 			}
 
 			_isLoading = true;
-			MainController.Instance.WallbinViews.Selection.Reset();
+			MainController.Instance.WallbinViews.Selection.ResetAll();
 			MainController.Instance.WallbinViews.FormatState.SwitchAccordingPage(pageType);
 			MainController.Instance.MainForm.buttonItemTagsCategories.Checked = MainController.Instance.WallbinViews.FormatState.ShowCategoryTags;
 			MainController.Instance.MainForm.buttonItemTagsKeywords.Checked = MainController.Instance.WallbinViews.FormatState.ShowKeywordTags;

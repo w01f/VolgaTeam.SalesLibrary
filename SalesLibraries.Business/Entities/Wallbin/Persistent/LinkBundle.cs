@@ -142,6 +142,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 
 		public class LinkBundleSettings : SettingsContainer
 		{
+			public bool ApplyDefaultHoverNotes { get; set; }
+
 			[JsonProperty(ItemTypeNameHandling = TypeNameHandling.All)]
 			public List<BaseBundleItem> Items { get; private set; }
 

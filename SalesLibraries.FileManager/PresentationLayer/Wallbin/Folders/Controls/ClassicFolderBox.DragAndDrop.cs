@@ -289,7 +289,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 			_mouseDownHitInfo = DataGridView.HitTestInfo.Nowhere;
 		}
 
-		private void OnHeaderMouseDown(object sender, MouseEventArgs e)
+		private void OnDragDropHeaderMouseDown(object sender, MouseEventArgs e)
 		{
 			switch (e.Button)
 			{
@@ -336,7 +336,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 			}
 		}
 
-		private void OnHeaderMouseMove(object sender, MouseEventArgs e)
+		private void OnDragDropHeaderMouseMove(object sender, MouseEventArgs e)
 		{
 			if (!FormatState.AllowEdit) return;
 			Cursor = Cursors.Default;

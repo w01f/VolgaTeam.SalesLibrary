@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraBars;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
+using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.DataState;
 using SalesLibraries.CommonGUI.Wallbin.Folders;
 using SalesLibraries.CommonGUI.Wallbin.Views;
@@ -81,8 +82,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 			labelControlText.DragDrop += OnDragDrop;
 			labelControlText.DragOver += OnDragOver;
 			labelControlText.DragLeave += OnDragLeave;
-			labelControlText.MouseDown += OnHeaderMouseDown;
-			labelControlText.MouseMove += OnHeaderMouseMove;
+			labelControlText.MouseDown += OnDragDropHeaderMouseDown;
+			labelControlText.MouseMove += OnDragDropHeaderMouseMove;
 		}
 
 		public override void ReleaseControl()
@@ -158,6 +159,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 
 		private void OnHeaderClick(object sender, EventArgs e)
 		{
+			if (ModifierKeys == Keys.None)
+			{
+				grFiles.ClearSelection();
+				grFiles.CurrentCell = null;
+			}
+
 			if (IsActive) return;
 			SelectionManager.SelectFolder(this);
 			labelControlText.Focus();
@@ -170,11 +177,20 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 
 		private void OnGridMouseDown(object sender, MouseEventArgs e)
 		{
-			if (IsActive) return;
-			SelectionManager.SelectFolder(this);
+			if (!IsActive)
+				SelectionManager.SelectFolder(this);
+
 			var hitTest = grFiles.HitTest(e.X, e.Y);
 			if (hitTest.Type != DataGridViewHitTestType.Cell)
+			{
 				labelControlText.Focus();
+
+				if (ModifierKeys == Keys.None)
+				{
+					grFiles.ClearSelection();
+					grFiles.CurrentCell = null;
+				}
+			}
 		}
 
 		private void OnGridCellMouseLeave(object sender, DataGridViewCellEventArgs e)

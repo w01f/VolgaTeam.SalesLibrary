@@ -17,10 +17,10 @@ namespace SalesLibraries.FileManager.Business.Services
 {
 	class RegularBrowserThumbnailGenerator
 	{
-		const int BrowserWidth = 1280;
-		const int BrowserHeight = 1024;
-		const int ThumbWidth = 800;
-		const int ThumbHeight = 600;
+		private const int BrowserWidth = 1280;
+		private const int BrowserHeight = 1024;
+		private const int ThumbWidth = 800;
+		private const int ThumbHeight = 600;
 
 
 		private bool _complited;
@@ -38,7 +38,7 @@ namespace SalesLibraries.FileManager.Business.Services
 			_webBrowser.DocumentCompleted += OnWebBrowserDocumentCompleted;
 		}
 
-		public void GenerateThumbnail(string url, string destinationPath, int delaySeconds = 10)
+		public void GenerateThumbnail(string url, string destinationPath, int delaySeconds = 10, string alternativeUrl = null)
 		{
 			try
 			{
@@ -49,11 +49,17 @@ namespace SalesLibraries.FileManager.Business.Services
 				_webBrowser.Width = BrowserWidth;
 				_webBrowser.Navigate(url);
 				long timeStart = Environment.TickCount;
-				const long timeout = 10000;
+				const long timeout = 20000;
 				while (!_complited)
 				{
 					Application.DoEvents();
 					if (Environment.TickCount - timeStart <= timeout) continue;
+
+					if (!String.IsNullOrEmpty(alternativeUrl))
+					{
+						GenerateThumbnail(alternativeUrl, destinationPath, delaySeconds);
+						return;
+					}
 					break;
 				}
 
@@ -63,15 +69,14 @@ namespace SalesLibraries.FileManager.Business.Services
 					Application.DoEvents();
 					delaySeconds--;
 				}
-			}
-			catch (Exception ex)
-			{
-				//throw ex;
-			}
-			finally
-			{
+
 				_webBrowser.Stop();
-				if (_webBrowser?.Document?.Body != null)
+				var isTitleIncorrect = _webBrowser?.Document?.Title?.Contains("Sign in is not complete");
+				if ((isTitleIncorrect.HasValue && isTitleIncorrect.Value) || _webBrowser?.Document?.Body == null)
+				{
+					GenerateThumbnail(alternativeUrl, destinationPath, delaySeconds);
+				}
+				else
 				{
 					var rectangle = new Rectangle(0, 0, ThumbWidth, ThumbHeight);
 					var bitmap = new Bitmap(rectangle.Width, rectangle.Height, PixelFormat.Format32bppArgb);
@@ -90,6 +95,13 @@ namespace SalesLibraries.FileManager.Business.Services
 						bitmap.Save(Path.Combine(destinationPath, "thumbnail.png"), ImageFormat.Png);
 					}
 				}
+			}
+			catch (Exception ex)
+			{
+				_webBrowser.Stop();
+			}
+			finally
+			{
 				_webBrowser.Dispose();
 			}
 		}

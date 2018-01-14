@@ -39,7 +39,7 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 			MainController.Instance.MainForm.Invoke(new MethodInvoker(() =>
 			{
 				var thumbnailGenerator = new RegularBrowserThumbnailGenerator();
-				thumbnailGenerator.GenerateThumbnail(webPreviewContainer.SourcePath, thumbsDestination);
+				thumbnailGenerator.GenerateThumbnail(webPreviewContainer.SourcePath, thumbsDestination, alternativeUrl: MainController.Instance.Settings.WebServiceSite);
 			}));
 			JpegHelper.ConvertFiles(thumbsDestination, thumbsDatatableDestination);
 

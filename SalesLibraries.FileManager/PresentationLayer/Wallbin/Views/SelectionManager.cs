@@ -30,7 +30,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			if (modifierKeys == Keys.None)
 			{
 				SelectionChanged?.Invoke(this, new SelectionEventArgs(SelectionEventType.SelectionReset));
-				ResetLinks();
+				ResetLinksInternal();
 			}
 			else
 				SelectedLinks.RemoveAll(link => link == null || link.Folder.ExtId == SelectedFolder.DataSource.ExtId);
@@ -49,22 +49,30 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			SelectionChanged?.Invoke(this, new SelectionEventArgs(SelectionEventType.FolderSelected));
 		}
 
-		public void Reset()
+		public void ResetAll()
 		{
 			if (_suspended) return;
+			ResetFolderInternal();
+			SelectionChanged?.Invoke(this, new SelectionEventArgs(SelectionEventType.FolderSelected));
+			ResetLinksInternal();
 			SelectionChanged?.Invoke(this, new SelectionEventArgs(SelectionEventType.SelectionReset));
-			ResetFolder();
-			ResetLinks();
+			LastUpdate = DateTime.Now;
+		}
+
+		public void ResetLinks()
+		{
+			if (_suspended) return;
+			ResetLinksInternal();
 			LastUpdate = DateTime.Now;
 			SelectionChanged?.Invoke(this, new SelectionEventArgs(SelectionEventType.SelectionReset));
 		}
 
-		private void ResetLinks()
+		private void ResetLinksInternal()
 		{
 			SelectedLinks.Clear();
 		}
 
-		private void ResetFolder()
+		private void ResetFolderInternal()
 		{
 			SelectedFolder = null;
 		}
@@ -77,7 +85,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 		public void Resume()
 		{
 			_suspended = false;
-			Reset();
+			ResetAll();
 		}
 	}
 

@@ -44,7 +44,11 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkBundleSetti
 			set
 			{
 				if (_title != value)
+				{
 					OnSettingsChanged();
+					if (ParentBundle != null && ParentBundle.Settings.ApplyDefaultHoverNotes)
+						HoverTip = value;
+				}
 				_title = value;
 			}
 		}
@@ -93,6 +97,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkBundleSetti
 		protected virtual void AfterConstraction(params object[] parameters)
 		{
 			Title = Name;
+			if (ParentBundle != null && ParentBundle.Settings.ApplyDefaultHoverNotes)
+				HoverTip = Title;
 		}
 
 		public virtual void AfterCreate() { }
