@@ -667,20 +667,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SalesLibraries.Business\SalesLibraries.Business.csproj">
-      <Project>{526944F8-7B85-48CE-81F1-43AE041A321F}</Project>
-      <Name>SalesLibraries.Business</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SalesLibraries.CommonGUI\SalesLibraries.CommonGUI.csproj">
-      <Project>{03639419-D148-4814-B8C1-CF0AB550D136}</Project>
-      <Name>SalesLibraries.CommonGUI</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SalesLibraries.Common\SalesLibraries.Common.csproj">
-      <Project>{F35DC0D8-6816-4033-A5E2-D446C7A956FE}</Project>
-      <Name>SalesLibraries.Common</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\Exit.png" />
   </ItemGroup>
   <ItemGroup>
@@ -849,7 +835,20 @@
     <None Include="Resources\WallbinSettingsColumns.png" />
     <None Include="Resources\WallbinSettingsAccordion.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\SalesLibraries.Business\SalesLibraries.Business.csproj">
+      <Project>{526944F8-7B85-48CE-81F1-43AE041A321F}</Project>
+      <Name>SalesLibraries.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SalesLibraries.CommonGUI\SalesLibraries.CommonGUI.csproj">
+      <Project>{03639419-D148-4814-B8C1-CF0AB550D136}</Project>
+      <Name>SalesLibraries.CommonGUI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SalesLibraries.Common\SalesLibraries.Common.csproj">
+      <Project>{F35DC0D8-6816-4033-A5E2-D446C7A956FE}</Project>
+      <Name>SalesLibraries.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>robocopy /s /z /r:100 "$(SolutionDir)SalesLibraries.Business\$(OutDir)\" "d:\WorkingFiles\SalesDepot\Release\Sales Library.exe" "*.sql" "sequense.txt"

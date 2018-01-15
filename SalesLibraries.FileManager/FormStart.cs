@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
+using SalesLibraries.Common.Configuration;
+using SalesLibraries.Common.Helpers;
 using SalesLibraries.CommonGUI.BackgroundProcesses;
 using SalesLibraries.CommonGUI.Common;
 
@@ -13,6 +16,7 @@ namespace SalesLibraries.FileManager
 		public FormStart(string title)
 		{
 			InitializeComponent();
+
 			if ((CreateGraphics()).DpiX > 96)
 			{
 				var font = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2,
@@ -25,6 +29,17 @@ namespace SalesLibraries.FileManager
 				styleController.AppearanceReadOnly.Font = font;
 			}
 
+			var styleSettings = new StartFormStyleConfiguration();
+			styleSettings.Load(Path.Combine(RemoteResourceManager.Instance.AppRootFolderPath, "sync_color.xml"));
+			BackColor = styleSettings.SyncBorderColor ?? BackColor;
+			panelEx.Style.BackColor1.Color = panelEx.Style.BackColor2.Color = styleSettings.SyncBackColor ?? panelEx.Style.BackColor1.Color;
+			labelControlDownloadInfo.ForeColor = styleSettings.SyncTextColor ?? labelControlDownloadInfo.ForeColor;
+			circularProgressRegular.ProgressColor = circularProgressMinimized.ProgressColor = styleSettings.SyncCircleColor ?? circularProgressRegular.ProgressColor;
+
+			var cancelLogoPath = Path.Combine(RemoteResourceManager.Instance.AppRootFolderPath, "ProgressCancel.png");
+			if (File.Exists(cancelLogoPath))
+				pbCancelRegular.Image = Image.FromFile(cancelLogoPath);
+
 			pbCancelRegular.Buttonize();
 			notifyIcon.Text = title;
 			notifyIcon.BalloonTipText = title;
@@ -35,7 +50,7 @@ namespace SalesLibraries.FileManager
 			notifyIcon.Visible = false;
 			Opacity = 1;
 			Width = 700;
-			Height = 370;
+			Height = 372;
 			pnNormal.Visible = true;
 			pnMinimized.Visible = false;
 
@@ -81,7 +96,7 @@ namespace SalesLibraries.FileManager
 			{
 				StartPosition = FormStartPosition.Manual;
 				Width = 440;
-				Height = 55;
+				Height = 57;
 				Left = Screen.PrimaryScreen.WorkingArea.Width - Width - 20;
 				Top = Screen.PrimaryScreen.WorkingArea.Height - Height - 20;
 				pnNormal.Visible = false;

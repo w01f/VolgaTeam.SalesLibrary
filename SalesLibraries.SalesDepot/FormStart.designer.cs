@@ -56,7 +56,7 @@
 			this.laTitle.Location = new System.Drawing.Point(26, 0);
 			this.laTitle.Name = "laTitle";
 			this.laTitle.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-			this.laTitle.Size = new System.Drawing.Size(248, 32);
+			this.laTitle.Size = new System.Drawing.Size(250, 34);
 			this.laTitle.TabIndex = 2;
 			this.laTitle.Text = "Test...";
 			this.laTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -72,10 +72,10 @@
 			this.panelEx.Cursor = System.Windows.Forms.Cursors.Arrow;
 			this.panelEx.DisabledBackColor = System.Drawing.Color.Empty;
 			this.panelEx.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panelEx.Location = new System.Drawing.Point(1, 1);
+			this.panelEx.Location = new System.Drawing.Point(0, 0);
 			this.panelEx.Name = "panelEx";
 			this.panelEx.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-			this.panelEx.Size = new System.Drawing.Size(308, 32);
+			this.panelEx.Size = new System.Drawing.Size(310, 34);
 			this.panelEx.Style.BackColor1.Color = System.Drawing.Color.ForestGreen;
 			this.panelEx.Style.BackColor2.Color = System.Drawing.Color.ForestGreen;
 			this.panelEx.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -99,7 +99,7 @@
 			this.circularProgress.ProgressBarType = DevComponents.DotNetBar.eCircularProgressType.Dot;
 			this.circularProgress.ProgressColor = System.Drawing.Color.White;
 			this.circularProgress.ProgressTextFormat = "";
-			this.circularProgress.Size = new System.Drawing.Size(21, 32);
+			this.circularProgress.Size = new System.Drawing.Size(21, 34);
 			this.circularProgress.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP;
 			this.circularProgress.TabIndex = 18;
 			// 
@@ -110,10 +110,10 @@
 			this.panelExCancel.Controls.Add(this.pbCancel);
 			this.panelExCancel.DisabledBackColor = System.Drawing.Color.Empty;
 			this.panelExCancel.Dock = System.Windows.Forms.DockStyle.Right;
-			this.panelExCancel.Location = new System.Drawing.Point(274, 0);
+			this.panelExCancel.Location = new System.Drawing.Point(276, 0);
 			this.panelExCancel.Name = "panelExCancel";
 			this.panelExCancel.Padding = new System.Windows.Forms.Padding(1);
-			this.panelExCancel.Size = new System.Drawing.Size(34, 32);
+			this.panelExCancel.Size = new System.Drawing.Size(34, 34);
 			this.panelExCancel.Style.Alignment = System.Drawing.StringAlignment.Center;
 			this.panelExCancel.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
 			this.panelExCancel.Style.BorderColor.Color = System.Drawing.Color.LightGray;
@@ -127,10 +127,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.pbCancel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.pbCancel.Image = global::SalesLibraries.CommonGUI.Properties.Resources.ProgressCancel;
+			this.pbCancel.Image = ((System.Drawing.Image)(resources.GetObject("pbCancel.Image")));
 			this.pbCancel.Location = new System.Drawing.Point(4, 4);
 			this.pbCancel.Name = "pbCancel";
-			this.pbCancel.Size = new System.Drawing.Size(26, 24);
+			this.pbCancel.Size = new System.Drawing.Size(26, 26);
 			this.pbCancel.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pbCancel.TabIndex = 0;
 			this.pbCancel.TabStop = false;
@@ -172,6 +172,7 @@
 			// 
 			// FormStart
 			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.BackColor = System.Drawing.Color.White;
 			this.ClientSize = new System.Drawing.Size(310, 34);
@@ -180,7 +181,6 @@
 			this.Cursor = System.Windows.Forms.Cursors.Arrow;
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.Name = "FormStart";
-			this.Padding = new System.Windows.Forms.Padding(1);
 			this.ShowIcon = false;
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;

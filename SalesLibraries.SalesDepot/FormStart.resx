@@ -117,13 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="pbCancel.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wwAADsMBx2+oZAAAAf5JREFUWEftli9QAkEUxgkEA4FAIBAIBILBYCAYjQaDgUAwGAwGg4FgcMZgJBAM
+        RqOBYDAQDAaDwWAwGAwGgoFgIDgD/t67j/P4J4PcNX4zO7v7vrff44673UutWDGLwWCQ6ff77/QO4wdJ
+        cyG3omWOzSUtBgt35OEwr0maCWlp8p6DFb6mKel/YHAjLzPr0GUlTYWckyDb8z/o/syfCyYF2ldg6aYN
+        SRMgF6O5sCtpOTA9lqH9gG+6DUkjoN0GWZ7XUnh58LP/9SmwdvNHSSHE9iSb3qUVJMUDhhWaXb3D+EDS
+        8I2x/9thfCQpXjBuqoYV+aTzB4xxI4hOvzuxgX+WAtErvaRt0vzOqC8rPRkoUrVihhWkvWlqnCktWSh6
+        p4IhxF7p1pSSLBSy973nlX/Zkpw8FMvzA7pB3QDm4VuROBQLt+chxOytyCklOSgUHlCMO9Y0tfmV0pKB
+        GuMbTpVW03RIcs8CxaIbUVthi7cVtvgLXVpSfGAcbsX0PVpJkt2Z8lATdUnxgKEdRnZlDuNTSSHEziWb
+        bkdyUdLyYFZ3Z8B86oZjMbToJ1w8xzFGJVp009mWNAF5I59wsPwHCab3MrOrulZ4JuS0lG75dkcykhaH
+        xfvuBJjZzpeXNBNyRj7LGF9IWgzW5lTUYXwoaS6kR58ZOzHXJa1YMUYq9QOlWCj5YhLlogAAAABJRU5E
+        rkJggg==
+</value>
+  </data>
   <metadata name="notifyIcon.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
   <metadata name="contextMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>123, 17</value>
   </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="notifyIcon.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABABcAMDACAAEAAQAwAwAAdgEAACAgAgABAAEAMAEAAKYEAAAQEAIAAQABALAAAADWBQAAAAAQAAEA
@@ -4353,9 +4368,6 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
 </value>
   </data>
-  <metadata name="styleController.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>433, 17</value>
-  </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>45</value>
   </metadata>
