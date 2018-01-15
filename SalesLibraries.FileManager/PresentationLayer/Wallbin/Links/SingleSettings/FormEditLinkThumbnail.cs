@@ -151,6 +151,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		private void LoadData()
 		{
+			_allowHandleEvents = false;
 			simpleLabelItemLinkName.Text = String.Format("<size=+4>{0}</size>",
 				_selectedLinks.Count > 1 ?
 					String.Format("{0} ({1})", linksTreeSelector.SelectedGroup?.Title, linksTreeSelector.SelectedGroup?.Links.OfType<LibraryObjectLink>().Count()) :
@@ -160,6 +161,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				LoadLinkSetData();
 			else
 				LoadSingleLinkData();
+			_allowHandleEvents = true;
 		}
 
 		private void SaveData()
@@ -559,6 +561,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		private void OnSingleSourceImagesSelectionChanged(object sender, EventArgs e)
 		{
 			layoutControlItemPreviewImage.Enabled = buttonXEnable.Checked && imageListViewSingle.SelectedItems.Any();
+			if (!_allowHandleEvents) return;
+			OnSinglePreviewImageClick(sender, e);
 		}
 
 		private void OnSinglePreviewImageClick(object sender, EventArgs e)

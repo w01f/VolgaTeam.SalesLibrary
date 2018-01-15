@@ -32,6 +32,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.LinksTreeSe
 				new VideoTreeGroup(),
 				new ImageTreeGroup(),
 				new UrlTreeGroup(),
+				new LinkBundleTreeGroup(),
 				new UndefinedTreeGroup()
 			};
 		}
@@ -128,6 +129,18 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.LinksTreeSe
 		};
 
 		public override int? StateImageIndex => 8;
+	}
+
+	class LinkBundleTreeGroup : LinksFormatTreeGroup
+	{
+		public override string Title => "Link Bundles";
+
+		public override string[] TargetLinkFormats => new[]
+		{
+			WebFormats.LinkBundle
+		};
+
+		public override int? StateImageIndex => null;
 	}
 
 	class UndefinedTreeGroup : LinksFormatTreeGroup
