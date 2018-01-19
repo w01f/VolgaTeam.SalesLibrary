@@ -18,6 +18,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Sync
 			panelEx.Style.BackColor1.Color = panelEx.Style.BackColor2.Color = panelExCancel.Style.BackColor1.Color = panelExCancel.Style.BackColor2.Color = styleSettings.SyncBackColor ?? panelEx.Style.BackColor1.Color;
 			laTitle.ForeColor = laTime.ForeColor = styleSettings.SyncTextColor ?? laTitle.ForeColor;
 			circularProgress.ProgressColor = styleSettings.SyncCircleColor ?? circularProgress.ProgressColor;
+
+			var cancelLogoPath = Path.Combine(RemoteResourceManager.Instance.AppRootFolderPath, "ProgressCancel.png");
+			if (File.Exists(cancelLogoPath))
+				pbCancel.Image = Image.FromFile(cancelLogoPath);
 		}
 	}
 }

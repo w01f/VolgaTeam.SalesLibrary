@@ -173,7 +173,7 @@
         #endregion
 
 		public System.Windows.Forms.Label laTitle;
-        private System.Windows.Forms.PictureBox pbCancel;
+	       protected System.Windows.Forms.PictureBox pbCancel;
         protected DevComponents.DotNetBar.PanelEx panelEx;
 		protected DevComponents.DotNetBar.PanelEx panelExCancel;
 	       protected DevComponents.DotNetBar.Controls.CircularProgress circularProgress;
