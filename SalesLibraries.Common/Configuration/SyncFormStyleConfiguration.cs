@@ -11,6 +11,7 @@ namespace SalesLibraries.Common.Configuration
 		public Color? SyncBorderColor { get; private set; }
 		public Color? SyncTextColor { get; private set; }
 		public Color? SyncCircleColor { get; private set; }
+		public int? SyncCircleStyle { get; private set; }
 
 		public void Load(string settingsFilePath, string sectionName = "Sync")
 		{
@@ -34,6 +35,9 @@ namespace SalesLibraries.Common.Configuration
 							break;
 						case "SyncCircleColor":
 							SyncCircleColor = ColorTranslator.FromHtml(childNode.InnerText);
+							break;
+						case "CircleStyle":
+							SyncCircleStyle = Int32.Parse(childNode.InnerText);
 							break;
 					}
 				}
