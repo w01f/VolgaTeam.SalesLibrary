@@ -17,20 +17,8 @@ namespace SalesLibraries.FileManager
 		{
 			InitializeComponent();
 
-			if ((CreateGraphics()).DpiX > 96)
-			{
-				var font = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2,
-					styleController.Appearance.Font.Style);
-				styleController.Appearance.Font = font;
-				styleController.AppearanceDisabled.Font = font;
-				styleController.AppearanceDropDown.Font = font;
-				styleController.AppearanceDropDownHeader.Font = font;
-				styleController.AppearanceFocused.Font = font;
-				styleController.AppearanceReadOnly.Font = font;
-			}
-
-			var styleSettings = new StartFormStyleConfiguration();
-			styleSettings.Load(Path.Combine(RemoteResourceManager.Instance.AppRootFolderPath, "sync_color.xml"));
+			var styleSettings = new SyncFormStyleConfiguration();
+			styleSettings.Load(Path.Combine(RemoteResourceManager.Instance.AppRootFolderPath, "sync_color.xml"), "SyncStart");
 			BackColor = styleSettings.SyncBorderColor ?? BackColor;
 			panelEx.Style.BackColor1.Color = panelEx.Style.BackColor2.Color = styleSettings.SyncBackColor ?? panelEx.Style.BackColor1.Color;
 			labelControlDownloadInfo.ForeColor = styleSettings.SyncTextColor ?? labelControlDownloadInfo.ForeColor;
@@ -39,8 +27,15 @@ namespace SalesLibraries.FileManager
 			var cancelLogoPath = Path.Combine(RemoteResourceManager.Instance.AppRootFolderPath, "ProgressCancel.png");
 			if (File.Exists(cancelLogoPath))
 				pbCancelRegular.Image = Image.FromFile(cancelLogoPath);
-
+			pbCancelRegular.Size = new Size(32, 32);
+			pbCancelRegular.Location = new Point(Right - 32 - 2, Top + 2);
 			pbCancelRegular.Buttonize();
+
+			var brandLogoPath = Path.Combine(RemoteResourceManager.Instance.AppRootFolderPath, "splash_tag.png");
+			if (File.Exists(brandLogoPath))
+				pictureEditBrand.Image = Image.FromFile(brandLogoPath);
+
+
 			notifyIcon.Text = title;
 			notifyIcon.BalloonTipText = title;
 			toolStripMenuItemKillApp.Text = String.Format(toolStripMenuItemKillApp.Text, title);
@@ -49,8 +44,8 @@ namespace SalesLibraries.FileManager
 			WindowState = FormWindowState.Normal;
 			notifyIcon.Visible = false;
 			Opacity = 1;
-			Width = 700;
-			Height = 372;
+			Width = (Int32)(700 * Utils.GetScaleFactor(CreateGraphics().DpiX).Width);
+			Height = pnNormal.Height = (Int32)(372 * Utils.GetScaleFactor(CreateGraphics().DpiX).Height);
 			pnNormal.Visible = true;
 			pnMinimized.Visible = false;
 
@@ -95,8 +90,8 @@ namespace SalesLibraries.FileManager
 			if (!_minimized)
 			{
 				StartPosition = FormStartPosition.Manual;
-				Width = 440;
-				Height = 57;
+				Width = Math.Max(440, (Int32)(440 * Utils.GetScaleFactor(CreateGraphics().DpiX).Width * 0.75));
+				Height = pnMinimized.Height = 57;
 				Left = Screen.PrimaryScreen.WorkingArea.Width - Width - 20;
 				Top = Screen.PrimaryScreen.WorkingArea.Height - Height - 20;
 				pnNormal.Visible = false;

@@ -78,7 +78,7 @@
   <ItemGroup>
     <Compile Include="Authorization\AuthSettings.cs" />
     <Compile Include="Configuration\GlobalSettings.cs" />
-    <Compile Include="Configuration\StartFormStyleConfiguration.cs" />
+    <Compile Include="Configuration\SyncFormStyleConfiguration.cs" />
     <Compile Include="DataState\DataChangeEventArgs.cs" />
     <Compile Include="DataState\DataChangeType.cs" />
     <Compile Include="DataState\DataStateObserver.cs" />

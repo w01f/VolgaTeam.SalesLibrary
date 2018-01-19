@@ -188,7 +188,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 							using (var form = new FormAddImageRequest())
 							{
 								form.simpleLabelItemTitle.Text =
-									String.Format("<color=gray>Add:<br>{0}</color>", Path.GetFileName(imageFilePath));
+									String.Format("<color=gray>Add: {0}</color>", Path.GetFileName(imageFilePath));
 								if (form.ShowDialog(MainController.Instance.MainForm) == DialogResult.OK)
 								{
 									var addToGallery = false;

@@ -100,7 +100,7 @@ namespace SalesLibraries.FileManager.Controllers
 
 			using (var form = new FormStart("Site Admin"))
 			{
-				form.pbHeaderRegular.Image = MainController.Instance.ImageResources.AppSplashLogo ?? form.pbHeaderRegular.Image;
+				form.pictureEditHeaderRegular.Image = MainController.Instance.ImageResources.AppSplashLogo ?? form.pictureEditHeaderRegular.Image;
 
 				FileStorageManager.Instance.Downloading += (o, e) =>
 				{

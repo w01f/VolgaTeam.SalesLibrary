@@ -86,7 +86,6 @@
 			// 
 			// circularProgress
 			// 
-			this.circularProgress.AnimationSpeed = 50;
 			this.circularProgress.BackColor = System.Drawing.Color.Transparent;
 			// 
 			// 

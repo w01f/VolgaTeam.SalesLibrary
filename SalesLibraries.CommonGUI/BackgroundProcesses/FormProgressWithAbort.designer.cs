@@ -96,7 +96,6 @@
 			// 
 			// circularProgress
 			// 
-			this.circularProgress.AnimationSpeed = 50;
 			this.circularProgress.BackColor = System.Drawing.Color.Transparent;
 			// 
 			// 
@@ -177,7 +176,7 @@
         private System.Windows.Forms.PictureBox pbCancel;
         protected DevComponents.DotNetBar.PanelEx panelEx;
 		protected DevComponents.DotNetBar.PanelEx panelExCancel;
-		private DevComponents.DotNetBar.Controls.CircularProgress circularProgress;
+	       protected DevComponents.DotNetBar.Controls.CircularProgress circularProgress;
 		public System.Windows.Forms.Label laTime;
     }
 }

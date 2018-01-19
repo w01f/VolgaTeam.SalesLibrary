@@ -16,7 +16,7 @@ namespace SalesLibraries.Common.Objects.Graphics
 				{
 					var favoritesImagesGroup = ParentList.Items.OfType<FavoriteImageGroup>().FirstOrDefault();
 					if (favoritesImagesGroup == null) return;
-					favoritesImagesGroup.AddImageSource(imageSource);
+					favoritesImagesGroup.AddImageSource<TImageSource>((TImageSource)imageSource);
 				};
 			}
 		}
