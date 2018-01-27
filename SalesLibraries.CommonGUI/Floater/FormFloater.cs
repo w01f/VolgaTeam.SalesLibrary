@@ -7,6 +7,8 @@ namespace SalesLibraries.CommonGUI.Floater
 {
 	public partial class FormFloater : Form
 	{
+		private Rectangle _dragStartRectangle = Rectangle.Empty;
+
 		public FormFloater(int x, int y, string defaultText,Image defaultImage)
 		{
 			InitializeComponent();
@@ -18,21 +20,47 @@ namespace SalesLibraries.CommonGUI.Floater
 				Font = new Font(Font.FontFamily, Font.Size - 1, Font.Style);
 		}
 
-		private void buttonItemBack_Click(object sender, EventArgs e)
+		private void OnBackButtonClick(object sender, EventArgs e)
 		{
 			DialogResult = DialogResult.Yes;
 		}
 
-		private void buttonItemHide_Click(object sender, EventArgs e)
+		private void OnHideButtonClick(object sender, EventArgs e)
 		{
 			DialogResult = DialogResult.No;
 		}
 		
-		private void labelCaption_MouseDown(object sender, MouseEventArgs e)
+		private void OnCaptionMouseDown(object sender, MouseEventArgs e)
 		{
 			if (e.Button != MouseButtons.Left) return;
 			WinAPIHelper.ReleaseCapture();
 			WinAPIHelper.SendMessage(Handle, WinAPIHelper.WM_NCLBUTTONDOWN, WinAPIHelper.HTCAPTION, IntPtr.Zero);
+		}
+
+		private void OnButtonMouseMove(object sender, MouseEventArgs e)
+		{
+			if (e.Button != MouseButtons.Left) return;
+			if (_dragStartRectangle.IsEmpty) return;
+			if (!_dragStartRectangle.Contains(e.Location))
+			{
+				WinAPIHelper.ReleaseCapture();
+				WinAPIHelper.SendMessage(Handle, WinAPIHelper.WM_NCLBUTTONDOWN, WinAPIHelper.HTCAPTION, IntPtr.Zero);
+			}
+		}
+
+		private void OnButtonMouseDown(object sender, MouseEventArgs e)
+		{
+			if (e.Button != MouseButtons.Left) return;
+			_dragStartRectangle = new Rectangle(
+				new Point(
+					e.X - (SystemInformation.DragSize.Width / 2),
+					e.Y - (SystemInformation.DragSize.Height / 2)),
+				SystemInformation.DragSize);
+		}
+
+		private void OnButtonMouseUp(object sender, MouseEventArgs e)
+		{
+			_dragStartRectangle = Rectangle.Empty;
 		}
 	}
 }

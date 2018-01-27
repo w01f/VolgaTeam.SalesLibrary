@@ -24,6 +24,7 @@ namespace SalesLibraries.FileManager
 			labelControlDownloadInfo.ForeColor = styleSettings.SyncTextColor ?? labelControlDownloadInfo.ForeColor;
 			circularProgressRegular.ProgressColor = circularProgressMinimized.ProgressColor = styleSettings.SyncCircleColor ?? circularProgressRegular.ProgressColor;
 			circularProgressRegular.ProgressBarType = circularProgressMinimized.ProgressBarType = (DevComponents.DotNetBar.eCircularProgressType)((styleSettings.SyncCircleStyle ?? 2) - 1);
+			circularProgressRegular.AnimationSpeed = circularProgressMinimized.AnimationSpeed = styleSettings.SyncCircleSpeed ?? 150;
 
 			var cancelLogoPath = Path.Combine(RemoteResourceManager.Instance.AppRootFolderPath, "ProgressCancel.png");
 			if (File.Exists(cancelLogoPath))

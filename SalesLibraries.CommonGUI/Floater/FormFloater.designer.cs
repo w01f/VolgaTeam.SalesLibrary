@@ -55,7 +55,10 @@
 			this.buttonXHide.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.superTooltip.SetSuperTooltip(this.buttonXHide, new DevComponents.DotNetBar.SuperTooltipInfo("Hide", "", "Hide Application", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
 			this.buttonXHide.TabIndex = 1;
-			this.buttonXHide.Click += new System.EventHandler(this.buttonItemHide_Click);
+			this.buttonXHide.Click += new System.EventHandler(this.OnHideButtonClick);
+			this.buttonXHide.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OnButtonMouseDown);
+			this.buttonXHide.MouseMove += new System.Windows.Forms.MouseEventHandler(this.OnButtonMouseMove);
+			this.buttonXHide.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OnButtonMouseUp);
 			// 
 			// buttonXBack
 			// 
@@ -67,7 +70,10 @@
 			this.buttonXBack.Size = new System.Drawing.Size(255, 106);
 			this.buttonXBack.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXBack.TabIndex = 0;
-			this.buttonXBack.Click += new System.EventHandler(this.buttonItemBack_Click);
+			this.buttonXBack.Click += new System.EventHandler(this.OnBackButtonClick);
+			this.buttonXBack.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OnButtonMouseDown);
+			this.buttonXBack.MouseMove += new System.Windows.Forms.MouseEventHandler(this.OnButtonMouseMove);
+			this.buttonXBack.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OnButtonMouseUp);
 			// 
 			// pnMain
 			// 
@@ -103,7 +109,7 @@
 			this.labelCaption.TabIndex = 3;
 			this.labelCaption.Text = "labelCaption";
 			this.labelCaption.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			this.labelCaption.MouseDown += new System.Windows.Forms.MouseEventHandler(this.labelCaption_MouseDown);
+			this.labelCaption.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OnCaptionMouseDown);
 			// 
 			// FormFloater
 			// 

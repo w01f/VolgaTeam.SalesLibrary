@@ -29,6 +29,7 @@ namespace SalesLibraries.SalesDepot
 			laTitle.ForeColor = styleSettings.SyncTextColor ?? laTitle.ForeColor;
 			circularProgress.ProgressColor = styleSettings.SyncCircleColor ?? circularProgress.ProgressColor;
 			circularProgress.ProgressBarType = (DevComponents.DotNetBar.eCircularProgressType)((styleSettings.SyncCircleStyle ?? 2) - 1);
+			circularProgress.AnimationSpeed = styleSettings.SyncCircleSpeed ?? 150;
 
 			var cancelLogoPath = Path.Combine(RemoteResourceManager.Instance.AppRootFolderPath, "ProgressCancel.png");
 			if (File.Exists(cancelLogoPath))
