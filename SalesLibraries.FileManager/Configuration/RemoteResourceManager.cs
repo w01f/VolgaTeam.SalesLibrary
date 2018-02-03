@@ -19,6 +19,9 @@ namespace SalesLibraries.FileManager.Configuration
 		public StorageFile ErrorEmailSettingsFile { get; private set; }
 		public StorageFile TabSettingsFile { get; private set; }
 		public StorageFile ArchiveLinksSettingsFile { get; private set; }
+		public StorageFile BrowserSettingsFile { get; private set; }
+		public StorageFile FormStyleConfigFile { get; private set; }
+		public StorageFile MainAppTitleTextFile { get; private set; }
 
 		public ArchiveDirectory ImageResourcesFolder { get; private set; }
 		public ArchiveDirectory InternalLinkTemplatesFolder { get; private set; }
@@ -80,6 +83,24 @@ namespace SalesLibraries.FileManager.Configuration
 			));
 			if (await ArchiveLinksSettingsFile.Exists(true))
 				await ArchiveLinksSettingsFile.Download();
+
+			BrowserSettingsFile = new StorageFile(appOutgoingFolder.RelativePathParts.Merge(
+				"eo.xml"
+			));
+			if (await BrowserSettingsFile.Exists(true))
+				await BrowserSettingsFile.Download();
+
+			MainAppTitleTextFile = new StorageFile(appOutgoingFolder.RelativePathParts.Merge(
+				"app_brand.txt"
+			));
+			if (await MainAppTitleTextFile.Exists(true))
+				await MainAppTitleTextFile.Download();
+
+			FormStyleConfigFile = new StorageFile(appOutgoingFolder.RelativePathParts.Merge(
+				"style.xml"
+			));
+			if (await FormStyleConfigFile.Exists(true))
+				await FormStyleConfigFile.Download();
 
 			ImageResourcesFolder = new ArchiveDirectory(new object[]
 			{

@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 using Ionic.Zip;
+using Microsoft.Win32;
 using SalesLibraries.Common.Configuration;
 
 namespace SalesLibraries.Common.Helpers
@@ -292,6 +292,15 @@ namespace SalesLibraries.Common.Helpers
 			if (dpi >= 120)
 				return new SizeF(1.25f, 1.25f);
 			return new SizeF(1, 1);
+		}
+
+		public static bool IsWindows10()
+		{
+			var reg = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion");
+
+			string productName = (string)reg.GetValue("ProductName");
+
+			return productName.StartsWith("Windows 10");
 		}
 	}
 }

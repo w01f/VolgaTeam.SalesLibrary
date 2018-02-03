@@ -3,9 +3,11 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using SalesLibraries.Common.Configuration;
+using SalesLibraries.Common.Extensions;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.CommonGUI.BackgroundProcesses;
 using SalesLibraries.CommonGUI.Common;
+using SalesLibraries.FileManager.Controllers;
 
 namespace SalesLibraries.FileManager
 {
@@ -17,8 +19,22 @@ namespace SalesLibraries.FileManager
 		{
 			InitializeComponent();
 
+			pbCancelRegular.Image = MainController.Instance.ImageResources.AppSplashCancelImage ?? pbCancelRegular.Image;
+			pbCancelRegular.Size = new Size(32, 32);
+			pbCancelRegular.Location = new Point(Right - 32 - 2, Top + 2);
+			pbCancelRegular.Buttonize();
+
+			StartPosition = FormStartPosition.CenterScreen;
+			WindowState = FormWindowState.Normal;
+			notifyIcon.Visible = false;
+			Opacity = 1;
+			Width = (Int32)(700 * Utils.GetScaleFactor(CreateGraphics().DpiX).Width);
+			Height = pnNormal.Height = (Int32)(392 * Utils.GetScaleFactor(CreateGraphics().DpiX).Height);
+			pnNormal.Visible = true;
+			pnMinimized.Visible = false;
+
 			var styleSettings = new SyncFormStyleConfiguration();
-			styleSettings.Load(Path.Combine(RemoteResourceManager.Instance.AppRootFolderPath, "sync_color.xml"), "SyncStart");
+			styleSettings.Load(Path.Combine(GlobalSettings.ApplicationRootPath, "sync_color.xml"), "SyncStart");
 			BackColor = styleSettings.SyncBorderColor ?? BackColor;
 			panelEx.Style.BackColor1.Color = panelEx.Style.BackColor2.Color = styleSettings.SyncBackColor ?? panelEx.Style.BackColor1.Color;
 			labelControlDownloadInfo.ForeColor = styleSettings.SyncTextColor ?? labelControlDownloadInfo.ForeColor;
@@ -26,56 +42,52 @@ namespace SalesLibraries.FileManager
 			circularProgressRegular.ProgressBarType = circularProgressMinimized.ProgressBarType = (DevComponents.DotNetBar.eCircularProgressType)((styleSettings.SyncCircleStyle ?? 2) - 1);
 			circularProgressRegular.AnimationSpeed = circularProgressMinimized.AnimationSpeed = styleSettings.SyncCircleSpeed ?? 150;
 
-			var cancelLogoPath = Path.Combine(RemoteResourceManager.Instance.AppRootFolderPath, "ProgressCancel.png");
-			if (File.Exists(cancelLogoPath))
-				pbCancelRegular.Image = Image.FromFile(cancelLogoPath);
-			pbCancelRegular.Size = new Size(32, 32);
-			pbCancelRegular.Location = new Point(Right - 32 - 2, Top + 2);
-			pbCancelRegular.Buttonize();
+			var regularHeaderImage = MainController.Instance.ImageResources.AppSplashLogo;
+			if (regularHeaderImage != null)
+				pictureEditHeaderRegular.Image = pictureEditHeaderRegular.Height < regularHeaderImage.Height
+					? regularHeaderImage.Resize(new Size(regularHeaderImage.Width, pictureEditHeaderRegular.Height))
+					: regularHeaderImage;
 
-			var brandLogoPath = Path.Combine(RemoteResourceManager.Instance.AppRootFolderPath, "splash_tag.png");
-			if (File.Exists(brandLogoPath))
-				pictureEditBrand.Image = Image.FromFile(brandLogoPath);
+			var webSiteStageImage = MainController.Instance.ImageResources.AppSplashStageWebSiteImage;
+			if (webSiteStageImage != null)
+				pbProgressStageWebSite.Image = pbProgressStageWebSite.Height < webSiteStageImage.Height
+					? webSiteStageImage.Resize(new Size(webSiteStageImage.Width, pbProgressStageWebSite.Height))
+					: webSiteStageImage;
 
+			var securityStageImage = MainController.Instance.ImageResources.AppSplashStageSecurityImage;
+			if (securityStageImage != null)
+				pbProgressStageSecurity.Image = pbProgressStageSecurity.Height < securityStageImage.Height
+					? securityStageImage.Resize(new Size(securityStageImage.Width, pbProgressStageSecurity.Height))
+					: securityStageImage;
+
+			var filesStageImage = MainController.Instance.ImageResources.AppSplashStageFilesImage;
+			if (filesStageImage != null)
+				pbProgressStageFiles.Image = pbProgressStageFiles.Height < filesStageImage.Height
+					? filesStageImage.Resize(new Size(filesStageImage.Width, pbProgressStageFiles.Height))
+					: filesStageImage;
+
+			pictureEditBrand.Image = MainController.Instance.ImageResources.AppSplashBrandImage ?? pictureEditBrand.Image;
 
 			notifyIcon.Text = title;
 			notifyIcon.BalloonTipText = title;
 			toolStripMenuItemKillApp.Text = String.Format(toolStripMenuItemKillApp.Text, title);
-
-			StartPosition = FormStartPosition.CenterScreen;
-			WindowState = FormWindowState.Normal;
-			notifyIcon.Visible = false;
-			Opacity = 1;
-			Width = (Int32)(700 * Utils.GetScaleFactor(CreateGraphics().DpiX).Width);
-			Height = pnNormal.Height = (Int32)(372 * Utils.GetScaleFactor(CreateGraphics().DpiX).Height);
-			pnNormal.Visible = true;
-			pnMinimized.Visible = false;
 
 			FormClosed += FormStart_FormClosed;
 		}
 
 		public void ProcessConnectionStage()
 		{
-			pnProgressStages.SuspendLayout();
-			pnProgressStageWebConnection.Visible = true;
-			pnProgressStageWebConnection.BringToFront();
-			pnProgressStages.ResumeLayout();
+			pbProgressStageWebSite.Visible = true;
 		}
 
 		public void ProcessSecurityStage()
 		{
-			pnProgressStages.SuspendLayout();
-			pnProgressStageSecurity.Visible = true;
-			pnProgressStageSecurity.BringToFront();
-			pnProgressStages.ResumeLayout();
+			pbProgressStageSecurity.Visible = true;
 		}
 
 		public void ProcessLoadFilesStage()
 		{
-			pnProgressStages.SuspendLayout();
-			pnProgressStageFiles.Visible = true;
-			pnProgressStageFiles.BringToFront();
-			pnProgressStages.ResumeLayout();
+			pbProgressStageFiles.Visible = true;
 		}
 
 		public void SetDownloadInfo(string info)

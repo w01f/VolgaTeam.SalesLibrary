@@ -19,7 +19,7 @@ namespace SalesLibraries.FileManager.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -57,6 +57,36 @@ namespace SalesLibraries.FileManager.Properties {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ApplicationMenuExit {
+            get {
+                object obj = ResourceManager.GetObject("ApplicationMenuExit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ApplicationMenuSave {
+            get {
+                object obj = ResourceManager.GetObject("ApplicationMenuSave", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ApplicationMenuSync {
+            get {
+                object obj = ResourceManager.GetObject("ApplicationMenuSync", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -1123,6 +1153,16 @@ namespace SalesLibraries.FileManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap RibbonCollapse {
+            get {
+                object obj = ResourceManager.GetObject("RibbonCollapse", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap RibbonCompactWallbin {
             get {
                 object obj = ResourceManager.GetObject("RibbonCompactWallbin", resourceCulture);
@@ -1136,6 +1176,16 @@ namespace SalesLibraries.FileManager.Properties {
         internal static System.Drawing.Bitmap RibbonExit {
             get {
                 object obj = ResourceManager.GetObject("RibbonExit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RibbonExpand {
+            get {
+                object obj = ResourceManager.GetObject("RibbonExpand", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1216,6 +1266,16 @@ namespace SalesLibraries.FileManager.Properties {
         internal static System.Drawing.Bitmap RibbonLinkTags {
             get {
                 object obj = ResourceManager.GetObject("RibbonLinkTags", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RibbonPin {
+            get {
+                object obj = ResourceManager.GetObject("RibbonPin", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

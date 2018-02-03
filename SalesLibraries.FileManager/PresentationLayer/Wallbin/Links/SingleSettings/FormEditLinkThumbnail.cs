@@ -368,7 +368,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			if (buttonXEnable.Checked)
 			{
 				SingleLink.Thumbnail.Enable = true;
-				SingleLink.Thumbnail.Image = (Image)pictureEditSingleImage.Image.Clone();
+				SingleLink.Thumbnail.Image = (Image)pictureEditSingleImage.Image?.Clone();
 				SingleLink.Thumbnail.SourcePath = imageListViewSingle.SelectedItems.Select(item => item.FileName).FirstOrDefault();
 
 				if (checkEditSingleImageSize200.Checked)

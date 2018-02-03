@@ -6,8 +6,8 @@ namespace SalesLibraries.Common.Configuration
 {
 	public static class GlobalSettings
 	{
-		public static string ApplicationRootPath { get; private set; }
-		public static List<string> HiddenObjects { get; private set; }
+		public static string ApplicationRootPath { get; }
+		public static List<string> HiddenObjects { get; }
 
 		static GlobalSettings()
 		{

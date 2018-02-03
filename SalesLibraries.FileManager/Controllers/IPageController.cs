@@ -10,5 +10,6 @@ namespace SalesLibraries.FileManager.Controllers
 		void ShowPage(TabPageEnum pageType);
 		void ProcessChanges();
 		void OnLibraryChanged(object sender, EventArgs e);
+		void UpdateStatusBar();
 	}
 }

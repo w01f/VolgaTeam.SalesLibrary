@@ -64,6 +64,11 @@ namespace SalesLibraries.FileManager.Controllers
 			_editor.LoadLibrary(activeWallbin.DataStorage);
 		}
 
+		public void UpdateStatusBar()
+		{
+			MainController.Instance.UpdateCommonStatusBar();
+		}
+
 		private void OnVideoConvertClick(object sender, EventArgs eventArgs)
 		{
 			_editor.ConvertSelected();

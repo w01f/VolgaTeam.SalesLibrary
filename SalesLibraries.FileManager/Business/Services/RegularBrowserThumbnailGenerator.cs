@@ -38,7 +38,7 @@ namespace SalesLibraries.FileManager.Business.Services
 			_webBrowser.DocumentCompleted += OnWebBrowserDocumentCompleted;
 		}
 
-		public void GenerateThumbnail(string url, string destinationPath, int delaySeconds = 10, string alternativeUrl = null)
+		public void GenerateThumbnail(string url, string destinationPath, int delaySeconds = 20, string alternativeUrl = null)
 		{
 			try
 			{
@@ -54,12 +54,6 @@ namespace SalesLibraries.FileManager.Business.Services
 				{
 					Application.DoEvents();
 					if (Environment.TickCount - timeStart <= timeout) continue;
-
-					if (!String.IsNullOrEmpty(alternativeUrl))
-					{
-						GenerateThumbnail(alternativeUrl, destinationPath, delaySeconds);
-						return;
-					}
 					break;
 				}
 

@@ -1,8 +1,7 @@
-﻿using System.Drawing;
-using System.IO;
+﻿using System.IO;
 using SalesLibraries.Common.Configuration;
-using SalesLibraries.Common.Helpers;
 using SalesLibraries.CommonGUI.BackgroundProcesses;
+using SalesLibraries.FileManager.Controllers;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Sync
 {
@@ -13,7 +12,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Sync
 			Title = "Uploading Library...";
 
 			var styleSettings = new SyncFormStyleConfiguration();
-			styleSettings.Load(Path.Combine(RemoteResourceManager.Instance.AppRootFolderPath, "sync_color.xml"), "SyncClose");
+			styleSettings.Load(Path.Combine(GlobalSettings.ApplicationRootPath, "sync_color.xml"), "SyncClose");
 			BackColor = panelEx.Style.BorderColor.Color = panelExCancel.Style.BorderColor.Color = styleSettings.SyncBorderColor ?? BackColor;
 			panelEx.Style.BackColor1.Color = panelEx.Style.BackColor2.Color = panelExCancel.Style.BackColor1.Color = panelExCancel.Style.BackColor2.Color = styleSettings.SyncBackColor ?? panelEx.Style.BackColor1.Color;
 			laTitle.ForeColor = laTime.ForeColor = styleSettings.SyncTextColor ?? laTitle.ForeColor;
@@ -21,9 +20,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Sync
 			circularProgress.ProgressBarType = (DevComponents.DotNetBar.eCircularProgressType)((styleSettings.SyncCircleStyle ?? 2) - 1);
 			circularProgress.AnimationSpeed = styleSettings.SyncCircleSpeed ?? 150;
 
-			var cancelLogoPath = Path.Combine(RemoteResourceManager.Instance.AppRootFolderPath, "ProgressCancel.png");
-			if (File.Exists(cancelLogoPath))
-				pbCancel.Image = Image.FromFile(cancelLogoPath);
+			pbCancel.Image = MainController.Instance.ImageResources.AppSplashCancelImage ?? pbCancel.Image;
 		}
 	}
 }

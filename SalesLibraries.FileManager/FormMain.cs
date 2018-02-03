@@ -2,9 +2,11 @@
 using System.IO;
 using System.Windows.Forms;
 using DevComponents.DotNetBar;
+using DevComponents.DotNetBar.Metro.ColorTables;
 using SalesLibraries.Common.DataState;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.CommonGUI.Floater;
+using SalesLibraries.FileManager.Configuration;
 using SalesLibraries.FileManager.Controllers;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.CompactWallbin;
 
@@ -12,27 +14,36 @@ namespace SalesLibraries.FileManager
 {
 	public partial class FormMain : RibbonForm
 	{
-		public const string TitleTemplate = "Site Admin ({0})";
+		public const string TitleTemplate = "{0} ({1})";
 		public new Form ActiveForm { get; private set; }
 		public FormCompactWallbin CompactWallbinForm { get; private set; }
 		public bool IsCompactWallbinView => ActiveForm == CompactWallbinForm;
 
+		public Bar StatusBar => barBottom;
+		public ItemContainer MainInfoContainer => itemContainerStatusBarMainContentInfo;
+		public ItemContainer AdditionalInfoContainer => itemContainerStatusBarAdditionalContentInfo;
+
 		public FormMain()
 		{
 			InitializeComponent();
-			Text = String.Format(TitleTemplate, "First Time Setup");
+			Text = String.Format(TitleTemplate, "Site Admin", "First Time Setup");
 			ribbonControl.Enabled = false;
 
 			Opacity = 0;
 			ActiveForm = this;
 
 			KeyPreview = true;
-			KeyUp+=OnFormKeyUp;
+			KeyUp += OnFormKeyUp;
+
+			Width = (Int32)(Screen.PrimaryScreen.Bounds.Width * 0.7);
+			Height = (Int32)(Screen.PrimaryScreen.Bounds.Height * 0.7);
+			Left = (Screen.PrimaryScreen.Bounds.Width - Width) / 2;
+			Top = (Screen.PrimaryScreen.Bounds.Height - Height) / 2;
 		}
 
 		public void InitForm()
 		{
-			Text = String.Format(TitleTemplate, AppProfileManager.Instance.LibraryAlias);
+			Text = String.Format(TitleTemplate, MainController.Instance.Settings.AppTitle, AppProfileManager.Instance.LibraryAlias);
 			Icon = MainController.Instance.ImageResources.AppIcon ?? Icon;
 
 			labelItemHomeLogo.Image = MainController.Instance.ImageResources.AppRibbonLogo ?? labelItemHomeLogo.Image;
@@ -71,6 +82,11 @@ namespace SalesLibraries.FileManager
 
 			ConfigureCompactWallbin();
 
+			if (MainController.Instance.Settings.MainFormStyle.AccentColor.HasValue)
+				styleManager.MetroColorParameters = new MetroColorGeneratorParameters(
+					styleManager.MetroColorParameters.CanvasColor,
+					MainController.Instance.Settings.MainFormStyle.AccentColor.Value);
+
 			if (MainController.Instance.Settings.ShowCompactWallbin)
 			{
 				ShowCompactWallbin();
@@ -90,13 +106,13 @@ namespace SalesLibraries.FileManager
 
 			var title = !String.IsNullOrEmpty(libraryDirectory.Name) ? libraryDirectory.Name : "Site Admin";
 
-			ribbonBarHomeLogo.Text = 
-			ribbonBarPreferencesLogo.Text = 
-			ribbonBarCalendarLogo.Text = 
-			ribbonBarVideoLogo.Text = 
-			ribbonBarTagsLogo.Text = 
-			ribbonBarSecurityLogo.Text = 
-			ribbonBarBundlesLogo.Text = 
+			ribbonBarHomeLogo.Text =
+			ribbonBarPreferencesLogo.Text =
+			ribbonBarCalendarLogo.Text =
+			ribbonBarVideoLogo.Text =
+			ribbonBarTagsLogo.Text =
+			ribbonBarSecurityLogo.Text =
+			ribbonBarBundlesLogo.Text =
 			ribbonBarSettingsLogo.Text = title;
 
 			ribbonBarHomeLogo.RecalcLayout();
@@ -123,13 +139,67 @@ namespace SalesLibraries.FileManager
 
 		private void ConfigureRibbon()
 		{
-			ribbonTabItemCalendar.Visible = MainController.Instance.Settings.EnableOvernightsCalendarTab;
-			ribbonTabItemVideo.Visible = MainController.Instance.Settings.EnableIPadSettingsTab;
-			ribbonTabItemTags.Visible = MainController.Instance.Settings.EnableTagsTab;
-			ribbonTabItemSecurity.Visible = MainController.Instance.Settings.EnableSecurityTab;
-			ribbonTabItemBundles.Visible = MainController.Instance.Settings.EnableLinkBundlesTab;
+			RibbonTabItem defaultTab = null;
+			ribbonControl.Items.Clear();
+			foreach (var tabPageConfig in MainController.Instance.Settings.RibbonTabPageSettings)
+			{
+				ButtonItem currentTab = null;
 
-			ribbonControl.SelectedRibbonTabChanged += ribbonControl_SelectedRibbonTabChanged;
+				if (!tabPageConfig.Visible) continue;
+
+				switch (tabPageConfig.Id)
+				{
+					case RibbonTabIdentifiers.MainMenu:
+						currentTab = applicationButtonApplicationMenu;
+						break;
+					case RibbonTabIdentifiers.Home:
+						currentTab = ribbonTabItemHome;
+						break;
+					case RibbonTabIdentifiers.Preferences:
+						currentTab = ribbonTabItemPreferences;
+						break;
+					case RibbonTabIdentifiers.Tags:
+						currentTab = ribbonTabItemTags;
+						break;
+					case RibbonTabIdentifiers.Security:
+						currentTab = ribbonTabItemSecurity;
+						break;
+					case RibbonTabIdentifiers.Video:
+						currentTab = ribbonTabItemVideo;
+						break;
+					case RibbonTabIdentifiers.LinkBundles:
+						currentTab = ribbonTabItemBundles;
+						break;
+					case RibbonTabIdentifiers.Settings:
+						currentTab = ribbonTabItemSettings;
+						break;
+					case RibbonTabIdentifiers.Calendar:
+						currentTab = ribbonTabItemCalendar;
+						break;
+					case RibbonTabIdentifiers.Browser:
+						currentTab = ribbonTabItemBrowser;
+						break;
+				}
+
+				if (currentTab == null) continue;
+
+				currentTab.Visible = true;
+				currentTab.Enabled = tabPageConfig.Enabled;
+				currentTab.Text = tabPageConfig.Name;
+				ribbonControl.Items.Add(currentTab);
+				if (defaultTab == null)
+					defaultTab = currentTab as RibbonTabItem;
+			}
+
+			ribbonControl.SelectedRibbonTabItem = defaultTab;
+
+			ribbonControl.Items.Add(buttonItemExpand);
+			ribbonControl.Items.Add(buttonItemCollapse);
+			ribbonControl.Items.Add(buttonItemPin);
+
+			ribbonControl.SelectedRibbonTabChanged += OnSelectedRibbonTabChanged;
+
+			ribbonControl.Expanded = true;
 		}
 
 		private void ConfigureCompactWallbin()
@@ -202,20 +272,25 @@ namespace SalesLibraries.FileManager
 			MainController.Instance.HelpManager.OpenHelpLink("Ribbon");
 		}
 
+		private void OnSaveClick(object sender, EventArgs e)
+		{
+			MainController.Instance.ProcessChanges();
+		}
+
 		private void OnFormKeyUp(object sender, KeyEventArgs e)
 		{
 			if (e.KeyCode == Keys.Escape)
 				MainController.Instance.WallbinViews.Selection.ResetAll();
 		}
 
-		private void ribbonControl_SelectedRibbonTabChanged(object sender, EventArgs e)
+		private void OnSelectedRibbonTabChanged(object sender, EventArgs e)
 		{
 			var key = TabPageEnum.Home;
 			if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemHome)
 				key = TabPageEnum.Home;
-			if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemTags)
+			else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemTags)
 				key = TabPageEnum.Tags;
-			if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemSecurity)
+			else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemSecurity)
 				key = TabPageEnum.Security;
 			else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemPreferences)
 				key = TabPageEnum.Preferences;
@@ -227,7 +302,81 @@ namespace SalesLibraries.FileManager
 				key = TabPageEnum.VideoManager;
 			else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemBundles)
 				key = TabPageEnum.Bundles;
+			else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemBrowser)
+				key = TabPageEnum.Browser;
+
 			MainController.Instance.ShowTab(key);
+
+			switch (key)
+			{
+				case TabPageEnum.Browser:
+					if (!_lastRibbonExpanded.HasValue)
+						_lastRibbonExpanded = ribbonControl.Expanded;
+					_allowRibbonStateChangeProcessing = false;
+					ribbonControl.AutoExpand = false;
+					ribbonControl.Expanded = false;
+					buttonItemExpand.Visible = false;
+					buttonItemCollapse.Visible = false;
+					buttonItemPin.Visible = false;
+					ribbonControl.RecalcLayout();
+					Application.DoEvents();
+					_allowRibbonStateChangeProcessing = true;
+					break;
+				default:
+					if (_lastRibbonExpanded.HasValue)
+					{
+						ribbonControl.Expanded = _lastRibbonExpanded.Value;
+						_lastRibbonExpanded = null;
+					}
+					ribbonControl.AutoExpand = true;
+					OnRibbonExpandedChanged(sender, e);
+					break;
+			}
 		}
+
+		#region Expand/Collapse Processing
+		private bool? _lastRibbonExpanded = true;
+		private bool _allowRibbonStateChangeProcessing = true;
+
+		private void OnRibbonExpandedChanged(object sender, EventArgs e)
+		{
+			if (!_allowRibbonStateChangeProcessing) return;
+			buttonItemExpand.Visible = !ribbonControl.Expanded;
+			buttonItemCollapse.Visible = ribbonControl.Expanded;
+			buttonItemPin.Visible = false;
+			ribbonControl.RecalcLayout();
+		}
+
+		private void OnRibbonAfterPanelPopup(object sender, EventArgs e)
+		{
+			buttonItemExpand.Visible = false;
+			buttonItemCollapse.Visible = false;
+			buttonItemPin.Visible = true;
+			ribbonControl.RecalcLayout();
+		}
+
+		private void OnRibbonAfterPanelPopupClose(object sender, EventArgs e)
+		{
+			buttonItemExpand.Visible = !ribbonControl.Expanded;
+			buttonItemCollapse.Visible = ribbonControl.Expanded;
+			buttonItemPin.Visible = false;
+			ribbonControl.RecalcLayout();
+		}
+
+		private void OnRibbonExpandClick(object sender, EventArgs e)
+		{
+			ribbonControl.Expanded = true;
+		}
+
+		private void OnRibbonCollapseClick(object sender, EventArgs e)
+		{
+			ribbonControl.Expanded = false;
+		}
+
+		private void OnRibbonPinClick(object sender, EventArgs e)
+		{
+			ribbonControl.Expanded = true;
+		}
+		#endregion
 	}
 }

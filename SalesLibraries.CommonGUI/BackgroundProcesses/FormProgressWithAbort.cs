@@ -11,8 +11,8 @@ namespace SalesLibraries.CommonGUI.BackgroundProcesses
 		private int _ticks;
 		public override string Title
 		{
-			get { return laTitle.Text; }
-			set { laTitle.Text = value; }
+			get => laTitle.Text;
+			set => laTitle.Text = value;
 		}
 
 		public FormProgressWithAbort()
@@ -32,7 +32,7 @@ namespace SalesLibraries.CommonGUI.BackgroundProcesses
 				var seconds = _ticks - (hours * 3600) - (minutes * 60);
 				Invoke(new MethodInvoker(() =>
 				{
-					laTime.Text = string.Format("{0}:{1}:{2}", hours.ToString("00"), minutes.ToString("00"), seconds.ToString("00"));
+					laTime.Text = string.Format("{0:00}:{1:00}:{2:00}", hours, minutes, seconds);
 					Application.DoEvents();
 				}));
 			};

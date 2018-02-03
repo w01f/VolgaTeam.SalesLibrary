@@ -143,6 +143,7 @@
       <DependentUpon>FormProgressCommon.cs</DependentUpon>
     </Compile>
     <Compile Include="Common\RichTextBoxPrinter.cs" />
+    <Compile Include="Floater\FloaterRequestedEventArgs.cs" />
     <Compile Include="Floater\FormFloater.cs">
       <SubType>Form</SubType>
     </Compile>

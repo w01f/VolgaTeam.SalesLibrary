@@ -53,20 +53,7 @@
 			this.buttonItemHomeAddUrl = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarHomeLogo = new DevComponents.DotNetBar.RibbonBar();
 			this.labelItemHomeLogo = new DevComponents.DotNetBar.LabelItem();
-			this.ribbonPanelTags = new DevComponents.DotNetBar.RibbonPanel();
-			this.ribbonBarTagsSync = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemTagsSync = new DevComponents.DotNetBar.ButtonItem();
-			this.ribbonBarTagsView = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemTagsViewFloater = new DevComponents.DotNetBar.ButtonItem();
-			this.buttonItemTagsViewCompactWallbin = new DevComponents.DotNetBar.ButtonItem();
-			this.ribbonBarTagsKeywords = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemTagsKeywords = new DevComponents.DotNetBar.ButtonItem();
-			this.ribbonBarTagsSuperFilters = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemTagsSuperFilters = new DevComponents.DotNetBar.ButtonItem();
-			this.ribbonBarTagsCategories = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemTagsCategories = new DevComponents.DotNetBar.ButtonItem();
-			this.ribbonBarTagsLogo = new DevComponents.DotNetBar.RibbonBar();
-			this.labelItemTagsLogo = new DevComponents.DotNetBar.LabelItem();
+			this.ribbonPanel1 = new DevComponents.DotNetBar.RibbonPanel();
 			this.ribbonPanelSettings = new DevComponents.DotNetBar.RibbonPanel();
 			this.ribbonBarSettingsSync = new DevComponents.DotNetBar.RibbonBar();
 			this.buttonItemSettingsSync = new DevComponents.DotNetBar.ButtonItem();
@@ -105,6 +92,20 @@
 			this.buttonItemSecuritySelect = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarSecurityLogo = new DevComponents.DotNetBar.RibbonBar();
 			this.labelItemSecurityLogo = new DevComponents.DotNetBar.LabelItem();
+			this.ribbonPanelTags = new DevComponents.DotNetBar.RibbonPanel();
+			this.ribbonBarTagsSync = new DevComponents.DotNetBar.RibbonBar();
+			this.buttonItemTagsSync = new DevComponents.DotNetBar.ButtonItem();
+			this.ribbonBarTagsView = new DevComponents.DotNetBar.RibbonBar();
+			this.buttonItemTagsViewFloater = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemTagsViewCompactWallbin = new DevComponents.DotNetBar.ButtonItem();
+			this.ribbonBarTagsKeywords = new DevComponents.DotNetBar.RibbonBar();
+			this.buttonItemTagsKeywords = new DevComponents.DotNetBar.ButtonItem();
+			this.ribbonBarTagsSuperFilters = new DevComponents.DotNetBar.RibbonBar();
+			this.buttonItemTagsSuperFilters = new DevComponents.DotNetBar.ButtonItem();
+			this.ribbonBarTagsCategories = new DevComponents.DotNetBar.RibbonBar();
+			this.buttonItemTagsCategories = new DevComponents.DotNetBar.ButtonItem();
+			this.ribbonBarTagsLogo = new DevComponents.DotNetBar.RibbonBar();
+			this.labelItemTagsLogo = new DevComponents.DotNetBar.LabelItem();
 			this.ribbonPanelVideo = new DevComponents.DotNetBar.RibbonPanel();
 			this.ribbonBarVideoSync = new DevComponents.DotNetBar.RibbonBar();
 			this.buttonItemVideoSync = new DevComponents.DotNetBar.ButtonItem();
@@ -157,6 +158,10 @@
 			this.buttonItemPreferencesPages = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarPreferencesLogo = new DevComponents.DotNetBar.RibbonBar();
 			this.labelItemPreferencesLogo = new DevComponents.DotNetBar.LabelItem();
+			this.applicationButtonApplicationMenu = new DevComponents.DotNetBar.ApplicationButton();
+			this.buttonItemApplicationMenuSave = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemApplicationMenuSync = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemApplicationMenuExit = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonTabItemHome = new DevComponents.DotNetBar.RibbonTabItem();
 			this.ribbonTabItemPreferences = new DevComponents.DotNetBar.RibbonTabItem();
 			this.ribbonTabItemCalendar = new DevComponents.DotNetBar.RibbonTabItem();
@@ -165,22 +170,31 @@
 			this.ribbonTabItemSecurity = new DevComponents.DotNetBar.RibbonTabItem();
 			this.ribbonTabItemBundles = new DevComponents.DotNetBar.RibbonTabItem();
 			this.ribbonTabItemSettings = new DevComponents.DotNetBar.RibbonTabItem();
+			this.ribbonTabItemBrowser = new DevComponents.DotNetBar.RibbonTabItem();
+			this.buttonItemExpand = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemCollapse = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemPin = new DevComponents.DotNetBar.ButtonItem();
 			this.buttonItemQatHelp = new DevComponents.DotNetBar.ButtonItem();
 			this.pnContainer = new System.Windows.Forms.Panel();
 			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
 			this.superTooltip = new DevComponents.DotNetBar.SuperTooltip();
+			this.barBottom = new DevComponents.DotNetBar.Bar();
+			this.itemContainerStatusBarMainContentInfo = new DevComponents.DotNetBar.ItemContainer();
+			this.labelItemStatusBarSeparator = new DevComponents.DotNetBar.LabelItem();
+			this.itemContainerStatusBarAdditionalContentInfo = new DevComponents.DotNetBar.ItemContainer();
 			this.ribbonControl.SuspendLayout();
 			this.ribbonPanelHome.SuspendLayout();
-			this.ribbonPanelTags.SuspendLayout();
 			this.ribbonPanelSettings.SuspendLayout();
 			this.ribbonPanelBundles.SuspendLayout();
 			this.ribbonPanelSecurity.SuspendLayout();
+			this.ribbonPanelTags.SuspendLayout();
 			this.ribbonPanelVideo.SuspendLayout();
 			this.ribbonPanelCalendar.SuspendLayout();
 			this.ribbonBarCalendarLocation.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.buttonEditCalendarLocation.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			this.ribbonPanelPreferences.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.barBottom)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// styleManager
@@ -198,6 +212,7 @@
 			this.ribbonControl.CanCustomize = false;
 			this.ribbonControl.CaptionVisible = true;
 			this.ribbonControl.Controls.Add(this.ribbonPanelHome);
+			this.ribbonControl.Controls.Add(this.ribbonPanel1);
 			this.ribbonControl.Controls.Add(this.ribbonPanelSettings);
 			this.ribbonControl.Controls.Add(this.ribbonPanelBundles);
 			this.ribbonControl.Controls.Add(this.ribbonPanelSecurity);
@@ -207,8 +222,10 @@
 			this.ribbonControl.Controls.Add(this.ribbonPanelPreferences);
 			this.ribbonControl.Dock = System.Windows.Forms.DockStyle.Top;
 			this.ribbonControl.EnableQatPlacement = false;
+			this.ribbonControl.Expanded = false;
 			this.ribbonControl.ForeColor = System.Drawing.Color.Black;
 			this.ribbonControl.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.applicationButtonApplicationMenu,
             this.ribbonTabItemHome,
             this.ribbonTabItemPreferences,
             this.ribbonTabItemCalendar,
@@ -216,7 +233,11 @@
             this.ribbonTabItemTags,
             this.ribbonTabItemSecurity,
             this.ribbonTabItemBundles,
-            this.ribbonTabItemSettings});
+            this.ribbonTabItemSettings,
+            this.ribbonTabItemBrowser,
+            this.buttonItemExpand,
+            this.buttonItemCollapse,
+            this.buttonItemPin});
 			this.ribbonControl.KeyTipsFont = new System.Drawing.Font("Tahoma", 7F);
 			this.ribbonControl.Location = new System.Drawing.Point(5, 1);
 			this.ribbonControl.Name = "ribbonControl";
@@ -243,6 +264,9 @@
 			this.ribbonControl.TabIndex = 1;
 			this.ribbonControl.Text = "ribbonControl1";
 			this.ribbonControl.UseCustomizeDialog = false;
+			this.ribbonControl.AfterRibbonPanelPopup += new System.EventHandler(this.OnRibbonAfterPanelPopup);
+			this.ribbonControl.AfterRibbonPanelPopupClose += new System.EventHandler(this.OnRibbonAfterPanelPopupClose);
+			this.ribbonControl.ExpandedChanged += new System.EventHandler(this.OnRibbonExpandedChanged);
 			// 
 			// ribbonPanelHome
 			// 
@@ -254,10 +278,10 @@
 			this.ribbonPanelHome.Controls.Add(this.ribbonBarHomeAddLink);
 			this.ribbonPanelHome.Controls.Add(this.ribbonBarHomeLogo);
 			this.ribbonPanelHome.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.ribbonPanelHome.Location = new System.Drawing.Point(0, 53);
+			this.ribbonPanelHome.Location = new System.Drawing.Point(0, 54);
 			this.ribbonPanelHome.Name = "ribbonPanelHome";
 			this.ribbonPanelHome.Padding = new System.Windows.Forms.Padding(3, 0, 3, 2);
-			this.ribbonPanelHome.Size = new System.Drawing.Size(1258, 103);
+			this.ribbonPanelHome.Size = new System.Drawing.Size(1258, 102);
 			// 
 			// 
 			// 
@@ -291,7 +315,7 @@
 			this.ribbonBarHomeSync.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarHomeSync.Location = new System.Drawing.Point(759, 0);
 			this.ribbonBarHomeSync.Name = "ribbonBarHomeSync";
-			this.ribbonBarHomeSync.Size = new System.Drawing.Size(82, 101);
+			this.ribbonBarHomeSync.Size = new System.Drawing.Size(82, 100);
 			this.ribbonBarHomeSync.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarHomeSync.TabIndex = 18;
 			this.ribbonBarHomeSync.Text = "Sync";
@@ -332,7 +356,7 @@
 			this.ribbonBarHomeView.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarHomeView.Location = new System.Drawing.Point(641, 0);
 			this.ribbonBarHomeView.Name = "ribbonBarHomeView";
-			this.ribbonBarHomeView.Size = new System.Drawing.Size(118, 101);
+			this.ribbonBarHomeView.Size = new System.Drawing.Size(118, 100);
 			this.ribbonBarHomeView.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarHomeView.TabIndex = 24;
 			this.ribbonBarHomeView.Text = "View";
@@ -391,7 +415,7 @@
 			this.ribbonBarHomeLinkSettings.Name = "ribbonBarHomeLinkSettings";
 			this.ribbonBarHomeLinkSettings.OverflowButtonImage = global::SalesLibraries.FileManager.Properties.Resources.RibbonLinkSettings;
 			this.ribbonBarHomeLinkSettings.OverflowButtonText = "Current Link";
-			this.ribbonBarHomeLinkSettings.Size = new System.Drawing.Size(181, 101);
+			this.ribbonBarHomeLinkSettings.Size = new System.Drawing.Size(181, 100);
 			this.ribbonBarHomeLinkSettings.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarHomeLinkSettings.TabIndex = 22;
 			this.ribbonBarHomeLinkSettings.Text = "Link Tools";
@@ -491,7 +515,7 @@
 			this.ribbonBarHomeLinkActions.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarHomeLinkActions.Location = new System.Drawing.Point(340, 0);
 			this.ribbonBarHomeLinkActions.Name = "ribbonBarHomeLinkActions";
-			this.ribbonBarHomeLinkActions.Size = new System.Drawing.Size(120, 101);
+			this.ribbonBarHomeLinkActions.Size = new System.Drawing.Size(120, 100);
 			this.ribbonBarHomeLinkActions.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarHomeLinkActions.TabIndex = 26;
 			this.ribbonBarHomeLinkActions.Text = "Link";
@@ -544,7 +568,7 @@
 			this.ribbonBarHomeAddLink.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarHomeAddLink.Location = new System.Drawing.Point(216, 0);
 			this.ribbonBarHomeAddLink.Name = "ribbonBarHomeAddLink";
-			this.ribbonBarHomeAddLink.Size = new System.Drawing.Size(124, 101);
+			this.ribbonBarHomeAddLink.Size = new System.Drawing.Size(124, 100);
 			this.ribbonBarHomeAddLink.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarHomeAddLink.TabIndex = 21;
 			this.ribbonBarHomeAddLink.Text = "Add";
@@ -596,7 +620,7 @@
 			this.ribbonBarHomeLogo.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarHomeLogo.Location = new System.Drawing.Point(3, 0);
 			this.ribbonBarHomeLogo.Name = "ribbonBarHomeLogo";
-			this.ribbonBarHomeLogo.Size = new System.Drawing.Size(213, 101);
+			this.ribbonBarHomeLogo.Size = new System.Drawing.Size(213, 100);
 			this.ribbonBarHomeLogo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarHomeLogo.TabIndex = 20;
 			this.ribbonBarHomeLogo.Text = "Site Admin";
@@ -614,288 +638,28 @@
 			this.labelItemHomeLogo.Image = global::SalesLibraries.FileManager.Properties.Resources.HomeLogo;
 			this.labelItemHomeLogo.Name = "labelItemHomeLogo";
 			// 
-			// ribbonPanelTags
+			// ribbonPanel1
 			// 
-			this.ribbonPanelTags.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.ribbonPanelTags.Controls.Add(this.ribbonBarTagsSync);
-			this.ribbonPanelTags.Controls.Add(this.ribbonBarTagsView);
-			this.ribbonPanelTags.Controls.Add(this.ribbonBarTagsKeywords);
-			this.ribbonPanelTags.Controls.Add(this.ribbonBarTagsSuperFilters);
-			this.ribbonPanelTags.Controls.Add(this.ribbonBarTagsCategories);
-			this.ribbonPanelTags.Controls.Add(this.ribbonBarTagsLogo);
-			this.ribbonPanelTags.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.ribbonPanelTags.Location = new System.Drawing.Point(0, 53);
-			this.ribbonPanelTags.Name = "ribbonPanelTags";
-			this.ribbonPanelTags.Padding = new System.Windows.Forms.Padding(3, 0, 3, 2);
-			this.ribbonPanelTags.Size = new System.Drawing.Size(1258, 103);
+			this.ribbonPanel1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.ribbonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.ribbonPanel1.Location = new System.Drawing.Point(0, 54);
+			this.ribbonPanel1.Name = "ribbonPanel1";
+			this.ribbonPanel1.Padding = new System.Windows.Forms.Padding(3, 0, 3, 2);
+			this.ribbonPanel1.Size = new System.Drawing.Size(1258, 102);
 			// 
 			// 
 			// 
-			this.ribbonPanelTags.Style.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.ribbonPanel1.Style.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			// 
 			// 
 			// 
-			this.ribbonPanelTags.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.ribbonPanel1.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			// 
 			// 
 			// 
-			this.ribbonPanelTags.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.ribbonPanelTags.TabIndex = 4;
-			this.ribbonPanelTags.Visible = false;
-			// 
-			// ribbonBarTagsSync
-			// 
-			this.ribbonBarTagsSync.AutoOverflowEnabled = true;
-			// 
-			// 
-			// 
-			this.ribbonBarTagsSync.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// 
-			// 
-			this.ribbonBarTagsSync.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.ribbonBarTagsSync.ContainerControlProcessDialogKey = true;
-			this.ribbonBarTagsSync.Dock = System.Windows.Forms.DockStyle.Left;
-			this.ribbonBarTagsSync.DragDropSupport = true;
-			this.ribbonBarTagsSync.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.buttonItemTagsSync});
-			this.ribbonBarTagsSync.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarTagsSync.Location = new System.Drawing.Point(569, 0);
-			this.ribbonBarTagsSync.Name = "ribbonBarTagsSync";
-			this.ribbonBarTagsSync.Size = new System.Drawing.Size(81, 101);
-			this.ribbonBarTagsSync.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.ribbonBarTagsSync.TabIndex = 27;
-			this.ribbonBarTagsSync.Text = "Sync";
-			// 
-			// 
-			// 
-			this.ribbonBarTagsSync.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// 
-			// 
-			this.ribbonBarTagsSync.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemTagsSync
-			// 
-			this.buttonItemTagsSync.Image = global::SalesLibraries.FileManager.Properties.Resources.RibbonSync;
-			this.buttonItemTagsSync.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-			this.buttonItemTagsSync.Name = "buttonItemTagsSync";
-			this.buttonItemTagsSync.SubItemsExpandWidth = 14;
-			this.superTooltip.SetSuperTooltip(this.buttonItemTagsSync, new DevComponents.DotNetBar.SuperTooltipInfo("Sync", "", "Upload your site to the server", null, null, DevComponents.DotNetBar.eTooltipColor.Default));
-			// 
-			// ribbonBarTagsView
-			// 
-			this.ribbonBarTagsView.AutoOverflowEnabled = true;
-			// 
-			// 
-			// 
-			this.ribbonBarTagsView.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// 
-			// 
-			this.ribbonBarTagsView.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.ribbonBarTagsView.ContainerControlProcessDialogKey = true;
-			this.ribbonBarTagsView.Dock = System.Windows.Forms.DockStyle.Left;
-			this.ribbonBarTagsView.DragDropSupport = true;
-			this.ribbonBarTagsView.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.buttonItemTagsViewFloater,
-            this.buttonItemTagsViewCompactWallbin});
-			this.ribbonBarTagsView.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarTagsView.Location = new System.Drawing.Point(450, 0);
-			this.ribbonBarTagsView.Name = "ribbonBarTagsView";
-			this.ribbonBarTagsView.Size = new System.Drawing.Size(119, 101);
-			this.ribbonBarTagsView.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.ribbonBarTagsView.TabIndex = 30;
-			this.ribbonBarTagsView.Text = "View";
-			// 
-			// 
-			// 
-			this.ribbonBarTagsView.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// 
-			// 
-			this.ribbonBarTagsView.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemTagsViewFloater
-			// 
-			this.buttonItemTagsViewFloater.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-			this.buttonItemTagsViewFloater.ForeColor = System.Drawing.Color.Black;
-			this.buttonItemTagsViewFloater.Image = global::SalesLibraries.FileManager.Properties.Resources.RibbonFloater;
-			this.buttonItemTagsViewFloater.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-			this.buttonItemTagsViewFloater.Name = "buttonItemTagsViewFloater";
-			this.buttonItemTagsViewFloater.SubItemsExpandWidth = 14;
-			this.superTooltip.SetSuperTooltip(this.buttonItemTagsViewFloater, new DevComponents.DotNetBar.SuperTooltipInfo("Floater Toolbar", "", "Make your App window REAL TINY so you can see other files or apps...", null, null, DevComponents.DotNetBar.eTooltipColor.Default));
-			this.buttonItemTagsViewFloater.Text = "Floater";
-			this.buttonItemTagsViewFloater.Click += new System.EventHandler(this.OnFloaterClick);
-			// 
-			// buttonItemTagsViewCompactWallbin
-			// 
-			this.buttonItemTagsViewCompactWallbin.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-			this.buttonItemTagsViewCompactWallbin.ForeColor = System.Drawing.Color.Black;
-			this.buttonItemTagsViewCompactWallbin.Image = global::SalesLibraries.FileManager.Properties.Resources.RibbonCompactWallbin;
-			this.buttonItemTagsViewCompactWallbin.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-			this.buttonItemTagsViewCompactWallbin.Name = "buttonItemTagsViewCompactWallbin";
-			this.buttonItemTagsViewCompactWallbin.SubItemsExpandWidth = 14;
-			this.superTooltip.SetSuperTooltip(this.buttonItemTagsViewCompactWallbin, new DevComponents.DotNetBar.SuperTooltipInfo("Sidebar", "", "Enable Sidebar to easily drag and drop files into your site...", null, null, DevComponents.DotNetBar.eTooltipColor.Default));
-			this.buttonItemTagsViewCompactWallbin.Text = "Sidebar";
-			this.buttonItemTagsViewCompactWallbin.Click += new System.EventHandler(this.OnCompactWallbinClick);
-			// 
-			// ribbonBarTagsKeywords
-			// 
-			this.ribbonBarTagsKeywords.AutoOverflowEnabled = true;
-			// 
-			// 
-			// 
-			this.ribbonBarTagsKeywords.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// 
-			// 
-			this.ribbonBarTagsKeywords.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.ribbonBarTagsKeywords.ContainerControlProcessDialogKey = true;
-			this.ribbonBarTagsKeywords.Dock = System.Windows.Forms.DockStyle.Left;
-			this.ribbonBarTagsKeywords.DragDropSupport = true;
-			this.ribbonBarTagsKeywords.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.buttonItemTagsKeywords});
-			this.ribbonBarTagsKeywords.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarTagsKeywords.Location = new System.Drawing.Point(370, 0);
-			this.ribbonBarTagsKeywords.Name = "ribbonBarTagsKeywords";
-			this.ribbonBarTagsKeywords.Size = new System.Drawing.Size(80, 101);
-			this.ribbonBarTagsKeywords.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.ribbonBarTagsKeywords.TabIndex = 18;
-			this.ribbonBarTagsKeywords.Text = "KeyWords";
-			// 
-			// 
-			// 
-			this.ribbonBarTagsKeywords.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// 
-			// 
-			this.ribbonBarTagsKeywords.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemTagsKeywords
-			// 
-			this.buttonItemTagsKeywords.Image = global::SalesLibraries.FileManager.Properties.Resources.RibbonTagsKeywords;
-			this.buttonItemTagsKeywords.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-			this.buttonItemTagsKeywords.Name = "buttonItemTagsKeywords";
-			this.buttonItemTagsKeywords.SubItemsExpandWidth = 14;
-			this.superTooltip.SetSuperTooltip(this.buttonItemTagsKeywords, new DevComponents.DotNetBar.SuperTooltipInfo("Keywords", "", "Add custom search keywords to selected files...", null, null, DevComponents.DotNetBar.eTooltipColor.Default));
-			// 
-			// ribbonBarTagsSuperFilters
-			// 
-			this.ribbonBarTagsSuperFilters.AutoOverflowEnabled = true;
-			// 
-			// 
-			// 
-			this.ribbonBarTagsSuperFilters.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// 
-			// 
-			this.ribbonBarTagsSuperFilters.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.ribbonBarTagsSuperFilters.ContainerControlProcessDialogKey = true;
-			this.ribbonBarTagsSuperFilters.Dock = System.Windows.Forms.DockStyle.Left;
-			this.ribbonBarTagsSuperFilters.DragDropSupport = true;
-			this.ribbonBarTagsSuperFilters.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.buttonItemTagsSuperFilters});
-			this.ribbonBarTagsSuperFilters.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarTagsSuperFilters.Location = new System.Drawing.Point(291, 0);
-			this.ribbonBarTagsSuperFilters.Name = "ribbonBarTagsSuperFilters";
-			this.ribbonBarTagsSuperFilters.Size = new System.Drawing.Size(79, 101);
-			this.ribbonBarTagsSuperFilters.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.ribbonBarTagsSuperFilters.TabIndex = 21;
-			this.ribbonBarTagsSuperFilters.Text = "Super Filters";
-			// 
-			// 
-			// 
-			this.ribbonBarTagsSuperFilters.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// 
-			// 
-			this.ribbonBarTagsSuperFilters.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemTagsSuperFilters
-			// 
-			this.buttonItemTagsSuperFilters.Image = global::SalesLibraries.FileManager.Properties.Resources.RibbonTagsSuperFIlters;
-			this.buttonItemTagsSuperFilters.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-			this.buttonItemTagsSuperFilters.Name = "buttonItemTagsSuperFilters";
-			this.buttonItemTagsSuperFilters.SubItemsExpandWidth = 14;
-			this.superTooltip.SetSuperTooltip(this.buttonItemTagsSuperFilters, new DevComponents.DotNetBar.SuperTooltipInfo("Super Filters", "", "Add special search filters to selected links", null, null, DevComponents.DotNetBar.eTooltipColor.Default));
-			// 
-			// ribbonBarTagsCategories
-			// 
-			this.ribbonBarTagsCategories.AutoOverflowEnabled = true;
-			// 
-			// 
-			// 
-			this.ribbonBarTagsCategories.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// 
-			// 
-			this.ribbonBarTagsCategories.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.ribbonBarTagsCategories.ContainerControlProcessDialogKey = true;
-			this.ribbonBarTagsCategories.Dock = System.Windows.Forms.DockStyle.Left;
-			this.ribbonBarTagsCategories.DragDropSupport = true;
-			this.ribbonBarTagsCategories.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.buttonItemTagsCategories});
-			this.ribbonBarTagsCategories.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarTagsCategories.Location = new System.Drawing.Point(209, 0);
-			this.ribbonBarTagsCategories.Name = "ribbonBarTagsCategories";
-			this.ribbonBarTagsCategories.Size = new System.Drawing.Size(82, 101);
-			this.ribbonBarTagsCategories.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.ribbonBarTagsCategories.TabIndex = 17;
-			this.ribbonBarTagsCategories.Text = "Category Tags";
-			// 
-			// 
-			// 
-			this.ribbonBarTagsCategories.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// 
-			// 
-			this.ribbonBarTagsCategories.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemTagsCategories
-			// 
-			this.buttonItemTagsCategories.Image = global::SalesLibraries.FileManager.Properties.Resources.RibbonTagsCategories;
-			this.buttonItemTagsCategories.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
-			this.buttonItemTagsCategories.Name = "buttonItemTagsCategories";
-			this.buttonItemTagsCategories.SubItemsExpandWidth = 14;
-			this.superTooltip.SetSuperTooltip(this.buttonItemTagsCategories, new DevComponents.DotNetBar.SuperTooltipInfo("Category Tags", "", "Add unique search category tags to selected links", null, null, DevComponents.DotNetBar.eTooltipColor.Default));
-			// 
-			// ribbonBarTagsLogo
-			// 
-			this.ribbonBarTagsLogo.AutoOverflowEnabled = true;
-			// 
-			// 
-			// 
-			this.ribbonBarTagsLogo.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// 
-			// 
-			this.ribbonBarTagsLogo.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.ribbonBarTagsLogo.ContainerControlProcessDialogKey = true;
-			this.ribbonBarTagsLogo.Dock = System.Windows.Forms.DockStyle.Left;
-			this.ribbonBarTagsLogo.DragDropSupport = true;
-			this.ribbonBarTagsLogo.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.labelItemTagsLogo});
-			this.ribbonBarTagsLogo.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarTagsLogo.Location = new System.Drawing.Point(3, 0);
-			this.ribbonBarTagsLogo.Name = "ribbonBarTagsLogo";
-			this.ribbonBarTagsLogo.Size = new System.Drawing.Size(206, 101);
-			this.ribbonBarTagsLogo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.ribbonBarTagsLogo.TabIndex = 29;
-			this.ribbonBarTagsLogo.Text = "Site Admin";
-			// 
-			// 
-			// 
-			this.ribbonBarTagsLogo.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// 
-			// 
-			this.ribbonBarTagsLogo.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// labelItemTagsLogo
-			// 
-			this.labelItemTagsLogo.Image = global::SalesLibraries.FileManager.Properties.Resources.HomeLogo;
-			this.labelItemTagsLogo.Name = "labelItemTagsLogo";
+			this.ribbonPanel1.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.ribbonPanel1.TabIndex = 11;
+			this.ribbonPanel1.Visible = false;
 			// 
 			// ribbonPanelSettings
 			// 
@@ -908,10 +672,10 @@
 			this.ribbonPanelSettings.Controls.Add(this.ribbonBarSettingsLibraries);
 			this.ribbonPanelSettings.Controls.Add(this.ribbonBarSettingsLogo);
 			this.ribbonPanelSettings.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.ribbonPanelSettings.Location = new System.Drawing.Point(0, 53);
+			this.ribbonPanelSettings.Location = new System.Drawing.Point(0, 54);
 			this.ribbonPanelSettings.Name = "ribbonPanelSettings";
 			this.ribbonPanelSettings.Padding = new System.Windows.Forms.Padding(3, 0, 3, 2);
-			this.ribbonPanelSettings.Size = new System.Drawing.Size(1258, 103);
+			this.ribbonPanelSettings.Size = new System.Drawing.Size(1258, 102);
 			// 
 			// 
 			// 
@@ -946,7 +710,7 @@
 			this.ribbonBarSettingsSync.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarSettingsSync.Location = new System.Drawing.Point(633, 0);
 			this.ribbonBarSettingsSync.Name = "ribbonBarSettingsSync";
-			this.ribbonBarSettingsSync.Size = new System.Drawing.Size(74, 101);
+			this.ribbonBarSettingsSync.Size = new System.Drawing.Size(74, 100);
 			this.ribbonBarSettingsSync.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarSettingsSync.TabIndex = 29;
 			this.ribbonBarSettingsSync.Text = "Sync";
@@ -987,7 +751,7 @@
 			this.ribbonBarSettingsView.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarSettingsView.Location = new System.Drawing.Point(509, 0);
 			this.ribbonBarSettingsView.Name = "ribbonBarSettingsView";
-			this.ribbonBarSettingsView.Size = new System.Drawing.Size(124, 101);
+			this.ribbonBarSettingsView.Size = new System.Drawing.Size(124, 100);
 			this.ribbonBarSettingsView.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarSettingsView.TabIndex = 37;
 			this.ribbonBarSettingsView.Text = "View";
@@ -1043,7 +807,7 @@
 			this.ribbonBarSettingsWallbin.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarSettingsWallbin.Location = new System.Drawing.Point(437, 0);
 			this.ribbonBarSettingsWallbin.Name = "ribbonBarSettingsWallbin";
-			this.ribbonBarSettingsWallbin.Size = new System.Drawing.Size(72, 101);
+			this.ribbonBarSettingsWallbin.Size = new System.Drawing.Size(72, 100);
 			this.ribbonBarSettingsWallbin.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarSettingsWallbin.TabIndex = 32;
 			this.ribbonBarSettingsWallbin.Text = "Preferences";
@@ -1083,7 +847,7 @@
 			this.ribbonBarSettingsAdvanced.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarSettingsAdvanced.Location = new System.Drawing.Point(356, 0);
 			this.ribbonBarSettingsAdvanced.Name = "ribbonBarSettingsAdvanced";
-			this.ribbonBarSettingsAdvanced.Size = new System.Drawing.Size(81, 101);
+			this.ribbonBarSettingsAdvanced.Size = new System.Drawing.Size(81, 100);
 			this.ribbonBarSettingsAdvanced.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarSettingsAdvanced.TabIndex = 24;
 			this.ribbonBarSettingsAdvanced.Text = "Advanced";
@@ -1123,7 +887,7 @@
 			this.ribbonBarSettingsSyncSettings.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarSettingsSyncSettings.Location = new System.Drawing.Point(281, 0);
 			this.ribbonBarSettingsSyncSettings.Name = "ribbonBarSettingsSyncSettings";
-			this.ribbonBarSettingsSyncSettings.Size = new System.Drawing.Size(75, 101);
+			this.ribbonBarSettingsSyncSettings.Size = new System.Drawing.Size(75, 100);
 			this.ribbonBarSettingsSyncSettings.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarSettingsSyncSettings.TabIndex = 20;
 			this.ribbonBarSettingsSyncSettings.Text = "Sync Settings";
@@ -1163,7 +927,7 @@
 			this.ribbonBarSettingsLibraries.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarSettingsLibraries.Location = new System.Drawing.Point(206, 0);
 			this.ribbonBarSettingsLibraries.Name = "ribbonBarSettingsLibraries";
-			this.ribbonBarSettingsLibraries.Size = new System.Drawing.Size(75, 101);
+			this.ribbonBarSettingsLibraries.Size = new System.Drawing.Size(75, 100);
 			this.ribbonBarSettingsLibraries.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarSettingsLibraries.TabIndex = 21;
 			this.ribbonBarSettingsLibraries.Text = "Paths";
@@ -1203,7 +967,7 @@
 			this.ribbonBarSettingsLogo.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarSettingsLogo.Location = new System.Drawing.Point(3, 0);
 			this.ribbonBarSettingsLogo.Name = "ribbonBarSettingsLogo";
-			this.ribbonBarSettingsLogo.Size = new System.Drawing.Size(203, 101);
+			this.ribbonBarSettingsLogo.Size = new System.Drawing.Size(203, 100);
 			this.ribbonBarSettingsLogo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarSettingsLogo.TabIndex = 31;
 			this.ribbonBarSettingsLogo.Text = "Site Admin";
@@ -1229,10 +993,10 @@
 			this.ribbonPanelBundles.Controls.Add(this.ribbonBarBundlesNew);
 			this.ribbonPanelBundles.Controls.Add(this.ribbonBarBundlesLogo);
 			this.ribbonPanelBundles.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.ribbonPanelBundles.Location = new System.Drawing.Point(0, 53);
+			this.ribbonPanelBundles.Location = new System.Drawing.Point(0, 54);
 			this.ribbonPanelBundles.Name = "ribbonPanelBundles";
 			this.ribbonPanelBundles.Padding = new System.Windows.Forms.Padding(3, 0, 3, 2);
-			this.ribbonPanelBundles.Size = new System.Drawing.Size(1258, 103);
+			this.ribbonPanelBundles.Size = new System.Drawing.Size(1258, 102);
 			// 
 			// 
 			// 
@@ -1267,7 +1031,7 @@
 			this.ribbonBarBundlesSync.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarBundlesSync.Location = new System.Drawing.Point(397, 0);
 			this.ribbonBarBundlesSync.Name = "ribbonBarBundlesSync";
-			this.ribbonBarBundlesSync.Size = new System.Drawing.Size(69, 101);
+			this.ribbonBarBundlesSync.Size = new System.Drawing.Size(69, 100);
 			this.ribbonBarBundlesSync.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarBundlesSync.TabIndex = 32;
 			this.ribbonBarBundlesSync.Text = "Sync";
@@ -1308,7 +1072,7 @@
 			this.ribbonBarBundlesView.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarBundlesView.Location = new System.Drawing.Point(282, 0);
 			this.ribbonBarBundlesView.Name = "ribbonBarBundlesView";
-			this.ribbonBarBundlesView.Size = new System.Drawing.Size(115, 101);
+			this.ribbonBarBundlesView.Size = new System.Drawing.Size(115, 100);
 			this.ribbonBarBundlesView.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarBundlesView.TabIndex = 36;
 			this.ribbonBarBundlesView.Text = "View";
@@ -1364,7 +1128,7 @@
 			this.ribbonBarBundlesNew.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarBundlesNew.Location = new System.Drawing.Point(206, 0);
 			this.ribbonBarBundlesNew.Name = "ribbonBarBundlesNew";
-			this.ribbonBarBundlesNew.Size = new System.Drawing.Size(76, 101);
+			this.ribbonBarBundlesNew.Size = new System.Drawing.Size(76, 100);
 			this.ribbonBarBundlesNew.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarBundlesNew.TabIndex = 34;
 			this.ribbonBarBundlesNew.Text = "New Bundle";
@@ -1405,7 +1169,7 @@
 			this.ribbonBarBundlesLogo.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarBundlesLogo.Location = new System.Drawing.Point(3, 0);
 			this.ribbonBarBundlesLogo.Name = "ribbonBarBundlesLogo";
-			this.ribbonBarBundlesLogo.Size = new System.Drawing.Size(203, 101);
+			this.ribbonBarBundlesLogo.Size = new System.Drawing.Size(203, 100);
 			this.ribbonBarBundlesLogo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarBundlesLogo.TabIndex = 35;
 			this.ribbonBarBundlesLogo.Text = "Site Admin";
@@ -1432,10 +1196,10 @@
 			this.ribbonPanelSecurity.Controls.Add(this.ribbonBarSecuritySelect);
 			this.ribbonPanelSecurity.Controls.Add(this.ribbonBarSecurityLogo);
 			this.ribbonPanelSecurity.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.ribbonPanelSecurity.Location = new System.Drawing.Point(0, 53);
+			this.ribbonPanelSecurity.Location = new System.Drawing.Point(0, 54);
 			this.ribbonPanelSecurity.Name = "ribbonPanelSecurity";
 			this.ribbonPanelSecurity.Padding = new System.Windows.Forms.Padding(3, 0, 3, 2);
-			this.ribbonPanelSecurity.Size = new System.Drawing.Size(1258, 103);
+			this.ribbonPanelSecurity.Size = new System.Drawing.Size(1258, 102);
 			// 
 			// 
 			// 
@@ -1470,7 +1234,7 @@
 			this.ribbonBarSecuritySync.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarSecuritySync.Location = new System.Drawing.Point(491, 0);
 			this.ribbonBarSecuritySync.Name = "ribbonBarSecuritySync";
-			this.ribbonBarSecuritySync.Size = new System.Drawing.Size(69, 101);
+			this.ribbonBarSecuritySync.Size = new System.Drawing.Size(69, 100);
 			this.ribbonBarSecuritySync.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarSecuritySync.TabIndex = 28;
 			this.ribbonBarSecuritySync.Text = "Sync";
@@ -1511,7 +1275,7 @@
 			this.ribbonBarSecurityView.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarSecurityView.Location = new System.Drawing.Point(358, 0);
 			this.ribbonBarSecurityView.Name = "ribbonBarSecurityView";
-			this.ribbonBarSecurityView.Size = new System.Drawing.Size(133, 101);
+			this.ribbonBarSecurityView.Size = new System.Drawing.Size(133, 100);
 			this.ribbonBarSecurityView.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarSecurityView.TabIndex = 31;
 			this.ribbonBarSecurityView.Text = "View";
@@ -1567,7 +1331,7 @@
 			this.ribbonBarSecurityReset.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarSecurityReset.Location = new System.Drawing.Point(282, 0);
 			this.ribbonBarSecurityReset.Name = "ribbonBarSecurityReset";
-			this.ribbonBarSecurityReset.Size = new System.Drawing.Size(76, 101);
+			this.ribbonBarSecurityReset.Size = new System.Drawing.Size(76, 100);
 			this.ribbonBarSecurityReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarSecurityReset.TabIndex = 19;
 			this.ribbonBarSecurityReset.Text = "Reset All";
@@ -1607,7 +1371,7 @@
 			this.ribbonBarSecuritySelect.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarSecuritySelect.Location = new System.Drawing.Point(206, 0);
 			this.ribbonBarSecuritySelect.Name = "ribbonBarSecuritySelect";
-			this.ribbonBarSecuritySelect.Size = new System.Drawing.Size(76, 101);
+			this.ribbonBarSecuritySelect.Size = new System.Drawing.Size(76, 100);
 			this.ribbonBarSecuritySelect.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarSecuritySelect.TabIndex = 18;
 			this.ribbonBarSecuritySelect.Text = "Select All";
@@ -1647,7 +1411,7 @@
 			this.ribbonBarSecurityLogo.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarSecurityLogo.Location = new System.Drawing.Point(3, 0);
 			this.ribbonBarSecurityLogo.Name = "ribbonBarSecurityLogo";
-			this.ribbonBarSecurityLogo.Size = new System.Drawing.Size(203, 101);
+			this.ribbonBarSecurityLogo.Size = new System.Drawing.Size(203, 100);
 			this.ribbonBarSecurityLogo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarSecurityLogo.TabIndex = 30;
 			this.ribbonBarSecurityLogo.Text = "Manage Permissions";
@@ -1665,6 +1429,289 @@
 			this.labelItemSecurityLogo.Image = global::SalesLibraries.FileManager.Properties.Resources.HomeLogo;
 			this.labelItemSecurityLogo.Name = "labelItemSecurityLogo";
 			// 
+			// ribbonPanelTags
+			// 
+			this.ribbonPanelTags.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.ribbonPanelTags.Controls.Add(this.ribbonBarTagsSync);
+			this.ribbonPanelTags.Controls.Add(this.ribbonBarTagsView);
+			this.ribbonPanelTags.Controls.Add(this.ribbonBarTagsKeywords);
+			this.ribbonPanelTags.Controls.Add(this.ribbonBarTagsSuperFilters);
+			this.ribbonPanelTags.Controls.Add(this.ribbonBarTagsCategories);
+			this.ribbonPanelTags.Controls.Add(this.ribbonBarTagsLogo);
+			this.ribbonPanelTags.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.ribbonPanelTags.Location = new System.Drawing.Point(0, 54);
+			this.ribbonPanelTags.Name = "ribbonPanelTags";
+			this.ribbonPanelTags.Padding = new System.Windows.Forms.Padding(3, 0, 3, 2);
+			this.ribbonPanelTags.Size = new System.Drawing.Size(1258, 102);
+			// 
+			// 
+			// 
+			this.ribbonPanelTags.Style.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// 
+			// 
+			this.ribbonPanelTags.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// 
+			// 
+			this.ribbonPanelTags.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.ribbonPanelTags.TabIndex = 4;
+			this.ribbonPanelTags.Visible = false;
+			// 
+			// ribbonBarTagsSync
+			// 
+			this.ribbonBarTagsSync.AutoOverflowEnabled = true;
+			// 
+			// 
+			// 
+			this.ribbonBarTagsSync.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// 
+			// 
+			this.ribbonBarTagsSync.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.ribbonBarTagsSync.ContainerControlProcessDialogKey = true;
+			this.ribbonBarTagsSync.Dock = System.Windows.Forms.DockStyle.Left;
+			this.ribbonBarTagsSync.DragDropSupport = true;
+			this.ribbonBarTagsSync.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.buttonItemTagsSync});
+			this.ribbonBarTagsSync.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
+			this.ribbonBarTagsSync.Location = new System.Drawing.Point(569, 0);
+			this.ribbonBarTagsSync.Name = "ribbonBarTagsSync";
+			this.ribbonBarTagsSync.Size = new System.Drawing.Size(81, 100);
+			this.ribbonBarTagsSync.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.ribbonBarTagsSync.TabIndex = 27;
+			this.ribbonBarTagsSync.Text = "Sync";
+			// 
+			// 
+			// 
+			this.ribbonBarTagsSync.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// 
+			// 
+			this.ribbonBarTagsSync.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// buttonItemTagsSync
+			// 
+			this.buttonItemTagsSync.Image = global::SalesLibraries.FileManager.Properties.Resources.RibbonSync;
+			this.buttonItemTagsSync.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+			this.buttonItemTagsSync.Name = "buttonItemTagsSync";
+			this.buttonItemTagsSync.SubItemsExpandWidth = 14;
+			this.superTooltip.SetSuperTooltip(this.buttonItemTagsSync, new DevComponents.DotNetBar.SuperTooltipInfo("Sync", "", "Upload your site to the server", null, null, DevComponents.DotNetBar.eTooltipColor.Default));
+			// 
+			// ribbonBarTagsView
+			// 
+			this.ribbonBarTagsView.AutoOverflowEnabled = true;
+			// 
+			// 
+			// 
+			this.ribbonBarTagsView.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// 
+			// 
+			this.ribbonBarTagsView.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.ribbonBarTagsView.ContainerControlProcessDialogKey = true;
+			this.ribbonBarTagsView.Dock = System.Windows.Forms.DockStyle.Left;
+			this.ribbonBarTagsView.DragDropSupport = true;
+			this.ribbonBarTagsView.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.buttonItemTagsViewFloater,
+            this.buttonItemTagsViewCompactWallbin});
+			this.ribbonBarTagsView.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
+			this.ribbonBarTagsView.Location = new System.Drawing.Point(450, 0);
+			this.ribbonBarTagsView.Name = "ribbonBarTagsView";
+			this.ribbonBarTagsView.Size = new System.Drawing.Size(119, 100);
+			this.ribbonBarTagsView.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.ribbonBarTagsView.TabIndex = 30;
+			this.ribbonBarTagsView.Text = "View";
+			// 
+			// 
+			// 
+			this.ribbonBarTagsView.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// 
+			// 
+			this.ribbonBarTagsView.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// buttonItemTagsViewFloater
+			// 
+			this.buttonItemTagsViewFloater.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+			this.buttonItemTagsViewFloater.ForeColor = System.Drawing.Color.Black;
+			this.buttonItemTagsViewFloater.Image = global::SalesLibraries.FileManager.Properties.Resources.RibbonFloater;
+			this.buttonItemTagsViewFloater.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+			this.buttonItemTagsViewFloater.Name = "buttonItemTagsViewFloater";
+			this.buttonItemTagsViewFloater.SubItemsExpandWidth = 14;
+			this.superTooltip.SetSuperTooltip(this.buttonItemTagsViewFloater, new DevComponents.DotNetBar.SuperTooltipInfo("Floater Toolbar", "", "Make your App window REAL TINY so you can see other files or apps...", null, null, DevComponents.DotNetBar.eTooltipColor.Default));
+			this.buttonItemTagsViewFloater.Text = "Floater";
+			this.buttonItemTagsViewFloater.Click += new System.EventHandler(this.OnFloaterClick);
+			// 
+			// buttonItemTagsViewCompactWallbin
+			// 
+			this.buttonItemTagsViewCompactWallbin.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+			this.buttonItemTagsViewCompactWallbin.ForeColor = System.Drawing.Color.Black;
+			this.buttonItemTagsViewCompactWallbin.Image = global::SalesLibraries.FileManager.Properties.Resources.RibbonCompactWallbin;
+			this.buttonItemTagsViewCompactWallbin.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+			this.buttonItemTagsViewCompactWallbin.Name = "buttonItemTagsViewCompactWallbin";
+			this.buttonItemTagsViewCompactWallbin.SubItemsExpandWidth = 14;
+			this.superTooltip.SetSuperTooltip(this.buttonItemTagsViewCompactWallbin, new DevComponents.DotNetBar.SuperTooltipInfo("Sidebar", "", "Enable Sidebar to easily drag and drop files into your site...", null, null, DevComponents.DotNetBar.eTooltipColor.Default));
+			this.buttonItemTagsViewCompactWallbin.Text = "Sidebar";
+			this.buttonItemTagsViewCompactWallbin.Click += new System.EventHandler(this.OnCompactWallbinClick);
+			// 
+			// ribbonBarTagsKeywords
+			// 
+			this.ribbonBarTagsKeywords.AutoOverflowEnabled = true;
+			// 
+			// 
+			// 
+			this.ribbonBarTagsKeywords.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// 
+			// 
+			this.ribbonBarTagsKeywords.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.ribbonBarTagsKeywords.ContainerControlProcessDialogKey = true;
+			this.ribbonBarTagsKeywords.Dock = System.Windows.Forms.DockStyle.Left;
+			this.ribbonBarTagsKeywords.DragDropSupport = true;
+			this.ribbonBarTagsKeywords.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.buttonItemTagsKeywords});
+			this.ribbonBarTagsKeywords.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
+			this.ribbonBarTagsKeywords.Location = new System.Drawing.Point(370, 0);
+			this.ribbonBarTagsKeywords.Name = "ribbonBarTagsKeywords";
+			this.ribbonBarTagsKeywords.Size = new System.Drawing.Size(80, 100);
+			this.ribbonBarTagsKeywords.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.ribbonBarTagsKeywords.TabIndex = 18;
+			this.ribbonBarTagsKeywords.Text = "KeyWords";
+			// 
+			// 
+			// 
+			this.ribbonBarTagsKeywords.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// 
+			// 
+			this.ribbonBarTagsKeywords.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// buttonItemTagsKeywords
+			// 
+			this.buttonItemTagsKeywords.Image = global::SalesLibraries.FileManager.Properties.Resources.RibbonTagsKeywords;
+			this.buttonItemTagsKeywords.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+			this.buttonItemTagsKeywords.Name = "buttonItemTagsKeywords";
+			this.buttonItemTagsKeywords.SubItemsExpandWidth = 14;
+			this.superTooltip.SetSuperTooltip(this.buttonItemTagsKeywords, new DevComponents.DotNetBar.SuperTooltipInfo("Keywords", "", "Add custom search keywords to selected files...", null, null, DevComponents.DotNetBar.eTooltipColor.Default));
+			// 
+			// ribbonBarTagsSuperFilters
+			// 
+			this.ribbonBarTagsSuperFilters.AutoOverflowEnabled = true;
+			// 
+			// 
+			// 
+			this.ribbonBarTagsSuperFilters.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// 
+			// 
+			this.ribbonBarTagsSuperFilters.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.ribbonBarTagsSuperFilters.ContainerControlProcessDialogKey = true;
+			this.ribbonBarTagsSuperFilters.Dock = System.Windows.Forms.DockStyle.Left;
+			this.ribbonBarTagsSuperFilters.DragDropSupport = true;
+			this.ribbonBarTagsSuperFilters.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.buttonItemTagsSuperFilters});
+			this.ribbonBarTagsSuperFilters.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
+			this.ribbonBarTagsSuperFilters.Location = new System.Drawing.Point(291, 0);
+			this.ribbonBarTagsSuperFilters.Name = "ribbonBarTagsSuperFilters";
+			this.ribbonBarTagsSuperFilters.Size = new System.Drawing.Size(79, 100);
+			this.ribbonBarTagsSuperFilters.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.ribbonBarTagsSuperFilters.TabIndex = 21;
+			this.ribbonBarTagsSuperFilters.Text = "Super Filters";
+			// 
+			// 
+			// 
+			this.ribbonBarTagsSuperFilters.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// 
+			// 
+			this.ribbonBarTagsSuperFilters.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// buttonItemTagsSuperFilters
+			// 
+			this.buttonItemTagsSuperFilters.Image = global::SalesLibraries.FileManager.Properties.Resources.RibbonTagsSuperFIlters;
+			this.buttonItemTagsSuperFilters.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+			this.buttonItemTagsSuperFilters.Name = "buttonItemTagsSuperFilters";
+			this.buttonItemTagsSuperFilters.SubItemsExpandWidth = 14;
+			this.superTooltip.SetSuperTooltip(this.buttonItemTagsSuperFilters, new DevComponents.DotNetBar.SuperTooltipInfo("Super Filters", "", "Add special search filters to selected links", null, null, DevComponents.DotNetBar.eTooltipColor.Default));
+			// 
+			// ribbonBarTagsCategories
+			// 
+			this.ribbonBarTagsCategories.AutoOverflowEnabled = true;
+			// 
+			// 
+			// 
+			this.ribbonBarTagsCategories.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// 
+			// 
+			this.ribbonBarTagsCategories.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.ribbonBarTagsCategories.ContainerControlProcessDialogKey = true;
+			this.ribbonBarTagsCategories.Dock = System.Windows.Forms.DockStyle.Left;
+			this.ribbonBarTagsCategories.DragDropSupport = true;
+			this.ribbonBarTagsCategories.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.buttonItemTagsCategories});
+			this.ribbonBarTagsCategories.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
+			this.ribbonBarTagsCategories.Location = new System.Drawing.Point(209, 0);
+			this.ribbonBarTagsCategories.Name = "ribbonBarTagsCategories";
+			this.ribbonBarTagsCategories.Size = new System.Drawing.Size(82, 100);
+			this.ribbonBarTagsCategories.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.ribbonBarTagsCategories.TabIndex = 17;
+			this.ribbonBarTagsCategories.Text = "Category Tags";
+			// 
+			// 
+			// 
+			this.ribbonBarTagsCategories.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// 
+			// 
+			this.ribbonBarTagsCategories.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// buttonItemTagsCategories
+			// 
+			this.buttonItemTagsCategories.Image = global::SalesLibraries.FileManager.Properties.Resources.RibbonTagsCategories;
+			this.buttonItemTagsCategories.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+			this.buttonItemTagsCategories.Name = "buttonItemTagsCategories";
+			this.buttonItemTagsCategories.SubItemsExpandWidth = 14;
+			this.superTooltip.SetSuperTooltip(this.buttonItemTagsCategories, new DevComponents.DotNetBar.SuperTooltipInfo("Category Tags", "", "Add unique search category tags to selected links", null, null, DevComponents.DotNetBar.eTooltipColor.Default));
+			// 
+			// ribbonBarTagsLogo
+			// 
+			this.ribbonBarTagsLogo.AutoOverflowEnabled = true;
+			// 
+			// 
+			// 
+			this.ribbonBarTagsLogo.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// 
+			// 
+			this.ribbonBarTagsLogo.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.ribbonBarTagsLogo.ContainerControlProcessDialogKey = true;
+			this.ribbonBarTagsLogo.Dock = System.Windows.Forms.DockStyle.Left;
+			this.ribbonBarTagsLogo.DragDropSupport = true;
+			this.ribbonBarTagsLogo.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.labelItemTagsLogo});
+			this.ribbonBarTagsLogo.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
+			this.ribbonBarTagsLogo.Location = new System.Drawing.Point(3, 0);
+			this.ribbonBarTagsLogo.Name = "ribbonBarTagsLogo";
+			this.ribbonBarTagsLogo.Size = new System.Drawing.Size(206, 100);
+			this.ribbonBarTagsLogo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.ribbonBarTagsLogo.TabIndex = 29;
+			this.ribbonBarTagsLogo.Text = "Site Admin";
+			// 
+			// 
+			// 
+			this.ribbonBarTagsLogo.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// 
+			// 
+			this.ribbonBarTagsLogo.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// labelItemTagsLogo
+			// 
+			this.labelItemTagsLogo.Image = global::SalesLibraries.FileManager.Properties.Resources.HomeLogo;
+			this.labelItemTagsLogo.Name = "labelItemTagsLogo";
+			// 
 			// ribbonPanelVideo
 			// 
 			this.ribbonPanelVideo.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -1674,10 +1721,10 @@
 			this.ribbonPanelVideo.Controls.Add(this.ribbonBarVideoConvert);
 			this.ribbonPanelVideo.Controls.Add(this.ribbonBarVideoLogo);
 			this.ribbonPanelVideo.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.ribbonPanelVideo.Location = new System.Drawing.Point(0, 53);
+			this.ribbonPanelVideo.Location = new System.Drawing.Point(0, 54);
 			this.ribbonPanelVideo.Name = "ribbonPanelVideo";
 			this.ribbonPanelVideo.Padding = new System.Windows.Forms.Padding(3, 0, 3, 2);
-			this.ribbonPanelVideo.Size = new System.Drawing.Size(1258, 103);
+			this.ribbonPanelVideo.Size = new System.Drawing.Size(1258, 102);
 			// 
 			// 
 			// 
@@ -1712,7 +1759,7 @@
 			this.ribbonBarVideoSync.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarVideoSync.Location = new System.Drawing.Point(481, 0);
 			this.ribbonBarVideoSync.Name = "ribbonBarVideoSync";
-			this.ribbonBarVideoSync.Size = new System.Drawing.Size(81, 101);
+			this.ribbonBarVideoSync.Size = new System.Drawing.Size(81, 100);
 			this.ribbonBarVideoSync.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarVideoSync.TabIndex = 26;
 			this.ribbonBarVideoSync.Text = "Sync";
@@ -1753,7 +1800,7 @@
 			this.ribbonBarVideoView.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarVideoView.Location = new System.Drawing.Point(366, 0);
 			this.ribbonBarVideoView.Name = "ribbonBarVideoView";
-			this.ribbonBarVideoView.Size = new System.Drawing.Size(115, 101);
+			this.ribbonBarVideoView.Size = new System.Drawing.Size(115, 100);
 			this.ribbonBarVideoView.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarVideoView.TabIndex = 29;
 			this.ribbonBarVideoView.Text = "View";
@@ -1809,7 +1856,7 @@
 			this.ribbonBarVideoDelete.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarVideoDelete.Location = new System.Drawing.Point(285, 0);
 			this.ribbonBarVideoDelete.Name = "ribbonBarVideoDelete";
-			this.ribbonBarVideoDelete.Size = new System.Drawing.Size(81, 101);
+			this.ribbonBarVideoDelete.Size = new System.Drawing.Size(81, 100);
 			this.ribbonBarVideoDelete.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarVideoDelete.TabIndex = 21;
 			this.ribbonBarVideoDelete.Text = "Delete Video";
@@ -1849,7 +1896,7 @@
 			this.ribbonBarVideoConvert.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarVideoConvert.Location = new System.Drawing.Point(206, 0);
 			this.ribbonBarVideoConvert.Name = "ribbonBarVideoConvert";
-			this.ribbonBarVideoConvert.Size = new System.Drawing.Size(79, 101);
+			this.ribbonBarVideoConvert.Size = new System.Drawing.Size(79, 100);
 			this.ribbonBarVideoConvert.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarVideoConvert.TabIndex = 18;
 			this.ribbonBarVideoConvert.Text = "Convert Video";
@@ -1889,7 +1936,7 @@
 			this.ribbonBarVideoLogo.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarVideoLogo.Location = new System.Drawing.Point(3, 0);
 			this.ribbonBarVideoLogo.Name = "ribbonBarVideoLogo";
-			this.ribbonBarVideoLogo.Size = new System.Drawing.Size(203, 101);
+			this.ribbonBarVideoLogo.Size = new System.Drawing.Size(203, 100);
 			this.ribbonBarVideoLogo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarVideoLogo.TabIndex = 28;
 			this.ribbonBarVideoLogo.Text = "Site Admin";
@@ -1919,10 +1966,10 @@
 			this.ribbonPanelCalendar.Controls.Add(this.ribbonBarCalendarSyncStatus);
 			this.ribbonPanelCalendar.Controls.Add(this.ribbonBarCalendarLogo);
 			this.ribbonPanelCalendar.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.ribbonPanelCalendar.Location = new System.Drawing.Point(0, 53);
+			this.ribbonPanelCalendar.Location = new System.Drawing.Point(0, 54);
 			this.ribbonPanelCalendar.Name = "ribbonPanelCalendar";
 			this.ribbonPanelCalendar.Padding = new System.Windows.Forms.Padding(3, 0, 3, 2);
-			this.ribbonPanelCalendar.Size = new System.Drawing.Size(1258, 103);
+			this.ribbonPanelCalendar.Size = new System.Drawing.Size(1258, 102);
 			// 
 			// 
 			// 
@@ -1957,7 +2004,7 @@
 			this.ribbonBarCalendarSync.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarCalendarSync.Location = new System.Drawing.Point(928, 0);
 			this.ribbonBarCalendarSync.Name = "ribbonBarCalendarSync";
-			this.ribbonBarCalendarSync.Size = new System.Drawing.Size(77, 101);
+			this.ribbonBarCalendarSync.Size = new System.Drawing.Size(77, 100);
 			this.ribbonBarCalendarSync.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarCalendarSync.TabIndex = 24;
 			this.ribbonBarCalendarSync.Text = "Sync";
@@ -1998,7 +2045,7 @@
 			this.ribbonBarCalendarView.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarCalendarView.Location = new System.Drawing.Point(809, 0);
 			this.ribbonBarCalendarView.Name = "ribbonBarCalendarView";
-			this.ribbonBarCalendarView.Size = new System.Drawing.Size(119, 101);
+			this.ribbonBarCalendarView.Size = new System.Drawing.Size(119, 100);
 			this.ribbonBarCalendarView.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarCalendarView.TabIndex = 27;
 			this.ribbonBarCalendarView.Text = "View";
@@ -2054,7 +2101,7 @@
 			this.ribbonBarCalendarFont.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarCalendarFont.Location = new System.Drawing.Point(756, 0);
 			this.ribbonBarCalendarFont.Name = "ribbonBarCalendarFont";
-			this.ribbonBarCalendarFont.Size = new System.Drawing.Size(53, 101);
+			this.ribbonBarCalendarFont.Size = new System.Drawing.Size(53, 100);
 			this.ribbonBarCalendarFont.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarCalendarFont.TabIndex = 20;
 			this.ribbonBarCalendarFont.Text = "Text";
@@ -2122,7 +2169,7 @@
 			this.ribbonBarCalendarSettings.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarCalendarSettings.Location = new System.Drawing.Point(680, 0);
 			this.ribbonBarCalendarSettings.Name = "ribbonBarCalendarSettings";
-			this.ribbonBarCalendarSettings.Size = new System.Drawing.Size(76, 101);
+			this.ribbonBarCalendarSettings.Size = new System.Drawing.Size(76, 100);
 			this.ribbonBarCalendarSettings.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarCalendarSettings.TabIndex = 19;
 			this.ribbonBarCalendarSettings.Text = "Colors";
@@ -2163,7 +2210,7 @@
 			this.ribbonBarCalendarParts.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarCalendarParts.Location = new System.Drawing.Point(605, 0);
 			this.ribbonBarCalendarParts.Name = "ribbonBarCalendarParts";
-			this.ribbonBarCalendarParts.Size = new System.Drawing.Size(75, 101);
+			this.ribbonBarCalendarParts.Size = new System.Drawing.Size(75, 100);
 			this.ribbonBarCalendarParts.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarCalendarParts.TabIndex = 21;
 			this.ribbonBarCalendarParts.Text = "Calendars";
@@ -2205,7 +2252,7 @@
 			this.ribbonBarCalendarLocation.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarCalendarLocation.Location = new System.Drawing.Point(297, 0);
 			this.ribbonBarCalendarLocation.Name = "ribbonBarCalendarLocation";
-			this.ribbonBarCalendarLocation.Size = new System.Drawing.Size(308, 101);
+			this.ribbonBarCalendarLocation.Size = new System.Drawing.Size(308, 100);
 			this.ribbonBarCalendarLocation.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarCalendarLocation.TabIndex = 18;
 			this.ribbonBarCalendarLocation.Text = "Archive Network Location";
@@ -2280,7 +2327,7 @@
 			this.ribbonBarCalendarSyncStatus.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarCalendarSyncStatus.Location = new System.Drawing.Point(218, 0);
 			this.ribbonBarCalendarSyncStatus.Name = "ribbonBarCalendarSyncStatus";
-			this.ribbonBarCalendarSyncStatus.Size = new System.Drawing.Size(79, 101);
+			this.ribbonBarCalendarSyncStatus.Size = new System.Drawing.Size(79, 100);
 			this.ribbonBarCalendarSyncStatus.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarCalendarSyncStatus.TabIndex = 17;
 			this.ribbonBarCalendarSyncStatus.Text = "Sync";
@@ -2347,7 +2394,7 @@
 			this.ribbonBarCalendarLogo.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarCalendarLogo.Location = new System.Drawing.Point(3, 0);
 			this.ribbonBarCalendarLogo.Name = "ribbonBarCalendarLogo";
-			this.ribbonBarCalendarLogo.Size = new System.Drawing.Size(215, 101);
+			this.ribbonBarCalendarLogo.Size = new System.Drawing.Size(215, 100);
 			this.ribbonBarCalendarLogo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarCalendarLogo.TabIndex = 26;
 			this.ribbonBarCalendarLogo.Text = "Site Admin";
@@ -2375,10 +2422,10 @@
 			this.ribbonPanelPreferences.Controls.Add(this.ribbonBarPreferencesPages);
 			this.ribbonPanelPreferences.Controls.Add(this.ribbonBarPreferencesLogo);
 			this.ribbonPanelPreferences.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.ribbonPanelPreferences.Location = new System.Drawing.Point(0, 53);
+			this.ribbonPanelPreferences.Location = new System.Drawing.Point(0, 54);
 			this.ribbonPanelPreferences.Name = "ribbonPanelPreferences";
 			this.ribbonPanelPreferences.Padding = new System.Windows.Forms.Padding(3, 0, 3, 2);
-			this.ribbonPanelPreferences.Size = new System.Drawing.Size(1258, 103);
+			this.ribbonPanelPreferences.Size = new System.Drawing.Size(1258, 102);
 			// 
 			// 
 			// 
@@ -2413,7 +2460,7 @@
 			this.ribbonBarPreferencesSync.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarPreferencesSync.Location = new System.Drawing.Point(569, 0);
 			this.ribbonBarPreferencesSync.Name = "ribbonBarPreferencesSync";
-			this.ribbonBarPreferencesSync.Size = new System.Drawing.Size(87, 101);
+			this.ribbonBarPreferencesSync.Size = new System.Drawing.Size(87, 100);
 			this.ribbonBarPreferencesSync.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarPreferencesSync.TabIndex = 23;
 			this.ribbonBarPreferencesSync.Text = "Sync";
@@ -2454,7 +2501,7 @@
 			this.ribbonBarPreferencesView.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarPreferencesView.Location = new System.Drawing.Point(454, 0);
 			this.ribbonBarPreferencesView.Name = "ribbonBarPreferencesView";
-			this.ribbonBarPreferencesView.Size = new System.Drawing.Size(115, 101);
+			this.ribbonBarPreferencesView.Size = new System.Drawing.Size(115, 100);
 			this.ribbonBarPreferencesView.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarPreferencesView.TabIndex = 26;
 			this.ribbonBarPreferencesView.Text = "View";
@@ -2510,7 +2557,7 @@
 			this.ribbonBarPreferencesAutoWidgets.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarPreferencesAutoWidgets.Location = new System.Drawing.Point(373, 0);
 			this.ribbonBarPreferencesAutoWidgets.Name = "ribbonBarPreferencesAutoWidgets";
-			this.ribbonBarPreferencesAutoWidgets.Size = new System.Drawing.Size(81, 101);
+			this.ribbonBarPreferencesAutoWidgets.Size = new System.Drawing.Size(81, 100);
 			this.ribbonBarPreferencesAutoWidgets.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarPreferencesAutoWidgets.TabIndex = 21;
 			this.ribbonBarPreferencesAutoWidgets.Text = "Auto Widgets";
@@ -2550,7 +2597,7 @@
 			this.ribbonBarPreferencesColumns.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarPreferencesColumns.Location = new System.Drawing.Point(291, 0);
 			this.ribbonBarPreferencesColumns.Name = "ribbonBarPreferencesColumns";
-			this.ribbonBarPreferencesColumns.Size = new System.Drawing.Size(82, 101);
+			this.ribbonBarPreferencesColumns.Size = new System.Drawing.Size(82, 100);
 			this.ribbonBarPreferencesColumns.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarPreferencesColumns.TabIndex = 18;
 			this.ribbonBarPreferencesColumns.Text = "Columns";
@@ -2590,7 +2637,7 @@
 			this.ribbonBarPreferencesPages.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarPreferencesPages.Location = new System.Drawing.Point(209, 0);
 			this.ribbonBarPreferencesPages.Name = "ribbonBarPreferencesPages";
-			this.ribbonBarPreferencesPages.Size = new System.Drawing.Size(82, 101);
+			this.ribbonBarPreferencesPages.Size = new System.Drawing.Size(82, 100);
 			this.ribbonBarPreferencesPages.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarPreferencesPages.TabIndex = 17;
 			this.ribbonBarPreferencesPages.Text = "Pages";
@@ -2630,7 +2677,7 @@
 			this.ribbonBarPreferencesLogo.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarPreferencesLogo.Location = new System.Drawing.Point(3, 0);
 			this.ribbonBarPreferencesLogo.Name = "ribbonBarPreferencesLogo";
-			this.ribbonBarPreferencesLogo.Size = new System.Drawing.Size(206, 101);
+			this.ribbonBarPreferencesLogo.Size = new System.Drawing.Size(206, 100);
 			this.ribbonBarPreferencesLogo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarPreferencesLogo.TabIndex = 25;
 			this.ribbonBarPreferencesLogo.Text = "Site Admin";
@@ -2648,54 +2695,147 @@
 			this.labelItemPreferencesLogo.Image = global::SalesLibraries.FileManager.Properties.Resources.HomeLogo;
 			this.labelItemPreferencesLogo.Name = "labelItemPreferencesLogo";
 			// 
+			// applicationButtonApplicationMenu
+			// 
+			this.applicationButtonApplicationMenu.AutoExpandOnClick = true;
+			this.applicationButtonApplicationMenu.CanCustomize = false;
+			this.applicationButtonApplicationMenu.HotTrackingStyle = DevComponents.DotNetBar.eHotTrackingStyle.Image;
+			this.applicationButtonApplicationMenu.Image = ((System.Drawing.Image)(resources.GetObject("applicationButtonApplicationMenu.Image")));
+			this.applicationButtonApplicationMenu.ImageFixedSize = new System.Drawing.Size(16, 16);
+			this.applicationButtonApplicationMenu.ImagePaddingHorizontal = 0;
+			this.applicationButtonApplicationMenu.ImagePaddingVertical = 1;
+			this.applicationButtonApplicationMenu.Name = "applicationButtonApplicationMenu";
+			this.applicationButtonApplicationMenu.ShowSubItems = false;
+			this.applicationButtonApplicationMenu.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.buttonItemApplicationMenuSave,
+            this.buttonItemApplicationMenuSync,
+            this.buttonItemApplicationMenuExit});
+			this.applicationButtonApplicationMenu.Text = "File";
+			this.applicationButtonApplicationMenu.Visible = false;
+			// 
+			// buttonItemApplicationMenuSave
+			// 
+			this.buttonItemApplicationMenuSave.BeginGroup = true;
+			this.buttonItemApplicationMenuSave.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+			this.buttonItemApplicationMenuSave.Image = global::SalesLibraries.FileManager.Properties.Resources.ApplicationMenuSave;
+			this.buttonItemApplicationMenuSave.Name = "buttonItemApplicationMenuSave";
+			this.buttonItemApplicationMenuSave.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlS);
+			this.buttonItemApplicationMenuSave.SubItemsExpandWidth = 24;
+			this.buttonItemApplicationMenuSave.Text = "Save";
+			this.buttonItemApplicationMenuSave.Click += new System.EventHandler(this.OnSaveClick);
+			// 
+			// buttonItemApplicationMenuSync
+			// 
+			this.buttonItemApplicationMenuSync.BeginGroup = true;
+			this.buttonItemApplicationMenuSync.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+			this.buttonItemApplicationMenuSync.Image = global::SalesLibraries.FileManager.Properties.Resources.ApplicationMenuSync;
+			this.buttonItemApplicationMenuSync.Name = "buttonItemApplicationMenuSync";
+			this.buttonItemApplicationMenuSync.SubItemsExpandWidth = 24;
+			this.buttonItemApplicationMenuSync.Text = "Sync";
+			// 
+			// buttonItemApplicationMenuExit
+			// 
+			this.buttonItemApplicationMenuExit.BeginGroup = true;
+			this.buttonItemApplicationMenuExit.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+			this.buttonItemApplicationMenuExit.Image = global::SalesLibraries.FileManager.Properties.Resources.ApplicationMenuExit;
+			this.buttonItemApplicationMenuExit.Name = "buttonItemApplicationMenuExit";
+			this.buttonItemApplicationMenuExit.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.AltF4);
+			this.buttonItemApplicationMenuExit.Text = "Exit";
+			this.buttonItemApplicationMenuExit.Click += new System.EventHandler(this.OnExitClick);
+			// 
 			// ribbonTabItemHome
 			// 
 			this.ribbonTabItemHome.Checked = true;
 			this.ribbonTabItemHome.Name = "ribbonTabItemHome";
 			this.ribbonTabItemHome.Panel = this.ribbonPanelHome;
 			this.ribbonTabItemHome.Text = "Home";
+			this.ribbonTabItemHome.Visible = false;
 			// 
 			// ribbonTabItemPreferences
 			// 
 			this.ribbonTabItemPreferences.Name = "ribbonTabItemPreferences";
 			this.ribbonTabItemPreferences.Panel = this.ribbonPanelPreferences;
 			this.ribbonTabItemPreferences.Text = "Preferences";
+			this.ribbonTabItemPreferences.Visible = false;
 			// 
 			// ribbonTabItemCalendar
 			// 
 			this.ribbonTabItemCalendar.Name = "ribbonTabItemCalendar";
 			this.ribbonTabItemCalendar.Panel = this.ribbonPanelCalendar;
 			this.ribbonTabItemCalendar.Text = "Overnights Calendar";
+			this.ribbonTabItemCalendar.Visible = false;
 			// 
 			// ribbonTabItemVideo
 			// 
 			this.ribbonTabItemVideo.Name = "ribbonTabItemVideo";
 			this.ribbonTabItemVideo.Panel = this.ribbonPanelVideo;
 			this.ribbonTabItemVideo.Text = "Video Converter";
+			this.ribbonTabItemVideo.Visible = false;
 			// 
 			// ribbonTabItemTags
 			// 
 			this.ribbonTabItemTags.Name = "ribbonTabItemTags";
 			this.ribbonTabItemTags.Panel = this.ribbonPanelTags;
 			this.ribbonTabItemTags.Text = "Tags";
+			this.ribbonTabItemTags.Visible = false;
 			// 
 			// ribbonTabItemSecurity
 			// 
 			this.ribbonTabItemSecurity.Name = "ribbonTabItemSecurity";
 			this.ribbonTabItemSecurity.Panel = this.ribbonPanelSecurity;
 			this.ribbonTabItemSecurity.Text = "Security";
+			this.ribbonTabItemSecurity.Visible = false;
 			// 
 			// ribbonTabItemBundles
 			// 
 			this.ribbonTabItemBundles.Name = "ribbonTabItemBundles";
 			this.ribbonTabItemBundles.Panel = this.ribbonPanelBundles;
 			this.ribbonTabItemBundles.Text = "Link Bundles";
+			this.ribbonTabItemBundles.Visible = false;
 			// 
 			// ribbonTabItemSettings
 			// 
 			this.ribbonTabItemSettings.Name = "ribbonTabItemSettings";
 			this.ribbonTabItemSettings.Panel = this.ribbonPanelSettings;
 			this.ribbonTabItemSettings.Text = "Admin";
+			this.ribbonTabItemSettings.Visible = false;
+			// 
+			// ribbonTabItemBrowser
+			// 
+			this.ribbonTabItemBrowser.Name = "ribbonTabItemBrowser";
+			this.ribbonTabItemBrowser.Panel = this.ribbonPanel1;
+			this.ribbonTabItemBrowser.Text = "Browser";
+			this.ribbonTabItemBrowser.Visible = false;
+			// 
+			// buttonItemExpand
+			// 
+			this.buttonItemExpand.Image = global::SalesLibraries.FileManager.Properties.Resources.RibbonExpand;
+			this.buttonItemExpand.ItemAlignment = DevComponents.DotNetBar.eItemAlignment.Far;
+			this.buttonItemExpand.Name = "buttonItemExpand";
+			this.superTooltip.SetSuperTooltip(this.buttonItemExpand, new DevComponents.DotNetBar.SuperTooltipInfo("", "", "Expand", null, null, DevComponents.DotNetBar.eTooltipColor.Gray, false, true, new System.Drawing.Size(60, 18)));
+			this.buttonItemExpand.Text = "buttonItem1";
+			this.buttonItemExpand.Visible = false;
+			this.buttonItemExpand.Click += new System.EventHandler(this.OnRibbonExpandClick);
+			// 
+			// buttonItemCollapse
+			// 
+			this.buttonItemCollapse.Image = global::SalesLibraries.FileManager.Properties.Resources.RibbonCollapse;
+			this.buttonItemCollapse.ItemAlignment = DevComponents.DotNetBar.eItemAlignment.Far;
+			this.buttonItemCollapse.Name = "buttonItemCollapse";
+			this.superTooltip.SetSuperTooltip(this.buttonItemCollapse, new DevComponents.DotNetBar.SuperTooltipInfo("", "", "Collpase", null, null, DevComponents.DotNetBar.eTooltipColor.Gray, false, false, new System.Drawing.Size(60, 18)));
+			this.buttonItemCollapse.Text = "buttonItem2";
+			this.buttonItemCollapse.Visible = false;
+			this.buttonItemCollapse.Click += new System.EventHandler(this.OnRibbonCollapseClick);
+			// 
+			// buttonItemPin
+			// 
+			this.buttonItemPin.Image = global::SalesLibraries.FileManager.Properties.Resources.RibbonPin;
+			this.buttonItemPin.ItemAlignment = DevComponents.DotNetBar.eItemAlignment.Far;
+			this.buttonItemPin.Name = "buttonItemPin";
+			this.superTooltip.SetSuperTooltip(this.buttonItemPin, new DevComponents.DotNetBar.SuperTooltipInfo("", "", "Lock", null, null, DevComponents.DotNetBar.eTooltipColor.Gray, false, true, new System.Drawing.Size(40, 18)));
+			this.buttonItemPin.Text = "buttonItem3";
+			this.buttonItemPin.Visible = false;
+			this.buttonItemPin.Click += new System.EventHandler(this.OnRibbonPinClick);
 			// 
 			// buttonItemQatHelp
 			// 
@@ -2723,11 +2863,76 @@
 			this.superTooltip.DefaultTooltipSettings = new DevComponents.DotNetBar.SuperTooltipInfo("", "", "", null, null, DevComponents.DotNetBar.eTooltipColor.Default);
 			this.superTooltip.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			// 
+			// barBottom
+			// 
+			this.barBottom.AntiAlias = true;
+			this.barBottom.BarType = DevComponents.DotNetBar.eBarType.StatusBar;
+			this.barBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.barBottom.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.barBottom.IsMaximized = false;
+			this.barBottom.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.itemContainerStatusBarMainContentInfo,
+            this.labelItemStatusBarSeparator,
+            this.itemContainerStatusBarAdditionalContentInfo});
+			this.barBottom.Location = new System.Drawing.Point(5, 639);
+			this.barBottom.Name = "barBottom";
+			this.barBottom.PaddingBottom = 0;
+			this.barBottom.PaddingTop = 0;
+			this.barBottom.Size = new System.Drawing.Size(1258, 26);
+			this.barBottom.Stretch = true;
+			this.barBottom.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.barBottom.TabIndex = 33;
+			this.barBottom.TabStop = false;
+			// 
+			// itemContainerStatusBarMainContentInfo
+			// 
+			// 
+			// 
+			// 
+			this.itemContainerStatusBarMainContentInfo.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.itemContainerStatusBarMainContentInfo.ItemSpacing = 20;
+			this.itemContainerStatusBarMainContentInfo.MinimumSize = new System.Drawing.Size(0, 24);
+			this.itemContainerStatusBarMainContentInfo.Name = "itemContainerStatusBarMainContentInfo";
+			// 
+			// 
+			// 
+			this.itemContainerStatusBarMainContentInfo.TitleMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// 
+			// 
+			this.itemContainerStatusBarMainContentInfo.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.itemContainerStatusBarMainContentInfo.VerticalItemAlignment = DevComponents.DotNetBar.eVerticalItemsAlignment.Middle;
+			// 
+			// labelItemStatusBarSeparator
+			// 
+			this.labelItemStatusBarSeparator.ItemAlignment = DevComponents.DotNetBar.eItemAlignment.Far;
+			this.labelItemStatusBarSeparator.Name = "labelItemStatusBarSeparator";
+			// 
+			// itemContainerStatusBarAdditionalContentInfo
+			// 
+			// 
+			// 
+			// 
+			this.itemContainerStatusBarAdditionalContentInfo.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.itemContainerStatusBarAdditionalContentInfo.ItemSpacing = 5;
+			this.itemContainerStatusBarAdditionalContentInfo.MinimumSize = new System.Drawing.Size(0, 24);
+			this.itemContainerStatusBarAdditionalContentInfo.Name = "itemContainerStatusBarAdditionalContentInfo";
+			// 
+			// 
+			// 
+			this.itemContainerStatusBarAdditionalContentInfo.TitleMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// 
+			// 
+			this.itemContainerStatusBarAdditionalContentInfo.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.itemContainerStatusBarAdditionalContentInfo.VerticalItemAlignment = DevComponents.DotNetBar.eVerticalItemsAlignment.Middle;
+			// 
 			// FormMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.ClientSize = new System.Drawing.Size(1268, 667);
+			this.Controls.Add(this.barBottom);
 			this.Controls.Add(this.pnContainer);
 			this.Controls.Add(this.ribbonControl);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -2738,16 +2943,17 @@
 			this.ribbonControl.ResumeLayout(false);
 			this.ribbonControl.PerformLayout();
 			this.ribbonPanelHome.ResumeLayout(false);
-			this.ribbonPanelTags.ResumeLayout(false);
 			this.ribbonPanelSettings.ResumeLayout(false);
 			this.ribbonPanelBundles.ResumeLayout(false);
 			this.ribbonPanelSecurity.ResumeLayout(false);
+			this.ribbonPanelTags.ResumeLayout(false);
 			this.ribbonPanelVideo.ResumeLayout(false);
 			this.ribbonPanelCalendar.ResumeLayout(false);
 			this.ribbonBarCalendarLocation.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.buttonEditCalendarLocation.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			this.ribbonPanelPreferences.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.barBottom)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -2893,6 +3099,19 @@
 		public DevComponents.DotNetBar.ButtonItem buttonItemHomeLinkDelete;
 		public DevComponents.DotNetBar.ButtonItem buttonItemHomeLinkPropertiesNotes;
 		public DevComponents.DotNetBar.ButtonItem buttonItemHomeLinkPropertiesTags;
+		private DevComponents.DotNetBar.RibbonPanel ribbonPanel1;
+		private DevComponents.DotNetBar.RibbonTabItem ribbonTabItemBrowser;
+		private DevComponents.DotNetBar.Bar barBottom;
+		private DevComponents.DotNetBar.ItemContainer itemContainerStatusBarMainContentInfo;
+		private DevComponents.DotNetBar.LabelItem labelItemStatusBarSeparator;
+		private DevComponents.DotNetBar.ItemContainer itemContainerStatusBarAdditionalContentInfo;
+		private DevComponents.DotNetBar.ApplicationButton applicationButtonApplicationMenu;
+		private DevComponents.DotNetBar.ButtonItem buttonItemApplicationMenuSave;
+		public DevComponents.DotNetBar.ButtonItem buttonItemApplicationMenuSync;
+		private DevComponents.DotNetBar.ButtonItem buttonItemApplicationMenuExit;
+		private DevComponents.DotNetBar.ButtonItem buttonItemExpand;
+		private DevComponents.DotNetBar.ButtonItem buttonItemCollapse;
+		private DevComponents.DotNetBar.ButtonItem buttonItemPin;
 	}
 }
 

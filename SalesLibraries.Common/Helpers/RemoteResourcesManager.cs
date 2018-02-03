@@ -1,5 +1,4 @@
-﻿using System.IO;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using SalesLibraries.Common.Objects.RemoteStorage;
 
 namespace SalesLibraries.Common.Helpers
@@ -9,7 +8,6 @@ namespace SalesLibraries.Common.Helpers
 		public static RemoteResourceManager Instance { get; } = new RemoteResourceManager();
 
 		#region Local
-		public string AppRootFolderPath { get; }
 		public StorageDirectory AppSharedSettingsFolder { get; private set; }
 		public StorageDirectory AppAliasSettingsFolder { get; private set; }
 		public StorageDirectory TempFolder { get; private set; }
@@ -27,12 +25,7 @@ namespace SalesLibraries.Common.Helpers
 		public StorageFile HelpFile { get; private set; }
 		public StorageFile HelpBrowserFile { get; private set; }
 		#endregion
-
-		private RemoteResourceManager()
-		{
-			AppRootFolderPath = Path.GetDirectoryName(typeof(RemoteResourceManager).Assembly.Location);
-		}
-
+		
 		public async Task LoadLocal()
 		{
 			TempFolder = new StorageDirectory(new[]

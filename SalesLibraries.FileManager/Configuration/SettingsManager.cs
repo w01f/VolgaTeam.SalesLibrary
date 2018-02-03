@@ -13,6 +13,8 @@ namespace SalesLibraries.FileManager.Configuration
 	{
 		public string FFMpegPackagePath { get; set; }
 
+		public string AppTitle { get; set; } = "Site Admin";
+
 		#region FM Settings
 		public string BackupPath { get; set; }
 		public List<string> NetworkPaths { get; }
@@ -33,18 +35,6 @@ namespace SalesLibraries.FileManager.Configuration
 		public string DefaultBannerSettingsEncoded { get; set; }
 		#endregion
 
-		#region Ribbon Settings
-		public bool EnableOvernightsCalendarTab { get; private set; }
-		public bool EnableIPadSettingsTab { get; private set; }
-		public bool EnableTagsTab { get; private set; }
-		public bool EnableSecurityTab { get; private set; }
-		public bool EnableLinkBundlesTab { get; private set; }
-		public bool ShowTagsCategories { get; set; }
-		public bool ShowTagsSuperFilters { get; set; }
-		public bool ShowTagsKeywords { get; set; }
-		public bool ShowTagsCleaner { get; set; }
-		#endregion
-
 		#region Category Request Settings
 		public string CategoryRequestRecipients { get; set; }
 		public string CategoryRequestSubject { get; set; }
@@ -58,6 +48,12 @@ namespace SalesLibraries.FileManager.Configuration
 		#endregion
 
 		public EditorsSettings EditorSettings { get; }
+
+		public BrowserManager BrowserSettings { get; }
+
+		public List<RibbonTabPageConfig> RibbonTabPageSettings { get; }
+
+		public MainFormStyleConfiguration MainFormStyle { get; }
 
 		public SettingsManager()
 		{
@@ -76,16 +72,10 @@ namespace SalesLibraries.FileManager.Configuration
 			MultitabView = true;
 			#endregion
 
-			#region Ribbon Settings
-			EnableOvernightsCalendarTab = true;
-			EnableIPadSettingsTab = true;
-			EnableTagsTab = true;
-			EnableSecurityTab = true;
-			EnableLinkBundlesTab = true;
-			ShowTagsCategories = true;
-			#endregion
-
 			EditorSettings = new EditorsSettings();
+			BrowserSettings = new BrowserManager();
+			RibbonTabPageSettings = new List<RibbonTabPageConfig>();
+			MainFormStyle = new MainFormStyleConfiguration();
 		}
 
 		public void LoadLocal()
@@ -151,12 +141,18 @@ namespace SalesLibraries.FileManager.Configuration
 
 		public void LoadRemote()
 		{
-			LoadRibbonSettings();
+			if (RemoteResourceManager.Instance.MainAppTitleTextFile.ExistsLocal())
+				AppTitle = File.ReadAllText(RemoteResourceManager.Instance.MainAppTitleTextFile.LocalPath);
+
+			LoadRibbonTabSettings();
 			LoadCategoryRequestSettings();
 			LoadServiceConnectionSettings();
 			LoadArchiveLinksSettings();
+			LoadMainFormStyle();
 
 			EditorSettings.Load();
+
+			BrowserSettings.Init(RemoteResourceManager.Instance.BrowserSettingsFile);
 		}
 
 		public void Save()
@@ -196,35 +192,21 @@ namespace SalesLibraries.FileManager.Configuration
 			}
 		}
 
-		private void LoadRibbonSettings()
+		private void LoadRibbonTabSettings()
 		{
 			if (!RemoteResourceManager.Instance.TabSettingsFile.ExistsLocal()) return;
 			var document = new XmlDocument();
 			document.Load(RemoteResourceManager.Instance.TabSettingsFile.LocalPath);
-
-			var node = document.SelectSingleNode(@"/ribbon/OvernightsCalendar");
-			bool tempBool;
-			if (node != null)
-				if (bool.TryParse(node.InnerText, out tempBool))
-					EnableOvernightsCalendarTab = tempBool;
-
-			node = document.SelectSingleNode(@"/ribbon/iPadsettings");
-			if (node != null)
-				if (bool.TryParse(node.InnerText, out tempBool))
-					EnableIPadSettingsTab = tempBool;
-
-			node = document.SelectSingleNode(@"/ribbon/Tags");
-			if (node != null)
-				if (bool.TryParse(node.InnerText, out tempBool))
-					EnableTagsTab = tempBool;
-			node = document.SelectSingleNode(@"/ribbon/Security");
-			if (node != null)
-				if (bool.TryParse(node.InnerText, out tempBool))
-					EnableSecurityTab = tempBool;
-			node = document.SelectSingleNode(@"/ribbon/LinkBundles");
-			if (node != null)
-				if (bool.TryParse(node.InnerText, out tempBool))
-					EnableLinkBundlesTab = tempBool;
+			var node = document.SelectSingleNode(@"/Root");
+			if (node == null) return;
+			foreach (XmlNode childNode in node.ChildNodes)
+			{
+				var tabPageConfig = new RibbonTabPageConfig();
+				tabPageConfig.Deserialize(childNode);
+				if (tabPageConfig.Visible)
+					RibbonTabPageSettings.Add(tabPageConfig);
+			}
+			RibbonTabPageSettings.Sort((x, y) => x.Order.CompareTo(y.Order));
 		}
 
 		private void LoadCategoryRequestSettings()
@@ -266,5 +248,18 @@ namespace SalesLibraries.FileManager.Configuration
 			if (!RemoteResourceManager.Instance.SiteFile.ExistsLocal()) return;
 			WebServiceSite = File.ReadAllText(RemoteResourceManager.Instance.SiteFile.LocalPath).Trim();
 		}
+
+		private void LoadMainFormStyle()
+		{
+			if (RemoteResourceManager.Instance.FormStyleConfigFile.ExistsLocal())
+			{
+				var document = new XmlDocument();
+				document.Load(RemoteResourceManager.Instance.FormStyleConfigFile.LocalPath);
+				var node = document.SelectSingleNode(@"/Config/Style");
+				if (node == null) return;
+				MainFormStyle.Deserialize(node);
+			}
+		}
+
 	}
 }

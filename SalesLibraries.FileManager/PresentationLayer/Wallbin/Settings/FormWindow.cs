@@ -111,8 +111,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 					checkEditWindowHeaderAlignmentRight.Checked = true;
 					break;
 			}
-			layoutControlItemApllyForAllWindowsAppearance.Visibility = _formParameters.Type == WindowPropertiesType.None ? LayoutVisibility.Always : LayoutVisibility.Never;
-			checkEditApllyForAllWindowsAppearance.Checked = _formParameters.Type == WindowPropertiesType.None && _folder.Page.Library.Settings.ApplyAppearanceForAllWindows;
+			layoutControlItemApllyForAllWindowsAppearance.Visibility = _formParameters.Type == WindowPropertiesType.None || _formParameters.Type == WindowPropertiesType.Appearnce ? LayoutVisibility.Always : LayoutVisibility.Never;
+			checkEditApllyForAllWindowsAppearance.Checked = (_formParameters.Type == WindowPropertiesType.None || _formParameters.Type == WindowPropertiesType.Appearnce) && _folder.Page.Library.Settings.ApplyAppearanceForAllWindows;
 		}
 
 		private void SaveData()
@@ -131,8 +131,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 				_folder.Settings.HeaderAlignment = HorizontalAlignment.Center;
 			else if (checkEditWindowHeaderAlignmentRight.Checked)
 				_folder.Settings.HeaderAlignment = HorizontalAlignment.Right;
-			if (_formParameters.Type == WindowPropertiesType.None)
-				_folder.Page.Library.Settings.ApplyAppearanceForAllWindows = checkEditApllyForAllWindowsAppearance.Checked;
+
+			_folder.Page.Library.Settings.ApplyAppearanceForAllWindows = checkEditApllyForAllWindowsAppearance.Checked;
 
 			_widgetControl?.SaveData();
 			if (_bannerControl == null && _folder.Widget.Enabled)

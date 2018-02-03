@@ -4,9 +4,14 @@ namespace SalesLibraries.CommonGUI.Common
 {
 	public class PopupMessageHelper
 	{
-		private readonly string _title;
+		private string _title;
 
 		public PopupMessageHelper(string title)
+		{
+			_title = title;
+		}
+
+		public void ChangeTitle(string title)
 		{
 			_title = title;
 		}

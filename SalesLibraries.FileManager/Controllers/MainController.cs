@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using DevComponents.DotNetBar;
 using SalesLibraries.Business.Contexts.Wallbin.Local;
 using SalesLibraries.Common.Authorization;
 using SalesLibraries.Common.Helpers;
@@ -45,6 +46,7 @@ namespace SalesLibraries.FileManager.Controllers
 		public WallbinPage TabWallbin { get; private set; }
 		protected VideoPage TabVideo { get; private set; }
 		protected CalendarPage TabCalendar { get; private set; }
+		public BrowserPage TabBrowser { get; private set; }
 		#endregion
 
 		private MainController()
@@ -100,8 +102,6 @@ namespace SalesLibraries.FileManager.Controllers
 
 			using (var form = new FormStart("Site Admin"))
 			{
-				form.pictureEditHeaderRegular.Image = MainController.Instance.ImageResources.AppSplashLogo ?? form.pictureEditHeaderRegular.Image;
-
 				FileStorageManager.Instance.Downloading += (o, e) =>
 				{
 					form.SetDownloadInfo(e.ProgressPercent < 100
@@ -166,6 +166,7 @@ namespace SalesLibraries.FileManager.Controllers
 
 					AsyncHelper.RunSync(Configuration.RemoteResourceManager.Instance.LoadRemote);
 					Settings.LoadRemote();
+					PopupMessages.ChangeTitle(Settings.AppTitle);
 					ImageResources.LoadRemote();
 					InitBusinessObjects();
 					AsyncHelper.RunSync(FileStorageManager.Instance.FixDataState);
@@ -199,7 +200,7 @@ namespace SalesLibraries.FileManager.Controllers
 			if (stopRun) return;
 			if (appReady)
 			{
-				FormStateHelper.Init(MainForm, Common.Helpers.RemoteResourceManager.Instance.AppAliasSettingsFolder.LocalPath, "Site Admin-Main-Form", true, true);
+				FormStateHelper.Init(MainForm, Common.Helpers.RemoteResourceManager.Instance.AppAliasSettingsFolder.LocalPath, "Site Admin-Main-Form", false, true);
 				MainForm.Shown += (o, e) =>
 				{
 					MainForm.InitForm();
@@ -324,6 +325,7 @@ namespace SalesLibraries.FileManager.Controllers
 			_activeTab = tabPage;
 			if (!_tabPages.ContainsKey(tabPage)) return;
 			_tabPages[tabPage].ShowPage(tabPage);
+			_tabPages[tabPage].UpdateStatusBar();
 		}
 
 		public void ProcessChanges()
@@ -376,9 +378,48 @@ namespace SalesLibraries.FileManager.Controllers
 			TabCalendar = new CalendarPage();
 			_tabPages.Add(TabPageEnum.Calendar, TabCalendar);
 
-			TabWallbin.InitController();
-			TabVideo.InitController();
-			TabCalendar.InitController();
+			TabBrowser = new BrowserPage();
+			_tabPages.Add(TabPageEnum.Browser, TabBrowser);
+
+			if (Settings.RibbonTabPageSettings.Any(tabPage =>
+				new[]
+				{
+					RibbonTabIdentifiers.Home, RibbonTabIdentifiers.Settings, RibbonTabIdentifiers.LinkBundles,
+					RibbonTabIdentifiers.Security, RibbonTabIdentifiers.Tags, RibbonTabIdentifiers.Preferences
+				}.Contains(tabPage.Id)))
+				TabWallbin.InitController();
+			if (Settings.RibbonTabPageSettings.Any(tabPage => tabPage.Id == RibbonTabIdentifiers.Video))
+				TabVideo.InitController();
+			if (Settings.RibbonTabPageSettings.Any(tabPage => tabPage.Id == RibbonTabIdentifiers.Calendar))
+				TabCalendar.InitController();
+
+			TabBrowser.InitController();
+		}
+
+		public void UpdateCommonStatusBar()
+		{
+			MainForm.MainInfoContainer.SubItems.Clear();
+
+			var appInfoLabel = new LabelItem();
+			appInfoLabel.Text = String.Format("{0} v{1}",
+				String.Format(FormMain.TitleTemplate, Settings.AppTitle, AppProfileManager.Instance.LibraryAlias),
+				FileStorageManager.Instance.Version
+			);
+			if (Settings.MainFormStyle.StatusBarTextColor.HasValue)
+				appInfoLabel.ForeColor = Settings.MainFormStyle.StatusBarTextColor.Value;
+			MainForm.MainInfoContainer.SubItems.Add(appInfoLabel);
+
+			var urlLabel = new LabelItem();
+			urlLabel.Text = Settings.WebServiceSite;
+			if (Settings.MainFormStyle.StatusBarTextColor.HasValue)
+				urlLabel.ForeColor = Settings.MainFormStyle.StatusBarTextColor.Value;
+			MainForm.MainInfoContainer.SubItems.Add(urlLabel);
+
+			MainForm.MainInfoContainer.RecalcSize();
+
+			MainForm.AdditionalInfoContainer.SubItems.Clear();
+			MainForm.AdditionalInfoContainer.RecalcSize();
+			MainForm.StatusBar.RecalcLayout();
 		}
 	}
 }

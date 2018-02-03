@@ -532,4 +532,22 @@
   <data name="LinkSettingsSecurityWhiteList" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LinkSettingsSecurityWhiteList.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="ApplicationMenuExit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ApplicationMenuExit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ApplicationMenuSave" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ApplicationMenuSave.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ApplicationMenuSync" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ApplicationMenuSync.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RibbonCollapse" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RibbonCollapse.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RibbonExpand" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RibbonExpand.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RibbonPin" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RibbonPin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

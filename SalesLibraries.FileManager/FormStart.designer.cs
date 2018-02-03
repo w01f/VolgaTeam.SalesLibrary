@@ -84,9 +84,9 @@
 			this.panelEx.Cursor = System.Windows.Forms.Cursors.Arrow;
 			this.panelEx.DisabledBackColor = System.Drawing.Color.Empty;
 			this.panelEx.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panelEx.Location = new System.Drawing.Point(0, 0);
+			this.panelEx.Location = new System.Drawing.Point(1, 1);
 			this.panelEx.Name = "panelEx";
-			this.panelEx.Size = new System.Drawing.Size(700, 552);
+			this.panelEx.Size = new System.Drawing.Size(698, 550);
 			this.panelEx.Style.BackColor1.Color = System.Drawing.Color.DeepSkyBlue;
 			this.panelEx.Style.BackColor2.Color = System.Drawing.Color.DeepSkyBlue;
 			this.panelEx.Style.BorderColor.Color = System.Drawing.Color.LightGray;
@@ -99,7 +99,7 @@
 			this.pbCancelRegular.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.pbCancelRegular.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.pbCancelRegular.Image = global::SalesLibraries.FileManager.Properties.Resources.ProgressStartCancel;
-			this.pbCancelRegular.Location = new System.Drawing.Point(663, 2);
+			this.pbCancelRegular.Location = new System.Drawing.Point(661, 2);
 			this.pbCancelRegular.Name = "pbCancelRegular";
 			this.pbCancelRegular.Size = new System.Drawing.Size(32, 32);
 			this.pbCancelRegular.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -116,7 +116,7 @@
 			this.pnNormal.Location = new System.Drawing.Point(0, 55);
 			this.pnNormal.Name = "pnNormal";
 			this.pnNormal.Padding = new System.Windows.Forms.Padding(10);
-			this.pnNormal.Size = new System.Drawing.Size(700, 370);
+			this.pnNormal.Size = new System.Drawing.Size(698, 390);
 			this.pnNormal.TabIndex = 26;
 			// 
 			// pnBottom
@@ -126,10 +126,10 @@
 			this.pnBottom.Controls.Add(this.pnSeparator2);
 			this.pnBottom.Controls.Add(this.circularProgressRegular);
 			this.pnBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.pnBottom.Location = new System.Drawing.Point(10, 310);
+			this.pnBottom.Location = new System.Drawing.Point(10, 330);
 			this.pnBottom.Name = "pnBottom";
 			this.pnBottom.Padding = new System.Windows.Forms.Padding(50, 0, 0, 0);
-			this.pnBottom.Size = new System.Drawing.Size(680, 50);
+			this.pnBottom.Size = new System.Drawing.Size(678, 50);
 			this.pnBottom.TabIndex = 27;
 			// 
 			// labelControlDownloadInfo
@@ -151,7 +151,7 @@
 			this.labelControlDownloadInfo.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.labelControlDownloadInfo.Location = new System.Drawing.Point(50, 0);
 			this.labelControlDownloadInfo.Name = "labelControlDownloadInfo";
-			this.labelControlDownloadInfo.Size = new System.Drawing.Size(308, 50);
+			this.labelControlDownloadInfo.Size = new System.Drawing.Size(306, 50);
 			this.labelControlDownloadInfo.StyleController = this.styleController;
 			this.labelControlDownloadInfo.TabIndex = 25;
 			// 
@@ -175,7 +175,7 @@
 			this.pictureEditBrand.Cursor = System.Windows.Forms.Cursors.Arrow;
 			this.pictureEditBrand.Dock = System.Windows.Forms.DockStyle.Right;
 			this.pictureEditBrand.EditValue = global::SalesLibraries.FileManager.Properties.Resources.ProgressStartRegularBrand;
-			this.pictureEditBrand.Location = new System.Drawing.Point(358, 0);
+			this.pictureEditBrand.Location = new System.Drawing.Point(356, 0);
 			this.pictureEditBrand.Name = "pictureEditBrand";
 			this.pictureEditBrand.Properties.AllowFocused = false;
 			this.pictureEditBrand.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
@@ -193,7 +193,7 @@
 			// pnSeparator2
 			// 
 			this.pnSeparator2.Dock = System.Windows.Forms.DockStyle.Right;
-			this.pnSeparator2.Location = new System.Drawing.Point(604, 0);
+			this.pnSeparator2.Location = new System.Drawing.Point(602, 0);
 			this.pnSeparator2.Name = "pnSeparator2";
 			this.pnSeparator2.Size = new System.Drawing.Size(20, 50);
 			this.pnSeparator2.TabIndex = 28;
@@ -208,7 +208,7 @@
 			this.circularProgressRegular.Dock = System.Windows.Forms.DockStyle.Right;
 			this.circularProgressRegular.Enabled = false;
 			this.circularProgressRegular.FocusCuesEnabled = false;
-			this.circularProgressRegular.Location = new System.Drawing.Point(624, 0);
+			this.circularProgressRegular.Location = new System.Drawing.Point(622, 0);
 			this.circularProgressRegular.Name = "circularProgressRegular";
 			this.circularProgressRegular.Padding = new System.Windows.Forms.Padding(10);
 			this.circularProgressRegular.ProgressBarType = DevComponents.DotNetBar.eCircularProgressType.Dot;
@@ -226,20 +226,19 @@
 			this.pnProgressStages.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnProgressStages.Location = new System.Drawing.Point(10, 105);
 			this.pnProgressStages.Name = "pnProgressStages";
-			this.pnProgressStages.Padding = new System.Windows.Forms.Padding(50, 0, 0, 0);
-			this.pnProgressStages.Size = new System.Drawing.Size(680, 217);
+			this.pnProgressStages.Padding = new System.Windows.Forms.Padding(50, 20, 0, 0);
+			this.pnProgressStages.Size = new System.Drawing.Size(678, 217);
 			this.pnProgressStages.TabIndex = 24;
 			// 
 			// pnProgressStageFiles
 			// 
 			this.pnProgressStageFiles.Controls.Add(this.pbProgressStageFiles);
 			this.pnProgressStageFiles.Dock = System.Windows.Forms.DockStyle.Top;
-			this.pnProgressStageFiles.Location = new System.Drawing.Point(50, 140);
+			this.pnProgressStageFiles.Location = new System.Drawing.Point(50, 160);
 			this.pnProgressStageFiles.Name = "pnProgressStageFiles";
 			this.pnProgressStageFiles.Padding = new System.Windows.Forms.Padding(0, 0, 0, 20);
-			this.pnProgressStageFiles.Size = new System.Drawing.Size(630, 70);
+			this.pnProgressStageFiles.Size = new System.Drawing.Size(628, 70);
 			this.pnProgressStageFiles.TabIndex = 21;
-			this.pnProgressStageFiles.Visible = false;
 			// 
 			// pbProgressStageFiles
 			// 
@@ -247,20 +246,20 @@
 			this.pbProgressStageFiles.Image = global::SalesLibraries.FileManager.Properties.Resources.ProgressStartRegularFiles;
 			this.pbProgressStageFiles.Location = new System.Drawing.Point(0, 0);
 			this.pbProgressStageFiles.Name = "pbProgressStageFiles";
-			this.pbProgressStageFiles.Size = new System.Drawing.Size(630, 50);
+			this.pbProgressStageFiles.Size = new System.Drawing.Size(628, 50);
 			this.pbProgressStageFiles.TabIndex = 26;
 			this.pbProgressStageFiles.TabStop = false;
+			this.pbProgressStageFiles.Visible = false;
 			// 
 			// pnProgressStageSecurity
 			// 
 			this.pnProgressStageSecurity.Controls.Add(this.pbProgressStageSecurity);
 			this.pnProgressStageSecurity.Dock = System.Windows.Forms.DockStyle.Top;
-			this.pnProgressStageSecurity.Location = new System.Drawing.Point(50, 70);
+			this.pnProgressStageSecurity.Location = new System.Drawing.Point(50, 90);
 			this.pnProgressStageSecurity.Name = "pnProgressStageSecurity";
 			this.pnProgressStageSecurity.Padding = new System.Windows.Forms.Padding(0, 0, 0, 20);
-			this.pnProgressStageSecurity.Size = new System.Drawing.Size(630, 70);
+			this.pnProgressStageSecurity.Size = new System.Drawing.Size(628, 70);
 			this.pnProgressStageSecurity.TabIndex = 20;
-			this.pnProgressStageSecurity.Visible = false;
 			// 
 			// pbProgressStageSecurity
 			// 
@@ -268,20 +267,20 @@
 			this.pbProgressStageSecurity.Image = global::SalesLibraries.FileManager.Properties.Resources.ProgressStartRegularSecurity;
 			this.pbProgressStageSecurity.Location = new System.Drawing.Point(0, 0);
 			this.pbProgressStageSecurity.Name = "pbProgressStageSecurity";
-			this.pbProgressStageSecurity.Size = new System.Drawing.Size(630, 50);
+			this.pbProgressStageSecurity.Size = new System.Drawing.Size(628, 50);
 			this.pbProgressStageSecurity.TabIndex = 25;
 			this.pbProgressStageSecurity.TabStop = false;
+			this.pbProgressStageSecurity.Visible = false;
 			// 
 			// pnProgressStageWebConnection
 			// 
 			this.pnProgressStageWebConnection.Controls.Add(this.pbProgressStageWebSite);
 			this.pnProgressStageWebConnection.Dock = System.Windows.Forms.DockStyle.Top;
-			this.pnProgressStageWebConnection.Location = new System.Drawing.Point(50, 0);
+			this.pnProgressStageWebConnection.Location = new System.Drawing.Point(50, 20);
 			this.pnProgressStageWebConnection.Name = "pnProgressStageWebConnection";
 			this.pnProgressStageWebConnection.Padding = new System.Windows.Forms.Padding(0, 0, 0, 20);
-			this.pnProgressStageWebConnection.Size = new System.Drawing.Size(630, 70);
+			this.pnProgressStageWebConnection.Size = new System.Drawing.Size(628, 70);
 			this.pnProgressStageWebConnection.TabIndex = 19;
-			this.pnProgressStageWebConnection.Visible = false;
 			// 
 			// pbProgressStageWebSite
 			// 
@@ -289,9 +288,10 @@
 			this.pbProgressStageWebSite.Image = global::SalesLibraries.FileManager.Properties.Resources.ProgressStartRegularWebConnection;
 			this.pbProgressStageWebSite.Location = new System.Drawing.Point(0, 0);
 			this.pbProgressStageWebSite.Name = "pbProgressStageWebSite";
-			this.pbProgressStageWebSite.Size = new System.Drawing.Size(630, 50);
+			this.pbProgressStageWebSite.Size = new System.Drawing.Size(628, 50);
 			this.pbProgressStageWebSite.TabIndex = 24;
 			this.pbProgressStageWebSite.TabStop = false;
+			this.pbProgressStageWebSite.Visible = false;
 			// 
 			// pictureEditHeaderRegular
 			// 
@@ -309,7 +309,7 @@
 			this.pictureEditHeaderRegular.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
 			this.pictureEditHeaderRegular.Properties.ShowMenu = false;
 			this.pictureEditHeaderRegular.Properties.ZoomAccelerationFactor = 1D;
-			this.pictureEditHeaderRegular.Size = new System.Drawing.Size(680, 95);
+			this.pictureEditHeaderRegular.Size = new System.Drawing.Size(678, 95);
 			this.pictureEditHeaderRegular.TabIndex = 26;
 			// 
 			// pnMinimized
@@ -321,7 +321,7 @@
 			this.pnMinimized.Location = new System.Drawing.Point(0, 0);
 			this.pnMinimized.Name = "pnMinimized";
 			this.pnMinimized.Padding = new System.Windows.Forms.Padding(5);
-			this.pnMinimized.Size = new System.Drawing.Size(700, 55);
+			this.pnMinimized.Size = new System.Drawing.Size(698, 55);
 			this.pnMinimized.TabIndex = 22;
 			// 
 			// pictureEditHeaderMinimized
@@ -340,7 +340,7 @@
 			this.pictureEditHeaderMinimized.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
 			this.pictureEditHeaderMinimized.Properties.ShowMenu = false;
 			this.pictureEditHeaderMinimized.Properties.ZoomAccelerationFactor = 1D;
-			this.pictureEditHeaderMinimized.Size = new System.Drawing.Size(655, 45);
+			this.pictureEditHeaderMinimized.Size = new System.Drawing.Size(653, 45);
 			this.pictureEditHeaderMinimized.TabIndex = 28;
 			// 
 			// pnSeparator1
@@ -415,6 +415,7 @@
 			this.Cursor = System.Windows.Forms.Cursors.Arrow;
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.Name = "FormStart";
+			this.Padding = new System.Windows.Forms.Padding(1);
 			this.ShowIcon = false;
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;

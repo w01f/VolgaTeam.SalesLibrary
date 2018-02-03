@@ -73,6 +73,7 @@ namespace SalesLibraries.FileManager.Controllers
 				}
 			};
 
+			MainController.Instance.MainForm.buttonItemApplicationMenuSync.Click += OnSyncClick;
 			MainController.Instance.MainForm.buttonItemHomeSync.Click += OnSyncClick;
 			MainController.Instance.MainForm.buttonItemPreferencesSync.Click += OnSyncClick;
 			MainController.Instance.MainForm.buttonItemCalendarSync.Click += OnSyncClick;
@@ -232,6 +233,11 @@ namespace SalesLibraries.FileManager.Controllers
 				pnContainer.BringToFront();
 				_isLoading = false;
 			})));
+		}
+
+		public void UpdateStatusBar()
+		{
+			MainController.Instance.UpdateCommonStatusBar();
 		}
 
 		private void OnLibraryDataChanged(object sender, EventArgs e)

@@ -3,7 +3,6 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using SalesLibraries.Common.Configuration;
-using SalesLibraries.Common.Helpers;
 using SalesLibraries.CommonGUI.BackgroundProcesses;
 using SalesLibraries.CommonGUI.Common;
 
@@ -23,7 +22,7 @@ namespace SalesLibraries.SalesDepot
 			}
 
 			var styleSettings = new SyncFormStyleConfiguration();
-			styleSettings.Load(Path.Combine(RemoteResourceManager.Instance.AppRootFolderPath, "sync_color.xml"));
+			styleSettings.Load(Path.Combine(GlobalSettings.ApplicationRootPath, "sync_color.xml"));
 			BackColor = panelEx.Style.BorderColor.Color = panelExCancel.Style.BorderColor.Color = styleSettings.SyncBorderColor ?? BackColor;
 			panelEx.Style.BackColor1.Color = panelEx.Style.BackColor2.Color = panelExCancel.Style.BackColor1.Color = panelExCancel.Style.BackColor2.Color = styleSettings.SyncBackColor ?? panelEx.Style.BackColor1.Color;
 			laTitle.ForeColor = styleSettings.SyncTextColor ?? laTitle.ForeColor;
@@ -31,7 +30,7 @@ namespace SalesLibraries.SalesDepot
 			circularProgress.ProgressBarType = (DevComponents.DotNetBar.eCircularProgressType)((styleSettings.SyncCircleStyle ?? 2) - 1);
 			circularProgress.AnimationSpeed = styleSettings.SyncCircleSpeed ?? 150;
 
-			var cancelLogoPath = Path.Combine(RemoteResourceManager.Instance.AppRootFolderPath, "ProgressCancel.png");
+			var cancelLogoPath = Path.Combine(GlobalSettings.ApplicationRootPath, "ProgressCancel.png");
 			if (File.Exists(cancelLogoPath))
 				pbCancel.Image = Image.FromFile(cancelLogoPath);
 

@@ -25,7 +25,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings.ResetLin
 			resetInfoControl.SelectionChanged += OnControlSelectionChanged;
 			xtraTabControl.TabPages.Add(resetInfoControl);
 
-			if (MainController.Instance.Settings.EnableTagsTab)
+			if (MainController.Instance.Settings.EditorSettings.EnableTagsEdit)
 			{
 				var searchTagsControl = new ResetTagsControl();
 				searchTagsControl.SelectionChanged += OnControlSelectionChanged;

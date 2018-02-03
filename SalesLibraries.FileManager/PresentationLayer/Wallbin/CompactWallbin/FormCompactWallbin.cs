@@ -29,7 +29,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.CompactWallbin
 		{
 			InitializeComponent();
 
-			Text = String.Format(FormMain.TitleTemplate, AppProfileManager.Instance.LibraryAlias);
+			Text = String.Format(FormMain.TitleTemplate, MainController.Instance.Settings.AppTitle, AppProfileManager.Instance.LibraryAlias);
 			Icon = MainController.Instance.ImageResources.AppIcon ?? Icon;
 			barStaticItemLogo.Glyph = MainController.Instance.ImageResources.AppRibbonLogo ?? barStaticItemLogo.Glyph;
 

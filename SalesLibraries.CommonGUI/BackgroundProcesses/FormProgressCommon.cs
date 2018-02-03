@@ -7,8 +7,8 @@ namespace SalesLibraries.CommonGUI.BackgroundProcesses
 	{
 		public override string Title
 		{
-			get { return laProgress.Text; }
-			set { laProgress.Text = value; }
+			get => laProgress.Text;
+			set => laProgress.Text = value;
 		}
 		public FormProgressCommon()
 		{

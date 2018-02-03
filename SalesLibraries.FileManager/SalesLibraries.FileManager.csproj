@@ -235,12 +235,16 @@
     <Compile Include="Business\Synchronization\SyncManager.cs" />
     <Compile Include="Business\Services\WebContentManager.cs" />
     <Compile Include="Business\Models\Security\LibraryGroup.cs" />
+    <Compile Include="Configuration\BrowserManager.cs" />
     <Compile Include="Configuration\EditorsSettings.cs" />
     <Compile Include="Configuration\ImageResourcesManager.cs" />
     <Compile Include="Configuration\ListManager.cs" />
+    <Compile Include="Configuration\MainFormStyleConfiguration.cs" />
     <Compile Include="Configuration\MetaDataConst.cs" />
     <Compile Include="Configuration\MetaDataContainer.cs" />
     <Compile Include="Configuration\RemoteResourceManager.cs" />
+    <Compile Include="Configuration\RibbonTabIdentifiers.cs" />
+    <Compile Include="Configuration\RibbonTabPageConfig.cs" />
     <Compile Include="Configuration\SecurityLists.cs" />
     <Compile Include="Configuration\SettingsManager.cs" />
     <Compile Include="Configuration\SiteResouresManager.cs" />
@@ -248,6 +252,7 @@
     <Compile Include="Controllers\IPageController.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Controllers\TabPageEnum.cs" />
+    <Compile Include="Controllers\BrowserPage.cs" />
     <Compile Include="Controllers\VideoPage.cs" />
     <Compile Include="Controllers\WallbinPage.cs">
       <SubType>UserControl</SubType>
@@ -269,6 +274,9 @@
     </Compile>
     <Compile Include="FormStart.designer.cs">
       <DependentUpon>FormStart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Browser\BrowserControl.cs">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Calendars\CalendarContainerControl.cs">
       <SubType>UserControl</SubType>
@@ -1416,6 +1424,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\RibbonPin.png" />
+    <None Include="Resources\RibbonExpand.png" />
+    <None Include="Resources\RibbonCollapse.png" />
+    <None Include="Resources\ApplicationMenuSync.png" />
+    <None Include="Resources\ApplicationMenuSave.png" />
+    <None Include="Resources\ApplicationMenuExit.png" />
     <None Include="Resources\LinkSettingsSecurityWhiteList.png" />
     <None Include="Resources\LinkSettingsSecurityVisible.png" />
     <None Include="Resources\LinkSettingsSecurityLocal.png" />
@@ -1556,6 +1570,10 @@
     <None Include="Resources\ArrowDown.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SalesLibraries.Browser.Controls\SalesLibraries.Browser.Controls.csproj">
+      <Project>{0DB1BAD7-D7AA-46F8-BDE6-0212C8A4CAA6}</Project>
+      <Name>SalesLibraries.Browser.Controls</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SalesLibraries.Business\SalesLibraries.Business.csproj">
       <Project>{526944F8-7B85-48CE-81F1-43AE041A321F}</Project>
       <Name>SalesLibraries.Business</Name>
@@ -1580,6 +1598,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>robocopy /s /z /r:100 "$(SolutionDir)SalesLibraries.Business\$(OutDir)\" "d:\WorkingFiles\SalesDepot\Release\Site Admin.exe" "*.sql" "sequense.txt"

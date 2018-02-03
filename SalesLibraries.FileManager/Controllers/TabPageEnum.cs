@@ -11,5 +11,6 @@
 		Calendar,
 		VideoManager,
 		Bundles,
+		Browser,
 	}
 }

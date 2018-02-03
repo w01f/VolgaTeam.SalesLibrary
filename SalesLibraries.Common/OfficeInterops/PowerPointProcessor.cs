@@ -358,8 +358,7 @@ namespace SalesLibraries.Common.OfficeInterops
 
 		public void SetSlideSettings(SlideSettings settings)
 		{
-			if (PowerPointObject == null) return;
-			if (PowerPointObject.ActivePresentation == null) return;
+			if (PowerPointObject?.ActivePresentation == null) return;
 			SetSlideSettings(PowerPointObject.ActivePresentation, settings);
 		}
 
@@ -406,7 +405,7 @@ namespace SalesLibraries.Common.OfficeInterops
 			}
 		}
 
-		private void CloseSlideSourcePresentation()
+		public void CloseSlideSourcePresentation()
 		{
 			try
 			{

@@ -95,6 +95,11 @@ namespace SalesLibraries.FileManager.Controllers
 			LoadCalendarControls();
 		}
 
+		public void UpdateStatusBar()
+		{
+			MainController.Instance.UpdateCommonStatusBar();
+		}
+
 		private void ApplyCalendarSettings()
 		{
 			if (ActiveLibraryContext == null) return;

@@ -165,7 +165,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings.ResetLin
 			layoutControlGroupLinksFiles.Enabled =
 				layoutControlGroupLinksAllOthers.Enabled = false;
 
-			layoutControlItemCategory.Visibility = layoutControlItemKeyword.Visibility = MainController.Instance.Settings.EnableTagsTab
+			layoutControlItemCategory.Visibility = layoutControlItemKeyword.Visibility = MainController.Instance.Settings.EditorSettings.EnableTagsEdit
 				? LayoutVisibility.Always
 				: LayoutVisibility.Never;
 			layoutControlItemSecurity.Visibility = MainController.Instance.Settings.EditorSettings.EnableSecurityEdit
