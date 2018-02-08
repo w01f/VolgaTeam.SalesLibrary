@@ -59,8 +59,7 @@ namespace SalesLibraries.Browser.Controls.Controls
 			if (siteSettings.Any())
 				comboBoxItemSites.SelectedIndex = 0;
 
-			if (comboBoxItemSites.Items.Count == 1)
-				comboBoxItemSites.Visible = false;
+			comboBoxItemSites.Visible = comboBoxItemSites.Items.Count > 1;
 		}
 
 		private void OnSelectedSiteChanged(object sender, EventArgs e)
