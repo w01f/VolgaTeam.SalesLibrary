@@ -33,7 +33,7 @@
                                 <div style="color: <? echo $itemData->headerForeColor; ?>;
                                         <? if ($itemData->headerBackColor !== '#FFFFFF'): ?>background-color: <? echo $itemData->headerBackColor; ?>;<? endif; ?>
                                         font-family: <? echo FontReplacementHelper::replaceFont($itemData->headerFont->name); ?>;
-                                        font-size: <? echo $itemData->headerFont->size; ?>pt;
+                                        font-size: <? echo $itemData->headerFont->size->single; ?>pt;
                                         font-weight: <? echo $itemData->headerFont->isBold ? 'bold' : 'normal'; ?>;
                                         font-style: <? echo $itemData->headerFont->isItalic ? 'italic' : 'normal'; ?>;
                                         text-decoration: <? echo $itemData->headerFont->isUnderlined ? 'underline' : 'none'; ?>;">
@@ -56,7 +56,7 @@
                             <div style="color: <? echo $itemData->footerForeColor; ?>;
                                     <? if ($itemData->footerBackColor !== '#FFFFFF'): ?>background-color: <? echo $itemData->footerBackColor; ?>;<? endif; ?>
                                     font-family: <? echo FontReplacementHelper::replaceFont($itemData->footerFont->name); ?>;
-                                    font-size: <? echo $itemData->footerFont->size; ?>pt;
+                                    font-size: <? echo $itemData->footerFont->size->single; ?>pt;
                                     font-weight: <? echo $itemData->footerFont->isBold ? 'bold' : 'normal'; ?>;
                                     font-style: <? echo $itemData->footerFont->isItalic ? 'italic' : 'normal'; ?>;
                                     text-decoration: <? echo $itemData->footerFont->isUnderlined ? 'underline' : 'none'; ?>;">

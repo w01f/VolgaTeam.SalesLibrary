@@ -11,8 +11,7 @@
 		 */
 		public $name;
 		/**
-		 * @var int
-		 * @soap
+		 * @var \Size
 		 */
 		public $size;
 		/**
@@ -38,7 +37,7 @@
 		{
 			$font = new Font();
 			$font->name = 'Arial';
-			$font->size = 12;
+			$font->size = new \Size(12);
 			$font->isBold = false;
 			$font->isItalic = false;
 			$font->isUnderlined = false;
@@ -54,19 +53,20 @@
 		{
 			$font = self::createDefault();
 
-			$queryResult = $xpath->query('.//Name', $contextNode);
+			$queryResult = $xpath->query('./Name', $contextNode);
 			$font->name = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : $font->name;
 
-			$queryResult = $xpath->query('.//Size', $contextNode);
-			$font->size = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue)) : $font->size;
+			$queryResult = $xpath->query('./Size', $contextNode);
+			if ($queryResult->length > 0)
+				$font->size = \Size::fromXml($xpath, $queryResult->item(0));
 
-			$queryResult = $xpath->query('.//IsBold', $contextNode);
+			$queryResult = $xpath->query('./IsBold', $contextNode);
 			$font->isBold = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : $font->isBold;
 
-			$queryResult = $xpath->query('.//IsItalic', $contextNode);
+			$queryResult = $xpath->query('./IsItalic', $contextNode);
 			$font->isItalic = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : $font->isItalic;
 
-			$queryResult = $xpath->query('.//IsUnderlined', $contextNode);
+			$queryResult = $xpath->query('./IsUnderlined', $contextNode);
 			$font->isUnderlined = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : $font->isUnderlined;
 
 			return $font;

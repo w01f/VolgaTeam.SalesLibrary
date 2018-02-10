@@ -79,7 +79,7 @@
 				$color = '#000000';
 			$displayWidget = !(isset($disableWidget) && $disableWidget) && isset($widgetData['base']) && $widgetData['base'] != '';
 			$linkFontProperties = 'font-family: ' . FontReplacementHelper::replaceFont($link->lineBreakProperties->font->name) . '; '
-				. 'font-size: ' . $link->lineBreakProperties->font->size . 'pt; '
+				. 'font-size: ' . $link->lineBreakProperties->font->size->single . 'pt; '
 				. 'font-weight: ' . ($link->lineBreakProperties->font->isBold ? ' bold' : ' normal') . '; '
 				. 'font-style: ' . ($link->lineBreakProperties->font->isItalic ? ' italic' : ' normal') . '; '
 				. 'text-decoration: ' . ($link->lineBreakProperties->font->isUnderlined ? ' underline' : ' none') . '; '
@@ -111,7 +111,7 @@
 				$color = '#000000';
 
 			$linkFontProperties = 'font-family: ' . FontReplacementHelper::replaceFont($font->name) . '; '
-				. (!$isDefaultFont ? 'font-size: ' . $font->size . 'pt; ' : ' ')
+				. (!$isDefaultFont ? 'font-size: ' . $font->size->single . 'pt; ' : ' ')
 				. 'font-weight: ' . ($link->extendedProperties->isBold ? ' bold' : ($font->isBold ? ' bold' : ' normal')) . '; '
 				. 'font-style: ' . ($link->extendedProperties->isItalic ? ' italic' : ($font->isItalic ? ' italic' : ' normal')) . '; '
 				. 'text-decoration: ' . ($link->extendedProperties->isUnderline ? ' underline' : ($font->isUnderlined ? ' underline' : ' inherit')) . '; '

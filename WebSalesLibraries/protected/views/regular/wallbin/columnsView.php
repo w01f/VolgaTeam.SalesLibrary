@@ -183,7 +183,7 @@
                         <? $column = $libraryPage->columns[$i]; ?>
                         <div class="column-header-container column-header-container-<? echo $i; ?>"
                              style="font-family: <? echo FontReplacementHelper::replaceFont(isset($column->banner) && $column->banner->isEnabled ? $column->banner->font->name : $column->font->name); ?>;
-                                 font-size: <? echo isset($column->banner) && $column->banner->isEnabled ? $column->banner->font->size : $column->font->size; ?>pt;
+                                 font-size: <? echo isset($column->banner) && $column->banner->isEnabled ? $column->banner->font->size->single : $column->font->size->single; ?>pt;
                                  font-weight: <? echo (isset($column->banner) && $column->banner->isEnabled ? $column->banner->font->isBold : $column->font->isBold) ? ' bold' : ' normal'; ?>;
                                  font-style: <? echo (isset($column->banner) && $column->banner->isEnabled ? $column->banner->font->isItalic : $column->font->isItalic) ? ' italic' : ' normal'; ?>;
                                  text-decoration: <? echo (isset($column->banner) && $column->banner->isEnabled ? $column->banner->font->isUnderlined : $column->font->isUnderlined) ? ' underline' : ' inherit'; ?>;

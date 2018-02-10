@@ -11,7 +11,7 @@
 	<? if ($style->showRegularHeader): ?>
         <div class="folder-header-container regular" id="folder<? echo $folder->id; ?>"
              style="font-family: <? echo FontReplacementHelper::replaceFont(isset($folder->banner) && $folder->banner->isEnabled ? $folder->banner->font->name : $folder->headerFont->name); ?>;
-                     font-size: <? echo isset($folder->banner) && $folder->banner->isEnabled ? $folder->banner->font->size : $folder->headerFont->size; ?>pt;
+                     font-size: <? echo isset($folder->banner) && $folder->banner->isEnabled ? $folder->banner->font->size->single : $folder->headerFont->size->single; ?>pt;
                      font-weight: <? echo (isset($folder->banner) && $folder->banner->isEnabled ? $folder->banner->font->isBold : $folder->headerFont->isBold) ? ' bold' : ' normal'; ?>;
                      font-style: <? echo (isset($folder->banner) && $folder->banner->isEnabled ? $folder->banner->font->isItalic : $folder->headerFont->isItalic) ? ' italic' : ' normal'; ?>;
                      text-decoration: <? echo (isset($folder->banner) && $folder->banner->isEnabled ? $folder->banner->font->isUnderlined : $folder->headerFont->isUnderlined) ? ' underline' : ' inherit'; ?>;
@@ -46,7 +46,7 @@
         <style>
             #folder<? echo $folder->id; ?> {
                 font-family: <? echo FontReplacementHelper::replaceFont($style->font->name); ?>;
-                font-size: <? echo $style->font->size; ?>pt;
+                font-size: <? echo $style->font->size->single; ?>pt;
                 font-weight: <? echo $style->font->isBold ? 'bold' : 'normal'; ?>;
                 font-style: <? echo $style->font->isItalic ? 'italic' : 'normal'; ?>;
                 text-decoration: <? echo $style->font->isUnderlined ? 'underline' : 'inherit'; ?>;

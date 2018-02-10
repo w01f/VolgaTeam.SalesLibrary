@@ -6,7 +6,7 @@
 	 */
 	class Column extends BlockContainer
 	{
-		/** @var  Size */
+		/** @var  \Size */
 		public $size;
 
 		/** @var  \HideCondition */
@@ -20,7 +20,7 @@
 		{
 			parent::__construct($parentShortcut, $parentBlock);
 			$this->type = 'column';
-			$this->size = new Size(12);
+			$this->size = new \Size(12);
 			$this->hideCondition = new \HideCondition();
 		}
 
@@ -28,13 +28,13 @@
 		 * @param $xpath \DOMXPath
 		 * @param $contextNode \DOMNode
 		 */
-		protected function configureFromXml($xpath, $contextNode)
+		public function configureFromXml($xpath, $contextNode)
 		{
 			parent::configureFromXml($xpath, $contextNode);
 
 			$queryResult = $xpath->query('./Size', $contextNode);
 			if ($queryResult->length > 0)
-				$this->size = Size::fromXml($xpath, $queryResult->item(0));
+				$this->size = \Size::fromXml($xpath, $queryResult->item(0));
 
 			$queryResult = $xpath->query('./Hide', $contextNode);
 			if ($queryResult->length > 0)

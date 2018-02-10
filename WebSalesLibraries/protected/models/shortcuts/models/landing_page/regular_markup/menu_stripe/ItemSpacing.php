@@ -1,10 +1,11 @@
 <?
-	namespace application\models\shortcuts\models\landing_page\regular_markup\common;
+
+	namespace application\models\shortcuts\models\landing_page\regular_markup\menu_stripe;
 
 	/**
-	 * Class Size
+	 * Class ItemSpacing
 	 */
-	class Size
+	class ItemSpacing
 	{
 		public $extraSmall;
 		public $small;
@@ -23,11 +24,11 @@
 		/**
 		 * @param $xpath \DOMXPath
 		 * @param $contextNode \DOMNode
-		 * @return Size
+		 * @return ItemSpacing
 		 */
 		public static function fromXml($xpath, $contextNode)
 		{
-			$size = new Size();
+			$size = new ItemSpacing();
 
 			$queryResult = $xpath->query('./*', $contextNode);
 			if ($queryResult->length > 0)

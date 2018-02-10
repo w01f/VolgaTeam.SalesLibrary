@@ -36,7 +36,7 @@
 			$this->foreColor = "FFFFFF";
 			$this->font = new \Font();
 			$this->font->name = "Arial";
-			$this->font->size = "14";
+			$this->font->size = new \Size(14);
 			$this->font->isBold = TRUE;
 			$this->font->isItalic = FALSE;
 			$this->showText = FALSE;
@@ -57,7 +57,7 @@
 			$this->foreColor = $columnRecord->fore_color;
 			$this->font = new \Font();
 			$this->font->name = $columnRecord->font_name;
-			$this->font->size = $columnRecord->font_size;
+			$this->font->size = new \Size($columnRecord->font_size);
 			$this->font->isBold = $columnRecord->font_bold;
 			$this->font->isItalic = $columnRecord->font_italic;
 			$this->font->isUnderlined = $columnRecord->font_underline;

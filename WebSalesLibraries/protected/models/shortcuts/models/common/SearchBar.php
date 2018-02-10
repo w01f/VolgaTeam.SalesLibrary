@@ -46,7 +46,7 @@
 		 * @param $configEncoded string
 		 * @param null string $subSearchTemplatesImagePath
 		 */
-		protected function configureFromXml($configEncoded, $subSearchTemplatesImagePath = null)
+		public function configureFromXml($configEncoded, $subSearchTemplatesImagePath = null)
 		{
 			$config = new DOMDocument();
 			$config->loadXML($configEncoded);

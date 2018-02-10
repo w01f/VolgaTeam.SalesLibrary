@@ -41,7 +41,7 @@
              <? endif; ?>
 				<? if (!empty($itemSettingsName->font)): ?>
                         font-family: <? echo FontReplacementHelper::replaceFont($itemSettingsName->font->name); ?> !important;
-                        font-size: <? echo $itemSettingsName->font->size; ?>pt !important;
+                        font-size: <? echo $itemSettingsName->font->size->single; ?>pt !important;
                         font-weight: <? echo $itemSettingsName->font->isBold ? 'bold' : 'normal'; ?> !important;
                         font-style: <? echo $itemSettingsName->font->isItalic ? 'italic' : 'normal'; ?> !important;
                         text-decoration: <? echo $itemSettingsName->font->isUnderlined ? 'underline' : 'inherit'; ?> !important;
@@ -61,7 +61,7 @@
             <? endif; ?>
 				<? if (!empty($itemSettingsLibrary->font)): ?>
                         font-family: <? echo FontReplacementHelper::replaceFont($itemSettingsLibrary->font->name); ?> !important;
-                        font-size: <? echo $itemSettingsLibrary->font->size; ?>pt !important;
+                        font-size: <? echo $itemSettingsLibrary->font->size->single; ?>pt !important;
                         font-weight: <? echo $itemSettingsLibrary->font->isBold ? 'bold' : 'normal'; ?> !important;
                         font-style: <? echo $itemSettingsLibrary->font->isItalic ? 'italic' : 'normal'; ?> !important;
                         text-decoration: <? echo $itemSettingsLibrary->font->isUnderlined ? 'underline' : 'inherit'; ?> !important;
@@ -81,7 +81,7 @@
             <? endif; ?>
 				<? if (!empty($itemSettingsViewsCount->font)): ?>
                         font-family: <? echo FontReplacementHelper::replaceFont($itemSettingsViewsCount->font->name); ?> !important;
-                        font-size: <? echo $itemSettingsViewsCount->font->size; ?>pt !important;
+                        font-size: <? echo $itemSettingsViewsCount->font->size->single; ?>pt !important;
                         font-weight: <? echo $itemSettingsViewsCount->font->isBold ? 'bold' : 'normal'; ?> !important;
                         font-style: <? echo $itemSettingsViewsCount->font->isItalic ? 'italic' : 'normal'; ?> !important;
                         text-decoration: <? echo $itemSettingsViewsCount->font->isUnderlined ? 'underline' : 'inherit'; ?> !important;

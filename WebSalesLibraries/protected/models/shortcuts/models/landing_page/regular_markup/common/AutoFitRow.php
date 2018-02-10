@@ -6,7 +6,7 @@
 	 */
 	class AutoFitRow extends BlockContainer
 	{
-		/** @var  Size */
+		/** @var  \Size */
 		public $itemsPerRow;
 
 		/** @var  \HideCondition */
@@ -20,7 +20,7 @@
 		{
 			parent::__construct($parentShortcut, $parentBlock);
 			$this->type = 'auto-fit-row';
-			$this->itemsPerRow = new Size(12);
+			$this->itemsPerRow = new \Size(12);
 			$this->hideCondition = new \HideCondition();
 		}
 
@@ -28,13 +28,13 @@
 		 * @param $xpath \DOMXPath
 		 * @param $contextNode \DOMNode
 		 */
-		protected function configureFromXml($xpath, $contextNode)
+		public function configureFromXml($xpath, $contextNode)
 		{
 			parent::configureFromXml($xpath, $contextNode);
 
 			$queryResult = $xpath->query('./ItemsPerRow', $contextNode);
 			if ($queryResult->length > 0)
-				$this->itemsPerRow = Size::fromXml($xpath, $queryResult->item(0));
+				$this->itemsPerRow = \Size::fromXml($xpath, $queryResult->item(0));
 
 			$queryResult = $xpath->query('./Hide', $contextNode);
 			if ($queryResult->length > 0)

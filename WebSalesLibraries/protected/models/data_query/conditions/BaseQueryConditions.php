@@ -72,7 +72,7 @@
 		 * @param $xpath \DOMXPath
 		 * @param $contextNode \DOMNode
 		 */
-		protected function configureFromXml($xpath, $contextNode)
+		public function configureFromXml($xpath, $contextNode)
 		{
 			/** @var $queryResult \DOMNodeList */
 			$queryResult = $xpath->query('./Text', $contextNode);

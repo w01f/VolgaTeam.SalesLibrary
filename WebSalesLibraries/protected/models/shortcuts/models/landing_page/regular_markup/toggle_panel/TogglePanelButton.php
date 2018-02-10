@@ -41,6 +41,8 @@
 			$queryResult = $xpath->query('./TextStyle', $contextNode);
 			if ($queryResult->length > 0)
 				$this->textAppearance = TextAppearance::fromXml($xpath, $queryResult->item(0));
+			else
+				$this->textAppearance = TextAppearance::createEmpty();
 
 			$user = \Yii::app()->user;
 			$userGroups = \UserIdentity::getCurrentUserGroups();

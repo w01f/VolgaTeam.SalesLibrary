@@ -34,7 +34,7 @@
                             <div style="color: <? echo $itemData->foreColor; ?>;
                                     <? if ($itemData->backColor !== '#FFFFFF'): ?>background-color: <? echo $itemData->backColor; ?>;<? endif; ?>
                                     font-family: <? echo FontReplacementHelper::replaceFont($itemData->font->name); ?>;
-                                    font-size: <? echo $itemData->font->size; ?>pt;
+                                    font-size: <? echo $itemData->font->size->single; ?>pt;
                                     font-weight: <? echo $itemData->font->isBold ? 'bold' : 'normal'; ?>;
                                     font-style: <? echo $itemData->font->isItalic ? 'italic' : 'normal'; ?>;
                                     text-decoration: <? echo $itemData->font->isUnderlined ? 'underline' : 'none'; ?>;">

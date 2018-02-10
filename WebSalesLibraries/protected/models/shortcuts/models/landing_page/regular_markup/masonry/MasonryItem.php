@@ -45,7 +45,7 @@
 		 * @param $xpath \DOMXPath
 		 * @param $contextNode \DOMNode
 		 */
-		protected function configureFromXml($xpath, $contextNode)
+		public function configureFromXml($xpath, $contextNode)
 		{
 			ContentBlock::configureFromXml($xpath, $contextNode);
 
@@ -68,10 +68,14 @@
 			$queryResult = $xpath->query('./TitleStyle', $contextNode);
 			if ($queryResult->length > 0)
 				$this->titleTextAppearance = TextAppearance::fromXml($xpath, $queryResult->item(0));
+			else
+				$this->titleTextAppearance = TextAppearance::createEmpty();
 
 			$queryResult = $xpath->query('./DescriptionStyle', $contextNode);
 			if ($queryResult->length > 0)
 				$this->descriptionTextAppearance = TextAppearance::fromXml($xpath, $queryResult->item(0));
+			else
+				$this->descriptionTextAppearance = TextAppearance::createEmpty();
 
 			$queryResult = $xpath->query('./FilterTag', $contextNode);
 			foreach ($queryResult as $node)

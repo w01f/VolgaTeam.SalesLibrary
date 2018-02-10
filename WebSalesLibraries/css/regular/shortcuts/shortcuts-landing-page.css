@@ -366,7 +366,7 @@
     border-radius: 0;
 }
 
-/*-----------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
 
 /*Toggle Panel----------------------------------------------------------------*/
 #content .shortcuts-page-content.landing-page .toggle-panel .toggle-buttons
@@ -384,4 +384,68 @@
 {
     display: block;
 }
-/*-----------------------------------------------------*/
+/*--------------------------------------------------------------------------*/
+
+/*Menu Stripe---------------------------------------------------------------*/
+#content .shortcuts-page-content.landing-page .menu-stripe-container
+{
+    border: none;
+    background: inherit;
+    margin: 0;
+}
+
+#content .shortcuts-page-content.landing-page .menu-stripe-container .container-fluid
+{
+    padding: 0;
+}
+
+#content .shortcuts-page-content.landing-page .menu-stripe-item-submenu
+{
+    position: relative;
+}
+
+#content .shortcuts-page-content.landing-page .menu-stripe > li > a
+{
+    padding-left: 0;
+}
+
+#content .shortcuts-page-content.landing-page .dropdown-menu > li > a:hover,
+#content .shortcuts-page-content.landing-page .dropdown-menu > li > a:focus
+{
+    background-color: #eee;
+    border-color: #428bca;
+}
+
+#content .shortcuts-page-content.landing-page .menu-stripe-item-submenu>.menu-stripe-submenu
+{
+    top: 0;
+    left: 100%;
+    margin-top: -6px;
+    margin-left: -1px;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
+
+#content .shortcuts-page-content.landing-page .menu-stripe-top-item > .menu-stripe-submenu,
+#content .shortcuts-page-content.landing-page .menu-stripe-item-submenu>.menu-stripe-submenu
+{
+    /*display: block;*/
+    /*visibility: hidden;*/
+    /*opacity: 0;*/
+}
+
+#content .shortcuts-page-content.landing-page .menu-stripe-item-submenu.pull-left
+{
+    float: none;
+}
+
+#content .shortcuts-page-content.landing-page .menu-stripe-item-submenu.pull-left>.menu-stripe-submenu
+{
+    left: -100%;
+    margin-left: 10px;
+    -webkit-border-radius: 6px 0 6px 6px;
+    -moz-border-radius: 6px 0 6px 6px;
+    border-radius: 6px 0 6px 6px;
+}
+/*--------------------------------------------------------------------------*/

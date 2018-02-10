@@ -8,6 +8,7 @@
 	use application\models\shortcuts\models\landing_page\regular_markup\list_block\ListBlock;
 	use application\models\shortcuts\models\landing_page\regular_markup\list_block\ListItem;
 	use application\models\shortcuts\models\landing_page\regular_markup\masonry\MasonryBlock;
+	use application\models\shortcuts\models\landing_page\regular_markup\menu_stripe\MenuStripeBlock;
 	use application\models\shortcuts\models\landing_page\regular_markup\scroll_stripe\ScrollStripeBlock;
 	use application\models\shortcuts\models\landing_page\regular_markup\slider\SlideBlock;
 	use application\models\shortcuts\models\landing_page\regular_markup\slider\SliderBlock;
@@ -87,7 +88,7 @@
 		 * @param $xpath \DOMXPath
 		 * @param $contextNode \DOMNode
 		 */
-		protected function configureFromXml($xpath, $contextNode)
+		public function configureFromXml($xpath, $contextNode)
 		{
 			$queryResult = $xpath->query('./HoverTip', $contextNode);
 			$this->hoverText = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
@@ -106,6 +107,8 @@
 			$queryResult = $xpath->query('./TextStyle', $contextNode);
 			if ($queryResult->length > 0)
 				$this->textAppearance = TextAppearance::fromXml($xpath, $queryResult->item(0));
+			else
+				$this->textAppearance = TextAppearance::createEmpty();
 
 			$queryResult = $xpath->query('./Border', $contextNode);
 			if ($queryResult->length > 0)
@@ -234,6 +237,8 @@
 					return 'wallbin/libraryWindow';
 				case 'search-results':
 					return 'common/searchResults';
+				case 'menu-stripe':
+					return 'menu_stripe/menuStripe';
 				default:
 					return 'common/undefinedBlock';
 			}
@@ -382,6 +387,10 @@
 					return $libraryWindow;
 				case "search-table":
 					$searchResults = new SearchResultsBlock($parentShortcut, $parentBlock);
+					$searchResults->configureFromXml($xpath, $contextNode);
+					return $searchResults;
+				case "hoverlinks":
+					$searchResults = new MenuStripeBlock($parentShortcut, $parentBlock);
 					$searchResults->configureFromXml($xpath, $contextNode);
 					return $searchResults;
 				default:

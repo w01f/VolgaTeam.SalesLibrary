@@ -47,7 +47,7 @@
 			$this->foreColor = $lineBreakRecord->fore_color;
 			$this->font = new Font();
 			$this->font->name = $lineBreakRecord->font_name;
-			$this->font->size = $lineBreakRecord->font_size;
+			$this->font->size = new Size($lineBreakRecord->font_size);
 			$this->font->isBold = $lineBreakRecord->font_bold;
 			$this->font->isItalic = $lineBreakRecord->font_italic;
 			$this->font->isUnderlined = $lineBreakRecord->font_underline;

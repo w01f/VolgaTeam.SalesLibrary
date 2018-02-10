@@ -17,7 +17,7 @@
 			'banner-text-link-wrap' :
 			'banner-text-link-no-wrap';?>"
 		      style="font-family: <? echo FontReplacementHelper::replaceFont($banner->font->name); ?>,serif;
-				  font-size: <? echo $banner->font->size; ?>pt;
+				  font-size: <? echo $banner->font->size->single; ?>pt;
 				  font-weight: <? echo $banner->font->isBold ? ' bold' : ' normal'; ?>;
 				  font-style: <? echo $banner->font->isItalic ? ' italic' : ' normal'; ?>;
 				  text-decoration: <? echo $banner->font->isUnderlined ? ' underline' : ' inherit'; ?>;

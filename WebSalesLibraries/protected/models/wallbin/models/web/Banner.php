@@ -37,7 +37,7 @@
 			$this->foreColor = $bannerRecord->fore_color;
 			$this->font = new \Font();
 			$this->font->name = $bannerRecord->font_name;
-			$this->font->size = $bannerRecord->font_size;
+			$this->font->size = new \Size($bannerRecord->font_size);
 			$this->font->isBold = $bannerRecord->font_bold;
 			$this->font->isItalic = $bannerRecord->font_italic;
 			$this->font->isUnderlined = $bannerRecord->font_underline;

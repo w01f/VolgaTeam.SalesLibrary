@@ -39,16 +39,23 @@
 		 * @param $xpath \DOMXPath
 		 * @param $contextNode \DOMNode
 		 */
-		protected function configureFromXml($xpath, $contextNode)
+		public function configureFromXml($xpath, $contextNode)
 		{
 			ContentBlock::configureFromXml($xpath, $contextNode);
 
-			$this->querySettings = LinkFeedQuerySettings::fromXml(LinkFeedQuerySettings::FeedTypeTrending, $xpath, $contextNode);
-			$this->viewSettings = FeedSettings::fromXml(FeedSettings::FeedTypeTrending, $xpath, $contextNode);
-			$this->detailsSettings = TrendingDetailsSettings::fromXml($xpath, $contextNode);
+			try
+			{
+				$this->querySettings = LinkFeedQuerySettings::fromXml(LinkFeedQuerySettings::FeedTypeTrending, $xpath, $contextNode);
+				$this->viewSettings = FeedSettings::fromXml(FeedSettings::FeedTypeTrending, $xpath, $contextNode);
+				$this->detailsSettings = TrendingDetailsSettings::fromXml($xpath, $contextNode);
+			}
+			catch (\Exception $ex)
+			{
+			}
 		}
 
-		/** @return LinkFeedItem[] */
+		/** @return LinkFeedItem[]
+		 */
 		public function getFeedItems()
 		{
 			return LinkFeedQueryHelper::queryFeedItems($this->querySettings);

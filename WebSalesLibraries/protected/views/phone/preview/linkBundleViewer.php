@@ -104,7 +104,7 @@
                         <div style="color: <? echo $infoItems[0]->foreColor; ?>;
 						<? if ($infoItems[0]->backColor !== '#FFFFFF'): ?>background-color: <? echo $infoItems[0]->backColor; ?>;<? endif; ?>
                                 font-family: <? echo FontReplacementHelper::replaceFont($infoItems[0]->font->name); ?>;
-                                font-size: <? echo $infoItems[0]->font->size; ?>pt;
+                                font-size: <? echo $infoItems[0]->font->size->single; ?>pt;
                                 font-weight: <? echo $infoItems[0]->font->isBold ? 'bold' : 'normal'; ?>;
                                 font-style: <? echo $infoItems[0]->font->isItalic ? 'italic' : 'normal'; ?>;
                                 text-decoration: <? echo $infoItems[0]->font->isUnderlined ? 'underline' : 'none'; ?>;">

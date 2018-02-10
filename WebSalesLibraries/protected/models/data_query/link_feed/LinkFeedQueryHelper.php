@@ -16,7 +16,6 @@
 		/**
 		 * @param LinkFeedQuerySettings $feedSettings
 		 * @return LinkFeedItem[]
-		 * @throws \Exception
 		 */
 		public static function queryFeedItems($feedSettings)
 		{
@@ -32,7 +31,7 @@
 					/**@var SpecificLinkFeedQuerySettings $feedSettings */
 					return self::querySpecificLinkItems($feedSettings);
 				default:
-					throw new \Exception('Undefined feed type');
+					return array();
 			}
 		}
 
@@ -310,7 +309,14 @@
 
 			$dbCommand = $dbCommand->limit($feedSettings->maxLinks);
 
-			$resultRecords = $dbCommand->queryAll();
+			try
+			{
+				$resultRecords = $dbCommand->queryAll();
+			}
+			catch (\Exception $ex)
+			{
+				$resultRecords = array();
+			}
 
 			$libraryManager = new LibraryManager();
 
@@ -950,7 +956,15 @@
 					break;
 			}
 			$dbCommand = $dbCommand->order(sprintf("%s %s", $sortFiled, $feedSettings->sortSettings->order));
-			$resultRecords = $dbCommand->queryAll();
+
+			try
+			{
+				$resultRecords = $dbCommand->queryAll();
+			}
+			catch (\Exception $ex)
+			{
+				$resultRecords = array();
+			}
 
 			$libraryManager = new LibraryManager();
 

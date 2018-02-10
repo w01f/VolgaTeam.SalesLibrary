@@ -1,4 +1,5 @@
 <?
+
 	namespace application\models\wallbin\models\cadmin\entities;
 
 	use application\models\wallbin\models\cadmin\settings\LibraryFolderSettings as LibraryFolderSettings;
@@ -52,14 +53,14 @@
 
 				$folderSettings->windowFont = new \Font();
 				$folderSettings->windowFont->name = $folderRecord->window_font_name;
-				$folderSettings->windowFont->size = $folderRecord->window_font_size;
+				$folderSettings->windowFont->size = new \Size($folderRecord->window_font_size);
 				$folderSettings->windowFont->isBold = $folderRecord->window_font_bold;
 				$folderSettings->windowFont->isItalic = $folderRecord->window_font_italic;
 				$folderSettings->windowFont->isUnderlined = false;
 
 				$folderSettings->headerFont = new \Font();
 				$folderSettings->headerFont->name = $folderRecord->header_font_name;
-				$folderSettings->headerFont->size = $folderRecord->header_font_size;
+				$folderSettings->headerFont->size = new \Size($folderRecord->header_font_size);
 				$folderSettings->headerFont->isBold = $folderRecord->header_font_bold;
 				$folderSettings->headerFont->isItalic = $folderRecord->header_font_italic;
 				$folderSettings->headerFont->isUnderlined = false;

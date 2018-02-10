@@ -38,7 +38,7 @@
 		 * @param $xpath \DOMXPath
 		 * @param $contextNode \DOMNode
 		 */
-		protected function configureFromXml($xpath, $contextNode)
+		public function configureFromXml($xpath, $contextNode)
 		{
 			$this->useIcon = true;
 			$this->iconClass = 'default-icon';
