@@ -83,6 +83,15 @@
 						}).init();
 					});
 
+					$.each(landingPage.find('.menu-stripe'), function (key, value) {
+						var menuStripeBlock = $(value);
+						var menuStripeId = menuStripeBlock.prop('id').replace('menu-stripe-', '');
+
+						new $.SalesPortal.LandingPage.MenuStripe({
+							containerId: menuStripeId
+						}).init();
+					});
+
 					$.each(landingPage.find('.library-block'), function (key, value) {
 						var libraryBlock = $(value);
 						var libraryBlockId = libraryBlock.prop('id').replace('library-block-', '');

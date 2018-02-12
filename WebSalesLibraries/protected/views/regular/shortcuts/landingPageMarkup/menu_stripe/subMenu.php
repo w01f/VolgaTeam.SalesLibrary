@@ -81,7 +81,7 @@
 		<? echo $menuItem->title; ?><? if ($topLevel && $menuItem->showArrow): ?><span class="caret"></span><? endif; ?>
     </a>
 	<? if ($menuItem->enable): ?>
-        <ul class="dropdown-menu menu-stripe-submenu">
+        <ul class="dropdown-menu menu-stripe-submenu" aria-labelledby="<? echo $blockId; ?>">
 			<? foreach ($menuItem->items as $menuItem): ?>
 				<?
 				switch ($menuItem->type)

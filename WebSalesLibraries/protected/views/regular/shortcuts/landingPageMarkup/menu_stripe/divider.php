@@ -15,7 +15,7 @@
         <? endif; ?>
     }
 </style>
-<li id="<? echo $blockId; ?>" class="divider menu-stripe-item-divider<? if ($menuItem->hideCondition->large): ?> hidden-lg<? endif; ?>
+<li id="<? echo $blockId; ?>" role="separator" class="divider menu-stripe-item-divider<? if ($menuItem->hideCondition->large): ?> hidden-lg<? endif; ?>
     <? if ($menuItem->hideCondition->medium): ?> hidden-md<? endif; ?>
     <? if ($menuItem->hideCondition->small): ?> hidden-sm<? endif; ?>
     <? if ($menuItem->hideCondition->extraSmall): ?> hidden-xs<? endif; ?>">

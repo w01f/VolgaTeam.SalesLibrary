@@ -441,6 +441,13 @@
     opacity: 0;
 }
 
+#content .shortcuts-page-content.landing-page .menu-stripe-top-item.active-item > .menu-stripe-submenu,
+#content .shortcuts-page-content.landing-page .menu-stripe-item-submenu.active-item > .menu-stripe-submenu
+{
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
 #content .shortcuts-page-content.landing-page .menu-stripe-item-submenu.pull-left
 {
     float: none;

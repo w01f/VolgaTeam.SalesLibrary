@@ -106,7 +106,7 @@
     <? if ($contentBlock->hideCondition->small): ?> hidden-sm<? endif; ?>
     <? if ($contentBlock->hideCondition->extraSmall): ?> hidden-xs<? endif; ?>">
     <div class="container-fluid">
-        <ul id="<? echo $blockId; ?>" class="nav navbar-nav menu-stripe">
+        <ul id="<? echo $blockId; ?>" class="nav navbar-nav menu-stripe<?if(!$contentBlock->expandOnHover):?> expand-on-click<?endif;?>">
 			<? foreach ($contentBlock->items as $menuItem): ?>
 				<?
 				switch ($menuItem->type)
