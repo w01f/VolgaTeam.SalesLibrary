@@ -12,13 +12,16 @@
 	class MenuStripeBlock extends ContentBlock implements IParentMenu
 	{
 		public $expandOnHover;
-
 		public $showArrow;
 		public $animationSpeed;
+		public $floatRight;
+
 		/** @var  ItemSpacing */
 		public $itemSpacing;
+
 		/** @var  \HideCondition */
 		public $hideCondition;
+
 		/** @var  MenuStripeItem[] */
 		public $items;
 
@@ -34,6 +37,7 @@
 			$this->expandOnHover = true;
 			$this->showArrow = true;
 			$this->animationSpeed = 0;
+			$this->floatRight = false;
 			$this->itemSpacing = new ItemSpacing(0);
 			$this->hideCondition = new \HideCondition();
 
@@ -58,6 +62,9 @@
 
 				$queryResult = $xpath->query('./AnimationSpeed', $contextNode);
 				$this->animationSpeed = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue)) : $this->animationSpeed;
+
+				$queryResult = $xpath->query('./FloatRight', $contextNode);
+				$this->floatRight = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : $this->floatRight;
 
 				$queryResult = $xpath->query('./ItemSpacing', $contextNode);
 				if ($queryResult->length > 0)

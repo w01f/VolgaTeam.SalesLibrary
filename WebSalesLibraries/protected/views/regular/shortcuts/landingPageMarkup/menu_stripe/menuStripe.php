@@ -101,7 +101,7 @@
     }
 </style>
 
-<div class="navbar navbar-default menu-stripe-container<? if ($contentBlock->hideCondition->large): ?> hidden-lg<? endif; ?>
+<div class="navbar navbar-default menu-stripe-container<?if($contentBlock->floatRight):?> navbar-right<?endif;?><? if ($contentBlock->hideCondition->large): ?> hidden-lg<? endif; ?>
     <? if ($contentBlock->hideCondition->medium): ?> hidden-md<? endif; ?>
     <? if ($contentBlock->hideCondition->small): ?> hidden-sm<? endif; ?>
     <? if ($contentBlock->hideCondition->extraSmall): ?> hidden-xs<? endif; ?>">
