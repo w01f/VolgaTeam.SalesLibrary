@@ -74,6 +74,7 @@
 				if ($queryResult->length > 0)
 					$this->hideCondition = \HideCondition::fromXml($xpath, $queryResult->item(0));
 
+				$items = array();
 				$queryResult = $xpath->query('./Item', $contextNode);
 				foreach ($queryResult as $node)
 				{
@@ -96,8 +97,14 @@
 							break;
 					}
 					if (isset($menuItem) && $menuItem->isAccessGranted)
-						$this->items[] = $menuItem;
+						$items[] = $menuItem;
 				}
+
+				if ($this->floatRight)
+					for ($i = count($items) - 1; $i >= 0; $i--)
+						$this->items[] = $items[$i];
+				else
+					$this->items = $items;
 			}
 		}
 

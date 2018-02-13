@@ -409,6 +409,11 @@
     padding-left: 0;
 }
 
+#content .shortcuts-page-content.landing-page .navbar-right .navbar-nav > li
+{
+    float: right;
+}
+
 #content .shortcuts-page-content.landing-page .dropdown-menu > li > a:hover,
 #content .shortcuts-page-content.landing-page .dropdown-menu > li > a:focus
 {
