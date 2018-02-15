@@ -24,7 +24,7 @@
                     padding-bottom: 8px;
                     display: inline-block">
                 <span style="font-family: <? echo FontReplacementHelper::replaceFont($thumbnail->font->name); ?>,serif;
-                        font-size: <? echo $thumbnail->font->size->single; ?>pt;
+                        font-size: <? echo(!is_int($thumbnail->font->size) ? $thumbnail->font->size->single : $thumbnail->font->size); ?>pt;
                         font-weight: <? echo $thumbnail->font->isBold ? ' bold' : ' normal'; ?>;
                         font-style: <? echo $thumbnail->font->isItalic ? ' italic' : ' normal'; ?>;
                         text-decoration: <? echo $thumbnail->font->isUnderlined ? ' underline' : ' inherit'; ?>;

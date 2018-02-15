@@ -157,6 +157,7 @@
 		$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/data-table/bootstrap/js/datatables.min.js?' . Yii::app()->params['version'], CClientScript::POS_END);
 	}
 ?>
+
 <style id="main-menu-common-style">
     #main-menu .shortcut-menu-group-item {
         margin-right: <? echo Yii::app()->params['menu']['IconSeparation'];?>px;
