@@ -154,6 +154,7 @@ namespace SalesLibraries.FileManager.Controllers
 			if (!MainController.Instance.MainForm.pnContainer.Controls.Contains(this))
 				MainController.Instance.MainForm.pnContainer.Controls.Add(this);
 			pnContainer.BringToFront();
+			Visible = true;
 			BringToFront();
 
 			if (NeedToUpdate)

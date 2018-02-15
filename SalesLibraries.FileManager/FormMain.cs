@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using DevComponents.DotNetBar;
 using DevComponents.DotNetBar.Metro.ColorTables;
@@ -305,6 +306,14 @@ namespace SalesLibraries.FileManager
 			else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemBrowser)
 				key = TabPageEnum.Browser;
 
+			if (MainController.Instance.ActiveTab != key)
+			{
+				foreach (var control in pnContainer.Controls.OfType<Control>().ToList())
+					control.Visible = false;
+				pnContainer.Visible = false;
+				Application.DoEvents();
+			}
+
 			MainController.Instance.ShowTab(key);
 
 			switch (key)
@@ -332,6 +341,9 @@ namespace SalesLibraries.FileManager
 					OnRibbonExpandedChanged(sender, e);
 					break;
 			}
+
+			pnContainer.Visible = true;
+			Application.DoEvents();
 		}
 
 		#region Expand/Collapse Processing

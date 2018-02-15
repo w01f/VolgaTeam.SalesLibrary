@@ -37,6 +37,7 @@ namespace SalesLibraries.FileManager.Controllers
 			if (!MainController.Instance.MainForm.pnContainer.Controls.Contains(_browser))
 				MainController.Instance.MainForm.pnContainer.Controls.Add(_browser);
 
+			_browser.Visible = true;
 			_browser.BringToFront();
 
 			if (NeedToUpdate)

@@ -20,6 +20,7 @@ namespace SalesLibraries.FileManager.Configuration
 		public StorageFile TabSettingsFile { get; private set; }
 		public StorageFile ArchiveLinksSettingsFile { get; private set; }
 		public StorageFile BrowserSettingsFile { get; private set; }
+		public StorageFile IdleSettingsFile { get; private set; }
 		public StorageFile FormStyleConfigFile { get; private set; }
 		public StorageFile MainAppTitleTextFile { get; private set; }
 
@@ -89,6 +90,12 @@ namespace SalesLibraries.FileManager.Configuration
 			));
 			if (await BrowserSettingsFile.Exists(true))
 				await BrowserSettingsFile.Download();
+
+			IdleSettingsFile = new StorageFile(appOutgoingFolder.RelativePathParts.Merge(
+				"autoclose.xml"
+			));
+			if (await IdleSettingsFile.Exists(true))
+				await IdleSettingsFile.Download();
 
 			MainAppTitleTextFile = new StorageFile(appOutgoingFolder.RelativePathParts.Merge(
 				"app_brand.txt"

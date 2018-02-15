@@ -35,6 +35,7 @@ namespace SalesLibraries.FileManager.Controllers
 			if (!MainController.Instance.MainForm.pnContainer.Controls.Contains(_editor))
 				MainController.Instance.MainForm.pnContainer.Controls.Add(_editor);
 
+			_editor.Visible = true;
 			_editor.BringToFront();
 
 			if (NeedToUpdate)

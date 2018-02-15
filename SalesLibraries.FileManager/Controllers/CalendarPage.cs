@@ -69,6 +69,7 @@ namespace SalesLibraries.FileManager.Controllers
 
 			if (!MainController.Instance.MainForm.pnContainer.Controls.Contains(_viewer))
 				MainController.Instance.MainForm.pnContainer.Controls.Add(_viewer);
+			_viewer.Visible = true;
 			_viewer.BringToFront();
 		}
 

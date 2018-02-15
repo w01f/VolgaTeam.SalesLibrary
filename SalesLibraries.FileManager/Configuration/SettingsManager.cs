@@ -51,6 +51,8 @@ namespace SalesLibraries.FileManager.Configuration
 
 		public BrowserManager BrowserSettings { get; }
 
+		public ApplicationIdleSettings IdleSettings { get; }
+
 		public List<RibbonTabPageConfig> RibbonTabPageSettings { get; }
 
 		public MainFormStyleConfiguration MainFormStyle { get; }
@@ -74,6 +76,7 @@ namespace SalesLibraries.FileManager.Configuration
 
 			EditorSettings = new EditorsSettings();
 			BrowserSettings = new BrowserManager();
+			IdleSettings = new ApplicationIdleSettings();
 			RibbonTabPageSettings = new List<RibbonTabPageConfig>();
 			MainFormStyle = new MainFormStyleConfiguration();
 		}
@@ -153,6 +156,8 @@ namespace SalesLibraries.FileManager.Configuration
 			EditorSettings.Load();
 
 			BrowserSettings.Init(RemoteResourceManager.Instance.BrowserSettingsFile);
+
+			IdleSettings.Init(RemoteResourceManager.Instance.IdleSettingsFile);
 		}
 
 		public void Save()

@@ -24,15 +24,16 @@ namespace SalesLibraries.FileManager.Controllers
 	class MainController
 	{
 		private readonly Dictionary<TabPageEnum, IPageController> _tabPages = new Dictionary<TabPageEnum, IPageController>();
-		private TabPageEnum _activeTab;
 
 		public static MainController Instance { get; } = new MainController();
 
+		public TabPageEnum ActiveTab { get; private set; }
 		public SettingsManager Settings { get; }
 		public ListManager Lists { get; }
 		public RestServiceConnection RestServiceConnection { get; }
 		public LocalWallbinManager Wallbin { get; }
 		public HelpManager HelpManager { get; }
+		public ApplicationIdleManager IdleManager { get; }
 		public ImageResourcesManager ImageResources { get; }
 
 		public ViewManager WallbinViews { get; }
@@ -56,6 +57,7 @@ namespace SalesLibraries.FileManager.Controllers
 			RestServiceConnection = new RestServiceConnection();
 			Wallbin = new LocalWallbinManager();
 			HelpManager = new HelpManager();
+			IdleManager = new ApplicationIdleManager();
 			ImageResources = new ImageResourcesManager();
 			WallbinViews = new ViewManager();
 			MainForm = new FormMain();
@@ -214,6 +216,8 @@ namespace SalesLibraries.FileManager.Controllers
 						 })));
 					}
 					ShowTab(TabPageEnum.Home);
+
+					IdleManager.Init();
 				};
 				Application.Run(MainForm);
 			}
@@ -299,7 +303,7 @@ namespace SalesLibraries.FileManager.Controllers
 		public void ReloadWallbinViews()
 		{
 			MainForm.pnContainer.Controls.Clear();
-			foreach (var pageController in _tabPages.Where(pageController => pageController.Key == _activeTab))
+			foreach (var pageController in _tabPages.Where(pageController => pageController.Key == ActiveTab))
 				pageController.Value.IsActive = false;
 			using (var form = new FormProgressWallbin())
 			{
@@ -316,13 +320,13 @@ namespace SalesLibraries.FileManager.Controllers
 		{
 			MainForm.ribbonControl.Enabled = true;
 			if (tabPage == TabPageEnum.None)
-				tabPage = _activeTab;
+				tabPage = ActiveTab;
 			ProcessChanges();
 
-			foreach (var pageController in _tabPages.Where(pageController => pageController.Key == _activeTab))
+			foreach (var pageController in _tabPages.Where(pageController => pageController.Key == ActiveTab))
 				pageController.Value.IsActive = false;
 
-			_activeTab = tabPage;
+			ActiveTab = tabPage;
 			if (!_tabPages.ContainsKey(tabPage)) return;
 			_tabPages[tabPage].ShowPage(tabPage);
 			_tabPages[tabPage].UpdateStatusBar();
@@ -330,7 +334,7 @@ namespace SalesLibraries.FileManager.Controllers
 
 		public void ProcessChanges()
 		{
-			foreach (var pageController in _tabPages.Where(pageController => pageController.Key == _activeTab))
+			foreach (var pageController in _tabPages.Where(pageController => pageController.Key == ActiveTab))
 				pageController.Value.ProcessChanges();
 		}
 

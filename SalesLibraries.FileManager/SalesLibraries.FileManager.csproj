@@ -221,6 +221,7 @@
     <Compile Include="Business\PreviewGenerators\WordPreviewGenerator.cs" />
     <Compile Include="Business\PreviewGenerators\VideoPreviewGenerator.cs" />
     <Compile Include="Business\PreviewGenerators\PreviewGeneratorHelper.cs" />
+    <Compile Include="Business\Services\ApplicationIdleManager.cs" />
     <Compile Include="Business\Services\EOBrowserThumbnailGenerator.cs" />
     <Compile Include="Business\Services\RegularBrowserThumbnailGenerator.cs" />
     <Compile Include="Business\Services\CorruptedLinksHelper.cs" />
@@ -235,6 +236,7 @@
     <Compile Include="Business\Synchronization\SyncManager.cs" />
     <Compile Include="Business\Services\WebContentManager.cs" />
     <Compile Include="Business\Models\Security\LibraryGroup.cs" />
+    <Compile Include="Configuration\ApplicationIdleSettings.cs" />
     <Compile Include="Configuration\BrowserManager.cs" />
     <Compile Include="Configuration\EditorsSettings.cs" />
     <Compile Include="Configuration\ImageResourcesManager.cs" />
