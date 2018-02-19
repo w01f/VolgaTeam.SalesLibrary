@@ -21,7 +21,7 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 {
 	static class SyncManager
 	{
-		public static void SyncRegular(CancellationToken cancellationToken)
+		public static void SyncRegular(bool isAutoSync, CancellationToken cancellationToken)
 		{
 			var targetContext = MainController.Instance.WallbinViews.ActiveWallbin.DataStorage;
 			var targetLibrary = targetContext.Library;
@@ -51,7 +51,7 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 			WebContentManager.GenerateWebContent(targetLibrary);
 
 			if (cancellationToken.IsCancellationRequested) return;
-			var syncLogs = SyncLibrary(targetLibrary, cancellationToken);
+			var syncLogs = SyncLibrary(targetLibrary, isAutoSync, cancellationToken);
 			tempLogFiles.AddRange(syncLogs.Select(log => log.Save(tempPath)));
 
 			GenerateSyncLogArchive(tempLogFiles, targetLibrary, cancellationToken);
@@ -89,7 +89,7 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 				WebContentManager.GenerateWebContent(targetLibrary);
 
 				if (cancellationToken.IsCancellationRequested) return;
-				var syncLogs = SyncLibrary(targetLibrary, cancellationToken);
+				var syncLogs = SyncLibrary(targetLibrary, false, cancellationToken);
 				tempLogFiles.AddRange(syncLogs.Select(log => log.Save(tempPath)));
 
 				GenerateSyncLogArchive(tempLogFiles, targetLibrary, cancellationToken);
@@ -108,13 +108,15 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 				MainController.Instance.PopupMessages.ShowWarning(ex.Message);
 		}
 
-		private static IList<SyncLog> SyncLibrary(Library library, CancellationToken cancellationToken)
+		private static IList<SyncLog> SyncLibrary(Library library, bool isAutoSync, CancellationToken cancellationToken)
 		{
 			var syncLogs = new List<SyncLog>();
 
 			if (MainController.Instance.Settings.EnableLocalSync)
 			{
-				var localSyncLog = new SyncLog("Library Sync Manual");
+				var localSyncLog = isAutoSync && MainController.Instance.Settings.IdleSettings.Enabled && MainController.Instance.Settings.IdleSettings.SyncOnClose ?
+					new SyncLog("Library Sync", true, MainController.Instance.Settings.IdleSettings.InactivityMinutesTimeout) :
+					new SyncLog("Library Sync");
 				LibraryFilesSyncHelper.SyncLibraryLocalFiles(library, localSyncLog, cancellationToken);
 				if (cancellationToken.IsCancellationRequested) return syncLogs;
 				syncLogs.Add(localSyncLog);
@@ -122,7 +124,9 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 
 			if (MainController.Instance.Settings.EnableWebSync)
 			{
-				var webSyncLog = new SyncLog("iPad Sync Manual");
+				var webSyncLog = isAutoSync && MainController.Instance.Settings.IdleSettings.Enabled && MainController.Instance.Settings.IdleSettings.SyncOnClose ?
+					new SyncLog("iPad Sync", true, MainController.Instance.Settings.IdleSettings.InactivityMinutesTimeout) :
+					new SyncLog("iPad Sync");
 				LibraryFilesSyncHelper.SyncLibraryWebFiles(library, webSyncLog, cancellationToken);
 				if (cancellationToken.IsCancellationRequested) return syncLogs;
 				syncLogs.Add(webSyncLog);
@@ -289,9 +293,9 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 			logText.AppendLine("*Links Removed:");
 			foreach (var actionRecord in deleteActionRecords)
 				logText.AppendLine(String.Format("{0} ({1})", actionRecord.Settings.Name, actionRecord.Settings.Path));
-			logText.AppendLine(String.Empty); 
-			logText.AppendLine(String.Empty); 
-			logText.AppendLine(String.Empty); 
+			logText.AppendLine(String.Empty);
+			logText.AppendLine(String.Empty);
+			logText.AppendLine(String.Empty);
 
 			logText.AppendLine("*Links Changed:");
 			foreach (var actionRecord in changeActionRecords)

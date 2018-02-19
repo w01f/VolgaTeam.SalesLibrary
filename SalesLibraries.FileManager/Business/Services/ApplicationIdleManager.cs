@@ -15,16 +15,15 @@ namespace SalesLibraries.FileManager.Business.Services
 
 		public void Init()
 		{
-			if (!MainController.Instance.Settings.IdleSettings.Enabled || MainController.Instance.Settings.IdleSettings.InactivityTimeout == 0) return;
+			if (!MainController.Instance.Settings.IdleSettings.Enabled || MainController.Instance.Settings.IdleSettings.InactivityMinutesTimeout == 0) return;
 
 			var limf = new LeaveIdleMessageFilter();
 			Application.AddMessageFilter(limf);
 			Application.Idle += OnApplicationIdle;
-			IdleTimer.Interval = MainController.Instance.Settings.IdleSettings.InactivityTimeout;
+			IdleTimer.Interval = MainController.Instance.Settings.IdleSettings.InactivityMinutesTimeout * 60 * 1000;
 			IdleTimer.Tick += OnTimerExpired;
 			IdleTimer.Start();
 			MainController.Instance.MainForm.Closed += OnMainFormClosed;
-
 		}
 
 		private void OnApplicationIdle(Object sender, EventArgs e)
@@ -35,6 +34,9 @@ namespace SalesLibraries.FileManager.Business.Services
 
 		private void OnTimerExpired(object sender, EventArgs e)
 		{
+			if (IdleTimer.Enabled)
+				IdleTimer.Stop();
+			Application.Idle -= OnApplicationIdle;
 			if (MainController.Instance.Settings.IdleSettings.SyncOnClose && !((MainController.Instance.Settings.NetworkPaths.Any() && MainController.Instance.Settings.NetworkPaths.Any(p => !Directory.Exists(p))) ||
 				MainController.Instance.Settings.WebPaths.Any() && MainController.Instance.Settings.WebPaths.Any(p => !Directory.Exists(p))))
 			{
@@ -47,7 +49,7 @@ namespace SalesLibraries.FileManager.Business.Services
 						false,
 						(cancellationToken, formProgress) =>
 						{
-							SyncManager.SyncRegular(cancellationToken);
+							SyncManager.SyncRegular(true, cancellationToken);
 						},
 						null,
 						SyncManager.ProcessSyncException
@@ -59,7 +61,7 @@ namespace SalesLibraries.FileManager.Business.Services
 
 		private void OnMainFormClosed(Object sender, EventArgs e)
 		{
-			if (!MainController.Instance.Settings.IdleSettings.Enabled || MainController.Instance.Settings.IdleSettings.InactivityTimeout == 0) return;
+			if (!MainController.Instance.Settings.IdleSettings.Enabled || MainController.Instance.Settings.IdleSettings.InactivityMinutesTimeout == 0) return;
 
 			IdleTimer.Stop();
 			Application.Idle -= OnApplicationIdle;

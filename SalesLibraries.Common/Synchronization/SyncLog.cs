@@ -6,7 +6,9 @@ namespace SalesLibraries.Common.Synchronization
 {
 	public class SyncLog
 	{
-		private readonly string _name;
+		protected readonly string _name;
+		private readonly bool _isAutoSync;
+		private readonly int _afterInactivityMinutes;
 
 		private int _filesCreated;
 		private int _filesUpdated;
@@ -24,6 +26,13 @@ namespace SalesLibraries.Common.Synchronization
 			_name = name;
 		}
 
+		public SyncLog(string name, bool isAutoSync, int afterInactivityMinutes)
+		{
+			_name = name;
+			_isAutoSync = isAutoSync;
+			_afterInactivityMinutes = afterInactivityMinutes;
+		}
+
 		private void Reset()
 		{
 			_logRecords.Clear();
@@ -39,15 +48,15 @@ namespace SalesLibraries.Common.Synchronization
 				switch (e.Operation)
 				{
 					case SynchronizationOperation.Add:
-						_logRecords.AppendLine(string.Format("File created: {0}", e.DestinationFilePath));
+						_logRecords.AppendLine(String.Format("File created: {0}", e.DestinationFilePath));
 						_filesCreated++;
 						break;
 					case SynchronizationOperation.Update:
-						_logRecords.AppendLine(string.Format("File updated: {0}", e.DestinationFilePath));
+						_logRecords.AppendLine(String.Format("File updated: {0}", e.DestinationFilePath));
 						_filesUpdated++;
 						break;
 					case SynchronizationOperation.Delete:
-						_logRecords.AppendLine(string.Format("File deleted: {0}", e.DestinationFilePath));
+						_logRecords.AppendLine(String.Format("File deleted: {0}", e.DestinationFilePath));
 						_filesDeleted++;
 						break;
 				}
@@ -57,11 +66,11 @@ namespace SalesLibraries.Common.Synchronization
 				switch (e.Operation)
 				{
 					case SynchronizationOperation.Add:
-						_logRecords.AppendLine(string.Format("Folder created: {0}", e.DestinationFilePath));
+						_logRecords.AppendLine(String.Format("Folder created: {0}", e.DestinationFilePath));
 						_foldersCreated++;
 						break;
 					case SynchronizationOperation.Delete:
-						_logRecords.AppendLine(string.Format("Folder deleted: {0}", e.DestinationFilePath));
+						_logRecords.AppendLine(String.Format("Folder deleted: {0}", e.DestinationFilePath));
 						_foldersDeleted++;
 						break;
 				}
@@ -71,7 +80,9 @@ namespace SalesLibraries.Common.Synchronization
 		public void StartLogging()
 		{
 			Reset();
-			_logRecords.AppendLine(string.Format("Sync started: {0}", DateTime.Now.ToString("MM/dd/yy h:mm tt")));
+			_logRecords.AppendLine(String.Format("Sync started: {0:MM/dd/yy h:mm tt} {1}",
+				DateTime.Now,
+				_isAutoSync ? String.Format("(after {0} minutes inactivity)", _afterInactivityMinutes) : String.Empty));
 		}
 
 		public void AddRecord(string record)
@@ -81,30 +92,33 @@ namespace SalesLibraries.Common.Synchronization
 
 		public void FinishLoging()
 		{
-			_logRecords.AppendLine(string.Format("Sync completed: {0}", DateTime.Now.ToString("MM/dd/yy h:mm tt")));
+			_logRecords.AppendLine(String.Format("Sync completed: {0:MM/dd/yy h:mm tt}", DateTime.Now));
 
 			AppendSummary();
 		}
 
 		public void AbortLoging()
 		{
-			_logRecords.AppendLine(string.Format("Sync aborted: {0}", DateTime.Now.ToString("MM/dd/yy h:mm tt")));
+			_logRecords.AppendLine(String.Format("Sync aborted: {0:MM/dd/yy h:mm tt}", DateTime.Now));
 
 			AppendSummary();
 		}
 
 		private void AppendSummary()
 		{
-			_logRecords.AppendLine(string.Format("Total files created: {0}", _filesCreated.ToString("#,##0")));
-			_logRecords.AppendLine(string.Format("Total files updated: {0}", _filesUpdated.ToString("#,##0")));
-			_logRecords.AppendLine(string.Format("Total files deleted: {0}", _filesDeleted.ToString("#,##0")));
-			_logRecords.AppendLine(string.Format("Total folders created: {0}", _foldersCreated.ToString("#,##0")));
-			_logRecords.AppendLine(string.Format("Total folders deleted: {0}", _foldersDeleted.ToString("#,##0")));
+			_logRecords.AppendLine(String.Format("Total files created: {0:#,##0}", _filesCreated));
+			_logRecords.AppendLine(String.Format("Total files updated: {0:#,##0}", _filesUpdated));
+			_logRecords.AppendLine(String.Format("Total files deleted: {0:#,##0}", _filesDeleted));
+			_logRecords.AppendLine(String.Format("Total folders created: {0:#,##0}", _foldersCreated));
+			_logRecords.AppendLine(String.Format("Total folders deleted: {0:#,##0}", _foldersDeleted));
 		}
 
 		public string Save(string path)
 		{
-			var filePath = Path.Combine(path, String.Format("{0} at {1}.txt", _name, DateTime.Now.ToString("MM-dd-yy h-mm tt")));
+			var filePath = Path.Combine(path, String.Format("{0} {1} at {2:MM-dd-yy h-mm tt}.txt",
+				_name,
+				_isAutoSync ? "AutoTimer" : "Manual",
+				DateTime.Now));
 			File.WriteAllText(filePath, _logRecords.ToString());
 			return filePath;
 		}

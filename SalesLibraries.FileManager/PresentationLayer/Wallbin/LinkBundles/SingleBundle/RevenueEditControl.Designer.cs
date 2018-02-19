@@ -42,9 +42,12 @@
 			this.gridColumnInfoItemsActions = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.repositoryItemButtonEditInfoItemsActions = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
 			this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
-			this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-			this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
+			this.barManager = new DevExpress.XtraBars.BarManager(this.components);
+			this.barToolbar = new DevExpress.XtraBars.Bar();
+			this.barSubItemInfoAdd = new DevExpress.XtraBars.BarSubItem();
 			this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
+			this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
+			this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
 			this.colorEditBackColor = new SalesLibraries.CommonGUI.Common.HtmlColorEdit();
 			this.buttonEditTextFont = new DevExpress.XtraEditors.ButtonEdit();
 			this.pictureEditLogo = new DevExpress.XtraEditors.PictureEdit();
@@ -70,9 +73,6 @@
 			this.layoutControlItemTextFont = new DevExpress.XtraLayout.LayoutControlItem();
 			this.layoutControlItemRevenueInfo = new DevExpress.XtraLayout.LayoutControlItem();
 			this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
-			this.barManager = new DevExpress.XtraBars.BarManager(this.components);
-			this.barToolbar = new DevExpress.XtraBars.Bar();
-			this.barSubItemInfoAdd = new DevExpress.XtraBars.BarSubItem();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditAdditionalInfo.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControl)).BeginInit();
@@ -83,6 +83,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.gridViewInfoItems)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEditInfoItems)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditInfoItemsActions)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.barManager)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.colorEditBackColor.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonEditTextFont.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureEditLogo.Properties)).BeginInit();
@@ -108,7 +109,6 @@
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemTextFont)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemRevenueInfo)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.barManager)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// styleController
@@ -325,14 +325,51 @@
 			this.barDockControlLeft.Manager = this.barManager;
 			this.barDockControlLeft.Size = new System.Drawing.Size(0, 342);
 			// 
-			// barDockControlRight
+			// barManager
 			// 
-			this.barDockControlRight.CausesValidation = false;
-			this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-			this.barDockControlRight.ForeColor = System.Drawing.Color.Black;
-			this.barDockControlRight.Location = new System.Drawing.Point(354, 49);
-			this.barDockControlRight.Manager = this.barManager;
-			this.barDockControlRight.Size = new System.Drawing.Size(0, 342);
+			this.barManager.Bars.AddRange(new DevExpress.XtraBars.Bar[] {
+            this.barToolbar});
+			this.barManager.DockControls.Add(this.barDockControlTop);
+			this.barManager.DockControls.Add(this.barDockControlBottom);
+			this.barManager.DockControls.Add(this.barDockControlLeft);
+			this.barManager.DockControls.Add(this.barDockControlRight);
+			this.barManager.Form = this.pnRevenueInfo;
+			this.barManager.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
+            this.barSubItemInfoAdd});
+			this.barManager.MaxItemId = 14;
+			// 
+			// barToolbar
+			// 
+			this.barToolbar.BarName = "Tools";
+			this.barToolbar.CanDockStyle = DevExpress.XtraBars.BarCanDockStyle.Top;
+			this.barToolbar.DockCol = 0;
+			this.barToolbar.DockRow = 0;
+			this.barToolbar.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
+			this.barToolbar.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barSubItemInfoAdd, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
+			this.barToolbar.OptionsBar.AllowQuickCustomization = false;
+			this.barToolbar.OptionsBar.DisableClose = true;
+			this.barToolbar.OptionsBar.DisableCustomization = true;
+			this.barToolbar.OptionsBar.DrawDragBorder = false;
+			this.barToolbar.OptionsBar.UseWholeRow = true;
+			this.barToolbar.Text = "Tools";
+			// 
+			// barSubItemInfoAdd
+			// 
+			this.barSubItemInfoAdd.Caption = "Add Revenue Info";
+			this.barSubItemInfoAdd.Id = 3;
+			this.barSubItemInfoAdd.ImageOptions.Image = global::SalesLibraries.FileManager.Properties.Resources.BundlesEditorRevenueAdd;
+			this.barSubItemInfoAdd.ItemClickFireMode = DevExpress.XtraBars.BarItemEventFireMode.Immediate;
+			this.barSubItemInfoAdd.Name = "barSubItemInfoAdd";
+			// 
+			// barDockControlTop
+			// 
+			this.barDockControlTop.CausesValidation = false;
+			this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
+			this.barDockControlTop.ForeColor = System.Drawing.Color.Black;
+			this.barDockControlTop.Location = new System.Drawing.Point(2, 2);
+			this.barDockControlTop.Manager = this.barManager;
+			this.barDockControlTop.Size = new System.Drawing.Size(352, 47);
 			// 
 			// barDockControlBottom
 			// 
@@ -343,14 +380,14 @@
 			this.barDockControlBottom.Manager = this.barManager;
 			this.barDockControlBottom.Size = new System.Drawing.Size(352, 0);
 			// 
-			// barDockControlTop
+			// barDockControlRight
 			// 
-			this.barDockControlTop.CausesValidation = false;
-			this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
-			this.barDockControlTop.ForeColor = System.Drawing.Color.Black;
-			this.barDockControlTop.Location = new System.Drawing.Point(2, 2);
-			this.barDockControlTop.Manager = this.barManager;
-			this.barDockControlTop.Size = new System.Drawing.Size(352, 47);
+			this.barDockControlRight.CausesValidation = false;
+			this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
+			this.barDockControlRight.ForeColor = System.Drawing.Color.Black;
+			this.barDockControlRight.Location = new System.Drawing.Point(354, 49);
+			this.barDockControlRight.Manager = this.barManager;
+			this.barDockControlRight.Size = new System.Drawing.Size(0, 342);
 			// 
 			// colorEditBackColor
 			// 
@@ -706,43 +743,6 @@
 			this.emptySpaceItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
 			this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
 			// 
-			// barManager
-			// 
-			this.barManager.Bars.AddRange(new DevExpress.XtraBars.Bar[] {
-            this.barToolbar});
-			this.barManager.DockControls.Add(this.barDockControlTop);
-			this.barManager.DockControls.Add(this.barDockControlBottom);
-			this.barManager.DockControls.Add(this.barDockControlLeft);
-			this.barManager.DockControls.Add(this.barDockControlRight);
-			this.barManager.Form = this.pnRevenueInfo;
-			this.barManager.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
-            this.barSubItemInfoAdd});
-			this.barManager.MaxItemId = 14;
-			// 
-			// barToolbar
-			// 
-			this.barToolbar.BarName = "Tools";
-			this.barToolbar.CanDockStyle = DevExpress.XtraBars.BarCanDockStyle.Top;
-			this.barToolbar.DockCol = 0;
-			this.barToolbar.DockRow = 0;
-			this.barToolbar.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
-			this.barToolbar.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barSubItemInfoAdd, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
-			this.barToolbar.OptionsBar.AllowQuickCustomization = false;
-			this.barToolbar.OptionsBar.DisableClose = true;
-			this.barToolbar.OptionsBar.DisableCustomization = true;
-			this.barToolbar.OptionsBar.DrawDragBorder = false;
-			this.barToolbar.OptionsBar.UseWholeRow = true;
-			this.barToolbar.Text = "Tools";
-			// 
-			// barSubItemInfoAdd
-			// 
-			this.barSubItemInfoAdd.Caption = "Add Revenue Info";
-			this.barSubItemInfoAdd.Id = 3;
-			this.barSubItemInfoAdd.ImageOptions.Image = global::SalesLibraries.FileManager.Properties.Resources.BundlesEditorRevenueAdd;
-			this.barSubItemInfoAdd.ItemClickFireMode = DevExpress.XtraBars.BarItemEventFireMode.Immediate;
-			this.barSubItemInfoAdd.Name = "barSubItemInfoAdd";
-			// 
 			// RevenueEditControl
 			// 
 			this.BackColor = System.Drawing.Color.White;
@@ -762,6 +762,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.gridViewInfoItems)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEditInfoItems)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditInfoItemsActions)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.barManager)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.colorEditBackColor.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonEditTextFont.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureEditLogo.Properties)).EndInit();
@@ -787,7 +788,6 @@
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemTextFont)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemRevenueInfo)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.barManager)).EndInit();
 			this.ResumeLayout(false);
 
 		}

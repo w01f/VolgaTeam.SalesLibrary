@@ -295,7 +295,7 @@ namespace SalesLibraries.FileManager.Controllers
 					false,
 					(cancellationToken, formProgress) =>
 					{
-						SyncManager.SyncRegular(cancellationToken);
+						SyncManager.SyncRegular(false, cancellationToken);
 						successfullSync = true;
 					},
 					null,

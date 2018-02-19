@@ -25,6 +25,7 @@ using SalesLibraries.CommonGUI.CustomDialog;
 using SalesLibraries.FileManager.Business.Services;
 using SalesLibraries.FileManager.Controllers;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.ImageGallery;
+using SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Preview;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.SingleBundle
 {
@@ -114,6 +115,14 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Singl
 		{
 			if (DialogResult != DialogResult.OK) return;
 			SaveData();
+		}
+
+		private void OnPreviewClick(object sender, EventArgs e)
+		{
+			using (var form = new FormPreview(_linkBundle))
+			{
+				form.ShowDialog(MainController.Instance.MainForm);
+			}
 		}
 
 		#region Bundle Items
@@ -352,8 +361,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Singl
 
 		private void OnBundleItemsCellValueChanged(object sender, CellValueChangedEventArgs e)
 		{
-			var bundleItem = gridViewBundleItems.GetRow(e.RowHandle) as BaseBundleItem;
-			if (bundleItem == null) return;
+			if (!(gridViewBundleItems.GetRow(e.RowHandle) is BaseBundleItem bundleItem)) return;
 			if (e.Column == gridColumnBundleItemsTitle)
 			{
 				var applyDefaultHoverTips = (bool)barEditItemApplydefaultHoverNotes.EditValue;

@@ -105,7 +105,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.CompactWallbin
 			{
 				await Task.Run(() =>
 				{
-					SyncManager.SyncRegular(cancellationTokenSource.Token);
+					SyncManager.SyncRegular(false, cancellationTokenSource.Token);
 				}, cancellationTokenSource.Token);
 			}
 			catch (Exception exception)

@@ -390,6 +390,44 @@
     <Compile Include="PresentationLayer\Wallbin\ImageGallery\GalleryTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Wallbin\LinkBundles\Preview\BundleItemIconAdaptor.cs" />
+    <Compile Include="PresentationLayer\Wallbin\LinkBundles\Preview\LibraryLinkControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\LinkBundles\Preview\LibraryLinkControl.Designer.cs">
+      <DependentUpon>LibraryLinkControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\LinkBundles\Preview\CoverControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\LinkBundles\Preview\CoverControl.Designer.cs">
+      <DependentUpon>CoverControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\LinkBundles\Preview\FormPreview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\LinkBundles\Preview\FormPreview.designer.cs">
+      <DependentUpon>FormPreview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\LinkBundles\Preview\IBundleItemPreviewControl.cs" />
+    <Compile Include="PresentationLayer\Wallbin\LinkBundles\Preview\StrategyControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\LinkBundles\Preview\StrategyControl.Designer.cs">
+      <DependentUpon>StrategyControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\LinkBundles\Preview\InfoControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\LinkBundles\Preview\InfoControl.Designer.cs">
+      <DependentUpon>InfoControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\LinkBundles\Preview\LaunchScreenControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\LinkBundles\Preview\LaunchScreenControl.Designer.cs">
+      <DependentUpon>LaunchScreenControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationLayer\Wallbin\LinkBundles\SingleBundle\FormAddUrl.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1092,6 +1130,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\ImageGallery\FormImageGallery.resx">
       <DependentUpon>FormImageGallery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\LinkBundles\Preview\LibraryLinkControl.resx">
+      <DependentUpon>LibraryLinkControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\LinkBundles\Preview\CoverControl.resx">
+      <DependentUpon>CoverControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\LinkBundles\Preview\FormPreview.resx">
+      <DependentUpon>FormPreview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\LinkBundles\Preview\StrategyControl.resx">
+      <DependentUpon>StrategyControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\LinkBundles\Preview\InfoControl.resx">
+      <DependentUpon>InfoControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\LinkBundles\Preview\LaunchScreenControl.resx">
+      <DependentUpon>LaunchScreenControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\LinkBundles\SingleBundle\FormAddUrl.resx">
       <DependentUpon>FormAddUrl.cs</DependentUpon>

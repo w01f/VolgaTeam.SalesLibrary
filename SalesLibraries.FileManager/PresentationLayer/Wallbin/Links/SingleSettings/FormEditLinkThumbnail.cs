@@ -183,6 +183,46 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			}
 		}
 
+		private void RefreshSourceFiles(IList<IThumbnailSettingsHolder> thubnailLinks)
+		{
+			if (!thubnailLinks.Any()) return;
+			MainController.Instance.ProcessManager.Run("Updating Thumbnail Images...", (cancelationToken, formProgess) =>
+			{
+				foreach (var link in thubnailLinks)
+				{
+					var sourceLinks = new List<IPreviewableLink>();
+					if (link is LinkBundleLink linkBundleLink)
+					{
+						if (linkBundleLink.Settings is LinkBundleLinkSettings settings)
+						{
+							sourceLinks.AddRange(settings.Bundle.Settings.Items
+								.OfType<LibraryLinkItem>()
+								.Select(item => item.TargetLink)
+								.OfType<IPreviewableLink>());
+						}
+					}
+					else if (link is IPreviewableLink previewableLink)
+					{
+						sourceLinks.Add(previewableLink);
+					}
+
+					foreach (var previewableLink in sourceLinks)
+					{
+						if (link is PreviewableFileLink previewableFileLink)
+						{
+							if (previewableFileLink.Settings is DocumentLinkSettings settings)
+							{
+								settings.IsArchiveResource = false;
+								settings.GeneratePreviewImages = true;
+							}
+						}
+						var previewGenerator = previewableLink.GetPreviewContainer().GetPreviewGenerator();
+						previewableLink.UpdatePreviewContainer(previewGenerator, cancelationToken);
+					}
+				}
+			});
+		}
+
 		private void OnFormClosing(object sender, FormClosingEventArgs e)
 		{
 			if (DialogResult != DialogResult.OK) return;
@@ -491,38 +531,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		{
 			if (SingleLink == null) return;
 
-			MainController.Instance.ProcessManager.Run("Updating Images...", (cancelationToken, formProgess) =>
-			{
-				var sourceLinks = new List<IPreviewableLink>();
-				if (SingleLink is LinkBundleLink linkBundleLink)
-				{
-					if (linkBundleLink.Settings is LinkBundleLinkSettings settings)
-					{
-						sourceLinks.AddRange(settings.Bundle.Settings.Items
-							.OfType<LibraryLinkItem>()
-							.Select(item => item.TargetLink)
-							.OfType<IPreviewableLink>());
-					}
-				}
-				else if (SingleLink is IPreviewableLink previewableLink)
-				{
-					sourceLinks.Add(previewableLink);
-				}
-
-				foreach (var previewableLink in sourceLinks)
-				{
-					if (SingleLink is PreviewableFileLink previewableFileLink)
-					{
-						if (previewableFileLink.Settings is DocumentLinkSettings settings)
-						{
-							settings.IsArchiveResource = false;
-							settings.GeneratePreviewImages = true;
-						}
-					}
-					var previewGenerator = previewableLink.GetPreviewContainer().GetPreviewGenerator();
-					previewableLink.UpdatePreviewContainer(previewGenerator, cancelationToken);
-				}
-			});
+			RefreshSourceFiles(new[] { SingleLink });
 
 			LoadSourceImages();
 
@@ -755,6 +764,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		private void SaveLinkSetData()
 		{
+			if (buttonXEnable.Checked)
+				RefreshSourceFiles(_selectedLinks.Where(link => !link.GetThumbnailSourceFiles().Any()).ToList());
+
 			foreach (var selectedLink in _selectedLinks)
 			{
 				if (buttonXEnable.Checked)

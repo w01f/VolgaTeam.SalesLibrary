@@ -117,7 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="imageListViewList.Colors" xml:space="preserve">
+    <value>ControlBackColor = White; AlternateBackColor = WindowFrame; BorderColor = Transparent; ForeColor = DarkGray; UnFocusedColor1 = Highlight; UnFocusedColor2 = Highlight; UnFocusedBorderColor = 806d6d6d; UnFocusedForeColor = White; HoverColor1 = 83399ff; HoverColor2 = 403399ff; HoverBorderColor = 403399ff; SelectedColor1 = Highlight; SelectedColor2 = Highlight; SelectedBorderColor = 803399ff; SelectedForeColor = White; DisabledColor1 = 6d6d6d; DisabledColor2 = 206d6d6d; DisabledBorderColor = 206d6d6d; DisabledForeColor = DarkGray; ColumnHeaderBackColor1 = 20f0f0f0; ColumnHeaderBackColor2 = c4f0f0f0; ColumnHeaderHoverColor1 = 103399ff; ColumnHeaderHoverColor2 = 403399ff; ColumnSelectColor = 106d6d6d; ColumnSeparatorColor = 206d6d6d; PaneBackColor = 106d6d6d; PaneSeparatorColor = 806d6d6d; ImageInnerBorderColor = Transparent; ImageOuterBorderColor = Transparent; SelectionRectangleColor1 = 803399ff; SelectionRectangleColor2 = 803399ff</value>
+  </data>
   <metadata name="styleController.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>286, 56</value>
+    <value>17, 17</value>
   </metadata>
 </root>

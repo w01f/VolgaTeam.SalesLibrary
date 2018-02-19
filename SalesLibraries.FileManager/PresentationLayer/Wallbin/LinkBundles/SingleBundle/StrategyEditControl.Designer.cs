@@ -184,6 +184,7 @@
 			this.pictureEditLogo.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
 			this.pictureEditLogo.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
 			this.pictureEditLogo.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Zoom;
+			this.pictureEditLogo.Properties.ZoomAccelerationFactor = 1D;
 			this.pictureEditLogo.Size = new System.Drawing.Size(64, 64);
 			this.pictureEditLogo.StyleController = this.layoutControl;
 			this.pictureEditLogo.TabIndex = 64;
@@ -312,8 +313,6 @@
 			this.simpleLabelItemTitle.AppearanceItemCaption.Options.UseTextOptions = true;
 			this.simpleLabelItemTitle.AppearanceItemCaption.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.None;
 			this.simpleLabelItemTitle.AppearanceItemCaption.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-			this.simpleLabelItemTitle.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-			this.simpleLabelItemTitle.FillControlToClientArea = false;
 			this.simpleLabelItemTitle.Location = new System.Drawing.Point(72, 0);
 			this.simpleLabelItemTitle.MaxSize = new System.Drawing.Size(0, 72);
 			this.simpleLabelItemTitle.MinSize = new System.Drawing.Size(226, 72);
@@ -324,7 +323,6 @@
     " General Sales Cycle? Digital or Mobile Sales Strategy?</size>";
 			this.simpleLabelItemTitle.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
 			this.simpleLabelItemTitle.TextSize = new System.Drawing.Size(905, 18);
-			this.simpleLabelItemTitle.TrimClientAreaToControl = false;
 			// 
 			// emptySpaceItem1
 			// 

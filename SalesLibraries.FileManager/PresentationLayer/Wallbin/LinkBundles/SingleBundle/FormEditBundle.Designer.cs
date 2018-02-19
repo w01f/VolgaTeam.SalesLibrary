@@ -75,6 +75,7 @@
 			this.layoutControlItemBarDockControlTop = new DevExpress.XtraLayout.LayoutControlItem();
 			this.layoutControlItemBundleItems = new DevExpress.XtraLayout.LayoutControlItem();
 			this.layoutControlMain = new DevExpress.XtraLayout.LayoutControl();
+			this.buttonXPreview = new DevComponents.DotNetBar.ButtonX();
 			this.xtraTabControl = new DevExpress.XtraTab.XtraTabControl();
 			this.xtraTabPageLinks = new DevExpress.XtraTab.XtraTabPage();
 			this.layoutControlGroupRoot = new DevExpress.XtraLayout.LayoutControlGroup();
@@ -84,6 +85,7 @@
 			this.emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.layoutControlItemOK = new DevExpress.XtraLayout.LayoutControlItem();
 			this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.layoutControlItemPreview = new DevExpress.XtraLayout.LayoutControlItem();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlBundleItems)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewBundleItems)).BeginInit();
@@ -119,6 +121,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemOK)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPreview)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// buttonXCancel
@@ -729,6 +732,7 @@
 			this.layoutControlMain.Appearance.ControlReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.layoutControlMain.Appearance.ControlReadOnly.Options.UseFont = true;
 			this.layoutControlMain.BackColor = System.Drawing.Color.White;
+			this.layoutControlMain.Controls.Add(this.buttonXPreview);
 			this.layoutControlMain.Controls.Add(this.buttonXOK);
 			this.layoutControlMain.Controls.Add(this.buttonXCancel);
 			this.layoutControlMain.Controls.Add(this.xtraTabControl);
@@ -742,6 +746,20 @@
 			this.layoutControlMain.StyleController = this.styleController;
 			this.layoutControlMain.TabIndex = 63;
 			this.layoutControlMain.Text = "layoutControl1";
+			// 
+			// buttonXPreview
+			// 
+			this.buttonXPreview.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXPreview.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXPreview.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXPreview.Location = new System.Drawing.Point(7, 531);
+			this.buttonXPreview.Name = "buttonXPreview";
+			this.buttonXPreview.Size = new System.Drawing.Size(116, 36);
+			this.buttonXPreview.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXPreview.TabIndex = 65;
+			this.buttonXPreview.Text = "Preview";
+			this.buttonXPreview.TextColor = System.Drawing.Color.Black;
+			this.buttonXPreview.Click += new System.EventHandler(this.OnPreviewClick);
 			// 
 			// xtraTabControl
 			// 
@@ -801,7 +819,8 @@
             this.layoutControlItemCancel,
             this.emptySpaceItem3,
             this.layoutControlItemOK,
-            this.emptySpaceItem2});
+            this.emptySpaceItem2,
+            this.layoutControlItemPreview});
 			this.layoutControlGroupRoot.Location = new System.Drawing.Point(0, 0);
 			this.layoutControlGroupRoot.Name = "Root";
 			this.layoutControlGroupRoot.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 0, 10);
@@ -811,9 +830,9 @@
 			// emptySpaceItem1
 			// 
 			this.emptySpaceItem1.AllowHotTrack = false;
-			this.emptySpaceItem1.Location = new System.Drawing.Point(0, 529);
+			this.emptySpaceItem1.Location = new System.Drawing.Point(120, 529);
 			this.emptySpaceItem1.Name = "emptySpaceItem1";
-			this.emptySpaceItem1.Size = new System.Drawing.Size(664, 40);
+			this.emptySpaceItem1.Size = new System.Drawing.Size(544, 40);
 			this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
 			// 
 			// layoutControlItemItems
@@ -883,6 +902,21 @@
 			this.emptySpaceItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
 			this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
 			// 
+			// layoutControlItemPreview
+			// 
+			this.layoutControlItemPreview.Control = this.buttonXPreview;
+			this.layoutControlItemPreview.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+			this.layoutControlItemPreview.FillControlToClientArea = false;
+			this.layoutControlItemPreview.Location = new System.Drawing.Point(0, 529);
+			this.layoutControlItemPreview.MaxSize = new System.Drawing.Size(120, 40);
+			this.layoutControlItemPreview.MinSize = new System.Drawing.Size(120, 40);
+			this.layoutControlItemPreview.Name = "layoutControlItemPreview";
+			this.layoutControlItemPreview.Size = new System.Drawing.Size(120, 40);
+			this.layoutControlItemPreview.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.layoutControlItemPreview.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemPreview.TextVisible = false;
+			this.layoutControlItemPreview.TrimClientAreaToControl = false;
+			// 
 			// FormEditBundle
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -934,6 +968,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemOK)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemPreview)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -993,5 +1028,7 @@
 		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
 		private DevExpress.XtraBars.BarEditItem barEditItemApplydefaultHoverNotes;
 		private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit;
+		private DevComponents.DotNetBar.ButtonX buttonXPreview;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemPreview;
 	}
 }

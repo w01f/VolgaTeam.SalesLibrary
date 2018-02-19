@@ -7,7 +7,7 @@ namespace SalesLibraries.FileManager.Configuration
 	class ApplicationIdleSettings
 	{
 		public bool Enabled { get; private set; }
-		public int InactivityTimeout { get; private set; }
+		public int InactivityMinutesTimeout { get; private set; }
 		public bool SyncOnClose { get; private set; }
 
 		public ApplicationIdleSettings()
@@ -22,7 +22,7 @@ namespace SalesLibraries.FileManager.Configuration
 			document.Load(settingsFile.LocalPath);
 
 			Enabled = Boolean.Parse(document.SelectSingleNode(@"//config/EnableAutoClose")?.InnerText ?? "false");
-			InactivityTimeout = Int32.Parse(document.SelectSingleNode(@"//config/InactivityTime")?.InnerText ?? "0") * 60 * 1000;
+			InactivityMinutesTimeout = Int32.Parse(document.SelectSingleNode(@"//config/InactivityTime")?.InnerText ?? "0");
 			SyncOnClose = Boolean.Parse(document.SelectSingleNode(@"//config/SyncOnClose")?.InnerText ?? "false");
 		}
 	}
