@@ -279,7 +279,7 @@
 				}
 				return $filteredLinks;
 			}
-			else if (\UserIdentity::isUserAdmin())
+			else if (!\UserIdentity::isUserAuthorized() || \UserIdentity::isUserAdmin())
 				return $links;
 			return array();
 		}

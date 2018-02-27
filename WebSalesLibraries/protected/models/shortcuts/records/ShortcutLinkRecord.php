@@ -138,7 +138,8 @@
 				case 'page':
 					$shortcut = new LibraryPageShortcut($this, $isPhone);
 					$needToUpdate = false;
-					$savedPageViewTypeTag = sprintf('PageViewType-%s', $shortcut->libraryName);
+					$cookieLibraryName = str_replace(" ", "", str_replace("=", "", str_replace(";", "", (str_replace(",", "", str_replace("'", "", $shortcut->libraryName))))));
+					$savedPageViewTypeTag = sprintf('PageViewType-%s', $cookieLibraryName);
 					if (isset($parameters) && array_key_exists('pageViewType', $parameters))
 					{
 						$shortcut->pageViewType = $parameters['pageViewType'];
@@ -186,8 +187,8 @@
 					break;
 				case 'library':
 					$shortcut = new WallbinShortcut($this, $isPhone);
-
-					$savedPageViewTypeTag = sprintf('PageViewType-%s', $shortcut->libraryName);
+					$cookieLibraryName = str_replace(" ", "", str_replace("=", "", str_replace(";", "", (str_replace(",", "", str_replace("'", "", $shortcut->libraryName))))));
+					$savedPageViewTypeTag = sprintf('PageViewType-%s', $cookieLibraryName);
 					if (isset($parameters) && array_key_exists('pageViewType', $parameters))
 					{
 						$shortcut->pageViewType = $parameters['pageViewType'];
@@ -200,7 +201,7 @@
 						$shortcut->pageViewType = Yii::app()->request->cookies[$savedPageViewTypeTag]->value;
 					}
 
-					$savedPageSelectorModeTag = sprintf('PageSelectorMode-%s', $shortcut->libraryName);
+					$savedPageSelectorModeTag = sprintf('PageSelectorMode-%s', $cookieLibraryName);
 					if (isset($parameters) && array_key_exists('pageSelectorMode', $parameters))
 					{
 						$shortcut->pageSelectorMode = $parameters['pageSelectorMode'];
