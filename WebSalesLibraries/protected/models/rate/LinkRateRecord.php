@@ -93,7 +93,14 @@
 			$totalRate = self::model()->getRate($linkId, null);
 			$userRate = self::model()->getRate($linkId, $userId);
 			$totalRateImage = self::getStarImage($totalRate);
-			return array('totalRate' => $totalRate, 'userRate' => $userRate, 'totalRateImage' => $totalRateImage);
+			return array(
+				'linkId' => $linkId,
+				'linkName' => $linkId,
+				'linkFile' => $linkId,
+				'linkFormat' => $linkId,
+				'totalRate' => $totalRate,
+				'userRate' => $userRate,
+				'totalRateImage' => $totalRateImage);
 		}
 
 		/**

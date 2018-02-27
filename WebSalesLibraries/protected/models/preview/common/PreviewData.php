@@ -80,9 +80,6 @@
 					break;
 			}
 
-			$userId = UserIdentity::getCurrentUserId();
-			$this->rateData = LinkRateRecord::getRateData($link->id, $userId);
-
 			$this->totalViews = $link->getTotalViews();
 		}
 
@@ -117,6 +114,12 @@
 				$action->logo = sprintf('%s/images/preview/actions/favorites.png?%s', $imageUrlPrefix, Yii::app()->params['version']);
 				$this->dialogActions[] = $action;
 			}
+		}
+
+		public function initRateData()
+		{
+			$userId = UserIdentity::getCurrentUserId();
+			$this->rateData = LinkRateRecord::getRateData(isset($this->linkBundleId) ? $this->linkBundleId : $this->linkId, $userId);
 		}
 
 		public abstract function initContextActions();
@@ -214,6 +217,7 @@
 			$previewData->applyLinkSettings($isQuickSite, isset($parentBundleId));
 			$previewData->initDialogActions();
 			$previewData->initContextActions();
+			$previewData->initRateData();
 			return $previewData;
 		}
 	}

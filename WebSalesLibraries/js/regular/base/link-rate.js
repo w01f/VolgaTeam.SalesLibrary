@@ -18,7 +18,7 @@
 						type: "POST",
 						url: window.BaseUrl + "rate/setRate",
 						data: {
-							linkId: linkData.id,
+							linkId: rateData.linkId,
 							value: value
 						},
 						success: function (msg)

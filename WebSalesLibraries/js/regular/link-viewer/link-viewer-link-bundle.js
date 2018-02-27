@@ -1,16 +1,13 @@
-(function ($)
-{
+(function ($) {
 	window.BaseUrl = window.BaseUrl || '';
 	$.SalesPortal = $.SalesPortal || {};
-	$.SalesPortal.LinkBundleViewer = function (parameters)
-	{
+	$.SalesPortal.LinkBundleViewer = function (parameters) {
 		var that = this;
 		var dialogContent = undefined;
 		var openedViewer = undefined;
 		var viewerData = new $.SalesPortal.LinkBundleViewerData(parameters.data);
 
-		this.show = function ()
-		{
+		this.show = function () {
 			$.fancybox({
 				content: parameters.content,
 				title: "Link Bundle",
@@ -22,8 +19,7 @@
 			});
 		};
 
-		this.afterShow = function ()
-		{
+		this.afterShow = function () {
 			dialogContent = $('.bundle-container');
 
 			initDialogTitle();
@@ -38,27 +34,23 @@
 			openBundleItem(defaultItemData);
 		};
 
-		this.afterClose = function ()
-		{
+		this.afterClose = function () {
 			releaseOpenedBundleItem();
 		};
 
-		var initDialogTitle = function ()
-		{
+		var initDialogTitle = function () {
 			if (viewerData.totalViews > 0)
 				$('.fancybox-title').addClass('link-viewer-title');
 		};
 
-		var processBundleItem = function ()
-		{
+		var processBundleItem = function () {
 			var itemData = $(this).find('.service-data');
 			dialogContent.find('.content-item > a').removeClass('selected');
 			$(this).find('>a').addClass('selected');
 			openBundleItem(itemData);
 		};
 
-		var openBundleItem = function (itemData)
-		{
+		var openBundleItem = function (itemData) {
 			releaseOpenedBundleItem();
 
 			parameters.data.defaultItemId = itemData.find('.item-id').text();
@@ -86,20 +78,35 @@
 					linkViewContainer.find('.add-quicksite').off('click.preview').on('click.preview', addToQuickSite);
 					linkViewContainer.find('.add-favorites').off('click.preview').on('click.preview', addToFavorites);
 
-					new $.SalesPortal.RateManager().init(
-						{
-							id: viewerData.linkId,
-							name: viewerData.name,
-							file: viewerData.fileName,
-							format: viewerData.format
+					var linkRateContainer =linkViewContainer.find('.user-link-rate-container');
+					linkRateContainer.hide();
+					$.ajax({
+						type: "POST",
+						url: window.BaseUrl + "rate/getRate",
+						data: {
+							linkId: viewerData.rateData.linkId
 						},
-						linkViewContainer.find('.user-link-rate-container'),
-						viewerData.rateData,
-						function (newRateData)
-						{
-							viewerData.rateData = newRateData;
-						}
-					);
+						success: function (actualRateData) {
+							linkRateContainer.show();
+							new $.SalesPortal.RateManager().init(
+								{
+									id: viewerData.linkId,
+									name: viewerData.name,
+									file: viewerData.fileName,
+									format: viewerData.format
+								},
+								linkRateContainer,
+								actualRateData,
+								function (newRateData) {
+									viewerData.rateData = newRateData;
+								}
+							);
+						},
+						error: function () {
+						},
+						async: true,
+						dataType: 'json'
+					});
 					break;
 				case 'link':
 					$.SalesPortal.Overlay.show();
@@ -110,8 +117,7 @@
 						isQuickSite: false,
 						viewContainer: dialogContent.find('.link-viewer-container'),
 						parentPreviewParameters: parameters,
-						afterViewerOpenedCallback: function (viewer)
-						{
+						afterViewerOpenedCallback: function (viewer) {
 							openedViewer = viewer;
 						}
 					});
@@ -122,27 +128,23 @@
 
 		};
 
-		var releaseOpenedBundleItem = function ()
-		{
+		var releaseOpenedBundleItem = function () {
 			if (openedViewer !== undefined)
 				openedViewer.afterClose();
 			openedViewer = undefined;
 			dialogContent.find('.link-viewer-container').html('');
 		};
 
-		var downloadLinkBundle = function ()
-		{
+		var downloadLinkBundle = function () {
 			$.SalesPortal.ZipDownloadFilesHelper.processLinkBundle(viewerData.linkId);
 		};
 
-		var addToQuickSite = function ()
-		{
+		var addToQuickSite = function () {
 			$.fancybox.close();
 			$.SalesPortal.QBuilder.LinkCart.addLinks([viewerData.linkId]);
 		};
 
-		var addToFavorites = function ()
-		{
+		var addToFavorites = function () {
 			$.SalesPortal.LinkManager.addToFavorites(
 				viewerData.linkId,
 				viewerData.name,
