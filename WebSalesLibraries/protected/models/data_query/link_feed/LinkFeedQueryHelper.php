@@ -357,10 +357,12 @@
 					$feedItem->isDirectUrl = false;
 				}
 
+				if (!empty($resultRecord['thumbnail']))
+					$resultRecord['thumbnail'] = str_replace("/", DIRECTORY_SEPARATOR, str_replace("\\", DIRECTORY_SEPARATOR, $resultRecord['thumbnail']));
 				switch ($resultRecord['search_format'])
 				{
 					case LinkFeedQuerySettings::LinkFormatYouTube:
-						if (!isset($resultRecord['thumbnail']))
+						if (empty($resultRecord['thumbnail']))
 						{
 							if (preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $resultRecord['path'], $match))
 							{
@@ -369,10 +371,14 @@
 							}
 						}
 						else
-							$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '//' . 'sd_cache' . '//' . $resultRecord['thumbnail']);
+						{
+							$thumbnailFile = realpath(LibraryManager::getLibrariesRootPath() . DIRECTORY_SEPARATOR . $resultRecord['thumbnail']);
+							if (file_exists($thumbnailFile))
+								$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '//' . \Yii::app()->params['librariesRoot'] . '//' . $resultRecord['thumbnail']);
+						}
 						break;
 					case LinkFeedQuerySettings::LinkFormatVimeo:
-						if (!isset($resultRecord['thumbnail']))
+						if (empty($resultRecord['thumbnail']))
 						{
 
 							if (preg_match('/https?:\/\/(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|(\w*\/)*review\/|)(\d+)(?:$|\/|\?)/', $resultRecord['path'], $match))
@@ -391,13 +397,18 @@
 								$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/grid/thumbnail-placeholder/vimeo.png');
 						}
 						else
-							$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '//' . 'sd_cache' . '//' . $resultRecord['thumbnail']);
+						{
+							$thumbnailFile = realpath(LibraryManager::getLibrariesRootPath() . DIRECTORY_SEPARATOR . $resultRecord['thumbnail']);
+							if (file_exists($thumbnailFile))
+								$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '//' . \Yii::app()->params['librariesRoot'] . '//' . $resultRecord['thumbnail']);
+						}
 						break;
 					case LinkFeedQuerySettings::LinkFormatUrl:
 						if (!empty($resultRecord['thumbnail']))
 						{
-							$thumbnailRelativePath = $resultRecord['thumbnail'];
-							$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '//' . 'sd_cache' . '//' . $thumbnailRelativePath);
+							$thumbnailFile = realpath(LibraryManager::getLibrariesRootPath() . DIRECTORY_SEPARATOR . $resultRecord['thumbnail']);
+							if (file_exists($thumbnailFile))
+								$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '//' . \Yii::app()->params['librariesRoot'] . '//' . $resultRecord['thumbnail']);
 						}
 						else
 							$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/grid/thumbnail-placeholder/url.png');
@@ -495,11 +506,16 @@
 							$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/grid/thumbnail-placeholder/internal shortcut.png');
 						break;
 					default:
-						$thumbnailRelativePath = $resultRecord['thumbnail'];
-						$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '//' . 'sd_cache' . '//' . $thumbnailRelativePath);
+						if (!empty($resultRecord['thumbnail']))
+						{
+							$thumbnailFile = realpath(LibraryManager::getLibrariesRootPath() . DIRECTORY_SEPARATOR . $resultRecord['thumbnail']);
+							if (file_exists($thumbnailFile))
+								$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '//' . \Yii::app()->params['librariesRoot'] . '//' . $resultRecord['thumbnail']);
+						}
 						break;
 				}
-
+				if (empty($feedItem->thumbnail))
+					$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/missing_image.jpg');
 				$feedItems[] = $feedItem;
 			}
 
@@ -603,10 +619,12 @@
 					$feedItem->isDirectUrl = false;
 				}
 
+				if (!empty($resultRecord['thumbnail']))
+					$resultRecord['thumbnail'] = str_replace("/", DIRECTORY_SEPARATOR, str_replace("\\", DIRECTORY_SEPARATOR, $resultRecord['thumbnail']));
 				switch ($resultRecord['original_format'])
 				{
 					case LinkFeedQuerySettings::LinkFormatYouTube:
-						if (!isset($resultRecord['thumbnail']))
+						if (empty($resultRecord['thumbnail']))
 						{
 							if (preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $resultRecord['path'], $match))
 							{
@@ -615,10 +633,14 @@
 							}
 						}
 						else
-							$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '//' . 'sd_cache' . '//' . $resultRecord['thumbnail']);
+						{
+							$thumbnailFile = realpath(LibraryManager::getLibrariesRootPath() . DIRECTORY_SEPARATOR . $resultRecord['thumbnail']);
+							if (file_exists($thumbnailFile))
+								$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '//' . \Yii::app()->params['librariesRoot'] . '//' . $resultRecord['thumbnail']);
+						}
 						break;
 					case LinkFeedQuerySettings::LinkFormatVimeo:
-						if (!isset($resultRecord['thumbnail']))
+						if (empty($resultRecord['thumbnail']))
 						{
 
 							if (preg_match('/https?:\/\/(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|(\w*\/)*review\/|)(\d+)(?:$|\/|\?)/', $resultRecord['path'], $match))
@@ -637,13 +659,18 @@
 								$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/grid/thumbnail-placeholder/vimeo.png');
 						}
 						else
-							$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '//' . 'sd_cache' . '//' . $resultRecord['thumbnail']);
+						{
+							$thumbnailFile = realpath(LibraryManager::getLibrariesRootPath() . DIRECTORY_SEPARATOR . $resultRecord['thumbnail']);
+							if (file_exists($thumbnailFile))
+								$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '//' . \Yii::app()->params['librariesRoot'] . '//' . $resultRecord['thumbnail']);
+						}
 						break;
 					case LinkFeedQuerySettings::LinkFormatUrl:
 						if (!empty($resultRecord['thumbnail']))
 						{
-							$thumbnailRelativePath = $resultRecord['thumbnail'];
-							$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '//' . 'sd_cache' . '//' . $thumbnailRelativePath);
+							$thumbnailFile = realpath(LibraryManager::getLibrariesRootPath() . DIRECTORY_SEPARATOR . $resultRecord['thumbnail']);
+							if (file_exists($thumbnailFile))
+								$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '//' . \Yii::app()->params['librariesRoot'] . '//' . $resultRecord['thumbnail']);
 						}
 						else
 							$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/grid/thumbnail-placeholder/url.png');
@@ -741,11 +768,16 @@
 							$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/grid/thumbnail-placeholder/internal shortcut.png');
 						break;
 					default:
-						$thumbnailRelativePath = $resultRecord['thumbnail'];
-						$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '//' . 'sd_cache' . '//' . $thumbnailRelativePath);
+						if (!empty($resultRecord['thumbnail']))
+						{
+							$thumbnailFile = realpath(LibraryManager::getLibrariesRootPath() . DIRECTORY_SEPARATOR . $resultRecord['thumbnail']);
+							if (file_exists($thumbnailFile))
+								$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '//' . \Yii::app()->params['librariesRoot'] . '//' . $resultRecord['thumbnail']);
+						}
 						break;
 				}
-
+				if (empty($feedItem->thumbnail))
+					$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/missing_image.jpg');
 				$feedItems[] = $feedItem;
 			}
 
@@ -1005,10 +1037,12 @@
 					$feedItem->isDirectUrl = false;
 				}
 
+				if (!empty($resultRecord['thumbnail']))
+					$resultRecord['thumbnail'] = str_replace("/", DIRECTORY_SEPARATOR, str_replace("\\", DIRECTORY_SEPARATOR, $resultRecord['thumbnail']));
 				switch ($resultRecord['original_format'])
 				{
 					case LinkFeedQuerySettings::LinkFormatYouTube:
-						if (!isset($resultRecord['thumbnail']))
+						if (empty($resultRecord['thumbnail']))
 						{
 							if (preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $resultRecord['path'], $match))
 							{
@@ -1017,10 +1051,14 @@
 							}
 						}
 						else
-							$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '//' . 'sd_cache' . '//' . $resultRecord['thumbnail']);
+						{
+							$thumbnailFile = realpath(LibraryManager::getLibrariesRootPath() . DIRECTORY_SEPARATOR . $resultRecord['thumbnail']);
+							if (file_exists($thumbnailFile))
+								$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '//' . \Yii::app()->params['librariesRoot'] . '//' . $resultRecord['thumbnail']);
+						}
 						break;
 					case LinkFeedQuerySettings::LinkFormatVimeo:
-						if (!isset($resultRecord['thumbnail']))
+						if (empty($resultRecord['thumbnail']))
 						{
 							if (preg_match('/https?:\/\/(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|(\w*\/)*review\/|)(\d+)(?:$|\/|\?)/', $resultRecord['path'], $match))
 							{
@@ -1038,13 +1076,18 @@
 								$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/grid/thumbnail-placeholder/vimeo.png');
 						}
 						else
-							$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '//' . 'sd_cache' . '//' . $resultRecord['thumbnail']);
+						{
+							$thumbnailFile = realpath(LibraryManager::getLibrariesRootPath() . DIRECTORY_SEPARATOR . $resultRecord['thumbnail']);
+							if (file_exists($thumbnailFile))
+								$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '//' . \Yii::app()->params['librariesRoot'] . '//' . $resultRecord['thumbnail']);
+						}
 						break;
 					case LinkFeedQuerySettings::LinkFormatUrl:
 						if (!empty($resultRecord['thumbnail']))
 						{
-							$thumbnailRelativePath = $resultRecord['thumbnail'];
-							$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '//' . 'sd_cache' . '//' . $thumbnailRelativePath);
+							$thumbnailFile = realpath(LibraryManager::getLibrariesRootPath() . DIRECTORY_SEPARATOR . $resultRecord['thumbnail']);
+							if (file_exists($thumbnailFile))
+								$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '//' . \Yii::app()->params['librariesRoot'] . '//' . $resultRecord['thumbnail']);
 						}
 						else
 							$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/grid/thumbnail-placeholder/url.png');
@@ -1142,11 +1185,16 @@
 							$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/grid/thumbnail-placeholder/internal shortcut.png');
 						break;
 					default:
-						$thumbnailRelativePath = $resultRecord['thumbnail'];
-						$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '//' . 'sd_cache' . '//' . $thumbnailRelativePath);
+						if (!empty($resultRecord['thumbnail']))
+						{
+							$thumbnailFile = realpath(LibraryManager::getLibrariesRootPath() . DIRECTORY_SEPARATOR . $resultRecord['thumbnail']);
+							if (file_exists($thumbnailFile))
+								$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '//' . \Yii::app()->params['librariesRoot'] . '//' . $resultRecord['thumbnail']);
+						}
 						break;
 				}
-
+				if (empty($feedItem->thumbnail))
+					$feedItem->thumbnail = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/missing_image.jpg');
 				$feedItems[] = $feedItem;
 			}
 

@@ -166,7 +166,12 @@
 								{
 									$imageUrl = null;
 									if (!empty($linkRecord['thumbnail']))
-										$imageUrl = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '//' . 'sd_cache' . '//' . $linkRecord['thumbnail']);
+									{
+										$linkRecord['thumbnail'] = str_replace("/", DIRECTORY_SEPARATOR, str_replace("\\", DIRECTORY_SEPARATOR, $linkRecord['thumbnail']));
+										$thumbnailFile = realpath(LibraryManager::getLibrariesRootPath() . DIRECTORY_SEPARATOR . $linkRecord['thumbnail']);
+										if (file_exists($thumbnailFile))
+											$imageUrl = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '//' . \Yii::app()->params['librariesRoot'] . '//' . $linkRecord['thumbnail']);
+									}
 									else
 									{
 										$imageFileName = null;
@@ -315,7 +320,7 @@
 									if (!empty($imageUrl))
 										$record['thumbnail'] = sprintf('<img src="%s" style="' . ($columnSettings->width > 0 ? ('max-width:' . $columnSettings->width . 'px;') : '') . ($columnSettings->height > 0 ? ('max-height:' . $columnSettings->height . 'px;') : '') . '">', $imageUrl);
 									else
-										$record['thumbnail'] = 'Not found';
+										$record['thumbnail'] = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/missing_image.jpg');
 								}
 								break;
 						}

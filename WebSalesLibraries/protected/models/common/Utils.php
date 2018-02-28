@@ -76,7 +76,10 @@
 						str_replace('&amp;', '%26',
 							str_replace(' ', '%20',
 								str_replace('%', '%25',
-									str_replace('https:/', 'https://', str_replace('http:/', 'http://', preg_replace('~/+~', '/', str_replace('\\', '/', $url))))))))));
+									str_replace('https:/', 'https://',
+										str_replace('http:/', 'http://',
+											preg_replace('~/+~', '/',
+												str_replace('\\', '/', $url))))))))));
 		}
 
 		/**
