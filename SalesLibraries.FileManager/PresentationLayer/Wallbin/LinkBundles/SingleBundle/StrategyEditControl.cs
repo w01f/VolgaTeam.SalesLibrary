@@ -60,14 +60,14 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Singl
 			_bundleItem = null;
 		}
 
-		private void OnHeaderCheckedChanged(object sender, System.EventArgs e)
+		private void OnHeaderCheckedChanged(object sender, EventArgs e)
 		{
 			layoutControlItemHeaderEditor.Enabled = checkEditHeader.Checked;
 			if (!checkEditHeader.Checked)
 				textEditHeader.EditValue = null;
 		}
 
-		private void OnBodyCheckedChanged(object sender, System.EventArgs e)
+		private void OnBodyCheckedChanged(object sender, EventArgs e)
 		{
 			layoutControlItemBodyEditor.Enabled = checkEditBody.Checked;
 			layoutControlItemTextColor.Enabled = checkEditBody.Checked;

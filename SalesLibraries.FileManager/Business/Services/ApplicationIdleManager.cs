@@ -109,6 +109,4 @@ namespace SalesLibraries.FileManager.Business.Services
 			}
 		}
 	}
-
-
 }

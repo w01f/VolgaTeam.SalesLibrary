@@ -47,7 +47,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Previ
 				.Select(bundleItem => new ImageListViewItem(bundleItem.Id)
 				{
 					Tag = bundleItem,
-					Text = bundleItem.Name,
+					Text = bundleItem.Title,
 				}
 				)
 				.ToArray();

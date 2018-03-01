@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using DevComponents.DotNetBar.Metro;
 using DevExpress.Skins;
 using SalesLibraries.Common.Extensions;
@@ -15,7 +16,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 		{
 			InitializeComponent();
 
-			_originalImage = Image.FromFile(imagePath);
+			var tempFile = Path.GetTempFileName();
+			File.Copy(imagePath, tempFile, true);
+			_originalImage = Image.FromFile(tempFile);
 
 			pictureEditImage.Image = _originalImage;
 

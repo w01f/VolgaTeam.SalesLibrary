@@ -57,18 +57,19 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			// 
 			// textEditPageName
 			// 
-			this.textEditPageName.Location = new System.Drawing.Point(144, 47);
+			this.textEditPageName.Location = new System.Drawing.Point(144, 52);
 			this.textEditPageName.Name = "textEditPageName";
 			this.textEditPageName.Properties.Appearance.BackColor = System.Drawing.Color.White;
 			this.textEditPageName.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.textEditPageName.Properties.Appearance.Options.UseBackColor = true;
 			this.textEditPageName.Properties.Appearance.Options.UseForeColor = true;
-			this.textEditPageName.Size = new System.Drawing.Size(197, 22);
+			this.textEditPageName.Size = new System.Drawing.Size(290, 22);
 			this.textEditPageName.StyleController = this.layoutControl;
 			this.textEditPageName.TabIndex = 0;
 			// 
 			// layoutControl
 			// 
+			this.layoutControl.AllowCustomization = false;
 			this.layoutControl.Appearance.Control.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.layoutControl.Appearance.Control.Options.UseFont = true;
 			this.layoutControl.Appearance.ControlDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
@@ -92,7 +93,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			this.layoutControl.Name = "layoutControl";
 			this.layoutControl.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(802, 383, 250, 350);
 			this.layoutControl.Root = this.layoutControlGroupRoot;
-			this.layoutControl.Size = new System.Drawing.Size(353, 143);
+			this.layoutControl.Size = new System.Drawing.Size(446, 143);
 			this.layoutControl.StyleController = this.styleController;
 			this.layoutControl.TabIndex = 63;
 			this.layoutControl.Text = "layoutControl1";
@@ -116,7 +117,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			this.buttonXCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXCancel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.buttonXCancel.Location = new System.Drawing.Point(225, 95);
+			this.buttonXCancel.Location = new System.Drawing.Point(318, 95);
 			this.buttonXCancel.Name = "buttonXCancel";
 			this.buttonXCancel.Size = new System.Drawing.Size(116, 36);
 			this.buttonXCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -128,6 +129,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			this.labelControlTitle.AllowHtmlString = true;
 			this.labelControlTitle.Appearance.BackColor = System.Drawing.Color.White;
 			this.labelControlTitle.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.labelControlTitle.Appearance.Options.UseBackColor = true;
+			this.labelControlTitle.Appearance.Options.UseForeColor = true;
+			this.labelControlTitle.Appearance.Options.UseTextOptions = true;
 			this.labelControlTitle.Appearance.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.None;
 			this.labelControlTitle.Location = new System.Drawing.Point(12, 12);
 			this.labelControlTitle.Name = "labelControlTitle";
@@ -163,26 +167,29 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
             this.emptySpaceItem3});
 			this.layoutControlGroupRoot.Location = new System.Drawing.Point(0, 0);
 			this.layoutControlGroupRoot.Name = "Root";
-			this.layoutControlGroupRoot.Size = new System.Drawing.Size(353, 143);
+			this.layoutControlGroupRoot.Size = new System.Drawing.Size(446, 143);
 			this.layoutControlGroupRoot.TextVisible = false;
 			// 
 			// emptySpaceItem1
 			// 
 			this.emptySpaceItem1.AllowHotTrack = false;
-			this.emptySpaceItem1.Location = new System.Drawing.Point(0, 61);
+			this.emptySpaceItem1.Location = new System.Drawing.Point(0, 66);
 			this.emptySpaceItem1.Name = "emptySpaceItem1";
-			this.emptySpaceItem1.Size = new System.Drawing.Size(333, 22);
+			this.emptySpaceItem1.Size = new System.Drawing.Size(426, 17);
 			this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
 			// 
 			// layoutControlItemTitle
 			// 
+			this.layoutControlItemTitle.AppearanceItemCaption.Options.UseTextOptions = true;
+			this.layoutControlItemTitle.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+			this.layoutControlItemTitle.AppearanceItemCaption.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.None;
+			this.layoutControlItemTitle.AppearanceItemCaption.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
 			this.layoutControlItemTitle.Control = this.labelControlTitle;
 			this.layoutControlItemTitle.FillControlToClientArea = false;
 			this.layoutControlItemTitle.Location = new System.Drawing.Point(0, 0);
-			this.layoutControlItemTitle.MaxSize = new System.Drawing.Size(151, 40);
-			this.layoutControlItemTitle.MinSize = new System.Drawing.Size(151, 35);
+			this.layoutControlItemTitle.MinSize = new System.Drawing.Size(151, 40);
 			this.layoutControlItemTitle.Name = "layoutControlItemTitle";
-			this.layoutControlItemTitle.Size = new System.Drawing.Size(333, 35);
+			this.layoutControlItemTitle.Size = new System.Drawing.Size(426, 40);
 			this.layoutControlItemTitle.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
 			this.layoutControlItemTitle.Text = "Title";
 			this.layoutControlItemTitle.TextSize = new System.Drawing.Size(0, 0);
@@ -193,9 +200,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			// 
 			this.layoutControlItemName.Control = this.textEditPageName;
 			this.layoutControlItemName.CustomizationFormText = "Name";
-			this.layoutControlItemName.Location = new System.Drawing.Point(0, 35);
+			this.layoutControlItemName.Location = new System.Drawing.Point(0, 40);
 			this.layoutControlItemName.Name = "layoutControlItemName";
-			this.layoutControlItemName.Size = new System.Drawing.Size(333, 26);
+			this.layoutControlItemName.Size = new System.Drawing.Size(426, 26);
 			this.layoutControlItemName.Text = "Name the NEW Page:";
 			this.layoutControlItemName.TextSize = new System.Drawing.Size(129, 16);
 			// 
@@ -204,7 +211,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			this.layoutControlItemCancel.Control = this.buttonXCancel;
 			this.layoutControlItemCancel.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
 			this.layoutControlItemCancel.FillControlToClientArea = false;
-			this.layoutControlItemCancel.Location = new System.Drawing.Point(213, 83);
+			this.layoutControlItemCancel.Location = new System.Drawing.Point(306, 83);
 			this.layoutControlItemCancel.MaxSize = new System.Drawing.Size(120, 40);
 			this.layoutControlItemCancel.MinSize = new System.Drawing.Size(120, 40);
 			this.layoutControlItemCancel.Name = "layoutControlItemCancel";
@@ -236,7 +243,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			this.emptySpaceItem3.AllowHotTrack = false;
 			this.emptySpaceItem3.Location = new System.Drawing.Point(120, 83);
 			this.emptySpaceItem3.Name = "emptySpaceItem3";
-			this.emptySpaceItem3.Size = new System.Drawing.Size(93, 40);
+			this.emptySpaceItem3.Size = new System.Drawing.Size(186, 40);
 			this.emptySpaceItem3.TextSize = new System.Drawing.Size(0, 0);
 			// 
 			// styleController
@@ -258,10 +265,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-			this.ClientSize = new System.Drawing.Size(353, 143);
+			this.ClientSize = new System.Drawing.Size(446, 143);
 			this.Controls.Add(this.layoutControl);
 			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.ForeColor = System.Drawing.Color.Black;
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;

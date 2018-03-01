@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using DevExpress.Skins;
@@ -109,9 +110,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Singl
 			{
 				var imageFilePath = (e.Data.GetData(DataFormats.FileDrop) as String[] ?? new string[] { }).FirstOrDefault();
 				if (imageFilePath == null) return;
-				using (var originalImage = Image.FromFile(imageFilePath))
+				var tempFile = Path.GetTempFileName();
+				File.Copy(imageFilePath, tempFile, true);
+				using (var originalImage = Image.FromFile(tempFile))
 				{
-					pictureEditLaunchScreenLogo.Image = originalImage.Height > 100 ? originalImage.Resize(new Size(originalImage.Width, 100)) : Image.FromFile(imageFilePath);
+					pictureEditLaunchScreenLogo.Image = originalImage.Height > 100 ? originalImage.Resize(new Size(originalImage.Width, 100)) : Image.FromFile(tempFile);
 				}
 			}
 		}
@@ -123,7 +126,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Singl
 			{
 				var imageFilePath = (e.Data.GetData(DataFormats.FileDrop) as String[] ?? new string[] { }).FirstOrDefault();
 				if (imageFilePath == null) return;
-				pictureEditBanner.Image = Image.FromFile(imageFilePath);
+				var tempFile = Path.GetTempFileName();
+				File.Copy(imageFilePath, tempFile, true);
+				pictureEditBanner.Image = Image.FromFile(tempFile);
 			}
 		}
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using DevExpress.Skins;
@@ -49,7 +50,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Singl
 			openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 			if (openFileDialog.ShowDialog(MainController.Instance.MainForm) == DialogResult.OK)
 			{
-				pictureEditImage.Image = Image.FromFile(openFileDialog.FileName);
+				var tempFile = Path.GetTempFileName();
+				File.Copy(openFileDialog.FileName, tempFile, true);
+				pictureEditImage.Image = Image.FromFile(tempFile);
 			}
 		}
 
@@ -60,7 +63,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Singl
 			{
 				var imageFilePath = (e.Data.GetData(DataFormats.FileDrop) as String[] ?? new string[] { }).FirstOrDefault();
 				if (imageFilePath == null) return;
-				pictureEditImage.Image = Image.FromFile(imageFilePath);
+				var tempFile = Path.GetTempFileName();
+				File.Copy(imageFilePath, tempFile, true);
+				pictureEditImage.Image = Image.FromFile(tempFile);
 			}
 		}
 

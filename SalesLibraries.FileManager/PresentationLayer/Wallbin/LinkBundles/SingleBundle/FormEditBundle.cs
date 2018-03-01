@@ -119,6 +119,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Singl
 
 		private void OnPreviewClick(object sender, EventArgs e)
 		{
+			SaveData();
 			using (var form = new FormPreview(_linkBundle))
 			{
 				form.ShowDialog(MainController.Instance.MainForm);
