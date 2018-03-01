@@ -36,10 +36,12 @@
 		/**
 		 * @param string $feedType
 		 * @param string $encodedContent
+		 * @param string $parentShortcutId
+		 * @param string $parentBlockId
 		 * @return MasonrySettings
 		 * @throws \Exception
 		 */
-		public static function fromJson($feedType, $encodedContent)
+		public static function fromJson($feedType, $encodedContent, $parentShortcutId, $parentBlockId)
 		{
 			switch ($feedType)
 			{
@@ -56,7 +58,7 @@
 					\Utils::loadFromJson($instance, $encodedContent);
 					return $instance;
 				case self::MasonryTypeSimple:
-					$instance = new MasonrySimpleSettings();
+					$instance = new MasonrySimpleSettings($parentShortcutId, $parentBlockId);
 					\Utils::loadFromJson($instance, $encodedContent);
 					return $instance;
 				default:
@@ -68,10 +70,12 @@
 		 * @param $feedType string
 		 * @param $xpath \DOMXPath
 		 * @param $contextNode \DOMNode
+		 * @param string $parentShortcutId
+		 * @param string $parentBlockId
 		 * @return MasonrySettings
 		 * @throws \Exception
 		 */
-		public static function fromXml($feedType, $xpath, $contextNode)
+		public static function fromXml($feedType, $xpath, $contextNode, $parentShortcutId, $parentBlockId)
 		{
 			switch ($feedType)
 			{
@@ -88,7 +92,7 @@
 					$instance->configureFromXml($xpath, $contextNode);
 					return $instance;
 				case self::MasonryTypeSimple:
-					$instance = new MasonrySimpleSettings();
+					$instance = new MasonrySimpleSettings($parentShortcutId, $parentBlockId);
 					$instance->configureFromXml($xpath, $contextNode);
 					return $instance;
 				default:

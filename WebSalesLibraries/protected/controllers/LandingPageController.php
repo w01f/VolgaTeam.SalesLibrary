@@ -1,4 +1,5 @@
 <?
+
 	use application\models\data_query\link_feed\LinkFeedQueryHelper;
 	use application\models\data_query\link_feed\LinkFeedQuerySettings;
 	use application\models\feeds\horizontal\FeedSettings as HorizontalFeedSettings;
@@ -62,6 +63,7 @@
 		public function actionGetMasonryLinkFeedItems()
 		{
 			$feedId = Yii::app()->request->getPost('feedId');
+			$parentShortcutId = Yii::app()->request->getPost('parentShortcutId');
 			$feedType = Yii::app()->request->getPost('feedType');
 			$querySettingsEncoded = Yii::app()->request->getPost('querySettings');
 			$viewSettingsEncoded = Yii::app()->request->getPost('viewSettings');
@@ -73,7 +75,7 @@
 			}
 
 			if (isset($viewSettingsEncoded))
-				$viewSettings = MasonrySettings::fromJson($feedType, CJSON::encode($viewSettingsEncoded));
+				$viewSettings = MasonrySettings::fromJson($feedType, CJSON::encode($viewSettingsEncoded), $parentShortcutId, $feedId);
 
 			if (isset($viewSettings) && isset($feedItems))
 				$this->renderPartial('landingPageMarkup/masonry/feedItems', array('feedId' => $feedId, 'viewSettings' => $viewSettings, 'feedItems' => $feedItems));

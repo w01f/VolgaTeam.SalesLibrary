@@ -1,5 +1,4 @@
-(function ($)
-{
+(function ($) {
 	window.BaseUrl = window.BaseUrl || '';
 	$.SalesPortal = $.SalesPortal || {};
 	$.SalesPortal.ShortcutsLandingPage = function () {
@@ -69,6 +68,7 @@
 						var viewSettings = viewSettingsEncoded !== undefined && viewSettingsEncoded.length ? $.parseJSON(viewSettingsEncoded) : undefined;
 						new $.SalesPortal.LandingPage.Masonry({
 							containerId: masonryId,
+							parentShortcutId: pageData.options.linkId,
 							querySettings: querySettings,
 							viewSettings: viewSettings
 						}).init();

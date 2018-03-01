@@ -31,7 +31,7 @@
 		{
 			ContentBlock::configureFromXml($xpath, $contextNode);
 
-			$this->viewSettings = MasonrySettings::fromXml(MasonrySettings::MasonryTypeSimple, $xpath, $contextNode);
+			$this->viewSettings = MasonrySettings::fromXml(MasonrySettings::MasonryTypeSimple, $xpath, $contextNode, $this->parentShortcut->id, $this->id);
 
 			if ($this->isAccessGranted)
 			{

@@ -4,6 +4,9 @@
 
 	class MasonrySimpleSettings extends MasonrySettings
 	{
+		private $parentShortcutId;
+		private $parentBlockId;
+
 		/** @var  MasonryFilter[] */
 		public $filters;
 
@@ -13,8 +16,14 @@
 		/** @var  MasonryFilterButtonStyle */
 		public $buttonStyle;
 
-		public function __construct()
+		/*
+		* @param string $parentShortcutId
+		 * @param string $parentBlockId
+		*/
+		public function __construct($parentShortcutId, $parentBlockId)
 		{
+			$this->parentShortcutId = $parentShortcutId;
+			$this->parentBlockId = $parentBlockId;
 			$this->feedType = self::MasonryTypeSimple;
 			parent::__construct();
 			$this->filters = array();
@@ -29,6 +38,11 @@
 		{
 			parent::configureFromXml($xpath, $contextNode);
 
+			$defaultFilterTags = null;
+			$defaultFilterCookieTag = sprintf('DefaultFilterTags-%s-%s', $this->parentShortcutId, $this->parentBlockId);
+			if (isset(\Yii::app()->request->cookies[$defaultFilterCookieTag]))
+				$defaultFilterTags = \Yii::app()->request->cookies[$defaultFilterCookieTag]->value;
+
 			$queryResult = $xpath->query('./Filter/Item', $contextNode);
 			foreach ($queryResult as $node)
 			{
@@ -37,7 +51,12 @@
 				if ($filter->isAccessGranted)
 				{
 					$this->filters[] = $filter;
-					if ($filter->isDefault)
+					if (!empty($defaultFilterTags))
+					{
+						if (('.' . implode(', .', $filter->tags)) === $defaultFilterTags)
+							$this->defaultFilter = $filter;
+					}
+					else if ($filter->isDefault)
 						$this->defaultFilter = $filter;
 				}
 			}

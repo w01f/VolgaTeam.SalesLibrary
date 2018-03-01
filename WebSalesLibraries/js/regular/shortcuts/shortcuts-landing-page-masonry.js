@@ -1,17 +1,15 @@
-(function ($)
-{
+(function ($) {
 	window.BaseUrl = window.BaseUrl || '';
 	$.SalesPortal = $.SalesPortal || {};
 	$.SalesPortal.LandingPage = $.SalesPortal.LandingPage || {};
-	$.SalesPortal.LandingPage.Masonry = function (parameters)
-	{
+	$.SalesPortal.LandingPage.Masonry = function (parameters) {
 		var masonryId = parameters.containerId;
+		var parentShortcutId = parameters.parentShortcutId;
 		var querySettings = parameters.querySettings !== undefined ? new $.SalesPortal.LandingPage.LinkFeedQuerySettings(parameters.querySettings) : null;
 		var viewSettings = new MasonryViewSettings(parameters.viewSettings);
 		var masonryContainer = undefined;
 
-		this.init = function ()
-		{
+		this.init = function () {
 			masonryContainer = $('#masonry-container-' + masonryId);
 
 			initMasonry();
@@ -19,39 +17,35 @@
 			if (viewSettings.feedType !== 'masonry')
 			{
 				initControls();
-				setTimeout(function ()
-				{
+				setTimeout(function () {
 					reloadLinks(false);
 				}, 900000);
 			}
 		};
 
-		var reloadLinks = function (showProgress)
-		{
+		var reloadLinks = function (showProgress) {
 			$.ajax({
 				type: "POST",
 				url: window.BaseUrl + "landingPage/getMasonryLinkFeedItems",
 				data: {
 					feedId: masonryId,
+					parentShortcutId: parentShortcutId,
 					feedType: querySettings.feedType,
 					querySettings: querySettings,
 					viewSettings: viewSettings
 				},
-				beforeSend: function ()
-				{
+				beforeSend: function () {
 					if (showProgress)
 						$.SalesPortal.Overlay.show();
 				},
-				success: function (msg)
-				{
+				success: function (msg) {
 					$.SalesPortal.Overlay.hide();
 
 					masonryContainer.find('#masonry-grid-' + masonryId).html(msg);
 
 					initMasonry();
 				},
-				error: function ()
-				{
+				error: function () {
 					$.SalesPortal.Overlay.hide();
 				},
 				async: true,
@@ -59,10 +53,8 @@
 			});
 		};
 
-		var initControls = function ()
-		{
-			masonryContainer.find('.date-range-toggle a').off('click.link-feed').on('click.link-feed', function ()
-			{
+		var initControls = function () {
+			masonryContainer.find('.date-range-toggle a').off('click.link-feed').on('click.link-feed', function () {
 				var dateRangeTitle = $(this).text();
 				masonryContainer.find('.date-range-toggle-group>button .title').text(dateRangeTitle);
 				querySettings.dateRangeType = $(this).closest('.date-range-toggle').find('>.service-data .date-range-tag').text();
@@ -72,8 +64,7 @@
 				reloadLinks(true);
 			});
 
-			masonryContainer.find('.link-format-toggle').off('click').on('click', function ()
-			{
+			masonryContainer.find('.link-format-toggle').off('click').on('click', function () {
 				$(this).blur();
 				if ($(this).hasClass('active'))
 					$(this).removeClass('active');
@@ -81,8 +72,7 @@
 					$(this).addClass('active');
 
 				querySettings.linkFormatsInclude = [];
-				$.each(masonryContainer.find('.link-format-toggle.active'), function ()
-				{
+				$.each(masonryContainer.find('.link-format-toggle.active'), function () {
 					var button = $(this);
 					querySettings.linkFormatsInclude.push(button.find('.service-data .link-format-tag').text());
 				});
@@ -92,16 +82,14 @@
 
 			updateDetailsHoverTip();
 			masonryContainer.find('.date-range-toggle-group, .link-format-toggle').last().css("margin-right", "6px");
-			masonryContainer.find('.feed-details-button').each(function ()
-			{
+			masonryContainer.find('.feed-details-button').each(function () {
 				var img = $(this).find('.svg');
 				if (img.length > 0)
 				{
 					var imgClass = img.attr('class');
 					var imgURL = img.attr('src');
 
-					$.get(imgURL, function (data)
-					{
+					$.get(imgURL, function (data) {
 						var svg = $(data).find('svg');
 						if (typeof imgClass !== 'undefined')
 							svg = svg.attr('class', imgClass + ' replaced-svg');
@@ -111,8 +99,7 @@
 				}
 			});
 
-			masonryContainer.find('.feed-details-button').off('click').on('click', function ()
-			{
+			masonryContainer.find('.feed-details-button').off('click').on('click', function () {
 				$(this).blur();
 
 				var data = $(this).find('.service-data');
@@ -167,8 +154,7 @@
 									$.SalesPortal.Overlay.hide();
 								},
 								success: function (result) {
-									$.SalesPortal.ShortcutsSearchLink(result).runSearch(function (data)
-									{
+									$.SalesPortal.ShortcutsSearchLink(result).runSearch(function (data) {
 										if (data.dataset.length === 0)
 										{
 											var modalDialog = new $.SalesPortal.ModalDialog({
@@ -180,8 +166,7 @@
 													{
 														tag: 'ok',
 														title: 'OK',
-														clickHandler: function ()
-														{
+														clickHandler: function () {
 															modalDialog.close();
 														}
 													}
@@ -229,13 +214,14 @@
 			});
 		};
 
-		var initMasonry = function ()
-		{
+		var initMasonry = function () {
 			var grid = masonryContainer.find('#masonry-grid-' + masonryId);
 			try
 			{
+				var filterContainerId = '#masonry-filter-' + masonryId;
+
 				grid.cubeportfolio({
-					filters: '#masonry-filter-' + masonryId,
+					filters: filterContainerId,
 					layoutMode: 'grid',
 					defaultFilter: viewSettings.defaultFilter ? ('.' + viewSettings.defaultFilter.tags.join(', .')) : '*',
 					animationType: 'quicksand',
@@ -247,10 +233,16 @@
 					displayTypeSpeed: 100
 				});
 
+				$(filterContainerId).find('.cbp-filter-item').off('click.masonry-filter').on('click.masonry-filter', function () {
+					var filterTag = $(this).data('filter');
+					$.cookie("DefaultFilterTags-" + parentShortcutId + "-" + masonryId, filterTag, {
+						expires: (60 * 2)
+					});
+				});
+
 				$.SalesPortal.ShortcutsManager.assignShortcutItemHandlers(grid);
 
-				grid.find('.library-link-item.previewable').off('click').on('click', function (e)
-				{
+				grid.find('.library-link-item.previewable').off('click').on('click', function (e) {
 					e.stopPropagation();
 					var linkId = $(this).find('.service-data .link-id').text();
 					$.SalesPortal.LinkManager.requestViewDialog({
@@ -259,8 +251,7 @@
 					});
 				});
 
-				grid.find('.library-link-item.direct-url').off('click').on('click', function (e)
-				{
+				grid.find('.library-link-item.direct-url').off('click').on('click', function (e) {
 					var linkId = $(this).find('.service-data .link-id').text();
 					var url = $(this).data('url');
 					$.SalesPortal.LogHelper.write({
@@ -273,8 +264,7 @@
 					});
 				});
 
-				grid.find('.draggable').off('dragstart').on('dragstart', function (e)
-				{
+				grid.find('.draggable').off('dragstart').on('dragstart', function (e) {
 					var urlHeader = $(this).data("url-header");
 					var url = $(this).data('url');
 					if (url !== '')
@@ -283,15 +273,13 @@
 			}
 			catch (err)
 			{
-				grid.cubeportfolio('destroy', function ()
-				{
+				grid.cubeportfolio('destroy', function () {
 					initMasonry();
 				});
 			}
 		};
 
-		var updateDetailsHoverTip = function ()
-		{
+		var updateDetailsHoverTip = function () {
 			var hoverTipButton = masonryContainer.find('.feed-details-button');
 			var hoverTipTemplateObject = hoverTipButton.find('.service-data .hover-tip-template');
 			if (hoverTipTemplateObject.length > 0)
@@ -304,8 +292,7 @@
 		};
 	};
 
-	var MasonryViewSettings = function (data)
-	{
+	var MasonryViewSettings = function (data) {
 		this.itemsPadding = undefined;
 		this.enableCaptionZoom = undefined;
 		this.captionZoomScale = undefined;

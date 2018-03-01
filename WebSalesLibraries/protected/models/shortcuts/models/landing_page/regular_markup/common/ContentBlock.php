@@ -90,6 +90,9 @@
 		 */
 		public function configureFromXml($xpath, $contextNode)
 		{
+			$queryResult = $xpath->query('./StaticID', $contextNode);
+			$this->id = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : $this->id;
+
 			$queryResult = $xpath->query('./HoverTip', $contextNode);
 			$this->hoverText = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
 
