@@ -176,7 +176,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.QBuilder
 					var thread = new Thread(() =>
 					{
 						var tempFile = Path.Combine(Path.GetTempPath(), String.Format("{0}.xlsx", Guid.NewGuid()));
-						BeginInvoke(new Action(() =>
+						Invoke(new Action(() =>
 						{
 							using (var printingSystem = new PrintingSystem())
 							{
@@ -188,7 +188,9 @@ namespace SalesLibraries.SiteManager.PresentationClasses.QBuilder
 								};
 								printLink.CreateReportHeaderArea += OnCreateReportHeaderArea;
 								printLink.CreateDocument(printingSystem);
+								Application.DoEvents();
 								printingSystem.ExportToXlsx(tempFile, options);
+								Application.DoEvents();
 							}
 						}));
 						parts.Add("quickSITES & Emails", tempFile);

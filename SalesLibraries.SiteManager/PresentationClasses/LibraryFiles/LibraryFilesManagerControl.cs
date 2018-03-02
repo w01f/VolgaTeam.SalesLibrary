@@ -137,12 +137,14 @@ namespace SalesLibraries.SiteManager.PresentationClasses.LibraryFiles
 						foreach (var groupControl in groupControls)
 						{
 							var tempFile = Path.Combine(Path.GetTempPath(), String.Format("{0}.xlsx", Guid.NewGuid()));
-							BeginInvoke(new Action(() =>
+							Invoke(new Action(() =>
 							{
 								using (var printingSystem = new PrintingSystem())
 								{
 									groupControl.GetPrintLink().CreateDocument(printingSystem);
+									Application.DoEvents();
 									printingSystem.ExportToXlsx(tempFile, options);
+									Application.DoEvents();
 								}
 							}));
 							parts.Add(groupControl.GroupName, tempFile);

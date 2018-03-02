@@ -190,7 +190,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 					Application.DoEvents();
 					var thread = new Thread(() =>
 					{
-						BeginInvoke(new Action(() =>
+						Invoke(new Action(() =>
 						{
 							using (var printingSystem = new PrintingSystem())
 							{
@@ -203,7 +203,9 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 								};
 								printLink.CreateReportHeaderArea += OnCreateUsersReportHeaderArea;
 								printLink.CreateDocument(printingSystem);
+								Application.DoEvents();
 								printingSystem.ExportToXlsx(dialog.FileName, options);
+								Application.DoEvents();
 							}
 						}));
 					});
