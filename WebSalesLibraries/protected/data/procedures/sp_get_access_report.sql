@@ -28,6 +28,7 @@ CREATE PROCEDURE sp_get_access_report(in start_date datetime,in end_date datetim
               from tbl_statistic_activity sact
                 join tbl_statistic_user su on su.id_activity = sact.id
                 join tbl_statistic_group sg on sg.id_activity = sact.id
+                join tbl_user su_u on su_u.login = su.login
               where sact.date_time >= start_date and sact.date_time <= end_date
               group by sg.name, su.first_name, su.last_name
               union
