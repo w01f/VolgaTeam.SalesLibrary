@@ -163,4 +163,13 @@
   <data name="LinkConfigProfilesSave" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LinkConfigProfilesSave.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="LoginLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LoginLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PasswordLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PasswordLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UserLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\UserLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

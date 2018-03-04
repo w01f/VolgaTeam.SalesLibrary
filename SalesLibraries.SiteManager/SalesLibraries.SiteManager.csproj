@@ -111,14 +111,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\SalesLibraries.CommonGUI\Common\FormStateHelper.cs">
-      <Link>ToolClasses\FormStateHelper.cs</Link>
-    </Compile>
     <Compile Include="AppManager.cs" />
     <Compile Include="BusinessClasses\ImportManager.cs" />
     <Compile Include="BusinessClasses\LinkConfigProfilesDataHelper.cs" />
+    <Compile Include="ConfigurationClasses\RibbonTabIdentifiers.cs" />
+    <Compile Include="ConfigurationClasses\RibbonTabPageConfig.cs" />
     <Compile Include="BusinessClasses\WebSiteManager.cs" />
     <Compile Include="ConfigurationClasses\InactiveUsersSettings.cs" />
+    <Compile Include="ConfigurationClasses\RemoteResourceManager.cs" />
     <Compile Include="ConfigurationClasses\SettingsManager.cs" />
     <Compile Include="Controllers\ActivitiesController.cs" />
     <Compile Include="Controllers\LibraryFilesController.cs" />
@@ -134,8 +134,6 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="InteropClasses\ExcelHelper.cs" />
-    <Compile Include="InteropClasses\WinAPIHelper.cs" />
     <Compile Include="PresentationClasses\Activities\AccessData\ContainerControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -456,7 +454,6 @@
     </Compile>
     <Compile Include="ToolClasses\PasswordHelper.cs" />
     <Compile Include="ToolClasses\QuizStatisticExportHelper.cs" />
-    <Compile Include="ToolClasses\Utils.cs" />
     <Compile Include="ToolForms\FormEditGroup.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -475,11 +472,23 @@
     <Compile Include="ToolForms\FormEditUser.Designer.cs">
       <DependentUpon>FormEditUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="ToolForms\FormLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\FormLogin.designer.cs">
+      <DependentUpon>FormLogin.cs</DependentUpon>
+    </Compile>
     <Compile Include="ToolForms\FormProgress.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ToolForms\FormProgress.designer.cs">
       <DependentUpon>FormProgress.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolForms\FormStart.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\FormStart.designer.cs">
+      <DependentUpon>FormStart.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
@@ -683,8 +692,14 @@
     <EmbeddedResource Include="ToolForms\FormEditUser.resx">
       <DependentUpon>FormEditUser.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\FormLogin.resx">
+      <DependentUpon>FormLogin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\FormProgress.resx">
       <DependentUpon>FormProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\FormStart.resx">
+      <DependentUpon>FormStart.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="app.manifest" />
@@ -703,6 +718,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\UserLogo.png" />
+    <None Include="Resources\PasswordLogo.png" />
+    <None Include="Resources\LoginLogo.png" />
     <None Include="Resources\EditButton.png" />
     <None Include="Resources\LinkConfigProfilesSave.png" />
     <None Include="Resources\LinkConfigProfilesDelete.png" />
@@ -778,6 +796,14 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SalesLibraries.CommonGUI\SalesLibraries.CommonGUI.csproj">
+      <Project>{03639419-D148-4814-B8C1-CF0AB550D136}</Project>
+      <Name>SalesLibraries.CommonGUI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SalesLibraries.Common\SalesLibraries.Common.csproj">
+      <Project>{F35DC0D8-6816-4033-A5E2-D446C7A956FE}</Project>
+      <Name>SalesLibraries.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SalesLibraries.ServiceConnector\SalesLibraries.ServiceConnector.csproj">
       <Project>{900ccf99-921a-4e35-8686-c85d48263785}</Project>
       <Name>SalesLibraries.ServiceConnector</Name>

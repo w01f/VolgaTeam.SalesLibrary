@@ -12,22 +12,19 @@ namespace SalesLibraries.CommonGUI.Common
 		private static bool _enter;
 		private static bool _needSelect;
 
-		public static void EditorEnter(object sender, EventArgs e)
+		public static void OnEditorEnter(object sender, EventArgs e)
 		{
 			_enter = true;
 			ResetEnterFlag();
 		}
 
-		public static void EditorMouseUp(object sender, MouseEventArgs e)
+		public static void OnEditorMouseUp(object sender, MouseEventArgs e)
 		{
-			if (_needSelect)
-			{
-				var baseEdit = sender as BaseEdit;
-				if (baseEdit != null) baseEdit.SelectAll();
-			}
+			if (!_needSelect) return;
+			if (sender is BaseEdit baseEdit) baseEdit.SelectAll();
 		}
 
-		public static void EditorMouseDown(object sender, MouseEventArgs e)
+		public static void OnEditorMouseDown(object sender, MouseEventArgs e)
 		{
 			_needSelect = _enter;
 		}
@@ -37,10 +34,9 @@ namespace SalesLibraries.CommonGUI.Common
 			_enter = false;
 		}
 
-		public static void FontEdit_Click(object sender, EventArgs e)
+		public static void OnFontEditClick(object sender, EventArgs e)
 		{
-			var fontEdit = sender as ButtonEdit;
-			if (fontEdit == null) return;
+			if (!(sender is ButtonEdit fontEdit)) return;
 			using (var dlgFont = new FontDialog())
 			{
 				dlgFont.Font = fontEdit.Tag as Font;
@@ -50,9 +46,9 @@ namespace SalesLibraries.CommonGUI.Common
 			}
 		}
 
-		public static void FontEdit_ButtonClick(object sender, ButtonPressedEventArgs e)
+		public static void OnFontEditButtonClick(object sender, ButtonPressedEventArgs e)
 		{
-			FontEdit_Click(sender, null);
+			OnFontEditClick(sender, null);
 		}
 	}
 }

@@ -9,33 +9,30 @@ namespace SalesLibraries.SiteManager.BusinessClasses
 {
 	public class WebSiteManager
 	{
-		private static readonly WebSiteManager _instance = new WebSiteManager();
-
 		private SoapServiceConnection _selectedSite;
 
-		private WebSiteManager()
-		{
-			Sites = new List<SoapServiceConnection>();
-			Load();
-		}
-
-		public List<SoapServiceConnection> Sites { get; private set; }
+		public List<SoapServiceConnection> Sites { get; }
 
 		public SoapServiceConnection SelectedSite
 		{
 			get { return _selectedSite ?? (_selectedSite = !string.IsNullOrEmpty(SettingsManager.Instance.SelectedSiteName) ? Sites.FirstOrDefault(x => x.Website == SettingsManager.Instance.SelectedSiteName) ?? Sites.FirstOrDefault() : Sites.FirstOrDefault()); }
 		}
 
-		public static WebSiteManager Instance => _instance;
+		public static WebSiteManager Instance { get; } = new WebSiteManager();
 
-		private void Load()
+		private WebSiteManager()
+		{
+			Sites = new List<SoapServiceConnection>();
+		}
+
+		public void Load(string siteListFilePath)
 		{
 			Sites.Clear();
-			if (!File.Exists(SettingsManager.Instance.SitesListPath)) return;
+			if (!File.Exists(siteListFilePath)) return;
 			var document = new XmlDocument();
-			document.Load(SettingsManager.Instance.SitesListPath);
+			document.Load(siteListFilePath);
 
-			var node = document.SelectSingleNode(@"/Sites");
+			var node = document.SelectSingleNode(@"//Config/Sites") ?? document.SelectSingleNode(@"//Sites");
 			if (node != null)
 				foreach (XmlNode childNode in node.ChildNodes)
 					Sites.Add(new SoapServiceConnection(childNode));

@@ -78,7 +78,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.InactiveUsers
 					FormMain.Instance.ribbonControl.Enabled = true;
 				}
 				if (!string.IsNullOrEmpty(message))
-					AppManager.Instance.ShowWarning(message);
+					AppManager.Instance.PopupMessages.ShowWarning(message);
 			}
 			else
 			{
@@ -115,9 +115,9 @@ namespace SalesLibraries.SiteManager.PresentationClasses.InactiveUsers
 
 			var userIds = _records.Where(x => x.Selected).Select(x => x.id.ToString()).ToArray();
 			var onlyEmail = !_filterControl.EmailReset;
-			var sender = textEditEmailResetSender.EditValue != null ? textEditEmailResetSender.EditValue.ToString() : string.Empty;
-			var subject = textEditEmailResetSubject.EditValue != null ? textEditEmailResetSubject.EditValue.ToString() : string.Empty;
-			var body = memoEditEmailResetBody.EditValue != null ? memoEditEmailResetBody.EditValue.ToString() : string.Empty;
+			var sender = textEditEmailResetSender.EditValue?.ToString() ?? string.Empty;
+			var subject = textEditEmailResetSubject.EditValue?.ToString() ?? string.Empty;
+			var body = memoEditEmailResetBody.EditValue?.ToString() ?? string.Empty;
 
 			SettingsManager.Instance.InactiveUsersSettings.ResetEmailSender = sender;
 			SettingsManager.Instance.InactiveUsersSettings.ResetEmailSubject = subject;

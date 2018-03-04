@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Xml;
 
@@ -9,16 +11,18 @@ namespace SalesLibraries.SiteManager.ConfigurationClasses
 	{
 		#region Path
 		private readonly string _settingsFilePath;
-		public string ApplicationRootsPath { get; private set; }
-		public string SitesListPath { get; private set; }
+		public string ApplicationRootsPath { get; }
+		public string SitesListPath { get; }
 		public string IconPath { get; set; }
 		public string LogoPath { get; set; }
 		#endregion
 
 		#region Local Settings
 		public string SelectedSiteName { get; set; }
-		public int SelectedTab { get; set; }
-		public InactiveUsersSettings InactiveUsersSettings { get; private set; }
+		public int? SelectedTab { get; set; }
+		public InactiveUsersSettings InactiveUsersSettings { get; }
+		public List<RibbonTabPageConfig> RibbonTabPageSettings { get; }
+		public List<string> ApprovedUsers { get; }
 		#endregion
 
 		private SettingsManager()
@@ -29,7 +33,8 @@ namespace SalesLibraries.SiteManager.ConfigurationClasses
 			LogoPath = Path.Combine(ApplicationRootsPath, "logo.png");
 			IconPath = Path.Combine(ApplicationRootsPath, "icon.ico");
 			InactiveUsersSettings = new InactiveUsersSettings();
-			Load();
+			RibbonTabPageSettings = new List<RibbonTabPageConfig>();
+			ApprovedUsers = new List<String>();
 		}
 
 		public static SettingsManager Instance { get; } = new SettingsManager();
@@ -54,6 +59,35 @@ namespace SalesLibraries.SiteManager.ConfigurationClasses
 			}
 
 			InactiveUsersSettings.Load();
+			LoadRibbonTabSettings();
+			LoadApprovedUsers();
+		}
+
+		private void LoadRibbonTabSettings()
+		{
+			if (RemoteResourceManager.Instance.SettingsFile == null || !RemoteResourceManager.Instance.SettingsFile.ExistsLocal()) return;
+			var document = new XmlDocument();
+			document.Load(RemoteResourceManager.Instance.SettingsFile.LocalPath);
+			var node = document.SelectSingleNode(@"//Config/TabSettings");
+			if (node == null) return;
+			foreach (XmlNode childNode in node.ChildNodes)
+			{
+				var tabPageConfig = new RibbonTabPageConfig();
+				tabPageConfig.Deserialize(childNode);
+				if (tabPageConfig.Visible)
+					RibbonTabPageSettings.Add(tabPageConfig);
+			}
+			RibbonTabPageSettings.Sort((x, y) => x.Order.CompareTo(y.Order));
+		}
+
+		private void LoadApprovedUsers()
+		{
+			if (RemoteResourceManager.Instance.SettingsFile == null || !RemoteResourceManager.Instance.SettingsFile.ExistsLocal()) return;
+			var document = new XmlDocument();
+			document.Load(RemoteResourceManager.Instance.SettingsFile.LocalPath);
+			var nodes = document.SelectNodes(@"//Config/ApprovedUsers/UserAccount");
+			if (nodes == null) return;
+			ApprovedUsers.AddRange(nodes.OfType<XmlNode>().Select(n => n.InnerText));
 		}
 
 		public void Save()

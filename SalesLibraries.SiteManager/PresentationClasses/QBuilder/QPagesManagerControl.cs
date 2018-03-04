@@ -88,7 +88,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.QBuilder
 					FormMain.Instance.ribbonControl.Enabled = true;
 				}
 				if (!string.IsNullOrEmpty(message))
-					AppManager.Instance.ShowWarning(message);
+					AppManager.Instance.PopupMessages.ShowWarning(message);
 			}
 			else
 			{
@@ -120,7 +120,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.QBuilder
 		public void DeletePage()
 		{
 			var pageRecord = gridViewRecords.GetFocusedRow() as QPageModel;
-			if (pageRecord == null || AppManager.Instance.ShowWarningQuestion(string.Format("Are you sure want to delete this {0}?", pageRecord.Type)) != DialogResult.Yes) return;
+			if (pageRecord == null || AppManager.Instance.PopupMessages.ShowWarningQuestion(string.Format("Are you sure want to delete this {0}?", pageRecord.Type)) != DialogResult.Yes) return;
 			string message = string.Empty;
 			using (var form = new FormProgress())
 			{
@@ -142,7 +142,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.QBuilder
 			}
 			if (!string.IsNullOrEmpty(message))
 			{
-				AppManager.Instance.ShowWarning(message);
+				AppManager.Instance.PopupMessages.ShowWarning(message);
 				return;
 			}
 			RefreshData(false);

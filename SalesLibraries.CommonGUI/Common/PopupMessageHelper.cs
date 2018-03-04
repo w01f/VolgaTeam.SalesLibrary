@@ -1,39 +1,40 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 
 namespace SalesLibraries.CommonGUI.Common
 {
 	public class PopupMessageHelper
 	{
-		private string _title;
+		public string Title { get; private set; }
 
 		public PopupMessageHelper(string title)
 		{
-			_title = title;
+			Title = title;
 		}
 
 		public void ChangeTitle(string title)
 		{
-			_title = title;
+			Title = title;
 		}
 
 		public void ShowInfo(string text)
 		{
-			MessageBox.Show(text, _title, MessageBoxButtons.OK, MessageBoxIcon.Information);
+			MessageBox.Show(text, Title, MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 
 		public void ShowWarning(string text)
 		{
-			MessageBox.Show(text, _title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+			MessageBox.Show(text, Title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 		}
 
 		public DialogResult ShowQuestion(string text)
 		{
-			return MessageBox.Show(text, _title, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+			return MessageBox.Show(text, Title, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 		}
 
 		public DialogResult ShowWarningQuestion(string text)
 		{
-			return MessageBox.Show(text, _title, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+			return MessageBox.Show(text, Title, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
 		}
 	}
 }

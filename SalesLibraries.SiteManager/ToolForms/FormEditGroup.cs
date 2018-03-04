@@ -7,8 +7,11 @@ using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
+using Microsoft.Office.Interop.Excel;
+using SalesLibraries.Common.Helpers;
+using SalesLibraries.Common.OfficeInterops;
+using SalesLibraries.CommonGUI.Common;
 using SalesLibraries.ServiceConnector.AdminService;
-using SalesLibraries.SiteManager.InteropClasses;
 
 namespace SalesLibraries.SiteManager.ToolForms
 {
@@ -43,14 +46,9 @@ namespace SalesLibraries.SiteManager.ToolForms
 			gridViewLibraries.MasterRowGetChildList += OnGetLibraryChildList;
 			gridControlLibraries.DataSource = _libraries;
 
-			comboBoxEditName.Enter += FormMain.Instance.Editor_Enter;
-			comboBoxEditName.MouseUp += FormMain.Instance.Editor_MouseUp;
-			comboBoxEditName.MouseDown += FormMain.Instance.Editor_MouseDown;
+			comboBoxEditName.EnableSelectAll();
 
-			if (_newGroup)
-				Text = "Add Group";
-			else
-				Text = "Edit Group";
+			Text = _newGroup ? "Add Group" : "Edit Group";
 		}
 
 		public UserModel[] AssignedUsers
@@ -204,7 +202,46 @@ namespace SalesLibraries.SiteManager.ToolForms
 						users[i, 2] = selectedUsers[i].email;
 						users[i, 3] = selectedUsers[i].login;
 					}
-					ExcelHelper.Instance.ExportGroup(dialog.FileName, groupName, users);
+					try
+					{
+						if (!ExcelHelper.Instance.Connect()) return;
+						MessageFilter.Register();
+						var workbook = ExcelHelper.Instance.ExcelObject.Workbooks.Add();
+						Worksheet sheet;
+						try
+						{
+							sheet = workbook.Worksheets[1];
+						}
+						catch
+						{
+							sheet = workbook.Worksheets.Add();
+						}
+
+						sheet.Name = "Authorized Users";
+						sheet.Range["A1"].Value = "First Name";
+						sheet.Range["B1"].Value = "Last Name";
+						sheet.Range["C1"].Value = "Email Address";
+						sheet.Range["D1"].Value = "UserName";
+
+						var headerRow = sheet.Range["1:1"];
+						headerRow.Font.Bold = true;
+						headerRow.HorizontalAlignment = -4108;
+
+						var dataRange = sheet.Range["A2", "D" + (users.GetLength(0) + 1).ToString()];
+						dataRange.Value = users;
+						dataRange.EntireColumn.AutoFit();
+
+						workbook.SaveAs(dialog.FileName);
+						workbook.Close();
+						Utils.ReleaseComObject(workbook);
+					}
+					catch { }
+					finally
+					{
+						MessageFilter.Revoke();
+						ExcelHelper.Instance.Disconnect();
+					}
+
 					try
 					{
 						Process.Start(dialog.FileName);

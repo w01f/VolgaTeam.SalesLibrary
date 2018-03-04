@@ -130,7 +130,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities
 					FormMain.Instance.ribbonControl.Enabled = true;
 				}
 				if (!string.IsNullOrEmpty(message))
-					AppManager.Instance.ShowWarning(message);
+					AppManager.Instance.PopupMessages.ShowWarning(message);
 			}
 			else
 				foreach (var view in _views.Values)

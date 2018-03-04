@@ -7,9 +7,7 @@ namespace SalesLibraries.SalesDepot.Configuration
 {
 	public class RemoteResourceManager
 	{
-		private static readonly RemoteResourceManager _instance = new RemoteResourceManager();
-
-		public static RemoteResourceManager Instance => _instance;
+		public static RemoteResourceManager Instance { get; } = new RemoteResourceManager();
 
 		#region Local
 		public StorageDirectory LocalLibraryFolder { get; private set; }

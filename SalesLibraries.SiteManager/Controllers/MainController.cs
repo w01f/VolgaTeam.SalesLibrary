@@ -52,7 +52,7 @@ namespace SalesLibraries.SiteManager.Controllers
 				formProgress.TopMost = true;
 				FormMain.Instance.ribbonControl.Enabled = false;
 				FormMain.Instance.pnMain.Controls.Clear();
-				var thread = new Thread(delegate()
+				var thread = new Thread(delegate ()
 					{
 						FormMain.Instance.Invoke((MethodInvoker)delegate
 						{
@@ -109,44 +109,13 @@ namespace SalesLibraries.SiteManager.Controllers
 		{
 			SiteChanged = null;
 			InitializePresentationLayer();
-
 			ChangeSite(WebSiteManager.Instance.SelectedSite);
-
-			_activeTab = (TabPageEnum)SettingsManager.Instance.SelectedTab;
-			ShowTab(_activeTab);
-
-			switch (_activeTab)
-			{
-				case TabPageEnum.Users:
-					FormMain.Instance.ribbonControl.SelectedRibbonTabItem = FormMain.Instance.ribbonTabItemUsers;
-					break;
-				case TabPageEnum.Activities:
-					FormMain.Instance.ribbonControl.SelectedRibbonTabItem = FormMain.Instance.ribbonTabItemActivities;
-					break;
-				case TabPageEnum.LinkConfigProfiles:
-					FormMain.Instance.ribbonControl.SelectedRibbonTabItem = FormMain.Instance.ribbonTabItemLinkConfigProfiles;
-					break;
-				case TabPageEnum.LibraryFiles:
-					FormMain.Instance.ribbonControl.SelectedRibbonTabItem = FormMain.Instance.ribbonTabItemLibraries;
-					break;
-				case TabPageEnum.InactiveUsers:
-					FormMain.Instance.ribbonControl.SelectedRibbonTabItem = FormMain.Instance.ribbonTabItemInactiveUsers;
-					break;
-				case TabPageEnum.QBuilder:
-					FormMain.Instance.ribbonControl.SelectedRibbonTabItem = FormMain.Instance.ribbonTabItemQBuilder;
-					break;
-				case TabPageEnum.Utilities:
-					FormMain.Instance.ribbonControl.SelectedRibbonTabItem = FormMain.Instance.ribbonTabItemUtilities;
-					break;
-			}
 		}
 
 		#region Common Page Functionality
-		private TabPageEnum _activeTab;
 		public void ShowTab(TabPageEnum tabPage)
 		{
 			if (!_controllers.ContainsKey(tabPage)) return;
-			_activeTab = tabPage;
 
 			SettingsManager.Instance.SelectedTab = (int)tabPage;
 			SettingsManager.Instance.Save();

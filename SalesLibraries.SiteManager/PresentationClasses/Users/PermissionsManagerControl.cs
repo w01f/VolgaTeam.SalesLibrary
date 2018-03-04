@@ -108,7 +108,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 					FormMain.Instance.ribbonControl.Enabled = true;
 				}
 				if (!string.IsNullOrEmpty(message))
-					AppManager.Instance.ShowWarning(message);
+					AppManager.Instance.PopupMessages.ShowWarning(message);
 			}
 			else
 			{
@@ -161,7 +161,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 				}
 			}
 			if (!string.IsNullOrEmpty(message))
-				AppManager.Instance.ShowWarning(message);
+				AppManager.Instance.PopupMessages.ShowWarning(message);
 		}
 
 		public void Export()
@@ -306,7 +306,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 					FormMain.Instance.ribbonControl.Enabled = true;
 				}
 				if (!string.IsNullOrEmpty(message))
-					AppManager.Instance.ShowWarning(message);
+					AppManager.Instance.PopupMessages.ShowWarning(message);
 			}
 			else
 			{
@@ -371,7 +371,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 				}
 			}
 			if (!string.IsNullOrEmpty(message))
-				AppManager.Instance.ShowWarning(message);
+				AppManager.Instance.PopupMessages.ShowWarning(message);
 		}
 
 		public void EditUser()
@@ -444,13 +444,13 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 				}
 			}
 			if (!string.IsNullOrEmpty(message))
-				AppManager.Instance.ShowWarning(message);
+				AppManager.Instance.PopupMessages.ShowWarning(message);
 		}
 
 		public void DeleteUser()
 		{
 			var userRecord = gridViewUsers.GetFocusedRow() as UserModel;
-			if (userRecord == null || AppManager.Instance.ShowWarningQuestion(string.Format("Are you sure want to delete user {0}?", userRecord.FullName)) != DialogResult.Yes) return;
+			if (userRecord == null || AppManager.Instance.PopupMessages.ShowWarningQuestion(string.Format("Are you sure want to delete user {0}?", userRecord.FullName)) != DialogResult.Yes) return;
 			string message = string.Empty;
 			using (var form = new FormProgress())
 			{
@@ -477,7 +477,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 
 			UpdateUsers(true, ref message);
 			if (!string.IsNullOrEmpty(message))
-				AppManager.Instance.ShowWarning(message);
+				AppManager.Instance.PopupMessages.ShowWarning(message);
 		}
 
 		private void repositoryItemButtonEditUsersActions_ButtonClick(object sender, ButtonPressedEventArgs e)
@@ -607,7 +607,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 					FormMain.Instance.ribbonControl.Enabled = true;
 				}
 				if (!string.IsNullOrEmpty(message))
-					AppManager.Instance.ShowWarning(message);
+					AppManager.Instance.PopupMessages.ShowWarning(message);
 			}
 			else
 			{
@@ -668,7 +668,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 				}
 			}
 			if (!string.IsNullOrEmpty(message))
-				AppManager.Instance.ShowWarning(message);
+				AppManager.Instance.PopupMessages.ShowWarning(message);
 		}
 
 		private void EditGroup()
@@ -737,14 +737,14 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 					}
 				}
 				if (!string.IsNullOrEmpty(message))
-					AppManager.Instance.ShowWarning(message);
+					AppManager.Instance.PopupMessages.ShowWarning(message);
 			}
 		}
 
 		private void DeleteGroup()
 		{
 			var groupRecord = gridViewGroups.GetFocusedRow() as GroupModel;
-			if (groupRecord != null && AppManager.Instance.ShowWarningQuestion(string.Format("Are you sure want to delete group {0}?", groupRecord.name)) == DialogResult.Yes)
+			if (groupRecord != null && AppManager.Instance.PopupMessages.ShowWarningQuestion(string.Format("Are you sure want to delete group {0}?", groupRecord.name)) == DialogResult.Yes)
 			{
 				string message = string.Empty;
 				using (var form = new FormProgress())
@@ -772,7 +772,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 
 				UpdateGroups(true, ref message);
 				if (!string.IsNullOrEmpty(message))
-					AppManager.Instance.ShowWarning(message);
+					AppManager.Instance.PopupMessages.ShowWarning(message);
 			}
 		}
 
@@ -816,7 +816,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 					FormMain.Instance.ribbonControl.Enabled = true;
 				}
 				if (!string.IsNullOrEmpty(message))
-					AppManager.Instance.ShowWarning(message);
+					AppManager.Instance.PopupMessages.ShowWarning(message);
 			}
 			else
 			{
@@ -904,7 +904,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 					}
 				}
 				if (!string.IsNullOrEmpty(message))
-					AppManager.Instance.ShowWarning(message);
+					AppManager.Instance.PopupMessages.ShowWarning(message);
 			}
 		}
 

@@ -10,6 +10,7 @@ using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraTab;
+using SalesLibraries.CommonGUI.Common;
 using SalesLibraries.ServiceConnector.AdminService;
 using SalesLibraries.SiteManager.ToolClasses;
 
@@ -57,27 +58,27 @@ namespace SalesLibraries.SiteManager.ToolForms
 			gridViewLibraries.MasterRowGetChildList += OnGetLibraryChildList;
 			gridControlLibraries.DataSource = _libraries;
 
-			textEditLogin.Enter += FormMain.Instance.Editor_Enter;
-			textEditLogin.MouseUp += FormMain.Instance.Editor_MouseUp;
-			textEditLogin.MouseDown += FormMain.Instance.Editor_MouseDown;
-			textEditFirstName.Enter += FormMain.Instance.Editor_Enter;
-			textEditFirstName.MouseUp += FormMain.Instance.Editor_MouseUp;
-			textEditFirstName.MouseDown += FormMain.Instance.Editor_MouseDown;
-			textEditLastName.Enter += FormMain.Instance.Editor_Enter;
-			textEditLastName.MouseUp += FormMain.Instance.Editor_MouseUp;
-			textEditLastName.MouseDown += FormMain.Instance.Editor_MouseDown;
-			textEditPhone.Enter += FormMain.Instance.Editor_Enter;
-			textEditPhone.MouseUp += FormMain.Instance.Editor_MouseUp;
-			textEditPhone.MouseDown += FormMain.Instance.Editor_MouseDown;
-			textEditEmail.Enter += FormMain.Instance.Editor_Enter;
-			textEditEmail.MouseUp += FormMain.Instance.Editor_MouseUp;
-			textEditEmail.MouseDown += FormMain.Instance.Editor_MouseDown;
-			textEditEmailConfirm.Enter += FormMain.Instance.Editor_Enter;
-			textEditEmailConfirm.MouseUp += FormMain.Instance.Editor_MouseUp;
-			textEditEmailConfirm.MouseDown += FormMain.Instance.Editor_MouseDown;
-			buttonEditPassword.Enter += FormMain.Instance.Editor_Enter;
-			buttonEditPassword.MouseUp += FormMain.Instance.Editor_MouseUp;
-			buttonEditPassword.MouseDown += FormMain.Instance.Editor_MouseDown;
+			textEditLogin.Enter += EditorHelper.OnEditorEnter;
+			textEditLogin.MouseUp += EditorHelper.OnEditorMouseUp;
+			textEditLogin.MouseDown += EditorHelper.OnEditorMouseDown;
+			textEditFirstName.Enter += EditorHelper.OnEditorEnter;
+			textEditFirstName.MouseUp += EditorHelper.OnEditorMouseUp;
+			textEditFirstName.MouseDown += EditorHelper.OnEditorMouseDown;
+			textEditLastName.Enter += EditorHelper.OnEditorEnter;
+			textEditLastName.MouseUp += EditorHelper.OnEditorMouseUp;
+			textEditLastName.MouseDown += EditorHelper.OnEditorMouseDown;
+			textEditPhone.Enter += EditorHelper.OnEditorEnter;
+			textEditPhone.MouseUp += EditorHelper.OnEditorMouseUp;
+			textEditPhone.MouseDown += EditorHelper.OnEditorMouseDown;
+			textEditEmail.Enter += EditorHelper.OnEditorEnter;
+			textEditEmail.MouseUp += EditorHelper.OnEditorMouseUp;
+			textEditEmail.MouseDown += EditorHelper.OnEditorMouseDown;
+			textEditEmailConfirm.Enter += EditorHelper.OnEditorEnter;
+			textEditEmailConfirm.MouseUp += EditorHelper.OnEditorMouseUp;
+			textEditEmailConfirm.MouseDown += EditorHelper.OnEditorMouseDown;
+			buttonEditPassword.Enter += EditorHelper.OnEditorEnter;
+			buttonEditPassword.MouseUp += EditorHelper.OnEditorMouseUp;
+			buttonEditPassword.MouseDown += EditorHelper.OnEditorMouseDown;
 
 			if (_newUser)
 			{
@@ -115,7 +116,7 @@ namespace SalesLibraries.SiteManager.ToolForms
 					e.Cancel = true;
 				else if (_newUser && textEditLogin.EditValue != null && _existedUsers.Contains(textEditLogin.EditValue.ToString()))
 				{
-					if (AppManager.Instance.ShowWarningQuestion("User with given login already exist.\nDo you want to update his data?") == DialogResult.No)
+					if (AppManager.Instance.PopupMessages.ShowWarningQuestion("User with given login already exist.\nDo you want to update his data?") == DialogResult.No)
 						e.Cancel = true;
 				}
 			}

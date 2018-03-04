@@ -326,7 +326,7 @@ namespace SalesLibraries.SiteManager
 			this.buttonItemLinkConfigProfilesExit.SubItemsExpandWidth = 14;
 			this.superTooltip.SetSuperTooltip(this.buttonItemLinkConfigProfilesExit, new DevComponents.DotNetBar.SuperTooltipInfo("Exit", "", "Close Site Manager", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
 			this.buttonItemLinkConfigProfilesExit.Text = "buttonItemHomeExit";
-			this.buttonItemLinkConfigProfilesExit.Click += new System.EventHandler(this.buttonItemExit_Click);
+			this.buttonItemLinkConfigProfilesExit.Click += new System.EventHandler(this.OnExitClick);
 			// 
 			// buttonItemQBuilderExit
 			// 
@@ -335,7 +335,7 @@ namespace SalesLibraries.SiteManager
 			this.buttonItemQBuilderExit.SubItemsExpandWidth = 14;
 			this.superTooltip.SetSuperTooltip(this.buttonItemQBuilderExit, new DevComponents.DotNetBar.SuperTooltipInfo("Exit", "", "Close Site Manager", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
 			this.buttonItemQBuilderExit.Text = "buttonItemHomeExit";
-			this.buttonItemQBuilderExit.Click += new System.EventHandler(this.buttonItemExit_Click);
+			this.buttonItemQBuilderExit.Click += new System.EventHandler(this.OnExitClick);
 			// 
 			// buttonItemInactiveUsersExit
 			// 
@@ -344,7 +344,7 @@ namespace SalesLibraries.SiteManager
 			this.buttonItemInactiveUsersExit.SubItemsExpandWidth = 14;
 			this.superTooltip.SetSuperTooltip(this.buttonItemInactiveUsersExit, new DevComponents.DotNetBar.SuperTooltipInfo("Exit", "", "Close Site Manager", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
 			this.buttonItemInactiveUsersExit.Text = "buttonItemHomeExit";
-			this.buttonItemInactiveUsersExit.Click += new System.EventHandler(this.buttonItemExit_Click);
+			this.buttonItemInactiveUsersExit.Click += new System.EventHandler(this.OnExitClick);
 			// 
 			// buttonItemActivitiesExit
 			// 
@@ -353,7 +353,7 @@ namespace SalesLibraries.SiteManager
 			this.buttonItemActivitiesExit.SubItemsExpandWidth = 14;
 			this.superTooltip.SetSuperTooltip(this.buttonItemActivitiesExit, new DevComponents.DotNetBar.SuperTooltipInfo("Exit", "", "Close Site Manager", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
 			this.buttonItemActivitiesExit.Text = "buttonItemHomeExit";
-			this.buttonItemActivitiesExit.Click += new System.EventHandler(this.buttonItemExit_Click);
+			this.buttonItemActivitiesExit.Click += new System.EventHandler(this.OnExitClick);
 			// 
 			// buttonItemUsersExit
 			// 
@@ -362,7 +362,7 @@ namespace SalesLibraries.SiteManager
 			this.buttonItemUsersExit.SubItemsExpandWidth = 14;
 			this.superTooltip.SetSuperTooltip(this.buttonItemUsersExit, new DevComponents.DotNetBar.SuperTooltipInfo("Exit", "", "Close Site Manager", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
 			this.buttonItemUsersExit.Text = "buttonItemHomeExit";
-			this.buttonItemUsersExit.Click += new System.EventHandler(this.buttonItemExit_Click);
+			this.buttonItemUsersExit.Click += new System.EventHandler(this.OnExitClick);
 			// 
 			// buttonItemUtilitiesExit
 			// 
@@ -371,7 +371,7 @@ namespace SalesLibraries.SiteManager
 			this.buttonItemUtilitiesExit.SubItemsExpandWidth = 14;
 			this.superTooltip.SetSuperTooltip(this.buttonItemUtilitiesExit, new DevComponents.DotNetBar.SuperTooltipInfo("Exit", "", "Close Site Manager", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
 			this.buttonItemUtilitiesExit.Text = "buttonItemHomeExit";
-			this.buttonItemUtilitiesExit.Click += new System.EventHandler(this.buttonItemExit_Click);
+			this.buttonItemUtilitiesExit.Click += new System.EventHandler(this.OnExitClick);
 			// 
 			// buttonItemLibrariesExit
 			// 
@@ -380,7 +380,7 @@ namespace SalesLibraries.SiteManager
 			this.buttonItemLibrariesExit.SubItemsExpandWidth = 14;
 			this.superTooltip.SetSuperTooltip(this.buttonItemLibrariesExit, new DevComponents.DotNetBar.SuperTooltipInfo("Exit", "", "Close Site Manager", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
 			this.buttonItemLibrariesExit.Text = "buttonItemHomeExit";
-			this.buttonItemLibrariesExit.Click += new System.EventHandler(this.buttonItemExit_Click);
+			this.buttonItemLibrariesExit.Click += new System.EventHandler(this.OnExitClick);
 			// 
 			// defaultLookAndFeel
 			// 
@@ -404,6 +404,7 @@ namespace SalesLibraries.SiteManager
 			this.ribbonControl.Controls.Add(this.ribbonPanelActivities);
 			this.ribbonControl.Dock = System.Windows.Forms.DockStyle.Top;
 			this.ribbonControl.EnableQatPlacement = false;
+			this.ribbonControl.Expanded = false;
 			this.ribbonControl.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.ribbonControl.ForeColor = System.Drawing.Color.Black;
 			this.ribbonControl.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
@@ -438,7 +439,6 @@ namespace SalesLibraries.SiteManager
 			this.ribbonControl.TabGroupHeight = 14;
 			this.ribbonControl.TabIndex = 2;
 			this.ribbonControl.Text = "ribbonControl";
-			this.ribbonControl.SelectedRibbonTabChanged += new System.EventHandler(this.ribbonControl_SelectedRibbonTabChanged);
 			// 
 			// ribbonPanelUsers
 			// 
@@ -2606,7 +2606,7 @@ namespace SalesLibraries.SiteManager
 			this.Name = "FormMain";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
 			this.Text = "Site Manager";
-			this.Load += new System.EventHandler(this.FormMain_Load);
+			this.Load += new System.EventHandler(this.OnFormMainLoad);
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			this.ribbonControl.ResumeLayout(false);
 			this.ribbonControl.PerformLayout();

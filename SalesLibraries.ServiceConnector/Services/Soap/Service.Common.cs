@@ -25,10 +25,9 @@ namespace SalesLibraries.ServiceConnector.Services.Soap
 				{
 					case "Url":
 						var value = childNode.InnerText;
-						if (value.StartsWith("http",StringComparison.OrdinalIgnoreCase))
-							Website = value;
-						else
-							Website = String.Format("http://{0}", value);
+						Website = value.StartsWith("http",StringComparison.OrdinalIgnoreCase) ? 
+							value : 
+							String.Format("http://{0}", value);
 						break;
 				}
 			}

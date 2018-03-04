@@ -60,7 +60,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.LinkConfigProfiles
 					FormMain.Instance.ribbonControl.Enabled = true;
 				}
 				if (!string.IsNullOrEmpty(message))
-					AppManager.Instance.ShowWarning(message);
+					AppManager.Instance.PopupMessages.ShowWarning(message);
 			}
 			else
 			{
@@ -116,7 +116,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.LinkConfigProfiles
 		public void DeleteProfile()
 		{
 			if (_selectedProfileControl == null) return;
-			if (AppManager.Instance.ShowWarningQuestion(String.Format("Are you sure want to delete profile {0}?", _selectedProfileControl.ProfileName)) != DialogResult.Yes) return;
+			if (AppManager.Instance.PopupMessages.ShowWarningQuestion(String.Format("Are you sure want to delete profile {0}?", _selectedProfileControl.ProfileName)) != DialogResult.Yes) return;
 			using (var form = new FormProgress())
 			{
 				FormMain.Instance.ribbonControl.Enabled = false;

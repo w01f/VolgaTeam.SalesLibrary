@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using Microsoft.Office.Interop.Excel;
-using SalesLibraries.SiteManager.InteropClasses;
+using SalesLibraries.Common.Helpers;
+using SalesLibraries.Common.OfficeInterops;
 using Application = System.Windows.Forms.Application;
 
 namespace SalesLibraries.SiteManager.ToolClasses

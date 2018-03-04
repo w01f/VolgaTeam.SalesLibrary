@@ -84,7 +84,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities.QuizPassData
 					FormMain.Instance.ribbonControl.Enabled = true;
 				}
 				if (!string.IsNullOrEmpty(message))
-					AppManager.Instance.ShowWarning(message);
+					AppManager.Instance.PopupMessages.ShowWarning(message);
 			}
 			else
 			{

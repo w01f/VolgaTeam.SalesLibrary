@@ -9,15 +9,13 @@ namespace SalesLibraries.Common.OfficeInterops
 {
 	public class ExcelHelper
 	{
-		private static readonly ExcelHelper _instance = new ExcelHelper();
-
 		public Application ExcelObject { get; private set; }
 
 		private bool _isOpened;
 
 		private ExcelHelper() {}
 
-		public static ExcelHelper Instance => _instance;
+		public static ExcelHelper Instance { get; } = new ExcelHelper();
 
 		public bool IsOpened
 		{
@@ -57,8 +55,7 @@ namespace SalesLibraries.Common.OfficeInterops
 			{
 				foreach (Workbook workbook in ExcelObject.Workbooks)
 					workbook.Close();
-				uint processId;
-				WinAPIHelper.GetWindowThreadProcessId(new IntPtr(ExcelObject.Hwnd), out processId);
+				WinAPIHelper.GetWindowThreadProcessId(new IntPtr(ExcelObject.Hwnd), out var processId);
 				Process.GetProcessById((int)processId).Kill();
 			}
 			Utils.ReleaseComObject(ExcelObject);

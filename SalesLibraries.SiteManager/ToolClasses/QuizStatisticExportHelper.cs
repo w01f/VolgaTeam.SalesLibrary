@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Office.Interop.Excel;
+using SalesLibraries.Common.Helpers;
+using SalesLibraries.Common.OfficeInterops;
 using SalesLibraries.ServiceConnector.StatisticService;
-using SalesLibraries.SiteManager.InteropClasses;
 
 namespace SalesLibraries.SiteManager.ToolClasses
 {
@@ -23,7 +24,7 @@ namespace SalesLibraries.SiteManager.ToolClasses
 				MessageFilter.Register();
 				var workbook = ExcelHelper.Instance.ExcelObject.Workbooks.Add();
 				Worksheet sheet = null;
-				var updated = String.Format("Updated: {0}", DateTime.Now.ToString("MM/dd/yy - hmmtt"));
+				var updated = String.Format("Updated: {0:MM/dd/yy - hmmtt}", DateTime.Now);
 				sheet = workbook.Worksheets.Count < 1 ? workbook.Worksheets.Add() : workbook.Worksheets[1];
 				FillSummaryPage(sheet, header, group, totalUsers, totalGroups, updated, totalStatistic);
 				var currentSheetIndex = 2;
@@ -136,7 +137,8 @@ namespace SalesLibraries.SiteManager.ToolClasses
 			{
 				Name = group.Key,
 				TotalPassed = group.Sum(g => g.Passed)
-			}).OrderByDescending(item => item.TotalPassed).Select(item => item.Name);
+			}).OrderByDescending(item => item.TotalPassed).Select(item => item.Name)
+			.ToList();
 			var groupBegin = rowPosition;
 			var groupEnd = rowPosition;
 			foreach (var name in groupNames)
@@ -174,7 +176,7 @@ namespace SalesLibraries.SiteManager.ToolClasses
 			rowPosition += 2;
 
 
-			var quizNames = totalRecords.OrderBy(gr => gr.Date).Select(gr => gr.quizName).Distinct();
+			var quizNames = totalRecords.OrderBy(gr => gr.Date).Select(gr => gr.quizName).Distinct().ToList();
 			var quizIndex = 1;
 			foreach (var quizName in quizNames)
 			{

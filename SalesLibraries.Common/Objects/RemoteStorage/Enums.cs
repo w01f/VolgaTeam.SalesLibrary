@@ -6,6 +6,7 @@
 		FileManager,
 		CloudAdmin,
 		SalesDepot,
+		SiteManager
 	}
 
 	public enum DataActualityState

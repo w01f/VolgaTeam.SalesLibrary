@@ -54,6 +54,9 @@ namespace SalesLibraries.Common.Helpers
 				case AppTypeEnum.SalesDepot:
 					AppName = "app_sales_library";
 					break;
+				case AppTypeEnum.SiteManager:
+					AppName = "app_site_manager";
+					break;
 				default:
 					throw new InvalidEnumArgumentException("Storage Type Undefined");
 			}
