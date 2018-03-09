@@ -27,8 +27,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			layoutControlGroupBanner.PageEnabled = MainController.Instance.Lists.Banners.MainFolder.ExistsLocal();
 			layoutControlGroupWidget.PageEnabled = MainController.Instance.Lists.Widgets.MainFolder.ExistsLocal();
 
-			buttonEditFont.ButtonClick += EditorHelper.FontEdit_ButtonClick;
-			buttonEditFont.Click += EditorHelper.FontEdit_Click;
+			buttonEditFont.ButtonClick += EditorHelper.OnFontEditButtonClick;
+			buttonEditFont.Click += EditorHelper.OnFontEditClick;
 
 			Load += OnFormLoad;
 

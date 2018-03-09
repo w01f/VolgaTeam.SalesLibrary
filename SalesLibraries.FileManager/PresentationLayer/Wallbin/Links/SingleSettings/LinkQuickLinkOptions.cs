@@ -31,9 +31,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			checkEditTitleLink.Text = QuickLinkSettings.PredefinedQuickLinkTitleLink;
 			checkEditTitleResources.Text = QuickLinkSettings.PredefinedQuickLinkTitleResources;
 
-			textEditUrl.Enter += EditorHelper.EditorEnter;
-			textEditUrl.MouseUp += EditorHelper.EditorMouseUp;
-			textEditUrl.MouseDown += EditorHelper.EditorMouseUp;
+			textEditUrl.Enter += EditorHelper.OnEditorEnter;
+			textEditUrl.MouseUp += EditorHelper.OnEditorMouseUp;
+			textEditUrl.MouseDown += EditorHelper.OnEditorMouseUp;
 
 			layoutControlGroupControls.Enabled = false;
 		}

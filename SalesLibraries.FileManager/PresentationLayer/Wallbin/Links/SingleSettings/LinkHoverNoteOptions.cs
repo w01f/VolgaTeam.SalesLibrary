@@ -27,9 +27,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			InitializeComponent();
 			Text = "Hover Note";
 
-			memoEditNote.Enter += EditorHelper.EditorEnter;
-			memoEditNote.MouseUp += EditorHelper.EditorMouseUp;
-			memoEditNote.MouseDown += EditorHelper.EditorMouseUp;
+			memoEditNote.Enter += EditorHelper.OnEditorEnter;
+			memoEditNote.MouseUp += EditorHelper.OnEditorMouseUp;
+			memoEditNote.MouseDown += EditorHelper.OnEditorMouseUp;
 
 			layoutControlGroupControls.Enabled = false;
 		}

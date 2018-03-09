@@ -46,8 +46,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			simpleLabelItemTextDescription.Text = String.Format(simpleLabelItemTextDescription.Text, bannerHolder.ObjectDisplayName);
 			buttonXShowTextHolderObjectName.Text = String.Format(buttonXShowTextHolderObjectName.Text, bannerHolder.ObjectDisplayName);
 
-			buttonEditBannerTextFont.ButtonClick += EditorHelper.FontEdit_ButtonClick;
-			buttonEditBannerTextFont.Click += EditorHelper.FontEdit_Click;
+			buttonEditBannerTextFont.ButtonClick += EditorHelper.OnFontEditButtonClick;
+			buttonEditBannerTextFont.Click += EditorHelper.OnFontEditClick;
 
 			retractableBarGallery.AddButtons(new[]
 				{

@@ -50,8 +50,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Singl
 				barSubItemInfoAdd.LinksPersistInfo.Add(new LinkPersistInfo(barButton));
 			}
 
-			buttonEditTextFont.ButtonClick += EditorHelper.FontEdit_ButtonClick;
-			buttonEditTextFont.Click += EditorHelper.FontEdit_Click;
+			buttonEditTextFont.ButtonClick += EditorHelper.OnFontEditButtonClick;
+			buttonEditTextFont.Click += EditorHelper.OnFontEditClick;
 
 			layoutControlItemLogo.MaxSize = RectangleHelper.ScaleSize(layoutControlItemLogo.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemLogo.MinSize = RectangleHelper.ScaleSize(layoutControlItemLogo.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));

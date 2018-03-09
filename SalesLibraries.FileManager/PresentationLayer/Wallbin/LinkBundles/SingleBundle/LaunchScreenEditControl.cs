@@ -31,10 +31,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Singl
 			memoEditHeader.EnableSelectAll();
 			memoEditFooter.EnableSelectAll();
 
-			buttonEditHeaderTextFont.ButtonClick += EditorHelper.FontEdit_ButtonClick;
-			buttonEditHeaderTextFont.Click += EditorHelper.FontEdit_Click;
-			buttonEditFooterTextFont.ButtonClick += EditorHelper.FontEdit_ButtonClick;
-			buttonEditFooterTextFont.Click += EditorHelper.FontEdit_Click;
+			buttonEditHeaderTextFont.ButtonClick += EditorHelper.OnFontEditButtonClick;
+			buttonEditHeaderTextFont.Click += EditorHelper.OnFontEditClick;
+			buttonEditFooterTextFont.ButtonClick += EditorHelper.OnFontEditButtonClick;
+			buttonEditFooterTextFont.Click += EditorHelper.OnFontEditClick;
 
 			layoutControlItemLogo.MaxSize = RectangleHelper.ScaleSize(layoutControlItemLogo.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemLogo.MinSize = RectangleHelper.ScaleSize(layoutControlItemLogo.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));

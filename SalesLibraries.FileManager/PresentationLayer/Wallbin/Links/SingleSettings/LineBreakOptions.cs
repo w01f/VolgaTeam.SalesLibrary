@@ -27,8 +27,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 			Text = "Line Break";
 
-			buttonEditLineBreakFont.ButtonClick += EditorHelper.FontEdit_ButtonClick;
-			buttonEditLineBreakFont.Click += EditorHelper.FontEdit_Click;
+			buttonEditLineBreakFont.ButtonClick += EditorHelper.OnFontEditButtonClick;
+			buttonEditLineBreakFont.Click += EditorHelper.OnFontEditClick;
 		}
 
 		public LineBreakOptions(LinkType? defaultLinkType = null) : this() { }

@@ -23,9 +23,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Bundl
 		public FormBundleName()
 		{
 			InitializeComponent();
-			textEditName.MouseDown += EditorHelper.EditorMouseDown;
-			textEditName.MouseUp += EditorHelper.EditorMouseUp;
-			textEditName.Enter += EditorHelper.EditorEnter;
+			textEditName.MouseDown += EditorHelper.OnEditorMouseDown;
+			textEditName.MouseUp += EditorHelper.OnEditorMouseUp;
+			textEditName.Enter += EditorHelper.OnEditorEnter;
 			textEditName.Focus();
 
 			layoutControlItemOK.MaxSize = RectangleHelper.ScaleSize(layoutControlItemOK.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));

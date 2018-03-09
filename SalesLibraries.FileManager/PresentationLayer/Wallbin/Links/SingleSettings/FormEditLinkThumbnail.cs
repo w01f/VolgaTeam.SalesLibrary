@@ -50,10 +50,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		{
 			InitializeComponent();
 
-			buttonEditSingleTextFont.ButtonClick += EditorHelper.FontEdit_ButtonClick;
-			buttonEditSingleTextFont.Click += EditorHelper.FontEdit_Click;
-			buttonEditLinkSetTextFont.ButtonClick += EditorHelper.FontEdit_ButtonClick;
-			buttonEditLinkSetTextFont.Click += EditorHelper.FontEdit_Click;
+			buttonEditSingleTextFont.ButtonClick += EditorHelper.OnFontEditButtonClick;
+			buttonEditSingleTextFont.Click += EditorHelper.OnFontEditClick;
+			buttonEditLinkSetTextFont.ButtonClick += EditorHelper.OnFontEditButtonClick;
+			buttonEditLinkSetTextFont.Click += EditorHelper.OnFontEditClick;
 
 			spinEditSingleImagePadding.EnableSelectAll();
 			spinEditSingleImageSize.EnableSelectAll();

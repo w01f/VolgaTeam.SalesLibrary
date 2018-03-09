@@ -36,8 +36,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			checkEditApllyForAllWindowsBanner.Checked = _folder.Page.Library.Settings.ApplyBannerForAllWindows;
 			layoutControlGroupBanner.Enabled = MainController.Instance.Lists.Banners.MainFolder.ExistsLocal();
 			layoutControlGroupWidget.Enabled = MainController.Instance.Lists.Widgets.MainFolder.ExistsLocal();
-			buttonEditWindowHeaderFont.ButtonClick += EditorHelper.FontEdit_ButtonClick;
-			buttonEditWindowHeaderFont.Click += EditorHelper.FontEdit_Click;
+			buttonEditWindowHeaderFont.ButtonClick += EditorHelper.OnFontEditButtonClick;
+			buttonEditWindowHeaderFont.Click += EditorHelper.OnFontEditClick;
 			textEditName.EnableSelectAll();
 
 			layoutControlItemSave.MaxSize = RectangleHelper.ScaleSize(layoutControlItemSave.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));

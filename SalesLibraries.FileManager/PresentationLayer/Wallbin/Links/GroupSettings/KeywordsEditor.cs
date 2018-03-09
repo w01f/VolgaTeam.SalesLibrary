@@ -28,9 +28,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 			InitializeComponent();
 			Dock = DockStyle.Fill;
 
-			repositoryItemButtonEditSharedKeyword.Enter += EditorHelper.EditorEnter;
-			repositoryItemButtonEditSharedKeyword.MouseUp += EditorHelper.EditorMouseUp;
-			repositoryItemButtonEditSharedKeyword.MouseDown += EditorHelper.EditorMouseUp;
+			repositoryItemButtonEditSharedKeyword.Enter += EditorHelper.OnEditorEnter;
+			repositoryItemButtonEditSharedKeyword.MouseUp += EditorHelper.OnEditorMouseUp;
+			repositoryItemButtonEditSharedKeyword.MouseDown += EditorHelper.OnEditorMouseUp;
 
 			layoutControlItemReset.MaxSize = RectangleHelper.ScaleSize(layoutControlItemReset.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemReset.MinSize = RectangleHelper.ScaleSize(layoutControlItemReset.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));

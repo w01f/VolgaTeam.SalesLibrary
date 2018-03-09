@@ -52,8 +52,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		{
 			InitializeComponent();
 
-			buttonEditBannerTextFont.ButtonClick += EditorHelper.FontEdit_ButtonClick;
-			buttonEditBannerTextFont.Click += EditorHelper.FontEdit_Click;
+			buttonEditBannerTextFont.ButtonClick += EditorHelper.OnFontEditButtonClick;
+			buttonEditBannerTextFont.Click += EditorHelper.OnFontEditClick;
 
 			retractableBarGallery.AddButtons(new[]
 				{

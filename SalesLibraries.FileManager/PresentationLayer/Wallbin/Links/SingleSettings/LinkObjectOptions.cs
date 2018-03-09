@@ -33,9 +33,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			checkEditSellThis.Text = String.Format("<size=+2><b>{0}</b></size>", BaseLinkSettings.PredefinedNoteSellThis);
 			checkEditAttention.Text = String.Format("<size=+2><b>{0}</b></size>", BaseLinkSettings.PredefinedNoteAttention);
 
-			textEditCustomNote.Enter += EditorHelper.EditorEnter;
-			textEditCustomNote.MouseUp += EditorHelper.EditorMouseUp;
-			textEditCustomNote.MouseDown += EditorHelper.EditorMouseUp;
+			textEditCustomNote.Enter += EditorHelper.OnEditorEnter;
+			textEditCustomNote.MouseUp += EditorHelper.OnEditorMouseUp;
+			textEditCustomNote.MouseDown += EditorHelper.OnEditorMouseUp;
 		}
 
 		public LinkObjectOptions(LinkType? defaultLinkType = null) : this() { }

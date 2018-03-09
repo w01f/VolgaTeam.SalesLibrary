@@ -28,8 +28,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			InitializeComponent();
 			Text = "Text Format";
 
-			buttonEditLinkSpecialFont.ButtonClick += EditorHelper.FontEdit_ButtonClick;
-			buttonEditLinkSpecialFont.Click += EditorHelper.FontEdit_Click;
+			buttonEditLinkSpecialFont.ButtonClick += EditorHelper.OnFontEditButtonClick;
+			buttonEditLinkSpecialFont.Click += EditorHelper.OnFontEditClick;
 		}
 
 		public LinkTextOptions(LinkType? defaultLinkType = null) : this() { }
