@@ -55,6 +55,9 @@
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/qbuilder/page-list.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/qbuilder/page-content.css?' . Yii::app()->params['version']);
 
+    foreach (Yii::app()->params['custom_fonts'] as $fontConfig)
+        $cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/' . \Yii::app()->params['librariesRoot'] . '/custom_fonts' . $fontConfig['css_path'] . '?' . $fontConfig['version']);
+
 	$cs->registerCoreScript('jquery.ui');
 	$cs->registerCoreScript('cookie');
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/json/jquery.json-2.3.min.js', CClientScript::POS_END);
@@ -193,7 +196,7 @@
     <script type="text/javascript">
 		$(document).ready(function () {
 			var wait = setTimeout($.SalesPortal.Auth.requestRefreshDueToInactivity, <? echo Yii::app()->params['login']['inactivity_refresh_timeout'];?>* 1000);
-			$( "body" ).on('mousemove',function(){
+			$("body").on('mousemove', function () {
 				clearTimeout(wait);
 				wait = setTimeout($.SalesPortal.Auth.requestRefreshDueToInactivity, <? echo Yii::app()->params['login']['inactivity_refresh_timeout'];?>* 1000);
 			});
@@ -204,7 +207,7 @@
     <script type="text/javascript">
 		$(document).ready(function () {
 			var wait = setTimeout($.SalesPortal.Auth.requestLogoutDueToInactivity, <? echo Yii::app()->params['login']['inactivity_logout_timeout'];?>* 1000);
-			$( "body" ).on('mousemove',function(){
+			$("body").on('mousemove', function () {
 				clearTimeout(wait);
 				wait = setTimeout($.SalesPortal.Auth.requestLogoutDueToInactivity, <? echo Yii::app()->params['login']['inactivity_logout_timeout'];?>* 1000);
 			});

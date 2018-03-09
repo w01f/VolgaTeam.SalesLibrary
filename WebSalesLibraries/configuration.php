@@ -117,6 +117,16 @@
 				'icomoon' => array(
 					'version' => 1
 				),
+				'custom_fonts' => array(
+					//array(
+					//	'version' => 1,
+					//	'css_path' => '/proxima-nova-web-fonts-master/fonts/fonts.min.css'
+					//),
+					//array(
+					//	'version' => 1,
+					//	'css_path' => '/proxima-nova-web-fonts-master/fonts/fonts.min.css'
+					//)
+				),
 				'froala_editor' => array(
 					'key' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
 				),
