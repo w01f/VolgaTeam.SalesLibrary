@@ -74,7 +74,11 @@
 	display: none;
 }
 
-#progress-bar{
+#progress-bar
+{
+	border: 8px solid #f3f3f3;
+	border-top: 8px solid #8a8a8a;
+	border-radius: 50%;
 	position: fixed;
 	top: 50%;
 	left: 50%;
@@ -83,4 +87,11 @@
 	margin-top: -50px;
 	margin-left: -50px;
 	z-index: 8060;
+	animation: spin 2s linear infinite;
+}
+
+@keyframes spin
+{
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
 }

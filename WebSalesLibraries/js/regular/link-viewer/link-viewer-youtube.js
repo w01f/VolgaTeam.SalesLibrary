@@ -13,7 +13,7 @@
 		{
 			embeddedViewer = parameters.viewContainer !== undefined;
 
-			if (viewerData.forcePreview === true)
+			if (viewerData.forcePreview == true)
 			{
 				showModal();
 				$.SalesPortal.LogHelper.write({

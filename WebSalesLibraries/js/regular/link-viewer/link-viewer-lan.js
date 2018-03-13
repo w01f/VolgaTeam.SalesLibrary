@@ -9,7 +9,7 @@
 
 		this.show = function ()
 		{
-			if (viewerData.isEOBrowser === true)
+			if (viewerData.isEOBrowser == true)
 				$.SalesPortal.SalesLibraryExtensions.openLink(viewerData);
 			else
 			{

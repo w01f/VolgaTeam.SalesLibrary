@@ -16,11 +16,11 @@
 		{
 			embeddedViewer = parameters.viewContainer !== undefined;
 
-			if (viewerData.config.isEOBrowser === true && viewerData.config.forceEOOpen === true)
+			if (viewerData.config.isEOBrowser == true && viewerData.config.forceEOOpen == true)
 				$.SalesPortal.SalesLibraryExtensions.openLink(viewerData);
-			else if (viewerData.config.forceDownload === true)
+			else if (viewerData.config.forceDownload == true)
 				downloadFile();
-			else if (viewerData.config.forceWebOpen === true)
+			else if (viewerData.config.forceWebOpen == true)
 				open();
 			else
 			{
