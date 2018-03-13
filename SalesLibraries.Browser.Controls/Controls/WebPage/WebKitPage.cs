@@ -7,7 +7,7 @@ using SalesLibraries.Browser.Controls.BusinessClasses.Helpers;
 using DevExpress.Utils;
 using DevExpress.XtraTab;
 using EO.WebBrowser;
-using EO.WebBrowser.WinForm;
+using EO.WinForm;
 using SalesLibraries.Browser.Controls.ToolForms;
 using Padding = System.Windows.Forms.Padding;
 

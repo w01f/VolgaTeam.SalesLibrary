@@ -5,7 +5,7 @@ using SalesLibraries.Browser.Controls.BusinessClasses.Enums;
 using SalesLibraries.Browser.Controls.BusinessClasses.Helpers;
 using SalesLibraries.Browser.Controls.BusinessClasses.Objects.FileLinks;
 using EO.WebBrowser;
-using EO.WebBrowser.WinForm;
+using EO.WinForm;
 using SalesLibraries.Browser.Controls.ToolForms;
 
 namespace SalesLibraries.Browser.Controls.Controls.WebPage

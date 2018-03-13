@@ -4,7 +4,7 @@ using System.IO;
 using System.Windows.Forms;
 using SalesLibraries.Browser.Controls.BusinessClasses.Objects;
 using EO.WebBrowser;
-using EO.WebBrowser.WinForm;
+using EO.WinForm;
 using SalesLibraries.Browser.Controls.ToolForms;
 
 namespace SalesLibraries.Browser.Controls.Controls
