@@ -35,6 +35,9 @@
 						   target="<? echo isset($mainSiteTarget) ? $mainSiteTarget : '_blank'; ?>"><? echo $mainSiteName; ?></a>
 					</div>
 				<? endif; ?>
+                <div class="om-movenext om-controlitem" style="display: none;">
+                    <img src="/vendor/onemenu/images/rightarrow.png" alt="">
+                </div>
 			</div>
 		</div>
 	</div>

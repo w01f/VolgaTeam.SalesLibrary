@@ -11,8 +11,10 @@
 			var menuContainer = $('#main-menu');
 			var menuGroups = menuContainer.find('.om-controlitems .om-ctrlitems');
 			if (menuGroups.length > 0)
-				menuContainer.find('.onemenu').onemenu({
-					animEffect: 'fade',
+				menuContainer.onemenu({
+					openstyle: 'overlay',
+					ctrlalign: 'left',
+					animEffect: 'none',
 					onOpen: function ()
 					{
 						$('#content-overlay').removeClass('main-menu-opened').addClass('main-menu-opened');
