@@ -11,20 +11,20 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 	{
 		public string PageName
 		{
-			get { return textEditPageName.EditValue as String; }
-			set { textEditPageName.EditValue = value; }
+			get => textEditPageName.EditValue as String;
+			set => textEditPageName.EditValue = value;
 		}
 
 		public string Icon
 		{
-			get { return textEditIcon.EditValue as String; }
-			set { textEditIcon.EditValue = value; }
+			get => textEditIcon.EditValue as String;
+			set => textEditIcon.EditValue = value;
 		}
 
 		public Color IconColor
 		{
-			get { return colorEditIconColor.Color; }
-			set { colorEditIconColor.Color = value; }
+			get => colorEditIconColor.Color;
+			set => colorEditIconColor.Color = value;
 		}
 
 		public FormPageSettings()
@@ -34,7 +34,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			textEditPageName.Focus();
 
 			layoutControlItemApply.MaxSize = RectangleHelper.ScaleSize(layoutControlItemApply.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
-			layoutControlItemCancel.MinSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemApply.MinSize = RectangleHelper.ScaleSize(layoutControlItemApply.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemCancel.MaxSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 			layoutControlItemCancel.MinSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
