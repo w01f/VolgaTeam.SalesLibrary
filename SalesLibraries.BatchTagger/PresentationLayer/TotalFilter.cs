@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using DevExpress.Skins;
 using DevExpress.XtraEditors.Controls;
+using SalesLibraries.Common.Helpers;
 using ItemCheckEventArgs = DevExpress.XtraEditors.Controls.ItemCheckEventArgs;
 
 namespace SalesLibraries.BatchTagger.PresentationLayer
@@ -13,22 +14,20 @@ namespace SalesLibraries.BatchTagger.PresentationLayer
 	{
 		private bool _init;
 
-		private bool _enableFilter;
 		public bool EnableFilter
 		{
-			get { return _enableFilter; }
+			get => checkEditEnableFilter.Checked;
 			set
 			{
 				_init = true;
-				_enableFilter = value;
-				checkEditEnableFilter.Checked = _enableFilter;
+				checkEditEnableFilter.Checked = value;
 				_init = false;
 			}
 		}
 		public event EventHandler<EventArgs> FilterChanged;
 
-		public List<string> AllGroups { get; private set; }
-		public List<string> SelectedGroups { get; private set; }
+		public List<string> AllGroups { get; }
+		public List<string> SelectedGroups { get; }
 
 		public TotalFilter()
 		{
@@ -37,12 +36,12 @@ namespace SalesLibraries.BatchTagger.PresentationLayer
 			AllGroups = new List<string>();
 			SelectedGroups = new List<string>();
 
-			if (CreateGraphics().DpiX > 96)
-			{
-				checkedListBoxControlGroups.ItemHeight =
-					RectangleHelper.ScaleVertical(checkedListBoxControlGroups.ItemHeight,
-						checkedListBoxControlGroups.ScaleFactor.Height);
-			}
+			var scaleleFactor = Utils.GetScaleFactor(CreateGraphics().DpiX);
+			layoutControlItemGroupsAll.MaxSize = RectangleHelper.ScaleSize(layoutControlItemGroupsAll.MaxSize, scaleleFactor);
+			layoutControlItemGroupsAll.MinSize = RectangleHelper.ScaleSize(layoutControlItemGroupsAll.MinSize, scaleleFactor);
+			layoutControlItemGroupsNone.MaxSize = RectangleHelper.ScaleSize(layoutControlItemGroupsNone.MaxSize, scaleleFactor);
+			layoutControlItemGroupsNone.MinSize = RectangleHelper.ScaleSize(layoutControlItemGroupsNone.MinSize, scaleleFactor);
+			checkedListBoxControlGroups.ItemHeight = (Int32)(checkedListBoxControlGroups.ItemHeight * scaleleFactor.Height);
 		}
 
 		public void UpdateDataSource(string[] groups, bool reset = true)
@@ -59,17 +58,14 @@ namespace SalesLibraries.BatchTagger.PresentationLayer
 			foreach (var group in groups)
 				checkedListBoxControlGroups.Items.Add(group, SelectedGroups.Contains(group));
 
-			labelControlGroupsTitle.Text = string.Format("Libraries: {0}", AllGroups.Count);
+			simpleLabelItemLibraries.Text = string.Format("Libraries: {0}", AllGroups.Count);
 
 			_init = false;
 		}
 
 		private void checkEditFilterEnable_CheckedChanged(object sender, EventArgs e)
 		{
-			_enableFilter = checkEditEnableFilter.Checked;
-			checkedListBoxControlGroups.Enabled = _enableFilter;
-			buttonXGroupsAll.Enabled = _enableFilter;
-			buttonXGroupsNone.Enabled = _enableFilter;
+			layoutControlGroupControls.Enabled = checkEditEnableFilter.Checked;
 			if (_init) return;
 			FilterChanged?.Invoke(this, new EventArgs());
 		}

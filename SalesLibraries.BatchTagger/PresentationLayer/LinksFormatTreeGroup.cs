@@ -11,13 +11,15 @@ namespace SalesLibraries.BatchTagger.PresentationLayer
 	public abstract class TreeGroup
 	{
 		public abstract string Title { get; }
+		public string TitleAndLinksCount => String.Format("{0} ({1})", Title, Links.Count);
+
 		public List<BaseLibraryLink> Links { get; } = new List<BaseLibraryLink>();
 	}
 
 	abstract class LinksFormatTreeGroup : TreeGroup
 	{
 		public abstract string[] TargetLinkFormats { get; }
-		public abstract int StateImageIndex { get; }
+		public abstract int? StateImageIndex { get; }
 
 		public static IList<LinksFormatTreeGroup> GetDefaultGroups()
 		{
@@ -30,6 +32,7 @@ namespace SalesLibraries.BatchTagger.PresentationLayer
 				new VideoTreeGroup(),
 				new ImageTreeGroup(),
 				new UrlTreeGroup(),
+				new LinkBundleTreeGroup(),
 				new UndefinedTreeGroup()
 			};
 		}
@@ -38,63 +41,63 @@ namespace SalesLibraries.BatchTagger.PresentationLayer
 	class RootTreeGroup : TreeGroup
 	{
 		private readonly ILinksGroup _linksGroup;
-		public override string Title => String.Format("{0} (All Files) ({1})", _linksGroup.LinkGroupName, Links.Count);
+		public override string Title => String.Format("{0} (All Files)", _linksGroup.LinkGroupName);
 
-		public RootTreeGroup(ILinksGroup linksGroup, LinkType? defaultLinkType = null)
+		public RootTreeGroup(ILinksGroup linksGroup, LinkType? defaultLinkType = null, IList<LinkType> excludeFileTypes = null)
 		{
 			_linksGroup = linksGroup;
-			Links.AddRange(linksGroup.AllGroupLinks.Where(link => defaultLinkType == null || link.Type == defaultLinkType));
+			Links.AddRange(linksGroup.AllGroupLinks.Where(link => (defaultLinkType == null || link.Type == defaultLinkType) && (excludeFileTypes == null || !excludeFileTypes.Contains(link.Type))));
 		}
 	}
 
 	class PowerPointTreeGroup : LinksFormatTreeGroup
 	{
-		public override string Title => String.Format("PowerPoint Files ({0})", Links.Count);
+		public override string Title => "PowerPoint Files";
 
 		public override string[] TargetLinkFormats => new[] { WebFormats.PowerPoint };
 
-		public override int StateImageIndex => 7;
+		public override int? StateImageIndex => 7;
 	}
 
 	class WordTreeGroup : LinksFormatTreeGroup
 	{
-		public override string Title => String.Format("Document Files ({0})", Links.Count);
+		public override string Title => "Document Files";
 
 		public override string[] TargetLinkFormats => new[] { WebFormats.Word };
 
-		public override int StateImageIndex => 3;
+		public override int? StateImageIndex => 3;
 	}
 
 	class ExcelTreeGroup : LinksFormatTreeGroup
 	{
-		public override string Title => String.Format("Excel Files ({0})", Links.Count);
+		public override string Title => "Excel Files";
 
 		public override string[] TargetLinkFormats => new[] { WebFormats.Excel };
 
-		public override int StateImageIndex => 9;
+		public override int? StateImageIndex => 9;
 	}
 
 	class PdfTreeGroup : LinksFormatTreeGroup
 	{
-		public override string Title => String.Format("PDF Files ({0})", Links.Count);
+		public override string Title => "PDF Files";
 
 		public override string[] TargetLinkFormats => new[] { WebFormats.Pdf };
 
-		public override int StateImageIndex => 5;
+		public override int? StateImageIndex => 5;
 	}
 
 	class VideoTreeGroup : LinksFormatTreeGroup
 	{
-		public override string Title => String.Format("Video Files ({0})", Links.Count);
+		public override string Title => "Video Files";
 
 		public override string[] TargetLinkFormats => new[] { WebFormats.Video };
 
-		public override int StateImageIndex => 4;
+		public override int? StateImageIndex => 4;
 	}
 
 	class ImageTreeGroup : LinksFormatTreeGroup
 	{
-		public override string Title => String.Format("Image Files ({0})", Links.Count);
+		public override string Title => "Image Files";
 
 		public override string[] TargetLinkFormats => new[]
 		{
@@ -103,12 +106,12 @@ namespace SalesLibraries.BatchTagger.PresentationLayer
 			WebFormats.Gif
 		};
 
-		public override int StateImageIndex => 6;
+		public override int? StateImageIndex => 6;
 	}
 
 	class UrlTreeGroup : LinksFormatTreeGroup
 	{
-		public override string Title => String.Format("Hyperlinks ({0})", Links.Count);
+		public override string Title => "Hyperlinks";
 
 		public override string[] TargetLinkFormats => new[]
 		{
@@ -125,16 +128,28 @@ namespace SalesLibraries.BatchTagger.PresentationLayer
 			WebFormats.InternalWallbin,
 		};
 
-		public override int StateImageIndex => 8;
+		public override int? StateImageIndex => 8;
+	}
+
+	class LinkBundleTreeGroup : LinksFormatTreeGroup
+	{
+		public override string Title => "Link Bundles";
+
+		public override string[] TargetLinkFormats => new[]
+		{
+			WebFormats.LinkBundle
+		};
+
+		public override int? StateImageIndex => null;
 	}
 
 	class UndefinedTreeGroup : LinksFormatTreeGroup
 	{
-		public override string Title => String.Format("Other Files ({0})", Links.Count);
+		public override string Title => "Other Files";
 
 		public override string[] TargetLinkFormats => new string[] { };
 
-		public override int StateImageIndex => 2;
+		public override int? StateImageIndex => null;
 	}
 }
 

@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
+using DevExpress.Skins;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraLayout;
+using DevExpress.XtraLayout.Utils;
 using DevExpress.XtraTreeList;
 using DevExpress.XtraTreeList.Nodes;
 using SalesLibraries.BatchTagger.Properties;
@@ -14,7 +18,9 @@ using SalesLibraries.Business.Entities.Helpers;
 using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
+using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.Objects.SearchTags;
+using SalesLibraries.CommonGUI.Common;
 
 namespace SalesLibraries.BatchTagger.PresentationLayer
 {
@@ -26,25 +32,25 @@ namespace SalesLibraries.BatchTagger.PresentationLayer
 		private readonly ILinksGroup _linkGroup;
 		private readonly List<BaseLibraryLink> _selectedLinks = new List<BaseLibraryLink>();
 
+		public LinkSettingsType[] EditableSettings => new[]
+		{
+			LinkSettingsType.Tags,
+		};
+
 		public FormEditLinkTags()
 		{
 			InitializeComponent();
 
-			if (CreateGraphics().DpiX > 96)
-			{
-				var font = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2,
-					styleController.Appearance.Font.Style);
-				styleController.Appearance.Font = font;
-				styleController.AppearanceDisabled.Font = font;
-				styleController.AppearanceDropDown.Font = font;
-				styleController.AppearanceDropDownHeader.Font = font;
-				styleController.AppearanceFocused.Font = font;
-				styleController.AppearanceReadOnly.Font = font;
-
-				buttonXAddKeyWord.Font = new Font(buttonXAddKeyWord.Font.FontFamily, buttonXAddKeyWord.Font.Size - 2, buttonXAddKeyWord.Font.Style);
-				buttonXCancel.Font = new Font(buttonXCancel.Font.FontFamily, buttonXCancel.Font.Size - 2, buttonXCancel.Font.Style);
-				buttonXOK.Font = new Font(buttonXOK.Font.FontFamily, buttonXOK.Font.Size - 2, buttonXOK.Font.Style);
-			}
+			layoutControlItemCategoriesListExpandAll.MaxSize = RectangleHelper.ScaleSize(layoutControlItemCategoriesListExpandAll.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCategoriesListExpandAll.MinSize = RectangleHelper.ScaleSize(layoutControlItemCategoriesListExpandAll.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCategoriesListCollapseAll.MaxSize = RectangleHelper.ScaleSize(layoutControlItemCategoriesListCollapseAll.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCategoriesListCollapseAll.MinSize = RectangleHelper.ScaleSize(layoutControlItemCategoriesListCollapseAll.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemKeywordsAdd.MaxSize = RectangleHelper.ScaleSize(layoutControlItemKeywordsAdd.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemKeywordsAdd.MinSize = RectangleHelper.ScaleSize(layoutControlItemKeywordsAdd.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemOK.MaxSize = RectangleHelper.ScaleSize(layoutControlItemOK.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemOK.MinSize = RectangleHelper.ScaleSize(layoutControlItemOK.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCancel.MaxSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCancel.MinSize = RectangleHelper.ScaleSize(layoutControlItemCancel.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
 		public FormEditLinkTags(IList<BaseLibraryLink> sourceLinks) : this()
@@ -54,13 +60,19 @@ namespace SalesLibraries.BatchTagger.PresentationLayer
 			if (_selectedLinks.Count > 1)
 			{
 				_linkGroup = sourceLinks.ToMultiLinkSet();
-				panelFilesContainer.Visible = true;
+				layoutControlItemLinksTree.Visibility = LayoutVisibility.Always;
 			}
 			else
-				panelFilesContainer.Visible = false;
+				layoutControlItemLinksTree.Visibility = LayoutVisibility.Never;
 
 			Width = (Int32)(AppManager.Instance.MainForm.Width * 0.8);
 			Height = (Int32)(AppManager.Instance.MainForm.Height * 0.9);
+		}
+
+		public FormEditLinkTags(ILinksGroup linkGroup, LinkType? defaultLinkType = null) : this()
+		{
+			_linkGroup = linkGroup;
+			layoutControlItemLinksTree.Visibility = LayoutVisibility.Always;
 		}
 
 		public void InitForm()
@@ -81,7 +93,7 @@ namespace SalesLibraries.BatchTagger.PresentationLayer
 
 					LoadData();
 				};
-				linksTreeSelector.LoadData(_linkGroup, new[] { LinkType.LineBreak });
+				linksTreeSelector.LoadData(_linkGroup, null, new[] { LinkType.LineBreak });
 			}
 			else
 				LoadData();
@@ -108,19 +120,19 @@ namespace SalesLibraries.BatchTagger.PresentationLayer
 
 		private void UpdateTitle()
 		{
-			labelControlTitle.Appearance.Image = xtraTabControl.SelectedTabPage == xtraTabPageCategories
+			labelControlTitle.Appearance.Image = tabbedControlGroupMain.SelectedTabPage == layoutControlGroupCategories
 				? Resources.LinkSettingsTagsLogoCategories
 				: Resources.LinkSettingsTagsLogoKeywords;
 			labelControlTitle.Text = String.Format(HeaderTitleTemplate,
 				_selectedLinks.Count > 1 ?
-					linksTreeSelector.SelectedGroup?.Title :
+					String.Format("{0} ({1})", linksTreeSelector.SelectedGroup?.Title, linksTreeSelector.SelectedGroup?.Links.OfType<LibraryObjectLink>().Count()) :
 					_selectedLinks.FirstOrDefault()?.ToString());
 		}
 
 		private void UpdateControlPanels()
 		{
-			panelTopControlsCategories.Visible = xtraTabControl.SelectedTabPage == xtraTabPageCategories;
-			panelTopControlsKeywords.Visible = xtraTabControl.SelectedTabPage == xtraTabPageKeywords;
+			layoutControlGroupCategoriesHeader.Visibility = tabbedControlGroupMain.SelectedTabPage == layoutControlGroupCategories ? LayoutVisibility.Always : LayoutVisibility.Never;
+			layoutControlGroupKeywordsHeader.Visibility = tabbedControlGroupMain.SelectedTabPage == layoutControlGroupKeywords ? LayoutVisibility.Always : LayoutVisibility.Never;
 		}
 
 		private void FormEditLinkSettings_FormClosing(object sender, FormClosingEventArgs e)
@@ -134,7 +146,7 @@ namespace SalesLibraries.BatchTagger.PresentationLayer
 			buttonXOK.Focus();
 		}
 
-		private void OnSelectedTabPageChanged(object sender, DevExpress.XtraTab.TabPageChangedEventArgs e)
+		private void OnSelectedTabPageChanged(object sender, LayoutTabPageChangedEventArgs e)
 		{
 			UpdateTitle();
 			UpdateControlPanels();
@@ -227,7 +239,7 @@ namespace SalesLibraries.BatchTagger.PresentationLayer
 
 		private void LoadTreeView()
 		{
-			splitContainerCategories.Panel2.Controls.Clear();
+			panelCategoriesContent.Controls.Clear();
 			treeListCategories.Nodes.Clear();
 			_searchGroups.Clear();
 
@@ -251,7 +263,7 @@ namespace SalesLibraries.BatchTagger.PresentationLayer
 						UpdateSuperGroupNodes();
 						UpdateCategoryInfo();
 					};
-					splitContainerCategories.Panel2.Controls.Add(searchGroupContainer.ListBox);
+					panelCategoriesContent.Controls.Add(searchGroupContainer.ListBox);
 					_searchGroups.Add(searchGroupContainer);
 					groupNode.Tag = searchGroupContainer;
 					groupNode.StateImageIndex = 0;

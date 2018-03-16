@@ -3,15 +3,22 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using DevExpress.Skins;
+using DevExpress.XtraLayout.Utils;
 using DevExpress.XtraTreeList;
 using SalesLibraries.Business.Entities.Interfaces;
+using SalesLibraries.Business.Entities.Wallbin.Common.Constants;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
+using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
+using SalesLibraries.Common.Helpers;
 
 namespace SalesLibraries.BatchTagger.PresentationLayer
 {
 	public partial class LinksTreeSelectorControl : UserControl
 	{
+		private bool _dataLoading;
+
 		public List<BaseLibraryLink> SelectedLinks { get; } = new List<BaseLibraryLink>();
 		public TreeGroup SelectedGroup => treeList.FocusedNode?.Tag as TreeGroup;
 
@@ -21,20 +28,21 @@ namespace SalesLibraries.BatchTagger.PresentationLayer
 		{
 			InitializeComponent();
 
-			if (CreateGraphics().DpiX > 96)
-			{
-				buttonXExpandAll.Font = new Font(buttonXExpandAll.Font.FontFamily, buttonXExpandAll.Font.Size - 2, buttonXExpandAll.Font.Style);
-				buttonXCollapseAll.Font = new Font(buttonXCollapseAll.Font.FontFamily, buttonXCollapseAll.Font.Size - 2, buttonXCollapseAll.Font.Style);
-			}
+			layoutControlItemCollapseAll.MaxSize = RectangleHelper.ScaleSize(layoutControlItemCollapseAll.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemCollapseAll.MinSize = RectangleHelper.ScaleSize(layoutControlItemCollapseAll.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemExpandAll.MaxSize = RectangleHelper.ScaleSize(layoutControlItemExpandAll.MaxSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
+			layoutControlItemExpandAll.MinSize = RectangleHelper.ScaleSize(layoutControlItemExpandAll.MinSize, Utils.GetScaleFactor(CreateGraphics().DpiX));
 		}
 
-		public void LoadData(ILinksGroup linkGroup, IList<LinkType> excludeFileTypes = null)
+		public void LoadData(ILinksGroup linkGroup, LinkType? defaultLinkType = null, IList<LinkType> excludeFileTypes = null)
 		{
-			var rootGroup = new RootTreeGroup(linkGroup);
+			_dataLoading = true;
+
+			var rootGroup = new RootTreeGroup(linkGroup, defaultLinkType, excludeFileTypes);
 			var linksTreeGroups = new List<LinksFormatTreeGroup>();
 			linksTreeGroups.AddRange(LinksFormatTreeGroup.GetDefaultGroups());
 
-			foreach (var libraryLink in linkGroup.AllGroupLinks.Where(link => link != linkGroup && (excludeFileTypes == null || !excludeFileTypes.Contains(link.Type))).ToList())
+			foreach (var libraryLink in linkGroup.AllGroupLinks.Where(link => link != linkGroup && (defaultLinkType == null || link.Type == defaultLinkType.Value) && (excludeFileTypes == null || !excludeFileTypes.Contains(link.Type))).ToList())
 			{
 				var targetLinkGroup = linksTreeGroups.FirstOrDefault(g => g.TargetLinkFormats.Contains(libraryLink.WebFormat)) ??
 					linksTreeGroups.OfType<UndefinedTreeGroup>().First();
@@ -43,19 +51,19 @@ namespace SalesLibraries.BatchTagger.PresentationLayer
 
 			treeList.Nodes.Clear();
 
-			var rootNode = treeList.AppendNode(new object[] { rootGroup.Title }, null);
+			var rootNode = treeList.AppendNode(new object[] { rootGroup.TitleAndLinksCount }, null);
 			rootNode.Tag = rootGroup;
 			rootNode.StateImageIndex = 0;
 
 			var linkGroupsWithLinks = linksTreeGroups.Where(g => g.Links.Any()).ToList();
 
-			panelButtons.Visible = linkGroupsWithLinks.Count > 1;
+			layoutControlGroupButtons.Visibility = linkGroupsWithLinks.Count > 1 ? LayoutVisibility.Always : LayoutVisibility.Never;
 
 			if (linkGroupsWithLinks.Count > 1)
 			{
 				foreach (var formatTreeGroup in linksTreeGroups.Where(g => g.Links.Any()))
 				{
-					var formatGroupNode = treeList.AppendNode(new object[] { formatTreeGroup.Title }, rootNode);
+					var formatGroupNode = treeList.AppendNode(new object[] { formatTreeGroup.TitleAndLinksCount }, rootNode);
 					formatGroupNode.Tag = formatTreeGroup;
 					formatGroupNode.StateImageIndex = 0;
 
@@ -63,7 +71,38 @@ namespace SalesLibraries.BatchTagger.PresentationLayer
 					{
 						var linkNode = treeList.AppendNode(new object[] { (libraryLink as LibraryFileLink)?.NameWithExtension ?? libraryLink.LinkInfoDisplayName }, formatGroupNode);
 						linkNode.Tag = libraryLink;
-						linkNode.StateImageIndex = formatTreeGroup.StateImageIndex;
+						if (formatTreeGroup.StateImageIndex.HasValue)
+							linkNode.StateImageIndex = formatTreeGroup.StateImageIndex.Value;
+						else if (libraryLink is LinkBundleLink)
+						{
+							switch (((LinkBundleLinkSettings)((LinkBundleLink)libraryLink).Settings).CustomWebFormat)
+							{
+								case WebFormats.PowerPoint:
+									linkNode.StateImageIndex = 7;
+									break;
+								case WebFormats.Video:
+									linkNode.StateImageIndex = 4;
+									break;
+								case WebFormats.Pdf:
+									linkNode.StateImageIndex = 5;
+									break;
+								case WebFormats.Word:
+									linkNode.StateImageIndex = 3;
+									break;
+								case WebFormats.Excel:
+									linkNode.StateImageIndex = 7;
+									break;
+								case WebFormats.Url:
+									linkNode.StateImageIndex = 8;
+									break;
+								case WebFormats.Png:
+								case WebFormats.Jpeg:
+									linkNode.StateImageIndex = 6;
+									break;
+							}
+						}
+						else
+							linkNode.StateImageIndex = 2;
 					}
 				}
 			}
@@ -76,12 +115,46 @@ namespace SalesLibraries.BatchTagger.PresentationLayer
 					{
 						var linkNode = treeList.AppendNode(new object[] { (libraryLink as LibraryFileLink)?.NameWithExtension ?? libraryLink.LinkInfoDisplayName }, rootNode);
 						linkNode.Tag = libraryLink;
-						linkNode.StateImageIndex = defaultGroup.StateImageIndex;
+						if (defaultGroup.StateImageIndex.HasValue)
+							linkNode.StateImageIndex = defaultGroup.StateImageIndex.Value;
+						else if (libraryLink is LinkBundleLink)
+						{
+							switch (((LinkBundleLinkSettings)((LinkBundleLink)libraryLink).Settings).CustomWebFormat)
+							{
+								case WebFormats.PowerPoint:
+									linkNode.StateImageIndex = 7;
+									break;
+								case WebFormats.Video:
+									linkNode.StateImageIndex = 4;
+									break;
+								case WebFormats.Pdf:
+									linkNode.StateImageIndex = 5;
+									break;
+								case WebFormats.Word:
+									linkNode.StateImageIndex = 3;
+									break;
+								case WebFormats.Excel:
+									linkNode.StateImageIndex = 7;
+									break;
+								case WebFormats.Url:
+									linkNode.StateImageIndex = 8;
+									break;
+								case WebFormats.Png:
+								case WebFormats.Jpeg:
+									linkNode.StateImageIndex = 6;
+									break;
+							}
+						}
+						else
+							linkNode.StateImageIndex = 2;
 					}
 				}
 			}
 			rootNode.Expanded = true;
 			treeList.SetFocusedNode(rootNode);
+
+			_dataLoading = false;
+
 			OnTreeViewFocusedNodeChanged(treeList, new FocusedNodeChangedEventArgs(null, rootNode));
 		}
 
@@ -107,7 +180,8 @@ namespace SalesLibraries.BatchTagger.PresentationLayer
 				SelectedLinks.AddRange(((TreeGroup)e.Node.Tag).Links);
 			if (e.Node.Tag is BaseLibraryLink)
 				SelectedLinks.Add((BaseLibraryLink)e.Node.Tag);
-			LinkSelected?.Invoke(this, EventArgs.Empty);
+			if (!_dataLoading)
+				LinkSelected?.Invoke(this, EventArgs.Empty);
 		}
 
 		private void OnTreeViewNodeCellStyle(object sender, GetCustomNodeCellStyleEventArgs e)

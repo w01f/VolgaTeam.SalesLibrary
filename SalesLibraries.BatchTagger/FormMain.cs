@@ -7,6 +7,7 @@ using DevExpress.Skins;
 using DevExpress.XtraTab;
 using SalesLibraries.BatchTagger.PresentationLayer;
 using SalesLibraries.Common.Configuration;
+using SalesLibraries.Common.Helpers;
 using SalesLibraries.CommonGUI.Common;
 using SalesLibraries.ServiceConnector.StatisticService;
 
@@ -44,11 +45,11 @@ namespace SalesLibraries.BatchTagger
 
 			FormStateHelper.Init(this, GlobalSettings.ApplicationRootPath, "Batch Tagger", false, true);
 
-			if (CreateGraphics().DpiX > 96)
-			{
-				splitContainerControl.Panel1.Width =
-					RectangleHelper.ScaleVertical(splitContainerControl.Panel1.Width, splitContainerControl.ScaleFactor.Height);
-			}
+			var scaleleFactor = Utils.GetScaleFactor(CreateGraphics().DpiX);
+			layoutControlItemLoadData.MaxSize = RectangleHelper.ScaleSize(layoutControlItemLoadData.MaxSize, scaleleFactor);
+			layoutControlItemLoadData.MinSize = RectangleHelper.ScaleSize(layoutControlItemLoadData.MinSize, scaleleFactor);
+			layoutControlItemFilterContainer.MaxSize = RectangleHelper.ScaleSize(layoutControlItemFilterContainer.MaxSize, scaleleFactor);
+			layoutControlItemFilterContainer.MinSize = RectangleHelper.ScaleSize(layoutControlItemFilterContainer.MinSize, scaleleFactor);
 		}
 
 		private readonly List<LibraryFilesModel> _records = new List<LibraryFilesModel>();
