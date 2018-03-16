@@ -234,6 +234,8 @@
 #content .accordion-folder-container .btn.folder-header
 {
 	background-color: #fff;
+	-webkit-box-shadow: none;
+	box-shadow: none;
 }
 
 #content .accordion-folder-container .folder-header .links-number

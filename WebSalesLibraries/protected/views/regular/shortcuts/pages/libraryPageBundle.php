@@ -129,7 +129,13 @@
 	<?
 		if ($shortcut->pageViewType == 'accordion')
 		{
-			$this->renderPartial('../wallbin/accordionView', array('libraryPage' => $selectedPage->libraryPage));
+			$this->renderPartial('../wallbin/accordionView',
+                array(
+                    'libraryPage' => $selectedPage->libraryPage,
+	                'containerId' => 'content',
+	                'style' => $selectedPage->shortcut->style->page
+                )
+            );
 		}
 		else if ($this->isIOSDevice)
 		{

@@ -11,7 +11,9 @@
 		$content = $this->renderPartial(
 			'../wallbin/accordionView',
 			array(
-				'libraryPage' => $libraryPage
+				'libraryPage' => $libraryPage,
+				'containerId' => 'content',
+				'style' => $previewInfo->style->page
 			), true);
 	else
 		$content = $this->renderPartial(

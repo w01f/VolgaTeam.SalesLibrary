@@ -177,7 +177,13 @@
 		if ($pageViewType == 'accordion')
 		{
 			$selectedPage->loadData();
-			$this->renderPartial('../wallbin/accordionView', array('libraryPage' => $selectedPage));
+			$this->renderPartial('../wallbin/accordionView',
+                array(
+                    'libraryPage' => $selectedPage,
+	                'containerId' => $containerId,
+	                'style' => $style->page
+                )
+            );
 		}
 		else if ($style->page->enabled)
 		{

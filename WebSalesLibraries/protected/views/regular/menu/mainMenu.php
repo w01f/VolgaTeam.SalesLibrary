@@ -36,7 +36,7 @@
 					</div>
 				<? endif; ?>
                 <div class="om-movenext om-controlitem" style="display: none;">
-                    <img src="/vendor/onemenu/images/rightarrow.png" alt="">
+                    <img src="/images/menu/right-arrow.png" alt="">
                 </div>
 			</div>
 		</div>

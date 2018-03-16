@@ -10,7 +10,9 @@
 	if ($contentBlock->shortcut->pageViewType == 'accordion')
 		$content = $this->renderPartial('../wallbin/accordionView',
 			array(
-				'libraryPage' => $libraryPage
+				'libraryPage' => $libraryPage,
+				'containerId' => $blockId,
+				'style' => $contentBlock->shortcut->style->page
 			), true);
 	else
 		$content = $this->renderPartial('../wallbin/columnsView',

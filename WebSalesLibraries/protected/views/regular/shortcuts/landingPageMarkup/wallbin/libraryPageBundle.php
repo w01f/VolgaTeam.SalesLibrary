@@ -43,7 +43,8 @@
 ?>
 <style>
     <? if (isset($contentBlock->shortcut->style->header->padding) && $contentBlock->shortcut->style->header->padding->isConfigured): ?>
-    <? echo '#'.$blockId; ?> .wallbin-header-container {
+    <? echo '#'.$blockId; ?>
+    .wallbin-header-container {
 
         padding-top: <? echo $contentBlock->shortcut->style->header->padding->top; ?>px !important;
         padding-left: <? echo $contentBlock->shortcut->style->header->padding->left; ?>px !important;
@@ -53,38 +54,45 @@
 
     <?endif;?>
 
-    <? echo '#'.$blockId; ?> .wallbin-header {
+    <? echo '#'.$blockId; ?>
+    .wallbin-header {
         background-color: <? echo Utils::formatColor($contentBlock->shortcut->style->header->backColor); ?> !important;
     }
 
-    <? echo '#'.$blockId; ?> .wallbin-header .wallbin-header-cell {
+    <? echo '#'.$blockId; ?>
+    .wallbin-header .wallbin-header-cell {
         border-bottom: 1px <? echo Utils::formatColor($contentBlock->shortcut->style->header->headerBorderColor); ?> solid !important;
     }
 
-    <? echo '#'.$blockId; ?> .wallbin-header .page-selector-container .tab-pages div,
+    <? echo '#'.$blockId; ?>
+    .wallbin-header .page-selector-container .tab-pages div,
     <? echo '#'.$blockId; ?> .wallbin-header .page-selector-container .tab-pages span,
     <? echo '#'.$blockId; ?> .wallbin-header .page-selector-container .tab-pages li {
         background-color: <? echo Utils::formatColor($contentBlock->shortcut->style->header->tabSelector->regularBackColor)?> !important;
         border-color: <? echo Utils::formatColor($contentBlock->shortcut->style->header->tabSelector->borderColor)?> !important;
     }
 
-    <? echo '#'.$blockId; ?> .wallbin-header .page-selector-container .tab-pages div.scroll_tab_inner span,
+    <? echo '#'.$blockId; ?>
+    .wallbin-header .page-selector-container .tab-pages div.scroll_tab_inner span,
     <? echo '#'.$blockId; ?> .wallbin-header .page-selector-container .tab-pages div.scroll_tab_inner li {
         color: <? echo Utils::formatColor($contentBlock->shortcut->style->header->tabSelector->regularTextColor)?> !important;
     }
 
-    <? echo '#'.$blockId; ?> .wallbin-header .page-selector-container .tab-pages .scroll_tab_left_button,
+    <? echo '#'.$blockId; ?>
+    .wallbin-header .page-selector-container .tab-pages .scroll_tab_left_button,
     <? echo '#'.$blockId; ?> .wallbin-header .page-selector-container .tab-pages .scroll_tab_right_button {
         color: <? echo Utils::formatColor($contentBlock->shortcut->style->header->tabSelector->arrowColor)?> !important;
     }
 
-    <? echo '#'.$blockId; ?> .wallbin-header .page-selector-container .tab-pages div.scroll_tab_inner span.scroll_tab_over,
+    <? echo '#'.$blockId; ?>
+    .wallbin-header .page-selector-container .tab-pages div.scroll_tab_inner span.scroll_tab_over,
     <? echo '#'.$blockId; ?> .wallbin-header .page-selector-container .tab-pages div.scroll_tab_inner li.scroll_tab_over {
         color: <? echo Utils::formatColor($contentBlock->shortcut->style->header->tabSelector->hoverTextColor)?> !important;
         background-color: <? echo Utils::formatColor($contentBlock->shortcut->style->header->tabSelector->hoverBackColor)?> !important;
     }
 
-    <? echo '#'.$blockId; ?> .wallbin-header .page-selector-container .tab-pages .page-tab-header.selected {
+    <? echo '#'.$blockId; ?>
+    .wallbin-header .page-selector-container .tab-pages .page-tab-header.selected {
         color: <? echo Utils::formatColor($contentBlock->shortcut->style->header->tabSelector->selectedTextColor)?> !important;
         background-color: <? echo Utils::formatColor($contentBlock->shortcut->style->header->tabSelector->selectedBackColor)?> !important;
     }
@@ -92,14 +100,14 @@
 <div id="<? echo $blockId; ?>" class="library-page-bundle-block">
     <div class="service-data wallbin-settings">
         <div class="encoded-data">
-	        <? echo base64_encode(CJSON::encode(array(
-		        'shortcutId' => $contentBlock->shortcut->id,
-		        'wallbinId' => $contentBlock->shortcut->id,
-		        'wallbinName' => $contentBlock->shortcut->title,
-		        'pageViewType' => $contentBlock->shortcut->pageViewType,
-		        'pageSelectorMode' => $contentBlock->shortcut->pageSelectorMode
-	        ))
-	        ); ?>
+			<? echo base64_encode(CJSON::encode(array(
+				'shortcutId' => $contentBlock->shortcut->id,
+				'wallbinId' => $contentBlock->shortcut->id,
+				'wallbinName' => $contentBlock->shortcut->title,
+				'pageViewType' => $contentBlock->shortcut->pageViewType,
+				'pageSelectorMode' => $contentBlock->shortcut->pageSelectorMode
+			))
+			); ?>
         </div>
     </div>
     <div class="wallbin-header-container">
@@ -114,12 +122,12 @@
                                     <div class="service-data">
                                         <div class="encoded-data">
                                             <? echo CJSON::encode(array(
-                                                    'libraryId' => $item->libraryPage->libraryId,
-                                                    'pageId' => $item->libraryPage->id,
+		                                            'libraryId' => $item->libraryPage->libraryId,
+		                                            'pageId' => $item->libraryPage->id,
 		                                            'styleContainerType' => $item->shortcut->getStyleContainerType(),
-                                                    'styleContainerId' => $item->shortcut->getStyleContainerId(),
-                                                    'pageName' => $item->name
-                                                )
+		                                            'styleContainerId' => $item->shortcut->getStyleContainerId(),
+		                                            'pageName' => $item->name
+	                                            )
                                             ); ?>
                                         </div>
 								    </div>
@@ -132,7 +140,7 @@
                                 <option value='<? echo base64_encode(CJSON::encode(array(
 										'libraryId' => $item->libraryPage->libraryId,
 										'pageId' => $item->libraryPage->id,
-		                                'styleContainerType' => $item->shortcut->getStyleContainerType(),
+										'styleContainerType' => $item->shortcut->getStyleContainerType(),
 										'styleContainerId' => $item->shortcut->getStyleContainerId(),
 										'pageName' => $item->name
 									)
@@ -148,7 +156,13 @@
 		<?
 			if ($contentBlock->shortcut->pageViewType == 'accordion')
 			{
-				$this->renderPartial('../wallbin/accordionView', array('libraryPage' => $selectedPage->libraryPage));
+				$this->renderPartial('../wallbin/accordionView',
+					array(
+						'libraryPage' => $selectedPage->libraryPage,
+						'containerId' => $blockId,
+						'style' => $selectedPage->shortcut->style->page
+					)
+				);
 			}
 			else if ($this->isIOSDevice)
 			{

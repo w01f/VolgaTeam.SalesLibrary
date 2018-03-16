@@ -128,13 +128,52 @@
 
 		public function actionGetAccordionView()
 		{
+			$styleContainerType = Yii::app()->request->getPost('styleContainerType');
+			$styleContainerId = Yii::app()->request->getPost('styleContainerId');
 			$libraryId = Yii::app()->request->getPost('libraryId');
 			$pageId = Yii::app()->request->getPost('pageId');
+			$contentContainerId = Yii::app()->request->getPost('contentContainerId');
+
 			$libraryManager = new LibraryManager();
+
+			/** @var \application\models\wallbin\models\web\style\WallbinStyle $style */
+			$style = null;
+			if (isset($styleContainerType) && isset($styleContainerId))
+			{
+				switch ($styleContainerType)
+				{
+					case 'shortcut':
+						/** @var  $shortcutRecord ShortcutLinkRecord */
+						$shortcutRecord = ShortcutLinkRecord::model()->findByPk($styleContainerId);
+						/** @var  $shortcut WallbinShortcut */
+						$shortcut = $shortcutRecord->getModel($this->isPhone);
+						$shortcut->loadPageConfig();
+						$style = $shortcut->style;
+						break;
+					case 'internal link':
+						$linkRecord = LinkRecord::getLinkById($styleContainerId);
+						$library = $libraryManager->getLibraryById($linkRecord->id_library);
+						$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
+						$link->load($linkRecord);
+						/** @var InternalLinkPreviewData $previewData */
+						$previewData = $link->getPreviewData(null, false, $this->isPhone);
+						$style = $previewData->previewInfo->getStyle();
+						break;
+				}
+			}
+			if (!isset($style))
+				$style = \application\models\wallbin\models\web\style\WallbinStyle::createDefault();
+
 			$library = $libraryManager->getLibraryById($libraryId);
 			$selectedPage = $library->getPageById($pageId);
 			$selectedPage->loadData();
-			$this->renderPartial('accordionView', array('libraryPage' => $selectedPage), false, true);
+			$this->renderPartial('accordionView',
+				array(
+					'libraryPage' => $selectedPage,
+					'containerId' => $contentContainerId,
+					'style' => $style->page
+				),
+				false, true);
 		}
 		//------Regular Site API-------------------------------------------
 
