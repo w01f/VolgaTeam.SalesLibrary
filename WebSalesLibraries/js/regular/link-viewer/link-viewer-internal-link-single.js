@@ -13,6 +13,7 @@
 		$.SalesPortal.MainMenu.init();
 		$.SalesPortal.Content.init();
 		$.SalesPortal.HistoryManager.init();
+		$.SalesPortal.ScreenManager.init();
 
 		var singleLink = $('.single-link');
 		singleLink.on('click', function (e)

@@ -1,6 +1,7 @@
 <?
 	/**
 	 * @var $shortcut LibraryPageBundleShortcut
+	 * @var $screenSettings array
 	 */
 
 	/** @var LibraryPageBundleItem $selectedPage */
@@ -126,6 +127,19 @@
     </table>
 </div>
 <div class="wallbin-container">
+    <div class="service-data">
+        <div class="encoded-data selected-page-data">
+			<? echo CJSON::encode(array(
+					'libraryId' => $selectedPage->libraryPage->libraryId,
+					'pageId' => $selectedPage->libraryPage->id,
+					'styleContainerType' => $selectedPage->shortcut->getStyleContainerType(),
+					'styleContainerId' => $selectedPage->shortcut->getStyleContainerId(),
+					'pageName' => $selectedPage->libraryPage->name,
+					'logoContent' => $shortcut->style->header->showLogo ? $selectedPage->libraryPage->logoContent : ''
+				)
+			); ?>
+        </div>
+    </div>
 	<?
 		if ($shortcut->pageViewType == 'accordion')
 		{
@@ -133,7 +147,8 @@
                 array(
                     'libraryPage' => $selectedPage->libraryPage,
 	                'containerId' => 'content',
-	                'style' => $selectedPage->shortcut->style->page
+	                'style' => $selectedPage->shortcut->style->page,
+	                'screenSettings' => $screenSettings
                 )
             );
 		}
@@ -144,7 +159,8 @@
 				array(
 					'libraryPage' => $selectedPage->libraryPage,
 					'containerId' => 'content',
-					'style' => \application\models\wallbin\models\web\style\WallbinStyle::createDefault()
+					'style' => \application\models\wallbin\models\web\style\WallbinStyle::createDefault(),
+					'screenSettings' => $screenSettings
 				));
 		}
 		else
@@ -154,7 +170,8 @@
 				array(
 					'libraryPage' => $selectedPage->libraryPage,
 					'containerId' => 'content',
-					'style' => $selectedPage->shortcut->style->page
+					'style' => $selectedPage->shortcut->style->page,
+					'screenSettings' => $screenSettings
 				));
 		}
 	?>

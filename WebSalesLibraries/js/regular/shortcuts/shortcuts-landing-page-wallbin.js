@@ -19,6 +19,7 @@
 				wallbinName: wallbinSettings.wallbinName,
 				pageViewType: wallbinSettings.pageViewType,
 				pageSelectorMode: wallbinSettings.pageSelectorMode,
+				processResponsiveColumns: wallbinSettings.processResponsiveColumns,
 				fitWallbinToWholeScreen: false
 			});
 			wallbinManager.initPageSelector();
@@ -45,6 +46,7 @@
 				wallbinName: wallbinSettings.wallbinName,
 				pageViewType: wallbinSettings.pageViewType,
 				pageSelectorMode: wallbinSettings.pageSelectorMode,
+				processResponsiveColumns: wallbinSettings.processResponsiveColumns,
 				fitWallbinToWholeScreen: false
 			});
 			wallbinManager.initPageSelector();
@@ -68,6 +70,7 @@
 				contentObject: contentContainer,
 				shortcutId: wallbinSettings.shortcutId,
 				pageViewType: wallbinSettings.pageViewType,
+				processResponsiveColumns: wallbinSettings.processResponsiveColumns,
 				fitWallbinToWholeScreen: false
 			});
 			wallbinManager.initContent();
@@ -90,6 +93,7 @@
 				contentObject: contentContainer,
 				shortcutId: wallbinSettings.shortcutId,
 				pageViewType: wallbinSettings.pageViewType,
+				processResponsiveColumns: wallbinSettings.processResponsiveColumns,
 				fitWallbinToWholeScreen: false
 			});
 			wallbinManager.initContent();
@@ -102,6 +106,7 @@
 		this.wallbinName = undefined;
 		this.pageViewType = undefined;
 		this.pageSelectorMode = undefined;
+		this.processResponsiveColumns = false;
 
 		for (var property in data)
 			if (data.hasOwnProperty(property))

@@ -12,6 +12,7 @@
 	 * @var $containerId string
 	 * @var $styleContainer IWallbinStyleContainer
 	 * @var $searchBar SearchBar
+	 * @var $screenSettings array
 	 */
 
 	$style = $styleContainer->getStyle();
@@ -173,6 +174,19 @@
     </table>
 </div>
 <div class="wallbin-container">
+    <div class="service-data">
+        <div class="encoded-data selected-page-data">
+			<? echo CJSON::encode(array(
+					'libraryId' => $library->id,
+					'pageId' => $selectedPage->id,
+					'styleContainerType' => $styleContainer->getStyleContainerType(),
+					'styleContainerId' => $styleContainer->getStyleContainerId(),
+					'pageName' => $selectedPage->name,
+					'logoContent' => !$isEmbedded && $style->header->showLogo ? $selectedPage->logoContent : ''
+				)
+			); ?>
+        </div>
+    </div>
 	<?
 		if ($pageViewType == 'accordion')
 		{
@@ -181,7 +195,8 @@
                 array(
                     'libraryPage' => $selectedPage,
 	                'containerId' => $containerId,
-	                'style' => $style->page
+	                'style' => $style->page,
+	                'screenSettings' => $screenSettings
                 )
             );
 		}
@@ -193,10 +208,11 @@
 				array(
 					'libraryPage' => $selectedPage,
 					'containerId' => $containerId,
-					'style' => $style->page
+					'style' => $style->page,
+					'screenSettings' => $screenSettings
 				));
 		}
-		else if ($this->isIOSDevice)
+		else if ($this->isIOSDevice || $screenSettings['screenSizeType'] !== 'large')
 		{
 			$selectedPage->loadData();
 			$selectedPage->loadFolders(true);
@@ -204,7 +220,8 @@
 				array(
 					'libraryPage' => $selectedPage,
 					'containerId' => $containerId,
-					'style' => \application\models\wallbin\models\web\style\WallbinStyle::createDefault()
+					'style' => \application\models\wallbin\models\web\style\WallbinStyle::createDefault()->page,
+					'screenSettings' => $screenSettings
 				));
 		}
 		else

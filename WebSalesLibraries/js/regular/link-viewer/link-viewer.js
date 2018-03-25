@@ -24,7 +24,8 @@
 				data: {
 					linkId: requestData.linkId,
 					parentBundleId: requestData.parentPreviewParameters !== undefined ? requestData.parentPreviewParameters.data.linkId : undefined,
-					isQuickSite: requestData.isQuickSite
+					isQuickSite: requestData.isQuickSite,
+					screenSettings: $.SalesPortal.ScreenManager.getScreenSettings()
 				},
 				beforeSend: function ()
 				{

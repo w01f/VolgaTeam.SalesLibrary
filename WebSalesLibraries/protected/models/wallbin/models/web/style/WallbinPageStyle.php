@@ -1,4 +1,5 @@
 <?
+
 	namespace application\models\wallbin\models\web\style;
 
 	/**
@@ -10,6 +11,8 @@
 		public $columnStyleEnabled;
 
 		public $showWindowHeaders;
+
+		public $showResponsiveColumns;
 
 		public $verticalBorder1Color;
 		public $verticalBorder2Color;
@@ -36,16 +39,19 @@
 			$pageStyle->enabled = true;
 
 			$queryResult = $xpath->query('.//WindowTitleBars', $contextNode);
-			$pageStyle->showWindowHeaders = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
+			$pageStyle->showWindowHeaders = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : $pageStyle->showWindowHeaders;
+
+			$queryResult = $xpath->query('.//ResponsiveColumns', $contextNode);
+			$pageStyle->showResponsiveColumns = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : $pageStyle->showResponsiveColumns;
 
 			$queryResult = $xpath->query('.//VerticalBorder1Color', $contextNode);
-			$pageStyle->verticalBorder1Color = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
+			$pageStyle->verticalBorder1Color = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : $pageStyle->verticalBorder1Color;
 
 			$queryResult = $xpath->query('.//VerticalBorder2Color', $contextNode);
-			$pageStyle->verticalBorder2Color = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
+			$pageStyle->verticalBorder2Color = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : $pageStyle->verticalBorder2Color;
 
 			$queryResult = $xpath->query('.//VerticalBorderStretch', $contextNode);
-			$pageStyle->verticalBorderStretch = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
+			$pageStyle->verticalBorderStretch = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : $pageStyle->verticalBorderStretch;
 
 			$queryResult = $xpath->query('.//Padding', $contextNode);
 			if ($queryResult->length > 0)
@@ -81,6 +87,7 @@
 			$pageStyle->enabled = false;
 			$pageStyle->columnStyleEnabled = false;
 			$pageStyle->showWindowHeaders = true;
+			$pageStyle->showResponsiveColumns = false;
 			$pageStyle->verticalBorder1Color = null;
 			$pageStyle->verticalBorder2Color = null;
 			$pageStyle->column1Style = PageColumnStyle::createDefault();

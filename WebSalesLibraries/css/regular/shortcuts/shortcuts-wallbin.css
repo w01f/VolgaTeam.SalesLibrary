@@ -170,7 +170,7 @@
 
 #content .page-column.column2
 {
-	width: 34%;
+	width: 34% !important;
 	margin-right: -1px;
 }
 

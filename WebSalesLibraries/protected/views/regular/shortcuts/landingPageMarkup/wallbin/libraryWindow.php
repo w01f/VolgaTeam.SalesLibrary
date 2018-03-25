@@ -2,7 +2,10 @@
 
 	use application\models\shortcuts\models\landing_page\regular_markup\wallbin\LibraryWindowBlock;
 
-	/** @var $contentBlock LibraryWindowBlock */
+	/**
+     * @var $contentBlock LibraryWindowBlock
+	 * @var $screenSettings array
+     */
 
 	$blockId = sprintf('library-window-block-%s', $contentBlock->id);
 
@@ -64,6 +67,7 @@
 			<? echo base64_encode(CJSON::encode(array(
 				'shortcutId' => $contentBlock->shortcut->id,
 				'pageViewType' => $contentBlock->shortcut->windowViewType,
+				'processResponsiveColumns' => false
 			))
 			); ?>
         </div>

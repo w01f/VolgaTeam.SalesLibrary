@@ -14,6 +14,7 @@
 		$.SalesPortal.MainMenu.init();
 		$.SalesPortal.Content.init();
 		$.SalesPortal.HistoryManager.init();
+		$.SalesPortal.ScreenManager.init();
 		openDefaultShortcut();
 	});
 })(jQuery);

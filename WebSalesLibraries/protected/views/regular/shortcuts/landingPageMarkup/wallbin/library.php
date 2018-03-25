@@ -2,7 +2,10 @@
 
 	use application\models\shortcuts\models\landing_page\regular_markup\wallbin\LibraryBlock;
 
-	/** @var $contentBlock LibraryBlock */
+	/**
+     * @var $contentBlock LibraryBlock
+	 * @var $screenSettings array
+     */
 
 	$blockId = sprintf('library-block-%s', $contentBlock->id);
 
@@ -33,7 +36,8 @@
 				'wallbinId' => $contentBlock->shortcut->library->id,
 				'wallbinName' => $contentBlock->shortcut->title,
 				'pageViewType' => $contentBlock->shortcut->pageViewType,
-				'pageSelectorMode' => $contentBlock->shortcut->pageSelectorMode
+				'pageSelectorMode' => $contentBlock->shortcut->pageSelectorMode,
+                'processResponsiveColumns' => $contentBlock->shortcut->style->page->showResponsiveColumns
 			))
 			); ?>
         </div>
@@ -46,7 +50,8 @@
 			'isEmbedded' => true,
 			'containerId' => $blockId,
 			'styleContainer' => $contentBlock->shortcut,
-			'searchBar' => $contentBlock->shortcut->getSearchBar()
+			'searchBar' => $contentBlock->shortcut->getSearchBar(),
+			'screenSettings' => $screenSettings
 		));
 	?>
 </div>

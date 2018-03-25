@@ -47,6 +47,8 @@ build - 0046
 
 		var $ctrlitemMargin;
 
+		var $selectedGroupId = undefined;
+
 		if (settings.closemenu == 'hide')
 		{
 			$ctrlitemMargin = 50;
@@ -193,11 +195,23 @@ build - 0046
 			if ($submenu == 'show')
 			{ // Show Sub Menu
 
-				// Set active ctrl item
-				$('#' + $nav).find('.om-ctrlitems').find('.om-ctrlitem').eq(0).addClass('om-activectrlitem');
+				var $dfgroupid = undefined;
+				if($selectedGroupId != undefined)
+				{
+					// Set active ctrl item
+					$('#' + $nav).find('.om-ctrlitems').find('.om-ctrlitem[data-groupid="' + $selectedGroupId + '"]').addClass('om-activectrlitem');
 
-				// Get Ctrlitem Default Group ID
-				var $dfgroupid = $('#' + $nav).find('.om-ctrlitems').find('.om-ctrlitem').eq(0).attr('data-groupid');
+					// Get Ctrlitem Default Group ID
+					$dfgroupid = $selectedGroupId;
+				}
+				else
+				{
+					// Set active ctrl item
+					$('#' + $nav).find('.om-ctrlitems').find('.om-ctrlitem').eq(0).addClass('om-activectrlitem');
+
+					// Get Ctrlitem Default Group ID
+					$dfgroupid = $('#' + $nav).find('.om-ctrlitems').find('.om-ctrlitem').eq(0).attr('data-groupid');
+				}
 
 				// Show items in Default Group
 				$('#' + $nav).find('.om-itemlist').find('div[data-group="' + $dfgroupid + '"]').toggleClass('om-item om-showitem');
@@ -499,8 +513,9 @@ build - 0046
 
 				// Set new active group
 				var $newgroupid = $(this).attr('data-groupid');
+				$selectedGroupId = $newgroupid;
 
-				// Show items in new group
+					// Show items in new group
 				$('#' + $nav).find('.om-itemlist').find('div[data-group="' + $newgroupid + '"]').toggleClass('om-item om-showitem');
 
 				// Set active item

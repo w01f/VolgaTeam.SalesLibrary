@@ -2,7 +2,10 @@
 
 	use application\models\shortcuts\models\landing_page\regular_markup\wallbin\LibraryPageBlock;
 
-	/** @var $contentBlock LibraryPageBlock */
+	/**
+     * @var $contentBlock LibraryPageBlock
+	 * @var $screenSettings array
+     */
 
 	$blockId = sprintf('library-page-block-%s', $contentBlock->id);
 
@@ -12,14 +15,16 @@
 			array(
 				'libraryPage' => $libraryPage,
 				'containerId' => $blockId,
-				'style' => $contentBlock->shortcut->style->page
+				'style' => $contentBlock->shortcut->style->page,
+				'screenSettings' => $screenSettings
 			), true);
 	else
 		$content = $this->renderPartial('../wallbin/columnsView',
 			array(
 				'libraryPage' => $libraryPage,
 				'containerId' => $blockId,
-				'style' => $contentBlock->shortcut->style->page
+				'style' => $contentBlock->shortcut->style->page,
+				'screenSettings' => $screenSettings
 			), true);
 
 	echo $this->renderPartial('landingPageMarkup/style/styleBorder',
@@ -59,6 +64,7 @@
 			<? echo base64_encode(CJSON::encode(array(
 				'shortcutId' => $contentBlock->shortcut->id,
 				'pageViewType' => $contentBlock->shortcut->pageViewType,
+				'processResponsiveColumns' => $contentBlock->shortcut->style->page->showResponsiveColumns
 			))
 			); ?>
         </div>

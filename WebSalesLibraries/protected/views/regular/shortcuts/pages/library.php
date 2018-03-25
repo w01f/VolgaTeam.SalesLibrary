@@ -1,5 +1,8 @@
 <?
-	/** @var $shortcut WallbinShortcut */
+	/**
+	 * @var $shortcut WallbinShortcut
+	 * @var $screenSettings array
+	 */
 	$library = $shortcut->library;
 	$this->renderPartial('../wallbin/library', array(
 		'library' => $library,
@@ -8,6 +11,7 @@
 		'isEmbedded' => false,
 		'containerId' => 'content',
 		'styleContainer' => $shortcut,
-		'searchBar'=> $shortcut->getSearchBar()
+		'searchBar'=> $shortcut->getSearchBar(),
+		'screenSettings' => $screenSettings
 	));
 ?>

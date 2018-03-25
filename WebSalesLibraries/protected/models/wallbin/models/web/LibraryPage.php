@@ -1,5 +1,7 @@
 <?
+
 	namespace application\models\wallbin\models\web;
+
 	use application\models\wallbin\models\web\style\WallbinPageStyle;
 
 	/**
@@ -129,7 +131,7 @@
 			$this->loadFolders(false);
 			$path = \Yii::getPathOfAlias('application.views.regular.wallbin') . '/columnsView.php';
 			$style = WallbinPageStyle::createDefault();
-			$content = $controller->renderFile($path, array('libraryPage' => $this, 'style' => $style), true);
+			$content = $controller->renderFile($path, array('libraryPage' => $this, 'style' => $style, 'screenSettings' => array('screenSizeType' => 'large')), true);
 
 			if (isset($content) && $content != '')
 			{
@@ -186,18 +188,36 @@
 		}
 
 		/**
-		 * @param $columnOrder
+		 * @param $columnOrder int
+		 * @param $totalColumns int
 		 * @return LibraryFolder[]
 		 */
-		public function getFoldersByColumn($columnOrder)
+		public function getFoldersByColumn($columnOrder, $totalColumns)
 		{
 			$columnFolders = array();
 			if (isset($this->folders))
-				foreach ($this->folders as $folder)
+			{
+				if ($totalColumns == 3)
 				{
-					if ($folder->columnOrder == $columnOrder)
-						$columnFolders[] = $folder;
+					foreach ($this->folders as $folder)
+					{
+						if ($folder->columnOrder == $columnOrder)
+							$columnFolders[] = $folder;
+					}
 				}
+				else
+				{
+					$columnIndex = 0;
+					foreach ($this->folders as $folder)
+					{
+						if ($columnIndex == $columnOrder)
+							$columnFolders[] = $folder;
+						$columnIndex++;
+						if ($columnIndex >= $totalColumns)
+							$columnIndex = 0;
+					}
+				}
+			}
 			return $columnFolders;
 		}
 

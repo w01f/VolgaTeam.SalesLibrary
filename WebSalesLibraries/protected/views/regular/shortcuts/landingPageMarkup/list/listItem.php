@@ -1,7 +1,10 @@
 <?
 	use application\models\shortcuts\models\landing_page\regular_markup\list_block\ListItem;
 
-	/** @var $contentBlock ListItem */
+	/**
+     * @var $contentBlock ListItem
+	 * @var $screenSettings array
+     */
 
 	$blockId = sprintf('list-item-%s', $contentBlock->id);
 
@@ -29,5 +32,5 @@
     <? echo $this->renderPartial('landingPageMarkup/style/styleMargin', array('margin' => $contentBlock->margin), true); ?>
     <? if (!empty($contentBlock->backColor)): ?> background-color: <? echo Utils::formatColor($contentBlock->backColor); ?><? endif; ?>"
 	<? if (!empty($contentBlock->hoverText)): ?> title="<? echo $contentBlock->hoverText; ?>"<? endif; ?>>
-	<? echo $this->renderPartial('landingPageMarkup/common/blockContainer', array('contentBlocks' => $contentBlock->items), true); ?>
+	<? echo $this->renderPartial('landingPageMarkup/common/blockContainer', array('contentBlocks' => $contentBlock->items, 'screenSettings' => $screenSettings), true); ?>
 </li>

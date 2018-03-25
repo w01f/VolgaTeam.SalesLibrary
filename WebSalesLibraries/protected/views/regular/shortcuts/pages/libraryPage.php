@@ -1,5 +1,8 @@
 <?
-	/** @var $shortcut LibraryPageShortcut */
+	/**
+	 * @var $shortcut LibraryPageShortcut
+	 * @var $screenSettings array
+	 */
 
 	$libraryPage = $shortcut->getLibraryPage();
 	if ($shortcut->pageViewType == 'accordion')
@@ -7,14 +10,16 @@
 			array(
 				'libraryPage' => $libraryPage,
 				'containerId' => 'content',
-				'style' => $shortcut->style->page
+				'style' => $shortcut->style->page,
+				'screenSettings' => $screenSettings
 			), true);
 	else
 		$content = $this->renderPartial('../wallbin/columnsView',
 			array(
 				'libraryPage' => $libraryPage,
 				'containerId' => 'content',
-				'style' => $shortcut->style->page
+				'style' => $shortcut->style->page,
+				'screenSettings' => $screenSettings
 			), true);
 ?>
 <style>
@@ -117,4 +122,19 @@
 		<? endif; ?>
     </table>
 </div>
-<div class="wallbin-container"><? echo $content; ?></div>
+<div class="wallbin-container">
+    <div class="service-data">
+        <div class="encoded-data selected-page-data">
+			<? echo CJSON::encode(array(
+					'libraryId' => $libraryPage->libraryId,
+					'pageId' => $libraryPage->id,
+					'styleContainerType' => $shortcut->getStyleContainerType(),
+					'styleContainerId' => $shortcut->getStyleContainerId(),
+					'pageName' => $libraryPage->name,
+					'logoContent' => $shortcut->style->header->showLogo ? $libraryPage->logoContent : ''
+				)
+			); ?>
+        </div>
+    </div>
+	<? echo $content; ?>
+</div>

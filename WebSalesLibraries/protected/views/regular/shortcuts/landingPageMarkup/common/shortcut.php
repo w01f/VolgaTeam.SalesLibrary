@@ -1,7 +1,10 @@
 <?
 	use application\models\shortcuts\models\landing_page\regular_markup\common\ShortcutBlock;
 
-    /** @var $contentBlock ShortcutBlock */
+    /**
+     * @var $contentBlock ShortcutBlock
+     * @var $screenSettings array
+     */
 
 	$blockId = sprintf('shortcut-%s', $contentBlock->id);
 
@@ -28,7 +31,7 @@
         style="<? echo $this->renderPartial('landingPageMarkup/style/stylePadding', array('padding' => $contentBlock->padding), true); ?>
         <? echo $this->renderPartial('landingPageMarkup/style/styleMargin', array('margin' => $contentBlock->margin), true); ?>"
 	<? if (!empty($contentBlock->hoverText)): ?> title="<? echo $contentBlock->hoverText; ?>"<? endif; ?>>
-	<? echo $this->renderPartial('landingPageMarkup/common/blockContainer', array('contentBlocks' => $contentBlock->items), true); ?>
+    <? echo $this->renderPartial('landingPageMarkup/common/blockContainer', array('contentBlocks' => $contentBlock->items, 'screenSettings' => $screenSettings), true); ?>
     <div class="service-data">
 	    <? echo isset($contentBlock->shortcut) ? $contentBlock->shortcut->getMenuItemData() : '<div class="same-page"></div><div class="has-custom-handler"></div>'; ?>
     </div>

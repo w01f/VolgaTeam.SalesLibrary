@@ -2,7 +2,10 @@
 
 	use application\models\shortcuts\models\landing_page\regular_markup\toggle_panel\TogglePanelBlock;
 
-	/** @var $contentBlock TogglePanelBlock */
+	/**
+     * @var $contentBlock TogglePanelBlock
+	 * @var $screenSettings array
+     */
 
 	$blockId = sprintf('toggle-panel-%s', $contentBlock->id);
 
@@ -72,7 +75,7 @@
     </div>
     <div class="row">
         <div class="col-xs-12">
-			<? echo $this->renderPartial('landingPageMarkup/common/blockContainer', array('contentBlocks' => $contentBlock->items), true); ?>
+	        <? echo $this->renderPartial('landingPageMarkup/common/blockContainer', array('contentBlocks' => $contentBlock->items, 'screenSettings' => $screenSettings), true); ?>
         </div>
     </div>
 </div>

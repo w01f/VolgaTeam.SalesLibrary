@@ -1,4 +1,5 @@
 <?
+
 	use application\models\wallbin\models\web\LibraryManager as LibraryManager;
 	use application\models\wallbin\models\web\style\IWallbinStyleContainer;
 	use application\models\wallbin\models\web\style\WallbinStyle;
@@ -14,6 +15,7 @@
 		public $pageId;
 		public $pageViewType;
 		public $pageSelectorMode;
+		public $processResponsiveColumns;
 
 		/** @var  WallbinStyle */
 		public $style;
@@ -31,6 +33,7 @@
 
 			$this->pageViewType = 'columns';
 			$this->pageSelectorMode = 'tabs';
+			$this->processResponsiveColumns = false;
 			$this->style = WallbinStyle::createDefault();
 			if (!empty($this->styleSettingsEncoded))
 			{
@@ -45,7 +48,10 @@
 
 				$queryResult = $xpath->query('//Config/WallbinStyle');
 				if ($queryResult->length > 0)
+				{
 					$this->style = WallbinStyle::fromXml($xpath, $queryResult->item(0));
+					$this->processResponsiveColumns = $this->style->page->showResponsiveColumns;
+				}
 
 				$queryResult = $xpath->query('//Config/Actions/Action');
 				$this->initActions($xpath, $queryResult);

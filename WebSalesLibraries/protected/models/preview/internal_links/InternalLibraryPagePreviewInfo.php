@@ -13,6 +13,7 @@
 		public $libraryName;
 		public $pageName;
 		public $pageViewType;
+		public $processResponsiveColumns;
 
 		/** @var  WallbinStyle */
 		public $style;
@@ -29,6 +30,7 @@
 			$this->pageName = str_replace("'", "''", $linkSettings->pageName);
 
 			$this->pageViewType = 'columns';
+			$this->processResponsiveColumns = false;
 			$this->style = WallbinStyle::createDefault();
 			if (!empty($this->styleSettingsEncoded))
 			{
@@ -41,7 +43,10 @@
 
 				$queryResult = $xpath->query('//Config/WallbinStyle');
 				if ($queryResult->length > 0)
+				{
 					$this->style = WallbinStyle::fromXml($xpath, $queryResult->item(0));
+					$this->processResponsiveColumns =$this->style->page->showResponsiveColumns;
+				}
 
 				$queryResult = $xpath->query('//Config/Actions/Action');
 				$this->initActions($xpath, $queryResult);

@@ -91,14 +91,9 @@
 		{
 			$linkId = Yii::app()->request->getPost('linkId');
 			$linkParameters = Yii::app()->request->getPost('parameters');
+			$screenSettings = Yii::app()->request->getPost('screenSettings');
 
-			try
-			{
-				echo CJSON::encode($this->buildShortcutPage($linkId, $linkParameters));
-			}
-			catch (CException $e)
-			{
-			}
+			echo CJSON::encode($this->buildShortcutPage($linkId, $linkParameters, $screenSettings));
 		}
 
 		public function actionGetShortcutDataById()
@@ -146,10 +141,10 @@
 		/**
 		 * @param $linkId string
 		 * @param $parameters array
+		 * @param $screenSettings array
 		 * @return array
-		 * @throws CException
 		 */
-		private function buildShortcutPage($linkId, $parameters)
+		private function buildShortcutPage($linkId, $parameters, $screenSettings)
 		{
 			$pageContentBundle = array();
 
@@ -253,6 +248,7 @@
 			if ($viewName != '')
 			{
 				$viewParameters = $shortcut->getViewParameters();
+				$viewParameters = array_merge($viewParameters, array('screenSettings' => $screenSettings));
 				if ($this->isPhone && $useMobileWrapper)
 					$content = $this->renderPartial(
 						'pages/pageWrapper',
@@ -262,7 +258,7 @@
 						),
 						true);
 				else
-					$content = $this->renderPartial('pages/' . $viewName, $shortcut->getViewParameters(), true);
+					$content = $this->renderPartial('pages/' . $viewName, $viewParameters, true);
 
 				$actions = null;
 				$navigationPanel = '';

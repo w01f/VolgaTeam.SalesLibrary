@@ -1,6 +1,7 @@
 <?
 	/**
 	 * @var $data InternalLinkPreviewData
+	 * @var $screenSettings array
 	 */
 
 	/** @var InternalLibraryPagePreviewInfo $previewInfo */
@@ -13,7 +14,8 @@
 			array(
 				'libraryPage' => $libraryPage,
 				'containerId' => 'content',
-				'style' => $previewInfo->style->page
+				'style' => $previewInfo->style->page,
+				'screenSettings' => $screenSettings
 			), true);
 	else
 		$content = $this->renderPartial(
@@ -21,7 +23,8 @@
 			array(
 				'libraryPage' => $libraryPage,
 				'containerId' => 'content',
-				'style' => $previewInfo->style->page
+				'style' => $previewInfo->style->page,
+				'screenSettings' => $screenSettings
 			), true);
 ?>
 <style>
@@ -124,4 +127,19 @@
 		<? endif; ?>
     </table>
 </div>
-<div class="wallbin-container"><? echo $content; ?></div>
+<div class="wallbin-container">
+    <div class="service-data">
+        <div class="encoded-data selected-page-data">
+			<? echo CJSON::encode(array(
+					'libraryId' => $libraryPage->libraryId,
+					'pageId' => $libraryPage->id,
+					'styleContainerType' => $previewInfo->getStyleContainerType(),
+					'styleContainerId' => $previewInfo->getStyleContainerId(),
+					'pageName' => $libraryPage->name,
+					'logoContent' => $previewInfo->style->header->showLogo ? $libraryPage->logoContent : ''
+				)
+			); ?>
+        </div>
+    </div>
+    <? echo $content; ?>
+</div>

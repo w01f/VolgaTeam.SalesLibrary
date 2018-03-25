@@ -16,6 +16,7 @@
 		public $windowViewType;
 		public $column;
 		public $linksOnly;
+		public $processResponsiveColumns;
 
 		/** @var  WallbinHeaderStyle */
 		public $header;
@@ -38,6 +39,7 @@
 			$this->column = -1;
 			$this->windowViewType = 'columns';
 			$this->linksOnly = false;
+			$this->processResponsiveColumns = false;
 			if (!empty($this->styleSettingsEncoded))
 			{
 				$styleConfig = new DOMDocument();

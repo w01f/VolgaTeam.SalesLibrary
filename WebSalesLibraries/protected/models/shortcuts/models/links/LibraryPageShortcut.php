@@ -97,6 +97,7 @@
 			$data = parent::getPageData();
 			$data['serviceData'] = $this->getMenuItemData();
 			$data['pageViewType'] = $this->pageViewType;
+			$data['processResponsiveColumns'] = $this->style->page->showResponsiveColumns;
 			return $data;
 		}
 

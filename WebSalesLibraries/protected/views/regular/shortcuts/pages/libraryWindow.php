@@ -1,5 +1,8 @@
 <?
-	/** @var $shortcut WindowShortcut */
+	/**
+     * @var $shortcut WindowShortcut
+	 * @var $screenSettings array
+     */
 
 	$window = $shortcut->getWindow();
 

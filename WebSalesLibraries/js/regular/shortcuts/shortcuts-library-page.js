@@ -21,6 +21,7 @@
 						contentObject: pageContent,
 						shortcutId: libraryPageData.options.linkId,
 						pageViewType: libraryPageData.options.pageViewType,
+						processResponsiveColumns: libraryPageData.options.processResponsiveColumns,
 						fitWallbinToWholeScreen: true
 					});
 					wallbinManager.initContent();

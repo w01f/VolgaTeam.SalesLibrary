@@ -4,7 +4,10 @@
 	use application\models\shortcuts\models\landing_page\regular_markup\slider\SlideShortcutBlock;
 	use application\models\shortcuts\models\landing_page\regular_markup\slider\SlideUrlBlock;
 
-	/** @var $contentBlock SliderBlock */
+	/**
+     * @var $contentBlock SliderBlock
+	 * @var $screenSettings array
+     */
 
 	$blockId = sprintf('carousel%s', $contentBlock->id);
 
@@ -57,7 +60,7 @@
 					<? endif; ?>
                     <img src="<? echo $slideBlock->imageSettings->source; ?>">
                     <div class="carousel-caption">
-						<? echo $this->renderPartial('landingPageMarkup/common/blockContainer', array('contentBlocks' => $slideBlock->items), true); ?>
+	                    <? echo $this->renderPartial('landingPageMarkup/common/blockContainer', array('contentBlocks' => $slideBlock->items, 'screenSettings' => $screenSettings), true); ?>
                     </div>
             </a>
 		    <? $i++; ?>

@@ -94,7 +94,8 @@
 							url: url,
 							data: {
 								linkId: shortcutId,
-								parameters: customParameters
+								parameters: customParameters,
+								screenSettings: $.SalesPortal.ScreenManager.getScreenSettings()
 							},
 							beforeSend: function ()
 							{

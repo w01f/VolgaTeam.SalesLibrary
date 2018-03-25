@@ -25,7 +25,8 @@
 							headerOptions: headerOptions,
 							libraryId: viewerData.previewInfo.libraryId,
 							pageSelectorMode: viewerData.previewInfo.pageSelectorMode,
-							pageViewType: viewerData.previewInfo.pageViewType
+							pageViewType: viewerData.previewInfo.pageViewType,
+							processResponsiveColumns: viewerData.previewInfo.processResponsiveColumns
 						}
 					});
 					break;
@@ -45,7 +46,8 @@
 						navigationPanel: viewerData.previewInfo.navigationPanel,
 						options: {
 							headerOptions: headerOptions,
-							pageViewType: viewerData.previewInfo.pageViewType
+							pageViewType: viewerData.previewInfo.pageViewType,
+							processResponsiveColumns: viewerData.previewInfo.processResponsiveColumns
 						}
 					});
 					break;
@@ -65,7 +67,8 @@
 						navigationPanel: viewerData.previewInfo.navigationPanel,
 						options: {
 							headerOptions: headerOptions,
-							windowViewType: viewerData.previewInfo.windowViewType
+							windowViewType: viewerData.previewInfo.windowViewType,
+							processResponsiveColumns: viewerData.previewInfo.processResponsiveColumns
 						}
 					});
 					break;

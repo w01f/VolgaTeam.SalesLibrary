@@ -69,6 +69,7 @@
 			$libraryId = Yii::app()->request->getPost('libraryId');
 			$pageId = Yii::app()->request->getPost('pageId');
 			$contentContainerId = Yii::app()->request->getPost('contentContainerId');
+			$screenSettings = Yii::app()->request->getPost('screenSettings');
 
 			$libraryManager = new LibraryManager();
 
@@ -108,10 +109,11 @@
 					array(
 						'libraryPage' => $selectedPage,
 						'containerId' => $contentContainerId,
-						'style' => $style->page
+						'style' => $style->page,
+						'screenSettings' => $screenSettings
 					));
 			}
-			else if ($this->isIOSDevice)
+			else if ($this->isIOSDevice || $screenSettings['screenSizeType'] !== 'large')
 			{
 				$selectedPage->loadData();
 				$selectedPage->loadFolders(true);
@@ -119,7 +121,8 @@
 					array(
 						'libraryPage' => $selectedPage,
 						'containerId' => $contentContainerId,
-						'style' => \application\models\wallbin\models\web\style\WallbinStyle::createDefault()
+						'style' => \application\models\wallbin\models\web\style\WallbinStyle::createDefault()->page,
+						'screenSettings' => $screenSettings
 					));
 			}
 			else
@@ -133,6 +136,7 @@
 			$libraryId = Yii::app()->request->getPost('libraryId');
 			$pageId = Yii::app()->request->getPost('pageId');
 			$contentContainerId = Yii::app()->request->getPost('contentContainerId');
+			$screenSettings = Yii::app()->request->getPost('screenSettings');
 
 			$libraryManager = new LibraryManager();
 
@@ -171,7 +175,8 @@
 				array(
 					'libraryPage' => $selectedPage,
 					'containerId' => $contentContainerId,
-					'style' => $style->page
+					'style' => $style->page,
+					'screenSettings' => $screenSettings
 				),
 				false, true);
 		}

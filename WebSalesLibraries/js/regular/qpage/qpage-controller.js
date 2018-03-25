@@ -9,6 +9,8 @@
 
 			$.SalesPortal.Content.init();
 			$.SalesPortal.HistoryManager.init();
+			$.SalesPortal.ScreenManager.init();
+
 			assignLinkEvents($('#page-links-container'));
 			initActionButtons();
 			updateSize();

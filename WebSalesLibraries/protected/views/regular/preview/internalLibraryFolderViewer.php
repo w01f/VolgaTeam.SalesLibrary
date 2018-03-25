@@ -1,6 +1,7 @@
 <?
 	/**
 	 * @var $data InternalLinkPreviewData
+	 * @var $screenSettings array
 	 */
 
 	/** @var InternalLibraryFolderPreviewInfo $previewInfo */

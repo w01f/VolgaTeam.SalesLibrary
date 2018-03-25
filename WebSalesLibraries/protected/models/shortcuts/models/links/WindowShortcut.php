@@ -103,6 +103,7 @@
 		{
 			$data = parent::getPageData();
 			$data['windowViewType'] = $this->windowViewType;
+			$data['processResponsiveColumns'] = false;
 			return $data;
 		}
 

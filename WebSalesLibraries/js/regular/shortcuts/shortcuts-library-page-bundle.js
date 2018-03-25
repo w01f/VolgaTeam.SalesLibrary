@@ -25,6 +25,7 @@
 						wallbinName: bundleData.options.headerTitle,
 						pageViewType: bundleData.options.pageViewType,
 						pageSelectorMode: bundleData.options.pageSelectorMode,
+						processResponsiveColumns: bundleData.options.processResponsiveColumns,
 						fitWallbinToWholeScreen: true
 					});
 					wallbinManager.initPageSelector();

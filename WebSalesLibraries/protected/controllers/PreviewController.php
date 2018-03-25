@@ -30,6 +30,7 @@
 				$isQuickSite = true;
 			else
 				$isQuickSite = false;
+			$screenSettings = Yii::app()->request->getPost('screenSettings');
 			$dialogData = array();
 			if (isset($linkId))
 			{
@@ -43,7 +44,13 @@
 					$previewData = $link->getPreviewData($parentBundleId, $isQuickSite, $this->isPhone);
 					$content = '';
 					if ($previewData->contentView != '')
-						$content = $this->renderPartial($previewData->contentView, array('data' => $previewData), true);
+						$content = $this->renderPartial(
+							$previewData->contentView,
+							array(
+								'data' => $previewData,
+								'screenSettings' => $screenSettings
+							),
+							true);
 					$dialogData = array(
 						'format' => $previewData->viewerFormat,
 						'data' => $previewData,

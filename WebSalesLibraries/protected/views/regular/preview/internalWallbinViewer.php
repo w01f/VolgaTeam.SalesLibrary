@@ -3,6 +3,7 @@
 
 	/**
 	 * @var $data InternalLinkPreviewData
+	 * @var $screenSettings array
 	 */
 
 	/** @var InternalWallbinPreviewInfo $previewInfo */
@@ -26,6 +27,7 @@
 		'isEmbedded' => false,
 		'containerId' => 'content',
 		'styleContainer' => $previewInfo,
-		'searchBar'=> $previewInfo->searchBar
+		'searchBar'=> $previewInfo->searchBar,
+		'screenSettings' => $screenSettings
 	));
 ?>

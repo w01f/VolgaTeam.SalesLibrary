@@ -2,7 +2,10 @@
 
 	use application\models\shortcuts\models\landing_page\regular_markup\wallbin\LibraryPageBundleBlock;
 
-	/** @var $contentBlock LibraryPageBundleBlock */
+	/**
+     * @var $contentBlock LibraryPageBundleBlock
+	 * @var $screenSettings array
+     */
 
 	$blockId = sprintf('library-page-bundle-block-%s', $contentBlock->id);
 
@@ -105,7 +108,8 @@
 				'wallbinId' => $contentBlock->shortcut->id,
 				'wallbinName' => $contentBlock->shortcut->title,
 				'pageViewType' => $contentBlock->shortcut->pageViewType,
-				'pageSelectorMode' => $contentBlock->shortcut->pageSelectorMode
+				'pageSelectorMode' => $contentBlock->shortcut->pageSelectorMode,
+				'processResponsiveColumns' => $contentBlock->shortcut->style->page->showResponsiveColumns
 			))
 			); ?>
         </div>
@@ -160,7 +164,8 @@
 					array(
 						'libraryPage' => $selectedPage->libraryPage,
 						'containerId' => $blockId,
-						'style' => $selectedPage->shortcut->style->page
+						'style' => $selectedPage->shortcut->style->page,
+						'screenSettings' => $screenSettings
 					)
 				);
 			}
@@ -171,7 +176,8 @@
 					array(
 						'libraryPage' => $selectedPage->libraryPage,
 						'containerId' => 'content',
-						'style' => \application\models\wallbin\models\web\style\WallbinStyle::createDefault()
+						'style' => \application\models\wallbin\models\web\style\WallbinStyle::createDefault(),
+						'screenSettings' => $screenSettings
 					));
 			}
 			else
@@ -181,7 +187,8 @@
 					array(
 						'libraryPage' => $selectedPage->libraryPage,
 						'containerId' => $blockId,
-						'style' => $selectedPage->shortcut->style->page
+						'style' => $selectedPage->shortcut->style->page,
+						'screenSettings' => $screenSettings
 					));
 			}
 		?>

@@ -4,7 +4,10 @@
 	use application\models\shortcuts\models\landing_page\regular_markup\vertical_feed\SimpleFeedShortcutItem;
 	use application\models\shortcuts\models\landing_page\regular_markup\vertical_feed\SimpleFeedUrlItem;
 
-	/** @var $contentBlock SimpleFeedBlock */
+	/**
+     * @var $contentBlock SimpleFeedBlock
+	 * @var $screenSettings array
+     */
 
 	/** @var SimpleFeedItem[] $newsItems */
 	$newsItems = $contentBlock->items;
@@ -79,7 +82,7 @@
                                             </div>
                                         <? endif; ?>
                                         <div class="text">
-	                                        <? echo $this->renderPartial('landingPageMarkup/common/blockContainer', array('contentBlocks' => $newsItem->items), true); ?>
+	                                        <? echo $this->renderPartial('landingPageMarkup/common/blockContainer', array('contentBlocks' => $newsItem->items, 'screenSettings' => $screenSettings), true); ?>
                                         </div>
                                     </a>
                             </li>

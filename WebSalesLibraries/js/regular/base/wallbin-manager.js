@@ -3,6 +3,7 @@
 	$.SalesPortal = $.SalesPortal || {};
 	$.SalesPortal.WallbinManager = function (inputSettings) {
 		var that = this;
+		var updateResponsiveColumnsTimer = null;
 
 		var wallbinSettings = new WallbinSettings(inputSettings);
 
@@ -44,7 +45,7 @@
 						click_callback: function () {
 							tabContainer.find('.page-tab-header').removeClass('selected');
 							$(this).addClass('selected');
-							loadPageContent($.parseJSON($(this).find('.service-data .encoded-data').text()));
+							loadPageContent($(this).find('.service-data .encoded-data').text());
 						}
 					});
 					var selectedTab = tabContainer.find('.selected');
@@ -55,7 +56,7 @@
 					var comboSelector = libraryHeader.find('.selectpicker');
 					comboSelector.selectpicker();
 					comboSelector.off('change').on('change', function () {
-						loadPageContent($.parseJSON(atob(comboSelector.selectpicker('val'))));
+						loadPageContent(atob(comboSelector.selectpicker('val')));
 						comboSelector.selectpicker('refresh');
 					});
 					break;
@@ -63,6 +64,11 @@
 		};
 
 		this.updateContentSize = function () {
+			if (wallbinSettings.processResponsiveColumns)
+				updateResponsiveColumnsTimer = setTimeout(function () {
+					$.SalesPortal.ScreenManager.processScreenSizeChange(updateResponsiveColumns);
+				}, 500);
+
 			if (wallbinSettings.fitWallbinToWholeScreen)
 			{
 				var content = $.SalesPortal.Content.getContentObject();
@@ -105,12 +111,18 @@
 			}
 		};
 
-		var loadPageContent = function (pageData) {
+		var loadPageContent = function (pageDataEncoded) {
+
+			var pageData = $.parseJSON(pageDataEncoded);
+
 			$.cookie("SelectedLibraryPageId-" + wallbinSettings.wallbinId, pageData.pageId, {
 				expires: (60 * 60 * 24 * 7)
 			});
 
 			var libraryContent = wallbinSettings.contentObject.find('.wallbin-container');
+
+			libraryContent.find('.service-data .encoded-data.selected-page-data').text(pageDataEncoded);
+
 			libraryContent.find('.page-container').removeClass('selected').hide();
 
 			var selectedPage = libraryContent.find('#page-' + pageData.pageId);
@@ -134,7 +146,8 @@
 						pageId: pageData.pageId,
 						styleContainerType: pageData.styleContainerType,
 						styleContainerId: pageData.styleContainerId,
-						contentContainerId: contentContainerId
+						contentContainerId: contentContainerId,
+						screenSettings: $.SalesPortal.ScreenManager.getScreenSettings()
 					},
 					beforeSend: function () {
 						$.SalesPortal.Overlay.show();
@@ -544,6 +557,18 @@
 					'border-left-width': '1px'
 				});
 			}
+		};
+
+		var updateResponsiveColumns = function () {
+			updateResponsiveColumnsTimer = null;
+
+			var libraryContent = wallbinSettings.contentObject.find('.wallbin-container');
+			libraryContent.find('.page-container').remove();
+
+			var encodedSelectedPageData = libraryContent.find('.service-data .encoded-data.selected-page-data').text();
+			loadPageContent(encodedSelectedPageData);
+
+			updateResponsiveColumnsTimer = null;
 		}
 	};
 
@@ -554,6 +579,7 @@
 		this.wallbinName = undefined;
 		this.pageViewType = undefined;
 		this.pageSelectorMode = undefined;
+		this.processResponsiveColumns = false;
 		this.fitWallbinToWholeScreen = undefined;
 
 		for (var property in data)

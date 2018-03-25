@@ -84,6 +84,7 @@
 			$data['libraryId'] = $this->library->id;
 			$data['pageViewType'] = $this->pageViewType;
 			$data['pageSelectorMode'] = $this->pageSelectorMode;
+			$data['processResponsiveColumns'] = $this->style->page->showResponsiveColumns;
 			return $data;
 		}
 

@@ -19,6 +19,7 @@
 			$.SalesPortal.MainMenu.init();
 			$.SalesPortal.Content.init();
 			$.SalesPortal.HistoryManager.init();
+			$.SalesPortal.ScreenManager.init();
 
 			if (searchBarOptions !== '' && searchViewOptions !== '')
 			{
