@@ -135,7 +135,7 @@
 					'styleContainerType' => $selectedPage->shortcut->getStyleContainerType(),
 					'styleContainerId' => $selectedPage->shortcut->getStyleContainerId(),
 					'pageName' => $selectedPage->libraryPage->name,
-					'logoContent' => $shortcut->style->header->showLogo ? $selectedPage->libraryPage->logoContent : ''
+					'logoContent' => $selectedPage->shortcut->style->header->showLogo ? $selectedPage->libraryPage->logoContent : ''
 				)
 			); ?>
         </div>

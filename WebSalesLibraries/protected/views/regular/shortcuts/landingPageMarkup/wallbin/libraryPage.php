@@ -69,5 +69,20 @@
 			); ?>
         </div>
     </div>
-    <div class="wallbin-container"><? echo $content; ?></div>
+    <div class="wallbin-container">
+        <div class="service-data">
+            <div class="encoded-data selected-page-data">
+			    <? echo CJSON::encode(array(
+					    'libraryId' => $libraryPage->libraryId,
+					    'pageId' => $libraryPage->id,
+					    'styleContainerType' => $contentBlock->shortcut->getStyleContainerType(),
+					    'styleContainerId' => $contentBlock->shortcut->getStyleContainerId(),
+					    'pageName' => $libraryPage->name,
+					    'logoContent' => $contentBlock->shortcut->style->header->showLogo ? $libraryPage->logoContent : ''
+				    )
+			    ); ?>
+            </div>
+        </div>
+        <? echo $content; ?>
+    </div>
 </div>

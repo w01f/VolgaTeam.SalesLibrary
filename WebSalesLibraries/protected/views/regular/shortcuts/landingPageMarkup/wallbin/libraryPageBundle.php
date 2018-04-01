@@ -157,6 +157,19 @@
         </table>
     </div>
     <div class="wallbin-container">
+        <div class="service-data">
+            <div class="encoded-data selected-page-data">
+			    <? echo CJSON::encode(array(
+					    'libraryId' => $selectedPage->libraryPage->libraryId,
+					    'pageId' => $selectedPage->libraryPage->id,
+					    'styleContainerType' => $selectedPage->shortcut->getStyleContainerType(),
+					    'styleContainerId' => $selectedPage->shortcut->getStyleContainerId(),
+					    'pageName' => $selectedPage->libraryPage->name,
+					    'logoContent' => $selectedPage->shortcut->style->header->showLogo ? $selectedPage->libraryPage->logoContent : ''
+				    )
+			    ); ?>
+            </div>
+        </div>
 		<?
 			if ($contentBlock->shortcut->pageViewType == 'accordion')
 			{
