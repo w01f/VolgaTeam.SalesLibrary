@@ -30,7 +30,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.ContextMenu
 			var settings = TargetLinks.Select(link => link.Settings).OfType<LineBreakSettings>().ToList();
 
 			var defaultFont = settings.Select(s => s.Font).FirstOrDefault();
-			defaultFont = settings.All(s => s.Font.Equals(defaultFont)) ? defaultFont : BaseLinkSettings.DefaultFont;
+			defaultFont = settings.All(s => s.Font.Equals(defaultFont))
+				? defaultFont
+				: TargetLinks.FirstOrDefault()?.ParentLibrary?.Settings?.FontSettings?.Font;
 			TextFormatEditor.ItemFont.Tag = defaultFont;
 			TextFormatEditor.ItemFont.EditValue = Utils.FontToString(defaultFont);
 

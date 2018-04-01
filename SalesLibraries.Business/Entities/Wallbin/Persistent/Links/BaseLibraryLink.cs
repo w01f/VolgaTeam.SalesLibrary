@@ -26,7 +26,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		private string _name;
 		public string Name
 		{
-			get { return _name; }
+			get => _name;
 			set
 			{
 				if (_name != value)
@@ -39,7 +39,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		[Required]
 		public int Order
 		{
-			get { return _order; }
+			get => _order;
 			set
 			{
 				if (_order != value)
@@ -64,8 +64,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		[NotMapped, JsonIgnore]
 		public override IChangable Parent
 		{
-			get { return Folder; }
-			set { Folder = value as LibraryFolder; }
+			get => Folder;
+			set => Folder = value as LibraryFolder;
 		}
 
 		[NotMapped, JsonIgnore]
@@ -87,24 +87,24 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		[NotMapped, JsonIgnore]
 		public SecuritySettings Security
 		{
-			get { return _security ?? (_security = SettingsContainer.CreateInstance<SecuritySettings>(this, SecurityEncoded)); }
-			set { _security = value; }
+			get => _security ?? (_security = SettingsContainer.CreateInstance<SecuritySettings>(this, SecurityEncoded));
+			set => _security = value;
 		}
 
 		private TagSettings _tags;
 		[NotMapped, JsonIgnore]
 		public TagSettings Tags
 		{
-			get { return _tags ?? (_tags = SettingsContainer.CreateInstance<TagSettings>(this, TagsEncoded)); }
-			set { _tags = value; }
+			get => _tags ?? (_tags = SettingsContainer.CreateInstance<TagSettings>(this, TagsEncoded));
+			set => _tags = value;
 		}
 
 		private LinkWidgetSettings _widget;
 		[NotMapped, JsonIgnore]
 		public LinkWidgetSettings Widget
 		{
-			get { return _widget ?? (_widget = SettingsContainer.CreateInstance<LinkWidgetSettings>(this, WidgetEncoded)); }
-			set { _widget = value; }
+			get => _widget ?? (_widget = SettingsContainer.CreateInstance<LinkWidgetSettings>(this, WidgetEncoded));
+			set => _widget = value;
 		}
 
 		private BannerSettings _banner;
@@ -118,36 +118,36 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 					_banner = SettingsContainer.CreateInstance<BannerSettings>(this, BannerEncoded);
 					if (String.IsNullOrEmpty(BannerEncoded) && Folder != null)
 					{
-						_banner.Font = (Font)Folder.Settings.WindowFont.Clone();
+						_banner.Font = Folder?.Page?.Library?.Settings?.FontSettings?.Font?.Clone() as Font;
 						_banner.ForeColor = Folder.Settings.ForeWindowColor;
 					}
 				}
 				return _banner;
 			}
-			set { _banner = value; }
+			set => _banner = value;
 		}
 
 		private ThumbnailSettings _thumbnail;
 		[NotMapped, JsonIgnore]
 		public ThumbnailSettings Thumbnail
 		{
-			get { return _thumbnail ?? (_thumbnail = SettingsContainer.CreateInstance<ThumbnailSettings>(this, ThumbnailEncoded)); }
-			set { _thumbnail = value; }
+			get => _thumbnail ?? (_thumbnail = SettingsContainer.CreateInstance<ThumbnailSettings>(this, ThumbnailEncoded));
+			set => _thumbnail = value;
 		}
 
 		private ResetSettingsSchedulerSettings _resetSettingsScheduler;
 		[NotMapped, JsonIgnore]
 		public ResetSettingsSchedulerSettings ResetSettingsScheduler
 		{
-			get { return _resetSettingsScheduler ?? (_resetSettingsScheduler = SettingsContainer.CreateInstance<ResetSettingsSchedulerSettings>(this, ResetSettingsSchedulerEncoded)); }
-			set { _resetSettingsScheduler = value; }
+			get => _resetSettingsScheduler ?? (_resetSettingsScheduler = SettingsContainer.CreateInstance<ResetSettingsSchedulerSettings>(this, ResetSettingsSchedulerEncoded));
+			set => _resetSettingsScheduler = value;
 		}
 
 		[NotMapped, JsonIgnore]
 		public override int CollectionOrder
 		{
-			get { return Order; }
-			set { Order = value; }
+			get => Order;
+			set => Order = value;
 		}
 
 		[NotMapped, JsonIgnore]

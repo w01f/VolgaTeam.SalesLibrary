@@ -627,6 +627,12 @@
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Settings\ResetLinks\IResetLibraryContentControl.cs" />
     <Compile Include="PresentationLayer\Wallbin\Settings\ResetLinks\IResetLibraryLinkSettingsControl.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Settings\ResetLinks\ResetFontControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\ResetLinks\ResetFontControl.Designer.cs">
+      <DependentUpon>ResetFontControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationLayer\Wallbin\Settings\ResetLinks\ResetAllControl.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -1225,6 +1231,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\ResetLinks\FormResetPreviewContentConfirmation.resx">
       <DependentUpon>FormResetPreviewContentConfirmation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\ResetLinks\ResetFontControl.resx">
+      <DependentUpon>ResetFontControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\ResetLinks\ResetAllControl.resx">
       <DependentUpon>ResetAllControl.cs</DependentUpon>

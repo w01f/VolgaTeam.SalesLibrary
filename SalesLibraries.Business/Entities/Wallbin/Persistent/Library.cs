@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Drawing;
 using System.Linq;
 using Newtonsoft.Json;
 using SalesLibraries.Business.Contexts.Wallbin;
@@ -264,6 +265,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 			public List<AutoWidget> AutoWidgets { get; private set; }
 
 			public VideoConvertSettings VideoConvertSettings { get; private set; }
+			public FontSettings FontSettings { get; private set; }
 
 			public LibrarySettings()
 			{
@@ -274,14 +276,20 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 			{
 				base.AfterConstruction();
 				VideoConvertSettings = new VideoConvertSettings();
+				FontSettings = new FontSettings();
 			}
 
 			protected override void AfterCreate()
 			{
 				base.AfterCreate();
+
 				if (VideoConvertSettings == null)
 					VideoConvertSettings = new VideoConvertSettings();
 				VideoConvertSettings.SettingsContainer = this;
+
+				if (FontSettings == null)
+					FontSettings = new FontSettings();
+				FontSettings.SettingsContainer = this;
 			}
 		}
 	}

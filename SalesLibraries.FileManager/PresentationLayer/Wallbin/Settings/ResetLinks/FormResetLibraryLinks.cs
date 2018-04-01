@@ -25,6 +25,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings.ResetLin
 			resetInfoControl.SelectionChanged += OnControlSelectionChanged;
 			xtraTabControl.TabPages.Add(resetInfoControl);
 
+			var resetFontControl = new ResetFontControl(MainController.Instance.WallbinViews.ActiveWallbin.DataStorage.Library);
+			resetFontControl.SelectionChanged += OnControlSelectionChanged;
+			xtraTabControl.TabPages.Add(resetFontControl);
+
 			if (MainController.Instance.Settings.EditorSettings.EnableTagsEdit)
 			{
 				var searchTagsControl = new ResetTagsControl();

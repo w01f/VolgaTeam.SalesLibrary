@@ -195,6 +195,7 @@
     <Compile Include="Entities\Wallbin\NonPersistent\SourceLink.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\SyncSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\CalendarSettings.cs" />
+    <Compile Include="Entities\Wallbin\NonPersistent\FontSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\VideoConvertSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\WidgetSettings.cs" />
     <Compile Include="Entities\Wallbin\Persistent\ColumnTitle.cs" />

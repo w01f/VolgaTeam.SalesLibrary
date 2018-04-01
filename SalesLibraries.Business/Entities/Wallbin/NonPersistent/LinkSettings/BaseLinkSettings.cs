@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using Newtonsoft.Json;
 using SalesLibraries.Business.Entities.Common;
-using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 
@@ -18,16 +17,10 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		public const string PredefinedNoteSellThis = "SELL THIS!";
 		public const string PredefinedNoteAttention = "ATTENTION!";
 
-		[JsonIgnore]
-		public static Font DefaultFont { get; } = new Font("Arial", 12, FontStyle.Regular, GraphicsUnit.Point);
-
 		protected string _note;
 		public virtual string Note
 		{
-			get
-			{
-				return _note;
-			}
+			get => _note;
 			set
 			{
 				if (_note != value)
@@ -39,12 +32,12 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		protected Font _font;
 		public Font Font
 		{
-			get { return _font ?? DefaultFont; }
+			get => _font ?? ParentLink?.ParentLibrary?.Settings?.FontSettings?.Font;
 			set
 			{
 				if (_font != value)
 					OnSettingsChanged();
-				if (value != DefaultFont)
+				if (value != ParentLink?.ParentLibrary?.Settings?.FontSettings?.Font)
 					_font = value;
 			}
 		}
@@ -52,19 +45,20 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		private Color? _foreColor;
 		public Color? ForeColor
 		{
-			get { return _foreColor; }
+			get => _foreColor ?? ParentLink?.ParentLibrary?.Settings?.FontSettings?.Color;
 			set
 			{
 				if (_foreColor != value)
 					OnSettingsChanged();
-				_foreColor = value;
+				if (value != ParentLink?.ParentLibrary?.Settings?.FontSettings?.Color)
+					_foreColor = value;
 			}
 		}
 
 		private bool _textWordWrap;
 		public bool TextWordWrap
 		{
-			get { return _textWordWrap; }
+			get => _textWordWrap;
 			set
 			{
 				if (_textWordWrap != value)
@@ -102,7 +96,10 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 
 			if (!String.IsNullOrEmpty(Note))
 				customizedSettingsGroups.Add(LinkSettingsGroupType.TextNote);
-			if ((_font != null && _font.Size != DefaultFont.Size && _font.Style != DefaultFont.Style && _font.Name != DefaultFont.Name) || ForeColor.HasValue || TextWordWrap)
+
+			var defaultFont = ParentLink?.ParentLibrary?.Settings?.FontSettings?.Font;
+			var defaultColor = ParentLink?.ParentLibrary?.Settings?.FontSettings?.Color;
+			if ((_font != null && defaultFont != null && _font.Size != defaultFont.Size && _font.Style != defaultFont.Style && _font.Name != defaultFont.Name) || (ForeColor.HasValue && ForeColor != defaultColor) || TextWordWrap)
 				customizedSettingsGroups.Add(LinkSettingsGroupType.TextFormatting);
 
 			return customizedSettingsGroups;

@@ -13,7 +13,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		private string _hoverNote;
 		public string HoverNote
 		{
-			get { return _hoverNote; }
+			get => _hoverNote;
 			set
 			{
 				if (_hoverNote != value)
@@ -27,7 +27,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		private bool _showOnlyCustomHoverNote;
 		public bool ShowOnlyCustomHoverNote
 		{
-			get { return _showOnlyCustomHoverNote; }
+			get => _showOnlyCustomHoverNote;
 			set
 			{
 				if (_showOnlyCustomHoverNote != value)
@@ -39,7 +39,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		private FontStyle _regularFontStyle;
 		public FontStyle RegularFontStyle
 		{
-			get { return _regularFontStyle; }
+			get => _regularFontStyle;
 			set
 			{
 				if (_regularFontStyle != value)
@@ -51,7 +51,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		private bool _isSpecialFormat;
 		public bool IsSpecialFormat
 		{
-			get { return _isSpecialFormat; }
+			get => _isSpecialFormat;
 			set
 			{
 				if (_isSpecialFormat != value)
@@ -63,7 +63,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		private DateTime? _fakeFileDate;
 		public DateTime? FakeFileDate
 		{
-			get { return _fakeFileDate; }
+			get => _fakeFileDate;
 			set
 			{
 				if (_fakeFileDate != value)

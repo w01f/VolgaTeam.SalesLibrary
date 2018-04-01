@@ -184,14 +184,14 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 
 		protected void UpdateFont()
 		{
-			RegularRowFont = new Font(DataSource.Settings.WindowFont.FontFamily, FormatState.FontSize, DataSource.Settings.WindowFont.Style, GraphicsUnit.Point);
-			BoldRowFont = new Font(DataSource.Settings.WindowFont.FontFamily, FormatState.FontSize, FontStyle.Bold, GraphicsUnit.Point);
-			BoldItalicRowFont = new Font(DataSource.Settings.WindowFont.FontFamily, FormatState.FontSize, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-			BoldUnderlineRowFont = new Font(DataSource.Settings.WindowFont.FontFamily, FormatState.FontSize, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point);
-			ItalicRowFont = new Font(DataSource.Settings.WindowFont.FontFamily, FormatState.FontSize, FontStyle.Italic, GraphicsUnit.Point);
-			ItalicUnderlineRowFont = new Font(DataSource.Settings.WindowFont.FontFamily, FormatState.FontSize, FontStyle.Italic | FontStyle.Underline, GraphicsUnit.Point);
-			UnderlineRowFont = new Font(DataSource.Settings.WindowFont.FontFamily, FormatState.FontSize, FontStyle.Underline, GraphicsUnit.Point);
-			BoldItalicUndrerlineRowFont = new Font(DataSource.Settings.WindowFont.FontFamily, FormatState.FontSize, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline, GraphicsUnit.Point);
+			RegularRowFont = new Font(DataSource.Page.Library.Settings.FontSettings.Font.FontFamily, FormatState.FontSize, DataSource.Page.Library.Settings.FontSettings.Font.Style, GraphicsUnit.Point);
+			BoldRowFont = new Font(DataSource.Page.Library.Settings.FontSettings.Font.FontFamily, FormatState.FontSize, FontStyle.Bold, GraphicsUnit.Point);
+			BoldItalicRowFont = new Font(DataSource.Page.Library.Settings.FontSettings.Font.FontFamily, FormatState.FontSize, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+			BoldUnderlineRowFont = new Font(DataSource.Page.Library.Settings.FontSettings.Font.FontFamily, FormatState.FontSize, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point);
+			ItalicRowFont = new Font(DataSource.Page.Library.Settings.FontSettings.Font.FontFamily, FormatState.FontSize, FontStyle.Italic, GraphicsUnit.Point);
+			ItalicUnderlineRowFont = new Font(DataSource.Page.Library.Settings.FontSettings.Font.FontFamily, FormatState.FontSize, FontStyle.Italic | FontStyle.Underline, GraphicsUnit.Point);
+			UnderlineRowFont = new Font(DataSource.Page.Library.Settings.FontSettings.Font.FontFamily, FormatState.FontSize, FontStyle.Underline, GraphicsUnit.Point);
+			BoldItalicUndrerlineRowFont = new Font(DataSource.Page.Library.Settings.FontSettings.Font.FontFamily, FormatState.FontSize, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline, GraphicsUnit.Point);
 			grFiles.DefaultCellStyle.Font = BoldItalicUndrerlineRowFont;
 			grFiles.RowsDefaultCellStyle.Font = BoldItalicUndrerlineRowFont;
 		}

@@ -170,7 +170,7 @@ namespace SalesLibraries.FileManager.Business.Services
 			target.enableWidget = source.Widget.Enabled;
 			target.widget = Convert.ToBase64String((byte[])imageConverter.ConvertTo(source.Widget.DisplayedImage, typeof(byte[])));
 			target.windowFont = new Font();
-			target.windowFont.ImportData(source.Settings.WindowFont);
+			target.windowFont.ImportData(source.Page.Library.Settings.FontSettings.Font);
 			target.headerFont = new Font();
 			target.headerFont.ImportData(source.Settings.HeaderFont);
 			target.dateAdd = source.AddDate.ToString("MM/dd/yyyy hh:mm:ss tt");
