@@ -6,8 +6,8 @@
 		var defaultShortcutData = $('.default-shortcut-data');
 		if (defaultShortcutData.length > 0)
 			$.SalesPortal.ShortcutsManager.openShortcutByMenuItemData(defaultShortcutData, {
-				pushHistory: true,
-				singlePage: true
+				pushHistory: true
+				//singlePage: true
 			});
 	};
 	$(document).ready(function () {

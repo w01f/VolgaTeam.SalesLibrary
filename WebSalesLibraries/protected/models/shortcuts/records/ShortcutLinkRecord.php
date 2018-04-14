@@ -247,8 +247,8 @@
 					$shortcut = new EmptyShortcut($this, $isPhone);
 					break;
 			}
-			if (isset($parameters) && array_key_exists('singlePage', $parameters) && $parameters['singlePage'])
-				$shortcut->samePage = $parameters['singlePage'] != true;
+//			if (isset($parameters) && array_key_exists('singlePage', $parameters) && $parameters['singlePage'])
+//				$shortcut->samePage = $parameters['singlePage'] != true;
 			return $shortcut;
 		}
 
