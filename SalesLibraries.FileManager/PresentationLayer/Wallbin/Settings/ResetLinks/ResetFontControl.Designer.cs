@@ -30,40 +30,40 @@
 		{
 			this.components = new System.ComponentModel.Container();
 			this.layoutControl = new DevExpress.XtraLayout.LayoutControl();
+			this.checkEditApplyForAllLinks = new DevExpress.XtraEditors.CheckEdit();
+			this.colorEditFontColor = new SalesLibraries.CommonGUI.Common.HtmlColorEdit();
 			this.checkEditMakeDefault = new DevExpress.XtraEditors.CheckEdit();
+			this.buttonEditFont = new DevExpress.XtraEditors.ButtonEdit();
 			this.layoutControlGroupRoot = new DevExpress.XtraLayout.LayoutControlGroup();
 			this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.emptySpaceItem28 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.layoutControlItemMakeDefault = new DevExpress.XtraLayout.LayoutControlItem();
 			this.emptySpaceItem26 = new DevExpress.XtraLayout.EmptySpaceItem();
-			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
-			this.buttonEditFont = new DevExpress.XtraEditors.ButtonEdit();
 			this.layoutControlItemFont = new DevExpress.XtraLayout.LayoutControlItem();
 			this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
-			this.colorEditFontColor = new SalesLibraries.CommonGUI.Common.HtmlColorEdit();
 			this.layoutControlItemFontColor = new DevExpress.XtraLayout.LayoutControlItem();
 			this.emptySpaceItem4 = new DevExpress.XtraLayout.EmptySpaceItem();
-			this.checkEditApplyForAllLinks = new DevExpress.XtraEditors.CheckEdit();
 			this.layoutControlItemApplyForAllLinks = new DevExpress.XtraLayout.LayoutControlItem();
+			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.layoutControl)).BeginInit();
 			this.layoutControl.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditApplyForAllLinks.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.colorEditFontColor.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditMakeDefault.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.buttonEditFont.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupRoot)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem28)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemMakeDefault)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem26)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.buttonEditFont.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemFont)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.colorEditFontColor.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemFontColor)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem4)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditApplyForAllLinks.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemApplyForAllLinks)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// layoutControl
@@ -99,6 +99,31 @@
 			this.layoutControl.TabIndex = 0;
 			this.layoutControl.Text = "layoutControl1";
 			// 
+			// checkEditApplyForAllLinks
+			// 
+			this.checkEditApplyForAllLinks.Location = new System.Drawing.Point(12, 12);
+			this.checkEditApplyForAllLinks.Name = "checkEditApplyForAllLinks";
+			this.checkEditApplyForAllLinks.Properties.Caption = "Apply these font settings to all text links on all pages";
+			this.checkEditApplyForAllLinks.Size = new System.Drawing.Size(765, 20);
+			this.checkEditApplyForAllLinks.StyleController = this.layoutControl;
+			this.checkEditApplyForAllLinks.TabIndex = 33;
+			this.checkEditApplyForAllLinks.CheckedChanged += new System.EventHandler(this.OnLinksFileAllCheckedChanged);
+			// 
+			// colorEditFontColor
+			// 
+			this.colorEditFontColor.Color = System.Drawing.Color.Empty;
+			this.colorEditFontColor.EditValue = System.Drawing.Color.Empty;
+			this.colorEditFontColor.Location = new System.Drawing.Point(122, 82);
+			this.colorEditFontColor.Name = "colorEditFontColor";
+			this.colorEditFontColor.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+			this.colorEditFontColor.Properties.Appearance.Options.UseForeColor = true;
+			this.colorEditFontColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+			this.colorEditFontColor.Properties.Color = System.Drawing.Color.Empty;
+			this.colorEditFontColor.Size = new System.Drawing.Size(213, 22);
+			this.colorEditFontColor.StyleController = this.layoutControl;
+			this.colorEditFontColor.TabIndex = 32;
+			// 
 			// checkEditMakeDefault
 			// 
 			this.checkEditMakeDefault.Location = new System.Drawing.Point(12, 118);
@@ -109,6 +134,25 @@
 			this.checkEditMakeDefault.StyleController = this.layoutControl;
 			this.checkEditMakeDefault.TabIndex = 22;
 			this.checkEditMakeDefault.CheckedChanged += new System.EventHandler(this.OnSelectionChanged);
+			// 
+			// buttonEditFont
+			// 
+			this.buttonEditFont.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonEditFont.Location = new System.Drawing.Point(122, 46);
+			this.buttonEditFont.Name = "buttonEditFont";
+			this.buttonEditFont.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.buttonEditFont.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.buttonEditFont.Properties.Appearance.Options.UseBackColor = true;
+			this.buttonEditFont.Properties.Appearance.Options.UseForeColor = true;
+			this.buttonEditFont.Properties.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
+			this.buttonEditFont.Properties.AppearanceDisabled.Options.UseForeColor = true;
+			this.buttonEditFont.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+			this.buttonEditFont.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+			this.buttonEditFont.Size = new System.Drawing.Size(213, 22);
+			this.buttonEditFont.StyleController = this.layoutControl;
+			this.buttonEditFont.TabIndex = 30;
 			// 
 			// layoutControlGroupRoot
 			// 
@@ -176,42 +220,6 @@
 			this.emptySpaceItem26.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
 			this.emptySpaceItem26.TextSize = new System.Drawing.Size(0, 0);
 			// 
-			// styleController
-			// 
-			this.styleController.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.styleController.Appearance.Options.UseFont = true;
-			this.styleController.AppearanceDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.styleController.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
-			this.styleController.AppearanceDisabled.Options.UseFont = true;
-			this.styleController.AppearanceDisabled.Options.UseForeColor = true;
-			this.styleController.AppearanceDropDown.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.styleController.AppearanceDropDown.Options.UseFont = true;
-			this.styleController.AppearanceDropDownHeader.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.styleController.AppearanceDropDownHeader.Options.UseFont = true;
-			this.styleController.AppearanceFocused.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.styleController.AppearanceFocused.Options.UseFont = true;
-			this.styleController.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.styleController.AppearanceReadOnly.Options.UseFont = true;
-			// 
-			// buttonEditFont
-			// 
-			this.buttonEditFont.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonEditFont.Location = new System.Drawing.Point(122, 46);
-			this.buttonEditFont.Name = "buttonEditFont";
-			this.buttonEditFont.Properties.Appearance.BackColor = System.Drawing.Color.White;
-			this.buttonEditFont.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.buttonEditFont.Properties.Appearance.Options.UseBackColor = true;
-			this.buttonEditFont.Properties.Appearance.Options.UseForeColor = true;
-			this.buttonEditFont.Properties.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
-			this.buttonEditFont.Properties.AppearanceDisabled.Options.UseForeColor = true;
-			this.buttonEditFont.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
-			this.buttonEditFont.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-			this.buttonEditFont.Size = new System.Drawing.Size(213, 22);
-			this.buttonEditFont.StyleController = this.layoutControl;
-			this.buttonEditFont.TabIndex = 30;
-			// 
 			// layoutControlItemFont
 			// 
 			this.layoutControlItemFont.AllowHtmlStringInCaption = true;
@@ -250,21 +258,6 @@
 			this.emptySpaceItem3.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
 			this.emptySpaceItem3.TextSize = new System.Drawing.Size(0, 0);
 			// 
-			// colorEditFontColor
-			// 
-			this.colorEditFontColor.Color = System.Drawing.Color.Empty;
-			this.colorEditFontColor.EditValue = System.Drawing.Color.Empty;
-			this.colorEditFontColor.Location = new System.Drawing.Point(122, 82);
-			this.colorEditFontColor.Name = "colorEditFontColor";
-			this.colorEditFontColor.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-			this.colorEditFontColor.Properties.Appearance.Options.UseForeColor = true;
-			this.colorEditFontColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
-			this.colorEditFontColor.Properties.Color = System.Drawing.Color.Empty;
-			this.colorEditFontColor.Size = new System.Drawing.Size(213, 22);
-			this.colorEditFontColor.StyleController = this.layoutControl;
-			this.colorEditFontColor.TabIndex = 32;
-			// 
 			// layoutControlItemFontColor
 			// 
 			this.layoutControlItemFontColor.AllowHtmlStringInCaption = true;
@@ -290,16 +283,6 @@
 			this.emptySpaceItem4.Size = new System.Drawing.Size(442, 26);
 			this.emptySpaceItem4.TextSize = new System.Drawing.Size(0, 0);
 			// 
-			// checkEditApplyForAllLinks
-			// 
-			this.checkEditApplyForAllLinks.Location = new System.Drawing.Point(12, 12);
-			this.checkEditApplyForAllLinks.Name = "checkEditApplyForAllLinks";
-			this.checkEditApplyForAllLinks.Properties.Caption = "Apply these font settings to all text links on all pages";
-			this.checkEditApplyForAllLinks.Size = new System.Drawing.Size(765, 20);
-			this.checkEditApplyForAllLinks.StyleController = this.layoutControl;
-			this.checkEditApplyForAllLinks.TabIndex = 33;
-			this.checkEditApplyForAllLinks.CheckedChanged += new System.EventHandler(this.OnLinksFileAllCheckedChanged);
-			// 
 			// layoutControlItemApplyForAllLinks
 			// 
 			this.layoutControlItemApplyForAllLinks.Control = this.checkEditApplyForAllLinks;
@@ -310,6 +293,23 @@
 			this.layoutControlItemApplyForAllLinks.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutControlItemApplyForAllLinks.TextVisible = false;
 			// 
+			// styleController
+			// 
+			this.styleController.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.styleController.Appearance.Options.UseFont = true;
+			this.styleController.AppearanceDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
+			this.styleController.AppearanceDisabled.Options.UseFont = true;
+			this.styleController.AppearanceDisabled.Options.UseForeColor = true;
+			this.styleController.AppearanceDropDown.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceDropDown.Options.UseFont = true;
+			this.styleController.AppearanceDropDownHeader.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceDropDownHeader.Options.UseFont = true;
+			this.styleController.AppearanceFocused.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceFocused.Options.UseFont = true;
+			this.styleController.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceReadOnly.Options.UseFont = true;
+			// 
 			// ResetFontControl
 			// 
 			this.Controls.Add(this.layoutControl);
@@ -319,22 +319,22 @@
 			this.Size = new System.Drawing.Size(789, 522);
 			((System.ComponentModel.ISupportInitialize)(this.layoutControl)).EndInit();
 			this.layoutControl.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.checkEditApplyForAllLinks.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.colorEditFontColor.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditMakeDefault.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.buttonEditFont.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupRoot)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem28)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemMakeDefault)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem26)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.buttonEditFont.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemFont)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.colorEditFontColor.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemFontColor)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem4)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditApplyForAllLinks.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemApplyForAllLinks)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			this.ResumeLayout(false);
 
 		}

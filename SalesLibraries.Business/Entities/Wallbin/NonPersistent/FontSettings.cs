@@ -11,15 +11,21 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 
 		public SettingsContainer SettingsContainer { get; set; }
 
-		protected Font _font;
+		private Font _font;
 		public Font Font
 		{
 			get => _font ?? DefaultFont;
 			set
 			{
-				if (_font != value)
+				if (value == null)
+				{
+					_font = null;
 					SettingsContainer.OnSettingsChanged();
-				if (value != DefaultFont)
+					return;
+				}
+				if (_font == null || _font.FontFamily?.Name != value.FontFamily?.Name || _font.Size != value.Size || _font.Bold != value.Bold || _font.Style != value.Style)
+					SettingsContainer.OnSettingsChanged();
+				if (DefaultFont.FontFamily?.Name != value.FontFamily?.Name || DefaultFont.Size != value.Size || DefaultFont.Bold != value.Bold || DefaultFont.Style != value.Style)
 					_font = value;
 			}
 		}

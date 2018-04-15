@@ -10,13 +10,13 @@ using SalesLibraries.Business.Entities.Wallbin.Persistent;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.CommonGUI.Common;
+using SalesLibraries.FileManager.Controllers;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings.ResetLinks
 {
 	//public partial class ResetFontControl : UserControl, IResetLibraryLinkSettingsControl
 	public partial class ResetFontControl : XtraTabPage, IResetLibraryLinkSettingsControl
 	{
-
 		public bool SelectionMade => checkEditApplyForAllLinks.Checked;
 
 		public event EventHandler<EventArgs> SelectionChanged;
@@ -30,7 +30,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings.ResetLin
 			buttonEditFont.ButtonClick += EditorHelper.OnFontEditButtonClick;
 			buttonEditFont.Click += EditorHelper.OnFontEditClick;
 
-			buttonEditFont.EditValue = library.Settings.FontSettings.Font != null ? Utils.FontToString(library.Settings.FontSettings.Font) : null;
+			buttonEditFont.EditValue = library.Settings.FontSettings.Font != null
+				? Utils.FontToString(library.Settings.FontSettings.Font)
+				: null;
 			buttonEditFont.Tag = library.Settings.FontSettings.Font;
 			colorEditFontColor.Color = library.Settings.FontSettings.Color ?? Color.Black;
 		}
@@ -43,9 +45,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings.ResetLin
 
 		public void ResetContent(Library library)
 		{
-			var font = buttonEditFont.Tag as Font;
+			var newFont = buttonEditFont.Tag is Font font ? 
+				new Font(font.FontFamily, font.Size, font.Style) : 
+				null;
 
-			var linksToProcess = library.Pages.SelectMany(p => p.AllGroupLinks).ToList();
+			var linksToProcess = library.Pages.SelectMany(p => p.TopLevelLinks).ToList();
 			foreach (var libraryLink in linksToProcess)
 			{
 				if (libraryLink is LibraryObjectLink)
@@ -54,19 +58,20 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings.ResetLin
 					((LibraryObjectLinkSettings)libraryLink.Settings).IsSpecialFormat = true;
 
 				}
-				libraryLink.Settings.Font = font;
+				libraryLink.Settings.Font = newFont;
 				libraryLink.Settings.ForeColor = colorEditFontColor.Color;
 			}
 
 			if (checkEditMakeDefault.Checked)
 			{
-				library.Settings.FontSettings.Font = font;
+				library.Settings.FontSettings.Font = newFont;
 				library.Settings.FontSettings.Color = colorEditFontColor.Color;
 			}
 		}
 
 		private void OnSelectionChanged(object sender, EventArgs e)
 		{
+			MainController.Instance.Settings.Save();
 			SelectionChanged?.Invoke(this, EventArgs.Empty);
 		}
 

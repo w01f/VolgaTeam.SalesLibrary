@@ -1365,7 +1365,6 @@
 			this.treeViewGallery.ForeColor = System.Drawing.Color.Black;
 			this.treeViewGallery.HideSelection = false;
 			this.treeViewGallery.Indent = 16;
-			this.treeViewGallery.ItemHeight = 25;
 			this.treeViewGallery.Location = new System.Drawing.Point(0, 0);
 			this.treeViewGallery.Name = "treeViewGallery";
 			this.treeViewGallery.ShowLines = false;

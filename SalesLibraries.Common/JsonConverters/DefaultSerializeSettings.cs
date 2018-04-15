@@ -7,10 +7,14 @@ namespace SalesLibraries.Common.JsonConverters
 	{
 		public DefaultSerializeSettings()
 		{
-			ReferenceLoopHandling = ReferenceLoopHandling.Serialize;
+			ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
 			PreserveReferencesHandling = PreserveReferencesHandling.Objects;
-			ContractResolver = new EntitySettingsResolver();
+			TypeNameHandling = TypeNameHandling.All;
+			NullValueHandling = NullValueHandling.Ignore;
+			MissingMemberHandling = MissingMemberHandling.Ignore;
+			ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor;
 			Formatting = Formatting.None;
+			ContractResolver = new EntitySettingsResolver();
 
 			Converters.Add(new GuidConverter());
 			Converters.Add(new StringEnumConverter
@@ -19,7 +23,6 @@ namespace SalesLibraries.Common.JsonConverters
 				CamelCaseText = false
 			});
 			Converters.Add(new ImageConverter());
-			TypeNameHandling = TypeNameHandling.All;
 		}
 	}
 }

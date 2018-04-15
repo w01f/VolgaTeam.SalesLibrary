@@ -38,8 +38,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 		[NotMapped, JsonIgnore]
 		public LibrarySettings Settings
 		{
-			get { return _settings ?? (_settings = SettingsContainer.CreateInstance<LibrarySettings>(this, SettingsEncoded)); }
-			set { _settings = value; }
+			get => _settings ?? (_settings = SettingsContainer.CreateInstance<LibrarySettings>(this, SettingsEncoded));
+			set => _settings = value;
 		}
 
 		private SyncSettings _syncSettings;
@@ -47,11 +47,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 		[NotMapped, JsonIgnore]
 		public SyncSettings SyncSettings
 		{
-			get
-			{
-				return _syncSettings ?? (_syncSettings = SettingsContainer.CreateInstance<SyncSettings>(this, SyncSettingsEncoded));
-			}
-			set { _syncSettings = value; }
+			get => _syncSettings ?? (_syncSettings = SettingsContainer.CreateInstance<SyncSettings>(this, SyncSettingsEncoded));
+			set => _syncSettings = value;
 		}
 
 		private CalendarSettings _calendar;
@@ -59,8 +56,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 		[NotMapped, JsonIgnore]
 		public CalendarSettings Calendar
 		{
-			get { return _calendar ?? (_calendar = SettingsContainer.CreateInstance<CalendarSettings>(this, CalendarEncoded)); }
-			set { _calendar = value; }
+			get => _calendar ?? (_calendar = SettingsContainer.CreateInstance<CalendarSettings>(this, CalendarEncoded));
+			set => _calendar = value;
 		}
 
 		[NotMapped, JsonIgnore]
