@@ -58,6 +58,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Accessibility" />
     <Reference Include="DevComponents.DotNetBar2, Version=14.1.0.12, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Pdf.v16.2.Core, Version=16.2.10.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -68,6 +69,7 @@
     <Reference Include="DevExpress.Data.v16.2, Version=16.2.10.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
+    <Reference Include="DevExpress.Sparkline.v16.2.Core, Version=16.2.10.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Utils.v16.2, Version=16.2.10.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
@@ -99,7 +101,14 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -114,6 +123,8 @@
     <Compile Include="AppManager.cs" />
     <Compile Include="BusinessClasses\ImportManager.cs" />
     <Compile Include="BusinessClasses\LinkConfigProfilesDataHelper.cs" />
+    <Compile Include="BusinessClasses\LocalUsersEmailManager.cs" />
+    <Compile Include="ConfigurationClasses\UsersEmailSettings.cs" />
     <Compile Include="ConfigurationClasses\RibbonTabIdentifiers.cs" />
     <Compile Include="ConfigurationClasses\RibbonTabPageConfig.cs" />
     <Compile Include="BusinessClasses\WebSiteManager.cs" />
@@ -466,6 +477,12 @@
     <Compile Include="ToolForms\FormEditPage.Designer.cs">
       <DependentUpon>FormEditPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="ToolForms\FormUsersSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\FormUsersSettings.Designer.cs">
+      <DependentUpon>FormUsersSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="ToolForms\FormEditUser.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -689,6 +706,9 @@
     <EmbeddedResource Include="ToolForms\FormEditPage.resx">
       <DependentUpon>FormEditPage.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\FormUsersSettings.resx">
+      <DependentUpon>FormUsersSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\FormEditUser.resx">
       <DependentUpon>FormEditUser.cs</DependentUpon>
     </EmbeddedResource>
@@ -718,6 +738,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\UsersSettings.png" />
     <None Include="Resources\UserLogo.png" />
     <None Include="Resources\PasswordLogo.png" />
     <None Include="Resources\LoginLogo.png" />

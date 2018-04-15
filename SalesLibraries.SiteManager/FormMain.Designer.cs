@@ -52,30 +52,17 @@ namespace SalesLibraries.SiteManager
 			this.controlContainerItem3 = new DevComponents.DotNetBar.ControlContainerItem();
 			this.labelItemQBuilderLogo = new DevComponents.DotNetBar.LabelItem();
 			this.superTooltip = new DevComponents.DotNetBar.SuperTooltip();
-			this.buttonItemLinkConfigProfilesExit = new DevComponents.DotNetBar.ButtonItem();
-			this.buttonItemQBuilderExit = new DevComponents.DotNetBar.ButtonItem();
-			this.buttonItemInactiveUsersExit = new DevComponents.DotNetBar.ButtonItem();
-			this.buttonItemActivitiesExit = new DevComponents.DotNetBar.ButtonItem();
-			this.buttonItemUsersExit = new DevComponents.DotNetBar.ButtonItem();
-			this.buttonItemUtilitiesExit = new DevComponents.DotNetBar.ButtonItem();
-			this.buttonItemLibrariesExit = new DevComponents.DotNetBar.ButtonItem();
 			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.ribbonControl = new DevComponents.DotNetBar.RibbonControl();
 			this.ribbonPanelUsers = new DevComponents.DotNetBar.RibbonPanel();
 			this.ribbonBarUsersExit = new DevComponents.DotNetBar.RibbonBar();
 			this.ribbonBarUsersExport = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemUsersExport = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarUsersImport = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemUsersImport = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarUsersRefresh = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemUsersRefresh = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarUsersDelete = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemUsersDelete = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarUsersEdit = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemUsersEdit = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarUsersAdd = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemUsersAdd = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarUsersSite = new DevComponents.DotNetBar.RibbonBar();
 			this.comboBoxEditUsersSite = new DevExpress.XtraEditors.ComboBoxEdit();
 			this.itemContainerUsersSite = new DevComponents.DotNetBar.ItemContainer();
@@ -93,7 +80,6 @@ namespace SalesLibraries.SiteManager
 			this.ribbonPanelQBuilder = new DevComponents.DotNetBar.RibbonPanel();
 			this.ribbonBarQBuilderExit = new DevComponents.DotNetBar.RibbonBar();
 			this.ribbonBarQBuilderExport = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemQBuilder = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarQBuilderSite = new DevComponents.DotNetBar.RibbonBar();
 			this.comboBoxEditQBuilderSite = new DevExpress.XtraEditors.ComboBoxEdit();
 			this.itemContainerQBuilderSite = new DevComponents.DotNetBar.ItemContainer();
@@ -103,7 +89,6 @@ namespace SalesLibraries.SiteManager
 			this.ribbonPanelInactiveUsers = new DevComponents.DotNetBar.RibbonPanel();
 			this.ribbonBarInactiveUsersExit = new DevComponents.DotNetBar.RibbonBar();
 			this.ribbonBarInactiveUsersExport = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemInactiveUsersExport = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarInactiveUsersSite = new DevComponents.DotNetBar.RibbonBar();
 			this.comboBoxEditInactiveUsersSite = new DevExpress.XtraEditors.ComboBoxEdit();
 			this.itemContainerInactiveUsersSite = new DevComponents.DotNetBar.ItemContainer();
@@ -113,7 +98,6 @@ namespace SalesLibraries.SiteManager
 			this.ribbonPanelLibraries = new DevComponents.DotNetBar.RibbonPanel();
 			this.ribbonBarLibrariesExit = new DevComponents.DotNetBar.RibbonBar();
 			this.ribbonBarLibrariesExport = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemLibrariesExport = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarLibrariesSite = new DevComponents.DotNetBar.RibbonBar();
 			this.comboBoxEditLibrariesSite = new DevExpress.XtraEditors.ComboBoxEdit();
 			this.itemContainerLibrariesSite = new DevComponents.DotNetBar.ItemContainer();
@@ -125,13 +109,9 @@ namespace SalesLibraries.SiteManager
 			this.ribbonPanelLinkConfigProfiles = new DevComponents.DotNetBar.RibbonPanel();
 			this.ribbonBarLinkConfigProfilesExit = new DevComponents.DotNetBar.RibbonBar();
 			this.ribbonBarLinkConfigProfilesExportFiles = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemLinkConfigProfilesExportFiles = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarLinkConfigProfilesSave = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemLinkConfigProfilesSave = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarLinkConfigProfilesDelete = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemLinkConfigProfilesDelete = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarLinkConfigProfilesAdd = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemLinkConfigProfilesAdd = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarLinkConfigProfilesSite = new DevComponents.DotNetBar.RibbonBar();
 			this.comboBoxEditLinkConfigProfilesSite = new DevExpress.XtraEditors.ComboBoxEdit();
 			this.itemContainerLinkConfigProfilesSite = new DevComponents.DotNetBar.ItemContainer();
@@ -143,7 +123,6 @@ namespace SalesLibraries.SiteManager
 			this.ribbonPanelActivities = new DevComponents.DotNetBar.RibbonPanel();
 			this.ribbonBarActivitiesExit = new DevComponents.DotNetBar.RibbonBar();
 			this.ribbonBarActivitiesExport = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemActivitiesExport = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarActivitiesViews = new DevComponents.DotNetBar.RibbonBar();
 			this.itemContainerActivitiesViews1 = new DevComponents.DotNetBar.ItemContainer();
 			this.itemContainerActivitiesViews2 = new DevComponents.DotNetBar.ItemContainer();
@@ -166,6 +145,29 @@ namespace SalesLibraries.SiteManager
 			this.ribbonTabItemUtilities = new DevComponents.DotNetBar.RibbonTabItem();
 			this.pnMain = new System.Windows.Forms.Panel();
 			this.styleManager = new DevComponents.DotNetBar.StyleManager(this.components);
+			this.ribbonBarUsersSettings = new DevComponents.DotNetBar.RibbonBar();
+			this.buttonItemUsersExit = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemUsersSettings = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemUsersExport = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemUsersImport = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemUsersRefresh = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemUsersDelete = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemUsersEdit = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemUsersAdd = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemUtilitiesExit = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemQBuilderExit = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemQBuilder = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemInactiveUsersExit = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemInactiveUsersExport = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemLibrariesExit = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemLibrariesExport = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemLinkConfigProfilesExit = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemLinkConfigProfilesExportFiles = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemLinkConfigProfilesSave = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemLinkConfigProfilesDelete = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemLinkConfigProfilesAdd = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemActivitiesExit = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemActivitiesExport = new DevComponents.DotNetBar.ButtonItem();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			this.ribbonControl.SuspendLayout();
 			this.ribbonPanelUsers.SuspendLayout();
@@ -319,69 +321,6 @@ namespace SalesLibraries.SiteManager
 			this.superTooltip.DefaultTooltipSettings = new DevComponents.DotNetBar.SuperTooltipInfo("", "", "", null, null, DevComponents.DotNetBar.eTooltipColor.Gray);
 			this.superTooltip.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			// 
-			// buttonItemLinkConfigProfilesExit
-			// 
-			this.buttonItemLinkConfigProfilesExit.Image = global::SalesLibraries.SiteManager.Properties.Resources.Exit;
-			this.buttonItemLinkConfigProfilesExit.Name = "buttonItemLinkConfigProfilesExit";
-			this.buttonItemLinkConfigProfilesExit.SubItemsExpandWidth = 14;
-			this.superTooltip.SetSuperTooltip(this.buttonItemLinkConfigProfilesExit, new DevComponents.DotNetBar.SuperTooltipInfo("Exit", "", "Close Site Manager", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-			this.buttonItemLinkConfigProfilesExit.Text = "buttonItemHomeExit";
-			this.buttonItemLinkConfigProfilesExit.Click += new System.EventHandler(this.OnExitClick);
-			// 
-			// buttonItemQBuilderExit
-			// 
-			this.buttonItemQBuilderExit.Image = global::SalesLibraries.SiteManager.Properties.Resources.Exit;
-			this.buttonItemQBuilderExit.Name = "buttonItemQBuilderExit";
-			this.buttonItemQBuilderExit.SubItemsExpandWidth = 14;
-			this.superTooltip.SetSuperTooltip(this.buttonItemQBuilderExit, new DevComponents.DotNetBar.SuperTooltipInfo("Exit", "", "Close Site Manager", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-			this.buttonItemQBuilderExit.Text = "buttonItemHomeExit";
-			this.buttonItemQBuilderExit.Click += new System.EventHandler(this.OnExitClick);
-			// 
-			// buttonItemInactiveUsersExit
-			// 
-			this.buttonItemInactiveUsersExit.Image = global::SalesLibraries.SiteManager.Properties.Resources.Exit;
-			this.buttonItemInactiveUsersExit.Name = "buttonItemInactiveUsersExit";
-			this.buttonItemInactiveUsersExit.SubItemsExpandWidth = 14;
-			this.superTooltip.SetSuperTooltip(this.buttonItemInactiveUsersExit, new DevComponents.DotNetBar.SuperTooltipInfo("Exit", "", "Close Site Manager", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-			this.buttonItemInactiveUsersExit.Text = "buttonItemHomeExit";
-			this.buttonItemInactiveUsersExit.Click += new System.EventHandler(this.OnExitClick);
-			// 
-			// buttonItemActivitiesExit
-			// 
-			this.buttonItemActivitiesExit.Image = global::SalesLibraries.SiteManager.Properties.Resources.Exit;
-			this.buttonItemActivitiesExit.Name = "buttonItemActivitiesExit";
-			this.buttonItemActivitiesExit.SubItemsExpandWidth = 14;
-			this.superTooltip.SetSuperTooltip(this.buttonItemActivitiesExit, new DevComponents.DotNetBar.SuperTooltipInfo("Exit", "", "Close Site Manager", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-			this.buttonItemActivitiesExit.Text = "buttonItemHomeExit";
-			this.buttonItemActivitiesExit.Click += new System.EventHandler(this.OnExitClick);
-			// 
-			// buttonItemUsersExit
-			// 
-			this.buttonItemUsersExit.Image = global::SalesLibraries.SiteManager.Properties.Resources.Exit;
-			this.buttonItemUsersExit.Name = "buttonItemUsersExit";
-			this.buttonItemUsersExit.SubItemsExpandWidth = 14;
-			this.superTooltip.SetSuperTooltip(this.buttonItemUsersExit, new DevComponents.DotNetBar.SuperTooltipInfo("Exit", "", "Close Site Manager", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-			this.buttonItemUsersExit.Text = "buttonItemHomeExit";
-			this.buttonItemUsersExit.Click += new System.EventHandler(this.OnExitClick);
-			// 
-			// buttonItemUtilitiesExit
-			// 
-			this.buttonItemUtilitiesExit.Image = global::SalesLibraries.SiteManager.Properties.Resources.Exit;
-			this.buttonItemUtilitiesExit.Name = "buttonItemUtilitiesExit";
-			this.buttonItemUtilitiesExit.SubItemsExpandWidth = 14;
-			this.superTooltip.SetSuperTooltip(this.buttonItemUtilitiesExit, new DevComponents.DotNetBar.SuperTooltipInfo("Exit", "", "Close Site Manager", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-			this.buttonItemUtilitiesExit.Text = "buttonItemHomeExit";
-			this.buttonItemUtilitiesExit.Click += new System.EventHandler(this.OnExitClick);
-			// 
-			// buttonItemLibrariesExit
-			// 
-			this.buttonItemLibrariesExit.Image = global::SalesLibraries.SiteManager.Properties.Resources.Exit;
-			this.buttonItemLibrariesExit.Name = "buttonItemLibrariesExit";
-			this.buttonItemLibrariesExit.SubItemsExpandWidth = 14;
-			this.superTooltip.SetSuperTooltip(this.buttonItemLibrariesExit, new DevComponents.DotNetBar.SuperTooltipInfo("Exit", "", "Close Site Manager", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-			this.buttonItemLibrariesExit.Text = "buttonItemHomeExit";
-			this.buttonItemLibrariesExit.Click += new System.EventHandler(this.OnExitClick);
-			// 
 			// defaultLookAndFeel
 			// 
 			this.defaultLookAndFeel.LookAndFeel.SkinName = "Office 2013";
@@ -419,7 +358,7 @@ namespace SalesLibraries.SiteManager
 			this.ribbonControl.Location = new System.Drawing.Point(5, 1);
 			this.ribbonControl.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.ribbonControl.Name = "ribbonControl";
-			this.ribbonControl.Size = new System.Drawing.Size(1032, 174);
+			this.ribbonControl.Size = new System.Drawing.Size(1004, 174);
 			this.ribbonControl.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonControl.SystemText.MaximizeRibbonText = "&Maximize the Ribbon";
 			this.ribbonControl.SystemText.MinimizeRibbonText = "Mi&nimize the Ribbon";
@@ -444,6 +383,7 @@ namespace SalesLibraries.SiteManager
 			// 
 			this.ribbonPanelUsers.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonPanelUsers.Controls.Add(this.ribbonBarUsersExit);
+			this.ribbonPanelUsers.Controls.Add(this.ribbonBarUsersSettings);
 			this.ribbonPanelUsers.Controls.Add(this.ribbonBarUsersExport);
 			this.ribbonPanelUsers.Controls.Add(this.ribbonBarUsersImport);
 			this.ribbonPanelUsers.Controls.Add(this.ribbonBarUsersRefresh);
@@ -457,7 +397,7 @@ namespace SalesLibraries.SiteManager
 			this.ribbonPanelUsers.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.ribbonPanelUsers.Name = "ribbonPanelUsers";
 			this.ribbonPanelUsers.Padding = new System.Windows.Forms.Padding(3, 0, 3, 2);
-			this.ribbonPanelUsers.Size = new System.Drawing.Size(1032, 121);
+			this.ribbonPanelUsers.Size = new System.Drawing.Size(1004, 121);
 			// 
 			// 
 			// 
@@ -491,7 +431,7 @@ namespace SalesLibraries.SiteManager
 			this.ribbonBarUsersExit.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItemUsersExit});
 			this.ribbonBarUsersExit.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarUsersExit.Location = new System.Drawing.Point(971, 0);
+			this.ribbonBarUsersExit.Location = new System.Drawing.Point(1059, 0);
 			this.ribbonBarUsersExit.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.ribbonBarUsersExit.Name = "ribbonBarUsersExit";
 			this.ribbonBarUsersExit.Size = new System.Drawing.Size(77, 119);
@@ -541,13 +481,6 @@ namespace SalesLibraries.SiteManager
 			// 
 			this.ribbonBarUsersExport.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			// 
-			// buttonItemUsersExport
-			// 
-			this.buttonItemUsersExport.Image = global::SalesLibraries.SiteManager.Properties.Resources.ImportUsers;
-			this.buttonItemUsersExport.Name = "buttonItemUsersExport";
-			this.buttonItemUsersExport.SubItemsExpandWidth = 14;
-			this.buttonItemUsersExport.Text = "buttonItem1";
-			// 
 			// ribbonBarUsersImport
 			// 
 			this.ribbonBarUsersImport.AutoOverflowEnabled = true;
@@ -581,13 +514,6 @@ namespace SalesLibraries.SiteManager
 			// 
 			// 
 			this.ribbonBarUsersImport.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemUsersImport
-			// 
-			this.buttonItemUsersImport.Image = global::SalesLibraries.SiteManager.Properties.Resources.ImportUsers;
-			this.buttonItemUsersImport.Name = "buttonItemUsersImport";
-			this.buttonItemUsersImport.SubItemsExpandWidth = 14;
-			this.buttonItemUsersImport.Text = "buttonItem1";
 			// 
 			// ribbonBarUsersRefresh
 			// 
@@ -623,13 +549,6 @@ namespace SalesLibraries.SiteManager
 			// 
 			this.ribbonBarUsersRefresh.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			// 
-			// buttonItemUsersRefresh
-			// 
-			this.buttonItemUsersRefresh.Image = global::SalesLibraries.SiteManager.Properties.Resources.RefreshUsers;
-			this.buttonItemUsersRefresh.Name = "buttonItemUsersRefresh";
-			this.buttonItemUsersRefresh.SubItemsExpandWidth = 14;
-			this.buttonItemUsersRefresh.Text = "buttonItem1";
-			// 
 			// ribbonBarUsersDelete
 			// 
 			this.ribbonBarUsersDelete.AutoOverflowEnabled = true;
@@ -663,13 +582,6 @@ namespace SalesLibraries.SiteManager
 			// 
 			// 
 			this.ribbonBarUsersDelete.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemUsersDelete
-			// 
-			this.buttonItemUsersDelete.Image = global::SalesLibraries.SiteManager.Properties.Resources.DeleteUser;
-			this.buttonItemUsersDelete.Name = "buttonItemUsersDelete";
-			this.buttonItemUsersDelete.SubItemsExpandWidth = 14;
-			this.buttonItemUsersDelete.Text = "buttonItem1";
 			// 
 			// ribbonBarUsersEdit
 			// 
@@ -705,13 +617,6 @@ namespace SalesLibraries.SiteManager
 			// 
 			this.ribbonBarUsersEdit.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			// 
-			// buttonItemUsersEdit
-			// 
-			this.buttonItemUsersEdit.Image = global::SalesLibraries.SiteManager.Properties.Resources.ShowInfo;
-			this.buttonItemUsersEdit.Name = "buttonItemUsersEdit";
-			this.buttonItemUsersEdit.SubItemsExpandWidth = 14;
-			this.buttonItemUsersEdit.Text = "buttonItem1";
-			// 
 			// ribbonBarUsersAdd
 			// 
 			this.ribbonBarUsersAdd.AutoOverflowEnabled = true;
@@ -745,13 +650,6 @@ namespace SalesLibraries.SiteManager
 			// 
 			// 
 			this.ribbonBarUsersAdd.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemUsersAdd
-			// 
-			this.buttonItemUsersAdd.Image = global::SalesLibraries.SiteManager.Properties.Resources.AddUser;
-			this.buttonItemUsersAdd.Name = "buttonItemUsersAdd";
-			this.buttonItemUsersAdd.SubItemsExpandWidth = 14;
-			this.buttonItemUsersAdd.Text = "buttonItem1";
 			// 
 			// ribbonBarUsersSite
 			// 
@@ -1180,13 +1078,6 @@ namespace SalesLibraries.SiteManager
 			// 
 			this.ribbonBarQBuilderExport.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			// 
-			// buttonItemQBuilder
-			// 
-			this.buttonItemQBuilder.Image = global::SalesLibraries.SiteManager.Properties.Resources.ImportUsers;
-			this.buttonItemQBuilder.Name = "buttonItemQBuilder";
-			this.buttonItemQBuilder.SubItemsExpandWidth = 14;
-			this.buttonItemQBuilder.Text = "buttonItem1";
-			// 
 			// ribbonBarQBuilderSite
 			// 
 			this.ribbonBarQBuilderSite.AutoOverflowEnabled = true;
@@ -1418,13 +1309,6 @@ namespace SalesLibraries.SiteManager
 			// 
 			this.ribbonBarInactiveUsersExport.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			// 
-			// buttonItemInactiveUsersExport
-			// 
-			this.buttonItemInactiveUsersExport.Image = global::SalesLibraries.SiteManager.Properties.Resources.ImportUsers;
-			this.buttonItemInactiveUsersExport.Name = "buttonItemInactiveUsersExport";
-			this.buttonItemInactiveUsersExport.SubItemsExpandWidth = 14;
-			this.buttonItemInactiveUsersExport.Text = "buttonItem1";
-			// 
 			// ribbonBarInactiveUsersSite
 			// 
 			this.ribbonBarInactiveUsersSite.AutoOverflowEnabled = true;
@@ -1655,13 +1539,6 @@ namespace SalesLibraries.SiteManager
 			// 
 			// 
 			this.ribbonBarLibrariesExport.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemLibrariesExport
-			// 
-			this.buttonItemLibrariesExport.Image = global::SalesLibraries.SiteManager.Properties.Resources.ImportUsers;
-			this.buttonItemLibrariesExport.Name = "buttonItemLibrariesExport";
-			this.buttonItemLibrariesExport.SubItemsExpandWidth = 14;
-			this.buttonItemLibrariesExport.Text = "buttonItem1";
 			// 
 			// ribbonBarLibrariesSite
 			// 
@@ -1906,13 +1783,6 @@ namespace SalesLibraries.SiteManager
 			// 
 			this.ribbonBarLinkConfigProfilesExportFiles.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			// 
-			// buttonItemLinkConfigProfilesExportFiles
-			// 
-			this.buttonItemLinkConfigProfilesExportFiles.Image = global::SalesLibraries.SiteManager.Properties.Resources.ImportUsers;
-			this.buttonItemLinkConfigProfilesExportFiles.Name = "buttonItemLinkConfigProfilesExportFiles";
-			this.buttonItemLinkConfigProfilesExportFiles.SubItemsExpandWidth = 14;
-			this.buttonItemLinkConfigProfilesExportFiles.Text = "buttonItem1";
-			// 
 			// ribbonBarLinkConfigProfilesSave
 			// 
 			this.ribbonBarLinkConfigProfilesSave.AutoOverflowEnabled = true;
@@ -1944,13 +1814,6 @@ namespace SalesLibraries.SiteManager
 			// 
 			// 
 			this.ribbonBarLinkConfigProfilesSave.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemLinkConfigProfilesSave
-			// 
-			this.buttonItemLinkConfigProfilesSave.Image = global::SalesLibraries.SiteManager.Properties.Resources.LinkConfigProfilesSave;
-			this.buttonItemLinkConfigProfilesSave.Name = "buttonItemLinkConfigProfilesSave";
-			this.buttonItemLinkConfigProfilesSave.SubItemsExpandWidth = 14;
-			this.buttonItemLinkConfigProfilesSave.Text = "New Profile";
 			// 
 			// ribbonBarLinkConfigProfilesDelete
 			// 
@@ -1984,13 +1847,6 @@ namespace SalesLibraries.SiteManager
 			// 
 			this.ribbonBarLinkConfigProfilesDelete.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			// 
-			// buttonItemLinkConfigProfilesDelete
-			// 
-			this.buttonItemLinkConfigProfilesDelete.Image = global::SalesLibraries.SiteManager.Properties.Resources.LinkConfigProfilesDelete;
-			this.buttonItemLinkConfigProfilesDelete.Name = "buttonItemLinkConfigProfilesDelete";
-			this.buttonItemLinkConfigProfilesDelete.SubItemsExpandWidth = 14;
-			this.buttonItemLinkConfigProfilesDelete.Text = "New Profile";
-			// 
 			// ribbonBarLinkConfigProfilesAdd
 			// 
 			this.ribbonBarLinkConfigProfilesAdd.AutoOverflowEnabled = true;
@@ -2022,13 +1878,6 @@ namespace SalesLibraries.SiteManager
 			// 
 			// 
 			this.ribbonBarLinkConfigProfilesAdd.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemLinkConfigProfilesAdd
-			// 
-			this.buttonItemLinkConfigProfilesAdd.Image = global::SalesLibraries.SiteManager.Properties.Resources.LinkConfigProfilesAdd;
-			this.buttonItemLinkConfigProfilesAdd.Name = "buttonItemLinkConfigProfilesAdd";
-			this.buttonItemLinkConfigProfilesAdd.SubItemsExpandWidth = 14;
-			this.buttonItemLinkConfigProfilesAdd.Text = "New Profile";
 			// 
 			// ribbonBarLinkConfigProfilesSite
 			// 
@@ -2270,13 +2119,6 @@ namespace SalesLibraries.SiteManager
 			// 
 			// 
 			this.ribbonBarActivitiesExport.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemActivitiesExport
-			// 
-			this.buttonItemActivitiesExport.Image = global::SalesLibraries.SiteManager.Properties.Resources.ImportUsers;
-			this.buttonItemActivitiesExport.Name = "buttonItemActivitiesExport";
-			this.buttonItemActivitiesExport.SubItemsExpandWidth = 14;
-			this.buttonItemActivitiesExport.Text = "buttonItem1";
 			// 
 			// ribbonBarActivitiesViews
 			// 
@@ -2587,7 +2429,7 @@ namespace SalesLibraries.SiteManager
 			this.pnMain.Location = new System.Drawing.Point(5, 175);
 			this.pnMain.Name = "pnMain";
 			this.pnMain.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
-			this.pnMain.Size = new System.Drawing.Size(1032, 428);
+			this.pnMain.Size = new System.Drawing.Size(1004, 428);
 			this.pnMain.TabIndex = 3;
 			// 
 			// styleManager
@@ -2595,11 +2437,213 @@ namespace SalesLibraries.SiteManager
 			this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Metro;
 			this.styleManager.MetroColorParameters = new DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(System.Drawing.Color.White, System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(87)))), ((int)(((byte)(154))))));
 			// 
+			// ribbonBarUsersSettings
+			// 
+			this.ribbonBarUsersSettings.AutoOverflowEnabled = true;
+			this.ribbonBarUsersSettings.BackColor = System.Drawing.Color.White;
+			// 
+			// 
+			// 
+			this.ribbonBarUsersSettings.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// 
+			// 
+			this.ribbonBarUsersSettings.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.ribbonBarUsersSettings.ContainerControlProcessDialogKey = true;
+			this.ribbonBarUsersSettings.Dock = System.Windows.Forms.DockStyle.Left;
+			this.ribbonBarUsersSettings.DragDropSupport = true;
+			this.ribbonBarUsersSettings.ForeColor = System.Drawing.Color.Black;
+			this.ribbonBarUsersSettings.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.buttonItemUsersSettings});
+			this.ribbonBarUsersSettings.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
+			this.ribbonBarUsersSettings.Location = new System.Drawing.Point(971, 0);
+			this.ribbonBarUsersSettings.Name = "ribbonBarUsersSettings";
+			this.ribbonBarUsersSettings.Size = new System.Drawing.Size(88, 119);
+			this.ribbonBarUsersSettings.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.ribbonBarUsersSettings.TabIndex = 33;
+			this.ribbonBarUsersSettings.Text = "Settings";
+			// 
+			// 
+			// 
+			this.ribbonBarUsersSettings.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// 
+			// 
+			this.ribbonBarUsersSettings.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// buttonItemUsersExit
+			// 
+			this.buttonItemUsersExit.Image = global::SalesLibraries.SiteManager.Properties.Resources.Exit;
+			this.buttonItemUsersExit.Name = "buttonItemUsersExit";
+			this.buttonItemUsersExit.SubItemsExpandWidth = 14;
+			this.superTooltip.SetSuperTooltip(this.buttonItemUsersExit, new DevComponents.DotNetBar.SuperTooltipInfo("Exit", "", "Close Site Manager", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+			this.buttonItemUsersExit.Text = "buttonItemHomeExit";
+			this.buttonItemUsersExit.Click += new System.EventHandler(this.OnExitClick);
+			// 
+			// buttonItemUsersSettings
+			// 
+			this.buttonItemUsersSettings.Image = global::SalesLibraries.SiteManager.Properties.Resources.UsersSettings;
+			this.buttonItemUsersSettings.Name = "buttonItemUsersSettings";
+			this.buttonItemUsersSettings.SubItemsExpandWidth = 14;
+			this.buttonItemUsersSettings.Text = "buttonItem1";
+			// 
+			// buttonItemUsersExport
+			// 
+			this.buttonItemUsersExport.Image = global::SalesLibraries.SiteManager.Properties.Resources.ImportUsers;
+			this.buttonItemUsersExport.Name = "buttonItemUsersExport";
+			this.buttonItemUsersExport.SubItemsExpandWidth = 14;
+			this.buttonItemUsersExport.Text = "buttonItem1";
+			// 
+			// buttonItemUsersImport
+			// 
+			this.buttonItemUsersImport.Image = global::SalesLibraries.SiteManager.Properties.Resources.ImportUsers;
+			this.buttonItemUsersImport.Name = "buttonItemUsersImport";
+			this.buttonItemUsersImport.SubItemsExpandWidth = 14;
+			this.buttonItemUsersImport.Text = "buttonItem1";
+			// 
+			// buttonItemUsersRefresh
+			// 
+			this.buttonItemUsersRefresh.Image = global::SalesLibraries.SiteManager.Properties.Resources.RefreshUsers;
+			this.buttonItemUsersRefresh.Name = "buttonItemUsersRefresh";
+			this.buttonItemUsersRefresh.SubItemsExpandWidth = 14;
+			this.buttonItemUsersRefresh.Text = "buttonItem1";
+			// 
+			// buttonItemUsersDelete
+			// 
+			this.buttonItemUsersDelete.Image = global::SalesLibraries.SiteManager.Properties.Resources.DeleteUser;
+			this.buttonItemUsersDelete.Name = "buttonItemUsersDelete";
+			this.buttonItemUsersDelete.SubItemsExpandWidth = 14;
+			this.buttonItemUsersDelete.Text = "buttonItem1";
+			// 
+			// buttonItemUsersEdit
+			// 
+			this.buttonItemUsersEdit.Image = global::SalesLibraries.SiteManager.Properties.Resources.ShowInfo;
+			this.buttonItemUsersEdit.Name = "buttonItemUsersEdit";
+			this.buttonItemUsersEdit.SubItemsExpandWidth = 14;
+			this.buttonItemUsersEdit.Text = "buttonItem1";
+			// 
+			// buttonItemUsersAdd
+			// 
+			this.buttonItemUsersAdd.Image = global::SalesLibraries.SiteManager.Properties.Resources.AddUser;
+			this.buttonItemUsersAdd.Name = "buttonItemUsersAdd";
+			this.buttonItemUsersAdd.SubItemsExpandWidth = 14;
+			this.buttonItemUsersAdd.Text = "buttonItem1";
+			// 
+			// buttonItemUtilitiesExit
+			// 
+			this.buttonItemUtilitiesExit.Image = global::SalesLibraries.SiteManager.Properties.Resources.Exit;
+			this.buttonItemUtilitiesExit.Name = "buttonItemUtilitiesExit";
+			this.buttonItemUtilitiesExit.SubItemsExpandWidth = 14;
+			this.superTooltip.SetSuperTooltip(this.buttonItemUtilitiesExit, new DevComponents.DotNetBar.SuperTooltipInfo("Exit", "", "Close Site Manager", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+			this.buttonItemUtilitiesExit.Text = "buttonItemHomeExit";
+			this.buttonItemUtilitiesExit.Click += new System.EventHandler(this.OnExitClick);
+			// 
+			// buttonItemQBuilderExit
+			// 
+			this.buttonItemQBuilderExit.Image = global::SalesLibraries.SiteManager.Properties.Resources.Exit;
+			this.buttonItemQBuilderExit.Name = "buttonItemQBuilderExit";
+			this.buttonItemQBuilderExit.SubItemsExpandWidth = 14;
+			this.superTooltip.SetSuperTooltip(this.buttonItemQBuilderExit, new DevComponents.DotNetBar.SuperTooltipInfo("Exit", "", "Close Site Manager", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+			this.buttonItemQBuilderExit.Text = "buttonItemHomeExit";
+			this.buttonItemQBuilderExit.Click += new System.EventHandler(this.OnExitClick);
+			// 
+			// buttonItemQBuilder
+			// 
+			this.buttonItemQBuilder.Image = global::SalesLibraries.SiteManager.Properties.Resources.ImportUsers;
+			this.buttonItemQBuilder.Name = "buttonItemQBuilder";
+			this.buttonItemQBuilder.SubItemsExpandWidth = 14;
+			this.buttonItemQBuilder.Text = "buttonItem1";
+			// 
+			// buttonItemInactiveUsersExit
+			// 
+			this.buttonItemInactiveUsersExit.Image = global::SalesLibraries.SiteManager.Properties.Resources.Exit;
+			this.buttonItemInactiveUsersExit.Name = "buttonItemInactiveUsersExit";
+			this.buttonItemInactiveUsersExit.SubItemsExpandWidth = 14;
+			this.superTooltip.SetSuperTooltip(this.buttonItemInactiveUsersExit, new DevComponents.DotNetBar.SuperTooltipInfo("Exit", "", "Close Site Manager", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+			this.buttonItemInactiveUsersExit.Text = "buttonItemHomeExit";
+			this.buttonItemInactiveUsersExit.Click += new System.EventHandler(this.OnExitClick);
+			// 
+			// buttonItemInactiveUsersExport
+			// 
+			this.buttonItemInactiveUsersExport.Image = global::SalesLibraries.SiteManager.Properties.Resources.ImportUsers;
+			this.buttonItemInactiveUsersExport.Name = "buttonItemInactiveUsersExport";
+			this.buttonItemInactiveUsersExport.SubItemsExpandWidth = 14;
+			this.buttonItemInactiveUsersExport.Text = "buttonItem1";
+			// 
+			// buttonItemLibrariesExit
+			// 
+			this.buttonItemLibrariesExit.Image = global::SalesLibraries.SiteManager.Properties.Resources.Exit;
+			this.buttonItemLibrariesExit.Name = "buttonItemLibrariesExit";
+			this.buttonItemLibrariesExit.SubItemsExpandWidth = 14;
+			this.superTooltip.SetSuperTooltip(this.buttonItemLibrariesExit, new DevComponents.DotNetBar.SuperTooltipInfo("Exit", "", "Close Site Manager", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+			this.buttonItemLibrariesExit.Text = "buttonItemHomeExit";
+			this.buttonItemLibrariesExit.Click += new System.EventHandler(this.OnExitClick);
+			// 
+			// buttonItemLibrariesExport
+			// 
+			this.buttonItemLibrariesExport.Image = global::SalesLibraries.SiteManager.Properties.Resources.ImportUsers;
+			this.buttonItemLibrariesExport.Name = "buttonItemLibrariesExport";
+			this.buttonItemLibrariesExport.SubItemsExpandWidth = 14;
+			this.buttonItemLibrariesExport.Text = "buttonItem1";
+			// 
+			// buttonItemLinkConfigProfilesExit
+			// 
+			this.buttonItemLinkConfigProfilesExit.Image = global::SalesLibraries.SiteManager.Properties.Resources.Exit;
+			this.buttonItemLinkConfigProfilesExit.Name = "buttonItemLinkConfigProfilesExit";
+			this.buttonItemLinkConfigProfilesExit.SubItemsExpandWidth = 14;
+			this.superTooltip.SetSuperTooltip(this.buttonItemLinkConfigProfilesExit, new DevComponents.DotNetBar.SuperTooltipInfo("Exit", "", "Close Site Manager", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+			this.buttonItemLinkConfigProfilesExit.Text = "buttonItemHomeExit";
+			this.buttonItemLinkConfigProfilesExit.Click += new System.EventHandler(this.OnExitClick);
+			// 
+			// buttonItemLinkConfigProfilesExportFiles
+			// 
+			this.buttonItemLinkConfigProfilesExportFiles.Image = global::SalesLibraries.SiteManager.Properties.Resources.ImportUsers;
+			this.buttonItemLinkConfigProfilesExportFiles.Name = "buttonItemLinkConfigProfilesExportFiles";
+			this.buttonItemLinkConfigProfilesExportFiles.SubItemsExpandWidth = 14;
+			this.buttonItemLinkConfigProfilesExportFiles.Text = "buttonItem1";
+			// 
+			// buttonItemLinkConfigProfilesSave
+			// 
+			this.buttonItemLinkConfigProfilesSave.Image = global::SalesLibraries.SiteManager.Properties.Resources.LinkConfigProfilesSave;
+			this.buttonItemLinkConfigProfilesSave.Name = "buttonItemLinkConfigProfilesSave";
+			this.buttonItemLinkConfigProfilesSave.SubItemsExpandWidth = 14;
+			this.buttonItemLinkConfigProfilesSave.Text = "New Profile";
+			// 
+			// buttonItemLinkConfigProfilesDelete
+			// 
+			this.buttonItemLinkConfigProfilesDelete.Image = global::SalesLibraries.SiteManager.Properties.Resources.LinkConfigProfilesDelete;
+			this.buttonItemLinkConfigProfilesDelete.Name = "buttonItemLinkConfigProfilesDelete";
+			this.buttonItemLinkConfigProfilesDelete.SubItemsExpandWidth = 14;
+			this.buttonItemLinkConfigProfilesDelete.Text = "New Profile";
+			// 
+			// buttonItemLinkConfigProfilesAdd
+			// 
+			this.buttonItemLinkConfigProfilesAdd.Image = global::SalesLibraries.SiteManager.Properties.Resources.LinkConfigProfilesAdd;
+			this.buttonItemLinkConfigProfilesAdd.Name = "buttonItemLinkConfigProfilesAdd";
+			this.buttonItemLinkConfigProfilesAdd.SubItemsExpandWidth = 14;
+			this.buttonItemLinkConfigProfilesAdd.Text = "New Profile";
+			// 
+			// buttonItemActivitiesExit
+			// 
+			this.buttonItemActivitiesExit.Image = global::SalesLibraries.SiteManager.Properties.Resources.Exit;
+			this.buttonItemActivitiesExit.Name = "buttonItemActivitiesExit";
+			this.buttonItemActivitiesExit.SubItemsExpandWidth = 14;
+			this.superTooltip.SetSuperTooltip(this.buttonItemActivitiesExit, new DevComponents.DotNetBar.SuperTooltipInfo("Exit", "", "Close Site Manager", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+			this.buttonItemActivitiesExit.Text = "buttonItemHomeExit";
+			this.buttonItemActivitiesExit.Click += new System.EventHandler(this.OnExitClick);
+			// 
+			// buttonItemActivitiesExport
+			// 
+			this.buttonItemActivitiesExport.Image = global::SalesLibraries.SiteManager.Properties.Resources.ImportUsers;
+			this.buttonItemActivitiesExport.Name = "buttonItemActivitiesExport";
+			this.buttonItemActivitiesExport.SubItemsExpandWidth = 14;
+			this.buttonItemActivitiesExport.Text = "buttonItem1";
+			// 
 			// FormMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-			this.ClientSize = new System.Drawing.Size(1042, 605);
+			this.ClientSize = new System.Drawing.Size(1014, 605);
 			this.Controls.Add(this.pnMain);
 			this.Controls.Add(this.ribbonControl);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -2774,5 +2818,7 @@ namespace SalesLibraries.SiteManager
 		public DevComponents.DotNetBar.ButtonItem buttonItemActivitiesViewsReport8;
 		private DevComponents.DotNetBar.RibbonBar ribbonBarUsersExport;
 		public DevComponents.DotNetBar.ButtonItem buttonItemUsersExport;
+		private DevComponents.DotNetBar.RibbonBar ribbonBarUsersSettings;
+		public DevComponents.DotNetBar.ButtonItem buttonItemUsersSettings;
 	}
 }

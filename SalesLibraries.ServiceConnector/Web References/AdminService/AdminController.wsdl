@@ -80,6 +80,7 @@
           <xsd:element name="name" type="xsd:string" />
           <xsd:element name="libraryName" type="xsd:string" />
           <xsd:element name="order" type="xsd:int" />
+          <xsd:element name="settings" type="tns:SoapLibraryPageSettings" />
           <xsd:element name="folders" type="tns:SoapLibraryFolderArray" />
           <xsd:element name="enableColumns" type="xsd:boolean" />
           <xsd:element name="columns" type="tns:SoapColumnArray" />
@@ -89,6 +90,12 @@
           <xsd:element name="allGroups" type="xsd:boolean" />
           <xsd:element name="users" type="tns:UserModelArray" />
           <xsd:element name="allUsers" type="xsd:boolean" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="SoapLibraryPageSettings">
+        <xsd:all>
+          <xsd:element name="icon" type="xsd:string" />
+          <xsd:element name="iconColor" type="xsd:string" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="SoapLibraryFolderArray">
@@ -125,7 +132,6 @@
       <xsd:complexType name="Font">
         <xsd:all>
           <xsd:element name="name" type="xsd:string" />
-          <xsd:element name="size" type="xsd:int" />
           <xsd:element name="isBold" type="xsd:boolean" />
           <xsd:element name="isItalic" type="xsd:boolean" />
           <xsd:element name="isUnderlined" type="xsd:boolean" />
@@ -139,6 +145,7 @@
           <xsd:element name="image" type="xsd:string" />
           <xsd:element name="showText" type="xsd:boolean" />
           <xsd:element name="imageAlignment" type="xsd:string" />
+          <xsd:element name="imageVerticalAlignment" type="xsd:string" />
           <xsd:element name="text" type="xsd:string" />
           <xsd:element name="font" type="tns:Font" />
           <xsd:element name="foreColor" type="xsd:string" />
@@ -165,12 +172,15 @@
           <xsd:element name="fileDate" type="xsd:string" />
           <xsd:element name="fileSize" type="xsd:int" />
           <xsd:element name="originalFormat" type="xsd:string" />
+          <xsd:element name="searchFormat" type="xsd:string" />
           <xsd:element name="order" type="xsd:int" />
           <xsd:element name="type" type="xsd:int" />
           <xsd:element name="extendedProperties" type="tns:BaseLinkSettings" />
+          <xsd:element name="lineBreakProperties" type="tns:LineBreak" />
           <xsd:element name="widgetType" type="xsd:int" />
           <xsd:element name="widget" type="xsd:string" />
           <xsd:element name="banner" type="tns:SoapBanner" />
+          <xsd:element name="thumbnail" type="tns:SoapThumbnail" />
           <xsd:element name="previewId" type="xsd:string" />
           <xsd:element name="superFilters" type="tns:LinkSuperFilterArray" />
           <xsd:element name="categories" type="tns:LinkCategoryArray" />
@@ -178,23 +188,50 @@
           <xsd:element name="dateAdd" type="xsd:string" />
           <xsd:element name="dateModify" type="xsd:string" />
           <xsd:element name="contentPath" type="xsd:string" />
-          <xsd:element name="isDead" type="xsd:boolean" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="BaseLinkSettings">
         <xsd:all>
           <xsd:element name="note" type="xsd:string" />
           <xsd:element name="hoverNote" type="xsd:string" />
+          <xsd:element name="showOnlyCustomHoverNote" type="xsd:boolean" />
           <xsd:element name="isBold" type="xsd:boolean" />
           <xsd:element name="isItalic" type="xsd:boolean" />
           <xsd:element name="isUnderline" type="xsd:boolean" />
           <xsd:element name="isSpecialFormat" type="xsd:boolean" />
           <xsd:element name="font" type="tns:Font" />
           <xsd:element name="foreColor" type="xsd:string" />
+          <xsd:element name="isTextWordWrap" type="xsd:boolean" />
           <xsd:element name="isRestricted" type="xsd:boolean" />
           <xsd:element name="noShare" type="xsd:boolean" />
           <xsd:element name="assignedUsers" type="xsd:string" />
           <xsd:element name="deniedUsers" type="xsd:string" />
+          <xsd:element name="quickLinkUrl" type="xsd:string" />
+          <xsd:element name="quickLinkTitle" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="LineBreak">
+        <xsd:all>
+          <xsd:element name="id" type="xsd:string" />
+          <xsd:element name="libraryId" type="xsd:string" />
+          <xsd:element name="font" type="tns:Font" />
+          <xsd:element name="foreColor" type="xsd:string" />
+          <xsd:element name="note" type="xsd:string" />
+          <xsd:element name="dateModify" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="SoapThumbnail">
+        <xsd:all>
+          <xsd:element name="isEnabled" type="xsd:boolean" />
+          <xsd:element name="image" type="xsd:string" />
+          <xsd:element name="imagePadding" type="xsd:int" />
+          <xsd:element name="imageAlignment" type="xsd:string" />
+          <xsd:element name="showText" type="xsd:boolean" />
+          <xsd:element name="text" type="xsd:string" />
+          <xsd:element name="font" type="tns:Font" />
+          <xsd:element name="foreColor" type="xsd:string" />
+          <xsd:element name="textPosition" type="xsd:string" />
+          <xsd:element name="textAlignment" type="xsd:string" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="LinkSuperFilterArray">
@@ -222,6 +259,7 @@
         <xsd:all>
           <xsd:element name="linkId" type="xsd:string" />
           <xsd:element name="libraryId" type="xsd:string" />
+          <xsd:element name="group" type="xsd:string" />
           <xsd:element name="category" type="xsd:string" />
           <xsd:element name="tag" type="xsd:string" />
         </xsd:all>
@@ -283,6 +321,7 @@
           <xsd:element name="newOfficeFormatLinks" type="tns:stringArray" />
           <xsd:element name="thumbsLinks" type="tns:stringArray" />
           <xsd:element name="thumbsPhoneLinks" type="tns:stringArray" />
+          <xsd:element name="thumbsDatatableLinks" type="tns:stringArray" />
           <xsd:element name="thumbsWidth" type="xsd:int" />
           <xsd:element name="thumbsHeight" type="xsd:int" />
         </xsd:all>
@@ -317,6 +356,7 @@
     <wsdl:part name="assignedGroups" type="tns:GroupModelArray" />
     <wsdl:part name="assignedPages" type="tns:SoapLibraryPageArray" />
     <wsdl:part name="role" type="xsd:int" />
+    <wsdl:part name="sendInfoMessage" type="xsd:boolean" />
   </wsdl:message>
   <wsdl:message name="setUserOut" />
   <wsdl:message name="deleteUserIn">
@@ -383,68 +423,57 @@
   </wsdl:message>
   <wsdl:portType name="AdminControllerPortType">
     <wsdl:operation name="setUser">
-      <wsdl:documentation>
-      </wsdl:documentation>
+      <wsdl:documentation />
       <wsdl:input message="tns:setUserIn" />
       <wsdl:output message="tns:setUserOut" />
     </wsdl:operation>
     <wsdl:operation name="deleteUser">
-      <wsdl:documentation>
-      </wsdl:documentation>
+      <wsdl:documentation />
       <wsdl:input message="tns:deleteUserIn" />
       <wsdl:output message="tns:deleteUserOut" />
     </wsdl:operation>
     <wsdl:operation name="getUsers">
-      <wsdl:documentation>
-      </wsdl:documentation>
+      <wsdl:documentation />
       <wsdl:input message="tns:getUsersIn" />
       <wsdl:output message="tns:getUsersOut" />
     </wsdl:operation>
     <wsdl:operation name="isUserPasswordComplex">
-      <wsdl:documentation>
-      </wsdl:documentation>
+      <wsdl:documentation />
       <wsdl:input message="tns:isUserPasswordComplexIn" />
       <wsdl:output message="tns:isUserPasswordComplexOut" />
     </wsdl:operation>
     <wsdl:operation name="setGroup">
-      <wsdl:documentation>
-      </wsdl:documentation>
+      <wsdl:documentation />
       <wsdl:input message="tns:setGroupIn" />
       <wsdl:output message="tns:setGroupOut" />
     </wsdl:operation>
     <wsdl:operation name="deleteGroup">
-      <wsdl:documentation>
-      </wsdl:documentation>
+      <wsdl:documentation />
       <wsdl:input message="tns:deleteGroupIn" />
       <wsdl:output message="tns:deleteGroupOut" />
     </wsdl:operation>
     <wsdl:operation name="getGroups">
-      <wsdl:documentation>
-      </wsdl:documentation>
+      <wsdl:documentation />
       <wsdl:input message="tns:getGroupsIn" />
       <wsdl:output message="tns:getGroupsOut" />
     </wsdl:operation>
     <wsdl:operation name="setPage">
-      <wsdl:documentation>
-      </wsdl:documentation>
+      <wsdl:documentation />
       <wsdl:input message="tns:setPageIn" />
       <wsdl:output message="tns:setPageOut" />
     </wsdl:operation>
     <wsdl:operation name="getLibraries">
-      <wsdl:documentation>
-      </wsdl:documentation>
+      <wsdl:documentation />
       <wsdl:input message="tns:getLibrariesIn" />
       <wsdl:output message="tns:getLibrariesOut" />
     </wsdl:operation>
     <wsdl:operation name="getGroupTemplates">
-      <wsdl:documentation>
-      </wsdl:documentation>
+      <wsdl:documentation />
       <wsdl:input message="tns:getGroupTemplatesIn" />
       <wsdl:output message="tns:getGroupTemplatesOut" />
     </wsdl:operation>
     <wsdl:operation name="getSessionKey">
-      <wsdl:documentation>
-      </wsdl:documentation>
+      <wsdl:documentation />
       <wsdl:input message="tns:getSessionKeyIn" />
       <wsdl:output message="tns:getSessionKeyOut" />
     </wsdl:operation>

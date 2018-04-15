@@ -40,9 +40,10 @@
 		 * @param GroupModel[] $assignedGroups
 		 * @param SoapLibraryPage[] $assignedPages
 		 * @param int $role
+		 * @param boolean $sendInfoMessage
 		 * @soap
 		 */
-		public function setUser($sessionKey, $login, $password, $firstName, $lastName, $email, $phone, $assignedGroups, $assignedPages, $role)
+		public function setUser($sessionKey, $login, $password, $firstName, $lastName, $email, $phone, $assignedGroups, $assignedPages, $role, $sendInfoMessage)
 		{
 			$newUser = false;
 			$resetPassword = false;
@@ -81,7 +82,7 @@
 					UserLibraryRecord::assignPagesForUser($login, $assignedPages);
 
 				if ($resetPassword)
-					ResetPasswordRecord::resetPasswordForUser($login, $password, $newUser, true);
+					ResetPasswordRecord::resetPasswordForUser($login, $password, $newUser, $sendInfoMessage);
 
 				MetaDataRecord::setData('library-security', 'last-update', date(Yii::app()->params['sourceDateFormat']));
 			}
@@ -112,7 +113,7 @@
 			{
 				foreach (UserRecord::model()->findAll(array('condition' => 'role<>2', 'order' => 'first_name, last_name')) as $userRecord)
 				{
-					/** @var $userRecord UserRecord*/
+					/** @var $userRecord UserRecord */
 					$user = new UserModel();
 					$user->id = $userRecord->id;
 					$user->login = $userRecord->login;
@@ -141,7 +142,7 @@
 							$pageRecords = LibraryPageRecord::model()->findAll("id_library=? and id in ('" . implode("','", $assignedPageIds) . "')", array($libraryRecord->id));
 							foreach ($pageRecords as $pageRecord)
 							{
-								$page = new SoapLibraryPage($library);
+								$page = new SoapLibraryPage();
 								$page->id = $pageRecord->id;
 								$page->libraryId = $pageRecord->id_library;
 								$page->name = $pageRecord->name;
@@ -271,7 +272,7 @@
 							{
 								foreach ($pageRecords as $pageRecord)
 								{
-									$page = new SoapLibraryPage($library);
+									$page = new SoapLibraryPage();
 									$page->id = $pageRecord->id;
 									$page->libraryId = $pageRecord->id_library;
 									$page->name = $pageRecord->name;
@@ -331,7 +332,7 @@
 				{
 					$library = new SoapLibrary();
 					$library->id = $pageRecord->id_library;
-					$page = new SoapLibraryPage($library);
+					$page = new SoapLibraryPage();
 					$page->id = $pageRecord->id;
 					$page->libraryId = $pageRecord->id_library;
 
@@ -354,7 +355,7 @@
 			{
 				foreach (LibraryRecord::model()->findAll(array('order' => 'name')) as $libraryRecord)
 				{
-					/** @var  $libraryRecord LibraryRecord*/
+					/** @var  $libraryRecord LibraryRecord */
 					$library = new SoapLibrary();
 					$library->id = $libraryRecord->id;
 					$library->name = $libraryRecord->name;
@@ -365,7 +366,7 @@
 					{
 						foreach ($pageRecords as $pageRecord)
 						{
-							$page = new SoapLibraryPage($library);
+							$page = new SoapLibraryPage();
 							$page->id = $pageRecord->id;
 							$page->libraryId = $pageRecord->id_library;
 							$page->name = $pageRecord->name;

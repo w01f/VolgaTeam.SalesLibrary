@@ -20,6 +20,7 @@ namespace SalesLibraries.SiteManager.ConfigurationClasses
 		#region Local Settings
 		public string SelectedSiteName { get; set; }
 		public int? SelectedTab { get; set; }
+		public UsersEmailSettings UsersEmailSettings { get; }
 		public InactiveUsersSettings InactiveUsersSettings { get; }
 		public List<RibbonTabPageConfig> RibbonTabPageSettings { get; }
 		public List<string> ApprovedUsers { get; }
@@ -32,6 +33,7 @@ namespace SalesLibraries.SiteManager.ConfigurationClasses
 			SitesListPath = Path.Combine(ApplicationRootsPath, "Sites.xml");
 			LogoPath = Path.Combine(ApplicationRootsPath, "logo.png");
 			IconPath = Path.Combine(ApplicationRootsPath, "icon.ico");
+			UsersEmailSettings = new UsersEmailSettings();
 			InactiveUsersSettings = new InactiveUsersSettings();
 			RibbonTabPageSettings = new List<RibbonTabPageConfig>();
 			ApprovedUsers = new List<String>();
@@ -58,6 +60,7 @@ namespace SalesLibraries.SiteManager.ConfigurationClasses
 				#endregion
 			}
 
+			UsersEmailSettings.Load();
 			InactiveUsersSettings.Load();
 			LoadRibbonTabSettings();
 			LoadApprovedUsers();

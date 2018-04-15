@@ -23,7 +23,7 @@ namespace SalesLibraries.ServiceConnector.AdminService {
     
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="AdminControllerBinding", Namespace="urn:AdminControllerwsdl")]
@@ -135,7 +135,7 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:AdminControllerwsdl#setUser", RequestNamespace="urn:AdminControllerwsdl", ResponseNamespace="urn:AdminControllerwsdl")]
-        public void setUser(string sessionKey, string login, string password, string firstName, string lastName, string email, string phone, GroupModel[] assignedGroups, SoapLibraryPage[] assignedPages, int role) {
+        public void setUser(string sessionKey, string login, string password, string firstName, string lastName, string email, string phone, GroupModel[] assignedGroups, SoapLibraryPage[] assignedPages, int role, bool sendInfoMessage) {
             this.Invoke("setUser", new object[] {
                         sessionKey,
                         login,
@@ -146,16 +146,17 @@ namespace SalesLibraries.ServiceConnector.AdminService {
                         phone,
                         assignedGroups,
                         assignedPages,
-                        role});
+                        role,
+                        sendInfoMessage});
         }
         
         /// <remarks/>
-        public void setUserAsync(string sessionKey, string login, string password, string firstName, string lastName, string email, string phone, GroupModel[] assignedGroups, SoapLibraryPage[] assignedPages, int role) {
-            this.setUserAsync(sessionKey, login, password, firstName, lastName, email, phone, assignedGroups, assignedPages, role, null);
+        public void setUserAsync(string sessionKey, string login, string password, string firstName, string lastName, string email, string phone, GroupModel[] assignedGroups, SoapLibraryPage[] assignedPages, int role, bool sendInfoMessage) {
+            this.setUserAsync(sessionKey, login, password, firstName, lastName, email, phone, assignedGroups, assignedPages, role, sendInfoMessage, null);
         }
         
         /// <remarks/>
-        public void setUserAsync(string sessionKey, string login, string password, string firstName, string lastName, string email, string phone, GroupModel[] assignedGroups, SoapLibraryPage[] assignedPages, int role, object userState) {
+        public void setUserAsync(string sessionKey, string login, string password, string firstName, string lastName, string email, string phone, GroupModel[] assignedGroups, SoapLibraryPage[] assignedPages, int role, bool sendInfoMessage, object userState) {
             if ((this.setUserOperationCompleted == null)) {
                 this.setUserOperationCompleted = new System.Threading.SendOrPostCallback(this.OnsetUserOperationCompleted);
             }
@@ -169,7 +170,8 @@ namespace SalesLibraries.ServiceConnector.AdminService {
                         phone,
                         assignedGroups,
                         assignedPages,
-                        role}, this.setUserOperationCompleted, userState);
+                        role,
+                        sendInfoMessage}, this.setUserOperationCompleted, userState);
         }
         
         private void OnsetUserOperationCompleted(object arg) {
@@ -511,7 +513,7 @@ namespace SalesLibraries.ServiceConnector.AdminService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -616,7 +618,7 @@ namespace SalesLibraries.ServiceConnector.AdminService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -817,7 +819,7 @@ namespace SalesLibraries.ServiceConnector.AdminService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -910,7 +912,7 @@ namespace SalesLibraries.ServiceConnector.AdminService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -926,6 +928,8 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         private string libraryNameField;
         
         private int orderField;
+        
+        private SoapLibraryPageSettings settingsField;
         
         private SoapLibraryFolder[] foldersField;
         
@@ -992,6 +996,16 @@ namespace SalesLibraries.ServiceConnector.AdminService {
             }
             set {
                 this.orderField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public SoapLibraryPageSettings settings {
+            get {
+                return this.settingsField;
+            }
+            set {
+                this.settingsField = value;
             }
         }
         
@@ -1087,7 +1101,1552 @@ namespace SalesLibraries.ServiceConnector.AdminService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
+    public partial class SoapLibraryPageSettings {
+        
+        private string iconField;
+        
+        private string iconColorField;
+        
+        /// <remarks/>
+        public string icon {
+            get {
+                return this.iconField;
+            }
+            set {
+                this.iconField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string iconColor {
+            get {
+                return this.iconColorField;
+            }
+            set {
+                this.iconColorField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
+    public partial class LibraryConfig {
+        
+        private string idField;
+        
+        private string libraryIdField;
+        
+        private string deadLinkSenderField;
+        
+        private string deadLinkRecipientsField;
+        
+        private string deadLinkSubjectField;
+        
+        private string deadLinkBodyField;
+        
+        /// <remarks/>
+        public string id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string libraryId {
+            get {
+                return this.libraryIdField;
+            }
+            set {
+                this.libraryIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string deadLinkSender {
+            get {
+                return this.deadLinkSenderField;
+            }
+            set {
+                this.deadLinkSenderField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string deadLinkRecipients {
+            get {
+                return this.deadLinkRecipientsField;
+            }
+            set {
+                this.deadLinkRecipientsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string deadLinkSubject {
+            get {
+                return this.deadLinkSubjectField;
+            }
+            set {
+                this.deadLinkSubjectField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string deadLinkBody {
+            get {
+                return this.deadLinkBodyField;
+            }
+            set {
+                this.deadLinkBodyField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
+    public partial class SoapUniversalPreviewContainer {
+        
+        private string idField;
+        
+        private string libraryIdField;
+        
+        private string[] pngLinksField;
+        
+        private string[] pngPhoneLinksField;
+        
+        private string[] pdfLinksField;
+        
+        private string[] mp4LinksField;
+        
+        private string[] mp4ThumbLinksField;
+        
+        private string[] newOfficeFormatLinksField;
+        
+        private string[] thumbsLinksField;
+        
+        private string[] thumbsPhoneLinksField;
+        
+        private string[] thumbsDatatableLinksField;
+        
+        private int thumbsWidthField;
+        
+        private int thumbsHeightField;
+        
+        /// <remarks/>
+        public string id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string libraryId {
+            get {
+                return this.libraryIdField;
+            }
+            set {
+                this.libraryIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string[] pngLinks {
+            get {
+                return this.pngLinksField;
+            }
+            set {
+                this.pngLinksField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string[] pngPhoneLinks {
+            get {
+                return this.pngPhoneLinksField;
+            }
+            set {
+                this.pngPhoneLinksField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string[] pdfLinks {
+            get {
+                return this.pdfLinksField;
+            }
+            set {
+                this.pdfLinksField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string[] mp4Links {
+            get {
+                return this.mp4LinksField;
+            }
+            set {
+                this.mp4LinksField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string[] mp4ThumbLinks {
+            get {
+                return this.mp4ThumbLinksField;
+            }
+            set {
+                this.mp4ThumbLinksField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string[] newOfficeFormatLinks {
+            get {
+                return this.newOfficeFormatLinksField;
+            }
+            set {
+                this.newOfficeFormatLinksField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string[] thumbsLinks {
+            get {
+                return this.thumbsLinksField;
+            }
+            set {
+                this.thumbsLinksField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string[] thumbsPhoneLinks {
+            get {
+                return this.thumbsPhoneLinksField;
+            }
+            set {
+                this.thumbsPhoneLinksField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string[] thumbsDatatableLinks {
+            get {
+                return this.thumbsDatatableLinksField;
+            }
+            set {
+                this.thumbsDatatableLinksField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int thumbsWidth {
+            get {
+                return this.thumbsWidthField;
+            }
+            set {
+                this.thumbsWidthField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int thumbsHeight {
+            get {
+                return this.thumbsHeightField;
+            }
+            set {
+                this.thumbsHeightField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
+    public partial class SoapAutoWidget {
+        
+        private string libraryIdField;
+        
+        private string extensionField;
+        
+        private string widgetField;
+        
+        /// <remarks/>
+        public string libraryId {
+            get {
+                return this.libraryIdField;
+            }
+            set {
+                this.libraryIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string extension {
+            get {
+                return this.extensionField;
+            }
+            set {
+                this.extensionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string widget {
+            get {
+                return this.widgetField;
+            }
+            set {
+                this.widgetField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
+    public partial class SoapColumn {
+        
+        private string pageIdField;
+        
+        private string libraryIdField;
+        
+        private string nameField;
+        
+        private int orderField;
+        
+        private string backColorField;
+        
+        private string foreColorField;
+        
+        private Font fontField;
+        
+        private bool showTextField;
+        
+        private string alignmentField;
+        
+        private bool enableWidgetField;
+        
+        private string widgetField;
+        
+        private SoapBanner bannerField;
+        
+        private string dateModifyField;
+        
+        /// <remarks/>
+        public string pageId {
+            get {
+                return this.pageIdField;
+            }
+            set {
+                this.pageIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string libraryId {
+            get {
+                return this.libraryIdField;
+            }
+            set {
+                this.libraryIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int order {
+            get {
+                return this.orderField;
+            }
+            set {
+                this.orderField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string backColor {
+            get {
+                return this.backColorField;
+            }
+            set {
+                this.backColorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string foreColor {
+            get {
+                return this.foreColorField;
+            }
+            set {
+                this.foreColorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Font font {
+            get {
+                return this.fontField;
+            }
+            set {
+                this.fontField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool showText {
+            get {
+                return this.showTextField;
+            }
+            set {
+                this.showTextField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string alignment {
+            get {
+                return this.alignmentField;
+            }
+            set {
+                this.alignmentField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool enableWidget {
+            get {
+                return this.enableWidgetField;
+            }
+            set {
+                this.enableWidgetField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string widget {
+            get {
+                return this.widgetField;
+            }
+            set {
+                this.widgetField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public SoapBanner banner {
+            get {
+                return this.bannerField;
+            }
+            set {
+                this.bannerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string dateModify {
+            get {
+                return this.dateModifyField;
+            }
+            set {
+                this.dateModifyField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
+    public partial class Font {
+        
+        private string nameField;
+        
+        private bool isBoldField;
+        
+        private bool isItalicField;
+        
+        private bool isUnderlinedField;
+        
+        /// <remarks/>
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isBold {
+            get {
+                return this.isBoldField;
+            }
+            set {
+                this.isBoldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isItalic {
+            get {
+                return this.isItalicField;
+            }
+            set {
+                this.isItalicField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isUnderlined {
+            get {
+                return this.isUnderlinedField;
+            }
+            set {
+                this.isUnderlinedField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
+    public partial class SoapBanner {
+        
+        private string idField;
+        
+        private string libraryIdField;
+        
+        private bool isEnabledField;
+        
+        private string imageField;
+        
+        private bool showTextField;
+        
+        private string imageAlignmentField;
+        
+        private string imageVerticalAlignmentField;
+        
+        private string textField;
+        
+        private Font fontField;
+        
+        private string foreColorField;
+        
+        private string dateModifyField;
+        
+        /// <remarks/>
+        public string id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string libraryId {
+            get {
+                return this.libraryIdField;
+            }
+            set {
+                this.libraryIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isEnabled {
+            get {
+                return this.isEnabledField;
+            }
+            set {
+                this.isEnabledField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string image {
+            get {
+                return this.imageField;
+            }
+            set {
+                this.imageField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool showText {
+            get {
+                return this.showTextField;
+            }
+            set {
+                this.showTextField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string imageAlignment {
+            get {
+                return this.imageAlignmentField;
+            }
+            set {
+                this.imageAlignmentField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string imageVerticalAlignment {
+            get {
+                return this.imageVerticalAlignmentField;
+            }
+            set {
+                this.imageVerticalAlignmentField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string text {
+            get {
+                return this.textField;
+            }
+            set {
+                this.textField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Font font {
+            get {
+                return this.fontField;
+            }
+            set {
+                this.fontField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string foreColor {
+            get {
+                return this.foreColorField;
+            }
+            set {
+                this.foreColorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string dateModify {
+            get {
+                return this.dateModifyField;
+            }
+            set {
+                this.dateModifyField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
+    public partial class LinkCategory {
+        
+        private string linkIdField;
+        
+        private string libraryIdField;
+        
+        private string groupField;
+        
+        private string categoryField;
+        
+        private string tagField;
+        
+        /// <remarks/>
+        public string linkId {
+            get {
+                return this.linkIdField;
+            }
+            set {
+                this.linkIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string libraryId {
+            get {
+                return this.libraryIdField;
+            }
+            set {
+                this.libraryIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string group {
+            get {
+                return this.groupField;
+            }
+            set {
+                this.groupField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string category {
+            get {
+                return this.categoryField;
+            }
+            set {
+                this.categoryField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string tag {
+            get {
+                return this.tagField;
+            }
+            set {
+                this.tagField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
+    public partial class LinkSuperFilter {
+        
+        private string linkIdField;
+        
+        private string libraryIdField;
+        
+        private string valueField;
+        
+        /// <remarks/>
+        public string linkId {
+            get {
+                return this.linkIdField;
+            }
+            set {
+                this.linkIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string libraryId {
+            get {
+                return this.libraryIdField;
+            }
+            set {
+                this.libraryIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string value {
+            get {
+                return this.valueField;
+            }
+            set {
+                this.valueField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
+    public partial class SoapThumbnail {
+        
+        private bool isEnabledField;
+        
+        private string imageField;
+        
+        private int imagePaddingField;
+        
+        private string imageAlignmentField;
+        
+        private bool showTextField;
+        
+        private string textField;
+        
+        private Font fontField;
+        
+        private string foreColorField;
+        
+        private string textPositionField;
+        
+        private string textAlignmentField;
+        
+        /// <remarks/>
+        public bool isEnabled {
+            get {
+                return this.isEnabledField;
+            }
+            set {
+                this.isEnabledField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string image {
+            get {
+                return this.imageField;
+            }
+            set {
+                this.imageField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int imagePadding {
+            get {
+                return this.imagePaddingField;
+            }
+            set {
+                this.imagePaddingField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string imageAlignment {
+            get {
+                return this.imageAlignmentField;
+            }
+            set {
+                this.imageAlignmentField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool showText {
+            get {
+                return this.showTextField;
+            }
+            set {
+                this.showTextField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string text {
+            get {
+                return this.textField;
+            }
+            set {
+                this.textField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Font font {
+            get {
+                return this.fontField;
+            }
+            set {
+                this.fontField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string foreColor {
+            get {
+                return this.foreColorField;
+            }
+            set {
+                this.foreColorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string textPosition {
+            get {
+                return this.textPositionField;
+            }
+            set {
+                this.textPositionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string textAlignment {
+            get {
+                return this.textAlignmentField;
+            }
+            set {
+                this.textAlignmentField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
+    public partial class LineBreak {
+        
+        private string idField;
+        
+        private string libraryIdField;
+        
+        private Font fontField;
+        
+        private string foreColorField;
+        
+        private string noteField;
+        
+        private string dateModifyField;
+        
+        /// <remarks/>
+        public string id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string libraryId {
+            get {
+                return this.libraryIdField;
+            }
+            set {
+                this.libraryIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Font font {
+            get {
+                return this.fontField;
+            }
+            set {
+                this.fontField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string foreColor {
+            get {
+                return this.foreColorField;
+            }
+            set {
+                this.foreColorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string note {
+            get {
+                return this.noteField;
+            }
+            set {
+                this.noteField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string dateModify {
+            get {
+                return this.dateModifyField;
+            }
+            set {
+                this.dateModifyField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
+    public partial class BaseLinkSettings {
+        
+        private string noteField;
+        
+        private string hoverNoteField;
+        
+        private bool showOnlyCustomHoverNoteField;
+        
+        private bool isBoldField;
+        
+        private bool isItalicField;
+        
+        private bool isUnderlineField;
+        
+        private bool isSpecialFormatField;
+        
+        private Font fontField;
+        
+        private string foreColorField;
+        
+        private bool isTextWordWrapField;
+        
+        private bool isRestrictedField;
+        
+        private bool noShareField;
+        
+        private string assignedUsersField;
+        
+        private string deniedUsersField;
+        
+        private string quickLinkUrlField;
+        
+        private string quickLinkTitleField;
+        
+        /// <remarks/>
+        public string note {
+            get {
+                return this.noteField;
+            }
+            set {
+                this.noteField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string hoverNote {
+            get {
+                return this.hoverNoteField;
+            }
+            set {
+                this.hoverNoteField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool showOnlyCustomHoverNote {
+            get {
+                return this.showOnlyCustomHoverNoteField;
+            }
+            set {
+                this.showOnlyCustomHoverNoteField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isBold {
+            get {
+                return this.isBoldField;
+            }
+            set {
+                this.isBoldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isItalic {
+            get {
+                return this.isItalicField;
+            }
+            set {
+                this.isItalicField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isUnderline {
+            get {
+                return this.isUnderlineField;
+            }
+            set {
+                this.isUnderlineField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isSpecialFormat {
+            get {
+                return this.isSpecialFormatField;
+            }
+            set {
+                this.isSpecialFormatField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Font font {
+            get {
+                return this.fontField;
+            }
+            set {
+                this.fontField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string foreColor {
+            get {
+                return this.foreColorField;
+            }
+            set {
+                this.foreColorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isTextWordWrap {
+            get {
+                return this.isTextWordWrapField;
+            }
+            set {
+                this.isTextWordWrapField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isRestricted {
+            get {
+                return this.isRestrictedField;
+            }
+            set {
+                this.isRestrictedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool noShare {
+            get {
+                return this.noShareField;
+            }
+            set {
+                this.noShareField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string assignedUsers {
+            get {
+                return this.assignedUsersField;
+            }
+            set {
+                this.assignedUsersField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string deniedUsers {
+            get {
+                return this.deniedUsersField;
+            }
+            set {
+                this.deniedUsersField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string quickLinkUrl {
+            get {
+                return this.quickLinkUrlField;
+            }
+            set {
+                this.quickLinkUrlField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string quickLinkTitle {
+            get {
+                return this.quickLinkTitleField;
+            }
+            set {
+                this.quickLinkTitleField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
+    public partial class SoapLibraryLink {
+        
+        private string idField;
+        
+        private string parentLinkIdField;
+        
+        private string folderIdField;
+        
+        private string libraryIdField;
+        
+        private string nameField;
+        
+        private string fileRelativePathField;
+        
+        private string fileNameField;
+        
+        private string fileExtensionField;
+        
+        private string fileDateField;
+        
+        private int fileSizeField;
+        
+        private string originalFormatField;
+        
+        private string searchFormatField;
+        
+        private int orderField;
+        
+        private int typeField;
+        
+        private BaseLinkSettings extendedPropertiesField;
+        
+        private LineBreak lineBreakPropertiesField;
+        
+        private int widgetTypeField;
+        
+        private string widgetField;
+        
+        private SoapBanner bannerField;
+        
+        private SoapThumbnail thumbnailField;
+        
+        private string previewIdField;
+        
+        private LinkSuperFilter[] superFiltersField;
+        
+        private LinkCategory[] categoriesField;
+        
+        private string tagsField;
+        
+        private string dateAddField;
+        
+        private string dateModifyField;
+        
+        private string contentPathField;
+        
+        /// <remarks/>
+        public string id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string parentLinkId {
+            get {
+                return this.parentLinkIdField;
+            }
+            set {
+                this.parentLinkIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string folderId {
+            get {
+                return this.folderIdField;
+            }
+            set {
+                this.folderIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string libraryId {
+            get {
+                return this.libraryIdField;
+            }
+            set {
+                this.libraryIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string fileRelativePath {
+            get {
+                return this.fileRelativePathField;
+            }
+            set {
+                this.fileRelativePathField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string fileName {
+            get {
+                return this.fileNameField;
+            }
+            set {
+                this.fileNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string fileExtension {
+            get {
+                return this.fileExtensionField;
+            }
+            set {
+                this.fileExtensionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string fileDate {
+            get {
+                return this.fileDateField;
+            }
+            set {
+                this.fileDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int fileSize {
+            get {
+                return this.fileSizeField;
+            }
+            set {
+                this.fileSizeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string originalFormat {
+            get {
+                return this.originalFormatField;
+            }
+            set {
+                this.originalFormatField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string searchFormat {
+            get {
+                return this.searchFormatField;
+            }
+            set {
+                this.searchFormatField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int order {
+            get {
+                return this.orderField;
+            }
+            set {
+                this.orderField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public BaseLinkSettings extendedProperties {
+            get {
+                return this.extendedPropertiesField;
+            }
+            set {
+                this.extendedPropertiesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public LineBreak lineBreakProperties {
+            get {
+                return this.lineBreakPropertiesField;
+            }
+            set {
+                this.lineBreakPropertiesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int widgetType {
+            get {
+                return this.widgetTypeField;
+            }
+            set {
+                this.widgetTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string widget {
+            get {
+                return this.widgetField;
+            }
+            set {
+                this.widgetField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public SoapBanner banner {
+            get {
+                return this.bannerField;
+            }
+            set {
+                this.bannerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public SoapThumbnail thumbnail {
+            get {
+                return this.thumbnailField;
+            }
+            set {
+                this.thumbnailField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string previewId {
+            get {
+                return this.previewIdField;
+            }
+            set {
+                this.previewIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public LinkSuperFilter[] superFilters {
+            get {
+                return this.superFiltersField;
+            }
+            set {
+                this.superFiltersField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public LinkCategory[] categories {
+            get {
+                return this.categoriesField;
+            }
+            set {
+                this.categoriesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string tags {
+            get {
+                return this.tagsField;
+            }
+            set {
+                this.tagsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string dateAdd {
+            get {
+                return this.dateAddField;
+            }
+            set {
+                this.dateAddField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string dateModify {
+            get {
+                return this.dateModifyField;
+            }
+            set {
+                this.dateModifyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string contentPath {
+            get {
+                return this.contentPathField;
+            }
+            set {
+                this.contentPathField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1336,1225 +2895,19 @@ namespace SalesLibraries.ServiceConnector.AdminService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
-    public partial class Font {
-        
-        private string nameField;
-        
-        private int sizeField;
-        
-        private bool isBoldField;
-        
-        private bool isItalicField;
-        
-        private bool isUnderlinedField;
-        
-        /// <remarks/>
-        public string name {
-            get {
-                return this.nameField;
-            }
-            set {
-                this.nameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int size {
-            get {
-                return this.sizeField;
-            }
-            set {
-                this.sizeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool isBold {
-            get {
-                return this.isBoldField;
-            }
-            set {
-                this.isBoldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool isItalic {
-            get {
-                return this.isItalicField;
-            }
-            set {
-                this.isItalicField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool isUnderlined {
-            get {
-                return this.isUnderlinedField;
-            }
-            set {
-                this.isUnderlinedField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
-    public partial class LibraryConfig {
-        
-        private string idField;
-        
-        private string libraryIdField;
-        
-        private string deadLinkSenderField;
-        
-        private string deadLinkRecipientsField;
-        
-        private string deadLinkSubjectField;
-        
-        private string deadLinkBodyField;
-        
-        /// <remarks/>
-        public string id {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string libraryId {
-            get {
-                return this.libraryIdField;
-            }
-            set {
-                this.libraryIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string deadLinkSender {
-            get {
-                return this.deadLinkSenderField;
-            }
-            set {
-                this.deadLinkSenderField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string deadLinkRecipients {
-            get {
-                return this.deadLinkRecipientsField;
-            }
-            set {
-                this.deadLinkRecipientsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string deadLinkSubject {
-            get {
-                return this.deadLinkSubjectField;
-            }
-            set {
-                this.deadLinkSubjectField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string deadLinkBody {
-            get {
-                return this.deadLinkBodyField;
-            }
-            set {
-                this.deadLinkBodyField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
-    public partial class SoapUniversalPreviewContainer {
-        
-        private string idField;
-        
-        private string libraryIdField;
-        
-        private string[] pngLinksField;
-        
-        private string[] pngPhoneLinksField;
-        
-        private string[] pdfLinksField;
-        
-        private string[] mp4LinksField;
-        
-        private string[] mp4ThumbLinksField;
-        
-        private string[] newOfficeFormatLinksField;
-        
-        private string[] thumbsLinksField;
-        
-        private string[] thumbsPhoneLinksField;
-        
-        private int thumbsWidthField;
-        
-        private int thumbsHeightField;
-        
-        /// <remarks/>
-        public string id {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string libraryId {
-            get {
-                return this.libraryIdField;
-            }
-            set {
-                this.libraryIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string[] pngLinks {
-            get {
-                return this.pngLinksField;
-            }
-            set {
-                this.pngLinksField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string[] pngPhoneLinks {
-            get {
-                return this.pngPhoneLinksField;
-            }
-            set {
-                this.pngPhoneLinksField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string[] pdfLinks {
-            get {
-                return this.pdfLinksField;
-            }
-            set {
-                this.pdfLinksField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string[] mp4Links {
-            get {
-                return this.mp4LinksField;
-            }
-            set {
-                this.mp4LinksField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string[] mp4ThumbLinks {
-            get {
-                return this.mp4ThumbLinksField;
-            }
-            set {
-                this.mp4ThumbLinksField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string[] newOfficeFormatLinks {
-            get {
-                return this.newOfficeFormatLinksField;
-            }
-            set {
-                this.newOfficeFormatLinksField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string[] thumbsLinks {
-            get {
-                return this.thumbsLinksField;
-            }
-            set {
-                this.thumbsLinksField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string[] thumbsPhoneLinks {
-            get {
-                return this.thumbsPhoneLinksField;
-            }
-            set {
-                this.thumbsPhoneLinksField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int thumbsWidth {
-            get {
-                return this.thumbsWidthField;
-            }
-            set {
-                this.thumbsWidthField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int thumbsHeight {
-            get {
-                return this.thumbsHeightField;
-            }
-            set {
-                this.thumbsHeightField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
-    public partial class SoapAutoWidget {
-        
-        private string libraryIdField;
-        
-        private string extensionField;
-        
-        private string widgetField;
-        
-        /// <remarks/>
-        public string libraryId {
-            get {
-                return this.libraryIdField;
-            }
-            set {
-                this.libraryIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string extension {
-            get {
-                return this.extensionField;
-            }
-            set {
-                this.extensionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string widget {
-            get {
-                return this.widgetField;
-            }
-            set {
-                this.widgetField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
-    public partial class SoapColumn {
-        
-        private string pageIdField;
-        
-        private string libraryIdField;
-        
-        private string nameField;
-        
-        private int orderField;
-        
-        private string backColorField;
-        
-        private string foreColorField;
-        
-        private Font fontField;
-        
-        private bool showTextField;
-        
-        private string alignmentField;
-        
-        private bool enableWidgetField;
-        
-        private string widgetField;
-        
-        private SoapBanner bannerField;
-        
-        private string dateModifyField;
-        
-        /// <remarks/>
-        public string pageId {
-            get {
-                return this.pageIdField;
-            }
-            set {
-                this.pageIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string libraryId {
-            get {
-                return this.libraryIdField;
-            }
-            set {
-                this.libraryIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string name {
-            get {
-                return this.nameField;
-            }
-            set {
-                this.nameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int order {
-            get {
-                return this.orderField;
-            }
-            set {
-                this.orderField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string backColor {
-            get {
-                return this.backColorField;
-            }
-            set {
-                this.backColorField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string foreColor {
-            get {
-                return this.foreColorField;
-            }
-            set {
-                this.foreColorField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public Font font {
-            get {
-                return this.fontField;
-            }
-            set {
-                this.fontField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool showText {
-            get {
-                return this.showTextField;
-            }
-            set {
-                this.showTextField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string alignment {
-            get {
-                return this.alignmentField;
-            }
-            set {
-                this.alignmentField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool enableWidget {
-            get {
-                return this.enableWidgetField;
-            }
-            set {
-                this.enableWidgetField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string widget {
-            get {
-                return this.widgetField;
-            }
-            set {
-                this.widgetField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public SoapBanner banner {
-            get {
-                return this.bannerField;
-            }
-            set {
-                this.bannerField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string dateModify {
-            get {
-                return this.dateModifyField;
-            }
-            set {
-                this.dateModifyField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
-    public partial class SoapBanner {
-        
-        private string idField;
-        
-        private string libraryIdField;
-        
-        private bool isEnabledField;
-        
-        private string imageField;
-        
-        private bool showTextField;
-        
-        private string imageAlignmentField;
-        
-        private string textField;
-        
-        private Font fontField;
-        
-        private string foreColorField;
-        
-        private string dateModifyField;
-        
-        /// <remarks/>
-        public string id {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string libraryId {
-            get {
-                return this.libraryIdField;
-            }
-            set {
-                this.libraryIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool isEnabled {
-            get {
-                return this.isEnabledField;
-            }
-            set {
-                this.isEnabledField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string image {
-            get {
-                return this.imageField;
-            }
-            set {
-                this.imageField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool showText {
-            get {
-                return this.showTextField;
-            }
-            set {
-                this.showTextField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string imageAlignment {
-            get {
-                return this.imageAlignmentField;
-            }
-            set {
-                this.imageAlignmentField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string text {
-            get {
-                return this.textField;
-            }
-            set {
-                this.textField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public Font font {
-            get {
-                return this.fontField;
-            }
-            set {
-                this.fontField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string foreColor {
-            get {
-                return this.foreColorField;
-            }
-            set {
-                this.foreColorField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string dateModify {
-            get {
-                return this.dateModifyField;
-            }
-            set {
-                this.dateModifyField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
-    public partial class LinkCategory {
-        
-        private string linkIdField;
-        
-        private string libraryIdField;
-        
-        private string categoryField;
-        
-        private string tagField;
-        
-        /// <remarks/>
-        public string linkId {
-            get {
-                return this.linkIdField;
-            }
-            set {
-                this.linkIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string libraryId {
-            get {
-                return this.libraryIdField;
-            }
-            set {
-                this.libraryIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string category {
-            get {
-                return this.categoryField;
-            }
-            set {
-                this.categoryField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string tag {
-            get {
-                return this.tagField;
-            }
-            set {
-                this.tagField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
-    public partial class LinkSuperFilter {
-        
-        private string linkIdField;
-        
-        private string libraryIdField;
-        
-        private string valueField;
-        
-        /// <remarks/>
-        public string linkId {
-            get {
-                return this.linkIdField;
-            }
-            set {
-                this.linkIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string libraryId {
-            get {
-                return this.libraryIdField;
-            }
-            set {
-                this.libraryIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string value {
-            get {
-                return this.valueField;
-            }
-            set {
-                this.valueField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
-    public partial class BaseLinkSettings {
-        
-        private string noteField;
-        
-        private string hoverNoteField;
-        
-        private bool isBoldField;
-        
-        private bool isItalicField;
-        
-        private bool isUnderlineField;
-        
-        private bool isSpecialFormatField;
-        
-        private Font fontField;
-        
-        private string foreColorField;
-        
-        private bool isRestrictedField;
-        
-        private bool noShareField;
-        
-        private string assignedUsersField;
-        
-        private string deniedUsersField;
-        
-        /// <remarks/>
-        public string note {
-            get {
-                return this.noteField;
-            }
-            set {
-                this.noteField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string hoverNote {
-            get {
-                return this.hoverNoteField;
-            }
-            set {
-                this.hoverNoteField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool isBold {
-            get {
-                return this.isBoldField;
-            }
-            set {
-                this.isBoldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool isItalic {
-            get {
-                return this.isItalicField;
-            }
-            set {
-                this.isItalicField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool isUnderline {
-            get {
-                return this.isUnderlineField;
-            }
-            set {
-                this.isUnderlineField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool isSpecialFormat {
-            get {
-                return this.isSpecialFormatField;
-            }
-            set {
-                this.isSpecialFormatField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public Font font {
-            get {
-                return this.fontField;
-            }
-            set {
-                this.fontField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string foreColor {
-            get {
-                return this.foreColorField;
-            }
-            set {
-                this.foreColorField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool isRestricted {
-            get {
-                return this.isRestrictedField;
-            }
-            set {
-                this.isRestrictedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool noShare {
-            get {
-                return this.noShareField;
-            }
-            set {
-                this.noShareField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string assignedUsers {
-            get {
-                return this.assignedUsersField;
-            }
-            set {
-                this.assignedUsersField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string deniedUsers {
-            get {
-                return this.deniedUsersField;
-            }
-            set {
-                this.deniedUsersField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
-    public partial class SoapLibraryLink {
-        
-        private string idField;
-        
-        private string parentLinkIdField;
-        
-        private string folderIdField;
-        
-        private string libraryIdField;
-        
-        private string nameField;
-        
-        private string fileRelativePathField;
-        
-        private string fileNameField;
-        
-        private string fileExtensionField;
-        
-        private string fileDateField;
-        
-        private int fileSizeField;
-        
-        private string originalFormatField;
-        
-        private int orderField;
-        
-        private int typeField;
-        
-        private BaseLinkSettings extendedPropertiesField;
-        
-        private int widgetTypeField;
-        
-        private string widgetField;
-        
-        private SoapBanner bannerField;
-        
-        private string previewIdField;
-        
-        private LinkSuperFilter[] superFiltersField;
-        
-        private LinkCategory[] categoriesField;
-        
-        private string tagsField;
-        
-        private string dateAddField;
-        
-        private string dateModifyField;
-        
-        private string contentPathField;
-        
-        private bool isDeadField;
-        
-        /// <remarks/>
-        public string id {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string parentLinkId {
-            get {
-                return this.parentLinkIdField;
-            }
-            set {
-                this.parentLinkIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string folderId {
-            get {
-                return this.folderIdField;
-            }
-            set {
-                this.folderIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string libraryId {
-            get {
-                return this.libraryIdField;
-            }
-            set {
-                this.libraryIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string name {
-            get {
-                return this.nameField;
-            }
-            set {
-                this.nameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string fileRelativePath {
-            get {
-                return this.fileRelativePathField;
-            }
-            set {
-                this.fileRelativePathField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string fileName {
-            get {
-                return this.fileNameField;
-            }
-            set {
-                this.fileNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string fileExtension {
-            get {
-                return this.fileExtensionField;
-            }
-            set {
-                this.fileExtensionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string fileDate {
-            get {
-                return this.fileDateField;
-            }
-            set {
-                this.fileDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int fileSize {
-            get {
-                return this.fileSizeField;
-            }
-            set {
-                this.fileSizeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string originalFormat {
-            get {
-                return this.originalFormatField;
-            }
-            set {
-                this.originalFormatField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int order {
-            get {
-                return this.orderField;
-            }
-            set {
-                this.orderField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int type {
-            get {
-                return this.typeField;
-            }
-            set {
-                this.typeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public BaseLinkSettings extendedProperties {
-            get {
-                return this.extendedPropertiesField;
-            }
-            set {
-                this.extendedPropertiesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int widgetType {
-            get {
-                return this.widgetTypeField;
-            }
-            set {
-                this.widgetTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string widget {
-            get {
-                return this.widgetField;
-            }
-            set {
-                this.widgetField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public SoapBanner banner {
-            get {
-                return this.bannerField;
-            }
-            set {
-                this.bannerField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string previewId {
-            get {
-                return this.previewIdField;
-            }
-            set {
-                this.previewIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public LinkSuperFilter[] superFilters {
-            get {
-                return this.superFiltersField;
-            }
-            set {
-                this.superFiltersField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public LinkCategory[] categories {
-            get {
-                return this.categoriesField;
-            }
-            set {
-                this.categoriesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string tags {
-            get {
-                return this.tagsField;
-            }
-            set {
-                this.tagsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string dateAdd {
-            get {
-                return this.dateAddField;
-            }
-            set {
-                this.dateAddField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string dateModify {
-            get {
-                return this.dateModifyField;
-            }
-            set {
-                this.dateModifyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string contentPath {
-            get {
-                return this.contentPathField;
-            }
-            set {
-                this.contentPathField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool isDead {
-            get {
-                return this.isDeadField;
-            }
-            set {
-                this.isDeadField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
     public delegate void setUserCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
     public delegate void deleteUserCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
     public delegate void getUsersCompletedEventHandler(object sender, getUsersCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class getUsersCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2576,11 +2929,11 @@ namespace SalesLibraries.ServiceConnector.AdminService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
     public delegate void isUserPasswordComplexCompletedEventHandler(object sender, isUserPasswordComplexCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class isUserPasswordComplexCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2602,19 +2955,19 @@ namespace SalesLibraries.ServiceConnector.AdminService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
     public delegate void setGroupCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
     public delegate void deleteGroupCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
     public delegate void getGroupsCompletedEventHandler(object sender, getGroupsCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class getGroupsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2636,15 +2989,15 @@ namespace SalesLibraries.ServiceConnector.AdminService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
     public delegate void setPageCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
     public delegate void getLibrariesCompletedEventHandler(object sender, getLibrariesCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class getLibrariesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2666,11 +3019,11 @@ namespace SalesLibraries.ServiceConnector.AdminService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
     public delegate void getGroupTemplatesCompletedEventHandler(object sender, getGroupTemplatesCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class getGroupTemplatesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2692,11 +3045,11 @@ namespace SalesLibraries.ServiceConnector.AdminService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
     public delegate void getSessionKeyCompletedEventHandler(object sender, getSessionKeyCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class getSessionKeyCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {

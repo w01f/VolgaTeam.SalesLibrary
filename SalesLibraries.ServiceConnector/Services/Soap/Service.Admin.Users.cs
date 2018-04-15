@@ -66,6 +66,7 @@ namespace SalesLibraries.ServiceConnector.Services.Soap
 			int role,
 			GroupModel[] groups,
 			SoapLibraryPage[] pages,
+			bool sendServerMessage,
 			out string message)
 		{
 			message = string.Empty;
@@ -76,7 +77,7 @@ namespace SalesLibraries.ServiceConnector.Services.Soap
 				{
 					var sessionKey = client.getSessionKey(Login, Password);
 					if (!string.IsNullOrEmpty(sessionKey))
-						client.setUser(sessionKey, login, password, firstName, lastName, email, phone, groups, pages, role);
+						client.setUser(sessionKey, login, password, firstName, lastName, email, phone, groups, pages, role, sendServerMessage);
 					else
 						message = "Couldn't complete operation.\nLogin or password are not correct.";
 				}
@@ -89,7 +90,7 @@ namespace SalesLibraries.ServiceConnector.Services.Soap
 				message = "Couldn't complete operation.\nServer is unavailable.";
 		}
 
-		public void SetUsers(UserInfo[] users, out string message)
+		public void SetUsers(UserInfo[] users, bool sendServerMessage, out string message)
 		{
 			message = string.Empty;
 			var client = GetAdminClient();
@@ -104,7 +105,7 @@ namespace SalesLibraries.ServiceConnector.Services.Soap
 						foreach (var group in uniqueGroups)
 							client.setGroup(sessionKey, group.id, group.name, new UserModel[] { }, new SoapLibraryPage[] { });
 						foreach (var user in users)
-							client.setUser(sessionKey, user.Login, user.Password, user.FirstName, user.LastName, user.Email, user.Phone, user.Groups.ToArray(), user.Pages.ToArray(), 0);
+							client.setUser(sessionKey, user.Login, user.Password, user.FirstName, user.LastName, user.Email, user.Phone, user.Groups.ToArray(), user.Pages.ToArray(), 0, sendServerMessage);
 					}
 					else
 						message = "Couldn't complete operation.\nLogin or password are not correct.";

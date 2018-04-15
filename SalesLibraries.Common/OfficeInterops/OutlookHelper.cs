@@ -9,11 +9,9 @@ namespace SalesLibraries.Common.OfficeInterops
 {
 	public class OutlookHelper
 	{
-		private static readonly OutlookHelper _instance = new OutlookHelper();
-
 		private OutlookHelper() { }
 
-		public static OutlookHelper Instance => _instance;
+		public static OutlookHelper Instance { get; } = new OutlookHelper();
 
 		private Application _outlookObject;
 
@@ -33,9 +31,9 @@ namespace SalesLibraries.Common.OfficeInterops
 				try
 				{
 					_outlookObject = new Application();
-					var folder = (_outlookObject.GetNamespace("MAPI")).GetDefaultFolder(OlDefaultFolders.olFolderInbox);
+					var folder = _outlookObject.GetNamespace("MAPI").GetDefaultFolder(OlDefaultFolders.olFolderInbox);
 					folder.Display();
-					_outlookObject.Explorers.Add(folder, OlFolderDisplayMode.olFolderDisplayNormal);
+					_outlookObject.Explorers.Add(folder);
 				}
 				catch
 				{
@@ -50,20 +48,20 @@ namespace SalesLibraries.Common.OfficeInterops
 			_outlookObject = null;
 		}
 
-		public void CreateMessage(IEnumerable<string> adresses, string body, bool sendMessage)
+		public void SendMessage(string accountName, IEnumerable<string> recipients, string copy, string subject, string body)
 		{
 			try
 			{
 				var mi = (MailItem)_outlookObject.CreateItem(OlItemType.olMailItem);
-				mi.Subject = "Sales Library Files Have EXPIRED!";
-				foreach (var adress in adresses)
-					mi.Recipients.Add(adress);
-				mi.Body = "Below are the Sales Library Links that are Currently Expired:" + Environment.NewLine + Environment.NewLine + body;
-				if (sendMessage)
-					mi.Send();
-				else
-					mi.Display(new object());
-				_outlookObject = null;
+				var account = _outlookObject.Session.Accounts.OfType<Account>().ToList().FirstOrDefault(item => String.Equals(item.DisplayName, accountName, StringComparison.OrdinalIgnoreCase));
+				if (account != null)
+					mi.SendUsingAccount = account;
+				foreach (var address in recipients)
+					mi.Recipients.Add(address);
+				mi.CC = copy;
+				mi.Subject = subject;
+				mi.Body = body;
+				mi.Send();
 			}
 			catch { }
 		}
@@ -100,6 +98,17 @@ namespace SalesLibraries.Common.OfficeInterops
 					Utils.ActivateForm(handle, true, true);
 			}
 			catch { }
+		}
+
+		public IList<string> GetEmailAccounts()
+		{
+			var accountNames = new List<string>();
+			var accounts = _outlookObject.Session.Accounts.OfType<Account>().ToList();
+			foreach (var account in accounts)
+			{
+				accountNames.Add(account.DisplayName);
+			}
+			return accountNames;
 		}
 	}
 }

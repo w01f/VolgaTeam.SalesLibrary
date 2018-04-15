@@ -7,7 +7,7 @@ namespace SalesLibraries.SiteManager.ConfigurationClasses
 {
 	public class InactiveUsersSettings
 	{
-		private string _filePath;
+		private readonly string _filePath;
 
 		public string ResetEmailSender { get; set; }
 		public string ResetEmailSubject { get; set; }

@@ -3,6 +3,7 @@ using SalesLibraries.ServiceConnector.Services.Soap;
 using SalesLibraries.SiteManager.PresentationClasses.Users;
 using SalesLibraries.SiteManager.TabPages;
 using SalesLibraries.SiteManager.BusinessClasses;
+using SalesLibraries.SiteManager.ToolForms;
 
 namespace SalesLibraries.SiteManager.Controllers
 {
@@ -36,12 +37,13 @@ namespace SalesLibraries.SiteManager.Controllers
 				if (!NeedToUpdate)
 					MainController.Instance.ChangeSite(FormMain.Instance.comboBoxEditUsersSite.EditValue as SoapServiceConnection);
 			};
-			FormMain.Instance.buttonItemUsersAdd.Click += buttonItemIPadUsersAdd_Click;
-			FormMain.Instance.buttonItemUsersEdit.Click += buttonItemIPadUsersEdit_Click;
-			FormMain.Instance.buttonItemUsersDelete.Click += buttonItemIPadUsersDelete_Click;
-			FormMain.Instance.buttonItemUsersRefresh.Click += buttonItemIPadUsersRefresh_Click;
-			FormMain.Instance.buttonItemUsersImport.Click += buttonItemIPadUsersImport_Click;
-			FormMain.Instance.buttonItemUsersExport.Click += buttonItemIPadUsersExport_Click;
+			FormMain.Instance.buttonItemUsersAdd.Click += OnUsersAddClick;
+			FormMain.Instance.buttonItemUsersEdit.Click += OnUsersEditClick;
+			FormMain.Instance.buttonItemUsersDelete.Click += OnUsersDeleteClick;
+			FormMain.Instance.buttonItemUsersRefresh.Click += OnUsersRefreshClick;
+			FormMain.Instance.buttonItemUsersImport.Click += OnUsersImportClick;
+			FormMain.Instance.buttonItemUsersExport.Click += OnUsersExportClick;
+			FormMain.Instance.buttonItemUsersSettings.Click += OnUsersSettingsClick;
 			MainController.Instance.SiteChanged += (sender, args) =>
 													   {
 														   if (IsActive)
@@ -69,34 +71,43 @@ namespace SalesLibraries.SiteManager.Controllers
 		}
 		#endregion
 
-		private void buttonItemIPadUsersAdd_Click(object sender, EventArgs e)
+		private void OnUsersAddClick(object sender, EventArgs e)
 		{
 			PermissionsManagerControl.AddObject();
 		}
 
-		private void buttonItemIPadUsersEdit_Click(object sender, EventArgs e)
+		private void OnUsersEditClick(object sender, EventArgs e)
 		{
 			PermissionsManagerControl.EditObject();
 		}
 
-		private void buttonItemIPadUsersDelete_Click(object sender, EventArgs e)
+		private void OnUsersDeleteClick(object sender, EventArgs e)
 		{
 			PermissionsManagerControl.DeleteObject();
 		}
 
-		private void buttonItemIPadUsersRefresh_Click(object sender, EventArgs e)
+		private void OnUsersRefreshClick(object sender, EventArgs e)
 		{
 			PermissionsManagerControl.RefreshData(true);
 		}
 
-		private void buttonItemIPadUsersImport_Click(object sender, EventArgs e)
+		private void OnUsersImportClick(object sender, EventArgs e)
 		{
 			PermissionsManagerControl.ImportUsers();
 		}
 
-		private void buttonItemIPadUsersExport_Click(object sender, EventArgs e)
+		private void OnUsersExportClick(object sender, EventArgs e)
 		{
 			PermissionsManagerControl.Export();
 		}
+
+		private void OnUsersSettingsClick(Object sender, EventArgs e)
+		{
+			using (var form = new FormUsersSettings())
+			{
+				form.ShowDialog(FormMain.Instance);
+			}
+		}
+
 	}
 }

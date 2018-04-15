@@ -17,6 +17,7 @@ using DevExpress.XtraPrinting;
 using DevExpress.XtraTab;
 using SalesLibraries.ServiceConnector.AdminService;
 using SalesLibraries.SiteManager.BusinessClasses;
+using SalesLibraries.SiteManager.ConfigurationClasses;
 using SalesLibraries.SiteManager.PresentationClasses.Common;
 using SalesLibraries.SiteManager.ToolClasses;
 using SalesLibraries.SiteManager.ToolForms;
@@ -136,9 +137,24 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 						form.TopMost = true;
 						var thread = new Thread(() =>
 													{
-														var users = ImportManager.ImportUsers(dialog.FileName, _users.ToArray(), _groups.ToArray(), _complexPassword, out message);
+														var sendServerMessage = !(SettingsManager.Instance.UsersEmailSettings.SendLocalEmail &&
+																				  LocalUsersEmailManager.Instance.IsAvailable());
+														var users = ImportManager.ImportUsers(dialog.FileName, _users.ToArray(), _groups.ToArray(), _complexPassword, out message).ToList();
 														if (string.IsNullOrEmpty(message))
-															WebSiteManager.Instance.SelectedSite.SetUsers(users.ToArray(), out message);
+															WebSiteManager.Instance.SelectedSite.SetUsers(users.ToArray(), sendServerMessage, out message);
+														if (!sendServerMessage)
+														{
+															foreach (var user in users)
+															{
+																LocalUsersEmailManager.Instance.SendEmailToUser(
+																	String.Format("{0} {1}", user.FirstName, user.LastName),
+																	user.Login,
+																	user.Email,
+																	user.Password,
+																	true
+																);
+															}
+														}
 													});
 						form.Show();
 						thread.Start();
@@ -350,7 +366,23 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 						Enabled = false;
 						form.laProgress.Text = "Adding user...";
 						form.TopMost = true;
-						var thread = new Thread(() => WebSiteManager.Instance.SelectedSite.SetUser(login, password, firstName, lastName, email, phone, role, groups.ToArray(), pages.ToArray(), out message));
+						var thread = new Thread(() =>
+						{
+							var sendServerMessage = !(SettingsManager.Instance.UsersEmailSettings.SendLocalEmail &&
+													LocalUsersEmailManager.Instance.IsAvailable());
+							WebSiteManager.Instance.SelectedSite.SetUser(login, password, firstName, lastName, email, phone, role,
+									groups.ToArray(), pages.ToArray(), sendServerMessage, out message);
+							if (!sendServerMessage)
+							{
+								LocalUsersEmailManager.Instance.SendEmailToUser(
+									String.Format("{0} {1}", firstName, lastName),
+									login,
+									email,
+									password,
+									true
+									);
+							}
+						});
 						form.Show();
 						thread.Start();
 						while (thread.IsAlive)
@@ -423,7 +455,23 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 						Enabled = false;
 						form.laProgress.Text = "Updating user...";
 						form.TopMost = true;
-						var thread = new Thread(() => WebSiteManager.Instance.SelectedSite.SetUser(login, password, firstName, lastName, email, phone, role, groups.ToArray(), pages.ToArray(), out message));
+						var thread = new Thread(() =>
+						{
+							var sendServerMessage = !(SettingsManager.Instance.UsersEmailSettings.SendLocalEmail &&
+													  LocalUsersEmailManager.Instance.IsAvailable());
+							WebSiteManager.Instance.SelectedSite.SetUser(login, password, firstName, lastName, email, phone, role,
+									groups.ToArray(), pages.ToArray(), sendServerMessage, out message);
+							if (!String.IsNullOrWhiteSpace(password) && !sendServerMessage)
+							{
+								LocalUsersEmailManager.Instance.SendEmailToUser(
+									String.Format("{0} {1}", firstName, lastName),
+									login,
+									email,
+									password,
+									false
+								);
+							}
+						});
 						form.Show();
 						thread.Start();
 						while (thread.IsAlive)
@@ -501,7 +549,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 
 		private void OnCreateUsersReportHeaderArea(object sender, CreateAreaEventArgs e)
 		{
-			var reportHeader = string.Format("Users" );
+			var reportHeader = string.Format("Users");
 			e.Graph.StringFormat = new BrickStringFormat(StringAlignment.Center);
 			e.Graph.Font = new System.Drawing.Font("Arial", 12, FontStyle.Bold);
 			var rec = new RectangleF(0, 0, e.Graph.ClientPageSize.Width, 50);
