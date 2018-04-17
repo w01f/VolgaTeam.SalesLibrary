@@ -104,6 +104,7 @@ namespace SalesLibraries.SiteManager
 									var connection = new SoapServiceConnection();
 									connection.Load(authUrl);
 									authorized = connection.IsAuthenticated(e.Login, e.Password);
+									UsersEditPermissionsManager.Instance.LoadCurrentUserConfiguration(e.Login);
 								}
 								catch
 								{
@@ -141,6 +142,7 @@ namespace SalesLibraries.SiteManager
 			await ConfigurationClasses.RemoteResourceManager.Instance.Load();
 			SettingsManager.Instance.Load();
 			WebSiteManager.Instance.Load(ConfigurationClasses.RemoteResourceManager.Instance.SettingsFile.LocalPath);
+			UsersEditPermissionsManager.Instance.Load(ConfigurationClasses.RemoteResourceManager.Instance.UsersEditPermissionsSettingsFile.LocalPath);
 
 			if (ConfigurationClasses.RemoteResourceManager.Instance.SettingsFile.ExistsLocal())
 				try

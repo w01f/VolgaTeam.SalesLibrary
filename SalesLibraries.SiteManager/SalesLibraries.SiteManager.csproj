@@ -124,6 +124,8 @@
     <Compile Include="BusinessClasses\ImportManager.cs" />
     <Compile Include="BusinessClasses\LinkConfigProfilesDataHelper.cs" />
     <Compile Include="BusinessClasses\LocalUsersEmailManager.cs" />
+    <Compile Include="BusinessClasses\UsersEditPermissions.cs" />
+    <Compile Include="BusinessClasses\UsersEditPermissionsManager.cs" />
     <Compile Include="ConfigurationClasses\UsersEmailSettings.cs" />
     <Compile Include="ConfigurationClasses\RibbonTabIdentifiers.cs" />
     <Compile Include="ConfigurationClasses\RibbonTabPageConfig.cs" />

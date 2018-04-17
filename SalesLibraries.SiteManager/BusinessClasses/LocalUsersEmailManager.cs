@@ -41,7 +41,7 @@ namespace SalesLibraries.SiteManager.BusinessClasses
 				bodyLines.AppendLine(SettingsManager.Instance.UsersEmailSettings.NewAccountBodyPlaceholder5);
 				bodyLines.AppendLine();
 				bodyLines.AppendLine(String.Format("{0}/auth/changePassword?login={1}&password={2}&rememberMe=",
-					WebSiteManager.Instance.SelectedSite.Website, userLogin, userPassword));
+					WebSiteManager.Instance.SelectedSite.Website.TrimEnd('/'), userLogin, userPassword));
 				bodyLines.AppendLine();
 				bodyLines.AppendLine(SettingsManager.Instance.UsersEmailSettings.NewAccountBodyPlaceholder6);
 				bodyLines.AppendLine();

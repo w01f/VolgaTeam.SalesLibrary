@@ -98,31 +98,31 @@ namespace SalesLibraries.SiteManager.ConfigurationClasses
 
 			xml.AppendLine(@"<Settings>");
 			xml.AppendLine(@"<SendLocalEmail>" + SendLocalEmail + @"</SendLocalEmail>");
-			xml.AppendLine(@"<LocalEmailAccountName>" + LocalEmailAccountName.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</LocalEmailAccountName>");
-			xml.AppendLine(@"<LocalEmailCopyAddresses>" + LocalEmailCopyAddresses.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</LocalEmailCopyAddresses>");
+			xml.AppendLine(@"<LocalEmailAccountName>" + LocalEmailAccountName?.Replace(@"&", "&#38;")?.Replace("\"", "&quot;") + @"</LocalEmailAccountName>");
+			xml.AppendLine(@"<LocalEmailCopyAddresses>" + LocalEmailCopyAddresses?.Replace(@"&", "&#38;")?.Replace("\"", "&quot;") + @"</LocalEmailCopyAddresses>");
 
 			xml.AppendLine(@"<NewAccount>");
-			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Subject", NewAccountSubject.Replace(@"&", "&#38;").Replace("\"", "&quot;")));
-			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Placeholder1", NewAccountBodyPlaceholder1.Replace(@"&", "&#38;").Replace("\"", "&quot;")));
-			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Placeholder2", NewAccountBodyPlaceholder2.Replace(@"&", "&#38;").Replace("\"", "&quot;")));
-			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Placeholder3", NewAccountBodyPlaceholder3.Replace(@"&", "&#38;").Replace("\"", "&quot;")));
-			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Placeholder4", NewAccountBodyPlaceholder4.Replace(@"&", "&#38;").Replace("\"", "&quot;")));
-			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Placeholder5", NewAccountBodyPlaceholder5.Replace(@"&", "&#38;").Replace("\"", "&quot;")));
-			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Placeholder6", NewAccountBodyPlaceholder6.Replace(@"&", "&#38;").Replace("\"", "&quot;")));
-			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Placeholder7", NewAccountBodyPlaceholder7.Replace(@"&", "&#38;").Replace("\"", "&quot;")));
-			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Placeholder8", NewAccountBodyPlaceholder8.Replace(@"&", "&#38;").Replace("\"", "&quot;")));
+			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Subject", NewAccountSubject?.Replace(@"&", "&#38;")?.Replace("\"", "&quot;")));
+			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Placeholder1", NewAccountBodyPlaceholder1?.Replace(@"&", "&#38;")?.Replace("\"", "&quot;")));
+			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Placeholder2", NewAccountBodyPlaceholder2?.Replace(@"&", "&#38;")?.Replace("\"", "&quot;")));
+			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Placeholder3", NewAccountBodyPlaceholder3?.Replace(@"&", "&#38;")?.Replace("\"", "&quot;")));
+			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Placeholder4", NewAccountBodyPlaceholder4?.Replace(@"&", "&#38;")?.Replace("\"", "&quot;")));
+			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Placeholder5", NewAccountBodyPlaceholder5?.Replace(@"&", "&#38;")?.Replace("\"", "&quot;")));
+			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Placeholder6", NewAccountBodyPlaceholder6?.Replace(@"&", "&#38;")?.Replace("\"", "&quot;")));
+			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Placeholder7", NewAccountBodyPlaceholder7?.Replace(@"&", "&#38;")?.Replace("\"", "&quot;")));
+			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Placeholder8", NewAccountBodyPlaceholder8?.Replace(@"&", "&#38;")?.Replace("\"", "&quot;")));
 			xml.AppendLine(@"</NewAccount>");
 
 			xml.AppendLine(@"<ResetAccount>");
-			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Subject", ResetAccountSubject.Replace(@"&", "&#38;").Replace("\"", "&quot;")));
-			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Placeholder1", ResetAccountBodyPlaceholder1.Replace(@"&", "&#38;").Replace("\"", "&quot;")));
-			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Placeholder2", ResetAccountBodyPlaceholder2.Replace(@"&", "&#38;").Replace("\"", "&quot;")));
-			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Placeholder3", ResetAccountBodyPlaceholder3.Replace(@"&", "&#38;").Replace("\"", "&quot;")));
-			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Placeholder4", ResetAccountBodyPlaceholder4.Replace(@"&", "&#38;").Replace("\"", "&quot;")));
-			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Placeholder5", ResetAccountBodyPlaceholder5.Replace(@"&", "&#38;").Replace("\"", "&quot;")));
-			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Placeholder6", ResetAccountBodyPlaceholder6.Replace(@"&", "&#38;").Replace("\"", "&quot;")));
-			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Placeholder7", ResetAccountBodyPlaceholder7.Replace(@"&", "&#38;").Replace("\"", "&quot;")));
-			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Placeholder8", ResetAccountBodyPlaceholder8.Replace(@"&", "&#38;").Replace("\"", "&quot;")));
+			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Subject", ResetAccountSubject?.Replace(@"&", "&#38;")?.Replace("\"", "&quot;")));
+			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Placeholder1", ResetAccountBodyPlaceholder1?.Replace(@"&", "&#38;")?.Replace("\"", "&quot;")));
+			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Placeholder2", ResetAccountBodyPlaceholder2?.Replace(@"&", "&#38;")?.Replace("\"", "&quot;")));
+			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Placeholder3", ResetAccountBodyPlaceholder3?.Replace(@"&", "&#38;")?.Replace("\"", "&quot;")));
+			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Placeholder4", ResetAccountBodyPlaceholder4?.Replace(@"&", "&#38;")?.Replace("\"", "&quot;")));
+			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Placeholder5", ResetAccountBodyPlaceholder5?.Replace(@"&", "&#38;")?.Replace("\"", "&quot;")));
+			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Placeholder6", ResetAccountBodyPlaceholder6?.Replace(@"&", "&#38;")?.Replace("\"", "&quot;")));
+			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Placeholder7", ResetAccountBodyPlaceholder7?.Replace(@"&", "&#38;")?.Replace("\"", "&quot;")));
+			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Placeholder8", ResetAccountBodyPlaceholder8?.Replace(@"&", "&#38;")?.Replace("\"", "&quot;")));
 			xml.AppendLine(@"</ResetAccount>");
 
 			xml.AppendLine(@"</Settings>");

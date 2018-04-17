@@ -18,8 +18,6 @@ using DevExpress.XtraTab;
 using SalesLibraries.ServiceConnector.AdminService;
 using SalesLibraries.SiteManager.BusinessClasses;
 using SalesLibraries.SiteManager.ConfigurationClasses;
-using SalesLibraries.SiteManager.PresentationClasses.Common;
-using SalesLibraries.SiteManager.ToolClasses;
 using SalesLibraries.SiteManager.ToolForms;
 using ItemCheckEventArgs = DevExpress.XtraEditors.Controls.ItemCheckEventArgs;
 
@@ -41,6 +39,15 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 		{
 			InitializeComponent();
 			Dock = DockStyle.Fill;
+
+			xtraTabPageUsers.PageEnabled = UsersEditPermissionsManager.Instance.CurrentUserPermissions.Tab1.Enabled;
+			xtraTabPageUsers.PageVisible = UsersEditPermissionsManager.Instance.CurrentUserPermissions.Tab1.Visible;
+
+			xtraTabPageGroups.PageEnabled = UsersEditPermissionsManager.Instance.CurrentUserPermissions.Tab2.Enabled;
+			xtraTabPageGroups.PageVisible = UsersEditPermissionsManager.Instance.CurrentUserPermissions.Tab2.Visible;
+
+			xtraTabPageLibraries.PageEnabled = UsersEditPermissionsManager.Instance.CurrentUserPermissions.Tab3.Enabled;
+			xtraTabPageLibraries.PageVisible = UsersEditPermissionsManager.Instance.CurrentUserPermissions.Tab3.Visible;
 
 			if (CreateGraphics().DpiX > 96)
 			{
@@ -308,7 +315,13 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 					var thread = new Thread(() =>
 												{
 													_complexPassword = WebSiteManager.Instance.SelectedSite.IsUserPasswordComplex(out message);
-													_users.AddRange(WebSiteManager.Instance.SelectedSite.GetUsers(out message));
+
+													var loadedUsers = WebSiteManager.Instance.SelectedSite.GetUsers(out message).ToList();
+													var filteredUsers = UsersEditPermissionsManager.Instance.CurrentUserPermissions.Tab1.AllowedGroups.Any() ?
+														loadedUsers.Where(loadedUser =>
+															UsersEditPermissionsManager.Instance.CurrentUserPermissions.Tab1.AllowedGroups.Any(allowedGroup => loadedUser.groups != null && loadedUser.groups.Any(userGroup => String.Equals(allowedGroup, userGroup.name, StringComparison.OrdinalIgnoreCase)))).ToList() :
+														loadedUsers;
+													_users.AddRange(filteredUsers);
 												});
 					form.Show();
 					thread.Start();
@@ -329,7 +342,13 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 				var thread = new Thread(() =>
 				{
 					_complexPassword = WebSiteManager.Instance.SelectedSite.IsUserPasswordComplex(out message);
-					_users.AddRange(WebSiteManager.Instance.SelectedSite.GetUsers(out message));
+
+					var loadedUsers = WebSiteManager.Instance.SelectedSite.GetUsers(out message).ToList();
+					var filteredUsers = UsersEditPermissionsManager.Instance.CurrentUserPermissions.Tab1.AllowedGroups.Any() ?
+						loadedUsers.Where(loadedUser =>
+							UsersEditPermissionsManager.Instance.CurrentUserPermissions.Tab1.AllowedGroups.Any(allowedGroup => loadedUser.groups != null && loadedUser.groups.Any(userGroup => String.Equals(allowedGroup, userGroup.name, StringComparison.OrdinalIgnoreCase)))).ToList() :
+						loadedUsers;
+					_users.AddRange(filteredUsers);
 				});
 				thread.Start();
 				while (thread.IsAlive)
@@ -339,7 +358,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 				}
 			}
 			updateMessage = message;
-			UpdateFilter(_users.SelectMany(x => x.groups != null ? x.groups : new GroupModel[] { }).OrderBy(g => g.name).Select(g => g.name).Distinct().ToArray());
+			UpdateFilter(_users.SelectMany(x => x.groups ?? new GroupModel[] { }).Where(group => !UsersEditPermissionsManager.Instance.CurrentUserPermissions.Tab1.AllowedGroups.Any() || UsersEditPermissionsManager.Instance.CurrentUserPermissions.Tab1.AllowedGroups.Any(allowedGroup => String.Equals(allowedGroup, group.name, StringComparison.OrdinalIgnoreCase))).OrderBy(g => g.name).Select(g => g.name).Distinct().ToArray());
 			FilterUsers();
 			_userCollectionChanged = false;
 		}
@@ -639,10 +658,16 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 					form.laProgress.Text = "Loading groups...";
 					form.TopMost = true;
 					var thread = new Thread(() =>
-												{
-													_groups.AddRange(WebSiteManager.Instance.SelectedSite.GetGroups(out message));
-													_groupTemplates.AddRange(WebSiteManager.Instance.SelectedSite.GetGroupTemplates(out message));
-												});
+					{
+						var loadedGroups = WebSiteManager.Instance.SelectedSite.GetGroups(out message).ToList();
+						var filteredGroups = UsersEditPermissionsManager.Instance.CurrentUserPermissions.Tab2.AllowedGroups.Any() ?
+												loadedGroups.Where(loadedGroup =>
+														UsersEditPermissionsManager.Instance.CurrentUserPermissions.Tab2.AllowedGroups.Any(allowedGroup =>
+															String.Equals(allowedGroup, loadedGroup.name, StringComparison.OrdinalIgnoreCase))).ToList() :
+												loadedGroups;
+						_groups.AddRange(filteredGroups);
+						_groupTemplates.AddRange(WebSiteManager.Instance.SelectedSite.GetGroupTemplates(out message));
+					});
 					form.Show();
 					thread.Start();
 					while (thread.IsAlive)
@@ -660,10 +685,16 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 			else
 			{
 				var thread = new Thread(() =>
-											{
-												_groups.AddRange(WebSiteManager.Instance.SelectedSite.GetGroups(out message));
-												_groupTemplates.AddRange(WebSiteManager.Instance.SelectedSite.GetGroupTemplates(out message));
-											});
+				{
+					var loadedGroups = WebSiteManager.Instance.SelectedSite.GetGroups(out message).ToList();
+					var filteredGroups = UsersEditPermissionsManager.Instance.CurrentUserPermissions.Tab2.AllowedGroups.Any() ?
+						loadedGroups.Where(loadedGroup =>
+							UsersEditPermissionsManager.Instance.CurrentUserPermissions.Tab2.AllowedGroups.Any(allowedGroup =>
+								String.Equals(allowedGroup, loadedGroup.name, StringComparison.OrdinalIgnoreCase))).ToList() :
+						loadedGroups;
+					_groups.AddRange(filteredGroups);
+					_groupTemplates.AddRange(WebSiteManager.Instance.SelectedSite.GetGroupTemplates(out message));
+				});
 				thread.Start();
 				while (thread.IsAlive)
 				{
@@ -851,7 +882,16 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 					Enabled = false;
 					form.laProgress.Text = "Loading libraries...";
 					form.TopMost = true;
-					var thread = new Thread(() => _libraries.AddRange(WebSiteManager.Instance.SelectedSite.GetLibraries(out message)));
+					var thread = new Thread(() =>
+					{
+						var loadedLibraries = WebSiteManager.Instance.SelectedSite.GetLibraries(out message).ToList();
+						var filteredLibraries = UsersEditPermissionsManager.Instance.CurrentUserPermissions.Tab3.AllowedLibraries.Any() ?
+							loadedLibraries.Where(loadedLibrary =>
+								UsersEditPermissionsManager.Instance.CurrentUserPermissions.Tab3.AllowedLibraries.Any(allowedLibrary =>
+									String.Equals(allowedLibrary, loadedLibrary.name, StringComparison.OrdinalIgnoreCase))).ToList() :
+							loadedLibraries;
+						_libraries.AddRange(filteredLibraries);
+					});
 					form.Show();
 					thread.Start();
 					while (thread.IsAlive)
@@ -868,7 +908,16 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 			}
 			else
 			{
-				var thread = new Thread(() => _libraries.AddRange(WebSiteManager.Instance.SelectedSite.GetLibraries(out message)));
+				var thread = new Thread(() =>
+				{
+					var loadedLibraries = WebSiteManager.Instance.SelectedSite.GetLibraries(out message).ToList();
+					var filteredLibraries = UsersEditPermissionsManager.Instance.CurrentUserPermissions.Tab3.AllowedLibraries.Any() ?
+						loadedLibraries.Where(loadedLibrary =>
+							UsersEditPermissionsManager.Instance.CurrentUserPermissions.Tab3.AllowedLibraries.Any(allowedLibrary =>
+								String.Equals(allowedLibrary, loadedLibrary.name, StringComparison.OrdinalIgnoreCase))).ToList() :
+						loadedLibraries;
+					_libraries.AddRange(filteredLibraries);
+				});
 				thread.Start();
 				while (thread.IsAlive)
 				{

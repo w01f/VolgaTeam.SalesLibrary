@@ -11,6 +11,7 @@ namespace SalesLibraries.SiteManager.ConfigurationClasses
 
 		#region Remote
 		public StorageFile SettingsFile { get; private set; }
+		public StorageFile UsersEditPermissionsSettingsFile { get; private set; }
 		#endregion
 
 		private RemoteResourceManager() { }
@@ -28,6 +29,11 @@ namespace SalesLibraries.SiteManager.ConfigurationClasses
 			SettingsFile = new StorageFile(appOutgoingFolder.RelativePathParts.Merge(
 				"site_manager_settings.xml"));
 			await SettingsFile.Download();
+
+			UsersEditPermissionsSettingsFile = new StorageFile(appOutgoingFolder.RelativePathParts.Merge(
+				"site_manager_account_controls.xml"));
+			if (await UsersEditPermissionsSettingsFile.Exists(true))
+				await UsersEditPermissionsSettingsFile.Download();
 			#endregion
 		}
 	}
