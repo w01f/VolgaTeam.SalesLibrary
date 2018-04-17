@@ -19,9 +19,10 @@ namespace SalesLibraries.Business.Entities.Helpers
 			var originalEncoded = JsonConvert.SerializeObject(original, serializerSettings);
 			var copy = JsonConvert.DeserializeObject<TEntity>(originalEncoded, serializerSettings);
 
-			var collectionItemOriginal = original as ICollectionItem;
-			if (collectionItemOriginal != null)
+			if (original is ICollectionItem collectionItemOriginal)
 				((ICollectionItem)copy).Parent = collectionItemOriginal.Parent;
+
+			copy.AfterClone(original);
 
 			return copy;
 		}

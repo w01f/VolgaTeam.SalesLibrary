@@ -100,6 +100,12 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 			Library = null;
 		}
 
+		public override void AfterClone(BaseEntity<LibraryContext> original)
+		{
+			base.AfterClone(original);
+			Settings = null;
+		}
+
 		public LinkBundle Clone(string name)
 		{
 			NeedToSave = true;
@@ -152,7 +158,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 				Items = new List<BaseBundleItem>();
 			}
 
-			protected override void AfterCreate()
+			public override void AfterCreate()
 			{
 				base.AfterCreate();
 				Items.ForEach(i =>

@@ -10,7 +10,7 @@
 			VideoConvertSettings = new VideoConvertSettings();
 		}
 
-		protected override void AfterCreate()
+		public override void AfterCreate()
 		{
 			base.AfterCreate();
 			if (VideoConvertSettings == null)

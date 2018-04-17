@@ -264,7 +264,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 			_textMode = BannerTextMode.NoText;
 		}
 
-		protected override void AfterCreate()
+		public override void AfterCreate()
 		{
 			base.AfterCreate();
 			if (Font.Unit != GraphicsUnit.Point)

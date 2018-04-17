@@ -301,6 +301,12 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			ResetSettingsScheduler = null;
 		}
 
+		public override void AfterClone(BaseEntity<LibraryContext> original)
+		{
+			base.AfterClone(original);
+			Settings = null;
+		}
+
 		public override void ResetParent()
 		{
 			Folder = null;

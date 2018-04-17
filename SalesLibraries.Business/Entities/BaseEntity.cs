@@ -13,6 +13,8 @@ namespace SalesLibraries.Business.Entities
 
 		public virtual void AfterSave() { }
 
+		public virtual void AfterClone(BaseEntity<TContext> original) { }
+
 		public virtual void Save(TContext context, IDbEntity<TContext> current, bool withCommit = true)
 		{
 			current.BeforeSave();

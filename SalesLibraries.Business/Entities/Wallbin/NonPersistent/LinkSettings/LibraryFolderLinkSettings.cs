@@ -28,7 +28,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 			SettingsTemplates = new List<LinkFileSettingsTemplate>();
 		}
 
-		protected override void AfterCreate()
+		public override void AfterCreate()
 		{
 			base.AfterConstruction();
 			if (SettingsTemplates == null)

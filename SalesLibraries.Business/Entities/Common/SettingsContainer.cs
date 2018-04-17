@@ -30,7 +30,7 @@ namespace SalesLibraries.Business.Entities.Common
 
 		protected virtual void AfterConstruction() { }
 
-		protected virtual void AfterCreate()
+		public virtual void AfterCreate()
 		{
 			AllowToHandleChanges = true;
 		}

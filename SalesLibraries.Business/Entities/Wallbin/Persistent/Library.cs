@@ -276,7 +276,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 				FontSettings = new FontSettings();
 			}
 
-			protected override void AfterCreate()
+			public override void AfterCreate()
 			{
 				base.AfterCreate();
 
