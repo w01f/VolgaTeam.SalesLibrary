@@ -20,7 +20,7 @@ namespace SalesLibraries.SiteManager.ConfigurationClasses
 		#region Local Settings
 		public string SelectedSiteName { get; set; }
 		public int? SelectedTab { get; set; }
-		public UsersEmailSettings UsersEmailSettings { get; }
+		public List<UsersEmailSettings> UsersEmailSettingItems { get; }
 		public InactiveUsersSettings InactiveUsersSettings { get; }
 		public List<RibbonTabPageConfig> RibbonTabPageSettings { get; }
 		public List<string> ApprovedUsers { get; }
@@ -33,7 +33,7 @@ namespace SalesLibraries.SiteManager.ConfigurationClasses
 			SitesListPath = Path.Combine(ApplicationRootsPath, "Sites.xml");
 			LogoPath = Path.Combine(ApplicationRootsPath, "logo.png");
 			IconPath = Path.Combine(ApplicationRootsPath, "icon.ico");
-			UsersEmailSettings = new UsersEmailSettings();
+			UsersEmailSettingItems = new List<UsersEmailSettings>();
 			InactiveUsersSettings = new InactiveUsersSettings();
 			RibbonTabPageSettings = new List<RibbonTabPageConfig>();
 			ApprovedUsers = new List<String>();
@@ -60,7 +60,7 @@ namespace SalesLibraries.SiteManager.ConfigurationClasses
 				#endregion
 			}
 
-			UsersEmailSettings.Load();
+			LoadUsersEmailSettings();
 			InactiveUsersSettings.Load();
 			LoadRibbonTabSettings();
 			LoadApprovedUsers();
@@ -91,6 +91,12 @@ namespace SalesLibraries.SiteManager.ConfigurationClasses
 			var nodes = document.SelectNodes(@"//Config/ApprovedUsers/UserAccount");
 			if (nodes == null) return;
 			ApprovedUsers.AddRange(nodes.OfType<XmlNode>().Select(n => n.InnerText));
+		}
+
+		private void LoadUsersEmailSettings()
+		{
+			UsersEmailSettingItems.Clear();
+			UsersEmailSettingItems.AddRange(UsersEmailSettings.LoadFromXml());
 		}
 
 		public void Save()

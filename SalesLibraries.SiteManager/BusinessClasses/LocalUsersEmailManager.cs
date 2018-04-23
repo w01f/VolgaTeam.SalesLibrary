@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text;
 using SalesLibraries.Common.OfficeInterops;
 using SalesLibraries.SiteManager.ConfigurationClasses;
@@ -22,63 +23,67 @@ namespace SalesLibraries.SiteManager.BusinessClasses
 		{
 			string subject;
 			var bodyLines = new StringBuilder();
+
+			var selectedSite = WebSiteManager.Instance.SelectedSite.Website;
+			var emailSettings = SettingsManager.Instance.UsersEmailSettingItems.FirstOrDefault(item => item.SiteUrl == selectedSite) ??
+				new UsersEmailSettings();
+
 			if (newUser)
 			{
-				subject = SettingsManager.Instance.UsersEmailSettings.NewAccountSubject;
+				subject = emailSettings.NewAccountSubject;
 
 				bodyLines.AppendLine(String.Format("Hello {0}:", userName));
 				bodyLines.AppendLine();
-				bodyLines.AppendLine(SettingsManager.Instance.UsersEmailSettings.NewAccountBodyPlaceholder1);
+				bodyLines.AppendLine(emailSettings.NewAccountBodyPlaceholder1);
 				bodyLines.AppendLine();
 				bodyLines.AppendLine(String.Format("{0} {1}",
-					SettingsManager.Instance.UsersEmailSettings.NewAccountBodyPlaceholder2, userLogin));
+					emailSettings.NewAccountBodyPlaceholder2, userLogin));
 				bodyLines.AppendLine();
 				bodyLines.AppendLine(String.Format("{0} {1}",
-					SettingsManager.Instance.UsersEmailSettings.NewAccountBodyPlaceholder3, userPassword));
+					emailSettings.NewAccountBodyPlaceholder3, userPassword));
 				bodyLines.AppendLine();
-				bodyLines.AppendLine(SettingsManager.Instance.UsersEmailSettings.NewAccountBodyPlaceholder4);
+				bodyLines.AppendLine(emailSettings.NewAccountBodyPlaceholder4);
 				bodyLines.AppendLine();
-				bodyLines.AppendLine(SettingsManager.Instance.UsersEmailSettings.NewAccountBodyPlaceholder5);
+				bodyLines.AppendLine(emailSettings.NewAccountBodyPlaceholder5);
 				bodyLines.AppendLine();
-				bodyLines.AppendLine(String.Format("{0}/auth/changePassword?login={1}&password={2}&rememberMe=",
-					WebSiteManager.Instance.SelectedSite.Website.TrimEnd('/'), userLogin, userPassword));
+				bodyLines.AppendLine(String.Format("{0}/auth/changePassword?login={1}&password={2}&rememberMe=", selectedSite.TrimEnd('/'), userLogin, userPassword));
 				bodyLines.AppendLine();
-				bodyLines.AppendLine(SettingsManager.Instance.UsersEmailSettings.NewAccountBodyPlaceholder6);
+				bodyLines.AppendLine(emailSettings.NewAccountBodyPlaceholder6);
 				bodyLines.AppendLine();
-				bodyLines.AppendLine(SettingsManager.Instance.UsersEmailSettings.NewAccountBodyPlaceholder7);
+				bodyLines.AppendLine(emailSettings.NewAccountBodyPlaceholder7);
 				bodyLines.AppendLine();
 				bodyLines.AppendLine();
-				bodyLines.AppendLine(SettingsManager.Instance.UsersEmailSettings.NewAccountBodyPlaceholder8);
+				bodyLines.AppendLine(emailSettings.NewAccountBodyPlaceholder8);
 			}
 			else
 			{
-				subject = SettingsManager.Instance.UsersEmailSettings.ResetAccountSubject;
+				subject = emailSettings.ResetAccountSubject;
 
 				bodyLines.AppendLine(String.Format("Hello {0}:", userName));
 				bodyLines.AppendLine();
-				bodyLines.AppendLine(SettingsManager.Instance.UsersEmailSettings.ResetAccountBodyPlaceholder1);
+				bodyLines.AppendLine(emailSettings.ResetAccountBodyPlaceholder1);
 				bodyLines.AppendLine();
-				bodyLines.AppendLine(String.Format("{0} {1}", SettingsManager.Instance.UsersEmailSettings.ResetAccountBodyPlaceholder2, userLogin));
+				bodyLines.AppendLine(String.Format("{0} {1}", emailSettings.ResetAccountBodyPlaceholder2, userLogin));
 				bodyLines.AppendLine();
-				bodyLines.AppendLine(String.Format("{0} {1}", SettingsManager.Instance.UsersEmailSettings.ResetAccountBodyPlaceholder3, userPassword));
+				bodyLines.AppendLine(String.Format("{0} {1}", emailSettings.ResetAccountBodyPlaceholder3, userPassword));
 				bodyLines.AppendLine();
-				bodyLines.AppendLine(SettingsManager.Instance.UsersEmailSettings.ResetAccountBodyPlaceholder4);
+				bodyLines.AppendLine(emailSettings.ResetAccountBodyPlaceholder4);
 				bodyLines.AppendLine();
-				bodyLines.AppendLine(SettingsManager.Instance.UsersEmailSettings.ResetAccountBodyPlaceholder5);
+				bodyLines.AppendLine(emailSettings.ResetAccountBodyPlaceholder5);
 				bodyLines.AppendLine();
-				bodyLines.AppendLine(String.Format("{0}/auth/changePassword?login={1}&password={2}&rememberMe=", WebSiteManager.Instance.SelectedSite.Website, userLogin, userPassword));
+				bodyLines.AppendLine(String.Format("{0}/auth/changePassword?login={1}&password={2}&rememberMe=", selectedSite.TrimEnd('/'), userLogin, userPassword));
 				bodyLines.AppendLine();
-				bodyLines.AppendLine(SettingsManager.Instance.UsersEmailSettings.ResetAccountBodyPlaceholder6);
+				bodyLines.AppendLine(emailSettings.ResetAccountBodyPlaceholder6);
 				bodyLines.AppendLine();
-				bodyLines.AppendLine(SettingsManager.Instance.UsersEmailSettings.ResetAccountBodyPlaceholder7);
+				bodyLines.AppendLine(emailSettings.ResetAccountBodyPlaceholder7);
 				bodyLines.AppendLine();
 				bodyLines.AppendLine();
-				bodyLines.AppendLine(SettingsManager.Instance.UsersEmailSettings.ResetAccountBodyPlaceholder8);
+				bodyLines.AppendLine(emailSettings.ResetAccountBodyPlaceholder8);
 			}
 
 			if (OutlookHelper.Instance.Connect())
 			{
-				OutlookHelper.Instance.SendMessage(SettingsManager.Instance.UsersEmailSettings.LocalEmailAccountName,new[]{userEmail}, SettingsManager.Instance.UsersEmailSettings.LocalEmailCopyAddresses,subject,bodyLines.ToString());
+				OutlookHelper.Instance.SendMessage(emailSettings.LocalEmailAccountName, new[] { userEmail }, emailSettings.LocalEmailCopyAddresses, subject, bodyLines.ToString());
 				OutlookHelper.Instance.Disconnect();
 			}
 		}

@@ -144,7 +144,10 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 						form.TopMost = true;
 						var thread = new Thread(() =>
 													{
-														var sendServerMessage = !(SettingsManager.Instance.UsersEmailSettings.SendLocalEmail &&
+														var emailSettings = SettingsManager.Instance.UsersEmailSettingItems.FirstOrDefault(item => item.SiteUrl == WebSiteManager.Instance.SelectedSite.Website) ??
+																			new UsersEmailSettings();
+
+														var sendServerMessage = !(emailSettings.SendLocalEmail &&
 																				  LocalUsersEmailManager.Instance.IsAvailable());
 														var users = ImportManager.ImportUsers(dialog.FileName, _users.ToArray(), _groups.ToArray(), _complexPassword, out message).ToList();
 														if (string.IsNullOrEmpty(message))
@@ -387,7 +390,9 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 						form.TopMost = true;
 						var thread = new Thread(() =>
 						{
-							var sendServerMessage = !(SettingsManager.Instance.UsersEmailSettings.SendLocalEmail &&
+							var emailSettings = SettingsManager.Instance.UsersEmailSettingItems.FirstOrDefault(item => item.SiteUrl == WebSiteManager.Instance.SelectedSite.Website) ??
+												new UsersEmailSettings();
+							var sendServerMessage = !(emailSettings.SendLocalEmail &&
 													LocalUsersEmailManager.Instance.IsAvailable());
 							WebSiteManager.Instance.SelectedSite.SetUser(login, password, firstName, lastName, email, phone, role,
 									groups.ToArray(), pages.ToArray(), sendServerMessage, out message);
@@ -476,7 +481,9 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 						form.TopMost = true;
 						var thread = new Thread(() =>
 						{
-							var sendServerMessage = !(SettingsManager.Instance.UsersEmailSettings.SendLocalEmail &&
+							var emailSettings = SettingsManager.Instance.UsersEmailSettingItems.FirstOrDefault(item => item.SiteUrl == WebSiteManager.Instance.SelectedSite.Website) ??
+												new UsersEmailSettings();
+							var sendServerMessage = !(emailSettings.SendLocalEmail &&
 													  LocalUsersEmailManager.Instance.IsAvailable());
 							WebSiteManager.Instance.SelectedSite.SetUser(login, password, firstName, lastName, email, phone, role,
 									groups.ToArray(), pages.ToArray(), sendServerMessage, out message);

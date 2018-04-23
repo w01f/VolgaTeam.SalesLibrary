@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Xml;
 
@@ -7,8 +9,9 @@ namespace SalesLibraries.SiteManager.ConfigurationClasses
 {
 	public class UsersEmailSettings
 	{
-		private readonly string _filePath;
+		private static string _filePath = Path.Combine(Path.GetDirectoryName(typeof(SettingsManager).Assembly.Location), "UsersEmailSettings.xml");
 
+		public string SiteUrl { get; set; }
 		public bool SendLocalEmail { get; set; }
 		public string LocalEmailAccountName { get; set; }
 		public string LocalEmailCopyAddresses { get; set; }
@@ -35,8 +38,6 @@ namespace SalesLibraries.SiteManager.ConfigurationClasses
 
 		public UsersEmailSettings()
 		{
-			_filePath = Path.Combine(Path.GetDirectoryName(typeof(SettingsManager).Assembly.Location), "UsersEmailSettings.xml");
-
 			NewAccountSubject = "Your NEW RAYCOM RESULTS ACCOUNT is READY!";
 			NewAccountBodyPlaceholder1 = "You have a NEW account at RaycomResults.tv";
 			NewAccountBodyPlaceholder2 = "1. Account Username:";
@@ -58,45 +59,83 @@ namespace SalesLibraries.SiteManager.ConfigurationClasses
 			ResetAccountBodyPlaceholder8 = "Happy Selling!";
 		}
 
-		public void Load()
+		public static IList<UsersEmailSettings> LoadFromXml()
 		{
-			if (!File.Exists(_filePath)) return;
-			var document = new XmlDocument();
-			document.Load(_filePath);
+			var items = new List<UsersEmailSettings>();
 
-			var node = document.SelectSingleNode(@"//Settings/SendLocalEmail");
-			if (Boolean.TryParse(node?.InnerText?.Trim() ?? "false", out var temp))
-				SendLocalEmail = temp;
+			if (File.Exists(_filePath))
+			{
+				var document = new XmlDocument();
+				document.Load(_filePath);
 
-			LocalEmailAccountName = document.SelectSingleNode(@"//Settings/LocalEmailAccountName")?.InnerText;
-			LocalEmailCopyAddresses = document.SelectSingleNode(@"//Settings/LocalEmailCopyAddresses")?.InnerText;
+				var configNodes = (document.SelectNodes("//Settings/Item").OfType<XmlNode>() ?? new XmlNode[] { }).ToList();
+				foreach (var configNode in configNodes)
+				{
+					var item = new UsersEmailSettings();
+					item.Load(configNode);
+					items.Add(item);
+				}
 
-			NewAccountSubject = document.SelectSingleNode(@"//Settings/NewAccount/Subject")?.InnerText ?? NewAccountSubject;
-			NewAccountBodyPlaceholder1 = document.SelectSingleNode(@"//Settings/NewAccount/Placeholder1")?.InnerText ?? NewAccountBodyPlaceholder1;
-			NewAccountBodyPlaceholder2 = document.SelectSingleNode(@"//Settings/NewAccount/Placeholder2")?.InnerText ?? NewAccountBodyPlaceholder2;
-			NewAccountBodyPlaceholder3 = document.SelectSingleNode(@"//Settings/NewAccount/Placeholder3")?.InnerText ?? NewAccountBodyPlaceholder3;
-			NewAccountBodyPlaceholder4 = document.SelectSingleNode(@"//Settings/NewAccount/Placeholder4")?.InnerText ?? NewAccountBodyPlaceholder4;
-			NewAccountBodyPlaceholder5 = document.SelectSingleNode(@"//Settings/NewAccount/Placeholder5")?.InnerText ?? NewAccountBodyPlaceholder5;
-			NewAccountBodyPlaceholder6 = document.SelectSingleNode(@"//Settings/NewAccount/Placeholder6")?.InnerText ?? NewAccountBodyPlaceholder6;
-			NewAccountBodyPlaceholder7 = document.SelectSingleNode(@"//Settings/NewAccount/Placeholder7")?.InnerText ?? NewAccountBodyPlaceholder7;
-			NewAccountBodyPlaceholder8 = document.SelectSingleNode(@"//Settings/NewAccount/Placeholder8")?.InnerText ?? NewAccountBodyPlaceholder8;
-
-			ResetAccountSubject = document.SelectSingleNode(@"//Settings/ResetAccount/Subject")?.InnerText ?? ResetAccountSubject;
-			ResetAccountBodyPlaceholder1 = document.SelectSingleNode(@"//Settings/ResetAccount/Placeholder1")?.InnerText ?? ResetAccountBodyPlaceholder1;
-			ResetAccountBodyPlaceholder2 = document.SelectSingleNode(@"//Settings/ResetAccount/Placeholder2")?.InnerText ?? ResetAccountBodyPlaceholder2;
-			ResetAccountBodyPlaceholder3 = document.SelectSingleNode(@"//Settings/ResetAccount/Placeholder3")?.InnerText ?? ResetAccountBodyPlaceholder3;
-			ResetAccountBodyPlaceholder4 = document.SelectSingleNode(@"//Settings/ResetAccount/Placeholder4")?.InnerText ?? ResetAccountBodyPlaceholder4;
-			ResetAccountBodyPlaceholder5 = document.SelectSingleNode(@"//Settings/ResetAccount/Placeholder5")?.InnerText ?? ResetAccountBodyPlaceholder5;
-			ResetAccountBodyPlaceholder6 = document.SelectSingleNode(@"//Settings/ResetAccount/Placeholder6")?.InnerText ?? ResetAccountBodyPlaceholder6;
-			ResetAccountBodyPlaceholder7 = document.SelectSingleNode(@"//Settings/ResetAccount/Placeholder7")?.InnerText ?? ResetAccountBodyPlaceholder7;
-			ResetAccountBodyPlaceholder8 = document.SelectSingleNode(@"//Settings/ResetAccount/Placeholder8")?.InnerText ?? ResetAccountBodyPlaceholder8;
+			}
+			return items;
 		}
 
-		public void Save()
+		private void Load(XmlNode configNode)
+		{
+			SiteUrl = configNode.SelectSingleNode(@"./SiteUrl")?.InnerText;
+
+			if (Boolean.TryParse(configNode.SelectSingleNode(@"./SendLocalEmail")?.InnerText?.Trim() ?? "false", out var temp))
+				SendLocalEmail = temp;
+
+			LocalEmailAccountName = configNode.SelectSingleNode(@"./LocalEmailAccountName")?.InnerText;
+			LocalEmailCopyAddresses = configNode.SelectSingleNode(@"./LocalEmailCopyAddresses")?.InnerText;
+
+			NewAccountSubject = configNode.SelectSingleNode(@"./NewAccount/Subject")?.InnerText ?? NewAccountSubject;
+			NewAccountBodyPlaceholder1 = configNode.SelectSingleNode(@"./NewAccount/Placeholder1")?.InnerText ?? NewAccountBodyPlaceholder1;
+			NewAccountBodyPlaceholder2 = configNode.SelectSingleNode(@"./NewAccount/Placeholder2")?.InnerText ?? NewAccountBodyPlaceholder2;
+			NewAccountBodyPlaceholder3 = configNode.SelectSingleNode(@"./NewAccount/Placeholder3")?.InnerText ?? NewAccountBodyPlaceholder3;
+			NewAccountBodyPlaceholder4 = configNode.SelectSingleNode(@"./NewAccount/Placeholder4")?.InnerText ?? NewAccountBodyPlaceholder4;
+			NewAccountBodyPlaceholder5 = configNode.SelectSingleNode(@"./NewAccount/Placeholder5")?.InnerText ?? NewAccountBodyPlaceholder5;
+			NewAccountBodyPlaceholder6 = configNode.SelectSingleNode(@"./NewAccount/Placeholder6")?.InnerText ?? NewAccountBodyPlaceholder6;
+			NewAccountBodyPlaceholder7 = configNode.SelectSingleNode(@"./NewAccount/Placeholder7")?.InnerText ?? NewAccountBodyPlaceholder7;
+			NewAccountBodyPlaceholder8 = configNode.SelectSingleNode(@"./NewAccount/Placeholder8")?.InnerText ?? NewAccountBodyPlaceholder8;
+
+			ResetAccountSubject = configNode.SelectSingleNode(@"./ResetAccount/Subject")?.InnerText ?? ResetAccountSubject;
+			ResetAccountBodyPlaceholder1 = configNode.SelectSingleNode(@"./ResetAccount/Placeholder1")?.InnerText ?? ResetAccountBodyPlaceholder1;
+			ResetAccountBodyPlaceholder2 = configNode.SelectSingleNode(@"./ResetAccount/Placeholder2")?.InnerText ?? ResetAccountBodyPlaceholder2;
+			ResetAccountBodyPlaceholder3 = configNode.SelectSingleNode(@"./ResetAccount/Placeholder3")?.InnerText ?? ResetAccountBodyPlaceholder3;
+			ResetAccountBodyPlaceholder4 = configNode.SelectSingleNode(@"./ResetAccount/Placeholder4")?.InnerText ?? ResetAccountBodyPlaceholder4;
+			ResetAccountBodyPlaceholder5 = configNode.SelectSingleNode(@"./ResetAccount/Placeholder5")?.InnerText ?? ResetAccountBodyPlaceholder5;
+			ResetAccountBodyPlaceholder6 = configNode.SelectSingleNode(@"./ResetAccount/Placeholder6")?.InnerText ?? ResetAccountBodyPlaceholder6;
+			ResetAccountBodyPlaceholder7 = configNode.SelectSingleNode(@"./ResetAccount/Placeholder7")?.InnerText ?? ResetAccountBodyPlaceholder7;
+			ResetAccountBodyPlaceholder8 = configNode.SelectSingleNode(@"./ResetAccount/Placeholder8")?.InnerText ?? ResetAccountBodyPlaceholder8;
+		}
+
+		public static void SaveToFile(IList<UsersEmailSettings> items)
 		{
 			var xml = new StringBuilder();
 
 			xml.AppendLine(@"<Settings>");
+			foreach (var item in items)
+			{
+				xml.AppendLine(@"<Item>");
+				xml.AppendLine(item.Serialize());
+				xml.AppendLine(@"</Item>");
+			}
+			xml.AppendLine(@"</Settings>");
+
+			using (var sw = new StreamWriter(_filePath, false))
+			{
+				sw.Write(xml);
+				sw.Flush();
+			}
+		}
+
+		private string Serialize()
+		{
+			var xml = new StringBuilder();
+
+			xml.AppendLine(@"<SiteUrl>" + SiteUrl?.Replace(@"&", "&#38;")?.Replace("\"", "&quot;") + @"</SiteUrl>");
 			xml.AppendLine(@"<SendLocalEmail>" + SendLocalEmail + @"</SendLocalEmail>");
 			xml.AppendLine(@"<LocalEmailAccountName>" + LocalEmailAccountName?.Replace(@"&", "&#38;")?.Replace("\"", "&quot;") + @"</LocalEmailAccountName>");
 			xml.AppendLine(@"<LocalEmailCopyAddresses>" + LocalEmailCopyAddresses?.Replace(@"&", "&#38;")?.Replace("\"", "&quot;") + @"</LocalEmailCopyAddresses>");
@@ -125,13 +164,7 @@ namespace SalesLibraries.SiteManager.ConfigurationClasses
 			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Placeholder8", ResetAccountBodyPlaceholder8?.Replace(@"&", "&#38;")?.Replace("\"", "&quot;")));
 			xml.AppendLine(@"</ResetAccount>");
 
-			xml.AppendLine(@"</Settings>");
-
-			using (var sw = new StreamWriter(_filePath, false))
-			{
-				sw.Write(xml);
-				sw.Flush();
-			}
+			return xml.ToString();
 		}
 	}
 }
