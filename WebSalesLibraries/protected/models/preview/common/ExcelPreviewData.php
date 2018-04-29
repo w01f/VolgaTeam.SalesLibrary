@@ -32,6 +32,7 @@
 
 			/** @var  $previewConfig FilePreviewConfig */
 			$previewConfig = $this->config;
+			$previewConfig->forceOpenGallery &= (($this->link->fileSize * .0009765625) * .0009765625) < 10;
 
 			if (!$openFromBundle)
 			{

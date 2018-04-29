@@ -21,7 +21,7 @@
 				              <? if ($userProfile->powerPointSettings->isDefault()): ?>checked<? endif; ?>>Default</label>
 			</div>
 		</div>
-		<div class="col-xs-4 text-center">
+		<div class="col-xs-3 text-center">
 			<div class="checkbox">
 				<label><input id="user-link-preferences-power-point-force-EO-open" class="log-action" type="checkbox"
 				              <? if ($userProfile->powerPointSettings->forceEOOpen == true): ?>checked<? endif; ?>>Download
@@ -39,7 +39,7 @@
 				              <? if ($userProfile->docSettings->isDefault()): ?>checked<? endif; ?>>Default</label>
 			</div>
 		</div>
-		<div class="col-xs-4 text-center">
+		<div class="col-xs-3 text-center">
 			<div class="checkbox">
 				<label><input id="user-link-preferences-doc-force-EO-open" class="log-action" type="checkbox"
 				              <? if ($userProfile->docSettings->forceEOOpen == true): ?>checked<? endif; ?>>Download &
@@ -57,13 +57,20 @@
 				              <? if ($userProfile->xlsSettings->isDefault()): ?>checked<? endif; ?>>Default</label>
 			</div>
 		</div>
-		<div class="col-xs-4 text-center">
+		<div class="col-xs-3 text-center">
 			<div class="checkbox">
 				<label><input id="user-link-preferences-xls-force-EO-open" class="log-action" type="checkbox"
 				              <? if ($userProfile->xlsSettings->forceEOOpen == true): ?>checked<? endif; ?>>Download &
 					Open</label>
 			</div>
 		</div>
+        <div class="col-xs-5 text-left">
+            <div class="checkbox">
+                <label><input id="user-link-preferences-xls-force-open-gallery" class="log-action" type="checkbox"
+				              <? if ($userProfile->xlsSettings->forceOpenGallery == true): ?>checked<? endif; ?>>Open Preview (less than 10 mb)
+                </label>
+            </div>
+        </div>
 	</div>
 	<div class="row settings-row">
 		<div class="col-xs-12">
@@ -80,14 +87,14 @@
 				              <? if ($userProfile->pdfSettings->isDefault()): ?>checked<? endif; ?>>Default</label>
 			</div>
 		</div>
-		<div class="col-xs-4 text-center">
+		<div class="col-xs-3 text-center">
 			<div class="checkbox">
 				<label><input id="user-link-preferences-pdf-force-EO-open" class="log-action" type="checkbox"
 				              <? if ($userProfile->pdfSettings->forceEOOpen == true): ?>checked<? endif; ?>>Download &
 					Open</label>
 			</div>
 		</div>
-		<div class="col-xs-4 text-center">
+		<div class="col-xs-5 text-left">
 			<div class="checkbox">
 				<label><input id="user-link-preferences-pdf-force-web-open" class="log-action" type="checkbox"
 				              <? if ($userProfile->pdfSettings->forceWebOpen == true): ?>checked<? endif; ?>>Open New
@@ -106,14 +113,14 @@
 				              <? if ($userProfile->imageSettings->isDefault()): ?>checked<? endif; ?>>Default</label>
 			</div>
 		</div>
-		<div class="col-xs-4 text-center">
+		<div class="col-xs-3 text-center">
 			<div class="checkbox">
 				<label><input id="user-link-preferences-image-force-EO-open" class="log-action" type="checkbox"
 				              <? if ($userProfile->imageSettings->forceEOOpen == true): ?>checked<? endif; ?>>Download &
 					Open</label>
 			</div>
 		</div>
-		<div class="col-xs-4 text-center">
+		<div class="col-xs-5 text-left">
 			<div class="checkbox">
 				<label><input id="user-link-preferences-image-force-web-open" class="log-action" type="checkbox"
 				              <? if ($userProfile->imageSettings->forceWebOpen == true): ?>checked<? endif; ?>>Open New

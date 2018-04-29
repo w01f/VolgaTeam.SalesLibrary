@@ -82,6 +82,9 @@
 					case 'document':
 						openedViewer = new $.SalesPortal.DocumentViewer(previewParameters).show();
 						break;
+					case 'xls':
+						openedViewer = new $.SalesPortal.ExcelViewer(previewParameters).show();
+						break;
 					case 'video':
 						openedViewer = new $.SalesPortal.VideoViewer(previewParameters).show();
 						break;

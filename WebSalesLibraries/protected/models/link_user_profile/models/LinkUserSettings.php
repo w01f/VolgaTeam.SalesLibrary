@@ -7,6 +7,7 @@
 	{
 		public $forceWebOpen;
 		public $forceEOOpen;
+		public $forceOpenGallery;
 
 		/**
 		 * @param array $jsonArray
@@ -26,6 +27,9 @@
 					case 'forceWebOpen':
 						$linkSettings->forceWebOpen = $value;
 						break;
+					case 'forceOpenGallery':
+						$linkSettings->forceOpenGallery = $value;
+						break;
 				}
 			}
 			return $linkSettings;
@@ -39,6 +43,7 @@
 			$linkSettings = new LinkUserSettings();
 			$linkSettings->forceWebOpen = false;
 			$linkSettings->forceEOOpen = false;
+			$linkSettings->forceOpenGallery = false;
 			return $linkSettings;
 		}
 
@@ -47,6 +52,6 @@
 		 */
 		public function isDefault()
 		{
-			return !($this->forceEOOpen || $this->forceWebOpen);
+			return !($this->forceEOOpen || $this->forceWebOpen || $this->forceOpenGallery);
 		}
 	}
