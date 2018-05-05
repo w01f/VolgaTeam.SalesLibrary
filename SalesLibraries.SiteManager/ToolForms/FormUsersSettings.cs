@@ -19,6 +19,7 @@ namespace SalesLibraries.SiteManager.ToolForms
 
 			memoEditEmailCopyAddresses.EnableSelectAll();
 
+			textEditNewAccountSubject.EnableSelectAll();
 			textEditNewAccountBodyPlaceholder1.EnableSelectAll();
 			textEditNewAccountBodyPlaceholder2.EnableSelectAll();
 			textEditNewAccountBodyPlaceholder3.EnableSelectAll();
@@ -28,6 +29,7 @@ namespace SalesLibraries.SiteManager.ToolForms
 			memoEditNewAccountBodyPlaceholder7.EnableSelectAll();
 			textEditNewAccountBodyPlaceholder8.EnableSelectAll();
 
+			textEditResetAccountSubject.EnableSelectAll();
 			textEditResetAccountBodyPlaceholder1.EnableSelectAll();
 			textEditResetAccountBodyPlaceholder2.EnableSelectAll();
 			textEditResetAccountBodyPlaceholder3.EnableSelectAll();
@@ -36,6 +38,12 @@ namespace SalesLibraries.SiteManager.ToolForms
 			memoEditResetAccountBodyPlaceholder6.EnableSelectAll();
 			memoEditResetAccountBodyPlaceholder7.EnableSelectAll();
 			textEditResetAccountBodyPlaceholder8.EnableSelectAll();
+
+			textEditDeleteAccountSubject.EnableSelectAll();
+			textEditDeleteAccountBodyPlaceholder1.EnableSelectAll();
+			textEditDeleteAccountBodyPlaceholder2.EnableSelectAll();
+			textEditDeleteAccountBodyPlaceholder3.EnableSelectAll();
+			memoEditDeleteAccountRecipients.EnableSelectAll();
 
 			var scaleFactor = Utils.GetScaleFactor(CreateGraphics().DpiX);
 			layoutControlItemSave.MaxSize = RectangleHelper.ScaleSize(layoutControlItemSave.MaxSize, scaleFactor);
@@ -86,6 +94,12 @@ namespace SalesLibraries.SiteManager.ToolForms
 			memoEditResetAccountBodyPlaceholder6.EditValue = emailSettings.ResetAccountBodyPlaceholder6;
 			memoEditResetAccountBodyPlaceholder7.EditValue = emailSettings.ResetAccountBodyPlaceholder7;
 			textEditResetAccountBodyPlaceholder8.EditValue = emailSettings.ResetAccountBodyPlaceholder8;
+
+			textEditDeleteAccountSubject.EditValue = emailSettings.DeleteAccountSubject;
+			textEditDeleteAccountBodyPlaceholder1.EditValue = emailSettings.DeleteAccountBodyPlaceholder1;
+			textEditDeleteAccountBodyPlaceholder2.EditValue = emailSettings.DeleteAccountBodyPlaceholder2;
+			textEditDeleteAccountBodyPlaceholder3.EditValue = emailSettings.DeleteAccountBodyPlaceholder3;
+			memoEditDeleteAccountRecipients.EditValue = emailSettings.DeleteAccountRecipients;
 		}
 
 		private void OnFormClosed(object sender, FormClosedEventArgs e)
@@ -124,6 +138,12 @@ namespace SalesLibraries.SiteManager.ToolForms
 			emailSettings.ResetAccountBodyPlaceholder7 = memoEditResetAccountBodyPlaceholder7.EditValue as String;
 			emailSettings.ResetAccountBodyPlaceholder8 = textEditResetAccountBodyPlaceholder8.EditValue as String;
 
+			emailSettings.DeleteAccountSubject = textEditDeleteAccountSubject.EditValue as String;
+			emailSettings.DeleteAccountBodyPlaceholder1 = textEditDeleteAccountBodyPlaceholder1.EditValue as String;
+			emailSettings.DeleteAccountBodyPlaceholder2 = textEditDeleteAccountBodyPlaceholder2.EditValue as String;
+			emailSettings.DeleteAccountBodyPlaceholder3 = textEditDeleteAccountBodyPlaceholder3.EditValue as String;
+			emailSettings.DeleteAccountRecipients = memoEditDeleteAccountRecipients.EditValue as String;
+
 			UsersEmailSettings.SaveToFile(SettingsManager.Instance.UsersEmailSettingItems);
 		}
 
@@ -132,6 +152,7 @@ namespace SalesLibraries.SiteManager.ToolForms
 			layoutControlGroupLocalEmailSettings.Enabled =
 				layoutControlGroupNewAccount.PageEnabled =
 				layoutControlGroupResetAccount.PageEnabled =
+				layoutControlGroupDeleteAccount.PageEnabled =
 				checkEditLocalEmail.Checked;
 		}
 	}

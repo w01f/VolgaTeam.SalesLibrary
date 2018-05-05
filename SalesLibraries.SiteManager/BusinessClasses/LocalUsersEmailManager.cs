@@ -19,7 +19,7 @@ namespace SalesLibraries.SiteManager.BusinessClasses
 			return connected;
 		}
 
-		public void SendEmailToUser(string userName, string userLogin, string userEmail, string userPassword, bool newUser)
+		public void SendUserChangeNotificationEmail(string userName, string userLogin, string userEmail, string userPassword, bool newUser)
 		{
 			string subject;
 			var bodyLines = new StringBuilder();
@@ -84,6 +84,40 @@ namespace SalesLibraries.SiteManager.BusinessClasses
 			if (OutlookHelper.Instance.Connect())
 			{
 				OutlookHelper.Instance.SendMessage(emailSettings.LocalEmailAccountName, new[] { userEmail }, emailSettings.LocalEmailCopyAddresses, subject, bodyLines.ToString());
+				OutlookHelper.Instance.Disconnect();
+			}
+		}
+
+		public void SendUserDeleteNotificationEmail(string userName, string userLogin)
+		{
+			var bodyLines = new StringBuilder();
+
+			var selectedSite = WebSiteManager.Instance.SelectedSite.Website;
+			var emailSettings = SettingsManager.Instance.UsersEmailSettingItems.FirstOrDefault(item => item.SiteUrl == selectedSite) ??
+				new UsersEmailSettings();
+
+			if (String.IsNullOrWhiteSpace(emailSettings.DeleteAccountRecipients))
+				return;
+
+			var subject = emailSettings.DeleteAccountSubject;
+
+			bodyLines.AppendLine(String.Format("{0} {1:MM-dd-yy h:mm tt}", emailSettings.DeleteAccountBodyPlaceholder1, DateTime.Now));
+			bodyLines.AppendLine();
+			bodyLines.AppendLine(String.Format("{0} {1}", emailSettings.DeleteAccountBodyPlaceholder2, userName));
+			bodyLines.AppendLine();
+			bodyLines.AppendLine(String.Format("{0} {1}", emailSettings.DeleteAccountBodyPlaceholder3, userLogin));
+
+			if (OutlookHelper.Instance.Connect())
+			{
+				OutlookHelper.Instance.SendMessage(
+					emailSettings.LocalEmailAccountName,
+					emailSettings.DeleteAccountRecipients
+						.Split(';', ',')
+						.Select(item => item.Trim())
+						.Where(item => !String.IsNullOrWhiteSpace(item)),
+					emailSettings.LocalEmailCopyAddresses,
+					subject,
+					bodyLines.ToString());
 				OutlookHelper.Instance.Disconnect();
 			}
 		}

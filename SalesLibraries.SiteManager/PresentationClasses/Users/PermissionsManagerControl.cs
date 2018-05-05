@@ -156,7 +156,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 														{
 															foreach (var user in users)
 															{
-																LocalUsersEmailManager.Instance.SendEmailToUser(
+																LocalUsersEmailManager.Instance.SendUserChangeNotificationEmail(
 																	String.Format("{0} {1}", user.FirstName, user.LastName),
 																	user.Login,
 																	user.Email,
@@ -398,7 +398,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 									groups.ToArray(), pages.ToArray(), sendServerMessage, out message);
 							if (!sendServerMessage)
 							{
-								LocalUsersEmailManager.Instance.SendEmailToUser(
+								LocalUsersEmailManager.Instance.SendUserChangeNotificationEmail(
 									String.Format("{0} {1}", firstName, lastName),
 									login,
 									email,
@@ -489,7 +489,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 									groups.ToArray(), pages.ToArray(), sendServerMessage, out message);
 							if (!String.IsNullOrWhiteSpace(password) && !sendServerMessage)
 							{
-								LocalUsersEmailManager.Instance.SendEmailToUser(
+								LocalUsersEmailManager.Instance.SendUserChangeNotificationEmail(
 									String.Format("{0} {1}", firstName, lastName),
 									login,
 									email,
@@ -523,16 +523,29 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 
 		public void DeleteUser()
 		{
-			var userRecord = gridViewUsers.GetFocusedRow() as UserModel;
-			if (userRecord == null || AppManager.Instance.PopupMessages.ShowWarningQuestion(string.Format("Are you sure want to delete user {0}?", userRecord.FullName)) != DialogResult.Yes) return;
-			string message = string.Empty;
+			if (!(gridViewUsers.GetFocusedRow() is UserModel userRecord) ||
+				AppManager.Instance.PopupMessages.ShowWarningQuestion(string.Format("Are you sure want to delete user {0}?", userRecord.FullName)) != DialogResult.Yes)
+				return;
+			var message = string.Empty;
 			using (var form = new FormProgress())
 			{
 				FormMain.Instance.ribbonControl.Enabled = false;
 				Enabled = false;
 				form.laProgress.Text = "Deleting user...";
 				form.TopMost = true;
-				var thread = new Thread(() => WebSiteManager.Instance.SelectedSite.DeleteUser(userRecord.login, out message));
+				var thread = new Thread(() =>
+				{
+					var emailSettings = SettingsManager.Instance.UsersEmailSettingItems.FirstOrDefault(item => item.SiteUrl == WebSiteManager.Instance.SelectedSite.Website) ??
+										new UsersEmailSettings();
+					var sendServerMessage = !(emailSettings.SendLocalEmail && LocalUsersEmailManager.Instance.IsAvailable());
+					WebSiteManager.Instance.SelectedSite.DeleteUser(userRecord.login, out message);
+					if (!sendServerMessage)
+					{
+						LocalUsersEmailManager.Instance.SendUserDeleteNotificationEmail(
+							String.Format("{0} {1}", userRecord.firstName, userRecord.lastName),
+							userRecord.login);
+					}
+				});
 				form.Show();
 				thread.Start();
 				while (thread.IsAlive)

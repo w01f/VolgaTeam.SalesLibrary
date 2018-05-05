@@ -36,6 +36,12 @@ namespace SalesLibraries.SiteManager.ConfigurationClasses
 		public string ResetAccountBodyPlaceholder7 { get; set; }
 		public string ResetAccountBodyPlaceholder8 { get; set; }
 
+		public string DeleteAccountRecipients { get; set; }
+		public string DeleteAccountSubject { get; set; }
+		public string DeleteAccountBodyPlaceholder1 { get; set; }
+		public string DeleteAccountBodyPlaceholder2 { get; set; }
+		public string DeleteAccountBodyPlaceholder3 { get; set; }
+
 		public UsersEmailSettings()
 		{
 			NewAccountSubject = "Your NEW RAYCOM RESULTS ACCOUNT is READY!";
@@ -57,6 +63,11 @@ namespace SalesLibraries.SiteManager.ConfigurationClasses
 			ResetAccountBodyPlaceholder6 = "5. When you log in, create your NEW PASSWORD  (Facebook or LinkedIn passwords work best)";
 			ResetAccountBodyPlaceholder7 = "6. If you have connection issues, email billy@adSALESapps.com or llambert@raycommedia.com";
 			ResetAccountBodyPlaceholder8 = "Happy Selling!";
+
+			DeleteAccountSubject = "User Account Termination Notice";
+			DeleteAccountBodyPlaceholder1 = "Account Closed:";
+			DeleteAccountBodyPlaceholder2 = "Account Name:";
+			DeleteAccountBodyPlaceholder3 = "User Name:";
 		}
 
 		public static IList<UsersEmailSettings> LoadFromXml()
@@ -109,6 +120,12 @@ namespace SalesLibraries.SiteManager.ConfigurationClasses
 			ResetAccountBodyPlaceholder6 = configNode.SelectSingleNode(@"./ResetAccount/Placeholder6")?.InnerText ?? ResetAccountBodyPlaceholder6;
 			ResetAccountBodyPlaceholder7 = configNode.SelectSingleNode(@"./ResetAccount/Placeholder7")?.InnerText ?? ResetAccountBodyPlaceholder7;
 			ResetAccountBodyPlaceholder8 = configNode.SelectSingleNode(@"./ResetAccount/Placeholder8")?.InnerText ?? ResetAccountBodyPlaceholder8;
+
+			DeleteAccountRecipients = configNode.SelectSingleNode(@"./DeleteAccount/Recipients")?.InnerText;
+			DeleteAccountSubject = configNode.SelectSingleNode(@"./DeleteAccount/Subject")?.InnerText ?? DeleteAccountSubject;
+			DeleteAccountBodyPlaceholder1 = configNode.SelectSingleNode(@"./DeleteAccount/Placeholder1")?.InnerText ?? DeleteAccountBodyPlaceholder1;
+			DeleteAccountBodyPlaceholder2 = configNode.SelectSingleNode(@"./DeleteAccount/Placeholder2")?.InnerText ?? DeleteAccountBodyPlaceholder2;
+			DeleteAccountBodyPlaceholder3 = configNode.SelectSingleNode(@"./DeleteAccount/Placeholder3")?.InnerText ?? DeleteAccountBodyPlaceholder3;
 		}
 
 		public static void SaveToFile(IList<UsersEmailSettings> items)
@@ -163,6 +180,14 @@ namespace SalesLibraries.SiteManager.ConfigurationClasses
 			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Placeholder7", ResetAccountBodyPlaceholder7?.Replace(@"&", "&#38;")?.Replace("\"", "&quot;")));
 			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Placeholder8", ResetAccountBodyPlaceholder8?.Replace(@"&", "&#38;")?.Replace("\"", "&quot;")));
 			xml.AppendLine(@"</ResetAccount>");
+
+			xml.AppendLine(@"<DeleteAccount>");
+			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Recipients", DeleteAccountRecipients?.Replace(@"&", "&#38;")?.Replace("\"", "&quot;")));
+			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Subject", DeleteAccountSubject?.Replace(@"&", "&#38;")?.Replace("\"", "&quot;")));
+			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Placeholder1", DeleteAccountBodyPlaceholder1?.Replace(@"&", "&#38;")?.Replace("\"", "&quot;")));
+			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Placeholder2", DeleteAccountBodyPlaceholder2?.Replace(@"&", "&#38;")?.Replace("\"", "&quot;")));
+			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Placeholder3", DeleteAccountBodyPlaceholder3?.Replace(@"&", "&#38;")?.Replace("\"", "&quot;")));
+			xml.AppendLine(@"</DeleteAccount>");
 
 			return xml.ToString();
 		}
