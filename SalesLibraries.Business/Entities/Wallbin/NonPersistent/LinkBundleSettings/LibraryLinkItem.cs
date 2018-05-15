@@ -16,8 +16,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkBundleSetti
 		[JsonIgnore]
 		public override string Name
 		{
-			get { return TargetLink is LibraryFileLink && TargetLink.Settings.TextWordWrap ? ((LibraryFileLink)TargetLink).NameWithExtension : TargetLink?.Name ?? "Link is Missing"; }
-			set { throw new NotImplementedException(); }
+			get => TargetLink is LibraryFileLink && TargetLink.Settings.TextWordWrap ? ((LibraryFileLink)TargetLink).NameWithExtension : TargetLink?.Name ?? "Link is Missing";
+			set => throw new NotImplementedException();
 		}
 
 		[JsonIgnore]

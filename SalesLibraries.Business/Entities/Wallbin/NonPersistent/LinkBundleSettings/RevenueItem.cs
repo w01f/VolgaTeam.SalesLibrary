@@ -14,7 +14,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkBundleSetti
 		private LinkBundleRevenueType _revenueType;
 		public LinkBundleRevenueType RevenueType
 		{
-			get { return _revenueType; }
+			get => _revenueType;
 			set
 			{
 				if (_revenueType != value)
@@ -27,7 +27,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkBundleSetti
 
 		public string AdditionalInfo
 		{
-			get { return _additionalInfo; }
+			get => _additionalInfo;
 			set
 			{
 				if (_additionalInfo != value)
@@ -39,7 +39,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkBundleSetti
 		private Color _foreColor = Color.Black;
 		public Color ForeColor
 		{
-			get { return _foreColor; }
+			get => _foreColor;
 			set
 			{
 				if (_foreColor != value)
@@ -51,7 +51,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkBundleSetti
 		private Color _backColor = Color.White;
 		public Color BackColor
 		{
-			get { return _backColor; }
+			get => _backColor;
 			set
 			{
 				if (_backColor != value)
@@ -63,7 +63,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkBundleSetti
 		private Font _font = new Font("Arial", 10, FontStyle.Regular, GraphicsUnit.Point);
 		public Font Font
 		{
-			get { return _font; }
+			get => _font;
 			set
 			{
 				if (_font != value)
@@ -77,15 +77,15 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkBundleSetti
 		[JsonIgnore]
 		public override string Name
 		{
-			get { return ItemName; }
-			set { throw new NotImplementedException(); }
+			get => ItemName;
+			set => throw new NotImplementedException();
 		}
 
 		[JsonIgnore]
 		public DateTime LastModified
 		{
-			get { return Parent.LastModified; }
-			set { Parent.LastModified = value; }
+			get => Parent.LastModified;
+			set => Parent.LastModified = value;
 		}
 
 		public RevenueItem()

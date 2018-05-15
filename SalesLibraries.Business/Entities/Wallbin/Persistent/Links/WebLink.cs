@@ -16,8 +16,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		[NotMapped, JsonIgnore]
 		public override BaseLinkSettings Settings
 		{
-			get { return _settings ?? (_settings = SettingsContainer.CreateInstance<WebLinkSettings>(this, SettingsEncoded)); }
-			set { _settings = value as WebLinkSettings; }
+			get => _settings ?? (_settings = SettingsContainer.CreateInstance<WebLinkSettings>(this, SettingsEncoded));
+			set => _settings = value as WebLinkSettings;
 		}
 
 		[NotMapped, JsonIgnore]

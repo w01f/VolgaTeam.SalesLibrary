@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using Microsoft.Office.Interop.Word;
@@ -61,6 +62,12 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 				wordContainer.GenerateText;
 			if (updateTxt && !Directory.Exists(txtDestination))
 				Directory.CreateDirectory(txtDestination);
+
+			var oneDriveUrl = wordContainer.OneDriveUrl;
+			var oneDriveUrlDestination = Path.Combine(wordContainer.ContainerPath, PreviewFormats.OneDrive);
+			var updateOneDrive = !Directory.Exists(oneDriveUrlDestination) && !String.IsNullOrEmpty(oneDriveUrl);
+			if (!Directory.Exists(oneDriveUrlDestination) && updateOneDrive)
+				Directory.CreateDirectory(oneDriveUrlDestination);
 
 			var needToUpdate = updatePdf ||
 				updatePng ||
@@ -173,7 +180,15 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 
 			} while (!updated && tryCount < 10);
 
-
+			if (updateOneDrive)
+			{
+				OneDrivePreviewHelper.GenerateShortcutFiles(
+					oneDriveUrl,
+					Path.GetFileName(previewContainer.SourcePath),
+					oneDriveUrlDestination);
+				logger.LogStage(PreviewFormats.OneDrive);
+			}
+			
 			if (needToUpdate)
 			{
 				PngHelper.ConvertFiles(wordContainer.ContainerPath);

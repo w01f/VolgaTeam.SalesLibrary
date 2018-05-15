@@ -12,7 +12,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		private DateTime? _resetDate;
 		public DateTime? ResetDate
 		{
-			get { return _resetDate; }
+			get => _resetDate;
 			set
 			{
 				if (_resetDate != value)

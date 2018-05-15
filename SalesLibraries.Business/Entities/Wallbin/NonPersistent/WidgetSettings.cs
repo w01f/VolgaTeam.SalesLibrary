@@ -12,7 +12,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private WidgetType _widgetType;
 		public WidgetType WidgetType
 		{
-			get { return _widgetType; }
+			get => _widgetType;
 			set
 			{
 				if (_widgetType != value)
@@ -24,7 +24,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private bool _inverted;
 		public bool Inverted
 		{
-			get { return _inverted; }
+			get => _inverted;
 			set
 			{
 				if (_inverted != value)
@@ -61,7 +61,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		protected Image _image;
 		public virtual Image Image
 		{
-			get { return _image; }
+			get => _image;
 			set
 			{
 				if (_image != value)
@@ -76,7 +76,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private string _imageName;
 		public string ImageName
 		{
-			get { return _imageName; }
+			get => _imageName;
 			set
 			{
 				if (_imageName != value)

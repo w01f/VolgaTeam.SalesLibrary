@@ -13,7 +13,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		private string _customWebFormat;
 		public string CustomWebFormat
 		{
-			get { return _customWebFormat; }
+			get => _customWebFormat;
 			set
 			{
 				if (_customWebFormat != value)

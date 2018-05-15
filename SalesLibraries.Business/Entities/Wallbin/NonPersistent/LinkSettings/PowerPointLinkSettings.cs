@@ -15,7 +15,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		private DateTime? _lastPresentationInfoUpdate;
 		public DateTime? LastPresentationInfoUpdate
 		{
-			get { return _lastPresentationInfoUpdate; }
+			get => _lastPresentationInfoUpdate;
 			set
 			{
 				if (_lastPresentationInfoUpdate != value)
@@ -27,7 +27,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		private double _height;
 		public double Height
 		{
-			get { return _height; }
+			get => _height;
 			set
 			{
 				if (_height != value)
@@ -40,7 +40,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 
 		public double Width
 		{
-			get { return _width; }
+			get => _width;
 			set
 			{
 				if (_width != value)

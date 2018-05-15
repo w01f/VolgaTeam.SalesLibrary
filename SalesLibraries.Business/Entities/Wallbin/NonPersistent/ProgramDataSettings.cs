@@ -7,7 +7,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private bool _enable;
 		public bool Enable
 		{
-			get { return _enable; }
+			get => _enable;
 			set
 			{
 				if (_enable != value)
@@ -19,7 +19,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private string _path;
 		public string Path
 		{
-			get { return _path; }
+			get => _path;
 			set
 			{
 				if (_path != value)

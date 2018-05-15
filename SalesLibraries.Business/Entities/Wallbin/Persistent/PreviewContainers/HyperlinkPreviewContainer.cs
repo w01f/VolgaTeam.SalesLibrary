@@ -18,8 +18,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 		[NotMapped, JsonIgnore]
 		public override BasePreviewContainerSettings Settings
 		{
-			get { return _settings ?? (_settings = SettingsContainer.CreateInstance<CommonPreviewContainerSettings>(this, SettingsEncoded)); }
-			set { _settings = value as CommonPreviewContainerSettings; }
+			get => _settings ?? (_settings = SettingsContainer.CreateInstance<CommonPreviewContainerSettings>(this, SettingsEncoded));
+			set => _settings = value as CommonPreviewContainerSettings;
 		}
 
 		[NotMapped, JsonIgnore]

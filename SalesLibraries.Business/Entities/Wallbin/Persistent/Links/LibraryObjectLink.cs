@@ -23,24 +23,24 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		[NotMapped, JsonIgnore]
 		public override BaseLinkSettings Settings
 		{
-			get { return _settings ?? (_settings = SettingsContainer.CreateInstance<LibraryObjectLinkSettings>(this, SettingsEncoded)); }
-			set { _settings = value as LibraryObjectLinkSettings; }
+			get => _settings ?? (_settings = SettingsContainer.CreateInstance<LibraryObjectLinkSettings>(this, SettingsEncoded));
+			set => _settings = value as LibraryObjectLinkSettings;
 		}
 
 		private LinkExpirationSettings _expirationSettings;
 		[NotMapped, JsonIgnore]
 		public LinkExpirationSettings ExpirationSettings
 		{
-			get { return _expirationSettings ?? (_expirationSettings = SettingsContainer.CreateInstance<LinkExpirationSettings>(this, ExpirationEncoded)); }
-			set { _expirationSettings = value; }
+			get => _expirationSettings ?? (_expirationSettings = SettingsContainer.CreateInstance<LinkExpirationSettings>(this, ExpirationEncoded));
+			set => _expirationSettings = value;
 		}
 
 		private QuickLinkSettings _quickLinkSettings;
 		[NotMapped, JsonIgnore]
 		public QuickLinkSettings QuickLinkSettings
 		{
-			get { return _quickLinkSettings ?? (_quickLinkSettings = SettingsContainer.CreateInstance<QuickLinkSettings>(this, QuickLinkEncoded)); }
-			set { _quickLinkSettings = value; }
+			get => _quickLinkSettings ?? (_quickLinkSettings = SettingsContainer.CreateInstance<QuickLinkSettings>(this, QuickLinkEncoded));
+			set => _quickLinkSettings = value;
 		}
 
 		[NotMapped, JsonIgnore]
@@ -87,10 +87,10 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			get
 			{
 				var lines = new List<string>();
-				lines.Add(String.Format("Added: {0}", AddDate.ToString("M/dd/yy h:mm:ss tt")));
-				lines.Add(String.Format("Updated: {0}", LastModified.ToString("M/dd/yy h:mm:ss tt")));
+				lines.Add(String.Format("Added: {0:M/dd/yy h:mm:ss tt}", AddDate));
+				lines.Add(String.Format("Updated: {0:M/dd/yy h:mm:ss tt}", LastModified));
 				if (ExpirationSettings.IsExpired)
-					lines.Add(String.Format("Expires: {0}", ExpirationSettings.ExpirationDate.ToString("M/dd/yy h:mm:ss tt")));
+					lines.Add(String.Format("Expires: {0:M/dd/yy h:mm:ss tt}", ExpirationSettings.ExpirationDate));
 				var baseHint = base.Hint;
 				if (!String.IsNullOrEmpty(baseHint))
 					lines.Add(baseHint);

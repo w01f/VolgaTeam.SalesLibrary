@@ -20,8 +20,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		[NotMapped, JsonIgnore]
 		public override BaseLinkSettings Settings
 		{
-			get { return _settings ?? (_settings = SettingsContainer.CreateInstance<VideoLinkSettings>(this, SettingsEncoded)); }
-			set { _settings = value as VideoLinkSettings; }
+			get => _settings ?? (_settings = SettingsContainer.CreateInstance<VideoLinkSettings>(this, SettingsEncoded));
+			set => _settings = value as VideoLinkSettings;
 		}
 
 		[NotMapped, JsonIgnore]

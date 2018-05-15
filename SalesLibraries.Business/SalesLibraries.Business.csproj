@@ -125,6 +125,8 @@
     <Compile Include="Entities\Wallbin\Common\Enums\LinkSettingsType.cs" />
     <Compile Include="Entities\Wallbin\Common\Enums\WidgetType.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\AutoWidget.cs" />
+    <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\OneDriveLinkSettings.cs" />
+    <Compile Include="Entities\Wallbin\NonPersistent\OneDriveLibrarySettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkBundleSettings\CoverItem.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\PreviewContainerSettings\CommonPreviewContainerSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\PreviewContainerSettings\BasePreviewContainerSettings.cs" />
@@ -263,6 +265,12 @@
     <Compile Include="Schema\Wallbin\Initialization\LocalWallbinInitializer.cs" />
     <Compile Include="Schema\Wallbin\Initialization\WallbinInitializer.cs" />
     <Content Include="Schema\Wallbin\Base\sequense.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Schema\Wallbin\Version10\library_link.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Schema\Wallbin\Version10\sequense.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Schema\Wallbin\Version3\library_link.sql">

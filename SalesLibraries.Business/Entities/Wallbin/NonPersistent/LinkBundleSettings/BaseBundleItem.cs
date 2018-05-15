@@ -16,7 +16,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkBundleSetti
 		private int _collectionOrder;
 		public int CollectionOrder
 		{
-			get { return _collectionOrder; }
+			get => _collectionOrder;
 			set
 			{
 				if (_collectionOrder != value)
@@ -28,7 +28,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkBundleSetti
 		private Image _image;
 		public Image Image
 		{
-			get { return _image; }
+			get => _image;
 			set
 			{
 				if (_image != value)
@@ -40,7 +40,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkBundleSetti
 		private string _title;
 		public string Title
 		{
-			get { return _title; }
+			get => _title;
 			set
 			{
 				if (_title != value)
@@ -56,7 +56,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkBundleSetti
 		private string _hoverTip;
 		public string HoverTip
 		{
-			get { return _hoverTip; }
+			get => _hoverTip;
 			set
 			{
 				if (_hoverTip != value)
@@ -68,7 +68,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkBundleSetti
 		private bool _useAsThumbnail;
 		public bool UseAsThumbnail
 		{
-			get { return _useAsThumbnail; }
+			get => _useAsThumbnail;
 			set
 			{
 				if (_useAsThumbnail != value)

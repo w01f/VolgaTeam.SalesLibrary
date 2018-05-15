@@ -5,7 +5,7 @@
 		private bool _forcePreview;
 		public bool ForcePreview
 		{
-			get { return _forcePreview; }
+			get => _forcePreview;
 			set
 			{
 				if (_forcePreview != value)

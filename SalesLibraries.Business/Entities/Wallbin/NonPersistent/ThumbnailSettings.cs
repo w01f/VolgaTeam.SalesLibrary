@@ -16,7 +16,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private bool _enable;
 		public bool Enable
 		{
-			get { return _enable; }
+			get => _enable;
 			set
 			{
 				if (_enable != value)
@@ -28,7 +28,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private Image _image;
 		public Image Image
 		{
-			get { return _image; }
+			get => _image;
 			set
 			{
 				if (_image != value)
@@ -40,7 +40,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private string _sourcePath;
 		public string SourcePath
 		{
-			get { return _sourcePath; }
+			get => _sourcePath;
 			set
 			{
 				if (_sourcePath != value)
@@ -52,7 +52,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private int _imageWidth = 300;
 		public int ImageWidth
 		{
-			get { return _imageWidth; }
+			get => _imageWidth;
 			set
 			{
 				if (_imageWidth != value)
@@ -64,7 +64,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private int _imagePadding = 10;
 		public int ImagePadding
 		{
-			get { return _imagePadding; }
+			get => _imagePadding;
 			set
 			{
 				if (_imagePadding != value)
@@ -76,7 +76,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private HorizontalAlignment _imageAlignement = HorizontalAlignment.Left;
 		public HorizontalAlignment ImageAlignement
 		{
-			get { return _imageAlignement; }
+			get => _imageAlignement;
 			set
 			{
 				if (_imageAlignement != value)
@@ -88,7 +88,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private int _borderSize = 2;
 		public int BorderSize
 		{
-			get { return _borderSize; }
+			get => _borderSize;
 			set
 			{
 				if (_borderSize != value)
@@ -100,7 +100,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private Color _borderColor = ColorTranslator.FromHtml("#C0C0C0");
 		public Color BorderColor
 		{
-			get { return _borderColor; }
+			get => _borderColor;
 			set
 			{
 				if (_borderColor != value)
@@ -112,7 +112,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private Color _shadowColor = DefaultShadowColor;
 		public Color ShadowColor
 		{
-			get { return _shadowColor; }
+			get => _shadowColor;
 			set
 			{
 				if (_shadowColor != value)
@@ -124,7 +124,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private ThumbnailTextMode _textMode = ThumbnailTextMode.LinkName;
 		public ThumbnailTextMode TextMode
 		{
-			get { return _textMode; }
+			get => _textMode;
 			set
 			{
 				if (_textMode != value)
@@ -136,7 +136,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private ThumbnailTextPosition _textPosition = ThumbnailTextPosition.Top;
 		public ThumbnailTextPosition TextPosition
 		{
-			get { return _textPosition; }
+			get => _textPosition;
 			set
 			{
 				if (_textPosition != value)
@@ -148,7 +148,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private string _text = String.Empty;
 		public string Text
 		{
-			get { return _text; }
+			get => _text;
 			set
 			{
 				if (_text != value)
@@ -160,7 +160,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private Color _foreColor = ColorTranslator.FromHtml("#828282");
 		public Color ForeColor
 		{
-			get { return _foreColor; }
+			get => _foreColor;
 			set
 			{
 				if (_foreColor != value)
@@ -172,7 +172,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private Font _font = new Font("Arial", 10, FontStyle.Regular, GraphicsUnit.Point);
 		public Font Font
 		{
-			get { return _font; }
+			get => _font;
 			set
 			{
 				if (_font != value)
@@ -184,7 +184,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private HorizontalAlignment _textAlignement = HorizontalAlignment.Left;
 		public HorizontalAlignment TextAlignement
 		{
-			get { return _textAlignement; }
+			get => _textAlignement;
 			set
 			{
 				if (_textAlignement != value)

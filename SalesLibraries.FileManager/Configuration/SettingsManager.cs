@@ -47,6 +47,8 @@ namespace SalesLibraries.FileManager.Configuration
 		public string WebServicePassword { get; private set; }
 		#endregion
 
+		public OneDriveSettings OneDriveSettings { get; }
+
 		public EditorsSettings EditorSettings { get; }
 
 		public BrowserManager BrowserSettings { get; }
@@ -74,6 +76,7 @@ namespace SalesLibraries.FileManager.Configuration
 			MultitabView = true;
 			#endregion
 
+			OneDriveSettings = new OneDriveSettings();
 			EditorSettings = new EditorsSettings();
 			BrowserSettings = new BrowserManager();
 			IdleSettings = new ApplicationIdleSettings();
@@ -94,7 +97,7 @@ namespace SalesLibraries.FileManager.Configuration
 			document.Load(Common.Helpers.RemoteResourceManager.Instance.AppSettingsFile.LocalPath);
 
 			#region FM Settings
-			XmlNode node = document.SelectSingleNode(@"/LocalSettings/BackupPath");
+			var node = document.SelectSingleNode(@"/LocalSettings/BackupPath");
 			if (node != null)
 				BackupPath = node.InnerText;
 			node = document.SelectSingleNode(@"/LocalSettings/NetworkPath");
@@ -150,6 +153,7 @@ namespace SalesLibraries.FileManager.Configuration
 			LoadRibbonTabSettings();
 			LoadCategoryRequestSettings();
 			LoadServiceConnectionSettings();
+			LoadOneDriveSettings();
 			LoadArchiveLinksSettings();
 			LoadMainFormStyle();
 
@@ -221,7 +225,7 @@ namespace SalesLibraries.FileManager.Configuration
 				var document = new XmlDocument();
 				document.Load(RemoteResourceManager.Instance.CategoryRequestSettingsFile.LocalPath);
 
-				XmlNode node = document.SelectSingleNode(@"/catrequest/recipients");
+				var node = document.SelectSingleNode(@"/catrequest/recipients");
 				if (node != null)
 					CategoryRequestRecipients = node.InnerText;
 
@@ -242,8 +246,7 @@ namespace SalesLibraries.FileManager.Configuration
 			document.Load(RemoteResourceManager.Instance.ArchiveLinksSettingsFile.LocalPath);
 			var node = document.SelectSingleNode(@"/Config/MaxPdfPages");
 			{
-				int temp;
-				if (node != null && Int32.TryParse(node.InnerText, out temp))
+				if (node != null && Int32.TryParse(node.InnerText, out var temp))
 					WallbinConfiguration.MaxPreviewPdfPagesCount = temp;
 			}
 		}
@@ -252,6 +255,14 @@ namespace SalesLibraries.FileManager.Configuration
 		{
 			if (!RemoteResourceManager.Instance.SiteFile.ExistsLocal()) return;
 			WebServiceSite = File.ReadAllText(RemoteResourceManager.Instance.SiteFile.LocalPath).Trim();
+		}
+
+		private void LoadOneDriveSettings()
+		{
+			if (!RemoteResourceManager.Instance.OneDriveSettingsFile.ExistsLocal()) return;
+			var document = new XmlDocument();
+			document.Load(RemoteResourceManager.Instance.OneDriveSettingsFile.LocalPath);
+			OneDriveSettings.Deserialize(document.SelectSingleNode(@"/Settings"));
 		}
 
 		private void LoadMainFormStyle()

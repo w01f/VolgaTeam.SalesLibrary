@@ -41,6 +41,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 							return "Expiration Date";
 						case LinkSettingsGroupType.QuickLink:
 							return "Quick Link";
+						case LinkSettingsGroupType.OneDrive:
+							return "OneDrive";
 						case LinkSettingsGroupType.AutoWidgets:
 							return "Auto Widgets";
 						default:

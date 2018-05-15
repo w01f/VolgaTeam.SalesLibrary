@@ -11,7 +11,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		private string _shortcutId;
 		public string ShortcutId
 		{
-			get { return _shortcutId; }
+			get => _shortcutId;
 			set
 			{
 				if (_shortcutId != value)
@@ -23,7 +23,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		private bool _openOnSamePage;
 		public bool OpenOnSamePage
 		{
-			get { return _openOnSamePage; }
+			get => _openOnSamePage;
 			set
 			{
 				if (_openOnSamePage != value)

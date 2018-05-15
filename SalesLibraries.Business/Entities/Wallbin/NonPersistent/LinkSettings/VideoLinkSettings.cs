@@ -7,7 +7,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		private bool _forcePreview;
 		public bool ForcePreview
 		{
-			get { return _forcePreview; }
+			get => _forcePreview;
 			set
 			{
 				if (_forcePreview != value)
@@ -19,7 +19,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		private bool _downloadSource;
 		public bool DownloadSource
 		{
-			get { return _downloadSource; }
+			get => _downloadSource;
 			set
 			{
 				if (_downloadSource != value)

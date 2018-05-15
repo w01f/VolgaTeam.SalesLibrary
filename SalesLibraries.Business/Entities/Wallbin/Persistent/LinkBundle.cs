@@ -20,7 +20,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 		[Required]
 		public string Name
 		{
-			get { return _name; }
+			get => _name;
 			set
 			{
 				if (_name != value)
@@ -33,7 +33,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 		[Required]
 		public int Order
 		{
-			get { return _order; }
+			get => _order;
 			set
 			{
 				if (_order != value)
@@ -49,23 +49,23 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 		[NotMapped, JsonIgnore]
 		public override IChangable Parent
 		{
-			get { return Library; }
-			set { Library = value as Library; }
+			get => Library;
+			set => Library = value as Library;
 		}
 
 		private LinkBundleSettings _settings;
 		[NotMapped, JsonIgnore]
 		public LinkBundleSettings Settings
 		{
-			get { return _settings ?? (_settings = SettingsContainer.CreateInstance<LinkBundleSettings>(this, SettingsEncoded)); }
-			set { _settings = value; }
+			get => _settings ?? (_settings = SettingsContainer.CreateInstance<LinkBundleSettings>(this, SettingsEncoded));
+			set => _settings = value;
 		}
 
 		[NotMapped, JsonIgnore]
 		public override int CollectionOrder
 		{
-			get { return Order; }
-			set { Order = value; }
+			get => Order;
+			set => Order = value;
 		}
 		#endregion
 

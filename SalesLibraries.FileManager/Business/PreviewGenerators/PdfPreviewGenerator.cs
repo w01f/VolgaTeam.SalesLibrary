@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using SalesLibraries.Business.Entities.Interfaces;
@@ -24,22 +25,32 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 			var updatePng = !(Directory.Exists(pngDestination) && Directory.GetFiles(pngDestination).Any());
 			if (updatePng && !Directory.Exists(pngDestination))
 				Directory.CreateDirectory(pngDestination);
+
 			var pngPhoneDestination = Path.Combine(pdfContainer.ContainerPath, PreviewFormats.PngForMobile);
 			var updatePngPhone = !(Directory.Exists(pngPhoneDestination) && Directory.GetFiles(pngPhoneDestination).Any());
 			if (updatePngPhone && !Directory.Exists(pngPhoneDestination))
 				Directory.CreateDirectory(pngPhoneDestination);
+
 			var thumbsDestination = Path.Combine(pdfContainer.ContainerPath, PreviewFormats.Thumbnails);
 			var updateThumbs = !(Directory.Exists(thumbsDestination) && Directory.GetFiles(thumbsDestination).Any());
 			if (updateThumbs && !Directory.Exists(thumbsDestination))
 				Directory.CreateDirectory(thumbsDestination);
+
 			var thumbsPhoneDestination = Path.Combine(pdfContainer.ContainerPath, PreviewFormats.ThumbnailsForMobile);
 			var updateThumbsPhone = !(Directory.Exists(thumbsPhoneDestination) && Directory.GetFiles(thumbsPhoneDestination).Any());
 			if (updateThumbsPhone && !Directory.Exists(thumbsPhoneDestination))
 				Directory.CreateDirectory(thumbsPhoneDestination);
+
 			var thumbsDatatableDestination = Path.Combine(pdfContainer.ContainerPath, PreviewFormats.ThumbnailsForDatatable);
 			var updateThumbsDatatable = !(Directory.Exists(thumbsDatatableDestination) && Directory.GetFiles(thumbsDatatableDestination).Any());
 			if (updateThumbsDatatable && !Directory.Exists(thumbsDatatableDestination))
 				Directory.CreateDirectory(thumbsDatatableDestination);
+
+			var oneDriveUrl = pdfContainer.OneDriveUrl;
+			var oneDriveUrlDestination = Path.Combine(pdfContainer.ContainerPath, PreviewFormats.OneDrive);
+			var updateOneDrive = !Directory.Exists(oneDriveUrlDestination) && !String.IsNullOrEmpty(oneDriveUrl);
+			if (!Directory.Exists(oneDriveUrlDestination) && updateOneDrive)
+				Directory.CreateDirectory(oneDriveUrlDestination);
 
 			if (updatePng || updateThumbs || updateThumbsDatatable)
 			{
@@ -74,6 +85,15 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 			{
 				PngHelper.ConvertFiles(pdfContainer.ContainerPath);
 				previewContainer.MarkAsModified();
+			}
+
+			if (updateOneDrive)
+			{
+				OneDrivePreviewHelper.GenerateShortcutFiles(
+					oneDriveUrl,
+					Path.GetFileName(previewContainer.SourcePath),
+					oneDriveUrlDestination);
+				logger.LogStage(PreviewFormats.OneDrive);
 			}
 
 			logger.FinishLogging();

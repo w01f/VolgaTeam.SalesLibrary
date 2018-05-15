@@ -14,5 +14,6 @@
 		public const string VideoThumbnail = "thumb";
 		public const string VideoInfo = "info";
 		public const string Word = "docx";
+		public const string OneDrive = "one_drive";
 	}
 }

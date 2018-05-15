@@ -29,7 +29,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkBundleSetti
 		private int _collectionOrder;
 		public int CollectionOrder
 		{
-			get { return _collectionOrder; }
+			get => _collectionOrder;
 			set
 			{
 				if (_collectionOrder != value)
@@ -41,7 +41,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkBundleSetti
 		private decimal? _value;
 		public decimal? Value
 		{
-			get { return _value; }
+			get => _value;
 			set
 			{
 				if (_value != value)
@@ -56,8 +56,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkBundleSetti
 		[JsonIgnore]
 		public IChangable Parent
 		{
-			get { return ParentRevenue; }
-			set { ParentRevenue = value as RevenueItem; }
+			get => ParentRevenue;
+			set => ParentRevenue = value as RevenueItem;
 		}
 
 		[JsonConstructor]

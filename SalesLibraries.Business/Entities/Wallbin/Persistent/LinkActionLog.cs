@@ -26,22 +26,22 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 		[NotMapped, JsonIgnore]
 		public ActionSettings Settings
 		{
-			get { return _settings ?? (_settings = SettingsContainer.CreateInstance<ActionSettings>(null, SettingsEncoded)); }
-			set { _settings = value; }
+			get => _settings ?? (_settings = SettingsContainer.CreateInstance<ActionSettings>(null, SettingsEncoded));
+			set => _settings = value;
 		}
 
 		[NotMapped, JsonIgnore]
 		public IChangable Parent
 		{
-			get { return Library; }
-			set { Library = value as Library; }
+			get => Library;
+			set => Library = value as Library;
 		}
 
 		[NotMapped, JsonIgnore]
 		public int CollectionOrder
 		{
-			get { return Order; }
-			set { Order = value; }
+			get => Order;
+			set => Order = value;
 		}
 		#endregion
 

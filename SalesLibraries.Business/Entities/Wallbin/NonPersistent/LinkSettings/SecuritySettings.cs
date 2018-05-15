@@ -8,7 +8,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		private bool _isForbidden;
 		public bool IsForbidden
 		{
-			get { return _isForbidden; }
+			get => _isForbidden;
 			set
 			{
 				if (_isForbidden != value)
@@ -20,7 +20,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		private bool _isRestricted;
 		public bool IsRestricted
 		{
-			get { return _isRestricted; }
+			get => _isRestricted;
 			set
 			{
 				if (_isRestricted != value)
@@ -32,7 +32,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		private bool _noShare;
 		public bool NoShare
 		{
-			get { return _noShare; }
+			get => _noShare;
 			set
 			{
 				if (_noShare != value)
@@ -44,7 +44,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		private string _assignedUsers;
 		public string AssignedUsers
 		{
-			get { return _assignedUsers; }
+			get => _assignedUsers;
 			set
 			{
 				if (_assignedUsers != value)
@@ -56,7 +56,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		private string _deniedUsers;
 		public string DeniedUsers
 		{
-			get { return _deniedUsers; }
+			get => _deniedUsers;
 			set
 			{
 				if (_deniedUsers != value)

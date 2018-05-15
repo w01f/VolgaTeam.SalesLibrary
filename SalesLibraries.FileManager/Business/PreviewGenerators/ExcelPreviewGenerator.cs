@@ -37,6 +37,12 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 			if (!Directory.Exists(thumbsDatatableDestination))
 				Directory.CreateDirectory(thumbsDatatableDestination);
 
+			var oneDriveUrl = excelContainer.OneDriveUrl;
+			var oneDriveUrlDestination = Path.Combine(excelContainer.ContainerPath, PreviewFormats.OneDrive);
+			var updateOneDrive = !Directory.Exists(oneDriveUrlDestination) && !String.IsNullOrEmpty(oneDriveUrl);
+			if (!Directory.Exists(oneDriveUrlDestination) && updateOneDrive)
+				Directory.CreateDirectory(oneDriveUrlDestination);
+
 			var needToUpdate = updateTxt || updateThumbs || updateThumbsDatatable;
 			if (needToUpdate)
 			{
@@ -60,7 +66,9 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 								{
 									File.Delete(pdfFileName);
 								}
-								catch { }
+								catch
+								{
+								}
 						}
 
 						if (updateTxt)
@@ -84,6 +92,15 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 					MessageFilter.Revoke();
 					ExcelHelper.Instance.Disconnect();
 				}
+			}
+
+			if (updateOneDrive)
+			{
+				OneDrivePreviewHelper.GenerateShortcutFiles(
+					oneDriveUrl,
+					Path.GetFileName(previewContainer.SourcePath),
+					oneDriveUrlDestination);
+				logger.LogStage(PreviewFormats.OneDrive);
 			}
 
 			if (needToUpdate)

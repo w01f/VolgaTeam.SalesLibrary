@@ -12,7 +12,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private bool _inverted;
 		public bool Inverted
 		{
-			get { return _inverted; }
+			get => _inverted;
 			set
 			{
 				if (_inverted != value)
@@ -27,7 +27,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private Color _inversionColor = GraphicObjectExtensions.DefaultReplaceColor;
 		public Color InversionColor
 		{
-			get { return _inversionColor; }
+			get => _inversionColor;
 			set
 			{
 				if (_inversionColor != value)
@@ -42,7 +42,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private Image _widget;
 		public Image Widget
 		{
-			get { return _widget; }
+			get => _widget;
 			set
 			{
 				if (_widget != value)

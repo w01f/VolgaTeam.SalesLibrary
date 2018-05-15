@@ -8,7 +8,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private bool _enabled;
 		public bool Enabled
 		{
-			get { return _enabled; }
+			get => _enabled;
 			set
 			{
 				if (_enabled != value)
@@ -20,7 +20,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private string _path;
 		public string Path
 		{
-			get { return _path; }
+			get => _path;
 			set
 			{
 				if (_path != value)
@@ -32,7 +32,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private Color _calendarBackColor;
 		public Color CalendarBackColor
 		{
-			get { return _calendarBackColor; }
+			get => _calendarBackColor;
 			set
 			{
 				if (_calendarBackColor != value)
@@ -44,7 +44,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private Color _calendarBorderColor;
 		public Color CalendarBorderColor
 		{
-			get { return _calendarBorderColor; }
+			get => _calendarBorderColor;
 			set
 			{
 				if (_calendarBorderColor != value)
@@ -56,7 +56,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private Color _calendarHeaderBackColor;
 		public Color CalendarHeaderBackColor
 		{
-			get { return _calendarHeaderBackColor; }
+			get => _calendarHeaderBackColor;
 			set
 			{
 				if (_calendarHeaderBackColor != value)
@@ -68,7 +68,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private Color _calendarHeaderForeColor;
 		public Color CalendarHeaderForeColor
 		{
-			get { return _calendarHeaderForeColor; }
+			get => _calendarHeaderForeColor;
 			set
 			{
 				if (_calendarHeaderForeColor != value)
@@ -80,7 +80,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private Color _monthHeaderBackColor;
 		public Color MonthHeaderBackColor
 		{
-			get { return _monthHeaderBackColor; }
+			get => _monthHeaderBackColor;
 			set
 			{
 				if (_monthHeaderBackColor != value)
@@ -92,7 +92,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private Color _monthHeaderForeColor;
 		public Color MonthHeaderForeColor
 		{
-			get { return _monthHeaderForeColor; }
+			get => _monthHeaderForeColor;
 			set
 			{
 				if (_monthHeaderForeColor != value)
@@ -104,7 +104,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private Color _monthBodyBackColor;
 		public Color MonthBodyBackColor
 		{
-			get { return _monthBodyBackColor; }
+			get => _monthBodyBackColor;
 			set
 			{
 				if (_monthBodyBackColor != value)
@@ -116,7 +116,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private Color _monthBodyForeColor;
 		public Color MonthBodyForeColor
 		{
-			get { return _monthBodyForeColor; }
+			get => _monthBodyForeColor;
 			set
 			{
 				if (_monthBodyForeColor != value)
@@ -128,7 +128,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private Color _sweepBackColor;
 		public Color SweepBackColor
 		{
-			get { return _sweepBackColor; }
+			get => _sweepBackColor;
 			set
 			{
 				if (_sweepBackColor != value)
@@ -140,7 +140,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private Color _sweepForeColor;
 		public Color SweepForeColor
 		{
-			get { return _sweepForeColor; }
+			get => _sweepForeColor;
 			set
 			{
 				if (_sweepForeColor != value)
@@ -152,7 +152,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private Color _deadLinksForeColor;
 		public Color DeadLinksForeColor
 		{
-			get { return _deadLinksForeColor; }
+			get => _deadLinksForeColor;
 			set
 			{
 				if (_deadLinksForeColor != value)

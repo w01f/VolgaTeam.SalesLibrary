@@ -15,6 +15,7 @@ namespace SalesLibraries.FileManager.Configuration
 
 		#region Remote
 		public StorageFile SiteFile { get; private set; }
+		public StorageFile OneDriveSettingsFile { get; private set; }
 		public StorageFile CategoryRequestSettingsFile { get; private set; }
 		public StorageFile ErrorEmailSettingsFile { get; private set; }
 		public StorageFile TabSettingsFile { get; private set; }
@@ -63,6 +64,12 @@ namespace SalesLibraries.FileManager.Configuration
 				"Site.txt"
 				));
 			await SiteFile.Download();
+
+			OneDriveSettingsFile = new StorageFile(appOutgoingFolder.RelativePathParts.Merge(
+				"OneDrive.xml"
+			));
+			if (await OneDriveSettingsFile.Exists(true))
+				await OneDriveSettingsFile.Download();
 
 			CategoryRequestSettingsFile = new StorageFile(appOutgoingFolder.RelativePathParts.Merge(
 				"CategoryRequest.xml"

@@ -11,7 +11,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		private string _libraryName;
 		public string LibraryName
 		{
-			get { return _libraryName; }
+			get => _libraryName;
 			set
 			{
 				if (_libraryName != value)
@@ -23,7 +23,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		private string _pageName;
 		public string PageName
 		{
-			get { return _pageName; }
+			get => _pageName;
 			set
 			{
 				if (_pageName != value)
@@ -35,7 +35,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		private string _windowName;
 		public string WindowName
 		{
-			get { return _windowName; }
+			get => _windowName;
 			set
 			{
 				if (_windowName != value)
@@ -47,7 +47,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		private string _linkName;
 		public string LinkName
 		{
-			get { return _linkName; }
+			get => _linkName;
 			set
 			{
 				if (_linkName != value)

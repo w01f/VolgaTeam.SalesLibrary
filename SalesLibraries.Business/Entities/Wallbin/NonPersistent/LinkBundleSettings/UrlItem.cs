@@ -9,7 +9,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkBundleSetti
 		private string _url;
 		public string Url
 		{
-			get { return _url; }
+			get => _url;
 			set
 			{
 				if (_url != value)
@@ -21,8 +21,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkBundleSetti
 		[JsonIgnore]
 		public override string Name
 		{
-			get { return Url; }
-			set { Url = value; }
+			get => Url;
+			set => Url = value;
 		}
 
 		public UrlItem()

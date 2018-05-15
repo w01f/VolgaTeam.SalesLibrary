@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using DevExpress.Data.Helpers;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
@@ -35,6 +36,21 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 			ApplyOriginalFileStateChangesOnAssociatedLink(targetLibrary, cancellationToken);
 
 			UpdatePowerPointInfo(targetLibrary, cancellationToken);
+
+			if (MainController.Instance.Settings.OneDriveSettings.Enabled)
+			{
+				var oneDriveConnector = new OneDriveConnector();
+				AsyncHelper.RunSync(async () =>
+				{
+					await oneDriveConnector.ProcessLinks(targetLibrary.Pages
+						.SelectMany(p => p.AllGroupLinks)
+						.OfType<LibraryFileLink>()
+						.Where(f => !f.IsDead)
+						.ToList()
+						, cancellationToken);
+				});
+				tempLogFiles.Add(oneDriveConnector.SaveLog(tempPath));
+			}
 
 			UpdatePreviewContent(targetLibrary, cancellationToken);
 
@@ -73,6 +89,21 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 				ApplyOriginalFileStateChangesOnAssociatedLink(targetLibrary, cancellationToken);
 
 				UpdatePowerPointInfo(targetLibrary, cancellationToken);
+
+				if (MainController.Instance.Settings.OneDriveSettings.Enabled)
+				{
+					var oneDriveConnector = new OneDriveConnector();
+					AsyncHelper.RunSync(async () =>
+					{
+						await oneDriveConnector.ProcessLinks(targetLibrary.Pages
+								.SelectMany(p => p.AllGroupLinks)
+								.OfType<LibraryFileLink>()
+								.Where(f => !f.IsDead)
+								.ToList()
+							, cancellationToken);
+					});
+					tempLogFiles.Add(oneDriveConnector.SaveLog(tempPath));
+				}
 
 				UpdatePreviewContent(targetLibrary, cancellationToken);
 

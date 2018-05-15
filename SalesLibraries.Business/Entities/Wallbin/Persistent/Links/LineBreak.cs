@@ -19,8 +19,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		[NotMapped, JsonIgnore]
 		public override BaseLinkSettings Settings
 		{
-			get { return _settings ?? (_settings = SettingsContainer.CreateInstance<LineBreakSettings>(this, SettingsEncoded)); }
-			set { _settings = value as LineBreakSettings; }
+			get => _settings ?? (_settings = SettingsContainer.CreateInstance<LineBreakSettings>(this, SettingsEncoded));
+			set => _settings = value as LineBreakSettings;
 		}
 
 		[NotMapped, JsonIgnore]

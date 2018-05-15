@@ -79,7 +79,6 @@
       <xsd:complexType name="Font">
         <xsd:all>
           <xsd:element name="name" type="xsd:string" />
-          <xsd:element name="size" type="xsd:int" />
           <xsd:element name="isBold" type="xsd:boolean" />
           <xsd:element name="isItalic" type="xsd:boolean" />
           <xsd:element name="isUnderlined" type="xsd:boolean" />
@@ -129,6 +128,7 @@
           <xsd:element name="widget" type="xsd:string" />
           <xsd:element name="banner" type="tns:SoapBanner" />
           <xsd:element name="thumbnail" type="tns:SoapThumbnail" />
+          <xsd:element name="oneDrive" type="tns:SoapOneDrive" />
           <xsd:element name="previewId" type="xsd:string" />
           <xsd:element name="superFilters" type="tns:LinkSuperFilterArray" />
           <xsd:element name="categories" type="tns:LinkCategoryArray" />
@@ -180,6 +180,11 @@
           <xsd:element name="foreColor" type="xsd:string" />
           <xsd:element name="textPosition" type="xsd:string" />
           <xsd:element name="textAlignment" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="SoapOneDrive">
+        <xsd:all>
+          <xsd:element name="url" type="xsd:string" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="LinkSuperFilterArray">

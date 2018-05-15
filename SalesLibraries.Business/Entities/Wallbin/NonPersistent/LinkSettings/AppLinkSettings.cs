@@ -5,7 +5,7 @@
 		private string _secondPath;
 		public string SecondPath
 		{
-			get { return _secondPath; }
+			get => _secondPath;
 			set
 			{
 				if (_secondPath != value)

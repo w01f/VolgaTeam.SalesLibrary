@@ -7,7 +7,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private bool _minimizeOnSync;
 		public bool MinimizeOnSync
 		{
-			get { return _minimizeOnSync; }
+			get => _minimizeOnSync;
 			set
 			{
 				if (_minimizeOnSync != value)
@@ -19,7 +19,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private bool _closeAfterSync;
 		public bool CloseAfterSync
 		{
-			get { return _closeAfterSync; }
+			get => _closeAfterSync;
 			set
 			{
 				if (_closeAfterSync != value)

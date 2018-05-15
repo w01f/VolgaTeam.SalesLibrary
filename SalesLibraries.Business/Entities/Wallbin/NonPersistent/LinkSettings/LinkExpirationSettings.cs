@@ -9,7 +9,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		private bool _enable;
 		public bool Enable
 		{
-			get { return _enable; }
+			get => _enable;
 			set
 			{
 				if (_enable != value)
@@ -21,7 +21,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		private DateTime _expirationDate;
 		public DateTime ExpirationDate
 		{
-			get { return _expirationDate; }
+			get => _expirationDate;
 			set
 			{
 				if (_expirationDate != value)
@@ -33,7 +33,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		private bool _markWhenExpired;
 		public bool MarkWhenExpired
 		{
-			get { return _markWhenExpired; }
+			get => _markWhenExpired;
 			set
 			{
 				if (_markWhenExpired != value)
@@ -45,7 +45,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		private bool _sendEmailOnSync;
 		public bool SendEmailOnSync
 		{
-			get { return _sendEmailOnSync; }
+			get => _sendEmailOnSync;
 			set
 			{
 				if (_sendEmailOnSync != value)

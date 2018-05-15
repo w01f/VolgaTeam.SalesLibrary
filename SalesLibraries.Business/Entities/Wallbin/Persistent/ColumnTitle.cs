@@ -17,7 +17,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 		[Required]
 		public int ColumnOrder
 		{
-			get { return _columnOrder; }
+			get => _columnOrder;
 			set
 			{
 				if (_columnOrder != value)
@@ -36,39 +36,39 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 		[NotMapped, JsonIgnore]
 		public override IChangable Parent
 		{
-			get { return Page; }
-			set { Page = value as LibraryPage; }
+			get => Page;
+			set => Page = value as LibraryPage;
 		}
 
 		[NotMapped, JsonIgnore]
 		public override int CollectionOrder
 		{
-			get { return ColumnOrder; }
-			set { ColumnOrder = value; }
+			get => ColumnOrder;
+			set => ColumnOrder = value;
 		}
 
 		private ColumnTitleSettings _settings;
 		[NotMapped, JsonIgnore]
 		public ColumnTitleSettings Settings
 		{
-			get { return _settings ?? (_settings = SettingsContainer.CreateInstance<ColumnTitleSettings>(this, SettingsEncoded)); }
-			set { _settings = value; }
+			get => _settings ?? (_settings = SettingsContainer.CreateInstance<ColumnTitleSettings>(this, SettingsEncoded));
+			set => _settings = value;
 		}
 
 		private WidgetSettings _widget;
 		[NotMapped, JsonIgnore]
 		public WidgetSettings Widget
 		{
-			get { return _widget ?? (_widget = SettingsContainer.CreateInstance<WidgetSettings>(this, WidgetEncoded)); }
-			set { _widget = value; }
+			get => _widget ?? (_widget = SettingsContainer.CreateInstance<WidgetSettings>(this, WidgetEncoded));
+			set => _widget = value;
 		}
 
 		private BannerSettings _banner;
 		[NotMapped, JsonIgnore]
 		public BannerSettings Banner
 		{
-			get { return _banner ?? (_banner = SettingsContainer.CreateInstance<BannerSettings>(this, BannerEncoded)); }
-			set { _banner = value; }
+			get => _banner ?? (_banner = SettingsContainer.CreateInstance<BannerSettings>(this, BannerEncoded));
+			set => _banner = value;
 		}
 
 		[NotMapped, JsonIgnore]
@@ -124,7 +124,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 			private bool _showText;
 			public bool ShowText
 			{
-				get { return _showText; }
+				get => _showText;
 				set
 				{
 					if (_showText != value)
@@ -136,7 +136,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 			private string _text;
 			public string Text
 			{
-				get { return _text; }
+				get => _text;
 				set
 				{
 					if (_text != value)
@@ -148,7 +148,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 			private Color _backgroundColor = Color.White;
 			public Color BackgroundColor
 			{
-				get { return _backgroundColor; }
+				get => _backgroundColor;
 				set
 				{
 					if (_backgroundColor != value)
@@ -160,7 +160,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 			private Color _foreColor = Color.Black;
 			public Color ForeColor
 			{
-				get { return _foreColor; }
+				get => _foreColor;
 				set
 				{
 					if (_foreColor != value)
@@ -172,7 +172,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 			private Font _headerFont = new Font("Arial", 12, FontStyle.Regular, GraphicsUnit.Point);
 			public Font HeaderFont
 			{
-				get { return _headerFont; }
+				get => _headerFont;
 				set
 				{
 					if (_headerFont != value)
@@ -184,7 +184,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 			private HorizontalAlignment _headerAlignment = HorizontalAlignment.Center;
 			public HorizontalAlignment HeaderAlignment
 			{
-				get { return _headerAlignment; }
+				get => _headerAlignment;
 				set
 				{
 					if (_headerAlignment != value)

@@ -24,7 +24,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		private bool _isDead;
 		public bool IsDead
 		{
-			get { return _isDead; }
+			get => _isDead;
 			set
 			{
 				if (_isDead != value)
@@ -32,10 +32,21 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 				_isDead = value;
 			}
 		}
+
+		public string OneDriveEncoded { get; set; }
+
 		public virtual LibraryFolderLink FolderLink { get; set; }
 		#endregion
 
 		#region Nonpersistent Properties
+		private OneDriveLinkSettings _oneDriveLinkSettings;
+		[NotMapped, JsonIgnore]
+		public OneDriveLinkSettings OneDriveSettings
+		{
+			get => _oneDriveLinkSettings ?? (_oneDriveLinkSettings = SettingsContainer.CreateInstance<OneDriveLinkSettings>(this, OneDriveEncoded));
+			set => _oneDriveLinkSettings = value;
+		}
+
 		[NotMapped, JsonIgnore]
 		public override IChangable Parent => (IChangable)FolderLink ?? Folder;
 
@@ -55,8 +66,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		[NotMapped, JsonIgnore]
 		public override BaseLinkSettings Settings
 		{
-			get { return _settings ?? (_settings = SettingsContainer.CreateInstance<LibraryFileLinkSettings>(this, SettingsEncoded)); }
-			set { _settings = value as LibraryFileLinkSettings; }
+			get => _settings ?? (_settings = SettingsContainer.CreateInstance<LibraryFileLinkSettings>(this, SettingsEncoded));
+			set => _settings = value as LibraryFileLinkSettings;
 		}
 
 		[NotMapped, JsonIgnore]
@@ -236,10 +247,18 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			return !File.Exists(FullPath);
 		}
 
+		public override void BeforeSave()
+		{
+			if (NeedToSave)
+				OneDriveEncoded = OneDriveSettings.Serialize();
+			base.BeforeSave();
+		}
+
 		public override void ApplyValues(BaseLibraryLink link)
 		{
 			IsDead = ((LibraryFileLink)link).IsDead;
 			DataSourceId = ((LibraryFileLink)link).DataSourceId;
+			OneDriveEncoded = ((LibraryFileLink)link).OneDriveEncoded;
 			base.ApplyValues(link);
 		}
 
@@ -248,6 +267,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			var link = (LibraryFileLink)base.Copy();
 			link.IsDead = IsDead;
 			link.DataSourceId = DataSourceId;
+			link.OneDriveEncoded = OneDriveEncoded;
 
 			if (this.IsLinkExternal() && FolderLink == null)
 			{
@@ -260,6 +280,23 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			}
 
 			return link;
+		}
+
+		public override void ResetToDefault(IList<LinkSettingsGroupType> groupsForReset = null)
+		{
+			if (groupsForReset == null || groupsForReset.Contains(LinkSettingsGroupType.OneDrive))
+				OneDriveEncoded = null;
+			base.ResetToDefault(groupsForReset);
+		}
+
+		public override IList<LinkSettingsGroupType> GetCustomizedSettigsGroups()
+		{
+			var customizedSettingsGroups = base.GetCustomizedSettigsGroups().ToList();
+
+			if (OneDriveSettings.Enable)
+				customizedSettingsGroups.Add(LinkSettingsGroupType.OneDrive);
+
+			return customizedSettingsGroups;
 		}
 
 		public static LibraryFileLink Create(SourceLink sourceLink, LibraryFolder parentFolder)

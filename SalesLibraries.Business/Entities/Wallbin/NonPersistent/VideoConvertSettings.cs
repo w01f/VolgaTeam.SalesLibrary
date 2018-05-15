@@ -9,7 +9,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private int? _crf;
 		public int? Crf
 		{
-			get { return _crf; }
+			get => _crf;
 			set
 			{
 				if (_crf != value)

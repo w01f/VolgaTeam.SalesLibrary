@@ -129,6 +129,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 					case LinkSettingsGroupType.QuickLink:
 						itemName = "Quick Link";
 						break;
+					case LinkSettingsGroupType.OneDrive:
+						itemName = "OneDrive";
+						break;
 					case LinkSettingsGroupType.AutoWidgets:
 						itemName = "Auto Widgets";
 						break;

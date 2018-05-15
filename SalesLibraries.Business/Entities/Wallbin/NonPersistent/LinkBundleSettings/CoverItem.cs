@@ -13,7 +13,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkBundleSetti
 		protected Image _logo;
 		public Image Logo
 		{
-			get { return _logo; }
+			get => _logo;
 			set
 			{
 				if (_logo != value)
@@ -27,8 +27,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkBundleSetti
 		[JsonIgnore]
 		public override string Name
 		{
-			get { return ItemName; }
-			set { throw new NotImplementedException(); }
+			get => ItemName;
+			set => throw new NotImplementedException();
 		}
 
 		public CoverItem()

@@ -71,6 +71,12 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 				if (updateTxt && !Directory.Exists(txtDestination))
 					Directory.CreateDirectory(txtDestination);
 
+				var oneDriveUrl = powerPointContainer.OneDriveUrl;
+				var oneDriveUrlDestination = Path.Combine(powerPointContainer.ContainerPath, PreviewFormats.OneDrive);
+				var updateOneDrive = !Directory.Exists(oneDriveUrlDestination) && !String.IsNullOrEmpty(oneDriveUrl);
+				if (!Directory.Exists(oneDriveUrlDestination) && updateOneDrive)
+					Directory.CreateDirectory(oneDriveUrlDestination);
+
 				var needToUpdate = updatePdf ||
 					updatePng ||
 					updateThumbs ||
@@ -275,6 +281,15 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 						tryCount++;
 						MessageFilter.Revoke();
 					}
+				}
+
+				if (updateOneDrive)
+				{
+					OneDrivePreviewHelper.GenerateShortcutFiles(
+						oneDriveUrl,
+						Path.GetFileName(previewContainer.SourcePath),
+						oneDriveUrlDestination);
+					logger.LogStage(PreviewFormats.OneDrive);
 				}
 			} while (!updated && tryCount < 10);
 

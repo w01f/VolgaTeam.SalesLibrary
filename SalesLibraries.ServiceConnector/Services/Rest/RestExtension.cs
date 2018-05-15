@@ -28,5 +28,13 @@ namespace SalesLibraries.ServiceConnector.Services.Rest
 				JsonConvert.DeserializeObject<TData>(target.DataEncoded, serializerSettings) :
 				default(TData);
 		}
+
+		public static object GetData(this RestResponse target)
+		{
+			var serializerSettings = new RestSerializeSettings();
+			return !String.IsNullOrEmpty(target.DataEncoded) ?
+				JsonConvert.DeserializeObject(target.DataEncoded, serializerSettings) :
+				default(object);
+		}
 	}
 }

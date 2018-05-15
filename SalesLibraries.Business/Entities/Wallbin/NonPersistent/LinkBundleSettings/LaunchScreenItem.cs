@@ -13,7 +13,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkBundleSetti
 		private string _header;
 		public string Header
 		{
-			get { return _header; }
+			get => _header;
 			set
 			{
 				if (_header != value)
@@ -25,7 +25,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkBundleSetti
 		private string _footer;
 		public string Footer
 		{
-			get { return _footer; }
+			get => _footer;
 			set
 			{
 				if (_footer != value)
@@ -37,7 +37,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkBundleSetti
 		protected Image _logo;
 		public Image Logo
 		{
-			get { return _logo; }
+			get => _logo;
 			set
 			{
 				if (_logo != value)
@@ -51,7 +51,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkBundleSetti
 		protected Image _banner;
 		public Image Banner
 		{
-			get { return _banner; }
+			get => _banner;
 			set
 			{
 				if (_banner != value)
@@ -65,7 +65,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkBundleSetti
 		private Color _headerForeColor = Color.Black;
 		public Color HeaderForeColor
 		{
-			get { return _headerForeColor; }
+			get => _headerForeColor;
 			set
 			{
 				if (_headerForeColor != value)
@@ -77,7 +77,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkBundleSetti
 		private Color _headerBackColor = Color.White;
 		public Color HeaderBackColor
 		{
-			get { return _headerBackColor; }
+			get => _headerBackColor;
 			set
 			{
 				if (_headerBackColor != value)
@@ -89,7 +89,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkBundleSetti
 		private Font _headerFont = new Font("Arial", 10, FontStyle.Regular, GraphicsUnit.Point);
 		public Font HeaderFont
 		{
-			get { return _headerFont; }
+			get => _headerFont;
 			set
 			{
 				if (_headerFont != value)
@@ -101,7 +101,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkBundleSetti
 		private Color _footerForeColor = Color.Black;
 		public Color FooterForeColor
 		{
-			get { return _footerForeColor; }
+			get => _footerForeColor;
 			set
 			{
 				if (_footerForeColor != value)
@@ -113,7 +113,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkBundleSetti
 		private Color _footerBackColor = Color.White;
 		public Color FooterBackColor
 		{
-			get { return _footerBackColor; }
+			get => _footerBackColor;
 			set
 			{
 				if (_footerBackColor != value)
@@ -125,7 +125,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkBundleSetti
 		private Font _footerFont = new Font("Arial", 10, FontStyle.Regular, GraphicsUnit.Point);
 		public Font FooterFont
 		{
-			get { return _footerFont; }
+			get => _footerFont;
 			set
 			{
 				if (_footerFont != value)
@@ -137,8 +137,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkBundleSetti
 		[JsonIgnore]
 		public override string Name
 		{
-			get { return ItemName; }
-			set { throw new NotImplementedException(); }
+			get => ItemName;
+			set => throw new NotImplementedException();
 		}
 
 		public LaunchScreenItem()

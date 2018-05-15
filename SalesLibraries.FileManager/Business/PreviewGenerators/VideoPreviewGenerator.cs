@@ -28,6 +28,12 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 			if (!Directory.Exists(infoDestination))
 				Directory.CreateDirectory(infoDestination);
 
+			var oneDriveUrl = ((VideoPreviewContainer)previewContainer).OneDriveUrl;
+			var oneDriveUrlDestination = Path.Combine(((VideoPreviewContainer)previewContainer).ContainerPath, PreviewFormats.OneDrive);
+			var updateOneDrive = !Directory.Exists(oneDriveUrlDestination) && !String.IsNullOrEmpty(oneDriveUrl);
+			if (!Directory.Exists(oneDriveUrlDestination) && updateOneDrive)
+				Directory.CreateDirectory(oneDriveUrlDestination);
+
 			if (!cancellationToken.IsCancellationRequested)
 			{
 				var infoFilePath = Path.Combine(infoDestination, String.Format(Constants.OriginalVideoInfoFileNameTemplate, Path.GetFileNameWithoutExtension(previewContainer.SourcePath)) + ".txt");
@@ -89,6 +95,15 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 					logger.LogStage(PreviewFormats.ThumbnailsForDatatable);
 				}
 				updated |= updateThumbs || updateThumbsDatatable;
+			}
+
+			if (updateOneDrive)
+			{
+				OneDrivePreviewHelper.GenerateShortcutFiles(
+					oneDriveUrl,
+					Path.GetFileName(previewContainer.SourcePath),
+					oneDriveUrlDestination);
+				logger.LogStage(PreviewFormats.OneDrive);
 			}
 
 			if (updated)

@@ -13,6 +13,7 @@
 		Security = 80,
 		Expiration = 90,
 		QuickLink = 100,
+		OneDrive = 110,
 		AdminSettings = 9990,
 		AutoWidgets = 9999,
 	}

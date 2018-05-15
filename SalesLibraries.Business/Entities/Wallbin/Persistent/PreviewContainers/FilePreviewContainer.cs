@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using SalesLibraries.Business.Entities.Common;
 using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.PreviewContainerSettings;
+using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 
 namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 {
@@ -17,8 +18,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 		[NotMapped, JsonIgnore]
 		public override BasePreviewContainerSettings Settings
 		{
-			get { return _settings ?? (_settings = SettingsContainer.CreateInstance<CommonPreviewContainerSettings>(this, SettingsEncoded)); }
-			set { _settings = value as CommonPreviewContainerSettings; }
+			get => _settings ?? (_settings = SettingsContainer.CreateInstance<CommonPreviewContainerSettings>(this, SettingsEncoded));
+			set => _settings = value as CommonPreviewContainerSettings;
 		}
 
 		[NotMapped, JsonIgnore]
@@ -26,6 +27,14 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 
 		[NotMapped, JsonIgnore]
 		public string SourceSubType => !String.IsNullOrEmpty(SourcePath) && File.Exists(SourcePath) ? Path.GetExtension(SourcePath).Replace(".", String.Empty).ToLower() : null;
+
+		[NotMapped, JsonIgnore]
+		public string OneDriveUrl => Library
+			.GetPreviewableLinksBySourcePath(SourcePath)
+			.OfType<LibraryFileLink>()
+			.Where(link => link.OneDriveSettings.Enable)
+			.Select(link => link.OneDriveSettings.Url)
+			.FirstOrDefault();
 		#endregion
 
 		protected override void UpdateState(IList<IPreviewableLink> associatedLinks)

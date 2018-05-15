@@ -12,7 +12,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		private string _libraryName;
 		public string LibraryName
 		{
-			get { return _libraryName; }
+			get => _libraryName;
 			set
 			{
 				if (_libraryName != value)
@@ -24,7 +24,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		private string _pageName;
 		public string PageName
 		{
-			get { return _pageName; }
+			get => _pageName;
 			set
 			{
 				if (_pageName != value)
@@ -36,7 +36,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		private bool _showHeaderText = true;
 		public bool ShowHeaderText
 		{
-			get { return _showHeaderText; }
+			get => _showHeaderText;
 			set
 			{
 				if (_showHeaderText != value)
@@ -48,7 +48,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		private bool _openOnSamePage;
 		public bool OpenOnSamePage
 		{
-			get { return _openOnSamePage; }
+			get => _openOnSamePage;
 			set
 			{
 				if (_openOnSamePage != value)
@@ -60,7 +60,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		private InternalLinkTemplate _styleSettings;
 		public InternalLinkTemplate StyleSettings
 		{
-			get { return _styleSettings; }
+			get => _styleSettings;
 			set
 			{
 				if (_styleSettings != value)

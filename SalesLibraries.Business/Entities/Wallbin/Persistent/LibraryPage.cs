@@ -26,7 +26,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 		[Required]
 		public string Name
 		{
-			get { return _name; }
+			get => _name;
 			set
 			{
 				if (_name != value)
@@ -39,7 +39,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 		[Required]
 		public int Order
 		{
-			get { return _order; }
+			get => _order;
 			set
 			{
 				if (_order != value)
@@ -57,16 +57,16 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 		[NotMapped, JsonIgnore]
 		public override IChangable Parent
 		{
-			get { return Library; }
-			set { Library = value as Library; }
+			get => Library;
+			set => Library = value as Library;
 		}
 
 		private LibraryPageSettings _settings;
 		[NotMapped, JsonIgnore]
 		public LibraryPageSettings Settings
 		{
-			get { return _settings ?? (_settings = SettingsContainer.CreateInstance<LibraryPageSettings>(this, SettingsEncoded)); }
-			set { _settings = value; }
+			get => _settings ?? (_settings = SettingsContainer.CreateInstance<LibraryPageSettings>(this, SettingsEncoded));
+			set => _settings = value;
 		}
 
 		[NotMapped, JsonIgnore]
@@ -75,8 +75,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 		[NotMapped, JsonIgnore]
 		public override int CollectionOrder
 		{
-			get { return Order; }
-			set { Order = value; }
+			get => Order;
+			set => Order = value;
 		}
 		
 		[NotMapped, JsonIgnore]
@@ -347,7 +347,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 			private string _icon;
 			public string Icon
 			{
-				get { return _icon; }
+				get => _icon;
 				set
 				{
 					if (_icon != value)
@@ -359,7 +359,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 			private Color _iconColor = Color.Black;
 			public Color IconColor
 			{
-				get { return _iconColor; }
+				get => _iconColor;
 				set
 				{
 					if (_iconColor != value)
@@ -371,7 +371,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 			private bool _enableColumnTitles;
 			public bool EnableColumnTitles
 			{
-				get { return _enableColumnTitles; }
+				get => _enableColumnTitles;
 				set
 				{
 					if (_enableColumnTitles != value)
@@ -383,7 +383,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 			private bool _applyForAllColumnTitles;
 			public bool ApplyForAllColumnTitles
 			{
-				get { return _applyForAllColumnTitles; }
+				get => _applyForAllColumnTitles;
 				set
 				{
 					if (_applyForAllColumnTitles != value)

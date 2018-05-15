@@ -221,6 +221,12 @@ namespace SalesLibraries.FileManager.Business.Services
 			target.thumbnail = new SoapThumbnail();
 			target.thumbnail.ImportData(source.Thumbnail);
 
+			if (source is LibraryFileLink libraryFileLink)
+			{
+				target.oneDrive = new SoapOneDrive();
+				target.oneDrive.ImportData(libraryFileLink.OneDriveSettings);
+			}
+
 			target.dateAdd = source.AddDate.ToString("MM/dd/yyyy hh:mm:ss tt");
 			target.dateModify = source.LastModified.ToString("MM/dd/yyyy hh:mm:ss tt");
 
@@ -817,6 +823,13 @@ namespace SalesLibraries.FileManager.Business.Services
 			target.font.ImportData(source.Font);
 			target.textPosition = source.TextPosition.ToString().ToLower();
 			target.textAlignment = source.TextAlignement.ToString().ToLower();
+		}
+
+		private static void ImportData(
+			this SoapOneDrive target,
+			SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.OneDriveLinkSettings source)
+		{
+			target.url = source.Url;
 		}
 
 		private static void ImportData(

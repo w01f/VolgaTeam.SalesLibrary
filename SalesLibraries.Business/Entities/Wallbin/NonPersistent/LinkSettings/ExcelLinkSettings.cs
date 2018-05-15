@@ -7,7 +7,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		private bool _generateContentText;
 		public bool GenerateContentText
 		{
-			get { return _generateContentText; }
+			get => _generateContentText;
 			set
 			{
 				if (_generateContentText != value)
@@ -19,7 +19,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		private bool _forceDownload;
 		public bool ForceDownload
 		{
-			get { return _forceDownload; }
+			get => _forceDownload;
 			set
 			{
 				if (_forceDownload != value)
@@ -31,7 +31,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		private bool _forceOpen;
 		public bool ForceOpen
 		{
-			get { return _forceOpen; }
+			get => _forceOpen;
 			set
 			{
 				if (_forceOpen != value)
@@ -43,7 +43,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		private bool _isArchiveResource;
 		public bool IsArchiveResource
 		{
-			get { return _isArchiveResource; }
+			get => _isArchiveResource;
 			set
 			{
 				if (_isArchiveResource != value)

@@ -14,7 +14,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		private string _url;
 		public string Url
 		{
-			get { return _url; }
+			get => _url;
 			set
 			{
 				if (_url != value)
@@ -26,7 +26,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		private string _title;
 		public string Title
 		{
-			get { return _title; }
+			get => _title;
 			set
 			{
 				if (_title != value)
