@@ -23,6 +23,7 @@
 	 * @property mixed content
 	 * @property mixed settings
 	 * @property mixed thumbnail
+	 * @property mixed one_drive
 	 * @property mixed id_banner
 	 * @property mixed id_line_break
 	 * @property mixed id
@@ -116,6 +117,9 @@
 
 			if (array_key_exists('thumbnail', $link) && !empty($link['thumbnail']))
 				$linkRecord->thumbnail = CJSON::encode($link['thumbnail']);
+
+			if (array_key_exists('oneDrive', $link) && !empty($link['oneDrive']))
+				$linkRecord->one_drive = CJSON::encode($link['oneDrive']);
 
 			if (array_key_exists('extendedProperties', $link) && !empty($link['extendedProperties']))
 			{

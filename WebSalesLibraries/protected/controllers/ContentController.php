@@ -27,6 +27,7 @@
 						'SoapAutoWidget' => 'SoapAutoWidget',
 						'SoapBanner' => 'SoapBanner',
 						'SoapThumbnail' => 'SoapThumbnail',
+						'SoapOneDrive' => 'SoapOneDrive',
 						'SoapColumn' => 'SoapColumn',
 						'SoapLibraryFolder' => 'SoapLibraryFolder',
 						'SoapLibraryLink' => 'SoapLibraryLink',

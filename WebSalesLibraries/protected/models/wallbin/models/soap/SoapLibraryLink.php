@@ -106,6 +106,11 @@
 		 */
 		public $thumbnail;
 		/**
+		 * @var SoapOneDrive
+		 * @soap
+		 */
+		public $oneDrive;
+		/**
 		 * @var string
 		 * @soap
 		 */

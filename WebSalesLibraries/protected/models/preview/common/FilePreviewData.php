@@ -12,6 +12,7 @@
 		public $fileExtension;
 
 		public $dragUrl;
+		public $oneDriveUrl;
 
 		/**
 		 * @param $link LibraryLink
@@ -72,6 +73,8 @@
 			if ($fileInfo->isFile)
 				$this->dragUrl = \FileInfo::getFileMIME($link->originalFormat) . ':' .
 					$fileInfo->dragDownloadName . ':' . $fileInfo->link;
+
+			$this->oneDriveUrl = $link->oneDrive->url;
 		}
 
 		/**

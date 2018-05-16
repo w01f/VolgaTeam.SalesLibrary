@@ -1,4 +1,5 @@
 <?
+
 	use application\models\wallbin\models\web\LibraryManager as LibraryManager;
 	use application\models\wallbin\models\web\LibraryPage as LibraryPage;
 	use application\models\wallbin\models\web\LibraryFolder as LibraryFolder;
@@ -357,5 +358,34 @@
 			$this->pageTitle = sprintf('%s', $linkRecord->name);
 			$menuGroups = ShortcutsManager::getAvailableGroups($this->isPhone);
 			$this->render('internalLinkSinglePage', array('menuGroups' => $menuGroups, 'linkName' => $linkRecord->name, 'linkId' => $linkId));
+		}
+
+		public function actionGenerateOneDriveToken()
+		{
+			$msGraphAuthCode = Yii::app()->request->getQuery('code');
+			if (!empty($msGraphAuthCode))
+			{
+				$authResponse = OneDriveRequestHelper::sendAuthRequest(array('client_id' => Yii::app()->params['one_drive_links']['app_id'],
+						'redirect_uri' => Yii::app()->createAbsoluteUrl('preview/generateOneDriveToken'),
+						'client_secret' => Yii::app()->params['one_drive_links']['app_key'],
+						'grant_type' => 'authorization_code',
+						'code' => $msGraphAuthCode)
+				);
+
+				echo "<b>Auth Token:</b>";
+				echo nl2br(PHP_EOL);
+				echo nl2br(PHP_EOL);
+				echo '<div style="width:100%;word-wrap: break-word;">' . $authResponse['refresh_token'] . '</div>';
+			}
+			else
+			{
+				$url = 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize?' . implode('&', array(
+						'client_id=' . Yii::app()->params['one_drive_links']['app_id'],
+						'scope=' . 'files.read files.readwrite files.read.all files.readwrite.all offline_access',
+						'response_type=' . 'code',
+						'redirect_uri=' . Yii::app()->createAbsoluteUrl('preview/generateOneDriveToken')
+					));
+				$this->redirect($url);
+			}
 		}
 	}

@@ -8,12 +8,25 @@
 	$fullScreenSizeMode = Yii::app()->browser->isMobile() ? 'mobile' : 'regular';
 	$linkBundleInfo = $data->getLinkBundleInfo();
 ?>
-<div
-        class="link-viewer<? echo $isEOBrowser ? ' eo' : ''; ?><? if ($data->config->enableLogging): ?> logger-form<? endif; ?>"
-        data-log-group="Link" data-log-action="Preview Activity">
+<div class="link-viewer<? echo $isEOBrowser ? ' eo' : ''; ?><? if ($data->config->enableLogging): ?> logger-form<? endif; ?>"
+     data-log-group="Link" data-log-action="Preview Activity">
+	<?
+		$headerGapSize = 6;
+		if (!Yii::app()->params['one_drive_links']['enabled'] || empty($data->oneDriveUrl))
+			$headerGapSize += 4;
+	?>
     <div class="row row-buttons tab-above-header" id="tab-above-header-preview">
-        <div class="col col-xs-10">
-        </div>
+        <div class="col col-xs-<? echo $headerGapSize; ?>"></div>
+		<? if (Yii::app()->params['one_drive_links']['enabled'] && !empty($data->oneDriveUrl)): ?>
+            <div class="col col-xs-4 text-center">
+                <div class="image-button log-action open-one-drive" data-log-action="Open OneDrive"
+                     title="view one drive">
+                    <a href="<? echo $data->oneDriveUrl; ?>" target="_blank">
+                        <img src="<? echo sprintf('%s/images/preview/gallery/button-open-one-drive.png', $imageUrlPrefix); ?>">
+                    </a>
+                </div>
+            </div>
+		<? endif; ?>
         <div class="col col-xs-1 text-center">
             <div class="image-button log-action open-video-modal" data-log-action="Preview Modal" title="Zoom">
                 <img src="<? echo sprintf('%s/images/preview/gallery/button-video-modal.png', $imageUrlPrefix); ?>">
@@ -124,7 +137,7 @@
                                                         class="file-size">(<? echo $data->mp4Src->size; ?></span>)
                                             </a>
                                         </li>
-                                        <? if ($data->downloadSource): ?>
+	                                    <? if ($data->downloadSource): ?>
                                             <li role="separator" class="divider"></li>
                                             <li>
                                                 <a href="#" class="log-action download-original-file"
@@ -133,13 +146,14 @@
                                                             class="file-size">(<? echo $data->fileSize; ?></span>)
                                                 </a>
                                             </li>
-                                        <? endif; ?>
+	                                    <? endif; ?>
 	                                    <? if (isset($linkBundleInfo) && count($linkBundleInfo->downloadInfo) > 1): ?>
                                             <li role="separator" class="divider"></li>
                                             <li>
                                                 <a href="#" class="log-action download-link-bundle"
                                                    data-log-action="Download Link Bundle">
-                                                    Download all <? echo count($linkBundleInfo->downloadInfo); ?> files (<? echo FileInfo::formatFileSize(FileDownloadInfo::getTotalSize($linkBundleInfo->downloadInfo)); ?>)
+                                                    Download all <? echo count($linkBundleInfo->downloadInfo); ?> files (<? echo FileInfo::formatFileSize(FileDownloadInfo::getTotalSize($linkBundleInfo->downloadInfo)); ?>
+                                                    )
                                                 </a>
                                             </li>
 	                                    <? endif; ?>

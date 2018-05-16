@@ -41,6 +41,10 @@
 		 * @var Thumbnail
 		 */
 		public $thumbnail;
+		/**
+		 * @var OneDrive
+		 */
+		public $oneDrive;
 		public $previewId;
 		/**
 		 * @var \LinkSuperFilter[]
@@ -101,6 +105,7 @@
 			$this->searchFormat = $linkRecord->search_format;
 			$this->extendedProperties = \BaseLinkSettings::createByLink($linkRecord);
 			$this->thumbnail = Thumbnail::createByContent($linkRecord->thumbnail);
+			$this->oneDrive = OneDrive::createByContent($linkRecord->one_drive);
 
 			$lineBreakRecord = \LineBreakRecord::model()->findByPk($linkRecord->id_line_break);
 			if ($lineBreakRecord !== null)

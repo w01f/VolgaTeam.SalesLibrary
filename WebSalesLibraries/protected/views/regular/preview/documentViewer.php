@@ -20,13 +20,25 @@
 <div class="link-viewer<? if ($data->config->enableLogging): ?> logger-form<? endif; ?>" data-log-group="Link"
      data-log-action="Preview Activity">
 	<?
-		$headerGapSize = 10;
+		$headerGapSize = 6;
+		if (!Yii::app()->params['one_drive_links']['enabled'] || empty($data->oneDriveUrl))
+			$headerGapSize += 4;
 		if (!$data->config->allowPdf)
 			$headerGapSize++;
 	?>
     <div class="row row-buttons tab-above-header" id="tab-above-header-preview">
         <div class="col col-xs-<? echo $headerGapSize; ?>">
         </div>
+		<? if (Yii::app()->params['one_drive_links']['enabled'] && !empty($data->oneDriveUrl)): ?>
+            <div class="col col-xs-4 text-center">
+                <div class="image-button log-action open-one-drive" data-log-action="Open OneDrive"
+                     title="view one drive">
+                    <a href="<? echo $data->oneDriveUrl; ?>" target="_blank">
+                        <img src="<? echo sprintf('%s/images/preview/gallery/button-open-one-drive.png', $imageUrlPrefix); ?>">
+                    </a>
+                </div>
+            </div>
+		<? endif; ?>
 		<? if ($data->config->allowPdf): ?>
             <div class="col col-xs-1 text-center">
                 <div class="image-button log-action open-pdf" data-log-action="Open PDF" title="view pdf">
@@ -91,7 +103,8 @@
 					<? endif; ?>
                 </div>
                 <div class="col col-xs-10 text-center preview-image-container">
-                    <img class="page-preview-image log-action" style="display: none;" src="//:0" draggable="true" data-url-header="DownloadURL" data-url="<? echo $data->dragUrl; ?>">
+                    <img class="page-preview-image log-action" style="display: none;" src="//:0" draggable="true"
+                         data-url-header="DownloadURL" data-url="<? echo $data->dragUrl; ?>">
                 </div>
                 <div class="col col-xs-1 text-center">
 					<? if (!$data->singlePage): ?>
