@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraTreeList;
@@ -10,7 +11,9 @@ using SalesLibraries.Business.Entities.Helpers;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
+using SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers;
 using SalesLibraries.FileManager.Controllers;
+using SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.CompactWallbin
 {
@@ -23,7 +26,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.CompactWallbin
 		{
 			TreeListNode parentNode;
 			int positionToInsert;
-			if (((WallbinItem) targetNode.Tag).Type == WallbinItemType.Folder)
+			if (((WallbinItem)targetNode.Tag).Type == WallbinItemType.Folder)
 			{
 				parentNode = targetNode;
 				positionToInsert = 0;
@@ -39,13 +42,54 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.CompactWallbin
 
 			var sourceLinks = new List<SourceLink>();
 			foreach (var sourcePath in sourcePaths)
-				sourceLinks.Add(SourceLink.FromExternalPath(sourcePath,parentFolder.Page.Library));
+				sourceLinks.Add(SourceLink.FromExternalPath(sourcePath, parentFolder.Page.Library));
+
+
+			var existedPreviewContainerPairs = new Dictionary<SourceLink, List<BasePreviewContainer>>();
+			foreach (var extrernalLink in sourceLinks.Where(link => link.IsExternal).OfType<FileLink>().ToList())
+			{
+				var existedPreviewContainers = parentFolder.Page.Library.PreviewContainers
+					.Where(previewContainer => String.Equals(Path.GetFileName(previewContainer.SourcePath), extrernalLink.Name,
+						StringComparison.OrdinalIgnoreCase))
+					.ToList();
+				if (existedPreviewContainers.Any())
+					existedPreviewContainerPairs.Add(extrernalLink, existedPreviewContainers);
+			}
 
 			if (!sourceLinks.Any()) return;
 
+			var confirmDrop = true;
+			if (existedPreviewContainerPairs.Any())
+			{
+				using (var form = new FormUpdateFile())
+				{
+					var result = form.ShowDialog(MainController.Instance.MainForm);
+					confirmDrop = result == DialogResult.Yes;
+					if (result == DialogResult.No)
+					{
+						foreach (var previewContainerPair in existedPreviewContainerPairs)
+						{
+							foreach (var previewContainer in previewContainerPair.Value)
+							{
+								previewContainer.ClearContent();
+								try
+								{
+									File.Copy(previewContainerPair.Key.Path, previewContainer.SourcePath, true);
+								}
+								catch { }
+							}
+						}
+						MainController.Instance.PopupMessages.ShowInfo("Existed file updated");
+					}
+				}
+			}
+
+			if (!confirmDrop) return;
+
 			var treeList = targetNode.TreeList;
 			treeList.SuspendLayout();
-			MainController.Instance.ProcessManager.Run(String.Format("Adding Link{0}...", sourceLinks.Count > 1 ? "s" : String.Empty),
+			MainController.Instance.ProcessManager.Run(
+				String.Format("Adding Link{0}...", sourceLinks.Count > 1 ? "s" : String.Empty),
 				(cancelationToken, formProgess) =>
 				{
 					foreach (var sourceLink in sourceLinks)
@@ -104,7 +148,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.CompactWallbin
 			var targetNode = treeList.CalcHitInfo(p).Node;
 			var droppedItemsPaths = e.Data.GetData(DataFormats.FileDrop) as String[];
 
-			InsertLinks(droppedItemsPaths,targetNode);
+			InsertLinks(droppedItemsPaths, targetNode);
 
 			if (_dragOverNode != null)
 			{

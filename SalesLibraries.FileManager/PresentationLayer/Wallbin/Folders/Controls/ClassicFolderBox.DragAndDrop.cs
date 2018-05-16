@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -11,6 +12,7 @@ using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.HyperLinkInfo;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
+using SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.JsonConverters;
 using SalesLibraries.Common.Objects.Graphics;
@@ -31,7 +33,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 
 		protected IDataObject DataDraggedOver
 		{
-			get { return _dataDraggedOver; }
+			get => _dataDraggedOver;
 			set
 			{
 				_dataDraggedOver = value;
@@ -235,7 +237,45 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 									confirmDrop = form.ShowDialog(MainController.Instance.MainForm) == DialogResult.OK;
 						}
 						if (confirmDrop)
-							InsertDataSourceLinks(extrernalLinks, _mouseDragOverHitInfo.RowIndex);
+						{
+							var existedPreviewContainerPairs = new Dictionary<SourceLink, List<BasePreviewContainer>>();
+							foreach (var extrernalLink in extrernalLinks.OfType<FileLink>().ToList())
+							{
+								var existedPreviewContainers = DataSource.Page.Library.PreviewContainers
+									.Where(previewContainer => String.Equals(Path.GetFileName(previewContainer.SourcePath), extrernalLink.Name,
+										StringComparison.OrdinalIgnoreCase))
+									.ToList();
+								if (existedPreviewContainers.Any())
+									existedPreviewContainerPairs.Add(extrernalLink, existedPreviewContainers);
+							}
+
+							if (existedPreviewContainerPairs.Any())
+							{
+								using (var form = new FormUpdateFile())
+								{
+									var result = form.ShowDialog(MainController.Instance.MainForm);
+									confirmDrop = result == DialogResult.Yes;
+									if (result == DialogResult.No)
+									{
+										foreach (var previewContainerPair in existedPreviewContainerPairs)
+										{
+											foreach (var previewContainer in previewContainerPair.Value)
+											{
+												previewContainer.ClearContent();
+												try
+												{
+													File.Copy(previewContainerPair.Key.Path, previewContainer.SourcePath, true);
+												}
+												catch { }
+											}
+										}
+										MainController.Instance.PopupMessages.ShowInfo("Existed file updated");
+									}
+								}
+							}
+							if (confirmDrop)
+								InsertDataSourceLinks(extrernalLinks, _mouseDragOverHitInfo.RowIndex);
+						}
 					}
 				}
 			}
