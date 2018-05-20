@@ -82,6 +82,11 @@
 
 			dialogContent.find('.open-quick-link').off('click.preview').on('click.preview', openQuickLink);
 
+			dialogContent.find('.one-drive-link-copy').off('click.preview').on('click.preview', function (e) {
+				$.SalesPortal.LinkManager.copyTextToClipboard($(this).prop('href'));
+				e.preventDefault();
+			});
+
 			dialogContent.find('.action-container .action').off('click.preview').on('click.preview', processSaveAction);
 
 			new $.SalesPortal.RateManager().init(

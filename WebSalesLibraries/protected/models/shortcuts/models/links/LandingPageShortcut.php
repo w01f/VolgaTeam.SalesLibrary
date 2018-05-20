@@ -34,6 +34,16 @@
 			}
 		}
 
+		/**
+		 * @return array
+		 */
+		public function getPageData()
+		{
+			$data = parent::getPageData();
+			$data['serviceData'] = $this->getMenuItemData();
+			return $data;
+		}
+
 		/** @return string */
 		public function getTypeForActivityTracker()
 		{

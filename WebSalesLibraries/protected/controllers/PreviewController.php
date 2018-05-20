@@ -355,9 +355,14 @@
 		{
 			$linkId = Yii::app()->request->getQuery('linkId');
 			$linkRecord = LinkRecord::getLinkById($linkId);
-			$this->pageTitle = sprintf('%s', $linkRecord->name);
-			$menuGroups = ShortcutsManager::getAvailableGroups($this->isPhone);
-			$this->render('internalLinkSinglePage', array('menuGroups' => $menuGroups, 'linkName' => $linkRecord->name, 'linkId' => $linkId));
+			if (isset($linkRecord))
+			{
+				$this->pageTitle = sprintf('%s', $linkRecord->name);
+				$menuGroups = ShortcutsManager::getAvailableGroups($this->isPhone);
+				$this->render('internalLinkSinglePage', array('menuGroups' => $menuGroups, 'linkName' => $linkRecord->name, 'linkId' => $linkId));
+			}
+			else
+				echo "Link was not found on the site. Please update your server files or contact system administrator";
 		}
 
 		public function actionGenerateOneDriveToken()

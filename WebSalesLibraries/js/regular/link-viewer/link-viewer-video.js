@@ -98,6 +98,11 @@
 			dialogContent.find('.open-video-fullscreen-regular').off('click.preview').on('click.preview', showVideoFullScreenRegular);
 			dialogContent.find('.open-video-fullscreen-mobile').off('click.preview').on('click.preview', showVideoFullScreenMobile);
 
+			dialogContent.find('.one-drive-link-copy').off('click.preview').on('click.preview', function (e) {
+				$.SalesPortal.LinkManager.copyTextToClipboard($(this).prop('href'));
+				e.preventDefault();
+			});
+
 			player = dialogContent.find('#video-player');
 			player.on('play', function ()
 			{

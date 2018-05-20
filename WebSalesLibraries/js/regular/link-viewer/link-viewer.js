@@ -688,6 +688,14 @@
 			body.find('.context-menu-content').remove();
 		};
 
+		this.copyTextToClipboard = function(text){
+			var $temp = $("<input>");
+			$("body").append($temp);
+			$temp.val(text).select();
+			document.execCommand("copy");
+			$temp.remove();
+		};
+
 		var getMenuPosition = function (menuObject, mouse, direction, scrollDir)
 		{
 			var win = $(window)[direction](),

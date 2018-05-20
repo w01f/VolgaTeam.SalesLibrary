@@ -96,6 +96,10 @@
 			dialogContent.find('.open-quick-link').off('click.preview').on('click.preview', openQuickLink);
 			dialogContent.find('.open-pdf').off('click.preview').on('click.preview', openPdf);
 			dialogContent.find('.open-gallery-modal').off('click.preview').on('click.preview', showGalleryModal);
+			dialogContent.find('.one-drive-link-copy').off('click.preview').on('click.preview', function (e) {
+				$.SalesPortal.LinkManager.copyTextToClipboard($(this).prop('href'));
+				e.preventDefault();
+			});
 
 			dialogContent.find('.action-container .action').off('click.preview').on('click.preview', processSaveAction);
 

@@ -17,11 +17,27 @@
         <div class="col col-xs-<? echo $headerGapSize; ?>"></div>
 		<? if (Yii::app()->params['one_drive_links']['enabled'] && !empty($data->oneDriveUrl)): ?>
             <div class="col col-xs-4 text-center">
-                <div class="image-button log-action open-one-drive" data-log-action="Open OneDrive"
-                     title="view one drive">
-                    <a href="<? echo $data->oneDriveUrl; ?>" target="_blank">
-                        <img src="<? echo sprintf('%s/images/preview/gallery/button-open-one-drive.png', $imageUrlPrefix); ?>">
-                    </a>
+                <div class="image-button" title="one drive link">
+                    <span class="text-item dropdown">
+                         <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+                            <img src="<? echo sprintf('%s/images/preview/gallery/button-open-one-drive.png', $imageUrlPrefix); ?>">
+                         </a>
+                        <ul class="dropdown-menu" style="left: 0;">
+                            <li>
+                                <a href="<? echo $data->oneDriveUrl; ?>"
+                                   class="log-action log-action one-drive-link-open"
+                                   data-log-action="Open OneDrive Link" target="_blank" title="open link">Open Link</a>
+                            </li>
+                            <li>
+                                <a href="<? echo $data->oneDriveUrl; ?>" class="log-action one-drive-link-copy" data-log-action="Copy OneDrive Link"
+                                   title="copy link">Copy Link URL</a>
+                            </li>
+                            <li>
+                                <a href="#" class="log-action one-drive-link-email"
+                                   data-log-action="Email OneDrive Link" title="email link">Email Link</a>
+                            </li>
+                        </ul>
+                    </span>
                 </div>
             </div>
 		<? endif; ?>
