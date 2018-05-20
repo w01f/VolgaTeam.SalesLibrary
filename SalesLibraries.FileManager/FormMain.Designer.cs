@@ -47,6 +47,10 @@
 			this.buttonItemHomeLinkPropertiesThumbnail = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarHomeLinkActions = new DevComponents.DotNetBar.RibbonBar();
 			this.buttonItemHomeLinkOpen = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemHomeLinkOpenSourceFile = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemHomeLinkOpenSourceFolder = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemHomeLinkOpenSiteLink = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemHomeLinkOpenOneDriveLink = new DevComponents.DotNetBar.ButtonItem();
 			this.buttonItemHomeLinkDelete = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarHomeAddLink = new DevComponents.DotNetBar.RibbonBar();
 			this.buttonItemHomeAddLineBreak = new DevComponents.DotNetBar.ButtonItem();
@@ -182,6 +186,10 @@
 			this.itemContainerStatusBarMainContentInfo = new DevComponents.DotNetBar.ItemContainer();
 			this.labelItemStatusBarSeparator = new DevComponents.DotNetBar.LabelItem();
 			this.itemContainerStatusBarAdditionalContentInfo = new DevComponents.DotNetBar.ItemContainer();
+			this.buttonItemHomeLinkPropertiesOneDrive = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemHomeLinkPropertiesOneDriveOpenUrl = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemHomeLinkPropertiesOneDriveCopyUrl = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemHomeLinkPropertiesOneDriveResetUrl = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonControl.SuspendLayout();
 			this.ribbonPanelHome.SuspendLayout();
 			this.ribbonPanelSettings.SuspendLayout();
@@ -313,7 +321,7 @@
 			this.ribbonBarHomeSync.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItemHomeSync});
 			this.ribbonBarHomeSync.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarHomeSync.Location = new System.Drawing.Point(759, 0);
+			this.ribbonBarHomeSync.Location = new System.Drawing.Point(814, 0);
 			this.ribbonBarHomeSync.Name = "ribbonBarHomeSync";
 			this.ribbonBarHomeSync.Size = new System.Drawing.Size(82, 100);
 			this.ribbonBarHomeSync.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -354,7 +362,7 @@
             this.buttonItemHomeViewFloater,
             this.buttonItemHomeViewCompactWallbin});
 			this.ribbonBarHomeView.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarHomeView.Location = new System.Drawing.Point(641, 0);
+			this.ribbonBarHomeView.Location = new System.Drawing.Point(696, 0);
 			this.ribbonBarHomeView.Name = "ribbonBarHomeView";
 			this.ribbonBarHomeView.Size = new System.Drawing.Size(118, 100);
 			this.ribbonBarHomeView.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -409,13 +417,14 @@
 			this.ribbonBarHomeLinkSettings.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItemHomeLinkPropertiesNotes,
             this.buttonItemHomeLinkPropertiesTags,
-            this.buttonItemHomeLinkPropertiesImage});
+            this.buttonItemHomeLinkPropertiesImage,
+            this.buttonItemHomeLinkPropertiesOneDrive});
 			this.ribbonBarHomeLinkSettings.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarHomeLinkSettings.Location = new System.Drawing.Point(460, 0);
 			this.ribbonBarHomeLinkSettings.Name = "ribbonBarHomeLinkSettings";
 			this.ribbonBarHomeLinkSettings.OverflowButtonImage = global::SalesLibraries.FileManager.Properties.Resources.RibbonLinkSettings;
 			this.ribbonBarHomeLinkSettings.OverflowButtonText = "Current Link";
-			this.ribbonBarHomeLinkSettings.Size = new System.Drawing.Size(181, 100);
+			this.ribbonBarHomeLinkSettings.Size = new System.Drawing.Size(236, 100);
 			this.ribbonBarHomeLinkSettings.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarHomeLinkSettings.TabIndex = 22;
 			this.ribbonBarHomeLinkSettings.Text = "Link Tools";
@@ -463,7 +472,7 @@
             this.buttonItemHomeLinkPropertiesBanner,
             this.buttonItemHomeLinkPropertiesThumbnail});
 			this.superTooltip.SetSuperTooltip(this.buttonItemHomeLinkPropertiesImage, new DevComponents.DotNetBar.SuperTooltipInfo("Artwork", "", "Add Icons and clipart to your link...", null, null, DevComponents.DotNetBar.eTooltipColor.Default));
-			this.buttonItemHomeLinkPropertiesImage.Tag = "Tags";
+			this.buttonItemHomeLinkPropertiesImage.Tag = "";
 			this.buttonItemHomeLinkPropertiesImage.Text = "Artwork";
 			// 
 			// buttonItemHomeLinkPropertiesWidget
@@ -530,13 +539,39 @@
 			// 
 			// buttonItemHomeLinkOpen
 			// 
+			this.buttonItemHomeLinkOpen.AutoExpandOnClick = true;
 			this.buttonItemHomeLinkOpen.Enabled = false;
 			this.buttonItemHomeLinkOpen.ForeColor = System.Drawing.Color.Black;
 			this.buttonItemHomeLinkOpen.Image = global::SalesLibraries.FileManager.Properties.Resources.RibbonLinkOpen;
 			this.buttonItemHomeLinkOpen.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
 			this.buttonItemHomeLinkOpen.Name = "buttonItemHomeLinkOpen";
+			this.buttonItemHomeLinkOpen.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.buttonItemHomeLinkOpenSourceFile,
+            this.buttonItemHomeLinkOpenSourceFolder,
+            this.buttonItemHomeLinkOpenSiteLink,
+            this.buttonItemHomeLinkOpenOneDriveLink});
 			this.superTooltip.SetSuperTooltip(this.buttonItemHomeLinkOpen, new DevComponents.DotNetBar.SuperTooltipInfo("Open Link", "", "View the actual source file for this link or folder...", null, null, DevComponents.DotNetBar.eTooltipColor.Default));
 			this.buttonItemHomeLinkOpen.Text = "Open";
+			// 
+			// buttonItemHomeLinkOpenSourceFile
+			// 
+			this.buttonItemHomeLinkOpenSourceFile.Name = "buttonItemHomeLinkOpenSourceFile";
+			this.buttonItemHomeLinkOpenSourceFile.Text = "Source File";
+			// 
+			// buttonItemHomeLinkOpenSourceFolder
+			// 
+			this.buttonItemHomeLinkOpenSourceFolder.Name = "buttonItemHomeLinkOpenSourceFolder";
+			this.buttonItemHomeLinkOpenSourceFolder.Text = "Soure Folder";
+			// 
+			// buttonItemHomeLinkOpenSiteLink
+			// 
+			this.buttonItemHomeLinkOpenSiteLink.Name = "buttonItemHomeLinkOpenSiteLink";
+			this.buttonItemHomeLinkOpenSiteLink.Text = "Site Link";
+			// 
+			// buttonItemHomeLinkOpenOneDriveLink
+			// 
+			this.buttonItemHomeLinkOpenOneDriveLink.Name = "buttonItemHomeLinkOpenOneDriveLink";
+			this.buttonItemHomeLinkOpenOneDriveLink.Text = "OneDrive Link";
 			// 
 			// buttonItemHomeLinkDelete
 			// 
@@ -2927,6 +2962,37 @@
 			this.itemContainerStatusBarAdditionalContentInfo.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			this.itemContainerStatusBarAdditionalContentInfo.VerticalItemAlignment = DevComponents.DotNetBar.eVerticalItemsAlignment.Middle;
 			// 
+			// buttonItemHomeLinkPropertiesOneDrive
+			// 
+			this.buttonItemHomeLinkPropertiesOneDrive.AutoExpandOnClick = true;
+			this.buttonItemHomeLinkPropertiesOneDrive.Enabled = false;
+			this.buttonItemHomeLinkPropertiesOneDrive.ForeColor = System.Drawing.Color.Black;
+			this.buttonItemHomeLinkPropertiesOneDrive.Image = global::SalesLibraries.FileManager.Properties.Resources.RibbonLinkOneDrive;
+			this.buttonItemHomeLinkPropertiesOneDrive.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top;
+			this.buttonItemHomeLinkPropertiesOneDrive.Name = "buttonItemHomeLinkPropertiesOneDrive";
+			this.buttonItemHomeLinkPropertiesOneDrive.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.buttonItemHomeLinkPropertiesOneDriveOpenUrl,
+            this.buttonItemHomeLinkPropertiesOneDriveCopyUrl,
+            this.buttonItemHomeLinkPropertiesOneDriveResetUrl});
+			this.superTooltip.SetSuperTooltip(this.buttonItemHomeLinkPropertiesOneDrive, new DevComponents.DotNetBar.SuperTooltipInfo("Artwork", "", "Add Icons and clipart to your link...", null, null, DevComponents.DotNetBar.eTooltipColor.Default));
+			this.buttonItemHomeLinkPropertiesOneDrive.Tag = "";
+			this.buttonItemHomeLinkPropertiesOneDrive.Text = "OneDrive";
+			// 
+			// buttonItemHomeLinkPropertiesOneDriveOpenUrl
+			// 
+			this.buttonItemHomeLinkPropertiesOneDriveOpenUrl.Name = "buttonItemHomeLinkPropertiesOneDriveOpenUrl";
+			this.buttonItemHomeLinkPropertiesOneDriveOpenUrl.Text = "Open Office 365 Link";
+			// 
+			// buttonItemHomeLinkPropertiesOneDriveCopyUrl
+			// 
+			this.buttonItemHomeLinkPropertiesOneDriveCopyUrl.Name = "buttonItemHomeLinkPropertiesOneDriveCopyUrl";
+			this.buttonItemHomeLinkPropertiesOneDriveCopyUrl.Text = "Copy URL";
+			// 
+			// buttonItemHomeLinkPropertiesOneDriveResetUrl
+			// 
+			this.buttonItemHomeLinkPropertiesOneDriveResetUrl.Name = "buttonItemHomeLinkPropertiesOneDriveResetUrl";
+			this.buttonItemHomeLinkPropertiesOneDriveResetUrl.Text = "Create NEW URL";
+			// 
 			// FormMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -3112,6 +3178,14 @@
 		private DevComponents.DotNetBar.ButtonItem buttonItemExpand;
 		private DevComponents.DotNetBar.ButtonItem buttonItemCollapse;
 		private DevComponents.DotNetBar.ButtonItem buttonItemPin;
+		public DevComponents.DotNetBar.ButtonItem buttonItemHomeLinkOpenSourceFile;
+		public DevComponents.DotNetBar.ButtonItem buttonItemHomeLinkOpenSourceFolder;
+		public DevComponents.DotNetBar.ButtonItem buttonItemHomeLinkOpenSiteLink;
+		public DevComponents.DotNetBar.ButtonItem buttonItemHomeLinkOpenOneDriveLink;
+		public DevComponents.DotNetBar.ButtonItem buttonItemHomeLinkPropertiesOneDrive;
+		public DevComponents.DotNetBar.ButtonItem buttonItemHomeLinkPropertiesOneDriveOpenUrl;
+		public DevComponents.DotNetBar.ButtonItem buttonItemHomeLinkPropertiesOneDriveCopyUrl;
+		public DevComponents.DotNetBar.ButtonItem buttonItemHomeLinkPropertiesOneDriveResetUrl;
 	}
 }
 

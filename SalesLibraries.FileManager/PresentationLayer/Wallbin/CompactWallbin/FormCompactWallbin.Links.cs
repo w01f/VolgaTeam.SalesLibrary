@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraTreeList.Nodes;
@@ -26,22 +27,38 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.CompactWallbin
 
 		private void OpenLink(TreeListNode targetLinkNode)
 		{
-			var sourceLink = (targetLinkNode?.Tag as WallbinItem)?.Source as LibraryObjectLink;
-			if (sourceLink == null) return;
+			if (!((targetLinkNode?.Tag as WallbinItem)?.Source is LibraryObjectLink sourceLink)) return;
 			Utils.OpenFile(sourceLink.OpenPaths);
 		}
 
 		private void OpenLinkLocation(TreeListNode targetLinkNode)
 		{
-			var sourceLink = (targetLinkNode?.Tag as WallbinItem)?.Source as LibraryFileLink;
-			if (sourceLink == null) return;
+			if (!((targetLinkNode?.Tag as WallbinItem)?.Source is LibraryFileLink sourceLink)) return;
 			Utils.OpenFile(sourceLink.LocationPath);
+		}
+
+		public void OpenLinkOnSite(TreeListNode targetLinkNode)
+		{
+			var sourceLink = (targetLinkNode?.Tag as WallbinItem)?.Source as LibraryObjectLink;
+			var linkId = sourceLink?.ExtId.ToString();
+			if (String.IsNullOrEmpty(linkId)) return;
+
+			var linkUrl = String.Format("{0}/preview/getSingleInternalLink?linkId={1}",
+				MainController.Instance.Settings.WebServiceSite, linkId);
+
+			Process.Start(linkUrl);
+		}
+
+		public void OpenLinkOnOneDrive(TreeListNode targetLinkNode)
+		{
+			if (!((targetLinkNode?.Tag as WallbinItem)?.Source is LibraryFileLink sourceLink) || String.IsNullOrEmpty(sourceLink.OneDriveSettings.Url))
+				return;
+			Process.Start(sourceLink.OneDriveSettings.Url);
 		}
 
 		public void DeleteSingleLink(TreeListNode targetLinkNode)
 		{
-			var sourceLink = (targetLinkNode?.Tag as WallbinItem)?.Source as BaseLibraryLink;
-			if (sourceLink == null) return;
+			if (!((targetLinkNode?.Tag as WallbinItem)?.Source is BaseLibraryLink sourceLink)) return;
 			var parentFolderNode = targetLinkNode.ParentNode;
 			var relatedLinks = (sourceLink as LibraryFileLink)?.GetRelatedLinks();
 			if (relatedLinks != null && relatedLinks.Any())
@@ -84,8 +101,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.CompactWallbin
 
 		private void RefreshLinkPreviewFiles(TreeListNode targetLinkNode)
 		{
-			var sourceLink = (targetLinkNode?.Tag as WallbinItem)?.Source as IPreviewableLink;
-			if (sourceLink == null) return;
+			if (!((targetLinkNode?.Tag as WallbinItem)?.Source is IPreviewableLink sourceLink)) return;
 			RefreshPreviewFiles(new[] { sourceLink });
 		}
 
@@ -130,8 +146,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.CompactWallbin
 		
 		private void EditSingleLinkSettings(TreeListNode targetLinkNode, LinkSettingsType settingsType, LinkType? defaultLinkType = null)
 		{
-			var sourceLink = (targetLinkNode?.Tag as WallbinItem)?.Source as BaseLibraryLink;
-			if (sourceLink == null) return;
+			if (!((targetLinkNode?.Tag as WallbinItem)?.Source is BaseLibraryLink sourceLink)) return;
 			if ((sourceLink is ILinksGroup && LinkGroupSettings.Contains(settingsType) ?
 				SettingsEditorFactory.Run((ILinksGroup)sourceLink, settingsType, defaultLinkType) :
 				SettingsEditorFactory.Run(sourceLink, settingsType)) == DialogResult.OK)
@@ -143,8 +158,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.CompactWallbin
 
 		private void EditImageSettings(TreeListNode targetLinkNode)
 		{
-			var sourceLink = (targetLinkNode?.Tag as WallbinItem)?.Source as BaseLibraryLink;
-			if (sourceLink == null) return;
+			if (!((targetLinkNode?.Tag as WallbinItem)?.Source is BaseLibraryLink sourceLink)) return;
 			if (sourceLink.Widget.Enabled)
 				EditSingleLinkSettings(targetLinkNode, LinkSettingsType.Widget);
 			else if (sourceLink.Banner.Enable)
@@ -157,8 +171,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.CompactWallbin
 
 		private void ResetSingleLinkSettings(TreeListNode targetLinkNode)
 		{
-			var sourceLink = (targetLinkNode?.Tag as WallbinItem)?.Source as BaseLibraryLink;
-			if (sourceLink == null) return;
+			if (!((targetLinkNode?.Tag as WallbinItem)?.Source is BaseLibraryLink sourceLink)) return;
 
 			using (var form = new FormResetLinkSettings(sourceLink))
 			{

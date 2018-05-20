@@ -104,8 +104,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings.ResetLin
 						previewContainers.AddRange(library.PreviewContainers.OfType<PdfPreviewContainer>());
 					if (checkEditExcel.Checked)
 						previewContainers.AddRange(library.PreviewContainers.OfType<ExcelPreviewContainer>());
-					if (checkEditExcel.Checked)
-						previewContainers.AddRange(library.PreviewContainers.OfType<ExcelPreviewContainer>());
 					if (checkEditUrl.Checked)
 						previewContainers.AddRange(library.PreviewContainers.OfType<WebLinkPreviewContainer>().Where(container => !container.IsQuickSite));
 					if (checkEditHtml5.Checked)

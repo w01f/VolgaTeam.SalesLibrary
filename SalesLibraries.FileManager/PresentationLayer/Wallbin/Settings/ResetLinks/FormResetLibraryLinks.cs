@@ -44,6 +44,13 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings.ResetLin
 			resetPreviewContentControl.SelectionChanged += OnControlSelectionChanged;
 			xtraTabControl.TabPages.Add(resetPreviewContentControl);
 
+			if (MainController.Instance.Settings.OneDriveSettings.Enabled)
+			{
+				var resetOneDriveLinksControl = new ResetOneDriveLinksControl();
+				resetOneDriveLinksControl.SelectionChanged += OnControlSelectionChanged;
+				xtraTabControl.TabPages.Add(resetOneDriveLinksControl);
+			}
+
 			var resetAllControl = new ResetAllControl();
 			resetAllControl.SelectionChanged += OnControlSelectionChanged;
 			xtraTabControl.TabPages.Add(resetAllControl);

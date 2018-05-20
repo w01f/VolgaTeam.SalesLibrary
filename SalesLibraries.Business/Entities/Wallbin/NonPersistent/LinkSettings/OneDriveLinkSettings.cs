@@ -54,6 +54,30 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 			}
 		}
 
+		private string _appId;
+		public string AppId
+		{
+			get => _appId;
+			set
+			{
+				if (_appId != value)
+					OnSettingsChanged();
+				_appId = value;
+			}
+		}
+
+		private string _appRoot;
+		public string AppRoot
+		{
+			get => _appRoot;
+			set
+			{
+				if (_appRoot != value)
+					OnSettingsChanged();
+				_appRoot = value;
+			}
+		}
+
 		[JsonIgnore]
 		public bool Enable => !String.IsNullOrEmpty(Url);
 
@@ -63,6 +87,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 			UrlId = null;
 			Url = null;
 			UrlGeneratingDate = null;
+			AppId = null;
+			AppRoot = null;
 		}
 	}
 }

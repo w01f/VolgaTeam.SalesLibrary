@@ -70,7 +70,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 
 				barButtonItemSingleLinkPropertiesCopy.Visibility = BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesCut.Visibility = BarItemVisibility.Never;
-				barButtonItemSingleLinkPropertiesOpenLink.Visibility = BarItemVisibility.Never;
+				barButtonItemSingleLinkPropertiesOpenLinkSourceFile.Visibility = BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesDelete.Visibility = BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesLinkSettings.Visibility = BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesImageSettings.Visibility = BarItemVisibility.Never;
@@ -90,7 +90,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 				barButtonItemSingleLinkPropertiesCopy.Visibility = BarItemVisibility.Always;
 				barButtonItemSingleLinkPropertiesCut.Visibility = BarItemVisibility.Always;
 				barButtonItemSingleLinkPropertiesPaste.Visibility = BarItemVisibility.Always;
-				barButtonItemSingleLinkPropertiesOpenLink.Visibility = BarItemVisibility.Always;
+				barButtonItemSingleLinkPropertiesOpenLinkSourceFile.Visibility = BarItemVisibility.Always;
 				barButtonItemSingleLinkPropertiesDelete.Visibility = BarItemVisibility.Always;
 				barButtonItemSingleLinkPropertiesLinkSettings.Visibility = BarItemVisibility.Always;
 				barButtonItemSingleLinkPropertiesImageSettings.Visibility = BarItemVisibility.Always;
@@ -140,8 +140,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 					: BarItemVisibility.Never;
 			if (linkRow.Source is LineBreak)
 			{
-				barButtonItemSingleLinkPropertiesOpenLink.Visibility = BarItemVisibility.Never;
-				barButtonItemSingleLinkPropertiesFileLocation.Visibility = BarItemVisibility.Never;
+				barSubItemSingleLinkPropertiesOpenLink.Visibility = BarItemVisibility.Never;
+				barSubItemSingleLinkPropertiesOneDrive.Visibility = BarItemVisibility.Never;
 				barSubItemSingleLinkPropertiesFolderLinkSettings.Visibility = BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesRefreshPreview.Visibility = BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesTags.Visibility = BarItemVisibility.Never;
@@ -156,8 +156,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 			}
 			else if (linkRow.Source is LinkBundleLink)
 			{
-				barButtonItemSingleLinkPropertiesOpenLink.Visibility = BarItemVisibility.Never;
-				barButtonItemSingleLinkPropertiesFileLocation.Visibility = BarItemVisibility.Never;
+				barSubItemSingleLinkPropertiesOpenLink.Visibility = BarItemVisibility.Never;
+				barSubItemSingleLinkPropertiesOneDrive.Visibility = BarItemVisibility.Never;
 				barSubItemSingleLinkPropertiesFolderLinkSettings.Visibility = BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesRefreshPreview.Visibility = BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesAdminSettings.Visibility = BarItemVisibility.Never;
@@ -174,12 +174,31 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 			}
 			else
 			{
-				barButtonItemSingleLinkPropertiesOpenLink.Visibility = !linkRow.Inaccessable
+				var fileLink = linkRow.Source as LibraryFileLink;
+
+				barSubItemSingleLinkPropertiesOpenLink.Visibility = !linkRow.Inaccessable
 					? BarItemVisibility.Always
 					: BarItemVisibility.Never;
-				barButtonItemSingleLinkPropertiesFileLocation.Visibility = !linkRow.Inaccessable && linkRow.Source is LibraryFileLink
+				barButtonItemSingleLinkPropertiesOpenLinkSourceFolder.Visibility = fileLink != null
 					? BarItemVisibility.Always
 					: BarItemVisibility.Never;
+				barButtonItemSingleLinkPropertiesOpenLinkSiteLink.Visibility = linkRow.Source?.ParentLibrary != null &&
+																			   linkRow.Source != null &&
+																			   linkRow.Source.ParentLibrary.SyncDate > linkRow.Source.AddDate
+					? BarItemVisibility.Always
+					: BarItemVisibility.Never;
+				barButtonItemSingleLinkPropertiesOpenLinkOneDriveLink.Visibility = MainController.Instance.Settings.OneDriveSettings.Enabled && !String.IsNullOrEmpty(fileLink?.OneDriveSettings.Url)
+					? BarItemVisibility.Always
+					: BarItemVisibility.Never;
+
+				barSubItemSingleLinkPropertiesOneDrive.Visibility = MainController.Instance.Settings.OneDriveSettings.Enabled && fileLink != null
+					? BarItemVisibility.Always
+					: BarItemVisibility.Never;
+				barButtonItemSingleLinkPropertiesOneDriveOpenUrl.Visibility =
+				barButtonItemSingleLinkPropertiesOneDriveCopyUrl.Visibility = !String.IsNullOrEmpty(fileLink?.OneDriveSettings.Url)
+					? BarItemVisibility.Always
+					: BarItemVisibility.Never;
+
 				barSubItemSingleLinkPropertiesFolderLinkSettings.Visibility = !linkRow.Inaccessable &&
 																		 linkRow.Source is LibraryFolderLink &&
 																		 ((LibraryFolderLink)linkRow.Source).AllLinks.Any(l => l.Type == LinkType.Excel || l.Type == LinkType.Pdf)
@@ -215,7 +234,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 					: BarItemVisibility.Never;
 
 				barButtonItemSingleLinkPropertiesLinkSettings.Caption = "Link Settings";
-				barButtonItemSingleLinkPropertiesDelete.Caption = "Delete this Link";
+				barButtonItemSingleLinkPropertiesDelete.Caption = "Delete";
 				barSubItemSingleLinkPropertiesImages.Caption = "Link ART";
 				barButtonItemSingleLinkPropertiesResetSettings.Caption = "Reset this Link";
 
@@ -246,37 +265,62 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 			ApplySingleLinkContextMenuEditorChanges();
 		}
 
-		private void barButtonItemLinkPropertiesCopy_ItemClick(object sender, ItemClickEventArgs e)
+		private void OnSingleLinkPropertiesCopyClick(object sender, ItemClickEventArgs e)
 		{
 			CopyLinks();
 		}
 
-		private void barButtonItemLinkPropertiesCut_ItemClick(object sender, ItemClickEventArgs e)
+		private void OnSingleLinkPropertiesCutClick(object sender, ItemClickEventArgs e)
 		{
 			CutLinks();
 		}
 
-		private void barButtonItemLinkPropertiesPaste_ItemClick(object sender, ItemClickEventArgs e)
+		private void OnSingleLinkPropertiesPasteClick(object sender, ItemClickEventArgs e)
 		{
 			PasteLinks();
 		}
 
-		private void barButtonItemLinkPropertiesOpenLink_ItemClick(object sender, ItemClickEventArgs e)
+		private void OnSingleLinkPropertiesOpenLinkSourceFileClick(object sender, ItemClickEventArgs e)
 		{
 			OpenLink();
 		}
 
-		private void barButtonItemLinkPropertiesFileLocation_ItemClick(object sender, ItemClickEventArgs e)
+		private void OnSingleLinkPropertiesOpenLinkSourceFolderClick(object sender, ItemClickEventArgs e)
 		{
 			OpenLinkLocation();
 		}
 
-		private void barButtonItemLinkPropertiesDelete_ItemClick(object sender, ItemClickEventArgs e)
+		private void OnSingleLinkPropertiesOpenLinkSiteLinkClick(object sender, ItemClickEventArgs e)
+		{
+			OpenLinkOnSite();
+		}
+
+		private void OnSingleLinkPropertiesOpenLinkOneDriveLinkClick(object sender, ItemClickEventArgs e)
+		{
+			OpenLinkOnOneDrive();
+		}
+
+		private void OnSingleLinkPropertiesDeleteClick(object sender, ItemClickEventArgs e)
 		{
 			DeleteSingleLink();
 		}
 
-		private void barButtonItemLinkPropertiesRefreshPreview_ItemClick(object sender, ItemClickEventArgs e)
+		private void OnSingleLinkPropertiesOneDriveOpenUrlClick(object sender, ItemClickEventArgs e)
+		{
+			OpenLinkOnOneDrive();
+		}
+
+		private void OnSingleLinkPropertiesOneDriveCopyUrlClick(object sender, ItemClickEventArgs e)
+		{
+			CopyOneDriveUrl();
+		}
+
+		private void OnSingleLinkPropertiesOneDriveResetUrlClick(object sender, ItemClickEventArgs e)
+		{
+			ResetOneDriveUrl();
+		}
+
+		private void OnSingleLinkPropertiesRefreshPreviewClick(object sender, ItemClickEventArgs e)
 		{
 			var sourceLinks = new List<IPreviewableLink>();
 			var linkTitle = String.Empty;
@@ -297,102 +341,102 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 			MainController.Instance.PopupMessages.ShowInfo(String.Format("{0}{1}Is now updated for the server!", linkTitle, Environment.NewLine));
 		}
 
-		private void barButtonItemLinkPropertiesEditImageSettings_ItemClick(object sender, ItemClickEventArgs e)
+		private void OnSingleLinkPropertiesEditImageSettingsClick(object sender, ItemClickEventArgs e)
 		{
 			EditImageSettings();
 		}
 
-		private void barButtonItemLinkPropertiesLinkSettings_ItemClick(object sender, ItemClickEventArgs e)
+		private void OnSingleLinkPropertiesLinkSettingsClick(object sender, ItemClickEventArgs e)
 		{
 			EditSingleLinkSettings(LinkSettingsType.Notes);
 		}
 
-		private void barButtonItemLinkPropertiesTags_ItemClick(object sender, ItemClickEventArgs e)
+		private void OnSingleLinkPropertiesTagsClick(object sender, ItemClickEventArgs e)
 		{
 			EditSingleLinkSettings(LinkSettingsType.Tags);
 		}
 
-		private void barButtonItemLinkPropertiesExpirationDate_ItemClick(object sender, ItemClickEventArgs e)
+		private void OnSingleLinkPropertiesExpirationDateClick(object sender, ItemClickEventArgs e)
 		{
 			EditSingleLinkSettings(LinkSettingsType.ExpirationDate);
 		}
 
-		private void barButtonItemLinkPropertiesSecurity_ItemClick(object sender, ItemClickEventArgs e)
+		private void OnSingleLinkPropertiesSecurityClick(object sender, ItemClickEventArgs e)
 		{
 			EditSingleLinkSettings(LinkSettingsType.Security);
 		}
 
-		private void barButtonItemLinkPropertiesWidget_ItemClick(object sender, ItemClickEventArgs e)
+		private void OnSingleLinkPropertiesWidgetClick(object sender, ItemClickEventArgs e)
 		{
 			EditSingleLinkSettings(LinkSettingsType.Widget);
 		}
 
-		private void barButtonItemLinkPropertiesBanner_ItemClick(object sender, ItemClickEventArgs e)
+		private void OnSingleLinkPropertiesBannerClick(object sender, ItemClickEventArgs e)
 		{
 			EditSingleLinkSettings(LinkSettingsType.Banner);
 		}
 
-		private void barButtonItemSingleLinkPropertiesThumbnail_ItemClick(object sender, ItemClickEventArgs e)
+		private void OnSingleLinkPropertiesThumbnailClick(object sender, ItemClickEventArgs e)
 		{
 			EditSingleLinkSettings(LinkSettingsType.Thumbnail);
 		}
 
-		private void barButtonItemLinkPropertiesResetSettings_ItemClick(object sender, ItemClickEventArgs e)
+		private void OnSingleLinkPropertiesResetSettingsClick(object sender, ItemClickEventArgs e)
 		{
 			ResetSingleLinkSettings();
 		}
 
-		private void barSubItemLinkPropertiesAddHyperlinkUrl_ItemClick(object sender, ItemClickEventArgs e)
+		private void OnSingleLinkPropertiesAddHyperlinkUrlClick(object sender, ItemClickEventArgs e)
 		{
 			AddHyperLink(BaseNetworkLinkInfo.GetDefault<UrlLinkInfo>());
 		}
 
-		private void barSubItemLinkPropertiesAddHyperlinkYouTube_ItemClick(object sender, ItemClickEventArgs e)
+		private void OnSingleLinkPropertiesAddHyperlinkYouTubeClick(object sender, ItemClickEventArgs e)
 		{
 			AddHyperLink(BaseNetworkLinkInfo.GetDefault<YouTubeLinkInfo>());
 		}
 
-		private void barSubItemLinkPropertiesAddHyperlinkVimeo_ItemClick(object sender, ItemClickEventArgs e)
+		private void OnSingleLinkPropertiesAddHyperlinkVimeoClick(object sender, ItemClickEventArgs e)
 		{
 			AddHyperLink(BaseNetworkLinkInfo.GetDefault<VimeoLinkInfo>());
 		}
 
-		private void barSubItemLinkPropertiesAddHyperlinkQuickSite_ItemClick(object sender, ItemClickEventArgs e)
+		private void OnSingleLinkPropertiesAddHyperlinkQuickSiteClick(object sender, ItemClickEventArgs e)
 		{
 			AddHyperLink(BaseNetworkLinkInfo.GetDefault<QuickSiteLinkInfo>());
 		}
 
-		private void barSubItemLinkPropertiesAddHyperlinkHtml5_ItemClick(object sender, ItemClickEventArgs e)
+		private void OnSingleLinkPropertiesAddHyperlinkHtml5Click(object sender, ItemClickEventArgs e)
 		{
 			AddHyperLink(BaseNetworkLinkInfo.GetDefault<Html5LinkInfo>());
 		}
 
-		private void barSubItemLinkPropertiesAddHyperlinkInternal_ItemClick(object sender, ItemClickEventArgs e)
+		private void OnSingleLinkPropertiesAddHyperlinkInternalClick(object sender, ItemClickEventArgs e)
 		{
 			AddHyperLink(BaseNetworkLinkInfo.GetDefault<InternalWallbinLinkInfo>());
 		}
 
-		private void barSubItemLinkPropertiesAddHyperlinkLan_ItemClick(object sender, ItemClickEventArgs e)
+		private void OnSingleLinkPropertiesAddHyperlinkLanClick(object sender, ItemClickEventArgs e)
 		{
 			AddHyperLink(BaseNetworkLinkInfo.GetDefault<LanLinkInfo>());
 		}
 
-		private void barSubItemLinkPropertiesAddHyperlinkApp_ItemClick(object sender, ItemClickEventArgs e)
+		private void OnSingleLinkPropertiesAddHyperlinkAppClick(object sender, ItemClickEventArgs e)
 		{
 			AddHyperLink(BaseNetworkLinkInfo.GetDefault<AppLinkInfo>());
 		}
 
-		private void barButtonItemSingleLinkPropertiesFolderLinkPdfSettings_ItemClick(object sender, ItemClickEventArgs e)
+		private void OnSingleLinkPropertiesFolderLinkPdfSettingsClick(object sender, ItemClickEventArgs e)
 		{
 			EditSingleLinkSettings(LinkSettingsType.AdminSettings, LinkType.Pdf);
 		}
 
-		private void barButtonItemSingleLinkPropertiesFolderLinkExcelSettings_ItemClick(object sender, ItemClickEventArgs e)
+		private void OnSingleLinkPropertiesFolderLinkExcelSettingsClick(object sender, ItemClickEventArgs e)
 		{
 			EditSingleLinkSettings(LinkSettingsType.AdminSettings, LinkType.Excel);
 		}
 
-		private void barButtonItemSingleLinkPropertiesAdminSettings_ItemClick(object sender, ItemClickEventArgs e)
+		private void OnSingleLinkPropertiesAdminSettingsClick(object sender, ItemClickEventArgs e)
 		{
 			var sourceLink = SelectedLinkRow?.Source as IPreviewableLink;
 			if (sourceLink is PdfLink)

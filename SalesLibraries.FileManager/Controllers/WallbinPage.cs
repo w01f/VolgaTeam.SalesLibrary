@@ -86,17 +86,23 @@ namespace SalesLibraries.FileManager.Controllers
 			#region Link Operations
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesTags.Visible = MainController.Instance.Settings.EditorSettings.EnableTagsEdit;
 
-			MainController.Instance.MainForm.buttonItemHomeAddUrl.Click += buttonItemHomeAddUrl_Click;
-			MainController.Instance.MainForm.buttonItemHomeAddLineBreak.Click += buttonItemHomeAddLineBreak_Click;
+			MainController.Instance.MainForm.buttonItemHomeAddUrl.Click += OnAddUrlClick;
+			MainController.Instance.MainForm.buttonItemHomeAddLineBreak.Click += OnAddLineBreakClick;
 
-			MainController.Instance.MainForm.buttonItemHomeLinkOpen.Click += buttonItemHomeLinkOpen_Click;
-			MainController.Instance.MainForm.buttonItemHomeLinkDelete.Click += buttonItemHomeLinkDelete_Click;
+			MainController.Instance.MainForm.buttonItemHomeLinkOpenSourceFile.Click += OnLinkOpenSourceFileClick;
+			MainController.Instance.MainForm.buttonItemHomeLinkOpenSourceFolder.Click += OnLinkOpenSourceFolderClick;
+			MainController.Instance.MainForm.buttonItemHomeLinkOpenSiteLink.Click += OnLinkOpenSiteLinkClick;
+			MainController.Instance.MainForm.buttonItemHomeLinkOpenOneDriveLink.Click += OnLinkOpenOneDriveLinkClick;
+			MainController.Instance.MainForm.buttonItemHomeLinkDelete.Click += OnLinkDeleteClick;
 
-			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesNotes.Click += buttonItemHomeLinkSettings_Click;
-			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesTags.Click += buttonItemHomeLinkSettings_Click;
-			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesWidget.Click += buttonItemHomeLinkSettings_Click;
-			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesBanner.Click += buttonItemHomeLinkSettings_Click;
-			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesThumbnail.Click += buttonItemHomeLinkSettings_Click;
+			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesNotes.Click += OnLinkSettingsClick;
+			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesTags.Click += OnLinkSettingsClick;
+			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesWidget.Click += OnLinkSettingsClick;
+			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesBanner.Click += OnLinkSettingsClick;
+			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesThumbnail.Click += OnLinkSettingsClick;
+			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesOneDriveOpenUrl.Click += OnLinkOpenOneDriveLinkClick;
+			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesOneDriveCopyUrl.Click +=OnLinkPropertiesOneDriveCopyUrlClick;
+			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesOneDriveResetUrl.Click += OnLinkPropertiesOneDriveResetUrlClick;
 			#endregion
 
 			#region General Settings
@@ -193,18 +199,27 @@ namespace SalesLibraries.FileManager.Controllers
 		{
 			var selectedFolder = MainController.Instance.WallbinViews.Selection.SelectedFolder;
 			var selectedLinks = MainController.Instance.WallbinViews.Selection.SelectedLinks.ToList();
+			var currentFileLink = selectedFolder?.SelectedLinkRow?.Source as LibraryFileLink;
 
 			MainController.Instance.MainForm.buttonItemHomeAddUrl.Enabled =
 			MainController.Instance.MainForm.buttonItemHomeAddLineBreak.Enabled = selectedFolder != null;
 
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesNotes.Enabled =
 			MainController.Instance.MainForm.buttonItemHomeLinkOpen.Enabled = selectedLinks.Count == 1 && selectedFolder?.SelectedLinkRow != null && !selectedFolder.SelectedLinkRow.Inaccessable;
-
+			MainController.Instance.MainForm.buttonItemHomeLinkOpenSourceFolder.Enabled = selectedFolder?.SelectedLinkRow?.Source is LibraryFileLink;
+			MainController.Instance.MainForm.buttonItemHomeLinkOpenSiteLink.Enabled = selectedFolder?.SelectedLinkRow?.Source?.ParentLibrary != null &&
+																						selectedFolder?.SelectedLinkRow?.Source != null &&
+																						selectedFolder.SelectedLinkRow.Source.ParentLibrary.SyncDate > selectedFolder.SelectedLinkRow.Source.AddDate;
+			MainController.Instance.MainForm.buttonItemHomeLinkOpenOneDriveLink.Enabled = !String.IsNullOrEmpty(currentFileLink?.OneDriveSettings?.Url);
 			MainController.Instance.MainForm.buttonItemHomeLinkDelete.Enabled = selectedLinks.Any();
 
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesImage.Enabled =
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesWidget.Enabled =
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesBanner.Enabled = selectedLinks.Any(l => !(l is LibraryFileLink) || !((LibraryFileLink)l).IsDead);
+
+			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesOneDrive.Enabled = MainController.Instance.Settings.OneDriveSettings.Enabled && currentFileLink != null;
+			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesOneDriveOpenUrl.Enabled =
+			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesOneDriveCopyUrl.Enabled = !String.IsNullOrEmpty(currentFileLink?.OneDriveSettings?.Url);
 
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesThumbnail.Enabled = selectedLinks.Any(l => l is IThumbnailSettingsHolder && (!(l is LibraryFileLink) || !((LibraryFileLink)l).IsDead));
 
@@ -328,25 +343,61 @@ namespace SalesLibraries.FileManager.Controllers
 		}
 
 		#region Link Operations Processing
-		private void buttonItemHomeAddUrl_Click(object sender, EventArgs e)
+		private void OnAddUrlClick(object sender, EventArgs e)
 		{
 			var selectedFolder = MainController.Instance.WallbinViews.Selection.SelectedFolder;
 			selectedFolder?.AddHyperLink();
 		}
 
-		private void buttonItemHomeAddLineBreak_Click(object sender, EventArgs e)
+		private void OnAddLineBreakClick(object sender, EventArgs e)
 		{
 			var selectedFolder = MainController.Instance.WallbinViews.Selection.SelectedFolder;
 			selectedFolder?.AddLineBreak();
 		}
 
-		private void buttonItemHomeLinkOpen_Click(object sender, EventArgs e)
+		private void OnLinkOpenSourceFileClick(object sender, EventArgs e)
 		{
 			var selectedFolder = MainController.Instance.WallbinViews.Selection.SelectedFolder;
 			selectedFolder?.OpenLink();
 		}
 
-		private void buttonItemHomeLinkDelete_Click(object sender, EventArgs e)
+		private void OnLinkOpenSourceFolderClick(object sender, EventArgs e)
+		{
+			var selectedFolder = MainController.Instance.WallbinViews.Selection.SelectedFolder;
+			selectedFolder?.OpenLinkLocation();
+		}
+
+		private void OnLinkOpenSiteLinkClick(object sender, EventArgs e)
+		{
+			var selectedFolder = MainController.Instance.WallbinViews.Selection.SelectedFolder;
+			selectedFolder?.OpenLinkOnSite();
+		}
+
+		private void OnLinkOpenOneDriveLinkClick(object sender, EventArgs e)
+		{
+			var selectedFolder = MainController.Instance.WallbinViews.Selection.SelectedFolder;
+			selectedFolder?.OpenLinkOnOneDrive();
+		}
+
+		private void OnLinkPropertiesOneDriveOpenUrlClick(object sender, EventArgs e)
+		{
+			var selectedFolder = MainController.Instance.WallbinViews.Selection.SelectedFolder;
+			selectedFolder?.OpenLinkOnOneDrive();
+		}
+
+		private void OnLinkPropertiesOneDriveCopyUrlClick(object sender, EventArgs e)
+		{
+			var selectedFolder = MainController.Instance.WallbinViews.Selection.SelectedFolder;
+			selectedFolder?.CopyOneDriveUrl();
+		}
+
+		private void OnLinkPropertiesOneDriveResetUrlClick(object sender, EventArgs e)
+		{
+			var selectedFolder = MainController.Instance.WallbinViews.Selection.SelectedFolder;
+			selectedFolder?.ResetOneDriveUrl();
+		}
+
+		private void OnLinkDeleteClick(object sender, EventArgs e)
 		{
 			var selectedFolder = MainController.Instance.WallbinViews.Selection.SelectedFolder;
 			var selectedLinks = MainController.Instance.WallbinViews.Selection.SelectedLinks.ToList();
@@ -356,7 +407,7 @@ namespace SalesLibraries.FileManager.Controllers
 				selectedFolder.DeleteSingleLink();
 		}
 
-		private void buttonItemHomeLinkSettings_Click(object sender, EventArgs e)
+		private void OnLinkSettingsClick(object sender, EventArgs e)
 		{
 			var selectedFolder = MainController.Instance.WallbinViews.Selection.SelectedFolder;
 			if (selectedFolder == null) return;

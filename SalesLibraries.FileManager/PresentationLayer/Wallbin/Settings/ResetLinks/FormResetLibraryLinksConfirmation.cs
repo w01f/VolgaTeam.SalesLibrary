@@ -43,6 +43,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings.ResetLin
 							return "Quick Link";
 						case LinkSettingsGroupType.AutoWidgets:
 							return "Auto Widgets";
+						case LinkSettingsGroupType.OneDrive:
+							return "OneDrive URLs";
 						default:
 							throw new ArgumentOutOfRangeException("Undefined Settings Group");
 					}

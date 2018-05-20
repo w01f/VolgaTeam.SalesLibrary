@@ -39,8 +39,8 @@
 			this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-			this.barButtonItemSingleLinkPropertiesOpenLink = new DevExpress.XtraBars.BarButtonItem();
-			this.barButtonItemSingleLinkPropertiesFileLocation = new DevExpress.XtraBars.BarButtonItem();
+			this.barButtonItemSingleLinkPropertiesOpenLinkSourceFile = new DevExpress.XtraBars.BarButtonItem();
+			this.barButtonItemSingleLinkPropertiesOpenLinkSourceFolder = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemSingleLinkPropertiesDelete = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemSingleLinkPropertiesRefreshPreview = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemSingleLinkPropertiesLinkSettings = new DevExpress.XtraBars.BarButtonItem();
@@ -104,6 +104,9 @@
 			this.layoutControlItemExit = new DevExpress.XtraLayout.LayoutControlItem();
 			this.layoutControlItemBack = new DevExpress.XtraLayout.LayoutControlItem();
 			this.emptySpaceItem5 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.barSubItemSingleLinkPropertiesOpenLink = new DevExpress.XtraBars.BarSubItem();
+			this.barButtonItemSingleLinkPropertiesOpenLinkSiteLink = new DevExpress.XtraBars.BarButtonItem();
+			this.barButtonItemSingleLinkPropertiesOpenLinkOneDriveLink = new DevExpress.XtraBars.BarButtonItem();
 			((System.ComponentModel.ISupportInitialize)(this.barManager)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
@@ -139,7 +142,7 @@
 			this.buttonXExit.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXExit.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXExit.Location = new System.Drawing.Point(280, 422);
+			this.buttonXExit.Location = new System.Drawing.Point(280, 425);
 			this.buttonXExit.Name = "buttonXExit";
 			this.buttonXExit.Size = new System.Drawing.Size(116, 36);
 			this.buttonXExit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -152,7 +155,7 @@
 			// 
 			this.buttonXBack.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXBack.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXBack.Location = new System.Drawing.Point(2, 422);
+			this.buttonXBack.Location = new System.Drawing.Point(2, 425);
 			this.buttonXBack.Name = "buttonXBack";
 			this.buttonXBack.Size = new System.Drawing.Size(116, 36);
 			this.buttonXBack.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -173,8 +176,8 @@
 			this.barManager.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.barLargeButtonItemSync,
             this.barStaticItemLogo,
-            this.barButtonItemSingleLinkPropertiesOpenLink,
-            this.barButtonItemSingleLinkPropertiesFileLocation,
+            this.barButtonItemSingleLinkPropertiesOpenLinkSourceFile,
+            this.barButtonItemSingleLinkPropertiesOpenLinkSourceFolder,
             this.barButtonItemSingleLinkPropertiesDelete,
             this.barButtonItemSingleLinkPropertiesRefreshPreview,
             this.barButtonItemSingleLinkPropertiesLinkSettings,
@@ -204,8 +207,11 @@
             this.barSubItemSingleLinkPropertiesFolderLinkSettings,
             this.barButtonItemSingleLinkPropertiesFolderLinkExcelSettings,
             this.barButtonItemSingleLinkPropertiesFolderLinkPdfSettings,
-            this.barButtonItemSingleLinkPropertiesAdminSettings});
-			this.barManager.MaxItemId = 21;
+            this.barButtonItemSingleLinkPropertiesAdminSettings,
+            this.barSubItemSingleLinkPropertiesOpenLink,
+            this.barButtonItemSingleLinkPropertiesOpenLinkSiteLink,
+            this.barButtonItemSingleLinkPropertiesOpenLinkOneDriveLink});
+			this.barManager.MaxItemId = 24;
 			this.barManager.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemPictureEdit1});
 			// 
@@ -251,7 +257,7 @@
 			this.barDockControlTop.ForeColor = System.Drawing.Color.Black;
 			this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
 			this.barDockControlTop.Manager = this.barManager;
-			this.barDockControlTop.Size = new System.Drawing.Size(398, 95);
+			this.barDockControlTop.Size = new System.Drawing.Size(398, 92);
 			// 
 			// barDockControlBottom
 			// 
@@ -267,42 +273,42 @@
 			this.barDockControlLeft.CausesValidation = false;
 			this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
 			this.barDockControlLeft.ForeColor = System.Drawing.Color.Black;
-			this.barDockControlLeft.Location = new System.Drawing.Point(0, 95);
+			this.barDockControlLeft.Location = new System.Drawing.Point(0, 92);
 			this.barDockControlLeft.Manager = this.barManager;
-			this.barDockControlLeft.Size = new System.Drawing.Size(0, 460);
+			this.barDockControlLeft.Size = new System.Drawing.Size(0, 463);
 			// 
 			// barDockControlRight
 			// 
 			this.barDockControlRight.CausesValidation = false;
 			this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
 			this.barDockControlRight.ForeColor = System.Drawing.Color.Black;
-			this.barDockControlRight.Location = new System.Drawing.Point(398, 95);
+			this.barDockControlRight.Location = new System.Drawing.Point(398, 92);
 			this.barDockControlRight.Manager = this.barManager;
-			this.barDockControlRight.Size = new System.Drawing.Size(0, 460);
+			this.barDockControlRight.Size = new System.Drawing.Size(0, 463);
 			// 
-			// barButtonItemSingleLinkPropertiesOpenLink
+			// barButtonItemSingleLinkPropertiesOpenLinkSourceFile
 			// 
-			this.barButtonItemSingleLinkPropertiesOpenLink.Caption = "Open this Link";
-			this.barButtonItemSingleLinkPropertiesOpenLink.CategoryGuid = new System.Guid("0399476a-ad4e-415d-bbb8-97162e27fa1a");
-			this.barButtonItemSingleLinkPropertiesOpenLink.Id = 0;
-			this.barButtonItemSingleLinkPropertiesOpenLink.Name = "barButtonItemSingleLinkPropertiesOpenLink";
-			this.barButtonItemSingleLinkPropertiesOpenLink.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemSingleLinkPropertiesOpenLink_ItemClick);
+			this.barButtonItemSingleLinkPropertiesOpenLinkSourceFile.Caption = "Source File";
+			this.barButtonItemSingleLinkPropertiesOpenLinkSourceFile.CategoryGuid = new System.Guid("0399476a-ad4e-415d-bbb8-97162e27fa1a");
+			this.barButtonItemSingleLinkPropertiesOpenLinkSourceFile.Id = 0;
+			this.barButtonItemSingleLinkPropertiesOpenLinkSourceFile.Name = "barButtonItemSingleLinkPropertiesOpenLinkSourceFile";
+			this.barButtonItemSingleLinkPropertiesOpenLinkSourceFile.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.OnSingleLinkPropertiesOpenLinkSourceFileClick);
 			// 
-			// barButtonItemSingleLinkPropertiesFileLocation
+			// barButtonItemSingleLinkPropertiesOpenLinkSourceFolder
 			// 
-			this.barButtonItemSingleLinkPropertiesFileLocation.Caption = "Open File Location";
-			this.barButtonItemSingleLinkPropertiesFileLocation.CategoryGuid = new System.Guid("0399476a-ad4e-415d-bbb8-97162e27fa1a");
-			this.barButtonItemSingleLinkPropertiesFileLocation.Id = 1;
-			this.barButtonItemSingleLinkPropertiesFileLocation.Name = "barButtonItemSingleLinkPropertiesFileLocation";
-			this.barButtonItemSingleLinkPropertiesFileLocation.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemSingleLinkPropertiesFileLocation_ItemClick);
+			this.barButtonItemSingleLinkPropertiesOpenLinkSourceFolder.Caption = "Source Folder";
+			this.barButtonItemSingleLinkPropertiesOpenLinkSourceFolder.CategoryGuid = new System.Guid("0399476a-ad4e-415d-bbb8-97162e27fa1a");
+			this.barButtonItemSingleLinkPropertiesOpenLinkSourceFolder.Id = 1;
+			this.barButtonItemSingleLinkPropertiesOpenLinkSourceFolder.Name = "barButtonItemSingleLinkPropertiesOpenLinkSourceFolder";
+			this.barButtonItemSingleLinkPropertiesOpenLinkSourceFolder.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.OnSingleLinkPropertiesOpenLinkSourceFolderClick);
 			// 
 			// barButtonItemSingleLinkPropertiesDelete
 			// 
-			this.barButtonItemSingleLinkPropertiesDelete.Caption = "Delete this link";
+			this.barButtonItemSingleLinkPropertiesDelete.Caption = "Delete";
 			this.barButtonItemSingleLinkPropertiesDelete.CategoryGuid = new System.Guid("0399476a-ad4e-415d-bbb8-97162e27fa1a");
 			this.barButtonItemSingleLinkPropertiesDelete.Id = 2;
 			this.barButtonItemSingleLinkPropertiesDelete.Name = "barButtonItemSingleLinkPropertiesDelete";
-			this.barButtonItemSingleLinkPropertiesDelete.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemSingleLinkPropertiesDelete_ItemClick);
+			this.barButtonItemSingleLinkPropertiesDelete.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.OnSingleLinkPropertiesDeleteClick);
 			// 
 			// barButtonItemSingleLinkPropertiesRefreshPreview
 			// 
@@ -310,7 +316,7 @@
 			this.barButtonItemSingleLinkPropertiesRefreshPreview.CategoryGuid = new System.Guid("0399476a-ad4e-415d-bbb8-97162e27fa1a");
 			this.barButtonItemSingleLinkPropertiesRefreshPreview.Id = 3;
 			this.barButtonItemSingleLinkPropertiesRefreshPreview.Name = "barButtonItemSingleLinkPropertiesRefreshPreview";
-			this.barButtonItemSingleLinkPropertiesRefreshPreview.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemSingleLinkPropertiesRefreshPreview_ItemClick);
+			this.barButtonItemSingleLinkPropertiesRefreshPreview.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.OnSingleLinkPropertiesRefreshPreviewClick);
 			// 
 			// barButtonItemSingleLinkPropertiesLinkSettings
 			// 
@@ -318,7 +324,7 @@
 			this.barButtonItemSingleLinkPropertiesLinkSettings.CategoryGuid = new System.Guid("0399476a-ad4e-415d-bbb8-97162e27fa1a");
 			this.barButtonItemSingleLinkPropertiesLinkSettings.Id = 4;
 			this.barButtonItemSingleLinkPropertiesLinkSettings.Name = "barButtonItemSingleLinkPropertiesLinkSettings";
-			this.barButtonItemSingleLinkPropertiesLinkSettings.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemSingleLinkPropertiesLinkSettings_ItemClick);
+			this.barButtonItemSingleLinkPropertiesLinkSettings.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.OnSingleLinkPropertiesLinkSettingsClick);
 			// 
 			// barButtonItemSingleLinkPropertiesTags
 			// 
@@ -326,7 +332,7 @@
 			this.barButtonItemSingleLinkPropertiesTags.CategoryGuid = new System.Guid("0399476a-ad4e-415d-bbb8-97162e27fa1a");
 			this.barButtonItemSingleLinkPropertiesTags.Id = 6;
 			this.barButtonItemSingleLinkPropertiesTags.Name = "barButtonItemSingleLinkPropertiesTags";
-			this.barButtonItemSingleLinkPropertiesTags.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemSingleLinkPropertiesTags_ItemClick);
+			this.barButtonItemSingleLinkPropertiesTags.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.OnSingleLinkPropertiesTagsClick);
 			// 
 			// barButtonItemSingleLinkPropertiesExpirationDate
 			// 
@@ -334,7 +340,7 @@
 			this.barButtonItemSingleLinkPropertiesExpirationDate.CategoryGuid = new System.Guid("0399476a-ad4e-415d-bbb8-97162e27fa1a");
 			this.barButtonItemSingleLinkPropertiesExpirationDate.Id = 7;
 			this.barButtonItemSingleLinkPropertiesExpirationDate.Name = "barButtonItemSingleLinkPropertiesExpirationDate";
-			this.barButtonItemSingleLinkPropertiesExpirationDate.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemSingleLinkPropertiesExpirationDate_ItemClick);
+			this.barButtonItemSingleLinkPropertiesExpirationDate.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.OnSingleLinkPropertiesExpirationDateClick);
 			// 
 			// barButtonItemSingleLinkPropertiesSecurity
 			// 
@@ -342,7 +348,7 @@
 			this.barButtonItemSingleLinkPropertiesSecurity.CategoryGuid = new System.Guid("0399476a-ad4e-415d-bbb8-97162e27fa1a");
 			this.barButtonItemSingleLinkPropertiesSecurity.Id = 8;
 			this.barButtonItemSingleLinkPropertiesSecurity.Name = "barButtonItemSingleLinkPropertiesSecurity";
-			this.barButtonItemSingleLinkPropertiesSecurity.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemSingleLinkPropertiesSecurity_ItemClick);
+			this.barButtonItemSingleLinkPropertiesSecurity.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.OnSingleLinkPropertiesSecurityClick);
 			// 
 			// barButtonItemSingleLinkPropertiesWidget
 			// 
@@ -350,7 +356,7 @@
 			this.barButtonItemSingleLinkPropertiesWidget.CategoryGuid = new System.Guid("0399476a-ad4e-415d-bbb8-97162e27fa1a");
 			this.barButtonItemSingleLinkPropertiesWidget.Id = 9;
 			this.barButtonItemSingleLinkPropertiesWidget.Name = "barButtonItemSingleLinkPropertiesWidget";
-			this.barButtonItemSingleLinkPropertiesWidget.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemSingleLinkPropertiesWidget_ItemClick);
+			this.barButtonItemSingleLinkPropertiesWidget.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.OnSingleLinkPropertiesWidgetClick);
 			// 
 			// barButtonItemSingleLinkPropertiesBanner
 			// 
@@ -358,7 +364,7 @@
 			this.barButtonItemSingleLinkPropertiesBanner.CategoryGuid = new System.Guid("0399476a-ad4e-415d-bbb8-97162e27fa1a");
 			this.barButtonItemSingleLinkPropertiesBanner.Id = 10;
 			this.barButtonItemSingleLinkPropertiesBanner.Name = "barButtonItemSingleLinkPropertiesBanner";
-			this.barButtonItemSingleLinkPropertiesBanner.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemSingleLinkPropertiesBanner_ItemClick);
+			this.barButtonItemSingleLinkPropertiesBanner.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.OnSingleLinkPropertiesBannerClick);
 			// 
 			// barSubItemSingleLinkPropertiesObjectTextFormat
 			// 
@@ -373,7 +379,6 @@
 			this.barSubItemSingleLinkPropertiesAdvanced.CategoryGuid = new System.Guid("0399476a-ad4e-415d-bbb8-97162e27fa1a");
 			this.barSubItemSingleLinkPropertiesAdvanced.Id = 29;
 			this.barSubItemSingleLinkPropertiesAdvanced.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSingleLinkPropertiesFileLocation),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSingleLinkPropertiesRefreshPreview),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSingleLinkPropertiesExpirationDate),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSingleLinkPropertiesSecurity)});
@@ -385,7 +390,7 @@
 			this.barButtonItemSingleLinkPropertiesResetSettings.CategoryGuid = new System.Guid("0399476a-ad4e-415d-bbb8-97162e27fa1a");
 			this.barButtonItemSingleLinkPropertiesResetSettings.Id = 33;
 			this.barButtonItemSingleLinkPropertiesResetSettings.Name = "barButtonItemSingleLinkPropertiesResetSettings";
-			this.barButtonItemSingleLinkPropertiesResetSettings.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemSingleLinkPropertiesResetSettings_ItemClick);
+			this.barButtonItemSingleLinkPropertiesResetSettings.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.OnSingleLinkPropertiesResetSettingsClick);
 			// 
 			// barSubItemSingleLinkPropertiesImages
 			// 
@@ -404,7 +409,7 @@
 			this.barButtonItemSingleLinkPropertiesThumbnail.CategoryGuid = new System.Guid("0399476a-ad4e-415d-bbb8-97162e27fa1a");
 			this.barButtonItemSingleLinkPropertiesThumbnail.Id = 106;
 			this.barButtonItemSingleLinkPropertiesThumbnail.Name = "barButtonItemSingleLinkPropertiesThumbnail";
-			this.barButtonItemSingleLinkPropertiesThumbnail.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemSingleLinkPropertiesThumbnail_ItemClick);
+			this.barButtonItemSingleLinkPropertiesThumbnail.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.OnSingleLinkPropertiesThumbnailClick);
 			// 
 			// barButtonItemSingleLinkPropertiesImageSettings
 			// 
@@ -412,7 +417,7 @@
 			this.barButtonItemSingleLinkPropertiesImageSettings.CategoryGuid = new System.Guid("0399476a-ad4e-415d-bbb8-97162e27fa1a");
 			this.barButtonItemSingleLinkPropertiesImageSettings.Id = 35;
 			this.barButtonItemSingleLinkPropertiesImageSettings.Name = "barButtonItemSingleLinkPropertiesImageSettings";
-			this.barButtonItemSingleLinkPropertiesImageSettings.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemSingleLinkPropertiesImageSettings_ItemClick);
+			this.barButtonItemSingleLinkPropertiesImageSettings.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.OnSingleLinkPropertiesImageSettingsClick);
 			// 
 			// barSubItemSingleLinkPropertiesObjectNotes
 			// 
@@ -537,21 +542,21 @@
 			this.barButtonItemSingleLinkPropertiesFolderLinkExcelSettings.Caption = "Excel";
 			this.barButtonItemSingleLinkPropertiesFolderLinkExcelSettings.Id = 18;
 			this.barButtonItemSingleLinkPropertiesFolderLinkExcelSettings.Name = "barButtonItemSingleLinkPropertiesFolderLinkExcelSettings";
-			this.barButtonItemSingleLinkPropertiesFolderLinkExcelSettings.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemSingleLinkPropertiesFolderLinkExcelSettings_ItemClick);
+			this.barButtonItemSingleLinkPropertiesFolderLinkExcelSettings.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.OnSingleLinkPropertiesFolderLinkExcelSettingsClick);
 			// 
 			// barButtonItemSingleLinkPropertiesFolderLinkPdfSettings
 			// 
 			this.barButtonItemSingleLinkPropertiesFolderLinkPdfSettings.Caption = "PDF";
 			this.barButtonItemSingleLinkPropertiesFolderLinkPdfSettings.Id = 19;
 			this.barButtonItemSingleLinkPropertiesFolderLinkPdfSettings.Name = "barButtonItemSingleLinkPropertiesFolderLinkPdfSettings";
-			this.barButtonItemSingleLinkPropertiesFolderLinkPdfSettings.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemSingleLinkPropertiesFolderLinkPdfSettings_ItemClick);
+			this.barButtonItemSingleLinkPropertiesFolderLinkPdfSettings.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.OnSingleLinkPropertiesFolderLinkPdfSettingsClick);
 			// 
 			// barButtonItemSingleLinkPropertiesAdminSettings
 			// 
 			this.barButtonItemSingleLinkPropertiesAdminSettings.Caption = "Admin Settings";
 			this.barButtonItemSingleLinkPropertiesAdminSettings.Id = 20;
 			this.barButtonItemSingleLinkPropertiesAdminSettings.Name = "barButtonItemSingleLinkPropertiesAdminSettings";
-			this.barButtonItemSingleLinkPropertiesAdminSettings.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemSingleLinkPropertiesAdminSettings_ItemClick);
+			this.barButtonItemSingleLinkPropertiesAdminSettings.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.OnSingleLinkPropertiesAdminSettingsClick);
 			// 
 			// repositoryItemPictureEdit1
 			// 
@@ -604,7 +609,7 @@
 			this.treeListWallbinItems.OptionsView.ShowIndicator = false;
 			this.treeListWallbinItems.OptionsView.ShowVertLines = false;
 			this.treeListWallbinItems.ShowButtonMode = DevExpress.XtraTreeList.ShowButtonModeEnum.ShowForFocusedRow;
-			this.treeListWallbinItems.Size = new System.Drawing.Size(394, 226);
+			this.treeListWallbinItems.Size = new System.Drawing.Size(394, 229);
 			this.treeListWallbinItems.StateImageList = this.imageList;
 			this.treeListWallbinItems.TabIndex = 2;
 			this.treeListWallbinItems.CalcNodeHeight += new DevExpress.XtraTreeList.CalcNodeHeightEventHandler(this.OnTreeViewCalcNodeHeight);
@@ -639,13 +644,13 @@
 			// circularProgressSyncProgress
 			// 
 			this.circularProgressSyncProgress.AnimationSpeed = 50;
-			this.circularProgressSyncProgress.BackColor = System.Drawing.Color.White;
+			this.circularProgressSyncProgress.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
 			// 
 			// 
 			// 
 			this.circularProgressSyncProgress.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			this.circularProgressSyncProgress.FocusCuesEnabled = false;
-			this.circularProgressSyncProgress.Location = new System.Drawing.Point(2, 302);
+			this.circularProgressSyncProgress.Location = new System.Drawing.Point(2, 305);
 			this.circularProgressSyncProgress.Name = "circularProgressSyncProgress";
 			this.circularProgressSyncProgress.ProgressBarType = DevComponents.DotNetBar.eCircularProgressType.Dot;
 			this.circularProgressSyncProgress.ProgressColor = System.Drawing.Color.ForestGreen;
@@ -657,13 +662,13 @@
 			// circularProgressTreeView
 			// 
 			this.circularProgressTreeView.AnimationSpeed = 50;
-			this.circularProgressTreeView.BackColor = System.Drawing.Color.White;
+			this.circularProgressTreeView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
 			// 
 			// 
 			// 
 			this.circularProgressTreeView.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			this.circularProgressTreeView.FocusCuesEnabled = false;
-			this.circularProgressTreeView.Location = new System.Drawing.Point(2, 377);
+			this.circularProgressTreeView.Location = new System.Drawing.Point(2, 380);
 			this.circularProgressTreeView.Name = "circularProgressTreeView";
 			this.circularProgressTreeView.ProgressBarType = DevComponents.DotNetBar.eCircularProgressType.Dot;
 			this.circularProgressTreeView.ProgressTextFormat = "";
@@ -703,7 +708,7 @@
 			this.popupMenuSingleLinkProperties.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.None, false, this.barSubItemSingleLinkPropertiesAddHyperlink, true),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSingleLinkPropertiesImageSettings, true),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSingleLinkPropertiesOpenLink, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemSingleLinkPropertiesOpenLink, true),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSingleLinkPropertiesDelete),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSingleLinkPropertiesLinkSettings, true),
             new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemSingleLinkPropertiesFolderLinkSettings),
@@ -735,7 +740,7 @@
 			this.layoutControl.Appearance.ControlFocused.Options.UseFont = true;
 			this.layoutControl.Appearance.ControlReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.layoutControl.Appearance.ControlReadOnly.Options.UseFont = true;
-			this.layoutControl.BackColor = System.Drawing.Color.White;
+			this.layoutControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
 			this.layoutControl.Controls.Add(this.buttonXBack);
 			this.layoutControl.Controls.Add(this.buttonXExit);
 			this.layoutControl.Controls.Add(this.treeListWallbinItems);
@@ -745,11 +750,11 @@
 			this.layoutControl.Controls.Add(this.buttonXCollapse);
 			this.layoutControl.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.layoutControl.ForeColor = System.Drawing.Color.Black;
-			this.layoutControl.Location = new System.Drawing.Point(0, 95);
+			this.layoutControl.Location = new System.Drawing.Point(0, 92);
 			this.layoutControl.Name = "layoutControl";
 			this.layoutControl.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(802, 383, 250, 350);
 			this.layoutControl.Root = this.layoutControlGroupRoot;
-			this.layoutControl.Size = new System.Drawing.Size(398, 460);
+			this.layoutControl.Size = new System.Drawing.Size(398, 463);
 			this.layoutControl.StyleController = this.styleController;
 			this.layoutControl.TabIndex = 63;
 			this.layoutControl.Text = "layoutControl1";
@@ -781,13 +786,13 @@
 			this.layoutControlGroupRoot.Location = new System.Drawing.Point(0, 0);
 			this.layoutControlGroupRoot.Name = "Root";
 			this.layoutControlGroupRoot.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-			this.layoutControlGroupRoot.Size = new System.Drawing.Size(398, 460);
+			this.layoutControlGroupRoot.Size = new System.Drawing.Size(398, 463);
 			this.layoutControlGroupRoot.TextVisible = false;
 			// 
 			// emptySpaceItem4
 			// 
 			this.emptySpaceItem4.AllowHotTrack = false;
-			this.emptySpaceItem4.Location = new System.Drawing.Point(0, 410);
+			this.emptySpaceItem4.Location = new System.Drawing.Point(0, 413);
 			this.emptySpaceItem4.MaxSize = new System.Drawing.Size(0, 10);
 			this.emptySpaceItem4.MinSize = new System.Drawing.Size(10, 10);
 			this.emptySpaceItem4.Name = "emptySpaceItem4";
@@ -801,7 +806,7 @@
 			this.layoutControlGroupSyncProgress.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.simpleLabelItemSyncProgress,
             this.layoutControlItemSyncProgress});
-			this.layoutControlGroupSyncProgress.Location = new System.Drawing.Point(0, 300);
+			this.layoutControlGroupSyncProgress.Location = new System.Drawing.Point(0, 303);
 			this.layoutControlGroupSyncProgress.Name = "layoutControlGroupSyncProgress";
 			this.layoutControlGroupSyncProgress.Size = new System.Drawing.Size(398, 35);
 			this.layoutControlGroupSyncProgress.Text = "Sync Progress";
@@ -839,7 +844,7 @@
 			this.simpleLabelItemSyncInfo.AllowHotTrack = false;
 			this.simpleLabelItemSyncInfo.AllowHtmlStringInCaption = true;
 			this.simpleLabelItemSyncInfo.CustomizationFormText = "Sync Info";
-			this.simpleLabelItemSyncInfo.Location = new System.Drawing.Point(0, 335);
+			this.simpleLabelItemSyncInfo.Location = new System.Drawing.Point(0, 338);
 			this.simpleLabelItemSyncInfo.MaxSize = new System.Drawing.Size(0, 40);
 			this.simpleLabelItemSyncInfo.MinSize = new System.Drawing.Size(1, 40);
 			this.simpleLabelItemSyncInfo.Name = "simpleLabelItemSyncInfo";
@@ -855,7 +860,7 @@
 			this.layoutControlGroupTreeViewProgress.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.simpleLabelItemTreeViewProgressLabel,
             this.layoutControlItemTreeViewProgress});
-			this.layoutControlGroupTreeViewProgress.Location = new System.Drawing.Point(0, 375);
+			this.layoutControlGroupTreeViewProgress.Location = new System.Drawing.Point(0, 378);
 			this.layoutControlGroupTreeViewProgress.Name = "layoutControlGroupTreeViewProgress";
 			this.layoutControlGroupTreeViewProgress.Size = new System.Drawing.Size(398, 35);
 			this.layoutControlGroupTreeViewProgress.TextVisible = false;
@@ -899,7 +904,7 @@
             this.emptySpaceItem3});
 			this.layoutControlGroupTreeView.Location = new System.Drawing.Point(0, 0);
 			this.layoutControlGroupTreeView.Name = "layoutControlGroupTreeView";
-			this.layoutControlGroupTreeView.Size = new System.Drawing.Size(398, 300);
+			this.layoutControlGroupTreeView.Size = new System.Drawing.Size(398, 303);
 			this.layoutControlGroupTreeView.Text = "Tree View";
 			this.layoutControlGroupTreeView.TextVisible = false;
 			// 
@@ -972,7 +977,7 @@
 			this.layoutControlItemWallbinItems.FillControlToClientArea = false;
 			this.layoutControlItemWallbinItems.Location = new System.Drawing.Point(0, 60);
 			this.layoutControlItemWallbinItems.Name = "layoutControlItemWallbinItems";
-			this.layoutControlItemWallbinItems.Size = new System.Drawing.Size(398, 230);
+			this.layoutControlItemWallbinItems.Size = new System.Drawing.Size(398, 233);
 			this.layoutControlItemWallbinItems.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutControlItemWallbinItems.TextVisible = false;
 			this.layoutControlItemWallbinItems.TrimClientAreaToControl = false;
@@ -980,7 +985,7 @@
 			// emptySpaceItem3
 			// 
 			this.emptySpaceItem3.AllowHotTrack = false;
-			this.emptySpaceItem3.Location = new System.Drawing.Point(0, 290);
+			this.emptySpaceItem3.Location = new System.Drawing.Point(0, 293);
 			this.emptySpaceItem3.MaxSize = new System.Drawing.Size(0, 10);
 			this.emptySpaceItem3.MinSize = new System.Drawing.Size(10, 10);
 			this.emptySpaceItem3.Name = "emptySpaceItem3";
@@ -995,7 +1000,7 @@
             this.layoutControlItemExit,
             this.layoutControlItemBack,
             this.emptySpaceItem5});
-			this.layoutControlGroupBottomButtons.Location = new System.Drawing.Point(0, 420);
+			this.layoutControlGroupBottomButtons.Location = new System.Drawing.Point(0, 423);
 			this.layoutControlGroupBottomButtons.Name = "layoutControlGroupBottomButtons";
 			this.layoutControlGroupBottomButtons.Size = new System.Drawing.Size(398, 40);
 			this.layoutControlGroupBottomButtons.Text = "Bottom Buttons";
@@ -1040,6 +1045,31 @@
 			this.emptySpaceItem5.Name = "emptySpaceItem5";
 			this.emptySpaceItem5.Size = new System.Drawing.Size(158, 40);
 			this.emptySpaceItem5.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// barSubItem1
+			// 
+			this.barSubItemSingleLinkPropertiesOpenLink.Caption = "Open";
+			this.barSubItemSingleLinkPropertiesOpenLink.Id = 21;
+			this.barSubItemSingleLinkPropertiesOpenLink.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSingleLinkPropertiesOpenLinkSourceFile),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSingleLinkPropertiesOpenLinkSourceFolder),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSingleLinkPropertiesOpenLinkSiteLink),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSingleLinkPropertiesOpenLinkOneDriveLink)});
+			this.barSubItemSingleLinkPropertiesOpenLink.Name = "barSubItemSingleLinkPropertiesOpenLink";
+			// 
+			// barButtonItemSingleLinkPropertiesOpenLinkSiteLink
+			// 
+			this.barButtonItemSingleLinkPropertiesOpenLinkSiteLink.Caption = "Site Link";
+			this.barButtonItemSingleLinkPropertiesOpenLinkSiteLink.Id = 22;
+			this.barButtonItemSingleLinkPropertiesOpenLinkSiteLink.Name = "barButtonItemSingleLinkPropertiesOpenLinkSiteLink";
+			this.barButtonItemSingleLinkPropertiesOpenLinkSiteLink.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.OnSingleLinkPropertiesOpenLinkSiteLinkClick);
+			// 
+			// barButtonItemSingleLinkPropertiesOpenLinkOneDriveLink
+			// 
+			this.barButtonItemSingleLinkPropertiesOpenLinkOneDriveLink.Caption = "OneDrive Link";
+			this.barButtonItemSingleLinkPropertiesOpenLinkOneDriveLink.Id = 23;
+			this.barButtonItemSingleLinkPropertiesOpenLinkOneDriveLink.Name = "barButtonItemSingleLinkPropertiesOpenLinkOneDriveLink";
+			this.barButtonItemSingleLinkPropertiesOpenLinkOneDriveLink.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.OnSingleLinkPropertiesOpenLinkOneDriveLinkClick);
 			// 
 			// FormCompactWallbin
 			// 
@@ -1115,8 +1145,8 @@
 		private System.Windows.Forms.ImageList imageList;
 		private DevComponents.DotNetBar.Controls.CircularProgress circularProgressTreeView;
 		private DevExpress.XtraBars.PopupMenu popupMenuSingleLinkProperties;
-		private DevExpress.XtraBars.BarButtonItem barButtonItemSingleLinkPropertiesOpenLink;
-		private DevExpress.XtraBars.BarButtonItem barButtonItemSingleLinkPropertiesFileLocation;
+		private DevExpress.XtraBars.BarButtonItem barButtonItemSingleLinkPropertiesOpenLinkSourceFile;
+		private DevExpress.XtraBars.BarButtonItem barButtonItemSingleLinkPropertiesOpenLinkSourceFolder;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemSingleLinkPropertiesDelete;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemSingleLinkPropertiesRefreshPreview;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemSingleLinkPropertiesLinkSettings;
@@ -1170,5 +1200,8 @@
 		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem6;
 		private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroupTreeView;
 		private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroupBottomButtons;
+		private DevExpress.XtraBars.BarSubItem barSubItemSingleLinkPropertiesOpenLink;
+		private DevExpress.XtraBars.BarButtonItem barButtonItemSingleLinkPropertiesOpenLinkSiteLink;
+		private DevExpress.XtraBars.BarButtonItem barButtonItemSingleLinkPropertiesOpenLinkOneDriveLink;
 	}
 }

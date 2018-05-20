@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using SalesLibraries.Business.Entities.Helpers;
 using SalesLibraries.Business.Entities.Interfaces;
@@ -16,6 +20,7 @@ using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.OfficeInterops;
 using SalesLibraries.CommonGUI.Wallbin.Folders;
 using SalesLibraries.FileManager.Business.PreviewGenerators;
+using SalesLibraries.FileManager.Business.Synchronization;
 using SalesLibraries.FileManager.Controllers;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEdit;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings;
@@ -193,18 +198,104 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 		public void OpenLink()
 		{
 			var selectedRow = SelectedLinkRow;
-			var sourceLink = selectedRow?.Source as LibraryObjectLink;
-			if (sourceLink == null) return;
+			if (!(selectedRow?.Source is LibraryObjectLink sourceLink))
+				return;
 			Utils.OpenFile(sourceLink.OpenPaths);
 		}
 
 		public void OpenLinkLocation()
 		{
 			var selectedRow = SelectedLinkRow;
-			var sourceLink = selectedRow?.Source as LibraryFileLink;
-			if (sourceLink == null) return;
+			if (!(selectedRow?.Source is LibraryFileLink sourceLink))
+				return;
 			Utils.OpenFile(sourceLink.LocationPath);
 			MainController.Instance.WallbinViews.ActiveWallbin.DataSourcesControl.ShowFileInTree(sourceLink.FullPath);
+		}
+
+		public void OpenLinkOnSite()
+		{
+			var selectedRow = SelectedLinkRow;
+			var linkId = selectedRow?.Source?.ExtId.ToString();
+			if (String.IsNullOrEmpty(linkId)) return;
+
+			var linkUrl = String.Format("{0}/preview/getSingleInternalLink?linkId={1}",
+				MainController.Instance.Settings.WebServiceSite, linkId);
+
+			Process.Start(linkUrl);
+		}
+
+		public void OpenLinkOnOneDrive()
+		{
+			var selectedRow = SelectedLinkRow;
+			if (!(selectedRow?.Source is LibraryFileLink sourceLink) || String.IsNullOrEmpty(sourceLink.OneDriveSettings.Url))
+				return;
+			Process.Start(sourceLink.OneDriveSettings.Url);
+		}
+
+		public void CopyOneDriveUrl()
+		{
+			var selectedRow = SelectedLinkRow;
+			if (!(selectedRow?.Source is LibraryFileLink sourceLink) || String.IsNullOrEmpty(sourceLink.OneDriveSettings.Url))
+				return;
+
+			var url = sourceLink.OneDriveSettings.Url;
+
+			Task.Run(() =>
+			{
+				var urlCopied = false;
+				var retryCount = 0;
+				do
+				{
+					Invoke(new MethodInvoker(() =>
+					{
+						try
+						{
+							System.Windows.Forms.Clipboard.Clear();
+							System.Windows.Forms.Clipboard.SetText(url);
+							urlCopied = true;
+						}
+						catch (ExternalException)
+						{
+							Thread.Sleep(1000);
+							System.Windows.Forms.Clipboard.Clear();
+						}
+					}));
+					retryCount++;
+				} while (!urlCopied && retryCount < 10);
+			});
+
+			MainController.Instance.PopupMessages.ShowInfo("Url successfully copied");
+		}
+
+		public void ResetOneDriveUrl()
+		{
+			var selectedRow = SelectedLinkRow;
+			if (!(selectedRow?.Source is LibraryFileLink sourceLink) || String.IsNullOrEmpty(sourceLink.OneDriveSettings.Url))
+				return;
+			var successfullResult = false;
+			MainController.Instance.ProcessManager.Run("Processing OneDrive links...", (cancelationToken, formProgess) =>
+			{
+				var links = new[] { sourceLink };
+				var oneDriveConnector = new OneDriveConnector();
+				AsyncHelper.RunSync(async () =>
+				{
+					try
+					{
+						await oneDriveConnector.ProcessLinksResetUrl(links
+								.Where(f => !f.IsDead)
+								.ToList()
+							, cancelationToken);
+						successfullResult = true;
+					}
+					catch { }
+
+				});
+			});
+
+			if (successfullResult)
+				MainController.Instance.PopupMessages.ShowInfo("Url successfully updated");
+			else
+				MainController.Instance.PopupMessages.ShowInfo("Url updating failed because of external service error. Try again later");
 		}
 
 		public void DeleteSingleLink()

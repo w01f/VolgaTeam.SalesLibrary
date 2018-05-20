@@ -1243,6 +1243,16 @@ namespace SalesLibraries.FileManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap RibbonLinkOneDrive {
+            get {
+                object obj = ResourceManager.GetObject("RibbonLinkOneDrive", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap RibbonLinkOpen {
             get {
                 object obj = ResourceManager.GetObject("RibbonLinkOpen", resourceCulture);

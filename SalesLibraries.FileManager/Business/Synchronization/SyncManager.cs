@@ -42,7 +42,7 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 				var oneDriveConnector = new OneDriveConnector();
 				AsyncHelper.RunSync(async () =>
 				{
-					await oneDriveConnector.ProcessLinks(targetLibrary.Pages
+					await oneDriveConnector.ProcessLinksSync(targetLibrary.Pages
 						.SelectMany(p => p.AllGroupLinks)
 						.OfType<LibraryFileLink>()
 						.Where(f => !f.IsDead)
@@ -95,7 +95,7 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 					var oneDriveConnector = new OneDriveConnector();
 					AsyncHelper.RunSync(async () =>
 					{
-						await oneDriveConnector.ProcessLinks(targetLibrary.Pages
+						await oneDriveConnector.ProcessLinksSync(targetLibrary.Pages
 								.SelectMany(p => p.AllGroupLinks)
 								.OfType<LibraryFileLink>()
 								.Where(f => !f.IsDead)

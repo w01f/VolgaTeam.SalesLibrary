@@ -625,6 +625,12 @@
     <Compile Include="PresentationLayer\Wallbin\Settings\ResetLinks\FormResetLibraryLinks.designer.cs">
       <DependentUpon>FormResetLibraryLinks.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\ResetLinks\FormResetOneDriveLinksConfirmation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\ResetLinks\FormResetOneDriveLinksConfirmation.Designer.cs">
+      <DependentUpon>FormResetOneDriveLinksConfirmation.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationLayer\Wallbin\Settings\ResetLinks\FormResetLineBreaksConfirmation.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -656,6 +662,12 @@
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Settings\ResetLinks\ResetAllControl.Designer.cs">
       <DependentUpon>ResetAllControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\ResetLinks\ResetOneDriveLinksControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\ResetLinks\ResetOneDriveLinksControl.Designer.cs">
+      <DependentUpon>ResetOneDriveLinksControl.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Settings\ResetLinks\ResetPreviewContentControl.cs">
       <SubType>Component</SubType>
@@ -1244,6 +1256,9 @@
     <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\ResetLinks\FormResetLibraryLinks.resx">
       <DependentUpon>FormResetLibraryLinks.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\ResetLinks\FormResetOneDriveLinksConfirmation.resx">
+      <DependentUpon>FormResetOneDriveLinksConfirmation.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\ResetLinks\FormResetLineBreaksConfirmation.resx">
       <DependentUpon>FormResetLineBreaksConfirmation.cs</DependentUpon>
     </EmbeddedResource>
@@ -1258,6 +1273,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\ResetLinks\ResetAllControl.resx">
       <DependentUpon>ResetAllControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\ResetLinks\ResetOneDriveLinksControl.resx">
+      <DependentUpon>ResetOneDriveLinksControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\ResetLinks\ResetPreviewContentControl.resx">
       <DependentUpon>ResetPreviewContentControl.cs</DependentUpon>
@@ -1504,6 +1522,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\RibbonLinkOneDrive.png" />
     <None Include="Resources\RibbonPin.png" />
     <None Include="Resources\RibbonExpand.png" />
     <None Include="Resources\RibbonCollapse.png" />

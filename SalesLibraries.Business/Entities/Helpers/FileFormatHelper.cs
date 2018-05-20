@@ -109,6 +109,39 @@ namespace SalesLibraries.Business.Entities.Helpers
 			}
 		}
 
+		public static bool IsMovFile(string filePath)
+		{
+			switch (GetExtension(filePath))
+			{
+				case ".MOV":
+					return true;
+				default:
+					return false;
+			}
+		}
+
+		public static bool IsWmvFile(string filePath)
+		{
+			switch (GetExtension(filePath))
+			{
+				case ".WMV":
+					return true;
+				default:
+					return false;
+			}
+		}
+
+		public static bool IsM4vFile(string filePath)
+		{
+			switch (GetExtension(filePath))
+			{
+				case ".M4V":
+					return true;
+				default:
+					return false;
+			}
+		}
+
 		public static bool IsPngFile(string filePath)
 		{
 			switch (GetExtension(filePath))

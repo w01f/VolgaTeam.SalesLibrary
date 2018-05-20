@@ -79,7 +79,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.CompactWallbin
 								catch { }
 							}
 						}
-						MainController.Instance.PopupMessages.ShowInfo("Existed file updated");
+						MainController.Instance.PopupMessages.ShowInfo("File updated");
 					}
 				}
 			}
