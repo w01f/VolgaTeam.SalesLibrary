@@ -31,6 +31,14 @@
 							</div>
 						</li>
 					<? endforeach; ?>
+					<? if (Yii::app()->params['one_drive_links']['enabled'] && !empty($data->oneDriveUrl)): ?>
+                        <li class="action">
+                            <a href="<? echo $data->oneDriveUrl; ?>" target="_blank" data-role="button" data-rel="external">OneDrive Link</a>
+                        </li>
+                        <li class="action">
+                            <a href="mailto:?body=<? echo $data->oneDriveUrl; ?>" target="_blank" data-role="button" data-rel="external">Email OneDrive Link</a>
+                        </li>
+					<? endif; ?>
 				</ul>
 			</div>
 		<? else: ?>

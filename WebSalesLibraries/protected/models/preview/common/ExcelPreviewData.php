@@ -8,6 +8,7 @@
 	class ExcelPreviewData extends FilePreviewData
 	{
 		public $isPhone;
+		public $thumbImageSrc;
 
 		/**
 		 * @param $link LibraryLink
@@ -20,6 +21,11 @@
 			parent::__construct($link);
 			$this->viewerFormat = 'xls';
 			$this->linkTitle = 'Excel File';
+
+			if ($this->isPhone)
+				$this->contentView = 'excelViewer';
+
+			$this->thumbImageSrc = $link->universalPreview->thumbItems[0]->link;
 		}
 
 		/**

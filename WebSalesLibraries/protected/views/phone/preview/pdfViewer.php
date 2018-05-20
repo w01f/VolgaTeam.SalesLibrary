@@ -25,7 +25,7 @@
 						<div class="ui-block-a">
 							<a href="#link-viewer-open-menu" data-role="button" data-rel="popup" data-inline="true" data-theme="a">Open</a>
 						</div>
-						<? if ($data->config->allowAddToQuickSite || $data->config->allowAddToFavorites): ?>
+						<? if ($data->config->allowAddToQuickSite || $data->config->allowAddToFavorites || (Yii::app()->params['one_drive_links']['enabled'] && !empty($data->oneDriveUrl))): ?>
 							<div class="ui-block-b">
 								<a id="link-viwer-open-full-screen" href="#" data-role="button" data-inline="true" data-theme="a" data-transition="slidefade">Full Screen</a>
 							</div>
@@ -72,12 +72,15 @@
                     <li data-role="list-divider"><p>Copyright 2015 adSALESapps.com</p></li>
                 </ul>
 			</div>
-			<? if ($data->config->allowAddToQuickSite || $data->config->allowAddToFavorites): ?>
+			<? if ($data->config->allowAddToQuickSite || $data->config->allowAddToFavorites || (Yii::app()->params['one_drive_links']['enabled'] && !empty($data->oneDriveUrl))): ?>
 				<div data-role="popup" id="link-viewer-options-menu" data-theme="a">
 					<ul data-role="listview" data-inset="true" style="min-width:250px;" data-corners="false">
 						<li data-role="list-divider" data-theme="d">File Options...</li>
 						<? if ($data->config->allowAddToQuickSite): ?>
 							<li><a href="#email-page" data-transition="slidefade" data-ajax="false">Email this Link</a></li>
+						<? endif; ?>
+						<? if (Yii::app()->params['one_drive_links']['enabled'] && !empty($data->oneDriveUrl)): ?>
+                            <li><a href="mailto:?body=<? echo $data->oneDriveUrl; ?>" data-rel="external">Email OneDrive Link</a></li>
 						<? endif; ?>
 						<? if ($data->config->allowAddToFavorites): ?>
 							<li><a href="#favorites-add-page" data-transition="slidefade" data-ajax="false">Save to Favorites</a></li>
@@ -89,6 +92,11 @@
 		<div data-role="popup" id="link-viewer-open-menu" data-theme="a">
 			<ul data-role="listview" data-inset="true" style="min-width:250px;" data-corners="false">
 				<li data-role="list-divider" data-theme="d">Open this file...</li>
+				<? if (Yii::app()->params['one_drive_links']['enabled'] && !empty($data->oneDriveUrl)): ?>
+                    <li>
+                        <a class="popup-open-action" href="<? echo $data->oneDriveUrl; ?>" target="_blank" data-rel="external">OneDrive Link</a>
+                    </li>
+				<? endif; ?>
 				<li>
 					<a href="#link-viewer-gallery" data-transition="slidefade">Thumb Gallery</a>
 				</li>
