@@ -11,6 +11,7 @@
 		this.format = undefined;
 		this.tags = undefined;
 		this.url = undefined;
+		this.oneDriveUrl = undefined;
 		this.fileName = undefined;
 		this.filePath = undefined;
 		this.fileSize = undefined;

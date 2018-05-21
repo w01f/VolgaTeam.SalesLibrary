@@ -53,7 +53,6 @@
 		public function initDialogActions()
 		{
 			parent::initDialogActions();
-
 			if (!$this->isPhone && (($this->link->fileSize * .0009765625) * .0009765625) < 10)
 			{
 				$imageUrlPrefix = Yii::app()->getBaseUrl(true);

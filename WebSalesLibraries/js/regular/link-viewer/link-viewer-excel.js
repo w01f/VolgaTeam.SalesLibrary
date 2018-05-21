@@ -160,7 +160,6 @@
 				'</div>' +
 				'</td></tr>' +
 				'</table>';
-
 			$.fancybox.close();
 			$.fancybox({
 				content: content,
