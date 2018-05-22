@@ -5,13 +5,17 @@ select
 	whole.login,
 	whole.first_name,
 	whole.last_name,
-	whole.groups
+	group_concat(distinct whole.email separator '; ') as email,
+	group_concat(distinct whole.user_group separator ', ') as groups,
+	max(whole.last_activity) as last_activity
 from (select
 				0 as id,
 				su.login as login,
 				su.first_name as first_name,
 				su.last_name as last_name,
-				group_concat(distinct sg.name separator ',') as groups,
+				su.email as email,
+				sg.name as user_group,
+				sact.date_time as last_activity,
 				1 as activity
 			from tbl_statistic_activity sact
 				join tbl_statistic_user su on su.id_activity = sact.id
@@ -24,12 +28,14 @@ from (select
 				u.login as login,
 				u.first_name as first_name,
 				u.last_name as last_name,
-				group_concat(distinct g.name separator ',') as groups,
+				u.email as email,
+				g.name as user_group,
+				null as last_activity,
 				0 as activity
 			from tbl_user u
 				join tbl_user_group ug on ug.id_user = u.id
 				join tbl_group g on g.id = ug.id_group
 			group by u.login, u.first_name, u.last_name
 		 ) whole
-group by whole.login, whole.first_name, whole.last_name, whole.groups
+group by whole.login, whole.first_name, whole.last_name
 having max(whole.activity) < 1;

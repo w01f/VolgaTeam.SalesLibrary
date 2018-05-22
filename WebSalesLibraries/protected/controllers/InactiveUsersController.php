@@ -48,7 +48,9 @@
 					$userRecord->login = $resultRecord['login'];
 					$userRecord->firstName = $resultRecord['first_name'];
 					$userRecord->lastName = $resultRecord['last_name'];
+					$userRecord->email = $resultRecord['email'];
 					$userRecord->groupNames = $resultRecord['groups'];
+					$userRecord->dateLastActivity = $resultRecord['last_activity'];
 					$userRecords[] = $userRecord;
 				}
 			}
@@ -60,79 +62,27 @@
 
 		/**
 		 * @param string $sessionKey
-		 * @param string[] $userIds
-		 * @param boolean $onlyEmail
-		 * @param string $sender
-		 * @param string $subject
-		 * @param string $body
+		 * @param string $login
+		 * @param string $password
 		 * @soap
 		 */
-		public function resetUsers($sessionKey, $userIds, $onlyEmail, $sender, $subject, $body)
+		public function resetUser($sessionKey, $login, $password)
 		{
-			if ($this->authenticateBySession($sessionKey) && isset($userIds))
+			if ($this->authenticateBySession($sessionKey))
 			{
-				foreach ($userIds as $userId)
-				{
-					/** @var $userRecord UserRecord */
-					$userRecord = UserRecord::model()->findByPk($userId);
-					if (isset($userRecord->email))
-					{
-						$password = '';
-						if (!$onlyEmail)
-						{
-							$password = UserRecord::generatePassword();
-							UserRecord::changePassword($userRecord->login, $password);
-							ResetPasswordRecord::resetPasswordForUser($userRecord->login, $password, false, false);
-						}
-
-						$message = Yii::app()->email;
-						$message->to = $userRecord->email;
-						$message->cc = $sender;
-						$message->subject = $subject;
-						$message->from = $sender;
-						$body = str_replace(PHP_EOL, '<br>', $body);
-						if ($onlyEmail)
-							$message->message = $body;
-						else
-						{
-							$message->viewVars = array('login' => $userRecord->login, 'password' => $password, 'body' => $body);
-							$message->view = 'resetUser';
-						}
-						$message->send();
-					}
-				}
+				UserRecord::changePassword($login, $password);
+				ResetPasswordRecord::resetPasswordForUser($login, $password, false, false);
 			}
 		}
 
 		/**
 		 * @param string $sessionKey
-		 * @param string[] $userIds
-		 * @param boolean $onlyEmail
-		 * @param string $sender
-		 * @param string $subject
-		 * @param string $body
+		 * @param string $login
 		 * @soap
 		 */
-		public function deleteUsers($sessionKey, $userIds, $onlyEmail, $sender, $subject, $body)
+		public function deleteUser($sessionKey, $login)
 		{
-			if ($this->authenticateBySession($sessionKey) && isset($userIds))
-			{
-				foreach ($userIds as $userId)
-				{
-					$userRecord = UserRecord::model()->findByPk($userId);
-					if (isset($userRecord->email))
-					{
-						$message = Yii::app()->email;
-						$message->to = $userRecord->email;
-						$message->cc = $sender;
-						$message->subject = $subject;
-						$message->from = $sender;
-						$message->message = $body;
-						$message->send();
-						if (!$onlyEmail)
-							UserRecord::deleteUserByLogin($userRecord->login);
-					}
-				}
-			}
+			if ($this->authenticateBySession($sessionKey))
+				UserRecord::deleteUserByLogin($login);
 		}
 	}

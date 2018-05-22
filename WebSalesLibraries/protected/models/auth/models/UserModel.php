@@ -60,6 +60,11 @@
 		 */
 		public $dateModify;
 		/**
+		 * @var string
+		 * @soap
+		 */
+		public $dateLastActivity;
+		/**
 		 * @var GroupModel[]
 		 * @soap
 		 */
