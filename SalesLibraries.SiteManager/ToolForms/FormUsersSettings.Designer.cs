@@ -33,11 +33,11 @@
 			this.buttonXSave = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXCancel = new DevComponents.DotNetBar.ButtonX();
 			this.layoutControl = new DevExpress.XtraLayout.LayoutControl();
-			this.textEditNewAccountSubject = new DevExpress.XtraEditors.TextEdit();
 			this.checkEditLocalEmail = new DevExpress.XtraEditors.CheckEdit();
 			this.checkEditServerEmail = new DevExpress.XtraEditors.CheckEdit();
 			this.comboBoxEditLocalEmailAccount = new DevExpress.XtraEditors.ComboBoxEdit();
 			this.memoEditEmailCopyAddresses = new DevExpress.XtraEditors.MemoEdit();
+			this.textEditNewAccountSubject = new DevExpress.XtraEditors.TextEdit();
 			this.textEditNewAccountBodyPlaceholder1 = new DevExpress.XtraEditors.TextEdit();
 			this.textEditNewAccountBodyPlaceholder2 = new DevExpress.XtraEditors.TextEdit();
 			this.textEditNewAccountBodyPlaceholder3 = new DevExpress.XtraEditors.TextEdit();
@@ -55,6 +55,11 @@
 			this.memoEditResetAccountBodyPlaceholder6 = new DevExpress.XtraEditors.MemoEdit();
 			this.memoEditResetAccountBodyPlaceholder7 = new DevExpress.XtraEditors.MemoEdit();
 			this.textEditResetAccountBodyPlaceholder8 = new DevExpress.XtraEditors.TextEdit();
+			this.textEditDeleteAccountSubject = new DevExpress.XtraEditors.TextEdit();
+			this.textEditDeleteAccountBodyPlaceholder1 = new DevExpress.XtraEditors.TextEdit();
+			this.textEditDeleteAccountBodyPlaceholder2 = new DevExpress.XtraEditors.TextEdit();
+			this.textEditDeleteAccountBodyPlaceholder3 = new DevExpress.XtraEditors.TextEdit();
+			this.memoEditDeleteAccountRecipients = new DevExpress.XtraEditors.MemoEdit();
 			this.layoutControlGroupRoot = new DevExpress.XtraLayout.LayoutControlGroup();
 			this.layoutControlItemCancel = new DevExpress.XtraLayout.LayoutControlItem();
 			this.layoutControlItemSave = new DevExpress.XtraLayout.LayoutControlItem();
@@ -125,38 +130,84 @@
 			this.simpleLabelItemResetAccountBodyLine12 = new DevExpress.XtraLayout.SimpleLabelItem();
 			this.simpleLabelItemResetAccountBodyLine13 = new DevExpress.XtraLayout.SimpleLabelItem();
 			this.layoutControlItemResetAccountBodyPlaceholder8 = new DevExpress.XtraLayout.LayoutControlItem();
-			this.textEditDeleteAccountBodyPlaceholder2 = new DevExpress.XtraEditors.TextEdit();
-			this.textEditDeleteAccountBodyPlaceholder1 = new DevExpress.XtraEditors.TextEdit();
-			this.memoEditDeleteAccountRecipients = new DevExpress.XtraEditors.MemoEdit();
-			this.textEditDeleteAccountBodyPlaceholder3 = new DevExpress.XtraEditors.TextEdit();
-			this.textEditDeleteAccountSubject = new DevExpress.XtraEditors.TextEdit();
 			this.layoutControlGroupDeleteAccount = new DevExpress.XtraLayout.LayoutControlGroup();
 			this.simpleLabelItemDeleteAccountSubjectTitle = new DevExpress.XtraLayout.SimpleLabelItem();
 			this.layoutControlItemDeleteAccountSubjectValue = new DevExpress.XtraLayout.LayoutControlItem();
 			this.emptySpaceItem11 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.emptySpaceItem12 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.simpleLabelItemDeleteAccountBodyTitle = new DevExpress.XtraLayout.SimpleLabelItem();
-			this.simpleLabelItemDeleteAccountBodyLine3 = new DevExpress.XtraLayout.SimpleLabelItem();
 			this.emptySpaceItem13 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.layoutControlItemDeleteAccountBodyPlaceholder1 = new DevExpress.XtraLayout.LayoutControlItem();
 			this.simpleLabelItemDeleteAccountBodyLine2 = new DevExpress.XtraLayout.SimpleLabelItem();
 			this.layoutControlItemDeleteAccountBodyPlaceholder2 = new DevExpress.XtraLayout.LayoutControlItem();
 			this.simpleLabelItemDeleteAccountBodyLine4 = new DevExpress.XtraLayout.SimpleLabelItem();
-			this.simpleLabelItemDeleteAccountBodyLine5 = new DevExpress.XtraLayout.SimpleLabelItem();
 			this.layoutControlItemDeleteAccountBodyPlaceholder3 = new DevExpress.XtraLayout.LayoutControlItem();
+			this.simpleLabelItemDeleteAccountBodyLine3 = new DevExpress.XtraLayout.SimpleLabelItem();
+			this.simpleLabelItemDeleteAccountBodyLine5 = new DevExpress.XtraLayout.SimpleLabelItem();
 			this.simpleLabelItemDeleteAccountBodyLine1 = new DevExpress.XtraLayout.SimpleLabelItem();
-			this.layoutControlItemDeleteAccountRecipients = new DevExpress.XtraLayout.LayoutControlItem();
 			this.emptySpaceItem14 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.layoutControlItemDeleteAccountRecipients = new DevExpress.XtraLayout.LayoutControlItem();
 			this.emptySpaceItem15 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.emptySpaceItem16 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.layoutControlGroupInactiveUsers = new DevExpress.XtraLayout.LayoutControlGroup();
+			this.tabbedControlGroupInactiveUsers = new DevExpress.XtraLayout.TabbedControlGroup();
+			this.emptySpaceItem17 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.textEditInactiveUsersResetBodyPlaceholder3 = new DevExpress.XtraEditors.TextEdit();
+			this.textEditInactiveUsersResetBodyPlaceholder1 = new DevExpress.XtraEditors.TextEdit();
+			this.textEditInactiveUsersResetSubject = new DevExpress.XtraEditors.TextEdit();
+			this.layoutControlGroupInactiveUsersReset = new DevExpress.XtraLayout.LayoutControlGroup();
+			this.simpleLabelItemInactiveUsersResetSubjectTitle = new DevExpress.XtraLayout.SimpleLabelItem();
+			this.layoutControlItemInactiveUsersResetSubjectValue = new DevExpress.XtraLayout.LayoutControlItem();
+			this.emptySpaceItem19 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.emptySpaceItem20 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.simpleLabelItemInactiveUsersResetBodyTitle = new DevExpress.XtraLayout.SimpleLabelItem();
+			this.emptySpaceItem21 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.layoutControlItemInactiveUsersResetBodyPlaceholder1 = new DevExpress.XtraLayout.LayoutControlItem();
+			this.simpleLabelItemInactiveUsersResetBodyLine7 = new DevExpress.XtraLayout.SimpleLabelItem();
+			this.layoutControlItemInactiveUsersResetBodyPlaceholder2 = new DevExpress.XtraLayout.LayoutControlItem();
+			this.simpleLabelItemInactiveUsersResetBodyLine10 = new DevExpress.XtraLayout.SimpleLabelItem();
+			this.layoutControlItemInactiveUsersResetBodyPlaceholder3 = new DevExpress.XtraLayout.LayoutControlItem();
+			this.simpleLabelItemInactiveUsersResetBodyLine1 = new DevExpress.XtraLayout.SimpleLabelItem();
+			this.emptySpaceItem24 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.simpleLabelItemInactiveUsersResetBodyLine2 = new DevExpress.XtraLayout.SimpleLabelItem();
+			this.simpleLabelItemInactiveUsersResetBodyLine3 = new DevExpress.XtraLayout.SimpleLabelItem();
+			this.simpleLabelItemInactiveUsersResetBodyLine4 = new DevExpress.XtraLayout.SimpleLabelItem();
+			this.simpleLabelItemInactiveUsersResetBodyLine5 = new DevExpress.XtraLayout.SimpleLabelItem();
+			this.simpleLabelItemInactiveUsersResetBodyLine6 = new DevExpress.XtraLayout.SimpleLabelItem();
+			this.memoEditInactiveUsersResetBodyPlaceholder2 = new DevExpress.XtraEditors.MemoEdit();
+			this.simpleLabelItemInactiveUsersResetBodyLine9 = new DevExpress.XtraLayout.SimpleLabelItem();
+			this.simpleLabelItemInactiveUsersResetBodyLine8 = new DevExpress.XtraLayout.SimpleLabelItem();
+			this.simpleLabelItemInactiveUsersResetBodyLine11 = new DevExpress.XtraLayout.SimpleLabelItem();
+			this.textEditInactiveUsersDeleteSubject = new DevExpress.XtraEditors.TextEdit();
+			this.memoEditInactiveUsersDeleteBodyPlaceholder1 = new DevExpress.XtraEditors.MemoEdit();
+			this.textEditInactiveUsersDeleteBodyPlaceholder2 = new DevExpress.XtraEditors.TextEdit();
+			this.layoutControlGroupInactiveUsersDelete = new DevExpress.XtraLayout.LayoutControlGroup();
+			this.simpleLabelItemInactiveUsersDeleteSubjectTitle = new DevExpress.XtraLayout.SimpleLabelItem();
+			this.layoutControlItemInactiveUsersDeleteSubjectValue = new DevExpress.XtraLayout.LayoutControlItem();
+			this.emptySpaceItem18 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.emptySpaceItem22 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.simpleLabelItemInactiveUsersDeleteBodyTitle = new DevExpress.XtraLayout.SimpleLabelItem();
+			this.emptySpaceItem23 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.layoutControlItemInactiveUsersDeleteBodyPlaceholder1 = new DevExpress.XtraLayout.LayoutControlItem();
+			this.simpleLabelItemInactiveUsersDeleteBodyLine8 = new DevExpress.XtraLayout.SimpleLabelItem();
+			this.layoutControlItemInactiveUsersDeleteBodyPlaceholder2 = new DevExpress.XtraLayout.LayoutControlItem();
+			this.emptySpaceItem25 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.simpleLabelItemInactiveUsersDeleteBodyLine1 = new DevExpress.XtraLayout.SimpleLabelItem();
+			this.simpleLabelItemInactiveUsersDeleteBodyLine2 = new DevExpress.XtraLayout.SimpleLabelItem();
+			this.simpleLabelItemInactiveUsersDeleteBodyLine3 = new DevExpress.XtraLayout.SimpleLabelItem();
+			this.simpleLabelItemInactiveUsersDeleteBodyLine4 = new DevExpress.XtraLayout.SimpleLabelItem();
+			this.simpleLabelItemInactiveUsersDeleteBodyLine5 = new DevExpress.XtraLayout.SimpleLabelItem();
+			this.simpleLabelItemInactiveUsersDeleteBodyLine6 = new DevExpress.XtraLayout.SimpleLabelItem();
+			this.simpleLabelItemInactiveUsersDeleteBodyLine7 = new DevExpress.XtraLayout.SimpleLabelItem();
+			this.simpleLabelItemInactiveUsersDeleteBodyLine9 = new DevExpress.XtraLayout.SimpleLabelItem();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControl)).BeginInit();
 			this.layoutControl.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.textEditNewAccountSubject.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditLocalEmail.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditServerEmail.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.comboBoxEditLocalEmailAccount.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.memoEditEmailCopyAddresses.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.textEditNewAccountSubject.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditNewAccountBodyPlaceholder1.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditNewAccountBodyPlaceholder2.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditNewAccountBodyPlaceholder3.Properties)).BeginInit();
@@ -174,6 +225,11 @@
 			((System.ComponentModel.ISupportInitialize)(this.memoEditResetAccountBodyPlaceholder6.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.memoEditResetAccountBodyPlaceholder7.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditResetAccountBodyPlaceholder8.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.textEditDeleteAccountSubject.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.textEditDeleteAccountBodyPlaceholder1.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.textEditDeleteAccountBodyPlaceholder2.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.textEditDeleteAccountBodyPlaceholder3.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.memoEditDeleteAccountRecipients.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupRoot)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemCancel)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemSave)).BeginInit();
@@ -244,30 +300,76 @@
 			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemResetAccountBodyLine12)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemResetAccountBodyLine13)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemResetAccountBodyPlaceholder8)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.textEditDeleteAccountBodyPlaceholder2.Properties)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.textEditDeleteAccountBodyPlaceholder1.Properties)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.memoEditDeleteAccountRecipients.Properties)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.textEditDeleteAccountBodyPlaceholder3.Properties)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.textEditDeleteAccountSubject.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupDeleteAccount)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemDeleteAccountSubjectTitle)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemDeleteAccountSubjectValue)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem11)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem12)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemDeleteAccountBodyTitle)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemDeleteAccountBodyLine3)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem13)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemDeleteAccountBodyPlaceholder1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemDeleteAccountBodyLine2)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemDeleteAccountBodyPlaceholder2)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemDeleteAccountBodyLine4)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemDeleteAccountBodyLine5)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemDeleteAccountBodyPlaceholder3)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemDeleteAccountBodyLine3)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemDeleteAccountBodyLine5)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemDeleteAccountBodyLine1)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemDeleteAccountRecipients)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem14)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemDeleteAccountRecipients)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem15)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem16)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupInactiveUsers)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.tabbedControlGroupInactiveUsers)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem17)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.textEditInactiveUsersResetBodyPlaceholder3.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.textEditInactiveUsersResetBodyPlaceholder1.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.textEditInactiveUsersResetSubject.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupInactiveUsersReset)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemInactiveUsersResetSubjectTitle)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemInactiveUsersResetSubjectValue)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem19)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem20)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemInactiveUsersResetBodyTitle)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem21)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemInactiveUsersResetBodyPlaceholder1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemInactiveUsersResetBodyLine7)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemInactiveUsersResetBodyPlaceholder2)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemInactiveUsersResetBodyLine10)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemInactiveUsersResetBodyPlaceholder3)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemInactiveUsersResetBodyLine1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem24)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemInactiveUsersResetBodyLine2)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemInactiveUsersResetBodyLine3)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemInactiveUsersResetBodyLine4)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemInactiveUsersResetBodyLine5)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemInactiveUsersResetBodyLine6)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.memoEditInactiveUsersResetBodyPlaceholder2.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemInactiveUsersResetBodyLine9)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemInactiveUsersResetBodyLine8)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemInactiveUsersResetBodyLine11)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.textEditInactiveUsersDeleteSubject.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.memoEditInactiveUsersDeleteBodyPlaceholder1.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.textEditInactiveUsersDeleteBodyPlaceholder2.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupInactiveUsersDelete)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemInactiveUsersDeleteSubjectTitle)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemInactiveUsersDeleteSubjectValue)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem18)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem22)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemInactiveUsersDeleteBodyTitle)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem23)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemInactiveUsersDeleteBodyPlaceholder1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemInactiveUsersDeleteBodyLine8)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemInactiveUsersDeleteBodyPlaceholder2)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem25)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemInactiveUsersDeleteBodyLine1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemInactiveUsersDeleteBodyLine2)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemInactiveUsersDeleteBodyLine3)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemInactiveUsersDeleteBodyLine4)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemInactiveUsersDeleteBodyLine5)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemInactiveUsersDeleteBodyLine6)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemInactiveUsersDeleteBodyLine7)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemInactiveUsersDeleteBodyLine9)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// styleController
@@ -295,7 +397,7 @@
 			this.buttonXSave.Name = "buttonXSave";
 			this.buttonXSave.Size = new System.Drawing.Size(116, 36);
 			this.buttonXSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.buttonXSave.TabIndex = 6;
+			this.buttonXSave.TabIndex = 4;
 			this.buttonXSave.Text = "Save";
 			this.buttonXSave.TextColor = System.Drawing.Color.Black;
 			// 
@@ -310,7 +412,7 @@
 			this.buttonXCancel.Name = "buttonXCancel";
 			this.buttonXCancel.Size = new System.Drawing.Size(116, 36);
 			this.buttonXCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.buttonXCancel.TabIndex = 7;
+			this.buttonXCancel.TabIndex = 5;
 			this.buttonXCancel.Text = "Cancel";
 			this.buttonXCancel.TextColor = System.Drawing.Color.Black;
 			// 
@@ -361,6 +463,13 @@
 			this.layoutControl.Controls.Add(this.textEditDeleteAccountBodyPlaceholder2);
 			this.layoutControl.Controls.Add(this.textEditDeleteAccountBodyPlaceholder3);
 			this.layoutControl.Controls.Add(this.memoEditDeleteAccountRecipients);
+			this.layoutControl.Controls.Add(this.textEditInactiveUsersResetSubject);
+			this.layoutControl.Controls.Add(this.textEditInactiveUsersResetBodyPlaceholder1);
+			this.layoutControl.Controls.Add(this.textEditInactiveUsersResetBodyPlaceholder3);
+			this.layoutControl.Controls.Add(this.memoEditInactiveUsersResetBodyPlaceholder2);
+			this.layoutControl.Controls.Add(this.textEditInactiveUsersDeleteSubject);
+			this.layoutControl.Controls.Add(this.memoEditInactiveUsersDeleteBodyPlaceholder1);
+			this.layoutControl.Controls.Add(this.textEditInactiveUsersDeleteBodyPlaceholder2);
 			this.layoutControl.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.layoutControl.ForeColor = System.Drawing.Color.Black;
 			this.layoutControl.Location = new System.Drawing.Point(0, 0);
@@ -373,21 +482,9 @@
 			this.layoutControl.TabIndex = 13;
 			this.layoutControl.Text = "layoutControl1";
 			// 
-			// textEditNewAccountSubject
-			// 
-			this.textEditNewAccountSubject.Location = new System.Drawing.Point(54, 69);
-			this.textEditNewAccountSubject.Name = "textEditNewAccountSubject";
-			this.textEditNewAccountSubject.Properties.Appearance.BackColor = System.Drawing.Color.White;
-			this.textEditNewAccountSubject.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.textEditNewAccountSubject.Properties.Appearance.Options.UseBackColor = true;
-			this.textEditNewAccountSubject.Properties.Appearance.Options.UseForeColor = true;
-			this.textEditNewAccountSubject.Size = new System.Drawing.Size(533, 22);
-			this.textEditNewAccountSubject.StyleController = this.layoutControl;
-			this.textEditNewAccountSubject.TabIndex = 1;
-			// 
 			// checkEditLocalEmail
 			// 
-			this.checkEditLocalEmail.Location = new System.Drawing.Point(308, 49);
+			this.checkEditLocalEmail.Location = new System.Drawing.Point(308, 50);
 			this.checkEditLocalEmail.Name = "checkEditLocalEmail";
 			this.checkEditLocalEmail.Properties.AllowFocused = false;
 			this.checkEditLocalEmail.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -403,7 +500,7 @@
 			// 
 			// checkEditServerEmail
 			// 
-			this.checkEditServerEmail.Location = new System.Drawing.Point(24, 49);
+			this.checkEditServerEmail.Location = new System.Drawing.Point(24, 50);
 			this.checkEditServerEmail.Name = "checkEditServerEmail";
 			this.checkEditServerEmail.Properties.AllowFocused = false;
 			this.checkEditServerEmail.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -419,7 +516,7 @@
 			// 
 			// comboBoxEditLocalEmailAccount
 			// 
-			this.comboBoxEditLocalEmailAccount.Location = new System.Drawing.Point(24, 142);
+			this.comboBoxEditLocalEmailAccount.Location = new System.Drawing.Point(24, 143);
 			this.comboBoxEditLocalEmailAccount.Name = "comboBoxEditLocalEmailAccount";
 			this.comboBoxEditLocalEmailAccount.Properties.Appearance.BackColor = System.Drawing.Color.White;
 			this.comboBoxEditLocalEmailAccount.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -436,7 +533,7 @@
 			// 
 			// memoEditEmailCopyAddresses
 			// 
-			this.memoEditEmailCopyAddresses.Location = new System.Drawing.Point(24, 237);
+			this.memoEditEmailCopyAddresses.Location = new System.Drawing.Point(24, 238);
 			this.memoEditEmailCopyAddresses.Name = "memoEditEmailCopyAddresses";
 			this.memoEditEmailCopyAddresses.Properties.Appearance.BackColor = System.Drawing.Color.White;
 			this.memoEditEmailCopyAddresses.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -446,9 +543,21 @@
 			this.memoEditEmailCopyAddresses.StyleController = this.layoutControl;
 			this.memoEditEmailCopyAddresses.TabIndex = 2;
 			// 
+			// textEditNewAccountSubject
+			// 
+			this.textEditNewAccountSubject.Location = new System.Drawing.Point(54, 70);
+			this.textEditNewAccountSubject.Name = "textEditNewAccountSubject";
+			this.textEditNewAccountSubject.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.textEditNewAccountSubject.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.textEditNewAccountSubject.Properties.Appearance.Options.UseBackColor = true;
+			this.textEditNewAccountSubject.Properties.Appearance.Options.UseForeColor = true;
+			this.textEditNewAccountSubject.Size = new System.Drawing.Size(533, 22);
+			this.textEditNewAccountSubject.StyleController = this.layoutControl;
+			this.textEditNewAccountSubject.TabIndex = 1;
+			// 
 			// textEditNewAccountBodyPlaceholder1
 			// 
-			this.textEditNewAccountBodyPlaceholder1.Location = new System.Drawing.Point(54, 185);
+			this.textEditNewAccountBodyPlaceholder1.Location = new System.Drawing.Point(54, 186);
 			this.textEditNewAccountBodyPlaceholder1.Name = "textEditNewAccountBodyPlaceholder1";
 			this.textEditNewAccountBodyPlaceholder1.Properties.Appearance.BackColor = System.Drawing.Color.White;
 			this.textEditNewAccountBodyPlaceholder1.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -460,31 +569,31 @@
 			// 
 			// textEditNewAccountBodyPlaceholder2
 			// 
-			this.textEditNewAccountBodyPlaceholder2.Location = new System.Drawing.Point(54, 231);
+			this.textEditNewAccountBodyPlaceholder2.Location = new System.Drawing.Point(54, 232);
 			this.textEditNewAccountBodyPlaceholder2.Name = "textEditNewAccountBodyPlaceholder2";
 			this.textEditNewAccountBodyPlaceholder2.Properties.Appearance.BackColor = System.Drawing.Color.White;
 			this.textEditNewAccountBodyPlaceholder2.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.textEditNewAccountBodyPlaceholder2.Properties.Appearance.Options.UseBackColor = true;
 			this.textEditNewAccountBodyPlaceholder2.Properties.Appearance.Options.UseForeColor = true;
-			this.textEditNewAccountBodyPlaceholder2.Size = new System.Drawing.Size(179, 22);
+			this.textEditNewAccountBodyPlaceholder2.Size = new System.Drawing.Size(167, 22);
 			this.textEditNewAccountBodyPlaceholder2.StyleController = this.layoutControl;
 			this.textEditNewAccountBodyPlaceholder2.TabIndex = 1;
 			// 
 			// textEditNewAccountBodyPlaceholder3
 			// 
-			this.textEditNewAccountBodyPlaceholder3.Location = new System.Drawing.Point(54, 277);
+			this.textEditNewAccountBodyPlaceholder3.Location = new System.Drawing.Point(54, 278);
 			this.textEditNewAccountBodyPlaceholder3.Name = "textEditNewAccountBodyPlaceholder3";
 			this.textEditNewAccountBodyPlaceholder3.Properties.Appearance.BackColor = System.Drawing.Color.White;
 			this.textEditNewAccountBodyPlaceholder3.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.textEditNewAccountBodyPlaceholder3.Properties.Appearance.Options.UseBackColor = true;
 			this.textEditNewAccountBodyPlaceholder3.Properties.Appearance.Options.UseForeColor = true;
-			this.textEditNewAccountBodyPlaceholder3.Size = new System.Drawing.Size(179, 22);
+			this.textEditNewAccountBodyPlaceholder3.Size = new System.Drawing.Size(167, 22);
 			this.textEditNewAccountBodyPlaceholder3.StyleController = this.layoutControl;
 			this.textEditNewAccountBodyPlaceholder3.TabIndex = 1;
 			// 
 			// textEditNewAccountBodyPlaceholder4
 			// 
-			this.textEditNewAccountBodyPlaceholder4.Location = new System.Drawing.Point(54, 323);
+			this.textEditNewAccountBodyPlaceholder4.Location = new System.Drawing.Point(54, 324);
 			this.textEditNewAccountBodyPlaceholder4.Name = "textEditNewAccountBodyPlaceholder4";
 			this.textEditNewAccountBodyPlaceholder4.Properties.Appearance.BackColor = System.Drawing.Color.White;
 			this.textEditNewAccountBodyPlaceholder4.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -496,7 +605,7 @@
 			// 
 			// textEditNewAccountBodyPlaceholder5
 			// 
-			this.textEditNewAccountBodyPlaceholder5.Location = new System.Drawing.Point(54, 369);
+			this.textEditNewAccountBodyPlaceholder5.Location = new System.Drawing.Point(54, 370);
 			this.textEditNewAccountBodyPlaceholder5.Name = "textEditNewAccountBodyPlaceholder5";
 			this.textEditNewAccountBodyPlaceholder5.Properties.Appearance.BackColor = System.Drawing.Color.White;
 			this.textEditNewAccountBodyPlaceholder5.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -508,7 +617,7 @@
 			// 
 			// memoEditNewAccountBodyPlaceholder6
 			// 
-			this.memoEditNewAccountBodyPlaceholder6.Location = new System.Drawing.Point(54, 435);
+			this.memoEditNewAccountBodyPlaceholder6.Location = new System.Drawing.Point(54, 436);
 			this.memoEditNewAccountBodyPlaceholder6.Name = "memoEditNewAccountBodyPlaceholder6";
 			this.memoEditNewAccountBodyPlaceholder6.Properties.Appearance.BackColor = System.Drawing.Color.White;
 			this.memoEditNewAccountBodyPlaceholder6.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -520,13 +629,13 @@
 			// 
 			// memoEditNewAccountBodyPlaceholder7
 			// 
-			this.memoEditNewAccountBodyPlaceholder7.Location = new System.Drawing.Point(54, 561);
+			this.memoEditNewAccountBodyPlaceholder7.Location = new System.Drawing.Point(54, 562);
 			this.memoEditNewAccountBodyPlaceholder7.Name = "memoEditNewAccountBodyPlaceholder7";
 			this.memoEditNewAccountBodyPlaceholder7.Properties.Appearance.BackColor = System.Drawing.Color.White;
 			this.memoEditNewAccountBodyPlaceholder7.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.memoEditNewAccountBodyPlaceholder7.Properties.Appearance.Options.UseBackColor = true;
 			this.memoEditNewAccountBodyPlaceholder7.Properties.Appearance.Options.UseForeColor = true;
-			this.memoEditNewAccountBodyPlaceholder7.Size = new System.Drawing.Size(533, 26);
+			this.memoEditNewAccountBodyPlaceholder7.Size = new System.Drawing.Size(533, 25);
 			this.memoEditNewAccountBodyPlaceholder7.StyleController = this.layoutControl;
 			this.memoEditNewAccountBodyPlaceholder7.TabIndex = 1;
 			// 
@@ -544,7 +653,7 @@
 			// 
 			// textEditResetAccountSubject
 			// 
-			this.textEditResetAccountSubject.Location = new System.Drawing.Point(54, 69);
+			this.textEditResetAccountSubject.Location = new System.Drawing.Point(54, 70);
 			this.textEditResetAccountSubject.Name = "textEditResetAccountSubject";
 			this.textEditResetAccountSubject.Properties.Appearance.BackColor = System.Drawing.Color.White;
 			this.textEditResetAccountSubject.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -556,7 +665,7 @@
 			// 
 			// textEditResetAccountBodyPlaceholder1
 			// 
-			this.textEditResetAccountBodyPlaceholder1.Location = new System.Drawing.Point(54, 185);
+			this.textEditResetAccountBodyPlaceholder1.Location = new System.Drawing.Point(54, 186);
 			this.textEditResetAccountBodyPlaceholder1.Name = "textEditResetAccountBodyPlaceholder1";
 			this.textEditResetAccountBodyPlaceholder1.Properties.Appearance.BackColor = System.Drawing.Color.White;
 			this.textEditResetAccountBodyPlaceholder1.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -568,31 +677,31 @@
 			// 
 			// textEditResetAccountBodyPlaceholder2
 			// 
-			this.textEditResetAccountBodyPlaceholder2.Location = new System.Drawing.Point(54, 231);
+			this.textEditResetAccountBodyPlaceholder2.Location = new System.Drawing.Point(54, 232);
 			this.textEditResetAccountBodyPlaceholder2.Name = "textEditResetAccountBodyPlaceholder2";
 			this.textEditResetAccountBodyPlaceholder2.Properties.Appearance.BackColor = System.Drawing.Color.White;
 			this.textEditResetAccountBodyPlaceholder2.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.textEditResetAccountBodyPlaceholder2.Properties.Appearance.Options.UseBackColor = true;
 			this.textEditResetAccountBodyPlaceholder2.Properties.Appearance.Options.UseForeColor = true;
-			this.textEditResetAccountBodyPlaceholder2.Size = new System.Drawing.Size(179, 22);
+			this.textEditResetAccountBodyPlaceholder2.Size = new System.Drawing.Size(167, 22);
 			this.textEditResetAccountBodyPlaceholder2.StyleController = this.layoutControl;
 			this.textEditResetAccountBodyPlaceholder2.TabIndex = 1;
 			// 
 			// textEditResetAccountBodyPlaceholder3
 			// 
-			this.textEditResetAccountBodyPlaceholder3.Location = new System.Drawing.Point(54, 277);
+			this.textEditResetAccountBodyPlaceholder3.Location = new System.Drawing.Point(54, 278);
 			this.textEditResetAccountBodyPlaceholder3.Name = "textEditResetAccountBodyPlaceholder3";
 			this.textEditResetAccountBodyPlaceholder3.Properties.Appearance.BackColor = System.Drawing.Color.White;
 			this.textEditResetAccountBodyPlaceholder3.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.textEditResetAccountBodyPlaceholder3.Properties.Appearance.Options.UseBackColor = true;
 			this.textEditResetAccountBodyPlaceholder3.Properties.Appearance.Options.UseForeColor = true;
-			this.textEditResetAccountBodyPlaceholder3.Size = new System.Drawing.Size(179, 22);
+			this.textEditResetAccountBodyPlaceholder3.Size = new System.Drawing.Size(167, 22);
 			this.textEditResetAccountBodyPlaceholder3.StyleController = this.layoutControl;
 			this.textEditResetAccountBodyPlaceholder3.TabIndex = 1;
 			// 
 			// textEditResetAccountBodyPlaceholder4
 			// 
-			this.textEditResetAccountBodyPlaceholder4.Location = new System.Drawing.Point(54, 323);
+			this.textEditResetAccountBodyPlaceholder4.Location = new System.Drawing.Point(54, 324);
 			this.textEditResetAccountBodyPlaceholder4.Name = "textEditResetAccountBodyPlaceholder4";
 			this.textEditResetAccountBodyPlaceholder4.Properties.Appearance.BackColor = System.Drawing.Color.White;
 			this.textEditResetAccountBodyPlaceholder4.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -604,7 +713,7 @@
 			// 
 			// textEditResetAccountBodyPlaceholder5
 			// 
-			this.textEditResetAccountBodyPlaceholder5.Location = new System.Drawing.Point(54, 369);
+			this.textEditResetAccountBodyPlaceholder5.Location = new System.Drawing.Point(54, 370);
 			this.textEditResetAccountBodyPlaceholder5.Name = "textEditResetAccountBodyPlaceholder5";
 			this.textEditResetAccountBodyPlaceholder5.Properties.Appearance.BackColor = System.Drawing.Color.White;
 			this.textEditResetAccountBodyPlaceholder5.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -616,7 +725,7 @@
 			// 
 			// memoEditResetAccountBodyPlaceholder6
 			// 
-			this.memoEditResetAccountBodyPlaceholder6.Location = new System.Drawing.Point(54, 435);
+			this.memoEditResetAccountBodyPlaceholder6.Location = new System.Drawing.Point(54, 436);
 			this.memoEditResetAccountBodyPlaceholder6.Name = "memoEditResetAccountBodyPlaceholder6";
 			this.memoEditResetAccountBodyPlaceholder6.Properties.Appearance.BackColor = System.Drawing.Color.White;
 			this.memoEditResetAccountBodyPlaceholder6.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -628,13 +737,13 @@
 			// 
 			// memoEditResetAccountBodyPlaceholder7
 			// 
-			this.memoEditResetAccountBodyPlaceholder7.Location = new System.Drawing.Point(54, 561);
+			this.memoEditResetAccountBodyPlaceholder7.Location = new System.Drawing.Point(54, 562);
 			this.memoEditResetAccountBodyPlaceholder7.Name = "memoEditResetAccountBodyPlaceholder7";
 			this.memoEditResetAccountBodyPlaceholder7.Properties.Appearance.BackColor = System.Drawing.Color.White;
 			this.memoEditResetAccountBodyPlaceholder7.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.memoEditResetAccountBodyPlaceholder7.Properties.Appearance.Options.UseBackColor = true;
 			this.memoEditResetAccountBodyPlaceholder7.Properties.Appearance.Options.UseForeColor = true;
-			this.memoEditResetAccountBodyPlaceholder7.Size = new System.Drawing.Size(533, 26);
+			this.memoEditResetAccountBodyPlaceholder7.Size = new System.Drawing.Size(533, 25);
 			this.memoEditResetAccountBodyPlaceholder7.StyleController = this.layoutControl;
 			this.memoEditResetAccountBodyPlaceholder7.TabIndex = 1;
 			// 
@@ -649,6 +758,66 @@
 			this.textEditResetAccountBodyPlaceholder8.Size = new System.Drawing.Size(533, 22);
 			this.textEditResetAccountBodyPlaceholder8.StyleController = this.layoutControl;
 			this.textEditResetAccountBodyPlaceholder8.TabIndex = 1;
+			// 
+			// textEditDeleteAccountSubject
+			// 
+			this.textEditDeleteAccountSubject.Location = new System.Drawing.Point(54, 70);
+			this.textEditDeleteAccountSubject.Name = "textEditDeleteAccountSubject";
+			this.textEditDeleteAccountSubject.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.textEditDeleteAccountSubject.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.textEditDeleteAccountSubject.Properties.Appearance.Options.UseBackColor = true;
+			this.textEditDeleteAccountSubject.Properties.Appearance.Options.UseForeColor = true;
+			this.textEditDeleteAccountSubject.Size = new System.Drawing.Size(533, 22);
+			this.textEditDeleteAccountSubject.StyleController = this.layoutControl;
+			this.textEditDeleteAccountSubject.TabIndex = 1;
+			// 
+			// textEditDeleteAccountBodyPlaceholder1
+			// 
+			this.textEditDeleteAccountBodyPlaceholder1.Location = new System.Drawing.Point(54, 166);
+			this.textEditDeleteAccountBodyPlaceholder1.Name = "textEditDeleteAccountBodyPlaceholder1";
+			this.textEditDeleteAccountBodyPlaceholder1.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.textEditDeleteAccountBodyPlaceholder1.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.textEditDeleteAccountBodyPlaceholder1.Properties.Appearance.Options.UseBackColor = true;
+			this.textEditDeleteAccountBodyPlaceholder1.Properties.Appearance.Options.UseForeColor = true;
+			this.textEditDeleteAccountBodyPlaceholder1.Size = new System.Drawing.Size(167, 22);
+			this.textEditDeleteAccountBodyPlaceholder1.StyleController = this.layoutControl;
+			this.textEditDeleteAccountBodyPlaceholder1.TabIndex = 1;
+			// 
+			// textEditDeleteAccountBodyPlaceholder2
+			// 
+			this.textEditDeleteAccountBodyPlaceholder2.Location = new System.Drawing.Point(54, 212);
+			this.textEditDeleteAccountBodyPlaceholder2.Name = "textEditDeleteAccountBodyPlaceholder2";
+			this.textEditDeleteAccountBodyPlaceholder2.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.textEditDeleteAccountBodyPlaceholder2.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.textEditDeleteAccountBodyPlaceholder2.Properties.Appearance.Options.UseBackColor = true;
+			this.textEditDeleteAccountBodyPlaceholder2.Properties.Appearance.Options.UseForeColor = true;
+			this.textEditDeleteAccountBodyPlaceholder2.Size = new System.Drawing.Size(167, 22);
+			this.textEditDeleteAccountBodyPlaceholder2.StyleController = this.layoutControl;
+			this.textEditDeleteAccountBodyPlaceholder2.TabIndex = 1;
+			// 
+			// textEditDeleteAccountBodyPlaceholder3
+			// 
+			this.textEditDeleteAccountBodyPlaceholder3.Location = new System.Drawing.Point(54, 258);
+			this.textEditDeleteAccountBodyPlaceholder3.Name = "textEditDeleteAccountBodyPlaceholder3";
+			this.textEditDeleteAccountBodyPlaceholder3.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.textEditDeleteAccountBodyPlaceholder3.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.textEditDeleteAccountBodyPlaceholder3.Properties.Appearance.Options.UseBackColor = true;
+			this.textEditDeleteAccountBodyPlaceholder3.Properties.Appearance.Options.UseForeColor = true;
+			this.textEditDeleteAccountBodyPlaceholder3.Size = new System.Drawing.Size(167, 22);
+			this.textEditDeleteAccountBodyPlaceholder3.StyleController = this.layoutControl;
+			this.textEditDeleteAccountBodyPlaceholder3.TabIndex = 1;
+			// 
+			// memoEditDeleteAccountRecipients
+			// 
+			this.memoEditDeleteAccountRecipients.Location = new System.Drawing.Point(24, 333);
+			this.memoEditDeleteAccountRecipients.Name = "memoEditDeleteAccountRecipients";
+			this.memoEditDeleteAccountRecipients.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.memoEditDeleteAccountRecipients.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.memoEditDeleteAccountRecipients.Properties.Appearance.Options.UseBackColor = true;
+			this.memoEditDeleteAccountRecipients.Properties.Appearance.Options.UseForeColor = true;
+			this.memoEditDeleteAccountRecipients.Size = new System.Drawing.Size(563, 148);
+			this.memoEditDeleteAccountRecipients.StyleController = this.layoutControl;
+			this.memoEditDeleteAccountRecipients.TabIndex = 1;
 			// 
 			// layoutControlGroupRoot
 			// 
@@ -729,7 +898,8 @@
             this.layoutControlGroupMain,
             this.layoutControlGroupNewAccount,
             this.layoutControlGroupResetAccount,
-            this.layoutControlGroupDeleteAccount});
+            this.layoutControlGroupDeleteAccount,
+            this.layoutControlGroupInactiveUsers});
 			this.tabbedControlGroup.Text = "Tabs";
 			// 
 			// layoutControlGroupMain
@@ -741,7 +911,7 @@
             this.layoutControlGroupLocalEmailSettings});
 			this.layoutControlGroupMain.Location = new System.Drawing.Point(0, 0);
 			this.layoutControlGroupMain.Name = "layoutControlGroupMain";
-			this.layoutControlGroupMain.Size = new System.Drawing.Size(567, 608);
+			this.layoutControlGroupMain.Size = new System.Drawing.Size(567, 607);
 			this.layoutControlGroupMain.Text = "Settings";
 			// 
 			// layoutControlItemServerEmail
@@ -791,7 +961,7 @@
             this.emptySpaceItem8});
 			this.layoutControlGroupLocalEmailSettings.Location = new System.Drawing.Point(0, 74);
 			this.layoutControlGroupLocalEmailSettings.Name = "layoutControlGroupLocalEmailSettings";
-			this.layoutControlGroupLocalEmailSettings.Size = new System.Drawing.Size(567, 534);
+			this.layoutControlGroupLocalEmailSettings.Size = new System.Drawing.Size(567, 533);
 			this.layoutControlGroupLocalEmailSettings.Text = "Local Email Settings";
 			this.layoutControlGroupLocalEmailSettings.TextVisible = false;
 			// 
@@ -839,7 +1009,7 @@
 			this.emptySpaceItem8.AllowHotTrack = false;
 			this.emptySpaceItem8.Location = new System.Drawing.Point(0, 240);
 			this.emptySpaceItem8.Name = "emptySpaceItem8";
-			this.emptySpaceItem8.Size = new System.Drawing.Size(567, 294);
+			this.emptySpaceItem8.Size = new System.Drawing.Size(567, 293);
 			this.emptySpaceItem8.TextSize = new System.Drawing.Size(0, 0);
 			// 
 			// layoutControlGroupNewAccount
@@ -874,7 +1044,7 @@
             this.layoutControlItemNewAccountBodyPlaceholder8});
 			this.layoutControlGroupNewAccount.Location = new System.Drawing.Point(0, 0);
 			this.layoutControlGroupNewAccount.Name = "layoutControlGroupNewAccount";
-			this.layoutControlGroupNewAccount.Size = new System.Drawing.Size(567, 608);
+			this.layoutControlGroupNewAccount.Size = new System.Drawing.Size(567, 607);
 			this.layoutControlGroupNewAccount.Text = "New Account";
 			// 
 			// simpleLabelItemNewAccountSubjectTitle
@@ -947,7 +1117,7 @@
 			this.emptySpaceItem6.MaxSize = new System.Drawing.Size(30, 0);
 			this.emptySpaceItem6.MinSize = new System.Drawing.Size(30, 10);
 			this.emptySpaceItem6.Name = "emptySpaceItem6";
-			this.emptySpaceItem6.Size = new System.Drawing.Size(30, 512);
+			this.emptySpaceItem6.Size = new System.Drawing.Size(30, 511);
 			this.emptySpaceItem6.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
 			this.emptySpaceItem6.TextSize = new System.Drawing.Size(0, 0);
 			// 
@@ -992,7 +1162,7 @@
 			this.layoutControlItemNewAccountBodyPlaceholder2.FillControlToClientArea = false;
 			this.layoutControlItemNewAccountBodyPlaceholder2.Location = new System.Drawing.Point(30, 182);
 			this.layoutControlItemNewAccountBodyPlaceholder2.Name = "layoutControlItemNewAccountBodyPlaceholder2";
-			this.layoutControlItemNewAccountBodyPlaceholder2.Size = new System.Drawing.Size(183, 26);
+			this.layoutControlItemNewAccountBodyPlaceholder2.Size = new System.Drawing.Size(171, 26);
 			this.layoutControlItemNewAccountBodyPlaceholder2.Text = "Body Placeholder 2";
 			this.layoutControlItemNewAccountBodyPlaceholder2.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutControlItemNewAccountBodyPlaceholder2.TextVisible = false;
@@ -1013,9 +1183,9 @@
 			// 
 			this.simpleLabelItemNewAccountBodyLine4.AllowHotTrack = false;
 			this.simpleLabelItemNewAccountBodyLine4.AllowHtmlStringInCaption = true;
-			this.simpleLabelItemNewAccountBodyLine4.Location = new System.Drawing.Point(213, 182);
+			this.simpleLabelItemNewAccountBodyLine4.Location = new System.Drawing.Point(201, 182);
 			this.simpleLabelItemNewAccountBodyLine4.Name = "simpleLabelItemNewAccountBodyLine4";
-			this.simpleLabelItemNewAccountBodyLine4.Size = new System.Drawing.Size(354, 26);
+			this.simpleLabelItemNewAccountBodyLine4.Size = new System.Drawing.Size(366, 26);
 			this.simpleLabelItemNewAccountBodyLine4.Text = "<color=blue><UserName></color>";
 			this.simpleLabelItemNewAccountBodyLine4.TextSize = new System.Drawing.Size(350, 16);
 			// 
@@ -1026,7 +1196,7 @@
 			this.layoutControlItemNewAccountBodyPlaceholder3.FillControlToClientArea = false;
 			this.layoutControlItemNewAccountBodyPlaceholder3.Location = new System.Drawing.Point(30, 228);
 			this.layoutControlItemNewAccountBodyPlaceholder3.Name = "layoutControlItemNewAccountBodyPlaceholder3";
-			this.layoutControlItemNewAccountBodyPlaceholder3.Size = new System.Drawing.Size(183, 26);
+			this.layoutControlItemNewAccountBodyPlaceholder3.Size = new System.Drawing.Size(171, 26);
 			this.layoutControlItemNewAccountBodyPlaceholder3.Text = "Body Placeholder 3";
 			this.layoutControlItemNewAccountBodyPlaceholder3.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutControlItemNewAccountBodyPlaceholder3.TextVisible = false;
@@ -1036,9 +1206,9 @@
 			// 
 			this.simpleLabelItemNewAccountBodyLine6.AllowHotTrack = false;
 			this.simpleLabelItemNewAccountBodyLine6.AllowHtmlStringInCaption = true;
-			this.simpleLabelItemNewAccountBodyLine6.Location = new System.Drawing.Point(213, 228);
+			this.simpleLabelItemNewAccountBodyLine6.Location = new System.Drawing.Point(201, 228);
 			this.simpleLabelItemNewAccountBodyLine6.Name = "simpleLabelItemNewAccountBodyLine6";
-			this.simpleLabelItemNewAccountBodyLine6.Size = new System.Drawing.Size(354, 26);
+			this.simpleLabelItemNewAccountBodyLine6.Size = new System.Drawing.Size(366, 26);
 			this.simpleLabelItemNewAccountBodyLine6.Text = "<color=blue><TemporaryPassword></color>";
 			this.simpleLabelItemNewAccountBodyLine6.TextSize = new System.Drawing.Size(350, 16);
 			// 
@@ -1143,7 +1313,7 @@
 			this.layoutControlItemNewAccountBodyPlaceholder7.FillControlToClientArea = false;
 			this.layoutControlItemNewAccountBodyPlaceholder7.Location = new System.Drawing.Point(30, 512);
 			this.layoutControlItemNewAccountBodyPlaceholder7.Name = "layoutControlItemNewAccountBodyPlaceholder7";
-			this.layoutControlItemNewAccountBodyPlaceholder7.Size = new System.Drawing.Size(537, 30);
+			this.layoutControlItemNewAccountBodyPlaceholder7.Size = new System.Drawing.Size(537, 29);
 			this.layoutControlItemNewAccountBodyPlaceholder7.Text = "Body Placeholder 7";
 			this.layoutControlItemNewAccountBodyPlaceholder7.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutControlItemNewAccountBodyPlaceholder7.TextVisible = false;
@@ -1154,7 +1324,7 @@
 			this.simpleLabelItemNewAccountBodyLine12.AllowHotTrack = false;
 			this.simpleLabelItemNewAccountBodyLine12.AllowHtmlStringInCaption = true;
 			this.simpleLabelItemNewAccountBodyLine12.CustomizationFormText = "<color=blue><empty line></color>";
-			this.simpleLabelItemNewAccountBodyLine12.Location = new System.Drawing.Point(30, 542);
+			this.simpleLabelItemNewAccountBodyLine12.Location = new System.Drawing.Point(30, 541);
 			this.simpleLabelItemNewAccountBodyLine12.Name = "simpleLabelItemNewAccountBodyLine12";
 			this.simpleLabelItemNewAccountBodyLine12.Size = new System.Drawing.Size(537, 20);
 			this.simpleLabelItemNewAccountBodyLine12.Text = "<color=blue><empty line></color>";
@@ -1165,7 +1335,7 @@
 			this.simpleLabelItemNewAccountBodyLine13.AllowHotTrack = false;
 			this.simpleLabelItemNewAccountBodyLine13.AllowHtmlStringInCaption = true;
 			this.simpleLabelItemNewAccountBodyLine13.CustomizationFormText = "<color=blue><empty line></color>";
-			this.simpleLabelItemNewAccountBodyLine13.Location = new System.Drawing.Point(30, 562);
+			this.simpleLabelItemNewAccountBodyLine13.Location = new System.Drawing.Point(30, 561);
 			this.simpleLabelItemNewAccountBodyLine13.Name = "simpleLabelItemNewAccountBodyLine13";
 			this.simpleLabelItemNewAccountBodyLine13.Size = new System.Drawing.Size(537, 20);
 			this.simpleLabelItemNewAccountBodyLine13.Text = "<color=blue><empty line></color>";
@@ -1176,7 +1346,7 @@
 			this.layoutControlItemNewAccountBodyPlaceholder8.Control = this.textEditNewAccountBodyPlaceholder8;
 			this.layoutControlItemNewAccountBodyPlaceholder8.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
 			this.layoutControlItemNewAccountBodyPlaceholder8.FillControlToClientArea = false;
-			this.layoutControlItemNewAccountBodyPlaceholder8.Location = new System.Drawing.Point(30, 582);
+			this.layoutControlItemNewAccountBodyPlaceholder8.Location = new System.Drawing.Point(30, 581);
 			this.layoutControlItemNewAccountBodyPlaceholder8.Name = "layoutControlItemNewAccountBodyPlaceholder8";
 			this.layoutControlItemNewAccountBodyPlaceholder8.Size = new System.Drawing.Size(537, 26);
 			this.layoutControlItemNewAccountBodyPlaceholder8.Text = "Body Placeholder 8";
@@ -1216,7 +1386,7 @@
             this.layoutControlItemResetAccountBodyPlaceholder8});
 			this.layoutControlGroupResetAccount.Location = new System.Drawing.Point(0, 0);
 			this.layoutControlGroupResetAccount.Name = "layoutControlGroupResetAccount";
-			this.layoutControlGroupResetAccount.Size = new System.Drawing.Size(567, 608);
+			this.layoutControlGroupResetAccount.Size = new System.Drawing.Size(567, 607);
 			this.layoutControlGroupResetAccount.Text = "Reset Account";
 			// 
 			// simpleLabelItemResetAccountSubjectTitle
@@ -1298,7 +1468,7 @@
 			this.emptySpaceItem10.MaxSize = new System.Drawing.Size(30, 0);
 			this.emptySpaceItem10.MinSize = new System.Drawing.Size(30, 10);
 			this.emptySpaceItem10.Name = "emptySpaceItem10";
-			this.emptySpaceItem10.Size = new System.Drawing.Size(30, 512);
+			this.emptySpaceItem10.Size = new System.Drawing.Size(30, 511);
 			this.emptySpaceItem10.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
 			this.emptySpaceItem10.Text = "emptySpaceItem6";
 			this.emptySpaceItem10.TextSize = new System.Drawing.Size(0, 0);
@@ -1346,7 +1516,7 @@
 			this.layoutControlItemResetAccountBodyPlaceholder2.CustomizationFormText = "Body Placeholder 2";
 			this.layoutControlItemResetAccountBodyPlaceholder2.Location = new System.Drawing.Point(30, 182);
 			this.layoutControlItemResetAccountBodyPlaceholder2.Name = "layoutControlItemResetAccountBodyPlaceholder2";
-			this.layoutControlItemResetAccountBodyPlaceholder2.Size = new System.Drawing.Size(183, 26);
+			this.layoutControlItemResetAccountBodyPlaceholder2.Size = new System.Drawing.Size(171, 26);
 			this.layoutControlItemResetAccountBodyPlaceholder2.Text = "Body Placeholder 2";
 			this.layoutControlItemResetAccountBodyPlaceholder2.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutControlItemResetAccountBodyPlaceholder2.TextVisible = false;
@@ -1368,9 +1538,9 @@
 			this.simpleLabelItemResetAccountBodyLine4.AllowHotTrack = false;
 			this.simpleLabelItemResetAccountBodyLine4.AllowHtmlStringInCaption = true;
 			this.simpleLabelItemResetAccountBodyLine4.CustomizationFormText = "<color=blue><UserName></color>";
-			this.simpleLabelItemResetAccountBodyLine4.Location = new System.Drawing.Point(213, 182);
+			this.simpleLabelItemResetAccountBodyLine4.Location = new System.Drawing.Point(201, 182);
 			this.simpleLabelItemResetAccountBodyLine4.Name = "simpleLabelItemResetAccountBodyLine4";
-			this.simpleLabelItemResetAccountBodyLine4.Size = new System.Drawing.Size(354, 26);
+			this.simpleLabelItemResetAccountBodyLine4.Size = new System.Drawing.Size(366, 26);
 			this.simpleLabelItemResetAccountBodyLine4.Text = "<color=blue><UserName></color>";
 			this.simpleLabelItemResetAccountBodyLine4.TextSize = new System.Drawing.Size(350, 16);
 			// 
@@ -1382,7 +1552,7 @@
 			this.layoutControlItemResetAccountBodyPlaceholder3.FillControlToClientArea = false;
 			this.layoutControlItemResetAccountBodyPlaceholder3.Location = new System.Drawing.Point(30, 228);
 			this.layoutControlItemResetAccountBodyPlaceholder3.Name = "layoutControlItemResetAccountBodyPlaceholder3";
-			this.layoutControlItemResetAccountBodyPlaceholder3.Size = new System.Drawing.Size(183, 26);
+			this.layoutControlItemResetAccountBodyPlaceholder3.Size = new System.Drawing.Size(171, 26);
 			this.layoutControlItemResetAccountBodyPlaceholder3.Text = "Body Placeholder 3";
 			this.layoutControlItemResetAccountBodyPlaceholder3.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutControlItemResetAccountBodyPlaceholder3.TextVisible = false;
@@ -1393,9 +1563,9 @@
 			this.simpleLabelItemResetAccountBodyLine6.AllowHotTrack = false;
 			this.simpleLabelItemResetAccountBodyLine6.AllowHtmlStringInCaption = true;
 			this.simpleLabelItemResetAccountBodyLine6.CustomizationFormText = "<color=blue><TemporaryPassword></color>";
-			this.simpleLabelItemResetAccountBodyLine6.Location = new System.Drawing.Point(213, 228);
+			this.simpleLabelItemResetAccountBodyLine6.Location = new System.Drawing.Point(201, 228);
 			this.simpleLabelItemResetAccountBodyLine6.Name = "simpleLabelItemResetAccountBodyLine6";
-			this.simpleLabelItemResetAccountBodyLine6.Size = new System.Drawing.Size(354, 26);
+			this.simpleLabelItemResetAccountBodyLine6.Size = new System.Drawing.Size(366, 26);
 			this.simpleLabelItemResetAccountBodyLine6.Text = "<color=blue><TemporaryPassword></color>";
 			this.simpleLabelItemResetAccountBodyLine6.TextSize = new System.Drawing.Size(350, 16);
 			// 
@@ -1504,7 +1674,7 @@
 			this.layoutControlItemResetAccountBodyPlaceholder7.FillControlToClientArea = false;
 			this.layoutControlItemResetAccountBodyPlaceholder7.Location = new System.Drawing.Point(30, 512);
 			this.layoutControlItemResetAccountBodyPlaceholder7.Name = "layoutControlItemResetAccountBodyPlaceholder7";
-			this.layoutControlItemResetAccountBodyPlaceholder7.Size = new System.Drawing.Size(537, 30);
+			this.layoutControlItemResetAccountBodyPlaceholder7.Size = new System.Drawing.Size(537, 29);
 			this.layoutControlItemResetAccountBodyPlaceholder7.Text = "Body Placeholder 7";
 			this.layoutControlItemResetAccountBodyPlaceholder7.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutControlItemResetAccountBodyPlaceholder7.TextVisible = false;
@@ -1515,7 +1685,7 @@
 			this.simpleLabelItemResetAccountBodyLine12.AllowHotTrack = false;
 			this.simpleLabelItemResetAccountBodyLine12.AllowHtmlStringInCaption = true;
 			this.simpleLabelItemResetAccountBodyLine12.CustomizationFormText = "<color=blue><empty line></color>";
-			this.simpleLabelItemResetAccountBodyLine12.Location = new System.Drawing.Point(30, 542);
+			this.simpleLabelItemResetAccountBodyLine12.Location = new System.Drawing.Point(30, 541);
 			this.simpleLabelItemResetAccountBodyLine12.Name = "simpleLabelItemResetAccountBodyLine12";
 			this.simpleLabelItemResetAccountBodyLine12.Size = new System.Drawing.Size(537, 20);
 			this.simpleLabelItemResetAccountBodyLine12.Text = "<color=blue><empty line></color>";
@@ -1526,7 +1696,7 @@
 			this.simpleLabelItemResetAccountBodyLine13.AllowHotTrack = false;
 			this.simpleLabelItemResetAccountBodyLine13.AllowHtmlStringInCaption = true;
 			this.simpleLabelItemResetAccountBodyLine13.CustomizationFormText = "<color=blue><empty line></color>";
-			this.simpleLabelItemResetAccountBodyLine13.Location = new System.Drawing.Point(30, 562);
+			this.simpleLabelItemResetAccountBodyLine13.Location = new System.Drawing.Point(30, 561);
 			this.simpleLabelItemResetAccountBodyLine13.Name = "simpleLabelItemResetAccountBodyLine13";
 			this.simpleLabelItemResetAccountBodyLine13.Size = new System.Drawing.Size(537, 20);
 			this.simpleLabelItemResetAccountBodyLine13.Text = "<color=blue><empty line></color>";
@@ -1538,73 +1708,13 @@
 			this.layoutControlItemResetAccountBodyPlaceholder8.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
 			this.layoutControlItemResetAccountBodyPlaceholder8.CustomizationFormText = "Body Placeholder 8";
 			this.layoutControlItemResetAccountBodyPlaceholder8.FillControlToClientArea = false;
-			this.layoutControlItemResetAccountBodyPlaceholder8.Location = new System.Drawing.Point(30, 582);
+			this.layoutControlItemResetAccountBodyPlaceholder8.Location = new System.Drawing.Point(30, 581);
 			this.layoutControlItemResetAccountBodyPlaceholder8.Name = "layoutControlItemResetAccountBodyPlaceholder8";
 			this.layoutControlItemResetAccountBodyPlaceholder8.Size = new System.Drawing.Size(537, 26);
 			this.layoutControlItemResetAccountBodyPlaceholder8.Text = "Body Placeholder 8";
 			this.layoutControlItemResetAccountBodyPlaceholder8.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutControlItemResetAccountBodyPlaceholder8.TextVisible = false;
 			this.layoutControlItemResetAccountBodyPlaceholder8.TrimClientAreaToControl = false;
-			// 
-			// textEditDeleteAccountBodyPlaceholder2
-			// 
-			this.textEditDeleteAccountBodyPlaceholder2.Location = new System.Drawing.Point(54, 211);
-			this.textEditDeleteAccountBodyPlaceholder2.Name = "textEditDeleteAccountBodyPlaceholder2";
-			this.textEditDeleteAccountBodyPlaceholder2.Properties.Appearance.BackColor = System.Drawing.Color.White;
-			this.textEditDeleteAccountBodyPlaceholder2.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.textEditDeleteAccountBodyPlaceholder2.Properties.Appearance.Options.UseBackColor = true;
-			this.textEditDeleteAccountBodyPlaceholder2.Properties.Appearance.Options.UseForeColor = true;
-			this.textEditDeleteAccountBodyPlaceholder2.Size = new System.Drawing.Size(179, 22);
-			this.textEditDeleteAccountBodyPlaceholder2.StyleController = this.layoutControl;
-			this.textEditDeleteAccountBodyPlaceholder2.TabIndex = 1;
-			// 
-			// textEditDeleteAccountBodyPlaceholder1
-			// 
-			this.textEditDeleteAccountBodyPlaceholder1.Location = new System.Drawing.Point(54, 165);
-			this.textEditDeleteAccountBodyPlaceholder1.Name = "textEditDeleteAccountBodyPlaceholder1";
-			this.textEditDeleteAccountBodyPlaceholder1.Properties.Appearance.BackColor = System.Drawing.Color.White;
-			this.textEditDeleteAccountBodyPlaceholder1.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.textEditDeleteAccountBodyPlaceholder1.Properties.Appearance.Options.UseBackColor = true;
-			this.textEditDeleteAccountBodyPlaceholder1.Properties.Appearance.Options.UseForeColor = true;
-			this.textEditDeleteAccountBodyPlaceholder1.Size = new System.Drawing.Size(179, 22);
-			this.textEditDeleteAccountBodyPlaceholder1.StyleController = this.layoutControl;
-			this.textEditDeleteAccountBodyPlaceholder1.TabIndex = 1;
-			// 
-			// memoEditDeleteAccountRecipients
-			// 
-			this.memoEditDeleteAccountRecipients.Location = new System.Drawing.Point(24, 332);
-			this.memoEditDeleteAccountRecipients.Name = "memoEditDeleteAccountRecipients";
-			this.memoEditDeleteAccountRecipients.Properties.Appearance.BackColor = System.Drawing.Color.White;
-			this.memoEditDeleteAccountRecipients.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.memoEditDeleteAccountRecipients.Properties.Appearance.Options.UseBackColor = true;
-			this.memoEditDeleteAccountRecipients.Properties.Appearance.Options.UseForeColor = true;
-			this.memoEditDeleteAccountRecipients.Size = new System.Drawing.Size(563, 149);
-			this.memoEditDeleteAccountRecipients.StyleController = this.layoutControl;
-			this.memoEditDeleteAccountRecipients.TabIndex = 1;
-			// 
-			// textEditDeleteAccountBodyPlaceholder3
-			// 
-			this.textEditDeleteAccountBodyPlaceholder3.Location = new System.Drawing.Point(54, 257);
-			this.textEditDeleteAccountBodyPlaceholder3.Name = "textEditDeleteAccountBodyPlaceholder3";
-			this.textEditDeleteAccountBodyPlaceholder3.Properties.Appearance.BackColor = System.Drawing.Color.White;
-			this.textEditDeleteAccountBodyPlaceholder3.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.textEditDeleteAccountBodyPlaceholder3.Properties.Appearance.Options.UseBackColor = true;
-			this.textEditDeleteAccountBodyPlaceholder3.Properties.Appearance.Options.UseForeColor = true;
-			this.textEditDeleteAccountBodyPlaceholder3.Size = new System.Drawing.Size(179, 22);
-			this.textEditDeleteAccountBodyPlaceholder3.StyleController = this.layoutControl;
-			this.textEditDeleteAccountBodyPlaceholder3.TabIndex = 1;
-			// 
-			// textEditDeleteAccountSubject
-			// 
-			this.textEditDeleteAccountSubject.Location = new System.Drawing.Point(54, 69);
-			this.textEditDeleteAccountSubject.Name = "textEditDeleteAccountSubject";
-			this.textEditDeleteAccountSubject.Properties.Appearance.BackColor = System.Drawing.Color.White;
-			this.textEditDeleteAccountSubject.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.textEditDeleteAccountSubject.Properties.Appearance.Options.UseBackColor = true;
-			this.textEditDeleteAccountSubject.Properties.Appearance.Options.UseForeColor = true;
-			this.textEditDeleteAccountSubject.Size = new System.Drawing.Size(533, 22);
-			this.textEditDeleteAccountSubject.StyleController = this.layoutControl;
-			this.textEditDeleteAccountSubject.TabIndex = 1;
 			// 
 			// layoutControlGroupDeleteAccount
 			// 
@@ -1629,7 +1739,7 @@
             this.emptySpaceItem16});
 			this.layoutControlGroupDeleteAccount.Location = new System.Drawing.Point(0, 0);
 			this.layoutControlGroupDeleteAccount.Name = "layoutControlGroupDeleteAccount";
-			this.layoutControlGroupDeleteAccount.Size = new System.Drawing.Size(567, 608);
+			this.layoutControlGroupDeleteAccount.Size = new System.Drawing.Size(567, 607);
 			this.layoutControlGroupDeleteAccount.Text = "Delete Account";
 			// 
 			// simpleLabelItemDeleteAccountSubjectTitle
@@ -1692,16 +1802,6 @@
 			this.simpleLabelItemDeleteAccountBodyTitle.Text = "Body:";
 			this.simpleLabelItemDeleteAccountBodyTitle.TextSize = new System.Drawing.Size(350, 16);
 			// 
-			// simpleLabelItemDeleteAccountBodyLine3
-			// 
-			this.simpleLabelItemDeleteAccountBodyLine3.AllowHotTrack = false;
-			this.simpleLabelItemDeleteAccountBodyLine3.AllowHtmlStringInCaption = true;
-			this.simpleLabelItemDeleteAccountBodyLine3.Location = new System.Drawing.Point(213, 162);
-			this.simpleLabelItemDeleteAccountBodyLine3.Name = "simpleLabelItemDeleteAccountBodyLine3";
-			this.simpleLabelItemDeleteAccountBodyLine3.Size = new System.Drawing.Size(354, 26);
-			this.simpleLabelItemDeleteAccountBodyLine3.Text = "<color=blue><FirstName> <LastName>:</color>";
-			this.simpleLabelItemDeleteAccountBodyLine3.TextSize = new System.Drawing.Size(350, 16);
-			// 
 			// emptySpaceItem13
 			// 
 			this.emptySpaceItem13.AllowHotTrack = false;
@@ -1723,7 +1823,7 @@
 			this.layoutControlItemDeleteAccountBodyPlaceholder1.FillControlToClientArea = false;
 			this.layoutControlItemDeleteAccountBodyPlaceholder1.Location = new System.Drawing.Point(30, 116);
 			this.layoutControlItemDeleteAccountBodyPlaceholder1.Name = "layoutControlItemDeleteAccountBodyPlaceholder1";
-			this.layoutControlItemDeleteAccountBodyPlaceholder1.Size = new System.Drawing.Size(183, 26);
+			this.layoutControlItemDeleteAccountBodyPlaceholder1.Size = new System.Drawing.Size(171, 26);
 			this.layoutControlItemDeleteAccountBodyPlaceholder1.Text = "Body Placeholder 1";
 			this.layoutControlItemDeleteAccountBodyPlaceholder1.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutControlItemDeleteAccountBodyPlaceholder1.TextVisible = false;
@@ -1748,7 +1848,7 @@
 			this.layoutControlItemDeleteAccountBodyPlaceholder2.FillControlToClientArea = false;
 			this.layoutControlItemDeleteAccountBodyPlaceholder2.Location = new System.Drawing.Point(30, 162);
 			this.layoutControlItemDeleteAccountBodyPlaceholder2.Name = "layoutControlItemDeleteAccountBodyPlaceholder2";
-			this.layoutControlItemDeleteAccountBodyPlaceholder2.Size = new System.Drawing.Size(183, 26);
+			this.layoutControlItemDeleteAccountBodyPlaceholder2.Size = new System.Drawing.Size(171, 26);
 			this.layoutControlItemDeleteAccountBodyPlaceholder2.Text = "Body Placeholder 2";
 			this.layoutControlItemDeleteAccountBodyPlaceholder2.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutControlItemDeleteAccountBodyPlaceholder2.TextVisible = false;
@@ -1765,17 +1865,6 @@
 			this.simpleLabelItemDeleteAccountBodyLine4.Text = "<color=blue><empty line></color>";
 			this.simpleLabelItemDeleteAccountBodyLine4.TextSize = new System.Drawing.Size(350, 16);
 			// 
-			// simpleLabelItemDeleteAccountBodyLine5
-			// 
-			this.simpleLabelItemDeleteAccountBodyLine5.AllowHotTrack = false;
-			this.simpleLabelItemDeleteAccountBodyLine5.AllowHtmlStringInCaption = true;
-			this.simpleLabelItemDeleteAccountBodyLine5.CustomizationFormText = "<color=blue><UserName></color>";
-			this.simpleLabelItemDeleteAccountBodyLine5.Location = new System.Drawing.Point(213, 208);
-			this.simpleLabelItemDeleteAccountBodyLine5.Name = "simpleLabelItemDeleteAccountBodyLine5";
-			this.simpleLabelItemDeleteAccountBodyLine5.Size = new System.Drawing.Size(354, 26);
-			this.simpleLabelItemDeleteAccountBodyLine5.Text = "<color=blue><UserName></color>";
-			this.simpleLabelItemDeleteAccountBodyLine5.TextSize = new System.Drawing.Size(350, 16);
-			// 
 			// layoutControlItemDeleteAccountBodyPlaceholder3
 			// 
 			this.layoutControlItemDeleteAccountBodyPlaceholder3.Control = this.textEditDeleteAccountBodyPlaceholder3;
@@ -1784,35 +1873,42 @@
 			this.layoutControlItemDeleteAccountBodyPlaceholder3.FillControlToClientArea = false;
 			this.layoutControlItemDeleteAccountBodyPlaceholder3.Location = new System.Drawing.Point(30, 208);
 			this.layoutControlItemDeleteAccountBodyPlaceholder3.Name = "layoutControlItemDeleteAccountBodyPlaceholder3";
-			this.layoutControlItemDeleteAccountBodyPlaceholder3.Size = new System.Drawing.Size(183, 26);
+			this.layoutControlItemDeleteAccountBodyPlaceholder3.Size = new System.Drawing.Size(171, 26);
 			this.layoutControlItemDeleteAccountBodyPlaceholder3.Text = "Body Placeholder 3";
 			this.layoutControlItemDeleteAccountBodyPlaceholder3.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutControlItemDeleteAccountBodyPlaceholder3.TextVisible = false;
 			this.layoutControlItemDeleteAccountBodyPlaceholder3.TrimClientAreaToControl = false;
 			// 
+			// simpleLabelItemDeleteAccountBodyLine3
+			// 
+			this.simpleLabelItemDeleteAccountBodyLine3.AllowHotTrack = false;
+			this.simpleLabelItemDeleteAccountBodyLine3.AllowHtmlStringInCaption = true;
+			this.simpleLabelItemDeleteAccountBodyLine3.Location = new System.Drawing.Point(201, 162);
+			this.simpleLabelItemDeleteAccountBodyLine3.Name = "simpleLabelItemDeleteAccountBodyLine3";
+			this.simpleLabelItemDeleteAccountBodyLine3.Size = new System.Drawing.Size(366, 26);
+			this.simpleLabelItemDeleteAccountBodyLine3.Text = "<color=blue><FirstName> <LastName>:</color>";
+			this.simpleLabelItemDeleteAccountBodyLine3.TextSize = new System.Drawing.Size(350, 16);
+			// 
+			// simpleLabelItemDeleteAccountBodyLine5
+			// 
+			this.simpleLabelItemDeleteAccountBodyLine5.AllowHotTrack = false;
+			this.simpleLabelItemDeleteAccountBodyLine5.AllowHtmlStringInCaption = true;
+			this.simpleLabelItemDeleteAccountBodyLine5.CustomizationFormText = "<color=blue><UserName></color>";
+			this.simpleLabelItemDeleteAccountBodyLine5.Location = new System.Drawing.Point(201, 208);
+			this.simpleLabelItemDeleteAccountBodyLine5.Name = "simpleLabelItemDeleteAccountBodyLine5";
+			this.simpleLabelItemDeleteAccountBodyLine5.Size = new System.Drawing.Size(366, 26);
+			this.simpleLabelItemDeleteAccountBodyLine5.Text = "<color=blue><UserName></color>";
+			this.simpleLabelItemDeleteAccountBodyLine5.TextSize = new System.Drawing.Size(350, 16);
+			// 
 			// simpleLabelItemDeleteAccountBodyLine1
 			// 
 			this.simpleLabelItemDeleteAccountBodyLine1.AllowHotTrack = false;
 			this.simpleLabelItemDeleteAccountBodyLine1.AllowHtmlStringInCaption = true;
-			this.simpleLabelItemDeleteAccountBodyLine1.Location = new System.Drawing.Point(213, 116);
+			this.simpleLabelItemDeleteAccountBodyLine1.Location = new System.Drawing.Point(201, 116);
 			this.simpleLabelItemDeleteAccountBodyLine1.Name = "simpleLabelItemDeleteAccountBodyLine1";
-			this.simpleLabelItemDeleteAccountBodyLine1.Size = new System.Drawing.Size(354, 26);
+			this.simpleLabelItemDeleteAccountBodyLine1.Size = new System.Drawing.Size(366, 26);
 			this.simpleLabelItemDeleteAccountBodyLine1.Text = "<color=blue><MM-DD-YY> <H:MM></color>";
 			this.simpleLabelItemDeleteAccountBodyLine1.TextSize = new System.Drawing.Size(350, 16);
-			// 
-			// layoutControlItemDeleteAccountRecipients
-			// 
-			this.layoutControlItemDeleteAccountRecipients.Control = this.memoEditDeleteAccountRecipients;
-			this.layoutControlItemDeleteAccountRecipients.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-			this.layoutControlItemDeleteAccountRecipients.CustomizationFormText = "Recipients ";
-			this.layoutControlItemDeleteAccountRecipients.FillControlToClientArea = false;
-			this.layoutControlItemDeleteAccountRecipients.Location = new System.Drawing.Point(0, 264);
-			this.layoutControlItemDeleteAccountRecipients.Name = "layoutControlItemDeleteAccountRecipients";
-			this.layoutControlItemDeleteAccountRecipients.Size = new System.Drawing.Size(567, 172);
-			this.layoutControlItemDeleteAccountRecipients.Text = "Only send this Termination Email to the following addresses:";
-			this.layoutControlItemDeleteAccountRecipients.TextLocation = DevExpress.Utils.Locations.Top;
-			this.layoutControlItemDeleteAccountRecipients.TextSize = new System.Drawing.Size(350, 16);
-			this.layoutControlItemDeleteAccountRecipients.TrimClientAreaToControl = false;
 			// 
 			// emptySpaceItem14
 			// 
@@ -1824,6 +1920,20 @@
 			this.emptySpaceItem14.Size = new System.Drawing.Size(537, 20);
 			this.emptySpaceItem14.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
 			this.emptySpaceItem14.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// layoutControlItemDeleteAccountRecipients
+			// 
+			this.layoutControlItemDeleteAccountRecipients.Control = this.memoEditDeleteAccountRecipients;
+			this.layoutControlItemDeleteAccountRecipients.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+			this.layoutControlItemDeleteAccountRecipients.CustomizationFormText = "Recipients ";
+			this.layoutControlItemDeleteAccountRecipients.FillControlToClientArea = false;
+			this.layoutControlItemDeleteAccountRecipients.Location = new System.Drawing.Point(0, 264);
+			this.layoutControlItemDeleteAccountRecipients.Name = "layoutControlItemDeleteAccountRecipients";
+			this.layoutControlItemDeleteAccountRecipients.Size = new System.Drawing.Size(567, 171);
+			this.layoutControlItemDeleteAccountRecipients.Text = "Only send this Termination Email to the following addresses:";
+			this.layoutControlItemDeleteAccountRecipients.TextLocation = DevExpress.Utils.Locations.Top;
+			this.layoutControlItemDeleteAccountRecipients.TextSize = new System.Drawing.Size(350, 16);
+			this.layoutControlItemDeleteAccountRecipients.TrimClientAreaToControl = false;
 			// 
 			// emptySpaceItem15
 			// 
@@ -1839,10 +1949,632 @@
 			// emptySpaceItem16
 			// 
 			this.emptySpaceItem16.AllowHotTrack = false;
-			this.emptySpaceItem16.Location = new System.Drawing.Point(0, 436);
+			this.emptySpaceItem16.Location = new System.Drawing.Point(0, 435);
 			this.emptySpaceItem16.Name = "emptySpaceItem16";
 			this.emptySpaceItem16.Size = new System.Drawing.Size(567, 172);
 			this.emptySpaceItem16.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// layoutControlGroupInactiveUsers
+			// 
+			this.layoutControlGroupInactiveUsers.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.tabbedControlGroupInactiveUsers,
+            this.emptySpaceItem17});
+			this.layoutControlGroupInactiveUsers.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlGroupInactiveUsers.Name = "layoutControlGroupInactiveUsers";
+			this.layoutControlGroupInactiveUsers.Size = new System.Drawing.Size(567, 607);
+			this.layoutControlGroupInactiveUsers.Text = "Inactive User Emails";
+			// 
+			// tabbedControlGroupInactiveUsers
+			// 
+			this.tabbedControlGroupInactiveUsers.Location = new System.Drawing.Point(0, 20);
+			this.tabbedControlGroupInactiveUsers.Name = "tabbedControlGroupInactiveUsers";
+			this.tabbedControlGroupInactiveUsers.SelectedTabPage = this.layoutControlGroupInactiveUsersReset;
+			this.tabbedControlGroupInactiveUsers.SelectedTabPageIndex = 0;
+			this.tabbedControlGroupInactiveUsers.Size = new System.Drawing.Size(567, 587);
+			this.tabbedControlGroupInactiveUsers.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlGroupInactiveUsersReset,
+            this.layoutControlGroupInactiveUsersDelete});
+			this.tabbedControlGroupInactiveUsers.Text = "Inactive Users";
+			// 
+			// emptySpaceItem17
+			// 
+			this.emptySpaceItem17.AllowHotTrack = false;
+			this.emptySpaceItem17.Location = new System.Drawing.Point(0, 0);
+			this.emptySpaceItem17.MaxSize = new System.Drawing.Size(0, 20);
+			this.emptySpaceItem17.MinSize = new System.Drawing.Size(10, 20);
+			this.emptySpaceItem17.Name = "emptySpaceItem17";
+			this.emptySpaceItem17.Size = new System.Drawing.Size(567, 20);
+			this.emptySpaceItem17.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem17.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// textEditInactiveUsersResetBodyPlaceholder3
+			// 
+			this.textEditInactiveUsersResetBodyPlaceholder3.Location = new System.Drawing.Point(66, 551);
+			this.textEditInactiveUsersResetBodyPlaceholder3.Name = "textEditInactiveUsersResetBodyPlaceholder3";
+			this.textEditInactiveUsersResetBodyPlaceholder3.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.textEditInactiveUsersResetBodyPlaceholder3.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.textEditInactiveUsersResetBodyPlaceholder3.Properties.Appearance.Options.UseBackColor = true;
+			this.textEditInactiveUsersResetBodyPlaceholder3.Properties.Appearance.Options.UseForeColor = true;
+			this.textEditInactiveUsersResetBodyPlaceholder3.Size = new System.Drawing.Size(509, 22);
+			this.textEditInactiveUsersResetBodyPlaceholder3.StyleController = this.layoutControl;
+			this.textEditInactiveUsersResetBodyPlaceholder3.TabIndex = 1;
+			// 
+			// textEditInactiveUsersResetBodyPlaceholder1
+			// 
+			this.textEditInactiveUsersResetBodyPlaceholder1.Location = new System.Drawing.Point(66, 324);
+			this.textEditInactiveUsersResetBodyPlaceholder1.Name = "textEditInactiveUsersResetBodyPlaceholder1";
+			this.textEditInactiveUsersResetBodyPlaceholder1.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.textEditInactiveUsersResetBodyPlaceholder1.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.textEditInactiveUsersResetBodyPlaceholder1.Properties.Appearance.Options.UseBackColor = true;
+			this.textEditInactiveUsersResetBodyPlaceholder1.Properties.Appearance.Options.UseForeColor = true;
+			this.textEditInactiveUsersResetBodyPlaceholder1.Size = new System.Drawing.Size(509, 22);
+			this.textEditInactiveUsersResetBodyPlaceholder1.StyleController = this.layoutControl;
+			this.textEditInactiveUsersResetBodyPlaceholder1.TabIndex = 1;
+			// 
+			// textEditInactiveUsersResetSubject
+			// 
+			this.textEditInactiveUsersResetSubject.Location = new System.Drawing.Point(66, 128);
+			this.textEditInactiveUsersResetSubject.Name = "textEditInactiveUsersResetSubject";
+			this.textEditInactiveUsersResetSubject.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.textEditInactiveUsersResetSubject.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.textEditInactiveUsersResetSubject.Properties.Appearance.Options.UseBackColor = true;
+			this.textEditInactiveUsersResetSubject.Properties.Appearance.Options.UseForeColor = true;
+			this.textEditInactiveUsersResetSubject.Size = new System.Drawing.Size(509, 22);
+			this.textEditInactiveUsersResetSubject.StyleController = this.layoutControl;
+			this.textEditInactiveUsersResetSubject.TabIndex = 1;
+			// 
+			// layoutControlGroupInactiveUsersReset
+			// 
+			this.layoutControlGroupInactiveUsersReset.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.simpleLabelItemInactiveUsersResetSubjectTitle,
+            this.layoutControlItemInactiveUsersResetSubjectValue,
+            this.emptySpaceItem19,
+            this.emptySpaceItem20,
+            this.simpleLabelItemInactiveUsersResetBodyTitle,
+            this.emptySpaceItem21,
+            this.layoutControlItemInactiveUsersResetBodyPlaceholder1,
+            this.simpleLabelItemInactiveUsersResetBodyLine7,
+            this.layoutControlItemInactiveUsersResetBodyPlaceholder2,
+            this.simpleLabelItemInactiveUsersResetBodyLine10,
+            this.layoutControlItemInactiveUsersResetBodyPlaceholder3,
+            this.emptySpaceItem24,
+            this.simpleLabelItemInactiveUsersResetBodyLine1,
+            this.simpleLabelItemInactiveUsersResetBodyLine2,
+            this.simpleLabelItemInactiveUsersResetBodyLine3,
+            this.simpleLabelItemInactiveUsersResetBodyLine4,
+            this.simpleLabelItemInactiveUsersResetBodyLine5,
+            this.simpleLabelItemInactiveUsersResetBodyLine6,
+            this.simpleLabelItemInactiveUsersResetBodyLine8,
+            this.simpleLabelItemInactiveUsersResetBodyLine9,
+            this.simpleLabelItemInactiveUsersResetBodyLine11});
+			this.layoutControlGroupInactiveUsersReset.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlGroupInactiveUsersReset.Name = "layoutControlGroupInactiveUsersReset";
+			this.layoutControlGroupInactiveUsersReset.Size = new System.Drawing.Size(543, 537);
+			this.layoutControlGroupInactiveUsersReset.Text = "Batch Reset";
+			// 
+			// simpleLabelItemInactiveUsersResetSubjectTitle
+			// 
+			this.simpleLabelItemInactiveUsersResetSubjectTitle.AllowHotTrack = false;
+			this.simpleLabelItemInactiveUsersResetSubjectTitle.CustomizationFormText = "Subject:";
+			this.simpleLabelItemInactiveUsersResetSubjectTitle.Location = new System.Drawing.Point(0, 0);
+			this.simpleLabelItemInactiveUsersResetSubjectTitle.Name = "simpleLabelItemInactiveUsersResetSubjectTitle";
+			this.simpleLabelItemInactiveUsersResetSubjectTitle.Size = new System.Drawing.Size(543, 20);
+			this.simpleLabelItemInactiveUsersResetSubjectTitle.Text = "Subject:";
+			this.simpleLabelItemInactiveUsersResetSubjectTitle.TextSize = new System.Drawing.Size(350, 16);
+			// 
+			// layoutControlItemInactiveUsersResetSubjectValue
+			// 
+			this.layoutControlItemInactiveUsersResetSubjectValue.Control = this.textEditInactiveUsersResetSubject;
+			this.layoutControlItemInactiveUsersResetSubjectValue.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+			this.layoutControlItemInactiveUsersResetSubjectValue.CustomizationFormText = "Subject";
+			this.layoutControlItemInactiveUsersResetSubjectValue.FillControlToClientArea = false;
+			this.layoutControlItemInactiveUsersResetSubjectValue.Location = new System.Drawing.Point(30, 20);
+			this.layoutControlItemInactiveUsersResetSubjectValue.Name = "layoutControlItemInactiveUsersResetSubjectValue";
+			this.layoutControlItemInactiveUsersResetSubjectValue.Size = new System.Drawing.Size(513, 26);
+			this.layoutControlItemInactiveUsersResetSubjectValue.Text = "Subject";
+			this.layoutControlItemInactiveUsersResetSubjectValue.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemInactiveUsersResetSubjectValue.TextVisible = false;
+			this.layoutControlItemInactiveUsersResetSubjectValue.TrimClientAreaToControl = false;
+			// 
+			// emptySpaceItem19
+			// 
+			this.emptySpaceItem19.AllowHotTrack = false;
+			this.emptySpaceItem19.CustomizationFormText = "emptySpaceItem5";
+			this.emptySpaceItem19.Location = new System.Drawing.Point(0, 46);
+			this.emptySpaceItem19.MaxSize = new System.Drawing.Size(0, 30);
+			this.emptySpaceItem19.MinSize = new System.Drawing.Size(10, 30);
+			this.emptySpaceItem19.Name = "emptySpaceItem19";
+			this.emptySpaceItem19.Size = new System.Drawing.Size(543, 30);
+			this.emptySpaceItem19.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem19.Text = "emptySpaceItem5";
+			this.emptySpaceItem19.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// emptySpaceItem20
+			// 
+			this.emptySpaceItem20.AllowHotTrack = false;
+			this.emptySpaceItem20.CustomizationFormText = "emptySpaceItem4";
+			this.emptySpaceItem20.Location = new System.Drawing.Point(0, 20);
+			this.emptySpaceItem20.MaxSize = new System.Drawing.Size(30, 0);
+			this.emptySpaceItem20.MinSize = new System.Drawing.Size(30, 10);
+			this.emptySpaceItem20.Name = "emptySpaceItem20";
+			this.emptySpaceItem20.Size = new System.Drawing.Size(30, 26);
+			this.emptySpaceItem20.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem20.Text = "emptySpaceItem4";
+			this.emptySpaceItem20.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// simpleLabelItemInactiveUsersResetBodyTitle
+			// 
+			this.simpleLabelItemInactiveUsersResetBodyTitle.AllowHotTrack = false;
+			this.simpleLabelItemInactiveUsersResetBodyTitle.CustomizationFormText = "Body:";
+			this.simpleLabelItemInactiveUsersResetBodyTitle.Location = new System.Drawing.Point(0, 76);
+			this.simpleLabelItemInactiveUsersResetBodyTitle.Name = "simpleLabelItemInactiveUsersResetBodyTitle";
+			this.simpleLabelItemInactiveUsersResetBodyTitle.Size = new System.Drawing.Size(543, 20);
+			this.simpleLabelItemInactiveUsersResetBodyTitle.Text = "Body:";
+			this.simpleLabelItemInactiveUsersResetBodyTitle.TextSize = new System.Drawing.Size(350, 16);
+			// 
+			// emptySpaceItem21
+			// 
+			this.emptySpaceItem21.AllowHotTrack = false;
+			this.emptySpaceItem21.CustomizationFormText = "emptySpaceItem6";
+			this.emptySpaceItem21.Location = new System.Drawing.Point(0, 96);
+			this.emptySpaceItem21.MaxSize = new System.Drawing.Size(30, 0);
+			this.emptySpaceItem21.MinSize = new System.Drawing.Size(30, 10);
+			this.emptySpaceItem21.Name = "emptySpaceItem21";
+			this.emptySpaceItem21.Size = new System.Drawing.Size(30, 373);
+			this.emptySpaceItem21.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem21.Text = "emptySpaceItem6";
+			this.emptySpaceItem21.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// layoutControlItemInactiveUsersResetBodyPlaceholder1
+			// 
+			this.layoutControlItemInactiveUsersResetBodyPlaceholder1.Control = this.textEditInactiveUsersResetBodyPlaceholder1;
+			this.layoutControlItemInactiveUsersResetBodyPlaceholder1.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+			this.layoutControlItemInactiveUsersResetBodyPlaceholder1.CustomizationFormText = "Body Placeholder 1";
+			this.layoutControlItemInactiveUsersResetBodyPlaceholder1.FillControlToClientArea = false;
+			this.layoutControlItemInactiveUsersResetBodyPlaceholder1.Location = new System.Drawing.Point(30, 216);
+			this.layoutControlItemInactiveUsersResetBodyPlaceholder1.Name = "layoutControlItemInactiveUsersResetBodyPlaceholder1";
+			this.layoutControlItemInactiveUsersResetBodyPlaceholder1.Size = new System.Drawing.Size(513, 26);
+			this.layoutControlItemInactiveUsersResetBodyPlaceholder1.Text = "Body Placeholder 1";
+			this.layoutControlItemInactiveUsersResetBodyPlaceholder1.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemInactiveUsersResetBodyPlaceholder1.TextVisible = false;
+			this.layoutControlItemInactiveUsersResetBodyPlaceholder1.TrimClientAreaToControl = false;
+			// 
+			// simpleLabelItemInactiveUsersResetBodyLine7
+			// 
+			this.simpleLabelItemInactiveUsersResetBodyLine7.AllowHotTrack = false;
+			this.simpleLabelItemInactiveUsersResetBodyLine7.AllowHtmlStringInCaption = true;
+			this.simpleLabelItemInactiveUsersResetBodyLine7.CustomizationFormText = "<color=blue><empty line></color>";
+			this.simpleLabelItemInactiveUsersResetBodyLine7.Location = new System.Drawing.Point(30, 242);
+			this.simpleLabelItemInactiveUsersResetBodyLine7.Name = "simpleLabelItemInactiveUsersResetBodyLine7";
+			this.simpleLabelItemInactiveUsersResetBodyLine7.Size = new System.Drawing.Size(513, 20);
+			this.simpleLabelItemInactiveUsersResetBodyLine7.Text = "<color=blue><empty line></color>";
+			this.simpleLabelItemInactiveUsersResetBodyLine7.TextSize = new System.Drawing.Size(350, 16);
+			// 
+			// layoutControlItemInactiveUsersResetBodyPlaceholder2
+			// 
+			this.layoutControlItemInactiveUsersResetBodyPlaceholder2.Control = this.memoEditInactiveUsersResetBodyPlaceholder2;
+			this.layoutControlItemInactiveUsersResetBodyPlaceholder2.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+			this.layoutControlItemInactiveUsersResetBodyPlaceholder2.CustomizationFormText = "Body Placeholder 2";
+			this.layoutControlItemInactiveUsersResetBodyPlaceholder2.FillControlToClientArea = false;
+			this.layoutControlItemInactiveUsersResetBodyPlaceholder2.Location = new System.Drawing.Point(30, 302);
+			this.layoutControlItemInactiveUsersResetBodyPlaceholder2.Name = "layoutControlItemInactiveUsersResetBodyPlaceholder2";
+			this.layoutControlItemInactiveUsersResetBodyPlaceholder2.Size = new System.Drawing.Size(513, 101);
+			this.layoutControlItemInactiveUsersResetBodyPlaceholder2.Text = "Body Placeholder 2";
+			this.layoutControlItemInactiveUsersResetBodyPlaceholder2.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemInactiveUsersResetBodyPlaceholder2.TextVisible = false;
+			this.layoutControlItemInactiveUsersResetBodyPlaceholder2.TrimClientAreaToControl = false;
+			// 
+			// simpleLabelItemInactiveUsersResetBodyLine10
+			// 
+			this.simpleLabelItemInactiveUsersResetBodyLine10.AllowHotTrack = false;
+			this.simpleLabelItemInactiveUsersResetBodyLine10.AllowHtmlStringInCaption = true;
+			this.simpleLabelItemInactiveUsersResetBodyLine10.CustomizationFormText = "<color=blue><empty line></color>";
+			this.simpleLabelItemInactiveUsersResetBodyLine10.Location = new System.Drawing.Point(30, 403);
+			this.simpleLabelItemInactiveUsersResetBodyLine10.Name = "simpleLabelItemInactiveUsersResetBodyLine10";
+			this.simpleLabelItemInactiveUsersResetBodyLine10.Size = new System.Drawing.Size(513, 20);
+			this.simpleLabelItemInactiveUsersResetBodyLine10.Text = "<color=blue><empty line></color>";
+			this.simpleLabelItemInactiveUsersResetBodyLine10.TextSize = new System.Drawing.Size(350, 16);
+			// 
+			// layoutControlItemInactiveUsersResetBodyPlaceholder3
+			// 
+			this.layoutControlItemInactiveUsersResetBodyPlaceholder3.Control = this.textEditInactiveUsersResetBodyPlaceholder3;
+			this.layoutControlItemInactiveUsersResetBodyPlaceholder3.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+			this.layoutControlItemInactiveUsersResetBodyPlaceholder3.CustomizationFormText = "Body Placeholder 3";
+			this.layoutControlItemInactiveUsersResetBodyPlaceholder3.FillControlToClientArea = false;
+			this.layoutControlItemInactiveUsersResetBodyPlaceholder3.Location = new System.Drawing.Point(30, 443);
+			this.layoutControlItemInactiveUsersResetBodyPlaceholder3.Name = "layoutControlItemInactiveUsersResetBodyPlaceholder3";
+			this.layoutControlItemInactiveUsersResetBodyPlaceholder3.Size = new System.Drawing.Size(513, 26);
+			this.layoutControlItemInactiveUsersResetBodyPlaceholder3.Text = "Body Placeholder 3";
+			this.layoutControlItemInactiveUsersResetBodyPlaceholder3.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemInactiveUsersResetBodyPlaceholder3.TextVisible = false;
+			this.layoutControlItemInactiveUsersResetBodyPlaceholder3.TrimClientAreaToControl = false;
+			// 
+			// simpleLabelItemInactiveUsersResetBodyLine1
+			// 
+			this.simpleLabelItemInactiveUsersResetBodyLine1.AllowHotTrack = false;
+			this.simpleLabelItemInactiveUsersResetBodyLine1.AllowHtmlStringInCaption = true;
+			this.simpleLabelItemInactiveUsersResetBodyLine1.Location = new System.Drawing.Point(30, 96);
+			this.simpleLabelItemInactiveUsersResetBodyLine1.Name = "simpleLabelItemInactiveUsersResetBodyLine1";
+			this.simpleLabelItemInactiveUsersResetBodyLine1.Size = new System.Drawing.Size(513, 20);
+			this.simpleLabelItemInactiveUsersResetBodyLine1.Text = "<color=blue>Hello <FirstName> <LastName>:</color>";
+			this.simpleLabelItemInactiveUsersResetBodyLine1.TextSize = new System.Drawing.Size(350, 16);
+			// 
+			// emptySpaceItem24
+			// 
+			this.emptySpaceItem24.AllowHotTrack = false;
+			this.emptySpaceItem24.CustomizationFormText = "emptySpaceItem16";
+			this.emptySpaceItem24.Location = new System.Drawing.Point(0, 469);
+			this.emptySpaceItem24.Name = "emptySpaceItem24";
+			this.emptySpaceItem24.Size = new System.Drawing.Size(543, 68);
+			this.emptySpaceItem24.Text = "emptySpaceItem16";
+			this.emptySpaceItem24.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// simpleLabelItemInactiveUsersResetBodyLine2
+			// 
+			this.simpleLabelItemInactiveUsersResetBodyLine2.AllowHotTrack = false;
+			this.simpleLabelItemInactiveUsersResetBodyLine2.AllowHtmlStringInCaption = true;
+			this.simpleLabelItemInactiveUsersResetBodyLine2.CustomizationFormText = "<color=blue><empty line></color>";
+			this.simpleLabelItemInactiveUsersResetBodyLine2.Location = new System.Drawing.Point(30, 116);
+			this.simpleLabelItemInactiveUsersResetBodyLine2.Name = "simpleLabelItemInactiveUsersResetBodyLine2";
+			this.simpleLabelItemInactiveUsersResetBodyLine2.Size = new System.Drawing.Size(513, 20);
+			this.simpleLabelItemInactiveUsersResetBodyLine2.Text = "<color=blue><empty line></color>";
+			this.simpleLabelItemInactiveUsersResetBodyLine2.TextSize = new System.Drawing.Size(350, 16);
+			// 
+			// simpleLabelItemInactiveUsersResetBodyLine3
+			// 
+			this.simpleLabelItemInactiveUsersResetBodyLine3.AllowHotTrack = false;
+			this.simpleLabelItemInactiveUsersResetBodyLine3.AllowHtmlStringInCaption = true;
+			this.simpleLabelItemInactiveUsersResetBodyLine3.Location = new System.Drawing.Point(30, 136);
+			this.simpleLabelItemInactiveUsersResetBodyLine3.Name = "simpleLabelItemInactiveUsersResetBodyLine3";
+			this.simpleLabelItemInactiveUsersResetBodyLine3.Size = new System.Drawing.Size(513, 20);
+			this.simpleLabelItemInactiveUsersResetBodyLine3.Text = "<color=blue>You have not used your account since <date>...</color>";
+			this.simpleLabelItemInactiveUsersResetBodyLine3.TextSize = new System.Drawing.Size(350, 16);
+			// 
+			// simpleLabelItemInactiveUsersResetBodyLine4
+			// 
+			this.simpleLabelItemInactiveUsersResetBodyLine4.AllowHotTrack = false;
+			this.simpleLabelItemInactiveUsersResetBodyLine4.AllowHtmlStringInCaption = true;
+			this.simpleLabelItemInactiveUsersResetBodyLine4.CustomizationFormText = "<color=blue><empty line></color>";
+			this.simpleLabelItemInactiveUsersResetBodyLine4.Location = new System.Drawing.Point(30, 156);
+			this.simpleLabelItemInactiveUsersResetBodyLine4.Name = "simpleLabelItemInactiveUsersResetBodyLine4";
+			this.simpleLabelItemInactiveUsersResetBodyLine4.Size = new System.Drawing.Size(513, 20);
+			this.simpleLabelItemInactiveUsersResetBodyLine4.Text = "<color=blue><empty line></color>";
+			this.simpleLabelItemInactiveUsersResetBodyLine4.TextSize = new System.Drawing.Size(350, 16);
+			// 
+			// simpleLabelItemInactiveUsersResetBodyLine5
+			// 
+			this.simpleLabelItemInactiveUsersResetBodyLine5.AllowHotTrack = false;
+			this.simpleLabelItemInactiveUsersResetBodyLine5.AllowHtmlStringInCaption = true;
+			this.simpleLabelItemInactiveUsersResetBodyLine5.Location = new System.Drawing.Point(30, 176);
+			this.simpleLabelItemInactiveUsersResetBodyLine5.Name = "simpleLabelItemInactiveUsersResetBodyLine5";
+			this.simpleLabelItemInactiveUsersResetBodyLine5.Size = new System.Drawing.Size(513, 20);
+			this.simpleLabelItemInactiveUsersResetBodyLine5.Text = "<color=blue>Your account has been temporarly disabled.</color>";
+			this.simpleLabelItemInactiveUsersResetBodyLine5.TextSize = new System.Drawing.Size(350, 16);
+			// 
+			// simpleLabelItemInactiveUsersResetBodyLine6
+			// 
+			this.simpleLabelItemInactiveUsersResetBodyLine6.AllowHotTrack = false;
+			this.simpleLabelItemInactiveUsersResetBodyLine6.AllowHtmlStringInCaption = true;
+			this.simpleLabelItemInactiveUsersResetBodyLine6.CustomizationFormText = "<color=blue><empty line></color>";
+			this.simpleLabelItemInactiveUsersResetBodyLine6.Location = new System.Drawing.Point(30, 196);
+			this.simpleLabelItemInactiveUsersResetBodyLine6.Name = "simpleLabelItemInactiveUsersResetBodyLine6";
+			this.simpleLabelItemInactiveUsersResetBodyLine6.Size = new System.Drawing.Size(513, 20);
+			this.simpleLabelItemInactiveUsersResetBodyLine6.Text = "<color=blue><empty line></color>";
+			this.simpleLabelItemInactiveUsersResetBodyLine6.TextSize = new System.Drawing.Size(350, 16);
+			// 
+			// memoEditInactiveUsersResetBodyPlaceholder2
+			// 
+			this.memoEditInactiveUsersResetBodyPlaceholder2.Location = new System.Drawing.Point(66, 410);
+			this.memoEditInactiveUsersResetBodyPlaceholder2.Name = "memoEditInactiveUsersResetBodyPlaceholder2";
+			this.memoEditInactiveUsersResetBodyPlaceholder2.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.memoEditInactiveUsersResetBodyPlaceholder2.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.memoEditInactiveUsersResetBodyPlaceholder2.Properties.Appearance.Options.UseBackColor = true;
+			this.memoEditInactiveUsersResetBodyPlaceholder2.Properties.Appearance.Options.UseForeColor = true;
+			this.memoEditInactiveUsersResetBodyPlaceholder2.Size = new System.Drawing.Size(509, 97);
+			this.memoEditInactiveUsersResetBodyPlaceholder2.StyleController = this.layoutControl;
+			this.memoEditInactiveUsersResetBodyPlaceholder2.TabIndex = 1;
+			// 
+			// simpleLabelItemInactiveUsersResetBodyLine9
+			// 
+			this.simpleLabelItemInactiveUsersResetBodyLine9.AllowHotTrack = false;
+			this.simpleLabelItemInactiveUsersResetBodyLine9.AllowHtmlStringInCaption = true;
+			this.simpleLabelItemInactiveUsersResetBodyLine9.CustomizationFormText = "<color=blue><empty line></color>";
+			this.simpleLabelItemInactiveUsersResetBodyLine9.Location = new System.Drawing.Point(30, 282);
+			this.simpleLabelItemInactiveUsersResetBodyLine9.Name = "simpleLabelItemInactiveUsersResetBodyLine9";
+			this.simpleLabelItemInactiveUsersResetBodyLine9.Size = new System.Drawing.Size(513, 20);
+			this.simpleLabelItemInactiveUsersResetBodyLine9.Text = "<color=blue><empty line></color>";
+			this.simpleLabelItemInactiveUsersResetBodyLine9.TextSize = new System.Drawing.Size(350, 16);
+			// 
+			// simpleLabelItemInactiveUsersResetBodyLine8
+			// 
+			this.simpleLabelItemInactiveUsersResetBodyLine8.AllowHotTrack = false;
+			this.simpleLabelItemInactiveUsersResetBodyLine8.AllowHtmlStringInCaption = true;
+			this.simpleLabelItemInactiveUsersResetBodyLine8.Location = new System.Drawing.Point(30, 262);
+			this.simpleLabelItemInactiveUsersResetBodyLine8.Name = "simpleLabelItemInactiveUsersResetBodyLine8";
+			this.simpleLabelItemInactiveUsersResetBodyLine8.Size = new System.Drawing.Size(513, 20);
+			this.simpleLabelItemInactiveUsersResetBodyLine8.Text = "<color=blue><Active Link to create new password></color>";
+			this.simpleLabelItemInactiveUsersResetBodyLine8.TextSize = new System.Drawing.Size(350, 16);
+			// 
+			// simpleLabelItemInactiveUsersResetBodyLine11
+			// 
+			this.simpleLabelItemInactiveUsersResetBodyLine11.AllowHotTrack = false;
+			this.simpleLabelItemInactiveUsersResetBodyLine11.AllowHtmlStringInCaption = true;
+			this.simpleLabelItemInactiveUsersResetBodyLine11.CustomizationFormText = "<color=blue><empty line></color>";
+			this.simpleLabelItemInactiveUsersResetBodyLine11.Location = new System.Drawing.Point(30, 423);
+			this.simpleLabelItemInactiveUsersResetBodyLine11.Name = "simpleLabelItemInactiveUsersResetBodyLine11";
+			this.simpleLabelItemInactiveUsersResetBodyLine11.Size = new System.Drawing.Size(513, 20);
+			this.simpleLabelItemInactiveUsersResetBodyLine11.Text = "<color=blue><empty line></color>";
+			this.simpleLabelItemInactiveUsersResetBodyLine11.TextSize = new System.Drawing.Size(350, 16);
+			// 
+			// textEditInactiveUsersDeleteSubject
+			// 
+			this.textEditInactiveUsersDeleteSubject.Location = new System.Drawing.Point(66, 128);
+			this.textEditInactiveUsersDeleteSubject.Name = "textEditInactiveUsersDeleteSubject";
+			this.textEditInactiveUsersDeleteSubject.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.textEditInactiveUsersDeleteSubject.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.textEditInactiveUsersDeleteSubject.Properties.Appearance.Options.UseBackColor = true;
+			this.textEditInactiveUsersDeleteSubject.Properties.Appearance.Options.UseForeColor = true;
+			this.textEditInactiveUsersDeleteSubject.Size = new System.Drawing.Size(509, 22);
+			this.textEditInactiveUsersDeleteSubject.StyleController = this.layoutControl;
+			this.textEditInactiveUsersDeleteSubject.TabIndex = 1;
+			// 
+			// memoEditInactiveUsersDeleteBodyPlaceholder1
+			// 
+			this.memoEditInactiveUsersDeleteBodyPlaceholder1.Location = new System.Drawing.Point(66, 344);
+			this.memoEditInactiveUsersDeleteBodyPlaceholder1.Name = "memoEditInactiveUsersDeleteBodyPlaceholder1";
+			this.memoEditInactiveUsersDeleteBodyPlaceholder1.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.memoEditInactiveUsersDeleteBodyPlaceholder1.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.memoEditInactiveUsersDeleteBodyPlaceholder1.Properties.Appearance.Options.UseBackColor = true;
+			this.memoEditInactiveUsersDeleteBodyPlaceholder1.Properties.Appearance.Options.UseForeColor = true;
+			this.memoEditInactiveUsersDeleteBodyPlaceholder1.Size = new System.Drawing.Size(509, 180);
+			this.memoEditInactiveUsersDeleteBodyPlaceholder1.StyleController = this.layoutControl;
+			this.memoEditInactiveUsersDeleteBodyPlaceholder1.TabIndex = 1;
+			// 
+			// textEditInactiveUsersDeleteBodyPlaceholder2
+			// 
+			this.textEditInactiveUsersDeleteBodyPlaceholder2.Location = new System.Drawing.Point(66, 568);
+			this.textEditInactiveUsersDeleteBodyPlaceholder2.Name = "textEditInactiveUsersDeleteBodyPlaceholder2";
+			this.textEditInactiveUsersDeleteBodyPlaceholder2.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.textEditInactiveUsersDeleteBodyPlaceholder2.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.textEditInactiveUsersDeleteBodyPlaceholder2.Properties.Appearance.Options.UseBackColor = true;
+			this.textEditInactiveUsersDeleteBodyPlaceholder2.Properties.Appearance.Options.UseForeColor = true;
+			this.textEditInactiveUsersDeleteBodyPlaceholder2.Size = new System.Drawing.Size(509, 22);
+			this.textEditInactiveUsersDeleteBodyPlaceholder2.StyleController = this.layoutControl;
+			this.textEditInactiveUsersDeleteBodyPlaceholder2.TabIndex = 1;
+			// 
+			// layoutControlGroupInactiveUsersDelete
+			// 
+			this.layoutControlGroupInactiveUsersDelete.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.simpleLabelItemInactiveUsersDeleteSubjectTitle,
+            this.layoutControlItemInactiveUsersDeleteSubjectValue,
+            this.emptySpaceItem18,
+            this.emptySpaceItem22,
+            this.simpleLabelItemInactiveUsersDeleteBodyTitle,
+            this.emptySpaceItem23,
+            this.layoutControlItemInactiveUsersDeleteBodyPlaceholder1,
+            this.simpleLabelItemInactiveUsersDeleteBodyLine8,
+            this.layoutControlItemInactiveUsersDeleteBodyPlaceholder2,
+            this.emptySpaceItem25,
+            this.simpleLabelItemInactiveUsersDeleteBodyLine1,
+            this.simpleLabelItemInactiveUsersDeleteBodyLine2,
+            this.simpleLabelItemInactiveUsersDeleteBodyLine3,
+            this.simpleLabelItemInactiveUsersDeleteBodyLine4,
+            this.simpleLabelItemInactiveUsersDeleteBodyLine5,
+            this.simpleLabelItemInactiveUsersDeleteBodyLine6,
+            this.simpleLabelItemInactiveUsersDeleteBodyLine7,
+            this.simpleLabelItemInactiveUsersDeleteBodyLine9});
+			this.layoutControlGroupInactiveUsersDelete.Location = new System.Drawing.Point(0, 0);
+			this.layoutControlGroupInactiveUsersDelete.Name = "layoutControlGroupInactiveUsersDelete";
+			this.layoutControlGroupInactiveUsersDelete.Size = new System.Drawing.Size(543, 537);
+			this.layoutControlGroupInactiveUsersDelete.Text = "Batch Delete";
+			// 
+			// simpleLabelItemInactiveUsersDeleteSubjectTitle
+			// 
+			this.simpleLabelItemInactiveUsersDeleteSubjectTitle.AllowHotTrack = false;
+			this.simpleLabelItemInactiveUsersDeleteSubjectTitle.CustomizationFormText = "Subject:";
+			this.simpleLabelItemInactiveUsersDeleteSubjectTitle.Location = new System.Drawing.Point(0, 0);
+			this.simpleLabelItemInactiveUsersDeleteSubjectTitle.Name = "simpleLabelItemInactiveUsersDeleteSubjectTitle";
+			this.simpleLabelItemInactiveUsersDeleteSubjectTitle.Size = new System.Drawing.Size(543, 20);
+			this.simpleLabelItemInactiveUsersDeleteSubjectTitle.Text = "Subject:";
+			this.simpleLabelItemInactiveUsersDeleteSubjectTitle.TextSize = new System.Drawing.Size(350, 16);
+			// 
+			// layoutControlItemInactiveUsersDeleteSubjectValue
+			// 
+			this.layoutControlItemInactiveUsersDeleteSubjectValue.Control = this.textEditInactiveUsersDeleteSubject;
+			this.layoutControlItemInactiveUsersDeleteSubjectValue.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+			this.layoutControlItemInactiveUsersDeleteSubjectValue.CustomizationFormText = "Subject";
+			this.layoutControlItemInactiveUsersDeleteSubjectValue.FillControlToClientArea = false;
+			this.layoutControlItemInactiveUsersDeleteSubjectValue.Location = new System.Drawing.Point(30, 20);
+			this.layoutControlItemInactiveUsersDeleteSubjectValue.Name = "layoutControlItemInactiveUsersDeleteSubjectValue";
+			this.layoutControlItemInactiveUsersDeleteSubjectValue.Size = new System.Drawing.Size(513, 26);
+			this.layoutControlItemInactiveUsersDeleteSubjectValue.Text = "Subject";
+			this.layoutControlItemInactiveUsersDeleteSubjectValue.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemInactiveUsersDeleteSubjectValue.TextVisible = false;
+			this.layoutControlItemInactiveUsersDeleteSubjectValue.TrimClientAreaToControl = false;
+			// 
+			// emptySpaceItem18
+			// 
+			this.emptySpaceItem18.AllowHotTrack = false;
+			this.emptySpaceItem18.CustomizationFormText = "emptySpaceItem5";
+			this.emptySpaceItem18.Location = new System.Drawing.Point(0, 46);
+			this.emptySpaceItem18.MaxSize = new System.Drawing.Size(0, 30);
+			this.emptySpaceItem18.MinSize = new System.Drawing.Size(10, 30);
+			this.emptySpaceItem18.Name = "emptySpaceItem18";
+			this.emptySpaceItem18.Size = new System.Drawing.Size(543, 30);
+			this.emptySpaceItem18.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem18.Text = "emptySpaceItem5";
+			this.emptySpaceItem18.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// emptySpaceItem22
+			// 
+			this.emptySpaceItem22.AllowHotTrack = false;
+			this.emptySpaceItem22.CustomizationFormText = "emptySpaceItem4";
+			this.emptySpaceItem22.Location = new System.Drawing.Point(0, 20);
+			this.emptySpaceItem22.MaxSize = new System.Drawing.Size(30, 0);
+			this.emptySpaceItem22.MinSize = new System.Drawing.Size(30, 10);
+			this.emptySpaceItem22.Name = "emptySpaceItem22";
+			this.emptySpaceItem22.Size = new System.Drawing.Size(30, 26);
+			this.emptySpaceItem22.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem22.Text = "emptySpaceItem4";
+			this.emptySpaceItem22.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// simpleLabelItemInactiveUsersDeleteBodyTitle
+			// 
+			this.simpleLabelItemInactiveUsersDeleteBodyTitle.AllowHotTrack = false;
+			this.simpleLabelItemInactiveUsersDeleteBodyTitle.CustomizationFormText = "Body:";
+			this.simpleLabelItemInactiveUsersDeleteBodyTitle.Location = new System.Drawing.Point(0, 76);
+			this.simpleLabelItemInactiveUsersDeleteBodyTitle.Name = "simpleLabelItemInactiveUsersDeleteBodyTitle";
+			this.simpleLabelItemInactiveUsersDeleteBodyTitle.Size = new System.Drawing.Size(543, 20);
+			this.simpleLabelItemInactiveUsersDeleteBodyTitle.Text = "Body:";
+			this.simpleLabelItemInactiveUsersDeleteBodyTitle.TextSize = new System.Drawing.Size(350, 16);
+			// 
+			// emptySpaceItem23
+			// 
+			this.emptySpaceItem23.AllowHotTrack = false;
+			this.emptySpaceItem23.CustomizationFormText = "emptySpaceItem6";
+			this.emptySpaceItem23.Location = new System.Drawing.Point(0, 96);
+			this.emptySpaceItem23.MaxSize = new System.Drawing.Size(30, 0);
+			this.emptySpaceItem23.MinSize = new System.Drawing.Size(30, 10);
+			this.emptySpaceItem23.Name = "emptySpaceItem23";
+			this.emptySpaceItem23.Size = new System.Drawing.Size(30, 390);
+			this.emptySpaceItem23.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem23.Text = "emptySpaceItem6";
+			this.emptySpaceItem23.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// layoutControlItemInactiveUsersDeleteBodyPlaceholder1
+			// 
+			this.layoutControlItemInactiveUsersDeleteBodyPlaceholder1.Control = this.memoEditInactiveUsersDeleteBodyPlaceholder1;
+			this.layoutControlItemInactiveUsersDeleteBodyPlaceholder1.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+			this.layoutControlItemInactiveUsersDeleteBodyPlaceholder1.FillControlToClientArea = false;
+			this.layoutControlItemInactiveUsersDeleteBodyPlaceholder1.Location = new System.Drawing.Point(30, 236);
+			this.layoutControlItemInactiveUsersDeleteBodyPlaceholder1.Name = "layoutControlItemInactiveUsersDeleteBodyPlaceholder1";
+			this.layoutControlItemInactiveUsersDeleteBodyPlaceholder1.Size = new System.Drawing.Size(513, 184);
+			this.layoutControlItemInactiveUsersDeleteBodyPlaceholder1.Text = "Body Placeholder 1";
+			this.layoutControlItemInactiveUsersDeleteBodyPlaceholder1.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemInactiveUsersDeleteBodyPlaceholder1.TextVisible = false;
+			this.layoutControlItemInactiveUsersDeleteBodyPlaceholder1.TrimClientAreaToControl = false;
+			// 
+			// simpleLabelItemInactiveUsersDeleteBodyLine8
+			// 
+			this.simpleLabelItemInactiveUsersDeleteBodyLine8.AllowHotTrack = false;
+			this.simpleLabelItemInactiveUsersDeleteBodyLine8.AllowHtmlStringInCaption = true;
+			this.simpleLabelItemInactiveUsersDeleteBodyLine8.CustomizationFormText = "<color=blue><empty line></color>";
+			this.simpleLabelItemInactiveUsersDeleteBodyLine8.Location = new System.Drawing.Point(30, 420);
+			this.simpleLabelItemInactiveUsersDeleteBodyLine8.Name = "simpleLabelItemInactiveUsersDeleteBodyLine8";
+			this.simpleLabelItemInactiveUsersDeleteBodyLine8.Size = new System.Drawing.Size(513, 20);
+			this.simpleLabelItemInactiveUsersDeleteBodyLine8.Text = "<color=blue><empty line></color>";
+			this.simpleLabelItemInactiveUsersDeleteBodyLine8.TextSize = new System.Drawing.Size(350, 16);
+			// 
+			// layoutControlItemInactiveUsersDeleteBodyPlaceholder2
+			// 
+			this.layoutControlItemInactiveUsersDeleteBodyPlaceholder2.Control = this.textEditInactiveUsersDeleteBodyPlaceholder2;
+			this.layoutControlItemInactiveUsersDeleteBodyPlaceholder2.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+			this.layoutControlItemInactiveUsersDeleteBodyPlaceholder2.FillControlToClientArea = false;
+			this.layoutControlItemInactiveUsersDeleteBodyPlaceholder2.Location = new System.Drawing.Point(30, 460);
+			this.layoutControlItemInactiveUsersDeleteBodyPlaceholder2.Name = "layoutControlItemInactiveUsersDeleteBodyPlaceholder2";
+			this.layoutControlItemInactiveUsersDeleteBodyPlaceholder2.Size = new System.Drawing.Size(513, 26);
+			this.layoutControlItemInactiveUsersDeleteBodyPlaceholder2.Text = "Body Placeholder 2";
+			this.layoutControlItemInactiveUsersDeleteBodyPlaceholder2.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemInactiveUsersDeleteBodyPlaceholder2.TextVisible = false;
+			this.layoutControlItemInactiveUsersDeleteBodyPlaceholder2.TrimClientAreaToControl = false;
+			// 
+			// emptySpaceItem25
+			// 
+			this.emptySpaceItem25.AllowHotTrack = false;
+			this.emptySpaceItem25.CustomizationFormText = "emptySpaceItem16";
+			this.emptySpaceItem25.Location = new System.Drawing.Point(0, 486);
+			this.emptySpaceItem25.Name = "emptySpaceItem25";
+			this.emptySpaceItem25.Size = new System.Drawing.Size(543, 51);
+			this.emptySpaceItem25.Text = "emptySpaceItem16";
+			this.emptySpaceItem25.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// simpleLabelItemInactiveUsersDeleteBodyLine1
+			// 
+			this.simpleLabelItemInactiveUsersDeleteBodyLine1.AllowHotTrack = false;
+			this.simpleLabelItemInactiveUsersDeleteBodyLine1.AllowHtmlStringInCaption = true;
+			this.simpleLabelItemInactiveUsersDeleteBodyLine1.CustomizationFormText = "<color=blue>Hello <FirstName> <LastName>:</color>";
+			this.simpleLabelItemInactiveUsersDeleteBodyLine1.Location = new System.Drawing.Point(30, 96);
+			this.simpleLabelItemInactiveUsersDeleteBodyLine1.Name = "simpleLabelItemInactiveUsersDeleteBodyLine1";
+			this.simpleLabelItemInactiveUsersDeleteBodyLine1.Size = new System.Drawing.Size(513, 20);
+			this.simpleLabelItemInactiveUsersDeleteBodyLine1.Text = "<color=blue>Hello <FirstName> <LastName>:</color>";
+			this.simpleLabelItemInactiveUsersDeleteBodyLine1.TextSize = new System.Drawing.Size(350, 16);
+			// 
+			// simpleLabelItemInactiveUsersDeleteBodyLine2
+			// 
+			this.simpleLabelItemInactiveUsersDeleteBodyLine2.AllowHotTrack = false;
+			this.simpleLabelItemInactiveUsersDeleteBodyLine2.AllowHtmlStringInCaption = true;
+			this.simpleLabelItemInactiveUsersDeleteBodyLine2.CustomizationFormText = "<color=blue><empty line></color>";
+			this.simpleLabelItemInactiveUsersDeleteBodyLine2.Location = new System.Drawing.Point(30, 116);
+			this.simpleLabelItemInactiveUsersDeleteBodyLine2.Name = "simpleLabelItemInactiveUsersDeleteBodyLine2";
+			this.simpleLabelItemInactiveUsersDeleteBodyLine2.Size = new System.Drawing.Size(513, 20);
+			this.simpleLabelItemInactiveUsersDeleteBodyLine2.Text = "<color=blue><empty line></color>";
+			this.simpleLabelItemInactiveUsersDeleteBodyLine2.TextSize = new System.Drawing.Size(350, 16);
+			// 
+			// simpleLabelItemInactiveUsersDeleteBodyLine3
+			// 
+			this.simpleLabelItemInactiveUsersDeleteBodyLine3.AllowHotTrack = false;
+			this.simpleLabelItemInactiveUsersDeleteBodyLine3.AllowHtmlStringInCaption = true;
+			this.simpleLabelItemInactiveUsersDeleteBodyLine3.CustomizationFormText = "<color=blue>You have not used your account since <date>...</color>";
+			this.simpleLabelItemInactiveUsersDeleteBodyLine3.Location = new System.Drawing.Point(30, 136);
+			this.simpleLabelItemInactiveUsersDeleteBodyLine3.Name = "simpleLabelItemInactiveUsersDeleteBodyLine3";
+			this.simpleLabelItemInactiveUsersDeleteBodyLine3.Size = new System.Drawing.Size(513, 20);
+			this.simpleLabelItemInactiveUsersDeleteBodyLine3.Text = "<color=blue>You have not used your account since <date>...</color>";
+			this.simpleLabelItemInactiveUsersDeleteBodyLine3.TextSize = new System.Drawing.Size(350, 16);
+			// 
+			// simpleLabelItemInactiveUsersDeleteBodyLine4
+			// 
+			this.simpleLabelItemInactiveUsersDeleteBodyLine4.AllowHotTrack = false;
+			this.simpleLabelItemInactiveUsersDeleteBodyLine4.AllowHtmlStringInCaption = true;
+			this.simpleLabelItemInactiveUsersDeleteBodyLine4.CustomizationFormText = "<color=blue><empty line></color>";
+			this.simpleLabelItemInactiveUsersDeleteBodyLine4.Location = new System.Drawing.Point(30, 156);
+			this.simpleLabelItemInactiveUsersDeleteBodyLine4.Name = "simpleLabelItemInactiveUsersDeleteBodyLine4";
+			this.simpleLabelItemInactiveUsersDeleteBodyLine4.Size = new System.Drawing.Size(513, 20);
+			this.simpleLabelItemInactiveUsersDeleteBodyLine4.Text = "<color=blue><empty line></color>";
+			this.simpleLabelItemInactiveUsersDeleteBodyLine4.TextSize = new System.Drawing.Size(350, 16);
+			// 
+			// simpleLabelItemInactiveUsersDeleteBodyLine5
+			// 
+			this.simpleLabelItemInactiveUsersDeleteBodyLine5.AllowHotTrack = false;
+			this.simpleLabelItemInactiveUsersDeleteBodyLine5.AllowHtmlStringInCaption = true;
+			this.simpleLabelItemInactiveUsersDeleteBodyLine5.CustomizationFormText = "<color=blue>Your account has been temporarly disabled.</color>";
+			this.simpleLabelItemInactiveUsersDeleteBodyLine5.Location = new System.Drawing.Point(30, 176);
+			this.simpleLabelItemInactiveUsersDeleteBodyLine5.Name = "simpleLabelItemInactiveUsersDeleteBodyLine5";
+			this.simpleLabelItemInactiveUsersDeleteBodyLine5.Size = new System.Drawing.Size(513, 20);
+			this.simpleLabelItemInactiveUsersDeleteBodyLine5.Text = "<color=blue>Your account has been deleted from the server.</color>";
+			this.simpleLabelItemInactiveUsersDeleteBodyLine5.TextSize = new System.Drawing.Size(350, 16);
+			// 
+			// simpleLabelItemInactiveUsersDeleteBodyLine6
+			// 
+			this.simpleLabelItemInactiveUsersDeleteBodyLine6.AllowHotTrack = false;
+			this.simpleLabelItemInactiveUsersDeleteBodyLine6.AllowHtmlStringInCaption = true;
+			this.simpleLabelItemInactiveUsersDeleteBodyLine6.CustomizationFormText = "<color=blue><empty line></color>";
+			this.simpleLabelItemInactiveUsersDeleteBodyLine6.Location = new System.Drawing.Point(30, 196);
+			this.simpleLabelItemInactiveUsersDeleteBodyLine6.Name = "simpleLabelItemInactiveUsersDeleteBodyLine6";
+			this.simpleLabelItemInactiveUsersDeleteBodyLine6.Size = new System.Drawing.Size(513, 20);
+			this.simpleLabelItemInactiveUsersDeleteBodyLine6.Text = "<color=blue><empty line></color>";
+			this.simpleLabelItemInactiveUsersDeleteBodyLine6.TextSize = new System.Drawing.Size(350, 16);
+			// 
+			// simpleLabelItemInactiveUsersDeleteBodyLine7
+			// 
+			this.simpleLabelItemInactiveUsersDeleteBodyLine7.AllowHotTrack = false;
+			this.simpleLabelItemInactiveUsersDeleteBodyLine7.AllowHtmlStringInCaption = true;
+			this.simpleLabelItemInactiveUsersDeleteBodyLine7.CustomizationFormText = "<color=blue><empty line></color>";
+			this.simpleLabelItemInactiveUsersDeleteBodyLine7.Location = new System.Drawing.Point(30, 216);
+			this.simpleLabelItemInactiveUsersDeleteBodyLine7.Name = "simpleLabelItemInactiveUsersDeleteBodyLine7";
+			this.simpleLabelItemInactiveUsersDeleteBodyLine7.Size = new System.Drawing.Size(513, 20);
+			this.simpleLabelItemInactiveUsersDeleteBodyLine7.Text = "<color=blue><empty line></color>";
+			this.simpleLabelItemInactiveUsersDeleteBodyLine7.TextSize = new System.Drawing.Size(350, 16);
+			// 
+			// simpleLabelItemInactiveUsersDeleteBodyLine9
+			// 
+			this.simpleLabelItemInactiveUsersDeleteBodyLine9.AllowHotTrack = false;
+			this.simpleLabelItemInactiveUsersDeleteBodyLine9.AllowHtmlStringInCaption = true;
+			this.simpleLabelItemInactiveUsersDeleteBodyLine9.CustomizationFormText = "<color=blue><empty line></color>";
+			this.simpleLabelItemInactiveUsersDeleteBodyLine9.Location = new System.Drawing.Point(30, 440);
+			this.simpleLabelItemInactiveUsersDeleteBodyLine9.Name = "simpleLabelItemInactiveUsersDeleteBodyLine9";
+			this.simpleLabelItemInactiveUsersDeleteBodyLine9.Size = new System.Drawing.Size(513, 20);
+			this.simpleLabelItemInactiveUsersDeleteBodyLine9.Text = "<color=blue><empty line></color>";
+			this.simpleLabelItemInactiveUsersDeleteBodyLine9.TextSize = new System.Drawing.Size(350, 16);
 			// 
 			// FormUsersSettings
 			// 
@@ -1866,11 +2598,11 @@
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControl)).EndInit();
 			this.layoutControl.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.textEditNewAccountSubject.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditLocalEmail.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditServerEmail.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.comboBoxEditLocalEmailAccount.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.memoEditEmailCopyAddresses.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.textEditNewAccountSubject.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditNewAccountBodyPlaceholder1.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditNewAccountBodyPlaceholder2.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditNewAccountBodyPlaceholder3.Properties)).EndInit();
@@ -1888,6 +2620,11 @@
 			((System.ComponentModel.ISupportInitialize)(this.memoEditResetAccountBodyPlaceholder6.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.memoEditResetAccountBodyPlaceholder7.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditResetAccountBodyPlaceholder8.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.textEditDeleteAccountSubject.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.textEditDeleteAccountBodyPlaceholder1.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.textEditDeleteAccountBodyPlaceholder2.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.textEditDeleteAccountBodyPlaceholder3.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.memoEditDeleteAccountRecipients.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupRoot)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemCancel)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemSave)).EndInit();
@@ -1958,30 +2695,76 @@
 			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemResetAccountBodyLine12)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemResetAccountBodyLine13)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemResetAccountBodyPlaceholder8)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.textEditDeleteAccountBodyPlaceholder2.Properties)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.textEditDeleteAccountBodyPlaceholder1.Properties)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.memoEditDeleteAccountRecipients.Properties)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.textEditDeleteAccountBodyPlaceholder3.Properties)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.textEditDeleteAccountSubject.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupDeleteAccount)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemDeleteAccountSubjectTitle)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemDeleteAccountSubjectValue)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem11)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem12)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemDeleteAccountBodyTitle)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemDeleteAccountBodyLine3)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem13)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemDeleteAccountBodyPlaceholder1)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemDeleteAccountBodyLine2)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemDeleteAccountBodyPlaceholder2)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemDeleteAccountBodyLine4)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemDeleteAccountBodyLine5)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemDeleteAccountBodyPlaceholder3)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemDeleteAccountBodyLine3)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemDeleteAccountBodyLine5)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemDeleteAccountBodyLine1)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemDeleteAccountRecipients)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem14)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemDeleteAccountRecipients)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem15)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem16)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupInactiveUsers)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.tabbedControlGroupInactiveUsers)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem17)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.textEditInactiveUsersResetBodyPlaceholder3.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.textEditInactiveUsersResetBodyPlaceholder1.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.textEditInactiveUsersResetSubject.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupInactiveUsersReset)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemInactiveUsersResetSubjectTitle)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemInactiveUsersResetSubjectValue)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem19)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem20)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemInactiveUsersResetBodyTitle)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem21)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemInactiveUsersResetBodyPlaceholder1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemInactiveUsersResetBodyLine7)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemInactiveUsersResetBodyPlaceholder2)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemInactiveUsersResetBodyLine10)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemInactiveUsersResetBodyPlaceholder3)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemInactiveUsersResetBodyLine1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem24)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemInactiveUsersResetBodyLine2)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemInactiveUsersResetBodyLine3)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemInactiveUsersResetBodyLine4)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemInactiveUsersResetBodyLine5)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemInactiveUsersResetBodyLine6)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.memoEditInactiveUsersResetBodyPlaceholder2.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemInactiveUsersResetBodyLine9)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemInactiveUsersResetBodyLine8)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemInactiveUsersResetBodyLine11)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.textEditInactiveUsersDeleteSubject.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.memoEditInactiveUsersDeleteBodyPlaceholder1.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.textEditInactiveUsersDeleteBodyPlaceholder2.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupInactiveUsersDelete)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemInactiveUsersDeleteSubjectTitle)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemInactiveUsersDeleteSubjectValue)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem18)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem22)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemInactiveUsersDeleteBodyTitle)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem23)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemInactiveUsersDeleteBodyPlaceholder1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemInactiveUsersDeleteBodyLine8)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemInactiveUsersDeleteBodyPlaceholder2)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem25)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemInactiveUsersDeleteBodyLine1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemInactiveUsersDeleteBodyLine2)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemInactiveUsersDeleteBodyLine3)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemInactiveUsersDeleteBodyLine4)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemInactiveUsersDeleteBodyLine5)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemInactiveUsersDeleteBodyLine6)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemInactiveUsersDeleteBodyLine7)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemInactiveUsersDeleteBodyLine9)).EndInit();
 			this.ResumeLayout(false);
 
         }
@@ -2108,5 +2891,56 @@
 		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemDeleteAccountRecipients;
 		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem15;
 		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem16;
+		private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroupInactiveUsers;
+		private DevExpress.XtraLayout.TabbedControlGroup tabbedControlGroupInactiveUsers;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem17;
+		private DevExpress.XtraEditors.TextEdit textEditInactiveUsersResetSubject;
+		private DevExpress.XtraEditors.TextEdit textEditInactiveUsersResetBodyPlaceholder1;
+		private DevExpress.XtraEditors.TextEdit textEditInactiveUsersResetBodyPlaceholder3;
+		private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroupInactiveUsersReset;
+		private DevExpress.XtraLayout.SimpleLabelItem simpleLabelItemInactiveUsersResetSubjectTitle;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemInactiveUsersResetSubjectValue;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem19;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem20;
+		private DevExpress.XtraLayout.SimpleLabelItem simpleLabelItemInactiveUsersResetBodyTitle;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem21;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemInactiveUsersResetBodyPlaceholder1;
+		private DevExpress.XtraLayout.SimpleLabelItem simpleLabelItemInactiveUsersResetBodyLine7;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemInactiveUsersResetBodyPlaceholder2;
+		private DevExpress.XtraLayout.SimpleLabelItem simpleLabelItemInactiveUsersResetBodyLine10;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemInactiveUsersResetBodyPlaceholder3;
+		private DevExpress.XtraLayout.SimpleLabelItem simpleLabelItemInactiveUsersResetBodyLine1;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem24;
+		private DevExpress.XtraLayout.SimpleLabelItem simpleLabelItemInactiveUsersResetBodyLine2;
+		private DevExpress.XtraLayout.SimpleLabelItem simpleLabelItemInactiveUsersResetBodyLine3;
+		private DevExpress.XtraLayout.SimpleLabelItem simpleLabelItemInactiveUsersResetBodyLine4;
+		private DevExpress.XtraLayout.SimpleLabelItem simpleLabelItemInactiveUsersResetBodyLine5;
+		private DevExpress.XtraLayout.SimpleLabelItem simpleLabelItemInactiveUsersResetBodyLine6;
+		private DevExpress.XtraEditors.MemoEdit memoEditInactiveUsersResetBodyPlaceholder2;
+		private DevExpress.XtraLayout.SimpleLabelItem simpleLabelItemInactiveUsersResetBodyLine8;
+		private DevExpress.XtraLayout.SimpleLabelItem simpleLabelItemInactiveUsersResetBodyLine9;
+		private DevExpress.XtraLayout.SimpleLabelItem simpleLabelItemInactiveUsersResetBodyLine11;
+		private DevExpress.XtraEditors.TextEdit textEditInactiveUsersDeleteSubject;
+		private DevExpress.XtraEditors.MemoEdit memoEditInactiveUsersDeleteBodyPlaceholder1;
+		private DevExpress.XtraEditors.TextEdit textEditInactiveUsersDeleteBodyPlaceholder2;
+		private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroupInactiveUsersDelete;
+		private DevExpress.XtraLayout.SimpleLabelItem simpleLabelItemInactiveUsersDeleteSubjectTitle;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemInactiveUsersDeleteSubjectValue;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem18;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem22;
+		private DevExpress.XtraLayout.SimpleLabelItem simpleLabelItemInactiveUsersDeleteBodyTitle;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem23;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemInactiveUsersDeleteBodyPlaceholder1;
+		private DevExpress.XtraLayout.SimpleLabelItem simpleLabelItemInactiveUsersDeleteBodyLine8;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemInactiveUsersDeleteBodyPlaceholder2;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem25;
+		private DevExpress.XtraLayout.SimpleLabelItem simpleLabelItemInactiveUsersDeleteBodyLine1;
+		private DevExpress.XtraLayout.SimpleLabelItem simpleLabelItemInactiveUsersDeleteBodyLine2;
+		private DevExpress.XtraLayout.SimpleLabelItem simpleLabelItemInactiveUsersDeleteBodyLine3;
+		private DevExpress.XtraLayout.SimpleLabelItem simpleLabelItemInactiveUsersDeleteBodyLine4;
+		private DevExpress.XtraLayout.SimpleLabelItem simpleLabelItemInactiveUsersDeleteBodyLine5;
+		private DevExpress.XtraLayout.SimpleLabelItem simpleLabelItemInactiveUsersDeleteBodyLine6;
+		private DevExpress.XtraLayout.SimpleLabelItem simpleLabelItemInactiveUsersDeleteBodyLine7;
+		private DevExpress.XtraLayout.SimpleLabelItem simpleLabelItemInactiveUsersDeleteBodyLine9;
 	}
 }

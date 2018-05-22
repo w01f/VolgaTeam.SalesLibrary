@@ -62,6 +62,7 @@ namespace SalesLibraries.Common.OfficeInterops
 				mi.Subject = subject;
 				mi.Body = body;
 				mi.Send();
+				//mi.Display();
 			}
 			catch { }
 		}

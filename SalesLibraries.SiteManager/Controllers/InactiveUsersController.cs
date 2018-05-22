@@ -29,7 +29,9 @@ namespace SalesLibraries.SiteManager.Controllers
 				_tabPage.Controls.Add(InactiveUsersManagerControl);
 			InactiveUsersManagerControl.BringToFront();
 
-			FormMain.Instance.buttonItemInactiveUsersExport.Click += buttonItemInactiveUsersExport_Click;
+			FormMain.Instance.buttonItemInactiveUsersReset.Click += OnInactiveUsersResetClick;
+			FormMain.Instance.buttonItemInactiveUsersDelete.Click += OnInactiveUsersDeleteClick;
+			FormMain.Instance.buttonItemInactiveUsersExport.Click += OnInactiveUsersExportClick;
 			FormMain.Instance.comboBoxEditInactiveUsersSite.Properties.Items.Clear();
 			FormMain.Instance.comboBoxEditInactiveUsersSite.Properties.Items.AddRange(WebSiteManager.Instance.Sites);
 			FormMain.Instance.comboBoxEditInactiveUsersSite.EditValueChanged += (o, e) =>
@@ -64,7 +66,17 @@ namespace SalesLibraries.SiteManager.Controllers
 		}
 		#endregion
 
-		private void buttonItemInactiveUsersExport_Click(object sender, EventArgs e)
+		private void OnInactiveUsersResetClick(object sender, EventArgs e)
+		{
+			InactiveUsersManagerControl.ResetUsers();
+		}
+
+		private void OnInactiveUsersDeleteClick(object sender, EventArgs e)
+		{
+			InactiveUsersManagerControl.DeleteUsers();
+		}
+
+		private void OnInactiveUsersExportClick(object sender, EventArgs e)
 		{
 			InactiveUsersManagerControl.ExportUsers();
 		}

@@ -94,7 +94,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 
 		public void RefreshData(bool showMessages)
 		{
-			string message = string.Empty;
+			var message = string.Empty;
 
 			if (showMessages)
 			{
@@ -128,7 +128,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 
 		public void ImportUsers()
 		{
-			string message = string.Empty;
+			var message = string.Empty;
 			using (var dialog = new OpenFileDialog())
 			{
 				dialog.Title = "Import Users";
@@ -279,7 +279,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 
 		private void xtraTabControl_SelectedPageChanged(object sender, TabPageChangedEventArgs e)
 		{
-			string message = string.Empty;
+			var message = string.Empty;
 			if (e.Page == xtraTabPageUsers && _userCollectionChanged)
 			{
 				UpdateUsers(true, ref message);
@@ -306,7 +306,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 			gridControlUsers.DataSource = null;
 			_users.Clear();
 
-			string message = string.Empty;
+			var message = string.Empty;
 			if (showMessages)
 			{
 				using (var form = new FormProgress())
@@ -368,18 +368,18 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 
 		public void AddUser()
 		{
-			string message = string.Empty;
+			var message = string.Empty;
 			using (var formEdit = new FormEditUser(true, _complexPassword, _users.Select(x => x.login).ToArray(), _groups.Select(x => new GroupModel { id = x.id, name = x.name }).ToArray(), _libraries.Select(x => new SoapLibrary { id = x.id, name = x.name, pages = x.pages.Select(y => new SoapLibraryPage { id = y.id, name = y.name, libraryId = y.libraryId }).ToArray() }).ToArray()))
 			{
 				if (formEdit.ShowDialog() == DialogResult.OK)
 				{
-					string login = formEdit.textEditLogin.EditValue != null ? formEdit.textEditLogin.EditValue.ToString() : string.Empty;
-					string password = formEdit.buttonEditPassword.EditValue != null ? formEdit.buttonEditPassword.EditValue.ToString() : string.Empty;
-					string firstName = formEdit.textEditFirstName.EditValue != null ? formEdit.textEditFirstName.EditValue.ToString() : string.Empty;
-					string lastName = formEdit.textEditLastName.EditValue != null ? formEdit.textEditLastName.EditValue.ToString() : string.Empty;
-					string email = formEdit.textEditEmail.EditValue != null ? formEdit.textEditEmail.EditValue.ToString() : string.Empty;
-					string phone = formEdit.textEditPhone.EditValue != null ? formEdit.textEditPhone.EditValue.ToString() : string.Empty;
-					int role = 0;
+					var login = formEdit.textEditLogin.EditValue?.ToString() ?? string.Empty;
+					var password = formEdit.buttonEditPassword.EditValue?.ToString() ?? string.Empty;
+					var firstName = formEdit.textEditFirstName.EditValue?.ToString() ?? string.Empty;
+					var lastName = formEdit.textEditLastName.EditValue?.ToString() ?? string.Empty;
+					var email = formEdit.textEditEmail.EditValue?.ToString() ?? string.Empty;
+					var phone = formEdit.textEditPhone.EditValue?.ToString() ?? string.Empty;
+					var role = 0;
 					var groups = new List<GroupModel>(formEdit.AssignedGroups);
 					var pages = new List<SoapLibraryPage>(formEdit.AssignedPages);
 					using (var form = new FormProgress())
@@ -432,7 +432,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 
 		public void EditUser()
 		{
-			string message = string.Empty;
+			var message = string.Empty;
 			var userRecord = gridViewUsers.GetFocusedRow() as UserModel;
 			if (userRecord == null) return;
 			using (var formEdit = new FormEditUser(false, _complexPassword, _users.Select(x => x.login).ToArray(),
@@ -464,12 +464,12 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 				formEdit.textEditEmailConfirm.EditValue = userRecord.email;
 				if (formEdit.ShowDialog() == DialogResult.OK)
 				{
-					string login = formEdit.textEditLogin.EditValue != null ? formEdit.textEditLogin.EditValue.ToString() : string.Empty;
-					string password = formEdit.buttonEditPassword.EditValue != null ? formEdit.buttonEditPassword.EditValue.ToString() : string.Empty;
-					string firstName = formEdit.textEditFirstName.EditValue != null ? formEdit.textEditFirstName.EditValue.ToString() : string.Empty;
-					string lastName = formEdit.textEditLastName.EditValue != null ? formEdit.textEditLastName.EditValue.ToString() : string.Empty;
-					string email = formEdit.textEditEmail.EditValue != null ? formEdit.textEditEmail.EditValue.ToString() : string.Empty;
-					string phone = formEdit.textEditPhone.EditValue != null ? formEdit.textEditPhone.EditValue.ToString() : string.Empty;
+					var login = formEdit.textEditLogin.EditValue != null ? formEdit.textEditLogin.EditValue.ToString() : string.Empty;
+					var password = formEdit.buttonEditPassword.EditValue != null ? formEdit.buttonEditPassword.EditValue.ToString() : string.Empty;
+					var firstName = formEdit.textEditFirstName.EditValue != null ? formEdit.textEditFirstName.EditValue.ToString() : string.Empty;
+					var lastName = formEdit.textEditLastName.EditValue != null ? formEdit.textEditLastName.EditValue.ToString() : string.Empty;
+					var email = formEdit.textEditEmail.EditValue != null ? formEdit.textEditEmail.EditValue.ToString() : string.Empty;
+					var phone = formEdit.textEditPhone.EditValue != null ? formEdit.textEditPhone.EditValue.ToString() : string.Empty;
 					var role = 0;
 					var groups = new List<GroupModel>(formEdit.AssignedGroups);
 					var pages = new List<SoapLibraryPage>(formEdit.AssignedPages);
@@ -668,7 +668,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 			gridControlGroups.DataSource = null;
 			_groups.Clear();
 			_groupTemplates.Clear();
-			string message = string.Empty;
+			var message = string.Empty;
 			if (showMessages)
 			{
 				using (var form = new FormProgress())
@@ -731,13 +731,13 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 
 		private void AddGroup()
 		{
-			string message = string.Empty;
+			var message = string.Empty;
 			using (var formEdit = new FormEditGroup(true, _groupTemplates.ToArray(), _groups.Select(x => x.name).ToArray(), _users.Select(x => new UserModel { id = x.id, login = x.login, firstName = x.firstName, lastName = x.lastName, email = x.email }).ToArray(), _libraries.Select(x => new SoapLibrary { id = x.id, name = x.name, pages = x.pages.Select(y => new SoapLibraryPage { id = y.id, name = y.name, libraryId = y.libraryId }).ToArray() }).ToArray()))
 			{
 				if (formEdit.ShowDialog() == DialogResult.OK)
 				{
-					string id = Guid.NewGuid().ToString();
-					string name = formEdit.comboBoxEditName.EditValue != null ? formEdit.comboBoxEditName.EditValue.ToString() : string.Empty;
+					var id = Guid.NewGuid().ToString();
+					var name = formEdit.comboBoxEditName.EditValue != null ? formEdit.comboBoxEditName.EditValue.ToString() : string.Empty;
 					var users = new List<UserModel>(formEdit.AssignedUsers);
 					var pages = new List<SoapLibraryPage>(formEdit.AssignedPages);
 					using (var form = new FormProgress())
@@ -772,7 +772,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 
 		private void EditGroup()
 		{
-			string message = string.Empty;
+			var message = string.Empty;
 			var groupRecord = gridViewGroups.GetFocusedRow() as GroupModel;
 			if (groupRecord != null)
 			{
@@ -805,8 +805,8 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 					formEdit.comboBoxEditName.EditValue = groupRecord.name;
 					if (formEdit.ShowDialog() == DialogResult.OK)
 					{
-						string id = groupRecord.id;
-						string name = formEdit.comboBoxEditName.EditValue != null ? formEdit.comboBoxEditName.EditValue.ToString() : string.Empty;
+						var id = groupRecord.id;
+						var name = formEdit.comboBoxEditName.EditValue != null ? formEdit.comboBoxEditName.EditValue.ToString() : string.Empty;
 						var users = new List<UserModel>(formEdit.AssignedUsers);
 						var pages = new List<SoapLibraryPage>(formEdit.AssignedPages);
 						using (var form = new FormProgress())
@@ -845,7 +845,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 			var groupRecord = gridViewGroups.GetFocusedRow() as GroupModel;
 			if (groupRecord != null && AppManager.Instance.PopupMessages.ShowWarningQuestion(string.Format("Are you sure want to delete group {0}?", groupRecord.name)) == DialogResult.Yes)
 			{
-				string message = string.Empty;
+				var message = string.Empty;
 				using (var form = new FormProgress())
 				{
 					FormMain.Instance.ribbonControl.Enabled = false;
@@ -893,7 +893,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 			gridControlPages.DataSource = null;
 			_libraries.Clear();
 
-			string message = string.Empty;
+			var message = string.Empty;
 			if (showMessages)
 			{
 				using (var form = new FormProgress())
@@ -955,7 +955,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 
 		private void EditPage()
 		{
-			string message = string.Empty;
+			var message = string.Empty;
 			var pageRecord = gridViewPages.GetFocusedRow() as SoapLibraryPage;
 			if (pageRecord != null)
 			{
@@ -982,7 +982,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 					{
 						var users = new List<UserModel>(formEdit.AssignedUsers);
 						var groups = new List<GroupModel>(formEdit.AssignedGroups);
-						bool allLibrary = formEdit.checkEditapplyForLibrary.Checked;
+						var allLibrary = formEdit.checkEditapplyForLibrary.Checked;
 						using (var form = new FormProgress())
 						{
 							FormMain.Instance.ribbonControl.Enabled = false;
@@ -995,7 +995,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 															{
 																var libraray = _libraries.FirstOrDefault(x => x.id.Equals(pageRecord.libraryId));
 																if (libraray != null)
-																	foreach (SoapLibraryPage page in libraray.pages)
+																	foreach (var page in libraray.pages)
 																		WebSiteManager.Instance.SelectedSite.SetPage(page.id, users.ToArray(), groups.ToArray(), out message);
 															}
 															else

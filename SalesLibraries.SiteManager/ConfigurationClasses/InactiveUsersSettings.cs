@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Xml;
 
@@ -7,74 +9,61 @@ namespace SalesLibraries.SiteManager.ConfigurationClasses
 {
 	public class InactiveUsersSettings
 	{
-		private readonly string _filePath;
+		private static string _filePath = Path.Combine(Path.GetDirectoryName(typeof(SettingsManager).Assembly.Location), "InactiveUserEmailSettings.xml");
 
-		public string ResetEmailSender { get; set; }
+		public string SiteUrl { get; set; }
+
 		public string ResetEmailSubject { get; set; }
-		public string ResetEmailBody { get; set; }
-		public string DeleteEmailSender { get; set; }
+		public string ResetEmailBodyPlaceholder1 { get; set; }
+		public string ResetEmailBodyPlaceholder2 { get; set; }
+		public string ResetEmailBodyPlaceholder3 { get; set; }
 		public string DeleteEmailSubject { get; set; }
-		public string DeleteEmailBody { get; set; }
+		public string DeleteEmailBodyPlaceholder1 { get; set; }
+		public string DeleteEmailBodyPlaceholder2 { get; set; }
 
 		public InactiveUsersSettings()
 		{
-			ResetEmailSender = String.Empty;
-			ResetEmailSubject = String.Empty;
-			ResetEmailBody = String.Empty;
-			DeleteEmailSender = String.Empty;
-			DeleteEmailSubject = String.Empty;
-			DeleteEmailBody = String.Empty;
-
-			_filePath = Path.Combine(Path.GetDirectoryName(typeof(SettingsManager).Assembly.Location), "InactiveUserEmailSettings.xml");
+			ResetEmailSubject = "Raycom Results Account Inactivity Notification…";
+			ResetEmailBodyPlaceholder1 = "If you want to reset your account, click this link below:";
+			ResetEmailBodyPlaceholder2 = "If you have connection issues, email billy@adSALESapps.com";
+			ResetEmailBodyPlaceholder3 = "Happy Selling!";
+			DeleteEmailSubject = "Raycom Results Account Inactivity Notification…";
+			DeleteEmailBodyPlaceholder1 = "If you have any questions, or need the account re-activated, email: billy@adSALESapps.com";
+			DeleteEmailBodyPlaceholder2 = "Best regards,";
 		}
 
-		public void Load()
+		public static IList<InactiveUsersSettings> LoadFromXml()
 		{
-			if (!File.Exists(_filePath)) return;
-			var document = new XmlDocument();
-			document.Load(_filePath);
+			var items = new List<InactiveUsersSettings>();
 
-			#region Local Settings
-			var node = document.SelectSingleNode(@"/Settings/ResetEmail/Sender");
-			if (node != null)
-				ResetEmailSender = node.InnerText.Trim();
-			node = document.SelectSingleNode(@"/Settings/ResetEmail/Subject");
-			if (node != null)
-				ResetEmailSubject = node.InnerText.Trim();
-			node = document.SelectSingleNode(@"/Settings/ResetEmail/Body");
-			if (node != null)
-				ResetEmailBody = node.InnerText.Trim();
+			if (File.Exists(_filePath))
+			{
+				var document = new XmlDocument();
+				document.Load(_filePath);
 
-			node = document.SelectSingleNode(@"/Settings/DeleteEmail/Sender");
-			if (node != null)
-				DeleteEmailSender = node.InnerText.Trim();
-			node = document.SelectSingleNode(@"/Settings/DeleteEmail/Subject");
-			if (node != null)
-				DeleteEmailSubject = node.InnerText.Trim();
-			node = document.SelectSingleNode(@"/Settings/DeleteEmail/Body");
-			if (node != null)
-				DeleteEmailBody = node.InnerText.Trim();
-			#endregion
+				var configNodes = (document.SelectNodes("//Settings/Item").OfType<XmlNode>() ?? new XmlNode[] { }).ToList();
+				foreach (var configNode in configNodes)
+				{
+					var item = new InactiveUsersSettings();
+					item.Load(configNode);
+					items.Add(item);
+				}
+
+			}
+			return items;
 		}
 
-		public void Save()
+		public static void SaveToFile(IList<InactiveUsersSettings> items)
 		{
 			var xml = new StringBuilder();
 
 			xml.AppendLine(@"<Settings>");
-
-			xml.AppendLine(@"<ResetEmail>");
-			xml.AppendLine(@"<Sender>" + ResetEmailSender.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Sender>");
-			xml.AppendLine(@"<Subject>" + ResetEmailSubject.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Subject>");
-			xml.AppendLine(@"<Body>" + ResetEmailBody.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Body>");
-			xml.AppendLine(@"</ResetEmail>");
-
-			xml.AppendLine(@"<DeleteEmail>");
-			xml.AppendLine(@"<Sender>" + DeleteEmailSender.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Sender>");
-			xml.AppendLine(@"<Subject>" + DeleteEmailSubject.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Subject>");
-			xml.AppendLine(@"<Body>" + DeleteEmailBody.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Body>");
-			xml.AppendLine(@"</DeleteEmail>");
-
+			foreach (var item in items)
+			{
+				xml.AppendLine(@"<Item>");
+				xml.AppendLine(item.Serialize());
+				xml.AppendLine(@"</Item>");
+			}
 			xml.AppendLine(@"</Settings>");
 
 			using (var sw = new StreamWriter(_filePath, false))
@@ -82,6 +71,42 @@ namespace SalesLibraries.SiteManager.ConfigurationClasses
 				sw.Write(xml);
 				sw.Flush();
 			}
+		}
+
+		private void Load(XmlNode configNode)
+		{
+			SiteUrl = configNode.SelectSingleNode(@"./SiteUrl")?.InnerText;
+
+			ResetEmailSubject = configNode.SelectSingleNode(@"./ResetEmail/Subject")?.InnerText ?? ResetEmailSubject;
+			ResetEmailBodyPlaceholder1 = configNode.SelectSingleNode(@"./ResetEmail/Placeholder1")?.InnerText ?? ResetEmailBodyPlaceholder1;
+			ResetEmailBodyPlaceholder2 = configNode.SelectSingleNode(@"./ResetEmail/Placeholder2")?.InnerText ?? ResetEmailBodyPlaceholder2;
+			ResetEmailBodyPlaceholder3 = configNode.SelectSingleNode(@"./ResetEmail/Placeholder3")?.InnerText ?? ResetEmailBodyPlaceholder3;
+
+			DeleteEmailSubject = configNode.SelectSingleNode(@"./DeleteEmail/Subject")?.InnerText ?? DeleteEmailSubject;
+			DeleteEmailBodyPlaceholder1 = configNode.SelectSingleNode(@"./DeleteEmail/Placeholder1")?.InnerText ?? DeleteEmailBodyPlaceholder1;
+			DeleteEmailBodyPlaceholder2 = configNode.SelectSingleNode(@"./DeleteEmail/Placeholder2")?.InnerText ?? DeleteEmailBodyPlaceholder2;
+		}
+
+		private string Serialize()
+		{
+			var xml = new StringBuilder();
+
+			xml.AppendLine(@"<SiteUrl>" + SiteUrl?.Replace(@"&", "&#38;")?.Replace("\"", "&quot;") + @"</SiteUrl>");
+
+			xml.AppendLine(@"<ResetEmail>");
+			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Subject", ResetEmailSubject?.Replace(@"&", "&#38;")?.Replace("\"", "&quot;")));
+			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Placeholder1", ResetEmailBodyPlaceholder1?.Replace(@"&", "&#38;")?.Replace("\"", "&quot;")));
+			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Placeholder2", ResetEmailBodyPlaceholder2?.Replace(@"&", "&#38;")?.Replace("\"", "&quot;")));
+			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Placeholder3", ResetEmailBodyPlaceholder3?.Replace(@"&", "&#38;")?.Replace("\"", "&quot;")));
+			xml.AppendLine(@"</ResetEmail>");
+
+			xml.AppendLine(@"<DeleteEmail>");
+			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Subject", DeleteEmailSubject?.Replace(@"&", "&#38;")?.Replace("\"", "&quot;")));
+			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Placeholder1", DeleteEmailBodyPlaceholder1?.Replace(@"&", "&#38;")?.Replace("\"", "&quot;")));
+			xml.AppendLine(String.Format("<{0}>{1}</{0}>", "Placeholder2", DeleteEmailBodyPlaceholder2?.Replace(@"&", "&#38;")?.Replace("\"", "&quot;")));
+			xml.AppendLine(@"</DeleteEmail>");
+
+			return xml.ToString();
 		}
 	}
 }

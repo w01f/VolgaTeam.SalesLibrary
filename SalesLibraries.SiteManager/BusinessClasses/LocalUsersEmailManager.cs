@@ -121,5 +121,78 @@ namespace SalesLibraries.SiteManager.BusinessClasses
 				OutlookHelper.Instance.Disconnect();
 			}
 		}
+
+		public void SendInactiveUserResetNotificationEmail(string userName, string userLogin, string userEmail, string userPassword, DateTime? lastActivityDate)
+		{
+			var bodyLines = new StringBuilder();
+
+			var selectedSite = WebSiteManager.Instance.SelectedSite.Website;
+
+			var emailSettings = SettingsManager.Instance.UsersEmailSettingItems.FirstOrDefault(item => item.SiteUrl == selectedSite) ??
+				new UsersEmailSettings();
+
+			var inactiveUserSettings = SettingsManager.Instance.InactiveUsersSettingItems.FirstOrDefault(item => item.SiteUrl == selectedSite) ??
+				new InactiveUsersSettings();
+
+			var subject = inactiveUserSettings.ResetEmailSubject;
+
+			bodyLines.AppendLine(String.Format("Hello {0}:", userName));
+			bodyLines.AppendLine();
+			bodyLines.AppendLine(lastActivityDate.HasValue
+				? String.Format("You have not used your account since {0:MM/dd/yyyy}...", lastActivityDate.Value)
+				: "You have not recently used your account...");
+			bodyLines.AppendLine();
+			bodyLines.AppendLine("Your account has been temporarly disabled.");
+			bodyLines.AppendLine();
+			bodyLines.AppendLine(inactiveUserSettings.ResetEmailBodyPlaceholder1);
+			bodyLines.AppendLine();
+			bodyLines.AppendLine(String.Format("{0}/auth/changePassword?login={1}&password={2}&rememberMe=", selectedSite.TrimEnd('/'), userLogin, userPassword));
+			bodyLines.AppendLine();
+			bodyLines.AppendLine(inactiveUserSettings.ResetEmailBodyPlaceholder2);
+			bodyLines.AppendLine();
+			bodyLines.AppendLine();
+			bodyLines.AppendLine(inactiveUserSettings.ResetEmailBodyPlaceholder3);
+
+			if (OutlookHelper.Instance.Connect())
+			{
+				OutlookHelper.Instance.SendMessage(emailSettings.LocalEmailAccountName, new[] { userEmail }, emailSettings.LocalEmailCopyAddresses, subject, bodyLines.ToString());
+				OutlookHelper.Instance.Disconnect();
+			}
+		}
+
+		public void SendInactiveUserDeleteNotificationEmail(string userName, string userLogin, string userEmail, DateTime? lastActivityDate)
+		{
+			var bodyLines = new StringBuilder();
+
+			var selectedSite = WebSiteManager.Instance.SelectedSite.Website;
+
+			var emailSettings = SettingsManager.Instance.UsersEmailSettingItems.FirstOrDefault(item => item.SiteUrl == selectedSite) ??
+								new UsersEmailSettings();
+
+			var inactiveUserSettings = SettingsManager.Instance.InactiveUsersSettingItems.FirstOrDefault(item => item.SiteUrl == selectedSite) ??
+									   new InactiveUsersSettings();
+
+			var subject = inactiveUserSettings.DeleteEmailSubject;
+
+			bodyLines.AppendLine(String.Format("Hello {0}:", userName));
+			bodyLines.AppendLine();
+			bodyLines.AppendLine(lastActivityDate.HasValue
+				? String.Format("You have not used your account since {0:MM/dd/yyyy}...", lastActivityDate.Value)
+				: "You have not recently used your account...");
+			bodyLines.AppendLine();
+			bodyLines.AppendLine("Your account has been deleted from the server.");
+			bodyLines.AppendLine();
+			bodyLines.AppendLine();
+			bodyLines.AppendLine(inactiveUserSettings.DeleteEmailBodyPlaceholder1);
+			bodyLines.AppendLine();
+			bodyLines.AppendLine();
+			bodyLines.AppendLine(inactiveUserSettings.DeleteEmailBodyPlaceholder2);
+
+			if (OutlookHelper.Instance.Connect())
+			{
+				OutlookHelper.Instance.SendMessage(emailSettings.LocalEmailAccountName, new[] { userEmail }, emailSettings.LocalEmailCopyAddresses, subject, bodyLines.ToString());
+				OutlookHelper.Instance.Disconnect();
+			}
+		}
 	}
 }

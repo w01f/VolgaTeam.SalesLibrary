@@ -35,13 +35,9 @@
 			this.labelControlGroupsTitle = new DevExpress.XtraEditors.LabelControl();
 			this.buttonXGroupsAll = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXGroupsNone = new DevComponents.DotNetBar.ButtonX();
-			this.checkEditEmailReset = new DevExpress.XtraEditors.CheckEdit();
-			this.checkEditEmailDelete = new DevExpress.XtraEditors.CheckEdit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditEnableFilter.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControlGroups)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditEmailReset.Properties)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditEmailDelete.Properties)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// checkEditEnableFilter
@@ -75,12 +71,13 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.checkedListBoxControlGroups.CheckOnClick = true;
+			this.checkedListBoxControlGroups.Cursor = System.Windows.Forms.Cursors.Default;
 			this.checkedListBoxControlGroups.Enabled = false;
 			this.checkedListBoxControlGroups.ItemHeight = 35;
-			this.checkedListBoxControlGroups.Location = new System.Drawing.Point(8, 91);
+			this.checkedListBoxControlGroups.Location = new System.Drawing.Point(8, 88);
 			this.checkedListBoxControlGroups.Name = "checkedListBoxControlGroups";
 			this.checkedListBoxControlGroups.SelectionMode = System.Windows.Forms.SelectionMode.None;
-			this.checkedListBoxControlGroups.Size = new System.Drawing.Size(222, 237);
+			this.checkedListBoxControlGroups.Size = new System.Drawing.Size(222, 338);
 			this.checkedListBoxControlGroups.StyleController = this.styleController;
 			this.checkedListBoxControlGroups.TabIndex = 1;
 			this.checkedListBoxControlGroups.ItemCheck += new DevExpress.XtraEditors.Controls.ItemCheckEventHandler(this.checkedListBoxControlGroups_ItemCheck);
@@ -125,39 +122,11 @@
 			this.buttonXGroupsNone.TextColor = System.Drawing.Color.Black;
 			this.buttonXGroupsNone.Click += new System.EventHandler(this.buttonXGroupsNone_Click);
 			// 
-			// checkEditEmailReset
-			// 
-			this.checkEditEmailReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.checkEditEmailReset.Location = new System.Drawing.Point(8, 334);
-			this.checkEditEmailReset.Name = "checkEditEmailReset";
-			this.checkEditEmailReset.Properties.Appearance.Options.UseTextOptions = true;
-			this.checkEditEmailReset.Properties.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-			this.checkEditEmailReset.Properties.AutoHeight = false;
-			this.checkEditEmailReset.Properties.Caption = "Reset the User\'s Password when the email is sent";
-			this.checkEditEmailReset.Size = new System.Drawing.Size(222, 45);
-			this.checkEditEmailReset.StyleController = this.styleController;
-			this.checkEditEmailReset.TabIndex = 19;
-			// 
-			// checkEditEmailDelete
-			// 
-			this.checkEditEmailDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.checkEditEmailDelete.Location = new System.Drawing.Point(8, 385);
-			this.checkEditEmailDelete.Name = "checkEditEmailDelete";
-			this.checkEditEmailDelete.Properties.Appearance.Options.UseTextOptions = true;
-			this.checkEditEmailDelete.Properties.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-			this.checkEditEmailDelete.Properties.AutoHeight = false;
-			this.checkEditEmailDelete.Properties.Caption = "Kill the User\'s Account when the email is sent";
-			this.checkEditEmailDelete.Size = new System.Drawing.Size(222, 41);
-			this.checkEditEmailDelete.StyleController = this.styleController;
-			this.checkEditEmailDelete.TabIndex = 20;
-			// 
 			// InactiveUsersFilter
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.BackColor = System.Drawing.Color.White;
-			this.Controls.Add(this.checkEditEmailDelete);
-			this.Controls.Add(this.checkEditEmailReset);
 			this.Controls.Add(this.buttonXGroupsNone);
 			this.Controls.Add(this.buttonXGroupsAll);
 			this.Controls.Add(this.labelControlGroupsTitle);
@@ -169,8 +138,6 @@
 			((System.ComponentModel.ISupportInitialize)(this.checkEditEnableFilter.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControlGroups)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditEmailReset.Properties)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditEmailDelete.Properties)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -184,7 +151,5 @@
 		private DevExpress.XtraEditors.LabelControl labelControlGroupsTitle;
 		private DevComponents.DotNetBar.ButtonX buttonXGroupsAll;
 		private DevComponents.DotNetBar.ButtonX buttonXGroupsNone;
-		private DevExpress.XtraEditors.CheckEdit checkEditEmailReset;
-		private DevExpress.XtraEditors.CheckEdit checkEditEmailDelete;
 	}
 }

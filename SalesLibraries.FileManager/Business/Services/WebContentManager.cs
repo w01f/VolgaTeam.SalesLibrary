@@ -827,7 +827,7 @@ namespace SalesLibraries.FileManager.Business.Services
 
 		private static void ImportData(
 			this SoapOneDrive target,
-			SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.OneDriveLinkSettings source)
+			OneDriveLinkSettings source)
 		{
 			target.url = source.Url;
 		}

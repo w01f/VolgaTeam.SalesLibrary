@@ -48,7 +48,7 @@ namespace SalesLibraries.ServiceConnector.Services.Soap
 			return userRecords.ToArray();
 		}
 
-		public void ResetUsers(string[] userIds, bool onlyEmail, string sender, string subject, string body, out string message)
+		public void ResetInactiveUser(string login, string password, out string message)
 		{
 			message = string.Empty;
 			var client = GetInactiveUsersClient();
@@ -58,7 +58,7 @@ namespace SalesLibraries.ServiceConnector.Services.Soap
 				{
 					var sessionKey = client.getSessionKey(Login, Password);
 					if (!string.IsNullOrEmpty(sessionKey))
-						client.resetUsers(sessionKey, userIds, onlyEmail, sender, subject, body);
+						client.resetUser(sessionKey, login, password);
 					else
 						message = "Couldn't complete operation.\nLogin or password are not correct.";
 				}
@@ -71,7 +71,7 @@ namespace SalesLibraries.ServiceConnector.Services.Soap
 				message = "Couldn't complete operation.\nServer is unavailable.";
 		}
 
-		public void DeleteUsers(string[] userIds, bool onlyEmail, string sender, string subject, string body, out string message)
+		public void DeleteInactiveUser(string login, out string message)
 		{
 			message = string.Empty;
 			var client = GetInactiveUsersClient();
@@ -81,7 +81,7 @@ namespace SalesLibraries.ServiceConnector.Services.Soap
 				{
 					var sessionKey = client.getSessionKey(Login, Password);
 					if (!string.IsNullOrEmpty(sessionKey))
-						client.deleteUsers(sessionKey, userIds, onlyEmail, sender, subject, body);
+						client.deleteUser(sessionKey, login);
 					else
 						message = "Couldn't complete operation.\nLogin or password are not correct.";
 				}

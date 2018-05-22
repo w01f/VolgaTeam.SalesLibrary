@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Windows.Forms;
 using DevExpress.Skins;
 using DevExpress.XtraEditors.Controls;
@@ -17,11 +16,8 @@ namespace SalesLibraries.SiteManager.PresentationClasses.InactiveUsers
 		public bool EnableFilter { get; private set; }
 		public event EventHandler<EventArgs> FilterChanged;
 
-		public List<string> AllGroups { get; private set; }
-		public List<string> SelectedGroups { get; private set; }
-
-		public bool EmailReset => checkEditEmailReset.Checked;
-		public bool EmailDelete => checkEditEmailDelete.Checked;
+		public List<string> AllGroups { get; }
+		public List<string> SelectedGroups { get; }
 
 		public InactiveUsersFilter()
 		{
@@ -52,9 +48,12 @@ namespace SalesLibraries.SiteManager.PresentationClasses.InactiveUsers
 			foreach (var group in groups)
 				checkedListBoxControlGroups.Items.Add(group, SelectedGroups.Contains(group));
 
-			labelControlGroupsTitle.Text = string.Format("Groups: {0}", AllGroups.Count);
-
 			_init = false;
+		}
+
+		public void UpdateUsersCount(int totalUsers, int selectedUsers)
+		{
+			labelControlGroupsTitle.Text = String.Format("Groups: {0}   Users:{1}   Selected:{2}", AllGroups.Count, totalUsers, selectedUsers);
 		}
 
 		private void checkEditFilterEnable_CheckedChanged(object sender, EventArgs e)
@@ -63,8 +62,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.InactiveUsers
 			checkedListBoxControlGroups.Enabled = EnableFilter;
 			buttonXGroupsAll.Enabled = EnableFilter;
 			buttonXGroupsNone.Enabled = EnableFilter;
-			if (FilterChanged != null)
-				FilterChanged(this, new EventArgs());
+			FilterChanged?.Invoke(this, new EventArgs());
 		}
 
 		private void checkedListBoxControlGroups_ItemCheck(object sender, ItemCheckEventArgs e)
@@ -73,8 +71,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.InactiveUsers
 			SelectedGroups.Clear();
 			foreach (CheckedListBoxItem item in checkedListBoxControlGroups.CheckedItems)
 				SelectedGroups.Add(item.Value.ToString());
-			if (FilterChanged != null)
-				FilterChanged(this, new EventArgs());
+			FilterChanged?.Invoke(this, new EventArgs());
 		}
 
 		private void buttonXGroupsAll_Click(object sender, EventArgs e)
@@ -83,8 +80,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.InactiveUsers
 			SelectedGroups.Clear();
 			SelectedGroups.AddRange(AllGroups);
 			checkedListBoxControlGroups.CheckAll();
-			if (FilterChanged != null)
-				FilterChanged(this, new EventArgs());
+			FilterChanged?.Invoke(this, new EventArgs());
 			_init = false;
 		}
 
@@ -93,8 +89,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.InactiveUsers
 			_init = true;
 			SelectedGroups.Clear();
 			checkedListBoxControlGroups.UnCheckAll();
-			if (FilterChanged != null)
-				FilterChanged(this, new EventArgs());
+			FilterChanged?.Invoke(this, new EventArgs());
 			_init = false;
 		}
 	}

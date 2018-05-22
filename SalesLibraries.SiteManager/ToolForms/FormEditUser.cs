@@ -132,8 +132,7 @@ namespace SalesLibraries.SiteManager.ToolForms
 
 		private void textEdit_Validating(object sender, CancelEventArgs e)
 		{
-			BaseEdit edit = sender as BaseEdit;
-			if (edit != null && edit.Enabled && string.IsNullOrEmpty(edit.Text))
+			if (sender is BaseEdit edit && edit.Enabled && string.IsNullOrEmpty(edit.Text))
 			{
 				edit.ErrorText = "Empty value is not allowed";
 				e.Cancel = true;
@@ -204,30 +203,26 @@ namespace SalesLibraries.SiteManager.ToolForms
 
 		private void RepositoryItemCheckEditCheckedChanged(object sender, EventArgs e)
 		{
-			var focussedView = gridControlLibraries.FocusedView as GridView;
-			if (focussedView != null)
+			if (gridControlLibraries.FocusedView is GridView focussedView)
 			{
 				focussedView.CloseEditor();
 				if (focussedView == gridViewLibraries)
 				{
 					if (focussedView.FocusedRowHandle != GridControl.InvalidRowHandle)
 					{
-						var libraray = focussedView.GetFocusedRow() as SoapLibrary;
-						if (libraray != null)
+						if (focussedView.GetFocusedRow() is SoapLibrary libraray)
 						{
 							foreach (var page in _pages.Where(x => x.libraryId == libraray.id))
 								page.selected = libraray.selected;
 							var pagesView = focussedView.GetDetailView(focussedView.FocusedRowHandle, 0) as GridView;
-							if (pagesView != null)
-								pagesView.RefreshData();
+							pagesView?.RefreshData();
 						}
 					}
 				}
 				else
 				{
-					var libraray = focussedView.SourceRow as SoapLibrary;
 					var page = focussedView.GetFocusedRow() as SoapLibraryPage;
-					if (libraray != null && page != null && page.selected)
+					if (focussedView.SourceRow is SoapLibrary libraray && page != null && page.selected)
 					{
 						libraray.selected = page.selected;
 						gridControlLibraries.MainView.RefreshData();

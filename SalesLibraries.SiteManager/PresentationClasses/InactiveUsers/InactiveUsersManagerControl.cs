@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using System.Web.Security;
 using System.Windows.Forms;
 using DevExpress.Skins;
 using DevExpress.XtraGrid.Views.Base;
@@ -13,6 +14,7 @@ using DevExpress.XtraPrinting;
 using SalesLibraries.ServiceConnector.InactiveUsersService;
 using SalesLibraries.SiteManager.BusinessClasses;
 using SalesLibraries.SiteManager.ConfigurationClasses;
+using SalesLibraries.SiteManager.ToolClasses;
 using SalesLibraries.SiteManager.ToolForms;
 
 namespace SalesLibraries.SiteManager.PresentationClasses.InactiveUsers
@@ -37,14 +39,8 @@ namespace SalesLibraries.SiteManager.PresentationClasses.InactiveUsers
 			_filterControl.FilterChanged += (o, e) => ApplyData();
 			pnCustomFilter.Controls.Add(_filterControl);
 
-			LoadDefaultEmailSettings();
-
 			if (CreateGraphics().DpiX > 96)
 			{
-				splitContainerControlMain.Panel1.Width =
-					RectangleHelper.ScaleVertical(splitContainerControlMain.Panel1.Width,
-						splitContainerControlMain.ScaleFactor.Width);
-
 				splitContainerControlData.Panel2.Width =
 					RectangleHelper.ScaleVertical(splitContainerControlData.Panel2.Width,
 						splitContainerControlData.ScaleFactor.Width);
@@ -109,22 +105,16 @@ namespace SalesLibraries.SiteManager.PresentationClasses.InactiveUsers
 			UpdateUsersCount();
 		}
 
-		private void ResetUsers()
+		public void ResetUsers()
 		{
 			var message = string.Empty;
 
-			var userIds = _records.Where(x => x.Selected).Select(x => x.id.ToString()).ToArray();
-			var onlyEmail = !_filterControl.EmailReset;
-			var sender = textEditEmailResetSender.EditValue?.ToString() ?? string.Empty;
-			var subject = textEditEmailResetSubject.EditValue?.ToString() ?? string.Empty;
-			var body = memoEditEmailResetBody.EditValue?.ToString() ?? string.Empty;
+			var userModels = gridViewRecords.GetSelectedRows()
+				.Select(rowIndex => gridViewRecords.GetRow(rowIndex))
+				.OfType<UserModel>()
+				.ToList();
 
-			SettingsManager.Instance.InactiveUsersSettings.ResetEmailSender = sender;
-			SettingsManager.Instance.InactiveUsersSettings.ResetEmailSubject = subject;
-			SettingsManager.Instance.InactiveUsersSettings.ResetEmailBody = body;
-			SettingsManager.Instance.InactiveUsersSettings.Save();
-
-			if (userIds.Length == 0 || string.IsNullOrEmpty(sender)) return;
+			if (!userModels.Any()) return;
 
 			using (var form = new FormProgress())
 			{
@@ -133,7 +123,21 @@ namespace SalesLibraries.SiteManager.PresentationClasses.InactiveUsers
 				form.laProgress.Text = "Sending Emails...";
 				form.TopMost = true;
 
-				var thread = new Thread(() => WebSiteManager.Instance.SelectedSite.ResetUsers(userIds, onlyEmail, sender, subject, body, out message));
+				var thread = new Thread(() =>
+				{
+					var complexPassword = WebSiteManager.Instance.SelectedSite.IsUserPasswordComplex(out message);
+
+					var emailSettings = SettingsManager.Instance.UsersEmailSettingItems.FirstOrDefault(item => item.SiteUrl == WebSiteManager.Instance.SelectedSite.Website) ??
+										new UsersEmailSettings();
+					var sendLocalMessage = emailSettings.SendLocalEmail && LocalUsersEmailManager.Instance.IsAvailable();
+					foreach (var userModel in userModels)
+					{
+						var password = complexPassword ? Membership.GeneratePassword(10, 3) : new PasswordGenerator().Generate();
+						WebSiteManager.Instance.SelectedSite.ResetInactiveUser(userModel.login, password, out message);
+						if (sendLocalMessage)
+							LocalUsersEmailManager.Instance.SendInactiveUserResetNotificationEmail(userModel.FullName, userModel.login, userModel.email, password, userModel.LastActivityDate);
+					}
+				});
 				form.Show();
 				thread.Start();
 				while (thread.IsAlive)
@@ -152,22 +156,16 @@ namespace SalesLibraries.SiteManager.PresentationClasses.InactiveUsers
 				RefreshData(true);
 		}
 
-		private void DeleteUsers()
+		public void DeleteUsers()
 		{
 			var message = string.Empty;
 
-			var userIds = _records.Where(x => x.Selected).Select(x => x.id.ToString()).ToArray();
-			var onlyEmail = !_filterControl.EmailDelete;
-			var sender = textEditEmailDeleteSender.EditValue != null ? textEditEmailDeleteSender.EditValue.ToString() : string.Empty;
-			var subject = textEditEmailDeleteSubject.EditValue != null ? textEditEmailDeleteSubject.EditValue.ToString() : string.Empty;
-			var body = memoEditEmailDeleteBody.EditValue != null ? memoEditEmailDeleteBody.EditValue.ToString() : string.Empty;
+			var userModels = gridViewRecords.GetSelectedRows()
+				.Select(rowIndex => gridViewRecords.GetRow(rowIndex))
+				.OfType<UserModel>()
+				.ToList();
 
-			SettingsManager.Instance.InactiveUsersSettings.DeleteEmailSender = sender;
-			SettingsManager.Instance.InactiveUsersSettings.DeleteEmailSubject = subject;
-			SettingsManager.Instance.InactiveUsersSettings.DeleteEmailBody = body;
-			SettingsManager.Instance.InactiveUsersSettings.Save();
-
-			if (userIds.Length == 0 || string.IsNullOrEmpty(sender)) return;
+			if (!userModels.Any()) return;
 
 			using (var form = new FormProgress())
 			{
@@ -176,7 +174,18 @@ namespace SalesLibraries.SiteManager.PresentationClasses.InactiveUsers
 				form.laProgress.Text = "Sending Emails...";
 				form.TopMost = true;
 
-				var thread = new Thread(() => WebSiteManager.Instance.SelectedSite.DeleteUsers(userIds, onlyEmail, sender, subject, body, out message));
+				var thread = new Thread(() =>
+				{
+					var emailSettings = SettingsManager.Instance.UsersEmailSettingItems.FirstOrDefault(item => item.SiteUrl == WebSiteManager.Instance.SelectedSite.Website) ??
+										new UsersEmailSettings();
+					var sendLocalMessage = emailSettings.SendLocalEmail && LocalUsersEmailManager.Instance.IsAvailable();
+					foreach (var userModel in userModels)
+					{
+						WebSiteManager.Instance.SelectedSite.DeleteInactiveUser(userModel.login, out message);
+						if (sendLocalMessage)
+							LocalUsersEmailManager.Instance.SendInactiveUserDeleteNotificationEmail(userModel.FullName, userModel.login, userModel.email, userModel.LastActivityDate);
+					}
+				});
 				form.Show();
 				thread.Start();
 				while (thread.IsAlive)
@@ -193,23 +202,16 @@ namespace SalesLibraries.SiteManager.PresentationClasses.InactiveUsers
 
 			if (!string.IsNullOrEmpty(message))
 				RefreshData(true);
-		}
-
-		private void LoadDefaultEmailSettings()
-		{
-			textEditEmailResetSender.EditValue = SettingsManager.Instance.InactiveUsersSettings.ResetEmailSender;
-			textEditEmailResetSubject.EditValue = SettingsManager.Instance.InactiveUsersSettings.ResetEmailSubject;
-			memoEditEmailResetBody.EditValue = SettingsManager.Instance.InactiveUsersSettings.ResetEmailBody;
-
-			textEditEmailDeleteSender.EditValue = SettingsManager.Instance.InactiveUsersSettings.DeleteEmailSender;
-			textEditEmailDeleteSubject.EditValue = SettingsManager.Instance.InactiveUsersSettings.DeleteEmailSubject;
-			memoEditEmailDeleteBody.EditValue = SettingsManager.Instance.InactiveUsersSettings.DeleteEmailBody;
 		}
 
 		private void UpdateUsersCount()
 		{
-			var selecteUsersCount = _records.Count(x => x.Selected);
-			labelControlEmailResetUserCount.Text = labelControlEmailDeleteUserCount.Text = selecteUsersCount > 0 ? String.Format("The Email will be sent to: {0} {1}", selecteUsersCount, selecteUsersCount > 1 ? "Users" : "User") : "Email will not be sent. There are no selected users";
+			var selectedRecords = gridViewRecords.GetSelectedRows()
+				.Select(rowIndex => gridViewRecords.GetRow(rowIndex))
+				.OfType<UserModel>()
+				.ToList();
+			var selecteUsersCount = selectedRecords.Count;
+			_filterControl.UpdateUsersCount(_records.Count, selecteUsersCount);
 		}
 
 		public void ExportUsers()
@@ -217,12 +219,11 @@ namespace SalesLibraries.SiteManager.PresentationClasses.InactiveUsers
 			using (var dialog = new SaveFileDialog())
 			{
 				dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-				dialog.FileName = string.Format("InactiveUsers({0}).xls", DateTime.Now.ToString("MMddyy-hmmtt"));
+				dialog.FileName = string.Format("InactiveUsers({0:MMddyy-hmmtt}).xls", DateTime.Now);
 				dialog.Filter = "Excel files|*.xls";
 				dialog.Title = "Export Inactive Users";
 				if (dialog.ShowDialog() == DialogResult.OK)
 				{
-					gridColumnUsersSelected.Visible = false;
 					var options = new XlsExportOptions();
 					options.SheetName = Path.GetFileNameWithoutExtension(dialog.FileName);
 					options.TextExportMode = TextExportMode.Text;
@@ -231,7 +232,6 @@ namespace SalesLibraries.SiteManager.PresentationClasses.InactiveUsers
 					options.ExportMode = XlsExportMode.SingleFile;
 					printableComponentLink.CreateDocument();
 					printableComponentLink.PrintingSystem.ExportToXls(dialog.FileName, options);
-					gridColumnUsersSelected.Visible = true;
 
 					if (File.Exists(dialog.FileName))
 						Process.Start(dialog.FileName);
@@ -239,30 +239,14 @@ namespace SalesLibraries.SiteManager.PresentationClasses.InactiveUsers
 			}
 		}
 
+		private void OnGridViewSelectionChanged(object sender, DevExpress.Data.SelectionChangedEventArgs e)
+		{
+			UpdateUsersCount();
+		}
+
 		private void buttonXLoadData_Click(object sender, EventArgs e)
 		{
 			RefreshData(true);
-		}
-
-		private void gridViewRecords_CellValueChanged(object sender, CellValueChangedEventArgs e)
-		{
-			if (e.Column == gridColumnUsersSelected)
-				UpdateUsersCount();
-		}
-
-		private void repositoryItemCheckEditUsers_CheckedChanged(object sender, EventArgs e)
-		{
-			gridViewRecords.CloseEditor();
-		}
-
-		private void buttonXEmailResetSend_Click(object sender, EventArgs e)
-		{
-			ResetUsers();
-		}
-
-		private void buttonXEmailDeleteSend_Click(object sender, EventArgs e)
-		{
-			DeleteUsers();
 		}
 
 		private void printableComponentLink_CreateReportHeaderArea(object sender, CreateAreaEventArgs e)

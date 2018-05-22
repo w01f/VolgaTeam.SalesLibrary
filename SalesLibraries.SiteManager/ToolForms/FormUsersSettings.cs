@@ -45,6 +45,15 @@ namespace SalesLibraries.SiteManager.ToolForms
 			textEditDeleteAccountBodyPlaceholder3.EnableSelectAll();
 			memoEditDeleteAccountRecipients.EnableSelectAll();
 
+			textEditInactiveUsersResetSubject.EnableSelectAll();
+			textEditInactiveUsersResetBodyPlaceholder1.EnableSelectAll();
+			memoEditInactiveUsersResetBodyPlaceholder2.EnableSelectAll();
+			textEditInactiveUsersResetBodyPlaceholder3.EnableSelectAll();
+
+			textEditInactiveUsersDeleteSubject.EnableSelectAll();
+			memoEditInactiveUsersDeleteBodyPlaceholder1.EnableSelectAll();
+			textEditInactiveUsersDeleteBodyPlaceholder2.EnableSelectAll();
+
 			var scaleFactor = Utils.GetScaleFactor(CreateGraphics().DpiX);
 			layoutControlItemSave.MaxSize = RectangleHelper.ScaleSize(layoutControlItemSave.MaxSize, scaleFactor);
 			layoutControlItemSave.MinSize = RectangleHelper.ScaleSize(layoutControlItemSave.MinSize, scaleFactor);
@@ -100,6 +109,18 @@ namespace SalesLibraries.SiteManager.ToolForms
 			textEditDeleteAccountBodyPlaceholder2.EditValue = emailSettings.DeleteAccountBodyPlaceholder2;
 			textEditDeleteAccountBodyPlaceholder3.EditValue = emailSettings.DeleteAccountBodyPlaceholder3;
 			memoEditDeleteAccountRecipients.EditValue = emailSettings.DeleteAccountRecipients;
+
+			var inactiveUserSettings = SettingsManager.Instance.InactiveUsersSettingItems.FirstOrDefault(item => item.SiteUrl == WebSiteManager.Instance.SelectedSite.Website) ??
+								new InactiveUsersSettings();
+
+			textEditInactiveUsersResetSubject.EditValue = inactiveUserSettings.ResetEmailSubject;
+			textEditInactiveUsersResetBodyPlaceholder1.EditValue = inactiveUserSettings.ResetEmailBodyPlaceholder1;
+			memoEditInactiveUsersResetBodyPlaceholder2.EditValue = inactiveUserSettings.ResetEmailBodyPlaceholder2;
+			textEditInactiveUsersResetBodyPlaceholder3.EditValue = inactiveUserSettings.ResetEmailBodyPlaceholder3;
+
+			textEditInactiveUsersDeleteSubject.EditValue = inactiveUserSettings.DeleteEmailSubject;
+			memoEditInactiveUsersDeleteBodyPlaceholder1.EditValue = inactiveUserSettings.DeleteEmailBodyPlaceholder1;
+			textEditInactiveUsersDeleteBodyPlaceholder2.EditValue = inactiveUserSettings.DeleteEmailBodyPlaceholder2;
 		}
 
 		private void OnFormClosed(object sender, FormClosedEventArgs e)
@@ -145,6 +166,25 @@ namespace SalesLibraries.SiteManager.ToolForms
 			emailSettings.DeleteAccountRecipients = memoEditDeleteAccountRecipients.EditValue as String;
 
 			UsersEmailSettings.SaveToFile(SettingsManager.Instance.UsersEmailSettingItems);
+
+			var inactiveUserSettings = SettingsManager.Instance.InactiveUsersSettingItems.FirstOrDefault(item => item.SiteUrl == WebSiteManager.Instance.SelectedSite.Website);
+			if (inactiveUserSettings == null)
+			{
+				inactiveUserSettings = new InactiveUsersSettings();
+				inactiveUserSettings.SiteUrl = WebSiteManager.Instance.SelectedSite.Website;
+				SettingsManager.Instance.InactiveUsersSettingItems.Add(inactiveUserSettings);
+			}
+
+			inactiveUserSettings.ResetEmailSubject = textEditInactiveUsersResetSubject.EditValue as String;
+			inactiveUserSettings.ResetEmailBodyPlaceholder1 = textEditInactiveUsersResetBodyPlaceholder1.EditValue as String;
+			inactiveUserSettings.ResetEmailBodyPlaceholder2 = memoEditInactiveUsersResetBodyPlaceholder2.EditValue as String;
+			inactiveUserSettings.ResetEmailBodyPlaceholder3 = textEditInactiveUsersResetBodyPlaceholder3.EditValue as String;
+
+			inactiveUserSettings.DeleteEmailSubject = textEditInactiveUsersDeleteSubject.EditValue as String;
+			inactiveUserSettings.DeleteEmailBodyPlaceholder1 = memoEditInactiveUsersDeleteBodyPlaceholder1.EditValue as String;
+			inactiveUserSettings.DeleteEmailBodyPlaceholder2 = textEditInactiveUsersDeleteBodyPlaceholder2.EditValue as String;
+
+			InactiveUsersSettings.SaveToFile(SettingsManager.Instance.InactiveUsersSettingItems);
 		}
 
 		private void OnEmailSendModeCheckedChanged(object sender, System.EventArgs e)
@@ -153,6 +193,7 @@ namespace SalesLibraries.SiteManager.ToolForms
 				layoutControlGroupNewAccount.PageEnabled =
 				layoutControlGroupResetAccount.PageEnabled =
 				layoutControlGroupDeleteAccount.PageEnabled =
+				layoutControlGroupInactiveUsers.PageEnabled =
 				checkEditLocalEmail.Checked;
 		}
 	}

@@ -21,7 +21,7 @@ namespace SalesLibraries.SiteManager.ConfigurationClasses
 		public string SelectedSiteName { get; set; }
 		public int? SelectedTab { get; set; }
 		public List<UsersEmailSettings> UsersEmailSettingItems { get; }
-		public InactiveUsersSettings InactiveUsersSettings { get; }
+		public List<InactiveUsersSettings> InactiveUsersSettingItems { get; }
 		public List<RibbonTabPageConfig> RibbonTabPageSettings { get; }
 		public List<string> ApprovedUsers { get; }
 		#endregion
@@ -34,7 +34,7 @@ namespace SalesLibraries.SiteManager.ConfigurationClasses
 			LogoPath = Path.Combine(ApplicationRootsPath, "logo.png");
 			IconPath = Path.Combine(ApplicationRootsPath, "icon.ico");
 			UsersEmailSettingItems = new List<UsersEmailSettings>();
-			InactiveUsersSettings = new InactiveUsersSettings();
+			InactiveUsersSettingItems = new List<InactiveUsersSettings>();
 			RibbonTabPageSettings = new List<RibbonTabPageConfig>();
 			ApprovedUsers = new List<String>();
 		}
@@ -61,7 +61,7 @@ namespace SalesLibraries.SiteManager.ConfigurationClasses
 			}
 
 			LoadUsersEmailSettings();
-			InactiveUsersSettings.Load();
+			LoadInactiveUsersSettings();
 			LoadRibbonTabSettings();
 			LoadApprovedUsers();
 		}
@@ -97,6 +97,12 @@ namespace SalesLibraries.SiteManager.ConfigurationClasses
 		{
 			UsersEmailSettingItems.Clear();
 			UsersEmailSettingItems.AddRange(UsersEmailSettings.LoadFromXml());
+		}
+
+		private void LoadInactiveUsersSettings()
+		{
+			InactiveUsersSettingItems.Clear();
+			InactiveUsersSettingItems.AddRange(InactiveUsersSettings.LoadFromXml());
 		}
 
 		public void Save()

@@ -27,8 +27,7 @@ namespace SalesLibraries.ServiceConnector.AdminService
 		{
 			get
 			{
-				DateTime temp;
-				if (DateTime.TryParse(dateModify, out temp))
+				if (DateTime.TryParse(dateModify, out var temp))
 					return temp;
 				if (DateTime.TryParse(dateAdd, out temp))
 					return temp;
@@ -36,14 +35,7 @@ namespace SalesLibraries.ServiceConnector.AdminService
 			}
 		}
 
-		public bool IsModified
-		{
-			get
-			{
-				DateTime temp;
-				return DateTime.TryParse(dateModify, out temp);
-			}
-		}
+		public bool IsModified => DateTime.TryParse(dateModify, out DateTime _);
 
 		public string LoginWithName => string.Format("{0} ({1})", login, FullName);
 
