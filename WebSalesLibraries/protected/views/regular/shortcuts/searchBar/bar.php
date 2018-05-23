@@ -89,6 +89,7 @@
 
         <?echo '#'.$searchBarId; ?>
         .search-bar-run {
+            width: 48px;
             height: <? echo ($style->lineHeight+14);?>px !important;
         }
     </style>

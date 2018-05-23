@@ -10,6 +10,7 @@
 		public $forceDownload;
 		public $forceEOOpen;
 		public $forceWebOpen;
+		public $forceOpenOneDrive;
 		public $forceOpenGallery;
 
 		/**
@@ -31,6 +32,7 @@
 			$this->forceDownload = false;
 			$this->forceEOOpen = false;
 			$this->forceWebOpen = false;
+			$this->forceOpenOneDrive = false;
 			$this->forceOpenGallery = false;
 
 			if (UserIdentity::isUserAuthorized())
@@ -45,24 +47,28 @@
 						$this->forceDownload = $userProfile->powerPointSettings->forceEOOpen;
 						$this->forceEOOpen = $userProfile->powerPointSettings->forceEOOpen;
 						$this->forceWebOpen = $userProfile->powerPointSettings->forceWebOpen;
+						$this->forceOpenOneDrive = $userProfile->powerPointSettings->forceOneDriveOpen;
 						$this->forceOpenGallery = $userProfile->powerPointSettings->forceOpenGallery;
 						break;
 					case 'doc':
 						$this->forceDownload = $userProfile->docSettings->forceEOOpen;
 						$this->forceEOOpen = $userProfile->docSettings->forceEOOpen;
 						$this->forceWebOpen = $userProfile->docSettings->forceWebOpen;
+						$this->forceOpenOneDrive = $userProfile->docSettings->forceOneDriveOpen;
 						$this->forceOpenGallery = $userProfile->docSettings->forceOpenGallery;
 						break;
 					case 'xls':
 						$this->forceDownload = $userProfile->xlsSettings->forceEOOpen;
 						$this->forceEOOpen = $userProfile->xlsSettings->forceEOOpen;
 						$this->forceWebOpen = $userProfile->xlsSettings->forceWebOpen;
+						$this->forceOpenOneDrive = $userProfile->xlsSettings->forceOneDriveOpen;
 						$this->forceOpenGallery = $userProfile->xlsSettings->forceOpenGallery;
 						break;
 					case 'pdf':
 						$this->forceDownload = $userProfile->pdfSettings->forceEOOpen;
 						$this->forceEOOpen = $userProfile->pdfSettings->forceEOOpen;
 						$this->forceWebOpen = $userProfile->pdfSettings->forceWebOpen;
+						$this->forceOpenOneDrive = $userProfile->pdfSettings->forceOneDriveOpen;
 						$this->forceOpenGallery = $userProfile->pdfSettings->forceOpenGallery;
 						break;
 					case 'png':
@@ -71,6 +77,7 @@
 						$this->forceDownload = $userProfile->imageSettings->forceEOOpen;
 						$this->forceEOOpen = $userProfile->imageSettings->forceEOOpen;
 						$this->forceWebOpen = $userProfile->imageSettings->forceWebOpen;
+						$this->forceOpenOneDrive = $userProfile->imageSettings->forceOneDriveOpen;
 						$this->forceOpenGallery = $userProfile->imageSettings->forceOpenGallery;
 						break;
 				}

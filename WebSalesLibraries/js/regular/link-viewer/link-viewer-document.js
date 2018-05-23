@@ -22,6 +22,8 @@
 				downloadFile();
 			else if (viewerData.config.forceWebOpen == true)
 				open();
+			else if (viewerData.config.forceOpenOneDrive == true)
+				openOneDrive();
 			else
 			{
 				if (parameters.viewContainer === undefined)
@@ -207,7 +209,12 @@
 
 		var open = function ()
 		{
-			$.SalesPortal.LinkManager.openFile(viewerData.url, "_self");
+			$.SalesPortal.LinkManager.openFile(viewerData.url, "_blank");
+		};
+
+		var openOneDrive = function ()
+		{
+			$.SalesPortal.LinkManager.openFile(viewerData.oneDriveUrl, "_blank");
 		};
 
 		var openPdf = function ()

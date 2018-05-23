@@ -32,5 +32,5 @@
      style="<? echo $this->renderPartial('landingPageMarkup/style/stylePadding', array('padding' => $contentBlock->padding), true); ?>
      <? echo $this->renderPartial('landingPageMarkup/style/styleMargin', array('margin' => $contentBlock->margin), true); ?>"
 	<? if (!empty($contentBlock->hoverText)): ?> title="<? echo $contentBlock->hoverText; ?>"<? endif; ?>>
-    <img class="img-responsive" src="<? echo $contentBlock->source; ?>" <? if (!empty($contentBlock->animation)): ?> data-bs-hover-animate="<? echo $contentBlock->animation; ?>"<? endif; ?>>
+    <img class="img-responsive" style="width: 100%;" src="<? echo $contentBlock->source; ?>" <? if (!empty($contentBlock->animation)): ?> data-bs-hover-animate="<? echo $contentBlock->animation; ?>"<? endif; ?>>
 </div>

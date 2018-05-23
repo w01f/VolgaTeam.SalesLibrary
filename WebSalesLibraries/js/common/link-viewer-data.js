@@ -35,6 +35,7 @@
 		this.format = undefined;
 		this.tags = undefined;
 		this.url = undefined;
+		this.oneDriveUrl = undefined;
 		this.fileName = undefined;
 		this.filePath = undefined;
 		this.fileSize = undefined;
@@ -70,6 +71,7 @@
 		this.format = undefined;
 		this.tags = undefined;
 		this.url = undefined;
+		this.oneDriveUrl = undefined;
 		this.fileName = undefined;
 		this.filePath = undefined;
 		this.fileSize = undefined;
@@ -191,6 +193,7 @@
 		this.format = undefined;
 		this.tags = undefined;
 		this.url = undefined;
+		this.oneDriveUrl = undefined;
 		this.fileName = undefined;
 		this.quickLinkUrl = undefined;
 		this.isEOBrowser = undefined;

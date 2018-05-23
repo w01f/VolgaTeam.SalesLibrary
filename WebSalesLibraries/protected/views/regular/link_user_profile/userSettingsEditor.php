@@ -21,6 +21,16 @@
 				              <? if ($userProfile->powerPointSettings->isDefault()): ?>checked<? endif; ?>>Default</label>
 			</div>
 		</div>
+		<? if (Yii::app()->params['one_drive_links']['enabled']): ?>
+            <div class="col-xs-2 text-center">
+                <div class="checkbox">
+                    <label><input id="user-link-preferences-power-point-open-one-drive" class="log-action"
+                                  type="checkbox"
+					              <? if ($userProfile->powerPointSettings->forceOneDriveOpen == true): ?>checked<? endif; ?>>OneDrive
+                    </label>
+                </div>
+            </div>
+		<? endif; ?>
 		<div class="col-xs-3 text-center">
 			<div class="checkbox">
 				<label><input id="user-link-preferences-power-point-force-EO-open" class="log-action" type="checkbox"
@@ -39,6 +49,15 @@
 				              <? if ($userProfile->docSettings->isDefault()): ?>checked<? endif; ?>>Default</label>
 			</div>
 		</div>
+		<? if (Yii::app()->params['one_drive_links']['enabled']): ?>
+            <div class="col-xs-2 text-center">
+                <div class="checkbox">
+                    <label><input id="user-link-preferences-doc-open-one-drive" class="log-action" type="checkbox"
+					              <? if ($userProfile->docSettings->forceOneDriveOpen == true): ?>checked<? endif; ?>>OneDrive
+                    </label>
+                </div>
+            </div>
+		<? endif; ?>
 		<div class="col-xs-3 text-center">
 			<div class="checkbox">
 				<label><input id="user-link-preferences-doc-force-EO-open" class="log-action" type="checkbox"
@@ -57,6 +76,15 @@
 				              <? if ($userProfile->xlsSettings->isDefault()): ?>checked<? endif; ?>>Default</label>
 			</div>
 		</div>
+		<? if (Yii::app()->params['one_drive_links']['enabled']): ?>
+            <div class="col-xs-2 text-center">
+                <div class="checkbox">
+                    <label><input id="user-link-preferences-xls-open-one-drive" class="log-action" type="checkbox"
+					              <? if ($userProfile->xlsSettings->forceOneDriveOpen == true): ?>checked<? endif; ?>>OneDrive
+                    </label>
+                </div>
+            </div>
+		<? endif; ?>
 		<div class="col-xs-3 text-center">
 			<div class="checkbox">
 				<label><input id="user-link-preferences-xls-force-EO-open" class="log-action" type="checkbox"
@@ -64,10 +92,10 @@
 					Open</label>
 			</div>
 		</div>
-        <div class="col-xs-5 text-left">
+        <div class="col-xs-3 text-left">
             <div class="checkbox">
                 <label><input id="user-link-preferences-xls-force-open-gallery" class="log-action" type="checkbox"
-				              <? if ($userProfile->xlsSettings->forceOpenGallery == true): ?>checked<? endif; ?>>Open Preview (less than 10 mb)
+				              <? if ($userProfile->xlsSettings->forceOpenGallery == true): ?>checked<? endif; ?>>Preview (less 10 mb)
                 </label>
             </div>
         </div>
@@ -87,6 +115,15 @@
 				              <? if ($userProfile->pdfSettings->isDefault()): ?>checked<? endif; ?>>Default</label>
 			</div>
 		</div>
+		<? if (Yii::app()->params['one_drive_links']['enabled']): ?>
+            <div class="col-xs-2 text-center">
+                <div class="checkbox">
+                    <label><input id="user-link-preferences-pdf-open-one-drive" class="log-action" type="checkbox"
+					              <? if ($userProfile->pdfSettings->forceOneDriveOpen == true): ?>checked<? endif; ?>>OneDrive
+                    </label>
+                </div>
+            </div>
+		<? endif; ?>
 		<div class="col-xs-3 text-center">
 			<div class="checkbox">
 				<label><input id="user-link-preferences-pdf-force-EO-open" class="log-action" type="checkbox"
@@ -94,7 +131,7 @@
 					Open</label>
 			</div>
 		</div>
-		<div class="col-xs-5 text-left">
+		<div class="col-xs-3 text-left">
 			<div class="checkbox">
 				<label><input id="user-link-preferences-pdf-force-web-open" class="log-action" type="checkbox"
 				              <? if ($userProfile->pdfSettings->forceWebOpen == true): ?>checked<? endif; ?>>Open New
@@ -113,6 +150,15 @@
 				              <? if ($userProfile->imageSettings->isDefault()): ?>checked<? endif; ?>>Default</label>
 			</div>
 		</div>
+		<? if (Yii::app()->params['one_drive_links']['enabled']): ?>
+            <div class="col-xs-2 text-center">
+                <div class="checkbox">
+                    <label><input id="user-link-preferences-image-open-one-drive" class="log-action" type="checkbox"
+					              <? if ($userProfile->imageSettings->forceOneDriveOpen == true): ?>checked<? endif; ?>>OneDrive
+                    </label>
+                </div>
+            </div>
+		<? endif; ?>
 		<div class="col-xs-3 text-center">
 			<div class="checkbox">
 				<label><input id="user-link-preferences-image-force-EO-open" class="log-action" type="checkbox"
@@ -120,7 +166,7 @@
 					Open</label>
 			</div>
 		</div>
-		<div class="col-xs-5 text-left">
+		<div class="col-xs-3 text-left">
 			<div class="checkbox">
 				<label><input id="user-link-preferences-image-force-web-open" class="log-action" type="checkbox"
 				              <? if ($userProfile->imageSettings->forceWebOpen == true): ?>checked<? endif; ?>>Open New
@@ -134,7 +180,7 @@
 			<img src="<? echo Yii::app()->getBaseUrl(true) . '/images/popup-blocker-warning.png' ?>" style="height: 48px">
 		</div>
 		<div style="width: 100%;padding-left: 10px;">
-			<span style="color: red">You may need to ALLOW Pop-Ups to view PDFs or Images</span>
+			<span style="color: red">You may need to ALLOW Pop-Ups to view OneDrive links, PDFs or Images</span>
 			<br>
 			<span>Click <a
 					href="https://support.google.com/chrome/answer/95472?co=GENIE.Platform%3DDesktop&hl=en" target="_blank">HERE</a> to learn more</span>

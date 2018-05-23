@@ -54,62 +54,62 @@
 	<? endif; ?>
     <div id="masonry-grid-<? echo $contentBlock->id; ?>" class="cbp cbp-l-grid-masonry-projects">
 		<? foreach ($contentBlock->items as $masonryItem): ?>
-		<?
-			/** @var MasonryItem $masonryItem */
-			$itemStyle = '';
-			if (((isset($masonryItem->titleTextAppearance) && $masonryItem->titleTextAppearance->wrapText) || (isset($masonryItem->descriptionTextAppearance) && $masonryItem->descriptionTextAppearance->wrapText)) && $masonryItem->imageWidth > 0)
-				$itemStyle = sprintf('style="width: %spx;"', $masonryItem->imageWidth);
-		?>
-		<? if ($masonryItem->type === 'url'): ?>
-		<? /** @var MasonryUrl $masonryItem */ ?>
-        <a href="<? echo $masonryItem->url; ?>" <? if ($masonryItem->isMailTo !== false): ?>target="_self"
-		   <? else: ?>target="_blank"<? endif; ?>
-           class="cbp-item <? echo implode(' ', $masonryItem->filterTags); ?>" <? echo $itemStyle; ?>>
-			<? elseif ($masonryItem->type === 'shortcut'): ?>
-		<? /** @var MasonryShortcut $masonryItem */ ?>
-            <a href="<? echo isset($masonryItem->shortcut) ? $masonryItem->shortcut->getSourceLink() : '#'; ?>"
-               target="<? echo isset($masonryItem->shortcut) && !$masonryItem->shortcut->samePage ? '_blank' : '_self'; ?>"
-               class="cbp-item <? echo implode(' ', $masonryItem->filterTags); ?> shortcuts-link<? if (!isset($masonryItem->shortcut)): ?> disabled<? endif; ?>" <? echo $itemStyle; ?>>
-                <div class="service-data">
-					<? echo isset($masonryItem->shortcut) ? $masonryItem->shortcut->getMenuItemData() : '<div class="same-page"></div><div class="has-custom-handler"></div>'; ?>
-                </div>
-				<? endif; ?>
-                <div class="cbp-caption">
-                    <div class="cbp-caption-defaultWrap">
-                        <img src="<? echo $masonryItem->imagePath; ?>"
-                             style="<? if ($masonryItem->imageWidth > 0): ?>max-width:<? echo $masonryItem->imageWidth; ?>px;<? endif; ?><? if ($masonryItem->imageHeight > 0): ?> max-height:<? echo $masonryItem->imageHeight; ?>px;<? endif; ?>">
+            <?
+                /** @var MasonryItem $masonryItem */
+                $itemStyle = '';
+                if (((isset($masonryItem->titleTextAppearance) && $masonryItem->titleTextAppearance->wrapText) || (isset($masonryItem->descriptionTextAppearance) && $masonryItem->descriptionTextAppearance->wrapText)) && $masonryItem->imageWidth > 0)
+                    $itemStyle = sprintf('style="width: %spx;"', $masonryItem->imageWidth);
+            ?>
+            <? if ($masonryItem->type === 'url'): ?>
+                <? /** @var MasonryUrl $masonryItem */ ?>
+                <a href="<? echo $masonryItem->url; ?>" <? if ($masonryItem->isMailTo !== false): ?>target="_self"
+                   <? else: ?>target="_blank"<? endif; ?>
+                   class="cbp-item <? echo implode(' ', $masonryItem->filterTags); ?>" <? echo $itemStyle; ?>>
+            <? elseif ($masonryItem->type === 'shortcut'): ?>
+                <? /** @var MasonryShortcut $masonryItem */ ?>
+                <a href="<? echo isset($masonryItem->shortcut) ? $masonryItem->shortcut->getSourceLink() : '#'; ?>"
+                   target="<? echo isset($masonryItem->shortcut) && !$masonryItem->shortcut->samePage ? '_blank' : '_self'; ?>"
+                   class="cbp-item <? echo implode(' ', $masonryItem->filterTags); ?> shortcuts-link<? if (!isset($masonryItem->shortcut)): ?> disabled<? endif; ?>" <? echo $itemStyle; ?>>
+                    <div class="service-data">
+                        <? echo isset($masonryItem->shortcut) ? $masonryItem->shortcut->getMenuItemData() : '<div class="same-page"></div><div class="has-custom-handler"></div>'; ?>
                     </div>
-                </div>
-                <div style="<? echo $this->renderPartial('../shortcuts/landingPageMarkup/style/stylePadding', array('padding' => $contentBlock->viewSettings->textPadding), true); ?>">
-					<? if (!empty($masonryItem->title)): ?>
-						<?
-						$itemTitleId = sprintf("masonry-item-title-%s", $masonryItem->id);
-						echo $this->renderPartial('landingPageMarkup/style/styleTextAppearance',
-							array(
-								'textAppearance' => $masonryItem->titleTextAppearance,
-								'blockId' => $itemTitleId
-							)
-							, true);
-						?>
-                        <div id="<? echo $itemTitleId; ?>"
-                             class="cbp-l-grid-masonry-projects-title"><? echo $masonryItem->title; ?></div>
-					<? endif; ?>
-					<? if (!empty($masonryItem->description)): ?>
-						<?
-						$itemDescriptionId = sprintf("masonry-item-description-%s", $masonryItem->id);
-						echo $this->renderPartial('landingPageMarkup/style/styleTextAppearance',
-							array(
-								'textAppearance' => $masonryItem->descriptionTextAppearance,
-								'blockId' => $itemDescriptionId
-							)
-							, true);
-						?>
-                        <div id="<? echo $itemDescriptionId; ?>"
-                             class="cbp-l-grid-masonry-projects-desc"><? echo $masonryItem->description; ?></div>
-					<? endif; ?>
-                </div>
-            </a>
-			<? endforeach; ?>
+            <? endif; ?>
+                    <div class="cbp-caption">
+                        <div class="cbp-caption-defaultWrap">
+                            <img src="<? echo $masonryItem->imagePath; ?>"
+                                 style="<? if ($masonryItem->imageWidth > 0): ?>max-width:<? echo $masonryItem->imageWidth; ?>px;<? endif; ?><? if ($masonryItem->imageHeight > 0): ?> max-height:<? echo $masonryItem->imageHeight; ?>px;<? endif; ?>">
+                        </div>
+                    </div>
+                    <div style="<? echo $this->renderPartial('../shortcuts/landingPageMarkup/style/stylePadding', array('padding' => $contentBlock->viewSettings->textPadding), true); ?>">
+                        <? if (!empty($masonryItem->title)): ?>
+                            <?
+                            $itemTitleId = sprintf("masonry-item-title-%s", $masonryItem->id);
+                            echo $this->renderPartial('landingPageMarkup/style/styleTextAppearance',
+                                array(
+                                    'textAppearance' => $masonryItem->titleTextAppearance,
+                                    'blockId' => $itemTitleId
+                                )
+                                , true);
+                            ?>
+                            <div id="<? echo $itemTitleId; ?>"
+                                 class="cbp-l-grid-masonry-projects-title"><? echo $masonryItem->title; ?></div>
+                        <? endif; ?>
+                        <? if (!empty($masonryItem->description)): ?>
+                            <?
+                            $itemDescriptionId = sprintf("masonry-item-description-%s", $masonryItem->id);
+                            echo $this->renderPartial('landingPageMarkup/style/styleTextAppearance',
+                                array(
+                                    'textAppearance' => $masonryItem->descriptionTextAppearance,
+                                    'blockId' => $itemDescriptionId
+                                )
+                                , true);
+                            ?>
+                            <div id="<? echo $itemDescriptionId; ?>"
+                                 class="cbp-l-grid-masonry-projects-desc"><? echo $masonryItem->description; ?></div>
+                        <? endif; ?>
+                    </div>
+                </a>
+        <? endforeach; ?>
     </div>
 </div>
 

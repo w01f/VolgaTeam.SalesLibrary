@@ -7,6 +7,7 @@
 	{
 		public $forceWebOpen;
 		public $forceEOOpen;
+		public $forceOneDriveOpen;
 		public $forceOpenGallery;
 
 		/**
@@ -27,6 +28,9 @@
 					case 'forceWebOpen':
 						$linkSettings->forceWebOpen = $value;
 						break;
+					case 'forceOneDriveOpen':
+						$linkSettings->forceOneDriveOpen = $value;
+						break;
 					case 'forceOpenGallery':
 						$linkSettings->forceOpenGallery = $value;
 						break;
@@ -43,6 +47,7 @@
 			$linkSettings = new LinkUserSettings();
 			$linkSettings->forceWebOpen = false;
 			$linkSettings->forceEOOpen = false;
+			$linkSettings->forceOneDriveOpen = false;
 			$linkSettings->forceOpenGallery = false;
 			return $linkSettings;
 		}
@@ -52,6 +57,6 @@
 		 */
 		public function isDefault()
 		{
-			return !($this->forceEOOpen || $this->forceWebOpen || $this->forceOpenGallery);
+			return !($this->forceEOOpen || $this->forceWebOpen || $this->forceOneDriveOpen || $this->forceOpenGallery);
 		}
 	}

@@ -78,9 +78,14 @@
 ?>
 <style>
 	<?if($viewSettings->maxImageHeight>0):?>
-	#horizontal-feed-carousel-<? echo $feedId; ?> .portfolio_utube_item_image > img {
-		max-height: <?echo $viewSettings->maxImageHeight;?>px;
-	}
+        #horizontal-feed-carousel-<? echo $feedId; ?> .portfolio_utube_item_image {
+            text-align: center;
+        }
+        #horizontal-feed-carousel-<? echo $feedId; ?> .portfolio_utube_item_image > img {
+            max-height: <?echo $viewSettings->maxImageHeight;?>px;
+            max-width: 100%;
+            width: auto;
+        }
 	<?endif;?>
 
     #horizontal-feed-carousel-<? echo $feedId; ?> {

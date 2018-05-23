@@ -66,26 +66,31 @@
 									powerPointSettings: {
 										forceEOOpen: content.find('#user-link-preferences-power-point-force-EO-open').prop('checked'),
 										forceWebOpen: false,
+										forceOneDriveOpen: content.find('#user-link-preferences-power-point-open-one-drive').prop('checked'),
 										forceOpenGallery: false
 									},
 									docSettings: {
 										forceEOOpen: content.find('#user-link-preferences-doc-force-EO-open').prop('checked'),
 										forceWebOpen: false,
+										forceOneDriveOpen: content.find('#user-link-preferences-doc-open-one-drive').prop('checked'),
 										forceOpenGallery: false
 									},
 									xlsSettings: {
 										forceEOOpen: content.find('#user-link-preferences-xls-force-EO-open').prop('checked'),
 										forceWebOpen: false,
+										forceOneDriveOpen: content.find('#user-link-preferences-xls-open-one-drive').prop('checked'),
 										forceOpenGallery: content.find('#user-link-preferences-xls-force-open-gallery').prop('checked')
 									},
 									pdfSettings: {
 										forceEOOpen: content.find('#user-link-preferences-pdf-force-EO-open').prop('checked'),
 										forceWebOpen: content.find('#user-link-preferences-pdf-force-web-open').prop('checked'),
+										forceOneDriveOpen: content.find('#user-link-preferences-pdf-open-one-drive').prop('checked'),
 										forceOpenGallery: false
 									},
 									imageSettings: {
 										forceEOOpen: content.find('#user-link-preferences-image-force-EO-open').prop('checked'),
 										forceWebOpen: content.find('#user-link-preferences-image-force-web-open').prop('checked'),
+										forceOneDriveOpen: content.find('#user-link-preferences-image-open-one-drive').prop('checked'),
 										forceOpenGallery: false
 									}
 								})
@@ -103,7 +108,7 @@
 
 					$.fancybox({
 						content: content,
-						width: 750,
+						width: 850,
 						autoSize: false,
 						autoHeight: true,
 						openEffect: 'none',
@@ -125,7 +130,12 @@
 
 		var updateWarningVisibility = function ()
 		{
-			if (content.find('#user-link-preferences-pdf-force-web-open').prop('checked') ||
+			if (content.find('#user-link-preferences-power-point-open-one-drive').prop('checked') ||
+				content.find('#user-link-preferences-doc-open-one-drive').prop('checked') ||
+				content.find('#user-link-preferences-xls-open-one-drive').prop('checked') ||
+				content.find('#user-link-preferences-pdf-open-one-drive').prop('checked') ||
+				content.find('#user-link-preferences-image-open-one-drive').prop('checked') ||
+				content.find('#user-link-preferences-pdf-force-web-open').prop('checked') ||
 				content.find('#user-link-preferences-image-force-web-open').prop('checked'))
 				content.find('.popup-blocker-warning').show();
 			else

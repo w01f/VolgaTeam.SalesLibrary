@@ -1,13 +1,10 @@
-(function ($)
-{
+(function ($) {
 	window.BaseUrl = window.BaseUrl || '';
 	$.SalesPortal = $.SalesPortal || {};
-	var LinkManager = function ()
-	{
+	var LinkManager = function () {
 		var that = this;
 
-		this.requestViewDialog = function (requestData)
-		{
+		this.requestViewDialog = function (requestData) {
 			if (requestData === undefined)
 				requestData = {
 					linkId: undefined,
@@ -27,12 +24,10 @@
 					isQuickSite: requestData.isQuickSite,
 					screenSettings: $.SalesPortal.ScreenManager.getScreenSettings()
 				},
-				beforeSend: function ()
-				{
+				beforeSend: function () {
 					$.SalesPortal.Overlay.show();
 				},
-				success: function (parameters)
-				{
+				success: function (parameters) {
 					$.SalesPortal.Overlay.hide();
 
 					var previewParameters = parameters;
@@ -53,16 +48,14 @@
 
 					that.openViewerDialog(previewParameters)
 				},
-				error: function ()
-				{
+				error: function () {
 				},
 				async: true,
 				dataType: 'json'
 			});
 		};
 
-		this.openViewerDialog = function (previewParameters)
-		{
+		this.openViewerDialog = function (previewParameters) {
 			var openedViewer = undefined;
 			if (previewParameters.data.config.allowPreview)
 			{
@@ -124,8 +117,7 @@
 							tag: 'close',
 							title: 'Close',
 							width: 80,
-							clickHandler: function ()
-							{
+							clickHandler: function () {
 								modalDialog.close();
 							}
 						}
@@ -139,8 +131,7 @@
 				previewParameters.afterViewerOpenedCallback(openedViewer);
 		};
 
-		this.requestLinkContextMenu = function (linkId, isQuickSite, pointX, pointY)
-		{
+		this.requestLinkContextMenu = function (linkId, isQuickSite, pointX, pointY) {
 			that.cleanupContextMenu();
 			$.ajax({
 				type: "POST",
@@ -149,16 +140,13 @@
 					linkId: linkId,
 					isQuickSite: isQuickSite
 				},
-				beforeSend: function ()
-				{
+				beforeSend: function () {
 					$.SalesPortal.Overlay.show();
 				},
-				complete: function ()
-				{
+				complete: function () {
 					$.SalesPortal.Overlay.hide();
 				},
-				success: function (parameters)
-				{
+				success: function (parameters) {
 					if (parameters.data.config.allowPreview)
 					{
 						if (parameters.data.config.enableLogging)
@@ -199,8 +187,7 @@
 									top: getMenuPosition(menu, pointY, 'height', 'scrollTop')
 								})
 								.off('click')
-								.on('click', 'a.regular-open', function ()
-								{
+								.on('click', 'a.regular-open', function () {
 									menu.hide();
 									var tag = $(this).find('.service-data .tag').text();
 									switch (tag)
@@ -245,6 +232,12 @@
 										case 'rate':
 											that.requestRateDialog(parameters.data.linkId);
 											break;
+										case 'one-drive-open':
+											that.openFile(parameters.data.oneDriveUrl, "_blank");
+											break;
+										case 'one-drive-email':
+											that.openFile("mailto:?body=" + parameters.data.oneDriveUrl, "_self");
+											break;
 									}
 								});
 						}
@@ -259,8 +252,7 @@
 									tag: 'close',
 									title: 'Close',
 									width: 80,
-									clickHandler: function ()
-									{
+									clickHandler: function () {
 										modalDialog.close();
 									}
 								}
@@ -270,32 +262,27 @@
 						modalDialog.show();
 					}
 				},
-				error: function ()
-				{
+				error: function () {
 				},
 				async: true,
 				dataType: 'json'
 			});
 		};
 
-		this.requestRateDialog = function (linkId, afterClose)
-		{
+		this.requestRateDialog = function (linkId, afterClose) {
 			$.ajax({
 				type: "POST",
 				url: window.BaseUrl + "preview/getRateDialog",
 				data: {
 					linkId: linkId
 				},
-				beforeSend: function ()
-				{
+				beforeSend: function () {
 					$.SalesPortal.Overlay.show();
 				},
-				complete: function ()
-				{
+				complete: function () {
 					$.SalesPortal.Overlay.hide();
 				},
-				success: function (parameters)
-				{
+				success: function (parameters) {
 					if (parameters.data.config.allowPreview && parameters.data.config.enableRating)
 					{
 						if (parameters.data.config.enableLogging)
@@ -316,8 +303,7 @@
 							autoSize: true,
 							openEffect: 'none',
 							closeEffect: 'none',
-							afterShow: function ()
-							{
+							afterShow: function () {
 								var dialogContent = $('.fancybox-wrap');
 
 								new $.SalesPortal.RateManager().init(
@@ -343,8 +329,7 @@
 									tag: 'close',
 									title: 'Close',
 									width: 80,
-									clickHandler: function ()
-									{
+									clickHandler: function () {
 										modalDialog.close();
 									}
 								}
@@ -354,16 +339,14 @@
 						modalDialog.show();
 					}
 				},
-				error: function ()
-				{
+				error: function () {
 				},
 				async: true,
 				dataType: 'json'
 			});
 		};
 
-		this.requestEmailDialog = function (linkId)
-		{
+		this.requestEmailDialog = function (linkId) {
 			that.cleanupContextMenu();
 			$.ajax({
 				type: "POST",
@@ -371,16 +354,13 @@
 				data: {
 					linkId: linkId
 				},
-				beforeSend: function ()
-				{
+				beforeSend: function () {
 					$.SalesPortal.Overlay.show();
 				},
-				complete: function ()
-				{
+				complete: function () {
 					$.SalesPortal.Overlay.hide();
 				},
-				success: function (parameters)
-				{
+				success: function (parameters) {
 					var viewerData = new $.SalesPortal.SimpleViewerData(parameters.data);
 					$.fancybox({
 						content: parameters.content,
@@ -390,8 +370,7 @@
 						autoHeight: true,
 						openEffect: 'none',
 						closeEffect: 'none',
-						afterShow: function ()
-						{
+						afterShow: function () {
 							var dialogContent = $('.fancybox-wrap');
 
 							if (parameters.data.config.enableLogging)
@@ -412,8 +391,7 @@
 							dialogContent.find('#link-viewer-body-tabs li').first().addClass('active');
 							dialogContent.find('.tab-content .tab-pane').first().addClass('active');
 
-							dialogContent.find('#link-viewer-body-tabs a[data-toggle="tab"]').on('shown.bs.tab', function (e)
-							{
+							dialogContent.find('#link-viewer-body-tabs a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 								dialogContent.find('.tab-above-header').removeClass('active');
 								var tabTag = e.target.attributes['href'].value.replace("#link-viewer-tab-", "");
 								dialogContent.find('#tab-above-header-' + tabTag).addClass('active');
@@ -424,21 +402,19 @@
 						}
 					});
 				},
-				error: function ()
-				{
+				error: function () {
 				},
 				async: true,
 				dataType: 'json'
 			});
 		};
 
-		this.openFile = function (url)
+		this.openFile = function (url, target)
 		{
-			window.open(url.replace(/&amp;/g, '%26'));
+			window.open(url.replace(/&amp;/g, '%26'), target);
 		};
 
-		this.downloadFile = function (fileData)
-		{
+		this.downloadFile = function (fileData) {
 			var form = document.getElementById('form-download-file');
 			if (form === null)
 			{
@@ -460,24 +436,20 @@
 		};
 
 		var favoritesDialogObject = [];
-		this.addToFavorites = function (linkId, title, fileName, fileType)
-		{
+		this.addToFavorites = function (linkId, title, fileName, fileType) {
 			$.ajax({
 				type: "POST",
 				url: window.BaseUrl + "favorites/addLinkDialog",
 				data: {
 					linkId: linkId
 				},
-				beforeSend: function ()
-				{
+				beforeSend: function () {
 					$.SalesPortal.Overlay.show();
 				},
-				complete: function ()
-				{
+				complete: function () {
 					$.SalesPortal.Overlay.hide();
 				},
-				success: function (msg)
-				{
+				success: function (msg) {
 					favoritesDialogObject.content = $(msg);
 
 					$.SalesPortal.LogHelper.write({
@@ -504,24 +476,20 @@
 
 					favoritesDialogObject.mainView = favoritesDialogObject.content.find('.main-view');
 					favoritesDialogObject.mainView.find('.dropdown .dropdown-toggle').dropdown();
-					favoritesDialogObject.mainView.find('#show-folder-selector').on('click', function ()
-					{
+					favoritesDialogObject.mainView.find('#show-folder-selector').on('click', function () {
 						if (!$(this).hasClass('disabled'))
 						{
 							favoritesDialogObject.mainView.hide();
 							favoritesDialogObject.folderSelector.show();
 						}
 					});
-					favoritesDialogObject.mainView.find('#clear-folder').on('click', function ()
-					{
+					favoritesDialogObject.mainView.find('#clear-folder').on('click', function () {
 						favoritesDialogObject.mainView.find('#favorites-folder-name').val('');
 					});
-					favoritesDialogObject.mainView.find('.btn.cancel-button').on('click', function ()
-					{
+					favoritesDialogObject.mainView.find('.btn.cancel-button').on('click', function () {
 						$.fancybox.close();
 					});
-					favoritesDialogObject.mainView.find('.btn.accept-button').on('click', function ()
-					{
+					favoritesDialogObject.mainView.find('.btn.accept-button').on('click', function () {
 						$.fancybox.close();
 						$.ajax({
 							type: "POST",
@@ -531,16 +499,13 @@
 								linkName: favoritesDialogObject.mainView.find('#favorites-link-name').val(),
 								folderName: favoritesDialogObject.mainView.find('#favorites-folder-name').val()
 							},
-							beforeSend: function ()
-							{
+							beforeSend: function () {
 								$.SalesPortal.Overlay.show();
 							},
-							complete: function ()
-							{
+							complete: function () {
 								$.SalesPortal.Overlay.hide();
 							},
-							success: function ()
-							{
+							success: function () {
 								var modalDialog = new $.SalesPortal.ModalDialog({
 									title: 'SUCCESS!',
 									description: fileName + ' was saved to your favorites...',
@@ -549,8 +514,7 @@
 											tag: 'open_favorites',
 											title: 'Open Favorites',
 											width: 150,
-											clickHandler: function ()
-											{
+											clickHandler: function () {
 												modalDialog.close();
 												$.SalesPortal.ShortcutsManager.openStaticShortcutByType('favorites');
 											}
@@ -559,8 +523,7 @@
 											tag: 'close',
 											title: 'Return to Site',
 											width: 150,
-											clickHandler: function ()
-											{
+											clickHandler: function () {
 												modalDialog.close();
 											}
 										}
@@ -569,8 +532,7 @@
 								});
 								modalDialog.show();
 							},
-							error: function ()
-							{
+							error: function () {
 							},
 							async: true,
 							dataType: 'html'
@@ -578,25 +540,21 @@
 					});
 
 					favoritesDialogObject.folderSelector = favoritesDialogObject.content.find('.folder-selector');
-					favoritesDialogObject.folderSelector.find('.btn.cancel-button').on('click', function ()
-					{
+					favoritesDialogObject.folderSelector.find('.btn.cancel-button').on('click', function () {
 						favoritesDialogObject.folderSelector.hide();
 						favoritesDialogObject.mainView.show();
 					});
-					favoritesDialogObject.folderSelector.find('.btn.accept-button').on('click', function ()
-					{
+					favoritesDialogObject.folderSelector.find('.btn.accept-button').on('click', function () {
 						favoritesDialogObject.mainView.find('#favorites-folder-name').val(favoritesDialogObject.folderSelector.find('li.active').find('a').html());
 						favoritesDialogObject.folderSelector.hide();
 						favoritesDialogObject.mainView.show();
 					});
 					favoritesDialogObject.folderSelector.find('li')
-						.on('click', function ()
-						{
+						.on('click', function () {
 							favoritesDialogObject.folderSelector.find('li').removeClass('active');
 							$(this).addClass('active');
 						})
-						.on('dblclick', function ()
-						{
+						.on('dblclick', function () {
 							favoritesDialogObject.folderSelector.find('li').removeClass('active');
 							$(this).addClass('active');
 							favoritesDialogObject.folderSelector.find('.btn.accept-button').click();
@@ -612,16 +570,14 @@
 						closeEffect: 'none'
 					});
 				},
-				error: function ()
-				{
+				error: function () {
 				},
 				async: true,
 				dataType: 'html'
 			});
 		};
 
-		this.playVideo = function (links, viewerBar, callbackAfterShow, callbackAfterClose)
-		{
+		this.playVideo = function (links, viewerBar, callbackAfterShow, callbackAfterClose) {
 			$.fancybox({
 				title: links[0].title,
 				content: $('<video controls autoplay preload="auto"' +
@@ -631,14 +587,12 @@
 					'</video>'),
 				openEffect: 'none',
 				closeEffect: 'none',
-				afterShow: function ()
-				{
+				afterShow: function () {
 					$('.fancybox-wrap').addClass('content-boxed');
 					if (callbackAfterShow !== undefined)
 						callbackAfterShow();
 				},
-				afterClose: function ()
-				{
+				afterClose: function () {
 					if (viewerBar !== undefined)
 						viewerBar.close();
 					$('#video-player').remove();
@@ -648,8 +602,7 @@
 			});
 		};
 
-		this.playYouTube = function (title, youTubeId)
-		{
+		this.playYouTube = function (title, youTubeId) {
 			$.fancybox({
 				title: title,
 				content: '<iframe ' +
@@ -658,15 +611,13 @@
 				'</iframe>',
 				openEffect: 'none',
 				closeEffect: 'none',
-				afterShow: function ()
-				{
+				afterShow: function () {
 					$('.fancybox-wrap').addClass('content-boxed');
 				}
 			});
 		};
 
-		this.playVimeo = function (title, playerUrl)
-		{
+		this.playVimeo = function (title, playerUrl) {
 			$.fancybox({
 				title: title,
 				content: '<iframe ' +
@@ -675,20 +626,18 @@
 				'</iframe>',
 				openEffect: 'none',
 				closeEffect: 'none',
-				afterShow: function ()
-				{
+				afterShow: function () {
 					$('.fancybox-wrap').addClass('content-boxed');
 				}
 			});
 		};
 
-		this.cleanupContextMenu = function ()
-		{
+		this.cleanupContextMenu = function () {
 			var body = $('body');
 			body.find('.context-menu-content').remove();
 		};
 
-		this.copyTextToClipboard = function(text){
+		this.copyTextToClipboard = function (text) {
 			var $temp = $("<input>");
 			$("body").append($temp);
 			$temp.val(text).select();
@@ -696,8 +645,7 @@
 			$temp.remove();
 		};
 
-		var getMenuPosition = function (menuObject, mouse, direction, scrollDir)
-		{
+		var getMenuPosition = function (menuObject, mouse, direction, scrollDir) {
 			var win = $(window)[direction](),
 				scroll = $(window)[scrollDir](),
 				menu = menuObject[direction](),
@@ -714,15 +662,12 @@
 
 	$.SalesPortal.LinkManager = new LinkManager();
 
-	$(document).one('ready', function ()
-	{
+	$(document).one('ready', function () {
 		$('body')
-			.on('click', function ()
-			{
+			.on('click', function () {
 				$.SalesPortal.LinkManager.cleanupContextMenu();
 			})
-			.on('contextmenu', function ()
-			{
+			.on('contextmenu', function () {
 				$.SalesPortal.LinkManager.cleanupContextMenu();
 			});
 	});

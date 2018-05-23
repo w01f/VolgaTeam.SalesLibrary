@@ -36,7 +36,7 @@
 
 		var open = function ()
 		{
-			$.SalesPortal.LinkManager.openFile(viewerData.url, "_self");
+			$.SalesPortal.LinkManager.openFile(viewerData.url, "_blank");
 		};
 
 		var processAction = function ()

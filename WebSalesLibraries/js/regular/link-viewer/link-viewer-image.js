@@ -19,6 +19,8 @@
 				downloadFile();
 			else if (viewerData.config.forceWebOpen == true)
 				open();
+			else if (viewerData.config.forceOpenOneDrive == true)
+				openOneDrive();
 			else
 			{
 				if (parameters.viewContainer === undefined)
@@ -157,7 +159,12 @@
 
 		var open = function ()
 		{
-			$.SalesPortal.LinkManager.openFile(viewerData.url, "_self");
+			$.SalesPortal.LinkManager.openFile(viewerData.url);
+		};
+
+		var openOneDrive = function ()
+		{
+			$.SalesPortal.LinkManager.openFile(viewerData.oneDriveUrl);
 		};
 
 		var addToQuickSite = function ()

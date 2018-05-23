@@ -19,6 +19,8 @@
 				download();
 			else if (viewerData.config.forceOpenGallery == true)
 				viewExcel();
+			else if (viewerData.config.forceOpenOneDrive == true)
+				openOneDrive();
 			else
 			{
 				if (parameters.viewContainer === undefined)
@@ -131,6 +133,11 @@
 			{
 				$('.fancybox-title .child .text-left').html(title);
 			}
+		};
+
+		var openOneDrive = function ()
+		{
+			$.SalesPortal.LinkManager.openFile(viewerData.oneDriveUrl, "_blank");
 		};
 
 		var download = function ()

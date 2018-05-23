@@ -106,6 +106,13 @@
 			$action->text = 'Open this Link';
 			$this->contextActions[] = $action;
 
+			if (Yii::app()->params['one_drive_links']['enabled'] && !empty($this->oneDriveUrl))
+			{
+				$action = new PreviewAction();
+				$action->tag = 'one-drive-open';
+				$action->text = 'Open OneDrive Link';
+				$this->contextActions[] = $action;
+			}
 			if ($this->config->allowDownload)
 			{
 				$action = new PreviewAction();
@@ -128,6 +135,13 @@
 				$action = new PreviewAction();
 				$action->tag = 'quicksite';
 				$action->text = 'Email this Link';
+				$this->contextActions[] = $action;
+			}
+			if (Yii::app()->params['one_drive_links']['enabled'] && !empty($this->oneDriveUrl))
+			{
+				$action = new PreviewAction();
+				$action->tag = 'one-drive-email';
+				$action->text = 'Email OneDrive Link';
 				$this->contextActions[] = $action;
 			}
 			if ($this->config->allowAddToFavorites)
