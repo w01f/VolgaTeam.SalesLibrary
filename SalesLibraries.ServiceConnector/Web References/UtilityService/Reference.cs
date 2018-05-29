@@ -23,7 +23,7 @@ namespace SalesLibraries.ServiceConnector.UtilityService {
     
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="UtilityControllerBinding", Namespace="urn:UtilityControllerwsdl")]
@@ -36,6 +36,8 @@ namespace SalesLibraries.ServiceConnector.UtilityService {
         private System.Threading.SendOrPostCallback updateQuizzesOperationCompleted;
         
         private System.Threading.SendOrPostCallback resetOpCacheOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback resetQueryDataCacheOperationCompleted;
         
         private System.Threading.SendOrPostCallback getSessionKeyOperationCompleted;
         
@@ -88,6 +90,9 @@ namespace SalesLibraries.ServiceConnector.UtilityService {
         
         /// <remarks/>
         public event resetOpCacheCompletedEventHandler resetOpCacheCompleted;
+        
+        /// <remarks/>
+        public event resetQueryDataCacheCompletedEventHandler resetQueryDataCacheCompleted;
         
         /// <remarks/>
         public event getSessionKeyCompletedEventHandler getSessionKeyCompleted;
@@ -213,6 +218,36 @@ namespace SalesLibraries.ServiceConnector.UtilityService {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:UtilityControllerwsdl#resetQueryDataCache", RequestNamespace="urn:UtilityControllerwsdl", ResponseNamespace="urn:UtilityControllerwsdl")]
+        [return: System.Xml.Serialization.SoapElementAttribute("return")]
+        public string resetQueryDataCache(string sessionKey) {
+            object[] results = this.Invoke("resetQueryDataCache", new object[] {
+                        sessionKey});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void resetQueryDataCacheAsync(string sessionKey) {
+            this.resetQueryDataCacheAsync(sessionKey, null);
+        }
+        
+        /// <remarks/>
+        public void resetQueryDataCacheAsync(string sessionKey, object userState) {
+            if ((this.resetQueryDataCacheOperationCompleted == null)) {
+                this.resetQueryDataCacheOperationCompleted = new System.Threading.SendOrPostCallback(this.OnresetQueryDataCacheOperationCompleted);
+            }
+            this.InvokeAsync("resetQueryDataCache", new object[] {
+                        sessionKey}, this.resetQueryDataCacheOperationCompleted, userState);
+        }
+        
+        private void OnresetQueryDataCacheOperationCompleted(object arg) {
+            if ((this.resetQueryDataCacheCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.resetQueryDataCacheCompleted(this, new resetQueryDataCacheCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:UtilityControllerwsdl#getSessionKey", RequestNamespace="urn:UtilityControllerwsdl", ResponseNamespace="urn:UtilityControllerwsdl")]
         [return: System.Xml.Serialization.SoapElementAttribute("return")]
         public string getSessionKey(string login, string password) {
@@ -264,11 +299,11 @@ namespace SalesLibraries.ServiceConnector.UtilityService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void updateWallbinCompletedEventHandler(object sender, updateWallbinCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class updateWallbinCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -290,11 +325,11 @@ namespace SalesLibraries.ServiceConnector.UtilityService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void updateShortcutsCompletedEventHandler(object sender, updateShortcutsCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class updateShortcutsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -316,11 +351,11 @@ namespace SalesLibraries.ServiceConnector.UtilityService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void updateQuizzesCompletedEventHandler(object sender, updateQuizzesCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class updateQuizzesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -342,11 +377,11 @@ namespace SalesLibraries.ServiceConnector.UtilityService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void resetOpCacheCompletedEventHandler(object sender, resetOpCacheCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class resetOpCacheCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -368,11 +403,37 @@ namespace SalesLibraries.ServiceConnector.UtilityService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    public delegate void resetQueryDataCacheCompletedEventHandler(object sender, resetQueryDataCacheCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class resetQueryDataCacheCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal resetQueryDataCacheCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void getSessionKeyCompletedEventHandler(object sender, getSessionKeyCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class getSessionKeyCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {

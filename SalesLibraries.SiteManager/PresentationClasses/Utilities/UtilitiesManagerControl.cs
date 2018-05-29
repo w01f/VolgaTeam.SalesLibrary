@@ -124,5 +124,31 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Utilities
 			if (!String.IsNullOrEmpty(message))
 				memoEditResult.EditValue = message.Replace("\n", "\r\n");
 		}
+
+		private void simpleButtonResetQueryDataCache_Click(object sender, EventArgs e)
+		{
+			string message = string.Empty;
+			memoEditResult.EditValue = null;
+			using (var form = new FormProgress())
+			{
+				FormMain.Instance.ribbonControl.Enabled = false;
+				Enabled = false;
+				form.laProgress.Text = "Resetting Snapshots...";
+				form.TopMost = true;
+				var thread = new Thread(() => WebSiteManager.Instance.SelectedSite.ResetQueruyDataCache(out message));
+				form.Show();
+				thread.Start();
+				while (thread.IsAlive)
+				{
+					Thread.Sleep(100);
+					Application.DoEvents();
+				}
+				form.Close();
+				Enabled = true;
+				FormMain.Instance.ribbonControl.Enabled = true;
+			}
+			if (!String.IsNullOrEmpty(message))
+				memoEditResult.EditValue = message.Replace("\n", "\r\n");
+		}
 	}
 }

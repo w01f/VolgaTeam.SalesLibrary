@@ -10,6 +10,7 @@ namespace SalesLibraries.ServiceConnector.Services.Soap
 			try
 			{
 				var client = new UtilityControllerService();
+				client.Timeout = 6000000;
 				client.Url = String.Format("{0}/utility/quote?ws=1", Website);
 				return client;
 			}
@@ -85,6 +86,25 @@ namespace SalesLibraries.ServiceConnector.Services.Soap
 				{
 					var sessionKey = client.getSessionKey(Login, Password);
 					message = !string.IsNullOrEmpty(sessionKey) ? client.resetOpCache(sessionKey) : "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+		}
+
+		public void ResetQueruyDataCache(out string message)
+		{
+			var client = GetUtilityClient();
+			if (client != null)
+			{
+				try
+				{
+					var sessionKey = client.getSessionKey(Login, Password);
+					message = !string.IsNullOrEmpty(sessionKey) ? client.resetQueryDataCache(sessionKey) : "Couldn't complete operation.\nLogin or password are not correct.";
 				}
 				catch (Exception ex)
 				{

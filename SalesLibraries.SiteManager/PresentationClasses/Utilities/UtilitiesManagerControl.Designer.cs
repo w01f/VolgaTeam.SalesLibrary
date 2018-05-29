@@ -37,6 +37,7 @@
 			this.buttonXUpdateQuizzes = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXUpdateShorcuts = new DevComponents.DotNetBar.ButtonX();
 			this.memoEditResult = new DevExpress.XtraEditors.MemoEdit();
+			this.buttonXResetQueryDataCache = new DevComponents.DotNetBar.ButtonX();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).BeginInit();
 			this.splitContainerControl.SuspendLayout();
@@ -76,6 +77,7 @@
 			// 
 			// pnUtilityOperations
 			// 
+			this.pnUtilityOperations.Controls.Add(this.buttonXResetQueryDataCache);
 			this.pnUtilityOperations.Controls.Add(this.buttonXResetOpCache);
 			this.pnUtilityOperations.Controls.Add(this.buttonXUpdateContent);
 			this.pnUtilityOperations.Controls.Add(this.buttonXUpdateQuizzes);
@@ -160,6 +162,21 @@
 			this.memoEditResult.Size = new System.Drawing.Size(676, 483);
 			this.memoEditResult.TabIndex = 0;
 			// 
+			// buttonXResetQueryDataCache
+			// 
+			this.buttonXResetQueryDataCache.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXResetQueryDataCache.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXResetQueryDataCache.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXResetQueryDataCache.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.buttonXResetQueryDataCache.Location = new System.Drawing.Point(12, 303);
+			this.buttonXResetQueryDataCache.Name = "buttonXResetQueryDataCache";
+			this.buttonXResetQueryDataCache.Size = new System.Drawing.Size(205, 41);
+			this.buttonXResetQueryDataCache.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXResetQueryDataCache.TabIndex = 11;
+			this.buttonXResetQueryDataCache.Text = "Reset Snapshots";
+			this.buttonXResetQueryDataCache.Click += new System.EventHandler(this.simpleButtonResetQueryDataCache_Click);
+			// 
 			// UtilitiesManagerControl
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -189,5 +206,6 @@
 		private DevComponents.DotNetBar.ButtonX buttonXUpdateShorcuts;
 		private DevComponents.DotNetBar.ButtonX buttonXUpdateQuizzes;
 		private DevComponents.DotNetBar.ButtonX buttonXResetOpCache;
+		private DevComponents.DotNetBar.ButtonX buttonXResetQueryDataCache;
 	}
 }
