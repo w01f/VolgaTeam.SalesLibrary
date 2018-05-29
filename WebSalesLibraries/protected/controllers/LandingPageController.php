@@ -1,5 +1,6 @@
 <?
 
+	use application\models\data_query\conditions\QueryCacheSettings;
 	use application\models\data_query\link_feed\LinkFeedQueryHelper;
 	use application\models\data_query\link_feed\LinkFeedQuerySettings;
 	use application\models\feeds\horizontal\FeedSettings as HorizontalFeedSettings;
@@ -26,6 +27,8 @@
 			if (!empty($feedType) && isset($querySettingsEncoded))
 			{
 				$querySettings = LinkFeedQuerySettings::fromJson($feedType, CJSON::encode($querySettingsEncoded));
+				$querySettings->cacheSettings = new QueryCacheSettings();
+
 				$feedItems = LinkFeedQueryHelper::queryFeedItems($querySettings);
 			}
 
@@ -48,6 +51,8 @@
 			if (isset($feedType) && isset($querySettingsEncoded))
 			{
 				$querySettings = LinkFeedQuerySettings::fromJson($feedType, CJSON::encode($querySettingsEncoded));
+				$querySettings->cacheSettings = new QueryCacheSettings();
+
 				$feedItems = LinkFeedQueryHelper::queryFeedItems($querySettings);
 			}
 
@@ -71,6 +76,8 @@
 			if (isset($feedType) && isset($querySettingsEncoded))
 			{
 				$querySettings = LinkFeedQuerySettings::fromJson($feedType, CJSON::encode($querySettingsEncoded));
+				$querySettings->cacheSettings = new QueryCacheSettings();
+
 				$feedItems = LinkFeedQueryHelper::queryFeedItems($querySettings);
 			}
 

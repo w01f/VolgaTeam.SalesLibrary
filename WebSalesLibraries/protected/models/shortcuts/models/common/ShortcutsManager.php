@@ -51,7 +51,9 @@
 			{
 				$group = new ShortcutGroup($groupRecord, $selectedSuperGroupTag, $isPhone);
 				if ($group->enabled && $group->isAccessGranted)
+				{
 					$groups[] = $group;
+				}
 			}
 			return $groups;
 		}
@@ -112,5 +114,20 @@
 				$navigationPanel->id = $id;
 			}
 			return $navigationPanel;
+		}
+
+		/**
+		 * @param $ignoreExpirationDate boolean
+		 */
+		public static function prepareDataQueryCache($ignoreExpirationDate)
+		{
+			/** @var ShortcutLinkRecord[] $landingPageShortcutRecords */
+			$landingPageShortcutRecords = ShortcutLinkRecord::model()->findAll('type=?', array('landing'));
+			foreach ($landingPageShortcutRecords as $landingPageShortcutRecord)
+			{
+				/** @var LandingPageShortcut $landingPageShortcut */
+				$landingPageShortcut = $landingPageShortcutRecord->getServiceModel();
+				$landingPageShortcut->prepareDataQueryCache($ignoreExpirationDate);
+			}
 		}
 	}

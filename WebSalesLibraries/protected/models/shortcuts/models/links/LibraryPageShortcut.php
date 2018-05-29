@@ -42,6 +42,11 @@
 			$this->pageName = $queryResult->length > 0 ? str_replace("'", "''", trim($queryResult->item(0)->nodeValue)) : null;
 			$queryResult = $xpath->query('//Config/PageViewType');
 			$this->pageViewType = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : 'columns';
+		}
+
+		public function initRegularModel()
+		{
+			parent::initRegularModel();
 
 			$userId = \UserIdentity::getCurrentUserId();
 			$isAdmin = \UserIdentity::isUserAdmin();
@@ -53,7 +58,6 @@
 				->where("p.name='" . $this->pageName . "' and l.name='" . $this->libraryName . "'")
 				->queryRow();
 			$this->isAccessGranted &= isset($libraryPageRecord) && ($isAdmin || in_array($libraryPageRecord['id'], $assignedPageIds));
-
 		}
 
 		public function loadPageConfig()

@@ -29,7 +29,7 @@
 				$shortcutRecord = ShortcutLinkRecord::model()->findByPk($shortcutId);
 				if (isset($shortcutRecord))
 					/** @var  $shortcut BaseShortcut */
-					$this->shortcut = $shortcutRecord->getModel(false, null);
+					$this->shortcut = $shortcutRecord->getRegularModel(false, null);
 			}
 			$this->settings->enabled &= isset($this->shortcut);
 		}

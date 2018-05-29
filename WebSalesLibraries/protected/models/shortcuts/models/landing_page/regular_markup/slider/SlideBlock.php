@@ -32,7 +32,7 @@
 		{
 			ContentBlock::configureFromXml($xpath, $contextNode);
 
-			if ($this->isAccessGranted)
+			if (!$this->parentShortcut->usePermissions || $this->isAccessGranted)
 			{
 				$queryResult = $xpath->query('./ContentBlock', $contextNode);
 				foreach ($queryResult as $node)

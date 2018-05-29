@@ -83,7 +83,7 @@
 						/** @var  $shortcutRecord ShortcutLinkRecord */
 						$shortcutRecord = ShortcutLinkRecord::model()->findByPk($styleContainerId);
 						/** @var  $shortcut WallbinShortcut */
-						$shortcut = $shortcutRecord->getModel($this->isPhone);
+						$shortcut = $shortcutRecord->getRegularModel($this->isPhone);
 						$shortcut->loadPageConfig();
 						$style = $shortcut->style;
 						break;
@@ -150,7 +150,7 @@
 						/** @var  $shortcutRecord ShortcutLinkRecord */
 						$shortcutRecord = ShortcutLinkRecord::model()->findByPk($styleContainerId);
 						/** @var  $shortcut WallbinShortcut */
-						$shortcut = $shortcutRecord->getModel($this->isPhone);
+						$shortcut = $shortcutRecord->getRegularModel($this->isPhone);
 						$shortcut->loadPageConfig();
 						$style = $shortcut->style;
 						break;

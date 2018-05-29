@@ -144,7 +144,7 @@
 			$linksEncoded = \Yii::app()->session[$datasetKey];
 			if (!isset($linksEncoded))
 			{
-				$queryRecords = self::queryLinksByCondition($queryConditions);
+				$queryRecords = self::queryLinksByCondition($queryConditions, true);
 				$links = DataTableFormatHelper::formatRegularData($queryRecords, $queryConditions->columnSettings);
 				\Yii::app()->session[$datasetKey] = \CJSON::encode($links);
 			}
@@ -155,9 +155,10 @@
 
 		/**
 		 * @param $queryConditions BaseQueryConditions
+		 * @param boolean $usePermissionFilter
 		 * @return array
 		 */
-		public static function queryLinksByCondition($queryConditions)
+		public static function queryLinksByCondition($queryConditions, $usePermissionFilter)
 		{
 			$baseLinksEncoded = \Yii::app()->session[$queryConditions->baseDatasetKey];
 			$baseLinksCondition = '1=1';
@@ -291,7 +292,7 @@
 
 			$folderCondition = '1 <> 1';
 			$isAdmin = \UserIdentity::isUserAdmin();
-			if ($isAdmin)
+			if (!$usePermissionFilter || $isAdmin)
 				$folderCondition = '1 = 1';
 			else
 			{

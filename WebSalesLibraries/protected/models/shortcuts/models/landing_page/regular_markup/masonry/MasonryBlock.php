@@ -33,7 +33,7 @@
 
 			$this->viewSettings = MasonrySettings::fromXml(MasonrySettings::MasonryTypeSimple, $xpath, $contextNode, $this->parentShortcut->id, $this->id);
 
-			if ($this->isAccessGranted)
+			if (!$this->parentShortcut->usePermissions || $this->isAccessGranted)
 			{
 				$queryResult = $xpath->query('./ContentBlock', $contextNode);
 				foreach ($queryResult as $node)

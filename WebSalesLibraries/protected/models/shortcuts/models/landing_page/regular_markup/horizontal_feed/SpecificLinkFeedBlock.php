@@ -15,7 +15,7 @@
 	/**
 	 * Class SpecificLinkFeedBlock
 	 */
-	class SpecificLinkFeedBlock extends BlockContainer
+	class SpecificLinkFeedBlock extends BlockContainer implements \IDataQueryableBlock
 	{
 		/** @var  SpecificLinkFeedQuerySettings */
 		public $querySettings;
@@ -43,7 +43,7 @@
 		public function configureFromXml($xpath, $contextNode)
 		{
 			ContentBlock::configureFromXml($xpath, $contextNode);
-			$this->querySettings = LinkFeedQuerySettings::fromXml(LinkFeedQuerySettings::FeedTypeSpecificLinks, $xpath, $contextNode);
+			$this->querySettings = LinkFeedQuerySettings::fromXml($this, LinkFeedQuerySettings::FeedTypeSpecificLinks, $xpath, $contextNode);
 			$this->viewSettings = FeedSettings::fromXml(FeedSettings::FeedTypeSpecificLinks, $xpath, $contextNode);
 			$this->detailsSettings = SimpleDetailsSettings::fromXml($xpath, $contextNode);
 		}
@@ -52,5 +52,13 @@
 		public function getFeedItems()
 		{
 			return LinkFeedQueryHelper::queryFeedItems($this->querySettings);
+		}
+
+		/**
+		 * @return LinkFeedQuerySettings
+		 */
+		public function getQuerySettings()
+		{
+			return $this->querySettings;
 		}
 	}

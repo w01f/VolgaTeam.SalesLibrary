@@ -56,7 +56,7 @@
 		 * @param $parameters array|null
 		 * @return BaseShortcut
 		 */
-		public function getModel($isPhone, $parameters = null)
+		public function getRegularModel($isPhone, $parameters = null)
 		{
 			$shortcut = null;
 			switch ($this->type)
@@ -137,6 +137,50 @@
 					break;
 				case 'page':
 					$shortcut = new LibraryPageShortcut($this, $isPhone);
+					break;
+				case 'pagebundle':
+					$shortcut = new LibraryPageBundleShortcut($this, $isPhone);
+					break;
+				case 'library':
+					$shortcut = new WallbinShortcut($this, $isPhone);
+					break;
+				case 'searchapp':
+					$shortcut = new SearchAppShortcut($this, $isPhone);
+					break;
+				case 'qbuilder':
+					$shortcut = new QBuilderShortcut($this, $isPhone, $parameters);
+					break;
+				case 'quizzes':
+					$shortcut = new QuizzesShortcut($this, $isPhone);
+					break;
+				case 'favorites':
+					$shortcut = new FavoritesShortcut($this, $isPhone);
+					break;
+				case 'user_preferences':
+					$shortcut = new FavoritesShortcut($this, $isPhone);
+					break;
+				case 'youtube':
+					$shortcut = new YouTubeShortcut($this, $isPhone);
+					break;
+				case 'vimeo':
+					$shortcut = new VimeoShortcut($this, $isPhone);
+					break;
+				case 'landing':
+					$shortcut = new LandingPageShortcut($this, $isPhone);
+					break;
+				case 'shortcutlink':
+					$shortcut = new AliasShortcut($this, $isPhone);
+					break;
+				default:
+					$shortcut = new EmptyShortcut($this, $isPhone);
+					break;
+			}
+
+			$shortcut->initRegularModel();
+
+			switch ($this->type)
+			{
+				case 'page':
 					$needToUpdate = false;
 					$cookieLibraryName = str_replace(" ", "", str_replace("=", "", str_replace(";", "", (str_replace(",", "", str_replace("'", "", $shortcut->libraryName))))));
 					$savedPageViewTypeTag = sprintf('PageViewType-%s', $cookieLibraryName);
@@ -157,8 +201,6 @@
 						$shortcut->updateAction();
 					break;
 				case 'pagebundle':
-					$shortcut = new LibraryPageBundleShortcut($this, $isPhone);
-
 					$savedPageViewTypeTag = sprintf('PageViewType-%s', $shortcut->id);
 					if (isset($parameters) && array_key_exists('pageViewType', $parameters))
 					{
@@ -186,7 +228,6 @@
 					}
 					break;
 				case 'library':
-					$shortcut = new WallbinShortcut($this, $isPhone);
 					$cookieLibraryName = str_replace(" ", "", str_replace("=", "", str_replace(";", "", (str_replace(",", "", str_replace("'", "", $shortcut->libraryName))))));
 					$savedPageViewTypeTag = sprintf('PageViewType-%s', $cookieLibraryName);
 					if (isset($parameters) && array_key_exists('pageViewType', $parameters))
@@ -214,41 +255,100 @@
 						$shortcut->pageSelectorMode = Yii::app()->request->cookies[$savedPageSelectorModeTag]->value;
 					}
 					break;
-				case 'searchapp':
-					$shortcut = new SearchAppShortcut($this, $isPhone);
-					break;
-				case 'qbuilder':
-					$shortcut = new QBuilderShortcut($this, $isPhone, $parameters);
-					break;
-				case 'quizzes':
-					$shortcut = new QuizzesShortcut($this, $isPhone);
-					break;
-				case 'favorites':
-					$shortcut = new FavoritesShortcut($this, $isPhone);
-					break;
-				case 'user_preferences':
-					$shortcut = new FavoritesShortcut($this, $isPhone);
-					break;
-				case 'youtube':
-					$shortcut = new YouTubeShortcut($this, $isPhone);
-					break;
-				case 'vimeo':
-					$shortcut = new VimeoShortcut($this, $isPhone);
-					break;
-				case 'landing':
-					$shortcut = new LandingPageShortcut($this, $isPhone);
-					break;
 				case 'shortcutlink':
-					/** @var AliasShortcut $aliasShortcut */
-					$aliasShortcut = new AliasShortcut($this, $isPhone);
-					$shortcut = $aliasShortcut->originalShortcut;
-					break;
-				default:
-					$shortcut = new EmptyShortcut($this, $isPhone);
+					/** @var AliasShortcut $shortcut */
+					$shortcut = $shortcut->originalShortcut;
 					break;
 			}
-//			if (isset($parameters) && array_key_exists('singlePage', $parameters) && $parameters['singlePage'])
-//				$shortcut->samePage = $parameters['singlePage'] != true;
+			return $shortcut;
+		}
+
+		/**
+		 * @return BaseShortcut
+		 */
+		public function getServiceModel()
+		{
+			switch ($this->type)
+			{
+				case 'video':
+					$shortcut = new VideoShortcut($this, false);
+					break;
+				case 'url':
+					$shortcut = new UrlShortcut($this, false);
+					break;
+				case 'qpage':
+					$shortcut = new QPageShortcut($this, false);
+					break;
+				case 'file':
+					$shortcut = new FileShortcut($this, false);
+					break;
+				case 'download':
+					$shortcut = new DownloadShortcut($this, false);
+					break;
+				case 'libraryfile':
+					$shortcut = new LibraryLinkShortcut($this, false);
+					break;
+				case 'window':
+					$shortcut = new WindowShortcut($this, false);
+					break;
+				case 'quicklist':
+					$shortcut = new QuickListShortcut($this, false);
+					break;
+				case 'search':
+					$shortcut = new SearchLinkShortcut($this, false);
+					break;
+				case 'gbookmark':
+					$shortcut = new GroupBookmarkShortcut($this, false);
+					break;
+				case 'supergroup':
+					$shortcut = new SuperGroupShortcut($this, false);
+					break;
+				case 'gridbundle':
+					$shortcut = new GridBundleShortcut($this, false);
+					break;
+				case 'carouselbundle':
+					$shortcut = new CarouselBundleShortcut($this, false);
+					break;
+				case 'page':
+					$shortcut = new LibraryPageShortcut($this, false);
+					break;
+				case 'pagebundle':
+					$shortcut = new LibraryPageBundleShortcut($this, false);
+					break;
+				case 'library':
+					$shortcut = new WallbinShortcut($this, false);
+					break;
+				case 'searchapp':
+					$shortcut = new SearchAppShortcut($this, false);
+					break;
+				case 'qbuilder':
+					$shortcut = new QBuilderShortcut($this, false);
+					break;
+				case 'quizzes':
+					$shortcut = new QuizzesShortcut($this, false);
+					break;
+				case 'favorites':
+					$shortcut = new FavoritesShortcut($this, false);
+					break;
+				case 'user_preferences':
+					$shortcut = new FavoritesShortcut($this, false);
+					break;
+				case 'youtube':
+					$shortcut = new YouTubeShortcut($this, false);
+					break;
+				case 'vimeo':
+					$shortcut = new VimeoShortcut($this, false);
+					break;
+				case 'landing':
+					$shortcut = new LandingPageShortcut($this, false);
+					break;
+				case 'shortcutlink':
+					$shortcut = new AliasShortcut($this, false);
+					break;
+				default:
+					$shortcut = new EmptyShortcut($this, false);
+					break;
+			}
 			return $shortcut;
 		}
 
@@ -281,7 +381,7 @@
 				->with($withArray)
 				->find('t.order=' . $linkOrder . ($parentOrder == '' ? ' and t.id_parent is null' : ''));
 			if (isset($record))
-				return $record->getModel($isPhone);
+				return $record->getRegularModel($isPhone);
 			return null;
 		}
 

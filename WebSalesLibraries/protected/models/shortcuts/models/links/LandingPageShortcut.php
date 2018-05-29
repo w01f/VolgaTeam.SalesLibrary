@@ -1,4 +1,8 @@
 <?
+
+	use application\models\data_query\link_feed\LinkFeedQueryHelper;
+	use application\models\shortcuts\models\landing_page\regular_markup\common\BlockContainer;
+	use application\models\shortcuts\models\landing_page\regular_markup\common\ContentBlock;
 	use application\models\shortcuts\models\landing_page\regular_markup\common\MarkupSettings;
 
 	/**
@@ -6,6 +10,8 @@
 	 */
 	class LandingPageShortcut extends ContainerShortcut
 	{
+		public $usePermissions;
+
 		/** @var  MarkupSettings */
 		public $markupSettings;
 
@@ -15,7 +21,12 @@
 		public function loadPageConfig()
 		{
 			parent::loadPageConfig();
+			$this->usePermissions = true;
+			$this->loadMarkup();
+		}
 
+		private function loadMarkup()
+		{
 			$linkConfig = new DOMDocument();
 			$linkConfig->loadXML($this->linkRecord->config);
 			$xpath = new DomXPath($linkConfig);
@@ -44,7 +55,9 @@
 			return $data;
 		}
 
-		/** @return string */
+		/**
+		 * @return string
+		 */
 		public function getTypeForActivityTracker()
 		{
 			return 'Landing page';
@@ -62,5 +75,38 @@
 				$actionsByKey['show-search']->enabled = $actionsByKey['show-search']->enabled && $this->searchBar->configured;
 			if (array_key_exists('hide-search', $actionsByKey))
 				$actionsByKey['hide-search']->enabled = $actionsByKey['hide-search']->enabled && $this->searchBar->configured;
+		}
+
+		/**
+		 * @param $ignoreExpirationDate boolean
+		 */
+		public function prepareDataQueryCache($ignoreExpirationDate)
+		{
+			$this->usePermissions = false;
+			$this->loadMarkup();
+			foreach ($this->markupSettings->contentBlocks as $contentBlock)
+				self::prepareDataQueryCacheInternal($contentBlock, $ignoreExpirationDate);
+		}
+
+		/**
+		 * @param $contentBlock ContentBlock
+		 * @param $ignoreExpirationDate boolean
+		 */
+		private static function prepareDataQueryCacheInternal($contentBlock, $ignoreExpirationDate)
+		{
+			if ($contentBlock instanceof BlockContainer)
+			{
+				/* @var BlockContainer $dataQueryableBlock */
+				$blockContainer = $contentBlock;
+				foreach ($blockContainer->items as $childBlock)
+					self::prepareDataQueryCacheInternal($childBlock, $ignoreExpirationDate);
+			}
+			if ($contentBlock instanceof IDataQueryableBlock)
+			{
+				/* @var IDataQueryableBlock $dataQueryableBlock */
+				$dataQueryableBlock = $contentBlock;
+				$querySettings = $dataQueryableBlock->getQuerySettings();
+				LinkFeedQueryHelper::prepareDataQueryCache($querySettings, $ignoreExpirationDate);
+			}
 		}
 	}

@@ -25,7 +25,7 @@
 			/** @var  $shortcutRecord ShortcutLinkRecord */
 			$shortcutRecord = ShortcutLinkRecord::model()->findByPk($this->shortcutId);
 			/** @var  $shortcut BaseShortcut */
-			$shortcut = $shortcutRecord->getModel($isPhone);
+			$shortcut = $shortcutRecord->getRegularModel($isPhone);
 			return $shortcut->getMenuItemData();
 		}
 	}

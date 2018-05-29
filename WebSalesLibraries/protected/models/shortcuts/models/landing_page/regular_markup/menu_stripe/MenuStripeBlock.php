@@ -52,7 +52,7 @@
 		{
 			parent::configureFromXml($xpath, $contextNode);
 
-			if ($this->isAccessGranted)
+			if (!$this->parentShortcut->usePermissions || $this->isAccessGranted)
 			{
 				$queryResult = $xpath->query('./ExpandOnHover', $contextNode);
 				$this->expandOnHover = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : $this->expandOnHover;

@@ -13,7 +13,7 @@
 		 * @param $isPhone boolean
 		 * @param int $defaultCategoryIndex
 		 */
-		public function __construct($linkRecord, $isPhone, $defaultCategoryIndex)
+		public function __construct($linkRecord, $isPhone, $defaultCategoryIndex = 0)
 		{
 			parent::__construct($linkRecord, $isPhone);
 
@@ -162,12 +162,7 @@
 		{
 			$groupedLinks = array();
 			foreach ($this->links as $link)
-			{
-				if ($link->carouselGroup != '')
-					$groupedLinks[$link->carouselGroup][] = $link;
-				else
-					$groupedLinks['No Group'][] = $link;
-			}
+				$groupedLinks['No Group'][] = $link;
 
 			$dataList = array();
 

@@ -3,6 +3,7 @@
 	namespace application\models\data_query\link_feed;
 
 	use application\models\data_query\conditions\ConditionalQueryHelper;
+	use application\models\data_query\conditions\QueryCacheSettings;
 	use application\models\data_query\conditions\ThumbnailQuerySettings;
 	use application\models\data_query\data_table\DataTableQuerySettings;
 	use application\models\wallbin\models\web\LibraryLink;
@@ -19,27 +20,44 @@
 		 */
 		public static function queryFeedItems($feedSettings)
 		{
-			switch ($feedSettings->feedType)
+			$feedItems = null;
+
+			$cacheSettings = isset($feedSettings->cacheSettings) ? $feedSettings->cacheSettings : new QueryCacheSettings();
+			if ($cacheSettings->enableCache)
 			{
-				case LinkFeedQuerySettings::FeedTypeTrending:
-					/**@var TrendingFeedQuerySettings $feedSettings */
-					return self::queryTrendingItems($feedSettings);
-				case LinkFeedQuerySettings::FeedTypeSearch:
-					/**@var SearchFeedQuerySettings $feedSettings */
-					return self::querySearchItems($feedSettings);
-				case LinkFeedQuerySettings::FeedTypeSpecificLinks:
-					/**@var SpecificLinkFeedQuerySettings $feedSettings */
-					return self::querySpecificLinkItems($feedSettings);
-				default:
-					return array();
+				$encodedData = \ShortcutDataQueryCacheRecord::getCachedData($cacheSettings->cacheId);
+				if (!empty($encodedData))
+					$feedItems = \CJSON::decode($encodedData, false);
 			}
+
+			if (!isset($feedItems))
+			{
+				switch ($feedSettings->feedType)
+				{
+					case LinkFeedQuerySettings::FeedTypeTrending:
+						/**@var TrendingFeedQuerySettings $feedSettings */
+						$feedItems = self::queryTrendingItems($feedSettings, true);
+						break;
+					case LinkFeedQuerySettings::FeedTypeSearch:
+						/**@var SearchFeedQuerySettings $feedSettings */
+						$feedItems = self::querySearchItems($feedSettings, true);
+						break;
+					case LinkFeedQuerySettings::FeedTypeSpecificLinks:
+						/**@var SpecificLinkFeedQuerySettings $feedSettings */
+						$feedItems = self::querySpecificLinkItems($feedSettings, true);
+						break;
+				}
+			}
+
+			return isset($feedItems) ? $feedItems : array();
 		}
 
 		/**
 		 * @param TrendingFeedQuerySettings $feedSettings
+		 * @param boolean $usePermissionFilter
 		 * @return LinkFeedItem[]
 		 */
-		private static function queryTrendingItems($feedSettings)
+		private static function queryTrendingItems($feedSettings, $usePermissionFilter)
 		{
 			$feedItems = array();
 
@@ -269,7 +287,7 @@
 			}
 
 			$isAdmin = \UserIdentity::isUserAdmin();
-			if (!$isAdmin)
+			if ($usePermissionFilter && !$isAdmin)
 			{
 				$userId = \UserIdentity::getCurrentUserId();
 
@@ -522,12 +540,12 @@
 			return $feedItems;
 		}
 
-
 		/**
 		 * @param SearchFeedQuerySettings $feedSettings
+		 * @param boolean $usePermissionFilter
 		 * @return LinkFeedItem[]
 		 */
-		private static function querySearchItems($feedSettings)
+		private static function querySearchItems($feedSettings, $usePermissionFilter)
 		{
 			$feedItems = array();
 
@@ -578,7 +596,7 @@
 
 			$feedSettings->conditions->limit = $feedSettings->maxLinks;
 
-			$resultRecords = ConditionalQueryHelper::queryLinksByCondition($feedSettings->conditions);
+			$resultRecords = ConditionalQueryHelper::queryLinksByCondition($feedSettings->conditions, $usePermissionFilter);
 
 			$libraryManager = new LibraryManager();
 
@@ -792,9 +810,10 @@
 
 		/**
 		 * @param SpecificLinkFeedQuerySettings $feedSettings
+		 * @param boolean $usePermissionFilter
 		 * @return LinkFeedItem[]
 		 */
-		private static function querySpecificLinkItems($feedSettings)
+		private static function querySpecificLinkItems($feedSettings, $usePermissionFilter)
 		{
 			$feedItems = array();
 
@@ -946,7 +965,7 @@
 			}
 
 			$isAdmin = \UserIdentity::isUserAdmin();
-			if (!$isAdmin)
+			if ($usePermissionFilter && !$isAdmin)
 			{
 				$userId = \UserIdentity::getCurrentUserId();
 
@@ -1199,5 +1218,51 @@
 			}
 
 			return $feedItems;
+		}
+
+		/**
+		 * @param LinkFeedQuerySettings $querySettings
+		 * @param boolean $ignoreExpirationDate
+		 */
+		public static function prepareDataQueryCache($querySettings, $ignoreExpirationDate)
+		{
+			$cacheSettings = isset($querySettings->cacheSettings) ? $querySettings->cacheSettings : new QueryCacheSettings();
+
+			if (!$cacheSettings->enableCache)
+				return;
+
+			if (!$ignoreExpirationDate)
+			{
+				if ($cacheSettings->enableCache)
+				{
+					$encodedData = \ShortcutDataQueryCacheRecord::getCachedData($cacheSettings->cacheId);
+					if (!empty($encodedData))
+						return;
+				}
+			}
+
+			$feedItems = null;
+			switch ($querySettings->feedType)
+			{
+				case LinkFeedQuerySettings::FeedTypeTrending:
+					/**@var TrendingFeedQuerySettings $querySettings */
+					$feedItems = self::queryTrendingItems($querySettings, false);
+					break;
+				case LinkFeedQuerySettings::FeedTypeSearch:
+					/**@var SearchFeedQuerySettings $querySettings */
+					$feedItems = self::querySearchItems($querySettings, false);
+					break;
+				case LinkFeedQuerySettings::FeedTypeSpecificLinks:
+					/**@var SpecificLinkFeedQuerySettings $querySettings */
+					$feedItems = self::querySpecificLinkItems($querySettings, false);
+					break;
+			}
+
+			if (isset($feedItems))
+			{
+				$encodedData = \CJSON::encode($feedItems);
+				$expirationDate = $cacheSettings->expireInHours > 0 ? date(\Yii::app()->params['mysqlDateTimeFormat'], strtotime('+' . $cacheSettings->expireInHours . ' hours')) : null;
+				\ShortcutDataQueryCacheRecord::setCachedData($cacheSettings->cacheId, $encodedData, $expirationDate);
+			}
 		}
 	}

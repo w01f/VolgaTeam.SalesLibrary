@@ -15,8 +15,6 @@
 		public $order;
 		public $enabled;
 
-		public $carouselGroup;
-
 		public $useIcon;
 		public $iconClass;
 		public $imageContent;
@@ -57,19 +55,23 @@
 			$this->type = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '';
 
 			$this->order = $linkRecord->order;
+		}
 
-			$queryResult = $xpath->query('//Config/CarouselGroup');
-			$this->carouselGroup = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '';
-
-			$this->loadAppearanceData($xpath);
-			$this->loadSecurityData($xpath);
+		public function initRegularModel()
+		{
+			$this->loadAppearanceData($this->linkRecord->config);
+			$this->loadSecurityData($this->linkRecord->config);
 		}
 
 		/**
-		 * @param $xpath DOMXPath
+		 * @param $configData string
 		 */
-		public function loadAppearanceData($xpath)
+		protected function loadAppearanceData($configData)
 		{
+			$linkConfig = new DOMDocument();
+			$linkConfig->loadXML($configData);
+			$xpath = new DomXPath($linkConfig);
+
 			$visualSettingsSubSection = $this->isPhone ? 'Mobile' : 'Regular';
 			$queryResult = $xpath->query('//Config/' . $visualSettingsSubSection);
 			if ($queryResult->length == 0)
@@ -123,10 +125,14 @@
 		}
 
 		/**
-		 * @param $xpath DOMXPath
+		 * @param $configData string
 		 */
-		public function loadSecurityData($xpath)
+		protected function loadSecurityData($configData)
 		{
+			$linkConfig = new DOMDocument();
+			$linkConfig->loadXML($configData);
+			$xpath = new DomXPath($linkConfig);
+
 			$this->isAccessGranted = true;
 			$isAdmin = UserIdentity::isUserAdmin();
 			if (!$isAdmin)

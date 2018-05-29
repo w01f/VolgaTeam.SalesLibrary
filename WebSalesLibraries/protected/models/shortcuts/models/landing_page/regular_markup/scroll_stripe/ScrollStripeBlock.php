@@ -50,7 +50,7 @@
 			if (in_array($stripeSize, array(self::StripeSizeNormal, self::StripeSizeMedium, self::StripeSizeLarge)))
 				$this->stripeSize = $stripeSize;
 
-			if ($this->isAccessGranted)
+			if (!$this->parentShortcut->usePermissions || $this->isAccessGranted)
 			{
 				$queryResult = $xpath->query('./ContentBlock', $contextNode);
 				foreach ($queryResult as $node)

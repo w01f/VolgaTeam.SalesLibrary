@@ -33,7 +33,7 @@
 				$shortcutRecord = \ShortcutLinkRecord::model()->findByPk($shortcutId);
 				if (isset($shortcutRecord))
 					/** @var  $shortcut \BaseShortcut */
-					$this->shortcut = $shortcutRecord->getModel(true, null);
+					$this->shortcut = $shortcutRecord->getRegularModel(true, null);
 			}
 		}
 

@@ -20,14 +20,10 @@
 		public $autoLoadLinkId;
 		public $autoLoadLinkShowDelayHours;
 
-		/**
-		 * @param $linkRecord
-		 * @param $isPhone boolean
-		 */
-		public function __construct($linkRecord, $isPhone)
+		public function initRegularModel()
 		{
 			$linkConfig = new DOMDocument();
-			$linkConfig->loadXML($linkRecord->config);
+			$linkConfig->loadXML($this->linkRecord->config);
 			$xpath = new DomXPath($linkConfig);
 
 			if ($this->isPhone)
@@ -41,7 +37,7 @@
 					$this->headerSettings = PageHeaderSettings::createEmpty();
 			}
 
-			parent::__construct($linkRecord, $isPhone);
+			parent::initRegularModel();
 
 			if ($this->isPhone)
 			{

@@ -27,6 +27,7 @@
 		/**
 		 * @param $xpath \DOMXPath
 		 * @param $contextNode \DOMNode
+		 *
 		 */
 		public function configureFromXml($xpath, $contextNode)
 		{

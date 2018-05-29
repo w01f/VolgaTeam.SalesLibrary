@@ -39,7 +39,7 @@
 				if (isset($shortcutRecord))
 				{
 					/** @var  $shortcut \WallbinShortcut */
-					$this->shortcut = $shortcutRecord->getModel(false, null);
+					$this->shortcut = $shortcutRecord->getRegularModel(false, null);
 					$this->shortcut->loadPageConfig();
 				}
 			}

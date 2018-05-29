@@ -28,7 +28,7 @@
 			$this->links = array();
 			foreach ($this->linkRecord->subLinks as $linkRecord)
 			{
-				$shortcut = $linkRecord->getModel($this->isPhone);
+				$shortcut = $linkRecord->getRegularModel($this->isPhone);
 				if (isset($shortcut) && $shortcut->isAccessGranted)
 					$this->links[] = $shortcut;
 			}

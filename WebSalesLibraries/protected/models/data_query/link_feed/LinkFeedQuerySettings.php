@@ -1,7 +1,10 @@
 <?
+
 	namespace application\models\data_query\link_feed;
 
+	use application\models\data_query\conditions\QueryCacheSettings;
 	use application\models\data_query\conditions\ThumbnailQuerySettings;
+	use application\models\shortcuts\models\landing_page\regular_markup\common\ContentBlock;
 
 	/**
 	 * Class LinkFeedQuerySettings
@@ -35,15 +38,20 @@
 		public $linkFormatsInclude;
 		public $linkFormatsExclude;
 		public $maxLinks;
+
 		/** @var  ThumbnailQuerySettings */
 		public $thumbnailSettings;
 
+		/** @var  QueryCacheSettings */
+		public $cacheSettings;
+
 		public function __construct()
 		{
+			$this->maxLinks = 30;
 			$this->linkFormatsInclude = array(self::LinkFormatPowerPoint, self::LinkFormatDocument, self::LinkFormatVideo, self::LinkFormatHyperlink);
 			$this->linkFormatsExclude = array();
 			$this->thumbnailSettings = new ThumbnailQuerySettings();
-			$this->maxLinks = 30;
+			$this->cacheSettings = new QueryCacheSettings();
 		}
 
 		/**
@@ -54,51 +62,57 @@
 		 */
 		public static function fromJson($feedType, $encodedContent)
 		{
+			$instance = null;
 			switch ($feedType)
 			{
 				case self::FeedTypeTrending:
 					$instance = new TrendingFeedQuerySettings();
 					\Utils::loadFromJson($instance, $encodedContent);
-					return $instance;
+					break;
 				case self::FeedTypeSearch:
 					$instance = new SearchFeedQuerySettings();
 					\Utils::loadFromJson($instance, $encodedContent);
-					return $instance;
+					break;
 				case self::FeedTypeSpecificLinks:
 					$instance = new SpecificLinkFeedQuerySettings();
 					\Utils::loadFromJson($instance, $encodedContent);
-					return $instance;
+					break;
 				default:
 					throw  new \Exception('Unknown feed type');
 			}
+			return $instance;
 		}
 
 		/**
+		 * @param $parentContentBlock ContentBlock
 		 * @param $feedType string
 		 * @param $xpath \DOMXPath
 		 * @param $contextNode \DOMNode
 		 * @return LinkFeedQuerySettings
 		 * @throws \Exception
 		 */
-		public static function fromXml($feedType, $xpath, $contextNode)
+		public static function fromXml($parentContentBlock, $feedType, $xpath, $contextNode)
 		{
+			$instance = null;
 			switch ($feedType)
 			{
 				case self::FeedTypeTrending:
 					$instance = new TrendingFeedQuerySettings();
 					$instance->configureFromXml($xpath, $contextNode);
-					return $instance;
+					break;
 				case self::FeedTypeSearch:
 					$instance = new SearchFeedQuerySettings();
 					$instance->configureFromXml($xpath, $contextNode);
-					return $instance;
+					break;
 				case self::FeedTypeSpecificLinks:
 					$instance = new SpecificLinkFeedQuerySettings();
 					$instance->configureFromXml($xpath, $contextNode);
-					return $instance;
+					break;
 				default:
 					throw  new \Exception('Unknown feed type');
 			}
+			$instance->cacheSettings->cacheId = $parentContentBlock->id;
+			return $instance;
 		}
 
 		/**
@@ -141,5 +155,9 @@
 			$queryResult = $xpath->query('./ThumbnailSettings', $contextNode);
 			if ($queryResult->length > 0)
 				$this->thumbnailSettings = ThumbnailQuerySettings::fromXml($xpath, $queryResult->item(0));
+
+			$queryResult = $xpath->query('./SnapshotData', $contextNode);
+			if ($queryResult->length > 0)
+				$this->cacheSettings = QueryCacheSettings::fromXml($xpath, $queryResult->item(0));
 		}
 	}

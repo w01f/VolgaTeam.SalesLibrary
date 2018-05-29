@@ -35,7 +35,7 @@
 			if (isset($shortcutRecord))
 			{
 				/** @var  $shortcut PageContentShortcut */
-				$shortcut = $shortcutRecord->getModel($this->isPhone);
+				$shortcut = $shortcutRecord->getRegularModel($this->isPhone);
 				$shortcut->loadPageConfig();
 
 				if ($useForThumbnail || UserIdentity::isUserAuthorized() || ($shortcut->allowPublicAccess && !isset($shortcut->publicPassword)))
@@ -102,7 +102,7 @@
 			/** @var  $shortcutRecord ShortcutLinkRecord */
 			$shortcutRecord = ShortcutLinkRecord::model()->findByPk($shortcutId);
 			/** @var  $shortcut BaseShortcut */
-			$shortcut = $shortcutRecord->getModel($this->isPhone);
+			$shortcut = $shortcutRecord->getRegularModel($this->isPhone);
 			echo $shortcut->getMenuItemData();
 		}
 
@@ -112,7 +112,7 @@
 			/** @var  $shortcutRecord ShortcutLinkRecord */
 			$shortcutRecord = ShortcutLinkRecord::model()->find('type=?', array($shortcutType));
 			/** @var  $shortcut BaseShortcut */
-			$shortcut = $shortcutRecord->getModel($this->isPhone);
+			$shortcut = $shortcutRecord->getRegularModel($this->isPhone);
 			echo $shortcut->getMenuItemData();
 		}
 
@@ -124,7 +124,7 @@
 				/**@var $linkRecord ShortcutLinkRecord */
 				$linkRecord = ShortcutLinkRecord::model()->findByPk($linkId);
 				/**@var $link DownloadShortcut */
-				$link = $linkRecord->getModel($this->isPhone);
+				$link = $linkRecord->getRegularModel($this->isPhone);
 				$fileName = $link->fileName;
 				$path = $link->sourcePath;
 				try
@@ -151,7 +151,7 @@
 			/** @var  $shortcutRecord ShortcutLinkRecord */
 			$shortcutRecord = ShortcutLinkRecord::model()->findByPk($linkId);
 			/** @var  $shortcut CustomHandledShortcut */
-			$shortcut = $shortcutRecord->getModel($this->isPhone, $parameters);
+			$shortcut = $shortcutRecord->getRegularModel($this->isPhone, $parameters);
 			if ($shortcut instanceof PageContentShortcut)
 				$shortcut->loadPageConfig();
 
@@ -322,7 +322,7 @@
 				/** @var $linkRecord ShortcutLinkRecord */
 				$linkRecord = ShortcutLinkRecord::model()->findByPk($linkId);
 				/**@var $link DownloadShortcut */
-				$link = $linkRecord->getModel($this->isPhone);
+				$link = $linkRecord->getRegularModel($this->isPhone);
 				try
 				{
 					$this->renderPartial('downloadDialog', array('link' => $link));
@@ -362,7 +362,7 @@
 				/** @var $linkRecord ShortcutLinkRecord */
 				$linkRecord = ShortcutLinkRecord::model()->findByPk($linkId);
 				/** @var $searchBarContainer ContainerShortcut */
-				$searchBarContainer = $linkRecord->getModel($this->isPhone);
+				$searchBarContainer = $linkRecord->getRegularModel($this->isPhone);
 				$searchBarContainer->loadPageConfig();
 				$searchBar = $searchBarContainer->getSearchBar();
 				$this->pageTitle = $searchBar->title;
@@ -399,7 +399,7 @@
 				/** @var $linkRecord ShortcutLinkRecord */
 				$linkRecord = ShortcutLinkRecord::model()->findByPk($bundleId);
 				/** @var $searchBarContainer ContainerShortcut */
-				$searchBarContainer = $linkRecord->getModel($this->isPhone);
+				$searchBarContainer = $linkRecord->getRegularModel($this->isPhone);
 				$searchBarContainer->loadPageConfig();
 				$searchBar = $searchBarContainer->searchBar;
 			}
@@ -408,7 +408,7 @@
 				/** @var $linkRecord ShortcutLinkRecord */
 				$linkRecord = ShortcutLinkRecord::model()->findByPk($linkId);
 				/** @var $searchLink SearchLinkShortcut */
-				$searchLink = $linkRecord->getModel($this->isPhone);
+				$searchLink = $linkRecord->getRegularModel($this->isPhone);
 				$searchLink->loadPageConfig();
 				$searchBar = $searchLink->subSearchBar;
 			}
@@ -430,7 +430,7 @@
 				/** @var $linkRecord ShortcutLinkRecord */
 				$linkRecord = ShortcutLinkRecord::model()->findByPk($bundleId);
 				/** @var $searchBarContainer ContainerShortcut */
-				$searchBarContainer = $linkRecord->getModel($this->isPhone);
+				$searchBarContainer = $linkRecord->getRegularModel($this->isPhone);
 				$searchBarContainer->loadPageConfig();
 				$templates = $searchBarContainer->searchBar->subConditions;
 				$id = $bundleId;

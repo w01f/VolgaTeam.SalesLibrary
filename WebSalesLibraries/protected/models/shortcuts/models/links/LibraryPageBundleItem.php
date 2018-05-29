@@ -34,7 +34,7 @@
 				if (isset($shortcutRecord))
 				{
 					/** @var  $shortcut LibraryPageShortcut */
-					$item->shortcut = $shortcutRecord->getModel(false, null);
+					$item->shortcut = $shortcutRecord->getRegularModel(false, null);
 					$item->shortcut->loadPageConfig();
 					$item->libraryPage = $item->shortcut->getLibraryPage();
 				}

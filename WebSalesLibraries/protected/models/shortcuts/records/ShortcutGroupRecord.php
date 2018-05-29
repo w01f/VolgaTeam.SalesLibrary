@@ -39,7 +39,7 @@
 			foreach ($shortcutRecords as $linkRecord)
 			{
 				/** @var  $shortcut  BaseShortcut */
-				$shortcut = $linkRecord->getModel($isPhone);
+				$shortcut = $linkRecord->getRegularModel($isPhone);
 				if ($shortcut->isAccessGranted)
 					$shortcuts[] = $shortcut;
 			}

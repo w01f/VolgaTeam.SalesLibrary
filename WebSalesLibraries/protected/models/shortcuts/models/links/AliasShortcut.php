@@ -5,15 +5,12 @@
 		/** @var  BaseShortcut */
 		public $originalShortcut;
 
-		/**
-		 * @param $linkRecord
-		 * @param $isPhone boolean
-		 */
-		public function __construct($linkRecord, $isPhone)
+		public function initRegularModel()
 		{
-			parent::__construct($linkRecord, $isPhone);
+			parent::initRegularModel();
+
 			$linkConfig = new DOMDocument();
-			$linkConfig->loadXML($linkRecord->config);
+			$linkConfig->loadXML($this->linkRecord->config);
 			$xpath = new DomXPath($linkConfig);
 
 			$queryResult = $xpath->query('//Config/ShortcutID');
@@ -22,14 +19,15 @@
 			{
 				/**@var $originalLinkRecord ShortcutLinkRecord */
 				$originalLinkRecord = ShortcutLinkRecord::model()->findByPk($originalShortcutId);
-				$this->originalShortcut = $originalLinkRecord->getModel($isPhone);
+				$this->originalShortcut = $originalLinkRecord->getRegularModel($this->isPhone);
 
 				$this->originalShortcut->groupId = $this->groupId;
 				$this->originalShortcut->bundleId = $this->bundleId;
 				$this->originalShortcut->order = $this->order;
-				$this->originalShortcut->carouselGroup = $this->carouselGroup;
 
-				$this->originalShortcut->loadAppearanceData($xpath);
+				$this->originalShortcut->initRegularModel();
+
+				$this->originalShortcut->loadAppearanceData($this->linkRecord->config);
 				$this->originalShortcut->isAccessGranted &= $this->isAccessGranted;
 			}
 		}

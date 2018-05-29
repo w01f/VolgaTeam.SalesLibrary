@@ -73,7 +73,6 @@
 		 * @param string $parentShortcutId
 		 * @param string $parentBlockId
 		 * @return MasonrySettings
-		 * @throws \Exception
 		 */
 		public static function fromXml($feedType, $xpath, $contextNode, $parentShortcutId, $parentBlockId)
 		{

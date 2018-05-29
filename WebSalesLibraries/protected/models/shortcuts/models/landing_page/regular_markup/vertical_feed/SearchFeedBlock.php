@@ -14,7 +14,7 @@
 	/**
 	 * Class SearchFeedBlock
 	 */
-	class SearchFeedBlock extends ContentBlock
+	class SearchFeedBlock extends ContentBlock implements \IDataQueryableBlock
 	{
 		/** @var  SearchFeedQuerySettings */
 		public $querySettings;
@@ -43,7 +43,7 @@
 		{
 			ContentBlock::configureFromXml($xpath, $contextNode);
 
-			$this->querySettings = LinkFeedQuerySettings::fromXml(LinkFeedQuerySettings::FeedTypeSearch, $xpath, $contextNode);
+			$this->querySettings = LinkFeedQuerySettings::fromXml($this, LinkFeedQuerySettings::FeedTypeSearch, $xpath, $contextNode);
 			$this->viewSettings = FeedSettings::fromXml(FeedSettings::FeedTypeSearch, $xpath, $contextNode);
 			$this->detailsSettings = SimpleDetailsSettings::fromXml($xpath, $contextNode);
 		}
@@ -52,5 +52,13 @@
 		public function getFeedItems()
 		{
 			return LinkFeedQueryHelper::queryFeedItems($this->querySettings);
+		}
+
+		/**
+		 * @return LinkFeedQuerySettings
+		 */
+		public function getQuerySettings()
+		{
+			return $this->querySettings;
 		}
 	}

@@ -37,7 +37,7 @@
 			$queryResult = $xpath->query('./SlideShowInterval', $contextNode);
 			$this->slideShowInterval = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue)) : 5000;
 
-			if ($this->isAccessGranted)
+			if (!$this->parentShortcut->usePermissions || $this->isAccessGranted)
 			{
 				$queryResult = $xpath->query('./ContentBlock', $contextNode);
 				foreach ($queryResult as $node)

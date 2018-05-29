@@ -36,7 +36,7 @@
 				if (isset($shortcutRecord))
 				{
 					/** @var  $shortcut \SearchLinkShortcut */
-					$this->shortcut = $shortcutRecord->getModel(false, null);
+					$this->shortcut = $shortcutRecord->getRegularModel(false, null);
 					$this->shortcut->loadPageConfig();
 				}
 			}

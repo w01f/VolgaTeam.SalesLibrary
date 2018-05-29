@@ -13,7 +13,7 @@
 	/**
 	 * Class TrendingBlock
 	 */
-	class TrendingBlock extends ContentBlock
+	class TrendingBlock extends ContentBlock implements \IDataQueryableBlock
 	{
 		/** @var  TrendingFeedQuerySettings */
 		public $querySettings;
@@ -42,8 +42,8 @@
 		{
 			ContentBlock::configureFromXml($xpath, $contextNode);
 
-			$this->querySettings = LinkFeedQuerySettings::fromXml(LinkFeedQuerySettings::FeedTypeTrending, $xpath, $contextNode);
-			$this->viewSettings = MasonrySettings::fromXml(MasonrySettings::MasonryTypeTrending, $xpath, $contextNode);
+			$this->querySettings = LinkFeedQuerySettings::fromXml($this, LinkFeedQuerySettings::FeedTypeTrending, $xpath, $contextNode);
+			$this->viewSettings = MasonrySettings::fromXml(MasonrySettings::MasonryTypeTrending, $xpath, $contextNode, $this->parentShortcut->id, $this->id);
 			$this->detailsSettings = TrendingDetailsSettings::fromXml($xpath, $contextNode);
 		}
 
@@ -51,5 +51,13 @@
 		public function getFeedItems()
 		{
 			return LinkFeedQueryHelper::queryFeedItems($this->querySettings);
+		}
+
+		/**
+		 * @return LinkFeedQuerySettings
+		 */
+		public function getQuerySettings()
+		{
+			return $this->querySettings;
 		}
 	}
