@@ -60,7 +60,7 @@
 .bundle-container .bundle-items-list li a.selected:hover,
 .bundle-container .bundle-items-list li a.selected:focus
 {
-    background-color: #c6e2ff;
+    background-color: rgba(255, 223, 66, 0.53);
 }
 
 .bundle-container .bundle-items-list li .item-title

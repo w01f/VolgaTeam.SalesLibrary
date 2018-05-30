@@ -2,10 +2,9 @@
 {
 	window.BaseUrl = window.BaseUrl || '';
 	$.SalesPortal = $.SalesPortal || {};
-	$.SalesPortal.PreviewEmailer = function (viewerData, isProtected)
+	$.SalesPortal.PreviewEmailer = function (viewerData)
 	{
-		var idSuffix = '-' + (isProtected ? 'protected' : 'public');
-		var dialogContent = $('#email-content' + idSuffix);
+		var dialogContent = $('#email-content');
 
 		if (viewerData.config.enableLogging)
 		{
@@ -60,10 +59,10 @@
 		{
 			var accessCode = dialogContent.find('#add-page-access-code');
 			if ($(this).is(':checked'))
-				accessCode.show();
+				accessCode.prop("disabled", false);
 			else
 			{
-				accessCode.hide();
+				accessCode.prop("disabled", "disabled");
 				accessCode.val('');
 			}
 		});
@@ -103,7 +102,7 @@
 					subtitle: subtitle,
 					logo: dialogContent.find('.logo-list a.opened').find('img').attr('src'),
 					expiresInDays: dialogContent.find('#add-page-expires-in').find('.active').val(),
-					restricted: isProtected,
+					restricted: dialogContent.find('#add-page-require-credentials').is(':checked'),
 					pinCode: pinCode,
 					disableWidgets: dialogContent.find('#add-page-disable-widgets').is(':checked'),
 					disableBanners: dialogContent.find('#add-page-disable-banners').is(':checked'),

@@ -28,8 +28,7 @@
 
 #tab-above-header-preview .header-text,
 #tab-above-header-save .header-text,
-#tab-above-header-email-protected .header-text,
-#tab-above-header-email-public .header-text {
+#tab-above-header-email .header-text {
     font-size: 1.5em;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -78,7 +77,18 @@
 
 .link-viewer .image-button:hover,
 .link-viewer .text-button:hover {
-    background: #c6e2ff;
+    background-color: rgba(255, 223, 66, 0.53);
+}
+
+.link-viewer .image-button .dropdown .dropdown-menu,
+.link-viewer .text-button .dropdown .dropdown-menu,
+.link-viewer .image-button .dropup .dropdown-menu,
+.link-viewer .text-button .dropup .dropdown-menu
+{
+    margin: 0;
+    opacity: 0;
+    display: block;
+    transition: .3s all linear;
 }
 
 .link-viewer .image-button:hover .dropdown .dropdown-menu,
@@ -88,19 +98,18 @@
 .link-viewer .image-button .dropdown.open .dropdown-menu,
 .link-viewer .text-button .dropdown.open .dropdown-menu,
 .link-viewer .image-button .dropup.open .dropdown-menu,
-.link-viewer .text-button .dropup.open .dropdown-menu{
+.link-viewer .text-button .dropup.open .dropdown-menu
+{
     opacity: 1;
     transition: .5s all linear;
 }
 
-.link-viewer .image-button .dropdown .dropdown-menu,
-.link-viewer .text-button .dropdown .dropdown-menu,
-.link-viewer .image-button .dropup .dropdown-menu,
-.link-viewer .text-button .dropup .dropdown-menu{
-    margin: 0;
-    opacity: 0;
-    display: block;
-    transition: .3s all linear;
+.link-viewer .image-button .dropdown-menu > li > a:hover,
+.link-viewer .text-button .dropdown-menu > li > a:hover,
+.link-viewer .image-button .dropdown-menu > li > a:focus,
+.link-viewer .text-button .dropdown-menu > li > a:focus
+{
+    background-color: rgba(255, 223, 66, 0.53);
 }
 
 .link-viewer .image-button.disabled:hover,

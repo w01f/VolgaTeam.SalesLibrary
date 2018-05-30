@@ -397,8 +397,7 @@
 								dialogContent.find('#tab-above-header-' + tabTag).addClass('active');
 							});
 
-							new $.SalesPortal.PreviewEmailer(viewerData, false);
-							new $.SalesPortal.PreviewEmailer(viewerData, true);
+							new $.SalesPortal.PreviewEmailer(viewerData);
 						}
 					});
 				},

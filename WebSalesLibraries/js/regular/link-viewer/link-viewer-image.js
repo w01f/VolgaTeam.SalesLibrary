@@ -106,8 +106,7 @@
 				}
 			);
 
-			new $.SalesPortal.PreviewEmailer(viewerData, false);
-			new $.SalesPortal.PreviewEmailer(viewerData, true);
+			new $.SalesPortal.PreviewEmailer(viewerData);
 
 			dialogContent.find('.btn').off('mouseup.preview').on('mouseup.preview', function ()
 			{
