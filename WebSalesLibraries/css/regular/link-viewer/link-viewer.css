@@ -81,6 +81,28 @@
     background: #c6e2ff;
 }
 
+.link-viewer .image-button:hover .dropdown .dropdown-menu,
+.link-viewer .text-button:hover .dropdown .dropdown-menu,
+.link-viewer .image-button:hover .dropup .dropdown-menu,
+.link-viewer .text-button:hover .dropup .dropdown-menu,
+.link-viewer .image-button .dropdown.open .dropdown-menu,
+.link-viewer .text-button .dropdown.open .dropdown-menu,
+.link-viewer .image-button .dropup.open .dropdown-menu,
+.link-viewer .text-button .dropup.open .dropdown-menu{
+    opacity: 1;
+    transition: .5s all linear;
+}
+
+.link-viewer .image-button .dropdown .dropdown-menu,
+.link-viewer .text-button .dropdown .dropdown-menu,
+.link-viewer .image-button .dropup .dropdown-menu,
+.link-viewer .text-button .dropup .dropdown-menu{
+    margin: 0;
+    opacity: 0;
+    display: block;
+    transition: .3s all linear;
+}
+
 .link-viewer .image-button.disabled:hover,
 .link-viewer .text-button.disabled:hover {
     background: none;
