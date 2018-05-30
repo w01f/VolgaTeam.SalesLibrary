@@ -128,6 +128,7 @@
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\OneDriveLinkSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\OneDriveLibrarySettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkBundleSettings\CoverItem.cs" />
+    <Compile Include="Entities\Wallbin\NonPersistent\PreviewContainerSettings\HyperlinkPreviewContainerSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\PreviewContainerSettings\CommonPreviewContainerSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\PreviewContainerSettings\BasePreviewContainerSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\PreviewContainerSettings\VideoPreviewContainerSettings.cs" />

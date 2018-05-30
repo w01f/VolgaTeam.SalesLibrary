@@ -531,6 +531,12 @@
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\BaseInternalLibraryContentOptions.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkCustomThumbnail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkCustomThumbnail.Designer.cs">
+      <DependentUpon>FormEditLinkCustomThumbnail.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkThumbnail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1213,6 +1219,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\VimeoEditControl.resx">
       <DependentUpon>VimeoEditControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkCustomThumbnail.resx">
+      <DependentUpon>FormEditLinkCustomThumbnail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkThumbnail.resx">
       <DependentUpon>FormEditLinkThumbnail.cs</DependentUpon>

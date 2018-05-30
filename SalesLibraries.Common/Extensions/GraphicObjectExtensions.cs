@@ -30,6 +30,8 @@ namespace SalesLibraries.Common.Extensions
 			var percent = Math.Min(percentHeight, percentWidth);
 			if (float.IsInfinity(percent))
 				percent = 1;
+			else if (percent > 1)
+				return image;
 			var newWidth = (int)(originalWidth * percent);
 			var newHeight = (int)(originalHeight * percent);
 			Image newImage = new Bitmap(newWidth, newHeight);

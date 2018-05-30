@@ -63,6 +63,18 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 		public bool IsAlive { get; protected set; }
 		#endregion
 
+		public override void BeforeSave()
+		{
+			if (NeedToSave)
+				SettingsEncoded = Settings.Serialize();
+			base.BeforeSave();
+		}
+
+		public override void AfterSave()
+		{
+			Settings = null;
+		}
+
 		public override void ResetParent()
 		{
 			Library = null;

@@ -14,12 +14,12 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 	public abstract class HyperlinkPreviewContainer : BasePreviewContainer
 	{
 		#region Nonpersistent Properties
-		private CommonPreviewContainerSettings _settings;
+		private HyperlinkPreviewContainerSettings _settings;
 		[NotMapped, JsonIgnore]
 		public override BasePreviewContainerSettings Settings
 		{
-			get => _settings ?? (_settings = SettingsContainer.CreateInstance<CommonPreviewContainerSettings>(this, SettingsEncoded));
-			set => _settings = value as CommonPreviewContainerSettings;
+			get => _settings ?? (_settings = SettingsContainer.CreateInstance<HyperlinkPreviewContainerSettings>(this, SettingsEncoded));
+			set => _settings = value as HyperlinkPreviewContainerSettings;
 		}
 
 		[NotMapped, JsonIgnore]

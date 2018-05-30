@@ -19,8 +19,8 @@ namespace SalesLibraries.FileManager.Business.Services
 	{
 		private const int BrowserWidth = 1280;
 		private const int BrowserHeight = 1024;
-		private const int ThumbWidth = 800;
-		private const int ThumbHeight = 600;
+		public const int ThumbWidth = 800;
+		public const int ThumbHeight = 600;
 
 
 		private bool _complited;

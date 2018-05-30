@@ -1,10 +1,14 @@
-﻿using System.IO;
+﻿using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Constants;
+using SalesLibraries.Business.Entities.Wallbin.NonPersistent.PreviewContainerSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers;
+using SalesLibraries.Common.Extensions;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.FileManager.Business.Services;
 using SalesLibraries.FileManager.Controllers;
@@ -36,11 +40,20 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 			if (!Directory.Exists(thumbsDatatableDestination))
 				Directory.CreateDirectory(thumbsDatatableDestination);
 
-			MainController.Instance.MainForm.Invoke(new MethodInvoker(() =>
+			var customThumbnailImage = ((HyperlinkPreviewContainerSettings)previewContainer.Settings).CustomThumbnail;
+			if (customThumbnailImage != null)
+				customThumbnailImage
+					.Resize(new Size(RegularBrowserThumbnailGenerator.ThumbWidth, RegularBrowserThumbnailGenerator.ThumbHeight))
+					.Save(Path.Combine(thumbsDestination, "thumbnail.png"), ImageFormat.Png);
+			else
 			{
-				var thumbnailGenerator = new RegularBrowserThumbnailGenerator();
-				thumbnailGenerator.GenerateThumbnail(webPreviewContainer.SourcePath, thumbsDestination, alternativeUrl: MainController.Instance.Settings.WebServiceSite);
-			}));
+				MainController.Instance.MainForm.Invoke(new MethodInvoker(() =>
+				{
+					var thumbnailGenerator = new RegularBrowserThumbnailGenerator();
+					thumbnailGenerator.GenerateThumbnail(webPreviewContainer.SourcePath, thumbsDestination,
+						alternativeUrl: MainController.Instance.Settings.WebServiceSite);
+				}));
+			}
 			JpegHelper.ConvertFiles(thumbsDestination, thumbsDatatableDestination);
 
 			logger.LogStage(PreviewFormats.Thumbnails);

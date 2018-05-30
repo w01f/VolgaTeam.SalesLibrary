@@ -1,6 +1,6 @@
 ﻿namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.PreviewContainerSettings
 {
-	public abstract class CommonPreviewContainerSettings : BasePreviewContainerSettings
+	public class CommonPreviewContainerSettings : BasePreviewContainerSettings
 	{
 	}
 }

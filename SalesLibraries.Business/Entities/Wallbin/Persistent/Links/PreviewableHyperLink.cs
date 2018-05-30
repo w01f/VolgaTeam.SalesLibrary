@@ -29,6 +29,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		public Color ThumbnailBackColor => ParentFolder.Settings.BackgroundWindowColor;
 		[NotMapped, JsonIgnore]
 		public bool ShowSourceFilesList => true;
+		[NotMapped, JsonIgnore]
+		public HyperlinkPreviewContainer HyperlinkPreviewContainer => GetPreviewContainer() as HyperlinkPreviewContainer;
 		#endregion
 
 		protected override void AfterCreate()

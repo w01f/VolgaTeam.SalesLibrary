@@ -54,6 +54,10 @@
 			this.barButtonItemSingleLinkPropertiesOpenLinkSiteLink = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemSingleLinkPropertiesOpenLinkOneDriveLink = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemSingleLinkPropertiesDelete = new DevExpress.XtraBars.BarButtonItem();
+			this.barSubItemSingleLinkPropertiesOneDrive = new DevExpress.XtraBars.BarSubItem();
+			this.barButtonItemSingleLinkPropertiesOneDriveOpenUrl = new DevExpress.XtraBars.BarButtonItem();
+			this.barButtonItemSingleLinkPropertiesOneDriveCopyUrl = new DevExpress.XtraBars.BarButtonItem();
+			this.barButtonItemSingleLinkPropertiesOneDriveResetUrl = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemSingleLinkPropertiesLinkSettings = new DevExpress.XtraBars.BarButtonItem();
 			this.barSubItemSingleLinkPropertiesFolderLinkSettings = new DevExpress.XtraBars.BarSubItem();
 			this.barButtonItemSingleLinkPropertiesFolderLinkExcelSettings = new DevExpress.XtraBars.BarButtonItem();
@@ -128,10 +132,7 @@
 			this.barButtonItembarSubItemFolderPropertiesDeleteAllLinks = new DevExpress.XtraBars.BarButtonItem();
 			this.popupMenuFolderProperties = new DevExpress.XtraBars.PopupMenu(this.components);
 			this.popupMenuMultiLinkProperties = new DevExpress.XtraBars.PopupMenu(this.components);
-			this.barSubItemSingleLinkPropertiesOneDrive = new DevExpress.XtraBars.BarSubItem();
-			this.barButtonItemSingleLinkPropertiesOneDriveOpenUrl = new DevExpress.XtraBars.BarButtonItem();
-			this.barButtonItemSingleLinkPropertiesOneDriveCopyUrl = new DevExpress.XtraBars.BarButtonItem();
-			this.barButtonItemSingleLinkPropertiesOneDriveResetUrl = new DevExpress.XtraBars.BarButtonItem();
+			this.barButtonItemSingleLinkPropertiesCustomThumbnail = new DevExpress.XtraBars.BarButtonItem();
 			this.pnHeader.SuspendLayout();
 			this.pnHeaderBorder.SuspendLayout();
 			this.pnBorders.SuspendLayout();
@@ -358,6 +359,37 @@
 			this.barButtonItemSingleLinkPropertiesDelete.Name = "barButtonItemSingleLinkPropertiesDelete";
 			this.barButtonItemSingleLinkPropertiesDelete.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.OnSingleLinkPropertiesDeleteClick);
 			// 
+			// barSubItemSingleLinkPropertiesOneDrive
+			// 
+			this.barSubItemSingleLinkPropertiesOneDrive.Caption = "OneDrive Link";
+			this.barSubItemSingleLinkPropertiesOneDrive.Id = 117;
+			this.barSubItemSingleLinkPropertiesOneDrive.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSingleLinkPropertiesOneDriveOpenUrl),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSingleLinkPropertiesOneDriveCopyUrl),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSingleLinkPropertiesOneDriveResetUrl)});
+			this.barSubItemSingleLinkPropertiesOneDrive.Name = "barSubItemSingleLinkPropertiesOneDrive";
+			// 
+			// barButtonItemSingleLinkPropertiesOneDriveOpenUrl
+			// 
+			this.barButtonItemSingleLinkPropertiesOneDriveOpenUrl.Caption = "Open Office 365 Link";
+			this.barButtonItemSingleLinkPropertiesOneDriveOpenUrl.Id = 118;
+			this.barButtonItemSingleLinkPropertiesOneDriveOpenUrl.Name = "barButtonItemSingleLinkPropertiesOneDriveOpenUrl";
+			this.barButtonItemSingleLinkPropertiesOneDriveOpenUrl.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.OnSingleLinkPropertiesOneDriveOpenUrlClick);
+			// 
+			// barButtonItemSingleLinkPropertiesOneDriveCopyUrl
+			// 
+			this.barButtonItemSingleLinkPropertiesOneDriveCopyUrl.Caption = "Copy URL";
+			this.barButtonItemSingleLinkPropertiesOneDriveCopyUrl.Id = 119;
+			this.barButtonItemSingleLinkPropertiesOneDriveCopyUrl.Name = "barButtonItemSingleLinkPropertiesOneDriveCopyUrl";
+			this.barButtonItemSingleLinkPropertiesOneDriveCopyUrl.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.OnSingleLinkPropertiesOneDriveCopyUrlClick);
+			// 
+			// barButtonItemSingleLinkPropertiesOneDriveResetUrl
+			// 
+			this.barButtonItemSingleLinkPropertiesOneDriveResetUrl.Caption = "Create NEW URL";
+			this.barButtonItemSingleLinkPropertiesOneDriveResetUrl.Id = 120;
+			this.barButtonItemSingleLinkPropertiesOneDriveResetUrl.Name = "barButtonItemSingleLinkPropertiesOneDriveResetUrl";
+			this.barButtonItemSingleLinkPropertiesOneDriveResetUrl.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.OnSingleLinkPropertiesOneDriveResetUrlClick);
+			// 
 			// barButtonItemSingleLinkPropertiesLinkSettings
 			// 
 			this.barButtonItemSingleLinkPropertiesLinkSettings.Caption = "Link Settings";
@@ -489,7 +521,8 @@
 			this.barSubItemSingleLinkPropertiesAdvanced.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSingleLinkPropertiesRefreshPreview),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSingleLinkPropertiesExpirationDate),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSingleLinkPropertiesSecurity)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSingleLinkPropertiesSecurity),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSingleLinkPropertiesCustomThumbnail)});
 			this.barSubItemSingleLinkPropertiesAdvanced.Name = "barSubItemSingleLinkPropertiesAdvanced";
 			// 
 			// barButtonItemSingleLinkPropertiesRefreshPreview
@@ -631,8 +664,9 @@
             this.barSubItemSingleLinkPropertiesOneDrive,
             this.barButtonItemSingleLinkPropertiesOneDriveOpenUrl,
             this.barButtonItemSingleLinkPropertiesOneDriveCopyUrl,
-            this.barButtonItemSingleLinkPropertiesOneDriveResetUrl});
-			this.barManager.MaxItemId = 121;
+            this.barButtonItemSingleLinkPropertiesOneDriveResetUrl,
+            this.barButtonItemSingleLinkPropertiesCustomThumbnail});
+			this.barManager.MaxItemId = 122;
 			// 
 			// barDockControlTop
 			// 
@@ -1116,36 +1150,12 @@
 			this.popupMenuMultiLinkProperties.MenuAppearance.AppearanceMenu.Pressed.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.None;
 			this.popupMenuMultiLinkProperties.Name = "popupMenuMultiLinkProperties";
 			// 
-			// barButtonItemSingleLinkPropertiesOneDrive
+			// barButtonItemSingleLinkPropertiesCustomThumbnail
 			// 
-			this.barSubItemSingleLinkPropertiesOneDrive.Caption = "OneDrive Link";
-			this.barSubItemSingleLinkPropertiesOneDrive.Id = 117;
-			this.barSubItemSingleLinkPropertiesOneDrive.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSingleLinkPropertiesOneDriveOpenUrl),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSingleLinkPropertiesOneDriveCopyUrl),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSingleLinkPropertiesOneDriveResetUrl)});
-			this.barSubItemSingleLinkPropertiesOneDrive.Name = "barSubItemSingleLinkPropertiesOneDrive";
-			// 
-			// barButtonItemSingleLinkPropertiesOneDriveOpenUrl
-			// 
-			this.barButtonItemSingleLinkPropertiesOneDriveOpenUrl.Caption = "Open Office 365 Link";
-			this.barButtonItemSingleLinkPropertiesOneDriveOpenUrl.Id = 118;
-			this.barButtonItemSingleLinkPropertiesOneDriveOpenUrl.Name = "barButtonItemSingleLinkPropertiesOneDriveOpenUrl";
-			this.barButtonItemSingleLinkPropertiesOneDriveOpenUrl.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.OnSingleLinkPropertiesOneDriveOpenUrlClick);
-			// 
-			// barButtonItemSingleLinkPropertiesOneDriveCopyUrl
-			// 
-			this.barButtonItemSingleLinkPropertiesOneDriveCopyUrl.Caption = "Copy URL";
-			this.barButtonItemSingleLinkPropertiesOneDriveCopyUrl.Id = 119;
-			this.barButtonItemSingleLinkPropertiesOneDriveCopyUrl.Name = "barButtonItemSingleLinkPropertiesOneDriveCopyUrl";
-			this.barButtonItemSingleLinkPropertiesOneDriveCopyUrl.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.OnSingleLinkPropertiesOneDriveCopyUrlClick);
-			// 
-			// barButtonItemSingleLinkPropertiesOneDriveResetUrl
-			// 
-			this.barButtonItemSingleLinkPropertiesOneDriveResetUrl.Caption = "Create NEW URL";
-			this.barButtonItemSingleLinkPropertiesOneDriveResetUrl.Id = 120;
-			this.barButtonItemSingleLinkPropertiesOneDriveResetUrl.Name = "barButtonItemSingleLinkPropertiesOneDriveResetUrl";
-			this.barButtonItemSingleLinkPropertiesOneDriveResetUrl.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.OnSingleLinkPropertiesOneDriveResetUrlClick);
+			this.barButtonItemSingleLinkPropertiesCustomThumbnail.Caption = "Set Server Image";
+			this.barButtonItemSingleLinkPropertiesCustomThumbnail.Id = 121;
+			this.barButtonItemSingleLinkPropertiesCustomThumbnail.Name = "barButtonItemSingleLinkPropertiesCustomThumbnail";
+			this.barButtonItemSingleLinkPropertiesCustomThumbnail.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.OnSingleLinkPropertiesCustomThumbnailClick);
 			// 
 			// ClassicFolderBox
 			// 
@@ -1278,5 +1288,6 @@
 		private DevExpress.XtraBars.BarButtonItem barButtonItemSingleLinkPropertiesOneDriveOpenUrl;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemSingleLinkPropertiesOneDriveCopyUrl;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemSingleLinkPropertiesOneDriveResetUrl;
+		private DevExpress.XtraBars.BarButtonItem barButtonItemSingleLinkPropertiesCustomThumbnail;
 	}
 }

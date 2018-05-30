@@ -34,7 +34,6 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		[NotMapped, JsonIgnore]
 		public string Url => RelativePath;
-
 		#endregion
 	}
 }

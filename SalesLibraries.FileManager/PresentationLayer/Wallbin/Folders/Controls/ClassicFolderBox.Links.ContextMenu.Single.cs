@@ -148,6 +148,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 				barButtonItemSingleLinkPropertiesExpirationDate.Visibility = BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesAdminSettings.Visibility = BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesThumbnail.Visibility = BarItemVisibility.Never;
+				barButtonItemSingleLinkPropertiesCustomThumbnail.Visibility = BarItemVisibility.Never;
 
 				barButtonItemSingleLinkPropertiesLinkSettings.Caption = "Line Break Settings";
 				barButtonItemSingleLinkPropertiesDelete.Caption = "Delete this Line Break";
@@ -166,6 +167,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 					? BarItemVisibility.Always
 					: BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesExpirationDate.Visibility = BarItemVisibility.Always;
+				barButtonItemSingleLinkPropertiesCustomThumbnail.Visibility = BarItemVisibility.Never;
 
 				barButtonItemSingleLinkPropertiesLinkSettings.Caption = "Link Bundle Settings";
 				barButtonItemSingleLinkPropertiesDelete.Caption = "Delete this Link Bundle";
@@ -232,6 +234,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 																		 linkRow.Source is IThumbnailSettingsHolder
 					? BarItemVisibility.Always
 					: BarItemVisibility.Never;
+				barButtonItemSingleLinkPropertiesCustomThumbnail.Visibility =
+					!linkRow.Inaccessable && linkRow.Source is PreviewableHyperLink hyperLink && hyperLink.HyperlinkPreviewContainer != null
+						? BarItemVisibility.Always
+						: BarItemVisibility.Never;
+
 
 				barButtonItemSingleLinkPropertiesLinkSettings.Caption = "Link Settings";
 				barButtonItemSingleLinkPropertiesDelete.Caption = "Delete";
@@ -443,6 +450,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 				EditSingleLinkSettings(LinkSettingsType.AdminSettings, LinkType.Pdf);
 			else if (sourceLink is ExcelLink)
 				EditSingleLinkSettings(LinkSettingsType.AdminSettings, LinkType.Excel);
+		}
+
+		private void OnSingleLinkPropertiesCustomThumbnailClick(object sender, ItemClickEventArgs e)
+		{
+			EditLinkCustomThumbnail();
 		}
 	}
 }

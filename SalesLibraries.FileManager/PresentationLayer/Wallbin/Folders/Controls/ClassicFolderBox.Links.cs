@@ -13,6 +13,7 @@ using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.HyperLinkInfo;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
+using SalesLibraries.Business.Entities.Wallbin.NonPersistent.PreviewContainerSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.DataState;
@@ -352,6 +353,27 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 		private void DeleteFolderLinks()
 		{
 			DeleteMultiLinks(grFiles.Rows.OfType<LinkRow>().Where(r => r.Source != null).Select(r => r.Source).ToList());
+		}
+
+		public void EditLinkCustomThumbnail()
+		{
+			var selectedRow = SelectedLinkRow;
+			if (!(selectedRow?.Source is PreviewableHyperLink sourceLink))
+				return;
+			var hyperLinkPreviewContainer = sourceLink.HyperlinkPreviewContainer;
+			if (hyperLinkPreviewContainer == null)
+				return;
+			if (!(hyperLinkPreviewContainer.Settings is HyperlinkPreviewContainerSettings hyperLinkPreviewSettings))
+				return;
+			using (var form = new FormEditLinkCustomThumbnail())
+			{
+				form.pictureEdit.Image = hyperLinkPreviewSettings.CustomThumbnail;
+				if (form.ShowDialog(MainController.Instance.MainForm) == DialogResult.OK)
+				{
+					hyperLinkPreviewSettings.CustomThumbnail = form.pictureEdit.Image;
+					DataChanged?.Invoke(this, EventArgs.Empty);
+				}
+			}
 		}
 
 		public void SelectAll(bool handleSelection = true)
