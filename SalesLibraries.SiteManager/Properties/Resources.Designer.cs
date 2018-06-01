@@ -213,6 +213,16 @@ namespace SalesLibraries.SiteManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ResetDataQueryCache {
+            get {
+                object obj = ResourceManager.GetObject("ResetDataQueryCache", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ShowInfo {
             get {
                 object obj = ResourceManager.GetObject("ShowInfo", resourceCulture);

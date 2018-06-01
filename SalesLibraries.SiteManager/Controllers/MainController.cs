@@ -36,6 +36,7 @@ namespace SalesLibraries.SiteManager.Controllers
 		public LibraryFilesController LibraryFilesController { get; private set; }
 		public InactiveUsersController InactiveUsersController { get; private set; }
 		public QBuilderController QBuilderController { get; private set; }
+		public DataQueryCacheController DataQueryCacheController { get; private set; }
 		public UtilitiesController UtilitiesController { get; private set; }
 		#endregion
 
@@ -70,6 +71,8 @@ namespace SalesLibraries.SiteManager.Controllers
 							Application.DoEvents();
 							QBuilderController.InitController();
 							Application.DoEvents();
+							DataQueryCacheController.InitController();
+							Application.DoEvents();
 							UtilitiesController.InitController();
 							Application.DoEvents();
 						});
@@ -101,6 +104,8 @@ namespace SalesLibraries.SiteManager.Controllers
 			_controllers.Add(TabPageEnum.InactiveUsers, InactiveUsersController);
 			QBuilderController = new QBuilderController();
 			_controllers.Add(TabPageEnum.QBuilder, QBuilderController);
+			DataQueryCacheController = new DataQueryCacheController();
+			_controllers.Add(TabPageEnum.DataQueryCache, DataQueryCacheController);
 			UtilitiesController = new UtilitiesController();
 			_controllers.Add(TabPageEnum.Utilities, UtilitiesController);
 		}
@@ -135,6 +140,7 @@ namespace SalesLibraries.SiteManager.Controllers
 		LibraryFiles,
 		InactiveUsers,
 		QBuilder,
+		DataQueryCache,
 		Utilities
 	}
 

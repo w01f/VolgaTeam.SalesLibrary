@@ -11,6 +11,7 @@
     <AssemblyName>SalesLibraries.ServiceConnector</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,7 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\RestSharp.105.2.3\lib\net451\RestSharp.dll</HintPath>
@@ -160,6 +161,7 @@
     <Compile Include="Services\Soap\Service.InactiveUsers.cs" />
     <Compile Include="Services\Soap\Service.QBuilder.cs" />
     <Compile Include="Services\Soap\Service.Statistic.cs" />
+    <Compile Include="Services\Soap\Service.ShortcutsDataQueryCache.cs" />
     <Compile Include="Services\Soap\Service.Utility.cs" />
     <Compile Include="Web References\AdminService\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -177,6 +179,11 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\QBuilderService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\ShortcutsDataQueryCacheService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -259,6 +266,17 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>SalesLibraries_ServiceConnector_QBuilderService_QBuilderControllerService</CachedSettingsPropName>
     </WebReferenceUrl>
+    <WebReferenceUrl Include="http://localhost/SalesLibraries/ShortcutsDataQueryCache/quote">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ShortcutsDataQueryCacheService\</RelPath>
+      <UpdateFromURL>http://localhost/SalesLibraries/ShortcutsDataQueryCache/quote</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>SalesLibraries_ServiceConnector_ShortcutsDataQueryCacheService_ShortcutsDataQueryCacheControllerService</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="http://localhost/SalesLibraries/statistic/quote">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\StatisticService\</RelPath>
@@ -338,6 +356,14 @@
     <None Include="Web References\QBuilderService\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\ShortcutsDataQueryCacheService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\ShortcutsDataQueryCacheService\ShortcutsDataQueryCacheController.wsdl" />
+    <None Include="Web References\ShortcutsDataQueryCacheService\SoapShortcutModel.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\StatisticService\AccessReportModel.datasource">
       <DependentUpon>Reference.map</DependentUpon>

@@ -8,6 +8,7 @@
 		public const string ActiveLibraries = "Active Libraries";
 		public const string InactiveUsers = "User Inactivity Emails";
 		public const string QuickSites = "quickSITES";
+		public const string DataQueryCache = "Snapshots";
 		public const string Utilities = "Cron Jobs";
 	}
 }

@@ -23,5 +23,8 @@
     <Setting Name="SalesLibraries_ServiceConnector_LinkConfigProfileService_LinkConfigProfileControllerService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://localhost/SalesLibraries/linkConfigProfile/quote?ws=1</Value>
     </Setting>
+    <Setting Name="SalesLibraries_ServiceConnector_ShortcutsDataQueryCacheService_ShortcutsDataQueryCacheControllerService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost/SalesLibraries/shortcutsDataQueryCache/quote?ws=1</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

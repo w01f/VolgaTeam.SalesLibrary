@@ -16,15 +16,14 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Previ
 			_bundleItems.AddRange(bundleItems);
 		}
 
-		public override Image GetThumbnail(object key, Size size, UseEmbeddedThumbnails useEmbeddedThumbnails, bool useExifOrientation,
-			bool useWIC)
+		public override Image GetThumbnail(object key, Size size, UseEmbeddedThumbnails useEmbeddedThumbnails, bool useExifOrientation)
 		{
 			var guid = (Guid)key;
 			return _bundleItems.Where(i => i.Id == guid).Select(i => (Image)i.Image.Clone()).FirstOrDefault();
 		}
 
 		public override string GetUniqueIdentifier(object key, Size size, UseEmbeddedThumbnails useEmbeddedThumbnails,
-			bool useExifOrientation, bool useWIC)
+			bool useExifOrientation)
 		{
 			var guid = (Guid)key;
 			return guid.ToString();
@@ -36,7 +35,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Previ
 			return _bundleItems.Where(i => i.Id == guid).Select(i => i.Id.ToString()).FirstOrDefault();
 		}
 
-		public override Utility.Tuple<ColumnType, string, object>[] GetDetails(Object key, bool useWIC)
+		public override Utility.Tuple<ColumnType, string, object>[] GetDetails(Object key)
 		{
 			return null;
 		}

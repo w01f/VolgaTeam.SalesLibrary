@@ -25,12 +25,6 @@
   <wsdl:message name="resetOpCacheOut">
     <wsdl:part name="return" type="xsd:string" />
   </wsdl:message>
-  <wsdl:message name="resetQueryDataCacheIn">
-    <wsdl:part name="sessionKey" type="xsd:string" />
-  </wsdl:message>
-  <wsdl:message name="resetQueryDataCacheOut">
-    <wsdl:part name="return" type="xsd:string" />
-  </wsdl:message>
   <wsdl:message name="getSessionKeyIn">
     <wsdl:part name="login" type="xsd:string" />
     <wsdl:part name="password" type="xsd:string" />
@@ -58,11 +52,6 @@
       <wsdl:documentation />
       <wsdl:input message="tns:resetOpCacheIn" />
       <wsdl:output message="tns:resetOpCacheOut" />
-    </wsdl:operation>
-    <wsdl:operation name="resetQueryDataCache">
-      <wsdl:documentation />
-      <wsdl:input message="tns:resetQueryDataCacheIn" />
-      <wsdl:output message="tns:resetQueryDataCacheOut" />
     </wsdl:operation>
     <wsdl:operation name="getSessionKey">
       <wsdl:documentation />
@@ -101,15 +90,6 @@
     </wsdl:operation>
     <wsdl:operation name="resetOpCache">
       <soap:operation soapAction="urn:UtilityControllerwsdl#resetOpCache" style="rpc" />
-      <wsdl:input>
-        <soap:body use="encoded" namespace="urn:UtilityControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="encoded" namespace="urn:UtilityControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="resetQueryDataCache">
-      <soap:operation soapAction="urn:UtilityControllerwsdl#resetQueryDataCache" style="rpc" />
       <wsdl:input>
         <soap:body use="encoded" namespace="urn:UtilityControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:input>

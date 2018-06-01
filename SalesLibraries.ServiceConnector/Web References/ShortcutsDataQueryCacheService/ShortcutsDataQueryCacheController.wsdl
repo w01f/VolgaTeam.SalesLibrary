@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:ShortcutsDataQueryCacheControllerwsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" xmlns="http://schemas.xmlsoap.org/wsdl/" name="ShortcutsDataQueryCacheController" targetNamespace="urn:ShortcutsDataQueryCacheControllerwsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="urn:ShortcutsDataQueryCacheControllerwsdl">
+      <xsd:complexType name="SoapShortcutModelArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute wsdl:arrayType="tns:SoapShortcutModel[]" ref="soap-enc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="SoapShortcutModel">
+        <xsd:all>
+          <xsd:element name="id" type="xsd:string" />
+          <xsd:element name="title" type="xsd:string" />
+          <xsd:element name="description" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="getLandingPagesIn">
+    <wsdl:part name="sessionKey" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getLandingPagesOut">
+    <wsdl:part name="return" type="tns:SoapShortcutModelArray" />
+  </wsdl:message>
+  <wsdl:message name="resetDataQueryCacheIn">
+    <wsdl:part name="sessionKey" type="xsd:string" />
+    <wsdl:part name="landingPageId" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="resetDataQueryCacheOut" />
+  <wsdl:message name="getSessionKeyIn">
+    <wsdl:part name="login" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getSessionKeyOut">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:portType name="ShortcutsDataQueryCacheControllerPortType">
+    <wsdl:operation name="getLandingPages">
+      <wsdl:documentation />
+      <wsdl:input message="tns:getLandingPagesIn" />
+      <wsdl:output message="tns:getLandingPagesOut" />
+    </wsdl:operation>
+    <wsdl:operation name="resetDataQueryCache">
+      <wsdl:documentation />
+      <wsdl:input message="tns:resetDataQueryCacheIn" />
+      <wsdl:output message="tns:resetDataQueryCacheOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getSessionKey">
+      <wsdl:documentation />
+      <wsdl:input message="tns:getSessionKeyIn" />
+      <wsdl:output message="tns:getSessionKeyOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ShortcutsDataQueryCacheControllerBinding" type="tns:ShortcutsDataQueryCacheControllerPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="getLandingPages">
+      <soap:operation soapAction="urn:ShortcutsDataQueryCacheControllerwsdl#getLandingPages" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ShortcutsDataQueryCacheControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ShortcutsDataQueryCacheControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="resetDataQueryCache">
+      <soap:operation soapAction="urn:ShortcutsDataQueryCacheControllerwsdl#resetDataQueryCache" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ShortcutsDataQueryCacheControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ShortcutsDataQueryCacheControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSessionKey">
+      <soap:operation soapAction="urn:ShortcutsDataQueryCacheControllerwsdl#getSessionKey" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ShortcutsDataQueryCacheControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ShortcutsDataQueryCacheControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ShortcutsDataQueryCacheControllerService">
+    <wsdl:port name="ShortcutsDataQueryCacheControllerPort" binding="tns:ShortcutsDataQueryCacheControllerBinding">
+      <soap:address location="http://localhost/SalesLibraries/shortcutsDataQueryCache/quote?ws=1" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

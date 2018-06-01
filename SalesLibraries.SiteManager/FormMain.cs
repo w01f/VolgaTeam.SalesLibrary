@@ -60,6 +60,9 @@ namespace SalesLibraries.SiteManager
 						case RibbonTabIdentifiers.QuickSites:
 							currentTab = ribbonTabItemQBuilder;
 							break;
+						case RibbonTabIdentifiers.DataQueryCache:
+							currentTab = ribbonTabItemDataQueryCache;
+							break;
 						case RibbonTabIdentifiers.Utilities:
 							currentTab = ribbonTabItemUtilities;
 							break;
@@ -99,6 +102,9 @@ namespace SalesLibraries.SiteManager
 					case TabPageEnum.QBuilder:
 						defaultTab = ribbonTabItemQBuilder;
 						break;
+					case TabPageEnum.DataQueryCache:
+						defaultTab = ribbonTabItemDataQueryCache;
+						break;
 					case TabPageEnum.Utilities:
 						defaultTab = ribbonTabItemUtilities;
 						break;
@@ -118,6 +124,8 @@ namespace SalesLibraries.SiteManager
 					defaultTabType = TabPageEnum.LinkConfigProfiles;
 				else if (defaultTab == ribbonTabItemQBuilder)
 					defaultTabType = TabPageEnum.QBuilder;
+				else if (defaultTab == ribbonTabItemDataQueryCache)
+					defaultTabType = TabPageEnum.DataQueryCache;
 				else if (defaultTab == ribbonTabItemUtilities)
 					defaultTabType = TabPageEnum.Utilities;
 				else
@@ -162,6 +170,10 @@ namespace SalesLibraries.SiteManager
 				ribbonBarQBuilderLogo.RecalcLayout();
 				ribbonPanelQBuilder.PerformLayout();
 
+				labelItemDataQueryCacheLogo.Image = image;
+				ribbonBarDataQueryCacheLogo.RecalcLayout();
+				ribbonPanelDataQueryCache.PerformLayout();
+
 				labelItemUtilitiesLogo.Image = image;
 				ribbonBarUtilitiesLogo.RecalcLayout();
 				ribbonPanelUtilities.PerformLayout();
@@ -189,6 +201,8 @@ namespace SalesLibraries.SiteManager
 				key = TabPageEnum.InactiveUsers;
 			if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemQBuilder)
 				key = TabPageEnum.QBuilder;
+			if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemDataQueryCache)
+				key = TabPageEnum.DataQueryCache;
 			if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemUtilities)
 				key = TabPageEnum.Utilities;
 			MainController.Instance.ShowTab(key);

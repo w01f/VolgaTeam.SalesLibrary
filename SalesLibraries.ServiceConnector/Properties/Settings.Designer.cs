@@ -12,7 +12,7 @@ namespace SalesLibraries.ServiceConnector.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.7.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -92,6 +92,17 @@ namespace SalesLibraries.ServiceConnector.Properties {
             get {
                 return ((string)(this["SalesLibraries_ServiceConnector_LinkConfigProfileService_LinkConfigProfileControl" +
                     "lerService"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost/SalesLibraries/shortcutsDataQueryCache/quote?ws=1")]
+        public string SalesLibraries_ServiceConnector_ShortcutsDataQueryCacheService_ShortcutsDataQueryCacheControllerService {
+            get {
+                return ((string)(this["SalesLibraries_ServiceConnector_ShortcutsDataQueryCacheService_ShortcutsDataQuery" +
+                    "CacheControllerService"]));
             }
         }
     }
