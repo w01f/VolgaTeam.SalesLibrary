@@ -28,9 +28,10 @@
 
 		/**
 		 * @param string $cacheId
+		 * @param boolean $ignoreExpirationDate
 		 * @return string
 		 */
-		public static function getCachedData($cacheId)
+		public static function getCachedData($cacheId, $ignoreExpirationDate)
 		{
 			/** @var \CDbCommand $dbCommand */
 			$dbCommand = \Yii::app()->db->createCommand();
@@ -42,8 +43,11 @@
 			$whereConditions = array(
 				'AND',
 				sprintf("qcache.id_block='%s'", $cacheId),
-				"qcache.expire is null or qcache.expire > curdate()",
 			);
+
+			if (!$ignoreExpirationDate)
+				$whereConditions[] = "qcache.expire is null or qcache.expire > curdate()";
+
 			$dbCommand = $dbCommand->where($whereConditions);
 
 			try

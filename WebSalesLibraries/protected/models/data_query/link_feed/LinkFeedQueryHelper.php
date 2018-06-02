@@ -25,7 +25,7 @@
 			$cacheSettings = isset($feedSettings->cacheSettings) ? $feedSettings->cacheSettings : new QueryCacheSettings();
 			if ($cacheSettings->enableCache)
 			{
-				$encodedData = \ShortcutDataQueryCacheRecord::getCachedData($cacheSettings->cacheId);
+				$encodedData = \ShortcutDataQueryCacheRecord::getCachedData($cacheSettings->cacheId, true);
 				if (!empty($encodedData))
 					$feedItems = \CJSON::decode($encodedData, false);
 			}
@@ -1235,7 +1235,7 @@
 			{
 				if ($cacheSettings->enableCache)
 				{
-					$encodedData = \ShortcutDataQueryCacheRecord::getCachedData($cacheSettings->cacheId);
+					$encodedData = \ShortcutDataQueryCacheRecord::getCachedData($cacheSettings->cacheId, false);
 					if (!empty($encodedData))
 						return;
 				}
@@ -1261,7 +1261,12 @@
 			if (isset($feedItems))
 			{
 				$encodedData = \CJSON::encode($feedItems);
-				$expirationDate = $cacheSettings->expireInHours > 0 ? date(\Yii::app()->params['mysqlDateTimeFormat'], strtotime('+' . $cacheSettings->expireInHours . ' hours')) : null;
+
+				if ($cacheSettings->expireInHours > 0)
+					$expirationDate = $cacheSettings->expireInHours > 0 ? date("Y-m-d H:59:00", strtotime('+' . ($cacheSettings->expireInHours - 1) . ' hours')) : null;
+				else
+					$expirationDate = null;
+
 				\ShortcutDataQueryCacheRecord::setCachedData($cacheSettings->cacheId, $encodedData, $expirationDate);
 			}
 		}
