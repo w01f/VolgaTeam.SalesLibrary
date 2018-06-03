@@ -10,6 +10,7 @@ using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
+using SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers;
 using SalesLibraries.Common.Configuration;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.OfficeInterops;
@@ -42,10 +43,8 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 				var oneDriveConnector = new OneDriveConnector();
 				AsyncHelper.RunSync(async () =>
 				{
-					await oneDriveConnector.ProcessLinksSync(targetLibrary.Pages
-						.SelectMany(p => p.AllGroupLinks)
-						.OfType<LibraryFileLink>()
-						.Where(f => !f.IsDead)
+					await oneDriveConnector.ProcessLinksSync(targetLibrary.PreviewContainers
+						.OfType<FilePreviewContainer>()
 						.ToList()
 						, cancellationToken);
 				});
@@ -95,10 +94,8 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 					var oneDriveConnector = new OneDriveConnector();
 					AsyncHelper.RunSync(async () =>
 					{
-						await oneDriveConnector.ProcessLinksSync(targetLibrary.Pages
-								.SelectMany(p => p.AllGroupLinks)
-								.OfType<LibraryFileLink>()
-								.Where(f => !f.IsDead)
+						await oneDriveConnector.ProcessLinksSync(targetLibrary.PreviewContainers
+								.OfType<FilePreviewContainer>()
 								.ToList()
 							, cancellationToken);
 					});
@@ -254,8 +251,8 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 			foreach (var previewContainer in previewContainers)
 			{
 				if (cancellationToken.IsCancellationRequested) break;
-				var previewGenerator = previewContainer.GetPreviewGenerator();
-				previewContainer.UpdateContent(previewGenerator, cancellationToken);
+				var previewGenerator = previewContainer.GetPreviewContentGenerator();
+				previewContainer.UpdatePreviewContent(previewGenerator, cancellationToken);
 			}
 		}
 

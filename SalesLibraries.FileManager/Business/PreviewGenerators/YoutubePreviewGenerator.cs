@@ -15,9 +15,9 @@ using SalesLibraries.FileManager.Controllers;
 namespace SalesLibraries.FileManager.Business.PreviewGenerators
 {
 	[IntendForClass(typeof(YoutubePreviewContainer))]
-	class YoutubePreviewGenerator : IPreviewGenerator
+	class YoutubePreviewGenerator : IPreviewContentGenerator
 	{
-		public void Generate(BasePreviewContainer previewContainer, CancellationToken cancellationToken)
+		public void GeneratePreviewContent(BasePreviewContainer previewContainer, CancellationToken cancellationToken)
 		{
 			var youtubePreviewContainer = (YoutubePreviewContainer)previewContainer;
 

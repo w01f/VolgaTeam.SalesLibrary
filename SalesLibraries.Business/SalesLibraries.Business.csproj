@@ -98,7 +98,8 @@
     <Compile Include="Entities\Interfaces\IDataSource.cs" />
     <Compile Include="Entities\Interfaces\ILinkBundleInfoItem.cs" />
     <Compile Include="Entities\Interfaces\ILinksGroup.cs" />
-    <Compile Include="Entities\Interfaces\IPreviewGenerator.cs" />
+    <Compile Include="Entities\Interfaces\IOneDriveContentGenerator.cs" />
+    <Compile Include="Entities\Interfaces\IPreviewContentGenerator.cs" />
     <Compile Include="Entities\Interfaces\ITableItem.cs" />
     <Compile Include="Entities\Interfaces\ICollectionItem.cs" />
     <Compile Include="Entities\Interfaces\IThumbnailSettingsHolder.cs" />
@@ -129,8 +130,9 @@
     <Compile Include="Entities\Wallbin\NonPersistent\OneDriveLibrarySettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkBundleSettings\CoverItem.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\PreviewContainerSettings\HyperlinkPreviewContainerSettings.cs" />
-    <Compile Include="Entities\Wallbin\NonPersistent\PreviewContainerSettings\CommonPreviewContainerSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\PreviewContainerSettings\BasePreviewContainerSettings.cs" />
+    <Compile Include="Entities\Wallbin\NonPersistent\PreviewContainerSettings\OneDrivePreviewSettings.cs" />
+    <Compile Include="Entities\Wallbin\NonPersistent\PreviewContainerSettings\FilePreviewContainerSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\PreviewContainerSettings\VideoPreviewContainerSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\ThumbnailSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\BannerSettings.cs" />
@@ -238,6 +240,7 @@
     <Compile Include="Entities\Wallbin\Persistent\Links\WebLink.cs" />
     <Compile Include="Entities\Wallbin\Persistent\Links\WordLink.cs" />
     <Compile Include="Entities\Wallbin\Persistent\PreviewContainers\BasePreviewContainer.cs" />
+    <Compile Include="Entities\Wallbin\Persistent\PreviewContainers\CommonFilePreviewContainer.cs" />
     <Compile Include="Entities\Wallbin\Persistent\PreviewContainers\ImagePreviewContainer.cs" />
     <Compile Include="Entities\Wallbin\Persistent\PreviewContainers\FilePreviewContainer.cs" />
     <Compile Include="Entities\Wallbin\Persistent\PreviewContainers\VideoPreviewContainer.cs" />
@@ -264,6 +267,9 @@
     <Compile Include="Contexts\Wallbin\Local\LegacyImportHelper.cs" />
     <Compile Include="Schema\Wallbin\Initialization\CloudlWallbinInitializer.cs" />
     <Compile Include="Schema\Wallbin\Initialization\LocalWallbinInitializer.cs" />
+    <Compile Include="Schema\Wallbin\Initialization\Patches\IPatch.cs" />
+    <Compile Include="Schema\Wallbin\Initialization\Patches\Patch11.cs" />
+    <Compile Include="Schema\Wallbin\Initialization\Patches\PatchController.cs" />
     <Compile Include="Schema\Wallbin\Initialization\WallbinInitializer.cs" />
     <Content Include="Schema\Wallbin\Base\sequense.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -272,6 +278,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Schema\Wallbin\Version10\sequense.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Schema\Wallbin\Version11\AfterPatch\sequense.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Schema\Wallbin\Version12\library_link.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Schema\Wallbin\Version12\sequense.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Schema\Wallbin\Version3\library_link.sql">

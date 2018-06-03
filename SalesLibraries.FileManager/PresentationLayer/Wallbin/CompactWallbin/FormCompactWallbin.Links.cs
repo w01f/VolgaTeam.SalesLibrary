@@ -51,7 +51,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.CompactWallbin
 
 		public void OpenLinkOnOneDrive(TreeListNode targetLinkNode)
 		{
-			if (!((targetLinkNode?.Tag as WallbinItem)?.Source is LibraryFileLink sourceLink) || String.IsNullOrEmpty(sourceLink.OneDriveSettings.Url))
+			if (!((targetLinkNode?.Tag as WallbinItem)?.Source is PreviewableFileLink sourceLink) || String.IsNullOrEmpty(sourceLink.OneDriveSettings.Url))
 				return;
 			Process.Start(sourceLink.OneDriveSettings.Url);
 		}
@@ -131,8 +131,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.CompactWallbin
 				{
 					link.ClearPreviewContainer();
 					var previewContainer = link.GetPreviewContainer();
-					var previewGenerator = previewContainer.GetPreviewGenerator();
-					previewContainer.UpdateContent(previewGenerator, cancelationToken);
+					var previewGenerator = previewContainer.GetPreviewContentGenerator();
+					previewContainer.UpdatePreviewContent(previewGenerator, cancelationToken);
 				}
 
 				var thubnailHolders = links.OfType<IThumbnailSettingsHolder>().ToList();

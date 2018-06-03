@@ -114,6 +114,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings.ResetLin
 			else
 			{
 				SelectedControl.ResetContent(MainController.Instance.WallbinViews.ActiveWallbin.DataStorage.Library);
+				MainController.Instance.WallbinViews.ActiveWallbin.IsDataChanged = true;
+				MainController.Instance.ProcessChanges();
 			}
 		}
 	}

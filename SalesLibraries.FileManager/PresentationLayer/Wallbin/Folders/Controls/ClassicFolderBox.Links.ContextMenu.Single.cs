@@ -177,6 +177,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 			else
 			{
 				var fileLink = linkRow.Source as LibraryFileLink;
+				var filePreviewableLink = linkRow.Source as PreviewableFileLink;
 
 				barSubItemSingleLinkPropertiesOpenLink.Visibility = !linkRow.Inaccessable
 					? BarItemVisibility.Always
@@ -189,7 +190,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 																			   linkRow.Source.ParentLibrary.SyncDate > linkRow.Source.AddDate
 					? BarItemVisibility.Always
 					: BarItemVisibility.Never;
-				barButtonItemSingleLinkPropertiesOpenLinkOneDriveLink.Visibility = MainController.Instance.Settings.OneDriveSettings.Enabled && !String.IsNullOrEmpty(fileLink?.OneDriveSettings.Url)
+				barButtonItemSingleLinkPropertiesOpenLinkOneDriveLink.Visibility = MainController.Instance.Settings.OneDriveSettings.Enabled && !String.IsNullOrEmpty(filePreviewableLink?.OneDriveSettings.Url)
 					? BarItemVisibility.Always
 					: BarItemVisibility.Never;
 
@@ -197,7 +198,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 					? BarItemVisibility.Always
 					: BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesOneDriveOpenUrl.Visibility =
-				barButtonItemSingleLinkPropertiesOneDriveCopyUrl.Visibility = !String.IsNullOrEmpty(fileLink?.OneDriveSettings.Url)
+				barButtonItemSingleLinkPropertiesOneDriveCopyUrl.Visibility = !String.IsNullOrEmpty(filePreviewableLink?.OneDriveSettings.Url)
 					? BarItemVisibility.Always
 					: BarItemVisibility.Never;
 

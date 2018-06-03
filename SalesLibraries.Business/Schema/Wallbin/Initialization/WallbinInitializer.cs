@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using SalesLibraries.Business.Contexts.Wallbin;
 using SalesLibraries.Business.Entities.Common;
+using SalesLibraries.Business.Schema.Wallbin.Initialization.Patches;
 using SalesLibraries.Common.Configuration;
 
 namespace SalesLibraries.Business.Schema.Wallbin.Initialization
@@ -12,8 +13,11 @@ namespace SalesLibraries.Business.Schema.Wallbin.Initialization
 	public abstract class WallbinInitializer<TLibraryContext> : IDatabaseInitializer<TLibraryContext>
 		where TLibraryContext : LibraryContext
 	{
-		private const int CurrentRevision = 10;
+		//TODO: Remove in next version OneDriveLinkSettings class and OneDriveEncoded field inside LibraryLink table
+		private const int CurrentRevision = 11;
+
 		protected TLibraryContext _context;
+		protected PatchController _patchController = new PatchController();
 
 		public void InitializeDatabase(TLibraryContext context)
 		{
@@ -40,7 +44,8 @@ namespace SalesLibraries.Business.Schema.Wallbin.Initialization
 				{
 					var releaseNumber = Convert.ToInt32(Path.GetFileName(versionPath).Replace(schemaVersionPrefix, String.Empty));
 					if (!firstInitialization && _context.Versions.Any(r => r.Revision == releaseNumber)) continue;
-					ApplySchemaVersion(versionPath);
+					if (releaseNumber > CurrentRevision) continue;
+					ApplySchemaVersion(versionPath, releaseNumber);
 					newVersions.Add(releaseNumber);
 				}
 			}
@@ -54,20 +59,61 @@ namespace SalesLibraries.Business.Schema.Wallbin.Initialization
 			}
 		}
 
-		private void ApplySchemaVersion(string storagePath)
+		private void ApplySchemaVersion(string storagePath, int? releaseNumber = null)
 		{
-			const string sequenceFileName = "sequense.txt";
-			var sequenceFilePath = Path.Combine(storagePath, sequenceFileName);
-			if (!File.Exists(sequenceFilePath)) return;
-			foreach (var scriptFile in File.ReadAllLines(sequenceFilePath))
+			if (File.Exists(Path.Combine(storagePath, "sequense.txt")))
 			{
-				if (String.IsNullOrEmpty(scriptFile)) continue;
-				var scriptPath = Path.Combine(storagePath, scriptFile);
-				if (!File.Exists(scriptPath)) continue;
-				foreach (var scriptPart in File.ReadAllText(scriptPath).Split(';'))
+				foreach (var scriptFileName in File.ReadAllLines(Path.Combine(storagePath, "sequense.txt")))
 				{
-					if (String.IsNullOrEmpty(scriptPart)) continue;
-					_context.Database.ExecuteSqlCommand(scriptPart);
+					if (String.IsNullOrEmpty(scriptFileName)) continue;
+					var scriptPath = Path.Combine(storagePath, scriptFileName);
+					if (!File.Exists(scriptPath)) continue;
+					foreach (var scriptPart in File.ReadAllText(scriptPath).Split(';'))
+					{
+						if (String.IsNullOrEmpty(scriptPart)) continue;
+						_context.Database.ExecuteSqlCommand(scriptPart);
+					}
+				}
+			}
+			else
+			{
+				var beforePatchScriptFilePath = Path.Combine(storagePath, "BeforePatch", "sequense.txt");
+				if (File.Exists(beforePatchScriptFilePath))
+				{
+					foreach (var scriptFile in File.ReadAllLines(beforePatchScriptFilePath))
+					{
+						if (String.IsNullOrEmpty(scriptFile)) continue;
+						var scriptPath = Path.Combine(storagePath, "BeforePatch", scriptFile);
+						if (!File.Exists(scriptPath)) continue;
+						foreach (var scriptPart in File.ReadAllText(scriptPath).Split(';'))
+						{
+							if (String.IsNullOrEmpty(scriptPart)) continue;
+							_context.Database.ExecuteSqlCommand(scriptPart);
+						}
+					}
+				}
+
+				if (releaseNumber.HasValue)
+				{
+					var actualPatches = _patchController.Patches.Where(p => p.Version == releaseNumber.Value).ToList();
+					actualPatches.ForEach(p => p.Apply(_context));
+					_context.SaveChanges();
+				}
+
+				var afterPatchScriptFilePath = Path.Combine(storagePath, "AfterPatch", "sequense.txt");
+				if (File.Exists(afterPatchScriptFilePath))
+				{
+					foreach (var scriptFile in File.ReadAllLines(afterPatchScriptFilePath))
+					{
+						if (String.IsNullOrEmpty(scriptFile)) continue;
+						var scriptPath = Path.Combine(storagePath, "AfterPatch", scriptFile);
+						if (!File.Exists(scriptPath)) continue;
+						foreach (var scriptPart in File.ReadAllText(scriptPath).Split(';'))
+						{
+							if (String.IsNullOrEmpty(scriptPart)) continue;
+							_context.Database.ExecuteSqlCommand(scriptPart);
+						}
+					}
 				}
 			}
 		}

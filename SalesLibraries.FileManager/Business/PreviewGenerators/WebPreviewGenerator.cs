@@ -17,9 +17,9 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 {
 	[IntendForClass(typeof(WebLinkPreviewContainer))]
 	[IntendForClass(typeof(QuickSitePreviewContainer))]
-	class WebPreviewGenerator : IPreviewGenerator
+	class WebPreviewGenerator : IPreviewContentGenerator
 	{
-		public void Generate(BasePreviewContainer previewContainer, CancellationToken cancellationToken)
+		public void GeneratePreviewContent(BasePreviewContainer previewContainer, CancellationToken cancellationToken)
 		{
 			var webPreviewContainer = (WebLinkPreviewContainer)previewContainer;
 

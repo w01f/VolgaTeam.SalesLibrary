@@ -57,10 +57,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			{
 				_data.ClearPreviewContainer();
 				var previewContainer = _data.GetPreviewContainer();
-				var previewGenerator = previewContainer.GetPreviewGenerator();
+				var previewGenerator = previewContainer.GetPreviewContentGenerator();
 				try
 				{
-					previewContainer.UpdateContent(previewGenerator, cancelationToken);
+					previewContainer.UpdatePreviewContent(previewGenerator, cancelationToken);
 				}
 				catch { }
 			});

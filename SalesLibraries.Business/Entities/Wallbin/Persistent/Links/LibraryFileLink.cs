@@ -39,14 +39,6 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		#endregion
 
 		#region Nonpersistent Properties
-		private OneDriveLinkSettings _oneDriveLinkSettings;
-		[NotMapped, JsonIgnore]
-		public OneDriveLinkSettings OneDriveSettings
-		{
-			get => _oneDriveLinkSettings ?? (_oneDriveLinkSettings = SettingsContainer.CreateInstance<OneDriveLinkSettings>(this, OneDriveEncoded));
-			set => _oneDriveLinkSettings = value;
-		}
-
 		[NotMapped, JsonIgnore]
 		public override IChangable Parent => (IChangable)FolderLink ?? Folder;
 
@@ -247,13 +239,6 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			return !File.Exists(FullPath);
 		}
 
-		public override void BeforeSave()
-		{
-			if (NeedToSave)
-				OneDriveEncoded = OneDriveSettings.Serialize();
-			base.BeforeSave();
-		}
-
 		public override void ApplyValues(BaseLibraryLink link)
 		{
 			IsDead = ((LibraryFileLink)link).IsDead;
@@ -280,23 +265,6 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			}
 
 			return link;
-		}
-
-		public override void ResetToDefault(IList<LinkSettingsGroupType> groupsForReset = null)
-		{
-			if (groupsForReset == null || groupsForReset.Contains(LinkSettingsGroupType.OneDrive))
-				OneDriveEncoded = null;
-			base.ResetToDefault(groupsForReset);
-		}
-
-		public override IList<LinkSettingsGroupType> GetCustomizedSettigsGroups()
-		{
-			var customizedSettingsGroups = base.GetCustomizedSettigsGroups().ToList();
-
-			if (OneDriveSettings.Enable)
-				customizedSettingsGroups.Add(LinkSettingsGroupType.OneDrive);
-
-			return customizedSettingsGroups;
 		}
 
 		public static LibraryFileLink Create(SourceLink sourceLink, LibraryFolder parentFolder)

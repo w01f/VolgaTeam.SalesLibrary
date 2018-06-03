@@ -216,7 +216,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 								settings.GeneratePreviewImages = true;
 							}
 						}
-						var previewGenerator = previewableLink.GetPreviewContainer().GetPreviewGenerator();
+						var previewGenerator = previewableLink.GetPreviewContainer().GetPreviewContentGenerator();
 						previewableLink.UpdatePreviewContainer(previewGenerator, cancelationToken);
 					}
 				}

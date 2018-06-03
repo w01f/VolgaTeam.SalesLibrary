@@ -12,7 +12,9 @@ using Microsoft.OneDrive.Sdk;
 using Microsoft.OneDrive.Sdk.Helpers;
 using Newtonsoft.Json.Linq;
 using RestSharp;
-using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
+using SalesLibraries.Business.Entities.Wallbin.NonPersistent.PreviewContainerSettings;
+using SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers;
+using SalesLibraries.FileManager.Business.PreviewGenerators;
 using SalesLibraries.FileManager.Controllers;
 using File = System.IO.File;
 
@@ -29,7 +31,7 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 		private string _rootFolderId;
 		private readonly Dictionary<string, string> _oneDriveFolders = new Dictionary<String, String>();
 
-		public async Task ProcessLinksSync(IList<LibraryFileLink> links, CancellationToken cancellationToken)
+		public async Task ProcessLinksSync(IList<FilePreviewContainer> previewContainers, CancellationToken cancellationToken)
 		{
 			InitSyncLog();
 
@@ -41,9 +43,8 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 
 				await InitRootFolder();
 
-				foreach (var fileLink in links)
+				foreach (var filePreviewContainer in previewContainers)
 				{
-					if (fileLink.IsFolder) continue;
 					if (cancellationToken.IsCancellationRequested)
 					{
 						_syncLog.AppendLine("Sync interropted by the user");
@@ -51,7 +52,8 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 					}
 					try
 					{
-						await UpdateLink(fileLink);
+						await UpdateLink(filePreviewContainer);
+						filePreviewContainer.GetOneDriveContentGenerator().GenerateOneDriveContent(filePreviewContainer, cancellationToken);
 					}
 					catch (Exception e)
 					{
@@ -69,7 +71,7 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 			}
 		}
 
-		public async Task ProcessLinksResetUrl(IList<LibraryFileLink> links, CancellationToken cancellationToken)
+		public async Task ProcessLinksResetUrl(IList<FilePreviewContainer> previewContainers, CancellationToken cancellationToken)
 		{
 			var succesfullProcessed = 0;
 			try
@@ -78,14 +80,14 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 
 				await InitRootFolder();
 
-				foreach (var fileLink in links)
+				foreach (var filePreviewContainer in previewContainers)
 				{
 					if (cancellationToken.IsCancellationRequested)
 						break;
 					try
 					{
-						if (!fileLink.IsFolder)
-							await ResetLinkUrl(fileLink);
+						await ResetLinkUrl(filePreviewContainer);
+						filePreviewContainer.GetOneDriveContentGenerator()?.GenerateOneDriveContent(filePreviewContainer, cancellationToken);
 						succesfullProcessed++;
 					}
 					catch
@@ -96,7 +98,7 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 			catch
 			{
 			}
-			if (links.Count > succesfullProcessed)
+			if (previewContainers.Count > succesfullProcessed)
 				throw new Exception("Links reset failed");
 		}
 
@@ -196,24 +198,26 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 			}
 		}
 
-		private async Task UpdateLink(LibraryFileLink link)
+		private async Task UpdateLink(FilePreviewContainer filePreviewContainer)
 		{
-			var itemPathParts = link.RelativePath.Split('\\').ToList();
-			var fileInfo = new FileInfo(link.FullPath);
+			var itemPathParts = filePreviewContainer.RelativePath.Split('\\').ToList();
+			var fileInfo = new FileInfo(filePreviewContainer.SourcePath);
 
-			if (link.OneDriveSettings.AppId == MainController.Instance.Settings.OneDriveSettings.AppId &&
-				link.OneDriveSettings.AppRoot == MainController.Instance.Settings.OneDriveSettings.RootPath &&
-				link.OneDriveSettings.UrlGeneratingDate.HasValue && link.OneDriveSettings.UrlGeneratingDate.Value >= fileInfo.LastWriteTime)
+			var oneDriveSettings = ((FilePreviewContainerSettings)filePreviewContainer.Settings).OneDriveSettings;
+
+			if (oneDriveSettings.AppId == MainController.Instance.Settings.OneDriveSettings.AppId &&
+				oneDriveSettings.AppRoot == MainController.Instance.Settings.OneDriveSettings.RootPath &&
+				oneDriveSettings.UrlGeneratingDate.HasValue && oneDriveSettings.UrlGeneratingDate.Value >= fileInfo.LastWriteTime)
 				return;
 
 			Item oneDriveLinkItem;
-			if (link.OneDriveSettings.Enable)
+			if (oneDriveSettings.Enable)
 			{
 				try
 				{
 					oneDriveLinkItem = await _client
 						.Drive
-						.Items[link.OneDriveSettings.ItemId]
+						.Items[oneDriveSettings.ItemId]
 						.Request()
 						.GetAsync();
 				}
@@ -221,7 +225,7 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 				{
 					if (e.Error?.Code == "itemNotFound")
 					{
-						link.OneDriveSettings.Reset();
+						oneDriveSettings.Reset();
 						oneDriveLinkItem = null;
 					}
 					else
@@ -239,9 +243,9 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 						.Request()
 						.GetAsync();
 
-					link.OneDriveSettings.ItemId = oneDriveLinkItem.Id;
-					link.OneDriveSettings.AppId = MainController.Instance.Settings.OneDriveSettings.AppId;
-					link.OneDriveSettings.AppRoot = MainController.Instance.Settings.OneDriveSettings.RootPath;
+					oneDriveSettings.ItemId = oneDriveLinkItem.Id;
+					oneDriveSettings.AppId = MainController.Instance.Settings.OneDriveSettings.AppId;
+					oneDriveSettings.AppRoot = MainController.Instance.Settings.OneDriveSettings.RootPath;
 				}
 				catch (ServiceException e)
 				{
@@ -307,7 +311,7 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 					}
 				}
 
-				using (var contentStream = new FileStream(link.FullPath, FileMode.Open, FileAccess.Read, FileShare.Read))
+				using (var contentStream = new FileStream(filePreviewContainer.SourcePath, FileMode.Open, FileAccess.Read, FileShare.Read))
 				{
 					if (fileInfo.Length < fileChunckSize)
 					{
@@ -364,17 +368,17 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 						}
 
 						if (oneDriveLinkItem == null)
-							throw new Exception(String.Format("File uploading failed: {0}", link.FullPath));
+							throw new Exception(String.Format("File uploading failed: {0}", filePreviewContainer.SourcePath));
 					}
 				}
 
-				link.OneDriveSettings.ItemId = oneDriveLinkItem.Id;
-				link.OneDriveSettings.AppId = MainController.Instance.Settings.OneDriveSettings.AppId;
-				link.OneDriveSettings.AppRoot = MainController.Instance.Settings.OneDriveSettings.RootPath;
-				_syncLog.AppendLine(String.Format("File uploaded: Path - {0}", link.FullPath));
+				oneDriveSettings.ItemId = oneDriveLinkItem.Id;
+				oneDriveSettings.AppId = MainController.Instance.Settings.OneDriveSettings.AppId;
+				oneDriveSettings.AppRoot = MainController.Instance.Settings.OneDriveSettings.RootPath;
+				_syncLog.AppendLine(String.Format("File uploaded: Path - {0}", filePreviewContainer.SourcePath));
 			}
 
-			if (String.IsNullOrEmpty(link.OneDriveSettings.Url))
+			if (String.IsNullOrEmpty(oneDriveSettings.Url))
 			{
 				var restClient = new RestClient("https://graph.microsoft.com");
 				var restRequest = new RestRequest(String.Format("/v1.0/me/drive/items/{0}/createLink", oneDriveLinkItem.Id), Method.POST);
@@ -395,27 +399,29 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 				if (!String.IsNullOrEmpty(restResponseData?.error?.message?.ToString()))
 					throw new Exception(String.Format("Shared link assigning failed: {0}", restResponseData?.error?.message?.ToString()));
 
-				link.OneDriveSettings.UrlId = restResponseData?.id;
-				link.OneDriveSettings.Url = restResponseData?.link?.webUrl;
-				link.OneDriveSettings.UrlGeneratingDate = DateTime.Now;
+				oneDriveSettings.UrlId = restResponseData?.id;
+				oneDriveSettings.Url = restResponseData?.link?.webUrl;
+				oneDriveSettings.UrlGeneratingDate = DateTime.Now;
 
-				_syncLog.AppendLine(String.Format("Shared link assigned: {0}", link.OneDriveSettings.Url));
+				_syncLog.AppendLine(String.Format("Shared link assigned: {0}", oneDriveSettings.Url));
 			}
 		}
 
-		private async Task ResetLinkUrl(LibraryFileLink link)
+		private async Task ResetLinkUrl(FilePreviewContainer filePreviewContainer)
 		{
-			var itemPathParts = link.RelativePath.Split('\\').ToList();
-			var fileInfo = new FileInfo(link.FullPath);
+			var itemPathParts = filePreviewContainer.RelativePath.Split('\\').ToList();
+			var fileInfo = new FileInfo(filePreviewContainer.SourcePath);
+
+			var oneDriveSettings = ((FilePreviewContainerSettings)filePreviewContainer.Settings).OneDriveSettings;
 
 			Item oneDriveLinkItem;
-			if (link.OneDriveSettings.Enable)
+			if (oneDriveSettings.Enable)
 			{
 				try
 				{
 					oneDriveLinkItem = await _client
 						.Drive
-						.Items[link.OneDriveSettings.ItemId]
+						.Items[oneDriveSettings.ItemId]
 						.Request()
 						.GetAsync();
 				}
@@ -423,7 +429,7 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 				{
 					if (e.Error?.Code == "itemNotFound")
 					{
-						link.OneDriveSettings.Reset();
+						oneDriveSettings.Reset();
 						oneDriveLinkItem = null;
 					}
 					else
@@ -441,9 +447,9 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 						.Request()
 						.GetAsync();
 
-					link.OneDriveSettings.ItemId = oneDriveLinkItem.Id;
-					link.OneDriveSettings.AppId = MainController.Instance.Settings.OneDriveSettings.AppId;
-					link.OneDriveSettings.AppRoot = MainController.Instance.Settings.OneDriveSettings.RootPath;
+					oneDriveSettings.ItemId = oneDriveLinkItem.Id;
+					oneDriveSettings.AppId = MainController.Instance.Settings.OneDriveSettings.AppId;
+					oneDriveSettings.AppRoot = MainController.Instance.Settings.OneDriveSettings.RootPath;
 				}
 				catch (ServiceException e)
 				{
@@ -509,7 +515,7 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 					}
 				}
 
-				using (var contentStream = new FileStream(link.FullPath, FileMode.Open, FileAccess.Read, FileShare.Read))
+				using (var contentStream = new FileStream(filePreviewContainer.SourcePath, FileMode.Open, FileAccess.Read, FileShare.Read))
 				{
 					if (fileInfo.Length < fileChunckSize)
 					{
@@ -570,25 +576,25 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 						}
 
 						if (oneDriveLinkItem == null)
-							throw new Exception(String.Format("File uploading failed: {0}", link.FullPath));
+							throw new Exception(String.Format("File uploading failed: {0}", filePreviewContainer.SourcePath));
 					}
 				}
 
-				link.OneDriveSettings.ItemId = oneDriveLinkItem.Id;
-				link.OneDriveSettings.AppId = MainController.Instance.Settings.OneDriveSettings.AppId;
-				link.OneDriveSettings.AppRoot = MainController.Instance.Settings.OneDriveSettings.RootPath;
+				oneDriveSettings.ItemId = oneDriveLinkItem.Id;
+				oneDriveSettings.AppId = MainController.Instance.Settings.OneDriveSettings.AppId;
+				oneDriveSettings.AppRoot = MainController.Instance.Settings.OneDriveSettings.RootPath;
 			}
-			else if (!String.IsNullOrEmpty(link.OneDriveSettings.UrlId))
+			else if (!String.IsNullOrEmpty(oneDriveSettings.UrlId))
 			{
 				await _client
 					.Drive
 					.Items[oneDriveLinkItem.Id]
-					.Permissions[link.OneDriveSettings.UrlId]
+					.Permissions[oneDriveSettings.UrlId]
 					.Request()
 					.DeleteAsync();
 
-				link.OneDriveSettings.UrlId = null;
-				link.OneDriveSettings.Url = null;
+				oneDriveSettings.UrlId = null;
+				oneDriveSettings.Url = null;
 			}
 
 			{
@@ -598,7 +604,7 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 				restRequest.AddHeader("Accept", "*/*");
 				restRequest.AddHeader("Content-Type", "application/json");
 				restRequest.AddHeader("Authorization",
-					String.Format("bearer {0}", ((AuthenticationProvider) _client.AuthenticationProvider).AccessToken));
+					String.Format("bearer {0}", ((AuthenticationProvider)_client.AuthenticationProvider).AccessToken));
 				restRequest.AddJsonBody(new
 				{
 					type = "view",
@@ -615,9 +621,9 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 					throw new Exception(String.Format("Shared link assigning failed: {0}",
 						restResponseData?.error?.message?.ToString()));
 
-				link.OneDriveSettings.UrlId = restResponseData?.id;
-				link.OneDriveSettings.Url = restResponseData?.link?.webUrl;
-				link.OneDriveSettings.UrlGeneratingDate = DateTime.Now;
+				oneDriveSettings.UrlId = restResponseData?.id;
+				oneDriveSettings.Url = restResponseData?.link?.webUrl;
+				oneDriveSettings.UrlGeneratingDate = DateTime.Now;
 			}
 		}
 

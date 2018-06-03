@@ -10,9 +10,9 @@ using SalesLibraries.FileManager.Business.Services;
 namespace SalesLibraries.FileManager.Business.PreviewGenerators
 {
 	[IntendForClass(typeof(ColdFusionLinkPreviewContainer))]
-	class ColdFusionPreviewGenerator : IPreviewGenerator
+	class ColdFusionPreviewGenerator : IPreviewContentGenerator
 	{
-		public void Generate(BasePreviewContainer previewContainer, CancellationToken cancellationToken)
+		public void GeneratePreviewContent(BasePreviewContainer previewContainer, CancellationToken cancellationToken)
 		{
 			var coldFusionLinkPreviewContainer = (ColdFusionLinkPreviewContainer)previewContainer;
 

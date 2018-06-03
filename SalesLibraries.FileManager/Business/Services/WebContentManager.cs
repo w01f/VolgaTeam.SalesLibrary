@@ -11,6 +11,7 @@ using SalesLibraries.Business.Entities.Wallbin.Common.Constants;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkBundleSettings;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
+using SalesLibraries.Business.Entities.Wallbin.NonPersistent.PreviewContainerSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers;
@@ -221,7 +222,7 @@ namespace SalesLibraries.FileManager.Business.Services
 			target.thumbnail = new SoapThumbnail();
 			target.thumbnail.ImportData(source.Thumbnail);
 
-			if (source is LibraryFileLink libraryFileLink)
+			if (source is PreviewableFileLink libraryFileLink)
 			{
 				target.oneDrive = new SoapOneDrive();
 				target.oneDrive.ImportData(libraryFileLink.OneDriveSettings);
@@ -827,7 +828,7 @@ namespace SalesLibraries.FileManager.Business.Services
 
 		private static void ImportData(
 			this SoapOneDrive target,
-			OneDriveLinkSettings source)
+			OneDrivePreviewSettings source)
 		{
 			target.url = source.Url;
 		}

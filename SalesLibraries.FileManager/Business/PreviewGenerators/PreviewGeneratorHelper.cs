@@ -9,18 +9,30 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 {
 	static class PreviewGeneratorHelper
 	{
-		public static IPreviewGenerator GetPreviewGenerator(this BasePreviewContainer previewContainer)
+		public static IPreviewContentGenerator GetPreviewContentGenerator(this BasePreviewContainer previewContainer)
 		{
-			var previewGenerators = ObjectIntendHelper.GetObjectInstances(
-				typeof(IPreviewGenerator),
+			var previewContentGenerators = ObjectIntendHelper.GetObjectInstances(
+				typeof(IPreviewContentGenerator),
 				EntitySettingsResolver.ExtractObjectTypeFromProxy(previewContainer.GetType()))
-				.OfType<IPreviewGenerator>()
+				.OfType<IPreviewContentGenerator>()
 				.ToList();
-			if (!previewGenerators.Any())
+			if (!previewContentGenerators.Any())
 				throw new NotImplementedException("Preview Generator was not found for that type");
-			if (previewGenerators.Count > 1)
-				throw new NotImplementedException("Several Preview Generators was not found for that type");
-			return previewGenerators.Single();
+			if (previewContentGenerators.Count > 1)
+				throw new NotImplementedException("Several Preview Generators were found for that type");
+			return previewContentGenerators.Single();
+		}
+
+		public static IOneDriveContentGenerator GetOneDriveContentGenerator(this FilePreviewContainer previewContainer)
+		{
+			var oneDriveContentGenerators = ObjectIntendHelper.GetObjectInstances(
+					typeof(IOneDriveContentGenerator),
+					EntitySettingsResolver.ExtractObjectTypeFromProxy(previewContainer.GetType()))
+				.OfType<IOneDriveContentGenerator>()
+				.ToList();
+			if (oneDriveContentGenerators.Count > 1)
+				throw new NotImplementedException("Several Preview Generators were found for that type");
+			return oneDriveContentGenerators.FirstOrDefault() ?? new CommonFilePreviewGenerator();
 		}
 	}
 }

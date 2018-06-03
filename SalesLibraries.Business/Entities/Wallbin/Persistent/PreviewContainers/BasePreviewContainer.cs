@@ -87,29 +87,30 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 
 		public virtual void InitDefaultSettings() { }
 
-		public void UpdateContent(IPreviewGenerator generator, CancellationToken cancellationToken)
+		public void UpdatePreviewContent(IPreviewContentGenerator generator, CancellationToken cancellationToken)
 		{
 			if (generator == null)
 				throw new NotImplementedException("Preview Generator is not implemented for that file format");
 			var associatedLinks = Library.GetPreviewableLinksBySourcePath(SourcePath).ToList();
-			UpdateContent(associatedLinks, generator, cancellationToken);
+			UpdatePreviewContent(associatedLinks, generator, cancellationToken);
 		}
 
-		public void UpdateContent(IList<IPreviewableLink> associatedLinks, IPreviewGenerator generator, CancellationToken cancellationToken)
+		public virtual void UpdatePreviewContent(IList<IPreviewableLink> associatedLinks, IPreviewContentGenerator generator, CancellationToken cancellationToken)
 		{
 			if (generator == null)
 				throw new NotImplementedException("Preview Generator is not implemented for that file format");
 			UpdateState(associatedLinks);
-			if (IsUpToDate)
-				return;
-			MarkAsModified();
-			if (IsAlive)
+			if (!IsUpToDate)
 			{
-				ClearContent();
-				generator.Generate(this, cancellationToken);
+				MarkAsModified();
+				if (IsAlive)
+				{
+					ClearContent();
+					generator.GeneratePreviewContent(this, cancellationToken);
+				}
+				else
+					DeleteContainer();
 			}
-			else
-				DeleteContainer();
 		}
 
 		public void ClearContent()
@@ -150,8 +151,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 			else if (FileFormatHelper.IsVideoFile(sourceFile))
 				previewContainer = CreateEntity<VideoPreviewContainer>();
 			else if (FileFormatHelper.IsPngFile(sourceFile) ||
-				FileFormatHelper.IsJpegFile(sourceFile) ||
-				FileFormatHelper.IsGifFile(sourceFile))
+					 FileFormatHelper.IsJpegFile(sourceFile) ||
+					 FileFormatHelper.IsGifFile(sourceFile))
 				previewContainer = CreateEntity<ImagePreviewContainer>();
 			else if (sourceFile.Contains("youtu"))
 				previewContainer = CreateEntity<YoutubePreviewContainer>();
@@ -163,6 +164,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 				previewContainer = CreateEntity<Html5PreviewContainer>();
 			else if (sourceFile.Contains(".cfm"))
 				previewContainer = CreateEntity<ColdFusionLinkPreviewContainer>();
+			else if (!String.IsNullOrEmpty(sourceFile) && File.Exists(sourceFile))
+				previewContainer = CreateEntity<CommonFilePreviewContainer>();
 			else
 				previewContainer = CreateEntity<WebLinkPreviewContainer>();
 

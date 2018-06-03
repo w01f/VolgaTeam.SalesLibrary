@@ -138,7 +138,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.CompactWallbin
 					? BarItemVisibility.Always
 					: BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesOpenLinkOneDriveLink.Visibility = MainController.Instance.Settings.OneDriveSettings.Enabled &&
-																				sourceLink is LibraryFileLink fileLink &&
+																				sourceLink is PreviewableFileLink fileLink &&
 																				!String.IsNullOrEmpty(fileLink.OneDriveSettings.Url)
 					? BarItemVisibility.Always
 					: BarItemVisibility.Never;

@@ -137,10 +137,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 				{
 					link.ClearPreviewContainer();
 					var previewContainer = link.GetPreviewContainer();
-					var previewGenerator = previewContainer.GetPreviewGenerator();
+					var previewGenerator = previewContainer.GetPreviewContentGenerator();
 					try
 					{
-						previewContainer.UpdateContent(previewGenerator, cancelationToken);
+						previewContainer.UpdatePreviewContent(previewGenerator, cancelationToken);
 					}
 					catch { }
 				}

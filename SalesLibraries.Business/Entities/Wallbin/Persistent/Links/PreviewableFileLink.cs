@@ -2,6 +2,7 @@
 using System.Threading;
 using Newtonsoft.Json;
 using SalesLibraries.Business.Entities.Interfaces;
+using SalesLibraries.Business.Entities.Wallbin.NonPersistent.PreviewContainerSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers;
 
 namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
@@ -18,6 +19,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		public string PreviewContainerPath => GetPreviewContainer().ContainerPath;
 		[NotMapped, JsonIgnore]
 		public string PreviewContainerName => GetPreviewContainer().ExtId.ToString("D");
+		[NotMapped, JsonIgnore]
+		public OneDrivePreviewSettings OneDriveSettings => ((FilePreviewContainerSettings)GetPreviewContainer().Settings).OneDriveSettings;
 		#endregion
 
 		protected override void AfterCreate()
@@ -37,10 +40,10 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			GetPreviewContainer().ClearContent();
 		}
 
-		public void UpdatePreviewContainer(IPreviewGenerator generator, CancellationToken cancelationToken)
+		public void UpdatePreviewContainer(IPreviewContentGenerator generator, CancellationToken cancelationToken)
 		{
 			ClearPreviewContainer();
-			GetPreviewContainer().UpdateContent(new[] { this }, generator, cancelationToken);
+			GetPreviewContainer().UpdatePreviewContent(new[] { this }, generator, cancelationToken);
 		}
 	}
 }

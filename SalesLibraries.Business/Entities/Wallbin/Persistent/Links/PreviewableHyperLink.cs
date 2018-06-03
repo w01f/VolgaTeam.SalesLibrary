@@ -50,10 +50,10 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			GetPreviewContainer().ClearContent();
 		}
 
-		public void UpdatePreviewContainer(IPreviewGenerator generator, CancellationToken cancelationToken)
+		public void UpdatePreviewContainer(IPreviewContentGenerator generator, CancellationToken cancelationToken)
 		{
 			ClearPreviewContainer();
-			GetPreviewContainer().UpdateContent(new[] { this }, generator, cancelationToken);
+			GetPreviewContainer().UpdatePreviewContent(new[] { this }, generator, cancelationToken);
 		}
 
 		public IList<string> GetThumbnailSourceFiles()

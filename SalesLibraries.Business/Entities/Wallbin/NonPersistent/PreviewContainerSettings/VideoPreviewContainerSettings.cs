@@ -1,6 +1,6 @@
 ﻿namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.PreviewContainerSettings
 {
-	public class VideoPreviewContainerSettings : BasePreviewContainerSettings
+	public class VideoPreviewContainerSettings : FilePreviewContainerSettings
 	{
 		public VideoConvertSettings VideoConvertSettings { get; private set; }
 

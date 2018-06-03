@@ -5,7 +5,7 @@ using SalesLibraries.Business.Entities.Wallbin.Common.Constants;
 
 namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 {
-	public class CommonFileLink : LibraryFileLink
+	public class CommonFileLink : PreviewableFileLink
 	{
 		#region Nonpersistent Properties
 		[NotMapped, JsonIgnore]

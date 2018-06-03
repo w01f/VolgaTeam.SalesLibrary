@@ -1,19 +1,18 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using System.Threading;
-using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Constants;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.FileManager.Business.Services;
+using SalesLibraries.FileManager.Controllers;
 
 namespace SalesLibraries.FileManager.Business.PreviewGenerators
 {
 	[IntendForClass(typeof(PdfPreviewContainer))]
-	class PdfPreviewGenerator : IPreviewGenerator
+	class PdfPreviewGenerator : FilePreviewGenerator
 	{
-		public void Generate(BasePreviewContainer previewContainer, CancellationToken cancellationToken)
+		public override void GeneratePreviewContent(BasePreviewContainer previewContainer, CancellationToken cancellationToken)
 		{
 			var updated = false;
 			var pdfContainer = (PdfPreviewContainer)previewContainer;
@@ -45,12 +44,6 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 			var updateThumbsDatatable = !(Directory.Exists(thumbsDatatableDestination) && Directory.GetFiles(thumbsDatatableDestination).Any());
 			if (updateThumbsDatatable && !Directory.Exists(thumbsDatatableDestination))
 				Directory.CreateDirectory(thumbsDatatableDestination);
-
-			var oneDriveUrl = pdfContainer.OneDriveUrl;
-			var oneDriveUrlDestination = Path.Combine(pdfContainer.ContainerPath, PreviewFormats.OneDrive);
-			var updateOneDrive = !Directory.Exists(oneDriveUrlDestination) && !String.IsNullOrEmpty(oneDriveUrl);
-			if (!Directory.Exists(oneDriveUrlDestination) && updateOneDrive)
-				Directory.CreateDirectory(oneDriveUrlDestination);
 
 			if (updatePng || updateThumbs || updateThumbsDatatable)
 			{
@@ -87,12 +80,9 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 				previewContainer.MarkAsModified();
 			}
 
-			if (updateOneDrive)
+			if (MainController.Instance.Settings.OneDriveSettings.Enabled)
 			{
-				OneDrivePreviewHelper.GenerateShortcutFiles(
-					oneDriveUrl,
-					Path.GetFileName(previewContainer.SourcePath),
-					oneDriveUrlDestination);
+				GenerateOneDriveContent(pdfContainer, cancellationToken);
 				logger.LogStage(PreviewFormats.OneDrive);
 			}
 

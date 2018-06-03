@@ -199,7 +199,7 @@ namespace SalesLibraries.FileManager.Controllers
 		{
 			var selectedFolder = MainController.Instance.WallbinViews.Selection.SelectedFolder;
 			var selectedLinks = MainController.Instance.WallbinViews.Selection.SelectedLinks.ToList();
-			var currentFileLink = selectedFolder?.SelectedLinkRow?.Source as LibraryFileLink;
+			var currentFileLink = selectedFolder?.SelectedLinkRow?.Source as PreviewableFileLink;
 
 			MainController.Instance.MainForm.buttonItemHomeAddUrl.Enabled =
 			MainController.Instance.MainForm.buttonItemHomeAddLineBreak.Enabled = selectedFolder != null;

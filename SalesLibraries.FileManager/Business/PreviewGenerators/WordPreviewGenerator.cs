@@ -3,19 +3,19 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using Microsoft.Office.Interop.Word;
-using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Constants;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.OfficeInterops;
 using SalesLibraries.FileManager.Business.Services;
+using SalesLibraries.FileManager.Controllers;
 
 namespace SalesLibraries.FileManager.Business.PreviewGenerators
 {
 	[IntendForClass(typeof(WordPreviewContainer))]
-	class WordPreviewGenerator : IPreviewGenerator
+	class WordPreviewGenerator : FilePreviewGenerator
 	{
-		public void Generate(BasePreviewContainer previewContainer, CancellationToken cancellationToken)
+		public override void GeneratePreviewContent(BasePreviewContainer previewContainer, CancellationToken cancellationToken)
 		{
 			var wordContainer = (WordPreviewContainer)previewContainer;
 
@@ -62,12 +62,6 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 				wordContainer.GenerateText;
 			if (updateTxt && !Directory.Exists(txtDestination))
 				Directory.CreateDirectory(txtDestination);
-
-			var oneDriveUrl = wordContainer.OneDriveUrl;
-			var oneDriveUrlDestination = Path.Combine(wordContainer.ContainerPath, PreviewFormats.OneDrive);
-			var updateOneDrive = !Directory.Exists(oneDriveUrlDestination) && !String.IsNullOrEmpty(oneDriveUrl);
-			if (!Directory.Exists(oneDriveUrlDestination) && updateOneDrive)
-				Directory.CreateDirectory(oneDriveUrlDestination);
 
 			var needToUpdate = updatePdf ||
 				updatePng ||
@@ -180,19 +174,16 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 
 			} while (!updated && tryCount < 10);
 
-			if (updateOneDrive)
-			{
-				OneDrivePreviewHelper.GenerateShortcutFiles(
-					oneDriveUrl,
-					Path.GetFileName(previewContainer.SourcePath),
-					oneDriveUrlDestination);
-				logger.LogStage(PreviewFormats.OneDrive);
-			}
-			
 			if (needToUpdate)
 			{
 				PngHelper.ConvertFiles(wordContainer.ContainerPath);
 				previewContainer.MarkAsModified();
+			}
+
+			if (MainController.Instance.Settings.OneDriveSettings.Enabled)
+			{
+				GenerateOneDriveContent((FilePreviewContainer)previewContainer, cancellationToken);
+				logger.LogStage(PreviewFormats.OneDrive);
 			}
 
 			logger.FinishLogging();

@@ -135,8 +135,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings.ResetLin
 					{
 						if (cancelationToken.IsCancellationRequested) break;
 						previewContainer.ClearContent();
-						var previewGenerator = previewContainer.GetPreviewGenerator();
-						previewContainer.UpdateContent(previewGenerator, cancelationToken);
+						var previewGenerator = previewContainer.GetPreviewContentGenerator();
+						previewContainer.UpdatePreviewContent(previewGenerator, cancelationToken);
 					}
 				});
 			}

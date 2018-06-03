@@ -16,6 +16,7 @@ using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.PreviewContainerSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
+using SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers;
 using SalesLibraries.Common.DataState;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.OfficeInterops;
@@ -228,7 +229,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 		public void OpenLinkOnOneDrive()
 		{
 			var selectedRow = SelectedLinkRow;
-			if (!(selectedRow?.Source is LibraryFileLink sourceLink) || String.IsNullOrEmpty(sourceLink.OneDriveSettings.Url))
+			if (!(selectedRow?.Source is PreviewableFileLink sourceLink) || String.IsNullOrEmpty(sourceLink.OneDriveSettings.Url))
 				return;
 			Process.Start(sourceLink.OneDriveSettings.Url);
 		}
@@ -236,7 +237,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 		public void CopyOneDriveUrl()
 		{
 			var selectedRow = SelectedLinkRow;
-			if (!(selectedRow?.Source is LibraryFileLink sourceLink) || String.IsNullOrEmpty(sourceLink.OneDriveSettings.Url))
+			if (!(selectedRow?.Source is PreviewableFileLink sourceLink) || String.IsNullOrEmpty(sourceLink.OneDriveSettings.Url))
 				return;
 
 			var url = sourceLink.OneDriveSettings.Url;
@@ -271,7 +272,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 		public void ResetOneDriveUrl()
 		{
 			var selectedRow = SelectedLinkRow;
-			if (!(selectedRow?.Source is LibraryFileLink sourceLink) || String.IsNullOrEmpty(sourceLink.OneDriveSettings.Url))
+			if (!(selectedRow?.Source is PreviewableFileLink sourceLink) || String.IsNullOrEmpty(sourceLink.OneDriveSettings.Url))
 				return;
 			var successfullResult = false;
 			MainController.Instance.ProcessManager.Run("Processing OneDrive links...", (cancelationToken, formProgess) =>
@@ -283,7 +284,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 					try
 					{
 						await oneDriveConnector.ProcessLinksResetUrl(links
-								.Where(f => !f.IsDead)
+								.Select(f => f.GetPreviewContainer())
+								.OfType<FilePreviewContainer>()
 								.ToList()
 							, cancelationToken);
 						successfullResult = true;
@@ -294,9 +296,13 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 			});
 
 			if (successfullResult)
+			{
 				MainController.Instance.PopupMessages.ShowInfo("Url successfully updated");
+				DataChanged?.Invoke(this, EventArgs.Empty);
+			}
 			else
-				MainController.Instance.PopupMessages.ShowInfo("Url updating failed because of external service error. Try again later");
+				MainController.Instance.PopupMessages.ShowInfo(
+					"Url updating failed because of external service error. Try again later");
 		}
 
 		public void DeleteSingleLink()
@@ -529,10 +535,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 				{
 					link.ClearPreviewContainer();
 					var previewContainer = link.GetPreviewContainer();
-					var previewGenerator = previewContainer.GetPreviewGenerator();
+					var previewGenerator = previewContainer.GetPreviewContentGenerator();
 					try
 					{
-						previewContainer.UpdateContent(previewGenerator, cancelationToken);
+						previewContainer.UpdatePreviewContent(previewGenerator, cancelationToken);
 					}
 					catch { }
 				}

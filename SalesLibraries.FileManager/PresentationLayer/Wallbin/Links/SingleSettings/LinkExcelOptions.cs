@@ -195,10 +195,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				{
 					link.ClearPreviewContainer();
 					var previewContainer = link.GetPreviewContainer();
-					var previewGenerator = previewContainer.GetPreviewGenerator();
+					var previewGenerator = previewContainer.GetPreviewContentGenerator();
 					try
 					{
-						previewContainer.UpdateContent(previewGenerator, cancelationToken);
+						previewContainer.UpdatePreviewContent(previewGenerator, cancelationToken);
 					}
 					catch { }
 				}

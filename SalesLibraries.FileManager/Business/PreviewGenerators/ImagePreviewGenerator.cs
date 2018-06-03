@@ -4,19 +4,18 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Threading;
-using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Constants;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers;
 using SalesLibraries.Common.Extensions;
 using SalesLibraries.Common.Helpers;
-using SalesLibraries.FileManager.Business.Services;
+using SalesLibraries.FileManager.Controllers;
 
 namespace SalesLibraries.FileManager.Business.PreviewGenerators
 {
 	[IntendForClass(typeof(ImagePreviewContainer))]
-	class ImagePreviewGenerator : IPreviewGenerator
+	class ImagePreviewGenerator : FilePreviewGenerator
 	{
-		public void Generate(BasePreviewContainer previewContainer, CancellationToken cancellationToken)
+		public override void GeneratePreviewContent(BasePreviewContainer previewContainer, CancellationToken cancellationToken)
 		{
 			var imagePreviewContainer = (ImagePreviewContainer)previewContainer;
 
@@ -32,12 +31,6 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 			var updateThumbsDatatable = !(Directory.Exists(thumbsDatatableDestination) && Directory.GetFiles(thumbsDatatableDestination).Any());
 			if (!Directory.Exists(thumbsDatatableDestination))
 				Directory.CreateDirectory(thumbsDatatableDestination);
-
-			var oneDriveUrl = imagePreviewContainer.OneDriveUrl;
-			var oneDriveUrlDestination = Path.Combine(imagePreviewContainer.ContainerPath, PreviewFormats.OneDrive);
-			var updateOneDrive = !Directory.Exists(oneDriveUrlDestination) && !String.IsNullOrEmpty(oneDriveUrl);
-			if (!Directory.Exists(oneDriveUrlDestination) && updateOneDrive)
-				Directory.CreateDirectory(oneDriveUrlDestination);
 
 			var needToUpdate = updateThumbs || updateThumbsDatatable;
 			if (needToUpdate)
@@ -63,17 +56,14 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 				}
 			}
 
-			if (updateOneDrive)
-			{
-				OneDrivePreviewHelper.GenerateShortcutFiles(
-					oneDriveUrl,
-					Path.GetFileName(previewContainer.SourcePath),
-					oneDriveUrlDestination);
-				logger.LogStage(PreviewFormats.OneDrive);
-			}
-
 			if (needToUpdate)
 				previewContainer.MarkAsModified();
+
+			if (MainController.Instance.Settings.OneDriveSettings.Enabled)
+			{
+				GenerateOneDriveContent(imagePreviewContainer, cancellationToken);
+				logger.LogStage(PreviewFormats.OneDrive);
+			}
 
 			logger.FinishLogging();
 		}

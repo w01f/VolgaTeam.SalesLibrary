@@ -207,6 +207,8 @@
     <Compile Include="Business\Models\ExternalShortcuts\ShortcutLink.cs" />
     <Compile Include="Business\Models\Security\LibraryUser.cs" />
     <Compile Include="Business\Models\WebLinkThumbnails\Link.cs" />
+    <Compile Include="Business\PreviewGenerators\CommonFilePreviewGenerator.cs" />
+    <Compile Include="Business\PreviewGenerators\FilePreviewGenerator.cs" />
     <Compile Include="Business\PreviewGenerators\ImagePreviewGenerator.cs" />
     <Compile Include="Business\PreviewGenerators\OneDrivePreviewHelper.cs" />
     <Compile Include="Business\PreviewGenerators\UrlPreviewGenerationLogger.cs" />

@@ -18,9 +18,9 @@ using SalesLibraries.FileManager.Controllers;
 namespace SalesLibraries.FileManager.Business.PreviewGenerators
 {
 	[IntendForClass(typeof(VimeoPreviewContainer))]
-	class VimeoPreviewGenerator : IPreviewGenerator
+	class VimeoPreviewGenerator : IPreviewContentGenerator
 	{
-		public void Generate(BasePreviewContainer previewContainer, CancellationToken cancellationToken)
+		public void GeneratePreviewContent(BasePreviewContainer previewContainer, CancellationToken cancellationToken)
 		{
 			var vimeoPreviewContainer = (VimeoPreviewContainer)previewContainer;
 

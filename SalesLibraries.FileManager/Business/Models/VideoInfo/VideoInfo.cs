@@ -103,10 +103,10 @@ namespace SalesLibraries.FileManager.Business.Models.VideoInfo
 
 		public void UpdateContent(CancellationToken cancellationToken)
 		{
-			var previewGenerator = _previewContainer.GetPreviewGenerator();
+			var previewGenerator = _previewContainer.GetPreviewContentGenerator();
 			try
 			{
-				_previewContainer.UpdateContent(previewGenerator, cancellationToken);
+				_previewContainer.UpdatePreviewContent(previewGenerator, cancellationToken);
 			}
 			catch { }
 		}

@@ -5,9 +5,9 @@ using System.Windows.Forms;
 using DevExpress.Skins;
 using DevExpress.XtraEditors;
 using DevExpress.XtraTab;
-using SalesLibraries.Business.Entities.Helpers;
+using SalesLibraries.Business.Entities.Wallbin.Common.Constants;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
-using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
+using SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.FileManager.Business.Synchronization;
 using SalesLibraries.FileManager.Controllers;
@@ -59,34 +59,32 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings.ResetLin
 					return;
 			}
 
-			var selectedLinks = new List<LibraryFileLink>();
-			var fileLinks = library.Pages
-				.SelectMany(p => p.AllGroupLinks)
-				.OfType<LibraryFileLink>()
-				.Where(f => !f.IsDead && !f.IsFolder)
+			var allPreviewContainers = library.PreviewContainers
+				.OfType<FilePreviewContainer>()
 				.ToList();
+			var selectedPreviewContainers = new List<FilePreviewContainer>();
 			if (checkEditAllFiles.Checked || _formatToggles.All(item => item.Checked))
-				selectedLinks.AddRange(fileLinks);
+				selectedPreviewContainers.AddRange(allPreviewContainers);
 			else
 			{
 				if (checkEditPowerPoint.Checked)
-					selectedLinks.AddRange(fileLinks.OfType<PowerPointLink>());
+					selectedPreviewContainers.AddRange(allPreviewContainers.OfType<PowerPointPreviewContainer>());
 				if (checkEditWord.Checked)
-					selectedLinks.AddRange(fileLinks.OfType<WordLink>());
+					selectedPreviewContainers.AddRange(allPreviewContainers.OfType<WordPreviewContainer>());
 				if (checkEditPdf.Checked)
-					selectedLinks.AddRange(fileLinks.OfType<PdfLink>());
+					selectedPreviewContainers.AddRange(allPreviewContainers.OfType<PdfPreviewContainer>());
 				if (checkEditExcel.Checked)
-					selectedLinks.AddRange(fileLinks.OfType<ExcelLink>());
+					selectedPreviewContainers.AddRange(allPreviewContainers.OfType<ExcelPreviewContainer>());
 				if (checkEditMp4.Checked)
-					selectedLinks.AddRange(fileLinks.OfType<VideoLink>().Where(fileLink => FileFormatHelper.IsMp4File(fileLink.NameWithExtension)));
+					selectedPreviewContainers.AddRange(allPreviewContainers.OfType<VideoPreviewContainer>().Where(container => container.SourceSubType == FileTypes.Mp4));
 				if (checkEditMov.Checked)
-					selectedLinks.AddRange(fileLinks.OfType<VideoLink>().Where(fileLink => FileFormatHelper.IsMovFile(fileLink.NameWithExtension)));
+					selectedPreviewContainers.AddRange(allPreviewContainers.OfType<VideoPreviewContainer>().Where(container => container.SourceSubType == FileTypes.Mov));
 				if (checkEditWmv.Checked)
-					selectedLinks.AddRange(fileLinks.OfType<VideoLink>().Where(fileLink => FileFormatHelper.IsWmvFile(fileLink.NameWithExtension)));
+					selectedPreviewContainers.AddRange(allPreviewContainers.OfType<VideoPreviewContainer>().Where(container => container.SourceSubType == FileTypes.Wmv));
 				if (checkEditM4v.Checked)
-					selectedLinks.AddRange(fileLinks.OfType<VideoLink>().Where(fileLink => FileFormatHelper.IsM4vFile(fileLink.NameWithExtension)));
+					selectedPreviewContainers.AddRange(allPreviewContainers.OfType<VideoPreviewContainer>().Where(container => container.SourceSubType == FileTypes.M4v));
 				if (checkEditImages.Checked)
-					selectedLinks.AddRange(fileLinks.OfType<ImageLink>());
+					selectedPreviewContainers.AddRange(allPreviewContainers.OfType<ImagePreviewContainer>());
 			}
 
 			MainController.Instance.ProcessManager.Run("Resetting OneDrive URLs...", (cancelationToken, formProgess) =>
@@ -94,7 +92,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings.ResetLin
 				var oneDriveConnector = new OneDriveConnector();
 				AsyncHelper.RunSync(async () =>
 				{
-					await oneDriveConnector.ProcessLinksResetUrl(selectedLinks, cancelationToken);
+					await oneDriveConnector.ProcessLinksResetUrl(selectedPreviewContainers, cancelationToken);
 				});
 			});
 		}

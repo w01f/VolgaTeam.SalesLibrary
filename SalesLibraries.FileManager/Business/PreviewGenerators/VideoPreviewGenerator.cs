@@ -10,13 +10,14 @@ using SalesLibraries.Common.Configuration;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.Objects.Video;
 using SalesLibraries.FileManager.Business.Services;
+using SalesLibraries.FileManager.Controllers;
 
 namespace SalesLibraries.FileManager.Business.PreviewGenerators
 {
 	[IntendForClass(typeof(VideoPreviewContainer))]
-	class VideoPreviewGenerator : IPreviewGenerator
+	class VideoPreviewGenerator : FilePreviewGenerator
 	{
-		public void Generate(BasePreviewContainer previewContainer, CancellationToken cancellationToken)
+		public override void GeneratePreviewContent(BasePreviewContainer previewContainer, CancellationToken cancellationToken)
 		{
 			var updated = false;
 			FFMpegData videoData = null;
@@ -27,12 +28,6 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 			var infoDestination = Path.Combine(previewContainer.ContainerPath, PreviewFormats.VideoInfo);
 			if (!Directory.Exists(infoDestination))
 				Directory.CreateDirectory(infoDestination);
-
-			var oneDriveUrl = ((VideoPreviewContainer)previewContainer).OneDriveUrl;
-			var oneDriveUrlDestination = Path.Combine(((VideoPreviewContainer)previewContainer).ContainerPath, PreviewFormats.OneDrive);
-			var updateOneDrive = !Directory.Exists(oneDriveUrlDestination) && !String.IsNullOrEmpty(oneDriveUrl);
-			if (!Directory.Exists(oneDriveUrlDestination) && updateOneDrive)
-				Directory.CreateDirectory(oneDriveUrlDestination);
 
 			if (!cancellationToken.IsCancellationRequested)
 			{
@@ -97,17 +92,14 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 				updated |= updateThumbs || updateThumbsDatatable;
 			}
 
-			if (updateOneDrive)
-			{
-				OneDrivePreviewHelper.GenerateShortcutFiles(
-					oneDriveUrl,
-					Path.GetFileName(previewContainer.SourcePath),
-					oneDriveUrlDestination);
-				logger.LogStage(PreviewFormats.OneDrive);
-			}
-
 			if (updated)
 				previewContainer.MarkAsModified();
+
+			if (MainController.Instance.Settings.OneDriveSettings.Enabled)
+			{
+				GenerateOneDriveContent((FilePreviewContainer)previewContainer, cancellationToken);
+				logger.LogStage(PreviewFormats.OneDrive);
+			}
 
 			logger.FinishLogging();
 		}

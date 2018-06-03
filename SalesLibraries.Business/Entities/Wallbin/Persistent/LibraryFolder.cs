@@ -188,7 +188,16 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 		public void SortLinksByDisplayName()
 		{
 			var sorderLinks = Links.ToList();
-			sorderLinks.Sort((x, y) => WinAPIHelper.StrCmpLogicalW(x.DisplayName, y.DisplayName));
+			sorderLinks.Sort((x, y) =>
+			{
+				if (String.IsNullOrEmpty(x.DisplayName) && String.IsNullOrEmpty(y.DisplayName))
+					return 0;
+				if (String.IsNullOrEmpty(x.DisplayName))
+					return -1;
+				if (String.IsNullOrEmpty(y.DisplayName))
+					return 1;
+				return WinAPIHelper.StrCmpLogicalW(x.DisplayName, y.DisplayName);
+			});
 			var order = 0;
 			foreach (var libraryLink in sorderLinks)
 			{

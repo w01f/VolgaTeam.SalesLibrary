@@ -12,6 +12,6 @@ namespace SalesLibraries.Business.Entities.Interfaces
 		string PreviewName { get; }
 		BasePreviewContainer GetPreviewContainer();
 		void ClearPreviewContainer();
-		void UpdatePreviewContainer(IPreviewGenerator generator, CancellationToken cancelationToken);
+		void UpdatePreviewContainer(IPreviewContentGenerator generator, CancellationToken cancelationToken);
 	}
 }

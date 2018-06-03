@@ -12,9 +12,9 @@ using SalesLibraries.FileManager.Controllers;
 namespace SalesLibraries.FileManager.Business.PreviewGenerators
 {
 	[IntendForClass(typeof(Html5PreviewContainer))]
-	class Html5PreviewGenerator : IPreviewGenerator
+	class Html5PreviewGenerator : IPreviewContentGenerator
 	{
-		public void Generate(BasePreviewContainer previewContainer, CancellationToken cancellationToken)
+		public void GeneratePreviewContent(BasePreviewContainer previewContainer, CancellationToken cancellationToken)
 		{
 			var html5PreviewContainer = (Html5PreviewContainer)previewContainer;
 

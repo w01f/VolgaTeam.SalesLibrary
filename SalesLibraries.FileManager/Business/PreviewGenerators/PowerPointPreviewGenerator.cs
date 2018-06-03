@@ -5,21 +5,20 @@ using System.Text;
 using System.Threading;
 using Microsoft.Office.Core;
 using Microsoft.Office.Interop.PowerPoint;
-using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Constants;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers;
 using SalesLibraries.Common.Configuration;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.OfficeInterops;
-using SalesLibraries.FileManager.Business.Services;
+using SalesLibraries.FileManager.Controllers;
 using Shape = Microsoft.Office.Interop.PowerPoint.Shape;
 
 namespace SalesLibraries.FileManager.Business.PreviewGenerators
 {
 	[IntendForClass(typeof(PowerPointPreviewContainer))]
-	class PowerPointPreviewGenerator : IPreviewGenerator
+	class PowerPointPreviewGenerator : FilePreviewGenerator
 	{
-		public void Generate(BasePreviewContainer previewContainer, CancellationToken cancellationToken)
+		public override void GeneratePreviewContent(BasePreviewContainer previewContainer, CancellationToken cancellationToken)
 		{
 			var powerPointContainer = (PowerPointPreviewContainer)previewContainer;
 
@@ -70,12 +69,6 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 					powerPointContainer.GenerateText;
 				if (updateTxt && !Directory.Exists(txtDestination))
 					Directory.CreateDirectory(txtDestination);
-
-				var oneDriveUrl = powerPointContainer.OneDriveUrl;
-				var oneDriveUrlDestination = Path.Combine(powerPointContainer.ContainerPath, PreviewFormats.OneDrive);
-				var updateOneDrive = !Directory.Exists(oneDriveUrlDestination) && !String.IsNullOrEmpty(oneDriveUrl);
-				if (!Directory.Exists(oneDriveUrlDestination) && updateOneDrive)
-					Directory.CreateDirectory(oneDriveUrlDestination);
 
 				var needToUpdate = updatePdf ||
 					updatePng ||
@@ -282,16 +275,13 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 						MessageFilter.Revoke();
 					}
 				}
-
-				if (updateOneDrive)
-				{
-					OneDrivePreviewHelper.GenerateShortcutFiles(
-						oneDriveUrl,
-						Path.GetFileName(previewContainer.SourcePath),
-						oneDriveUrlDestination);
-					logger.LogStage(PreviewFormats.OneDrive);
-				}
 			} while (!updated && tryCount < 10);
+
+			if (MainController.Instance.Settings.OneDriveSettings.Enabled)
+			{
+				GenerateOneDriveContent(powerPointContainer, cancellationToken);
+				logger.LogStage(PreviewFormats.OneDrive);
+			}
 
 			logger.FinishLogging();
 		}
