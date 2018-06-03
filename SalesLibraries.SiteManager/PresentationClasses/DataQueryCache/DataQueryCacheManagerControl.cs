@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
@@ -13,8 +14,6 @@ namespace SalesLibraries.SiteManager.PresentationClasses.DataQueryCache
 	[ToolboxItem(false)]
 	public partial class DataQueryCacheManagerControl : UserControl
 	{
-		private readonly List<SoapShortcutModel> _records = new List<SoapShortcutModel>();
-
 		public DataQueryCacheManagerControl()
 		{
 			InitializeComponent();
@@ -23,6 +22,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.DataQueryCache
 
 		public void RefreshData(bool showMessages)
 		{
+			var records = new List<SoapShortcutModel>();
 			var message = string.Empty;
 			if (showMessages)
 			{
@@ -32,7 +32,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.DataQueryCache
 					Enabled = false;
 					form.laProgress.Text = "Loading data...";
 					form.TopMost = true;
-					var thread = new Thread(() => _records.AddRange(WebSiteManager.Instance.SelectedSite.GetLandingPages(out message)));
+					var thread = new Thread(() => records.AddRange(WebSiteManager.Instance.SelectedSite.GetLandingPages(out message)));
 					form.Show();
 					thread.Start();
 					while (thread.IsAlive)
@@ -49,7 +49,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.DataQueryCache
 			}
 			else
 			{
-				var thread = new Thread(() => _records.AddRange(WebSiteManager.Instance.SelectedSite.GetLandingPages(out message)));
+				var thread = new Thread(() => records.AddRange(WebSiteManager.Instance.SelectedSite.GetLandingPages(out message)));
 				thread.Start();
 				while (thread.IsAlive)
 				{
@@ -57,7 +57,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.DataQueryCache
 					Application.DoEvents();
 				}
 			}
-			gridControlRecords.DataSource = _records;
+			gridControlRecords.DataSource = records;
 		}
 
 		public void ResetDataQueryCache()
@@ -82,9 +82,12 @@ namespace SalesLibraries.SiteManager.PresentationClasses.DataQueryCache
 				{
 					foreach (var shortcutModel in shortcutModels)
 					{
+						Console.WriteLine(shortcutModel.id);
 						WebSiteManager.Instance.SelectedSite.ResetDataQueryCache(shortcutModel.id, out message);
 						if (!String.IsNullOrEmpty(message))
 							break;
+						Console.WriteLine(String.Format("Success {0:MM/dd/yyyy hh:mm}", DateTime.Now));
+						Console.WriteLine();
 					}
 				});
 				form.Show();
@@ -94,8 +97,6 @@ namespace SalesLibraries.SiteManager.PresentationClasses.DataQueryCache
 					Thread.Sleep(100);
 					Application.DoEvents();
 				}
-				if (string.IsNullOrEmpty(message))
-					RefreshData(false);
 				form.Close();
 				Enabled = true;
 				FormMain.Instance.ribbonControl.Enabled = true;
