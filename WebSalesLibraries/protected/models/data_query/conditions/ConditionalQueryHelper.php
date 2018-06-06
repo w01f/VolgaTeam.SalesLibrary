@@ -160,7 +160,7 @@
 		 */
 		public static function queryLinksByCondition($queryConditions, $usePermissionFilter)
 		{
-			$baseLinksEncoded = \Yii::app()->session[$queryConditions->baseDatasetKey];
+			$baseLinksEncoded = !(\Yii::app() instanceof \CConsoleApplication) ? \Yii::app()->session[$queryConditions->baseDatasetKey] : null;
 			$baseLinksCondition = '1=1';
 			if (!empty($baseLinksEncoded))
 			{

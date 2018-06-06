@@ -44,9 +44,9 @@
 				'AND',
 				sprintf("qcache.id_block='%s'", $cacheId),
 			);
-
+			
 			if (!$ignoreExpirationDate)
-				$whereConditions[] = "qcache.expire is null or qcache.expire > curdate()";
+				$whereConditions[] = "(qcache.expire is null or qcache.expire > now())";
 
 			$dbCommand = $dbCommand->where($whereConditions);
 

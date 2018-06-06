@@ -153,5 +153,17 @@
 			),
 		)
 	);
+	if(!array_key_exists('HTTP_HOST', $_SERVER))
+	{
+		$configArray =CMap::mergeArray($configArray,array(
+			'components' => array(
+				'request' => array(
+					'hostInfo' => 'http://localhost',
+					'baseUrl' => '',
+					'scriptUrl' => '',
+				),
+			),
+		));
+	}
 	return $configArray;
 ?>

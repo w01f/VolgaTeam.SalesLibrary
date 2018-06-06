@@ -1,4 +1,5 @@
 <?php
+
 	namespace application\models\wallbin\models\web;
 	/**
 	 * Class LibraryManager
@@ -11,22 +12,25 @@
 		public function getLibraries()
 		{
 			$libraries = null;
-			if (!isset(\Yii::app()->session['sessionKey']))
-				\Yii::app()->session['sessionKey'] = uniqid();
-			$librariesCache = \Yii::app()->cacheDB->get(\Yii::app()->session['sessionKey']);
-			if ($librariesCache !== false)
+			$availableLibraryIds = array();
+			$useLibraryByUserFilter = false;
+			if (!(\Yii::app() instanceof \CConsoleApplication))
 			{
-				if (isset(\Yii::app()->session['libraries']))
-					$libraries = \Yii::app()->session['libraries'];
+				if (!isset(\Yii::app()->session['sessionKey']))
+					\Yii::app()->session['sessionKey'] = uniqid();
+				$librariesCache = \Yii::app()->cacheDB->get(\Yii::app()->session['sessionKey']);
+				if ($librariesCache !== false)
+				{
+					if (isset(\Yii::app()->session['libraries']))
+						$libraries = \Yii::app()->session['libraries'];
+				}
+				$useLibraryByUserFilter = \UserIdentity::isUserAuthorized() && !\UserIdentity::isUserAdmin();
+				if ($useLibraryByUserFilter)
+				{
+					$userId = \UserIdentity::getCurrentUserId();
+					$availableLibraryIds = \UserLibraryRecord::getLibraryIdsByUserAngHisGroups($userId);
+				}
 			}
-			$useLibraryByUserFilter = \UserIdentity::isUserAuthorized() && !\UserIdentity::isUserAdmin();
-			if ($useLibraryByUserFilter)
-			{
-				$userId = \UserIdentity::getCurrentUserId();
-				$availableLibraryIds = \UserLibraryRecord::getLibraryIdsByUserAngHisGroups($userId);
-			}
-			else
-				$availableLibraryIds = array();
 			if (!is_array($libraries))
 			{
 				$aliases = $this->getLibraryAliases();
@@ -105,14 +109,17 @@
 						}
 					}
 				}
-				if (is_array($libraries) && count($libraries) > 0)
+				if (!(\Yii::app() instanceof \CConsoleApplication))
 				{
-					usort($libraries, "application\\models\\wallbin\\models\\web\\Library::libraryComparerByName");
-					\Yii::app()->session['libraries'] = $libraries;
-					\Yii::app()->cacheDB->set(\Yii::app()->session['sessionKey'], 'libraries', (60 * 60 * 24 * 7));
+					if (is_array($libraries) && count($libraries) > 0)
+					{
+						usort($libraries, "application\\models\\wallbin\\models\\web\\Library::libraryComparerByName");
+						\Yii::app()->session['libraries'] = $libraries;
+						\Yii::app()->cacheDB->set(\Yii::app()->session['sessionKey'], 'libraries', (60 * 60 * 24 * 7));
+					}
+					else
+						unset(\Yii::app()->session['libraries']);
 				}
-				else
-					unset(\Yii::app()->session['libraries']);
 			}
 			if (is_array($libraries))
 				return $libraries;

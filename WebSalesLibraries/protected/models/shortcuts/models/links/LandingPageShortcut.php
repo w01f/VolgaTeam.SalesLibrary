@@ -106,6 +106,8 @@
 				/* @var IDataQueryableBlock $dataQueryableBlock */
 				$dataQueryableBlock = $contentBlock;
 				$querySettings = $dataQueryableBlock->getQuerySettings();
+				echo sprintf("Snapshot processing - %s", $contentBlock->id);
+				echo PHP_EOL;
 				LinkFeedQueryHelper::prepareDataQueryCache($querySettings, $ignoreExpirationDate);
 			}
 		}

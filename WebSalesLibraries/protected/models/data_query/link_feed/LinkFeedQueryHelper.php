@@ -1229,7 +1229,11 @@
 			$cacheSettings = isset($querySettings->cacheSettings) ? $querySettings->cacheSettings : new QueryCacheSettings();
 
 			if (!$cacheSettings->enableCache)
+			{
+				echo sprintf("Snapshot disabled - %s", $cacheSettings->cacheId);
+				echo PHP_EOL;
 				return;
+			}
 
 			if (!$ignoreExpirationDate)
 			{
@@ -1237,7 +1241,11 @@
 				{
 					$encodedData = \ShortcutDataQueryCacheRecord::getCachedData($cacheSettings->cacheId, false);
 					if (!empty($encodedData))
+					{
+						echo sprintf("Snapshot not expired. Skip update - %s", $cacheSettings->cacheId);
+						echo PHP_EOL;
 						return;
+					}
 				}
 			}
 
@@ -1268,6 +1276,8 @@
 					$expirationDate = null;
 
 				\ShortcutDataQueryCacheRecord::setCachedData($cacheSettings->cacheId, $encodedData, $expirationDate);
+				echo sprintf("Snapshot updated - %s", $cacheSettings->cacheId);
+				echo PHP_EOL;
 			}
 		}
 	}

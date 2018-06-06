@@ -125,9 +125,15 @@
 			$landingPageShortcutRecords = ShortcutLinkRecord::model()->findAll('type=?', array('landing'));
 			foreach ($landingPageShortcutRecords as $landingPageShortcutRecord)
 			{
+				echo sprintf("Shortcut processing - %s", $landingPageShortcutRecord->id);
+				echo PHP_EOL;
 				/** @var LandingPageShortcut $landingPageShortcut */
 				$landingPageShortcut = $landingPageShortcutRecord->getServiceModel();
 				$landingPageShortcut->prepareDataQueryCache($ignoreExpirationDate);
+				echo sprintf("Shortcut processing completed - %s", $landingPageShortcutRecord->id);
+				echo PHP_EOL;
+				echo PHP_EOL;
+				echo PHP_EOL;
 			}
 		}
 	}
