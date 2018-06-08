@@ -13,6 +13,8 @@ namespace SalesLibraries.Business.Schema.Wallbin.Initialization.Patches
 
 		public void Apply<TLibraryContext>(TLibraryContext context) where TLibraryContext : LibraryContext
 		{
+			if(!context.Libraries.Any()) return;
+
 			context.Library.Path = context.DataSourceFolderPath;
 
 			var fileLinks = context.Library.Pages
