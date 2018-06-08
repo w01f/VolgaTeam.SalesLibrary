@@ -21,6 +21,8 @@
 					'class' => 'CWebServiceAction',
 					'classMap' => array(
 						'SoapShortcutModel' => 'SoapShortcutModel',
+						'BaseServiceProfile' => 'BaseServiceProfile',
+						'ShortcutDataQueryCacheServiceProfile' => 'ShortcutDataQueryCacheServiceProfile',
 					),
 				),
 			);
@@ -43,6 +45,41 @@
 				return $models;
 			}
 			return null;
+		}
+
+		/**
+		 * @param string $sessionKey
+		 * @return ShortcutDataQueryCacheServiceProfile[]
+		 * @soap
+		 */
+		public function getProfiles($sessionKey)
+		{
+			$profiles = array();
+			if ($this->authenticateBySession($sessionKey))
+				$profiles = ShortcutServiceProfileRecord::getProfiles(BaseServiceProfile::ServiceTypeDataQueryCache);
+			return $profiles;
+		}
+
+		/**
+		 * @param string $sessionKey
+		 * @param ShortcutDataQueryCacheServiceProfile $profile
+		 * @soap
+		 */
+		public function saveProfile($sessionKey, $profile)
+		{
+			if ($this->authenticateBySession($sessionKey))
+				ShortcutServiceProfileRecord::saveProfile($profile, BaseServiceProfile::ServiceTypeDataQueryCache);
+		}
+
+		/**
+		 * @param string $sessionKey
+		 * @param ShortcutDataQueryCacheServiceProfile $profile
+		 * @soap
+		 */
+		public function deleteProfile($sessionKey, $profile)
+		{
+			if ($this->authenticateBySession($sessionKey))
+				ShortcutServiceProfileRecord::deleteProfile($profile);
 		}
 
 		/**

@@ -56,7 +56,7 @@
 					var comboSelector = libraryHeader.find('.selectpicker');
 					comboSelector.selectpicker();
 					comboSelector.off('change').on('change', function () {
-						loadPageContent(atob(comboSelector.selectpicker('val')));
+						loadPageContent(atob(comboSelector.selectpicker('val').trim()));
 						comboSelector.selectpicker('refresh');
 					});
 					break;

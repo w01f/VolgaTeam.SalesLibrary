@@ -10,7 +10,7 @@
 		this.init = function () {
 			var contentContainer = $('#library-block-' + contentContainerId);
 
-			var wallbinSettings = new WallbinSettings($.parseJSON(atob(contentContainer.find('.wallbin-settings .encoded-data').text())));
+			var wallbinSettings = new WallbinSettings($.parseJSON(atob(contentContainer.find('.wallbin-settings .encoded-data').text().trim())));
 
 			var wallbinManager = new $.SalesPortal.WallbinManager({
 				contentObject: contentContainer,
@@ -37,7 +37,7 @@
 		this.init = function () {
 			var contentContainer = $('#library-page-bundle-block-' + contentContainerId);
 
-			var wallbinSettings = new WallbinSettings($.parseJSON(atob(contentContainer.find('.wallbin-settings .encoded-data').text())));
+			var wallbinSettings = new WallbinSettings($.parseJSON(atob(contentContainer.find('.wallbin-settings .encoded-data').text().trim())));
 
 			var wallbinManager = new $.SalesPortal.WallbinManager({
 				contentObject: contentContainer,
@@ -64,7 +64,7 @@
 		this.init = function () {
 			var contentContainer = $('#library-page-block-' + contentContainerId);
 
-			var wallbinSettings = new WallbinSettings($.parseJSON(atob(contentContainer.find('.wallbin-settings .encoded-data').text())));
+			var wallbinSettings = new WallbinSettings($.parseJSON(atob(contentContainer.find('.wallbin-settings .encoded-data').text().trim())));
 
 			var wallbinManager = new $.SalesPortal.WallbinManager({
 				contentObject: contentContainer,
@@ -87,7 +87,7 @@
 		this.init = function () {
 			var contentContainer = $('#library-window-block-' + contentContainerId);
 
-			var wallbinSettings = new WallbinSettings($.parseJSON(atob(contentContainer.find('.wallbin-settings .encoded-data').text())));
+			var wallbinSettings = new WallbinSettings($.parseJSON(atob(contentContainer.find('.wallbin-settings .encoded-data').text().trim())));
 
 			var wallbinManager = new $.SalesPortal.WallbinManager({
 				contentObject: contentContainer,

@@ -124,7 +124,7 @@
 				var selectedFiles = [];
 				filesSelectContent.find('.zip-files-item:checked').each(function ()
 				{
-					selectedFiles.push($.parseJSON(atob($(this).val())));
+					selectedFiles.push($.parseJSON(atob($(this).val().trim())));
 				});
 
 				$.fancybox.close();
@@ -184,7 +184,7 @@
 			var totalSize = 0;
 			selectedFiles.each(function ()
 			{
-				var fileInfo = $.parseJSON(atob($(this).val()));
+				var fileInfo = $.parseJSON(atob($(this).val().trim()));
 				totalSize += parseInt(fileInfo.size);
 			});
 
