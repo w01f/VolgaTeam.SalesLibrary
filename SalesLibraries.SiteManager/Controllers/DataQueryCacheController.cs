@@ -29,7 +29,11 @@ namespace SalesLibraries.SiteManager.Controllers
 				_tabPage.Controls.Add(DataQueryCacheManagerControl);
 			DataQueryCacheManagerControl.BringToFront();
 
-			FormMain.Instance.buttonItemDataQueryCacheReset.Click += OnDataQueryCacheResetClick;
+			FormMain.Instance.buttonItemDataQueryCacheProfileAdd.Click += OnProfileAdd;
+			FormMain.Instance.buttonItemDataQueryCacheProfileDelete.Click += OnProfileDelete;
+			FormMain.Instance.buttonItemDataQueryCacheProfileSave.Click += OnProfileSave;
+			FormMain.Instance.buttonItemDataQueryCacheReset.Click += OnResetClick;
+
 			FormMain.Instance.comboBoxEditDataQueryCacheSite.Properties.Items.Clear();
 			FormMain.Instance.comboBoxEditDataQueryCacheSite.Properties.Items.AddRange(WebSiteManager.Instance.Sites);
 			FormMain.Instance.comboBoxEditDataQueryCacheSite.EditValueChanged += (o, e) =>
@@ -63,8 +67,23 @@ namespace SalesLibraries.SiteManager.Controllers
 			IsActive = true;
 		}
 		#endregion
+		
+		private void OnProfileAdd(Object sender, EventArgs e)
+		{
+			DataQueryCacheManagerControl.AddProfile();
+		}
 
-		private void OnDataQueryCacheResetClick(object sender, EventArgs e)
+		private void OnProfileDelete(Object sender, EventArgs e)
+		{
+			DataQueryCacheManagerControl.DeleteProfile();
+		}
+
+		private void OnProfileSave(Object sender, EventArgs e)
+		{
+			DataQueryCacheManagerControl.SaveProfile();
+		}
+
+		private void OnResetClick(object sender, EventArgs e)
 		{
 			DataQueryCacheManagerControl.ResetDataQueryCache();
 		}

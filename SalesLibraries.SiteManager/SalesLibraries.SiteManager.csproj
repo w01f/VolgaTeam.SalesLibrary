@@ -317,6 +317,12 @@
     <Compile Include="PresentationClasses\DataQueryCache\DataQueryCacheManagerControl.Designer.cs">
       <DependentUpon>DataQueryCacheManagerControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationClasses\DataQueryCache\FormEditProfile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\DataQueryCache\FormEditProfile.Designer.cs">
+      <DependentUpon>FormEditProfile.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationClasses\LibraryFiles\LibraryFilter.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -643,6 +649,9 @@
       <DependentUpon>DataQueryCacheManagerControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\DataQueryCache\FormEditProfile.resx">
+      <DependentUpon>FormEditProfile.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\InactiveUsers\InactiveUsersManagerControl.resx">
       <DependentUpon>InactiveUsersManagerControl.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -760,6 +769,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\DataQueryCacheReset.png" />
+    <None Include="Resources\DataQueryCacheProfilesSave.png" />
+    <None Include="Resources\DataQueryCacheProfilesDelete.png" />
+    <None Include="Resources\DataQueryCacheProfilesAdd.png" />
     <None Include="Resources\ResetDataQueryCache.png" />
     <None Include="Resources\UsersSettings.png" />
     <None Include="Resources\UserLogo.png" />

@@ -32,6 +32,12 @@ namespace SalesLibraries.ServiceConnector.ShortcutsDataQueryCacheService {
         
         private System.Threading.SendOrPostCallback getLandingPagesOperationCompleted;
         
+        private System.Threading.SendOrPostCallback getProfilesOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback saveProfileOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback deleteProfileOperationCompleted;
+        
         private System.Threading.SendOrPostCallback resetDataQueryCacheOperationCompleted;
         
         private System.Threading.SendOrPostCallback getSessionKeyOperationCompleted;
@@ -78,6 +84,15 @@ namespace SalesLibraries.ServiceConnector.ShortcutsDataQueryCacheService {
         public event getLandingPagesCompletedEventHandler getLandingPagesCompleted;
         
         /// <remarks/>
+        public event getProfilesCompletedEventHandler getProfilesCompleted;
+        
+        /// <remarks/>
+        public event saveProfileCompletedEventHandler saveProfileCompleted;
+        
+        /// <remarks/>
+        public event deleteProfileCompletedEventHandler deleteProfileCompleted;
+        
+        /// <remarks/>
         public event resetDataQueryCacheCompletedEventHandler resetDataQueryCacheCompleted;
         
         /// <remarks/>
@@ -110,6 +125,96 @@ namespace SalesLibraries.ServiceConnector.ShortcutsDataQueryCacheService {
             if ((this.getLandingPagesCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.getLandingPagesCompleted(this, new getLandingPagesCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:ShortcutsDataQueryCacheControllerwsdl#getProfiles", RequestNamespace="urn:ShortcutsDataQueryCacheControllerwsdl", ResponseNamespace="urn:ShortcutsDataQueryCacheControllerwsdl")]
+        [return: System.Xml.Serialization.SoapElementAttribute("return")]
+        public ShortcutDataQueryCacheServiceProfile[] getProfiles(string sessionKey) {
+            object[] results = this.Invoke("getProfiles", new object[] {
+                        sessionKey});
+            return ((ShortcutDataQueryCacheServiceProfile[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getProfilesAsync(string sessionKey) {
+            this.getProfilesAsync(sessionKey, null);
+        }
+        
+        /// <remarks/>
+        public void getProfilesAsync(string sessionKey, object userState) {
+            if ((this.getProfilesOperationCompleted == null)) {
+                this.getProfilesOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetProfilesOperationCompleted);
+            }
+            this.InvokeAsync("getProfiles", new object[] {
+                        sessionKey}, this.getProfilesOperationCompleted, userState);
+        }
+        
+        private void OngetProfilesOperationCompleted(object arg) {
+            if ((this.getProfilesCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getProfilesCompleted(this, new getProfilesCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:ShortcutsDataQueryCacheControllerwsdl#saveProfile", RequestNamespace="urn:ShortcutsDataQueryCacheControllerwsdl", ResponseNamespace="urn:ShortcutsDataQueryCacheControllerwsdl")]
+        public void saveProfile(string sessionKey, ShortcutDataQueryCacheServiceProfile profile) {
+            this.Invoke("saveProfile", new object[] {
+                        sessionKey,
+                        profile});
+        }
+        
+        /// <remarks/>
+        public void saveProfileAsync(string sessionKey, ShortcutDataQueryCacheServiceProfile profile) {
+            this.saveProfileAsync(sessionKey, profile, null);
+        }
+        
+        /// <remarks/>
+        public void saveProfileAsync(string sessionKey, ShortcutDataQueryCacheServiceProfile profile, object userState) {
+            if ((this.saveProfileOperationCompleted == null)) {
+                this.saveProfileOperationCompleted = new System.Threading.SendOrPostCallback(this.OnsaveProfileOperationCompleted);
+            }
+            this.InvokeAsync("saveProfile", new object[] {
+                        sessionKey,
+                        profile}, this.saveProfileOperationCompleted, userState);
+        }
+        
+        private void OnsaveProfileOperationCompleted(object arg) {
+            if ((this.saveProfileCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.saveProfileCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:ShortcutsDataQueryCacheControllerwsdl#deleteProfile", RequestNamespace="urn:ShortcutsDataQueryCacheControllerwsdl", ResponseNamespace="urn:ShortcutsDataQueryCacheControllerwsdl")]
+        public void deleteProfile(string sessionKey, ShortcutDataQueryCacheServiceProfile profile) {
+            this.Invoke("deleteProfile", new object[] {
+                        sessionKey,
+                        profile});
+        }
+        
+        /// <remarks/>
+        public void deleteProfileAsync(string sessionKey, ShortcutDataQueryCacheServiceProfile profile) {
+            this.deleteProfileAsync(sessionKey, profile, null);
+        }
+        
+        /// <remarks/>
+        public void deleteProfileAsync(string sessionKey, ShortcutDataQueryCacheServiceProfile profile, object userState) {
+            if ((this.deleteProfileOperationCompleted == null)) {
+                this.deleteProfileOperationCompleted = new System.Threading.SendOrPostCallback(this.OndeleteProfileOperationCompleted);
+            }
+            this.InvokeAsync("deleteProfile", new object[] {
+                        sessionKey,
+                        profile}, this.deleteProfileOperationCompleted, userState);
+        }
+        
+        private void OndeleteProfileOperationCompleted(object arg) {
+            if ((this.deleteProfileCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.deleteProfileCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -240,6 +345,63 @@ namespace SalesLibraries.ServiceConnector.ShortcutsDataQueryCacheService {
     }
     
     /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:ShortcutsDataQueryCacheControllerwsdl")]
+    public partial class ShortcutDataQueryCacheServiceProfile {
+        
+        private string[] shortcutIdsField;
+        
+        private string idField;
+        
+        private string nameField;
+        
+        private string typeField;
+        
+        /// <remarks/>
+        public string[] shortcutIds {
+            get {
+                return this.shortcutIdsField;
+            }
+            set {
+                this.shortcutIdsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void getLandingPagesCompletedEventHandler(object sender, getLandingPagesCompletedEventArgs e);
     
@@ -264,6 +426,40 @@ namespace SalesLibraries.ServiceConnector.ShortcutsDataQueryCacheService {
             }
         }
     }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    public delegate void getProfilesCompletedEventHandler(object sender, getProfilesCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getProfilesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getProfilesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public ShortcutDataQueryCacheServiceProfile[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((ShortcutDataQueryCacheServiceProfile[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    public delegate void saveProfileCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    public delegate void deleteProfileCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]

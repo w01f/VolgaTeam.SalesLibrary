@@ -16,6 +16,28 @@
           <xsd:element name="description" type="xsd:string" />
         </xsd:all>
       </xsd:complexType>
+      <xsd:complexType name="ShortcutDataQueryCacheServiceProfileArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute wsdl:arrayType="tns:ShortcutDataQueryCacheServiceProfile[]" ref="soap-enc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="ShortcutDataQueryCacheServiceProfile">
+        <xsd:all>
+          <xsd:element name="shortcutIds" type="tns:stringArray" />
+          <xsd:element name="id" type="xsd:string" />
+          <xsd:element name="name" type="xsd:string" />
+          <xsd:element name="type" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="stringArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute wsdl:arrayType="xsd:string[]" ref="soap-enc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="getLandingPagesIn">
@@ -24,6 +46,22 @@
   <wsdl:message name="getLandingPagesOut">
     <wsdl:part name="return" type="tns:SoapShortcutModelArray" />
   </wsdl:message>
+  <wsdl:message name="getProfilesIn">
+    <wsdl:part name="sessionKey" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getProfilesOut">
+    <wsdl:part name="return" type="tns:ShortcutDataQueryCacheServiceProfileArray" />
+  </wsdl:message>
+  <wsdl:message name="saveProfileIn">
+    <wsdl:part name="sessionKey" type="xsd:string" />
+    <wsdl:part name="profile" type="tns:ShortcutDataQueryCacheServiceProfile" />
+  </wsdl:message>
+  <wsdl:message name="saveProfileOut" />
+  <wsdl:message name="deleteProfileIn">
+    <wsdl:part name="sessionKey" type="xsd:string" />
+    <wsdl:part name="profile" type="tns:ShortcutDataQueryCacheServiceProfile" />
+  </wsdl:message>
+  <wsdl:message name="deleteProfileOut" />
   <wsdl:message name="resetDataQueryCacheIn">
     <wsdl:part name="sessionKey" type="xsd:string" />
     <wsdl:part name="landingPageId" type="xsd:string" />
@@ -42,6 +80,21 @@
       <wsdl:input message="tns:getLandingPagesIn" />
       <wsdl:output message="tns:getLandingPagesOut" />
     </wsdl:operation>
+    <wsdl:operation name="getProfiles">
+      <wsdl:documentation />
+      <wsdl:input message="tns:getProfilesIn" />
+      <wsdl:output message="tns:getProfilesOut" />
+    </wsdl:operation>
+    <wsdl:operation name="saveProfile">
+      <wsdl:documentation />
+      <wsdl:input message="tns:saveProfileIn" />
+      <wsdl:output message="tns:saveProfileOut" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteProfile">
+      <wsdl:documentation />
+      <wsdl:input message="tns:deleteProfileIn" />
+      <wsdl:output message="tns:deleteProfileOut" />
+    </wsdl:operation>
     <wsdl:operation name="resetDataQueryCache">
       <wsdl:documentation />
       <wsdl:input message="tns:resetDataQueryCacheIn" />
@@ -57,6 +110,33 @@
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
     <wsdl:operation name="getLandingPages">
       <soap:operation soapAction="urn:ShortcutsDataQueryCacheControllerwsdl#getLandingPages" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ShortcutsDataQueryCacheControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ShortcutsDataQueryCacheControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getProfiles">
+      <soap:operation soapAction="urn:ShortcutsDataQueryCacheControllerwsdl#getProfiles" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ShortcutsDataQueryCacheControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ShortcutsDataQueryCacheControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="saveProfile">
+      <soap:operation soapAction="urn:ShortcutsDataQueryCacheControllerwsdl#saveProfile" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ShortcutsDataQueryCacheControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ShortcutsDataQueryCacheControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteProfile">
+      <soap:operation soapAction="urn:ShortcutsDataQueryCacheControllerwsdl#deleteProfile" style="rpc" />
       <wsdl:input>
         <soap:body use="encoded" namespace="urn:ShortcutsDataQueryCacheControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:input>

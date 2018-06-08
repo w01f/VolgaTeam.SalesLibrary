@@ -95,7 +95,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.LinkConfigProfiles
 
 		public void AddProfile()
 		{
-			using (var form = new FormEditProfile(true))
+			using (var form = new DataQueryCache.FormEditProfile(true))
 			{
 				if (form.ShowDialog(FormMain.Instance) != DialogResult.OK) return;
 				var newProfileModel = new LinkConfigProfileModel();
@@ -160,7 +160,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.LinkConfigProfiles
 		private void EditProfileTitle()
 		{
 			if (_selectedProfileControl == null) return;
-			using (var form = new FormEditProfile(false))
+			using (var form = new DataQueryCache.FormEditProfile(false))
 			{
 				form.ProfileName = _selectedProfileControl.ProfileName;
 				if (form.ShowDialog(FormMain.Instance) != DialogResult.OK) return;
@@ -205,8 +205,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.LinkConfigProfiles
 		private void OnSelectedProfileChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
 		{
 			if(_loading) return;
-			if(_selectedProfileControl!= null)
-				_selectedProfileControl.SaveData();
+			_selectedProfileControl?.SaveData();
 			_selectedProfileControl = gridViewProfiles.GetFocusedRow() as ProfileControl;
 			LoadActiveProfile();
 		}
