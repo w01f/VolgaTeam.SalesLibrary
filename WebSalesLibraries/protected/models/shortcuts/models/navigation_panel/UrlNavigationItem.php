@@ -36,4 +36,10 @@
 		{
 			return null;
 		}
+
+		/** @return string */
+		public function getTarget()
+		{
+			return "_blank";
+		}
 	}

@@ -8,7 +8,7 @@
 
 		this.init = function ()
 		{
-			var groupPage = $('#shortcut-group');
+			var groupPage = $('.shortcut-group-page');
 
 			var initGroup = function ()
 			{

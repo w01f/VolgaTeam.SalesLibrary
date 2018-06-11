@@ -3,7 +3,7 @@
 	if ($shortcut->samePage)
 	{
 		$parentShortcutId = $shortcut->id;
-		$parentPageId = isset($shortcut->bundleId) ? ('shortcut-link-page-' . $shortcut->bundleId) : 'shortcut-group';
+		$parentPageId = isset($shortcut->bundleId) ? ('shortcut-link-page-' . $shortcut->bundleId) : "#";
 	}
 	else
 	{

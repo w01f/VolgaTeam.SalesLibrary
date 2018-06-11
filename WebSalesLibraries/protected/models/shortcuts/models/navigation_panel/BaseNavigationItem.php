@@ -86,6 +86,9 @@
 		public abstract function getUrl();
 
 		/** @return string */
+		public abstract function getTarget();
+
+		/** @return string */
 		public abstract function getItemData();
 
 		/**
@@ -105,12 +108,18 @@
 				case 'shortcut':
 					$item = new ShortcutNavigationItem($parent, $xpath, $contextNode, $imagePath, $isPhone);
 					break;
+				case 'shortcut-group':
+					if ($isPhone)
+						$item = new ShortcutGroupNavigationItem($parent, $xpath, $contextNode, $imagePath, $isPhone);
+					else
+						$item = null;
+					break;
 				case 'url':
 					$item = new UrlNavigationItem($parent, $xpath, $contextNode, $imagePath, $isPhone);
 					break;
 				default:
-					return null;
+					$item = null;
 			}
-			return $item->settings->enabled ? $item : null;
+			return isset($item) && $item->settings->enabled ? $item : null;
 		}
 	}

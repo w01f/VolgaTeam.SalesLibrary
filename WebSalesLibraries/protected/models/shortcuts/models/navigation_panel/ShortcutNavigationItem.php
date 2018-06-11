@@ -28,7 +28,6 @@
 				/** @var  $shortcutRecord ShortcutLinkRecord */
 				$shortcutRecord = ShortcutLinkRecord::model()->findByPk($shortcutId);
 				if (isset($shortcutRecord))
-					/** @var  $shortcut BaseShortcut */
 					$this->shortcut = $shortcutRecord->getRegularModel(false, null);
 			}
 			$this->settings->enabled &= isset($this->shortcut);
@@ -44,5 +43,11 @@
 		public function getItemData()
 		{
 			return $this->shortcut->getMenuItemData();
+		}
+
+		/** @return string */
+		public function getTarget()
+		{
+			return "_blank";
 		}
 	}

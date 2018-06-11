@@ -24,37 +24,37 @@
 /*------------------------------------*/
 
 /*Group Content------------------------------------*/
-#shortcut-group .menu-items .menu-item
+.shortcut-group-page .menu-items .menu-item
 {
 	margin-top: 20px;
 	width: 96px;
 	height: 128px;
 }
 
-#shortcut-group .menu-items .menu-item .logo
+.shortcut-group-page .menu-items .menu-item .logo
 {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
 }
 
-#shortcut-group .menu-items .menu-item i.logo
+.shortcut-group-page .menu-items .menu-item i.logo
 {
 	font-size: 48px;
 	height: 48px;
 }
 
-#shortcut-group .menu-items .menu-item img.logo
+.shortcut-group-page .menu-items .menu-item img.logo
 {
 	height: 48px;
 }
 
-#shortcut-group .menu-items .menu-item .title
+.shortcut-group-page .menu-items .menu-item .title
 {
 	font-size: 0.9em;
 }
 
-#shortcut-group .menu-items .menu-item i.default-icon
+.shortcut-group-page .menu-items .menu-item i.default-icon
 {
 	background-color: #cdcdcd;
 }

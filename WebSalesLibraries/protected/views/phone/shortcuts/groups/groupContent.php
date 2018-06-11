@@ -11,7 +11,7 @@
 		$.SalesPortal.ShortcutsManager.init();
 	});
 </script>
-<div data-role='page' id="shortcut-group" data-cache="never" data-dom-cache="false" data-ajax="false">
+<div data-role='page' id="shortcut-group-<? echo $group->id; ?>" class="shortcut-group-page" data-cache="never" data-dom-cache="false" data-ajax="false">
 	<div data-role='header' class="page-header" data-position="fixed" data-theme="a">
 		<h1 class="header-title"><? echo $group->title; ?></h1>
 		<a href="#shortcut-group-popup-panel-right" class="ui-btn-right" data-icon="ion-navicon-round" data-iconpos="notext"></a>

@@ -15,7 +15,7 @@
     <li data-icon="false">
         <a id="<? echo $identifier; ?>"
            class="navigation-item<? if ($navigationItem->type === 'shortcut'): ?> shortcuts-link<? endif; ?>"
-           data-ajax="false" href="<? echo $navigationItem->getUrl(); ?>" target="_blank">
+           data-ajax="false" href="<? echo $navigationItem->getUrl(); ?>" target="<? echo $navigationItem->getTarget(); ?>">
             <div>
                 <img class="logo" src="<? echo $settings->icon; ?>" alt=""/>
                 <span class="title"><? echo $settings->title; ?></span>
