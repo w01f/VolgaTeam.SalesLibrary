@@ -90,6 +90,8 @@
 					else
 						$(parentShortcutId + '-download-warning-popup').popup('open');
 					break;
+				case 'left_panel_mobile':
+					break;
 				default :
 					$.ajax({
 						type: "POST",

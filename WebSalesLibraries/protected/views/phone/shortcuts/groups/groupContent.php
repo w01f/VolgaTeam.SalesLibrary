@@ -4,6 +4,12 @@
 	 */
 
 	$this->renderPartial('../site/scripts');
+
+	/** @var NavigationPanelShortcut[] $navigationListShortcuts */
+	$navigationListShortcuts = array();
+	foreach ($group->menuItems as $menuItem)
+		if ($menuItem->shortcut instanceof NavigationPanelShortcut)
+			$navigationListShortcuts[] = $menuItem->shortcut;
 ?>
 <script type="text/javascript">
 	$(document).ready(function ()
@@ -21,34 +27,32 @@
 			<div class="cbp-l-grid-masonry">
 				<? foreach ($group->menuItems as $menuItem): ?>
 					<?
-					/** @var $menuItem MenuItem */
-					$identifier = 'menu-item-' . $menuItem->shortcut->id;
+                        /** @var $menuItem MenuItem */
+                        $identifier = 'menu-item-' . $menuItem->shortcut->id;
 					?>
-					<? if ($menuItem->shortcut->enabled == true): ?>
-						<style>
-							<?echo '#'.$identifier;?> .logo
-							{
-								color: <?echo Utils::formatColor($menuItem->appearance->iconColor);?> !important;
-							}
-							<?echo '#'.$identifier;?> .title
- 							{
-								color: <?echo Utils::formatColor($menuItem->appearance->textColor);?> !important;
-							}
-						</style>
-						<a id="<? echo $identifier; ?>" class="cbp-item menu-item" data-ajax="false" href="<? echo $menuItem->shortcut->getSourceLink(); ?>" target="_blank">
-							<div class="cbp-caption">
-								<? if ($menuItem->shortcut->useIcon == true): ?>
-									<i class="logo <? echo $menuItem->shortcut->iconClass; ?>"></i>
-								<? elseif ($menuItem->shortcut->useIcon != true && isset($menuItem->shortcut->imageContent)): ?>
-									<img class="logo" src="<? echo $menuItem->shortcut->imageContent; ?>" alt=""/>
-								<?endif; ?>
-								<p class="title"><? echo $menuItem->shortcut->title; ?></p>
-							</div>
-							<div class="service-data">
-								<? echo $menuItem->shortcut->getMenuItemData(); ?>
-							</div>
-						</a>
-					<? endif; ?>
+                    <style>
+                        <?echo '#'.$identifier;?> .logo
+                        {
+                            color: <?echo Utils::formatColor($menuItem->appearance->iconColor);?> !important;
+                        }
+                        <?echo '#'.$identifier;?> .title
+                        {
+                            color: <?echo Utils::formatColor($menuItem->appearance->textColor);?> !important;
+                        }
+                    </style>
+                    <a id="<? echo $identifier; ?>" class="cbp-item menu-item" data-ajax="false" href="<? echo $menuItem->shortcut->getSourceLink(); ?>" target="_blank">
+                        <div class="cbp-caption">
+                            <? if ($menuItem->shortcut->useIcon == true): ?>
+                                <i class="logo <? echo $menuItem->shortcut->iconClass; ?>"></i>
+                            <? elseif ($menuItem->shortcut->useIcon != true && isset($menuItem->shortcut->imageContent)): ?>
+                                <img class="logo" src="<? echo $menuItem->shortcut->imageContent; ?>" alt=""/>
+                            <?endif; ?>
+                            <p class="title"><? echo $menuItem->shortcut->title; ?></p>
+                        </div>
+                        <div class="service-data">
+                            <? echo $menuItem->shortcut->getMenuItemData(); ?>
+                        </div>
+                    </a>
 				<? endforeach; ?>
 			</div>
 		</div>
@@ -63,6 +67,17 @@
             <li data-role="list-divider"><p>Copyright 2015 adSALESapps.com</p></li>
         </ul>
 	</div>
+	<? foreach ($navigationListShortcuts as $navigationListShortcut): ?>
+		<? $navigationPanel = $navigationListShortcut->getNavigationPanel();?>
+		<? if (isset($navigationPanel)): ?>
+            <div data-role="panel" data-display="overlay" data-position="<? echo $navigationListShortcut->position; ?>"
+                 id="<? echo $navigationListShortcut->expandPanelId; ?>">
+                <ul class="navigation-items-container" data-role="listview">
+					<? echo $this->renderPartial('../shortcuts/navigationPanel/itemsList', array('navigationPanel' => $navigationPanel)); ?>
+                </ul>
+            </div>
+		<? endif; ?>
+	<? endforeach; ?>
 	<div id="shortcuts-link-download-warning-popup" data-role="popup" data-theme="a" data-overlay-theme="d" data-dismissible="false">
 		<div data-role="header" data-theme="d">
 			<h1>Message</h1>

@@ -98,7 +98,7 @@
 		public static function getNavigationPanel($id, $isPhone)
 		{
 			$navigationPanel = null;
-			if (!isset($id))
+			if (empty($id))
 				$id = self::NavigationPanelCommonId;
 			$configRootPath = self::getShortcutsRootPath() . DIRECTORY_SEPARATOR . self::NavigationPanelRootName . DIRECTORY_SEPARATOR . $id;
 			$configRootLink = self::getShortcutsRootLink() . '/' . self::NavigationPanelRootName . '/' . $id;

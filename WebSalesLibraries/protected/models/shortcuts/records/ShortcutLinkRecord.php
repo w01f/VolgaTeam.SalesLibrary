@@ -171,6 +171,9 @@
 				case 'shortcutlink':
 					$shortcut = new AliasShortcut($this, $isPhone);
 					break;
+				case 'left_panel_mobile':
+					$shortcut = new NavigationPanelShortcut($this, $isPhone);
+					break;
 				default:
 					$shortcut = new EmptyShortcut($this, $isPhone);
 					break;
@@ -344,6 +347,9 @@
 					break;
 				case 'shortcutlink':
 					$shortcut = new AliasShortcut($this, false);
+					break;
+				case 'left_panel_mobile':
+					$shortcut = new NavigationPanelShortcut($this, false);
 					break;
 				default:
 					$shortcut = new EmptyShortcut($this, false);
