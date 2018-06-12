@@ -160,6 +160,12 @@
 										$.SalesPortal.ShortcutsManager.openShortcutByMenuItemData(data, '#' + $('.shortcut-link-page.ui-page-active').prop('id'));
 									}
 								});
+								$('.logout-button').off('click').on('click', function (e)
+								{
+									e.stopPropagation();
+									e.preventDefault();
+									$.SalesPortal.Auth.logout();
+								});
 							});
 
 							$.mobile.initializePage();

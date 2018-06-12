@@ -1,6 +1,6 @@
 <? /** @var $content string */ ?>
 <!DOCTYPE html>
-<html>
+<html id="jqm-markup">
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<?

@@ -143,6 +143,11 @@
 					'app_id' => '570b9e2b-580f-4324-a5c4-6df762282bdc',
 					'app_key' => 'anqxkSHFEV104$*ncHB66^=',
 				),
+				'jqm_theme' => array(
+					'enabled' => true,
+					'major_color' => "EACE23",
+					'minor_color' => "F6ECB6",
+				),
 			),
 			'components' => array(
 				'db' => array(

@@ -46,4 +46,6 @@
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/phone/shortcuts-wallbin.js?' . Yii::app()->params['version'], CClientScript::POS_END);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/phone/shortcuts-manager.js?' . Yii::app()->params['version'], CClientScript::POS_END);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/phone/qpage-manager.js?' . Yii::app()->params['version'], CClientScript::POS_END);
+
+	$this->renderPartial('../site/theme');
 ?>
