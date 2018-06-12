@@ -2,22 +2,23 @@
 {
 	window.BaseUrl = window.BaseUrl || '';
 	$.SalesPortal = $.SalesPortal || { };
-	var WallbinManager = function ()
+	$.SalesPortal.WallbinManager = function (id)
 	{
 		var that = this;
+		var wallbinId = id;
 
 		this.init = function ()
 		{
-			var wallbinPage = $('#wallbin');
+			var wallbinPage = $('#wallbin-' + wallbinId);
 
-			$('#wallbin-popup-panel-pages').find('.page-item a').off('click').on('click', function ()
+			$('#wallbin-' + wallbinId + '-popup-panel-pages').find('.page-item a').off('click').on('click', function ()
 			{
 				var pageId = $(this).find('.service-data .page-id').text();
 				wallbinPage.find('.content-header .title .page-name').html($(this).find('span').html());
 				pageChanged(pageId);
 			});
 
-			that.initPageContent(wallbinPage.find('.content-data'), '#wallbin');
+			that.initPageContent(wallbinPage.find('.content-data'), '#wallbin-' + wallbinId);
 
 			$('.logout-button').off('click').on('click', function (e)
 			{
@@ -51,9 +52,9 @@
 				},
 				success: function (msg)
 				{
-					var pageContent = $('#wallbin').find('.content-data');
+					var pageContent = $('#wallbin-' + wallbinId).find('.content-data');
 					pageContent.html(msg).find('div[data-role=collapsible]').collapsible();
-					that.initPageContent(pageContent, '#wallbin');
+					that.initPageContent(pageContent, '#wallbin-' + wallbinId);
 				},
 				async: true,
 				dataType: 'html'
@@ -114,7 +115,7 @@
 					$(this).find('.link-id').text(),
 					{
 						id: parentId,
-						name: $('#wallbin').find('.header-title').text()
+						name: $(parentId).find('.header-title').text()
 					},
 					false
 				);
@@ -166,5 +167,4 @@
 			});
 		};
 	};
-	$.SalesPortal.Wallbin = new WallbinManager();
 })(jQuery);

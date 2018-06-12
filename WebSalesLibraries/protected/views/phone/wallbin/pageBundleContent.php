@@ -1,5 +1,6 @@
 <?
 	/**
+	 * @var $wallbinId string
 	 * @var $wallbinName string
 	 * @var $pageItems LibraryPageBundleItem[]
 	 * @var $defaultPageItem LibraryPageBundleItem
@@ -11,20 +12,20 @@
 		$pageIds[] = $item->libraryPage->id;
 	$linksCount = LinkRecord::getLinksCountByPageIds($pageIds);
 ?>
-<div data-role='page' id="wallbin" class="shortcut-link-page" data-cache="never" data-dom-cache="false"
+<div data-role='page' id="wallbin-<? echo $wallbinId; ?>" class="shortcut-link-page" data-cache="never" data-dom-cache="false"
      data-ajax="false">
     <div data-role='header' class="page-header" data-position="fixed" data-theme="a">
-        <a href="#wallbin-popup-panel-left" class="navigation-panel-toggle" data-icon="ion-navicon-round"
+        <a href="#wallbin-<? echo $wallbinId; ?>-popup-panel-left" class="navigation-panel-toggle" data-icon="ion-navicon-round"
            data-iconpos="notext"></a>
         <h1 class="header-title"><? echo $wallbinName ?></h1>
-        <a href="#wallbin-popup-panel-right" class="ui-btn-right" data-icon="ion-navicon-round"
+        <a href="#wallbin-<? echo $wallbinId; ?>-popup-panel-right" class="ui-btn-right" data-icon="ion-navicon-round"
            data-iconpos="notext"></a>
     </div>
     <div data-role='content' class="main-content">
         <table class="content-header">
             <tr>
                 <td class="title">
-                    <a data-rel="popup" data-ajax="false" href="#wallbin-popup-panel-pages">
+                    <a data-rel="popup" data-ajax="false" href="#wallbin-<? echo $wallbinId; ?>-popup-panel-pages">
                         <div>Change page:</div>
                         <div class="page-name"><? echo $defaultPageItem->name; ?></div>
                     </a>
@@ -54,11 +55,11 @@
             </li>
         </ul>
     </div>
-    <div data-role="panel" data-display="overlay" id="wallbin-popup-panel-left">
+    <div data-role="panel" data-display="overlay" id="wallbin-<? echo $wallbinId; ?>-popup-panel-left">
         <ul class="navigation-items-container" data-role="listview">
         </ul>
     </div>
-    <div data-role="panel" data-display="overlay" data-position="right" id="wallbin-popup-panel-right">
+    <div data-role="panel" data-display="overlay" data-position="right" id="wallbin-<? echo $wallbinId; ?>-popup-panel-right">
         <ul data-role="listview">
 			<? echo $this->renderPartial('../shortcuts/groups/groupList'); ?>
             <li data-icon="false">
@@ -69,7 +70,7 @@
             <li data-role="list-divider"><p>Copyright 2015 adSALESapps.com</p></li>
         </ul>
     </div>
-    <div data-role="panel" data-display="overlay" data-position="right" id="wallbin-popup-panel-pages">
+    <div data-role="panel" data-display="overlay" data-position="right" id="wallbin-<? echo $wallbinId; ?>-popup-panel-pages">
         <ul data-role="listview">
             <li data-role="list-divider" class="header">
                 <a href="#" data-ajax="false"><span><? echo $wallbinName ?></span></a>

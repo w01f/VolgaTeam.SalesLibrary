@@ -10,6 +10,8 @@
 		public $order;
 		public $enabled;
 
+		public $isPhone;
+
 		public $useIcon;
 		public $iconClass;
 		public $imageContent;
@@ -19,6 +21,9 @@
 		public $groupAppearance;
 
 		public $isAccessGranted;
+
+		public $showNavigationPanel;
+		public $navigationPanelId;
 
 		/** @var MenuItem[] */
 		public $menuItems;
@@ -36,6 +41,7 @@
 
 			$this->id = $groupRecord->id;
 			$this->order = $groupRecord->order;
+			$this->isPhone = $isPhone;
 
 			$visualSettingsSubSection = $isPhone ? 'Mobile' : 'Regular';
 			$queryResult = $xpath->query('//Config/' . $visualSettingsSubSection);
@@ -94,6 +100,12 @@
 				$this->defaultItemAppearance->shadowColor = Yii::app()->params['menu']['MenuItemsColor'];
 				$this->defaultItemAppearance->useGradient = false;
 			}
+
+			$queryResult = $xpath->query('//Config/ShowLeftPanel');
+			$this->showNavigationPanel = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
+
+			$queryResult = $xpath->query('//Config/LeftPanelID');
+			$this->navigationPanelId = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
 
 			$this->isAccessGranted = UserIdentity::isUserAuthorized();
 			$isAdmin = UserIdentity::isUserAdmin();
@@ -186,5 +198,13 @@
 			$result .= '<div class="activity-data">' . CJSON::encode(array(
 					'title' => $this->title)) . '</div>';
 			return $result;
+		}
+
+		/** @return NavigationPanel */
+		public function getNavigationPanel()
+		{
+			if ($this->showNavigationPanel)
+				return ShortcutsManager::getNavigationPanel($this->navigationPanelId, $this->isPhone);
+			return null;
 		}
 	}

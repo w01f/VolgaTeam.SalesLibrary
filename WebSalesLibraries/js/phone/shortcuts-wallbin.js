@@ -4,10 +4,14 @@
 	$.SalesPortal = $.SalesPortal || { };
 	$.SalesPortal.ShortcutsWallbin = function (data)
 	{
+		var shortcutData = data;
+
 		this.init = function ()
 		{
-			$.SalesPortal.Wallbin.init();
-			$.mobile.pageContainer.pagecontainer("change", "#wallbin", {
+			var wallbinManager = new $.SalesPortal.WallbinManager(shortcutData.options.linkId);
+			wallbinManager.init();
+
+			$.mobile.pageContainer.pagecontainer("change", "#wallbin-" + shortcutData.options.linkId, {
 				transition: "slidefade"
 			});
 		};

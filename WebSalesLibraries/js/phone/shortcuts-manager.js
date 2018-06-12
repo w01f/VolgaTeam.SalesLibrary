@@ -27,6 +27,21 @@
 					}
 				});
 
+				groupPage.find('.navigation-items-container .shortcuts-link').off('click').on('click', function (e)
+				{
+					var data = $(this).find('.service-data');
+					$.SalesPortal.ShortcutsManager.trackActivity(data);
+
+					var hasCustomHandler = data.find('.has-custom-handler').length > 0;
+					var samePage = data.find('.same-page').length > 0;
+
+					if (hasCustomHandler === true && samePage === true)
+					{
+						e.preventDefault();
+						$.SalesPortal.ShortcutsManager.openShortcutByMenuItemData(data, '#' + groupPage.prop('id'));
+					}
+				});
+
 				$('.logout-button').off('click').on('click', function (e)
 				{
 					e.stopPropagation();
@@ -170,7 +185,7 @@
 									break;
 								case 'library':
 								case 'pagebundle':
-									new $.SalesPortal.ShortcutsWallbin().init(result);
+									new $.SalesPortal.ShortcutsWallbin(result).init(result);
 									break;
 								case 'searchapp':
 									new $.SalesPortal.ShortcutsSearchApp().init(result);

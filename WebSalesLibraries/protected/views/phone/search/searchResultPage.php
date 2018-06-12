@@ -7,8 +7,7 @@
 <div id="search-results-<? echo $parentShortcutId; ?>" class="search-results-page shortcut-link-page" data-role='page'
      data-cache="never" data-dom-cache="false" data-ajax="false">
     <div data-role='header' class="page-header" data-position="fixed">
-        <a href="#search-results-<? echo $parentShortcutId; ?>-popup-panel-left" class="navigation-panel-toggle" data-icon="ion-navicon-round"
-           data-iconpos="notext"></a>
+        <a href="#search-results-<? echo $parentShortcutId; ?>-popup-panel-left" class="navigation-panel-toggle" data-icon="ion-navicon-round" data-iconpos="notext"></a>
         <h1 class="header-title">Search Results</h1>
         <a href="#search-results-<? echo $parentShortcutId; ?>-popup-panel-right" class="ui-btn-right" data-icon="ion-navicon-round"
            data-iconpos="notext"></a>

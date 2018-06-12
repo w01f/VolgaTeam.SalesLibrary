@@ -6,7 +6,9 @@
 ?>
 <div id="shortcut-link-page-<? echo $shortcut->id; ?>" class="shortcut-link-page" data-role='page' data-cache="never" data-dom-cache="false" data-ajax="false">
 	<div data-role='header' class="page-header" data-position="fixed">
-		<a href="#shortcut-link-page-<? echo $shortcut->id; ?>-popup-panel-left" class="navigation-panel-toggle" data-icon="ion-navicon-round" data-iconpos="notext"></a>
+		<? if ($shortcut->showNavigationPanel): ?>
+            <a href="#shortcut-link-page-<? echo $shortcut->id; ?>-popup-panel-left" class="navigation-panel-toggle" data-icon="ion-navicon-round" data-iconpos="notext"></a>
+		<? endif; ?>
 		<h1 class="header-title"><? echo $shortcut->headerTitle != '' ? $shortcut->headerTitle : $shortcut->title; ?></h1>
 		<a href="#shortcut-link-page-<? echo $shortcut->id; ?>-popup-panel-right" class="ui-btn-right" data-icon="ion-navicon-round" data-iconpos="notext"></a>
 	</div>
@@ -27,10 +29,12 @@
 			<? echo $shortcutContent; ?>
 		</div>
 	</div>
-	<div data-role="panel" data-display="overlay" id="shortcut-link-page-<? echo $shortcut->id; ?>-popup-panel-left">
-        <ul class="navigation-items-container" data-role="listview">
-		</ul>
-	</div>
+	<? if ($shortcut->showNavigationPanel): ?>
+        <div data-role="panel" data-display="overlay" id="shortcut-link-page-<? echo $shortcut->id; ?>-popup-panel-left">
+            <ul class="navigation-items-container" data-role="listview">
+            </ul>
+        </div>
+	<? endif; ?>
 	<div data-role="panel" data-display="overlay" data-position="right" id="shortcut-link-page-<? echo $shortcut->id; ?>-popup-panel-right">
         <ul data-role="listview">
 			<? echo $this->renderPartial('../shortcuts/groups/groupList'); ?>

@@ -5,11 +5,11 @@
 
 	$this->renderPartial('../site/scripts');
 
-	/** @var NavigationPanelShortcut[] $navigationListShortcuts */
-	$navigationListShortcuts = array();
+	/** @var NavigationPanelShortcut[] $navigationPanelShortcuts */
+	$navigationPanelShortcuts = array();
 	foreach ($group->menuItems as $menuItem)
 		if ($menuItem->shortcut instanceof NavigationPanelShortcut)
-			$navigationListShortcuts[] = $menuItem->shortcut;
+			$navigationPanelShortcuts[] = $menuItem->shortcut;
 ?>
 <script type="text/javascript">
 	$(document).ready(function ()
@@ -19,6 +19,9 @@
 </script>
 <div data-role='page' id="shortcut-group-<? echo $group->id; ?>" class="shortcut-group-page" data-cache="never" data-dom-cache="false" data-ajax="false">
 	<div data-role='header' class="page-header" data-position="fixed" data-theme="a">
+		<? if ($group->showNavigationPanel): ?>
+            <a href="#shortcut-group-<? echo $group->id; ?>-popup-panel-left" class="navigation-panel-toggle" data-icon="ion-navicon-round" data-iconpos="notext"></a>
+		<? endif; ?>
 		<h1 class="header-title"><? echo $group->title; ?></h1>
 		<a href="#shortcut-group-popup-panel-right" class="ui-btn-right" data-icon="ion-navicon-round" data-iconpos="notext"></a>
 	</div>
@@ -57,6 +60,14 @@
 			</div>
 		</div>
 	</div>
+	<? if ($group->showNavigationPanel): ?>
+		<? $navigationPanel = $group->getNavigationPanel(); ?>
+        <div data-role="panel" data-display="overlay" id="shortcut-group-<? echo $group->id; ?>-popup-panel-left">
+            <ul class="navigation-items-container" data-role="listview">
+				<? echo $this->renderPartial('../shortcuts/navigationPanel/itemsList', array('navigationPanel' => $navigationPanel)); ?>
+            </ul>
+        </div>
+	<? endif; ?>
 	<div data-role="panel" data-display="overlay" data-position="right" id="shortcut-group-popup-panel-right">
         <ul data-role="listview">
 			<? echo $this->renderPartial('../shortcuts/groups/groupList'); ?>
@@ -67,13 +78,12 @@
             <li data-role="list-divider"><p>Copyright 2015 adSALESapps.com</p></li>
         </ul>
 	</div>
-	<? foreach ($navigationListShortcuts as $navigationListShortcut): ?>
-		<? $navigationPanel = $navigationListShortcut->getNavigationPanel();?>
-		<? if (isset($navigationPanel)): ?>
-            <div data-role="panel" data-display="overlay" data-position="<? echo $navigationListShortcut->position; ?>"
-                 id="<? echo $navigationListShortcut->expandPanelId; ?>">
+	<? foreach ($navigationPanelShortcuts as $navigationPanelShortcut): ?>
+		<? $shortcutNavigationPanel = $navigationPanelShortcut->getNavigationPanel();?>
+		<? if (isset($shortcutNavigationPanel)): ?>
+            <div data-role="panel" data-display="overlay" data-position="<? echo $navigationPanelShortcut->position; ?>" id="<? echo $navigationPanelShortcut->expandPanelId; ?>">
                 <ul class="navigation-items-container" data-role="listview">
-					<? echo $this->renderPartial('../shortcuts/navigationPanel/itemsList', array('navigationPanel' => $navigationPanel)); ?>
+					<? echo $this->renderPartial('../shortcuts/navigationPanel/itemsList', array('navigationPanel' => $shortcutNavigationPanel)); ?>
                 </ul>
             </div>
 		<? endif; ?>

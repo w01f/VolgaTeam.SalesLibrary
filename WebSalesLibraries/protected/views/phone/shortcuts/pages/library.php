@@ -10,6 +10,7 @@
 
 	$this->renderPartial('../wallbin/pageBundleContent',
 		array(
+			'wallbinId' => $shortcut->id,
 			'wallbinName' => $shortcut->library->alias,
 			'pageItems' => $pageItems,
 			'defaultPageItem' => $pageItems[0],
