@@ -37,6 +37,7 @@
     overflow-x: hidden;
     width: 150px;
     height: 565px;
+    padding-right: 15px;
 }
 
 .bundle-container .bundle-items-list li

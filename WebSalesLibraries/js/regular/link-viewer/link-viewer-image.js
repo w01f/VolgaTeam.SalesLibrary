@@ -184,11 +184,24 @@
 		var showGalleryModal = function ()
 		{
 			$.fancybox.close();
+			var viewerBar = new $.SalesPortal.ViewerBar();
 			$.fancybox({
 				title: viewerData.name,
 				content: '<img src="' + viewerData.url + '">',
 				openEffect: 'none',
-				closeEffect: 'none'
+				closeEffect: 'none',
+				afterClose: function ()
+				{
+					viewerBar.close();
+				}
+			});
+			viewerBar.show({
+				returnCallback: function ()
+				{
+					$.fancybox.close();
+					var parentPreviewParameters = parameters.parentPreviewParameters;
+					$.SalesPortal.LinkManager.openViewerDialog(parentPreviewParameters);
+				}
 			});
 		};
 
