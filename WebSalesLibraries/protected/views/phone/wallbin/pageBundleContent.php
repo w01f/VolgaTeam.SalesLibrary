@@ -67,7 +67,7 @@
             </li>
             <li data-role="list-divider"><p class="user-info">User: <? echo UserIdentity::getCurrentUserLogin(); ?></p>
             </li>
-            <li data-role="list-divider"><p>Copyright 2015 adSALESapps.com</p></li>
+            <li data-role="list-divider"><p>Copyright 2018 adSALESapps.com</p></li>
         </ul>
     </div>
     <div data-role="panel" data-display="overlay" data-position="right" id="wallbin-<? echo $wallbinId; ?>-popup-panel-pages">
@@ -85,7 +85,7 @@
                     </a>
                 </li>
 			<? endforeach; ?>
-            <li data-role="list-divider"><p>Copyright 2015 adSALESapps.com</p></li>
+            <li data-role="list-divider"><p>Copyright 2018 adSALESapps.com</p></li>
         </ul>
     </div>
 </div>

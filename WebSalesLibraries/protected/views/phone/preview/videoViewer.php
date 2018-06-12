@@ -61,7 +61,7 @@
                     <a class="logout-button" href="#">Log Out</a>
                 </li>
                 <li data-role="list-divider"><p class="user-info">User: <? echo UserIdentity::getCurrentUserLogin(); ?></p></li>
-                <li data-role="list-divider"><p>Copyright 2015 adSALESapps.com</p></li>
+                <li data-role="list-divider"><p>Copyright 2018 adSALESapps.com</p></li>
             </ul>
 		</div>
 		<? if ($data->config->allowAddToQuickSite || $data->config->allowAddToFavorites || (Yii::app()->params['one_drive_links']['enabled'] && !empty($data->oneDriveUrl))): ?>

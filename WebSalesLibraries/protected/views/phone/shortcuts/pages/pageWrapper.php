@@ -42,7 +42,7 @@
                 <a class="logout-button" href="#">Log Out</a>
             </li>
             <li data-role="list-divider"><p class="user-info">User: <? echo UserIdentity::getCurrentUserLogin(); ?></p></li>
-            <li data-role="list-divider"><p>Copyright 2015 adSALESapps.com</p></li>
+            <li data-role="list-divider"><p>Copyright 2018 adSALESapps.com</p></li>
         </ul>
 	</div>
 	<div id="shortcut-link-page-<? echo $shortcut->id; ?>-download-warning-popup" data-role="popup" data-theme="a" data-overlay-theme="d" data-dismissible="false">
