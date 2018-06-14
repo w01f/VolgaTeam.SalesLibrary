@@ -14,6 +14,7 @@
 				headerOptions: libraryPageData.options.headerOptions,
 				actions: libraryPageData.actions,
 				navigationPanel: libraryPageData.navigationPanel,
+				fixedPanels: libraryPageData.fixedPanels,
 				loadCallback: function () {
 					var pageContent = $.SalesPortal.Content.getContentObject();
 

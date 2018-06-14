@@ -15,6 +15,7 @@
 				headerOptions: quizzesData.options.headerOptions,
 				actions: quizzesData.actions,
 				navigationPanel: quizzesData.navigationPanel,
+				fixedPanels: quizzesData.fixedPanels,
 				resizeCallback: updateContentSize
 			});
 

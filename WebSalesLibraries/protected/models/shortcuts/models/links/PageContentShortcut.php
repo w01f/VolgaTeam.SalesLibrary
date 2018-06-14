@@ -1,5 +1,7 @@
 <?
 
+	use application\models\shortcuts\models\landing_page\regular_markup\common\FixedPanelSettings;
+
 	/**
 	 * Class PageContentShortcut
 	 */
@@ -17,8 +19,13 @@
 		/** @var  PageHeaderSettings */
 		public $headerSettings;
 
+		/** @var  FixedPanelSettings */
+		public $fixedPanelSettings;
+
 		public $autoLoadLinkId;
 		public $autoLoadLinkShowDelayHours;
+
+		public $usePermissions;
 
 		public function initRegularModel()
 		{
@@ -54,6 +61,8 @@
 
 		public function loadPageConfig()
 		{
+			$this->usePermissions = true;
+
 			$linkConfig = new DOMDocument();
 			$linkConfig->loadXML($this->linkRecord->config);
 			$xpath = new DomXPath($linkConfig);
@@ -73,6 +82,13 @@
 			$queryResult = $xpath->query('//Config/AutoLoadLink');
 			if ($queryResult->length > 0)
 				$this->configureAutoLoadLink($xpath, $queryResult->item(0));
+
+			if (!$this->isPhone)
+			{
+				$queryResult = $xpath->query('//Config/FixedPanel');
+				if ($queryResult->length > 0)
+					$this->fixedPanelSettings = FixedPanelSettings::fromXml($this, $xpath, $queryResult->item(0));
+			}
 
 			$queryResult = $xpath->query('//Config/Actions/Action');
 			$this->initActions($xpath, $queryResult);

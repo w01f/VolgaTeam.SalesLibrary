@@ -60,13 +60,15 @@
 		public $border;
 		/** @var  BackgroundStyle */
 		public $background;
+		/** @var  \HideCondition */
+		public $hideCondition;
 
 		public $isAccessGranted;
 
 		public $imagePath;
 
 		/**
-		 * @param $parentShortcut \LandingPageShortcut
+		 * @param $parentShortcut \PageContentShortcut
 		 * @param $parentBlock BlockContainer
 		 */
 		protected function __construct($parentShortcut, $parentBlock)
@@ -82,6 +84,8 @@
 			$this->margin = new \Padding(0);
 
 			$this->imagePath = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . $this->parentShortcut->relativeLink . '/images/');
+
+			$this->hideCondition = new \HideCondition();
 		}
 
 		/**
@@ -120,6 +124,10 @@
 			$queryResult = $xpath->query('./Background', $contextNode);
 			if ($queryResult->length > 0)
 				$this->background = BackgroundStyle::fromXml($xpath, $queryResult->item(0));
+
+			$queryResult = $xpath->query('./Hide', $contextNode);
+			if ($queryResult->length > 0)
+				$this->hideCondition = \HideCondition::fromXml($xpath, $queryResult->item(0));
 
 			$this->isAccessGranted = true;
 
@@ -251,7 +259,7 @@
 		}
 
 		/**
-		 * @param $parentShortcut \LandingPageShortcut
+		 * @param $parentShortcut \PageContentShortcut
 		 * @param $parentBlock BlockContainer
 		 * @param $xpath \DOMXPath
 		 * @param $contextNode \DOMNode

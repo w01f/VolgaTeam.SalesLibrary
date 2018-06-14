@@ -15,6 +15,7 @@
 				headerOptions: gridData.options.headerOptions,
 				actions: gridData.actions,
 				navigationPanel: gridData.navigationPanel,
+				fixedPanels: gridData.fixedPanels,
 				resizeCallback: updateContentSize,
 				loadCallback: function ()
 				{

@@ -261,32 +261,62 @@
 					$content = $this->renderPartial('pages/' . $viewName, $viewParameters, true);
 
 				$actions = null;
-				$navigationPanel = '';
+				$navigationPanel = null;
+				$fixedPanels = null;
 
 				if ($shortcut instanceof PageContentShortcut)
 				{
+					/** @var PageContentShortcut $shortcut */
 					$actions = !$this->isPhone ?
 						$this->renderPartial('../menu/actionItems', array('actionContainer' => $shortcut), true) :
 						'';
 
-					if ($shortcut instanceof PageContentShortcut)
+					$navigationPanelData = $shortcut->getNavigationPanel();
+					if (isset($navigationPanelData))
 					{
-						/** @var PageContentShortcut $shortcut */
-						$navigationPanelData = $shortcut->getNavigationPanel();
-						if (isset($navigationPanelData))
-						{
-							$navigationPanel = array(
-								'content' => $this->renderPartial('navigationPanel/itemsList', array('navigationPanel' => $navigationPanelData), true),
-								'options' => array(
-									'id' => $navigationPanelData->id,
-									'expanded' => $navigationPanelData->isExpanded,
-									'hideCondition' => array(
-										'extraSmall' => $navigationPanelData->hideCondition->extraSmall,
-										'small' => $navigationPanelData->hideCondition->small,
-										'medium' => $navigationPanelData->hideCondition->medium,
-										'large' => $navigationPanelData->hideCondition->large,
-									)
+						$navigationPanel = array(
+							'content' => $this->renderPartial('navigationPanel/itemsList', array('navigationPanel' => $navigationPanelData), true),
+							'options' => array(
+								'id' => $navigationPanelData->id,
+								'expanded' => $navigationPanelData->isExpanded,
+								'hideCondition' => array(
+									'extraSmall' => $navigationPanelData->hideCondition->extraSmall,
+									'small' => $navigationPanelData->hideCondition->small,
+									'medium' => $navigationPanelData->hideCondition->medium,
+									'large' => $navigationPanelData->hideCondition->large,
 								)
+							)
+						);
+					}
+
+					$fixedPanelSettings = $shortcut->fixedPanelSettings;
+					if (isset($fixedPanelSettings))
+					{
+						$fixedPanels = array();
+						if (isset($fixedPanelSettings->topPanel))
+						{
+							$fixedPanels['top'] = array(
+								'content' => $this->renderPartial('landingPageMarkup/common/fixedPanel',
+									array(
+										'markup' => $fixedPanelSettings->topPanel,
+										'height' => $fixedPanelSettings->topHeight,
+										'isTop' => true,
+										'screenSettings' => $screenSettings,
+									), true),
+								'height' => $fixedPanelSettings->topHeight
+							);
+						}
+						if (isset($fixedPanelSettings->bottomPanel))
+						{
+							$fixedPanels['bottom'] = array(
+								'content' => $this->renderPartial('landingPageMarkup/common/fixedPanel',
+									array(
+										'markup' => $fixedPanelSettings->bottomPanel,
+										'height' => $fixedPanelSettings->bottomHeight,
+										'isTop' => false,
+										'screenSettings' => $screenSettings,
+									), true),
+								'height' => $fixedPanelSettings->bottomHeight
 							);
 						}
 					}
@@ -296,6 +326,7 @@
 					'content' => $content,
 					'actions' => $actions,
 					'navigationPanel' => $navigationPanel,
+					'fixedPanels' => $fixedPanels,
 					'options' => $shortcut->getPageData()
 				);
 			}

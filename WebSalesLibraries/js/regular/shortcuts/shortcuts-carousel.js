@@ -17,6 +17,7 @@
 				headerOptions: carouselData.options.headerOptions,
 				actions: carouselData.actions,
 				navigationPanel: carouselData.navigationPanel,
+				fixedPanels: carouselData.fixedPanels,
 				resizeCallback: updateContentSize,
 				loadCallback: function ()
 				{

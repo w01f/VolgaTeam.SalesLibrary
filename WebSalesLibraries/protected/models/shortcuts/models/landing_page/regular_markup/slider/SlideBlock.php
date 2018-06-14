@@ -15,7 +15,7 @@
 		public $imageSettings;
 
 		/**
-		 * @param $parentShortcut \LandingPageShortcut
+		 * @param $parentShortcut \PageContentShortcut
 		 * @param $parentBlock BlockContainer
 		 */
 		public function __construct($parentShortcut, $parentBlock)

@@ -10,7 +10,7 @@
 		public $items;
 
 		/**
-		 * @param $parentShortcut \LandingPageShortcut
+		 * @param $parentShortcut \PageContentShortcut
 		 * @param $parentBlock BlockContainer
 		 */
 		protected function __construct($parentShortcut, $parentBlock)

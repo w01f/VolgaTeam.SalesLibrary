@@ -40,6 +40,7 @@
 				headerOptions: appData.options.headerOptions,
 				actions: appData.actions,
 				navigationPanel: appData.navigationPanel,
+				fixedPanels: appData.fixedPanels,
 				resizeCallback: updateContentSize
 			});
 

@@ -44,6 +44,7 @@
 								headerOptions: parentSearchData.options.headerOptions,
 								actions: parentSearchData.actions,
 								navigationPanel: parentSearchData.navigationPanel,
+								fixedPanels: parentSearchData.fixedPanels,
 								resizeCallback: function () {
 									updateContentSize();
 								}

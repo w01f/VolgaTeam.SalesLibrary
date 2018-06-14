@@ -18,6 +18,7 @@
 				headerOptions: qBuilderData.options.headerOptions,
 				actions: qBuilderData.actions,
 				navigationPanel: qBuilderData.navigationPanel,
+				fixedPanels: qBuilderData.fixedPanels,
 				resizeCallback: updateContentSize
 			});
 

@@ -15,6 +15,7 @@
 					headerOptions: undefined,
 					actions: undefined,
 					navigationPanel: undefined,
+					fixedPanels: undefined,
 					loadCallback: undefined,
 					resizeCallback: undefined
 				};
@@ -22,6 +23,7 @@
 			parameters.headerOptions = parameters.headerOptions !== undefined ? parameters.headerOptions : undefined;
 			parameters.actions = parameters.actions !== undefined ? parameters.actions : undefined;
 			parameters.navigationPanel = parameters.navigationPanel !== undefined ? parameters.navigationPanel : undefined;
+			parameters.fixedPanels = parameters.fixedPanels !== undefined ? parameters.fixedPanels : null;
 			parameters.loadCallback = parameters.loadCallback !== undefined ? parameters.loadCallback : function () {
 			};
 			parameters.resizeCallback = parameters.resizeCallback !== undefined ? parameters.resizeCallback : function () {
@@ -38,6 +40,28 @@
 
 			var contentRoot = $('#content');
 			var contentObject = that.getContentObject();
+
+			var contentInner = contentRoot.find('.content-inner');
+			contentInner.find('.fixed-panel').remove();
+			contentInner.css({
+				'padding': '0'
+			});
+
+			if (parameters.fixedPanels)
+			{
+				if (parameters.fixedPanels.top !== undefined)
+				{
+					contentObject.before(parameters.fixedPanels.top.content);
+				}
+				if (parameters.fixedPanels.bottom !== undefined)
+				{
+					contentRoot.find('.content-inner').append(parameters.fixedPanels.bottom.content);
+					contentInner.css({
+						'padding-bottom': parameters.fixedPanels.bottom.height + 'px'
+					});
+				}
+			}
+
 			contentObject.scrollTop(0);
 			contentObject.html(parameters.content);
 
@@ -69,15 +93,29 @@
 			return $('#content').find('.navigation-panel');
 		};
 
+		this.getFixedPanels = function () {
+			return $('#content').find('.fixed-panel');
+		};
+
 		this.updateSize = function () {
 			$('body').css({
 				'height': 'auto'
 			});
 
+			var contentRoot = $('#content');
 			var content = that.getContentObject();
 
 			var menu = $('#main-menu');
+
+
+			var topFixedPanel = contentRoot.find('.fixed-panel-top');
+			var bottomFixedPanel = contentRoot.find('.fixed-panel-bottom');
+
 			var height = $(window).height() - menu.outerHeight(true) - menu.offset().top;
+			if (topFixedPanel.length > 0)
+				height = height - topFixedPanel.outerHeight(true);
+			if (bottomFixedPanel.length > 0)
+				height = height - bottomFixedPanel.outerHeight(true);
 
 			content.css({
 				'max-width': 'none',

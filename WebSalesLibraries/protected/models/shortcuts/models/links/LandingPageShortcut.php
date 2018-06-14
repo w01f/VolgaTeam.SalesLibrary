@@ -10,8 +10,6 @@
 	 */
 	class LandingPageShortcut extends ContainerShortcut
 	{
-		public $usePermissions;
-
 		/** @var  MarkupSettings */
 		public $markupSettings;
 
@@ -21,7 +19,6 @@
 		public function loadPageConfig()
 		{
 			parent::loadPageConfig();
-			$this->usePermissions = true;
 			$this->loadMarkup();
 		}
 

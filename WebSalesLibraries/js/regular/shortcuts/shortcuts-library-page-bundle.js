@@ -14,6 +14,7 @@
 				headerOptions: bundleData.options.headerOptions,
 				actions: bundleData.actions,
 				navigationPanel: bundleData.navigationPanel,
+				fixedPanels: bundleData.fixedPanels,
 				resizeCallback: updateContentSize,
 				loadCallback: function () {
 					var contentObject = $.SalesPortal.Content.getContentObject();

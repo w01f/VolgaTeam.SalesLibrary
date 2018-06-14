@@ -32,6 +32,7 @@
 				headerOptions: favoritesData.options.headerOptions,
 				actions: favoritesData.actions,
 				navigationPanel: favoritesData.navigationPanel,
+				fixedPanels: favoritesData.fixedPanels,
 				resizeCallback: updateContentSize
 			});
 
@@ -205,6 +206,7 @@
 									headerOptions: favoritesData.options.headerOptions,
 									actions: favoritesData.actions,
 									navigationPanel: favoritesData.navigationPanel,
+									fixedPanels: favoritesData.fixedPanels,
 									resizeCallback: updateContentSize
 								});
 								loadFolders(folderId);

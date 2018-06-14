@@ -254,6 +254,7 @@
 						headerOptions: parameters.options.headerOptions,
 						actions: parameters.actions,
 						navigationPanel: parameters.navigationPanel,
+						fixedPanels: parameters.fixedPanels,
 						loadCallback: function ()
 						{
 							$.SalesPortal.ShortcutsManager.updateContentSize();

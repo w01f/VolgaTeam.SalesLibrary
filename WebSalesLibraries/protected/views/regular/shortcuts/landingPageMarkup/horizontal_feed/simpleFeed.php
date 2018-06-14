@@ -107,7 +107,10 @@
         line-height: <?echo $viewSettings->style->controlButtonHeight;?>px !important;
     }
 </style>
-<div id="horizontal-feed-<? echo $feedId; ?>" class="row horizontal-feed">
+<div id="horizontal-feed-<? echo $feedId; ?>" class="row horizontal-feed <? if ($contentBlock->hideCondition->large): ?> hidden-lg<? endif; ?>
+    <? if ($contentBlock->hideCondition->medium): ?> hidden-md<? endif; ?>
+    <? if ($contentBlock->hideCondition->small): ?> hidden-sm<? endif; ?>
+    <? if ($contentBlock->hideCondition->extraSmall): ?> hidden-xs<? endif; ?>">
 	<div class="service-data">
 		<div class="encoded-object">
 			<div class="view-settings"><? echo CJSON::encode($viewSettings); ?></div>

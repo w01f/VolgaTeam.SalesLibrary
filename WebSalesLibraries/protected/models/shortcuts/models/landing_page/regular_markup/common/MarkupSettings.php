@@ -11,7 +11,7 @@
 		public $contentBlocks;
 
 		/**
-		 * @param $parentShortcut \LandingPageShortcut
+		 * @param $parentShortcut \PageContentShortcut
 		 * @param $xpath \DOMXPath
 		 * @param $contextNode \DOMNode
 		 * @return MarkupSettings
