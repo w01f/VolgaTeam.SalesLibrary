@@ -399,11 +399,15 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 			MainController.Instance.ProcessManager.Run(String.Format("Adding Link{0}...", sourceLinks.Count > 1 ? "s" : String.Empty),
 				(cancelationToken, formProgess) =>
 				{
+					var dataRecordPosition = position;
 					foreach (var sourceLink in sourceLinks)
 					{
 						var link = LibraryFileLink.Create(sourceLink, DataSource);
-						if (position >= 0)
-							((List<BaseLibraryLink>)DataSource.Links).InsertItem(link, position);
+						if (dataRecordPosition >= 0)
+						{
+							((List<BaseLibraryLink>)DataSource.Links).InsertItem(link, dataRecordPosition);
+							dataRecordPosition++;
+						}
 						else
 							DataSource.Links.AddItem(link);
 						libraryLinks.Add(link);
@@ -411,11 +415,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 				});
 
 			LinkRow row = null;
+			var rowItemPosition = position;
 			foreach (var link in libraryLinks)
 			{
-				row = InsertLinkRow(link, position);
-				if (position != -1)
-					position++;
+				row = InsertLinkRow(link, rowItemPosition);
+				if (rowItemPosition != -1)
+					rowItemPosition++;
 			}
 
 			_outsideChangesInProgress = false;

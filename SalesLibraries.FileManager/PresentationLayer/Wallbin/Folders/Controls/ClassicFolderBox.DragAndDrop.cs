@@ -242,8 +242,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 							foreach (var extrernalLink in extrernalLinks.OfType<FileLink>().ToList())
 							{
 								var existedPreviewContainers = DataSource.Page.Library.PreviewContainers
-									.Where(previewContainer => String.Equals(Path.GetFileName(previewContainer.SourcePath), extrernalLink.Name,
-										StringComparison.OrdinalIgnoreCase))
+									.Where(previewContainer => String.Equals(Path.GetFileName(previewContainer.SourcePath), extrernalLink.Name, StringComparison.OrdinalIgnoreCase) &&
+										DataSource.Page.Library.Pages.SelectMany(page => page.AllGroupLinks.OfType<LibraryFileLink>()).Any(fileLink => String.Equals(fileLink.NameWithExtension, extrernalLink.Name, StringComparison.OrdinalIgnoreCase)))
 									.ToList();
 								if (existedPreviewContainers.Any())
 									existedPreviewContainerPairs.Add(extrernalLink, existedPreviewContainers);
