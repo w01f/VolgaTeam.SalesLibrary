@@ -238,10 +238,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Bundl
 			var view = grid?.MainView as GridView;
 			var hitInfo = view?.CalcHitInfo(grid.PointToClient(new Point(e.X, e.Y)));
 			if (hitInfo == null) return;
-			var downHitInfo = e.Data.GetData(typeof(GridHitInfo)) as GridHitInfo;
-			if (downHitInfo == null) return;
+			if (!(e.Data.GetData(typeof(GridHitInfo)) is GridHitInfo downHitInfo)) return;
 			var sourceBundle = view.GetRow(downHitInfo.RowHandle) as LinkBundle;
-			var targetRowIndex = hitInfo.HitTest == GridHitTest.EmptyRow ? view.DataRowCount : hitInfo.RowHandle;
+			var targetRowIndex = hitInfo.HitTest == GridHitTest.EmptyRow ? -1 : hitInfo.RowHandle;
 			((IList<LinkBundle>)_library.LinkBundles).ChangeItemPosition(sourceBundle, targetRowIndex);
 			LoadBundles(targetRowIndex);
 			RaiseDataChanged();
@@ -251,8 +250,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Bundl
 		{
 			if (!(e.HitInfo.InRowCell || e.HitInfo.InRow || e.HitInfo.InDataRow)) return;
 			e.Allow = true;
-			var targetBundle = gridViewBundles.GetRow(e.HitInfo.RowHandle) as LinkBundle;
-			if (targetBundle == null) return;
+			if (!(gridViewBundles.GetRow(e.HitInfo.RowHandle) is LinkBundle targetBundle)) return;
 			e.Menu.Items.Clear();
 			var items = GetBundleContextMenuItems(targetBundle).ToList();
 			foreach (var menuItem in items)
@@ -275,9 +273,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Bundl
 
 		private void LoadBundleItems(int selectedItemIndex = 0)
 		{
+			gridViewBundleItems.CloseEditor();
 			gridControlBundleItems.DataSource = SelectedBundle?.Settings.Items;
 			gridViewBundleItems.RefreshData();
+
 			gridViewBundleItems.FocusedRowHandle = selectedItemIndex;
+			gridControlBundleItems.Refresh();
 
 			if (_bundleItemsDragDropHelper == null && SelectedBundle != null && SelectedBundle.Settings.Items.Any())
 			{
@@ -286,10 +287,14 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Bundl
 			}
 		}
 
-		private void AddLibraryLinkBundleItem(LibraryObjectLink libraryObjectLink)
+		private void AddLibraryLinkBundleItem(LibraryObjectLink libraryObjectLink, int targetRowIndex)
 		{
-			SelectedBundle.AddLibraryLink(libraryObjectLink).AssignDefaultImage();
-			LoadBundleItems(SelectedBundle.Settings.Items.Count - 1);
+			SelectedBundle.AddLibraryLink(libraryObjectLink, targetRowIndex).AssignDefaultImage();
+			LoadBundleItems();
+			if (targetRowIndex >= 0)
+				LoadBundleItems(targetRowIndex);
+			else
+				LoadBundleItems();
 			RaiseDataChanged();
 		}
 
@@ -344,8 +349,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Bundl
 			var view = grid?.MainView as GridView;
 			var hitInfo = view?.CalcHitInfo(grid.PointToClient(new Point(e.X, e.Y)));
 			if (hitInfo == null) return;
-			var downHitInfo = e.Data.GetData(typeof(GridHitInfo)) as GridHitInfo;
-			if (downHitInfo == null) return;
+			if (!(e.Data.GetData(typeof(GridHitInfo)) is GridHitInfo downHitInfo)) return;
 			var sourceBundleItem = view.GetRow(downHitInfo.RowHandle) as BaseBundleItem;
 			var targetRowIndex = hitInfo.HitTest == GridHitTest.EmptyRow ? view.DataRowCount : hitInfo.RowHandle;
 			SelectedBundle.Settings.Items.ChangeItemPosition(sourceBundleItem, targetRowIndex);
@@ -363,10 +367,15 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Bundl
 
 		private void OnGridBundleItemsDragDrop(object sender, DragEventArgs e)
 		{
+			var grid = sender as GridControl;
+			var view = grid?.MainView as GridView;
+			if (view == null) return;
 			if (!e.Data.GetDataPresent(typeof(LinkRow))) return;
 			var libraryObjectLink = (e.Data.GetData(typeof(LinkRow)) as LinkRow)?.SourceObject;
 			if (libraryObjectLink == null) return;
-			AddLibraryLinkBundleItem(libraryObjectLink);
+			var hitInfo = view.CalcHitInfo(grid.PointToClient(new Point(e.X, e.Y)));
+			var targetRowIndex = hitInfo == null || hitInfo.HitTest == GridHitTest.EmptyRow ? view.DataRowCount : hitInfo.RowHandle;
+			AddLibraryLinkBundleItem(libraryObjectLink, targetRowIndex);
 		}
 
 		private void OnBundleItemsRowCellClick(object sender, RowCellClickEventArgs e)
@@ -384,8 +393,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Bundl
 
 		private void OnGridBundleItemsRowCellStyle(object sender, RowCellStyleEventArgs e)
 		{
-			var bundleItem = ((GridView)sender).GetRow(e.RowHandle) as LibraryLinkItem;
-			if (bundleItem != null && bundleItem.IsDead)
+			if (((GridView)sender).GetRow(e.RowHandle) is LibraryLinkItem bundleItem && bundleItem.IsDead)
 				e.Appearance.ForeColor = Color.Red;
 		}
 

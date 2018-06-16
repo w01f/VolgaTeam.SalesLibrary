@@ -249,7 +249,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Singl
 			using (var form = new FormAddUrl())
 			{
 				if (form.ShowDialog(MainController.Instance.MainForm) != DialogResult.OK) return;
-				_linkBundle.AddBundleItem<UrlItem>(form.Url).AssignDefaultImage();
+				_linkBundle.AddBundleItem<UrlItem>(-1, form.Url).AssignDefaultImage();
 				LoadBundleItems();
 			}
 		}

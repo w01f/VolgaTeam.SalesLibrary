@@ -131,18 +131,21 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 				.ToList();
 		}
 
-		public LibraryLinkItem AddLibraryLink(LibraryObjectLink libraryObjectLink)
+		public LibraryLinkItem AddLibraryLink(LibraryObjectLink libraryObjectLink, int targetIndex)
 		{
 			var defaulUseAsThumbnail = Settings.Items.All(item => !item.UseAsThumbnail);
-			var libraryLinkItem = AddBundleItem<LibraryLinkItem>(libraryObjectLink.ExtId);
+			var libraryLinkItem = AddBundleItem<LibraryLinkItem>(targetIndex, libraryObjectLink.ExtId);
 			libraryLinkItem.UseAsThumbnail = defaulUseAsThumbnail && libraryLinkItem.ThumbnailAvailable;
 			return libraryLinkItem;
 		}
 
-		public TItem AddBundleItem<TItem>(params object[] parameters) where TItem : BaseBundleItem
+		public TItem AddBundleItem<TItem>(int targetIndex = -1, params object[] parameters) where TItem : BaseBundleItem
 		{
 			var bundleItem = BaseBundleItem.Create<TItem>(this, parameters);
-			Settings.Items.AddItem(bundleItem);
+			if (targetIndex >= 0)
+				Settings.Items.InsertItem(bundleItem, targetIndex);
+			else
+				Settings.Items.AddItem(bundleItem);
 			return bundleItem;
 		}
 
