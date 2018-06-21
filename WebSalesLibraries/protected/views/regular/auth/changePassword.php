@@ -28,10 +28,17 @@
 	<tr>
 		<td colspan="2">
 			<?
-				$logoFolderPath = realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images';
-				$imageSource = 'data:image/png;base64,' . base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'logo.png'));
+				$logoFilePath = realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'logo.svg';
+				if (file_exists($logoFilePath))
+					$imageSource = \Yii::app()->getBaseUrl(true) . '/images/logo.svg';
+				else
+				{
+					$logoFilePath = realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'logo.png';
+					if (file_exists($logoFilePath))
+						$imageSource = 'data:image/png;base64,' . base64_encode(file_get_contents($logoFilePath));
+				}
 			?>
-			<img id="image-logo" src="<? echo $imageSource; ?>"/>
+			<img style="max-width: 400px;" id="image-logo" src="<? echo $imageSource; ?>"/>
 		</td>
 	</tr>
 	<tr>

@@ -39,16 +39,6 @@
 	text-align: center;
 }
 
-.search-results-page .content-data table td.link-name .name
-{
-	color: #4A87EE;
-	text-decoration: underline;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	max-width: 100%;
-}
-
 .search-results-page .content-data table .link-name .library
 {
 	font-size: 0.8em;

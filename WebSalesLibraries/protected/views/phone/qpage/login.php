@@ -17,7 +17,14 @@
 			));
 		?>
 		<div class="edit-fields">
-			<p class="intro-message"><? echo Yii::app()->params['login']['jqmlogintext']; ?></p>
+			<?
+				$logoFilePath = realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'logo_mobile.svg';
+			?>
+			<? if (file_exists($logoFilePath)): ?>
+                <div style="width: 100%; padding-top: 20px; padding-bottom: 20px;">
+                    <img style="width: 100%;" src="<? echo \Yii::app()->getBaseUrl(true) . '/images/logo_mobile.svg'; ?>"/>
+                </div>
+			<? endif; ?>
 			<h5>Enter your 4 Digit Security PIN to access this site:</h5>
 			<?
 				echo $form->textField($formData, 'pageId'

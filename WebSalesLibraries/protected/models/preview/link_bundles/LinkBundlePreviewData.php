@@ -1,4 +1,5 @@
 <?
+
 	use application\models\wallbin\models\web\LibraryLink as LibraryLink;
 
 	/**
@@ -13,12 +14,16 @@
 
 		/**
 		 * @param $link LibraryLink
+		 * @param $isPhone boolean
 		 */
-		public function __construct($link)
+		public function __construct($link, $isPhone)
 		{
 			parent::__construct($link);
 
-			$this->linkTitle = 'Link Bundle';
+			if ($isPhone)
+				$this->linkTitle = $link->name;
+			else
+				$this->linkTitle = 'Link Bundle';
 			$this->viewerFormat = 'link bundle';
 			$this->contentView = 'linkBundleViewer';
 

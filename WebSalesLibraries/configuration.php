@@ -22,7 +22,6 @@
 					'disclaimerText' => 'I understand  that this Website contains information that is privileged, confidential and exempt from disclosure under applicable law.  Only Authorized employees  and representatives of WPLG-TV, Miami, may access or download information from this site.',
 					'tempPasswordExpiredIn' => '7',
 					'complex_password' => false,
-					'jqmlogintext' => 'Welcome to Raycom Results for Smartphones',
 					'inactivity_refresh_timeout' => -1,
 					'inactivity_logout_timeout' => -1,
 				),

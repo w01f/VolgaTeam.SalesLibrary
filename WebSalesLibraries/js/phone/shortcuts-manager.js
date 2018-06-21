@@ -143,7 +143,7 @@
 							var navigationItemsContainer = pageContent.find('.navigation-items-container');
 							if (!(result.navigationPanel && result.navigationPanel.content !== ''))
 								navigationToggleButton.hide();
-							navigationItemsContainer.html(result.navigationPanel.content);
+							navigationItemsContainer.html(result.navigationPanel ? result.navigationPanel.content : '');
 							$(window).one("pagecontainerchange.navigation-items", function ()
 							{
 								navigationItemsContainer.find('.shortcuts-link').off('click').on('click', function (e)

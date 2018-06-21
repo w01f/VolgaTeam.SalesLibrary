@@ -202,7 +202,7 @@
 					$previewData = new LineBreakPreviewData($link);
 					break;
 				case 'link bundle':
-					$previewData = new LinkBundlePreviewData($link);
+					$previewData = new LinkBundlePreviewData($link, $isPhone);
 					break;
 				default:
 					if ($link->isFolder)
