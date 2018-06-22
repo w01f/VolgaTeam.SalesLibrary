@@ -185,7 +185,7 @@
 				$this->rebuildLinkList($order);
 			else
 				$order = QPageLinkRecord::getMaxLinkIndex($this->id) + 1;
-			/** @var UserLinkCartRecord $linkInCartRecord*/
+			/** @var UserLinkCartRecord $linkInCartRecord */
 			$linkInCartRecord = UserLinkCartRecord::model()->findByPk($linkInCartId);
 			$linkInPageRecord = new QPageLinkRecord();
 			$linkInPageRecord->id = uniqid();
@@ -490,14 +490,24 @@
 				/** @var $logoFile DirectoryIterator */
 				if ($logoFile->isFile())
 				{
-					$type = 'png';
 					$path = $logoFile->getPathname();
 					$name = $logoFile->getFilename();
+					$type = strtolower($logoFile->getExtension());
 					$data = file_get_contents($path);
-					if ($name == 'default.png')
+					if (str_replace('.' . $type, '', $name) === 'default')
 						$default = 'data:image/' . $type . ';base64,' . base64_encode($data);
 					else
-						$stationLogos[$name] = 'data:image/' . $type . ';base64,' . base64_encode($data);
+					{
+						switch ($type)
+						{
+							case 'svg':
+								$stationLogos[$name] = 'data:image/svg+xml;base64,' . base64_encode($data);
+								break;
+							default:
+								$stationLogos[$name] = 'data:image/png;base64,' . base64_encode($data);
+								break;
+						}
+					}
 				}
 			}
 			if (isset($stationLogos))
