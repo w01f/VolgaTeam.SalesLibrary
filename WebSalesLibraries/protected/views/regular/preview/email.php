@@ -5,6 +5,9 @@
 
 	$imageUrlPrefix = Yii::app()->getBaseUrl(true);
 	$logos = QPageRecord::getPageLogoList();
+
+	$userId = UserIdentity::getCurrentUserId();
+	$defaultSettings = UserProfileRecord::getProfile($userId)->defaultEmailSettings;
 ?>
 <div id="email-content">
 	<div class="row<? if ($data->config->enableLogging): ?> logger-form<? endif; ?>" data-log-group="Link"
@@ -55,16 +58,16 @@
 					</div>
 					<div class="form-group" id="add-page-expires-in">
 						<div class="col-xs-3">
-							<button class="btn btn-default log-action active" type="button" value="7">7 Days</button>
+							<button class="btn btn-default log-action<? if ($defaultSettings->expiresInDays == 7): ?> active<? endif; ?>" type="button" value="7">7 Days</button>
 						</div>
 						<div class="col-xs-3">
-							<button class="btn btn-default log-action" type="button" value="14">14 Days</button>
+							<button class="btn btn-default log-action<? if ($defaultSettings->expiresInDays == 14): ?> active<? endif; ?>" type="button" value="14">14 Days</button>
 						</div>
 						<div class="col-xs-3">
-							<button class="btn btn-default log-action" type="button" value="30">30 Days</button>
+							<button class="btn btn-default log-action<? if ($defaultSettings->expiresInDays == 30): ?> active<? endif; ?>" type="button" value="30">30 Days</button>
 						</div>
 						<div class="col-xs-3">
-							<button class="btn btn-default log-action" type="button" value="0">Never</button>
+							<button class="btn btn-default log-action<? if (!in_array($defaultSettings->expiresInDays, array(7, 14, 30))): ?> active<? endif; ?>" type="button" value="0">Never</button>
 						</div>
 					</div>
                     <div class="form-group title">
@@ -101,7 +104,7 @@
                     <div class="form-group">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" id="add-page-disable-widgets" class="log-action" value="">
+                                <input type="checkbox" id="add-page-disable-widgets" class="log-action" value=""<? if ($defaultSettings->disableWidgets): ?> checked="checked"<? endif; ?>>
                                 Disable all Link Widget Icons
                             </label>
                         </div>
@@ -109,14 +112,14 @@
                     <div class="form-group title">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" id="add-page-disable-banners" class="log-action" value="">Disable
+                                <input type="checkbox" id="add-page-disable-banners" class="log-action" value=""<? if ($defaultSettings->disableBanners): ?> checked="checked"<? endif; ?>>Disable
                                 all Link Banner Images
                             </label>
                         </div>
                     </div>
                     <div class="form-group title">
                         <div class="checkbox">
-                            <label> <input type="checkbox" id="add-page-show-links-as-url" class="log-action" value="" checked="checked">Display
+                            <label> <input type="checkbox" id="add-page-show-links-as-url" class="log-action" value=""<? if ($defaultSettings->showLinksAsUrl): ?> checked="checked"<? endif; ?>>Display
                                 all Links as
                                 <span class="text-primary"><u>Blue Hyperlinks</u></span></label>
                         </div>

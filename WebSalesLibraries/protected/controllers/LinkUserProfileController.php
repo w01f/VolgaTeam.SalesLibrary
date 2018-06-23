@@ -13,7 +13,7 @@
 		public function actionGetEditor()
 		{
 			$userId = UserIdentity::getCurrentUserId();
-			$userProfile = LinkUserProfileRecord::getProfile($userId);
+			$userProfile = UserProfileRecord::getProfile($userId);
 			$this->renderPartial('userSettingsEditor', array('userProfile' => $userProfile), false, true);
 		}
 
@@ -21,8 +21,8 @@
 		{
 			$userId = UserIdentity::getCurrentUserId();
 			$userProfileValues = Yii::app()->request->getPost('userProfile');
-			$userProfile = new LinkUserProfileModel(CJSON::decode($userProfileValues, true));
-			LinkUserProfileRecord::saveProfile($userId, $userProfile);
+			$userProfile = new UserProfileModel(CJSON::decode($userProfileValues, true));
+			UserProfileRecord::saveProfile($userId, $userProfile);
 			Yii::app()->end();
 		}
 	}

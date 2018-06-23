@@ -1,9 +1,9 @@
 <?
 
 	/**
-	 * Class LinkUserSettings
+	 * Class LinkUserPreviewSettings
 	 */
-	class LinkUserSettings
+	class LinkUserPreviewSettings
 	{
 		public $forceWebOpen;
 		public $forceEOOpen;
@@ -12,7 +12,7 @@
 
 		/**
 		 * @param array $jsonArray
-		 * @return  LinkUserSettings
+		 * @return  LinkUserPreviewSettings
 		 */
 		public static function fromJsonArray($jsonArray)
 		{
@@ -40,11 +40,11 @@
 		}
 
 		/**
-		 * @return  LinkUserSettings
+		 * @return  LinkUserPreviewSettings
 		 */
 		public static function getDefault()
 		{
-			$linkSettings = new LinkUserSettings();
+			$linkSettings = new LinkUserPreviewSettings();
 			$linkSettings->forceWebOpen = false;
 			$linkSettings->forceEOOpen = false;
 			$linkSettings->forceOneDriveOpen = false;

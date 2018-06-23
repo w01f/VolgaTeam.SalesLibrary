@@ -245,8 +245,17 @@
 			$pageRecord->list_order = self::getMaxPageIndex() + 1;
 			$pageRecord->title = $pageTitle;
 			$pageRecord->create_date = date(Yii::app()->params['mysqlDateTimeFormat'], strtotime($createDate));
-			$pageRecord->show_links_as_url = true;
 			$pageRecord->is_email = false;
+
+			$defaultSettings = UserProfileRecord::getProfile($ownerId)->defaultQPageSettings;
+			$pageRecord->show_links_as_url = $defaultSettings->showLinksAsUrl;
+			$pageRecord->disable_widgets = $defaultSettings->disableWidgets;
+			$pageRecord->disable_banners = $defaultSettings->disableBanners;
+			$pageRecord->auto_launch = $defaultSettings->autoLaunch;
+			$pageRecord->restricted = $defaultSettings->requireLogin;
+			if ($defaultSettings->requirePinCode)
+				$pageRecord->pin_code = ' ';
+
 			$pageRecord->save();
 
 			if (!empty($linkCartIds))
@@ -293,7 +302,10 @@
 			$pageRecord->record_activity = $recordActivity;
 			$pageRecord->pin_code = $pinCode;
 			$pageRecord->activity_email_copy = $activityEmailCopy;
-			$pageRecord->auto_launch = true;
+
+			$defaultSettings = UserProfileRecord::getProfile($ownerId)->defaultEmailSettings;
+			$pageRecord->auto_launch = $defaultSettings->autoLaunch;
+
 			$pageRecord->save();
 
 			$linkInPageRecord = new QPageLinkRecord();

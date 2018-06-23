@@ -38,8 +38,8 @@
 			if (UserIdentity::isUserAuthorized())
 			{
 				$userId = UserIdentity::getCurrentUserId();
-				/** @var LinkUserProfileModel $userProfile */
-				$userProfile = LinkUserProfileRecord::getProfile($userId);
+				/** @var UserProfileModel $userProfile */
+				$userProfile = UserProfileRecord::getProfile($userId);
 
 				switch ($libraryLink->originalFormat)
 				{

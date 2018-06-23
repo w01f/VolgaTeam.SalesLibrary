@@ -36,3 +36,46 @@
 	display: table-cell;
 	vertical-align: middle;
 }
+
+#user-preferences-tabs-headers
+{
+	margin-bottom: 20px;
+}
+
+#user-preferences-tabs-headers div,
+#user-preferences-tabs-headers span
+{
+	border-radius: 0 !important;
+}
+
+#user-preferences-tabs-headers div.scroll_tab_inner span.scroll_tab_over,
+#user-preferences-tabs-headers div.scroll_tab_inner li.scroll_tab_over
+{
+	background-color: #CCC !important;
+}
+
+#user-preferences-tabs-headers .scroll_tab_left_finisher,
+#user-preferences-tabs-headers .scroll_tab_right_finisher
+{
+	width: 0 !important;
+}
+
+#user-preferences-tabs-headers .page-tab-header.selected
+{
+	background-color: #C6E2FF !important;
+}
+
+#user-preferences-tabs-content > div
+{
+	display: none;
+}
+
+#user-preferences-tabs-content > div.selected
+{
+	display: inherit;
+}
+
+#user-preferences-email .row > div
+{
+	padding-right: 0;
+}

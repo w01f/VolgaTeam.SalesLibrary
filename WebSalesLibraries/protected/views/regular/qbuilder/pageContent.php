@@ -118,13 +118,13 @@
 						<div class="col-xs-5">
 							<div class="checkbox">
 								<label>
-									<input id="page-content-access-code-enabled" class="log-action" type="checkbox" value="" <? echo isset($page->pin_code) && $page->pin_code > 0 ? 'checked' : '' ?>> C. ACCESS Pin (4 Digits)
+									<input id="page-content-access-code-enabled" class="log-action" type="checkbox" value="" <? echo !empty($page->pin_code) ? 'checked' : '' ?>> C. ACCESS Pin (4 Digits)
 								</label>
 							</div>
 						</div>
 						<div class="col-xs-4">
 							<label class="sr-only" for="page-content-access-code"></label>
-							<input type="text" maxlength="4" class="form-control input-sm log-action" id="page-content-access-code" <? if (!(isset($page->pin_code) && $page->pin_code > 0)): ?>style="display: none;"<? endif; ?> value="<? echo isset($page->pin_code) ? $page->pin_code : '' ?>">
+							<input type="text" maxlength="4" class="form-control input-sm log-action" id="page-content-access-code" <? if (empty($page->pin_code)): ?>style="display: none;"<? endif; ?> value="<? echo isset($page->pin_code) ? trim($page->pin_code) : '' ?>">
 						</div>
 					</div>
 					<div class="checkbox">

@@ -1,12 +1,12 @@
 <?php
 
 	/**
-	 * Class LinkUserProfileRecord
+	 * Class UserProfileRecord
 	 * @property string id
 	 * @property mixed id_user
 	 * @property string config
 	 */
-	class LinkUserProfileRecord extends CActiveRecord
+	class UserProfileRecord extends CActiveRecord
 	{
 		/**
 		 * @param string $className
@@ -26,38 +26,38 @@
 		}
 
 		/**
-		 * @return LinkUserProfileRecord
+		 * @return UserProfileModel
 		 */
 		public function getModel()
 		{
-			$configProfileModel = new LinkUserProfileModel(CJSON::decode($this->config, true));
+			$configProfileModel = new UserProfileModel(CJSON::decode($this->config, true));
 			return $configProfileModel;
 		}
 
 		/**
 		 * @param $userId int
-		 * @return LinkUserProfileModel
+		 * @return UserProfileModel
 		 */
 		public static function getProfile($userId)
 		{
-			/** @var  $userProfileRecord LinkUserProfileRecord */
+			/** @var  $userProfileRecord UserProfileRecord */
 			$userProfileRecord = self::model()->find('id_user=?', array($userId));
 			if (isset($userProfileRecord))
 				return $userProfileRecord->getModel();
-			return LinkUserProfileModel::getDefault();
+			return UserProfileModel::getDefault();
 		}
 
 		/**
 		 * @param $userId int
-		 * @param $profileModel LinkUserProfileModel
+		 * @param $profileModel UserProfileModel
 		 */
 		public static function saveProfile($userId, $profileModel)
 		{
-			/** @var  $userProfileRecord LinkUserProfileRecord */
+			/** @var  $userProfileRecord UserProfileRecord */
 			$userProfileRecord = self::model()->find('id_user=?', array($userId));
 			if (!isset($userProfileRecord))
 			{
-				$userProfileRecord = new LinkUserProfileRecord();
+				$userProfileRecord = new UserProfileRecord();
 				$userProfileRecord->id = uniqid();
 				$userProfileRecord->id_user = $userId;
 			}
