@@ -35,6 +35,7 @@
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.colorEditSingleTextColor = new SalesLibraries.CommonGUI.Common.HtmlColorEdit();
 			this.layoutControlMain = new DevExpress.XtraLayout.LayoutControl();
+			this.checkEditEnableText = new DevExpress.XtraEditors.CheckEdit();
 			this.linksTreeSelector = new SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.LinksTreeSelector.LinksTreeSelectorControl();
 			this.buttonXPreviewImage = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXEnable = new DevComponents.DotNetBar.ButtonX();
@@ -245,10 +246,12 @@
 			this.layoutControlItemLinksTree = new DevExpress.XtraLayout.LayoutControlItem();
 			this.simpleLabelItemLinkName = new DevExpress.XtraLayout.SimpleLabelItem();
 			this.emptySpaceItem33 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.layoutControlItemEnableText = new DevExpress.XtraLayout.LayoutControlItem();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.colorEditSingleTextColor.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlMain)).BeginInit();
 			this.layoutControlMain.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditEnableText.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditSingleTextAlignmentRight.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditSingleTextAlignmentCenter.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditSingleTextAlignmentLeft.Properties)).BeginInit();
@@ -444,6 +447,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemLinksTree)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemLinkName)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem33)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemEnableText)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// buttonXOK
@@ -526,6 +530,7 @@
 			this.layoutControlMain.Appearance.ControlReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.layoutControlMain.Appearance.ControlReadOnly.Options.UseFont = true;
 			this.layoutControlMain.BackColor = System.Drawing.Color.White;
+			this.layoutControlMain.Controls.Add(this.checkEditEnableText);
 			this.layoutControlMain.Controls.Add(this.linksTreeSelector);
 			this.layoutControlMain.Controls.Add(this.buttonXCancel);
 			this.layoutControlMain.Controls.Add(this.buttonXOK);
@@ -605,6 +610,20 @@
 			this.layoutControlMain.StyleController = this.styleController;
 			this.layoutControlMain.TabIndex = 61;
 			this.layoutControlMain.Text = "layoutControl1";
+			// 
+			// checkEditEnableText
+			// 
+			this.checkEditEnableText.EditValue = true;
+			this.checkEditEnableText.Location = new System.Drawing.Point(154, 601);
+			this.checkEditEnableText.Name = "checkEditEnableText";
+			this.checkEditEnableText.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.checkEditEnableText.Properties.Appearance.Options.UseForeColor = true;
+			this.checkEditEnableText.Properties.Caption = "Text Label Enabled";
+			this.checkEditEnableText.Size = new System.Drawing.Size(133, 20);
+			this.checkEditEnableText.StyleController = this.layoutControlMain;
+			this.checkEditEnableText.TabIndex = 15;
+			this.checkEditEnableText.TabStop = false;
+			this.checkEditEnableText.CheckedChanged += new System.EventHandler(this.checkEditEnableText_CheckedChanged);
 			// 
 			// linksTreeSelector
 			// 
@@ -1370,6 +1389,7 @@
 			this.imageListViewSingle.Size = new System.Drawing.Size(415, 332);
 			this.imageListViewSingle.TabIndex = 41;
 			this.imageListViewSingle.ThumbnailSize = new System.Drawing.Size(170, 100);
+			this.imageListViewSingle.UseWIC = true;
 			this.imageListViewSingle.Visible = false;
 			// 
 			// layoutControlSingleGallery
@@ -1910,7 +1930,8 @@
             this.layoutControlItemCancel,
             this.layoutControlItemLinksTree,
             this.simpleLabelItemLinkName,
-            this.emptySpaceItem33});
+            this.emptySpaceItem33,
+            this.layoutControlItemEnableText});
 			this.layoutControlGroupRootMain.Location = new System.Drawing.Point(0, 0);
 			this.layoutControlGroupRootMain.Name = "Root";
 			this.layoutControlGroupRootMain.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
@@ -3562,9 +3583,9 @@
 			// emptySpaceItem4
 			// 
 			this.emptySpaceItem4.AllowHotTrack = false;
-			this.emptySpaceItem4.Location = new System.Drawing.Point(102, 591);
+			this.emptySpaceItem4.Location = new System.Drawing.Point(289, 591);
 			this.emptySpaceItem4.Name = "emptySpaceItem4";
-			this.emptySpaceItem4.Size = new System.Drawing.Size(888, 40);
+			this.emptySpaceItem4.Size = new System.Drawing.Size(701, 40);
 			this.emptySpaceItem4.TextSize = new System.Drawing.Size(0, 0);
 			// 
 			// layoutControlItemPreviewImage
@@ -3573,8 +3594,8 @@
 			this.layoutControlItemPreviewImage.CustomizationFormText = "Preview Image";
 			this.layoutControlItemPreviewImage.Location = new System.Drawing.Point(0, 591);
 			this.layoutControlItemPreviewImage.Name = "layoutControlItemPreviewImage";
-			this.layoutControlItemPreviewImage.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 0, 0, 0);
-			this.layoutControlItemPreviewImage.Size = new System.Drawing.Size(102, 40);
+			this.layoutControlItemPreviewImage.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 50, 0, 0);
+			this.layoutControlItemPreviewImage.Size = new System.Drawing.Size(152, 40);
 			this.layoutControlItemPreviewImage.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutControlItemPreviewImage.TextVisible = false;
 			// 
@@ -3649,6 +3670,19 @@
 			this.emptySpaceItem33.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
 			this.emptySpaceItem33.TextSize = new System.Drawing.Size(0, 0);
 			// 
+			// layoutControlItemEnableText
+			// 
+			this.layoutControlItemEnableText.Control = this.checkEditEnableText;
+			this.layoutControlItemEnableText.ControlAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+			this.layoutControlItemEnableText.FillControlToClientArea = false;
+			this.layoutControlItemEnableText.Location = new System.Drawing.Point(152, 591);
+			this.layoutControlItemEnableText.Name = "layoutControlItemEnableText";
+			this.layoutControlItemEnableText.Size = new System.Drawing.Size(137, 40);
+			this.layoutControlItemEnableText.Text = "Enable Text";
+			this.layoutControlItemEnableText.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemEnableText.TextVisible = false;
+			this.layoutControlItemEnableText.TrimClientAreaToControl = false;
+			// 
 			// FormEditLinkThumbnail
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -3670,6 +3704,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.colorEditSingleTextColor.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlMain)).EndInit();
 			this.layoutControlMain.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.checkEditEnableText.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditSingleTextAlignmentRight.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditSingleTextAlignmentCenter.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditSingleTextAlignmentLeft.Properties)).EndInit();
@@ -3865,6 +3900,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemLinksTree)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.simpleLabelItemLinkName)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem33)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemEnableText)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -4086,5 +4122,7 @@
 		private DevExpress.XtraLayout.SimpleLabelItem simpleLabelItemLinkSetTextAlignmentTitle;
 		private DevExpress.XtraLayout.SimpleLabelItem simpleLabelItemLinkSetTextPositionTitle;
 		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem33;
+		private DevExpress.XtraEditors.CheckEdit checkEditEnableText;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemEnableText;
 	}
 }

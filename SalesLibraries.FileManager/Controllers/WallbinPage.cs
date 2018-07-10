@@ -619,8 +619,12 @@ namespace SalesLibraries.FileManager.Controllers
 					}
 				});
 				laEditorTitle.Text = "Saved Link Bundles";
-				if (!retractableBar.Content.Controls.Contains(MainController.Instance.WallbinViews.ActiveWallbin.LinkBundleListControl))
+				if (!retractableBar.Content.Controls.Contains(MainController.Instance.WallbinViews.ActiveWallbin
+					.LinkBundleListControl))
+				{
 					retractableBar.Content.Controls.Add(MainController.Instance.WallbinViews.ActiveWallbin.LinkBundleListControl);
+					MainController.Instance.WallbinViews.ActiveWallbin.LinkBundleListControl.LoadBundles();
+				}
 				MainController.Instance.WallbinViews.ActiveWallbin.LinkBundleListControl.BringToFront();
 			}
 			else if (MainController.Instance.WallbinViews.FormatState.ShowTagsEditor)

@@ -263,6 +263,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			layoutControlGroupSingleTextSettings.Visibility = LayoutVisibility.Always;
 			layoutControlGroupLinkSetSettings.Visibility = LayoutVisibility.Never;
 			tabbedControlSingleSettings.SelectedTabPage = layoutControlGroupSingleGallery;
+			OnTabControlSingleSettingsSelectedPageChanged(null, null);
 
 			if (SingleLink == null) return;
 
@@ -345,9 +346,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			}
 
 			memoEditBannerText.BackColor = SingleLink.ThumbnailBackColor;
+
+			checkEditEnableText.Checked = SingleLink.Thumbnail.TextMode != ThumbnailTextMode.NoText;
 			buttonXSingleShowTextNone.Checked = SingleLink.Thumbnail.TextMode == ThumbnailTextMode.NoText;
 			buttonXSingleShowTextLinkName.Checked = SingleLink.Thumbnail.TextMode == ThumbnailTextMode.LinkName;
 			buttonXSingleShowTextCustom.Checked = SingleLink.Thumbnail.TextMode == ThumbnailTextMode.CustomText;
+
 			buttonEditSingleTextFont.Tag = SingleLink.Thumbnail.Font;
 			buttonEditSingleTextFont.EditValue = Utils.FontToString(SingleLink.Thumbnail.Font);
 			colorEditSingleTextColor.Color = SingleLink.Thumbnail.ForeColor;
@@ -628,9 +632,21 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				_tempThumbnailText = memoEditBannerText.EditValue as String ?? _tempThumbnailText;
 		}
 
+		private void checkEditEnableText_CheckedChanged(object sender, EventArgs e)
+		{
+			layoutControlGroupSingleTextSettings.PageEnabled = layoutControlGroupSingleTextSettings.Enabled = checkEditEnableText.Checked;
+			if (!_allowHandleEvents) return;
+			if (checkEditEnableText.Checked)
+				OnSingleTextModeButtonClick(buttonXSingleShowTextLinkName, EventArgs.Empty);
+			else
+				OnSingleTextModeButtonClick(buttonXSingleShowTextNone, EventArgs.Empty);
+		}
+
 		private void OnTabControlSingleSettingsSelectedPageChanged(object sender, LayoutTabPageChangedEventArgs e)
 		{
-			layoutControlItemPreviewImage.Visibility = tabbedControlSingleSettings.SelectedTabPage == layoutControlGroupSingleGallery ? LayoutVisibility.Always : LayoutVisibility.Never;
+			layoutControlItemPreviewImage.Visibility =
+				layoutControlItemEnableText.Visibility =
+				tabbedControlSingleSettings.SelectedTabPage == layoutControlGroupSingleGallery ? LayoutVisibility.Always : LayoutVisibility.Never;
 		}
 
 		private void OnTabControlSingleSettingsSelectedPageChanging(object sender, LayoutTabPageChangingEventArgs e)
@@ -645,6 +661,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			layoutControlGroupSingleGallery.Visibility = LayoutVisibility.Never;
 			layoutControlGroupSingleTextSettings.Visibility = LayoutVisibility.Never;
 			layoutControlGroupLinkSetSettings.Visibility = LayoutVisibility.Always;
+			OnTabControlSingleSettingsSelectedPageChanged(null, null);
 
 			var defaultLink = _selectedLinks.First();
 

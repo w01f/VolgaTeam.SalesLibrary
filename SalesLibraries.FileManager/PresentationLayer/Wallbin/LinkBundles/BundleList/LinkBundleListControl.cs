@@ -31,7 +31,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Bundl
 	public partial class LinkBundleListControl : UserControl
 	{
 		private Library _library;
-		private bool _loading;
+		private bool _loading = true;
 		private GridDragDropHelper _bundlesDragDropHelper;
 		private GridDragDropHelper _bundleItemsDragDropHelper;
 
@@ -55,7 +55,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Bundl
 		public void LoadData(Library library)
 		{
 			_library = library;
-			LoadBundles();
 		}
 
 		private void RaiseDataChanged()
@@ -65,14 +64,26 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Bundl
 
 		#region Bundles
 
-		private void LoadBundles(int selectedBundleIndex = 0)
+		public void LoadBundles(int selectedBundleIndex = -1)
 		{
 			_loading = true;
 
 			_library.LinkBundles.Sort();
 			gridControlBundles.DataSource = _library.LinkBundles;
 			gridControlBundles.RefreshDataSource();
-			gridViewBundles.FocusedRowHandle = selectedBundleIndex;
+			
+			if (selectedBundleIndex >= 0)
+				gridViewBundles.FocusedRowHandle = selectedBundleIndex;
+			else if (!String.IsNullOrEmpty(MainController.Instance.Settings.SelectedLinkBundleId))
+			{
+				var linkBundle = _library.LinkBundles.FirstOrDefault(item =>
+					item.ExtId == Guid.Parse(MainController.Instance.Settings.SelectedLinkBundleId));
+				selectedBundleIndex = linkBundle != null ? _library.LinkBundles.ToList().IndexOf(linkBundle) : 0;
+				gridViewBundles.FocusedRowHandle = selectedBundleIndex;
+			}
+			else
+				gridViewBundles.FocusedRowHandle = 0;
+
 			gridViewBundles.RefreshRow(gridViewBundles.FocusedRowHandle);
 
 			if (_bundlesDragDropHelper == null && _library.LinkBundles.Any())
@@ -210,6 +221,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Bundl
 		private void OnFocusedBundleRowChanged(object sender, FocusedRowChangedEventArgs e)
 		{
 			if (_loading) return;
+
+			MainController.Instance.Settings.SelectedLinkBundleId = SelectedBundle?.ExtId.ToString();
+			MainController.Instance.Settings.Save();
+
 			LoadBundleItems();
 		}
 

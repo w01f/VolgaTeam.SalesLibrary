@@ -26,6 +26,7 @@ namespace SalesLibraries.FileManager.Configuration
 		public string SelectedLibrary { get; set; }
 		public string SelectedPage { get; set; }
 		public string SelectedCalendar { get; set; }
+		public string SelectedLinkBundleId { get; set; }
 		public int SelectedCalendarYear { get; set; }
 		public int FontSize { get; set; }
 		public int CalendarFontSize { get; set; }
@@ -119,6 +120,9 @@ namespace SalesLibraries.FileManager.Configuration
 			if (node != null)
 				if (int.TryParse(node.InnerText, out tempInt))
 					SelectedCalendarYear = tempInt;
+			node = document.SelectSingleNode(@"/LocalSettings/SelectedLinkBundleId");
+			if (node != null)
+				SelectedLinkBundleId = node.InnerText;
 			node = document.SelectSingleNode(@"/LocalSettings/FontSize");
 			if (node != null)
 				if (int.TryParse(node.InnerText, out tempInt))
@@ -183,6 +187,7 @@ namespace SalesLibraries.FileManager.Configuration
 			if (!String.IsNullOrEmpty(SelectedCalendar))
 				xml.AppendLine(@"<SelectedCalendar>" + SelectedCalendar.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedCalendar>");
 			xml.AppendLine(@"<SelectedCalendarYear>" + SelectedCalendarYear + @"</SelectedCalendarYear>");
+			xml.AppendLine(@"<SelectedLinkBundleId>" + SelectedLinkBundleId + @"</SelectedLinkBundleId>");
 			xml.AppendLine(@"<FontSize>" + FontSize + @"</FontSize>");
 			xml.AppendLine(@"<CalendarFontSize>" + CalendarFontSize + @"</CalendarFontSize>");
 			xml.AppendLine(@"<TreeViewVisible>" + TreeViewVisible + @"</TreeViewVisible>");
