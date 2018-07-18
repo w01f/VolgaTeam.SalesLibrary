@@ -243,4 +243,11 @@
 	color: #AAA;
 }
 /*------------------------------------*/
+
+/*Context menu------------------------------------*/
+body .dropdown-menu.context-menu-content.no-wallbin-content li.only-on-wallbin
+{
+	display: none;
+}
+/*------------------------------------*/
 /*------------------------------------*/

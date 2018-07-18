@@ -1,10 +1,18 @@
 <?
+
+	use application\models\wallbin\models\web\LibraryLink;
+	use application\models\wallbin\models\web\LibraryManager;
+
 	/**
 	 * Class LibraryLinkShortcut
 	 */
 	class LibraryLinkShortcut extends CustomHandledShortcut
 	{
 		public $linkId;
+
+		public $isDraggable;
+		public $dragHeader;
+		public $url;
 
 		/**
 		 * @param $linkRecord
@@ -24,7 +32,35 @@
 			{
 				$linkRecord = LinkRecord::getLinkByName($libraryName, $pageName, $windowName, $fileName);
 				if (isset($linkRecord))
+				{
 					$this->linkId = $linkRecord->id;
+
+					$libraryManager = new LibraryManager();
+					$library = $libraryManager->getLibraryById($linkRecord->id_library);
+					$settings = \BaseLinkSettings::createByContent($linkRecord->settings);
+					$fileInfo = \FileInfo::fromLinkData(
+						$linkRecord->id,
+						$linkRecord->type,
+						$linkRecord->name,
+						$linkRecord->file_relative_path,
+						$settings,
+						$library);
+					$isHyperlink = LibraryLink::isOpenedAsHyperlink($linkRecord->type, $settings);
+					$isLinkBundle = $linkRecord->original_format === 'link bundle';
+					$this->isDraggable = $fileInfo->isFile || $isHyperlink || $isLinkBundle;
+					if ($isHyperlink)
+					{
+						$this->dragHeader = 'URL';
+						$this->url = $fileInfo->link;
+					}
+					else if ($fileInfo->isFile || $isLinkBundle)
+					{
+						$this->dragHeader = 'DownloadURL';
+						$this->url = \FileInfo::getFileMIME($linkRecord->original_format) . ':' .
+							$fileInfo->dragDownloadName . ':' .
+							str_replace('SalesLibraries/SalesLibraries', 'SalesLibraries', $fileInfo->link);
+					}
+				}
 			}
 		}
 

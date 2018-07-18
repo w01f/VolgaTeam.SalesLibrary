@@ -454,7 +454,7 @@
 
 				table.find('.link-file, .link-url, .link-common').hammer().on('hold', function (event) {
 					var linkId = dataTable.api().row(getDataRowElement($(this))).data().id;
-					$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, event.gesture.center.pageX, event.gesture.center.pageY);
+					$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, false, event.gesture.center.pageX, event.gesture.center.pageY);
 					event.gesture.stopPropagation();
 					event.gesture.preventDefault();
 				});
@@ -484,7 +484,7 @@
 
 				table.on('contextmenu', '.link-file, .link-url-internal, .link-common', function (event) {
 					var linkId = dataTable.api().row(getDataRowElement($(this))).data().id;
-					$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, event.clientX, event.clientY);
+					$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, false, event.clientX, event.clientY);
 					return false;
 				});
 
@@ -492,7 +492,7 @@
 				{
 					table.on('contextmenu', '.link-url-external', function (event) {
 						var linkId = dataTable.api().row(getDataRowElement($(this))).data().id;
-						$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, event.clientX, event.clientY);
+						$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, false, event.clientX, event.clientY);
 						return false;
 					});
 				}

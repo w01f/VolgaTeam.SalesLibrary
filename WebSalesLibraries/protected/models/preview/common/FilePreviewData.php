@@ -100,7 +100,7 @@
 			if ($this->link->isDirectUrl && $this->config->isEOBrowser)
 				return;
 
-			$action = new PreviewAction();
+			$action = new ContextMenuAction();
 			$action->tag = 'open';
 			$action->url = $this->link->isDirectUrl ? $this->url : $action->url;
 			$action->text = 'Open this Link';
@@ -108,59 +108,64 @@
 
 			if (Yii::app()->params['one_drive_links']['enabled'] && !empty($this->oneDriveUrl))
 			{
-				$action = new PreviewAction();
+				$action = new ContextMenuAction();
 				$action->tag = 'one-drive-open';
 				$action->text = 'Open OneDrive Link';
 				$this->contextActions[] = $action;
 			}
 			if ($this->config->allowDownload)
 			{
-				$action = new PreviewAction();
+				$action = new ContextMenuAction();
 				$action->tag = 'download';
 				$action->text = 'Download this file';
 				$this->contextActions[] = $action;
 			}
 			if ($this->config->allowAddToQuickSite)
 			{
-				$action = new PreviewAction();
+				$action = new ContextMenuAction();
 				$action->tag = 'linkcart';
 				$action->text = 'Add this file to my QuickSites Cart';
+				$action->beginGroup = true;
 				$this->contextActions[] = $action;
 
-				$action = new PreviewAction();
+				$action = new ContextMenuAction();
 				$action->tag = 'linkcart-all-window';
 				$action->text = 'Add all links in this window…';
+				$action->onlyWallbinAction = true;
 				$this->contextActions[] = $action;
 
-				$action = new PreviewAction();
+				$action = new ContextMenuAction();
 				$action->tag = 'quicksite';
 				$action->text = 'Email this Link';
+				$action->beginGroup = true;
 				$this->contextActions[] = $action;
 			}
 			if (Yii::app()->params['one_drive_links']['enabled'] && !empty($this->oneDriveUrl))
 			{
-				$action = new PreviewAction();
+				$action = new ContextMenuAction();
 				$action->tag = 'one-drive-email';
 				$action->text = 'Email OneDrive Link';
 				$this->contextActions[] = $action;
 			}
 			if ($this->config->allowAddToFavorites)
 			{
-				$action = new PreviewAction();
+				$action = new ContextMenuAction();
 				$action->tag = 'favorites';
 				$action->text = 'Save to Favorites';
 				$this->contextActions[] = $action;
 			}
 			if ($this->config->allowDownload)
 			{
-				$action = new PreviewAction();
+				$action = new ContextMenuAction();
 				$action->tag = 'zip-library-folder';
 				$action->text = 'Download ALL in this window';
+				$action->beginGroup = true;
+				$action->onlyWallbinAction = true;
 				$this->contextActions[] = $action;
 			}
 			if ($this->config->enableRating)
 			{
-				$action = new PreviewAction();
+				$action = new ContextMenuAction();
 				$action->tag = 'rate';
 				$action->text = 'Rate this Link';
 				$this->contextActions[] = $action;

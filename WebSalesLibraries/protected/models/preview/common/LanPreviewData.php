@@ -31,7 +31,7 @@
 			$this->contextActions = array();
 			if ($this->config->allowDownload)
 			{
-				$action = new PreviewAction();
+				$action = new ContextMenuAction();
 				$action->tag = 'zip-library-folder';
 				$action->text = 'Download ALL in this window';
 				$this->contextActions[] = $action;

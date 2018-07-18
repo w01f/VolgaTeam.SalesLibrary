@@ -252,6 +252,24 @@
 							isQuickSite: false
 						});
 					});
+
+					if ($.SalesPortal.Content.isMobileDevice())
+					{
+						feedItemsList.find('.library-link-block').hammer().on('hold', function (event) {
+							var linkId = $(this).find('.service-data .link-id').text();
+							$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, false, event.gesture.center.pageX, event.gesture.center.pageY);
+							event.gesture.stopPropagation();
+							event.gesture.preventDefault();
+						});
+					}
+					else
+					{
+						feedItemsList.find('.library-link-block').off('contextmenu').on('contextmenu', function (event) {
+							var linkId = $(this).find('.service-data .link-id').text();
+							$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, false, event.clientX, event.clientY);
+							return false;
+						});
+					}
 				}
 			});
 
@@ -280,6 +298,24 @@
 					}
 				});
 			});
+
+			if ($.SalesPortal.Content.isMobileDevice())
+			{
+				feedItemsList.find('.library-link-block').hammer().on('hold', function (event) {
+					var linkId = $(this).find('.service-data .link-id').text();
+					$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, false, event.gesture.center.pageX, event.gesture.center.pageY);
+					event.gesture.stopPropagation();
+					event.gesture.preventDefault();
+				});
+			}
+			else
+			{
+				feedItemsList.find('.library-link-block').off('contextmenu').on('contextmenu', function (event) {
+					var linkId = $(this).find('.service-data .link-id').text();
+					$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, false, event.clientX, event.clientY);
+					return false;
+				});
+			}
 
 			feedItemsList.find('.draggable').off('dragstart').on('dragstart', function (e)
 			{

@@ -264,6 +264,24 @@
 					});
 				});
 
+				if ($.SalesPortal.Content.isMobileDevice())
+				{
+					grid.find('.library-link-item').hammer().on('hold', function (event) {
+						var linkId = $(this).find('.service-data .link-id').text();
+						$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, false, event.gesture.center.pageX, event.gesture.center.pageY);
+						event.gesture.stopPropagation();
+						event.gesture.preventDefault();
+					});
+				}
+				else
+				{
+					grid.find('.library-link-item').off('contextmenu').on('contextmenu', function (event) {
+						var linkId = $(this).find('.service-data .link-id').text();
+						$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, false, event.clientX, event.clientY);
+						return false;
+					});
+				}
+
 				grid.find('.draggable').off('dragstart').on('dragstart', function (e) {
 					var urlHeader = $(this).data("url-header");
 					var url = $(this).data('url');

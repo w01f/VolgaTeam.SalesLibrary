@@ -53,33 +53,36 @@
 		{
 			$this->contextActions = array();
 
-			$action = new PreviewAction();
+			$action = new ContextMenuAction();
 			$action->tag = 'open';
 			$action->text = 'Open this Link Bundle';
 			$this->contextActions[] = $action;
 
 			if ($this->config->allowDownload)
 			{
-				$action = new PreviewAction();
+				$action = new ContextMenuAction();
 				$action->tag = 'zip-link-bundle';
 				$action->text = 'Zip & Download all files from Link Bundle';
 				$this->contextActions[] = $action;
 
-				$action = new PreviewAction();
+				$action = new ContextMenuAction();
 				$action->tag = 'zip-library-folder';
 				$action->text = 'Download ALL in this window';
+				$action->onlyWallbinAction = true;
 				$this->contextActions[] = $action;
 			}
 			if ($this->config->allowAddToQuickSite)
 			{
-				$action = new PreviewAction();
+				$action = new ContextMenuAction();
 				$action->tag = 'linkcart';
 				$action->text = 'Add this Link Bundle to my QuickSites Cart';
+				$action->beginGroup = true;
 				$this->contextActions[] = $action;
 
-				$action = new PreviewAction();
+				$action = new ContextMenuAction();
 				$action->tag = 'quicksite';
 				$action->text = 'Email this Link Bundle';
+				$action->beginGroup = true;
 				$this->contextActions[] = $action;
 			}
 		}

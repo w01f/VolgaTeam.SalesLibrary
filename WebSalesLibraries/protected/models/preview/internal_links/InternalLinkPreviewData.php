@@ -67,28 +67,30 @@
 
 			if ($this->config->allowAddToQuickSite)
 			{
-				$action = new PreviewAction();
+				$action = new ContextMenuAction();
 				$action->tag = 'linkcart';
 				$action->text = 'Add this URL to my QuickSites Cart';
 				$this->contextActions[] = $action;
 
-				$action = new PreviewAction();
+				$action = new ContextMenuAction();
 				$action->tag = 'quicksite';
 				$action->text = 'Email this URL';
+				$action->beginGroup = true;
 				$this->contextActions[] = $action;
 			}
 			if ($this->config->allowAddToFavorites)
 			{
-				$action = new PreviewAction();
+				$action = new ContextMenuAction();
 				$action->tag = 'favorites';
 				$action->text = 'Save to Favorites';
 				$this->contextActions[] = $action;
 			}
 			if ($this->config->enableRating)
 			{
-				$action = new PreviewAction();
+				$action = new ContextMenuAction();
 				$action->tag = 'rate';
 				$action->text = 'Rate this URL Link';
+				$action->beginGroup = $this->config->allowAddToQuickSite || $this->config->allowAddToFavorites;
 				$this->contextActions[] = $action;
 			}
 		}

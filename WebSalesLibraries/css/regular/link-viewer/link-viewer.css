@@ -88,7 +88,9 @@
     margin: 0;
     opacity: 0;
     display: block;
-    transition: .3s all linear;
+    height: 0;
+    width: 0;
+    min-width: 0;
 }
 
 .link-viewer .image-button:hover .dropdown .dropdown-menu,
@@ -102,6 +104,29 @@
 {
     opacity: 1;
     transition: .5s all linear;
+    height: auto;
+    width: auto;
+    min-width: 160px;
+}
+
+.link-viewer .image-button .dropdown .dropdown-menu>li,
+.link-viewer .text-button .dropdown .dropdown-menu>li,
+.link-viewer .image-button .dropup .dropdown-menu>li,
+.link-viewer .text-button .dropup .dropdown-menu>li
+{
+    display: none;
+}
+
+.link-viewer .image-button:hover .dropdown .dropdown-menu>li,
+.link-viewer .text-button:hover .dropdown .dropdown-menu>li,
+.link-viewer .image-button:hover .dropup .dropdown-menu>li,
+.link-viewer .text-button:hover .dropup .dropdown-menu>li,
+.link-viewer .image-button .dropdown.open .dropdown-menu>li,
+.link-viewer .text-button .dropdown.open .dropdown-menu>li,
+.link-viewer .image-button .dropup.open .dropdown-menu>li,
+.link-viewer .text-button .dropup.open .dropdown-menu>li
+{
+    display: block;
 }
 
 .link-viewer .image-button .dropdown-menu > li > a:hover,
@@ -171,5 +196,6 @@
 }
 
 .link-viewer .image-button .dropdown-menu {
-    left: -40px;
+    right: 0;
+    left: auto;
 }

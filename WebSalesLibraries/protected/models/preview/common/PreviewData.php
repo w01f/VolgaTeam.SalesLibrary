@@ -40,7 +40,7 @@
 		/** @var  PreviewAction[] */
 		public $dialogActions;
 
-		/** @var  PreviewAction[] */
+		/** @var  ContextMenuAction[] */
 		public $contextActions;
 
 		protected $link;

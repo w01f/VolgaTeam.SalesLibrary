@@ -24,21 +24,22 @@
 			$this->contextActions = array();
 			if ($this->config->allowAddToQuickSite)
 			{
-				$action = new PreviewAction();
+				$action = new ContextMenuAction();
 				$action->tag = 'linkcart';
 				$action->text = 'Add this Line Break to my QuickSites Cart';
 				$this->contextActions[] = $action;
 
-				$action = new PreviewAction();
+				$action = new ContextMenuAction();
 				$action->tag = 'linkcart-all-window';
 				$action->text = 'Add all links in this window…';
 				$this->contextActions[] = $action;
 			}
 			if ($this->config->allowDownload)
 			{
-				$action = new PreviewAction();
+				$action = new ContextMenuAction();
 				$action->tag = 'zip-library-folder';
 				$action->text = 'Download ALL in this window';
+				$action->beginGroup = $this->config->allowAddToQuickSite;
 				$this->contextActions[] = $action;
 			}
 		}

@@ -27,10 +27,12 @@
 		)
 		, true);
 ?>
-<<?echo $contentBlock->buttonize?'button':'a';?> id="<? echo $blockId; ?>" class="<? if ($contentBlock->buttonize): ?>btn btn-default<? else: ?>landing-url<? endif; ?> shortcuts-link<?if(!isset($contentBlock->shortcut)):?> disabled<?endif;?>" href="<? echo isset($contentBlock->shortcut) ? $contentBlock->shortcut->getSourceLink() : '#'; ?>" target="_blank"
+<<?echo $contentBlock->buttonize?'button':'a';?> id="<? echo $blockId; ?>" class="<? if ($contentBlock->buttonize): ?>btn btn-default<? else: ?>landing-url<? endif; ?> shortcuts-link<?if(!isset($contentBlock->shortcut)):?> disabled<?endif;?><?if(isset($contentBlock->shortcut) && $contentBlock->shortcut->type === 'libraryfile'):?> shortcut-library-link<?endif;?><?if(isset($contentBlock->shortcut) && $contentBlock->shortcut->type === 'libraryfile' && $contentBlock->shortcut->isDraggable):?> draggable<?endif;?>" href="<? echo isset($contentBlock->shortcut) ? $contentBlock->shortcut->getSourceLink() : '#'; ?>" target="_blank"
         style="<? echo $this->renderPartial('landingPageMarkup/style/stylePadding', array('padding' => $contentBlock->padding), true); ?>
         <? echo $this->renderPartial('landingPageMarkup/style/styleMargin', array('margin' => $contentBlock->margin), true); ?>"
-	<? if (!empty($contentBlock->hoverText)): ?> title="<? echo $contentBlock->hoverText; ?>"<? endif; ?>>
+	<? if (!empty($contentBlock->hoverText)): ?> title="<? echo $contentBlock->hoverText; ?>"<? endif; ?> <? if (isset($contentBlock->shortcut) && $contentBlock->shortcut->type === 'libraryfile' && $contentBlock->shortcut->isDraggable): ?>draggable="true"
+    data-url-header="<? echo $contentBlock->shortcut->dragHeader; ?>"
+    data-url="<? echo $contentBlock->shortcut->url; ?>"<? endif; ?>>
     <? echo $this->renderPartial('landingPageMarkup/common/blockContainer', array('contentBlocks' => $contentBlock->items, 'screenSettings' => $screenSettings), true); ?>
     <div class="service-data">
 	    <? echo isset($contentBlock->shortcut) ? $contentBlock->shortcut->getMenuItemData() : '<div class="same-page"></div><div class="has-custom-handler"></div>'; ?>

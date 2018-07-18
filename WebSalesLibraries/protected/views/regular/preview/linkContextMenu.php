@@ -7,7 +7,10 @@
     data-log-action="Context Menu">
 	<? foreach ($data->contextActions as $action): ?>
 		<? $isDirectUrl = $action->url != '#'; ?>
-        <li>
+		<? if ($action->beginGroup): ?>
+            <li role="separator" class="divider"></li>
+		<? endif; ?>
+        <li <? if ($action->onlyWallbinAction): ?>class="only-on-wallbin" <? endif; ?>>
             <a tabindex="-1" href="<? echo $action->url; ?>"
                class="<? echo $isDirectUrl ? 'direct-open' : 'regular-open'; ?> log-action"
 			   <? if ($isDirectUrl): ?>target="_blank"<? endif; ?>>

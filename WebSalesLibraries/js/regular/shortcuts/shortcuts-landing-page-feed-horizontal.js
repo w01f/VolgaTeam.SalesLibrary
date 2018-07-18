@@ -153,8 +153,7 @@
 									$.SalesPortal.Overlay.hide();
 								},
 								success: function (result) {
-									$.SalesPortal.ShortcutsSearchLink(result).runSearch(function (data)
-									{
+									$.SalesPortal.ShortcutsSearchLink(result).runSearch(function (data) {
 										if (data.dataset.length === 0)
 										{
 											var modalDialog = new $.SalesPortal.ModalDialog({
@@ -166,8 +165,7 @@
 													{
 														tag: 'ok',
 														title: 'OK',
-														clickHandler: function ()
-														{
+														clickHandler: function () {
 															modalDialog.close();
 														}
 													}
@@ -294,6 +292,24 @@
 					}
 				});
 			});
+
+			if ($.SalesPortal.Content.isMobileDevice())
+			{
+				feedContainer.find('.carousel-links .item .library-link-item').hammer().on('hold', function (event) {
+					var linkId = $(this).find('.service-data .link-id').text();
+					$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, false, event.gesture.center.pageX, event.gesture.center.pageY);
+					event.gesture.stopPropagation();
+					event.gesture.preventDefault();
+				});
+			}
+			else
+			{
+				feedContainer.find('.carousel-links .item .library-link-item').off('contextmenu').on('contextmenu', function (event) {
+					var linkId = $(this).find('.service-data .link-id').text();
+					$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, false, event.clientX, event.clientY);
+					return false;
+				});
+			}
 
 			feedContainer.find('.carousel-links .item .draggable').off('dragstart').on('dragstart', function (e) {
 				var urlHeader = $(this).data("url-header");

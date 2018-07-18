@@ -131,7 +131,7 @@
 				previewParameters.afterViewerOpenedCallback(openedViewer);
 		};
 
-		this.requestLinkContextMenu = function (linkId, isQuickSite, pointX, pointY) {
+		this.requestLinkContextMenu = function (linkId, isQuickSite, isOnWallbin, pointX, pointY) {
 			that.cleanupContextMenu();
 			$.ajax({
 				type: "POST",
@@ -163,6 +163,8 @@
 						if (parameters.content !== '')
 						{
 							var menu = $(parameters.content);
+							if(!isOnWallbin)
+								menu.addClass('no-wallbin-content');
 							$('body').append(menu);
 
 							if (parameters.data.config.enableLogging)

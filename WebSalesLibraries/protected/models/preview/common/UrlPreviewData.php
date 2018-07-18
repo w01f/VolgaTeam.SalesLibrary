@@ -81,7 +81,7 @@
 			if ($this->link->isDirectUrl && $this->config->isEOBrowser)
 				return;
 
-			$action = new PreviewAction();
+			$action = new ContextMenuAction();
 			$action->tag = 'open';
 			$action->url = $this->link->isDirectUrl ? $this->url : $action->url;
 			$action->text = 'Open this URL Link';
@@ -89,35 +89,40 @@
 
 			if ($this->config->allowAddToQuickSite)
 			{
-				$action = new PreviewAction();
+				$action = new ContextMenuAction();
 				$action->tag = 'linkcart';
 				$action->text = 'Add this URL to my QuickSites Cart';
+				$action->beginGroup = true;
 				$this->contextActions[] = $action;
 
-				$action = new PreviewAction();
+				$action = new ContextMenuAction();
 				$action->tag = 'quicksite';
 				$action->text = 'Email this URL';
+				$action->beginGroup = true;
 				$this->contextActions[] = $action;
 			}
 			if ($this->config->allowAddToFavorites)
 			{
-				$action = new PreviewAction();
+				$action = new ContextMenuAction();
 				$action->tag = 'favorites';
 				$action->text = 'Save to Favorites';
 				$this->contextActions[] = $action;
 			}
 			if ($this->config->allowDownload)
 			{
-				$action = new PreviewAction();
+				$action = new ContextMenuAction();
 				$action->tag = 'zip-library-folder';
 				$action->text = 'Download ALL in this window';
+				$action->beginGroup = true;
+				$action->onlyWallbinAction = true;
 				$this->contextActions[] = $action;
 			}
 			if ($this->config->enableRating)
 			{
-				$action = new PreviewAction();
+				$action = new ContextMenuAction();
 				$action->tag = 'rate';
 				$action->text = 'Rate this URL Link';
+				$action->beginGroup = $this->config->allowDownload || $this->config->allowAddToFavorites || $this->config->allowAddToQuickSite;
 				$this->contextActions[] = $action;
 			}
 		}

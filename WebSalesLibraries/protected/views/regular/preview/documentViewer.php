@@ -43,7 +43,8 @@
                                    data-log-action="Open OneDrive Link" target="_blank" title="open link">Open Link</a>
                             </li>
                             <li>
-                                <a href="<? echo $data->oneDriveUrl; ?>" class="log-action one-drive-link-copy" data-log-action="Copy OneDrive Link"
+                                <a href="<? echo $data->oneDriveUrl; ?>" class="log-action one-drive-link-copy"
+                                   data-log-action="Copy OneDrive Link"
                                    title="copy link">Copy Link URL</a>
                             </li>
                             <li>
@@ -96,7 +97,8 @@
 		<? endif; ?>
 		<? if ($data->config->allowEmail): ?>
             <li>
-                <a class="log-action" href="#link-viewer-tab-email" role="tab" data-toggle="tab" data-log-action="Add to QS">Email</a>
+                <a class="log-action" href="#link-viewer-tab-email" role="tab" data-toggle="tab"
+                   data-log-action="Add to QS">Email</a>
             </li>
 		<? endif; ?>
     </ul>
@@ -145,14 +147,10 @@
 					<? endif; ?>
                 </div>
 				<?
-					$footerGapSize = 0;
+					$footerGapSize = 2;
 					if (!isset($data->quickLinkUrl))
 						$footerGapSize++;
-					if (!$data->config->allowDownload)
-						$footerGapSize++;
-					if (!$data->config->allowAddToFavorites)
-						$footerGapSize++;
-					if (!$data->config->allowAddToQuickSite)
+					if (!($data->config->allowDownload || $data->config->allowAddToFavorites || $data->config->allowAddToQuickSite))
 						$footerGapSize++;
 				?>
                 <div class="col col-xs-<? echo $footerGapSize; ?>"></div>
@@ -166,23 +164,22 @@
                         </div>
                     </div>
 				<? endif; ?>
-				<? if ($data->config->allowDownload): ?>
+				<? if ($data->config->allowDownload || $data->config->allowAddToFavorites || $data->config->allowAddToQuickSite): ?>
                     <div class="col col-xs-1 text-center">
-						<? if ($data->config->allowDownload): ?>
-                            <div class="image-button" title="download">
-                                <span class="text-item dropup">
-                                     <a href="#" data-toggle="dropdown" class="dropdown-toggle">
-                                        <img src="<? echo sprintf('%s/images/preview/gallery/button-download.png', $imageUrlPrefix); ?>">
-                                     </a>
-                                    <ul class="dropdown-menu">
+                        <div class="image-button" title="download">
+                            <span class="text-item dropup">
+                                 <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+                                    <img src="<? echo sprintf('%s/images/preview/gallery/button-download.png', $imageUrlPrefix); ?>">
+                                 </a>
+                                <ul class="dropdown-menu">
+                                    <? if ($data->config->allowDownload): ?>
                                         <li>
                                             <a href="#" class="log-action download-file"
                                                data-log-action="Download File">
                                                 Download file <span class="file-size"></span>
                                             </a>
                                         </li>
-	                                    <? if (!$data->singlePage): ?>
-                                            <li role="separator" class="divider"></li>
+                                        <? if (!$data->singlePage): ?>
                                             <li>
                                                 <a href="#" class="log-action download-page"
                                                    data-log-action="Download File">
@@ -190,42 +187,33 @@
                                                             class="page-size"></span>
                                                 </a>
                                             </li>
-	                                    <? endif; ?>
-	                                    <? if (isset($linkBundleInfo) && count($linkBundleInfo->downloadInfo) > 1): ?>
-                                            <li role="separator" class="divider"></li>
+                                        <? endif; ?>
+                                        <? if (isset($linkBundleInfo) && count($linkBundleInfo->downloadInfo) > 1): ?>
                                             <li>
                                                 <a href="#" class="log-action download-link-bundle"
                                                    data-log-action="Download Link Bundle">
-                                                    Download all <? echo count($linkBundleInfo->downloadInfo); ?> files (<? echo FileInfo::formatFileSize(FileDownloadInfo::getTotalSize($linkBundleInfo->downloadInfo)); ?>
+                                                    Download ALL <? echo count($linkBundleInfo->downloadInfo); ?> files (<? echo FileInfo::formatFileSize(FileDownloadInfo::getTotalSize($linkBundleInfo->downloadInfo)); ?>
                                                     )
                                                 </a>
                                             </li>
-	                                    <? endif; ?>
-                                    </ul>
-                                </span>
-                            </div>
-						<? endif; ?>
-                    </div>
-				<? endif; ?>
-				<? if ($data->config->allowAddToFavorites): ?>
-                    <div class="col col-xs-1 text-center">
-                        <div class="image-button log-action add-favorites" data-log-action="Add to Favorites"
-                             title="save favorite">
-							<span class="text-item">
-								<img
-                                        src="<? echo sprintf('%s/images/preview/gallery/button-favorites.png', $imageUrlPrefix); ?>">
-							</span>
-                        </div>
-                    </div>
-				<? endif; ?>
-				<? if ($data->config->allowAddToQuickSite): ?>
-                    <div class="col col-xs-1 text-center">
-                        <div class="image-button log-action add-quicksite" data-log-action="Add to QS"
-                             title="add to quickSITE">
-							<span class="text-item">
-								<img
-                                        src="<? echo sprintf('%s/images/preview/gallery/button-quicksite.png', $imageUrlPrefix); ?>">
-							</span>
+                                        <? endif; ?>
+                                        <? if ($data->config->allowAddToFavorites || $data->config->allowAddToQuickSite): ?>
+                                            <li role="separator" class="divider"></li>
+                                        <? endif; ?>
+                                    <? endif; ?>
+                                    <? if ($data->config->allowAddToFavorites): ?>
+                                        <li>
+                                            <a href="#" class="log-action add-favorites"
+                                               data-log-action="Add to Favorites">Save as Favorite</a>
+                                        </li>
+                                    <? endif; ?>
+                                    <? if ($data->config->allowAddToQuickSite): ?>
+                                        <li>
+                                            <a href="#" class="log-action add-quicksite" data-log-action="Add to QS">Add to QuickSite</a>
+                                        </li>
+                                    <? endif; ?>
+                                </ul>
+                            </span>
                         </div>
                     </div>
 				<? endif; ?>

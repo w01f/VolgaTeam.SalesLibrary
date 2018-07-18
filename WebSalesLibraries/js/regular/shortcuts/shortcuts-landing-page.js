@@ -24,6 +24,36 @@
 					var initMarkupBlocks = function (markupObject) {
 						$.SalesPortal.ShortcutsManager.assignShortcutItemHandlers(markupObject);
 
+						$.each(markupObject.find('.shortcut-library-link'), function (key, value) {
+
+							var libraryLinkBlock = $(value);
+							if ($.SalesPortal.Content.isMobileDevice())
+							{
+								libraryLinkBlock.hammer().on('hold', function (event) {
+									var linkId = $(this).find('.service-data .library-link-id').text();
+									$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, false, event.gesture.center.pageX, event.gesture.center.pageY);
+									event.gesture.stopPropagation();
+									event.gesture.preventDefault();
+								});
+							}
+							else
+							{
+								libraryLinkBlock.off('contextmenu').on('contextmenu', function (event) {
+									var linkId = $(this).find('.service-data .library-link-id').text();
+									$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, false, event.clientX, event.clientY);
+									return false;
+								});
+							}
+
+							if (libraryLinkBlock.hasClass('draggable'))
+								libraryLinkBlock.off('dragstart').on('dragstart', function (e) {
+									var urlHeader = $(this).data("url-header");
+									var url = $(this).data('url');
+									if (url !== '')
+										e.originalEvent.dataTransfer.setData(urlHeader, url);
+								});
+						});
+
 						$.each(markupObject.find('.horizontal-feed'), function (key, value) {
 							var linkFeed = $(value);
 							var feedId = linkFeed.prop('id').replace('horizontal-feed-', '');

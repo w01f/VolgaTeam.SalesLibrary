@@ -67,7 +67,7 @@
 					{
 						var linkId = $(this).attr('id').replace('link', '');
 						recordActivity(linkId);
-						$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, true, event.gesture.center.pageX, event.gesture.center.pageY);
+						$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, true, false, event.gesture.center.pageX, event.gesture.center.pageY);
 					}
 					event.gesture.stopPropagation();
 					event.gesture.preventDefault();
@@ -118,7 +118,7 @@
 					{
 						var linkId = $(this).attr('id').replace('link', '');
 						recordActivity(linkId);
-						$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, true, event.clientX, event.clientY);
+						$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, true, false, event.clientX, event.clientY);
 					}
 					return false;
 				});
@@ -131,7 +131,7 @@
 					{
 						var linkId = $(this).attr('id').replace('link', '');
 						recordActivity(linkId);
-						$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, event.clientX, event.clientY);
+						$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, false, event.clientX, event.clientY);
 					}
 					return false;
 				});
@@ -143,7 +143,7 @@
 						{
 							var linkId = $(this).attr('id').replace('link', '');
 							recordActivity(linkId);
-							$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, event.clientX, event.clientY);
+							$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, false, event.clientX, event.clientY);
 						}
 						return false;
 					});

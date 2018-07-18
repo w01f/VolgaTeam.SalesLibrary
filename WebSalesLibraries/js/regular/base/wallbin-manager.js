@@ -227,7 +227,7 @@
 				});
 				container.find('.clickable, .folder-link, .line-break, .url').hammer().on('hold', function (event) {
 					var linkId = $(this).attr('id').replace('link', '');
-					$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, event.gesture.center.pageX, event.gesture.center.pageY);
+					$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, true, event.gesture.center.pageX, event.gesture.center.pageY);
 					event.gesture.stopPropagation();
 					event.gesture.preventDefault();
 				});
@@ -275,7 +275,7 @@
 				container.find('.clickable, .folder-link, .line-break')
 					.off('contextmenu').on('contextmenu', function (event) {
 					var linkId = $(this).attr('id').replace('link', '');
-					$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, event.clientX, event.clientY);
+					$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, true, event.clientX, event.clientY);
 					return false;
 				});
 
@@ -284,14 +284,14 @@
 				});
 				container.find('.url-internal').off('contextmenu').on('contextmenu', function (event) {
 					var linkId = $(this).attr('id').replace('link', '');
-					$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, event.clientX, event.clientY);
+					$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, true, event.clientX, event.clientY);
 					return false;
 				});
 				if (!$.SalesPortal.Content.isEOBrowser())
 				{
 					container.find('.url-external').off('contextmenu').on('contextmenu', function (event) {
 						var linkId = $(this).attr('id').replace('link', '');
-						$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, event.clientX, event.clientY);
+						$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, true, event.clientX, event.clientY);
 						return false;
 					});
 				}
