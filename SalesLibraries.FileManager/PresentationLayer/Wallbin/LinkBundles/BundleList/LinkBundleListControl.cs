@@ -76,10 +76,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Bundl
 				gridViewBundles.FocusedRowHandle = selectedBundleIndex;
 			else if (!String.IsNullOrEmpty(MainController.Instance.Settings.SelectedLinkBundleId))
 			{
+				gridControlBundles.ForceInitialize();
 				var linkBundle = _library.LinkBundles.FirstOrDefault(item =>
 					item.ExtId == Guid.Parse(MainController.Instance.Settings.SelectedLinkBundleId));
 				selectedBundleIndex = linkBundle != null ? _library.LinkBundles.ToList().IndexOf(linkBundle) : 0;
 				gridViewBundles.FocusedRowHandle = selectedBundleIndex;
+				gridViewBundles.MakeRowVisible(gridViewBundles.FocusedRowHandle);
 			}
 			else
 				gridViewBundles.FocusedRowHandle = 0;
