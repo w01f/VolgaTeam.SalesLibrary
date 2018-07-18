@@ -279,6 +279,23 @@
 				"searchable": false
 			});
 
+			columnSettings.push({
+				"data": "previewUrl",
+				"title": "Preview",
+				"visible": false,
+				"searchable": false,
+				"class": "allow-export"
+
+			});
+
+			columnSettings.push({
+				"data": "oneDriveUrl",
+				"title": "OneDrive",
+				"visible": false,
+				"searchable": false,
+				"class": "allow-export"
+			});
+
 			$.extend($.fn.dataTableExt.oStdClasses, {
 				"sFilterInput": "form-control",
 				"sLengthSelect": "form-control"

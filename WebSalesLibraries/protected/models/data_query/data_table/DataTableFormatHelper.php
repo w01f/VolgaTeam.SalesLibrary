@@ -5,6 +5,7 @@
 	use application\models\wallbin\models\web\LibraryLink;
 	use application\models\wallbin\models\web\LibraryManager as LibraryManager;
 	use application\models\wallbin\models\web\Library as Library;
+	use application\models\wallbin\models\web\OneDrive;
 
 	/**
 	 * Class DataTableFormatHelper
@@ -136,6 +137,23 @@
 					$record['extended_data'] = array();
 					foreach ($extraColumns as $column)
 						$record['extended_data'][$column] = $linkRecord[$column];
+
+					if ($fileInfo->isFile || $isLinkBundle)
+					{
+						$record['previewUrl'] = \Yii::app()->createAbsoluteUrl('preview/getSingleInternalLink', array('linkId' => $linkRecord['id']));
+						if ($fileInfo->isFile)
+						{
+							$oneDriveSettings = OneDrive::createByContent($linkRecord['one_drive']);
+							$record['oneDriveUrl'] = $oneDriveSettings->url;
+						}
+						else
+							$record['oneDriveUrl'] = null;
+					}
+					else
+					{
+						$record['previewUrl'] = $fileInfo->link;
+						$record['oneDriveUrl'] = null;
+					}
 
 					foreach ($baseColumnSettings as $key => $value)
 					{

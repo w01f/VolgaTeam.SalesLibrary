@@ -88,6 +88,7 @@
 				'original_format' => 'max(link.original_format) as original_format',
 				'search_format' => 'max(link.search_format) as search_format',
 				'extended_properties' => 'max(link.settings) as extended_properties',
+				'one_drive' => 'max(link.one_drive) as one_drive',
 			);
 
 			$this->customQueryFields = array();
