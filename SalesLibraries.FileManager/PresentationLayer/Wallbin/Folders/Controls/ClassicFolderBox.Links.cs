@@ -31,16 +31,18 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 {
 	public partial class ClassicFolderBox
 	{
-		public void AddHyperLink(BaseNetworkLinkInfo initialLinkInfo = null)
+		public void AddHyperLink(BaseNetworkLinkInfo initialLinkInfo = null, int position = -1)
 		{
 			using (var form = new FormAddHyperLink(initialLinkInfo))
 			{
 				if (form.ShowDialog() != DialogResult.OK) return;
 
-				var position = -1;
-				var selectedLink = SelectedLinkRow;
-				if (selectedLink != null)
-					position = selectedLink.Index;
+				if (position == -1)
+				{
+					var selectedLink = SelectedLinkRow;
+					if (selectedLink != null)
+						position = selectedLink.Index;
+				}
 
 				_outsideChangesInProgress = true;
 

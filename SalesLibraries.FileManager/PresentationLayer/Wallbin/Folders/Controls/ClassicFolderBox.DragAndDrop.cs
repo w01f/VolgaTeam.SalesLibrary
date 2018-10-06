@@ -141,7 +141,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 						if (!sourceLinks.OfType<FolderLink>().Any() && sourceLinks.OfType<FileLink>().Count() == 1 &&
 							FileFormatHelper.IsUrlFile(sourceLinks.OfType<FileLink>().Single().Path))
 						{
-							AddHyperLink(UrlLinkInfo.FromFile(sourceLinks.OfType<FileLink>().Single().Path));
+							AddHyperLink(UrlLinkInfo.FromFile(sourceLinks.OfType<FileLink>().Single().Path), _mouseDragOverHitInfo.RowIndex);
 							confirmDrop = false;
 						}
 						else if (
@@ -229,6 +229,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 								else
 									confirmDrop = false;
 							}
+						}
+						else if (extrernalLinks.Count == 1 && extrernalLinks.All(link => FileFormatHelper.IsUrlFile(link.Path)))
+						{
+							var urlFilePath = extrernalLinks.Select(link => link.Path).First();
+							AddHyperLink(UrlLinkInfo.FromFile(urlFilePath), _mouseDragOverHitInfo.RowIndex);
+							confirmDrop = false;
 						}
 						else
 						{
