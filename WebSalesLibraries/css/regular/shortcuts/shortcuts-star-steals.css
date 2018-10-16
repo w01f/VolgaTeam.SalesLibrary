@@ -1,0 +1,217 @@
+/*Common Header------------------------------------*/
+#content .star-steals-main-page
+{
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	display: table;
+}
+/*--------------------------------------------------*/
+
+/*Service Panel------------------------------------*/
+#content .star-steals-main-page .service-panel
+{
+	background: #fff;
+	padding: 5px 0 0;
+	margin: 0;
+	vertical-align: top;
+	display: table-cell;
+	width: 20%;
+	min-width: 350px;
+}
+
+#content .star-steals-main-page .service-panel.left
+{
+	border-right: 2px #999 solid;
+}
+
+#content .star-steals-main-page .service-panel .row
+{
+	margin: 0;
+}
+
+#content .star-steals-main-page .service-panel .row > div
+{
+	padding: 0;
+}
+
+#content .star-steals-main-page .service-panel .service-panel-page > div > div
+{
+	width: 100%;
+}
+
+#content .star-steals-main-page .service-panel .item-list-buttons
+{
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-bottom: 30px;
+}
+
+#content .star-steals-main-page .service-panel .item-list-container
+{
+	overflow-y: auto;
+	padding-top: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+#content .star-steals-main-page .service-panel .item-list-container .grid
+{
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	border-collapse: collapse;
+	border: 1px #ddd solid;
+}
+
+#content .star-steals-main-page .service-panel .item-list-container .grid tr
+{
+	cursor: pointer;
+	height: 40px;
+}
+
+#content .star-steals-main-page .service-panel .item-list-container .grid td
+{
+	cursor: pointer;
+	height: 40px;
+	color: #222222;
+	font-size: 10pt;
+	font-family: Verdana, Arial, sans-serif;
+	font-weight: normal;
+	text-align: left;
+	vertical-align: middle !important;
+	padding: 0 !important;
+	border: none;
+	border-right: none;
+}
+
+#content .star-steals-main-page .service-panel .item-list-container .grid tr.even
+{
+	background: #F8F8F8;
+}
+
+#content .star-steals-main-page .service-panel .item-list-container .grid tr.odd
+{
+	background: #E5F1F4;
+}
+
+#content .star-steals-main-page .service-panel .item-list-container .grid tr.selected
+{
+	background: #C6E2FF !important;
+}
+
+#content .star-steals-main-page .service-panel .item-list-container .grid tr:hover
+{
+	background: #ECFBD4;
+}
+
+#content .star-steals-main-page .service-panel .item-list-container .grid td.item-delete
+{
+	width: 36px;
+	cursor: pointer;
+	text-align: center;
+}
+
+#content .star-steals-main-page .service-panel .item-list-container .grid td.item-up
+{
+	width: 36px;
+	cursor: pointer;
+	text-align: center;
+}
+
+#content .star-steals-main-page .service-panel .item-list-container .grid td.item-down
+{
+	width: 36px;
+	cursor: pointer;
+	text-align: center;
+}
+
+#content .star-steals-main-page .service-panel .item-list-container .grid td.item-clone
+{
+	width: 36px;
+	cursor: pointer;
+	text-align: center;
+}
+
+#content .star-steals-main-page .service-panel .item-list-container .grid td.item-id-column
+{
+	display: none;
+}
+
+#content .star-steals-main-page .service-panel .item-list-container .grid tr.selected td.item-delete img,
+#content .star-steals-main-page .service-panel .item-list-container .grid tr.selected td.item-clone img,
+#content .star-steals-main-page .service-panel .item-list-container .grid tr.selected td.item-up img,
+#content .star-steals-main-page .service-panel .item-list-container .grid tr.selected td.item-down img
+{
+	visibility: visible;
+}
+
+#content .star-steals-main-page .service-panel .item-list-container .grid tr td.item-delete img,
+#content .star-steals-main-page .service-panel .item-list-container .grid tr td.item-clone img,
+#content .star-steals-main-page .service-panel .item-list-container .grid tr td.item-up img,
+#content .star-steals-main-page .service-panel .item-list-container .grid tr td.item-down img
+{
+	visibility: hidden;
+}
+/*--------------------------------------------------*/
+
+/*Delete Items Dialog------------------------------------*/
+.delete-pages-list
+{
+	width: 99%;
+	background: #ffffff;
+	border: 1px #aaaaaa solid;
+	overflow: auto;
+	height: 400px;
+}
+
+.delete-pages-list li
+{
+	padding-bottom: 10px;
+	padding-left: 5px;
+}
+/*--------------------------------------------------*/
+
+/*Item Content------------------------------------*/
+#content .star-steals-main-page .item-content
+{
+	vertical-align: top;
+	margin: 0;
+	display: table-cell;
+}
+
+#content .star-steals-main-page .item-content > div
+{
+	overflow: auto;
+	height: 100%;
+}
+
+#content .star-steals-main-page .item-content .form-horizontal .row
+{
+	margin-left: 0;
+	margin-right: 0;
+}
+
+#content .star-steals-main-page .item-content .item-content-group
+{
+	margin-left: 0;
+	margin-right: 0;
+}
+
+#content .star-steals-main-page .item-content .item-content-group .control-label
+{
+	font-weight: normal;
+	margin-bottom: 5px;
+}
+
+#content .star-steals-main-page .item-content .item-content-group .controls label
+{
+	font-weight: normal;
+}
+
+#content .star-steals-main-page .item-content .star-steals-item-team-item
+{
+	margin-bottom: 15px;
+}
+/*--------------------------------------------------*/
+

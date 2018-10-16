@@ -1019,7 +1019,7 @@
 
 			if (!minDate || minDate.isBefore(calendar[1][1]))
 			{
-				html += '<th class="prev available"><i class="fa fa-arrow-left icon-arrow-left glyphicon glyphicon-arrow-left"></i></th>';
+				html += '<th class="prev available"><span class="glyphicon glyphicon-arrow-left"></span></th>';
 			}
 			else
 			{
@@ -1036,7 +1036,7 @@
 			html += '<th colspan="5" class="month">' + dateHtml + '</th>';
 			if (!maxDate || maxDate.isAfter(calendar[1][1]))
 			{
-				html += '<th class="next available"><i class="fa fa-arrow-right icon-arrow-right glyphicon glyphicon-arrow-right"></i></th>';
+				html += '<th class="next available"><span class="glyphicon glyphicon-arrow-right"></span></th>';
 			}
 			else
 			{

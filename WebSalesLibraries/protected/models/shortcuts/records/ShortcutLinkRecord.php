@@ -174,6 +174,9 @@
 				case 'left_panel_mobile':
 					$shortcut = new NavigationPanelShortcut($this, $isPhone);
 					break;
+				case 'starssteals':
+					$shortcut = new StarStealsShortcut($this, $isPhone);
+					break;
 				default:
 					$shortcut = new EmptyShortcut($this, $isPhone);
 					break;
@@ -350,6 +353,9 @@
 					break;
 				case 'left_panel_mobile':
 					$shortcut = new NavigationPanelShortcut($this, false);
+					break;
+				case 'starssteals':
+					$shortcut = new StarStealsShortcut($this, false);
 					break;
 				default:
 					$shortcut = new EmptyShortcut($this, false);

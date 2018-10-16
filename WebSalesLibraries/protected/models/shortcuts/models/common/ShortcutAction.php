@@ -437,6 +437,51 @@
 					$action->iconClass = 'icon-search32';
 					$customActions[$action->tag] = $action;
 					break;
+				case 'starssteals':
+					$action = new ShortcutAction('starssteals-panel-show');
+					$action->order = 10;
+					$action->group = 'starsteals-panel';
+					$action->title = 'Show Panel';
+					$action->iconClass = 'icon-list4';
+					$customActions[$action->tag] = $action;
+
+					$action = new ShortcutAction('starssteals-panel-hide');
+					$action->order = 10;
+					$action->group = 'starsteals-panel';
+					$action->title = 'Hide Panel';
+					$action->iconClass = 'icon-list4';
+					$customActions[$action->tag] = $action;
+
+					$action = new ShortcutAction('starssteals-item-add');
+					$action->order = 20;
+					$action->title = 'Add Item';
+					$action->iconClass = 'icon-add';
+					$customActions[$action->tag] = $action;
+
+					$action = new ShortcutAction('starssteals-item-delete');
+					$action->order = 30;
+					$action->title = 'Delete Item';
+					$action->iconClass = 'icon-delete';
+					$customActions[$action->tag] = $action;
+
+					$action = new ShortcutAction('starssteals-item-save');
+					$action->order = 40;
+					$action->title = 'Save Item';
+					$action->iconClass = 'icon-save';
+					$customActions[$action->tag] = $action;
+
+//					$action = new ShortcutAction('starsteals-item-preview');
+//					$action->order = 50;
+//					$action->title = 'Preview Item';
+//					$action->iconClass = 'icon-magnifying-glass';
+//					$customActions[$action->tag] = $action;
+//
+//					$action = new ShortcutAction('starsteals-item-email');
+//					$action->order = 60;
+//					$action->title = 'Email';
+//					$action->iconClass = 'icon-email';
+//					$customActions[$action->tag] = $action;
+					break;
 
 			}
 			return $customActions;

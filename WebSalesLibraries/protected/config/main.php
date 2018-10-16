@@ -79,6 +79,8 @@
 			'application.models.feeds.common.*',
 			'application.models.feeds.horizontal.*',
 			'application.models.feeds.vertical.*',
+			'application.models.star_steals.models.*',
+			'application.models.star_steals.records.*',
 		),
 		'behaviors' => array(
 			'onBeginRequest' => array(

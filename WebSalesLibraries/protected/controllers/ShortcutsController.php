@@ -166,6 +166,7 @@
 				case 'search':
 				case 'searchapp':
 				case 'qbuilder':
+				case 'starssteals':
 				case 'favorites':
 				case 'quizzes':
 				case 'landing':
@@ -231,6 +232,10 @@
 				case 'qbuilder':
 					$useMobileWrapper = false;
 					$viewName = 'qbuilder';
+					break;
+				case 'starssteals':
+					$useMobileWrapper = false;
+					$viewName = 'starsteals';
 					break;
 				case 'quizzes':
 					$useMobileWrapper = false;

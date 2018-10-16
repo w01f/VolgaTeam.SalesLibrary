@@ -248,6 +248,9 @@
 					new $.SalesPortal.ShortcutsLandingPage().init(parameters);
 					updatedAllContentNecessary = true;
 					break;
+				case 'starssteals':
+					new $.SalesPortal.ShortcutsStarSteals().init(parameters);
+					break;
 				default :
 					$.SalesPortal.Content.fillContent({
 						content: parameters.content,
