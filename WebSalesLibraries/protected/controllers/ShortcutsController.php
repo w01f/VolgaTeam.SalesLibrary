@@ -35,7 +35,7 @@
 			if (isset($shortcutRecord))
 			{
 				/** @var  $shortcut PageContentShortcut */
-				$shortcut = $shortcutRecord->getRegularModel($this->isPhone);
+				$shortcut = $shortcutRecord->getRegularModel($this->isPhone, $_GET);
 				$shortcut->loadPageConfig();
 
 				if ($useForThumbnail || UserIdentity::isUserAuthorized() || ($shortcut->allowPublicAccess && !isset($shortcut->publicPassword)))
@@ -167,6 +167,7 @@
 				case 'searchapp':
 				case 'qbuilder':
 				case 'starssteals':
+				case 'rrq1':
 				case 'favorites':
 				case 'quizzes':
 				case 'landing':
@@ -236,6 +237,10 @@
 				case 'starssteals':
 					$useMobileWrapper = false;
 					$viewName = 'starsteals';
+					break;
+				case 'rrq1':
+					$useMobileWrapper = false;
+					$viewName = 'salesRequests';
 					break;
 				case 'quizzes':
 					$useMobileWrapper = false;

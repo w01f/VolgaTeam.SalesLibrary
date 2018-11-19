@@ -5,10 +5,18 @@
 	var openDefaultShortcut = function () {
 		var defaultShortcutData = $('.default-shortcut-data');
 		if (defaultShortcutData.length > 0)
-			$.SalesPortal.ShortcutsManager.openShortcutByMenuItemData(defaultShortcutData, {
+		{
+			var customParametersEncoded = defaultShortcutData.find('.custom-parameters').text();
+			var customParameters = {
 				pushHistory: true
-				//singlePage: true
-			});
+			};
+			if (customParametersEncoded !== undefined && customParametersEncoded != '')
+			{
+				customParameters = $.parseJSON(customParametersEncoded);
+				customParameters.pushHistory = true;
+			}
+			$.SalesPortal.ShortcutsManager.openShortcutByMenuItemData(defaultShortcutData, customParameters);
+		}
 	};
 	$(document).ready(function () {
 		$.SalesPortal.MainMenu.init();

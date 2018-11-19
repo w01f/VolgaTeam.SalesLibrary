@@ -13,6 +13,12 @@ select.bootstrapped
     color: #555;
 }
 
+.progress,
+.progress-bar
+{
+    border-radius: 0;
+}
+
 div.checkbox > label > input[type=checkbox]
 {
     float: left !important;
@@ -285,5 +291,21 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6
 .portfolio_utube_carousel_wrapper .item>.row
 {
     margin: 0;
+}
+/*-------------------------------------------------------------------------------*/
+
+/*Dropzone-----------------------------------------------------------------*/
+.dropzone
+{
+    min-height: 140px;
+    border: 1px solid #ccc;
+}
+
+.dropzone .dz-preview {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    margin: 16px;
+    min-height: 0;
 }
 /*-------------------------------------------------------------------------------*/

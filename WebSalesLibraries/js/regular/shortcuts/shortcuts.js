@@ -251,6 +251,9 @@
 				case 'starssteals':
 					new $.SalesPortal.ShortcutsStarSteals().init(parameters);
 					break;
+				case 'rrq1':
+					new $.SalesPortal.ShortcutsSalesRequests().init(parameters);
+					break;
 				default :
 					$.SalesPortal.Content.fillContent({
 						content: parameters.content,

@@ -28,7 +28,6 @@
 		public function actionAddItem()
 		{
 			$title = Yii::app()->request->getPost('title');
-			$shortcutId = Yii::app()->request->getPost('shortcutId');
 			$templateItemId = Yii::app()->request->getPost('templateItemId');
 
 			$userId = UserIdentity::getCurrentUserId();

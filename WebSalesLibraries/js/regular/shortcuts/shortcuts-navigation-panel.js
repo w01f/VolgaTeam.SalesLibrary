@@ -147,7 +147,7 @@
 				width: '47px'
 			}, 300);
 			navigationPanelObject.find('.navigation-item-list').animate({
-				width: '64px'
+				width: '66px'
 			}, 300, function () {
 				parameters.sizeChangedCallback();
 			});

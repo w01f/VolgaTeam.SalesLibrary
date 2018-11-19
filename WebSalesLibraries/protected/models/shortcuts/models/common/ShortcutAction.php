@@ -469,18 +469,45 @@
 					$action->title = 'Save Item';
 					$action->iconClass = 'icon-save';
 					$customActions[$action->tag] = $action;
+					break;
+				case 'rrq1':
+					$action = new ShortcutAction('sales-requests-panel-show');
+					$action->order = 10;
+					$action->group = 'sales-requests-panel';
+					$action->title = 'Show Panel';
+					$action->iconClass = 'icon-list4';
+					$customActions[$action->tag] = $action;
 
-//					$action = new ShortcutAction('starsteals-item-preview');
-//					$action->order = 50;
-//					$action->title = 'Preview Item';
-//					$action->iconClass = 'icon-magnifying-glass';
-//					$customActions[$action->tag] = $action;
-//
-//					$action = new ShortcutAction('starsteals-item-email');
-//					$action->order = 60;
-//					$action->title = 'Email';
-//					$action->iconClass = 'icon-email';
-//					$customActions[$action->tag] = $action;
+					$action = new ShortcutAction('sales-requests-panel-hide');
+					$action->order = 10;
+					$action->group = 'sales-requests-panel';
+					$action->title = 'Hide Panel';
+					$action->iconClass = 'icon-list4';
+					$customActions[$action->tag] = $action;
+
+					$action = new ShortcutAction('sales-requests-item-add');
+					$action->order = 20;
+					$action->title = 'Add Item';
+					$action->iconClass = 'icon-add';
+					$customActions[$action->tag] = $action;
+
+					$action = new ShortcutAction('sales-requests-item-delete');
+					$action->order = 30;
+					$action->title = 'Delete Item';
+					$action->iconClass = 'icon-delete';
+					$customActions[$action->tag] = $action;
+
+					$action = new ShortcutAction('sales-requests-item-save');
+					$action->order = 40;
+					$action->title = 'Save Item';
+					$action->iconClass = 'icon-save';
+					$customActions[$action->tag] = $action;
+
+					$action = new ShortcutAction('sales-requests-item-submit');
+					$action->order = 50;
+					$action->title = 'Submit';
+					$action->iconClass = 'icon-save';
+					$customActions[$action->tag] = $action;
 					break;
 
 			}

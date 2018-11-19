@@ -185,8 +185,8 @@
 								.show()
 								.css({
 									position: "absolute",
-									left: getMenuPosition(menu, pointX, 'width', 'scrollLeft'),
-									top: getMenuPosition(menu, pointY, 'height', 'scrollTop')
+									left: that.getMenuPosition(menu, pointX, 'width', 'scrollLeft'),
+									top: that.getMenuPosition(menu, pointY, 'height', 'scrollTop')
 								})
 								.off('click')
 								.on('click', 'a.regular-open', function () {
@@ -646,7 +646,7 @@
 			$temp.remove();
 		};
 
-		var getMenuPosition = function (menuObject, mouse, direction, scrollDir) {
+		this.getMenuPosition = function (menuObject, mouse, direction, scrollDir) {
 			var win = $(window)[direction](),
 				scroll = $(window)[scrollDir](),
 				menu = menuObject[direction](),

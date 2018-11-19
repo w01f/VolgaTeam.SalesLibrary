@@ -24,8 +24,17 @@
 		{
 			$result = parent::getMenuItemData();
 			$result .= '<div class="has-custom-handler"></div>';
+			$result .= ('<div class="custom-parameters">' . CJSON::encode($this->getShortcutCustomParameters()) . '</div>');
 			if ($this->samePage)
 				$result .= '<div class="same-page"></div>';
 			return $result;
+		}
+
+		/**
+		 * @return array
+		 */
+		public function getShortcutCustomParameters()
+		{
+			return array();
 		}
 	}

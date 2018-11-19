@@ -122,7 +122,6 @@
 			$ownerId = $itemRecord->id_owner;
 
 			self::model()->deleteByPk($itemId);
-			//StatisticQPageRecord::model()->deleteAll('id_qpage=?', array($itemId));
 
 			self::rebuildItemList($ownerId, -1);
 		}
@@ -181,7 +180,7 @@
 			{
 				return Yii::app()->db->createCommand()
 					->select('max(list_order)')
-					->from('tbl_qpage')
+					->from('tbl_star_steals_item')
 					->where("id_owner='" . $userId . "'")
 					->queryScalar();
 			}

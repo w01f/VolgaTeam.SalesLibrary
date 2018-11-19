@@ -81,6 +81,8 @@
 			'application.models.feeds.vertical.*',
 			'application.models.star_steals.models.*',
 			'application.models.star_steals.records.*',
+			'application.models.sales_requests.models.*',
+			'application.models.sales_requests.records.*',
 		),
 		'behaviors' => array(
 			'onBeginRequest' => array(

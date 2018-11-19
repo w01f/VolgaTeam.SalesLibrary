@@ -177,6 +177,9 @@
 				case 'starssteals':
 					$shortcut = new StarStealsShortcut($this, $isPhone);
 					break;
+				case 'rrq1':
+					$shortcut = new SalesRequestsShortcut($this, $isPhone, $parameters);
+					break;
 				default:
 					$shortcut = new EmptyShortcut($this, $isPhone);
 					break;
@@ -356,6 +359,9 @@
 					break;
 				case 'starssteals':
 					$shortcut = new StarStealsShortcut($this, false);
+					break;
+				case 'rrq1':
+					$shortcut = new SalesRequestsShortcut($this, false);
 					break;
 				default:
 					$shortcut = new EmptyShortcut($this, false);
