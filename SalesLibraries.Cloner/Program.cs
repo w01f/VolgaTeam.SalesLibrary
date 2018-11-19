@@ -2,6 +2,7 @@
 using System.IO;
 using SalesLibraries.Business.Contexts.Wallbin.Local;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
+using SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers;
 
 namespace SalesLibraries.Cloner
 {
@@ -30,12 +31,14 @@ namespace SalesLibraries.Cloner
 					{
 						libraryLink.ExtId = Guid.NewGuid();
 						if (libraryLink is LibraryFileLink)
-							((LibraryFileLink) libraryLink).DataSourceId = libraryContext.Library.ExtId;
+							((LibraryFileLink)libraryLink).DataSourceId = libraryContext.Library.ExtId;
 					}
 				}
 				foreach (var previewContainer in libraryContext.Library.PreviewContainers)
 				{
 					previewContainer.ExtId = Guid.NewGuid();
+					if (previewContainer is FilePreviewContainer filePreviewContainer)
+						filePreviewContainer.OneDriveSettings?.Reset();
 				}
 				libraryContext.SaveChanges();
 			}
