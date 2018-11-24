@@ -12,8 +12,6 @@
 
 		public $showWindowHeaders;
 
-		public $showResponsiveColumns;
-
 		public $verticalBorder1Color;
 		public $verticalBorder2Color;
 		public $verticalBorderStretch;
@@ -28,6 +26,9 @@
 		/** @var  PageColumnStyle */
 		public $column3Style;
 
+		/** @var ResponsiveColumnsStyle */
+		public $responsiveColumnsStyle;
+
 		/**
 		 * @param $xpath \DOMXPath
 		 * @param $contextNode \DOMNode
@@ -40,9 +41,6 @@
 
 			$queryResult = $xpath->query('.//WindowTitleBars', $contextNode);
 			$pageStyle->showWindowHeaders = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : $pageStyle->showWindowHeaders;
-
-			$queryResult = $xpath->query('.//ResponsiveColumns', $contextNode);
-			$pageStyle->showResponsiveColumns = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : $pageStyle->showResponsiveColumns;
 
 			$queryResult = $xpath->query('.//VerticalBorder1Color', $contextNode);
 			$pageStyle->verticalBorder1Color = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : $pageStyle->verticalBorder1Color;
@@ -69,6 +67,10 @@
 			if ($queryResult->length > 0)
 				$pageStyle->column3Style = PageColumnStyle::fromXml($xpath, $queryResult->item(0));
 
+			$queryResult = $xpath->query('./ResponsiveColumns', $contextNode);
+			if ($queryResult->length > 0)
+				$pageStyle->responsiveColumnsStyle = ResponsiveColumnsStyle::fromXml($xpath, $queryResult->item(0));
+
 			$pageStyle->columnStyleEnabled = $pageStyle->column1Style->enabled || $pageStyle->column2Style->enabled || $pageStyle->column3Style->enabled;
 			$pageStyle->showWindowHeaders = $pageStyle->showWindowHeaders && !$pageStyle->columnStyleEnabled;
 			$pageStyle->column1Style->windowStyle->showRegularHeader &= $pageStyle->showWindowHeaders;
@@ -87,12 +89,12 @@
 			$pageStyle->enabled = false;
 			$pageStyle->columnStyleEnabled = false;
 			$pageStyle->showWindowHeaders = true;
-			$pageStyle->showResponsiveColumns = false;
 			$pageStyle->verticalBorder1Color = null;
 			$pageStyle->verticalBorder2Color = null;
 			$pageStyle->column1Style = PageColumnStyle::createDefault();
 			$pageStyle->column2Style = PageColumnStyle::createDefault();
 			$pageStyle->column3Style = PageColumnStyle::createDefault();
+			$pageStyle->responsiveColumnsStyle = ResponsiveColumnsStyle::createDefault();
 			return $pageStyle;
 		}
 	}

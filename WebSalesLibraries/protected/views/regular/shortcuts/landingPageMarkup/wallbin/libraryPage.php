@@ -64,7 +64,7 @@
 			<? echo base64_encode(CJSON::encode(array(
 				'shortcutId' => $contentBlock->shortcut->id,
 				'pageViewType' => $contentBlock->shortcut->pageViewType,
-				'processResponsiveColumns' => $contentBlock->shortcut->style->page->showResponsiveColumns
+				'processResponsiveColumns' => $contentBlock->shortcut->style->page->responsiveColumnsStyle->enabled
 			))
 			); ?>
         </div>

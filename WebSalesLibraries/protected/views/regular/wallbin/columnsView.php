@@ -10,22 +10,25 @@
 
 	$totalColumnCount = 3;
 	$screenSizeType = 'large';
-	if ($style->showResponsiveColumns)
+	if (isset($style->responsiveColumnsStyle) && $style->responsiveColumnsStyle->enabled)
 	{
 		switch ($screenSettings['screenSizeType'])
 		{
 			case 'large':
+				$screenSizeType = 'large';
+				$totalColumnCount = $style->responsiveColumnsStyle->largeScreenColumnsCount;
+				break;
 			case 'medium':
 				$screenSizeType = 'large';
-				$totalColumnCount = 3;
+				$totalColumnCount = $style->responsiveColumnsStyle->mediumScreenColumnsCount;
 				break;
 			case 'small':
 				$screenSizeType = 'small';
-				$totalColumnCount = 2;
+				$totalColumnCount = $style->responsiveColumnsStyle->smallScreenColumnsCount;
 				break;
 			case 'extrasmall':
 				$screenSizeType = 'extrasmall';
-				$totalColumnCount = 1;
+				$totalColumnCount = $style->responsiveColumnsStyle->extraSmallScreenColumnsCount;
 				break;
 		}
 	}

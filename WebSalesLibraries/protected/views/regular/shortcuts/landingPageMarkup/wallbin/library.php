@@ -37,7 +37,7 @@
 				'wallbinName' => $contentBlock->shortcut->title,
 				'pageViewType' => $contentBlock->shortcut->pageViewType,
 				'pageSelectorMode' => $contentBlock->shortcut->pageSelectorMode,
-                'processResponsiveColumns' => $contentBlock->shortcut->style->page->showResponsiveColumns
+                'processResponsiveColumns' => $contentBlock->shortcut->style->page->responsiveColumnsStyle->enabled
 			))
 			); ?>
         </div>

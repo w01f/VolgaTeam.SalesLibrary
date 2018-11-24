@@ -50,7 +50,7 @@
 				if ($queryResult->length > 0)
 				{
 					$this->style = WallbinStyle::fromXml($xpath, $queryResult->item(0));
-					$this->processResponsiveColumns = $this->style->page->showResponsiveColumns;
+					$this->processResponsiveColumns = $this->style->page->responsiveColumnsStyle->enabled;
 				}
 
 				$queryResult = $xpath->query('//Config/Actions/Action');
