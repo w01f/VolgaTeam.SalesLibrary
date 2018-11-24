@@ -10,7 +10,7 @@
 <a id="<? echo $blockId; ?>" class="btn btn-default shortcuts-link" href="<? echo isset($buttonItem->shortcut) ? $buttonItem->shortcut->getSourceLink() : '#'; ?>"
    title="<? echo $buttonItem->text; ?>">
 	<?if(!empty($buttonItem->icon)):?>
-		<span class="<? echo $buttonItem->icon; ?>" aria-hidden="true"></span>
+		<span class="button-icon <? echo $buttonItem->icon; ?>" aria-hidden="true"></span>
 	<? endif;?>
 	<? echo $buttonItem->text; ?>
 	<div class="service-data">

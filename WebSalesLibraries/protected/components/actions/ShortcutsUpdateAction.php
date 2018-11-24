@@ -50,6 +50,7 @@
 								$itemsName = $groupItemsFolder->getBasename();
 								if (substr($itemsName, 0, 5) === "Items")
 								{
+									$isTopMenuShortcut = $itemsName === "Items";
 									$groupItemsPath = $groupItemsFolder->getPathname();
 									/** @var $linksRoot DirectoryIterator[] */
 									$linksRoot = new DirectoryIterator($groupItemsPath);
@@ -71,7 +72,7 @@
 												if (!isset($linkShortcutsId))
 													$linkShortcutsId = uniqid();
 												$linkShortcutsRecord->id = $linkShortcutsId;
-												$linkShortcutsRecord->id_group = $groupId;
+												$linkShortcutsRecord->id_group = $isTopMenuShortcut ? $groupId : null;
 												$linkShortcutsRecord->type = trim($linkConfig->getElementsByTagName("Type")->item(0)->nodeValue);
 												$linkShortcutsRecord->order = intval(trim($linkConfig->getElementsByTagName("Order")->item(0)->nodeValue));
 												$linkShortcutsRecord->source_path = $linkPath;

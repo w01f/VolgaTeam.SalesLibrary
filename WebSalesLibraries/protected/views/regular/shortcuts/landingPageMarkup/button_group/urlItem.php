@@ -11,7 +11,7 @@
    title="<? echo $buttonItem->text; ?>"
    target="<? if (isset($buttonItem->shortcut)): ?>_blank<? else: ?>_self<? endif; ?>">
 	<?if(!empty($buttonItem->icon)):?>
-		<span class="<? echo $buttonItem->icon; ?>" aria-hidden="true"></span>
+		<span class="button-icon <? echo $buttonItem->icon; ?>" aria-hidden="true"></span>
 	<? endif;?>
 	<? echo $buttonItem->text; ?>
 </a>
