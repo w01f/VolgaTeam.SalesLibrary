@@ -14,7 +14,7 @@
 		var initMenuStripe = function () {
 			if (menuStripe.hasClass('expand-on-click'))
 			{
-				menuStripe.find('.menu-stripe-top-item>a, .menu-stripe-item-submenu>a').off('click.menu-stripe-expand').on('click.menu-stripe-expand', function (eclick) {
+				menuStripe.find('.menu-stripe-top-item > a, .menu-stripe-item-submenu>a').off('click.menu-stripe-expand').on('click.menu-stripe-expand', function (eclick) {
 					var menuItem = $(this).parent();
 					if (menuItem.hasClass('active-item'))
 					{

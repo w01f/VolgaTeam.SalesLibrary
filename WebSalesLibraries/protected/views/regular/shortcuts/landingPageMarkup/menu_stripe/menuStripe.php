@@ -14,11 +14,25 @@
     }
 
     <? if($contentBlock->expandOnHover): ?>
-        <? echo '#'.$blockId; ?> .menu-stripe-top-item:hover > .menu-stripe-submenu,
-        <? echo '#'.$blockId; ?> .menu-stripe-item-submenu:hover > .menu-stripe-submenu
+        <? echo '#'.$blockId; ?> .menu-stripe-top-item > a:hover + .menu-stripe-submenu,
+        <? echo '#'.$blockId; ?> .menu-stripe-item-submenu > a:hover + .menu-stripe-submenu,
+        <? echo '#'.$blockId; ?> .menu-stripe-top-item > .menu-stripe-submenu:hover,
+        <? echo '#'.$blockId; ?> .menu-stripe-item-submenu > .menu-stripe-submenu:hover
         {
             visibility: visible !important;
             opacity: 1 !important;
+            height: auto;
+            width: auto;
+            padding: 5px 0;
+            border: 1px solid rgba(0,0,0,.15);
+        }
+
+        <? echo '#'.$blockId; ?> .menu-stripe-top-item > a:hover + .menu-stripe-submenu > li,
+        <? echo '#'.$blockId; ?> .menu-stripe-item-submenu > a:hover + .menu-stripe-submenu > li,
+        <? echo '#'.$blockId; ?> .menu-stripe-top-item > .menu-stripe-submenu:hover > li,
+        <? echo '#'.$blockId; ?> .menu-stripe-item-submenu > .menu-stripe-submenu:hover > li
+        {
+             display: list-item;
         }
     <?endif;?>
 

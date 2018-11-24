@@ -41,6 +41,7 @@
 			'application.models.shortcuts.models.landing_page.regular_markup.slider.*',
 			'application.models.shortcuts.models.landing_page.regular_markup.horizontal_feed.*',
 			'application.models.shortcuts.models.landing_page.regular_markup.vertical_feed.*',
+			'application.models.shortcuts.models.landing_page.regular_markup.button_group.*',
 			'application.models.shortcuts.models.landing_page.mobile_items.*',
 			'application.models.shortcuts.models.service.common.*',
 			'application.models.shortcuts.models.service.data_query_cache.*',

@@ -61,7 +61,7 @@
 		 */
 		public static function formatColor($color)
 		{
-			return ($color !== 'transparent' ? '#' : '') . $color;
+			return (!in_array($color, array('transparent', 'red', 'blue', 'green', 'gray')) ? '#' : '') . $color;
 		}
 
 		/**

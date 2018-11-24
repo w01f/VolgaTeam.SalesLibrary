@@ -88,6 +88,11 @@
 							$.SalesPortal.ShortcutsManager.assignShortcutItemHandlers(stripeBlock);
 						});
 
+						$.each(markupObject.find('.landing-page-button-group'), function (key, value) {
+							var buttonGroupBlock = $(value);
+							$.SalesPortal.ShortcutsManager.assignShortcutItemHandlers(buttonGroupBlock);
+						});
+
 						$.each(markupObject.find('.masonry-container'), function (key, value) {
 							var masonryBlock = $(value);
 							var masonryId = masonryBlock.prop('id').replace('masonry-container-', '');

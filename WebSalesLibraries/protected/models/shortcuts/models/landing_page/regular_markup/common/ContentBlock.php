@@ -2,6 +2,7 @@
 
 	namespace application\models\shortcuts\models\landing_page\regular_markup\common;
 
+	use application\models\shortcuts\models\landing_page\regular_markup\button_group\ButtonGroupBlock;
 	use application\models\shortcuts\models\landing_page\regular_markup\horizontal_feed\SearchFeedBlock as HorizontalSearchFeedBlock;
 	use application\models\shortcuts\models\landing_page\regular_markup\horizontal_feed\SpecificLinkFeedBlock as HorizontalSpecificLinkFeedBlock;
 	use application\models\shortcuts\models\landing_page\regular_markup\horizontal_feed\TrendingBlock as HorizontalTrendingBlock;
@@ -253,6 +254,8 @@
 					return 'common/searchResults';
 				case 'menu-stripe':
 					return 'menu_stripe/menuStripe';
+				case 'button-group':
+					return 'button_group/buttonGroup';
 				default:
 					return 'common/undefinedBlock';
 			}
@@ -404,9 +407,13 @@
 					$searchResults->configureFromXml($xpath, $contextNode);
 					return $searchResults;
 				case "hoverlinks":
-					$searchResults = new MenuStripeBlock($parentShortcut, $parentBlock);
-					$searchResults->configureFromXml($xpath, $contextNode);
-					return $searchResults;
+					$hoverLinks = new MenuStripeBlock($parentShortcut, $parentBlock);
+					$hoverLinks->configureFromXml($xpath, $contextNode);
+					return $hoverLinks;
+				case "button-group":
+					$buttonGroup = new ButtonGroupBlock($parentShortcut, $parentBlock);
+					$buttonGroup->configureFromXml($xpath, $contextNode);
+					return $buttonGroup;
 				default:
 					return new UndefinedBlock($parentShortcut, $parentBlock);
 			}

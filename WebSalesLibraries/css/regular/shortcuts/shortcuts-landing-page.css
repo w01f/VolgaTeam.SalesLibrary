@@ -405,9 +405,19 @@
     position: relative;
 }
 
+#content .landing-page-markup .menu-stripe > li
+{
+    padding-top: 15px;
+    padding-bottom: 10px;
+    padding-right: 20px;
+}
+
 #content .landing-page-markup .menu-stripe > li > a
 {
     padding-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 5px;
 }
 
 #content .landing-page-markup .navbar-right .navbar-nav > li
@@ -440,11 +450,23 @@
 }
 
 #content .landing-page-markup .menu-stripe-top-item > .menu-stripe-submenu,
-#content .landing-page-markup .menu-stripe-item-submenu>.menu-stripe-submenu
+#content .landing-page-markup .menu-stripe-item-submenu> .menu-stripe-submenu
 {
     display: block;
     visibility: hidden;
     opacity: 0;
+    height: 0;
+    min-height: 0;
+    width: 0;
+    min-width: 0;
+    margin-top: -10px;
+    border: none;
+}
+
+#content .landing-page-markup .menu-stripe-top-item > .menu-stripe-submenu > li,
+#content .landing-page-markup .menu-stripe-item-submenu> .menu-stripe-submenu > li
+{
+    display: none;
 }
 
 #content .landing-page-markup .menu-stripe-top-item.active-item > .menu-stripe-submenu,

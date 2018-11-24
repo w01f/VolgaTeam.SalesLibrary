@@ -78,7 +78,7 @@
     <? if ($menuItem->hideCondition->small): ?> hidden-sm<? endif; ?>
     <? if ($menuItem->hideCondition->extraSmall): ?> hidden-xs<? endif; ?>">
     <a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">
-		<? echo $menuItem->title; ?><? if ($topLevel && $menuItem->showArrow): ?><span class="caret"></span><? endif; ?>
+		<span class="sub-menu-title"><? echo $menuItem->title; ?></span><? if ($topLevel && $menuItem->showArrow): ?><span class="caret"></span><? endif; ?>
     </a>
 	<? if ($menuItem->enable): ?>
         <ul class="dropdown-menu menu-stripe-submenu" aria-labelledby="<? echo $blockId; ?>">
