@@ -46,10 +46,13 @@
 									case 'carouselbundle':
 									case 'library':
 									case 'page':
+									case 'pagebundle':
 									case 'window':
 									case 'search':
 									case 'searchapp':
 									case 'qbuilder':
+									case 'starssteals':
+									case 'rrq1':
 									case 'favorites':
 									case 'quizzes':
 									case 'landing':

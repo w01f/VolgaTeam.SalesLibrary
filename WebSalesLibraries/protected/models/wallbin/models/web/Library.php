@@ -18,6 +18,11 @@
 		public $autoWidgets;
 		public $lastUpdate;
 
+		public function __construct()
+		{
+			$this->pages = array();
+		}
+
 		public function load()
 		{
 			$useLibraryByUserFilter = \UserIdentity::isUserAuthorized() && !\UserIdentity::isUserAdmin();

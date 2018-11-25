@@ -72,7 +72,7 @@
 												if (!isset($linkShortcutsId))
 													$linkShortcutsId = uniqid();
 												$linkShortcutsRecord->id = $linkShortcutsId;
-												$linkShortcutsRecord->id_group = $isTopMenuShortcut ? $groupId : null;
+												$linkShortcutsRecord->id_group = $isTopMenuShortcut ? $groupId : 'default_empty';
 												$linkShortcutsRecord->type = trim($linkConfig->getElementsByTagName("Type")->item(0)->nodeValue);
 												$linkShortcutsRecord->order = intval(trim($linkConfig->getElementsByTagName("Order")->item(0)->nodeValue));
 												$linkShortcutsRecord->source_path = $linkPath;
