@@ -360,10 +360,12 @@
 						[5, 15, 25, 50, 100, 200]
 					],
 				"iDisplayLength": defaultLength,
-				"oLanguage": {
-					"sEmptyTable": "",
-					"sZeroRecords": "",
-					"sSearch": "Filter:"
+				"language": {
+					"emptyTable": "",
+					"zeroRecords": "",
+					"search": "Filter:",
+					"info": "Showing _START_ to _END_ of _TOTAL_ links",
+					"lengthMenu": 'Show _MENU_ (of <span class="length-filter-total-items">0</span> links)'
 				},
 				"dom": (data.dataset.length > 0 ?
 					"<'row table-header-row'<'" + tableHeaderLengthItemClass + "'l><'" + tableHeaderFilterItemClass + "'f>" +
@@ -379,14 +381,16 @@
 				}
 			});
 
+			var tableWrapper = $("#" + tableIdentifier + "_wrapper");
+
+			tableWrapper.find('.length-filter-total-items').html(data.dataset.length);
+
 			table.find('img').load(function () {
 				dataTable.api().columns.adjust().draw();
 			});
 
 			if (!$.SalesPortal.Content.isMobileDevice())
 				$("#" + tableIdentifier + "_length").find('select').selectpicker();
-
-			var tableWrapper = $("#" + tableIdentifier + "_wrapper");
 
 			if (useExcelExport)
 			{
