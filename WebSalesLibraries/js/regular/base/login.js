@@ -10,11 +10,11 @@
 			var passwordRequirementsTag = $('#password-requirements');
 			var passwordField = $('#edit-field-password');
 
-			$('#recover-password-link').fancybox().off('click').on('click', function (e)
+			$('#site-help-link').fancybox().off('click').on('click', function (e)
 			{
 				e.preventDefault();
 				e.stopPropagation();
-				resetPassword();
+				showSiteHelpDialog();
 			});
 
 			var modeSwitchButton = $('#button-switch-version');
@@ -167,11 +167,11 @@
 			modalDialog.show();
 		};
 
-		var resetPassword = function ()
+		var showSiteHelpDialog = function ()
 		{
 			$.ajax({
 				type: "POST",
-				url: window.BaseUrl + "auth/recoverPasswordDialog",
+				url: window.BaseUrl + "auth/siteHelpDialog",
 				data: {},
 				beforeSend: function ()
 				{
@@ -188,10 +188,10 @@
 					{
 						$.ajax({
 							type: "POST",
-							url: window.BaseUrl + "auth/validateUserByEmail",
+							url: window.BaseUrl + "auth/sendHelpRequest",
 							data: {
-								login: content.find('#login').val(),
-								email: content.find('#email').val()
+								email: content.find('#email-address').val(),
+								text: content.find('#email-text').val()
 							},
 							beforeSend: function ()
 							{
@@ -203,61 +203,7 @@
 							},
 							success: function (msg)
 							{
-								if (msg !== '')
-									content.find('.error-message').html(msg);
-								else
-								{
-									$.ajax({
-										type: "POST",
-										url: window.BaseUrl + "auth/recoverPassword",
-										data: {
-											login: content.find('#login').val()
-										},
-										success: function ()
-										{
-											$.fancybox.close();
-											$.ajax({
-												type: "POST",
-												url: window.BaseUrl + "auth/recoverPasswordDialogSuccess",
-												data: {},
-												beforeSend: function ()
-												{
-													$.SalesPortal.Overlay.show();
-												},
-												complete: function ()
-												{
-													$.SalesPortal.Overlay.hide();
-												},
-												success: function (msg)
-												{
-													var content = $(msg);
-													content.find('#accept-button').off('click');
-													content.find('#accept-button').on('click', function ()
-													{
-														$.fancybox.close();
-													});
-													$.fancybox({
-														content: content,
-														title: 'Password recovery',
-														openEffect: 'none',
-														closeEffect: 'none'
-													});
-												},
-												error: function ()
-												{
-												},
-												async: true,
-												dataType: 'html'
-											});
-										},
-										async: true,
-										dataType: 'html'
-									});
-								}
-							},
-							error: function ()
-							{
-								content.find('#error-message').html('Error while validating user. Try again or contact to technical support');
+								$.fancybox.close();
 							},
 							async: true,
 							dataType: 'html'
@@ -270,6 +216,7 @@
 					});
 					$.fancybox({
 						content: content,
+						width: 400,
 						title: 'Site Help',
 						openEffect: 'none',
 						closeEffect: 'none'

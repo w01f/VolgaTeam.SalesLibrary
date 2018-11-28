@@ -113,9 +113,8 @@
 							<td colspan="2">
 								<div class="action-link-group">
 									<? if (Yii::app()->params['login']['forgotPasswordField']): ?>
-										<a id="recover-password-link" class="action-link gray"
-										   href="#">Site
-											Help</a>
+										<a id="site-help-link" class="action-link gray"
+										   href="#">Forgot Username or Password?</a>
 									<? endif; ?>
 									<? if (Yii::app()->params['login']['complex_password']): ?>
 										<a id="password-requirements" class="action-link gray" href="#">Password

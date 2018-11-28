@@ -113,7 +113,8 @@
 							var togglePanelId = togglePanelBlock.prop('id').replace('toggle-panel-', '');
 
 							new $.SalesPortal.LandingPage.TogglePanel({
-								containerId: togglePanelId
+								containerId: togglePanelId,
+								parentShortcutId: pageData.options.linkId,
 							}).init();
 						});
 

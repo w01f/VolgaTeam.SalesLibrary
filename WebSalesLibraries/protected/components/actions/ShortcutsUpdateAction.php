@@ -48,7 +48,7 @@
 							foreach ($groupRootFolder as $groupItemsFolder)
 							{
 								$itemsName = $groupItemsFolder->getBasename();
-								if (substr($itemsName, 0, 5) === "Items")
+								if ($groupItemsFolder->isDir() && substr($itemsName, 0, 5) === "Items")
 								{
 									$isTopMenuShortcut = $itemsName === "Items";
 									$groupItemsPath = $groupItemsFolder->getPathname();
@@ -83,7 +83,7 @@
 												foreach ($linkRootFolder as $itemsFolder)
 												{
 													$itemsName = $itemsFolder->getBasename();
-													if (substr($itemsName, 0, 5) === "Items")
+													if ($itemsFolder->isDir() && substr($itemsName, 0, 5) === "Items")
 													{
 														$itemsPath = $itemsFolder->getPathname();
 														/** @var $subLinksRoot DirectoryIterator[] */

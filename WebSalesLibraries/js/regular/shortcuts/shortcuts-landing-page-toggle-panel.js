@@ -4,6 +4,7 @@
 	$.SalesPortal.LandingPage = $.SalesPortal.LandingPage || {};
 	$.SalesPortal.LandingPage.TogglePanel = function (parameters) {
 		var togglePanelId = parameters.containerId;
+		var parentShortcutId = parameters.parentShortcutId;
 		var togglePanel = undefined;
 
 		this.init = function () {
@@ -19,6 +20,11 @@
 				if (!selectedButton.hasClass('toggle-button-active'))
 				{
 					var tag = selectedButton.data('toggle-tag');
+
+					$.cookie("DefaultToggleItem-" + parentShortcutId + "-" + togglePanelId, tag, {
+						expires: (60 * 2)
+					});
+
 					buttons.removeClass('toggle-button-active');
 					items.hide('slow', function () {
 						items.removeClass('toggle-item-active')

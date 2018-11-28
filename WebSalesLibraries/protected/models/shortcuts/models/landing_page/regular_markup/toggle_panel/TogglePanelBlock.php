@@ -40,6 +40,11 @@
 		{
 			parent::configureFromXml($xpath, $contextNode);
 
+			$defaultSavedToggleItem = null;
+			$defaultSavedToggleItemCookieTag = sprintf('DefaultToggleItem-%s-%s', $this->parentShortcut->id, $this->id);
+			if (isset(\Yii::app()->request->cookies[$defaultSavedToggleItemCookieTag]))
+				$defaultSavedToggleItem = \Yii::app()->request->cookies[$defaultSavedToggleItemCookieTag]->value;
+
 			$queryResult = $xpath->query('./Toggles/Item', $contextNode);
 			foreach ($queryResult as $node)
 			{
@@ -48,7 +53,17 @@
 				if ($togglePanelButton->isAccessGranted)
 				{
 					$this->toggleButtons[] = $togglePanelButton;
-					if ($togglePanelButton->isDefault)
+					if (!empty($defaultSavedToggleItem))
+					{
+						if ($togglePanelButton->tag == $defaultSavedToggleItem)
+						{
+							$this->defaultToggleButton = $togglePanelButton;
+							$togglePanelButton->isDefault = true;
+						}
+						else
+							$togglePanelButton->isDefault = false;
+					}
+					else if ($togglePanelButton->isDefault)
 						$this->defaultToggleButton = $togglePanelButton;
 				}
 			}
@@ -58,10 +73,9 @@
 				{
 					/** @var $item TogglePanelItem */
 					if ($item->tag === $this->defaultToggleButton->tag)
-					{
 						$item->isDefault = true;
-						break;
-					}
+					else
+						$item->isDefault = false;
 				}
 
 			$queryResult = $xpath->query('./ButtonStyle', $contextNode);

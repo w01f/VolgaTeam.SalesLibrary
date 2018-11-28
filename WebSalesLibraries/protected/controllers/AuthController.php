@@ -52,6 +52,27 @@
 			$this->render('unauthorized');
 		}
 
+		public function actionSiteHelpDialog()
+		{
+			$this->renderPartial('siteHelp', array(), false, true);
+		}
+
+		public function actionSendHelpRequest()
+		{
+			$email = Yii::app()->request->getPost('email');
+			$text = Yii::app()->request->getPost('text');
+
+			$message = Yii::app()->email;
+			$to = array(Yii::app()->params['email']['help_request_address']);
+			$message->to = $to;
+			$message->subject = 'Site Help Request - ' . Yii::app()->request->serverName;
+			$message->from = $email;
+			$message->message = $text;
+			$message->send();
+
+			Yii::app()->end();
+		}
+
 		public function actionChangePassword()
 		{
 			$changePasswordModel = new ChangePasswordForm();
