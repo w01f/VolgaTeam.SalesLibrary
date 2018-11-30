@@ -60,6 +60,8 @@
 		public function actionSendHelpRequest()
 		{
 			$email = Yii::app()->request->getPost('email');
+			$name = Yii::app()->request->getPost('name');
+			$station = Yii::app()->request->getPost('station');
 			$text = Yii::app()->request->getPost('text');
 
 			$message = Yii::app()->email;
@@ -67,7 +69,7 @@
 			$message->to = $to;
 			$message->subject = 'Site Help Request - ' . Yii::app()->request->serverName;
 			$message->from = $email;
-			$message->message = $text;
+			$message->message = sprintf("%s<br><br>%s<br><br>%s", $name, $station, $text);
 			$message->send();
 
 			Yii::app()->end();

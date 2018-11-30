@@ -184,30 +184,47 @@
 				success: function (msg)
 				{
 					var content = $(msg);
+
+					content.find('#email-name, #email-station').off('input').on('input', function ()
+					{
+						var nameText = content.find('#email-name').val();
+						var stationText = content.find('#email-station').val();
+						var sendButton = content.find('#accept-button');
+
+						if (nameText !== '' && stationText !== '')
+						{
+							sendButton.removeClass('disabled');
+						}
+						else if (!sendButton.hasClass('disabled'))
+							sendButton.addClass('disabled');
+					});
+
 					content.find('#accept-button').off('click').on('click', function ()
 					{
-						$.ajax({
-							type: "POST",
-							url: window.BaseUrl + "auth/sendHelpRequest",
-							data: {
-								email: content.find('#email-address').val(),
-								text: content.find('#email-text').val()
-							},
-							beforeSend: function ()
-							{
-								$.SalesPortal.Overlay.show();
-							},
-							complete: function ()
-							{
-								$.SalesPortal.Overlay.hide();
-							},
-							success: function (msg)
-							{
-								$.fancybox.close();
-							},
-							async: true,
-							dataType: 'html'
-						});
+						if(!$(this).hasClass('disabled'))
+						{
+							$.ajax({
+								type: "POST",
+								url: window.BaseUrl + "auth/sendHelpRequest",
+								data: {
+									email: content.find('#email-address').val(),
+									name: content.find('#email-name').val(),
+									station: content.find('#email-station').val(),
+									text: content.find('#email-text').val()
+								},
+								beforeSend: function () {
+									$.SalesPortal.Overlay.show();
+								},
+								complete: function () {
+									$.SalesPortal.Overlay.hide();
+								},
+								success: function (msg) {
+									$.fancybox.close();
+								},
+								async: true,
+								dataType: 'html'
+							});
+						}
 					});
 					content.find('#cancel-button').off('click');
 					content.find('#cancel-button').on('click', function ()
