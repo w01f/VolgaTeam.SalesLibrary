@@ -71,6 +71,32 @@
         }
     <? endif; ?>
 
+    <? echo '#'.$blockId; ?> > li
+    {
+        float: left;
+    }
+
+    <? if ($contentBlock->floatRight->useForExtraSmallScreen): ?>
+        <? echo '#'.$blockId; ?>
+          {
+              float: right !important;
+          }
+        <? echo '#'.$blockId; ?>  li
+          {
+              float: right !important;
+          }
+        <? echo '#'.$blockId; ?>  .dropdown-menu
+          {
+              right: 0;
+              left: auto;
+          }
+        <? echo '#'.$blockId; ?>  .menu-stripe-item-submenu>.menu-stripe-submenu
+          {
+              left: auto;
+              right: 100%;
+          }
+    <? endif; ?>
+
     @media (min-width: 768px)
     {
         <? echo '#'.$blockId; ?> > li > a
@@ -84,6 +110,27 @@
                 font-size: <? echo $textAppearance->font->size->small; ?>pt !important;
             <? endif; ?>
         }
+
+        <? if ($contentBlock->floatRight->useForSmallScreen): ?>
+            <? echo '#'.$blockId; ?>
+             {
+                 float: right !important;
+             }
+            <? echo '#'.$blockId; ?>  li
+              {
+                  float: right !important;
+              }
+            <? echo '#'.$blockId; ?>  .dropdown-menu
+              {
+                  right: 0;
+                  left: auto;
+              }
+            <? echo '#'.$blockId; ?>  .menu-stripe-item-submenu>.menu-stripe-submenu
+              {
+                  left: auto;
+                  right: 100%;
+              }
+        <? endif; ?>
     }
 
     @media (min-width: 992px)
@@ -98,6 +145,26 @@
               font-size: <? echo $textAppearance->font->size->medium; ?>pt !important;
             <? endif; ?>
         }
+        <? if ($contentBlock->floatRight->useForMediumScreen): ?>
+            <? echo '#'.$blockId; ?>
+             {
+                 float: right !important;
+             }
+            <? echo '#'.$blockId; ?>  li
+              {
+                  float: right !important;
+              }
+            <? echo '#'.$blockId; ?>  .dropdown-menu
+              {
+                  right: 0;
+                  left: auto;
+              }
+            <? echo '#'.$blockId; ?>  .menu-stripe-item-submenu>.menu-stripe-submenu
+              {
+                  left: auto;
+                  right: 100%;
+              }
+        <? endif; ?>
     }
 
     @media (min-width: 1200px)
@@ -112,31 +179,87 @@
               font-size: <? echo $textAppearance->font->size->large; ?>pt !important;
             <? endif; ?>
         }
+        <? if ($contentBlock->floatRight->useForLargeScreen): ?>
+            <? echo '#'.$blockId; ?> .menu-stripe-container ul
+             {
+                 float: right !important;
+             }
+            <? echo '#'.$blockId; ?>  li
+              {
+                  float: right !important;
+              }
+            <? echo '#'.$blockId; ?>  .dropdown-menu
+              {
+                  right: 0;
+                  left: auto;
+              }
+            <? echo '#'.$blockId; ?>  .menu-stripe-item-submenu>.menu-stripe-submenu
+              {
+                  left: auto;
+                  right: 100%;
+              }
+        <? endif; ?>
     }
 </style>
 
-<div class="navbar navbar-default menu-stripe-container<?if($contentBlock->floatRight):?> navbar-right<?endif;?><? if ($contentBlock->hideCondition->large): ?> hidden-lg<? endif; ?>
+<div class="navbar navbar-default menu-stripe-container<? if ($contentBlock->hideCondition->large): ?> hidden-lg<? endif; ?>
     <? if ($contentBlock->hideCondition->medium): ?> hidden-md<? endif; ?>
     <? if ($contentBlock->hideCondition->small): ?> hidden-sm<? endif; ?>
     <? if ($contentBlock->hideCondition->extraSmall): ?> hidden-xs<? endif; ?>">
     <div class="container-fluid">
-        <ul id="<? echo $blockId; ?>" class="nav navbar-nav menu-stripe<?if(!$contentBlock->expandOnHover):?> expand-on-click<?endif;?>">
-			<? foreach ($contentBlock->items as $menuItem): ?>
-				<?
-				switch ($menuItem->type)
-				{
-					case 'menu':
-						echo $this->renderPartial('landingPageMarkup/menu_stripe/subMenu', array('menuItem' => $menuItem, 'topLevel' => true), true);
-						break;
-					case 'url':
-						echo $this->renderPartial('landingPageMarkup/menu_stripe/url', array('menuItem' => $menuItem), true);
-						break;
-					case 'shortcut':
-						echo $this->renderPartial('landingPageMarkup/menu_stripe/shortcut', array('menuItem' => $menuItem), true);
-						break;
-				}
-				?>
-			<? endforeach; ?>
-        </ul>
+        <?
+	        if ($contentBlock->floatRight->useForLargeScreen ||
+                $contentBlock->floatRight->useForMediumScreen ||
+		        $contentBlock->floatRight->useForSmallScreen ||
+		        $contentBlock->floatRight->useForExtraSmallScreen)
+            {
+                echo $this->renderPartial('landingPageMarkup/menu_stripe/menuStripeList', array(
+                    'blockId'=>$blockId,
+	                'items' => $contentBlock->floatRight->useForLargeScreen ? $contentBlock->itemsReversed : $contentBlock->items,
+                    'expandOnHover' => $contentBlock->expandOnHover,
+                    'hideLarge' => false,
+                    'hideMedium' => true,
+                    'hideSmall' => true,
+                    'hideExtraSmall' => true,
+                ), true);
+	            echo $this->renderPartial('landingPageMarkup/menu_stripe/menuStripeList', array(
+		            'blockId'=>$blockId,
+		            'items' => $contentBlock->floatRight->useForMediumScreen ? $contentBlock->itemsReversed : $contentBlock->items,
+		            'expandOnHover' => $contentBlock->expandOnHover,
+		            'hideLarge' => true,
+		            'hideMedium' => false,
+		            'hideSmall' => true,
+		            'hideExtraSmall' => true,
+	            ), true);
+	            echo $this->renderPartial('landingPageMarkup/menu_stripe/menuStripeList', array(
+		            'blockId'=>$blockId,
+		            'items' => $contentBlock->floatRight->useForSmallScreen ? $contentBlock->itemsReversed : $contentBlock->items,
+		            'expandOnHover' => $contentBlock->expandOnHover,
+		            'hideLarge' => true,
+		            'hideMedium' => true,
+		            'hideSmall' => false,
+		            'hideExtraSmall' => true,
+	            ), true);
+	            echo $this->renderPartial('landingPageMarkup/menu_stripe/menuStripeList', array(
+		            'blockId'=>$blockId,
+		            'items' => $contentBlock->floatRight->useForExtraSmallScreen ? $contentBlock->itemsReversed : $contentBlock->items,
+		            'expandOnHover' => $contentBlock->expandOnHover,
+		            'hideLarge' => true,
+		            'hideMedium' => true,
+		            'hideSmall' => true,
+		            'hideExtraSmall' => false,
+	            ), true);
+            }
+            else
+	            echo $this->renderPartial('landingPageMarkup/menu_stripe/menuStripeList', array(
+		                'blockId'=>$blockId,
+	                    'items' => $contentBlock->items,
+		                'expandOnHover' => $contentBlock->expandOnHover,
+		                'hideLarge' => false,
+		                'hideMedium' => false,
+		                'hideSmall' => false,
+		                'hideExtraSmall' => false,
+                ), true);
+        ?>
     </div>
 </div>

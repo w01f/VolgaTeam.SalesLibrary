@@ -420,11 +420,6 @@
     padding-bottom: 5px;
 }
 
-#content .landing-page-markup .navbar-right .navbar-nav > li
-{
-    float: right;
-}
-
 #content .landing-page-markup .dropdown-menu > li > a:hover,
 #content .landing-page-markup .dropdown-menu > li > a:focus
 {
@@ -441,12 +436,6 @@
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
     border-radius: 0;
-}
-
-#content .landing-page-markup .menu-stripe-container.navbar-right .menu-stripe-item-submenu>.menu-stripe-submenu
-{
-    left: auto;
-    right: 100%;
 }
 
 #content .landing-page-markup .menu-stripe-top-item > .menu-stripe-submenu,

@@ -14,6 +14,8 @@
 		public $expandOnHover;
 		public $showArrow;
 		public $animationSpeed;
+
+		/** @var  FloatSettings */
 		public $floatRight;
 
 		/** @var  ItemSpacing */
@@ -24,6 +26,9 @@
 
 		/** @var  MenuStripeItem[] */
 		public $items;
+
+		/** @var  MenuStripeItem[] */
+		public $itemsReversed;
 
 		/**
 		 * @param $parentShortcut \PageContentShortcut
@@ -37,11 +42,12 @@
 			$this->expandOnHover = true;
 			$this->showArrow = true;
 			$this->animationSpeed = 0;
-			$this->floatRight = false;
+			$this->floatRight = FloatSettings::createEmpty();
 			$this->itemSpacing = new ItemSpacing(0);
 			$this->hideCondition = new \HideCondition();
 
 			$this->items = array();
+			$this->itemsReversed = array();
 		}
 
 		/**
@@ -64,7 +70,8 @@
 				$this->animationSpeed = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue)) : $this->animationSpeed;
 
 				$queryResult = $xpath->query('./FloatRight', $contextNode);
-				$this->floatRight = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : $this->floatRight;
+				if ($queryResult->length > 0)
+					$this->floatRight = FloatSettings::fromXml($xpath, $queryResult->item(0));
 
 				$queryResult = $xpath->query('./ItemSpacing', $contextNode);
 				if ($queryResult->length > 0)
@@ -100,11 +107,11 @@
 						$items[] = $menuItem;
 				}
 
-				if ($this->floatRight)
+				$this->items = $items;
+
+				if ($this->floatRight->useForLargeScreen || $this->floatRight->useForMediumScreen || $this->floatRight->useForSmallScreen || $this->floatRight->useForExtraSmallScreen)
 					for ($i = count($items) - 1; $i >= 0; $i--)
-						$this->items[] = $items[$i];
-				else
-					$this->items = $items;
+						$this->itemsReversed[] = $items[$i];
 			}
 		}
 
