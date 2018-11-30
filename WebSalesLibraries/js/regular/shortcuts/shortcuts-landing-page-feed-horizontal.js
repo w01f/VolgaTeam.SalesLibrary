@@ -271,30 +271,32 @@
 				}
 			});
 
-			feedContainer.find('.carousel-links .item .previewable').off('click').on('click', function (e) {
-				e.stopPropagation();
-				var linkId = $(this).find('.service-data .link-id').text();
-				$.SalesPortal.LinkManager.requestViewDialog({
-					linkId: linkId,
-					isQuickSite: false
-				});
-			});
 
-			feedContainer.find('.carousel-links .item .direct-url').off('click').on('click', function (e) {
-				var linkId = $(this).find('.service-data .link-id').text();
-				var url = $(this).data('url');
-				$.SalesPortal.LogHelper.write({
-					type: 'Link',
-					subType: 'Open',
-					linkId: linkId,
-					data: {
-						file: url
-					}
-				});
-			});
 
 			if ($.SalesPortal.Content.isMobileDevice())
 			{
+				feedContainer.find('.carousel-links .item .previewable').hammer().on('tap', function (e) {
+					e.stopPropagation();
+					var linkId = $(this).find('.service-data .link-id').text();
+					$.SalesPortal.LinkManager.requestViewDialog({
+						linkId: linkId,
+						isQuickSite: false
+					});
+				});
+
+				feedContainer.find('.carousel-links .item .direct-url').hammer().on('tap', function (e) {
+					var linkId = $(this).find('.service-data .link-id').text();
+					var url = $(this).data('url');
+					$.SalesPortal.LogHelper.write({
+						type: 'Link',
+						subType: 'Open',
+						linkId: linkId,
+						data: {
+							file: url
+						}
+					});
+				});
+
 				feedContainer.find('.carousel-links .item .library-link-item').hammer().on('hold', function (event) {
 					var linkId = $(this).find('.service-data .link-id').text();
 					$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, false, event.gesture.center.pageX, event.gesture.center.pageY);
@@ -304,6 +306,28 @@
 			}
 			else
 			{
+				feedContainer.find('.carousel-links .item .previewable').off('click').on('click', function (e) {
+					e.stopPropagation();
+					var linkId = $(this).find('.service-data .link-id').text();
+					$.SalesPortal.LinkManager.requestViewDialog({
+						linkId: linkId,
+						isQuickSite: false
+					});
+				});
+
+				feedContainer.find('.carousel-links .item .direct-url').off('click').on('click', function (e) {
+					var linkId = $(this).find('.service-data .link-id').text();
+					var url = $(this).data('url');
+					$.SalesPortal.LogHelper.write({
+						type: 'Link',
+						subType: 'Open',
+						linkId: linkId,
+						data: {
+							file: url
+						}
+					});
+				});
+
 				feedContainer.find('.carousel-links .item .library-link-item').off('contextmenu').on('contextmenu', function (event) {
 					var linkId = $(this).find('.service-data .link-id').text();
 					$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, false, event.clientX, event.clientY);
