@@ -32,8 +32,8 @@
 						'' :
 						$itemOwner->login,
 					'dateSubmit' => array(
-						'display' => !empty($item->dateSubmit)?
-							date(\Yii::app()->params['outputDateFormat'], strtotime($item->dateSubmit)):
+						'display' => !empty($item->dateSubmit) ?
+							date(\Yii::app()->params['outputDateFormat'], strtotime($item->dateSubmit)) :
 							null,
 						'value' => strtotime($item->dateSubmit)
 					),
@@ -98,6 +98,7 @@
 		public function actionSaveItem()
 		{
 			$selectedItemId = Yii::app()->request->getPost('selectedItemId');
+			$shortcutId = Yii::app()->request->getPost('shortcutId');
 			$title = Yii::app()->request->getPost('title');
 			$status = Yii::app()->request->getPost('status');
 			$assignedTo = Yii::app()->request->getPost('assignedTo');
@@ -112,7 +113,57 @@
 				$itemContent = null;
 
 			if (isset($selectedItemId))
-				SalesRequestItemRecord::saveItem($selectedItemId, $title, $status, $assignedTo, $dateNeeded, $dateCompleted, $itemContent);
+			{
+				/** @var $itemRecord SalesRequestItemRecord */
+				$itemRecord = SalesRequestItemRecord::model()->findByPk($selectedItemId);
+				if (isset($itemRecord))
+				{
+					$notYetSubmitted = !isset($itemRecord->date_submit);
+
+					$itemRecord->saveItem($title, $status, $assignedTo, $dateNeeded, $dateCompleted, $itemContent);
+
+					if ($notYetSubmitted &&
+						$status === \application\models\sales_requests\models\Dictionaries::StatusItemSubmitted &&
+						isset($shortcutId))
+					{
+						/** @var $linkRecord ShortcutLinkRecord */
+						$linkRecord = ShortcutLinkRecord::model()->findByPk($shortcutId);
+						/**@var $shortcut SalesRequestsShortcut */
+						$shortcut = $linkRecord->getRegularModel(false);
+						$submitEmailRecipients = $shortcut->getSubmitEmailRecipients();
+
+						$userId = UserIdentity::getCurrentUserId();
+						/** @var $itemOwner UserRecord */
+						$itemOwner = UserRecord::model()->findByPk($userId);
+
+						if (count($submitEmailRecipients) > 0 && isset($itemOwner))
+						{
+							$message = Yii::app()->email;
+							$message->to = $submitEmailRecipients;
+							$message->subject = sprintf("Research Request - %s", $title);
+							$message->from = Yii::app()->params['email']['sales_requests']['from'];
+							if (Yii::app()->params['email']['sales_requests']['copy_enabled'])
+							{
+								$copyRecipients = array();
+								$copyRecipients[] = Yii::app()->params['email']['sales_requests']['copy'];
+								if (Yii::app()->params['email']['sales_requests']['copy_user'] && !empty($itemOwner->email))
+									$copyRecipients[] = $itemOwner->email;
+								$message->cc = $copyRecipients;
+							}
+							$message->message = sprintf("%s<br><br>%s<br><br>%s",
+								sprintf("Submitted by %s %s",
+									$itemOwner->login,
+									date(\Yii::app()->params['outputDateFormat'], strtotime($this->date_submit)) . ' at ' . date(\Yii::app()->params['outputTimeFormat'], strtotime($this->date_submit))),
+								sprintf("Request ID: %s", $title),
+								\Yii::app()->createAbsoluteUrl('shortcuts/getSinglePage', array(
+									'linkId' => $shortcutId,
+									'itemId' => $selectedItemId
+								)));
+							$message->send();
+						}
+					}
+				}
+			}
 		}
 
 		public function actionGetItemContent()

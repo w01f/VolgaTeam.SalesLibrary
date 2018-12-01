@@ -93,19 +93,6 @@
 				$models[] = \application\models\sales_requests\models\ItemListModel::fromRecord($itemRecord);
 
 			return $models;
-
-//			$models = array();
-//
-//			$criteria = new CDbCriteria();
-//			if ($ownerId >= 0)
-//				$criteria->addCondition(self::FiledNameIdOwner . "=" . $ownerId);
-//			if (!empty($statusFilter) && $statusFilter !== \application\models\sales_requests\models\Dictionaries::StatusItemAll)
-//				$criteria->addCondition(self::FiledNameStatus . "='" . $statusFilter . "'");
-//
-//			$itemRecords = $this->findAll($criteria);
-//			foreach ($itemRecords as $itemRecord)
-//				$models[] = \application\models\sales_requests\models\ItemListModel::fromRecord($itemRecord);
-//			return $models;
 		}
 
 		/**
@@ -118,6 +105,33 @@
 			if (isset($itemRecord))
 				return \application\models\sales_requests\models\ItemEditModel::fromRecord($itemRecord);
 			return null;
+		}
+
+		/**
+		 * @param $title
+		 * @param $status
+		 * @param $assignedTo
+		 * @param $dateNeeded
+		 * @param $content \application\models\sales_requests\models\Content
+		 */
+		public function saveItem($title, $status, $assignedTo, $dateNeeded, $dateCompleted, $content)
+		{
+			$this->title = $title;
+			$this->status = $status;
+			$this->assigned_to = $assignedTo;
+			$this->date_needed = date(Yii::app()->params['mysqlDateTimeFormat'], strtotime($dateNeeded));
+			if (!empty($dateCompleted))
+				$this->date_completed = date(Yii::app()->params['mysqlDateTimeFormat'], strtotime($dateCompleted));
+
+			if (!isset($itemRecord->date_submit) &&
+				$status === \application\models\sales_requests\models\Dictionaries::StatusItemSubmitted)
+			{
+				$this->date_submit = date(Yii::app()->params['mysqlDateTimeFormat']);
+				$content->submittedByUserId = UserIdentity::getCurrentUserId();
+			}
+
+			$this->content = CJSON::encode($content);
+			$this->save();
 		}
 
 		/**
@@ -171,39 +185,6 @@
 				return $itemRecord->id;
 			}
 			return null;
-		}
-
-		/**
-		 * @param $itemId
-		 * @param $title
-		 * @param $status
-		 * @param $assignedTo
-		 * @param $dateNeeded
-		 * @param $content \application\models\sales_requests\models\Content
-		 */
-		public static function saveItem($itemId, $title, $status, $assignedTo, $dateNeeded, $dateCompleted, $content)
-		{
-			/** @var $itemRecord SalesRequestItemRecord */
-			$itemRecord = self::model()->findByPk($itemId);
-			if (isset($itemRecord))
-			{
-				$itemRecord->title = $title;
-				$itemRecord->status = $status;
-				$itemRecord->assigned_to = $assignedTo;
-				$itemRecord->date_needed = date(Yii::app()->params['mysqlDateTimeFormat'], strtotime($dateNeeded));
-				if (!empty($dateCompleted))
-					$itemRecord->date_completed = date(Yii::app()->params['mysqlDateTimeFormat'], strtotime($dateCompleted));
-
-				if (!isset($itemRecord->date_submit) &&
-					$status === \application\models\sales_requests\models\Dictionaries::StatusItemSubmitted)
-				{
-					$itemRecord->date_submit = date(Yii::app()->params['mysqlDateTimeFormat']);
-					$content->submittedByUserId = UserIdentity::getCurrentUserId();
-				}
-
-				$itemRecord->content = CJSON::encode($content);
-				$itemRecord->save();
-			}
 		}
 
 		/**

@@ -68,6 +68,49 @@
 		}
 
 		/**
+		 * @return string[]
+		 */
+		public function getSubmitEmailRecipients()
+		{
+			$linkConfig = new DOMDocument();
+			$linkConfig->loadXML($this->linkRecord->config);
+			$xpath = new DomXPath($linkConfig);
+
+			$userEmails = array();
+
+			$queryResult = $xpath->query('//Config/EmailOnSubmit/ApprovedGroups/Group');
+			foreach ($queryResult as $groupNode)
+			{
+				$groupName = trim($groupNode->nodeValue);
+				/** @var $groupRecord \GroupRecord */
+				$groupRecord = GroupRecord::model()->find('name=?', array($groupName));
+				if (isset($groupRecord))
+				{
+					$userIds = UserGroupRecord::getUserIdsByGroup($groupRecord->id);
+					foreach ($userIds as $userId)
+					{
+						/** @var $userRecord \UserRecord */
+						$userRecord = UserRecord::model()->findByPk($userId);
+						if (isset($userRecord) && !empty($userRecord->email) && !in_array($userRecord->email, $userEmails))
+							$userEmails[] = $userRecord->email;
+					}
+				}
+			}
+
+			$queryResult = $xpath->query('//Config/EmailOnSubmit/ApprovedUsers/User');
+			foreach ($queryResult as $userNode)
+			{
+				$userLogin = trim($userNode->nodeValue);
+				/** @var $userRecord \UserRecord */
+				$userRecord = UserRecord::model()->find('login=?', array($userLogin));
+				if (isset($userRecord) && !empty($userRecord->email) && !in_array($userRecord->email, $userEmails))
+					$userEmails[] = $userRecord->email;
+			}
+
+			return $userEmails;
+		}
+
+		/**
 		 * @return string
 		 */
 		public function getTypeForActivityTracker()

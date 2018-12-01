@@ -69,6 +69,7 @@
 						url: window.BaseUrl + "salesRequests/saveItem",
 						data: {
 							selectedItemId: itemList.selectedItem.itemId,
+							shortcutId: shortcutData.options.linkId,
 							title: itemList.selectedItem.itemTitle,
 							status: status,
 							assignedTo: $('#sales-requests-item-assigned-to').val(),

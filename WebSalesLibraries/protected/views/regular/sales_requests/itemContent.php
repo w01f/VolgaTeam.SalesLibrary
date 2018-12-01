@@ -26,7 +26,7 @@
                         /** @var $submittedByUser UserRecord */
                         $submittedByUser = UserRecord::model()->findByPk($item->content->submittedByUserId);
                     ?>
-                    <span class="item-content-sub-text">Submitted by <? echo isset($submittedByUser) ? $submittedByUser->login : ""; ?>: <? echo date(\Yii::app()->params['outputDateFormat'], strtotime($item->dateSubmit)) . ' at ' . date(\Yii::app()->params['outputTimeFormat'], strtotime($item->content->dateSubmit)); ?></span>
+                    <span class="item-content-sub-text">Submitted by <? echo isset($submittedByUser) ? $submittedByUser->login : ""; ?>: <? echo date(\Yii::app()->params['outputDateFormat'], strtotime($item->dateSubmit)) . ' at ' . date(\Yii::app()->params['outputTimeFormat'], strtotime($item->dateSubmit)); ?></span>
                     <div class="service-data submit-data">
                         <div class="submitted-date"><? echo $item->dateSubmit; ?></div>
                         <div class="submitted-by"><? echo $item->content->submittedByUserId; ?></div>
