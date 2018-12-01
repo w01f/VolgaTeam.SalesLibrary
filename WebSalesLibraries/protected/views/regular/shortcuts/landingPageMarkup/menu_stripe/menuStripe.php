@@ -76,26 +76,10 @@
         float: left;
     }
 
-    <? if ($contentBlock->floatRight->useForExtraSmallScreen): ?>
-        <? echo '#'.$blockId; ?>
-          {
-              float: right !important;
-          }
-        <? echo '#'.$blockId; ?>  li
-          {
-              float: right !important;
-          }
-        <? echo '#'.$blockId; ?>  .dropdown-menu
-          {
-              right: 0;
-              left: auto;
-          }
-        <? echo '#'.$blockId; ?>  .menu-stripe-item-submenu>.menu-stripe-submenu
-          {
-              left: auto;
-              right: 100%;
-          }
-    <? endif; ?>
+    <? echo '#'.$blockId; ?>.navbar-right > li
+     {
+         float: right !important;
+     }
 
     @media (min-width: 768px)
     {
@@ -110,27 +94,6 @@
                 font-size: <? echo $textAppearance->font->size->small; ?>pt !important;
             <? endif; ?>
         }
-
-        <? if ($contentBlock->floatRight->useForSmallScreen): ?>
-            <? echo '#'.$blockId; ?>
-             {
-                 float: right !important;
-             }
-            <? echo '#'.$blockId; ?>  li
-              {
-                  float: right !important;
-              }
-            <? echo '#'.$blockId; ?>  .dropdown-menu
-              {
-                  right: 0;
-                  left: auto;
-              }
-            <? echo '#'.$blockId; ?>  .menu-stripe-item-submenu>.menu-stripe-submenu
-              {
-                  left: auto;
-                  right: 100%;
-              }
-        <? endif; ?>
     }
 
     @media (min-width: 992px)
@@ -145,26 +108,6 @@
               font-size: <? echo $textAppearance->font->size->medium; ?>pt !important;
             <? endif; ?>
         }
-        <? if ($contentBlock->floatRight->useForMediumScreen): ?>
-            <? echo '#'.$blockId; ?>
-             {
-                 float: right !important;
-             }
-            <? echo '#'.$blockId; ?>  li
-              {
-                  float: right !important;
-              }
-            <? echo '#'.$blockId; ?>  .dropdown-menu
-              {
-                  right: 0;
-                  left: auto;
-              }
-            <? echo '#'.$blockId; ?>  .menu-stripe-item-submenu>.menu-stripe-submenu
-              {
-                  left: auto;
-                  right: 100%;
-              }
-        <? endif; ?>
     }
 
     @media (min-width: 1200px)
@@ -179,26 +122,6 @@
               font-size: <? echo $textAppearance->font->size->large; ?>pt !important;
             <? endif; ?>
         }
-        <? if ($contentBlock->floatRight->useForLargeScreen): ?>
-            <? echo '#'.$blockId; ?> .menu-stripe-container ul
-             {
-                 float: right !important;
-             }
-            <? echo '#'.$blockId; ?>  li
-              {
-                  float: right !important;
-              }
-            <? echo '#'.$blockId; ?>  .dropdown-menu
-              {
-                  right: 0;
-                  left: auto;
-              }
-            <? echo '#'.$blockId; ?>  .menu-stripe-item-submenu>.menu-stripe-submenu
-              {
-                  left: auto;
-                  right: 100%;
-              }
-        <? endif; ?>
     }
 </style>
 
@@ -217,6 +140,7 @@
                     'blockId'=>$blockId,
 	                'items' => $contentBlock->floatRight->useForLargeScreen ? $contentBlock->itemsReversed : $contentBlock->items,
                     'expandOnHover' => $contentBlock->expandOnHover,
+	                'floatRight' => $contentBlock->floatRight->useForLargeScreen,
                     'hideLarge' => false,
                     'hideMedium' => true,
                     'hideSmall' => true,
@@ -226,6 +150,7 @@
 		            'blockId'=>$blockId,
 		            'items' => $contentBlock->floatRight->useForMediumScreen ? $contentBlock->itemsReversed : $contentBlock->items,
 		            'expandOnHover' => $contentBlock->expandOnHover,
+		            'floatRight' => $contentBlock->floatRight->useForMediumScreen,
 		            'hideLarge' => true,
 		            'hideMedium' => false,
 		            'hideSmall' => true,
@@ -235,6 +160,7 @@
 		            'blockId'=>$blockId,
 		            'items' => $contentBlock->floatRight->useForSmallScreen ? $contentBlock->itemsReversed : $contentBlock->items,
 		            'expandOnHover' => $contentBlock->expandOnHover,
+		            'floatRight' => $contentBlock->floatRight->useForSmallScreen,
 		            'hideLarge' => true,
 		            'hideMedium' => true,
 		            'hideSmall' => false,
@@ -244,6 +170,7 @@
 		            'blockId'=>$blockId,
 		            'items' => $contentBlock->floatRight->useForExtraSmallScreen ? $contentBlock->itemsReversed : $contentBlock->items,
 		            'expandOnHover' => $contentBlock->expandOnHover,
+		            'floatRight' => $contentBlock->floatRight->useForExtraSmallScreen,
 		            'hideLarge' => true,
 		            'hideMedium' => true,
 		            'hideSmall' => true,
@@ -255,6 +182,7 @@
 		                'blockId'=>$blockId,
 	                    'items' => $contentBlock->items,
 		                'expandOnHover' => $contentBlock->expandOnHover,
+		                'floatRight' => false,
 		                'hideLarge' => false,
 		                'hideMedium' => false,
 		                'hideSmall' => false,
