@@ -8,6 +8,7 @@
 	 * @property string status
 	 * @property string assigned_to
 	 * @property mixed create_date
+	 * @property mixed date_submit
 	 * @property mixed date_needed
 	 * @property mixed date_completed
 	 * @property mixed content
@@ -54,27 +55,27 @@
 					$criteria->addCondition(self::FiledNameIdOwner . "=" . $userId);
 					break;
 				case self::ListTypeAll:
-					if(isset($shortcutId))
+					if (isset($shortcutId))
 					{
 						/** @var $linkRecord ShortcutLinkRecord */
 						$linkRecord = ShortcutLinkRecord::model()->findByPk($shortcutId);
 						/**@var $shortcut SalesRequestsShortcut */
 						$shortcut = $linkRecord->getRegularModel(false);
 						$shortcut->loadPageConfig();
-						if($shortcut->archiveSettings->isConfigured())
-							$criteria->addCondition(self::FiledNameDateCompleted . " is null or (".self::FiledNameDateCompleted." is not null and date_add(date_add(t.date_completed, interval ".$shortcut->archiveSettings->archiveAfterDays." day), interval ".$shortcut->archiveSettings->archiveAfterHours." hour) > now())");
+						if ($shortcut->archiveSettings->isConfigured())
+							$criteria->addCondition(self::FiledNameDateCompleted . " is null or (" . self::FiledNameDateCompleted . " is not null and date_add(date_add(t.date_completed, interval " . $shortcut->archiveSettings->archiveAfterDays . " day), interval " . $shortcut->archiveSettings->archiveAfterHours . " hour) > now())");
 					}
 					break;
 				case self::ListTypeArchive:
-					if(isset($shortcutId))
+					if (isset($shortcutId))
 					{
 						/** @var $linkRecord ShortcutLinkRecord */
 						$linkRecord = ShortcutLinkRecord::model()->findByPk($shortcutId);
 						/**@var $shortcut SalesRequestsShortcut */
 						$shortcut = $linkRecord->getRegularModel(false);
 						$shortcut->loadPageConfig();
-						if($shortcut->archiveSettings->isConfigured())
-							$criteria->addCondition(self::FiledNameDateCompleted." is not null and date_add(date_add(t.date_completed, interval ".$shortcut->archiveSettings->archiveAfterDays." day), interval ".$shortcut->archiveSettings->archiveAfterHours." hour) < now()");
+						if ($shortcut->archiveSettings->isConfigured())
+							$criteria->addCondition(self::FiledNameDateCompleted . " is not null and date_add(date_add(t.date_completed, interval " . $shortcut->archiveSettings->archiveAfterDays . " day), interval " . $shortcut->archiveSettings->archiveAfterHours . " hour) < now()");
 						else
 							$criteria->addCondition("1=2");
 					}
@@ -159,9 +160,9 @@
 				$itemRecord->status = $sourceItemRecord->status;
 				$itemRecord->assigned_to = $sourceItemRecord->assigned_to;
 				$itemRecord->create_date = date(Yii::app()->params['mysqlDateTimeFormat']);
-				if (isset($sourceItemRecord->date_completed))
-					$itemRecord->date_completed = date(Yii::app()->params['mysqlDateTimeFormat'], strtotime($sourceItemRecord->date_completed));
-				$itemRecord->date_completed = date(Yii::app()->params['mysqlDateTimeFormat'], strtotime($sourceItemRecord->date_completed));
+				$itemRecord->date_submit = $sourceItemRecord->date_submit;
+				$itemRecord->date_needed = $sourceItemRecord->date_needed;
+				$itemRecord->date_completed = $sourceItemRecord->date_completed;
 				$itemRecord->content = $sourceItemRecord->content;
 				$itemRecord->save();
 
@@ -190,14 +191,13 @@
 				$itemRecord->status = $status;
 				$itemRecord->assigned_to = $assignedTo;
 				$itemRecord->date_needed = date(Yii::app()->params['mysqlDateTimeFormat'], strtotime($dateNeeded));
-				if (isset($dateCompleted))
+				if (!empty($dateCompleted))
 					$itemRecord->date_completed = date(Yii::app()->params['mysqlDateTimeFormat'], strtotime($dateCompleted));
-				else
-					$itemRecord->date_completed = null;
 
-				if ($status === \application\models\sales_requests\models\Dictionaries::StatusItemSubmitted)
+				if (!isset($itemRecord->date_submit) &&
+					$status === \application\models\sales_requests\models\Dictionaries::StatusItemSubmitted)
 				{
-					$content->dateSubmit = date(Yii::app()->params['mysqlDateTimeFormat']);
+					$itemRecord->date_submit = date(Yii::app()->params['mysqlDateTimeFormat']);
 					$content->submittedByUserId = UserIdentity::getCurrentUserId();
 				}
 

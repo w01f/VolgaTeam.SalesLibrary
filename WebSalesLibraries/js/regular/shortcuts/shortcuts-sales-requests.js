@@ -77,7 +77,6 @@
 								$('#sales-requests-item-date-complete').val() :
 								undefined,
 							content: {
-								dateSubmit: itemContent.find('.submit-data .submitted-date').text(),
 								submittedByUserId: itemContent.find('.submit-data .submitted-by').text(),
 								advertiser: $('#sales-requests-item-advertiser').val(),
 								agency: $('#sales-requests-item-agency').val(),
@@ -456,14 +455,24 @@
 				"data": "title",
 				"title": "Requests",
 				"class": "",
-				"width": "40%",
+				"width": "32%",
 				"render": cellRenderer
 			});
 			columnSettings.push({
-				"data": "dateNeeded",
-				"title": "Date Needed",
+				"data": "dateSubmit",
+				"title": "Submitted",
 				"class": "",
-				"width": "20%",
+				"width": "17%",
+				"render": {
+					_: cellRenderer,
+					sort: 'value'
+				}
+			});
+			columnSettings.push({
+				"data": "dateNeeded",
+				"title": "Needed",
+				"class": "",
+				"width": "17%",
 				"render": {
 					_: cellRenderer,
 					sort: 'value'
@@ -473,14 +482,14 @@
 				"data": "assignedTo",
 				"title": "Assigned",
 				"class": "",
-				"width": "20%",
+				"width": "17%",
 				"render": cellRenderer
 			});
 			columnSettings.push({
 				"data": "status",
 				"title": "Status",
 				"class": "",
-				"width": "20%",
+				"width": "17%",
 				"render": cellRenderer
 			});
 			columnSettings.push({
@@ -513,7 +522,7 @@
 				autoWidth: false,
 				order: itemListOrderState !== undefined ?
 					[[itemListOrderState[0][0], itemListOrderState[0][1]]] :
-					[[0, 'asc']],
+					[[1, 'desc']],
 				"scrollCollapse": false,
 				"iDisplayLength": 500,
 				"oLanguage": {

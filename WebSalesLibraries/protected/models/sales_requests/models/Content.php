@@ -4,7 +4,6 @@
 
 	class Content
 	{
-		public $dateSubmit;
 		public $submittedByUserId;
 		public $advertiser;
 		public $agency;

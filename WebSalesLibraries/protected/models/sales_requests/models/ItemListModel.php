@@ -8,6 +8,7 @@
 		public $title;
 		public $status;
 		public $assignedTo;
+		public $dateSubmit;
 		public $dateNeeded;
 		public $dateCompleted;
 
@@ -24,6 +25,8 @@
 			$model->title = $itemRecord->title;
 			$model->status = $itemRecord->status;
 			$model->assignedTo = $itemRecord->assigned_to;
+			if (isset($itemRecord->date_submit))
+				$model->dateSubmit = $itemRecord->date_submit;
 			$model->dateNeeded = $itemRecord->date_needed;
 			if (isset($itemRecord->date_completed))
 				$model->dateCompleted = $itemRecord->date_completed;

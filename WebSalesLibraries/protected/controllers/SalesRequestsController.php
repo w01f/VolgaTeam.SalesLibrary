@@ -31,6 +31,12 @@
 					'itemOwner' => $listType == SalesRequestItemRecord::ListTypeOwn ?
 						'' :
 						$itemOwner->login,
+					'dateSubmit' => array(
+						'display' => !empty($item->dateSubmit)?
+							date(\Yii::app()->params['outputDateFormat'], strtotime($item->dateSubmit)):
+							null,
+						'value' => strtotime($item->dateSubmit)
+					),
 					'dateNeeded' => array(
 						'display' => date(\Yii::app()->params['outputDateFormat'], strtotime($item->dateNeeded)),
 						'value' => strtotime($item->dateNeeded)

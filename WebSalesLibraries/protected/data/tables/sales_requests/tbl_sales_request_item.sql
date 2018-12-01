@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS `tbl_sales_request_item` (
 	`status` varchar(512) NULL,
 	`assigned_to` varchar(512) NULL,
 	`create_date` datetime NULL,
+	`date_submit` datetime NULL,
 	`date_needed` datetime NULL,
 	`date_completed` datetime NULL,
 	`content` longtext,
