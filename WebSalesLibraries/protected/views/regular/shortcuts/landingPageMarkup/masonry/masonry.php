@@ -22,11 +22,90 @@
         background-color: <?echo Utils::formatColor($contentBlock->viewSettings->buttonStyle->backColorSelected);?> !important;
         border-color: <?echo $contentBlock->viewSettings->buttonStyle->hasBorder? Utils::formatColor($contentBlock->viewSettings->buttonStyle->borderColorSelected):'transparent';?> !important;
     }
+
+    <? foreach ($contentBlock->items as $masonryItem): ?>
+        <?
+            /** @var MasonryItem $masonryItem */
+            $itemId = sprintf('masonry-item-%s', $masonryItem->id);
+        ?>
+        <?if(((isset($masonryItem->titleTextAppearance) && $masonryItem->titleTextAppearance->wrapText) || (isset($masonryItem->descriptionTextAppearance) && $masonryItem->descriptionTextAppearance->wrapText)) && $masonryItem->imageWidth->sizeForExtraSmallScreen > 0):?>
+            <? echo '#'.$itemId; ?>
+            {
+                width: <? echo $masonryItem->imageWidth->sizeForExtraSmallScreen;?>px;
+            }
+        <?endif;?>
+        <? echo '#'.$itemId; ?> .cbp-caption .cbp-caption-defaultWrap img
+        {
+            <? if ($masonryItem->imageWidth->sizeForExtraSmallScreen > 0): ?>
+                max-width: <? echo $masonryItem->imageWidth->sizeForExtraSmallScreen;?>px !important;
+            <?endif;?>
+            <? if ($masonryItem->imageHeight->sizeForExtraSmallScreen > 0): ?>
+                max-height: <? echo $masonryItem->imageHeight->sizeForExtraSmallScreen;?>px !important;
+            <?endif;?>
+        }
+
+        @media (min-width: 768px)
+        {
+            <?if(((isset($masonryItem->titleTextAppearance) && $masonryItem->titleTextAppearance->wrapText) || (isset($masonryItem->descriptionTextAppearance) && $masonryItem->descriptionTextAppearance->wrapText)) && $masonryItem->imageWidth->sizeForSmallScreen > 0):?>
+                <? echo '#'.$itemId; ?>
+                {
+                    width: <? echo $masonryItem->imageWidth->sizeForSmallScreen;?>px;
+                }
+            <?endif;?>
+            <? echo '#'.$itemId; ?> .cbp-caption .cbp-caption-defaultWrap img
+            {
+                <? if ($masonryItem->imageWidth->sizeForSmallScreen > 0): ?>
+                    max-width: <? echo $masonryItem->imageWidth->sizeForSmallScreen;?>px !important;
+                <?endif;?>
+                <? if ($masonryItem->imageHeight->sizeForSmallScreen > 0): ?>
+                    max-height: <? echo $masonryItem->imageHeight->sizeForSmallScreen;?>px !important;
+                <?endif;?>
+            }
+        }
+
+        @media (min-width: 992px)
+        {
+            <?if(((isset($masonryItem->titleTextAppearance) && $masonryItem->titleTextAppearance->wrapText) || (isset($masonryItem->descriptionTextAppearance) && $masonryItem->descriptionTextAppearance->wrapText)) && $masonryItem->imageWidth->sizeForMediumScreen > 0):?>
+                <? echo '#'.$itemId; ?>
+                {
+                    width: <? echo $masonryItem->imageWidth->sizeForMediumScreen;?>px;
+                }
+            <?endif;?>
+            <? echo '#'.$itemId; ?> .cbp-caption .cbp-caption-defaultWrap img
+            {
+                <? if ($masonryItem->imageWidth->sizeForMediumScreen > 0): ?>
+                    max-width: <? echo $masonryItem->imageWidth->sizeForMediumScreen;?>px !important;
+                <?endif;?>
+                <? if ($masonryItem->imageHeight->sizeForMediumScreen > 0): ?>
+                    max-height: <? echo $masonryItem->imageHeight->sizeForMediumScreen;?>px !important;
+                <?endif;?>
+            }
+        }
+
+        @media (min-width: 1200px)
+        {
+            <?if(((isset($masonryItem->titleTextAppearance) && $masonryItem->titleTextAppearance->wrapText) || (isset($masonryItem->descriptionTextAppearance) && $masonryItem->descriptionTextAppearance->wrapText)) && $masonryItem->imageWidth->sizeForLargeScreen > 0):?>
+                <? echo '#'.$itemId; ?>
+                {
+                    width: <? echo $masonryItem->imageWidth->sizeForLargeScreen;?>px;
+                }
+            <?endif;?>
+            <? echo '#'.$itemId; ?> .cbp-caption .cbp-caption-defaultWrap img
+            {
+                <? if ($masonryItem->imageWidth->sizeForLargeScreen > 0): ?>
+                    max-width: <? echo $masonryItem->imageWidth->sizeForLargeScreen;?>px !important;
+                <?endif;?>
+                <? if ($masonryItem->imageHeight->sizeForLargeScreen > 0): ?>
+                    max-height: <? echo $masonryItem->imageHeight->sizeForLargeScreen;?>px !important;
+                <?endif;?>
+            }
+        }
+    <?endforeach;?>
 </style>
 <div id="masonry-container-<? echo $contentBlock->id; ?>" class="col-xs-12 masonry-container">
-    <div class="service-data">
-        <div class="encoded-object">
-            <div class="view-settings"><? echo CJSON::encode($contentBlock->viewSettings); ?></div>
+<div class="service-data">
+<div class="encoded-object">
+	<div class="view-settings"><? echo CJSON::encode($contentBlock->viewSettings); ?></div>
         </div>
     </div>
 	<? if (count($contentBlock->viewSettings->filters) > 1): ?>
@@ -55,29 +134,26 @@
     <div id="masonry-grid-<? echo $contentBlock->id; ?>" class="cbp cbp-l-grid-masonry-projects">
 		<? foreach ($contentBlock->items as $masonryItem): ?>
             <?
-                /** @var MasonryItem $masonryItem */
-                $itemStyle = '';
-                if (((isset($masonryItem->titleTextAppearance) && $masonryItem->titleTextAppearance->wrapText) || (isset($masonryItem->descriptionTextAppearance) && $masonryItem->descriptionTextAppearance->wrapText)) && $masonryItem->imageWidth > 0)
-                    $itemStyle = sprintf('style="width: %spx;"', $masonryItem->imageWidth);
+	            /** @var MasonryItem $masonryItem */
+	            $itemId = sprintf('masonry-item-%s', $masonryItem->id);
             ?>
             <? if ($masonryItem->type === 'url'): ?>
                 <? /** @var MasonryUrl $masonryItem */ ?>
-                <a href="<? echo $masonryItem->url; ?>" <? if ($masonryItem->isMailTo !== false): ?>target="_self"
+                <a id="<? echo $itemId; ?>" href="<? echo $masonryItem->url; ?>" <? if ($masonryItem->isMailTo !== false): ?>target="_self"
                    <? else: ?>target="_blank"<? endif; ?>
-                   class="cbp-item <? echo implode(' ', $masonryItem->filterTags); ?>" <? echo $itemStyle; ?>>
+                   class="cbp-item <? echo implode(' ', $masonryItem->filterTags); ?>">
             <? elseif ($masonryItem->type === 'shortcut'): ?>
                 <? /** @var MasonryShortcut $masonryItem */ ?>
-                <a href="<? echo isset($masonryItem->shortcut) ? $masonryItem->shortcut->getSourceLink() : '#'; ?>"
+                <a id="<? echo $itemId; ?>" href="<? echo isset($masonryItem->shortcut) ? $masonryItem->shortcut->getSourceLink() : '#'; ?>"
                    target="<? echo isset($masonryItem->shortcut) && !$masonryItem->shortcut->samePage ? '_blank' : '_self'; ?>"
-                   class="cbp-item <? echo implode(' ', $masonryItem->filterTags); ?> shortcuts-link<? if (!isset($masonryItem->shortcut)): ?> disabled<? endif; ?>" <? echo $itemStyle; ?>>
+                   class="cbp-item <? echo implode(' ', $masonryItem->filterTags); ?> shortcuts-link<? if (!isset($masonryItem->shortcut)): ?> disabled<? endif; ?>">
                     <div class="service-data">
                         <? echo isset($masonryItem->shortcut) ? $masonryItem->shortcut->getMenuItemData() : '<div class="same-page"></div><div class="has-custom-handler"></div>'; ?>
                     </div>
             <? endif; ?>
                     <div class="cbp-caption">
                         <div class="cbp-caption-defaultWrap">
-                            <img src="<? echo $masonryItem->imagePath; ?>"
-                                 style="<? if ($masonryItem->imageWidth > 0): ?>max-width:<? echo $masonryItem->imageWidth; ?>px;<? endif; ?><? if ($masonryItem->imageHeight > 0): ?> max-height:<? echo $masonryItem->imageHeight; ?>px;<? endif; ?>">
+                            <img src="<? echo $masonryItem->imagePath; ?>">
                         </div>
                     </div>
                     <div style="<? echo $this->renderPartial('../shortcuts/landingPageMarkup/style/stylePadding', array('padding' => $contentBlock->viewSettings->textPadding), true); ?>">

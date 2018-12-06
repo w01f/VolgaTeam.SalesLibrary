@@ -409,11 +409,7 @@
 		};
 
 		this.loadCurrentItem = function () {
-			var itemList = $.SalesPortal.Content.getContentObject().find('.sales-requests-main-page .service-panel .item-list-container');
-			var selectedRow = itemList.find('tr.selected');
-			var selectedItemId = selectedRow.find('.item-id-column').html();
-			var selectedItemTitle = selectedRow.find('.item-name-column .title').html();
-			openItemInternal(selectedItemId, selectedItemTitle);
+			openItemInternal();
 		};
 
 		this.updateContentSize = function () {
@@ -638,6 +634,10 @@
 		};
 
 		var openItemInternal = function (selectedItemId, selectedItemTitle) {
+			if(selectedItemId==undefined)
+				selectedItemId = that.selectedItem.itemId;
+			if(selectedItemTitle==undefined)
+				selectedItemTitle = that.selectedItem.itemTitle;
 			that.selectedItem = new ItemContent({
 				selectedItemId: selectedItemId,
 				selectedItemTitle: selectedItemTitle,

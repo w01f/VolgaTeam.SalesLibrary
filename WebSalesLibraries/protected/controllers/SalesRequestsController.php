@@ -153,7 +153,7 @@
 							$message->message = sprintf("%s<br><br>%s<br><br>%s",
 								sprintf("Submitted by %s %s",
 									$itemOwner->login,
-									date(\Yii::app()->params['outputDateFormat'], strtotime($this->date_submit)) . ' at ' . date(\Yii::app()->params['outputTimeFormat'], strtotime($this->date_submit))),
+									date(\Yii::app()->params['outputDateFormat'], strtotime($itemRecord->date_submit)) . ' at ' . date(\Yii::app()->params['outputTimeFormat'], strtotime($itemRecord->date_submit))),
 								sprintf("Request ID: %s", $title),
 								\Yii::app()->createAbsoluteUrl('shortcuts/getSinglePage', array(
 									'linkId' => $shortcutId,

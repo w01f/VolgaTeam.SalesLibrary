@@ -100,12 +100,16 @@
 							var querySettings = querySettingsEncoded !== undefined && querySettingsEncoded.length ? $.parseJSON(querySettingsEncoded) : undefined;
 							var viewSettingsEncoded = masonryBlock.find('>.service-data .encoded-object .view-settings').text();
 							var viewSettings = viewSettingsEncoded !== undefined && viewSettingsEncoded.length ? $.parseJSON(viewSettingsEncoded) : undefined;
-							new $.SalesPortal.LandingPage.Masonry({
+							var masonryProcessor = new $.SalesPortal.LandingPage.Masonry({
 								containerId: masonryId,
 								parentShortcutId: pageData.options.linkId,
 								querySettings: querySettings,
 								viewSettings: viewSettings
-							}).init();
+							});
+							masonryProcessor.init();
+							updateSizeDelegates.push(function () {
+								masonryProcessor.updateContentSize();
+							});
 						});
 
 						$.each(markupObject.find('.toggle-panel'), function (key, value) {

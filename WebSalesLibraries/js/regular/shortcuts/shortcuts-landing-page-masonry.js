@@ -8,6 +8,7 @@
 		var querySettings = parameters.querySettings !== undefined ? new $.SalesPortal.LandingPage.LinkFeedQuerySettings(parameters.querySettings) : null;
 		var viewSettings = new MasonryViewSettings(parameters.viewSettings);
 		var masonryContainer = undefined;
+		var updateResponsiveColumnsTimer = null;
 
 		this.init = function () {
 			masonryContainer = $('#masonry-container-' + masonryId);
@@ -160,7 +161,7 @@
 											var modalDialog = new $.SalesPortal.ModalDialog({
 												title: 'Site Update',
 												description: 'This section is not yet updated today.<br><br>' +
-												'Check back later and maybe this page will be ready…',
+													'Check back later and maybe this page will be ready…',
 												width: 300,
 												buttons: [
 													{
@@ -307,6 +308,55 @@
 					hoverTipTemplate += (' by ' + querySettings.dateRangeType);
 				hoverTipButton.prop('title', hoverTipTemplate);
 			}
+		};
+
+		this.updateContentSize = function () {
+			updateResponsiveColumnsTimer = setTimeout(function () {
+				updateResponsiveColumnsTimer = null;
+				$.SalesPortal.ScreenManager.processScreenSizeChange(function () {
+
+					var grid = masonryContainer.find('#masonry-grid-' + masonryId);
+					var filterContainerId = '#masonry-filter-' + masonryId;
+
+					try
+					{
+						grid.cubeportfolio('destroy', function () {
+
+							updateResponsiveColumnsTimer = null;
+							grid.cubeportfolio({
+								filters: filterContainerId,
+								layoutMode: 'grid',
+								defaultFilter: viewSettings.defaultFilter ? ('.' + viewSettings.defaultFilter.tags.join(', .')) : '*',
+								animationType: 'quicksand',
+								gapHorizontal: parseInt(viewSettings.itemsPadding.left) + parseInt(viewSettings.itemsPadding.right),
+								gapVertical: parseInt(viewSettings.itemsPadding.top) + parseInt(viewSettings.itemsPadding.bottom),
+								gridAdjustment: 'responsive',
+								caption: viewSettings.enableCaptionZoom === true ? 'zoom' : '',
+								displayType: 'fadeIn',
+								displayTypeSpeed: 100
+							});
+							updateResponsiveColumnsTimer = null;
+
+						});
+					}
+					catch (err)
+					{
+						grid.cubeportfolio({
+							filters: filterContainerId,
+							layoutMode: 'grid',
+							defaultFilter: viewSettings.defaultFilter ? ('.' + viewSettings.defaultFilter.tags.join(', .')) : '*',
+							animationType: 'quicksand',
+							gapHorizontal: parseInt(viewSettings.itemsPadding.left) + parseInt(viewSettings.itemsPadding.right),
+							gapVertical: parseInt(viewSettings.itemsPadding.top) + parseInt(viewSettings.itemsPadding.bottom),
+							gridAdjustment: 'responsive',
+							caption: viewSettings.enableCaptionZoom === true ? 'zoom' : '',
+							displayType: 'fadeIn',
+							displayTypeSpeed: 100
+						});
+						updateResponsiveColumnsTimer = null;
+					}
+				});
+			}, 500);
 		};
 	};
 

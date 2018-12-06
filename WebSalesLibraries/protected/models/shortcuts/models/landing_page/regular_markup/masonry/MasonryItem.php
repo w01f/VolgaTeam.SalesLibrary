@@ -12,11 +12,14 @@
 	class MasonryItem extends ContentBlock
 	{
 		public $imagePath;
-		public $imageWidth;
-		public $imageHeight;
 
 		public $title;
 		public $description;
+
+		/** @var  MasonryItemSize */
+		public $imageWidth;
+		/** @var  MasonryItemSize */
+		public $imageHeight;
 
 		/** @var  TextAppearance */
 		public $titleTextAppearance;
@@ -36,8 +39,8 @@
 			parent::__construct($parentShortcut, $parentBlock);
 			$this->type = 'masonry-item';
 
-			$this->imageWidth = 0;
-			$this->imageHeight = 0;
+			$this->imageWidth = MasonryItemSize::createEmpty();
+			$this->imageHeight = MasonryItemSize::createEmpty();
 			$this->filterTags = array();
 		}
 
@@ -53,17 +56,19 @@
 			$fileName = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
 			$this->imagePath = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . $this->parentShortcut->relativeLink . '/images/' . $fileName);
 
-			$queryResult = $xpath->query('./ImageWidth', $contextNode);
-			$this->imageWidth = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue)) : $this->imageWidth;
-
-			$queryResult = $xpath->query('./ImageHeight', $contextNode);
-			$this->imageHeight = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue)) : $this->imageHeight;
-
 			$queryResult = $xpath->query('./Title', $contextNode);
 			$this->title = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
 
 			$queryResult = $xpath->query('./Description', $contextNode);
 			$this->description = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
+
+			$queryResult = $xpath->query('./ImageWidth', $contextNode);
+			if ($queryResult->length > 0)
+				$this->imageWidth = MasonryItemSize::fromXml($xpath, $queryResult->item(0));
+
+			$queryResult = $xpath->query('./ImageHeight', $contextNode);
+			if ($queryResult->length > 0)
+				$this->imageHeight = MasonryItemSize::fromXml($xpath, $queryResult->item(0));
 
 			$queryResult = $xpath->query('./TitleStyle', $contextNode);
 			if ($queryResult->length > 0)
