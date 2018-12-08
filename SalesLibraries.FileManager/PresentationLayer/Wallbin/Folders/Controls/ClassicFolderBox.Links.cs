@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
@@ -19,6 +19,7 @@ using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers;
 using SalesLibraries.Common.DataState;
 using SalesLibraries.Common.Helpers;
+using SalesLibraries.Common.Objects.Graphics;
 using SalesLibraries.Common.OfficeInterops;
 using SalesLibraries.CommonGUI.Wallbin.Folders;
 using SalesLibraries.FileManager.Business.PreviewGenerators;
@@ -33,118 +34,19 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 	{
 		public void AddHyperLink(BaseNetworkLinkInfo initialLinkInfo = null, int position = -1)
 		{
-			using (var form = new FormAddHyperLink(initialLinkInfo))
+			var newLink = ProcessHyperlinkAdding(initialLinkInfo);
+			if (newLink == null)
+				return;
+
+			if (position == -1)
 			{
-				if (form.ShowDialog() != DialogResult.OK) return;
-
-				if (position == -1)
-				{
-					var selectedLink = SelectedLinkRow;
-					if (selectedLink != null)
-						position = selectedLink.Index;
-				}
-
-				_outsideChangesInProgress = true;
-
-				LibraryObjectLink newLink;
-				switch (form.SelectedEditorType)
-				{
-					case HyperLinkTypeEnum.Url:
-						newLink = WebLink.Create(
-							(UrlLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
-							DataSource);
-						break;
-					case HyperLinkTypeEnum.YouTube:
-						newLink = YouTubeLink.Create(
-							(YouTubeLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
-							DataSource);
-						break;
-					case HyperLinkTypeEnum.Network:
-						newLink = NetworkLink.Create(
-							(LanLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
-							DataSource);
-						break;
-					case HyperLinkTypeEnum.QuickSite:
-						newLink = QuickSiteLink.Create(
-							(QuickSiteLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
-							DataSource);
-						break;
-					case HyperLinkTypeEnum.App:
-						newLink = AppLink.Create(
-							(AppLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
-							DataSource);
-						break;
-					case HyperLinkTypeEnum.Internal:
-						var internalLinkInfo = (InternalLinkInfo)form.SelectedEditor.GetHyperLinkInfo();
-						switch (internalLinkInfo.InternalLinkType)
-						{
-							case InternalLinkType.Wallbin:
-								newLink = InternalWallbinLink.Create(
-									(InternalWallbinLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
-									DataSource);
-								break;
-							case InternalLinkType.LibraryPage:
-								newLink = InternalLibraryPageLink.Create(
-									(InternalLibraryPageLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
-									DataSource);
-								break;
-							case InternalLinkType.LibraryFolder:
-								newLink = InternalLibraryFolderLink.Create(
-									(InternalLibraryFolderLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
-									DataSource);
-								break;
-							case InternalLinkType.LibraryObject:
-								newLink = InternalLibraryObjectLink.Create(
-									(InternalLibraryObjectLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
-									DataSource);
-								break;
-							case InternalLinkType.Shortcut:
-								newLink = InternalShortcutLink.Create(
-									(InternalShortcutLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
-									DataSource);
-								break;
-							default:
-								throw new ArgumentOutOfRangeException("Link type not found");
-						}
-						break;
-					case HyperLinkTypeEnum.Html5:
-						newLink = Html5Link.Create(
-							(Html5LinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
-							DataSource);
-						break;
-					case HyperLinkTypeEnum.Vimeo:
-						newLink = VimeoLink.Create(
-							(VimeoLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
-							DataSource);
-						break;
-					default:
-						throw new ArgumentOutOfRangeException("Link type not found");
-				}
-
-				if (position >= 0)
-					((List<BaseLibraryLink>)DataSource.Links).InsertItem(newLink, position);
-				else
-					DataSource.Links.AddItem(newLink);
-				var newRow = InsertLinkRow(newLink, position);
-				_outsideChangesInProgress = false;
-
-				UpdateGridSize();
-
-				SelectSingleRow(newRow);
-
-				DataChanged?.Invoke(this, EventArgs.Empty);
+				var selectedLink = SelectedLinkRow;
+				if (selectedLink != null)
+					position = selectedLink.Index;
 			}
-		}
-
-		public void AddLineBreak()
-		{
-			var position = -1;
-			var selectedLink = SelectedLinkRow;
-			if (selectedLink != null)
-				position = selectedLink.Index;
 
 			_outsideChangesInProgress = true;
-			var newLink = LineBreak.Create(DataSource);
+
 			if (position >= 0)
 				((List<BaseLibraryLink>)DataSource.Links).InsertItem(newLink, position);
 			else
@@ -159,10 +61,15 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 			DataChanged?.Invoke(this, EventArgs.Empty);
 		}
 
-		public void AddImageAsLineBreak(Image image, int position)
+		public void AddLineBreak()
 		{
+			var position = -1;
+			var selectedLink = SelectedLinkRow;
+			if (selectedLink != null)
+				position = selectedLink.Index;
+
 			_outsideChangesInProgress = true;
-			var newLink = LineBreak.CreateWithBanner(DataSource, image);
+			var newLink = LineBreak.Create(DataSource);
 			if (position >= 0)
 				((List<BaseLibraryLink>)DataSource.Links).InsertItem(newLink, position);
 			else
@@ -398,13 +305,105 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 			_outsideChangesInProgress = true;
 
 			var libraryLinks = new List<BaseLibraryLink>();
-			MainController.Instance.ProcessManager.Run(String.Format("Adding Link{0}...", sourceLinks.Count > 1 ? "s" : String.Empty),
+			foreach (var sourceLink in sourceLinks)
+			{
+				if (sourceLink is FileLink sourceFileLink)
+				{
+					var existedPreviewContainers = DataSource.Page.Library.PreviewContainers
+						.Where(previewContainer => String.Equals(Path.GetFileName(previewContainer.SourcePath), sourceFileLink.Name, StringComparison.OrdinalIgnoreCase) &&
+													DataSource.Page.Library.Pages.SelectMany(page => page.AllGroupLinks.OfType<LibraryFileLink>()).Any(fileLink => String.Equals(fileLink.NameWithExtension, sourceFileLink.Name, StringComparison.OrdinalIgnoreCase)))
+						.ToList();
+
+					if (existedPreviewContainers.Any())
+					{
+						using (var form = new FormUpdateFile())
+						{
+							var result = form.ShowDialog(MainController.Instance.MainForm);
+							if (result == DialogResult.No)
+							{
+								foreach (var previewContainer in existedPreviewContainers)
+								{
+									previewContainer.ClearContent();
+									try
+									{
+										File.Copy(sourceFileLink.Path, previewContainer.SourcePath, true);
+									}
+									catch { }
+								}
+								if (sourceLinks.Count == 1)
+									MainController.Instance.PopupMessages.ShowInfo("File updated");
+								continue;
+							}
+						}
+					}
+
+					if (FileFormatHelper.IsJpegFile(sourceFileLink.Path) || FileFormatHelper.IsPngFile(sourceFileLink.Path))
+					{
+						var imageFilePath = sourceFileLink.Path;
+						using (var form = new FormAddImageRequest())
+						{
+							form.simpleLabelItemTitle.Text =
+								String.Format("<color=gray>Add: {0}</color>", Path.GetFileName(imageFilePath));
+							if (form.ShowDialog(MainController.Instance.MainForm) == DialogResult.OK)
+							{
+								var addToGallery = false;
+								if (form.checkEditGallery.Checked)
+								{
+									libraryLinks.Add(LibraryFileLink.Create(sourceFileLink, DataSource));
+									addToGallery = true;
+								}
+								else if (form.checkEditFile.Checked)
+								{
+									libraryLinks.Add(LibraryFileLink.Create(sourceFileLink, DataSource));
+									addToGallery = true;
+								}
+								else if (form.checkEditLinebreak.Checked)
+								{
+									using (var formEditImage = new FormAddImage(imageFilePath))
+									{
+										if (formEditImage.ShowDialog(MainController.Instance.MainForm) == DialogResult.OK)
+										{
+											libraryLinks.Add(LineBreak.CreateWithBanner(DataSource, formEditImage.pictureEditImage.Image));
+											addToGallery = true;
+										}
+									}
+								}
+
+								if (addToGallery)
+								{
+									MainController.Instance.Lists.Banners.ImportedImages.AddImage<Banner>(imageFilePath);
+									MainController.Instance.Lists.Widgets.ImportedImages.AddImage<Widget>(imageFilePath);
+								}
+							}
+						}
+					}
+					else if (FileFormatHelper.IsUrlFile(sourceFileLink.Path))
+					{
+						var urlFilePath = sourceFileLink.Path;
+						var urlLink = ProcessHyperlinkAdding(UrlLinkInfo.FromFile(urlFilePath));
+						if (urlLink != null)
+							libraryLinks.Add(urlLink);
+					}
+					else
+						libraryLinks.Add(LibraryFileLink.Create(sourceFileLink, DataSource));
+				}
+				else if (sourceLink is FolderLink sourceFolderLink)
+				{
+					using (var form = new FormAddExternalFolder(sourceFolderLink))
+						if (form.ShowDialog(MainController.Instance.MainForm) == DialogResult.OK)
+							libraryLinks.Add(LibraryFileLink.Create(sourceLink, DataSource));
+				}
+			}
+
+			if (!libraryLinks.Any())
+				return;
+
+			MainController.Instance.ProcessManager.Run(String.Format("Adding Link{0}...", libraryLinks.Count > 1 ? "s" : String.Empty),
 				(cancelationToken, formProgess) =>
 				{
 					var dataRecordPosition = position;
-					foreach (var sourceLink in sourceLinks)
+					foreach (var link in libraryLinks)
 					{
-						var link = LibraryFileLink.Create(sourceLink, DataSource);
 						if (dataRecordPosition >= 0)
 						{
 							((List<BaseLibraryLink>)DataSource.Links).InsertItem(link, dataRecordPosition);
@@ -412,7 +411,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 						}
 						else
 							DataSource.Links.AddItem(link);
-						libraryLinks.Add(link);
 					}
 				});
 
@@ -432,6 +430,75 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 			SelectSingleRow(row);
 
 			DataChanged?.Invoke(this, EventArgs.Empty);
+		}
+
+		private LibraryObjectLink ProcessHyperlinkAdding(BaseNetworkLinkInfo initialLinkInfo = null)
+		{
+			using (var form = new FormAddHyperLink(initialLinkInfo))
+			{
+				if (form.ShowDialog() != DialogResult.OK) return null;
+
+				switch (form.SelectedEditorType)
+				{
+					case HyperLinkTypeEnum.Url:
+						return WebLink.Create(
+							(UrlLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
+							DataSource);
+					case HyperLinkTypeEnum.YouTube:
+						return YouTubeLink.Create(
+							(YouTubeLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
+							DataSource);
+					case HyperLinkTypeEnum.Network:
+						return NetworkLink.Create(
+							(LanLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
+							DataSource);
+					case HyperLinkTypeEnum.QuickSite:
+						return QuickSiteLink.Create(
+							(QuickSiteLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
+							DataSource);
+					case HyperLinkTypeEnum.App:
+						return AppLink.Create(
+							(AppLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
+							DataSource);
+					case HyperLinkTypeEnum.Internal:
+						var internalLinkInfo = (InternalLinkInfo)form.SelectedEditor.GetHyperLinkInfo();
+						switch (internalLinkInfo.InternalLinkType)
+						{
+							case InternalLinkType.Wallbin:
+								return InternalWallbinLink.Create(
+									(InternalWallbinLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
+									DataSource);
+							case InternalLinkType.LibraryPage:
+								return InternalLibraryPageLink.Create(
+									(InternalLibraryPageLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
+									DataSource);
+							case InternalLinkType.LibraryFolder:
+								return InternalLibraryFolderLink.Create(
+									(InternalLibraryFolderLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
+									DataSource);
+							case InternalLinkType.LibraryObject:
+								return InternalLibraryObjectLink.Create(
+									(InternalLibraryObjectLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
+									DataSource);
+							case InternalLinkType.Shortcut:
+								return InternalShortcutLink.Create(
+									(InternalShortcutLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
+									DataSource);
+							default:
+								throw new ArgumentOutOfRangeException("Link type not found");
+						}
+					case HyperLinkTypeEnum.Html5:
+						return Html5Link.Create(
+							(Html5LinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
+							DataSource);
+					case HyperLinkTypeEnum.Vimeo:
+						return VimeoLink.Create(
+							(VimeoLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
+							DataSource);
+					default:
+						throw new ArgumentOutOfRangeException("Link type not found");
+				}
+			}
 		}
 
 		private void ProcessLinkRowMoving(LinkRow targetRow, int newPosition = -1)

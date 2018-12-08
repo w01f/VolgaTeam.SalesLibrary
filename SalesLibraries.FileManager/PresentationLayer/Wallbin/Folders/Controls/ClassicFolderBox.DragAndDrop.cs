@@ -138,14 +138,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 					if (sourceLinks.Any())
 					{
 						var confirmDrop = true;
-						if (!sourceLinks.OfType<FolderLink>().Any() && sourceLinks.OfType<FileLink>().Count() == 1 &&
-							FileFormatHelper.IsUrlFile(sourceLinks.OfType<FileLink>().Single().Path))
-						{
-							AddHyperLink(UrlLinkInfo.FromFile(sourceLinks.OfType<FileLink>().Single().Path), _mouseDragOverHitInfo.RowIndex);
-							confirmDrop = false;
-						}
-						else if (
-							sourceLinks.OfType<FolderLink>()
+						if (sourceLinks.OfType<FolderLink>()
 								.Any(folderLink => sourceLinks.OfType<FileLink>().Any(fileLink => fileLink.Path.Contains(folderLink.Path))))
 						{
 							using (var form = new FormCustomDialog(
@@ -179,110 +172,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 						sourceLinks =
 							droppedItemsPaths.Select(itemPath => SourceLink.FromExternalPath(itemPath, DataSource.Page.Library)).ToList();
 					}
-					var extrernalLinks = sourceLinks.Where(link => link.IsExternal).ToList();
-					if (extrernalLinks.Any())
-					{
-						var confirmDrop = true;
-						if (extrernalLinks.Count == 1 && extrernalLinks.All(link =>
-								FileFormatHelper.IsJpegFile(link.Path) || FileFormatHelper.IsPngFile(link.Path)))
-						{
-							var imageFilePath = extrernalLinks.Select(link => link.Path).First();
-							using (var form = new FormAddImageRequest())
-							{
-								form.simpleLabelItemTitle.Text =
-									String.Format("<color=gray>Add: {0}</color>", Path.GetFileName(imageFilePath));
-								if (form.ShowDialog(MainController.Instance.MainForm) == DialogResult.OK)
-								{
-									var addToGallery = false;
-									if (form.checkEditGallery.Checked)
-									{
-										confirmDrop = false;
-										addToGallery = true;
-									}
-									else if (form.checkEditFile.Checked)
-									{
-										confirmDrop = true;
-										addToGallery = true;
-									}
-									else if (form.checkEditLinebreak.Checked)
-									{
-										using (var formEditImage = new FormAddImage(imageFilePath))
-										{
-											if (formEditImage.ShowDialog(MainController.Instance.MainForm) == DialogResult.OK)
-											{
-												AddImageAsLineBreak(formEditImage.pictureEditImage.Image, _mouseDragOverHitInfo.RowIndex);
-												addToGallery = true;
-												confirmDrop = false;
-											}
-											else
-												confirmDrop = false;
-										}
-									}
-									else
-										confirmDrop = false;
-									if (addToGallery)
-									{
-										MainController.Instance.Lists.Banners.ImportedImages.AddImage<Banner>(imageFilePath);
-										MainController.Instance.Lists.Widgets.ImportedImages.AddImage<Widget>(imageFilePath);
-									}
-								}
-								else
-									confirmDrop = false;
-							}
-						}
-						else if (extrernalLinks.Count == 1 && extrernalLinks.All(link => FileFormatHelper.IsUrlFile(link.Path)))
-						{
-							var urlFilePath = extrernalLinks.Select(link => link.Path).First();
-							AddHyperLink(UrlLinkInfo.FromFile(urlFilePath), _mouseDragOverHitInfo.RowIndex);
-							confirmDrop = false;
-						}
-						else
-						{
-							foreach (var folderLink in extrernalLinks.OfType<FolderLink>().ToList())
-								using (var form = new FormAddExternalFolder(folderLink))
-									confirmDrop = form.ShowDialog(MainController.Instance.MainForm) == DialogResult.OK;
-						}
-						if (confirmDrop)
-						{
-							var existedPreviewContainerPairs = new Dictionary<SourceLink, List<BasePreviewContainer>>();
-							foreach (var extrernalLink in extrernalLinks.OfType<FileLink>().ToList())
-							{
-								var existedPreviewContainers = DataSource.Page.Library.PreviewContainers
-									.Where(previewContainer => String.Equals(Path.GetFileName(previewContainer.SourcePath), extrernalLink.Name, StringComparison.OrdinalIgnoreCase) &&
-										DataSource.Page.Library.Pages.SelectMany(page => page.AllGroupLinks.OfType<LibraryFileLink>()).Any(fileLink => String.Equals(fileLink.NameWithExtension, extrernalLink.Name, StringComparison.OrdinalIgnoreCase)))
-									.ToList();
-								if (existedPreviewContainers.Any())
-									existedPreviewContainerPairs.Add(extrernalLink, existedPreviewContainers);
-							}
-
-							if (existedPreviewContainerPairs.Any())
-							{
-								using (var form = new FormUpdateFile())
-								{
-									var result = form.ShowDialog(MainController.Instance.MainForm);
-									confirmDrop = result == DialogResult.Yes;
-									if (result == DialogResult.No)
-									{
-										foreach (var previewContainerPair in existedPreviewContainerPairs)
-										{
-											foreach (var previewContainer in previewContainerPair.Value)
-											{
-												previewContainer.ClearContent();
-												try
-												{
-													File.Copy(previewContainerPair.Key.Path, previewContainer.SourcePath, true);
-												}
-												catch { }
-											}
-										}
-										MainController.Instance.PopupMessages.ShowInfo("File updated");
-									}
-								}
-							}
-							if (confirmDrop)
-								InsertDataSourceLinks(extrernalLinks, _mouseDragOverHitInfo.RowIndex);
-						}
-					}
+					var externalLinks = sourceLinks.Where(link => link.IsExternal).ToList();
+					InsertDataSourceLinks(externalLinks, _mouseDragOverHitInfo.RowIndex);
 				}
 			}
 			else if (IsLinkBundleDragged)
