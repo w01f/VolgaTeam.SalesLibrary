@@ -13,6 +13,8 @@
 	$categoriesList = \application\models\sales_requests\models\Dictionaries::getCategoriesList();
 	$demosList = \application\models\sales_requests\models\Dictionaries::getDemoList();
 	$reasonsList = \application\models\sales_requests\models\Dictionaries::getReasonsList();
+
+	$isSubmitted = !empty($item->dateSubmit);
 ?>
 <div <? if ($item->allowEdit || $isAdminRole): ?>class="editable"<? else: ?>ondragover="return false;" ondrop="return false;"<? endif; ?>>
     <form class="form-horizontal">
@@ -21,7 +23,7 @@
                 <span class="item-content-sub-text">Request ID: <? echo $item->title; ?></span>
             </div>
             <div class="col col-md-6">
-				<? if (!empty($item->dateSubmit)): ?>
+				<? if ($isSubmitted): ?>
                     <?
                         /** @var $submittedByUser UserRecord */
                         $submittedByUser = UserRecord::model()->findByPk($item->content->submittedByUserId);

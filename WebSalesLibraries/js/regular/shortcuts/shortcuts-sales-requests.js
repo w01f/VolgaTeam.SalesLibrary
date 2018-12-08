@@ -99,7 +99,6 @@
 								onSuccessHandler();
 							else
 							{
-								$('body').append('<div id="page-content-save-confirm" title="adSALESapps.com">Data SAVED!</div>');
 								$.fancybox({
 									content: $('<div class="row" style="margin: 0;">' +
 										'<div class="col-xs-3"><img src="' + window.BaseUrl + 'images/qpages/save.png">' +
@@ -121,6 +120,8 @@
 									}
 								});
 							}
+
+							itemList.load();
 						},
 						error: function () {
 						},
@@ -132,14 +133,36 @@
 		};
 
 		var submitItem = function () {
-			var itemContent = $.SalesPortal.Content.getContentObject().find('.sales-requests-main-page .item-content');
-			var allowSave = itemContent.find(">div.editable").length > 0 || shortcutData.options.isAdminRole;
-			if (allowSave)
+			if (itemList.selectedItem !== undefined && !itemList.selectedItem.isSubmitted)
 			{
-				$('#sales-requests-item-status').val('submitted');
-				saveItem(function () {
-					itemList.loadCurrentItem();
-				});
+				var itemContent = $.SalesPortal.Content.getContentObject().find('.sales-requests-main-page .item-content');
+				var allowSave = itemContent.find(">div.editable").length > 0 || shortcutData.options.isAdminRole;
+				if (allowSave)
+				{
+					$('#sales-requests-item-status').val('submitted');
+					saveItem(function () {
+						$.fancybox({
+							content: $('<div class="row" style="margin: 0;">' +
+								'<div class="col-xs-3"><img style="width: 128px; height: 128px;" src="' + window.BaseUrl + 'images/qpages/submit.png">' +
+								'</div>' +
+								'<div class="col-xs-8 col-xs-offset-1">' +
+								'<h3 style="margin-left: 0">Boom Diggity!</h3>' +
+								'<p class="text-muted">Your request has been sent...</p>' +
+								'</div>' +
+								'</div>' +
+								'<div class="row" style="margin: 0;"><div class="col-xs-12 text-center"><button type="button" class="btn btn-default" style="width: 80px; margin-top: 20px" onclick="$.fancybox.close()">OK</button></div></div>'),
+							title: 'Item',
+							width: 400,
+							autoSize: false,
+							autoHeight: true,
+							openEffect: 'none',
+							closeEffect: 'none',
+							helpers: {
+								title: false
+							}
+						});
+					});
+				}
 			}
 		};
 
@@ -249,7 +272,6 @@
 		this.selectedItem = undefined;
 		this.shortcutData = undefined;
 
-
 		this.load = function (itemToSelectId) {
 			var itemListConditions = new ItemListCondition();
 
@@ -260,9 +282,9 @@
 
 			itemListConditions.shortcutId = that.shortcutData.options.linkId;
 
-			if($('#sales-requests-item-list-all').hasClass('active'))
+			if ($('#sales-requests-item-list-all').hasClass('active'))
 				itemListConditions.listType = 'all-items';
-			else if($('#sales-requests-item-list-archive').hasClass('active'))
+			else if ($('#sales-requests-item-list-archive').hasClass('active'))
 				itemListConditions.listType = 'archive-items';
 			else
 				itemListConditions.listType = 'own-items';
@@ -575,7 +597,7 @@
 
 				$.SalesPortal.LinkManager.cleanupContextMenu();
 
-				if(rowObject.data().allowEdit || that.shortcutData.options.isAdminRole)
+				if (rowObject.data().allowEdit || that.shortcutData.options.isAdminRole)
 				{
 					var menu = $('<ul class="dropdown-menu context-menu-content logger-form" role="menu" data-log-group="Sales Request" data-log-action="Sales Request Activity">' +
 						'<li><a tabindex="-1" href="#" class="menu-item log-action" data-action-tag="clone">Clone</a></li>' +
@@ -634,22 +656,15 @@
 		};
 
 		var openItemInternal = function (selectedItemId, selectedItemTitle) {
-			if(selectedItemId==undefined)
+			if (selectedItemId == undefined)
 				selectedItemId = that.selectedItem.itemId;
-			if(selectedItemTitle==undefined)
+			if (selectedItemTitle == undefined)
 				selectedItemTitle = that.selectedItem.itemTitle;
 			that.selectedItem = new ItemContent({
 				selectedItemId: selectedItemId,
 				selectedItemTitle: selectedItemTitle,
 				shortcutData: that.shortcutData
 			});
-		};
-
-		var getDataRowElement = function (cellItem) {
-			var tableRow = cellItem.closest("tr");
-			if (tableRow.hasClass('child'))
-				return tableRow.prev('tr.parent');
-			return tableRow;
 		};
 
 		var cellRenderer = function (data, type, row, meta) {
@@ -724,6 +739,7 @@
 
 		this.itemId = parameters.selectedItemId;
 		this.itemTitle = parameters.selectedItemTitle;
+		this.isSubmitted = false;
 		var shortcutData = parameters.shortcutData;
 
 		this.clear = function () {
@@ -802,6 +818,25 @@
 				logObject: {name: shortcutData.options.headerTitle},
 				formContent: itemContent
 			});
+
+			that.isSubmitted = itemContent.find('.submit-data .submitted-by').length > 0;
+			var actiomMenuSubmitButton = $('#shortcut-action-container').find('.sales-requests-item-submit');
+			var itemListSumbitButton = $.SalesPortal.Content.getContentObject().find('.sales-requests-main-page .service-panel .item-list-buttons .item-list-submit');
+			var bottomBarSubmitButton = $.SalesPortal.Content.getContentObject().find('.sales-requests-main-page .content-panel .content-buttons .item-submit');
+			if (that.isSubmitted)
+			{
+				if (!bottomBarSubmitButton.hasClass('disabled'))
+					bottomBarSubmitButton.addClass('disabled');
+				itemListSumbitButton.hide();
+				actiomMenuSubmitButton.hide();
+			}
+			else
+			{
+				bottomBarSubmitButton.removeClass('disabled');
+				itemListSumbitButton.show();
+				actiomMenuSubmitButton.show();
+			}
+
 
 			$('#sales-requests-item-assigned-to').selectpicker();
 
@@ -920,9 +955,9 @@
 			var itemContent = $.SalesPortal.Content.getContentObject().find('.sales-requests-main-page .item-content');
 			var attachmentsDataContainer = $("#sales-requests-item-attachments-data");
 
-			var attachmentsCount =attachmentsDataContainer.find('.file-item').length;
-			if(attachmentsCount>0)
-				itemContent.find('.sales-requests-item-content-additional-sections .nav-tabs .attachments-count').html(' ('+attachmentsCount+')');
+			var attachmentsCount = attachmentsDataContainer.find('.file-item').length;
+			if (attachmentsCount > 0)
+				itemContent.find('.sales-requests-item-content-additional-sections .nav-tabs .attachments-count').html(' (' + attachmentsCount + ')');
 			else
 				itemContent.find('.sales-requests-item-content-additional-sections .nav-tabs .attachments-count').html('');
 
