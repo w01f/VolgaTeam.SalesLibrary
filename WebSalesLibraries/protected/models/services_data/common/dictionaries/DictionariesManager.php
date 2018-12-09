@@ -1,4 +1,5 @@
 <?
+
 	namespace application\models\services_data\common\dictionaries;
 
 	use application\models\services_data\common\rest\RestResponse;
@@ -97,7 +98,7 @@
 			$dbCommand = $dbCommand->join('tbl_folder f', 'f.id = l.id_folder');
 			$dbCommand = $dbCommand->join('tbl_page p', 'p.id = f.id_page');
 			$dbCommand = $dbCommand->join('tbl_library lb', 'lb.id = p.id_library');
-			$dbCommand = $dbCommand->where('l.type not in (5,6)');
+			$dbCommand = $dbCommand->where("l.type not in (5,6) and l.original_format<>'internal link'");
 			$dbCommand = $dbCommand->order('library_id, page_id, folder_id, link_id');
 			$linkRecords = $dbCommand->queryAll();
 
@@ -142,6 +143,50 @@
 				$libraryFolder->links[] = $libraryLink;
 			}
 			return RestResponse::success($libraries);
+		}
+
+		/**
+		 * @param $requestData LinkThumbnailsGetRequestData
+		 * @return RestResponse
+		 */
+		public static function getLinkThumbnails($requestData)
+		{
+			/** @var \CDbCommand $dbCommand */
+			$dbCommand = \Yii::app()->db->createCommand();
+			$dbCommand = $dbCommand->select(array(
+				'source_url' => "concat(lib.path,'/',case when link.original_format='jpeg' or link.original_format='gif' or link.original_format='png' then link.file_relative_path else prv.relative_path end) as source_url",
+			));
+			$dbCommand = $dbCommand->from('tbl_preview prv');
+			$dbCommand = $dbCommand->join('tbl_library lib', 'lib.id = prv.id_library');
+			$dbCommand = $dbCommand->join('tbl_link link', 'link.id_preview = prv.id_container');
+			$dbCommand = $dbCommand->where("link.id='" . $requestData->linkId . "' and link.original_format <> 'link bundle' and (
+				((link.original_format='xls' or link.original_format='url' or link.original_format='html5' or link.original_format='youtube' or link.original_format='vimeo' or link.original_format='quicksite') and prv.type='thumbs') or
+                (link.original_format='video' and prv.type='thumb') or
+				((link.original_format='ppt' or link.original_format='doc' or link.original_format='pdf') and prv.type='png'))");
+			$thumbnailRecords = $dbCommand->queryAll();
+
+			if (count($thumbnailRecords) == 0)
+			{
+				$dbCommand = \Yii::app()->db->createCommand();
+				$dbCommand = $dbCommand->select(array(
+					'source_url' => "concat(lib.path,'/',case when link.original_format='jpeg' or link.original_format='gif' or link.original_format='png' then link.file_relative_path else prv.relative_path end) as source_url",
+				));
+				$dbCommand = $dbCommand->from('tbl_preview prv');
+				$dbCommand = $dbCommand->join('tbl_library lib', 'lib.id = prv.id_library');
+				$dbCommand = $dbCommand->join('tbl_link', 'link.id_preview=prv.id_container');
+				$dbCommand = $dbCommand->join('tbl_link_bundle lb', 'lb.id_link = link.id');
+				$dbCommand = $dbCommand->join('tbl_link parent_link', 'parent_link.id = lb.id_bundle and lb.use_as_thumbnail = 1');
+				$dbCommand = $dbCommand->where("parent_link.id='" . $requestData->linkId . "' and parent_link.original_format = 'link bundle' and (
+					((link.original_format='xls' or link.original_format='url' or link.original_format='html5' or link.original_format='youtube' or link.original_format='vimeo' or link.original_format='quicksite') and prv.type='thumbs') or
+                    (link.original_format='video' and prv.type='thumb') or
+					((link.original_format='ppt' or link.original_format='doc' or link.original_format='pdf') and prv.type='png'))");
+				$thumbnailRecords = $dbCommand->queryAll();
+			}
+
+			$thumbnailUrls = array();
+			foreach ($thumbnailRecords as $thumbnailRecord)
+				$thumbnailUrls[] = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '//' . \Yii::app()->params['librariesRoot'] . '//' . $thumbnailRecord['source_url']);
+			return RestResponse::success($thumbnailUrls);
 		}
 
 		/**

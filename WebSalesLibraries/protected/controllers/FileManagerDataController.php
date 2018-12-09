@@ -2,6 +2,7 @@
 	use application\models\services_data\batch_tagger\BatchTaggerSetRequestData;
 	use application\models\services_data\common\dictionaries\DictionariesManager;
 	use application\models\services_data\common\dictionaries\LibraryLinksGetRequestData;
+	use application\models\services_data\common\dictionaries\LinkThumbnailsGetRequestData;
 	use application\models\services_data\common\dictionaries\SearchCategoriesGetRequestData;
 	use application\models\services_data\common\dictionaries\SecurityGetRequestData;
 	use application\models\services_data\common\dictionaries\ShortcutLinksGetRequestData;
@@ -9,7 +10,6 @@
 	use application\models\services_data\common\meta_data\MetaDataGetRequestData;
 	use application\models\services_data\common\meta_data\MetaDataManager;
 	use application\models\services_data\common\rest\RestResponse;
-	use application\models\wallbin\models\web\LibraryManager;
 
 	/**
 	 * Class FileManagerDataController
@@ -48,6 +48,10 @@
 				case 'librarylinks':
 					/** @var $requestData LibraryLinksGetRequestData */
 					$response = DictionariesManager::getLibraryLinks();
+					break;
+				case 'linkthumbnails':
+					/** @var $requestData LinkThumbnailsGetRequestData */
+					$response = DictionariesManager::getLinkThumbnails($requestData);
 					break;
 				case 'shortcutlinks':
 					/** @var $requestData ShortcutLinksGetRequestData */
