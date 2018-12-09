@@ -57,9 +57,6 @@
 			'application.models.wallbin.models.web.bundle_settings.*',
 			'application.models.wallbin.models.web.style.*',
 			'application.models.wallbin.models.soap.*',
-			'application.models.wallbin.models.cadmin.*',
-			'application.models.wallbin.models.cadmin.entities.*',
-			'application.models.wallbin.models.cadmin.settings.*',
 			'application.models.wallbin.records.*',
 			'application.models.data_query.common.*',
 			'application.models.data_query.conditions.*',
@@ -109,8 +106,6 @@
 					// REST patterns
 					array('fileManagerData/get', 'pattern' => 'FileManagerData/<model:\w+>', 'verb' => 'POST'),
 					array('fileManagerData/set', 'pattern' => 'FileManagerData/<model:\w+>', 'verb' => 'PUT'),
-					array('cloudAdmin/get', 'pattern' => 'CloudAdmin/<model:\w+>', 'verb' => 'POST'),
-					array('cloudAdmin/set', 'pattern' => 'CloudAdmin/<model:\w+>', 'verb' => 'PUT'),
 					// Other patterns
 					'<controller:\w+>/<action:\w+>' => '<controller>/<action>',
 				)
