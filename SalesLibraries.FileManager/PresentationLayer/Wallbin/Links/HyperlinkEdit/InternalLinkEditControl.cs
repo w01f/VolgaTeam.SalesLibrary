@@ -42,7 +42,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 
 		public bool ValidateLinkInfo()
 		{
-			var linkInfo = (InternalLinkInfo)GetHyperLinkInfo();
+			var linkInfo = (InternalLinkInfo)PrepareHyperLinkInfo();
 			if (String.IsNullOrEmpty(linkInfo.Name))
 			{
 				MainController.Instance.PopupMessages.ShowWarning("You should set the link name before saving");
@@ -52,9 +52,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 			return result.HasValue && result.Value;
 		}
 
-		public BaseNetworkLinkInfo GetHyperLinkInfo()
+		public BaseNetworkLinkInfo PrepareHyperLinkInfo()
 		{
-			var linkInfo = SelectedEditor?.GetHyperLinkInfo();
+			var linkInfo = SelectedEditor?.PrepareHyperLinkInfo();
 			if (linkInfo != null)
 			{
 				linkInfo.Name = textEditLinkName.EditValue as String;
@@ -64,6 +64,18 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 			return linkInfo;
 		}
 
+		public BaseNetworkLinkInfo GetFinalHyperLinkInfo()
+		{
+			var linkInfo = SelectedEditor?.GetFinalHyperLinkInfo();
+			if (linkInfo != null)
+			{
+				linkInfo.Name = textEditLinkName.EditValue as String;
+				linkInfo.FormatAsBluelink = checkEditBlueHyperlink.Checked;
+				linkInfo.FormatBold = checkEditBold.Checked;
+			}
+			return linkInfo;
+		}
+		
 		public void ApplyDataFromTemplate(BaseNetworkLinkInfo templateInfo)
 		{
 			if (templateInfo != null)
@@ -78,7 +90,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 		{
 			var selectedToggle = (CheckEdit)sender;
 			if (!selectedToggle.Checked) return;
-			var templateSettings = SelectedEditor?.GetHyperLinkInfo();
+			var templateSettings = SelectedEditor?.PrepareHyperLinkInfo();
 			SelectedEditorType = (InternalLinkType)Enum.Parse(typeof(InternalLinkType), selectedToggle.Tag.ToString());
 			if (!_editors.ContainsKey(SelectedEditorType))
 			{

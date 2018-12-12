@@ -110,8 +110,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 				}
 			}
 		}
-
-
+		
 		public override IList<LinkSettingsGroupType> GetCustomizedSettigsGroups()
 		{
 			var customizedSettingsGroups = base.GetCustomizedSettigsGroups();

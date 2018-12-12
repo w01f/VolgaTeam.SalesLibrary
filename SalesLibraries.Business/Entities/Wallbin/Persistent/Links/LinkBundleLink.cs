@@ -68,7 +68,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			});
 		}
 
-		public IList<string> GetThumbnailSourceFiles()
+		public IList<string> GetThumbnailSourceFiles(string sessionKey)
 		{
 			var previewFiles = new List<string>();
 			foreach (var previewableLink in ((LinkBundleLinkSettings)Settings).Bundle.Settings.Items
@@ -76,7 +76,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 				.Select(item => item.TargetLink)
 				.OfType<IThumbnailSettingsHolder>())
 			{
-				var tempList = previewableLink.GetThumbnailSourceFiles().ToList();
+				var tempList = previewableLink.GetThumbnailSourceFiles(sessionKey).ToList();
 				tempList.Sort(WinAPIHelper.StrCmpLogicalW);
 				previewFiles.AddRange(tempList);
 			}

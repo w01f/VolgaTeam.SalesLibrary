@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows.Forms;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.HyperLinkInfo;
+using SalesLibraries.FileManager.Business.Models.ExternalLibraryLinks;
 using SalesLibraries.FileManager.Controllers;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEdit
@@ -28,7 +29,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 
 		public bool ValidateLinkInfo()
 		{
-			var linkInfo = (InternalLibraryObjectLinkInfo)GetHyperLinkInfo();
+			var linkInfo = (InternalLibraryObjectLinkInfo)PrepareHyperLinkInfo();
 			if (String.IsNullOrEmpty(linkInfo.LibraryName))
 			{
 				MainController.Instance.PopupMessages.ShowWarning("You should set the target library before saving");
@@ -52,15 +53,34 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 			return true;
 		}
 
-		public InternalLinkInfo GetHyperLinkInfo()
+		public InternalLinkInfo GetFinalHyperLinkInfo()
 		{
-			return new InternalLibraryObjectLinkInfo
+			var linkInfo = (InternalLibraryObjectLinkInfo)PrepareHyperLinkInfo();
+
+			MainController.Instance.ProcessManager.Run(
+				"Loading Link Thumbnails...",
+				(cancelationToken, formProgess) =>
+				{
+					linkInfo.ThumbnailUrls.AddRange(MainController.Instance.Lists.ExternalLibraryLinks.GetLinkThumbnails(linkInfo.LinkId));
+				});
+
+			return linkInfo;
+		}
+
+		public InternalLinkInfo PrepareHyperLinkInfo()
+		{
+			var selectedLink = (LibraryLink)comboBoxEditLibraryLinkName.EditValue;
+
+			var linkInfo = new InternalLibraryObjectLinkInfo
 			{
 				LibraryName = comboBoxEditLibraryName.EditValue as String,
 				PageName = comboBoxEditPageName.EditValue as String,
 				WindowName = comboBoxEditWindowName.EditValue as String,
-				LinkName = comboBoxEditLibraryLinkName.EditValue as String,
+				LinkName = selectedLink.ToString(),
+				LinkId = selectedLink.Id
 			};
+
+			return linkInfo;
 		}
 
 		public void ApplySharedSettings(InternalLinkInfo templateInfo)
@@ -124,9 +144,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 				.FirstOrDefault(f => String.Compare(f.Name, libraryFolderName, StringComparison.OrdinalIgnoreCase) == 0);
 			if (libraryFolder != null)
 				comboBoxEditLibraryLinkName.Properties.Items.AddRange(libraryFolder.Links
-					.OrderBy(link=>link.Order)
-					.Select(link => link.FileName ?? link.Name)
-					.Where(item => !String.IsNullOrEmpty(item))
+					.OrderBy(link => link.Order)
 					.ToArray());
 		}
 	}

@@ -33,11 +33,19 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 {
 	public partial class FormEditLinkThumbnail : MetroForm, ILinkSetSettingsEditForm
 	{
+		private static string _thumbnailSessionKey;
+
+		static FormEditLinkThumbnail()
+		{
+			_thumbnailSessionKey = Guid.NewGuid().ToString();
+		}
+
 		private bool _allowHandleEvents = false;
 		private string _tempThumbnailText;
 		private readonly List<IThumbnailSettingsHolder> _selectedLinks = new List<IThumbnailSettingsHolder>();
 		private readonly ILinksGroup _linkGroup;
 		private readonly LinkType? _defaultLinkType;
+		private readonly List<string> _cachedThumbnailFiles = new List<string>();
 
 		private IThumbnailSettingsHolder SingleLink => _selectedLinks.FirstOrDefault();
 
@@ -483,7 +491,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			if (SingleLink == null) return;
 
 			imageListViewSingle.Items.Clear();
-			var sourceImageFiles = SingleLink.GetThumbnailSourceFiles();
+
+			var sourceImageFiles = new List<string>();
+			MainController.Instance.ProcessManager.Run("Loading Thumbnail Images...", (cancelationToken, formProgess) =>
+			{
+				sourceImageFiles.AddRange(SingleLink.GetThumbnailSourceFiles(_thumbnailSessionKey));
+			});
 			if (!sourceImageFiles.Any()) return;
 			imageListViewSingle.Items.AddRange(sourceImageFiles
 				.Select(filePath => new ImageListViewItem(
@@ -537,6 +550,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 			RefreshSourceFiles(new[] { SingleLink });
 
+			_thumbnailSessionKey = Guid.NewGuid().ToString();
 			LoadSourceImages();
 
 			if (pictureEditSingleImage.Image == null)
@@ -782,7 +796,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		private void SaveLinkSetData()
 		{
 			if (buttonXEnable.Checked)
-				RefreshSourceFiles(_selectedLinks.Where(link => !link.GetThumbnailSourceFiles().Any()).ToList());
+				RefreshSourceFiles(_selectedLinks.Where(link => !link.GetThumbnailSourceFiles(_thumbnailSessionKey).Any()).ToList());
 
 			foreach (var selectedLink in _selectedLinks)
 			{
@@ -841,7 +855,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 					else if (checkEditLinkSetTextAlignmentRight.Checked)
 						selectedLink.Thumbnail.TextAlignement = HorizontalAlignment.Right;
 
-					var defaultImageFilePath = selectedLink.GetThumbnailSourceFiles().FirstOrDefault();
+					var defaultImageFilePath = selectedLink.GetThumbnailSourceFiles(_thumbnailSessionKey).FirstOrDefault();
 					if (defaultImageFilePath != null)
 						using (var tempImage = Image.FromFile(defaultImageFilePath))
 						{

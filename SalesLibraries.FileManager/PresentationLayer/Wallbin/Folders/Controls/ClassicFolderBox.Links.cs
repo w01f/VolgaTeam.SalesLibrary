@@ -442,58 +442,58 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 				{
 					case HyperLinkTypeEnum.Url:
 						return WebLink.Create(
-							(UrlLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
+							(UrlLinkInfo)form.SelectedEditor.GetFinalHyperLinkInfo(),
 							DataSource);
 					case HyperLinkTypeEnum.YouTube:
 						return YouTubeLink.Create(
-							(YouTubeLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
+							(YouTubeLinkInfo)form.SelectedEditor.GetFinalHyperLinkInfo(),
 							DataSource);
 					case HyperLinkTypeEnum.Network:
 						return NetworkLink.Create(
-							(LanLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
+							(LanLinkInfo)form.SelectedEditor.GetFinalHyperLinkInfo(),
 							DataSource);
 					case HyperLinkTypeEnum.QuickSite:
 						return QuickSiteLink.Create(
-							(QuickSiteLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
+							(QuickSiteLinkInfo)form.SelectedEditor.GetFinalHyperLinkInfo(),
 							DataSource);
 					case HyperLinkTypeEnum.App:
 						return AppLink.Create(
-							(AppLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
+							(AppLinkInfo)form.SelectedEditor.GetFinalHyperLinkInfo(),
 							DataSource);
 					case HyperLinkTypeEnum.Internal:
-						var internalLinkInfo = (InternalLinkInfo)form.SelectedEditor.GetHyperLinkInfo();
+						var internalLinkInfo = (InternalLinkInfo)form.SelectedEditor.GetFinalHyperLinkInfo();
 						switch (internalLinkInfo.InternalLinkType)
 						{
 							case InternalLinkType.Wallbin:
 								return InternalWallbinLink.Create(
-									(InternalWallbinLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
+									(InternalWallbinLinkInfo)internalLinkInfo,
 									DataSource);
 							case InternalLinkType.LibraryPage:
 								return InternalLibraryPageLink.Create(
-									(InternalLibraryPageLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
+									(InternalLibraryPageLinkInfo)internalLinkInfo,
 									DataSource);
 							case InternalLinkType.LibraryFolder:
 								return InternalLibraryFolderLink.Create(
-									(InternalLibraryFolderLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
+									(InternalLibraryFolderLinkInfo)internalLinkInfo,
 									DataSource);
 							case InternalLinkType.LibraryObject:
 								return InternalLibraryObjectLink.Create(
-									(InternalLibraryObjectLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
+									(InternalLibraryObjectLinkInfo)internalLinkInfo,
 									DataSource);
 							case InternalLinkType.Shortcut:
 								return InternalShortcutLink.Create(
-									(InternalShortcutLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
+									(InternalShortcutLinkInfo)internalLinkInfo,
 									DataSource);
 							default:
 								throw new ArgumentOutOfRangeException("Link type not found");
 						}
 					case HyperLinkTypeEnum.Html5:
 						return Html5Link.Create(
-							(Html5LinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
+							(Html5LinkInfo)form.SelectedEditor.GetFinalHyperLinkInfo(),
 							DataSource);
 					case HyperLinkTypeEnum.Vimeo:
 						return VimeoLink.Create(
-							(VimeoLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
+							(VimeoLinkInfo)form.SelectedEditor.GetFinalHyperLinkInfo(),
 							DataSource);
 					default:
 						throw new ArgumentOutOfRangeException("Link type not found");

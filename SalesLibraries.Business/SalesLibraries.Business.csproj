@@ -70,11 +70,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contexts\SQLiteContext.cs" />
-    <Compile Include="Contexts\Wallbin\Cloud\CloudDataExportHelper.cs" />
-    <Compile Include="Contexts\Wallbin\Cloud\CloudLibraryContext.cs" />
-    <Compile Include="Contexts\Wallbin\Cloud\CloudLibraryLocalContext.cs" />
-    <Compile Include="Contexts\Wallbin\Cloud\CloudLibraryRemoteContext.cs" />
-    <Compile Include="Contexts\Wallbin\Cloud\CloudWallbinManager.cs" />
     <Compile Include="Contexts\Wallbin\LibraryContext.cs" />
     <Compile Include="Contexts\Wallbin\Local\LocalWallbinManager.cs" />
     <Compile Include="Contexts\Wallbin\Local\LocalLibraryContext.cs" />
@@ -263,9 +258,7 @@
     <Compile Include="Mappers\Wallbin\BaseLibraryLinkMap.cs" />
     <Compile Include="Mappers\Wallbin\LibraryFileLinkMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Contexts\Wallbin\Cloud\CloudDataImportHelper.cs" />
     <Compile Include="Contexts\Wallbin\Local\LegacyImportHelper.cs" />
-    <Compile Include="Schema\Wallbin\Initialization\CloudlWallbinInitializer.cs" />
     <Compile Include="Schema\Wallbin\Initialization\LocalWallbinInitializer.cs" />
     <Compile Include="Schema\Wallbin\Initialization\Patches\IPatch.cs" />
     <Compile Include="Schema\Wallbin\Initialization\Patches\Patch11.cs" />

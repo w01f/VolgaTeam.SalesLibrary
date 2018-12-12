@@ -55,5 +55,17 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 				_linkName = value;
 			}
 		}
+
+		private string[] _thumbnailUrls;
+		public string[] ThumbnailUrls
+		{
+			get => _thumbnailUrls;
+			set
+			{
+				if (_thumbnailUrls != value)
+					OnSettingsChanged();
+				_thumbnailUrls = value;
+			}
+		}
 	}
 }

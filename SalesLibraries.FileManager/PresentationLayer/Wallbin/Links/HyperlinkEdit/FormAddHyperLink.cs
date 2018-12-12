@@ -65,7 +65,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 		{
 			var selectedButton = (ButtonX)sender;
 			if (!selectedButton.Checked) return;
-			var templateSettings = SelectedEditor?.GetHyperLinkInfo();
+			var templateSettings = SelectedEditor?.PrepareHyperLinkInfo();
 			SelectedEditorType = (HyperLinkTypeEnum)Enum.Parse(typeof(HyperLinkTypeEnum), selectedButton.Tag.ToString());
 			if (!_editors.ContainsKey(SelectedEditorType))
 			{

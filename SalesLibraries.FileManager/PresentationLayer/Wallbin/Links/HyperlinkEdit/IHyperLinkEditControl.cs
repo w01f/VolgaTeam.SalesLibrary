@@ -5,7 +5,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 	public interface IHyperLinkEditControl
 	{
 		bool ValidateLinkInfo();
-		BaseNetworkLinkInfo GetHyperLinkInfo();
+		BaseNetworkLinkInfo PrepareHyperLinkInfo();
+		BaseNetworkLinkInfo GetFinalHyperLinkInfo();
 		void ApplyDataFromTemplate(BaseNetworkLinkInfo templateInfo);
 	}
 }

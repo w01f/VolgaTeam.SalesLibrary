@@ -39,7 +39,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			Type = LinkType.Video;
 		}
 
-		public IList<string> GetThumbnailSourceFiles()
+		public IList<string> GetThumbnailSourceFiles(string sessionKey)
 		{
 			var previewFiles = new List<string>();
 			var sourceFilesPath = Path.Combine(PreviewContainerPath, PreviewFormats.VideoThumbnail);

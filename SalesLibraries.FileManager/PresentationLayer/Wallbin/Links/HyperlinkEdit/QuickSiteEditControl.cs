@@ -15,7 +15,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 
 		public bool ValidateLinkInfo()
 		{
-			var linkInfo = (QuickSiteLinkInfo)GetHyperLinkInfo();
+			var linkInfo = (QuickSiteLinkInfo)PrepareHyperLinkInfo();
 			if (String.IsNullOrEmpty(linkInfo.Name))
 			{
 				MainController.Instance.PopupMessages.ShowWarning("You should set the link name before saving");
@@ -29,7 +29,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 			return true;
 		}
 
-		public BaseNetworkLinkInfo GetHyperLinkInfo()
+		public BaseNetworkLinkInfo PrepareHyperLinkInfo()
 		{
 			return new QuickSiteLinkInfo()
 			{
@@ -39,6 +39,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 				FormatBold = checkEditBold.Checked,
 				ForcePreview = checkEditForcePreview.Checked
 			};
+		}
+
+		public BaseNetworkLinkInfo GetFinalHyperLinkInfo()
+		{
+			return PrepareHyperLinkInfo();
 		}
 
 		public void ApplyDataFromTemplate(BaseNetworkLinkInfo templateInfo)

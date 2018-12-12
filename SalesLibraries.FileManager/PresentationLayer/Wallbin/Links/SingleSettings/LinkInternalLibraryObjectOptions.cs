@@ -5,6 +5,7 @@ using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Helpers;
+using SalesLibraries.FileManager.Business.Models.ExternalLibraryLinks;
 using SalesLibraries.FileManager.Controllers;
 using SalesLibraries.FileManager.Properties;
 
@@ -52,10 +53,21 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		public void SaveData()
 		{
 			_data.Name = textEditName.EditValue as String;
+
+			var selectedLink = (LibraryLink)comboBoxEditLibraryLinkName.EditValue;
+
 			((InternalLibraryObjectLinkSettings)_data.Settings).LibraryName = comboBoxEditLibraryName.EditValue as String;
 			((InternalLibraryObjectLinkSettings)_data.Settings).PageName = comboBoxEditPageName.EditValue as String;
 			((InternalLibraryObjectLinkSettings)_data.Settings).WindowName = comboBoxEditWindowName.EditValue as String;
-			((InternalLibraryObjectLinkSettings)_data.Settings).LinkName = comboBoxEditLibraryLinkName.EditValue as String;
+			((InternalLibraryObjectLinkSettings)_data.Settings).LinkName = selectedLink.ToString();
+
+			MainController.Instance.ProcessManager.Run(
+				"Updating Link Thumbnails...",
+				(cancelationToken, formProgess) =>
+				{
+					((InternalLibraryObjectLinkSettings)_data.Settings).ThumbnailUrls = 
+						MainController.Instance.Lists.ExternalLibraryLinks.GetLinkThumbnails(selectedLink.Id).ToArray();
+				});
 		}
 
 		private void OnLibraryChanged(object sender, EventArgs e)
@@ -105,8 +117,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			if (libraryFolder != null)
 				comboBoxEditLibraryLinkName.Properties.Items.AddRange(libraryFolder.Links
 					.OrderBy(link => link.Order)
-					.Select(link => link.FileName ?? link.Name)
-					.Where(item => !String.IsNullOrEmpty(item))
 					.ToArray());
 		}
 	}

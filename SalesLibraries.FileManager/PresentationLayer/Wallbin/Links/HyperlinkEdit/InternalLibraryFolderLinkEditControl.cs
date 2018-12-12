@@ -36,7 +36,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 
 		public bool ValidateLinkInfo()
 		{
-			var linkInfo = (InternalLibraryFolderLinkInfo)GetHyperLinkInfo();
+			var linkInfo = (InternalLibraryFolderLinkInfo)PrepareHyperLinkInfo();
 			if (String.IsNullOrEmpty(linkInfo.LibraryName))
 			{
 				MainController.Instance.PopupMessages.ShowWarning("You should set the target library before saving");
@@ -55,7 +55,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 			return true;
 		}
 
-		public InternalLinkInfo GetHyperLinkInfo()
+		public InternalLinkInfo PrepareHyperLinkInfo()
 		{
 			return new InternalLibraryFolderLinkInfo
 			{
@@ -66,6 +66,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 				OpenOnSamePage = !checkEditOpenOnSamePage.Checked,
 				StyleSettings = comboBoxEditStyle.EditValue as InternalLinkTemplate
 			};
+		}
+
+		public InternalLinkInfo GetFinalHyperLinkInfo()
+		{
+			return PrepareHyperLinkInfo();
 		}
 
 		public void ApplySharedSettings(InternalLinkInfo templateInfo)

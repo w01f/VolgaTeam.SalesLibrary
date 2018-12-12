@@ -52,5 +52,12 @@ namespace SalesLibraries.FileManager.Business.Dictionaries
 			localMetaData.Save();
 			IsLoaded = true;
 		}
+
+		public IList<string> GetLinkThumbnails(string linkId)
+		{
+			var response = MainController.Instance.RestServiceConnection.DoRequest(new LinkThumbnailsGetRequestData { LinkId = linkId }, "Error loading thumbnails from server");
+			var thumbnailUrls = response.GetData<string[]>();
+			return thumbnailUrls;
+		}
 	}
 }

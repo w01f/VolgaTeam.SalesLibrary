@@ -10,6 +10,6 @@ namespace SalesLibraries.Business.Entities.Interfaces
 		bool ShowSourceFilesList { get; }
 		Color ThumbnailBackColor { get; }
 		ThumbnailSettings Thumbnail { get; set; }
-		IList<string> GetThumbnailSourceFiles();
+		IList<string> GetThumbnailSourceFiles(string sessionKey);
 	}
 }

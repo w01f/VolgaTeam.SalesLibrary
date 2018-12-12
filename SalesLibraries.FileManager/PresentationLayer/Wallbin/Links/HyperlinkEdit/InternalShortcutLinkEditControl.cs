@@ -41,7 +41,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 
 		public bool ValidateLinkInfo()
 		{
-			var linkInfo = (InternalShortcutLinkInfo)GetHyperLinkInfo();
+			var linkInfo = (InternalShortcutLinkInfo)PrepareHyperLinkInfo();
 			if (String.IsNullOrEmpty(linkInfo.ShortcutId))
 			{
 				MainController.Instance.PopupMessages.ShowWarning("You should set the shortcut id before saving");
@@ -50,13 +50,18 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 			return true;
 		}
 
-		public InternalLinkInfo GetHyperLinkInfo()
+		public InternalLinkInfo PrepareHyperLinkInfo()
 		{
 			return new InternalShortcutLinkInfo
 			{
 				ShortcutId = (comboBoxEditShortcutLink.EditValue as ShortcutLink)?.Id,
 				OpenOnSamePage = !checkEditOpenOnSamePage.Checked
 			};
+		}
+
+		public InternalLinkInfo GetFinalHyperLinkInfo()
+		{
+			return PrepareHyperLinkInfo();
 		}
 
 		public void ApplySharedSettings(InternalLinkInfo templateInfo)

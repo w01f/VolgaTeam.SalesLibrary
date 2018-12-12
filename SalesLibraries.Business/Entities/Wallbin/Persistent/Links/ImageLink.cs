@@ -33,7 +33,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		public bool ShowSourceFilesList => false;
 		#endregion
 
-		public IList<string> GetThumbnailSourceFiles()
+		public IList<string> GetThumbnailSourceFiles(string sessionKey)
 		{
 			return new[] { FullPath };
 		}
