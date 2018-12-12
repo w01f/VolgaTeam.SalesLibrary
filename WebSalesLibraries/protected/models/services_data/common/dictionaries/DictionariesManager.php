@@ -161,7 +161,7 @@
 			$dbCommand = $dbCommand->join('tbl_link link', 'link.id_preview = prv.id_container');
 			$dbCommand = $dbCommand->where("link.id='" . $requestData->linkId . "' and link.original_format <> 'link bundle' and (
 				((link.original_format='xls' or link.original_format='url' or link.original_format='html5' or link.original_format='youtube' or link.original_format='vimeo' or link.original_format='quicksite') and prv.type='thumbs') or
-                (link.original_format='video' and prv.type='thumb') or
+                (link.original_format='video' and (prv.type='thumb' or prv.type='mp4 thumb')) or
 				((link.original_format='ppt' or link.original_format='doc' or link.original_format='pdf') and prv.type='png'))");
 			$thumbnailRecords = $dbCommand->queryAll();
 
@@ -178,7 +178,7 @@
 				$dbCommand = $dbCommand->join('tbl_link parent_link', 'parent_link.id = lb.id_bundle and lb.use_as_thumbnail = 1');
 				$dbCommand = $dbCommand->where("parent_link.id='" . $requestData->linkId . "' and parent_link.original_format = 'link bundle' and (
 					((link.original_format='xls' or link.original_format='url' or link.original_format='html5' or link.original_format='youtube' or link.original_format='vimeo' or link.original_format='quicksite') and prv.type='thumbs') or
-                    (link.original_format='video' and prv.type='thumb') or
+                    (link.original_format='video' and (prv.type='thumb' or prv.type='mp4 thumb')) or
 					((link.original_format='ppt' or link.original_format='doc' or link.original_format='pdf') and prv.type='png'))");
 				$thumbnailRecords = $dbCommand->queryAll();
 			}

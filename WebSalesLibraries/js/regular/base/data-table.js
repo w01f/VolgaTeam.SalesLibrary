@@ -53,7 +53,10 @@
 			function () {
 			};
 
+		var columnVisibilitySettings = [];
 		var dataTable = undefined;
+
+		var updateResponsiveColumnsTimer = null;
 
 		this.init = function (data) {
 			destroy();
@@ -67,7 +70,7 @@
 				};
 			data.dataset = data.dataset !== undefined ? data.dataset : [];
 			data.dataViewOptions = data.dataViewOptions !== undefined ? data.dataViewOptions : {
-				columnSettings: undefined,
+				columnSettings: [],
 				showDeleteButton: false,
 				reorderSourceField: undefined
 			};
@@ -96,17 +99,27 @@
 
 			var columnSettings = [];
 			var exportColumnsIndexes = [];
+			columnVisibilitySettings = [];
 
 			if (data.dataViewOptions.reorderSourceField !== undefined)
+			{
 				columnSettings.push({
 					"data": 'extended_data.' + data.dataViewOptions.reorderSourceField,
 					"visible": false,
 					"searchable": false,
 					"orderable": true
 				});
+				columnVisibilitySettings.push({
+					large: false,
+					medium: false,
+					small: false,
+					extraSmall: false
+				});
+			}
 
 			var sortColumnIndex = 0;
 			var columnIndex = 0;
+			var columnVisibility = null;
 			$.each(data.dataViewOptions.columnSettings, function (key, value) {
 				if (data.dataViewOptions.reorderSourceField === undefined && key === data.sortColumnTag)
 					sortColumnIndex = columnIndex;
@@ -119,101 +132,155 @@
 					case ColumnTagCategory:
 						if (value.enable && hasCategories)
 						{
+							columnVisibility = {
+								large: !value.visibilitySettings.hideForLargeScreen,
+								medium: !value.visibilitySettings.hideForMediumScreen,
+								small: !value.visibilitySettings.hideForSmallScreen,
+								extraSmall: !value.visibilitySettings.hideForExtraSmallScreen
+							};
 							columnSettings.push({
 								"data": "tag",
 								"orderable": data.dataViewOptions.reorderSourceField === undefined,
 								"title": value.title,
 								"class": "tag-text-container allow-export allow-reorder" + (value.fullWidth ? ' none' : ' all'),
 								"width": value.width > 0 ? (value.width + "px") : "15%",
-								"render": cellRenderer
+								"visible": getIsColumnVisibile(columnVisibility),
+								"render": cellRenderer,
 							});
+							columnVisibilitySettings.push(columnVisibility);
 							columnIndex++;
 						}
 						break;
 					case ColumnTagLibrary:
 						if (value.enable)
 						{
+							columnVisibility = {
+								large: !value.visibilitySettings.hideForLargeScreen,
+								medium: !value.visibilitySettings.hideForMediumScreen,
+								small: !value.visibilitySettings.hideForSmallScreen,
+								extraSmall: !value.visibilitySettings.hideForExtraSmallScreen
+							};
 							columnSettings.push({
 								"data": "library.name",
 								"orderable": data.dataViewOptions.reorderSourceField === undefined,
 								"title": value.title,
 								"class": "centered allow-export allow-reorder" + (value.fullWidth ? ' none' : ' all'),
 								"width": value.width > 0 ? (value.width + "px") : "10%",
+								"visible": getIsColumnVisibile(columnVisibility),
 								"render": cellRenderer
 							});
+							columnVisibilitySettings.push(columnVisibility);
 							columnIndex++;
 						}
 						break;
 					case ColumnTagType:
 						if (value.enable)
 						{
+							columnVisibility = {
+								large: !value.visibilitySettings.hideForLargeScreen,
+								medium: !value.visibilitySettings.hideForMediumScreen,
+								small: !value.visibilitySettings.hideForSmallScreen,
+								extraSmall: !value.visibilitySettings.hideForExtraSmallScreen
+							};
 							columnSettings.push({
 								"data": "file_type",
 								"orderable": data.dataViewOptions.reorderSourceField === undefined,
 								"title": value.title,
 								"class": "centered allow-export allow-reorder" + (value.fullWidth ? ' none' : ' all'),
 								"width": value.width > 0 ? (value.width + "px") : "70px",
+								"visible": getIsColumnVisibile(columnVisibility),
 								"render": cellRenderer
 							});
+							columnVisibilitySettings.push(columnVisibility);
 							columnIndex++;
 						}
 						break;
 					case ColumnTagName:
 						if (value.enable)
 						{
+							columnVisibility = {
+								large: !value.visibilitySettings.hideForLargeScreen,
+								medium: !value.visibilitySettings.hideForMediumScreen,
+								small: !value.visibilitySettings.hideForSmallScreen,
+								extraSmall: !value.visibilitySettings.hideForExtraSmallScreen
+							};
 							columnSettings.push({
 								"data": "name",
 								"orderable": data.dataViewOptions.reorderSourceField === undefined,
 								"title": value.title,
 								"class": "link-name-text-container allow-export" + (value.fullWidth ? ' none' : ' all'),
 								"width": value.width > 0 ? (value.width + "px") : null,
+								"visible": getIsColumnVisibile(columnVisibility),
 								"render": cellRenderer,
 								"sType": "natural"
-
 							});
+							columnVisibilitySettings.push(columnVisibility);
 							columnIndex++;
 						}
 						break;
 					case ColumnTagThumbnail:
 						if (value.enable)
 						{
+							columnVisibility = {
+								large: !value.visibilitySettings.hideForLargeScreen,
+								medium: !value.visibilitySettings.hideForMediumScreen,
+								small: !value.visibilitySettings.hideForSmallScreen,
+								extraSmall: !value.visibilitySettings.hideForExtraSmallScreen
+							};
 							columnSettings.push({
 								"data": "thumbnail",
 								"orderable": data.dataViewOptions.reorderSourceField === undefined,
 								"title": value.title,
 								"width": value.width > 0 ? (value.width + "px") : "90px",
+								"visible": getIsColumnVisibile(columnVisibility),
 								"class": "centered" + (value.fullWidth ? ' none' : ' all'),
 								"render": cellRenderer
 							});
+							columnVisibilitySettings.push(columnVisibility);
 							columnIndex++;
 						}
 						break;
 					case ColumnTagViews:
 						if (value.enable)
 						{
+							columnVisibility = {
+								large: !value.visibilitySettings.hideForLargeScreen,
+								medium: !value.visibilitySettings.hideForMediumScreen,
+								small: !value.visibilitySettings.hideForSmallScreen,
+								extraSmall: !value.visibilitySettings.hideForExtraSmallScreen
+							};
 							columnSettings.push({
 								"data": "views",
 								"orderable": data.dataViewOptions.reorderSourceField === undefined,
 								"title": value.title,
 								"class": "centered allow-reorder allow-export" + (value.fullWidth ? ' none' : ' all'),
 								"width": value.width > 0 ? (value.width + "px") : "50px",
+								"visible": getIsColumnVisibile(columnVisibility),
 								"sType": "numeric",
 								"render": {
 									_: cellRenderer,
 									sort: 'value'
 								}
 							});
+							columnVisibilitySettings.push(columnVisibility);
 							columnIndex++;
 						}
 						break;
 					case ColumnTagRate:
 						if (value.enable)
 						{
+							columnVisibility = {
+								large: !value.visibilitySettings.hideForLargeScreen,
+								medium: !value.visibilitySettings.hideForMediumScreen,
+								small: !value.visibilitySettings.hideForSmallScreen,
+								extraSmall: !value.visibilitySettings.hideForExtraSmallScreen
+							};
 							columnSettings.push({
 								"data": "rate",
 								"orderable": data.dataViewOptions.reorderSourceField === undefined,
 								"title": value.title,
 								"width": value.width > 0 ? (value.width + "px") : "90px",
+								"visible": getIsColumnVisibile(columnVisibility),
 								"class": "centered rate-image-container" + (value.fullWidth ? ' none' : ' all'),
 								"render": {
 									_: function (columnData) {
@@ -225,29 +292,45 @@
 									sort: 'value'
 								}
 							});
+							columnVisibilitySettings.push(columnVisibility);
 							columnIndex++;
 						}
 						break;
 					case ColumnTagDate:
 						if (value.enable)
 						{
+							columnVisibility = {
+								large: !value.visibilitySettings.hideForLargeScreen,
+								medium: !value.visibilitySettings.hideForMediumScreen,
+								small: !value.visibilitySettings.hideForSmallScreen,
+								extraSmall: !value.visibilitySettings.hideForExtraSmallScreen
+							};
 							columnSettings.push({
 								"data": "date",
 								"orderable": data.dataViewOptions.reorderSourceField === undefined,
 								"title": value.title,
 								"class": "centered allow-reorder allow-export" + (value.fullWidth ? ' none' : ' all'),
+								"visible": getIsColumnVisibile(columnVisibility),
 								"width": value.width > 0 ? (value.width + "px") : "80px",
 								"render": {
 									_: cellRenderer,
 									sort: 'value'
 								}
 							});
+							columnVisibilitySettings.push(columnVisibility);
+
 							columnSettings.push({
 								"data": "date.value",
 								"title": value.title,
 								"visible": false,
 								"searchable": false,
 								"sType": "numeric"
+							});
+							columnVisibilitySettings.push({
+								large: false,
+								medium: false,
+								small: false,
+								extraSmall: false
 							});
 
 							columnIndex++;
@@ -257,6 +340,7 @@
 			});
 
 			if (data.dataViewOptions.showDeleteButton)
+			{
 				columnSettings.push({
 					"data": null,
 					"title": '',
@@ -264,6 +348,13 @@
 					"orderable": false,
 					"defaultContent": '<img class="link-delete-button" src="' + window.BaseUrl + 'images/grid/item-delete.png">'
 				});
+				columnVisibilitySettings.push({
+					large: true,
+					medium: true,
+					small: true,
+					extraSmall: true
+				});
+			}
 
 			columnSettings.push({
 				"data": "id",
@@ -271,12 +362,24 @@
 				"visible": false,
 				"searchable": false
 			});
+			columnVisibilitySettings.push({
+				large: false,
+				medium: false,
+				small: false,
+				extraSmall: false
+			});
 
 			columnSettings.push({
 				"data": "extended_data",
 				"title": "extended_data",
 				"visible": false,
 				"searchable": false
+			});
+			columnVisibilitySettings.push({
+				large: false,
+				medium: false,
+				small: false,
+				extraSmall: false
 			});
 
 			columnSettings.push({
@@ -287,6 +390,12 @@
 				"class": "allow-export"
 
 			});
+			columnVisibilitySettings.push({
+				large: false,
+				medium: false,
+				small: false,
+				extraSmall: false
+			});
 
 			columnSettings.push({
 				"data": "oneDriveUrl",
@@ -295,17 +404,17 @@
 				"searchable": false,
 				"class": "allow-export"
 			});
+			columnVisibilitySettings.push({
+				large: false,
+				medium: false,
+				small: false,
+				extraSmall: false
+			});
 
 			$.extend($.fn.dataTableExt.oStdClasses, {
 				"sFilterInput": "form-control",
 				"sLengthSelect": "form-control"
 			});
-
-			var tableHeaderLengthItemClass = backHandler ? 'col-lg-2 col-md-2 col-sm-4 hidden-xs' : 'col-lg-2 col-md-2 col-sm-4 hidden-xs';
-			var tableHeaderFilterItemClass = backHandler ? 'col-lg-3 col-md-2 hidden-sm hidden-xs' : 'col-lg-3 col-md-2 hidden-sm hidden-xs';
-			var tableHeaderButtonsItemClass = backHandler ? 'col-lg-2 col-md-1 hidden-sm hidden-xs' : 'col-lg-3 col-md-2 hidden-sm hidden-xs';
-			var tableHeaderBackItemClass = useExcelExport ? 'col-lg-1 col-md-1 hidden-sm hidden-xs' : 'col-lg-3 col-md-2 hidden-sm hidden-xs';
-			var tableHeaderPaginationItemClass = backHandler ? 'col-lg-4 col-md-6 col-sm-8 col-xs-12' : (useExcelExport ? 'col-lg-4 col-md-6 col-sm-8 col-xs-12' : 'col-lg-7 col-md-8 col-sm-8 col-xs-12');
 
 			jQuery.fn.dataTableExt.oSort['natural-asc'] = function (a, b) {
 				return naturalSort(a, b);
@@ -338,6 +447,7 @@
 				},
 				buttons: [{
 					extend: 'excelHtml5',
+					text: '<img style="width: 32px; height: 32px" src="' + window.BaseUrl + 'images/grid/thumbnail-placeholder/xls.png">',
 					exportOptions: {
 						columns: '.allow-export'
 					},
@@ -363,18 +473,19 @@
 				"language": {
 					"emptyTable": "",
 					"zeroRecords": "",
-					"search": "Filter:",
+					"search": "_INPUT_",
+					"searchPlaceholder": "filter...",
 					"info": "Showing _START_ to _END_ of _TOTAL_ links",
-					"lengthMenu": 'Show _MENU_ (of <span class="length-filter-total-items">0</span> links)'
+					"lengthMenu": '_MENU_ (of <span class="length-filter-total-items">0</span> links)'
 				},
-				"dom": (data.dataset.length > 0 ?
-					"<'row table-header-row'<'" + tableHeaderLengthItemClass + "'l><'" + tableHeaderFilterItemClass + "'f>" +
-					(useExcelExport ? "<'" + tableHeaderButtonsItemClass + " excel-export-action text-center'B>" : "") +
-					(backHandler ? "<'" + tableHeaderBackItemClass + " back-url text-right'>" : "") +
-					"<'" + tableHeaderPaginationItemClass + "'p>>" :
+				"dom": (data.dataset.length > 0 ? (
+					"<'row table-header-row hidden-xs'<'col-xs-12 back-url text-left'>>" +
+					"<'row table-header-row hidden-xs'<'col-lg-2 col-md-2 col-sm-2'f>" + (useExcelExport ? "<'col-lg-1 col-md-1 col-sm-1 excel-export-action left'B>" : "") + "<'col-lg-3 col-md-3 col-sm-3 text-center'l><'col-lg-6 col-md-6 col-sm-6'p>>" +
+					(backHandler || useExcelExport ? ("<'row table-header-row hidden-lg hidden-md hidden-sm'" + (useExcelExport ? "<'col-xs-6 excel-export-action left'B>" : "") + (backHandler ? "<'col-xs-6 back-url text-right'>" : "") + ">") : "") +
+					"<'row table-header-row hidden-lg hidden-md hidden-sm'<'col-xs-4'f><'col-xs-8 text-left'l><'col-xs-12'p>>") :
 					"<'row'<'col-xs-12 back-url text-center'>>") +
-				"<'row table-content-row'<'col-xs-12'tr>>" +
-				"<'row table-footer-row'<'col-xs-6'i>>",
+					"<'row table-content-row'<'col-xs-12'tr>>" +
+					"<'row table-footer-row'<'col-xs-6'i>>",
 				"fnRowCallback": function (nRow) {
 					$(nRow).addClass(tableIdentifier + '-row');
 					return nRow;
@@ -395,11 +506,10 @@
 			if (useExcelExport)
 			{
 				var excelExportActionContent = tableWrapper.find('.excel-export-action');
-				excelExportActionContent.append('<a href="#" style="color: green">Excel (Beta)</a>');
-				excelExportActionContent.find('.dt-buttons').hide();
-				excelExportActionContent.find('>a').on('click', function () {
-					excelExportActionContent.find('.buttons-excel').click();
-				});
+				var actionButton = excelExportActionContent.find('.buttons-excel');
+				actionButton.removeClass('btn');
+				actionButton.removeClass('btn-default');
+				actionButton.removeClass('buttons-html5');
 			}
 
 			if (backHandler !== undefined)
@@ -547,8 +657,11 @@
 						oSettings.oScroll.sY = height + 'px';
 				}
 				dataTable.api().columns.adjust().draw();
-			}
 
+				updateResponsiveColumnsTimer = setTimeout(function () {
+					$.SalesPortal.ScreenManager.processScreenSizeChange(updateResponsiveColumns);
+				}, 200);
+			}
 		};
 
 		this.clear = function () {
@@ -565,6 +678,40 @@
 			if (tableRow.hasClass('child'))
 				return tableRow.prev('tr.parent');
 			return tableRow;
+		};
+
+		var updateResponsiveColumns = function () {
+			updateResponsiveColumnsTimer = null;
+
+			$.SalesPortal.Overlay.show();
+
+			$.each(columnVisibilitySettings, function (index, value) {
+				var visibilitySettings = getIsColumnVisibile(value);
+				var column = dataTable.api().columns(index);
+				column.visible(visibilitySettings, false);
+			});
+
+			dataTable.api().columns.adjust().draw();
+
+			$.SalesPortal.Overlay.hide();
+
+			updateResponsiveColumnsTimer = null;
+		};
+
+		var getIsColumnVisibile = function (visibilitySettings) {
+			var screenSettings = $.SalesPortal.ScreenManager.getScreenSettings();
+			switch (screenSettings.screenSizeType)
+			{
+				case "large":
+					return visibilitySettings.large;
+				case "medium":
+					return visibilitySettings.medium;
+				case "small":
+					return visibilitySettings.small;
+				case "extrasmall":
+					return visibilitySettings.extraSmall;
+			}
+			return true;
 		};
 
 		var cellRenderer = function (data, type, row) {
@@ -625,9 +772,9 @@
 				return 1;
 			// natural sorting through split numeric strings and default strings
 			for (var cLoc = 0, numS = Math.max(xN.length, yN.length); cLoc < numS; cLoc++)
-				if (( parseFloat(xN[cLoc]) || xN[cLoc] ) < ( parseFloat(yN[cLoc]) || yN[cLoc] ))
+				if ((parseFloat(xN[cLoc]) || xN[cLoc]) < (parseFloat(yN[cLoc]) || yN[cLoc]))
 					return -1;
-				else if (( parseFloat(xN[cLoc]) || xN[cLoc] ) > ( parseFloat(yN[cLoc]) || yN[cLoc] ))
+				else if ((parseFloat(xN[cLoc]) || xN[cLoc]) > (parseFloat(yN[cLoc]) || yN[cLoc]))
 					return 1;
 			return 0;
 		};
@@ -657,7 +804,10 @@
 			var topHeight = content.find("#" + tableIdentifier + "_wrapper .table-header-row").outerHeight(true);
 			var bottomHeight = content.find("#" + tableIdentifier + "_wrapper .table-footer-row").outerHeight(true);
 
-			var tableHeaderHeight = content.find("#" + tableIdentifier + "_wrapper").find('.dataTables_scrollHead').outerHeight(true);
+			var tableHeaderHeight = 0;
+			$.each(content.find("#" + tableIdentifier + "_wrapper").find('.table-header-row'), function (index, value) {
+				tableHeaderHeight += $(value).outerHeight(true);
+			});
 
 			var containerOuterHeight = content.outerHeight(true);
 			var containerInnerHeight = content.height();
@@ -680,7 +830,10 @@
 			var topHeight = content.find("#" + tableIdentifier + "_wrapper .table-header-row").outerHeight(true);
 			var bottomHeight = content.find("#" + tableIdentifier + "_wrapper .table-footer-row").outerHeight(true);
 
-			var tableHeaderHeight = content.find("#" + tableIdentifier + "_wrapper").find('.dataTables_scrollHead').outerHeight(true);
+			var tableHeaderHeight = 0;
+			$.each(content.find("#" + tableIdentifier + "_wrapper").find('.table-header-row'), function (index, value) {
+				tableHeaderHeight += $(value).outerHeight(true);
+			});
 
 			var containerOuterHeight = content.outerHeight(true);
 			var containerInnerHeight = content.height();

@@ -53,6 +53,7 @@
 .table-header-row
 {
 	line-height: 34px !important;
+	margin-bottom: 10px;
 }
 
 .dataTables_info
@@ -62,12 +63,35 @@
 
 .dataTables_filter
 {
-	text-align: right !important;
+	text-align: left !important;
+}
+
+@media (max-width: 768px)
+{
+	.dataTables_filter
+	{
+		text-align: left !important;
+	}
+
+	.dataTables_paginate
+	{
+		text-align: left !important;
+	}
+
+	.dataTables_length
+	{
+		text-align: left !important;
+	}
+
+	.excel-export-action .dt-buttons {
+		text-align: left !important;
+	}
 }
 
 .dataTables_filter input
 {
 	width: 100px !important;
+	margin-left: 0 !important;
 }
 
 .dataTables_length .bootstrap-select

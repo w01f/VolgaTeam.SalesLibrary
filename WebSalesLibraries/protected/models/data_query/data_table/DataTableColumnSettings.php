@@ -1,4 +1,5 @@
 <?
+
 	namespace application\models\data_query\data_table;
 	/**
 	 * Class DataTableColumnSettings
@@ -23,12 +24,16 @@
 		public $height;
 		public $fullWidth;
 
+		/** @var DataTableColumnVisibilitySettings */
+		public $visibilitySettings;
+
 		/** @param string $tag */
 		public function __construct($tag)
 		{
 			$this->width = -1;
 			$this->height = -1;
 			$this->fullWidth = false;
+			$this->visibilitySettings = DataTableColumnVisibilitySettings::createEmpty();
 			switch ($tag)
 			{
 				case DataTableQuerySettings::DataTagCategory:
@@ -100,6 +105,10 @@
 
 			$queryResult = $xpath->query('./FullWidth', $contextNode);
 			$this->fullWidth = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : $this->fullWidth;
+
+			$queryResult = $xpath->query('./Hide', $contextNode);
+			if ($queryResult->length > 0)
+				$this->visibilitySettings = DataTableColumnVisibilitySettings::fromXml($xpath, $queryResult->item(0));
 		}
 
 		/**
