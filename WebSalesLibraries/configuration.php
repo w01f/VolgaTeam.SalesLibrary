@@ -149,6 +149,7 @@
 					'app_key' => 'anqxkSHFEV104$*ncHB66^=',
 				),
 				'jqm_theme' => array(
+					'jqm_enabled' => true,
 					'enabled' => true,
 					'major_color' => "EACE23",
 					'minor_color' => "F6ECB6",

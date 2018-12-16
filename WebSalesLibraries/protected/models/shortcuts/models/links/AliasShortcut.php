@@ -19,16 +19,19 @@
 			{
 				/**@var $originalLinkRecord ShortcutLinkRecord */
 				$originalLinkRecord = ShortcutLinkRecord::model()->findByPk($originalShortcutId);
-				$this->originalShortcut = $originalLinkRecord->getRegularModel($this->isPhone);
+				if (isset($originalLinkRecord))
+				{
+					$this->originalShortcut = $originalLinkRecord->getRegularModel($this->isPhone);
 
-				$this->originalShortcut->groupId = $this->groupId;
-				$this->originalShortcut->bundleId = $this->bundleId;
-				$this->originalShortcut->order = $this->order;
+					$this->originalShortcut->groupId = $this->groupId;
+					$this->originalShortcut->bundleId = $this->bundleId;
+					$this->originalShortcut->order = $this->order;
 
-				$this->originalShortcut->initRegularModel();
+					$this->originalShortcut->initRegularModel();
 
-				$this->originalShortcut->loadAppearanceData($this->linkRecord->config);
-				$this->originalShortcut->isAccessGranted &= $this->isAccessGranted;
+					$this->originalShortcut->loadAppearanceData($this->linkRecord->config);
+					$this->originalShortcut->isAccessGranted &= $this->isAccessGranted;
+				}
 			}
 		}
 
