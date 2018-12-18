@@ -140,13 +140,13 @@
 				),
 				'ifly_chat' => array(
 					'enabled' => false,
-					'app_id' => 'e84d4792-4d04-4da4-a7da-3a51bcd986d7',
-					'app_key' => 'H8jp4ubbW2Yx9w7wJIvE_5mmeOpkqL3gIJyf0thuPvcW48909'
+					'app_id' => '',
+					'app_key' => ''
 				),
 				'one_drive_links' => array(
 					'enabled' => true,
-					'app_id' => '570b9e2b-580f-4324-a5c4-6df762282bdc',
-					'app_key' => 'anqxkSHFEV104$*ncHB66^=',
+					'app_id' => '',
+					'app_key' => '',
 				),
 				'jqm_theme' => array(
 					'jqm_enabled' => true,
