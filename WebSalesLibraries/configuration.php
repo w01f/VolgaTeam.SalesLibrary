@@ -133,7 +133,7 @@
 					//)
 				),
 				'froala_editor' => array(
-					'key' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+					'key' => ''
 				),
 				'comet_chat' => array(
 					'enabled' => false,
