@@ -1,100 +1,209 @@
-(function ($)
-{
+(function ($) {
 	window.BaseUrl = window.BaseUrl || '';
-	$.SalesPortal = $.SalesPortal || { };
-	var AuthManager = function ()
-	{
+	$.SalesPortal = $.SalesPortal || {};
+	var AuthManager = function () {
+		var savedLoginModel = undefined;
 		var that = this;
-		this.init = function ()
-		{
-			var passwordRequirementsTag = $('#password-requirements');
-			var passwordField = $('#edit-field-password');
 
-			$('#site-help-link').fancybox().off('click').on('click', function (e)
-			{
-				e.preventDefault();
-				e.stopPropagation();
-				showSiteHelpDialog();
+		this.init = function (savedLoginModelInput) {
+			savedLoginModel = savedLoginModelInput
+
+			$('[data-img-src]').each(function () {
+				var imgValue = $(this).data('img-src');
+				$(this).css('background-image', 'url(' + imgValue + ')');
 			});
 
-			var modeSwitchButton = $('#button-switch-version');
-			if (typeof(modeSwitchButton.bootstrapSwitch) === "function")
-				modeSwitchButton.bootstrapSwitch().on('switchChange.bootstrapSwitch', function ()
-				{
-					switchVersion();
-				});
-
-			passwordRequirementsTag.off('click').on('click', function (e)
-			{
-				e.preventDefault();
-				e.stopPropagation();
-				$.fancybox({
-					content: $('<div style="text-align: center">' +
-						'Password MUST Be AT LEAST 8 characters<br><br>' +
-						'Must contain at least 3 of these 4 conditions below:<br><br>' +
-						'<b>1 CAPITAL LETTER</b><br>' +
-						'<b>1 lower case letter</b><br>' +
-						'<b>Number (1, 2, 3…)</b><br>' +
-						'<b>Symbols (!, @, #...)</b><br><br>' +
-						'<button type="button" class="btn btn-default" onclick="$.fancybox.close()">OK</button>' +
-						'</div>'),
-					title: 'Password Requirements',
-					width: 350,
-					autoSize: false,
-					autoHeight: true,
-					openEffect: 'none',
-					closeEffect: 'none'
+			$('#login-submit').off('click').on('click', function () {
+				$.ajax({
+					type: "POST",
+					url: window.BaseUrl + "auth/processUniversalLoginData",
+					data: {
+						actionType: 'login',
+						actionData: {
+							login: $('#login-user-name').val(),
+							password: $('#login-password').val(),
+							rememberMe: $('#login-remember-me').is(':checked')
+						}
+					},
+					beforeSend: function () {
+					},
+					complete: function () {
+					},
+					success: function (data) {
+						switch (data.nextAction)
+						{
+							case "login":
+								processLoginSubmit(data.returnUrl);
+								break;
+							case "change-password":
+								savedLoginModel = data.loginModel;
+								$('#login-modal').modal('toggle');
+								$('#new-password-modal').modal('toggle');
+								break;
+							case "fix-errors":
+								let errorText = "";
+								$.each(data.errors, function (index, value) {
+									errorText += (value + '<br>');
+								});
+								var errorContainer = $('#login-error-info');
+								errorContainer.find('p').html(errorText);
+								errorContainer.show();
+								break;
+						}
+					},
+					error: function () {
+					},
+					async: true,
+					dataType: 'json'
 				});
 			});
 
-			$('#button-change-password').off('click').on('click', function (event)
-			{
-				if (passwordRequirementsTag.length)
+			var passwordRequirementsContaner = $('#new-password-requirements');
+			$('#new-password-submit').off('click').on('click', function () {
+				var passwordField = $('#new-password-password');
+				var passwordConfirmField = $('#new-password-password-confirm');
+				if (passwordRequirementsContaner.length > 0)
 				{
 					if (!checkComplexPassword(passwordField.val()))
 					{
-						event.preventDefault();
-						event.stopPropagation();
-						$('#edit-field-password').val('');
-						$('#edit-field-password-confirm').val('');
-						$('#password-requirements').trigger('click');
+						passwordField.val('');
+						passwordConfirmField.val('');
+						$('#new-password-requirements-action').trigger('click');
+						return;
 					}
 				}
-			});
 
-			$('#form-login-data').off('submit').on('submit', function ()
-			{
-				var disclaimer = $('.disclaimer-text');
-				if (disclaimer.length > 0)
-				{
-					$.fancybox({
-						content: $('<div style="text-align: center">' +
-							'<i>Before you log in:</i><br><br>' +
-							disclaimer.text() +
-							'<br><br>' +
-							'<button type="button" id="confirm-disclaimer" class="btn btn-default" onclick="continueLogin = true;$.fancybox.close();">I Agree</button>' +
-							'</div>'),
-						width: 450,
-						autoSize: false,
-						autoHeight: true,
-						openEffect: 'none',
-						closeEffect: 'none',
-						closeBtn: false,
-						helpers: {
-							title: false
-						},
-						afterClose: function ()
-						{
-							document.forms[0].submit();
+				$.ajax({
+					type: "POST",
+					url: window.BaseUrl + "auth/processUniversalLoginData",
+					data: {
+						actionType: 'change-password',
+						actionData: {
+							login: savedLoginModel.login,
+							oldPassword: savedLoginModel.password,
+							rememberMe: savedLoginModel.rememberMe,
+							newInitialPassword: passwordField.val(),
+							newRepeatPassword: passwordConfirmField.val()
 						}
-					});
-					return false;
-				}
-				return true;
+					},
+					beforeSend: function () {
+					},
+					complete: function () {
+					},
+					success: function (data) {
+						switch (data.nextAction)
+						{
+							case "login":
+								processLoginSubmit(data.returnUrl);
+								break;
+							case "fix-errors":
+								let errorText = "";
+								$.each(data.errors, function (index, value) {
+									errorText += (value + '<br>');
+								});
+								var errorContainer = $('#new-password-error-info');
+								errorContainer.find('p').html(errorText);
+								errorContainer.show();
+								break;
+						}
+					},
+					error: function () {
+					},
+					async: true,
+					dataType: 'json'
+				});
 			});
 
-			updateContentSize();
-			$(window).off('resize').on('resize', updateContentSize);
+			$('#new-password-requirements-action').off('click').on('click', function () {
+				passwordRequirementsContaner.show();
+			});
+
+			$('#recover-password-submit').off('click').on('click', function () {
+				$.ajax({
+					type: "POST",
+					url: window.BaseUrl + "auth/validateUserByEmail",
+					data: {
+						email: $('#recover-password-email-address').val()
+					},
+					beforeSend: function () {
+					},
+					complete: function () {
+					},
+					success: function (msg) {
+						if (msg !== '')
+						{
+							var errorContainer = $('#recover-password-error-info');
+							errorContainer.find('p').html(msg);
+							errorContainer.show();
+						}
+						else
+						{
+							$.ajax({
+								type: "POST",
+								url: window.BaseUrl + "auth/recoverPassword",
+								data: {
+									email: $('#recover-password-email-address').val()
+								},
+								success: function () {
+									$('#recover-password-success-info-area').show();
+									$('#recover-password-main-area').hide();
+								},
+								async: true,
+								dataType: 'html'
+							});
+						}
+					},
+					error: function () {
+						var errorContainer = $('#recover-password-error-info');
+						errorContainer.find('p').html('Error while validating user. Try again or contact to technical support');
+						errorContainer.show();
+					},
+					async: true,
+					dataType: 'html'
+				});
+			});
+
+			$('#recover-password-success-confirm').off('click').on('click', function () {
+				$('#recover-password-modal').modal('toggle');
+			});
+
+			$('#contact-submit').off('click').on('click', function () {
+				if (!$(this).hasClass('mdl-button--disabled'))
+				{
+					$.ajax({
+						type: "POST",
+						url: window.BaseUrl + "auth/sendHelpRequest",
+						data: {
+							email: $('#contact-email-address').val(),
+							name: $('#contact-full-name').val(),
+							station: $('#contact-station').val(),
+							text: $('#contact-text').val()
+						},
+						beforeSend: function () {
+						},
+						complete: function () {
+						},
+						success: function () {
+							$('#contact-modal').modal('toggle');
+						},
+						async: true,
+						dataType: 'html'
+					});
+				}
+			});
+
+			$('#contact-full-name, #contact-station').off('input').on('input', function () {
+				var nameText = $('#contact-full-name').val();
+				var stationText = $('#contact-station').val();
+				var sendButton = $('#contact-submit');
+
+				if (nameText !== '' && stationText !== '')
+				{
+					sendButton.removeClass('mdl-button--disabled');
+				}
+				else if (!sendButton.hasClass('mdl-button--disabled'))
+					sendButton.addClass('mdl-button--disabled');
+			});
 		};
 
 		this.logout = function ()
@@ -167,129 +276,29 @@
 			modalDialog.show();
 		};
 
-		var showSiteHelpDialog = function ()
-		{
-			$.ajax({
-				type: "POST",
-				url: window.BaseUrl + "auth/siteHelpDialog",
-				data: {},
-				beforeSend: function ()
-				{
-					$.SalesPortal.Overlay.show();
-				},
-				complete: function ()
-				{
-					$.SalesPortal.Overlay.hide();
-				},
-				success: function (msg)
-				{
-					var content = $(msg);
+		var processLoginSubmit = function (returnUrl) {
+			var form = document.getElementById('form-login-submit');
+			if (form === null)
+			{
+				form = document.createElement("form");
+				form.setAttribute("id", "form-login-submit");
+				form.setAttribute("method", "post");
+				form.setAttribute("action", window.BaseUrl + 'auth/processSuccessfulUniversalLogin');
+				form._submit_function_ = form.submit;
 
-					content.find('#email-name, #email-station').off('input').on('input', function ()
-					{
-						var nameText = content.find('#email-name').val();
-						var stationText = content.find('#email-station').val();
-						var sendButton = content.find('#accept-button');
+				var hiddenField = document.createElement("input");
+				hiddenField.setAttribute("id", "input-return-url");
+				hiddenField.setAttribute("type", "hidden");
+				hiddenField.setAttribute("name", 'returnUrl');
+				form.appendChild(hiddenField);
 
-						if (nameText !== '' && stationText !== '')
-						{
-							sendButton.removeClass('disabled');
-						}
-						else if (!sendButton.hasClass('disabled'))
-							sendButton.addClass('disabled');
-					});
-
-					content.find('#accept-button').off('click').on('click', function ()
-					{
-						if(!$(this).hasClass('disabled'))
-						{
-							$.ajax({
-								type: "POST",
-								url: window.BaseUrl + "auth/sendHelpRequest",
-								data: {
-									email: content.find('#email-address').val(),
-									name: content.find('#email-name').val(),
-									station: content.find('#email-station').val(),
-									text: content.find('#email-text').val()
-								},
-								beforeSend: function () {
-									$.SalesPortal.Overlay.show();
-								},
-								complete: function () {
-									$.SalesPortal.Overlay.hide();
-								},
-								success: function (msg) {
-									$.fancybox.close();
-								},
-								async: true,
-								dataType: 'html'
-							});
-						}
-					});
-					content.find('#cancel-button').off('click');
-					content.find('#cancel-button').on('click', function ()
-					{
-						$.fancybox.close();
-					});
-					$.fancybox({
-						content: content,
-						width: 400,
-						title: 'Site Help',
-						openEffect: 'none',
-						closeEffect: 'none'
-					});
-				},
-				error: function ()
-				{
-				},
-				async: true,
-				dataType: 'html'
-			});
+				document.body.appendChild(form);
+			}
+			document.getElementById('input-return-url').setAttribute("value", returnUrl);
+			form._submit_function_();
 		};
 
-		var switchVersion = function ()
-		{
-			$.ajax({
-				type: "POST",
-				url: window.BaseUrl + "site/switchVersion",
-				data: {
-					siteVersion: 'mobile'
-				},
-				beforeSend: function ()
-				{
-					$.SalesPortal.Overlay.show();
-				},
-				complete: function ()
-				{
-					$.SalesPortal.Overlay.hide();
-				},
-				success: function ()
-				{
-					location.reload();
-				},
-				error: function ()
-				{
-				},
-				async: true,
-				dataType: 'html'
-			});
-		};
-
-		var updateContentSize = function ()
-		{
-			var formLogin = $('#form-login');
-			var top = ($(window).height() - formLogin.height()) / 2;
-			var left = ($(window).width() - formLogin.width()) / 2;
-			formLogin.css({
-				'left': left + 'px'
-			});
-			formLogin.css({
-				'top': top + 'px'
-			});
-		};
-
-		var checkComplexPassword = function (password)
-		{
+		var checkComplexPassword = function (password) {
 			if (password.length < 8)
 				return false;
 			var conditionPass = 0;
@@ -305,8 +314,4 @@
 		};
 	};
 	$.SalesPortal.Auth = new AuthManager();
-	$(document).ready(function ()
-	{
-		$.SalesPortal.Auth.init();
-	});
 })(jQuery);

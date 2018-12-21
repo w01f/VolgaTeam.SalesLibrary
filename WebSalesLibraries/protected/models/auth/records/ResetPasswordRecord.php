@@ -33,7 +33,7 @@
 		public static function resetPasswordForUser($login, $password, $newUser, $email)
 		{
 			/** @var UserRecord $user */
-			$user = UserRecord::model()->find('LOWER(login)=?', array(strtolower($login)));
+			$user = UserRecord::model()->find('LOWER(login)=? or LOWER(email)=?', array(strtolower($login),strtolower($login)));
 			if (isset($user))
 			{
 				$resetPassword = ResetPasswordRecord::model()->findByPk($user->login);

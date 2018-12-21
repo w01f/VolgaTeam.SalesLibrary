@@ -54,10 +54,26 @@
 		 * @param $login
 		 * @param $password
 		 */
-		public static function changePassword($login, $password)
+		public static function changePasswordByLogin($login, $password)
 		{
 			/** @var $user UserRecord */
 			$user = self::model()->find('LOWER(login)=?', array(strtolower($login)));
+			if (isset($user))
+			{
+				$user->password = self::hashPassword($password);
+				$user->date_modify = date(Yii::app()->params['mysqlDateTimeFormat']);
+				$user->save();
+			}
+		}
+
+		/**
+		 * @param $email
+		 * @param $password
+		 */
+		public static function changePasswordByEmail($email, $password)
+		{
+			/** @var $user UserRecord */
+			$user = self::model()->find('LOWER(email)=?', array(strtolower($email)));
 			if (isset($user))
 			{
 				$user->password = self::hashPassword($password);
@@ -147,25 +163,17 @@
 		}
 
 		/**
-		 * @param $login
 		 * @param $email
 		 * @return string
 		 */
-		public static function validateUserByEmail($login, $email)
+		public static function validateUserByEmail($email)
 		{
-			/** @var $result string */
 			/** @var $user UserRecord */
-			$user = self::model()->find('LOWER(login)=?', array(strtolower($login)));
+			$user = self::model()->find('LOWER(email)=?', array(strtolower($email)));
 			if (isset($user))
-			{
-				if (strtolower($user->email) == strtolower($email))
-					$result = '';
-				else
-					$result = 'Email address is not correct';
-			}
+				return '';
 			else
-				$result = 'User with name "' . $login . '" is not registered';
-			return $result;
+				return 'User with this email address is not registered';
 		}
 
 		/**

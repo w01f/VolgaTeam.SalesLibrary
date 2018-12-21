@@ -24,6 +24,7 @@
 					'complex_password' => false,
 					'inactivity_refresh_timeout' => -1,
 					'inactivity_logout_timeout' => -1,
+					'theme_color' => '2196f3'
 				),
 				'stations' => array(
 					'tab_name' => 'Libraries',

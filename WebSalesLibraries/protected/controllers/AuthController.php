@@ -15,6 +15,19 @@
 
 		public function actionLogin()
 		{
+			if (Yii::app()->params['jqm_theme']['jqm_enabled'] === true)
+			{
+				if ($this->isPhone)
+					$this->redirect($this->createAbsoluteUrl('auth/loginSeparate'));
+				else
+					$this->redirect($this->createAbsoluteUrl('auth/loginUniversal'));
+			}
+			else
+				$this->redirect($this->createAbsoluteUrl('auth/loginUniversal'));
+		}
+
+		public function actionLoginSeparate()
+		{
 			$loginModel = new LoginForm();
 
 			$attributes = Yii::app()->request->getPost('LoginForm');
@@ -40,6 +53,82 @@
 			$this->render('login', array('formData' => $loginModel));
 		}
 
+		public function actionLoginUniversal()
+		{
+			$this->pageTitle = Yii::app()->name . ' - Login';
+			$this->render('login');
+		}
+
+		public function actionProcessUniversalLoginData()
+		{
+			$actionType = Yii::app()->request->getPost('actionType');
+			$actionData = Yii::app()->request->getPost('actionData');
+			if (!empty($actionType) && isset($actionData))
+			{
+				$actionDataEncoded = CJSON::encode($actionData);
+				switch ($actionType)
+				{
+					case "login":
+						$loginModel = \application\models\auth\models\LoginModel::fromJson($actionDataEncoded);
+						$errors = $loginModel->validateCredentials();
+						if ($loginModel->authenticated)
+						{
+							$loginModel->login();
+							StatisticActivityRecord::writeCommonActivity('System', 'Login', null);
+
+							if ($loginModel->needToResetPassword)
+							{
+								echo CJSON::encode(array(
+									'nextAction' => 'change-password',
+									'loginModel' => $loginModel
+								));
+							}
+							else
+								echo CJSON::encode(array(
+									'nextAction' => 'login',
+									'returnUrl' => Yii::app()->user->returnUrl
+								));
+						}
+						else
+						{
+							echo CJSON::encode(array(
+								'nextAction' => 'fix-errors',
+								'errors' => $errors
+							));
+						}
+						break;
+					case "change-password":
+						$changePasswordModel = \application\models\auth\models\ChangePasswordModel::fromJson($actionDataEncoded);
+						$errors = $changePasswordModel->validatePassword();
+						if (count($errors) > 0)
+						{
+							echo CJSON::encode(array(
+								'nextAction' => 'fix-errors',
+								'errors' => $errors
+							));
+						}
+						else
+						{
+							$changePasswordModel->changePassword();
+							StatisticActivityRecord::writeCommonActivity('System', 'Login', null);
+
+							echo CJSON::encode(array(
+								'nextAction' => 'login',
+								'returnUrl' => Yii::app()->user->returnUrl
+							));
+						}
+						break;
+				}
+			}
+			Yii::app()->end();
+		}
+
+		public function actionProcessSuccessfulUniversalLogin()
+		{
+			$returnUrl = Yii::app()->request->getPost('returnUrl');
+			$this->redirect($returnUrl);
+		}
+
 		public function actionLogout()
 		{
 			StatisticActivityRecord::writeCommonActivity('System', 'Logout', null);
@@ -50,11 +139,6 @@
 		public function actionUnauthorized()
 		{
 			$this->render('unauthorized');
-		}
-
-		public function actionSiteHelpDialog()
-		{
-			$this->renderPartial('siteHelp', array(), false, true);
 		}
 
 		public function actionSendHelpRequest()
@@ -76,6 +160,34 @@
 		}
 
 		public function actionChangePassword()
+		{
+			$login = Yii::app()->request->getQuery('login');
+			$oldPassword = Yii::app()->request->getQuery('password');
+			$rememberMe = Yii::app()->request->getQuery('rememberMe', false);
+			if (Yii::app()->params['jqm_theme']['jqm_enabled'] === true)
+			{
+				if ($this->isPhone)
+					$this->redirect($this->createAbsoluteUrl('auth/changePasswordSeparate', array(
+						'login' => $login,
+						'password' => $oldPassword,
+						'rememberMe' => $rememberMe
+					)));
+				else
+					$this->redirect($this->createAbsoluteUrl('auth/changePasswordUniversal', array(
+						'login' => $login,
+						'password' => $oldPassword,
+						'rememberMe' => $rememberMe
+					)));
+			}
+			else
+				$this->redirect($this->createAbsoluteUrl('auth/changePasswordUniversal', array(
+					'login' => $login,
+					'password' => $oldPassword,
+					'rememberMe' => $rememberMe
+				)));
+		}
+
+		public function actionChangePasswordSeparate()
 		{
 			$changePasswordModel = new ChangePasswordForm();
 			$attributes = Yii::app()->request->getPost('ChangePasswordForm');
@@ -109,34 +221,38 @@
 			}
 		}
 
-		public function actionRecoverPasswordDialog()
+		public function actionChangePasswordUniversal()
 		{
-			$this->renderPartial('recoverPassword', array(), false, true);
-		}
-
-		public function actionRecoverPasswordDialogSuccess()
-		{
-			$this->renderPartial('successDialog', array('header' => 'Password Recovery', 'content' => 'A temporary password has been sent<br>Check your inbox of junk mail filter'), false, true);
+			$login = Yii::app()->request->getQuery('login');
+			$oldPassword = Yii::app()->request->getQuery('password');
+			$rememberMe = Yii::app()->request->getQuery('rememberMe', false);
+			if (empty(trim($rememberMe)))
+				$rememberMe = false;
+			$this->pageTitle = Yii::app()->name . ' - Change Password';
+			$this->render('changePassword', array(
+				'login' => $login,
+				'password' => $oldPassword,
+				'rememberMe' => $rememberMe
+			));
 		}
 
 		public function actionValidateUserByEmail()
 		{
-			$login = Yii::app()->request->getPost('login');
 			$email = Yii::app()->request->getPost('email');
 			$result = 'Error while validating user. Try again or contact to technical support';
-			if (isset($login) && isset($email))
-				$result = UserRecord::validateUserByEmail($login, $email);
+			if (isset($email))
+				$result = UserRecord::validateUserByEmail($email);
 			echo $result;
 		}
 
 		public function actionRecoverPassword()
 		{
-			$login = Yii::app()->request->getPost('login');
-			if (isset($login))
+			$email = Yii::app()->request->getPost('email');
+			if (isset($email))
 			{
 				$password = UserRecord::generatePassword();
-				UserRecord::changePassword($login, $password);
-				ResetPasswordRecord::resetPasswordForUser($login, $password, false, true);
+				UserRecord::changePasswordByEmail($email, $password);
+				ResetPasswordRecord::resetPasswordForUser($email, $password, false, true);
 			}
 		}
 	}

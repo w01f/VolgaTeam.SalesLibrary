@@ -29,7 +29,6 @@
 					type: "POST",
 					url: window.BaseUrl + "auth/validateUserByEmail",
 					data: {
-						login: $('#login').val(),
 						email: $('#email').val()
 					},
 					beforeSend: function ()
@@ -57,7 +56,7 @@
 								type: "POST",
 								url: window.BaseUrl + "auth/recoverPassword",
 								data: {
-									login: $('#login').val()
+									email: $('#email').val()
 								},
 								beforeSend: function ()
 								{
@@ -98,11 +97,6 @@
 				$('#site-help-menu').popup('close');
 			});
 
-			$('#button-switch-version').on('change', function ()
-			{
-				switchVersion();
-			});
-
 			var tabletLoginContent = $('.login-content.tablet');
 			if (tabletLoginContent.length > 0)
 			{
@@ -138,40 +132,6 @@
 					else
 						location.reload();
 
-				},
-				error: function ()
-				{
-				},
-				async: true,
-				dataType: 'html'
-			});
-		};
-
-		var switchVersion = function ()
-		{
-			$.ajax({
-				type: "POST",
-				url: window.BaseUrl + "site/switchVersion",
-				data: {
-					siteVersion: 'desktop'
-				},
-				beforeSend: function ()
-				{
-					$.mobile.loading('show', {
-						textVisible: false,
-						html: ""
-					});
-				},
-				complete: function ()
-				{
-					$.mobile.loading('hide', {
-						textVisible: false,
-						html: ""
-					});
-				},
-				success: function ()
-				{
-					location.reload();
 				},
 				error: function ()
 				{

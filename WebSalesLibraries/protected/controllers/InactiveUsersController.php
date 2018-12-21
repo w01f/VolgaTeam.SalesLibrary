@@ -70,7 +70,7 @@
 		{
 			if ($this->authenticateBySession($sessionKey))
 			{
-				UserRecord::changePassword($login, $password);
+				UserRecord::changePasswordByLogin($login, $password);
 				ResetPasswordRecord::resetPasswordForUser($login, $password, false, false);
 			}
 		}

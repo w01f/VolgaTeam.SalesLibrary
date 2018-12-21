@@ -7,11 +7,15 @@
 	$blockId = sprintf('button-item-%s', $buttonItem->id);
 	echo $this->renderPartial('landingPageMarkup/button_group/buttonStyle', array('buttonItem' => $buttonItem, 'blockId' => $blockId), true);
 ?>
-<a id="<? echo $blockId; ?>" class="btn btn-default" href="<? echo isset($buttonItem->shortcut) ? $buttonItem->shortcut->getSourceLink() : '#'; ?>"
-   title="<? echo $buttonItem->text; ?>"
-   target="<? if (isset($buttonItem->shortcut)): ?>_blank<? else: ?>_self<? endif; ?>">
-	<?if(!empty($buttonItem->icon)):?>
-		<span class="button-icon <? echo $buttonItem->icon; ?>" aria-hidden="true"></span>
-	<? endif;?>
-	<? echo $buttonItem->text; ?>
+<a id="<? echo $blockId; ?>" class="btn btn-default" href="<? echo $buttonItem->url; ?>"
+   title="<? echo $buttonItem->hoverTip; ?>"
+   target="<? if (!empty($buttonItem->url)): ?>_blank<? else: ?>_self<? endif; ?>">
+    <?if(!empty($buttonItem->image)):?>
+        <img src="<? echo $buttonItem->image; ?>" style="height: auto; width: auto; max-width: 100%;"/>
+    <?else:?>
+        <?if(!empty($buttonItem->icon)):?>
+            <span class="button-icon <? echo $buttonItem->icon; ?>" aria-hidden="true"></span>
+        <? endif;?>
+        <? echo $buttonItem->text; ?>
+    <? endif;?>
 </a>

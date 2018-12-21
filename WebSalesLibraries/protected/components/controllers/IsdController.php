@@ -29,7 +29,7 @@
 			$this->browser = Yii::app()->browser->getBrowser();
 			$this->isIOSDevice = $this->browser == Browser::BROWSER_IPAD;
 
-			if (Yii::app()->params['jqm_theme']['jqm_enabled'])
+			if (Yii::app()->params['jqm_theme']['jqm_enabled'] === true)
 			{
 				switch ($this->browser)
 				{
@@ -40,25 +40,21 @@
 						$this->isPhone = true;
 						break;
 					default :
-						$version = Yii::app()->cacheDB->get('siteVersion');
-						if (Yii::app()->browser->isMobile() && isset($version) && $version == 'mobile')
-						{
-							$this->layout = '/phone/layouts/main';
-							$this->pathPrefix = 'application.views.phone.';
-							$this->isPhone = true;
-						}
-						else
-						{
+						if (UserIdentity::isUserAuthorized())
 							$this->layout = '/regular/layouts/main';
-							$this->pathPrefix = 'application.views.regular.';
-							$this->isPhone = false;
-						}
+						else
+							$this->layout = '/regular/layouts/auth';
+						$this->pathPrefix = 'application.views.regular.';
+						$this->isPhone = false;
 						break;
 				}
 			}
 			else
 			{
-				$this->layout = '/regular/layouts/main';
+				if (UserIdentity::isUserAuthorized())
+					$this->layout = '/regular/layouts/main';
+				else
+					$this->layout = '/regular/layouts/auth';
 				$this->pathPrefix = 'application.views.regular.';
 				$this->isPhone = false;
 			}

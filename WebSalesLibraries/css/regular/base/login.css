@@ -1,97 +1,225 @@
-#form-login
+/*------------------------------------*\
+    GENERAL STYLES
+\*------------------------------------*/
+html, body
 {
-	width: 300px;
-	position: absolute;
-	top: 100px;
-	left: 370px;
+	height: 100%;
+	font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
 }
 
-#form-login td
+body
 {
-	text-align: center;
-	padding-bottom: 10px;
+	color: #737373;
 }
 
-#label-remember
+.form-control::-webkit-input-placeholder
 {
-	display: inline;
+	color: #fff;
 }
 
-.error-message
+.form-control::-moz-placeholder
+{
+	color: #fff;
+}
+
+.form-control::-ms-input-placeholder
+{
+	color: #fff;
+}
+
+.form-control.error
+{
+	border-color: #ff5252;
+}
+
+a,
+.mdl-button
+{
+	font-weight: 300;
+}
+
+a
+{
+	color: #ff5252;
+}
+
+a:hover, a:focus
+{
+	color: #ff5252;
+	text-decoration: none;
+	outline: none;
+}
+
+.mdl-button--primary.mdl-button--primary.mdl-button--raised
+{
+	color: #fff;
+	background-color: #ff5252;
+}
+
+/* VERTICAL CENTERING */
+.vc-parent
 {
 	width: 100%;
-	color: #FF0000
+	height: 100%;
+	display: table;
 }
 
-#view-dialog-wrapper
+.vc-child
 {
-	display: none;
+	display: table-cell;
+	vertical-align: middle;
+}
+/*------------------------------------*\
+    MAIN AREA
+\*------------------------------------*/
+#main-area
+{
+	width: 100%;
+	height: 100%;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
 }
 
-#content-overlay
+#main-area:before
 {
+	content: " ";
 	position: absolute;
 	top: 0;
 	left: 0;
-	overflow: hidden;
-	display: none;
-	opacity: 0.8;
-	background: #eee;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(34, 34, 34, 0.8);
 }
 
-.checkbox input[type="checkbox"]
+#main-area .content
 {
-	float: none;
-	vertical-align: top;
+	color: #fff;
 }
 
-.checkbox label
+#main-area .content a.mdl-button
 {
-	vertical-align: top;
-	padding-left: 0;
-	display: inherit;
+	padding: 5px 0;
+	height: auto;
+	min-width: 150px;
+	margin: 0 5px 15px;
 }
 
-.action-link-group
+@media screen and (max-width: 480px)
 {
-	margin-top: 40px;
+	#main-area
+	{
+		position: relative;
+		height: auto;
+		min-height: 100%;
+	}
 }
 
-.action-link
+/*------------------------------------*\
+    Popup Area
+\*------------------------------------*/
+.popup-area
 {
-	text-decoration: none;
-	margin-bottom: 10px;
+	padding: 0 20px;
+}
+
+.popup-area .modal-dialog
+{
+	margin: 30px auto;
+	width: auto;
+}
+
+.popup-area button.close
+{
+	position: absolute;
+	top: -10px;
+	right: -20px;
+	z-index: 39;
+	opacity: 1;
+	filter: alpha(opacity=100);
+	color: #fff;
+	font-size: 28px;
+	font-weight: 100;
+	opacity: 1;
+	outline: 0;
+}
+
+.modal-dialog .modal-content
+{
+	background-color: transparent;
+}
+
+.modal-dialog .mdl-card
+{
+	width: auto;
+}
+
+.modal-dialog label
+{
+    font-weight: normal;
+}
+
+.modal-dialog .mdl-card__title
+{
+	padding-top: 0;
+}
+
+.modal-dialog .mdl-card__title .modal--logo
+{
 	display: block;
+	width: auto;
+	height: auto;
+	margin: 0 auto;
+	padding: 15px;
+	border-radius: 2px;
+	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
 }
 
-.action-link.gray
+.modal-dialog .mdl-card__supporting-text
 {
-	color: #959595;
+	width: 100%;
 }
 
-.disclaimer-text
+.modal-dialog .error-info p
 {
-	display: none;
+	padding: 10px;
 }
 
-#progress-bar
+.modal-dialog .mdl-card__actions
 {
-	border: 8px solid #f3f3f3;
-	border-top: 8px solid #8a8a8a;
-	border-radius: 50%;
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	width: 100px;
-	height: 100px;
-	margin-top: -50px;
-	margin-left: -50px;
-	z-index: 8060;
-	animation: spin 2s linear infinite;
+	margin-top: 5px;
 }
 
-@keyframes spin
+.modal-dialog .mdl-card__actions a
 {
-	0% { transform: rotate(0deg); }
-	100% { transform: rotate(360deg); }
+	font-size: 12px;
+}
+
+#login-modal .modal-dialog
+{
+	max-width: 360px;
+}
+
+#new-password-modal .modal-dialog
+{
+	max-width: 360px;
+}
+
+#recover-password-modal .modal-dialog
+{
+	max-width: 360px;
+}
+
+#contact-modal .modal-dialog
+{
+	max-width: 600px;
+}
+
+@media screen and (max-width: 480px)
+{
+	.modal-dialog .mdl-card__actions a
+	{
+		font-size: 11px;
+		padding: 0 10px;
+	}
 }

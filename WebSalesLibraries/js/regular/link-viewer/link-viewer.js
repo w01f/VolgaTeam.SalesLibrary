@@ -131,7 +131,7 @@
 				previewParameters.afterViewerOpenedCallback(openedViewer);
 		};
 
-		this.requestLinkContextMenu = function (linkId, isQuickSite, isOnWallbin, pointX, pointY) {
+		this.requestLinkContextMenu = function (linkId, isQuickSite, isOnWallbin, pointX, pointY, additionalContentCallback) {
 			that.cleanupContextMenu();
 			$.ajax({
 				type: "POST",
@@ -242,6 +242,9 @@
 											break;
 									}
 								});
+
+							if (additionalContentCallback != undefined)
+								additionalContentCallback(menu);
 						}
 					}
 					else

@@ -469,7 +469,7 @@
 						[5, 15, 25, 50, 100, 200],
 						[5, 15, 25, 50, 100, 200]
 					],
-				"iDisplayLength": defaultLength,
+				"iDisplayLength": data.dataset.length >= defaultLength ? defaultLength : -1,
 				"language": {
 					"emptyTable": "",
 					"zeroRecords": "",
@@ -480,12 +480,12 @@
 				},
 				"dom": (data.dataset.length > 0 ? (
 					"<'row table-header-row hidden-xs'<'col-xs-12 back-url text-left'>>" +
-					"<'row table-header-row hidden-xs'<'col-lg-2 col-md-2 col-sm-2'f>" + (useExcelExport ? "<'col-lg-1 col-md-1 col-sm-1 excel-export-action left'B>" : "") + "<'col-lg-3 col-md-3 col-sm-3 text-center'l><'col-lg-6 col-md-6 col-sm-6'p>>" +
-					(backHandler || useExcelExport ? ("<'row table-header-row hidden-lg hidden-md hidden-sm'" + (useExcelExport ? "<'col-xs-6 excel-export-action left'B>" : "") + (backHandler ? "<'col-xs-6 back-url text-right'>" : "") + ">") : "") +
+					"<'row table-header-row hidden-xs'<'col-lg-3 col-md-3 col-sm-3'f><'col-lg-3 col-md-3 col-sm-3 text-center'l><'col-lg-6 col-md-6 col-sm-6'p>>" +
+					(backHandler ? ("<'row table-header-row hidden-lg hidden-md hidden-sm'<'col-xs-6 back-url text-right'>>") : "") +
 					"<'row table-header-row hidden-lg hidden-md hidden-sm'<'col-xs-4'f><'col-xs-8 text-left'l><'col-xs-12'p>>") :
 					"<'row'<'col-xs-12 back-url text-center'>>") +
 					"<'row table-content-row'<'col-xs-12'tr>>" +
-					"<'row table-footer-row'<'col-xs-6'i>>",
+					"<'row table-footer-row'<'col-xs-6'i>" + (useExcelExport ? "<'col-xs-1 excel-export-action left'B>" : "") + ">",
 				"fnRowCallback": function (nRow) {
 					$(nRow).addClass(tableIdentifier + '-row');
 					return nRow;
@@ -506,10 +506,7 @@
 			if (useExcelExport)
 			{
 				var excelExportActionContent = tableWrapper.find('.excel-export-action');
-				var actionButton = excelExportActionContent.find('.buttons-excel');
-				actionButton.removeClass('btn');
-				actionButton.removeClass('btn-default');
-				actionButton.removeClass('buttons-html5');
+				excelExportActionContent.hide();
 			}
 
 			if (backHandler !== undefined)
@@ -585,7 +582,13 @@
 
 				table.find('.link-file, .link-url, .link-common').hammer().on('hold', function (event) {
 					var linkId = dataTable.api().row(getDataRowElement($(this))).data().id;
-					$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, false, event.gesture.center.pageX, event.gesture.center.pageY);
+					$.SalesPortal.LinkManager.requestLinkContextMenu(
+						linkId,
+						false,
+						false,
+						event.gesture.center.pageX,
+						event.gesture.center.pageY,
+						extendLinkMenu);
 					event.gesture.stopPropagation();
 					event.gesture.preventDefault();
 				});
@@ -615,7 +618,13 @@
 
 				table.on('contextmenu', '.link-file, .link-url-internal, .link-common', function (event) {
 					var linkId = dataTable.api().row(getDataRowElement($(this))).data().id;
-					$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, false, event.clientX, event.clientY);
+					$.SalesPortal.LinkManager.requestLinkContextMenu(
+						linkId,
+						false,
+						false,
+						event.clientX,
+						event.clientY,
+						extendLinkMenu);
 					return false;
 				});
 
@@ -623,7 +632,7 @@
 				{
 					table.on('contextmenu', '.link-url-external', function (event) {
 						var linkId = dataTable.api().row(getDataRowElement($(this))).data().id;
-						$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, false, event.clientX, event.clientY);
+						$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, false, event.clientX, event.clientY, extendLinkMenu);
 						return false;
 					});
 				}
@@ -671,6 +680,18 @@
 
 		this.getTable = function () {
 			return dataTable.api();
+		};
+
+		var extendLinkMenu = function (menu) {
+			if (useExcelExport)
+			{
+				menu.append($('<li role="separator" class="divider"></li><li><a class="export-excel-action" href="#">Save this list to Excel</a></li>'));
+				menu.find('.export-excel-action').on('click', function () {
+					var excelExportActionContent = $("#" + tableIdentifier + "_wrapper").find('.excel-export-action');
+					var actionButton = excelExportActionContent.find('.buttons-excel');
+					actionButton.click();
+				});
+			}
 		};
 
 		var getDataRowElement = function (cellItem) {

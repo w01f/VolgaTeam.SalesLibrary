@@ -40,7 +40,7 @@
 		public $id;
 
 		/** @var \LandingPageShortcut */
-		protected $parentShortcut;
+		public $parentShortcut;
 
 		/** @var BlockContainer */
 		protected $parentBlock;

@@ -32,7 +32,7 @@
 			return array(
 				'login' => 'User Name:',
 				'password' => 'Password:',
-				'rememberMe' => 'Remember me',
+				'rememberMe' => 'Keep me logged in',
 			);
 		}
 
