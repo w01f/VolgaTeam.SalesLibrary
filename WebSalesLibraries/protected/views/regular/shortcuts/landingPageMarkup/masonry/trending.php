@@ -40,7 +40,8 @@
     <div class="btn-group feed-controls-container masonry-feed-controls-container" role="group">
 		<? if ($viewSettings->controlSettings->{FeedControlTag::ControlTagDateToday}->enabled ||
 			$viewSettings->controlSettings->{FeedControlTag::ControlTagDateWeek}->enabled ||
-			$viewSettings->controlSettings->{FeedControlTag::ControlTagDateMonth}->enabled
+			$viewSettings->controlSettings->{FeedControlTag::ControlTagDateMonth}->enabled ||
+			$viewSettings->controlSettings->{FeedControlTag::ControlTagDateAllTime}->enabled
 		): ?>
 			<?
 			$activeDateRangeTitle = 'Date Range';
@@ -55,6 +56,9 @@
 				case TrendingFeedQuerySettings::DataRangeTypeMonth:
 					$activeDateRangeTitle = $viewSettings->controlSettings->{FeedControlTag::ControlTagDateMonth}->title;
 					break;
+				case TrendingFeedQuerySettings::DataRangeTypeAllTime:
+					$activeDateRangeTitle = $viewSettings->controlSettings->{FeedControlTag::ControlTagDateAllTime}->title;
+					break;
 			}
 			?>
 			<?
@@ -64,11 +68,13 @@
 			$weekControl = $viewSettings->controlSettings->{FeedControlTag::ControlTagDateWeek};
 			/** @var FeedControlSettings $monthControl */
 			$monthControl = $viewSettings->controlSettings->{FeedControlTag::ControlTagDateMonth};
+			/** @var FeedControlSettings $allTimeControl */
+			$allTimeControl = $viewSettings->controlSettings->{FeedControlTag::ControlTagDateAllTime};
 
-			$dateHideLg = $todayControl->hideCondition->large || $weekControl->hideCondition->large || $monthControl->hideCondition->large;
-			$dateHideMd = $todayControl->hideCondition->medium || $weekControl->hideCondition->medium || $monthControl->hideCondition->medium;
-			$dateHideSm = $todayControl->hideCondition->small || $weekControl->hideCondition->small || $monthControl->hideCondition->small;
-			$dateHideXs = $todayControl->hideCondition->extraSmall || $weekControl->hideCondition->extraSmall || $monthControl->hideCondition->extraSmall;
+			$dateHideLg = $todayControl->hideCondition->large || $weekControl->hideCondition->large || $monthControl->hideCondition->large || $allTimeControl->hideCondition->large;
+			$dateHideMd = $todayControl->hideCondition->medium || $weekControl->hideCondition->medium || $monthControl->hideCondition->medium || $allTimeControl->hideCondition->medium;
+			$dateHideSm = $todayControl->hideCondition->small || $weekControl->hideCondition->small || $monthControl->hideCondition->small || $allTimeControl->hideCondition->small;
+			$dateHideXs = $todayControl->hideCondition->extraSmall || $weekControl->hideCondition->extraSmall || $monthControl->hideCondition->extraSmall || $allTimeControl->hideCondition->extraSmall;
 			?>
             <div class="btn-group date-range-toggle-group<? if ($dateHideLg): ?> hidden-lg<? endif; ?>
                             <? if ($dateHideMd): ?> hidden-md<? endif; ?>
@@ -116,6 +122,18 @@
                                         </span>
                         </li>
 					<? endif; ?>
+	                <?
+		                /** @var FeedControlSettings $control */
+		                $control = $viewSettings->controlSettings->{FeedControlTag::ControlTagDateAllTime};
+	                ?>
+	                <? if ($control->enabled): ?>
+                        <li class="date-range-toggle">
+                            <a href="#"><? echo $control->title; ?></a>
+                            <span class="service-data">
+                                            <span class="date-range-tag"><? echo TrendingFeedQuerySettings::DataRangeTypeAllTime; ?></span>
+                                        </span>
+                        </li>
+	                <? endif; ?>
                 </ul>
             </div>
 		<? endif; ?>

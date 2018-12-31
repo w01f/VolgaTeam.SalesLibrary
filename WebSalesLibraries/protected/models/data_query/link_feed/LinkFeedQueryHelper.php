@@ -109,14 +109,17 @@
 			$statisticRangeCondition = '';
 			switch ($feedSettings->dateRangeType)
 			{
-				case "today":
+				case TrendingFeedQuerySettings::DataRangeTypeToday:
 					$statisticRangeCondition = sprintf("sa.date_time>='%s'", date(\Yii::app()->params['mysqlDateFormat']));
 					break;
-				case "week":
+				case TrendingFeedQuerySettings::DataRangeTypeWeek:
 					$statisticRangeCondition = "yearweek(sa.date_time, 1) = yearweek(curdate(), 1)";
 					break;
-				case "month":
+				case TrendingFeedQuerySettings::DataRangeTypeMonth:
 					$statisticRangeCondition = "year(sa.date_time) = year(curdate()) and month(sa.date_time) = month(curdate())";
+					break;
+				case TrendingFeedQuerySettings::DataRangeTypeAllTime:
+					$statisticRangeCondition = "1=1";
 					break;
 			}
 

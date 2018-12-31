@@ -1,4 +1,5 @@
 <?
+
 	use application\models\data_query\link_feed\LinkFeedItem;
 	use application\models\data_query\link_feed\LinkFeedQuerySettings;
 	use application\models\data_query\link_feed\TrendingFeedQuerySettings;
@@ -39,7 +40,8 @@
                 <div class="btn-group" role="group">
 					<? if ($viewSettings->controlSettings->{FeedControlTag::ControlTagDateToday}->enabled ||
 						$viewSettings->controlSettings->{FeedControlTag::ControlTagDateWeek}->enabled ||
-						$viewSettings->controlSettings->{FeedControlTag::ControlTagDateMonth}->enabled
+						$viewSettings->controlSettings->{FeedControlTag::ControlTagDateMonth}->enabled ||
+						$viewSettings->controlSettings->{FeedControlTag::ControlTagDateAllTime}->enabled
 					): ?>
 						<?
 						$activeDateRangeTitle = 'Date Range';
@@ -54,6 +56,9 @@
 							case TrendingFeedQuerySettings::DataRangeTypeMonth:
 								$activeDateRangeTitle = $viewSettings->controlSettings->{FeedControlTag::ControlTagDateMonth}->title;
 								break;
+							case TrendingFeedQuerySettings::DataRangeTypeAllTime:
+								$activeDateRangeTitle = $viewSettings->controlSettings->{FeedControlTag::ControlTagDateAllTime}->title;
+								break;
 						}
 						?>
 						<?
@@ -63,11 +68,13 @@
 						$weekControl = $viewSettings->controlSettings->{FeedControlTag::ControlTagDateWeek};
 						/** @var FeedControlSettings $monthControl */
 						$monthControl = $viewSettings->controlSettings->{FeedControlTag::ControlTagDateMonth};
+						/** @var FeedControlSettings $allTimeControl */
+						$allTimeControl = $viewSettings->controlSettings->{FeedControlTag::ControlTagDateAllTime};
 
-						$dateHideLg = $todayControl->hideCondition->large || $weekControl->hideCondition->large || $monthControl->hideCondition->large;
-						$dateHideMd = $todayControl->hideCondition->medium || $weekControl->hideCondition->medium || $monthControl->hideCondition->medium;
-						$dateHideSm = $todayControl->hideCondition->small || $weekControl->hideCondition->small || $monthControl->hideCondition->small;
-						$dateHideXs = $todayControl->hideCondition->extraSmall || $weekControl->hideCondition->extraSmall || $monthControl->hideCondition->extraSmall;
+						$dateHideLg = $todayControl->hideCondition->large || $weekControl->hideCondition->large || $monthControl->hideCondition->large || $allTimeControl->hideCondition->large;
+						$dateHideMd = $todayControl->hideCondition->medium || $weekControl->hideCondition->medium || $monthControl->hideCondition->medium || $allTimeControl->hideCondition->medium;
+						$dateHideSm = $todayControl->hideCondition->small || $weekControl->hideCondition->small || $monthControl->hideCondition->small || $allTimeControl->hideCondition->small;
+						$dateHideXs = $todayControl->hideCondition->extraSmall || $weekControl->hideCondition->extraSmall || $monthControl->hideCondition->extraSmall || $allTimeControl->hideCondition->extraSmall;
 						?>
                         <div class="btn-group date-range-toggle-group<? if ($dateHideLg): ?> hidden-lg<? endif; ?>
                             <? if ($dateHideMd): ?> hidden-md<? endif; ?>
@@ -112,6 +119,18 @@
                                         <a href="#"><? echo $control->title; ?></a>
                                         <span class="service-data">
                                             <span class="date-range-tag"><? echo TrendingFeedQuerySettings::DataRangeTypeMonth; ?></span>
+                                        </span>
+                                    </li>
+								<? endif; ?>
+								<?
+									/** @var FeedControlSettings $control */
+									$control = $viewSettings->controlSettings->{FeedControlTag::ControlTagDateAllTime};
+								?>
+								<? if ($control->enabled): ?>
+                                    <li class="date-range-toggle">
+                                        <a href="#"><? echo $control->title; ?></a>
+                                        <span class="service-data">
+                                            <span class="date-range-tag"><? echo TrendingFeedQuerySettings::DataRangeTypeAllTime; ?></span>
                                         </span>
                                     </li>
 								<? endif; ?>
@@ -166,11 +185,11 @@
                             </span>
                         </button>
 					<? endif; ?>
-	                <?
-		                /** @var FeedControlSettings $control */
-		                $control = $viewSettings->controlSettings->{FeedControlTag::ControlTagLinkFormatHyperlinks};
-	                ?>
-	                <? if ($control->enabled): ?>
+					<?
+						/** @var FeedControlSettings $control */
+						$control = $viewSettings->controlSettings->{FeedControlTag::ControlTagLinkFormatHyperlinks};
+					?>
+					<? if ($control->enabled): ?>
                         <button type="button"
                                 class="btn btn-default link-format-toggle<? if (in_array(LinkFeedQuerySettings::LinkFormatHyperlink, $querySettings->linkFormatsInclude)): ?> active<? endif; ?><? if ($control->hideCondition->large): ?> hidden-lg<? endif; ?>
                             <? if ($control->hideCondition->medium): ?> hidden-md<? endif; ?>
@@ -181,7 +200,7 @@
                                 <span class="link-format-tag"><? echo LinkFeedQuerySettings::LinkFormatHyperlink; ?></span>
                             </span>
                         </button>
-	                <? endif; ?>
+					<? endif; ?>
 					<?
 						/** @var FeedDetailsControlSettings $control */
 						$control = $viewSettings->controlSettings->{FeedControlTag::ControlTagDetailsButton};
@@ -189,8 +208,7 @@
 					<? if ($control->enabled): ?>
 						<? if (!empty($viewSettings->controlsStyle->regularTextColor) || !empty($control->iconColor)): ?>
                             <style>
-                                #horizontal-feed-<? echo $contentBlock->id; ?> .feed-details-button .svg path
-                                {
+                                #horizontal-feed-<? echo $contentBlock->id; ?> .feed-details-button .svg path {
                                     fill: <? echo Utils::formatColor(!empty($control->iconColor)?$control->iconColor:$viewSettings->controlsStyle->regularTextColor);?> !important;
                                 }
                             </style>
@@ -200,9 +218,10 @@
                             <? if ($control->hideCondition->medium): ?> hidden-md<? endif; ?>
                             <? if ($control->hideCondition->small): ?> hidden-sm<? endif; ?>
                             <? if ($control->hideCondition->extraSmall): ?> hidden-xs<? endif; ?>" style="
-                            <?if(!empty($control->backColor)):?>background-color: <? echo Utils::formatColor($control->backColor);?> !important;<?endif;?>
-                            <?if(!empty($control->borderColor)):?>border-color: <? echo Utils::formatColor($control->borderColor);?> !important;<?endif;?>">
-                            <img src="<? echo $contentBlock->imagePath . $control->iconFile; ?>" <?if(strpos($control->iconFile, '.svg') !== false):?>class="svg"<?endif;?>>
+						<? if (!empty($control->backColor)): ?>background-color: <? echo Utils::formatColor($control->backColor); ?> !important;<? endif; ?>
+						<? if (!empty($control->borderColor)): ?>border-color: <? echo Utils::formatColor($control->borderColor); ?> !important;<? endif; ?>">
+                            <img src="<? echo $contentBlock->imagePath . $control->iconFile; ?>"
+							     <? if (strpos($control->iconFile, '.svg') !== false): ?>class="svg"<? endif; ?>>
                             <span class="service-data">
                                 <? if ($contentBlock->detailsSettings->openSamePage): ?>
                                     <span class="same-page">true</span>

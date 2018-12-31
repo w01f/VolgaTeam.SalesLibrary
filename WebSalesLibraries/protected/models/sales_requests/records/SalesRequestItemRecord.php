@@ -96,6 +96,65 @@
 		}
 
 		/**
+		 * @param $shortcutId
+		 * @param $statusFilter
+		 * @return \application\models\sales_requests\models\ItemListInfo
+		 */
+		public function getItemListInfo($shortcutId, $statusFilter = null)
+		{
+			$itemListInfo = new \application\models\sales_requests\models\ItemListInfo();
+
+			$listTypes = array(self::ListTypeOwn, self::ListTypeAll, self::ListTypeArchive);
+			foreach ($listTypes as $listType)
+			{
+				$criteria = new CDbCriteria();
+				if (!empty($statusFilter) && $statusFilter !== \application\models\sales_requests\models\Dictionaries::StatusItemAll)
+					$criteria->addCondition(self::FiledNameStatus . "='" . $statusFilter . "'");
+
+				switch ($listType)
+				{
+					case self::ListTypeOwn:
+						$userId = UserIdentity::getCurrentUserId();
+						$criteria->addCondition(self::FiledNameIdOwner . "=" . $userId);
+						$itemListInfo->ownItemsCount = $this->count($criteria);
+						break;
+					case self::ListTypeAll:
+						if (isset($shortcutId))
+						{
+							/** @var $linkRecord ShortcutLinkRecord */
+							$linkRecord = ShortcutLinkRecord::model()->findByPk($shortcutId);
+							/**@var $shortcut SalesRequestsShortcut */
+							$shortcut = $linkRecord->getRegularModel(false);
+							$shortcut->loadPageConfig();
+							if ($shortcut->archiveSettings->isConfigured())
+								$criteria->addCondition(self::FiledNameDateCompleted . " is null or (" . self::FiledNameDateCompleted . " is not null and date_add(date_add(t.date_completed, interval " . $shortcut->archiveSettings->archiveAfterDays . " day), interval " . $shortcut->archiveSettings->archiveAfterHours . " hour) > now())");
+						}
+						$itemListInfo->allItemsCount = $this->count($criteria);
+						break;
+					case self::ListTypeArchive:
+						if (isset($shortcutId))
+						{
+							/** @var $linkRecord ShortcutLinkRecord */
+							$linkRecord = ShortcutLinkRecord::model()->findByPk($shortcutId);
+							/**@var $shortcut SalesRequestsShortcut */
+							$shortcut = $linkRecord->getRegularModel(false);
+							$shortcut->loadPageConfig();
+							if ($shortcut->archiveSettings->isConfigured())
+								$criteria->addCondition(self::FiledNameDateCompleted . " is not null and date_add(date_add(t.date_completed, interval " . $shortcut->archiveSettings->archiveAfterDays . " day), interval " . $shortcut->archiveSettings->archiveAfterHours . " hour) < now()");
+							else
+								$criteria->addCondition("1=2");
+						}
+						else
+							$criteria->addCondition("1=2");
+						$itemListInfo->archiveItemsCount = $this->count($criteria);
+						break;
+				}
+			}
+
+			return $itemListInfo;
+		}
+
+		/**
 		 * @param $itemId
 		 * @return \application\models\sales_requests\models\ItemEditModel
 		 */

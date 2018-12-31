@@ -59,6 +59,7 @@
 				'settings' => array(
 					'statusFilterMarkup' => $statusFilterMarkup
 				),
+				'info' => SalesRequestItemRecord::model()->getItemListInfo($shortcutId, $statusFilter),
 				'dataset' => $tableItemsDataset
 			));
 			Yii::app()->end();

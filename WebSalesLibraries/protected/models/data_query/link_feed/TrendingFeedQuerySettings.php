@@ -13,6 +13,7 @@
 		const DataRangeTypeToday = 'today';
 		const DataRangeTypeWeek = 'week';
 		const DataRangeTypeMonth = 'month';
+		const DataRangeTypeAllTime = 'all-time';
 
 		public $libraries;
 		public $dateRangeType;
@@ -60,7 +61,7 @@
 
 			$queryResult = $xpath->query('./DateRange', $contextNode);
 			$dateRangeType = $queryResult->length > 0 ? strtolower(trim($queryResult->item(0)->nodeValue)) : $this->dateRangeType;
-			if (in_array($dateRangeType, array(self::DataRangeTypeToday, self::DataRangeTypeWeek, self::DataRangeTypeMonth)))
+			if (in_array($dateRangeType, array(self::DataRangeTypeToday, self::DataRangeTypeWeek, self::DataRangeTypeMonth, self::DataRangeTypeAllTime)))
 				$this->dateRangeType = $dateRangeType;
 
 			$queryResult = $xpath->query('./Text', $contextNode);

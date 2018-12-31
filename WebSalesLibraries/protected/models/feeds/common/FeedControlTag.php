@@ -13,6 +13,7 @@
 		const ControlTagDateToday = 'today';
 		const ControlTagDateWeek = 'week';
 		const ControlTagDateMonth = 'month';
+		const ControlTagDateAllTime = 'all-time';
 
 		const ControlTagDetailsButton = 'details';
 

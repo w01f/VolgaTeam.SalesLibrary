@@ -460,6 +460,11 @@
 				formContent: itemListContainer
 			});
 
+			var tabHeaders = $.SalesPortal.Content.getContentObject().find('.sales-requests-main-page .service-panel .item-list-tabs .nav-tabs');
+			tabHeaders.find('a[href="#sales-requests-item-list-own"]').html('my requests (' + data.info.ownItemsCount + ')');
+			tabHeaders.find('a[href="#sales-requests-item-list-all"]').html('all requests (' + data.info.allItemsCount + ')');
+			tabHeaders.find('a[href="#sales-requests-item-list-archive"]').html('archives (' + data.info.archiveItemsCount + ')');
+
 			var tableIdentifier = 'sales-requests-item-list';
 
 			if (!$.SalesPortal.Content.isMobileDevice())

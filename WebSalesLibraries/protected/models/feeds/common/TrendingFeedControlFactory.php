@@ -12,6 +12,7 @@
 			FeedControlTag::ControlTagDateToday,
 			FeedControlTag::ControlTagDateWeek,
 			FeedControlTag::ControlTagDateMonth,
+			FeedControlTag::ControlTagDateAllTime,
 			FeedControlTag::ControlTagLinkFormatPowerPoint,
 			FeedControlTag::ControlTagLinkFormatDocuments,
 			FeedControlTag::ControlTagLinkFormatVideo,
@@ -42,6 +43,11 @@
 					$control = new FeedControlSettings();
 					$control->enabled = true;
 					$control->title = 'this month';
+					return $control;
+				case FeedControlTag::ControlTagDateAllTime:
+					$control = new FeedControlSettings();
+					$control->enabled = true;
+					$control->title = 'all time';
 					return $control;
 				default:
 					return parent::createControl($controlTag);
