@@ -788,6 +788,17 @@ namespace SalesLibraries.FileManager.Business.Services
 					.Select(path => path.Replace(source.Library.Path, String.Empty))
 					.ToArray();
 			}
+			if (source is ImagePreviewContainer)
+			{
+				target.thumbsLinks = source
+					.GetPreviewLinksByFormat(PreviewFormats.Thumbnails)
+					.Select(path => path.Replace(source.Library.Path, String.Empty))
+					.ToArray();
+				target.thumbsDatatableLinks = source
+					.GetPreviewLinksByFormat(PreviewFormats.ThumbnailsForDatatable)
+					.Select(path => path.Replace(source.Library.Path, String.Empty))
+					.ToArray();
+			}
 		}
 
 		private static void ImportData(
