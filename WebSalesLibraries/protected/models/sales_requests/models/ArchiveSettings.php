@@ -23,10 +23,10 @@
 		{
 			$archiveSettings = new self();
 
-			$queryResult = $xpath->query('./ArchiveAfter/Days', $contextNode);
+			$queryResult = $xpath->query('./Days', $contextNode);
 			$archiveSettings->archiveAfterDays = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue)) : $archiveSettings->archiveAfterDays;
 
-			$queryResult = $xpath->query('./ArchiveAfter/Hours', $contextNode);
+			$queryResult = $xpath->query('./Hours', $contextNode);
 			$archiveSettings->archiveAfterHours = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue)) : $archiveSettings->archiveAfterHours;
 
 			return $archiveSettings;

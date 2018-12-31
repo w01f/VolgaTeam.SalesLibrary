@@ -34,7 +34,7 @@
 			$linkConfig->loadXML($this->linkRecord->config);
 			$xpath = new DomXPath($linkConfig);
 
-			$queryResult = $xpath->query('//Config/ArchiveSettings');
+			$queryResult = $xpath->query('//Config/ArchiveAfter');
 			if ($queryResult->length > 0)
 				$this->archiveSettings = \application\models\sales_requests\models\ArchiveSettings::fromXml($xpath, $queryResult->item(0));
 

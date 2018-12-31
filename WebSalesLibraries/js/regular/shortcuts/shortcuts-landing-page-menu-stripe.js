@@ -35,13 +35,13 @@
 
 								var targetItem = $(emouse.target);
 								if (!((targetItem.hasClass('menu-stripe-top-item') || targetItem.parent().hasClass('menu-stripe-top-item') ||
-											targetItem.hasClass('menu-stripe-item-submenu') || targetItem.parent().hasClass('menu-stripe-item-submenu')) &&
-										targetItem.closest('#menu-stripe-' + menuStripeId).length > 0
-									))
+										targetItem.hasClass('menu-stripe-item-submenu') || targetItem.parent().hasClass('menu-stripe-item-submenu')) &&
+									targetItem.closest('#menu-stripe-' + menuStripeId).length > 0
+								))
 									$('.menu-stripe-top-item, .menu-stripe-item-submenu').removeClass('active-item');
 							});
 					}
-				})
+				});
 			}
 		};
 	};

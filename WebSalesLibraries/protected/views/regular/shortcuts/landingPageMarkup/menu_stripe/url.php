@@ -11,5 +11,5 @@
     <? if ($menuItem->hideCondition->medium): ?> hidden-md<? endif; ?>
     <? if ($menuItem->hideCondition->small): ?> hidden-sm<? endif; ?>
     <? if ($menuItem->hideCondition->extraSmall): ?> hidden-xs<? endif; ?>">
-    <a href="<? echo $menuItem->url; ?>" title="<? echo $menuItem->title; ?>" target="_blank"><? echo $menuItem->title; ?></a>
+    <a class="tooltipster-target" href="<? echo $menuItem->url; ?>" <? if (!empty($menuItem->hoverTip)): ?>title="<? echo $menuItem->hoverTip; ?>"<? endif; ?> target="_blank"><? echo $menuItem->title; ?></a>
 </li>

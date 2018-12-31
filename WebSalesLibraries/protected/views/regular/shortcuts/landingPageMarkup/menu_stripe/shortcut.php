@@ -11,8 +11,8 @@
     <? if ($menuItem->hideCondition->medium): ?> hidden-md<? endif; ?>
     <? if ($menuItem->hideCondition->small): ?> hidden-sm<? endif; ?>
     <? if ($menuItem->hideCondition->extraSmall): ?> hidden-xs<? endif; ?>">
-    <a class="shortcuts-link" href="<? echo isset($menuItem->shortcut) ? $menuItem->shortcut->getSourceLink() : '#'; ?>"
-       title="<? echo $menuItem->title; ?>">
+    <a class="shortcuts-link tooltipster-target" href="<? echo isset($menuItem->shortcut) ? $menuItem->shortcut->getSourceLink() : '#'; ?>"
+       <? if (!empty($menuItem->hoverTip)): ?>title="<? echo $menuItem->hoverTip; ?>"<? endif; ?>>
 		<? echo $menuItem->title; ?>
         <div class="service-data">
 			<? echo isset($menuItem->shortcut) ? $menuItem->shortcut->getMenuItemData() : '<div class="same-page"></div><div class="has-custom-handler"></div>'; ?>

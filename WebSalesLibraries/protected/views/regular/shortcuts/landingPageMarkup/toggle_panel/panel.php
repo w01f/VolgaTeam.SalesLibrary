@@ -65,8 +65,8 @@
 						)
 						, true);
 					?>
-                    <button id="<? echo $buttonTextId ?>" type="button" class="btn btn-default toggle-button<? if ($button->isDefault): ?> toggle-button-active<? endif; ?>"
-                            data-toggle-tag="<? echo $button->tag; ?>">
+                    <button id="<? echo $buttonTextId ?>" type="button" class="btn btn-default tooltipster-target toggle-button<? if ($button->isDefault): ?> toggle-button-active<? endif; ?>"
+                            data-toggle-tag="<? echo $button->tag; ?>" <? if (!empty($button->hoverTip)): ?>title="<? echo $button->hoverTip; ?>"<? endif; ?>>
 						<? echo $button->title; ?>
                     </button>
 				<? endforeach; ?>

@@ -476,7 +476,7 @@
 					"search": "_INPUT_",
 					"searchPlaceholder": "filter...",
 					"info": "Showing _START_ to _END_ of _TOTAL_ links",
-					"lengthMenu": '_MENU_ (of <span class="length-filter-total-items">0</span> links)'
+					"lengthMenu": '_MENU_ <span style="color: #c0c0c0;">(of <span class="length-filter-total-items">0</span> links)</span>'
 				},
 				"dom": (data.dataset.length > 0 ? (
 					"<'row table-header-row hidden-xs'<'col-xs-12 back-url text-left'>>" +
@@ -646,6 +646,8 @@
 			}
 
 			table.on('search.dt', logHandler).on('page.dt', logHandler).on('length.dt', logHandler);
+
+			tableWrapper.find('.tooltipster-target').tooltipster({contentAsHTML: true});
 		};
 
 		this.updateSize = function () {
@@ -740,6 +742,7 @@
 			{
 				var content = '';
 				var objectClass = '';
+				var tooltipsterClass = '';
 
 				if (row && row !== '')
 				{
@@ -755,7 +758,7 @@
 
 					if (row.isHyperlink)
 					{
-						content = '<a class="link-content" title="' + row.tooltip + '" href="' + row.url + '" target="_blank" ' + dragData + '>' + displayValue + '</a>';
+						content = '<a class="link-content tooltipster-target" title="' + row.tooltip + '" href="' + row.url + '" target="_blank" ' + dragData + '>' + displayValue + '</a>';
 						objectClass = ' link-url';
 						if (row.isExternalHyperlink)
 							objectClass += ' link-url-external';
@@ -764,12 +767,12 @@
 					}
 					else if (row.isFile)
 					{
-						content = '<span class="link-content" ' + dragData + ' title="' + row.tooltip + '">' + displayValue + '</span>';
+						content = '<span class="link-content tooltipster-target" ' + dragData + ' title="' + row.tooltip + '">' + displayValue + '</span>';
 						objectClass += ' link-file';
 					}
 					else
 					{
-						content = '<span class="link-content" ' + dragData + ' title="' + row.tooltip + '">' + displayValue + '</span>';
+						content = '<span class="link-content tooltipster-target" ' + dragData + ' title="' + row.tooltip + '">' + displayValue + '</span>';
 						objectClass += ' link-common';
 					}
 				}

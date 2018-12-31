@@ -12,6 +12,7 @@
 		public $id;
 		public $isDefault;
 		public $title;
+		public $hoverTip;
 
 		/** @var  array */
 		public $tags;
@@ -36,6 +37,9 @@
 		{
 			$queryResult = $xpath->query('./Title', $contextNode);
 			$this->title = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
+
+			$queryResult = $xpath->query('./HoverTip', $contextNode);
+			$this->hoverTip = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
 
 			$queryResult = $xpath->query('./IsDefault', $contextNode);
 			$this->isDefault = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : $this->isDefault;

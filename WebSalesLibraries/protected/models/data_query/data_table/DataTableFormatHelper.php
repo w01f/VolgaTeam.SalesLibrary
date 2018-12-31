@@ -57,14 +57,6 @@
 					);
 					$record['lib_name'] = isset($library) ? $library->name : '';
 
-					$record['tooltip'] = isset($linkRecord['file_name']) && $linkRecord['file_name'] != '' ? $linkRecord['file_name'] : $linkRecord['name'];
-					if (isset($linkRecord['search_format']) && $linkRecord['search_format'] != 'other')
-						$formatKey = $linkRecord['search_format'];
-					else
-						$formatKey = $linkRecord['file_extension'];
-					if (isset($formatKey) && array_key_exists($formatKey, \Yii::app()->params['tooltips']['wallbin']))
-						$record['tooltip'] = $record['tooltip'] . PHP_EOL . \Yii::app()->params['tooltips']['wallbin'][$formatKey];
-
 					$type = $linkRecord['type'];
 					switch ($linkRecord['search_format'])
 					{
@@ -338,11 +330,29 @@
 									if (!empty($imageUrl))
 										$record['thumbnail'] = sprintf('<img src="%s" style="' . ($columnSettings->width > 0 ? ('max-width:' . $columnSettings->width . 'px;') : '') . ($columnSettings->height > 0 ? ('max-height:' . $columnSettings->height . 'px;') : '') . '">', $imageUrl);
 									else
-										$record['thumbnail'] = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/missing_image.jpg');
+									{
+										$imageUrl = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . '/images/missing_image.jpg');
+										$record['thumbnail'] = $imageUrl;
+									}
 								}
 								break;
 						}
 					}
+
+					$tooltipText = !empty($linkRecord['file_name']) ? $linkRecord['file_name'] : $linkRecord['name'];
+					if (isset($linkRecord['search_format']) && $linkRecord['search_format'] != 'other')
+						$formatKey = $linkRecord['search_format'];
+					else
+						$formatKey = $linkRecord['file_extension'];
+
+					if (isset($formatKey) && array_key_exists($formatKey, \Yii::app()->params['tooltips']['wallbin']))
+						$tooltipText = nl2br($tooltipText . PHP_EOL . \Yii::app()->params['tooltips']['wallbin'][$formatKey]);
+
+//					if(array_key_exists('thumbnail', $record))
+//						$record['tooltip'] = $record['thumbnail'].$tooltipText;
+//					else
+					$record['tooltip'] = $tooltipText;
+
 					$dataset[] = $record;
 				}
 			}

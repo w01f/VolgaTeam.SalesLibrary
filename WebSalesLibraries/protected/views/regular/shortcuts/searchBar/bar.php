@@ -113,16 +113,16 @@
 					<? if (!empty($searchBar->label)): ?>
                         <span class="input-group-addon search-bar-label"><? echo $searchBar->label; ?>:</span>
 					<? endif; ?>
-                    <input class="form-control log-action search-bar-text" type="text"
-                           placeholder="<? echo $searchBar->placeholder; ?>">
+                    <input class="form-control log-action search-bar-text tooltipster-target" type="text"
+                           placeholder="<? echo $searchBar->placeholder; ?>" <? if (!empty($searchBar->hoverTips[SearchBar::HoverTipTagInput])): ?>title="<? echo $searchBar->hoverTips[SearchBar::HoverTipTagInput]; ?>"<? endif; ?>>
                     <span class="input-group-btn">
 						<? if ($searchBar->showTagsSelector): ?>
-                            <button class="btn btn-default log-action search-bar-button tags-filter-panel-switcher"
-                                    type="button"><? echo $tagsName; ?></button>
+                            <button class="btn btn-default log-action search-bar-button tags-filter-panel-switcher tooltipster-target"
+                                    type="button" <? if (!empty($searchBar->hoverTips[SearchBar::HoverTipTagTagsButton])): ?>title="<? echo $searchBar->hoverTips[SearchBar::HoverTipTagTagsButton]; ?>"<? endif; ?>><? echo $tagsName; ?></button>
 						<? endIf; ?>
-                        <button class="btn btn-default log-action search-bar-button search-bar-options"
-                                type="button">Search Options</button>
-						<button class="btn btn-default search-bar-run" type="button">
+                        <button class="btn btn-default log-action search-bar-button search-bar-options tooltipster-target"
+                                type="button" <? if (!empty($searchBar->hoverTips[SearchBar::HoverTipTagOptionsButton])): ?>title="<? echo $searchBar->hoverTips[SearchBar::HoverTipTagOptionsButton]; ?>"<? endif; ?>>Search Options</button>
+						<button class="btn btn-default search-bar-run tooltipster-target" type="button" <? if (!empty($searchBar->hoverTips[SearchBar::HoverTipTagActionButton])): ?>title="<? echo $searchBar->hoverTips[SearchBar::HoverTipTagActionButton]; ?>"<? endif; ?>>
 							<img src="<? echo Yii::app()->getBaseUrl(true) . '/images/shortcuts/search-bar/search.svg'; ?>"
                                  style="height: 16px; width: 16px;">
 						</button>

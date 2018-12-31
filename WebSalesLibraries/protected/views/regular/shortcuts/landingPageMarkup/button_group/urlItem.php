@@ -7,8 +7,8 @@
 	$blockId = sprintf('button-item-%s', $buttonItem->id);
 	echo $this->renderPartial('landingPageMarkup/button_group/buttonStyle', array('buttonItem' => $buttonItem, 'blockId' => $blockId), true);
 ?>
-<a id="<? echo $blockId; ?>" class="btn btn-default" href="<? echo $buttonItem->url; ?>"
-   title="<? echo $buttonItem->hoverTip; ?>"
+<a id="<? echo $blockId; ?>" class="btn btn-default tooltipster-target" href="<? echo $buttonItem->url; ?>"
+   <? if (!empty($buttonItem->hoverTip)): ?>title="<? echo $buttonItem->hoverTip; ?>"<? endif; ?>
    target="<? if (!empty($buttonItem->url)): ?>_blank<? else: ?>_self<? endif; ?>">
     <?if(!empty($buttonItem->image)):?>
         <img src="<? echo $buttonItem->image; ?>" style="height: auto; width: auto; max-width: 100%;"/>

@@ -122,7 +122,7 @@
 					, true);
 				?>
                 <div id="<? echo $filterTextId; ?>" data-filter="<? echo '.' . implode(', .', $filter->tags) ?>"
-                     class="cbp-filter-item<? if ($filter->isDefault): ?> cbp-filter-item-active<? endif; ?>">
+                     class="cbp-filter-item tooltipster-target<? if ($filter->isDefault): ?> cbp-filter-item-active<? endif; ?>" <? if (!empty($filter->hoverTip)): ?>title="<? echo $filter->hoverTip; ?>"<? endif; ?>>
                     <span>
                         <? echo $filter->title; ?>
                     </span>
@@ -141,12 +141,13 @@
                 <? /** @var MasonryUrl $masonryItem */ ?>
                 <a id="<? echo $itemId; ?>" href="<? echo $masonryItem->url; ?>" <? if ($masonryItem->isMailTo !== false): ?>target="_self"
                    <? else: ?>target="_blank"<? endif; ?>
-                   class="cbp-item <? echo implode(' ', $masonryItem->filterTags); ?>">
+                   class="cbp-item <? echo implode(' ', $masonryItem->filterTags); ?> tooltipster-target"
+                   <? if (!empty($masonryItem->hoverTip)): ?>title="<? echo $masonryItem->hoverTip; ?>"<? endif; ?>>
             <? elseif ($masonryItem->type === 'shortcut'): ?>
                 <? /** @var MasonryShortcut $masonryItem */ ?>
                 <a id="<? echo $itemId; ?>" href="<? echo isset($masonryItem->shortcut) ? $masonryItem->shortcut->getSourceLink() : '#'; ?>"
                    target="<? echo isset($masonryItem->shortcut) && !$masonryItem->shortcut->samePage ? '_blank' : '_self'; ?>"
-                   class="cbp-item <? echo implode(' ', $masonryItem->filterTags); ?> shortcuts-link<? if (!isset($masonryItem->shortcut)): ?> disabled<? endif; ?>">
+                   class="cbp-item <? echo implode(' ', $masonryItem->filterTags); ?> shortcuts-link<? if (!isset($masonryItem->shortcut)): ?> disabled<? endif; ?> tooltipster-target" <? if (!empty($masonryItem->hoverTip)): ?>title="<? echo $masonryItem->hoverTip; ?>"<? endif; ?>>
                     <div class="service-data">
                         <? echo isset($masonryItem->shortcut) ? $masonryItem->shortcut->getMenuItemData() : '<div class="same-page"></div><div class="has-custom-handler"></div>'; ?>
                     </div>

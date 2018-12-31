@@ -6,6 +6,11 @@
 	 */
 	class SearchBar implements IShortcutSearchOptionsContainer, IShortcutActionContainer
 	{
+		public const HoverTipTagInput = "input";
+		public const HoverTipTagActionButton = "action-button";
+		public const HoverTipTagTagsButton = "tags-button";
+		public const HoverTipTagOptionsButton = "options-button";
+
 		public $id;
 
 		public $configured;
@@ -17,6 +22,7 @@
 		public $samePage;
 		public $showTagsSelector;
 		public $defaultPageLength;
+		public $hoverTips;
 
 		/** @var  TableQueryConditions */
 		public $conditions;
@@ -40,6 +46,7 @@
 			$this->id = uniqid();
 			$this->categoryManager = new CategoryManager();
 			$this->style = new SearchBarStyle();
+			$this->hoverTips = array();
 		}
 
 		/**
@@ -71,6 +78,15 @@
 				$this->showTagsSelector = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
 				$queryResult = $xpath->query('./DefaultPageLength');
 				$this->defaultPageLength = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue)) : null;
+
+				$queryResult = $xpath->query('./HoverTips/Placeholder', $rootNode);
+				$this->hoverTips[self::HoverTipTagInput] = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : self::HoverTipTagInput;
+				$queryResult = $xpath->query('./HoverTips/Tags', $rootNode);
+				$this->hoverTips[self::HoverTipTagTagsButton] = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : self::HoverTipTagTagsButton;
+				$queryResult = $xpath->query('./HoverTips/SearchOptions', $rootNode);
+				$this->hoverTips[self::HoverTipTagOptionsButton] = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : self::HoverTipTagOptionsButton;
+				$queryResult = $xpath->query('./HoverTips/SearchButton', $rootNode);
+				$this->hoverTips[self::HoverTipTagActionButton] = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : self::HoverTipTagActionButton;
 
 				$queryResult = $xpath->query('./SearchCondition', $rootNode);
 				$this->conditions = TableQueryConditions::fromXml($xpath, $queryResult->item(0));

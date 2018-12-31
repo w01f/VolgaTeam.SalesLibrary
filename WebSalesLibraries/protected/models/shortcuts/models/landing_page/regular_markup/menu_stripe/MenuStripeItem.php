@@ -15,6 +15,7 @@
 		public $id;
 		public $type;
 		public $title;
+		public $hoverTip;
 		public $enable;
 		public $isAccessGranted;
 
@@ -42,6 +43,9 @@
 		{
 			$queryResult = $xpath->query('./Text', $contextNode);
 			$this->title = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
+
+			$queryResult = $xpath->query('./HoverTip', $contextNode);
+			$this->hoverTip = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : $this->title;
 
 			$queryResult = $xpath->query('./Enabled', $contextNode);
 			$this->enable = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : $this->enable;

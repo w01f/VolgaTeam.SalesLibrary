@@ -14,6 +14,7 @@
 		public $imagePath;
 
 		public $title;
+		public $hoverTip;
 		public $description;
 
 		/** @var  MasonryItemSize */
@@ -58,6 +59,9 @@
 
 			$queryResult = $xpath->query('./Title', $contextNode);
 			$this->title = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
+
+			$queryResult = $xpath->query('./HoverTip', $contextNode);
+			$this->hoverTip = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
 
 			$queryResult = $xpath->query('./Description', $contextNode);
 			$this->description = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;

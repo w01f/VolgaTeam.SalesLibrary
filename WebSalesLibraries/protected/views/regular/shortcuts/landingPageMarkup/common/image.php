@@ -24,13 +24,13 @@
 		)
 		, true);
 ?>
-<div id="<? echo $blockId; ?>" class="<? if (isset($contentBlock->floatSide)): ?>pull-<? echo $contentBlock->floatSide; ?><? endif; ?><? if ($contentBlock->centerBlock): ?> center-block<? endif; ?>
+<div id="<? echo $blockId; ?>" class="<? if (isset($contentBlock->floatSide)): ?>pull-<? echo $contentBlock->floatSide; ?><? endif; ?><? if ($contentBlock->centerBlock): ?> center-block<? endif; ?> tooltipster-target
         <? if ($contentBlock->hideCondition->large): ?> hidden-lg<? endif; ?>
         <? if ($contentBlock->hideCondition->medium): ?> hidden-md<? endif; ?>
         <? if ($contentBlock->hideCondition->small): ?> hidden-sm<? endif; ?>
         <? if ($contentBlock->hideCondition->extraSmall): ?> hidden-xs<? endif; ?>"
      style="<? echo $this->renderPartial('landingPageMarkup/style/stylePadding', array('padding' => $contentBlock->padding), true); ?>
      <? echo $this->renderPartial('landingPageMarkup/style/styleMargin', array('margin' => $contentBlock->margin), true); ?>"
-	<? if (!empty($contentBlock->hoverText)): ?> title="<? echo $contentBlock->hoverText; ?>"<? endif; ?>>
+	<? if (!empty($contentBlock->hoverText)): ?>title="<? echo $contentBlock->hoverText; ?>"<? endif; ?>>
     <img class="img-responsive" style="width: 100%;" src="<? echo $contentBlock->source; ?>" <? if (!empty($contentBlock->animation)): ?> data-bs-hover-animate="<? echo $contentBlock->animation; ?>"<? endif; ?>>
 </div>

@@ -191,6 +191,8 @@
 							});
 
 						markupObject.find('.landing-carousel.carousel-slide-show').carousel();
+
+						markupObject.find('.tooltipster-target').tooltipster();
 					};
 
 					var pageContent = $.SalesPortal.Content.getContentObject();
