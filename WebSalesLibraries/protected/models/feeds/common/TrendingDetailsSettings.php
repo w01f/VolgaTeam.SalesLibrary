@@ -10,6 +10,7 @@
 		public $todayDetailsLinkId;
 		public $weekDetailsLinkId;
 		public $monthDetailsLinkId;
+		public $allTimeDetailsLinkId;
 
 		/**
 		 * @param $xpath \DOMXPath
@@ -32,6 +33,9 @@
 
 			$queryResult = $xpath->query('./Details/MonthShortcutId', $contextNode);
 			$instance->monthDetailsLinkId = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
+
+			$queryResult = $xpath->query('./Details/AllTimeShortcutId', $contextNode);
+			$instance->allTimeDetailsLinkId = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
 
 			return $instance;
 		}

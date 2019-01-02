@@ -270,10 +270,12 @@
                         <span class="today-link-id"><? echo $contentBlock->detailsSettings->todayDetailsLinkId; ?></span>
                         <span class="week-link-id"><? echo $contentBlock->detailsSettings->weekDetailsLinkId; ?></span>
                         <span class="month-link-id"><? echo $contentBlock->detailsSettings->monthDetailsLinkId; ?></span>
+                        <span class="all-time-link-id"><? echo $contentBlock->detailsSettings->allTimeDetailsLinkId; ?></span>
                     <? else: ?>
                         <span class="today-url"><? echo \PageContentShortcut::createShortcutUrl($contentBlock->detailsSettings->todayDetailsLinkId, false); ?></span>
                         <span class="week-url"><? echo \PageContentShortcut::createShortcutUrl($contentBlock->detailsSettings->weekDetailsLinkId, false); ?></span>
                         <span class="month-url"><? echo \PageContentShortcut::createShortcutUrl($contentBlock->detailsSettings->monthDetailsLinkId, false); ?></span>
+                        <span class="all-time-url"><? echo \PageContentShortcut::createShortcutUrl($contentBlock->detailsSettings->allTimeDetailsLinkId, false); ?></span>
                     <? endif; ?>
                     <span class="hover-tip-template"><? echo $control->hoverTip; ?></span>
                 </span>
