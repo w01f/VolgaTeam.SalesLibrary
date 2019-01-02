@@ -55,6 +55,7 @@ namespace SalesLibraries.CommonGUI.RetractableBar
 
 		public void Collapse(bool silent = false)
 		{
+			ContentSize = Width;
 			if (silent || AnimationDelay == 0)
 			{
 				Width = pnClosed.Width;
