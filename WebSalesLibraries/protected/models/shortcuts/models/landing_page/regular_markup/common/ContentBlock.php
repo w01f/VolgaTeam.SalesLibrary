@@ -27,6 +27,7 @@
 	use application\models\shortcuts\models\landing_page\regular_markup\masonry\TrendingBlock as MasonryTrendingBlock;
 	use application\models\shortcuts\models\landing_page\regular_markup\masonry\SearchFeedBlock as MasonrySearchFeedBlock;
 	use application\models\shortcuts\models\landing_page\regular_markup\masonry\SpecificLinkFeedBlock as MasonrySpecificLinkFeedBlock;
+	use application\models\shortcuts\models\landing_page\regular_markup\video_group\VideoGroupBlock;
 	use application\models\shortcuts\models\landing_page\regular_markup\wallbin\LibraryBlock;
 	use application\models\shortcuts\models\landing_page\regular_markup\wallbin\LibraryPageBlock;
 	use application\models\shortcuts\models\landing_page\regular_markup\wallbin\LibraryPageBundleBlock;
@@ -256,6 +257,8 @@
 					return 'menu_stripe/menuStripe';
 				case 'button-group':
 					return 'button_group/buttonGroup';
+				case 'video-group':
+					return 'video_group/videoGroup';
 				default:
 					return 'common/undefinedBlock';
 			}
@@ -414,6 +417,10 @@
 					$buttonGroup = new ButtonGroupBlock($parentShortcut, $parentBlock);
 					$buttonGroup->configureFromXml($xpath, $contextNode);
 					return $buttonGroup;
+				case "video-group":
+					$videoGroup = new VideoGroupBlock($parentShortcut, $parentBlock);
+					$videoGroup->configureFromXml($xpath, $contextNode);
+					return $videoGroup;
 				default:
 					return new UndefinedBlock($parentShortcut, $parentBlock);
 			}

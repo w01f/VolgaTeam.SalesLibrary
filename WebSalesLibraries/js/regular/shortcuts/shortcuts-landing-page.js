@@ -131,6 +131,15 @@
 							}).init();
 						});
 
+						$.each(markupObject.find('.landing-page-video-group'), function (key, value) {
+							var videoGroupBlock = $(value);
+							var videoGroupId = videoGroupBlock.prop('id').replace('video-group-', '');
+
+							new $.SalesPortal.LandingPage.VideoGroup({
+								containerId: videoGroupId
+							}).init();
+						});
+
 						$.each(markupObject.find('.library-block'), function (key, value) {
 							var libraryBlock = $(value);
 							var libraryBlockId = libraryBlock.prop('id').replace('library-block-', '');

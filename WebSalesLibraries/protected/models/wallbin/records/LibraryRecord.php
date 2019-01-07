@@ -1,6 +1,4 @@
 <?
-	use application\models\services_data\cadmin\models\versions_management\ChangeSet;
-
 	/**
 	 * Class LibraryRecord
 	 * @property mixed id
@@ -116,34 +114,6 @@
 			}
 			else
 				return false;
-		}
-
-		/**
-		 * @param application\models\wallbin\models\cadmin\entities\Library $library
-		 * @param int $changeType
-		 */
-		public static function updateDataFromChangeSet($library, $changeType)
-		{
-			switch ($changeType)
-			{
-				case ChangeSet::ChangeTypeAdd:
-				case ChangeSet::ChangeTypeUpdate:
-					$libraryRecord = self::model()->findByPk($library->id);
-					if (!isset($libraryRecord))
-					{
-						$libraryRecord = new LibraryRecord();
-						$libraryRecord->id = $library->id;
-					}
-					$libraryRecord->name = $library->name;
-					$libraryRecord->last_update = date(Yii::app()->params['mysqlDateTimeFormat'], strtotime($library->lastModified));
-					$libraryRecord->settings = CJSON::encode($library->settings);
-					$libraryRecord->save();
-					break;
-				case ChangeSet::ChangeTypeDelete:
-					self::clearData($library->id);
-					self::model()->deleteByPk($library->id);
-					break;
-			}
 		}
 
 		/**
