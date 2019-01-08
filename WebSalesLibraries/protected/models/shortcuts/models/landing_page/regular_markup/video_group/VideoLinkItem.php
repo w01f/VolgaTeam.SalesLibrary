@@ -42,6 +42,14 @@
 			$queryResult = $xpath->query('./Link', $contextNode);
 			$fileName = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
 
+			$queryResult = $xpath->query('./Image', $contextNode);
+			$imageFileName = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
+			if (!empty($imageFileName))
+			{
+				$baseUrl = \Yii::app()->getBaseUrl(true);
+				$this->thumbnailUrl = \Utils::formatUrl($baseUrl . $this->parentGroup->parentShortcut->relativeLink . '/images/' . $imageFileName);
+			}
+
 			if (empty($libraryName) || empty($pageName) || empty($windowName) || empty($fileName))
 				return;
 
@@ -64,8 +72,10 @@
 				if (isset($link->universalPreview->mp4))
 					$this->mp4Url = $link->universalPreview->mp4->link;
 				else
-					$this->mp4Url =str_replace('SalesLibraries/SalesLibraries', 'SalesLibraries', $link->fileLink);
-				$this->thumbnailUrl = $link->universalPreview->mp4Thumb->link;
+					$this->mp4Url = str_replace('SalesLibraries/SalesLibraries', 'SalesLibraries', $link->fileLink);
+
+				if (empty($this->thumbnailUrl))
+					$this->thumbnailUrl = $link->universalPreview->mp4Thumb->link;
 
 				$this->isConfigured = true;
 			}

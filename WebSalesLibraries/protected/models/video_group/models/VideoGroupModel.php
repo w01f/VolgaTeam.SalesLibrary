@@ -40,7 +40,7 @@
 		{
 			$model = new self();
 
-			$model->id = $record->id;
+			$model->id = $record->id_group;
 			$model->idShortcut = $record->id_shortcut;
 			$model->idUser = $record->id_user;
 			$model->state = new VideoGroupState();

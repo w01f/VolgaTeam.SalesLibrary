@@ -3,6 +3,7 @@
 	/**
 	 * Class VideoGroupRecord
 	 * @property mixed id
+	 * @property mixed id_group
 	 * @property mixed id_shortcut
 	 * @property mixed id_user
 	 * @property mixed state
@@ -30,7 +31,7 @@
 		 */
 		public function getModel($idGroup, $idShortcut, $idUser)
 		{
-			$record = $this->find("id='" . $idGroup . "' and id_shortcut='" . $idShortcut . "' and id_user=" . $idUser);
+			$record = $this->find("id_group='" . $idGroup . "' and id_shortcut='" . $idShortcut . "' and id_user=" . $idUser);
 			if (isset($record))
 				return \application\models\video_group\models\VideoGroupModel::fromRecord($record);
 			return \application\models\video_group\models\VideoGroupModel::createEmpty($idGroup, $idShortcut, $idUser);
@@ -44,11 +45,12 @@
 		 */
 		public function updateVideoItemState($idGroup, $idShortcut, $idUser, $videoItemState)
 		{
-			$record = $this->find("id='" . $idGroup . "' and id_shortcut='" . $idShortcut . "' and id_user=" . $idUser);
+			$record = $this->find("id_group='" . $idGroup . "' and id_shortcut='" . $idShortcut . "' and id_user=" . $idUser);
 			if (!isset($record))
 			{
 				$record = new self();
-				$record->id = $idGroup;
+				$record->id = uniqid();
+				$record->id_group = $idGroup;
 				$record->id_shortcut = $idShortcut;
 				$record->id_user = $idUser;
 			}

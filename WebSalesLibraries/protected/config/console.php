@@ -75,6 +75,8 @@ return array(
 	    'application.models.feeds.common.*',
 	    'application.models.feeds.horizontal.*',
 	    'application.models.feeds.vertical.*',
+	    'application.models.video_group.models.*',
+	    'application.models.video_group.records.*'
     ),
     'components' => array(
         'db' => array(

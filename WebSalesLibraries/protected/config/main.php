@@ -43,6 +43,7 @@
 			'application.models.shortcuts.models.landing_page.regular_markup.vertical_feed.*',
 			'application.models.shortcuts.models.landing_page.regular_markup.button_group.*',
 			'application.models.shortcuts.models.landing_page.regular_markup.video_group.*',
+			'application.models.shortcuts.models.landing_page.regular_markup.drop_folder.*',
 			'application.models.shortcuts.models.landing_page.mobile_items.*',
 			'application.models.shortcuts.models.service.common.*',
 			'application.models.shortcuts.models.service.data_query_cache.*',
@@ -84,6 +85,7 @@
 			'application.models.sales_requests.records.*',
 			'application.models.video_group.models.*',
 			'application.models.video_group.records.*',
+			'application.models.drop_folder.models.*',
 		),
 		'behaviors' => array(
 			'onBeginRequest' => array(

@@ -1,4 +1,5 @@
 <?
+
 	namespace application\models\shortcuts\models\landing_page\regular_markup\style;
 
 	/**
@@ -7,6 +8,7 @@
 	class BorderStyle
 	{
 		public $color;
+		public $style;
 		/** @var  \Padding */
 		public $size;
 
@@ -29,7 +31,10 @@
 			$borderStyle = new BorderStyle();
 
 			$queryResult = $xpath->query('./Color', $contextNode);
-			$borderStyle->color = $queryResult->length > 0 ? strtolower(trim($queryResult->item(0)->nodeValue)) : null;
+			$borderStyle->color = $queryResult->length > 0 ? str_replace("#", "", strtolower(trim($queryResult->item(0)->nodeValue))) : null;
+
+			$queryResult = $xpath->query('./Style', $contextNode);
+			$borderStyle->style = $queryResult->length > 0 ? strtolower(trim($queryResult->item(0)->nodeValue)) : "solid";
 
 			$queryResult = $xpath->query('./Size', $contextNode);
 			if ($queryResult->length > 0)

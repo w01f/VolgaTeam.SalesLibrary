@@ -3,6 +3,7 @@
 	namespace application\models\shortcuts\models\landing_page\regular_markup\common;
 
 	use application\models\shortcuts\models\landing_page\regular_markup\button_group\ButtonGroupBlock;
+	use application\models\shortcuts\models\landing_page\regular_markup\drop_folder\DropFolderBlock;
 	use application\models\shortcuts\models\landing_page\regular_markup\horizontal_feed\SearchFeedBlock as HorizontalSearchFeedBlock;
 	use application\models\shortcuts\models\landing_page\regular_markup\horizontal_feed\SpecificLinkFeedBlock as HorizontalSpecificLinkFeedBlock;
 	use application\models\shortcuts\models\landing_page\regular_markup\horizontal_feed\TrendingBlock as HorizontalTrendingBlock;
@@ -259,6 +260,8 @@
 					return 'button_group/buttonGroup';
 				case 'video-group':
 					return 'video_group/videoGroup';
+				case 'drop-folder':
+					return 'drop_folder/dropFolder';
 				default:
 					return 'common/undefinedBlock';
 			}
@@ -421,6 +424,10 @@
 					$videoGroup = new VideoGroupBlock($parentShortcut, $parentBlock);
 					$videoGroup->configureFromXml($xpath, $contextNode);
 					return $videoGroup;
+				case "filedrop":
+					$dropFolder = new DropFolderBlock($parentShortcut, $parentBlock);
+					$dropFolder->configureFromXml($xpath, $contextNode);
+					return $dropFolder;
 				default:
 					return new UndefinedBlock($parentShortcut, $parentBlock);
 			}

@@ -21,7 +21,7 @@
 				{
 					var modalDialog = new $.SalesPortal.ModalDialog({
 						title: 'Video',
-						description: "You can't play this video yet ",
+						description: "You can't play this video yet.",
 						buttons: [
 							{
 								tag: 'ok',
@@ -43,31 +43,68 @@
 					var videoItemState = videoItemStateEncoded != '' ?
 						$.parseJSON(videoItem.find('.video-item-data').text()) :
 						null;
-					$.fancybox({
-						title: 'Video',
-						content: $('<video controls autoplay preload="auto"' +
-							' id="video-player"' +
-							' height = "480" width="680">' +
-							'<source src="' + videoSource + '" type="video/mp4">' +
-							'</video>'),
-						openEffect: 'none',
-						closeEffect: 'none',
-						afterShow: function () {
-							$('.fancybox-wrap').addClass('content-boxed');
-							var videoPlayer = document.getElementById('video-player');
-							if (videoItemState)
-								videoPlayer.currentTime = videoItemState.lastViewPosition;
-						},
-						beforeClose: function () {
-							var videoPlayer = document.getElementById('video-player');
-							videoPlayer.pause();
-							updateVideoItemState(
-								videoItemIndex,
-								(videoItemState != null && videoItemState.fullyViewed == true) || videoPlayer.ended,
-								videoPlayer.ended ? 0 : videoPlayer.currentTime);
-							$('#video-player').remove();
-						}
-					});
+
+					var playVideo = function (startPosition) {
+						$.fancybox({
+							title: 'Video',
+							content: $('<video controls autoplay preload="auto"' +
+								' id="video-player"' +
+								' height = "480" width="680">' +
+								'<source src="' + videoSource + '" type="video/mp4">' +
+								'</video>'),
+							openEffect: 'none',
+							closeEffect: 'none',
+							afterShow: function () {
+								$('.fancybox-wrap').addClass('content-boxed');
+								var videoPlayer = document.getElementById('video-player');
+								videoPlayer.currentTime = startPosition;
+							},
+							beforeClose: function () {
+								var videoPlayer = document.getElementById('video-player');
+								videoPlayer.pause();
+								updateVideoItemState(
+									videoItemIndex,
+									(videoItemState != null && videoItemState.fullyViewed == true) || videoPlayer.ended,
+									videoPlayer.ended ? 0 : videoPlayer.currentTime);
+								$('#video-player').remove();
+							}
+						});
+					};
+
+					var lastViewPosition = videoItemState ? parseFloat(videoItemState.lastViewPosition) : 0;
+					if (lastViewPosition > 0)
+					{
+						var playbackRequestDialog = new $.SalesPortal.ModalDialog({
+							title: 'Video',
+							description: "Do you want to resume where you left off?",
+							width: 500,
+							buttons: [
+								{
+									tag: 'ok',
+									title: 'Resume',
+									width: 200,
+									clickHandler: function () {
+										playbackRequestDialog.close();
+										playVideo(lastViewPosition);
+									}
+								},
+								{
+									tag: 'cancel',
+									title: 'Start from beginning ',
+									width: 200,
+									clickHandler: function () {
+										playbackRequestDialog.close();
+										playVideo(0);
+									}
+								}
+							]
+						});
+						playbackRequestDialog.show();
+					}
+					else
+						playVideo(0);
+
+
 				}
 			});
 		};

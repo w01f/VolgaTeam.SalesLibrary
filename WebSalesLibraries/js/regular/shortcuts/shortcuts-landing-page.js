@@ -140,6 +140,15 @@
 							}).init();
 						});
 
+						$.each(markupObject.find('.drop-folder-container'), function (key, value) {
+							var dropFolderBlock = $(value);
+							var dropFolderContainerId = dropFolderBlock.prop('id').replace('drop-folder-container-', '');
+
+							new $.SalesPortal.LandingPage.DropFolder({
+								containerId: dropFolderContainerId
+							}).init();
+						});
+
 						$.each(markupObject.find('.library-block'), function (key, value) {
 							var libraryBlock = $(value);
 							var libraryBlockId = libraryBlock.prop('id').replace('library-block-', '');
