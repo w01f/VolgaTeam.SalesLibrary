@@ -336,6 +336,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			libraryFolder.Delete(PageContainer.Page.Library.Context);
 			PageContainer.Page.Folders.RemoveItem(libraryFolder);
 			UpdateFoldersSize();
+			MainController.Instance.WallbinViews.Selection.ResetLinks();
 			OnFolderDataChanged(this, EventArgs.Empty);
 		}
 
