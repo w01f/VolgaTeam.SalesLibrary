@@ -6,16 +6,11 @@
 	class VideoFileItem extends VideoGroupItem
 	{
 		public $fileUrl;
-		public $placeholderUrl;
+
 
 		public function getVideoUrl()
 		{
 			return $this->fileUrl;
-		}
-
-		public function getVideoPlaceholder()
-		{
-			return $this->placeholderUrl;
 		}
 
 		/**
@@ -29,15 +24,15 @@
 			$queryResult = $xpath->query('./File', $contextNode);
 			$videoFileName = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
 
-			$queryResult = $xpath->query('./Placeholder', $contextNode);
-			$imageFileName = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
-
-			if (empty($videoFileName) || empty($imageFileName))
+			if (empty($videoFileName))
 				return;
 
 			$baseUrl = \Yii::app()->getBaseUrl(true);
 			$this->fileUrl = \Utils::formatUrl($baseUrl . $this->parentGroup->parentShortcut->relativeLink . '/video/' . $videoFileName);
-			$this->placeholderUrl = \Utils::formatUrl($baseUrl . $this->parentGroup->parentShortcut->relativeLink . '/images/' . $imageFileName);
+
+			$queryResult = $xpath->query('./Image', $contextNode);
+			if ($queryResult->length > 0)
+				$this->placeholder = VideoPlaceholder::fromXml($xpath, $queryResult->item(0), $this->parentGroup->parentShortcut->relativeLink, null);
 
 			$this->isConfigured = true;
 		}

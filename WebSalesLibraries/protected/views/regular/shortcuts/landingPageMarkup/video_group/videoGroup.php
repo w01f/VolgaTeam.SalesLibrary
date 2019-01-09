@@ -54,8 +54,13 @@
 <div id="<? echo $blockId; ?>" class="row landing-page-video-group">
 	<? foreach ($contentBlock->items as $videoItem): ?>
         <div class="col text-center col-lg-<? echo $columnSizeLarge; ?> col-md-<? echo $columnSizeMedium; ?> col-sm-<? echo $columnSizeSmall; ?> col-xs-<? echo $columnSizeExtraSmall; ?>">
-            <div class="video-item<? if ($videoItem->index > 0): ?> suspended<? endif; ?>" data-index="<? echo $videoItem->index; ?>" data-source="<? echo $videoItem->getVideoUrl(); ?>">
-                <img class="placeholder" src="<? echo $videoItem->getVideoPlaceholder(); ?>">
+            <div class="video-item<? if ($videoItem->index > 0): ?> suspended<? endif; ?>"
+                 data-index="<? echo $videoItem->index; ?>" data-source="<? echo $videoItem->getVideoUrl(); ?>"
+                 data-placeholder-ready="<? echo $videoItem->placeholder->ready; ?>"
+                 data-placeholder-not-ready="<? echo $videoItem->placeholder->notReady; ?>"
+                 data-placeholder-in-progress="<? echo $videoItem->placeholder->inProgress; ?>"
+                 data-placeholder-complete="<? echo $videoItem->placeholder->complete; ?>">
+                <img class="placeholder" src="<? echo $videoItem->placeholder->notReady; ?>">
                 <div class="service-data video-item-data"></div>
             </div>
         </div>

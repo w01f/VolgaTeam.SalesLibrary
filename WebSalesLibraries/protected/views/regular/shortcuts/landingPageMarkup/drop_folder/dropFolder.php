@@ -29,6 +29,11 @@
 		, true);
 ?>
 <style>
+    <? echo '#'.$folderBlockId;?>
+    {
+        min-height: <? echo $contentBlock->minHeight;?>px;
+    }
+
     <? echo '#'.$folderBlockId;?> .file-item
     {
         margin: 5px;
@@ -66,6 +71,8 @@
 		<? echo CJSON::encode(array(
 			'folderName' => $contentBlock->folderName,
 			'defaultMessage' => $contentBlock->hoverText,
+			'maxFileSize' => $contentBlock->maxFileSize,
+			'maxFileSizeExcessMessage' => $contentBlock->maxFileSizeExcessMessage,
 		)) ?>
     </div>
 </div>

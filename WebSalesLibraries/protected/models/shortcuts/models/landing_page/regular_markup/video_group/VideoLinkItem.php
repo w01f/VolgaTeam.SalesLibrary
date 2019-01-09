@@ -17,11 +17,6 @@
 			return $this->mp4Url;
 		}
 
-		public function getVideoPlaceholder()
-		{
-			return $this->thumbnailUrl;
-		}
-
 		/**
 		 * @param $xpath \DOMXPath
 		 * @param $contextNode \DOMNode
@@ -42,14 +37,6 @@
 			$queryResult = $xpath->query('./Link', $contextNode);
 			$fileName = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
 
-			$queryResult = $xpath->query('./Image', $contextNode);
-			$imageFileName = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
-			if (!empty($imageFileName))
-			{
-				$baseUrl = \Yii::app()->getBaseUrl(true);
-				$this->thumbnailUrl = \Utils::formatUrl($baseUrl . $this->parentGroup->parentShortcut->relativeLink . '/images/' . $imageFileName);
-			}
-
 			if (empty($libraryName) || empty($pageName) || empty($windowName) || empty($fileName))
 				return;
 
@@ -58,7 +45,9 @@
 			$windowName = str_replace("'", "''", $windowName);
 			$fileName = str_replace("'", "''", $fileName);
 
-			/** @var \LinkRecord $linkRecord */
+			$defaultPlaceholderUrl = null;
+
+				/** @var \LinkRecord $linkRecord */
 			$linkRecord = \LinkRecord::getLinkByName($libraryName, $pageName, $windowName, $fileName);
 			if (isset($linkRecord))
 			{
@@ -74,10 +63,15 @@
 				else
 					$this->mp4Url = str_replace('SalesLibraries/SalesLibraries', 'SalesLibraries', $link->fileLink);
 
-				if (empty($this->thumbnailUrl))
-					$this->thumbnailUrl = $link->universalPreview->mp4Thumb->link;
+				$defaultPlaceholderUrl = $link->universalPreview->mp4Thumb->link;
 
 				$this->isConfigured = true;
 			}
+
+			$queryResult = $xpath->query('./Image', $contextNode);
+			if ($queryResult->length > 0)
+				$this->placeholder = VideoPlaceholder::fromXml($xpath, $queryResult->item(0), $this->parentGroup->parentShortcut->relativeLink, $defaultPlaceholderUrl);
+			else
+				$this->placeholder = VideoPlaceholder::createDefault($defaultPlaceholderUrl);
 		}
 	}

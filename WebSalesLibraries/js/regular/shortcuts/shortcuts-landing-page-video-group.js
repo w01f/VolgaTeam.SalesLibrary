@@ -11,7 +11,7 @@
 			videoGroup = $('#video-group-' + videoGroupId);
 			videoGroupData = $.parseJSON(videoGroup.find('.video-group-data').text());
 			initVideoGroup();
-			loadVideoGroupState();
+			loadVideoGroupState(true);
 		};
 
 		var initVideoGroup = function () {
@@ -109,7 +109,7 @@
 			});
 		};
 
-		var loadVideoGroupState = function () {
+		var loadVideoGroupState = function (showOverlay) {
 			$.ajax({
 				type: "POST",
 				url: window.BaseUrl + "videoGroup/getState",
@@ -118,12 +118,17 @@
 					shortcutId: videoGroupData.shortcutId
 				},
 				beforeSend: function () {
+					if(showOverlay)
+						$.SalesPortal.Overlay.show();
 				},
 				success: function (videoGroupState) {
+					$.SalesPortal.Overlay.hide();
+
 					var suspendNextItem = false;
 					var videoItems = videoGroup.find('.video-item');
 					$.each(videoItems, function () {
 						var videoItem = $(this);
+						var img = videoItem.find('img');
 
 						if (suspendNextItem)
 						{
@@ -133,17 +138,36 @@
 						else
 							videoItem.removeClass('suspended');
 
-						suspendNextItem = true;
+
 						var videoItemIndex = videoItem.data('index');
 						if (videoItemIndex in videoGroupState.itemStates)
 						{
 							var videoItemState = videoGroupState.itemStates[videoItemIndex];
+
+							if (videoItemState.fullyViewed == true)
+								img.prop('src', videoItem.data('placeholder-complete'));
+							else if (parseFloat(videoItemState.lastViewPosition) > 0)
+								img.prop('src', videoItem.data('placeholder-in-progress'));
+							else if (suspendNextItem)
+								img.prop('src', videoItem.data('placeholder-not-ready'));
+							else
+								img.prop('src', videoItem.data('placeholder-ready'));
+
 							videoItem.find('.service-data').text($.toJSON(videoItemState));
 							suspendNextItem = videoItemState.fullyViewed != true;
+						}
+						else
+						{
+							if (suspendNextItem)
+								img.prop('src', videoItem.data('placeholder-not-ready'));
+							else
+								img.prop('src', videoItem.data('placeholder-ready'));
+							suspendNextItem = true;
 						}
 					});
 				},
 				error: function () {
+					$.SalesPortal.Overlay.hide();
 				},
 				async: true,
 				dataType: 'json'
@@ -164,11 +188,13 @@
 					}
 				},
 				beforeSend: function () {
+					$.SalesPortal.Overlay.show();
 				},
 				success: function () {
-					loadVideoGroupState();
+					loadVideoGroupState(false);
 				},
 				error: function () {
+					$.SalesPortal.Overlay.hide();
 				},
 				async: true,
 				dataType: 'json'

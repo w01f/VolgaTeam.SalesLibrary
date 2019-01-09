@@ -9,9 +9,10 @@
 		public $index;
 		public $isConfigured;
 
-		public abstract function getVideoUrl();
+		/** @var VideoPlaceholder */
+		public $placeholder;
 
-		public abstract function getVideoPlaceholder();
+		public abstract function getVideoUrl();
 
 		/**
 		 * @param $parentGroup VideoGroupBlock
