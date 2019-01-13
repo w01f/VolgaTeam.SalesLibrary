@@ -49,6 +49,34 @@
 			updateContentSize();
 		};
 
+		var requestSaveItem = function(){
+			var modalDialog = new $.SalesPortal.ModalDialog({
+				title: 'Save Request',
+				description: 'Do you want to SUBMIT this Request to your Research Team Now?',
+				buttons: [
+					{
+						tag: 'yes',
+						title: 'Yes! Submit!',
+						width: 160,
+						clickHandler: function () {
+							modalDialog.close();
+							submitItem();
+						}
+					},
+					{
+						tag: 'no',
+						title: 'Not Now',
+						width: 160,
+						clickHandler: function () {
+							modalDialog.close();
+							saveItem();
+						}
+					}
+				]
+			});
+			modalDialog.show();
+		};
+
 		var saveItem = function (onSuccessHandler) {
 			if (itemList.selectedItem !== undefined)
 			{
@@ -204,7 +232,7 @@
 				itemList.deleteItem();
 			});
 			shortcutActionsContainer.find('.sales-requests-item-save').off('click.action').on('click.action', function () {
-				saveItem();
+				requestSaveItem();
 			});
 			shortcutActionsContainer.find('.sales-requests-item-submit').off('click.action').on('click.action', function () {
 				submitItem();
@@ -215,7 +243,7 @@
 				itemList.addItem();
 			});
 			itemListButtons.find('.item-list-save').off('click.sales-requests').on('click.sales-requests', function () {
-				saveItem()
+				requestSaveItem()
 			});
 			itemListButtons.find('.item-list-submit').off('click.sales-requests').on('click.sales-requests', function () {
 				submitItem();
@@ -223,7 +251,7 @@
 
 			var contentButtons = $.SalesPortal.Content.getContentObject().find('.sales-requests-main-page .content-panel .content-buttons');
 			contentButtons.find('.item-save').off('click.sales-requests').on('click.sales-requests', function () {
-				saveItem()
+				requestSaveItem()
 			});
 			contentButtons.find('.item-submit').off('click.sales-requests').on('click.sales-requests', function () {
 				submitItem();
