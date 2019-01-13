@@ -3,6 +3,7 @@
 	namespace application\models\shortcuts\models\landing_page\regular_markup\common;
 
 	use application\models\shortcuts\models\landing_page\regular_markup\button_group\ButtonGroupBlock;
+	use application\models\shortcuts\models\landing_page\regular_markup\calendar\CalendarBlock;
 	use application\models\shortcuts\models\landing_page\regular_markup\drop_folder\DropFolderBlock;
 	use application\models\shortcuts\models\landing_page\regular_markup\horizontal_feed\SearchFeedBlock as HorizontalSearchFeedBlock;
 	use application\models\shortcuts\models\landing_page\regular_markup\horizontal_feed\SpecificLinkFeedBlock as HorizontalSpecificLinkFeedBlock;
@@ -262,6 +263,8 @@
 					return 'video_group/videoGroup';
 				case 'drop-folder':
 					return 'drop_folder/dropFolder';
+				case 'calendar':
+					return 'calendar/calendar';
 				default:
 					return 'common/undefinedBlock';
 			}
@@ -428,6 +431,10 @@
 					$dropFolder = new DropFolderBlock($parentShortcut, $parentBlock);
 					$dropFolder->configureFromXml($xpath, $contextNode);
 					return $dropFolder;
+				case "calendar":
+					$calendar = new CalendarBlock($parentShortcut, $parentBlock);
+					$calendar->configureFromXml($xpath, $contextNode);
+					return $calendar;
 				default:
 					return new UndefinedBlock($parentShortcut, $parentBlock);
 			}

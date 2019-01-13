@@ -61,9 +61,6 @@
 			$record->save();
 		}
 
-		/**
-		 * @param $libraryId
-		 */
 		public static function clearData()
 		{
 			self::model()->deleteAll('id_shortcut not in (select s.id from tbl_shortcut_link s)', array());

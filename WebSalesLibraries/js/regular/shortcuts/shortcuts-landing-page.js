@@ -149,6 +149,16 @@
 							}).init();
 						});
 
+						$.each(markupObject.find('.landing-page-calendar'), function (key, value) {
+							var calendarBlock = $(value);
+							var calendarContainerId = calendarBlock.prop('id').replace('calendar-', '');
+
+							new $.SalesPortal.LandingPage.Calendar({
+								containerId: calendarContainerId,
+								parentShortcutId: pageData.options.linkId,
+							}).init();
+						});
+
 						$.each(markupObject.find('.library-block'), function (key, value) {
 							var libraryBlock = $(value);
 							var libraryBlockId = libraryBlock.prop('id').replace('library-block-', '');

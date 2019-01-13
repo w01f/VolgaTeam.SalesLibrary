@@ -17,7 +17,7 @@
 
 		//element that triggered the date range picker
 		this.element = $(element).find('input');
-		this.button = $(element).find('.select-date-toggle');;
+		this.button = $(element).find('.select-date-toggle');
 
 		//create the picker HTML object
 		var DRPTemplate = '<div class="daterangepicker dropdown-menu">' +
@@ -137,8 +137,8 @@
 				toLabel: 'To',
 				weekLabel: 'W',
 				customRangeLabel: 'Custom Range',
-				daysOfWeek: moment()._lang._weekdaysMin.slice(),
-				monthNames: moment()._lang._monthsShort.slice(),
+				daysOfWeek: moment().localeData()._weekdaysMin.slice(),
+				monthNames: moment().localeData()._monthsShort.slice(),
 				firstDay: 0
 			};
 
@@ -702,11 +702,11 @@
 			var cal = $(e.target).parents('.calendar');
 			if (cal.hasClass('left'))
 			{
-				this.leftCalendar.month.subtract('month', 1);
+				this.leftCalendar.month.subtract(1,'month');
 			}
 			else
 			{
-				this.rightCalendar.month.subtract('month', 1);
+				this.rightCalendar.month.subtract(1,'month');
 			}
 			this.updateCalendars();
 		},
@@ -716,11 +716,11 @@
 			var cal = $(e.target).parents('.calendar');
 			if (cal.hasClass('left'))
 			{
-				this.leftCalendar.month.add('month', 1);
+				this.leftCalendar.month.add(1,'month');
 			}
 			else
 			{
-				this.rightCalendar.month.add('month', 1);
+				this.rightCalendar.month.add(1,'month');
 			}
 			this.updateCalendars();
 		},
@@ -802,7 +802,7 @@
 				$(e.target).addClass('active');
 				var difference = this.endDate.diff(this.startDate);
 				this.startDate = startDate;
-				this.endDate = moment(startDate).add('ms', difference);
+				this.endDate = moment(startDate).add(difference,'ms');
 				this.chosenLabel = this.locale.customRangeLabel;
 			}
 
@@ -930,8 +930,8 @@
 		buildCalendar: function (month, year, hour, minute, side)
 		{
 			var firstDay = moment([year, month, 1]);
-			var lastMonth = moment(firstDay).subtract('month', 1).month();
-			var lastYear = moment(firstDay).subtract('month', 1).year();
+			var lastMonth = moment(firstDay).subtract(1,'month').month();
+			var lastYear = moment(firstDay).subtract(1,'month').year();
 
 			var daysInLastMonth = moment([lastYear, lastMonth]).daysInMonth();
 
@@ -956,7 +956,7 @@
 
 			var curDate = moment([lastYear, lastMonth, startDay, 12, minute]);
 			var col, row;
-			for (i = 0, col = 0, row = 0; i < 42; i++, col++, curDate = moment(curDate).add('hour', 24))
+			for (i = 0, col = 0, row = 0; i < 42; i++, col++, curDate = moment(curDate).add(24,'hour'))
 			{
 				if (i > 0 && col % 7 === 0)
 				{

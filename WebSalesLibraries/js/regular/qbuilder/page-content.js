@@ -325,13 +325,26 @@
 
 			var expirationDatePickerContainer = $('#page-content-expiration-date-container');
 			var expirationDatePicker = $('#page-content-expiration-date');
-			expirationDatePickerContainer.daterangepicker(
-				{
-					format: dateFormat,
-					singleDatePicker: true,
-					startDate: expirationDatePicker.val(),
-					endDate: expirationDatePicker.val()
-				}, markExpiredDate);
+
+			var expirationDateValue = expirationDatePicker.val();
+			if (expirationDateValue == '')
+			{
+				expirationDatePickerContainer.daterangepicker(
+					{
+						format: dateFormat,
+						singleDatePicker: true,
+					}, markExpiredDate);
+			}
+			else
+			{
+				expirationDatePickerContainer.daterangepicker(
+					{
+						format: dateFormat,
+						singleDatePicker: true,
+						startDate: expirationDateValue,
+						endDate: expirationDateValue
+					}, markExpiredDate);
+			}
 
 			$('#page-content-use-expiration-date').off('change').on('change', function ()
 			{
