@@ -57,6 +57,7 @@
 		/**
 		 * @param $idEvent string
 		 * @param $eventModelEncoded array
+		 * @return EventModel
 		 */
 		public function updateEventData($idEvent, $eventModelEncoded)
 		{
@@ -68,7 +69,10 @@
 				$record->event_data = CJSON::encode($eventData);
 
 				$record->save();
+
+				return EventModel::fromRecord($record);
 			}
+			return null;
 		}
 
 		/**

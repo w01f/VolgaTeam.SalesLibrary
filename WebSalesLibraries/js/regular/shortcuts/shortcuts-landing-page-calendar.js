@@ -11,6 +11,7 @@
 		this.init = function () {
 			calendarContainer = $('#calendar-' + calendarId);
 			calendarSettings = $.parseJSON(calendarContainer.find('.calendar-settings').text());
+
 			initCalendar();
 		};
 
@@ -41,10 +42,14 @@
 						defaultDate: moment(calendarSettings.defaultDate),
 						navLinks: true,
 						displayEventTime: true,
+						minTime: calendarSettings.minTime,
+						maxTime: calendarSettings.maxTime,
 						editable: calendarSettings.allowEdit,
+						droppable: calendarSettings.allowEdit,
 						eventLimit: true, // allow "more" link when too many events
 						dayClick: addEvent,
 						eventClick: editEvent,
+						eventDrop: processEventMoveDrop,
 						eventRender: function (event, element) {
 							if (calendarSettings.allowEdit)
 							{
@@ -57,11 +62,21 @@
 						dayRender: function (date, element) {
 							if (calendarSettings.allowEdit)
 							{
-								element.bind('contextmenu', function (jsEvent) {
-									showDayContextMenu(date, jsEvent);
-									return false;
-								});
+								var weekDay = moment(date).format('ddd');
+								if (!calendarSettings.disableWeekend || !["Sat", "Sun"].includes(weekDay))
+								{
+									element.bind('contextmenu', function (jsEvent) {
+										showDayContextMenu(date, jsEvent);
+										return false;
+									});
+								}
 							}
+						},
+						viewRender: function (view, element) {
+							if (calendarSettings.hideLeftNavigationButtonsForViews.includes(view.name))
+								calendarContainer.find('.fc-left').hide();
+							else
+								calendarContainer.find('.fc-left').show();
 						},
 						events: events
 					});
@@ -76,6 +91,10 @@
 
 		var addEvent = function (date, jsEvent, view) {
 			if (!calendarSettings.allowEdit)
+				return;
+
+			var weekDay = moment(date).format('ddd');
+			if (calendarSettings.disableWeekend && ["Sat", "Sun"].includes(weekDay))
 				return;
 
 			$.ajax({
@@ -108,6 +127,7 @@
 									separator: separator,
 									singleDatePicker: false,
 									timePicker: true,
+									timePickerIncrement: 15,
 									startDate: date,
 									endDate: date
 								}
@@ -116,14 +136,15 @@
 
 							innerContent.find('.accept-button').off('click').on('click', function () {
 								var dateRangeParts = dateRangeInput.val().split(separator);
-								var dateStart = new Date(dateRangeParts[0]);
-								var dateEnd = new Date(dateRangeParts[1]);
+								var dateStart = moment(dateRangeParts[0]).format();
+								var dateEnd = moment(dateRangeParts[1]).format();
 								$.ajax({
 									type: "POST",
 									url: window.BaseUrl + "calendar/addEvent",
 									data: {
 										calendarId: calendarId,
 										shortcutId: parentShortcutId,
+										emailSettings: calendarSettings.emailSettings,
 										eventData: {
 											start: dateStart,
 											end: dateEnd,
@@ -144,7 +165,6 @@
 									async: true,
 									dataType: 'json'
 								});
-
 							});
 							innerContent.find('.cancel-button').off('click').on('click', function () {
 								$.fancybox.close();
@@ -194,6 +214,7 @@
 									separator: separator,
 									singleDatePicker: false,
 									timePicker: true,
+									timePickerIncrement: 15,
 									startDate: calEvent.start,
 									endDate: calEvent.end != null ? calEvent.end : calEvent.start
 								}
@@ -205,8 +226,8 @@
 
 							innerContent.find('.accept-button').off('click').on('click', function () {
 								var dateRangeParts = dateRangeInput.val().split(separator);
-								var dateStart = new Date(dateRangeParts[0]);
-								var dateEnd = new Date(dateRangeParts[1]);
+								var dateStart = moment(dateRangeParts[0]);
+								var dateEnd = moment(dateRangeParts[1]);
 
 								calEvent.start = dateStart;
 								calEvent.end = dateEnd;
@@ -217,9 +238,10 @@
 									url: window.BaseUrl + "calendar/updateEvent",
 									data: {
 										eventId: calEvent.id,
+										emailSettings: calendarSettings.emailSettings,
 										eventData: {
-											start: calEvent.start,
-											end: calEvent.end,
+											start: calEvent.start.format(),
+											end: calEvent.end.format(),
 											title: calEvent.title
 										}
 									},
@@ -271,7 +293,8 @@
 								type: "POST",
 								url: window.BaseUrl + "calendar/deleteEvent",
 								data: {
-									eventId: event.id
+									eventId: event.id,
+									emailSettings: calendarSettings.emailSettings,
 								},
 								beforeSend: function () {
 									$.SalesPortal.Overlay.show();
@@ -299,6 +322,38 @@
 				]
 			});
 			modalDialog.show();
+		};
+
+		var processEventMoveDrop = function (calEvent, delta, revertFunc) {
+			if (!calendarSettings.allowEdit)
+				return;
+
+			var dateStart = moment(calEvent.start).format();
+			var dateEnd = moment(calEvent.end).format();
+			$.ajax({
+				type: "POST",
+				url: window.BaseUrl + "calendar/updateEvent",
+				data: {
+					eventId: calEvent.id,
+					emailSettings: calendarSettings.emailSettings,
+					eventData: {
+						start: dateStart,
+						end: dateEnd,
+						title: calEvent.title
+					}
+				},
+				beforeSend: function () {
+					$.SalesPortal.Overlay.show();
+				},
+				success: function () {
+					$.SalesPortal.Overlay.hide();
+				},
+				error: function () {
+					$.SalesPortal.Overlay.hide();
+				},
+				async: true,
+				dataType: 'json'
+			});
 		};
 
 		var showEventContextMenu = function (event, jsEvent) {

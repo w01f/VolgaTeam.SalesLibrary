@@ -49,6 +49,10 @@
 									viewSettings: viewSettings
 								}).init();
 							});
+
+						var calendar = selectedPanel.find('.landing-page-calendar');
+						if (calendar.length > 0)
+							calendar.fullCalendar('rerenderEvents');
 					});
 				}
 			});

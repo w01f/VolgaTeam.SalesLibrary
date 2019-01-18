@@ -1191,7 +1191,6 @@
 			this.container.remove();
 			this.element.off('.daterangepicker');
 			this.element.removeData('daterangepicker');
-
 		}
 
 	};
