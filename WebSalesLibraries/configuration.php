@@ -105,6 +105,12 @@
 						'copy_enabled' => true,
 						'copy' => 'billy@adsalesapps.com',
 						'copy_user' => true
+					),
+					'sales_contest' => array(
+						'from' => 'research@wfaa.com',
+						'copy_enabled' => true,
+						'copy' => 'billy@adsalesapps.com',
+						'copy_user' => true
 					)
 				),
 				'android_tablets' => array(

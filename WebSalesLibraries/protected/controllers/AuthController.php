@@ -2,6 +2,15 @@
 
 	class AuthController extends IsdController
 	{
+		public function init()
+		{
+			parent::init();
+			if ($this->isPhone)
+				$this->layout = '/phone/layouts/main';
+			else
+				$this->layout = '/regular/layouts/auth';
+		}
+
 		/** return boolean */
 		protected function getIsPublicController()
 		{

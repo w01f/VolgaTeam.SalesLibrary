@@ -254,6 +254,9 @@
 				case 'rrq1':
 					new $.SalesPortal.ShortcutsSalesRequests().init(parameters);
 					break;
+				case 'wow':
+					new $.SalesPortal.ShortcutsSalesContest().init(parameters);
+					break;
 				default :
 					$.SalesPortal.Content.fillContent({
 						content: parameters.content,

@@ -89,6 +89,8 @@
 			'application.models.drop_folder.models.*',
 			'application.models.calendar.models.*',
 			'application.models.calendar.records.*',
+			'application.models.sales_contest.models.*',
+			'application.models.sales_contest.records.*',
 		),
 		'behaviors' => array(
 			'onBeginRequest' => array(

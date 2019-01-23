@@ -117,6 +117,9 @@
 			'disableWeekend' => $contentBlock->settings->disableWeekend,
 			'minTime' => $contentBlock->settings->minTime,
 			'maxTime' => $contentBlock->settings->maxTime,
+			'viewToggles' => count($contentBlock->settings->viewToggles) > 1 ?
+				implode(',', $contentBlock->settings->viewToggles) :
+				'',
 			'hideLeftNavigationButtonsForViews' => $contentBlock->settings->hideLeftNavigationButtonsForViews,
 			'emailSettings' => $contentBlock->settings->emailSettings,
 		)); ?>

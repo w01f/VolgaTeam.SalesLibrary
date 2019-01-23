@@ -458,10 +458,6 @@
 			}
 		};
 
-		this.loadCurrentItem = function () {
-			openItemInternal();
-		};
-
 		this.updateContentSize = function () {
 			var itemListContainer = $.SalesPortal.Content.getContentObject().find('.sales-requests-main-page .service-panel .item-list-container');
 			var itemListButtons = $.SalesPortal.Content.getContentObject().find('.sales-requests-main-page .service-panel .item-list-buttons');

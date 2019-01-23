@@ -29,7 +29,7 @@
 				$querySettings = LinkFeedQuerySettings::fromJson($feedType, CJSON::encode($querySettingsEncoded));
 				$querySettings->cacheSettings = new QueryCacheSettings();
 
-				$feedItems = LinkFeedQueryHelper::queryFeedItems($querySettings);
+				$feedItems = LinkFeedQueryHelper::queryFeedItems($querySettings, !\UserIdentity::isUserAuthorized());
 			}
 
 			if (!empty($viewSettingsEncoded))
@@ -53,7 +53,7 @@
 				$querySettings = LinkFeedQuerySettings::fromJson($feedType, CJSON::encode($querySettingsEncoded));
 				$querySettings->cacheSettings = new QueryCacheSettings();
 
-				$feedItems = LinkFeedQueryHelper::queryFeedItems($querySettings);
+				$feedItems = LinkFeedQueryHelper::queryFeedItems($querySettings, !\UserIdentity::isUserAuthorized());
 			}
 
 			if (isset($viewSettingsEncoded))
@@ -78,7 +78,7 @@
 				$querySettings = LinkFeedQuerySettings::fromJson($feedType, CJSON::encode($querySettingsEncoded));
 				$querySettings->cacheSettings = new QueryCacheSettings();
 
-				$feedItems = LinkFeedQueryHelper::queryFeedItems($querySettings);
+				$feedItems = LinkFeedQueryHelper::queryFeedItems($querySettings, !\UserIdentity::isUserAuthorized());
 			}
 
 			if (isset($viewSettingsEncoded))

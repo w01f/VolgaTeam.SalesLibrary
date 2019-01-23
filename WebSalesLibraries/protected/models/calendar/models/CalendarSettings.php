@@ -20,6 +20,9 @@
 		public $maxTime;
 
 		/** @var array */
+		public $viewToggles;
+
+		/** @var array */
 		public $hideLeftNavigationButtonsForViews;
 
 		/** @var TextAppearance */
@@ -40,6 +43,7 @@
 			$this->disableWeekend = false;
 			$this->minTime = "00:00:00";
 			$this->maxTime = "24:00:00";
+			$this->viewToggles = array(self::ViewTypeMonth, self::ViewTypeWeek, self::ViewTypeDay, self::ViewTypeList);
 			$this->hideLeftNavigationButtonsForViews =array();
 			$this->headerStyle = TextAppearance::createEmpty();
 			$this->navigationButtonStyleLeft = NavigationButtonStyle::createDefault();
@@ -119,6 +123,28 @@
 						$instance->hideLeftNavigationButtonsForViews[] = self::ViewTypeList;
 						break;
 				}
+
+			$queryResult = $xpath->query('./ViewToggles/View', $contextNode);
+			if ($queryResult->length > 0)
+			{
+				$instance->viewToggles = array();
+				foreach ($queryResult as $groupNode)
+					switch (trim($groupNode->nodeValue))
+					{
+						case 'month':
+							$instance->viewToggles[] = self::ViewTypeMonth;
+							break;
+						case 'week':
+							$instance->viewToggles[] = self::ViewTypeWeek;
+							break;
+						case 'day':
+							$instance->viewToggles[] = self::ViewTypeDay;
+							break;
+						case 'list':
+							$instance->viewToggles[] = self::ViewTypeList;
+							break;
+					}
+			}
 
 			$instance->allowEdit = false;
 

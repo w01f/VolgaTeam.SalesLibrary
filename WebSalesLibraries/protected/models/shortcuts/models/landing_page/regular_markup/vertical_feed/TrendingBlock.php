@@ -58,7 +58,7 @@
 		 */
 		public function getFeedItems()
 		{
-			return LinkFeedQueryHelper::queryFeedItems($this->querySettings);
+			return LinkFeedQueryHelper::queryFeedItems($this->querySettings, $this->parentShortcut->allowPublicAccess);
 		}
 
 		/**

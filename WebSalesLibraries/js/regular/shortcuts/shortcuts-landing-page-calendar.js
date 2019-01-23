@@ -33,7 +33,7 @@
 						header: {
 							left: 'prev,next today',
 							center: 'title',
-							right: 'month,agendaWeek,agendaDay,listWeek'
+							right: calendarSettings.viewToggles
 						},
 						timezone: 'local',
 						firstDay: 1,
@@ -276,6 +276,99 @@
 			});
 		};
 
+		var copyEvent = function (calEvent, jsEvent, view) {
+			if (!calendarSettings.allowEdit)
+				return;
+
+			$.ajax({
+				type: "POST",
+				url: window.BaseUrl + "calendar/getEventEditDialog",
+				data: {},
+				beforeSend: function () {
+					$.SalesPortal.Overlay.show();
+				},
+				success: function (content) {
+					$.SalesPortal.Overlay.hide();
+					$.fancybox({
+						content: content,
+						title: "Copy Event",
+						width: 500,
+						autoSize: false,
+						autoHeight: true,
+						openEffect: 'none',
+						closeEffect: 'none',
+						afterShow: function () {
+							var innerContent = $('.fancybox-inner');
+
+							var dateDisplayFormat = 'MM/DD/YYYY h:mm a';
+							var separator = ' - ';
+							var dateRangeSelector = innerContent.find('#calendar-modal-date-range-container');
+							var dateRangeInput = dateRangeSelector.find('input');
+							dateRangeSelector.daterangepicker(
+								{
+									format: dateDisplayFormat,
+									separator: separator,
+									singleDatePicker: false,
+									timePicker: true,
+									timePickerIncrement: 15,
+									startDate: calEvent.start,
+									endDate: calEvent.end != null ? calEvent.end : calEvent.start
+								}
+							);
+							dateRangeInput.val(moment(calEvent.start).format(dateDisplayFormat) + separator + moment(calEvent.end != null ? calEvent.end : calEvent.start).format(dateDisplayFormat));
+
+							var detailsEditor = innerContent.find('#calendar-modal-details');
+							detailsEditor.val(calEvent.title);
+
+							innerContent.find('.accept-button').off('click').on('click', function () {
+								var dateRangeParts = dateRangeInput.val().split(separator);
+								var dateStart = moment(dateRangeParts[0]);
+								var dateEnd = moment(dateRangeParts[1]);
+
+								$.ajax({
+									type: "POST",
+									url: window.BaseUrl + "calendar/addEvent",
+									data: {
+										calendarId: calendarId,
+										shortcutId: parentShortcutId,
+										emailSettings: calendarSettings.emailSettings,
+										eventData: {
+											start: dateStart.format(),
+											end: dateEnd.format(),
+											title: detailsEditor.val()
+										}
+									},
+									beforeSend: function () {
+										$.SalesPortal.Overlay.show();
+									},
+									success: function (eventData) {
+										$.SalesPortal.Overlay.hide();
+										$.fancybox.close();
+										calendarContainer.fullCalendar('renderEvent', eventData);
+									},
+									error: function () {
+										$.SalesPortal.Overlay.hide();
+									},
+									async: true,
+									dataType: 'json'
+								});
+
+								return false;
+							});
+							innerContent.find('.cancel-button').off('click').on('click', function () {
+								$.fancybox.close();
+							});
+						}
+					});
+				},
+				error: function () {
+					$.SalesPortal.Overlay.hide();
+				},
+				async: true,
+				dataType: 'html'
+			});
+		};
+
 		var deleteEvent = function (event) {
 			if (!calendarSettings.allowEdit)
 				return;
@@ -361,6 +454,7 @@
 
 			var menu = $('<ul class="dropdown-menu context-menu-content" role="menu">' +
 				'<li><a tabindex="-1" href="#" class="menu-item" data-action-tag="edit">Edit meeting...</a></li>' +
+				'<li><a tabindex="-1" href="#" class="menu-item" data-action-tag="copy">Copy meeting...</a></li>' +
 				'<li><a tabindex="-1" href="#" class="menu-item" data-action-tag="delete">Delete meeting...</a></li>' +
 				'</ul>');
 			$('body').append(menu);
@@ -380,6 +474,9 @@
 					{
 						case 'edit':
 							editEvent(event, jsEvent);
+							break;
+						case 'copy':
+							copyEvent(event, jsEvent);
 							break;
 						case 'delete':
 							deleteEvent(event);

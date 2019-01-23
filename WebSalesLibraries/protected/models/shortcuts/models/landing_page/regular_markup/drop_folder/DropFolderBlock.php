@@ -39,7 +39,7 @@
 				$queryResult = $xpath->query('./MinHeight', $contextNode);
 				$this->minHeight = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue)) : 140;
 
-				$queryResult = $xpath->query('./MaxSize', $contextNode);
+				$queryResult = $xpath->query(   './MaxSize', $contextNode);
 				$this->maxFileSize = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue)) : 256;
 
 				$queryResult = $xpath->query('./MaxSizeMessage', $contextNode);

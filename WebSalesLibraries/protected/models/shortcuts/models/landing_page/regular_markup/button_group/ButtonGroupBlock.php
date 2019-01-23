@@ -9,6 +9,9 @@
 	{
 		public $height;
 
+		/** @var  \Size */
+		public $fixedSize;
+
 		/** @var  ButtonItem[] */
 		public $buttons;
 
@@ -21,6 +24,7 @@
 			parent::__construct($parentShortcut, $parentBlock);
 			$this->type = 'button-group';
 			$this->height = 0;
+			$this->fixedSize = new \Size(0);
 			$this->buttons = array();
 		}
 
@@ -36,6 +40,15 @@
 			{
 				$queryResult = $xpath->query('./Height', $contextNode);
 				$this->height = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue)) : $this->height;
+
+				$queryResult = $xpath->query('./FixedWidth/Enabled', $contextNode);
+				$useFixedSize = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
+				if ($useFixedSize)
+				{
+					$queryResult = $xpath->query('./FixedWidth', $contextNode);
+					if ($queryResult->length > 0)
+						$this->fixedSize = \Size::fromXml($xpath, $queryResult->item(0));
+				}
 
 				$queryResult = $xpath->query('./Button', $contextNode);
 				foreach ($queryResult as $node)

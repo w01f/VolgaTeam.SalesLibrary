@@ -16,9 +16,10 @@
 	{
 		/**
 		 * @param LinkFeedQuerySettings $feedSettings
+		 * @param bool $allowAnonymousRequest
 		 * @return LinkFeedItem[]
 		 */
-		public static function queryFeedItems($feedSettings)
+		public static function queryFeedItems($feedSettings, $allowAnonymousRequest = false)
 		{
 			$feedItems = null;
 
@@ -36,15 +37,15 @@
 				{
 					case LinkFeedQuerySettings::FeedTypeTrending:
 						/**@var TrendingFeedQuerySettings $feedSettings */
-						$feedItems = self::queryTrendingItems($feedSettings, true);
+						$feedItems = self::queryTrendingItems($feedSettings, !$allowAnonymousRequest);
 						break;
 					case LinkFeedQuerySettings::FeedTypeSearch:
 						/**@var SearchFeedQuerySettings $feedSettings */
-						$feedItems = self::querySearchItems($feedSettings, true);
+						$feedItems = self::querySearchItems($feedSettings, !$allowAnonymousRequest);
 						break;
 					case LinkFeedQuerySettings::FeedTypeSpecificLinks:
 						/**@var SpecificLinkFeedQuerySettings $feedSettings */
-						$feedItems = self::querySpecificLinkItems($feedSettings, true);
+						$feedItems = self::querySpecificLinkItems($feedSettings, !$allowAnonymousRequest);
 						break;
 				}
 			}

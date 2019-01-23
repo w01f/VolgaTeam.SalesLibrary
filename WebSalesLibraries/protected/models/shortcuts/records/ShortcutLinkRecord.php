@@ -176,6 +176,9 @@
 				case 'rrq1':
 					$shortcut = new SalesRequestsShortcut($this, $isPhone, $parameters);
 					break;
+				case 'wow':
+					$shortcut = new SalesContestShortcut($this, $isPhone, $parameters);
+					break;
 				default:
 					$shortcut = new EmptyShortcut($this, $isPhone);
 					break;
@@ -358,6 +361,9 @@
 					break;
 				case 'rrq1':
 					$shortcut = new SalesRequestsShortcut($this, false);
+					break;
+				case 'wow':
+					$shortcut = new SalesContestShortcut($this, false);
 					break;
 				default:
 					$shortcut = new EmptyShortcut($this, false);

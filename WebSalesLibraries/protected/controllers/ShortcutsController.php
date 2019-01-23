@@ -168,6 +168,7 @@
 				case 'qbuilder':
 				case 'starssteals':
 				case 'rrq1':
+				case 'wow':
 				case 'favorites':
 				case 'quizzes':
 				case 'landing':
@@ -241,6 +242,10 @@
 				case 'rrq1':
 					$useMobileWrapper = false;
 					$viewName = 'salesRequests';
+					break;
+				case 'wow':
+					$useMobileWrapper = false;
+					$viewName = 'salesContest';
 					break;
 				case 'quizzes':
 					$useMobileWrapper = false;

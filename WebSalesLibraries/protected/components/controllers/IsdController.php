@@ -40,10 +40,7 @@
 						$this->isPhone = true;
 						break;
 					default :
-						if (UserIdentity::isUserAuthorized())
-							$this->layout = '/regular/layouts/main';
-						else
-							$this->layout = '/regular/layouts/auth';
+						$this->layout = '/regular/layouts/main';
 						$this->pathPrefix = 'application.views.regular.';
 						$this->isPhone = false;
 						break;
@@ -51,10 +48,7 @@
 			}
 			else
 			{
-				if (UserIdentity::isUserAuthorized())
-					$this->layout = '/regular/layouts/main';
-				else
-					$this->layout = '/regular/layouts/auth';
+				$this->layout = '/regular/layouts/main';
 				$this->pathPrefix = 'application.views.regular.';
 				$this->isPhone = false;
 			}
