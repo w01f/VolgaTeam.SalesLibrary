@@ -81,7 +81,7 @@
 		public static function getCurrentUserId()
 		{
 			$userId = -1;
-			if (!(Yii::app() instanceof CConsoleApplication) && isset(Yii::app()->user))
+			if(self::isUserAuthorized())
 				$userId = Yii::app()->user->getId();
 			return isset($userId) ? $userId : -1;
 		}
@@ -91,7 +91,7 @@
 		 */
 		public static function getCurrentUserLogin()
 		{
-			if(!(Yii::app() instanceof CConsoleApplication))
+			if(self::isUserAuthorized())
 			{
 				if (isset(Yii::app()->user))
 					return Yii::app()->user->login;
@@ -104,7 +104,7 @@
 		 */
 		public static function getCurrentUserGroups()
 		{
-			if(!(Yii::app() instanceof CConsoleApplication))
+			if(self::isUserAuthorized())
 			{
 				$user = Yii::app()->user;
 				if (isset($user))
@@ -130,7 +130,7 @@
 		 */
 		public static function isUserAdmin()
 		{
-			if (!(Yii::app() instanceof CConsoleApplication) && isset(Yii::app()->user) && isset(Yii::app()->user->role))
+			if(self::isUserAuthorized())
 				return Yii::app()->user->role == 2;
 			else
 				return false;

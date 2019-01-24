@@ -76,7 +76,9 @@ return array(
 	    'application.models.feeds.horizontal.*',
 	    'application.models.feeds.vertical.*',
 	    'application.models.video_group.models.*',
-	    'application.models.video_group.records.*'
+	    'application.models.video_group.records.*',
+	    'application.models.calendar.models.*',
+		'application.models.calendar.records.*'
     ),
     'components' => array(
         'db' => array(

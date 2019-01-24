@@ -51,7 +51,7 @@
 			$this->allowAddToFavorites = $this->userAuthorized;
 			$this->allowAddToQuickSite = !$isQuickSite && $this->userAuthorized;
 
-			$this->enableLogging = $this->userAuthorized;
+			$this->enableLogging = true;
 			$this->enableRating = $this->userAuthorized;
 		}
 

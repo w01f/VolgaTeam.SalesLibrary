@@ -69,7 +69,7 @@
 			}
 			$detailRecord->browser = $browser;
 			$detailRecord->ip = Yii::app()->request->getUserHostAddress();
-			if (isset(Yii::app()->user) && !Yii::app()->user->isGuest)
+			if (UserIdentity::isUserAuthorized())
 			{
 				$userId = UserIdentity::getCurrentUserId();
 				/** @var $userRecord UserRecord */

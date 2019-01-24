@@ -421,8 +421,7 @@
 			$subType = Yii::app()->request->getPost('subType');
 			$data = Yii::app()->request->getPost('data');
 			$linkId = Yii::app()->request->getPost('linkId');
-			$authorized = UserIdentity::isUserAuthorized();
-			if (isset($type) && isset($subType) && $authorized)
+			if (isset($type) && isset($subType))
 			{
 				if (isset($linkId))
 					StatisticActivityRecord::writeLinkActivity($linkId, $type, $subType, $data);
