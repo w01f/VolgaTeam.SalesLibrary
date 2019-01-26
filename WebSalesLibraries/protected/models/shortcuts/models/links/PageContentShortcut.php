@@ -16,7 +16,7 @@
 		public $allowPublicAccess;
 		public $publicPassword;
 
-		/** @var  PageHeaderSettings */
+		/** @var  RegularPageHeaderSettings | MobilePageHeaderSettings */
 		public $headerSettings;
 
 		/** @var  FixedPanelSettings */
@@ -34,14 +34,20 @@
 			$xpath = new DomXPath($linkConfig);
 
 			if ($this->isPhone)
-				$this->headerSettings = PageHeaderSettings::createEmpty();
+			{
+				$queryResult = $xpath->query('//Config/Mobile/HeaderSettings');
+				if ($queryResult->length > 0)
+					$this->headerSettings = MobilePageHeaderSettings::fromXml($xpath, $queryResult->item(0), $this);
+				else
+					$this->headerSettings = MobilePageHeaderSettings::createEmpty();
+			}
 			else
 			{
 				$queryResult = $xpath->query('//Config/Regular/HeaderSettings');
 				if ($queryResult->length > 0)
-					$this->headerSettings = PageHeaderSettings::fromXml($xpath, $queryResult->item(0));
+					$this->headerSettings = RegularPageHeaderSettings::fromXml($xpath, $queryResult->item(0));
 				else
-					$this->headerSettings = PageHeaderSettings::createEmpty();
+					$this->headerSettings = RegularPageHeaderSettings::createEmpty();
 			}
 
 			parent::initRegularModel();
@@ -183,22 +189,25 @@
 			if (!empty($this->autoLoadLinkId))
 				$data['autoLoadLinkId'] = $this->autoLoadLinkId;
 
-			$data['headerOptions'] = $this->headerSettings;
+			if (!$this->isPhone)
+			{
+				$data['headerOptions'] = $this->headerSettings;
 
-			$data['headerIcon'] = $this->headerSettings->icon;
-			$data['headerIconHideCondition'] = array(
-				'extraSmall' => $this->headerSettings->hideIconCondition->extraSmall,
-				'small' => $this->headerSettings->hideIconCondition->small,
-				'medium' => $this->headerSettings->hideIconCondition->medium,
-				'large' => $this->headerSettings->hideIconCondition->large,
-			);
+				$data['headerIcon'] = $this->headerSettings->icon;
+				$data['headerIconHideCondition'] = array(
+					'extraSmall' => $this->headerSettings->hideIconCondition->extraSmall,
+					'small' => $this->headerSettings->hideIconCondition->small,
+					'medium' => $this->headerSettings->hideIconCondition->medium,
+					'large' => $this->headerSettings->hideIconCondition->large,
+				);
 
-			$data['headerTitleHideCondition'] = array(
-				'extraSmall' => $this->headerSettings->hideTextCondition->extraSmall,
-				'small' => $this->headerSettings->hideTextCondition->small,
-				'medium' => $this->headerSettings->hideTextCondition->medium,
-				'large' => $this->headerSettings->hideTextCondition->large,
-			);
+				$data['headerTitleHideCondition'] = array(
+					'extraSmall' => $this->headerSettings->hideTextCondition->extraSmall,
+					'small' => $this->headerSettings->hideTextCondition->small,
+					'medium' => $this->headerSettings->hideTextCondition->medium,
+					'large' => $this->headerSettings->hideTextCondition->large,
+				);
+			}
 
 			return $data;
 		}

@@ -12,7 +12,7 @@
 
 		public $showHeaderText;
 
-		/** @var  PageHeaderSettings */
+		/** @var  RegularPageHeaderSettings */
 		public $headerSettings;
 
 		/** @var  ShortcutAction[] */
@@ -34,7 +34,7 @@
 			$this->styleSettingsEncoded = !empty($linkSettings->styleSettingsEncoded) ? base64_decode($linkSettings->styleSettingsEncoded) : null;
 			$this->showHeaderText = $linkSettings->showHeaderText;
 			$this->searchBar = SearchBar::createEmpty();
-			$this->headerSettings = PageHeaderSettings::createEmpty();
+			$this->headerSettings = RegularPageHeaderSettings::createEmpty();
 
 			if (!empty($this->styleSettingsEncoded))
 			{
@@ -44,7 +44,7 @@
 
 				$queryResult = $xpath->query('//Config/Regular/HeaderSettings');
 				if ($queryResult->length > 0)
-					$this->headerSettings = PageHeaderSettings::fromXml($xpath, $queryResult->item(0));
+					$this->headerSettings = RegularPageHeaderSettings::fromXml($xpath, $queryResult->item(0));
 
 				$queryResult = $xpath->query('//Config/ShowLeftPanel');
 				$showNavigationPanel = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;

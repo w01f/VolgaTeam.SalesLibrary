@@ -226,7 +226,8 @@
 				var currentParentId = parentShortcutId;
 				while (currentParentId)
 				{
-					parentIds.push(currentParentId);
+					if (currentParentId != '#')
+						parentIds.push(currentParentId);
 					currentParentId = $(currentParentId).find('.back a').prop('href');
 					if (currentParentId)
 						currentParentId = currentParentId.substr(currentParentId.indexOf("#"))

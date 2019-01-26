@@ -12,10 +12,11 @@
 
 		public $useIcon;
 		public $iconClass;
+		public $iconColor;
 		public $imageUrl;
 
 		public $title;
-
+		public $titleColor;
 		/**
 		 * @param $parentShortcut \LandingPageShortcut
 		 */
@@ -46,9 +47,15 @@
 			if ($queryResult->length > 0)
 			{
 				$iconValue = trim($queryResult->item(0)->nodeValue);
-				$this->useIcon = strpos($iconValue, '.png') === false;
+				$this->useIcon = strpos($iconValue, '.png') === false && strpos($iconValue, '.svg') === false ;
 				if ($this->useIcon)
+				{
 					$this->iconClass = $iconValue;
+
+					$queryResult = $xpath->query('./IconColor', $contextNode);
+					if ($queryResult->length > 0)
+						$this->iconColor = trim($queryResult->item(0)->nodeValue);
+				}
 				else
 					$this->imageUrl = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . $this->parentShortcut->relativeLink . '/images/' . $iconValue);
 			}
@@ -56,6 +63,10 @@
 			$queryResult = $xpath->query('./Title', $contextNode);
 			if ($queryResult->length > 0)
 				$this->title = trim($queryResult->item(0)->nodeValue);
+
+			$queryResult = $xpath->query('./TextColor', $contextNode);
+			if ($queryResult->length > 0)
+				$this->titleColor = trim($queryResult->item(0)->nodeValue);
 		}
 
 		/**

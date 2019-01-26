@@ -16,7 +16,7 @@
 		 */
 		public static function fromXml($parentShortcut, $xpath, $contextNode)
 		{
-			$mobileSettings = new MobileSettings();
+			$mobileSettings = new self();
 
 			$queryResult = $xpath->query('./Item', $contextNode);
 			foreach ($queryResult as $node)

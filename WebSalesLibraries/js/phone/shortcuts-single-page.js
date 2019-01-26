@@ -9,7 +9,10 @@
 		{
 			var defaultShortcutData = $('.default-shortcut-data');
 			if (defaultShortcutData.length > 0)
+			{
 				$.SalesPortal.ShortcutsManager.openShortcutByMenuItemData(defaultShortcutData);
+				window.history.deleteAll();
+			}
 
 			$('.logout-button').off('click').on('click', function (e)
 			{

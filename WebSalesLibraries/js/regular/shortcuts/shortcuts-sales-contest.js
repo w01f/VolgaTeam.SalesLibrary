@@ -866,7 +866,7 @@
 			let allowEditAttachments = itemContent.find(">div.editable").length > 0 || shortcutData.options.isAdminRole;
 			if (allowEditAttachments)
 			{
-				let attachmentsContainer = $("#sales-contest-item-attachments");
+				let attachmentsContainer = itemContent.find(".sales-contest-item-attachments");
 				let attachmentsDataContainer = $("#sales-contest-item-attachments-data");
 				let dropZoneObject = undefined;
 				attachmentsDataContainer.dropzone({

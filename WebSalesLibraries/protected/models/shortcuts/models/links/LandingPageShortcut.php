@@ -13,8 +13,46 @@
 		/** @var  MarkupSettings */
 		public $markupSettings;
 
+		public $enabledMobile;
+		/** @var  \BaseShortcut */
+		public $alternativeMobileShortcut;
 		/** @var  \application\models\shortcuts\models\landing_page\mobile_items\MobileSettings */
 		public $mobileSettings;
+
+		public function initRegularModel()
+		{
+			parent::initRegularModel();
+
+			$linkConfig = new DOMDocument();
+			$linkConfig->loadXML($this->linkRecord->config);
+			$xpath = new DomXPath($linkConfig);
+
+			$queryResult = $xpath->query('//Config/MobileSettings/Enabled');
+			$this->enabledMobile = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
+			if (!$this->enabledMobile)
+			{
+				$queryResult = $xpath->query('//Config/MobileSettings/AltShortcutID');
+				$altShortcutId = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
+				if (!empty($altShortcutId))
+				{
+					/**@var $originalLinkRecord \ShortcutLinkRecord */
+					$originalLinkRecord = \ShortcutLinkRecord::model()->findByPk($altShortcutId);
+					if (isset($originalLinkRecord))
+					{
+						$this->alternativeMobileShortcut = $originalLinkRecord->getRegularModel($this->isPhone);
+
+						$this->alternativeMobileShortcut->groupId = $this->groupId;
+						$this->alternativeMobileShortcut->bundleId = $this->bundleId;
+						$this->alternativeMobileShortcut->order = $this->order;
+
+						$this->alternativeMobileShortcut->initRegularModel();
+
+						$this->alternativeMobileShortcut->loadAppearanceData($this->linkRecord->config);
+						$this->alternativeMobileShortcut->isAccessGranted &= $this->isAccessGranted;
+					}
+				}
+			}
+		}
 
 		public function loadPageConfig()
 		{

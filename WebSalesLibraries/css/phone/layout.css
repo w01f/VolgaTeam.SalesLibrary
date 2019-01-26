@@ -44,6 +44,16 @@
 	height: 48px;
 }
 
+.main-content .content-header .shortcut-header-logo
+{
+	text-align: center;
+}
+
+.main-content .content-header .shortcut-header-logo img
+{
+	max-width: 100%;
+}
+
 .main-footer .login
 {
 	color: #959595;

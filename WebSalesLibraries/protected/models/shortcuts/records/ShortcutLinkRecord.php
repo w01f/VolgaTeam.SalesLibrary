@@ -267,6 +267,13 @@
 					/** @var AliasShortcut $shortcut */
 					$shortcut = $shortcut->originalShortcut;
 					break;
+				case 'landing':
+					/** @var LandingPageShortcut $shortcut */
+					if($isPhone && !$shortcut->enabledMobile)
+					{
+						$shortcut = $shortcut->alternativeMobileShortcut;
+					}
+					break;
 			}
 			return $shortcut;
 		}

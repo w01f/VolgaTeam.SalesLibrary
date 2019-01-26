@@ -73,12 +73,14 @@
 		}
 
 		/** @param $parentShortcut PageContentShortcut */
-		public function configureFromparentShortcut($parentShortcut)
+		public function configureFromParentShortcut($parentShortcut)
 		{
 			$this->parentShortcut = $parentShortcut;
-			$this->backColor = $this->parentShortcut->headerSettings->barBackColor;
-			$this->textColor = $this->parentShortcut->headerSettings->shortcutGroupsColor;
-
+			if ($this->parentShortcut->headerSettings instanceof RegularPageHeaderSettings)
+			{
+				$this->backColor = $this->parentShortcut->headerSettings->barBackColor;
+				$this->textColor = $this->parentShortcut->headerSettings->shortcutGroupsColor;
+			}
 		}
 
 		/**
@@ -108,7 +110,7 @@
 			foreach ($customActions as $tag => $action)
 			{
 				/** @var $action ShortcutAction */
-				$action->configureFromparentShortcut($shortcut);
+				$action->configureFromParentShortcut($shortcut);
 			}
 			return $customActions;
 		}

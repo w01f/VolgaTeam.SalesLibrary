@@ -1,6 +1,6 @@
 <?
 
-	class PageHeaderSettings
+	class RegularPageHeaderSettings
 	{
 		public $title;
 		public $icon;
@@ -21,7 +21,7 @@
 		/**
 		 * @param $xpath \DOMXPath
 		 * @param $contextNode \DOMNode
-		 * @return PageHeaderSettings
+		 * @return RegularPageHeaderSettings
 		 */
 		public static function fromXml($xpath, $contextNode)
 		{
@@ -63,7 +63,7 @@
 		}
 
 		/**
-		 * @return PageHeaderSettings
+		 * @return RegularPageHeaderSettings
 		 */
 		public static function createEmpty()
 		{

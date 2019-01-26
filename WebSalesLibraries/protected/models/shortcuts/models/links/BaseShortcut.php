@@ -66,7 +66,7 @@
 		/**
 		 * @param $configData string
 		 */
-		protected function loadAppearanceData($configData)
+		public function loadAppearanceData($configData)
 		{
 			$linkConfig = new DOMDocument();
 			$linkConfig->loadXML($configData);
