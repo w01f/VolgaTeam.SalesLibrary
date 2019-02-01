@@ -1,4 +1,18 @@
-<? /** @var $shortcut LandingPageShortcut */ ?>
+<?
+    /** @var $shortcut LandingPageShortcut */
+
+	use application\models\shortcuts\models\landing_page\mobile_items\ShortcutItem;
+
+	/** @var NavigationPanelShortcut[] $navigationPanelShortcuts */
+	$navigationPanelShortcuts = array();
+	foreach ($shortcut->mobileSettings->items as $item)
+		if ($item instanceof ShortcutItem)
+		{
+			$childShortcut = $item->shortcut;
+			if ($childShortcut instanceof NavigationPanelShortcut)
+			    $navigationPanelShortcuts[] = $childShortcut;
+		}
+?>
 <div class="cbp-l-grid-masonry">
 	<? foreach ($shortcut->mobileSettings->items as $item): ?>
         <a class="cbp-item shortcuts-link" href="<? echo $item->getSourceLink(); ?>" data-ajax="false" target="_blank">
@@ -16,3 +30,19 @@
         </a>
 	<? endforeach; ?>
 </div>
+<? if (count($navigationPanelShortcuts) > 0): ?>
+    <div class="navigation-panels-dynamic">
+		<? foreach ($navigationPanelShortcuts as $navigationPanelShortcut): ?>
+			<? $shortcutNavigationPanel = $navigationPanelShortcut->getNavigationPanel(); ?>
+			<? if (isset($shortcutNavigationPanel)): ?>
+                <div data-role="panel" data-display="overlay"
+                     data-position="<? echo $navigationPanelShortcut->position; ?>"
+                     id="<? echo $navigationPanelShortcut->expandPanelId; ?>">
+                    <ul class="navigation-items-container navigation-items-container-dynamic" data-role="listview">
+						<? echo $this->renderPartial('../shortcuts/navigationPanel/itemsList', array('navigationPanel' => $shortcutNavigationPanel)); ?>
+                    </ul>
+                </div>
+			<? endif; ?>
+		<? endforeach; ?>
+    </div>
+<? endif; ?>

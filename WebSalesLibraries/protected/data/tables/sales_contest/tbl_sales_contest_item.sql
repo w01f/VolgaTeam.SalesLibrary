@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS `tbl_sales_contest_item` (
 	`title` varchar(512) NOT NULL,
 	`advertiser` varchar(512) NULL,
 	`revenue` decimal(37,2) NULL,
+	`storage_path` varchar(512) NULL,
 	`create_date` datetime NULL,
 	`date_submit` datetime NULL,
 	`content` longtext,

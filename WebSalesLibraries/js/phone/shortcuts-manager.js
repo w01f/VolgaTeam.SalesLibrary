@@ -27,7 +27,7 @@
 					}
 				});
 
-				groupPage.find('.navigation-items-container .shortcuts-link').off('click').on('click', function (e)
+				groupPage.find('.navigation-items-container-main .shortcuts-link').off('click').on('click', function (e)
 				{
 					var data = $(this).find('.service-data');
 					$.SalesPortal.ShortcutsManager.trackActivity(data);
@@ -134,19 +134,26 @@
 							cleanupPreviousInstance(parentShortcutId);
 
 							var pageContent = $(result.content);
+
+							var dynamicNavigationPanelContent = pageContent.find('.navigation-panels-dynamic').html();
+							pageContent.append($(dynamicNavigationPanelContent));
+							pageContent.find('.navigation-panels-dynamic').remove();
+
 							$('body').append(pageContent);
 
 							if (parentShortcutId !== undefined)
 								pageContent.find('.main-content .content-header .back a').prop('href', parentShortcutId);
 
 							var navigationToggleButton = pageContent.find('.navigation-panel-toggle');
-							var navigationItemsContainer = pageContent.find('.navigation-items-container');
+							var navigationItemsContainerMain = pageContent.find('.navigation-items-container-main');
 							if (!(result.navigationPanel && result.navigationPanel.content !== ''))
 								navigationToggleButton.hide();
-							navigationItemsContainer.html(result.navigationPanel ? result.navigationPanel.content : '');
+							navigationItemsContainerMain.html(result.navigationPanel ? result.navigationPanel.content : '');
+
+							var allNavigationItemsContainers = pageContent.find('.navigation-items-container');
 							$(window).one("pagecontainerchange.navigation-items", function ()
 							{
-								navigationItemsContainer.find('.shortcuts-link').off('click').on('click', function (e)
+								allNavigationItemsContainers.find('.shortcuts-link').off('click').on('click', function (e)
 								{
 									var data = $(this).find('.service-data');
 									$.SalesPortal.ShortcutsManager.trackActivity(data);

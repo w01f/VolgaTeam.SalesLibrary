@@ -63,7 +63,7 @@
 	<? if ($group->showNavigationPanel): ?>
 		<? $navigationPanel = $group->getNavigationPanel(); ?>
         <div data-role="panel" data-display="overlay" id="shortcut-group-<? echo $group->id; ?>-popup-panel-left">
-            <ul class="navigation-items-container" data-role="listview">
+            <ul class="navigation-items-container navigation-items-container-main" data-role="listview">
 				<? echo $this->renderPartial('../shortcuts/navigationPanel/itemsList', array('navigationPanel' => $navigationPanel)); ?>
             </ul>
         </div>
@@ -82,7 +82,7 @@
 		<? $shortcutNavigationPanel = $navigationPanelShortcut->getNavigationPanel();?>
 		<? if (isset($shortcutNavigationPanel)): ?>
             <div data-role="panel" data-display="overlay" data-position="<? echo $navigationPanelShortcut->position; ?>" id="<? echo $navigationPanelShortcut->expandPanelId; ?>">
-                <ul class="navigation-items-container" data-role="listview">
+                <ul class="navigation-items-container navigation-items-container-main" data-role="listview">
 					<? echo $this->renderPartial('../shortcuts/navigationPanel/itemsList', array('navigationPanel' => $shortcutNavigationPanel)); ?>
                 </ul>
             </div>

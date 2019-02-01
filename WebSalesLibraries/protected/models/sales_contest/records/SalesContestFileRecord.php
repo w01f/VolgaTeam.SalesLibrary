@@ -47,6 +47,22 @@
 		}
 
 		/**
+		 * @param $itemId
+		 * @param $fileType
+		 * @return int
+		 */
+		public function getCount($itemId, $fileType)
+		{
+			$models = array();
+
+			$criteria = new CDbCriteria();
+			$criteria->addCondition("id_item='" . $itemId . "'");
+			$criteria->addCondition("file_type='" . $fileType . "'");
+
+			return $this->count($criteria);
+		}
+
+		/**
 		 * @param $fileId
 		 * @return \application\models\sales_contest\models\FileModel
 		 */
@@ -64,9 +80,19 @@
 		 */
 		public function getFileContent($fileId)
 		{
-			$itemRecord = $this->findByPk($fileId);
-			if (isset($itemRecord))
-				return $itemRecord->content;
+			$fileRecord = $this->findByPk($fileId);
+			if (isset($fileRecord))
+			{
+				$itemRecord = SalesContestItemRecord::model()->findByPk($fileRecord->id_item);
+				if (isset($itemRecord) && !empty($itemRecord->storage_path))
+				{
+					$folderPath = self::getStoragePath($itemRecord->storage_path);
+					$filePath = $folderPath . DIRECTORY_SEPARATOR . $fileRecord->file_name;
+					if (file_exists($filePath))
+						return @file_get_contents($filePath);
+				}
+				return $fileRecord->content;
+			}
 			return null;
 		}
 
@@ -87,14 +113,28 @@
 			$fileRecord->file_type = $fileType;
 			$fileRecord->file_format = pathinfo($fileName, PATHINFO_EXTENSION);
 			$fileRecord->upload_date = date(Yii::app()->params['mysqlDateTimeFormat']);
-			$fileRecord->content = @file_get_contents($tempPath);
+
+			$savedToStorage = false;
+			$itemRecord = SalesContestItemRecord::model()->findByPk($itemId);
+			if (isset($itemRecord) && !empty($itemRecord->storage_path))
+			{
+				$folderPath = self::getStoragePath($itemRecord->storage_path);
+				if (!file_exists($folderPath))
+					mkdir($folderPath);
+				$filePath = $folderPath . DIRECTORY_SEPARATOR . $fileName;
+				$fileContent = @file_get_contents($tempPath);
+				@file_put_contents($filePath, $fileContent);
+				$savedToStorage = true;
+			}
+
+			if (!$savedToStorage)
+				$fileRecord->content = @file_get_contents($tempPath);
 
 			$fileRecord->save();
 		}
 
 		/**
 		 * @param $itemId
-		 * @param $sourceItemId
 		 * @param $sourceItemId
 		 */
 		public static function cloneFiles($itemId, $sourceItemId)
@@ -114,7 +154,9 @@
 				$fileRecord->file_type = $sourceFileRecord->file_type;
 				$fileRecord->file_format = $sourceFileRecord->file_format;
 				$fileRecord->upload_date = date(Yii::app()->params['mysqlDateTimeFormat']);
-				$fileRecord->content = $sourceFileRecord->content;
+
+				if (!empty($sourceFileRecord->content))
+					$fileRecord->content = $sourceFileRecord->content;
 
 				$fileRecord->save();
 			}
@@ -129,7 +171,23 @@
 			$fileRecord = self::model()->findByPk($fileId);
 			$itemId = $fileRecord->id_item;
 			$fileType = $fileRecord->file_type;
+
+			if (empty($fileRecord->content))
+			{
+				$itemRecord = SalesContestItemRecord::model()->findByPk($itemId);
+				if (isset($itemRecord) && !empty($itemRecord->storage_path))
+				{
+					$folderPath = self::getStoragePath($itemRecord->storage_path);
+					if (file_exists($folderPath))
+					{
+						$filePath = $folderPath . DIRECTORY_SEPARATOR . $fileRecord->file_name;
+						@unlink($filePath);
+					}
+				}
+			}
 			self::model()->deleteByPk($fileId);
+
+
 			self::rebuildItemList($itemId, $fileType, -1);
 		}
 
@@ -161,6 +219,17 @@
 				$fileRecord->save();
 				$i++;
 			}
+		}
+
+		/**
+		 * @param $rootPath string
+		 * @return string
+		 */
+		public static function getStoragePath($rootPath)
+		{
+			$folderNameFormatted = str_replace("/", DIRECTORY_SEPARATOR, $rootPath);
+			$folderPath = \Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . \Yii::app()->params['librariesRoot'] . DIRECTORY_SEPARATOR . $folderNameFormatted;
+			return $folderPath;
 		}
 
 		/**

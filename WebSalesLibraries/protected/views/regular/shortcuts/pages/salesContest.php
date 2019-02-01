@@ -24,8 +24,8 @@
                 <div class="row item-list-tabs" data-role="tab">
                     <ul class="nav nav-tabs">
                         <li <?if(!$showAllItems):?>class="active"<?endif;?>><a data-toggle="tab" href="#sales-contest-item-list-own">my nominations</a></li>
-                        <li <?if($showAllItems):?>class="active"<?endif;?>><a data-toggle="tab" href="#sales-contest-item-list-all">all nominations</a></li>
-                        <li><a data-toggle="tab" href="#sales-contest-item-list-archive">archive</a></li>
+                        <li <?if($showAllItems):?>class="active"<?endif;?>><a data-toggle="tab" href="#sales-contest-item-list-all" <? if (!$shortcut->showAllItemsTab): ?> style="display: none;" <? endif; ?>>all nominations</a></li>
+                        <li><a data-toggle="tab" href="#sales-contest-item-list-archive" <? if (!$shortcut->showArchiveTab): ?> style="display: none;" <? endif; ?>>archive</a></li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane <? if (!$showAllItems): ?>active<? endif; ?>" id="sales-contest-item-list-own"></div>

@@ -7,7 +7,10 @@
 	{
 		public $selectedItemId;
 		public $isAdminRole;
+		public $showAllItemsTab;
+		public $showArchiveTab;
 
+		public $fileStorageRootPath;
 		public $maxFileSize;
 		public $maxFileSizeExcessMessage;
 
@@ -43,34 +46,80 @@
 			$queryResult = $xpath->query('//Config/DropZone/MaxSizeMessage');
 			$this->maxFileSizeExcessMessage = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
 
+			$queryResult = $xpath->query('//Config/DropZone/Storage');
+			if ($queryResult->length > 0)
+				$this->fileStorageRootPath = trim($queryResult->item(0)->nodeValue);
+
 			$queryResult = $xpath->query('//Config/ArchiveAfter');
 			if ($queryResult->length > 0)
 				$this->archiveSettings = \application\models\sales_contest\models\ArchiveSettings::fromXml($xpath, $queryResult->item(0));
 
 			$this->isAdminRole = false;
-
-			$approvedUsers = array();
-			$queryResult = $xpath->query('//Config/AdminEdit/ApprovedUsers/User');
-			foreach ($queryResult as $groupNode)
-				$approvedUsers[] = trim($groupNode->nodeValue);
-
-			$approvedGroups = array();
-			$queryResult = $xpath->query('//Config/AdminEdit/ApprovedGroups/Group');
-			foreach ($queryResult as $groupNode)
-				$approvedGroups[] = trim($groupNode->nodeValue);
+			$this->showAllItemsTab = false;
+			$this->showArchiveTab = false;
 
 			if (UserIdentity::isUserAuthorized())
 			{
 				$userLogin = UserIdentity::getCurrentUserLogin();
 				$userGroups = UserIdentity::getCurrentUserGroups();
 
-				if (count($approvedUsers) > 0 || count($approvedGroups) > 0)
+				$adminUsers = array();
+				$queryResult = $xpath->query('//Config/AdminEdit/ApprovedUsers/User');
+				foreach ($queryResult as $groupNode)
+					$adminUsers[] = trim($groupNode->nodeValue);
+
+				$adminGroups = array();
+				$queryResult = $xpath->query('//Config/AdminEdit/ApprovedGroups/Group');
+				foreach ($queryResult as $groupNode)
+					$adminGroups[] = trim($groupNode->nodeValue);
+
+				if (count($adminUsers) > 0 || count($adminGroups) > 0)
 				{
 					if (!empty($userLogin))
 					{
-						$this->isAdminRole = $this->isAdminRole || in_array($userLogin, $approvedUsers);
+						$this->isAdminRole = $this->isAdminRole || in_array($userLogin, $adminUsers);
 						if (count($userGroups) > 0)
-							$this->isAdminRole = $this->isAdminRole || array_intersect($userGroups, $approvedGroups);
+							$this->isAdminRole = $this->isAdminRole || array_intersect($userGroups, $adminGroups);
+					}
+				}
+
+				$allItemsAvailableUsers = array();
+				$queryResult = $xpath->query('//Config/AllNominationsTab/ApprovedUsers/User');
+				foreach ($queryResult as $groupNode)
+					$allItemsAvailableUsers[] = trim($groupNode->nodeValue);
+
+				$allItemsAvailableGroups = array();
+				$queryResult = $xpath->query('//Config/AllNominationsTab/ApprovedGroups/Group');
+				foreach ($queryResult as $groupNode)
+					$allItemsAvailableGroups[] = trim($groupNode->nodeValue);
+
+				if (count($allItemsAvailableUsers) > 0 || count($allItemsAvailableGroups) > 0)
+				{
+					if (!empty($userLogin))
+					{
+						$this->showAllItemsTab = $this->showAllItemsTab || in_array($userLogin, $allItemsAvailableUsers);
+						if (count($userGroups) > 0)
+							$this->showAllItemsTab = $this->showAllItemsTab || array_intersect($userGroups, $allItemsAvailableGroups);
+					}
+				}
+
+				$archiveItemsAvailableUsers = array();
+				$queryResult = $xpath->query('//Config/ArchivesTab/ApprovedUsers/User');
+				foreach ($queryResult as $groupNode)
+					$archiveItemsAvailableUsers[] = trim($groupNode->nodeValue);
+
+				$archiveItemsAvailableGroups = array();
+				$queryResult = $xpath->query('//Config/ArchivesTab/ApprovedGroups/Group');
+				foreach ($queryResult as $groupNode)
+					$archiveItemsAvailableGroups[] = trim($groupNode->nodeValue);
+
+				if (count($archiveItemsAvailableUsers) > 0 || count($archiveItemsAvailableGroups) > 0)
+				{
+					if (!empty($userLogin))
+					{
+						$this->showArchiveTab = $this->showArchiveTab || in_array($userLogin, $archiveItemsAvailableUsers);
+						if (count($userGroups) > 0)
+							$this->showArchiveTab = $this->showArchiveTab || array_intersect($userGroups, $archiveItemsAvailableGroups);
 					}
 				}
 			}

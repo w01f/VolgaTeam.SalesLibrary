@@ -11,7 +11,6 @@
 
 	$categoriesList = \application\models\sales_contest\models\Dictionaries::getCategoriesList();
 	$marketList = \application\models\sales_contest\models\Dictionaries::getMarketList();
-	$stationList = \application\models\sales_contest\models\Dictionaries::getStationList();
 
 	$isSubmitted = !empty($item->dateSubmit);
 ?>
@@ -41,39 +40,6 @@
             </div>
         </div>
         <div class="row">
-            <div class="col col-md-12">
-                <div class="form-group item-content-group" style="margin-top: 0;">
-                    <label class="control-label"></label>
-                    <div class="controls">
-                        <label class="radio-inline sales-contest-item-nomination-type-label" for="sales-contest-item-nomination-type-1"><input type="radio"
-                                                                                                      name="sales-contest-item-nomination-type"
-                                                                                                      value="<? echo Content::NominationTypeShared; ?>"
-                                                                                                      class="sales-contest-item-nomination-type"
-                                                                                                      id="sales-contest-item-nomination-type-1"
-								<? if ($item->content->nominationType === Content::NominationTypeShared): ?> checked<? endif; ?>
-								                                                                      <? if (!($item->allowEdit || $isAdminRole)): ?>disabled="disabled"<? endif; ?>>GraySales.tv
-                            shared idea</label>
-                        <label class="radio-inline sales-contest-item-nomination-type-label" for="sales-contest-item-nomination-type-2"><input type="radio"
-                                                                                                      value="<? echo Content::NominationTypeOriginal; ?>"
-                                                                                                      name="sales-contest-item-nomination-type"
-                                                                                                      class="sales-contest-item-nomination-type"
-                                                                                                      id="sales-contest-item-nomination-type-2"
-								<? if ($item->content->nominationType === Content::NominationTypeOriginal): ?> checked<? endif; ?>
-								                                                                      <? if (!($item->allowEdit || $isAdminRole)): ?>disabled="disabled"<? endif; ?>>Original
-                            market idea</label>
-                        <label class="radio-inline sales-contest-item-nomination-type-label" for="sales-contest-item-sale-type-3"><input type="radio"
-                                                                                                value="<? echo Content::NominationTypeInitiative; ?>"
-                                                                                                name="sales-contest-item-sale-type"
-                                                                                                class="sales-contest-item-sale-type"
-                                                                                                id="sales-contest-item-sale-type-3"
-								<? if ($item->content->nominationType === Content::NominationTypeInitiative): ?> checked<? endif; ?>
-								                                                                <? if (!($item->allowEdit || $isAdminRole)): ?>disabled="disabled"<? endif; ?>>Station
-                            sales initiative</label>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
             <div class="col col-xs-12 sales-contest-item-content-additional-sections">
                 <ul class="nav nav-tabs" style="margin-top: 20px;">
                     <li class="active" style="max-width: 150px;"><a data-toggle="tab" href="#sales-contest-item-tab-info">Info</a></li>
@@ -83,7 +49,7 @@
                 <div class="tab-content">
                     <div class="tab-pane active" id="sales-contest-item-tab-info">
                         <div class="row">
-                            <div class="col col-md-6 col-sm-12">
+                            <div class="col col-md-3 col-sm-12">
                                 <div class="form-group item-content-group" style="margin-top: 20px;">
                                     <label class="control-label" for="sales-contest-item-revenue">A. revenue</label>
                                     <div class="controls">
@@ -96,13 +62,26 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col col-md-6 col-sm-12">
-                                <div class="form-group item-content-group" style="margin-top: 20px;">
-                                    <label class="control-label" for="sales-contest-item-advertiser">B. Client</label>
+                            <div class="col col-md-1 hidden-sm hidden-xs">
+                            </div>
+                            <div class="col col-md-8 col-sm-12 text-right">
+                                <div class="form-group item-content-group" style="margin-top: 30px;">
+                                    <label class="control-label"></label>
                                     <div class="controls">
-                                        <input id="sales-contest-item-advertiser" type="text" class="form-control" data-role="text"
-                                               value="<? echo $item->advertiser; ?>" placeholder="type"
-					                           <? if (!($item->allowEdit || $isAdminRole)): ?>disabled="disabled"<? endif; ?>>
+                                        <label class="radio-inline sales-contest-item-nomination-type-label" for="sales-contest-item-nomination-type-1"><input type="radio"
+                                                                                                                                                               name="sales-contest-item-nomination-type"
+                                                                                                                                                               value="<? echo Content::NominationTypeShared; ?>"
+                                                                                                                                                               class="sales-contest-item-nomination-type"
+                                                                                                                                                               id="sales-contest-item-nomination-type-1"
+					                            <? if ($item->content->nominationType === Content::NominationTypeShared): ?> checked<? endif; ?>
+					                                                                                                                                           <? if (!($item->allowEdit || $isAdminRole)): ?>disabled="disabled"<? endif; ?>>Stolen/Adapted GSTV Idea</label>
+                                        <label class="radio-inline sales-contest-item-nomination-type-label" for="sales-contest-item-nomination-type-2"><input type="radio"
+                                                                                                                                                               value="<? echo Content::NominationTypeOriginal; ?>"
+                                                                                                                                                               name="sales-contest-item-nomination-type"
+                                                                                                                                                               class="sales-contest-item-nomination-type"
+                                                                                                                                                               id="sales-contest-item-nomination-type-2"
+					                            <? if ($item->content->nominationType === Content::NominationTypeOriginal): ?> checked<? endif; ?>
+					                                                                                                                                           <? if (!($item->allowEdit || $isAdminRole)): ?>disabled="disabled"<? endif; ?>>Organic/Home-Grown Idea</label>
                                     </div>
                                 </div>
                             </div>
@@ -110,94 +89,84 @@
                         <div class="row">
                             <div class="col col-md-6 col-sm-12">
                                 <div class="form-group item-content-group">
+                                    <label class="control-label" for="sales-contest-item-advertiser">B. client/advertiser</label>
+                                    <div class="controls">
+                                        <input id="sales-contest-item-advertiser" type="text" class="form-control" data-role="text"
+                                               value="<? echo $item->advertiser; ?>" placeholder="type"
+			                                   <? if (!($item->allowEdit || $isAdminRole)): ?>disabled="disabled"<? endif; ?>>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col col-md-6 col-sm-12">
+                                <div class="form-group item-content-group">
                                     <div class="controls">
                                         <label class="control-label" for="sales-contest-item-category">C. advertiser category</label>
-				                        <? if ($item->allowEdit || $isAdminRole): ?>
-                                            <div class="input-group dropdown sales-contest-item-category-container">
+			                            <? if ($item->allowEdit || $isAdminRole): ?>
+                                            <div class="input-group popup-list-editor-container sales-contest-item-category-container">
+                                                <div class="service-data popup-list-content">
+                                                    <img src="<? echo Yii::app()->baseUrl . '/images/sales-contest/category-selector-logo.svg' ?>"
+                                                         style="height: 100px;">
+                                                    <div class="list-group"
+                                                         style="height: 450px; overflow-y: auto !important;">
+							                            <? foreach ($categoriesList as $categoryItem): ?>
+                                                            <a href="#" class="list-group-item" data-value="<? echo $categoryItem; ?>"><? echo $categoryItem; ?></a>
+							                            <? endforeach; ?>
+                                                    </div>
+                                                </div>
                                                 <input type="text" id="sales-contest-item-category"
-                                                       class="form-control dropdown-toggle"
+                                                       class="form-control editor"
                                                        value="<? echo $item->content->category; ?>"
                                                        placeholder="select or type">
-                                                <ul class="dropdown-menu">
-							                        <? foreach ($categoriesList as $categoryItem): ?>
-                                                        <li><a href="#"
-                                                               data-value="<? echo $categoryItem; ?>"><? echo $categoryItem; ?></a>
-                                                        </li>
-							                        <? endforeach; ?>
-                                                </ul>
-                                                <span role="button" class="input-group-addon dropdown-toggle"
-                                                      data-toggle="dropdown" aria-haspopup="true"
-                                                      aria-expanded="false"><span class="caret"></span></span>
+                                                <span role="button" class="input-group-addon popup-toggle"><span class="caret"></span></span>
                                             </div>
-				                        <? else: ?>
+			                            <? else: ?>
                                             <input type="text" id="sales-contest-item-category"
                                                    class="form-control"
                                                    value="<? echo $item->content->category; ?>"
                                                    disabled="disabled">
-				                        <? endif; ?>
+			                            <? endif; ?>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col col-md-6 col-sm-12">
                                 <div class="form-group item-content-group">
                                     <label class="control-label" for="sales-contest-item-seller">D. seller</label>
                                     <div class="controls">
                                         <input id="sales-contest-item-seller" type="text" class="form-control" data-role="text"
                                                value="<? echo $item->content->seller; ?>"
-					                           <? if (!($item->allowEdit || $isAdminRole)): ?>disabled="disabled"<? endif; ?>>
+			                                   <? if (!($item->allowEdit || $isAdminRole)): ?>disabled="disabled"<? endif; ?>>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col col-md-6 col-sm-12">
                                 <div class="form-group item-content-group">
-                                    <label class="control-label" for="sales-contest-item-market">E. market</label>
+                                    <label class="control-label" for="sales-contest-item-market">E. media property</label>
                                     <div class="controls">
-				                        <? if ($item->allowEdit || $isAdminRole): ?>
-                                            <div class="input-group dropdown sales-contest-item-market-container">
+			                            <? if ($item->allowEdit || $isAdminRole): ?>
+                                            <div class="input-group popup-list-editor-container sales-contest-item-market-container">
+                                                <div class="service-data popup-list-content">
+                                                    <img src="<? echo Yii::app()->baseUrl . '/images/sales-contest/market-selector-logo.svg' ?>"
+                                                         style="height: 100px;">
+                                                    <div class="list-group"
+                                                         style="height: 450px; overflow-y: auto !important;">
+			                                            <? foreach ($marketList as $marketItem): ?>
+                                                            <a href="#" class="list-group-item"
+                                                               data-value="<? echo $marketItem; ?>"><? echo $marketItem; ?></a>
+			                                            <? endforeach; ?>
+                                                    </div>
+                                                </div>
                                                 <input type="text" id="sales-contest-item-market"
-                                                       class="form-control dropdown-toggle"
-                                                       value="<? echo $item->content->market; ?>" placeholder="select or type">
-                                                <ul class="dropdown-menu">
-							                        <? foreach ($marketList as $marketItem): ?>
-                                                        <li><a href="#" data-value="<? echo $marketItem; ?>"><? echo $marketItem; ?></a>
-                                                        </li>
-							                        <? endforeach; ?>
-                                                </ul>
-                                                <span role="button" class="input-group-addon dropdown-toggle" data-toggle="dropdown"
-                                                      aria-haspopup="true" aria-expanded="false"><span class="caret"></span></span>
+                                                       class="form-control editor"
+                                                       value="<? echo $item->content->market; ?>"
+                                                       placeholder="select or type">
+                                                <span role="button" class="input-group-addon popup-toggle"><span class="caret"></span></span>
                                             </div>
-				                        <? else: ?>
+			                            <? else: ?>
                                             <input type="text" id="sales-contest-item-market" class="form-control"
                                                    value="<? echo $item->content->market; ?>" disabled="disabled">
-				                        <? endif; ?>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col col-md-6 col-sm-12">
-                                <div class="form-group item-content-group">
-                                    <label class="control-label" for="sales-contest-item-station">F. station</label>
-                                    <div class="controls">
-					                    <? if ($item->allowEdit || $isAdminRole): ?>
-                                            <div class="input-group dropdown sales-contest-item-station-container">
-                                                <input type="text" id="sales-contest-item-station"
-                                                       class="form-control dropdown-toggle"
-                                                       value="<? echo $item->content->station; ?>" placeholder="select or type">
-                                                <ul class="dropdown-menu">
-								                    <? foreach ($stationList as $stationItem): ?>
-                                                        <li><a href="#"
-                                                               data-value="<? echo $stationItem; ?>"><? echo $stationItem; ?></a>
-                                                        </li>
-								                    <? endforeach; ?>
-                                                </ul>
-                                                <span role="button" class="input-group-addon dropdown-toggle" data-toggle="dropdown"
-                                                      aria-haspopup="true" aria-expanded="false"><span class="caret"></span></span>
-                                            </div>
-					                    <? else: ?>
-                                            <input type="text" id="sales-contest-item-station" class="form-control"
-                                                   value="<? echo $item->content->station; ?>" disabled="disabled">
-					                    <? endif; ?>
+			                            <? endif; ?>
                                     </div>
                                 </div>
                             </div>
@@ -205,7 +174,7 @@
                         <div class="row">
                             <div class="col col-xs-12">
                                 <div class="panel panel-default sales-contest-item-attachments" data-role="panel" style="margin-top: 60px;">
-                                    <div class="panel-heading">G. files (drag &amp; drop any presentations, videos, &amp; sales assets here)
+                                    <div class="panel-heading">F. files (drag &amp; drop any presentations, videos, &amp; sales assets here)
                                     </div>
                                     <div class="panel-body" style="min-height: 170px;">
                                         <ul class="nav nav-pills dropzone<? if (!($item->allowEdit || $isAdminRole)): ?> disabled<? endif; ?>"
@@ -224,7 +193,7 @@
                         <div class="row">
                             <div class="col col-xs-12">
                                 <div class="form-group item-content-group" style="margin-top: 20px;">
-                                    <label class="control-label">H. revenue type:</label>
+                                    <label class="control-label">G. revenue type:</label>
                                     <div class="controls">
                                         <label class="radio-inline" for="sales-contest-item-revenue-type-1"><input type="radio"
                                                                                                                    value="<? echo Content::RevenueTypeNew; ?>"
@@ -248,7 +217,7 @@
                             <div class="col col-md-6 col-sm-12">
                                 <div class="form-group item-content-group">
                                     <label class="control-label"
-                                           for="sales-contest-item-revenue-digital">I. digital revenue</label>
+                                           for="sales-contest-item-revenue-digital">H. digital revenue</label>
                                     <div class="controls">
                                         <div class="input-group">
                                             <span class="input-group-addon">$</span>
@@ -262,7 +231,7 @@
                             <div class="col col-md-6 col-sm-12">
                                 <div class="form-group item-content-group">
                                     <label class="control-label"
-                                           for="sales-contest-item-revenue-media">J. tv revenue</label>
+                                           for="sales-contest-item-revenue-media">I. tv revenue</label>
                                     <div class="controls">
                                         <div class="input-group">
                                             <span class="input-group-addon">$</span>
@@ -278,7 +247,7 @@
                             <div class="col col-md-6 col-sm-12">
                                 <div class="form-group item-content-group">
                                     <label class="control-label"
-                                           for="sales-contest-item-revenue-production">K. production revenue</label>
+                                           for="sales-contest-item-revenue-production">J. production revenue</label>
                                     <div class="controls">
                                         <div class="input-group">
                                             <span class="input-group-addon">$</span>
@@ -292,7 +261,7 @@
                             <div class="col col-md-6 col-sm-12">
                                 <div class="form-group item-content-group">
                                     <label class="control-label"
-                                           for="sales-contest-item-revenue-other">L. other revenue</label>
+                                           for="sales-contest-item-revenue-other">K. other revenue</label>
                                     <div class="controls">
                                         <div class="input-group">
                                             <span class="input-group-addon">$</span>
@@ -313,7 +282,7 @@
                                     }
                                 </style>
                                 <div class="form-group item-content-group platform-container">
-                                    <label class="control-label">M. digital platforms used:</label>
+                                    <label class="control-label">L. digital platforms used:</label>
                                     <div class="controls" style="margin-left: 5px;">
                                         <div class="row">
                                             <div class="col col-md-3 col-sm-6 col-xs-12">
@@ -383,7 +352,7 @@
                         <div class="row">
                             <div class="col col-xs-12">
                                 <div class="form-group item-content-group" style="margin-top: 20px;">
-                                    <label class="control-label" for="sales-contest-item-team-members">N. Did any other key team members contribute to this sale?</label>
+                                    <label class="control-label" for="sales-contest-item-team-members">M. Did any other key team members contribute to this sale?</label>
                                     <div class="controls">
                                             <textarea id="sales-contest-item-team-members" rows="3"
                                                       class="form-control"
@@ -395,7 +364,7 @@
                         <div class="row">
                             <div class="col col-xs-12">
                                 <div class="form-group item-content-group">
-                                    <label class="control-label" for="sales-contest-item-success-story">O. What is it about this success story or BIG Idea that makes it a great opportunity for other Gray Markets?</label>
+                                    <label class="control-label" for="sales-contest-item-success-story">N. What is it about this success story or BIG Idea that makes it a great opportunity for other Gray Markets?</label>
                                     <div class="controls">
                                             <textarea id="sales-contest-item-success-story" rows="3"
                                                       class="form-control"
@@ -407,7 +376,7 @@
                         <div class="row">
                             <div class="col col-xs-12">
                                 <div class="form-group item-content-group">
-                                    <label class="control-label" for="sales-contest-item-milestones">P. What made this a “Creative” sale? What key milestones did you accomplish to close this deal?</label>
+                                    <label class="control-label" for="sales-contest-item-milestones">O. What made this a “Creative” sale? What key milestones did you accomplish to close this deal?</label>
                                     <div class="controls">
                                             <textarea id="sales-contest-item-milestones" rows="3"
                                                       class="form-control"

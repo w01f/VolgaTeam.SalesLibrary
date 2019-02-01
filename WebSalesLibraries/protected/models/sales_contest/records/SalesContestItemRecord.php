@@ -7,6 +7,7 @@
 	 * @property string title
 	 * @property string advertiser
 	 * @property mixed revenue
+	 * @property mixed storage_path
 	 * @property mixed create_date
 	 * @property mixed date_submit
 	 * @property mixed content
@@ -181,9 +182,10 @@
 		/**
 		 * @param $ownerId int
 		 * @param $title string
+		 * @param $shortcutId string
 		 * @return string
 		 */
-		public static function addItem($ownerId, $title)
+		public static function addItem($ownerId, $title, $shortcutId)
 		{
 			$itemRecord = new self();
 
@@ -191,6 +193,23 @@
 			$itemRecord->id_owner = $ownerId;
 			$itemRecord->title = $title;
 			$itemRecord->create_date = date(Yii::app()->params['mysqlDateTimeFormat']);
+
+			if (!empty($shortcutId))
+			{
+				/** @var $linkRecord ShortcutLinkRecord */
+				$linkRecord = ShortcutLinkRecord::model()->findByPk($shortcutId);
+				/**@var $shortcut SalesContestShortcut */
+				$shortcut = $linkRecord->getRegularModel(false);
+				$shortcut->loadPageConfig();
+				if (!empty($shortcut->fileStorageRootPath))
+				{
+					$storageRelativePath = $shortcut->fileStorageRootPath . '/' . $itemRecord->id;
+					$itemRecord->storage_path = $storageRelativePath;
+					$storageAbsolutePath = SalesContestFileRecord::getStoragePath($storageRelativePath);
+					if (!file_exists($storageAbsolutePath))
+						mkdir($storageAbsolutePath, 0777, true);
+				}
+			}
 
 			$itemRecord->save();
 
@@ -201,9 +220,10 @@
 		 * @param $ownerId
 		 * @param $title
 		 * @param $sourceItemId
+		 * @param $shortcutId string
 		 * @return string
 		 */
-		public static function cloneItem($ownerId, $title, $sourceItemId)
+		public static function cloneItem($ownerId, $title, $sourceItemId, $shortcutId)
 		{
 			/** @var $sourceItemRecord SalesContestItemRecord */
 			$sourceItemRecord = self::model()->findByPk($sourceItemId);
@@ -218,6 +238,24 @@
 				$itemRecord->create_date = date(Yii::app()->params['mysqlDateTimeFormat']);
 				$itemRecord->date_submit = $sourceItemRecord->date_submit;
 				$itemRecord->content = $sourceItemRecord->content;
+
+				if (!empty($shortcutId))
+				{
+					/** @var $linkRecord ShortcutLinkRecord */
+					$linkRecord = ShortcutLinkRecord::model()->findByPk($shortcutId);
+					/**@var $shortcut SalesContestShortcut */
+					$shortcut = $linkRecord->getRegularModel(false);
+					$shortcut->loadPageConfig();
+					if (!empty($shortcut->fileStorageRootPath))
+					{
+						$storageRelativePath = $shortcut->fileStorageRootPath . '/' . $itemRecord->id;
+						$itemRecord->storage_path = $storageRelativePath;
+						$storageAbsolutePath = SalesContestFileRecord::getStoragePath($storageRelativePath);
+						if (!file_exists($storageAbsolutePath))
+							mkdir($storageAbsolutePath, 0777, true);
+					}
+				}
+
 				$itemRecord->save();
 
 				SalesContestFileRecord::cloneFiles($itemRecord->id, $sourceItemId);
@@ -232,8 +270,23 @@
 		 */
 		public static function deleteItem($itemId)
 		{
-			self::model()->deleteByPk($itemId);
+			/** @var SalesContestItemRecord $itemRecord */
+			$itemRecord = self::model()->findByPk($itemId);
 			SalesContestFileRecord::deleteFilesByItem($itemId);
+			if (!empty($itemRecord->storage_path))
+			{
+				$storagePath = SalesContestFileRecord::getStoragePath($itemRecord->storage_path);
+				if (file_exists($storagePath))
+					try
+					{
+						array_map('unlink', glob("$storagePath/*.*"));
+						rmdir($storagePath);
+					}
+					catch (Exception $e)
+					{
+					}
+			}
+			self::model()->deleteByPk($itemId);
 		}
 
 		/**

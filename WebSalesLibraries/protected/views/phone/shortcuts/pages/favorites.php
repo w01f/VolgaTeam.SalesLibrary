@@ -29,7 +29,7 @@
 	</div>
 	<? if ($shortcut->showNavigationPanel): ?>
         <div data-role="panel" data-display="overlay" id="favorites-view-popup-panel-left">
-            <ul class="navigation-items-container" data-role="listview">
+            <ul class="navigation-items-container navigation-items-container-main" data-role="listview">
             </ul>
         </div>
 	<? endif; ?>

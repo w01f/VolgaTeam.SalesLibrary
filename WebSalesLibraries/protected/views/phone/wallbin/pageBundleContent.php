@@ -56,7 +56,7 @@
         </ul>
     </div>
     <div data-role="panel" data-display="overlay" id="wallbin-<? echo $wallbinId; ?>-popup-panel-left">
-        <ul class="navigation-items-container" data-role="listview">
+        <ul class="navigation-items-container navigation-items-container-main" data-role="listview">
         </ul>
     </div>
     <div data-role="panel" data-display="overlay" data-position="right" id="wallbin-<? echo $wallbinId; ?>-popup-panel-right">

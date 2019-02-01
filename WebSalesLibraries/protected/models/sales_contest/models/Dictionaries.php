@@ -26,16 +26,4 @@
 			else
 				return array();
 		}
-
-		/**
-		 * @return array
-		 */
-		public static function getStationList()
-		{
-			$stationsListFilePath = \Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . 'wow_stations.txt';
-			if (file_exists($stationsListFilePath))
-				return file($stationsListFilePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-			else
-				return array();
-		}
 	}

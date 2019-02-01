@@ -51,7 +51,7 @@
 	<? if ($shortcut->showNavigationPanel): ?>
         <div data-role="panel" data-display="overlay"
              id="shortcut-link-page-<? echo $shortcut->id; ?>-popup-panel-left">
-            <ul class="navigation-items-container" data-role="listview">
+            <ul class="navigation-items-container navigation-items-container-main" data-role="listview">
             </ul>
         </div>
 	<? endif; ?>

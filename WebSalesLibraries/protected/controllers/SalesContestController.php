@@ -31,6 +31,7 @@
 						'' :
 						$itemOwner->login,
 					'advertiser' => $item->advertiser,
+					'fileCount' => $item->filesCount > 0 ? $item->filesCount : '',
 					'revenue' => !empty($item->revenue) ?
 						('$' . (float)$item->revenue) :
 						null,
@@ -64,14 +65,15 @@
 		{
 			$title = Yii::app()->request->getPost('title');
 			$templateItemId = Yii::app()->request->getPost('templateItemId');
+			$shortcutId = Yii::app()->request->getPost('shortcutId');
 
 			$userId = UserIdentity::getCurrentUserId();
 			if (!empty($title))
 			{
 				if (!empty($templateItemId))
-					echo SalesContestItemRecord::cloneItem($userId, $title, $templateItemId);
+					echo SalesContestItemRecord::cloneItem($userId, $title, $templateItemId, $shortcutId);
 				else
-					echo SalesContestItemRecord::addItem($userId, $title);
+					echo SalesContestItemRecord::addItem($userId, $title, $shortcutId);
 			}
 			Yii::app()->end();
 		}

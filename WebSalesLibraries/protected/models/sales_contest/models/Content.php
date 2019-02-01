@@ -22,7 +22,6 @@
 		public $nominationType;
 		public $seller;
 		public $market;
-		public $station;
 		public $revenueType;
 		public $category;
 		public $digitalRevenue;

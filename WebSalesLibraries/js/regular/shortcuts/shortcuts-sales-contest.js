@@ -49,7 +49,7 @@
 			updateContentSize();
 		};
 
-		let requestSaveItem = function(){
+		let requestSaveItem = function () {
 			let modalDialog = new $.SalesPortal.ModalDialog({
 				title: 'Win of the Week',
 				description: 'Submit your Win of the Week?',
@@ -373,7 +373,8 @@
 							url: window.BaseUrl + "salesContest/addItem",
 							data: {
 								title: $('#add-item-name').val(),
-								templateItemId: parameters.templateItemId
+								templateItemId: parameters.templateItemId,
+								shortcutId: that.shortcutData.options.linkId,
 							},
 							beforeSend: function () {
 								$.SalesPortal.Overlay.show();
@@ -502,14 +503,21 @@
 				"data": "title",
 				"title": "Nomination",
 				"class": "",
-				"width": "30%",
+				"width": "25%",
 				"render": cellRenderer
 			});
 			columnSettings.push({
 				"data": "advertiser",
 				"title": "Advertiser",
 				"class": "",
-				"width": "30%",
+				"width": "20%",
+				"render": cellRenderer
+			});
+			columnSettings.push({
+				"data": "fileCount",
+				"title": "Files",
+				"class": "text-center",
+				"width": "15%",
 				"render": cellRenderer
 			});
 			columnSettings.push({
@@ -845,22 +853,13 @@
 			}
 
 			$('#sales-contest-item-revenue').off('keypress.sales-contest').on('keypress.sales-contest',validateNumbers);
+			$('#sales-contest-item-revenue-digital').off('keypress.sales-contest').on('keypress.sales-contest', validateNumbers);
+			$('#sales-contest-item-revenue-media').off('keypress.sales-contest').on('keypress.sales-contest', validateNumbers);
+			$('#sales-contest-item-revenue-production').off('keypress.sales-contest').on('keypress.sales-contest', validateNumbers);
+			$('#sales-contest-item-revenue-other').off('keypress.sales-contest').on('keypress.sales-contest', validateNumbers);
 
-			itemContent.find('.sales-contest-item-market-container .dropdown-menu a').click(function () {
-				$('#sales-contest-item-market').val($(this).data('value'));
-			});
-
-			itemContent.find('.sales-contest-item-station-container .dropdown-menu a').click(function () {
-				$('#sales-contest-item-station').val($(this).data('value'));
-			});
-
-			itemContent.find('.sales-contest-item-category-container .dropdown-menu a').click(function () {
-				$('#sales-contest-item-category').val($(this).data('value'));
-			});
-			$('#sales-contest-item-revenue-digital').off('keypress.sales-contest').on('keypress.sales-contest',validateNumbers);
-			$('#sales-contest-item-revenue-media').off('keypress.sales-contest').on('keypress.sales-contest',validateNumbers);
-			$('#sales-contest-item-revenue-production').off('keypress.sales-contest').on('keypress.sales-contest',validateNumbers);
-			$('#sales-contest-item-revenue-other').off('keypress.sales-contest').on('keypress.sales-contest',validateNumbers);
+			new PopupListEditor().init(itemContent.find('.sales-contest-item-category-container'));
+			new PopupListEditor().init(itemContent.find('.sales-contest-item-market-container'));
 
 			Dropzone.autoDiscover = false;
 			let allowEditAttachments = itemContent.find(">div.editable").length > 0 || shortcutData.options.isAdminRole;
@@ -990,7 +989,8 @@
 				attachmentsDataContainer.find('.file-item .file-delete').hide();
 		};
 
-		let validateNumbers =  function validate(evt) {
+
+		let validateNumbers = function validate(evt) {
 			let theEvent = evt || window.event;
 
 			if ($.inArray(theEvent.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
@@ -1003,7 +1003,7 @@
 				// Allow: home, end, left, right
 				(theEvent.keyCode >= 35 && theEvent.keyCode <= 39) ||
 				//Allow numbers and numbers + shift key
-				((theEvent.shiftKey && (theEvent.keyCode >= 48 && theEvent.keyCode <= 57)) || (theEvent.keyCode >= 96 && theEvent.keyCode <= 105)))
+				(theEvent.shiftKey && ((theEvent.keyCode >= 48 && theEvent.keyCode <= 57) || (theEvent.keyCode >= 96 && theEvent.keyCode <= 105))))
 			{
 				// let it happen, don't do anything
 				return;
@@ -1011,20 +1011,75 @@
 
 			// Handle paste
 			let key = '';
-			if (theEvent.type === 'paste') {
+			if (theEvent.type === 'paste')
+			{
 				key = event.clipboardData.getData('text/plain');
-			} else {
+			}
+			else
+			{
 				// Handle key press
 				key = theEvent.keyCode || theEvent.which;
 				key = String.fromCharCode(key);
 			}
 			let regex = /[0-9]|\./;
-			if( !regex.test(key) ) {
+			if (!regex.test(key))
+			{
 				theEvent.returnValue = false;
-				if(theEvent.preventDefault) theEvent.preventDefault();
+				if (theEvent.preventDefault) theEvent.preventDefault();
 			}
 		};
 
 		load();
 	};
+
+	let PopupListEditor = function () {
+		let container = undefined;
+
+		this.init = function (editorContainer) {
+			container = editorContainer;
+			container.find('.popup-toggle').off('click').on('click', showListEditor);
+		};
+
+		let showListEditor = function () {
+			let listContent = container.find('.popup-list-content').html();
+			let currentValue = container.find('.editor').val();
+
+			$.fancybox({
+				content: listContent,
+				autoSize: false,
+				width: 800,
+				autoHeight: true,
+				closeBtn: true,
+				openEffect: 'none',
+				closeEffect: 'none',
+				helpers: {
+					title: false,
+				},
+				afterShow: function () {
+					let innerContent = $('.fancybox-inner');
+					let listGroup = innerContent.find('.list-group');
+					let listItems = listGroup.find('.list-group-item');
+					$.each(listItems, function (index, value) {
+						let listItem = $(value);
+						let itemValue = listItem.data('value');
+						if (itemValue == currentValue)
+						{
+							listItem.addClass('active');
+							listGroup.animate({
+								scrollTop: (listItem.offset().top - listGroup.offset().top)
+							},10);
+
+							return false;
+						}
+					});
+
+					listItems.off('click').on('click', function () {
+						container.find('.editor').val($(this).data('value'));
+						$.fancybox.close();
+					})
+				}
+			});
+		};
+	};
+
 })(jQuery);
