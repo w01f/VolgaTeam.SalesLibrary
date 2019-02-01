@@ -456,6 +456,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			link.BannerEncoded = BannerEncoded;
 			link.ThumbnailEncoded = ThumbnailEncoded;
 			link.ResetSettingsSchedulerEncoded = ResetSettingsSchedulerEncoded;
+			link.AllowToHandleChanges = true;
 
 			return link;
 		}
