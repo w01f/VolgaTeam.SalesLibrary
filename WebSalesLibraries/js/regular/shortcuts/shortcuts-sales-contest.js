@@ -868,23 +868,37 @@
 				let attachmentsContainer = itemContent.find(".sales-contest-item-attachments");
 				let attachmentsDataContainer = $("#sales-contest-item-attachments-data");
 				let dropZoneObject = undefined;
+				let abortUploading = false;
 				attachmentsDataContainer.dropzone({
 					url: window.BaseUrl + "salesContest/uploadFile?itemId=" + that.itemId + "&fileType=attachment",
 					dictDefaultMessage: "",
 					previewTemplate: "<div></div>",
+					uploadMultiple: true,
+					parallelUploads: 1,
+					clickable: shortcutData.options.uploadOnClick == true,
 					init: function () {
 						dropZoneObject = this;
 					},
-					sending: function () {
-						attachmentsContainer.find('.progress-bar').css({
-							width: 0
-						});
-						attachmentsContainer.find('.progress').show();
+					sendingmultiple: function (files, xhr, formData) {
+						if (abortUploading)
+						{
+							$.each(files, function (index, value) {
+								dropZoneObject.removeFile(value);
+							});
+							abortUploading = false;
+						}
+						else
+						{
+							attachmentsContainer.find('.progress-bar').css({
+								width: 0
+							});
+							attachmentsContainer.find('.progress').show();
+						}
 					},
 					accept: function (file, done) {
 						if (file.size > parseInt(shortcutData.options.maxFileSize) * 1024 * 1024)
 						{
-							dropZoneObject.removeFile(file);
+							abortUploading = true;
 							var modalDialog = new $.SalesPortal.ModalDialog({
 								title: 'File Too BIG?',
 								description: shortcutData.options.maxFileSizeExcessMessage,
@@ -900,23 +914,61 @@
 								]
 							});
 							modalDialog.show();
+							return false;
 						}
-						else
+						else if (shortcutData.options.allowedFileTypes.length > 0)
 						{
-							done();
+							let acceptedFile = false;
+							$.each(shortcutData.options.allowedFileTypes, function (index, value) {
+								acceptedFile = acceptedFile || file.name.includes("." + value);
+							});
+							if (!acceptedFile)
+							{
+								abortUploading = true;
+								if (shortcutData.options.fileTypeDiscardMessage !== '')
+								{
+									let modalDialog = new $.SalesPortal.ModalDialog({
+										title: 'File type type is not authorized',
+										description: shortcutData.options.fileTypeDiscardMessage,
+										buttons: [
+											{
+												tag: 'ok',
+												title: 'Close',
+												width: 160,
+												clickHandler: function () {
+													modalDialog.close();
+												}
+											}
+										]
+									});
+									modalDialog.show();
+								}
+								return false;
+							}
 						}
+						done();
 					},
 					complete: function () {
 						attachmentsContainer.find('.progress').hide();
 					},
-					success: function () {
-						loadFiles(attachmentsDataContainer, 'attachment', afterAttachmentsLoad);
-					},
-					uploadprogress: function (e, progress) {
+					uploadprogress: function (file, progress) {
 						attachmentsContainer.find('.progress-bar').css({
 							width: progress + "%"
 						});
-					}
+						if (progress > 70)
+							attachmentsContainer.find('.progress-text').css({
+								color: '#ffffff'
+							});
+						else
+							attachmentsContainer.find('.progress-text').css({
+								color: '#000000'
+							});
+						attachmentsContainer.find('.file-name').text(file.name);
+						attachmentsContainer.find('.progress-percent').text(Math.round(progress));
+					},
+					queuecomplete: function () {
+						loadFiles(attachmentsDataContainer, 'attachment', afterAttachmentsLoad);
+					},
 				});
 			}
 			afterAttachmentsLoad();

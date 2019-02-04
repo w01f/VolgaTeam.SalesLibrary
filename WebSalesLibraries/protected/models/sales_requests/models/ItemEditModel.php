@@ -3,6 +3,8 @@
 	namespace application\models\sales_requests\models;
 
 
+	use SalesRequestFileRecord;
+
 	class ItemEditModel
 	{
 		public $id;
@@ -56,8 +58,8 @@
 			if (!empty($itemRecord->content))
 				$model->content = Content::fromJson(\CJSON::decode($itemRecord->content, true));
 
-			$model->attachments = \SalesRequestFileRecord::model()->getModels($itemRecord->id, 'attachment');
-			$model->deliverables = \SalesRequestFileRecord::model()->getModels($itemRecord->id, 'deliverable');
+			$model->attachments = SalesRequestFileRecord::model()->getModels($itemRecord->id, 'attachment');
+			$model->deliverables = SalesRequestFileRecord::model()->getModels($itemRecord->id, 'deliverable');
 
 			return $model;
 		}

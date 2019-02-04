@@ -3,11 +3,11 @@
 	$.SalesPortal = $.SalesPortal || {};
 	$.SalesPortal.LandingPage = $.SalesPortal.LandingPage || {};
 	$.SalesPortal.LandingPage.DropFolder = function (parameters) {
-		var dropFolderId = parameters.containerId;
-		var dropFolderContainer = undefined;
-		var dropFolderZone = undefined;
-		var dropZoneObject = undefined;
-		var dropFolderData = undefined;
+		let dropFolderId = parameters.containerId;
+		let dropFolderContainer = undefined;
+		let dropFolderZone = undefined;
+		let dropZoneObject = undefined;
+		let dropFolderData = undefined;
 
 		this.init = function () {
 			dropFolderContainer = $('#drop-folder-container-' + dropFolderId);
@@ -16,27 +16,41 @@
 			initDropFolder();
 		};
 
-		var initDropFolder = function () {
+		let initDropFolder = function () {
 			Dropzone.autoDiscover = false;
+			let abortUploading = false;
 			dropFolderZone.dropzone(
 				{
 					url: window.BaseUrl + "dropFolder/uploadFile?folderName=" + dropFolderData.folderName,
 					dictDefaultMessage: dropFolderData.defaultMessage,
 					previewTemplate: "<div></div>",
+					uploadMultiple: true,
+					parallelUploads: 1,
+					clickable: dropFolderData.uploadOnClick == true,
 					init: function () {
 						dropZoneObject = this;
 					},
-					sending: function (file, xhr, formData) {
-						dropFolderContainer.find('.progress-bar').css({
-							width: 0
-						});
-						dropFolderContainer.find('.progress').show();
+					sendingmultiple: function (files, xhr, formData) {
+						if (abortUploading)
+						{
+							$.each(files, function (index, value) {
+								dropZoneObject.removeFile(value);
+							});
+							abortUploading = false;
+						}
+						else
+						{
+							dropFolderContainer.find('.progress-bar').css({
+								width: 0
+							});
+							dropFolderContainer.find('.progress').show();
+						}
 					},
 					accept: function (file, done) {
 						if (file.size > parseInt(dropFolderData.maxFileSize) * 1024 * 1024)
 						{
-							dropZoneObject.removeFile(file);
-							var modalDialog = new $.SalesPortal.ModalDialog({
+							abortUploading = true;
+							let modalDialog = new $.SalesPortal.ModalDialog({
 								title: 'File Too BIG?',
 								description: dropFolderData.maxFileSizeExcessMessage,
 								buttons: [
@@ -51,28 +65,66 @@
 								]
 							});
 							modalDialog.show();
+							return false;
 						}
-						else
+						else if (dropFolderData.allowedFileTypes.length > 0)
 						{
-							done();
+							let acceptedFile = false;
+							$.each(dropFolderData.allowedFileTypes, function (index, value) {
+								acceptedFile = acceptedFile || file.name.includes("." + value);
+							});
+							if (!acceptedFile)
+							{
+								abortUploading = true;
+								if (dropFolderData.fileTypeDiscardMessage !== '')
+								{
+									let modalDialog = new $.SalesPortal.ModalDialog({
+										title: 'File type type is not authorized',
+										description: dropFolderData.fileTypeDiscardMessage,
+										buttons: [
+											{
+												tag: 'ok',
+												title: 'Close',
+												width: 160,
+												clickHandler: function () {
+													modalDialog.close();
+												}
+											}
+										]
+									});
+									modalDialog.show();
+								}
+								return false;
+							}
 						}
+						done();
 					},
 					complete: function () {
 						dropFolderContainer.find('.progress').hide();
 					},
-					success: function () {
-						loadFiles();
-					},
-					uploadprogress: function (e, progress) {
+					uploadprogress: function (file, progress) {
 						dropFolderContainer.find('.progress-bar').css({
 							width: progress + "%"
 						});
+						if (progress > 70)
+							dropFolderContainer.find('.progress-text').css({
+								color: '#ffffff'
+							});
+						else
+							dropFolderContainer.find('.progress-text').css({
+								color: '#000000'
+							});
+						dropFolderContainer.find('.file-name').text(file.name);
+						dropFolderContainer.find('.progress-percent').text(Math.round(progress));
+					},
+					queuecomplete: function () {
+						loadFiles();
 					},
 				});
 			loadFiles();
 		};
 
-		var loadFiles = function () {
+		let loadFiles = function () {
 			$.ajax({
 				type: "POST",
 				url: window.BaseUrl + "dropFolder/getFiles",
@@ -93,7 +145,7 @@
 					}
 					else
 					{
-						dropFolderZone.html('<div class="dz-default dz-message"><span>' + dropFolderData.defaultMessage + '</span></div>')
+						dropFolderZone.html('<div class="dz-default dz-message"><span>' + dropFolderData.defaultMessage + '</span></div>');
 						dropFolderZone.removeClass('dz-started');
 					}
 				},
@@ -105,11 +157,11 @@
 			});
 		};
 
-		var initFiles = function () {
+		let initFiles = function () {
 			dropFolderZone.find('.file-item .file-name').off('click').on('click', function () {
-				var folderName = $(this).closest('.file-item').find('.service-data .folder-name').text();
-				var fileName = $(this).closest('.file-item').find('.service-data .file-name').text();
-				var form = document.getElementById('form-download-drop-folder-file');
+				let folderName = $(this).closest('.file-item').find('.service-data .folder-name').text();
+				let fileName = $(this).closest('.file-item').find('.service-data .file-name').text();
+				let form = document.getElementById('form-download-drop-folder-file');
 				if (form === null)
 				{
 					form = document.createElement("form");
@@ -118,13 +170,13 @@
 					form.setAttribute("action", window.BaseUrl + 'dropFolder/downloadFile');
 					form._submit_function_ = form.submit;
 
-					var hiddenFolderNameField = document.createElement("input");
+					let hiddenFolderNameField = document.createElement("input");
 					hiddenFolderNameField.setAttribute("id", "input-drop-folder-folder-name");
 					hiddenFolderNameField.setAttribute("type", "hidden");
 					hiddenFolderNameField.setAttribute("name", 'folderName');
 					form.appendChild(hiddenFolderNameField);
 
-					var hiddenFileNameField = document.createElement("input");
+					let hiddenFileNameField = document.createElement("input");
 					hiddenFileNameField.setAttribute("id", "input-drop-folder-file-name");
 					hiddenFileNameField.setAttribute("type", "hidden");
 					hiddenFileNameField.setAttribute("name", 'fileName');
@@ -137,16 +189,16 @@
 			});
 
 			dropFolderZone.find('.draggable').off('dragstart').on('dragstart', function (e) {
-				var urlHeader = $(this).data("url-header");
-				var url = $(this).data('url');
+				let urlHeader = $(this).data("url-header");
+				let url = $(this).data('url');
 				if (url !== '')
 					e.originalEvent.dataTransfer.setData(urlHeader, url);
 			});
 
 			dropFolderZone.find('.file-item .file-delete').off('click').on('click', function () {
-				var folderName = $(this).closest('.file-item').find('.service-data .folder-name').text();
-				var fileName = $(this).closest('.file-item').find('.service-data .file-name').text();
-				var modalDialog = new $.SalesPortal.ModalDialog({
+				let folderName = $(this).closest('.file-item').find('.service-data .folder-name').text();
+				let fileName = $(this).closest('.file-item').find('.service-data .file-name').text();
+				let modalDialog = new $.SalesPortal.ModalDialog({
 					title: 'Delete this File?',
 					description: "Are you sure you want to DELETE this file from the site?",
 					buttons: [

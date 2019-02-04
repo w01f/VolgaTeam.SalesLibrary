@@ -6,7 +6,7 @@
 		var that = this;
 
 		this.init = function (savedLoginModelInput) {
-			savedLoginModel = savedLoginModelInput
+			savedLoginModel = savedLoginModelInput;
 
 			$('[data-img-src]').each(function () {
 				var imgValue = $(this).data('img-src');

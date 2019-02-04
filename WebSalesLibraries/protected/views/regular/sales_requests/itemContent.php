@@ -255,8 +255,9 @@
                                         <ul class="nav nav-pills dropzone<? if (!($item->allowEdit || $isAdminRole)): ?> disabled<? endif; ?>" id="sales-requests-item-attachments-data">
                                             <? echo $this->renderPartial('itemFiles', array('files' => $item->attachments), true); ?>
                                         </ul>
-                                        <div class="progress" style="display: none;">
-                                            <div class="progress-bar" style="width: 0;"></div>
+                                        <div class="progress" style="position: relative; width: 100%; display: none;">
+                                            <div class="progress-text text-center" style="width: 100%; position: absolute"><span class="file-name">Test</span>: <span class="progress-percent">90</span>%</div>
+                                            <div class="progress-bar" style="width: 0; height: 20px;"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -272,8 +273,9 @@
                                         <ul class="nav nav-pills dropzone<? if (!$isAdminRole): ?> disabled<? endif; ?>" id="sales-requests-item-deliverables-data">
                                             <? echo $this->renderPartial('itemFiles', array('files' => $item->deliverables), true); ?>
                                         </ul>
-                                        <div class="progress" style="display: none;">
-                                            <div class="progress-bar" style="width: 0;"></div>
+                                        <div class="progress" style="position: relative; width: 100%; display: none;">
+                                            <div class="progress-text text-center" style="width: 100%; position: absolute"><span class="file-name">Test</span>: <span class="progress-percent">90</span>%</div>
+                                            <div class="progress-bar" style="width: 0; height: 20px;"></div>
                                         </div>
                                     </div>
                                 </div>

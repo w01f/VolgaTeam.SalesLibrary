@@ -14,6 +14,12 @@
 		public $maxFileSize;
 		public $maxFileSizeExcessMessage;
 
+		/** @var array  */
+		public $allowedFileTypes;
+		public $fileTypeDiscardMessage;
+
+		public $uploadOnClick;
+
 		/** @var  \application\models\sales_contest\models\ArchiveSettings */
 		public $archiveSettings;
 
@@ -25,6 +31,10 @@
 		public function __construct($linkRecord, $isPhone, $parameters = null)
 		{
 			parent::__construct($linkRecord, $isPhone);
+
+			$this->allowedFileTypes = array();
+			$this->fileTypeDiscardMessage = '';
+			$this->uploadOnClick = true;
 
 			$this->archiveSettings = new \application\models\sales_contest\models\ArchiveSettings();
 
@@ -45,6 +55,16 @@
 
 			$queryResult = $xpath->query('//Config/DropZone/MaxSizeMessage');
 			$this->maxFileSizeExcessMessage = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
+
+			$queryResult = $xpath->query('//Config/DropZone/FileTypesAllowed/Filetype');
+			foreach ($queryResult as $fileTypeNode)
+				$this->allowedFileTypes[] = trim($fileTypeNode->nodeValue);
+
+			$queryResult = $xpath->query('//Config/DropZone/FileTypesAllowed/FileTypeMessage');
+			$this->fileTypeDiscardMessage = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '';
+
+			$queryResult = $xpath->query('//Config/DropZone/ClickUploadAllowed');
+			$this->uploadOnClick = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
 
 			$queryResult = $xpath->query('//Config/DropZone/Storage');
 			if ($queryResult->length > 0)
@@ -194,6 +214,9 @@
 			$data['isAdminRole'] = $this->isAdminRole;
 			$data['maxFileSize'] = $this->maxFileSize;
 			$data['maxFileSizeExcessMessage'] = $this->maxFileSizeExcessMessage;
+			$data['allowedFileTypes'] = $this->allowedFileTypes;
+			$data['fileTypeDiscardMessage'] = $this->fileTypeDiscardMessage;
+			$data['uploadOnClick'] = $this->uploadOnClick;
 			$data['serviceData'] = $this->getMenuItemData();
 			return $data;
 		}

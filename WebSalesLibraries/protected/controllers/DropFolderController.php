@@ -5,6 +5,12 @@
 	 */
 	class DropFolderController extends IsdController
 	{
+		/** return boolean */
+		protected function getIsPublicController()
+		{
+			return true;
+		}
+
 		public function getViewPath()
 		{
 			return YiiBase::getPathOfAlias($this->pathPrefix . 'drop_folder');
@@ -32,11 +38,25 @@
 			$folderName = Yii::app()->request->getQuery('folderName');
 			$dropFolderManager = new \application\models\drop_folder\models\DropFolderManager();
 			$dropFolderManager->init($folderName);
-			if ($dropFolderManager->isConfigured)
+			if ($dropFolderManager->isConfigured && count($_FILES) > 0)
 			{
-				$dropFolderManager->addFile(
-					$_FILES['file']['name'],
-					$_FILES['file']['tmp_name']);
+				$filesForUploading = array();
+				if (is_array($_FILES['file']['name']))
+					for ($i = 0; $i < count($_FILES['file']['name']); $i++)
+						$filesForUploading[] = array(
+							'name' => $_FILES['file']['name'][$i],
+							'tmp_name' => $_FILES['file']['tmp_name'][$i]
+						);
+				else
+					$filesForUploading[] = array(
+						'name' => $_FILES['file']['name'],
+						'tmp_name' => $_FILES['file']['tmp_name']
+					);
+
+				foreach ($filesForUploading as $fileForUploading)
+					$dropFolderManager->addFile(
+						$fileForUploading['name'],
+						$fileForUploading['tmp_name']);
 			}
 			Yii::app()->end();
 		}

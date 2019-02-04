@@ -64,8 +64,9 @@
     <? echo $this->renderPartial('landingPageMarkup/style/styleMargin', array('margin' => $contentBlock->margin), true); ?>">
     <ul id="<? echo $folderBlockId; ?>" class="nav nav-pills dropzone">
     </ul>
-    <div class="progress" style="display: none;">
-        <div class="progress-bar" style="width: 0;"></div>
+    <div class="progress" style="position: relative; width: 100%; display: none;">
+        <div class="progress-text text-center" style="width: 100%; position: absolute"><span class="file-name">Test</span>: <span class="progress-percent">90</span>%</div>
+        <div class="progress-bar" style="width: 0; height: 20px;"></div>
     </div>
     <div class="service-data drop-folder-data">
 		<? echo CJSON::encode(array(
@@ -73,6 +74,9 @@
 			'defaultMessage' => $contentBlock->hoverText,
 			'maxFileSize' => $contentBlock->maxFileSize,
 			'maxFileSizeExcessMessage' => $contentBlock->maxFileSizeExcessMessage,
+			'allowedFileTypes' =>  $contentBlock->allowedFileTypes,
+			'fileTypeDiscardMessage' => $contentBlock->fileTypeDiscardMessage,
+			'uploadOnClick' => $contentBlock->uploadOnClick,
 		)) ?>
     </div>
 </div>

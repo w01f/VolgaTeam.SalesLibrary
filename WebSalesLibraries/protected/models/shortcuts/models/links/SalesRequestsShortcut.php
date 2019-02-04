@@ -8,6 +8,15 @@
 		public $selectedItemId;
 		public $isAdminRole;
 
+		public $maxFileSize;
+		public $maxFileSizeExcessMessage;
+
+		/** @var array  */
+		public $allowedFileTypes;
+		public $fileTypeDiscardMessage;
+
+		public $uploadOnClick;
+
 		/** @var  \application\models\sales_requests\models\ArchiveSettings */
 		public $archiveSettings;
 
@@ -19,6 +28,11 @@
 		public function __construct($linkRecord, $isPhone, $parameters = null)
 		{
 			parent::__construct($linkRecord, $isPhone);
+
+			$this->allowedFileTypes = array();
+			$this->fileTypeDiscardMessage = '';
+
+			$this->uploadOnClick = true;
 
 			$this->archiveSettings = new \application\models\sales_requests\models\ArchiveSettings();
 
@@ -33,6 +47,22 @@
 			$linkConfig = new DOMDocument();
 			$linkConfig->loadXML($this->linkRecord->config);
 			$xpath = new DomXPath($linkConfig);
+
+			$queryResult = $xpath->query('//Config/MaxSize');
+			$this->maxFileSize = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue)) : 256;
+
+			$queryResult = $xpath->query('//Config/MaxSizeMessage');
+			$this->maxFileSizeExcessMessage = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
+
+			$queryResult = $xpath->query('//Config/FileTypesAllowed/Filetype');
+			foreach ($queryResult as $fileTypeNode)
+				$this->allowedFileTypes[] = trim($fileTypeNode->nodeValue);
+
+			$queryResult = $xpath->query('//Config/FileTypesAllowed/FileTypeMessage');
+			$this->fileTypeDiscardMessage = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '';
+
+			$queryResult = $xpath->query('//Config/ClickUploadAllowed');
+			$this->uploadOnClick = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
 
 			$queryResult = $xpath->query('//Config/ArchiveAfter');
 			if ($queryResult->length > 0)
@@ -134,6 +164,11 @@
 				$data['selectedItemId'] = count($items) > 0 ? $items[0]->id : null;
 			}
 			$data['isAdminRole'] = $this->isAdminRole;
+			$data['maxFileSize'] = $this->maxFileSize;
+			$data['maxFileSizeExcessMessage'] = $this->maxFileSizeExcessMessage;
+			$data['allowedFileTypes'] = $this->allowedFileTypes;
+			$data['fileTypeDiscardMessage'] = $this->fileTypeDiscardMessage;
+			$data['uploadOnClick'] = $this->uploadOnClick;
 			$data['serviceData'] = $this->getMenuItemData();
 			return $data;
 		}

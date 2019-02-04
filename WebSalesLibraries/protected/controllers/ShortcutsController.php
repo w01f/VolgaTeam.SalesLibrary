@@ -17,6 +17,9 @@
 		{
 			return array(
 				'getSinglePage',
+				'processPublicShortcutLoginData',
+				'sendPublicLoginHelpRequest',
+				'processSuccessfulUniversalLogin'
 			);
 		}
 
@@ -38,36 +41,16 @@
 				$shortcut = $shortcutRecord->getRegularModel($this->isPhone, $_GET);
 				$shortcut->loadPageConfig();
 
-				if ($useForThumbnail || UserIdentity::isUserAuthorized() || ($shortcut->allowPublicAccess && !isset($shortcut->publicPassword)))
+				if ($useForThumbnail || UserIdentity::isUserAuthorized() || ($shortcut->allowPublicAccess && empty($shortcut->publicPassword)))
 					$this->renderSinglePage($shortcut);
-				else if ($shortcut->allowPublicAccess && isset($shortcut->publicPassword))
+				else if ($shortcut->allowPublicAccess && !empty($shortcut->publicPassword))
 				{
 					$passwordSessionKey = sprintf('shortcutPassword%s', $shortcutId);
 					$savedPassword = Yii::app()->session[$passwordSessionKey];
 					if ($shortcut->publicPassword == $savedPassword)
 						$this->renderSinglePage($shortcut);
 					else
-					{
-						$passwordModel = new PublicPageContentShortcutPasswordForm();
-						$passwordModel->shortcutId = $shortcutId;
-						$passwordModel->isPhone = $shortcutId;
-
-						$attributes = Yii::app()->request->getPost('PublicPageContentShortcutPasswordForm');
-						if (isset($attributes))
-						{
-							$passwordModel->attributes = $attributes;
-							$passwordModel->password = $attributes['password'];
-							if ($passwordModel->validate())
-							{
-								Yii::app()->session[$passwordSessionKey] = $passwordModel->password;
-								$this->renderSinglePage($shortcut);
-							}
-							else
-								$this->render('publicLogin', array('formData' => $passwordModel, 'shortcut' => $shortcut));
-						}
-						else
-							$this->render('publicLogin', array('formData' => $passwordModel, 'shortcut' => $shortcut));
-					}
+						$this->render('publicLogin', array('shortcut' => $shortcut));
 				}
 				else
 					Yii::app()->user->loginRequired();
@@ -85,6 +68,76 @@
 			else
 				$menuGroups = array();
 			$this->render('pages/singlePage', array('menuGroups' => $menuGroups, 'shortcut' => $shortcut));
+		}
+
+		public function actionProcessPublicShortcutLoginData()
+		{
+			$loginData = Yii::app()->request->getPost('loginData');
+			if (isset($loginData))
+			{
+				$loginDataEncoded = CJSON::encode($loginData);
+				$loginModel = \PublicPageContentShortcutLoginModel::fromJson($loginDataEncoded);
+				$errors = array();
+				$authenticated = false;
+				/** @var  $shortcutRecord ShortcutLinkRecord */
+				$shortcutRecord = ShortcutLinkRecord::model()->findByPk($loginModel->shortcutId);
+				/** @var  $shortcut PageContentShortcut */
+				$shortcut = $shortcutRecord->getRegularModel($this->isPhone);
+				$shortcut->loadPageConfig();
+				if (empty($loginModel->password) || $loginModel->password !== $shortcut->publicPassword)
+					$errors[] = 'Incorrect Password';
+				else
+					$authenticated = true;
+
+				if ($authenticated)
+				{
+					$passwordSessionKey = sprintf('shortcutPassword%s', $loginModel->shortcutId);
+					Yii::app()->session[$passwordSessionKey] = $loginModel->password;
+					echo CJSON::encode(array(
+						'nextAction' => 'login',
+						'returnUrl' => $shortcut->getSourceLink()
+					));
+				}
+				else
+				{
+					echo CJSON::encode(array(
+						'nextAction' => 'fix-errors',
+						'errors' => $errors
+					));
+				}
+			}
+			Yii::app()->end();
+		}
+
+		public function actionProcessSuccessfulUniversalLogin()
+		{
+			$returnUrl = Yii::app()->request->getPost('returnUrl');
+			$this->redirect($returnUrl);
+		}
+
+		public function actionSendPublicLoginHelpRequest()
+		{
+			$shortcutId = Yii::app()->request->getPost('shortcutId');
+			$email = Yii::app()->request->getPost('email');
+			$name = Yii::app()->request->getPost('name');
+			$station = Yii::app()->request->getPost('station');
+			$text = Yii::app()->request->getPost('text');
+
+			/** @var  $shortcutRecord ShortcutLinkRecord */
+			$shortcutRecord = ShortcutLinkRecord::model()->findByPk($shortcutId);
+			/** @var  $shortcut PageContentShortcut */
+			$shortcut = $shortcutRecord->getRegularModel($this->isPhone);
+			$shortcut->loadPageConfig();
+
+			$message = Yii::app()->email;
+			$to = array(Yii::app()->params['email']['help_request_address']);
+			$message->to = $to;
+			$message->subject = 'Site Help Request - ' . $shortcut->getSourceLink();
+			$message->from = $email;
+			$message->message = sprintf("%s<br><br>%s<br><br>%s<br><br>Password: %s", $name, $station, $text, $shortcut->publicPassword);
+			$message->send();
+
+			Yii::app()->end();
 		}
 
 		public function actionGetSamePage()

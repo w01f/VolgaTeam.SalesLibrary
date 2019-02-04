@@ -190,11 +190,27 @@
 		{
 			$itemId = Yii::app()->request->getQuery('itemId');
 			$fileType = Yii::app()->request->getQuery('fileType');
-			SalesContestFileRecord::addItem(
-				$itemId,
-				$_FILES['file']['name'],
-				$fileType,
-				$_FILES['file']['tmp_name']);
+
+			$filesForUploading = array();
+			if (is_array($_FILES['file']['name']))
+				for ($i = 0; $i < count($_FILES['file']['name']); $i++)
+					$filesForUploading[] = array(
+						'name' => $_FILES['file']['name'][$i],
+						'tmp_name' => $_FILES['file']['tmp_name'][$i]
+					);
+			else
+				$filesForUploading[] = array(
+					'name' => $_FILES['file']['name'],
+					'tmp_name' => $_FILES['file']['tmp_name']
+				);
+
+			foreach ($filesForUploading as $fileForUploading)
+				SalesContestFileRecord::addItem(
+					$itemId,
+					$fileForUploading['name'],
+					$fileType,
+					$fileForUploading['tmp_name']);
+
 			Yii::app()->end();
 		}
 

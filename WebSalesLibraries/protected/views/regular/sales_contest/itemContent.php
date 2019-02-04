@@ -181,8 +181,9 @@
                                             id="sales-contest-item-attachments-data" style="min-height: 170px;">
 						                    <? echo $this->renderPartial('itemFiles', array('files' => $item->attachments), true); ?>
                                         </ul>
-                                        <div class="progress" style="display: none;">
-                                            <div class="progress-bar" style="width: 0;"></div>
+                                        <div class="progress" style="position: relative; width: 100%; display: none;">
+                                            <div class="progress-text text-center" style="width: 100%; position: absolute"><span class="file-name">Test</span>: <span class="progress-percent">90</span>%</div>
+                                            <div class="progress-bar" style="width: 0; height: 20px;"></div>
                                         </div>
                                     </div>
                                 </div>
