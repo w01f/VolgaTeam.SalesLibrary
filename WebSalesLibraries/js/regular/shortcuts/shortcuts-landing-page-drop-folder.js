@@ -47,57 +47,95 @@
 						}
 					},
 					accept: function (file, done) {
-						if (file.size > parseInt(dropFolderData.maxFileSize) * 1024 * 1024)
-						{
-							abortUploading = true;
-							let modalDialog = new $.SalesPortal.ModalDialog({
-								title: 'File Too BIG?',
-								description: dropFolderData.maxFileSizeExcessMessage,
-								buttons: [
-									{
-										tag: 'ok',
-										title: 'Close',
-										width: 160,
-										clickHandler: function () {
-											modalDialog.close();
-										}
-									}
-								]
-							});
-							modalDialog.show();
-							return false;
-						}
-						else if (dropFolderData.allowedFileTypes.length > 0)
-						{
-							let acceptedFile = false;
-							$.each(dropFolderData.allowedFileTypes, function (index, value) {
-								acceptedFile = acceptedFile || file.name.includes("." + value);
-							});
-							if (!acceptedFile)
+						let existingFiles = dropFolderZone.find('.file-item');
+						$.each(existingFiles, function (index, value) {
+							let existingFileNode = $(value);
+							if (existingFileNode.find('.file-name').html() == file.name)
 							{
 								abortUploading = true;
-								if (dropFolderData.fileTypeDiscardMessage !== '')
-								{
-									let modalDialog = new $.SalesPortal.ModalDialog({
-										title: 'File type type is not authorized',
-										description: dropFolderData.fileTypeDiscardMessage,
-										buttons: [
-											{
-												tag: 'ok',
-												title: 'Close',
-												width: 160,
-												clickHandler: function () {
-													modalDialog.close();
-												}
+								let modalDialog = new $.SalesPortal.ModalDialog({
+									title: 'Upload file?',
+									description: 'This file already exists on the server',
+									buttons: [
+										{
+											tag: 'ok',
+											title: 'Replace',
+											width: 160,
+											clickHandler: function () {
+												abortUploading = false;
+												existingFileNode.remove();
+												dropZoneObject.addFile(file);
+												modalDialog.close();
 											}
-										]
-									});
-									modalDialog.show();
-								}
+										},
+										{
+											tag: 'cancel',
+											title: 'Cancel',
+											width: 160,
+											clickHandler: function () {
+												modalDialog.close();
+											}
+										}
+									]
+								});
+								modalDialog.show();
 								return false;
 							}
+						});
+						if(!abortUploading)
+						{
+							if (file.size > parseInt(dropFolderData.maxFileSize) * 1024 * 1024)
+							{
+								abortUploading = true;
+								let modalDialog = new $.SalesPortal.ModalDialog({
+									title: 'File Too BIG?',
+									description: dropFolderData.maxFileSizeExcessMessage,
+									buttons: [
+										{
+											tag: 'ok',
+											title: 'Close',
+											width: 160,
+											clickHandler: function () {
+												modalDialog.close();
+											}
+										}
+									]
+								});
+								modalDialog.show();
+								return false;
+							}
+							else if (dropFolderData.allowedFileTypes.length > 0)
+							{
+								let acceptedFile = false;
+								$.each(dropFolderData.allowedFileTypes, function (index, value) {
+									acceptedFile = acceptedFile || file.name.includes("." + value);
+								});
+								if (!acceptedFile)
+								{
+									abortUploading = true;
+									if (dropFolderData.fileTypeDiscardMessage !== '')
+									{
+										let modalDialog = new $.SalesPortal.ModalDialog({
+											title: 'File type type is not authorized',
+											description: dropFolderData.fileTypeDiscardMessage,
+											buttons: [
+												{
+													tag: 'ok',
+													title: 'Close',
+													width: 160,
+													clickHandler: function () {
+														modalDialog.close();
+													}
+												}
+											]
+										});
+										modalDialog.show();
+									}
+									return false;
+								}
+							}
+							done();
 						}
-						done();
 					},
 					complete: function () {
 						dropFolderContainer.find('.progress').hide();

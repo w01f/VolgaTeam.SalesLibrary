@@ -951,57 +951,95 @@
 						}
 					},
 					accept: function (file, done) {
-						if (file.size > parseInt(shortcutData.options.maxFileSize) * 1024 * 1024)
-						{
-							abortUploadingAttachments = true;
-							var modalDialog = new $.SalesPortal.ModalDialog({
-								title: 'File Too BIG?',
-								description: shortcutData.options.maxFileSizeExcessMessage,
-								buttons: [
-									{
-										tag: 'ok',
-										title: 'Close',
-										width: 160,
-										clickHandler: function () {
-											modalDialog.close();
-										}
-									}
-								]
-							});
-							modalDialog.show();
-							return false;
-						}
-						else if (shortcutData.options.allowedFileTypes.length > 0)
-						{
-							let acceptedFile = false;
-							$.each(shortcutData.options.allowedFileTypes, function (index, value) {
-								acceptedFile = acceptedFile || file.name.includes("." + value);
-							});
-							if (!acceptedFile)
+						let existingFiles = attachmentsDataContainer.find('.file-item');
+						$.each(existingFiles, function (index, value) {
+							let existingFileNode = $(value);
+							if (existingFileNode.find('.file-name').html() == file.name)
 							{
 								abortUploadingAttachments = true;
-								if (shortcutData.options.fileTypeDiscardMessage !== '')
-								{
-									let modalDialog = new $.SalesPortal.ModalDialog({
-										title: 'File type type is not authorized',
-										description: shortcutData.options.fileTypeDiscardMessage,
-										buttons: [
-											{
-												tag: 'ok',
-												title: 'Close',
-												width: 160,
-												clickHandler: function () {
-													modalDialog.close();
-												}
+								let modalDialog = new $.SalesPortal.ModalDialog({
+									title: 'Upload file?',
+									description: 'This file already exists on the server',
+									buttons: [
+										{
+											tag: 'ok',
+											title: 'Replace',
+											width: 160,
+											clickHandler: function () {
+												abortUploadingAttachments = false;
+												existingFileNode.remove();
+												dropZoneObjectAttachments.addFile(file);
+												modalDialog.close();
 											}
-										]
-									});
-									modalDialog.show();
-								}
+										},
+										{
+											tag: 'cancel',
+											title: 'Cancel',
+											width: 160,
+											clickHandler: function () {
+												modalDialog.close();
+											}
+										}
+									]
+								});
+								modalDialog.show();
 								return false;
 							}
+						});
+						if(!abortUploadingAttachments)
+						{
+							if (file.size > parseInt(shortcutData.options.maxFileSize) * 1024 * 1024)
+							{
+								abortUploadingAttachments = true;
+								var modalDialog = new $.SalesPortal.ModalDialog({
+									title: 'File Too BIG?',
+									description: shortcutData.options.maxFileSizeExcessMessage,
+									buttons: [
+										{
+											tag: 'ok',
+											title: 'Close',
+											width: 160,
+											clickHandler: function () {
+												modalDialog.close();
+											}
+										}
+									]
+								});
+								modalDialog.show();
+								return false;
+							}
+							else if (shortcutData.options.allowedFileTypes.length > 0)
+							{
+								let acceptedFile = false;
+								$.each(shortcutData.options.allowedFileTypes, function (index, value) {
+									acceptedFile = acceptedFile || file.name.includes("." + value);
+								});
+								if (!acceptedFile)
+								{
+									abortUploadingAttachments = true;
+									if (shortcutData.options.fileTypeDiscardMessage !== '')
+									{
+										let modalDialog = new $.SalesPortal.ModalDialog({
+											title: 'File type type is not authorized',
+											description: shortcutData.options.fileTypeDiscardMessage,
+											buttons: [
+												{
+													tag: 'ok',
+													title: 'Close',
+													width: 160,
+													clickHandler: function () {
+														modalDialog.close();
+													}
+												}
+											]
+										});
+										modalDialog.show();
+									}
+									return false;
+								}
+							}
+							done();
 						}
-						done();
 					},
 					complete: function () {
 						attachmentsContainer.find('.progress').hide();
@@ -1062,57 +1100,95 @@
 						}
 					},
 					accept: function (file, done) {
-						if (file.size > parseInt(shortcutData.options.maxFileSize) * 1024 * 1024)
-						{
-							abortUploadingDeliverables = true;
-							var modalDialog = new $.SalesPortal.ModalDialog({
-								title: 'File Too BIG?',
-								description: shortcutData.options.maxFileSizeExcessMessage,
-								buttons: [
-									{
-										tag: 'ok',
-										title: 'Close',
-										width: 160,
-										clickHandler: function () {
-											modalDialog.close();
-										}
-									}
-								]
-							});
-							modalDialog.show();
-							return false;
-						}
-						else if (shortcutData.options.allowedFileTypes.length > 0)
-						{
-							let acceptedFile = false;
-							$.each(shortcutData.options.allowedFileTypes, function (index, value) {
-								acceptedFile = acceptedFile || file.name.includes("." + value);
-							});
-							if (!acceptedFile)
+						let existingFiles = deliverablesDataContainer.find('.file-item');
+						$.each(existingFiles, function (index, value) {
+							let existingFileNode = $(value);
+							if (existingFileNode.find('.file-name').html() == file.name)
 							{
 								abortUploadingDeliverables = true;
-								if (shortcutData.options.fileTypeDiscardMessage !== '')
-								{
-									let modalDialog = new $.SalesPortal.ModalDialog({
-										title: 'File type type is not authorized',
-										description: shortcutData.options.fileTypeDiscardMessage,
-										buttons: [
-											{
-												tag: 'ok',
-												title: 'Close',
-												width: 160,
-												clickHandler: function () {
-													modalDialog.close();
-												}
+								let modalDialog = new $.SalesPortal.ModalDialog({
+									title: 'Upload file?',
+									description: 'This file already exists on the server',
+									buttons: [
+										{
+											tag: 'ok',
+											title: 'Replace',
+											width: 160,
+											clickHandler: function () {
+												abortUploadingDeliverables = false;
+												existingFileNode.remove();
+												dropZoneObjectDeliverables.addFile(file);
+												modalDialog.close();
 											}
-										]
-									});
-									modalDialog.show();
-								}
+										},
+										{
+											tag: 'cancel',
+											title: 'Cancel',
+											width: 160,
+											clickHandler: function () {
+												modalDialog.close();
+											}
+										}
+									]
+								});
+								modalDialog.show();
 								return false;
 							}
+						});
+						if(!abortUploadingDeliverables)
+						{
+							if (file.size > parseInt(shortcutData.options.maxFileSize) * 1024 * 1024)
+							{
+								abortUploadingDeliverables = true;
+								var modalDialog = new $.SalesPortal.ModalDialog({
+									title: 'File Too BIG?',
+									description: shortcutData.options.maxFileSizeExcessMessage,
+									buttons: [
+										{
+											tag: 'ok',
+											title: 'Close',
+											width: 160,
+											clickHandler: function () {
+												modalDialog.close();
+											}
+										}
+									]
+								});
+								modalDialog.show();
+								return false;
+							}
+							else if (shortcutData.options.allowedFileTypes.length > 0)
+							{
+								let acceptedFile = false;
+								$.each(shortcutData.options.allowedFileTypes, function (index, value) {
+									acceptedFile = acceptedFile || file.name.includes("." + value);
+								});
+								if (!acceptedFile)
+								{
+									abortUploadingDeliverables = true;
+									if (shortcutData.options.fileTypeDiscardMessage !== '')
+									{
+										let modalDialog = new $.SalesPortal.ModalDialog({
+											title: 'File type type is not authorized',
+											description: shortcutData.options.fileTypeDiscardMessage,
+											buttons: [
+												{
+													tag: 'ok',
+													title: 'Close',
+													width: 160,
+													clickHandler: function () {
+														modalDialog.close();
+													}
+												}
+											]
+										});
+										modalDialog.show();
+									}
+									return false;
+								}
+							}
+							done();
 						}
-						done();
 					},
 					complete: function () {
 						deliverablesContainer.find('.progress').hide();

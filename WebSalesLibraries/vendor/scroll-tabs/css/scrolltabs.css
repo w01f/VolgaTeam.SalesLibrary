@@ -184,8 +184,6 @@ div.scroll_tab_inner > span .icomoon-wrap {
 
 .scrolltab-medium div.scroll_tab_inner {
   height: 62px;
-  left: 62px !important;
-  right: 62px !important;
 }
 
 .scrolltab-medium div.scroll_tab_inner > span {
@@ -210,8 +208,6 @@ div.scroll_tab_inner > span .icomoon-wrap {
 
 .scrolltab-large div.scroll_tab_inner {
   height: 82px;
-  left: 82px !important;
-  right: 82px !important;
 }
 
 .scrolltab-large div.scroll_tab_inner > span {
