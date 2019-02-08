@@ -30,11 +30,6 @@
 		 */
 		public $previewContainers;
 		/**
-		 * @var boolean selected
-		 * @soap
-		 */
-		public $selected;
-		/**
 		 * @var LibraryConfig
 		 * @soap
 		 */

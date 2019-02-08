@@ -28,7 +28,7 @@
 
 		/**
 		 * @param $groupId
-		 * @param $assignedPages
+		 * @param $assignedPages LibraryPageViewModel[]
 		 */
 		public static function assignPagesForGroup($groupId, $assignedPages)
 		{
@@ -46,7 +46,7 @@
 
 		/**
 		 * @param $page
-		 * @param $groups
+		 * @param $groups GroupViewModel[]
 		 */
 		public static function assignGroupsForPage($page, $groups)
 		{

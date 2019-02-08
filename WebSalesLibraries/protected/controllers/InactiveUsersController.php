@@ -20,7 +20,7 @@
 				'quote' => array(
 					'class' => 'CWebServiceAction',
 					'classMap' => array(
-						'UserModel' => 'UserModel',
+						'UserViewModel' => 'UserViewModel',
 					),
 				),
 			);
@@ -30,7 +30,7 @@
 		 * @param string $sessionKey
 		 * @param string $dateStart
 		 * @param string $dateEnd
-		 * @return UserModel[]
+		 * @return UserViewModel[]
 		 * @soap
 		 */
 		public function getInactiveUsers($sessionKey, $dateStart, $dateEnd)
@@ -43,13 +43,14 @@
 				$resultRecords = $command->queryAll();
 				foreach ($resultRecords as $resultRecord)
 				{
-					$userRecord = new UserModel();
+					$userRecord = new UserViewModel();
 					$userRecord->id = $resultRecord['id'];
 					$userRecord->login = $resultRecord['login'];
 					$userRecord->firstName = $resultRecord['first_name'];
 					$userRecord->lastName = $resultRecord['last_name'];
 					$userRecord->email = $resultRecord['email'];
-					$userRecord->groupNames = $resultRecord['groups'];
+					if (isset($resultRecord['groups']))
+						$userRecord->assignedGroups = explode(',', $resultRecord['groups']);
 					$userRecord->dateLastActivity = $resultRecord['last_activity'];
 					$userRecords[] = $userRecord;
 				}

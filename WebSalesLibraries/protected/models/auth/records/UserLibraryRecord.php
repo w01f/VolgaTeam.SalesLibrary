@@ -27,8 +27,8 @@
 		}
 
 		/**
-		 * @param $login
-		 * @param $assignedPages
+		 * @param $login string
+		 * @param $assignedPages LibraryPageViewModel[]
 		 */
 		public static function assignPagesForUser($login, $assignedPages)
 		{
@@ -51,7 +51,7 @@
 
 		/**
 		 * @param $page
-		 * @param $users
+		 * @param $users UserViewModel[]
 		 */
 		public static function assignUsersForPage($page, $users)
 		{

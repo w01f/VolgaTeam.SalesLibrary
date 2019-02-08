@@ -18,7 +18,7 @@
 			foreach (\GroupRecord::model()->findAll() as $groupRecord)
 			{
 				/** @var $groupRecord \GroupRecord */
-				$group = new \GroupModel();
+				$group = new \GroupEditModel();
 				$group->id = $groupRecord->id;
 				$group->name = $groupRecord->name;
 
@@ -32,7 +32,7 @@
 					$userRecord = \UserRecord::model()->findByPk($userId);
 					if (isset($userRecord))
 					{
-						$user = new \UserModel();
+						$user = new \UserEditModel();
 						$user->id = $userRecord->id;
 						$user->login = $userRecord->login;
 						$user->firstName = $userRecord->first_name;

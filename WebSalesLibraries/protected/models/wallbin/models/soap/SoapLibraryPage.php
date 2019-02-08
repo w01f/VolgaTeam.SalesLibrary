@@ -55,28 +55,13 @@
 		 */
 		public $dateModify;
 		/**
-		 * @var boolean selected
-		 * @soap
-		 */
-		public $selected;
-		/**
-		 * @var GroupModel[]
+		 * @var GroupViewModel[]
 		 * @soap
 		 */
 		public $groups;
 		/**
-		 * @var boolean selected
-		 * @soap
-		 */
-		public $allGroups;
-		/**
-		 * @var UserModel[]
+		 * @var UserViewModel[]
 		 * @soap
 		 */
 		public $users;
-		/**
-		 * @var boolean selected
-		 * @soap
-		 */
-		public $allUsers;
 	}

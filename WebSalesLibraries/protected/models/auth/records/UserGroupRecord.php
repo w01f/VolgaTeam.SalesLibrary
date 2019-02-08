@@ -26,7 +26,7 @@
 
 		/**
 		 * @param $groupId
-		 * @param $users
+		 * @param $users UserViewModel[]
 		 */
 		public static function assignUsersForGroup($groupId, $users)
 		{
@@ -43,7 +43,7 @@
 
 		/**
 		 * @param $login
-		 * @param $groups
+		 * @param $groups GroupViewModel[]
 		 */
 		public static function assignGroupsForUser($login, $groups)
 		{

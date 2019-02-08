@@ -20,10 +20,14 @@
 				'quote' => array(
 					'class' => 'CWebServiceAction',
 					'classMap' => array(
+						'LibraryViewModel' => 'LibraryViewModel',
+						'LibraryPageViewModel' => 'LibraryPageViewModel',
+						'UserViewModel' => 'UserViewModel',
+						'GroupViewModel' => 'GroupViewModel',
 						'SoapLibrary' => 'SoapLibrary',
 						'SoapLibraryPage' => 'SoapLibraryPage',
-						'UserModel' => 'UserModel',
-						'GroupModel' => 'GroupModel',
+						'UserEditModel' => 'UserEditModel',
+						'GroupEditModel' => 'GroupEditModel',
 					),
 				),
 			);
@@ -37,8 +41,8 @@
 		 * @param string $lastName
 		 * @param string $email
 		 * @param string $phone
-		 * @param GroupModel[] $assignedGroups
-		 * @param SoapLibraryPage[] $assignedPages
+		 * @param GroupViewModel[] $assignedGroups
+		 * @param LibraryPageViewModel[] $assignedPages
 		 * @param int $role
 		 * @param boolean $sendInfoMessage
 		 * @soap
@@ -104,17 +108,18 @@
 
 		/**
 		 * @param string $sessionKey
-		 * @return UserModel[]
+		 * @return UserViewModel[]
 		 * @soap
 		 */
 		public function getUsers($sessionKey)
 		{
 			if ($this->authenticateBySession($sessionKey))
 			{
+				$users = array();
 				foreach (UserRecord::model()->findAll(array('condition' => 'role<>2', 'order' => 'first_name, last_name')) as $userRecord)
 				{
 					/** @var $userRecord UserRecord */
-					$user = new UserModel();
+					$user = new UserViewModel();
 					$user->id = $userRecord->id;
 					$user->login = $userRecord->login;
 					$user->firstName = $userRecord->first_name;
@@ -124,33 +129,18 @@
 					$user->role = $userRecord->role;
 					$user->dateAdd = $userRecord->date_add;
 					$user->dateModify = $userRecord->date_modify;
+					$user->assignedLibraries = array();
+					$user->assignedGroups = array();
 
 					$assignedLibraryIds = UserLibraryRecord::getLibraryIdsByUser($userRecord->id);
 					$totalLibraries = LibraryRecord::model()->count();
 					$user->allLibraries = isset($assignedLibraryIds) && $totalLibraries == count($assignedLibraryIds);
-					$assignedPageIds = UserLibraryRecord::getPageIdsByUser($userRecord->id);
 					foreach ($assignedLibraryIds as $libraryId)
 					{
 						/** @var $libraryRecord LibraryRecord */
 						$libraryRecord = LibraryRecord::model()->findByPk($libraryId);
 						if (isset($libraryRecord))
-						{
-							$library = new SoapLibrary();
-							$library->id = $libraryRecord->id;
-							$library->name = $libraryRecord->name;
-							/** @var $pageRecords LibraryPageRecord[] */
-							$pageRecords = LibraryPageRecord::model()->findAll("id_library=? and id in ('" . implode("','", $assignedPageIds) . "')", array($libraryRecord->id));
-							foreach ($pageRecords as $pageRecord)
-							{
-								$page = new SoapLibraryPage();
-								$page->id = $pageRecord->id;
-								$page->libraryId = $pageRecord->id_library;
-								$page->name = $pageRecord->name;
-								$page->libraryName = $libraryRecord->name;
-								$library->pages[] = $page;
-							}
-							$user->libraries[] = $library;
-						}
+							$user->assignedLibraries[] = $libraryRecord->name;
 					}
 
 					$assignedGroups = UserGroupRecord::getGroupIdsByUser($userRecord->id);
@@ -161,21 +151,81 @@
 						/** @var $groupRecord GroupRecord */
 						$groupRecord = GroupRecord::model()->findByPk($groupId);
 						if (isset($groupRecord))
-						{
-							$group = new GroupModel();
-							$group->id = $groupRecord->id;
-							$group->name = $groupRecord->name;
-							$user->groups[] = $group;
-						}
+							$user->assignedGroups[] = $groupRecord->name;
 					}
 					$users[] = $user;
 				}
-			}
-
-			Yii::app()->cacheDB->flush();
-
-			if (isset($users))
 				return $users;
+			}
+			return null;
+		}
+
+		/**
+		 * @param string $sessionKey
+		 * @param int $userId
+		 * @return UserEditModel
+		 * @soap
+		 */
+		public function getUser($sessionKey, $userId)
+		{
+			if ($this->authenticateBySession($sessionKey))
+			{
+				/** @var $userRecord UserRecord */
+				$userRecord = UserRecord::model()->findByPk($userId);
+
+				$user = new UserEditModel();
+				$user->id = $userRecord->id;
+				$user->login = $userRecord->login;
+				$user->firstName = $userRecord->first_name;
+				$user->lastName = $userRecord->last_name;
+				$user->email = $userRecord->email;
+				$user->phone = $userRecord->phone;
+				$user->role = $userRecord->role;
+				$user->dateAdd = $userRecord->date_add;
+				$user->dateModify = $userRecord->date_modify;
+
+				$assignedLibraryIds = UserLibraryRecord::getLibraryIdsByUser($userRecord->id);
+				$assignedPageIds = UserLibraryRecord::getPageIdsByUser($userRecord->id);
+				foreach ($assignedLibraryIds as $libraryId)
+				{
+					/** @var $libraryRecord LibraryRecord */
+					$libraryRecord = LibraryRecord::model()->findByPk($libraryId);
+					if (isset($libraryRecord))
+					{
+						$library = new LibraryViewModel();
+						$library->id = $libraryRecord->id;
+						$library->name = $libraryRecord->name;
+						/** @var $pageRecords LibraryPageRecord[] */
+						$pageRecords = LibraryPageRecord::model()->findAll("id_library=? and id in ('" . implode("','", $assignedPageIds) . "')", array($libraryRecord->id));
+						foreach ($pageRecords as $pageRecord)
+						{
+							$page = new LibraryPageViewModel();
+							$page->id = $pageRecord->id;
+							$page->libraryId = $pageRecord->id_library;
+							$page->name = $pageRecord->name;
+							$page->libraryName = $libraryRecord->name;
+							$library->pages[] = $page;
+						}
+						$user->libraries[] = $library;
+					}
+				}
+
+				$assignedGroups = UserGroupRecord::getGroupIdsByUser($userRecord->id);
+				foreach ($assignedGroups as $groupId)
+				{
+					/** @var $groupRecord GroupRecord */
+					$groupRecord = GroupRecord::model()->findByPk($groupId);
+					if (isset($groupRecord))
+					{
+						$group = new GroupViewModel();
+						$group->id = $groupRecord->id;
+						$group->name = $groupRecord->name;
+						$user->groups[] = $group;
+					}
+				}
+
+				return $user;
+			}
 			return null;
 		}
 
@@ -195,8 +245,8 @@
 		 * @param string $sessionKey
 		 * @param string $id
 		 * @param string $name
-		 * @param UserModel[] $assignedUsers
-		 * @param SoapLibraryPage[] $assignedPages
+		 * @param UserViewModel[] $assignedUsers
+		 * @param LibraryPageViewModel[] $assignedPages
 		 * @soap
 		 */
 		public function setGroup($sessionKey, $id, $name, $assignedUsers, $assignedPages)
@@ -239,49 +289,32 @@
 
 		/**
 		 * @param string $sessionKey
-		 * @return GroupModel[]
+		 * @return GroupViewModel[]
 		 * @soap
 		 */
 		public function getGroups($sessionKey)
 		{
 			if ($this->authenticateBySession($sessionKey))
 			{
+				$groups = array();
 				foreach (GroupRecord::model()->findAll(array('order' => 'name')) as $groupRecord)
 				{
 					/** @var $groupRecord GroupRecord */
-					$group = new GroupModel();
+					$group = new GroupViewModel();
 					$group->id = $groupRecord->id;
 					$group->name = $groupRecord->name;
+					$group->assignedLibraries = array();
+					$group->assignedUsers = array();
 
 					$assignedLibraryIds = GroupLibraryRecord::getLibraryIdsByGroup($groupRecord->id);
 					$totalLibraries = LibraryRecord::model()->count();
 					$group->allLibraries = isset($assignedLibraryIds) && $totalLibraries == count($assignedLibraryIds);
-					$assignedPageIds = GroupLibraryRecord::getPageIdsByGroup($groupRecord->id);
 					foreach ($assignedLibraryIds as $libraryId)
 					{
 						/** @var $libraryRecord LibraryRecord */
 						$libraryRecord = LibraryRecord::model()->findByPk($libraryId);
 						if (isset($libraryRecord))
-						{
-							$library = new SoapLibrary();
-							$library->id = $libraryRecord->id;
-							$library->name = $libraryRecord->name;
-							/** @var $pageRecords LibraryPageRecord[] */
-							$pageRecords = LibraryPageRecord::model()->findAll("id_library=? and id in ('" . implode("','", $assignedPageIds) . "')", array($libraryRecord->id));
-							if (isset($pageRecords))
-							{
-								foreach ($pageRecords as $pageRecord)
-								{
-									$page = new SoapLibraryPage();
-									$page->id = $pageRecord->id;
-									$page->libraryId = $pageRecord->id_library;
-									$page->name = $pageRecord->name;
-									$page->libraryName = $libraryRecord->name;
-									$library->pages[] = $page;
-								}
-							}
-							$group->libraries[] = $library;
-						}
+							$group->assignedLibraries[] = $libraryRecord->name;
 					}
 
 					$assignedUsers = UserGroupRecord::getUserIdsByGroup($groupRecord->id);
@@ -292,34 +325,90 @@
 						/** @var $userRecord UserRecord */
 						$userRecord = UserRecord::model()->findByPk($userId);
 						if (isset($userRecord))
-						{
-							$user = new UserModel();
-							$user->id = $userRecord->id;
-							$user->login = $userRecord->login;
-							$user->firstName = $userRecord->first_name;
-							$user->lastName = $userRecord->last_name;
-							$user->email = $userRecord->email;
-							$user->dateAdd = $userRecord->date_add;
-							$user->dateModify = $userRecord->date_modify;
-							$group->users[] = $user;
-						}
+							$group->assignedUsers[] = $userRecord->login;
 					}
 					$groups[] = $group;
 				}
-			}
-
-			Yii::app()->cacheDB->flush();
-
-			if (isset($groups))
 				return $groups;
+			}
+			return null;
+		}
+
+		/**
+		 * @param string $sessionKey
+		 * @param string $groupId
+		 * @return GroupEditModel
+		 * @soap
+		 */
+		public function getGroup($sessionKey, $groupId)
+		{
+			if ($this->authenticateBySession($sessionKey))
+			{
+				/** @var $groupRecord GroupRecord */
+				$groupRecord = GroupRecord::model()->findByPk($groupId);
+				$group = new GroupEditModel();
+				$group->id = $groupRecord->id;
+				$group->name = $groupRecord->name;
+
+				$assignedLibraryIds = GroupLibraryRecord::getLibraryIdsByGroup($groupRecord->id);
+				$assignedPageIds = GroupLibraryRecord::getPageIdsByGroup($groupRecord->id);
+				foreach ($assignedLibraryIds as $libraryId)
+				{
+					/** @var $libraryRecord LibraryRecord */
+					$libraryRecord = LibraryRecord::model()->findByPk($libraryId);
+					if (isset($libraryRecord))
+					{
+						$library = new LibraryViewModel();
+						$library->id = $libraryRecord->id;
+						$library->name = $libraryRecord->name;
+						$library->pages =array();
+						/** @var $pageRecords LibraryPageRecord[] */
+						$pageRecords = LibraryPageRecord::model()->findAll("id_library=? and id in ('" . implode("','", $assignedPageIds) . "')", array($libraryRecord->id));
+						if (isset($pageRecords))
+						{
+							foreach ($pageRecords as $pageRecord)
+							{
+								$page = new LibraryPageViewModel();
+								$page->id = $pageRecord->id;
+								$page->libraryId = $pageRecord->id_library;
+								$page->name = $pageRecord->name;
+								$page->libraryName = $libraryRecord->name;
+								$library->pages[] = $page;
+							}
+						}
+						$group->libraries[] = $library;
+					}
+				}
+
+				$assignedUsers = UserGroupRecord::getUserIdsByGroup($groupRecord->id);
+				foreach ($assignedUsers as $userId)
+				{
+					/** @var $userRecord UserRecord */
+					$userRecord = UserRecord::model()->findByPk($userId);
+					if (isset($userRecord))
+					{
+						$user = new UserViewModel();
+						$user->id = $userRecord->id;
+						$user->login = $userRecord->login;
+						$user->firstName = $userRecord->first_name;
+						$user->lastName = $userRecord->last_name;
+						$user->email = $userRecord->email;
+						$user->dateAdd = $userRecord->date_add;
+						$user->dateModify = $userRecord->date_modify;
+						$group->users[] = $user;
+					}
+				}
+
+				return $group;
+			}
 			return null;
 		}
 
 		/**
 		 * @param string $sessionKey
 		 * @param string $id
-		 * @param UserModel[] $assignedUsers
-		 * @param GroupModel[] $assignedGroups
+		 * @param UserViewModel[] $assignedUsers
+		 * @param GroupViewModel[] $assignedGroups
 		 * @soap
 		 */
 		public function setPage($sessionKey, $id, $assignedUsers, $assignedGroups)
@@ -346,17 +435,18 @@
 
 		/**
 		 * @param string $sessionKey
-		 * @return SoapLibrary[]
+		 * @return LibraryViewModel[]
 		 * @soap
 		 */
 		public function getLibraries($sessionKey)
 		{
 			if ($this->authenticateBySession($sessionKey))
 			{
+				$libraries = array();
 				foreach (LibraryRecord::model()->findAll(array('order' => 'name')) as $libraryRecord)
 				{
 					/** @var  $libraryRecord LibraryRecord */
-					$library = new SoapLibrary();
+					$library = new LibraryViewModel();
 					$library->id = $libraryRecord->id;
 					$library->name = $libraryRecord->name;
 
@@ -366,59 +456,95 @@
 					{
 						foreach ($pageRecords as $pageRecord)
 						{
-							$page = new SoapLibraryPage();
+							$page = new LibraryPageViewModel();
 							$page->id = $pageRecord->id;
 							$page->libraryId = $pageRecord->id_library;
 							$page->name = $pageRecord->name;
 							$page->libraryName = $library->name;
+							$page->assignedUsers = array();
+							$page->assignedGroups = array();
 							$library->pages[] = $page;
 
 							$assignedUsers = UserLibraryRecord::getUserIdsByPage($pageRecord->id);
-							$totalUsers = UserRecord::model()->count('role<>2');
-							$page->allUsers = isset($assignedUsers) && $totalUsers == count($assignedUsers);
 							foreach ($assignedUsers as $userId)
 							{
 								/** @var $userRecord UserRecord */
 								$userRecord = UserRecord::model()->findByPk($userId);
 								if (isset($userRecord))
-								{
-									$user = new UserModel();
-									$user->id = $userRecord->id;
-									$user->login = $userRecord->login;
-									$user->firstName = $userRecord->first_name;
-									$user->lastName = $userRecord->last_name;
-									$user->email = $userRecord->email;
-									$user->dateAdd = $userRecord->date_add;
-									$user->dateModify = $userRecord->date_modify;
-									$page->users[] = $user;
-								}
+									$page->assignedUsers[] = $userRecord->login;
 							}
 
 							$assignedGroups = GroupLibraryRecord::getGroupIdsByPage($pageRecord->id);
-							$totalGroups = GroupRecord::model()->count();
-							$page->allGroups = isset($assignedGroups) && $totalGroups == count($assignedGroups);
 							foreach ($assignedGroups as $groupId)
 							{
 								/** @var $groupRecord GroupRecord */
 								$groupRecord = GroupRecord::model()->findByPk($groupId);
 								if (isset($groupRecord))
-								{
-									$group = new GroupModel();
-									$group->id = $groupRecord->id;
-									$group->name = $groupRecord->name;
-									$page->groups[] = $group;
-								}
+									$page->assignedGroups[] = $groupRecord->name;
 							}
 						}
 					}
 					$libraries[] = $library;
 				}
-			}
-
-			Yii::app()->cacheDB->flush();
-
-			if (isset($libraries))
 				return $libraries;
+			}
+			return null;
+		}
+
+		/**
+		 * @param string $sessionKey
+		 * @param string $pageId
+		 * @return SoapLibraryPage
+		 * @soap
+		 */
+		public function getLibraryPage($sessionKey, $pageId)
+		{
+			if ($this->authenticateBySession($sessionKey))
+			{
+				/** @var $pageRecord LibraryPageRecord */
+				$pageRecord = LibraryPageRecord::model()->findByPk($pageId);
+				/** @var $libraryRecord LibraryRecord */
+				$libraryRecord = LibraryRecord::model()->findByPk($pageRecord->id_library);
+				$page = new SoapLibraryPage();
+				$page->id = $pageRecord->id;
+				$page->libraryId = $pageRecord->id_library;
+				$page->name = $pageRecord->name;
+				$page->libraryName = $libraryRecord->name;
+
+				$assignedUsers = UserLibraryRecord::getUserIdsByPage($pageRecord->id);
+				foreach ($assignedUsers as $userId)
+				{
+					/** @var $userRecord UserRecord */
+					$userRecord = UserRecord::model()->findByPk($userId);
+					if (isset($userRecord))
+					{
+						$user = new UserViewModel();
+						$user->id = $userRecord->id;
+						$user->login = $userRecord->login;
+						$user->firstName = $userRecord->first_name;
+						$user->lastName = $userRecord->last_name;
+						$user->email = $userRecord->email;
+						$user->dateAdd = $userRecord->date_add;
+						$user->dateModify = $userRecord->date_modify;
+						$page->users[] = $user;
+					}
+				}
+
+				$assignedGroups = GroupLibraryRecord::getGroupIdsByPage($pageRecord->id);
+				foreach ($assignedGroups as $groupId)
+				{
+					/** @var $groupRecord GroupRecord */
+					$groupRecord = GroupRecord::model()->findByPk($groupId);
+					if (isset($groupRecord))
+					{
+						$group = new GroupViewModel();
+						$group->id = $groupRecord->id;
+						$group->name = $groupRecord->name;
+						$page->groups[] = $group;
+					}
+				}
+				return $page;
+			}
 			return null;
 		}
 
