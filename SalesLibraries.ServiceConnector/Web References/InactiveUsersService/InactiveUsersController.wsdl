@@ -2,14 +2,14 @@
 <wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:InactiveUsersControllerwsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" xmlns="http://schemas.xmlsoap.org/wsdl/" name="InactiveUsersController" targetNamespace="urn:InactiveUsersControllerwsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <xsd:schema targetNamespace="urn:InactiveUsersControllerwsdl">
-      <xsd:complexType name="UserModelArray">
+      <xsd:complexType name="UserViewModelArray">
         <xsd:complexContent mixed="false">
           <xsd:restriction base="soap-enc:Array">
-            <xsd:attribute wsdl:arrayType="tns:UserModel[]" ref="soap-enc:arrayType" />
+            <xsd:attribute wsdl:arrayType="tns:UserViewModel[]" ref="soap-enc:arrayType" />
           </xsd:restriction>
         </xsd:complexContent>
       </xsd:complexType>
-      <xsd:complexType name="UserModel">
+      <xsd:complexType name="UserViewModel">
         <xsd:all>
           <xsd:element name="id" type="xsd:int" />
           <xsd:element name="login" type="xsd:string" />
@@ -19,318 +19,13 @@
           <xsd:element name="email" type="xsd:string" />
           <xsd:element name="phone" type="xsd:string" />
           <xsd:element name="role" type="xsd:int" />
-          <xsd:element name="selected" type="xsd:boolean" />
           <xsd:element name="dateAdd" type="xsd:string" />
           <xsd:element name="dateModify" type="xsd:string" />
           <xsd:element name="dateLastActivity" type="xsd:string" />
-          <xsd:element name="groups" type="tns:GroupModelArray" />
-          <xsd:element name="groupNames" type="xsd:string" />
+          <xsd:element name="assignedGroups" type="tns:stringArray" />
           <xsd:element name="allGroups" type="xsd:boolean" />
-          <xsd:element name="libraries" type="tns:SoapLibraryArray" />
+          <xsd:element name="assignedLibraries" type="tns:stringArray" />
           <xsd:element name="allLibraries" type="xsd:boolean" />
-        </xsd:all>
-      </xsd:complexType>
-      <xsd:complexType name="GroupModelArray">
-        <xsd:complexContent mixed="false">
-          <xsd:restriction base="soap-enc:Array">
-            <xsd:attribute wsdl:arrayType="tns:GroupModel[]" ref="soap-enc:arrayType" />
-          </xsd:restriction>
-        </xsd:complexContent>
-      </xsd:complexType>
-      <xsd:complexType name="GroupModel">
-        <xsd:all>
-          <xsd:element name="id" type="xsd:string" />
-          <xsd:element name="name" type="xsd:string" />
-          <xsd:element name="selected" type="xsd:boolean" />
-          <xsd:element name="users" type="tns:UserModelArray" />
-          <xsd:element name="allUsers" type="xsd:boolean" />
-          <xsd:element name="libraries" type="tns:SoapLibraryArray" />
-          <xsd:element name="libraryIds" type="tns:stringArray" />
-          <xsd:element name="allLibraries" type="xsd:boolean" />
-        </xsd:all>
-      </xsd:complexType>
-      <xsd:complexType name="SoapLibraryArray">
-        <xsd:complexContent mixed="false">
-          <xsd:restriction base="soap-enc:Array">
-            <xsd:attribute wsdl:arrayType="tns:SoapLibrary[]" ref="soap-enc:arrayType" />
-          </xsd:restriction>
-        </xsd:complexContent>
-      </xsd:complexType>
-      <xsd:complexType name="SoapLibrary">
-        <xsd:all>
-          <xsd:element name="id" type="xsd:string" />
-          <xsd:element name="name" type="xsd:string" />
-          <xsd:element name="pages" type="tns:SoapLibraryPageArray" />
-          <xsd:element name="autoWidgets" type="tns:SoapAutoWidgetArray" />
-          <xsd:element name="previewContainers" type="tns:SoapUniversalPreviewContainerArray" />
-          <xsd:element name="selected" type="xsd:boolean" />
-          <xsd:element name="config" type="tns:LibraryConfig" />
-        </xsd:all>
-      </xsd:complexType>
-      <xsd:complexType name="SoapLibraryPageArray">
-        <xsd:complexContent mixed="false">
-          <xsd:restriction base="soap-enc:Array">
-            <xsd:attribute wsdl:arrayType="tns:SoapLibraryPage[]" ref="soap-enc:arrayType" />
-          </xsd:restriction>
-        </xsd:complexContent>
-      </xsd:complexType>
-      <xsd:complexType name="SoapLibraryPage">
-        <xsd:all>
-          <xsd:element name="id" type="xsd:string" />
-          <xsd:element name="libraryId" type="xsd:string" />
-          <xsd:element name="name" type="xsd:string" />
-          <xsd:element name="libraryName" type="xsd:string" />
-          <xsd:element name="order" type="xsd:int" />
-          <xsd:element name="settings" type="tns:SoapLibraryPageSettings" />
-          <xsd:element name="folders" type="tns:SoapLibraryFolderArray" />
-          <xsd:element name="enableColumns" type="xsd:boolean" />
-          <xsd:element name="columns" type="tns:SoapColumnArray" />
-          <xsd:element name="dateModify" type="xsd:string" />
-          <xsd:element name="selected" type="xsd:boolean" />
-          <xsd:element name="groups" type="tns:GroupModelArray" />
-          <xsd:element name="allGroups" type="xsd:boolean" />
-          <xsd:element name="users" type="tns:UserModelArray" />
-          <xsd:element name="allUsers" type="xsd:boolean" />
-        </xsd:all>
-      </xsd:complexType>
-      <xsd:complexType name="SoapLibraryPageSettings">
-        <xsd:all>
-          <xsd:element name="icon" type="xsd:string" />
-          <xsd:element name="iconColor" type="xsd:string" />
-        </xsd:all>
-      </xsd:complexType>
-      <xsd:complexType name="SoapLibraryFolderArray">
-        <xsd:complexContent mixed="false">
-          <xsd:restriction base="soap-enc:Array">
-            <xsd:attribute wsdl:arrayType="tns:SoapLibraryFolder[]" ref="soap-enc:arrayType" />
-          </xsd:restriction>
-        </xsd:complexContent>
-      </xsd:complexType>
-      <xsd:complexType name="SoapLibraryFolder">
-        <xsd:all>
-          <xsd:element name="id" type="xsd:string" />
-          <xsd:element name="pageId" type="xsd:string" />
-          <xsd:element name="libraryId" type="xsd:string" />
-          <xsd:element name="name" type="xsd:string" />
-          <xsd:element name="rowOrder" type="xsd:int" />
-          <xsd:element name="columnOrder" type="xsd:int" />
-          <xsd:element name="borderColor" type="xsd:string" />
-          <xsd:element name="windowBackColor" type="xsd:string" />
-          <xsd:element name="windowForeColor" type="xsd:string" />
-          <xsd:element name="headerBackColor" type="xsd:string" />
-          <xsd:element name="headerForeColor" type="xsd:string" />
-          <xsd:element name="windowFont" type="tns:Font" />
-          <xsd:element name="headerFont" type="tns:Font" />
-          <xsd:element name="headerAlignment" type="xsd:string" />
-          <xsd:element name="enableWidget" type="xsd:boolean" />
-          <xsd:element name="widget" type="xsd:string" />
-          <xsd:element name="banner" type="tns:SoapBanner" />
-          <xsd:element name="files" type="tns:SoapLibraryLinkArray" />
-          <xsd:element name="dateAdd" type="xsd:string" />
-          <xsd:element name="dateModify" type="xsd:string" />
-        </xsd:all>
-      </xsd:complexType>
-      <xsd:complexType name="Font">
-        <xsd:all>
-          <xsd:element name="name" type="xsd:string" />
-          <xsd:element name="isBold" type="xsd:boolean" />
-          <xsd:element name="isItalic" type="xsd:boolean" />
-          <xsd:element name="isUnderlined" type="xsd:boolean" />
-        </xsd:all>
-      </xsd:complexType>
-      <xsd:complexType name="SoapBanner">
-        <xsd:all>
-          <xsd:element name="id" type="xsd:string" />
-          <xsd:element name="libraryId" type="xsd:string" />
-          <xsd:element name="isEnabled" type="xsd:boolean" />
-          <xsd:element name="image" type="xsd:string" />
-          <xsd:element name="showText" type="xsd:boolean" />
-          <xsd:element name="imageAlignment" type="xsd:string" />
-          <xsd:element name="imageVerticalAlignment" type="xsd:string" />
-          <xsd:element name="text" type="xsd:string" />
-          <xsd:element name="font" type="tns:Font" />
-          <xsd:element name="foreColor" type="xsd:string" />
-          <xsd:element name="dateModify" type="xsd:string" />
-        </xsd:all>
-      </xsd:complexType>
-      <xsd:complexType name="SoapLibraryLinkArray">
-        <xsd:complexContent mixed="false">
-          <xsd:restriction base="soap-enc:Array">
-            <xsd:attribute wsdl:arrayType="tns:SoapLibraryLink[]" ref="soap-enc:arrayType" />
-          </xsd:restriction>
-        </xsd:complexContent>
-      </xsd:complexType>
-      <xsd:complexType name="SoapLibraryLink">
-        <xsd:all>
-          <xsd:element name="id" type="xsd:string" />
-          <xsd:element name="parentLinkId" type="xsd:string" />
-          <xsd:element name="folderId" type="xsd:string" />
-          <xsd:element name="libraryId" type="xsd:string" />
-          <xsd:element name="name" type="xsd:string" />
-          <xsd:element name="fileRelativePath" type="xsd:string" />
-          <xsd:element name="fileName" type="xsd:string" />
-          <xsd:element name="fileExtension" type="xsd:string" />
-          <xsd:element name="fileDate" type="xsd:string" />
-          <xsd:element name="fileSize" type="xsd:int" />
-          <xsd:element name="originalFormat" type="xsd:string" />
-          <xsd:element name="searchFormat" type="xsd:string" />
-          <xsd:element name="order" type="xsd:int" />
-          <xsd:element name="type" type="xsd:int" />
-          <xsd:element name="extendedProperties" type="tns:BaseLinkSettings" />
-          <xsd:element name="lineBreakProperties" type="tns:LineBreak" />
-          <xsd:element name="widgetType" type="xsd:int" />
-          <xsd:element name="widget" type="xsd:string" />
-          <xsd:element name="banner" type="tns:SoapBanner" />
-          <xsd:element name="thumbnail" type="tns:SoapThumbnail" />
-          <xsd:element name="oneDrive" type="tns:SoapOneDrive" />
-          <xsd:element name="previewId" type="xsd:string" />
-          <xsd:element name="superFilters" type="tns:LinkSuperFilterArray" />
-          <xsd:element name="categories" type="tns:LinkCategoryArray" />
-          <xsd:element name="tags" type="xsd:string" />
-          <xsd:element name="dateAdd" type="xsd:string" />
-          <xsd:element name="dateModify" type="xsd:string" />
-          <xsd:element name="contentPath" type="xsd:string" />
-        </xsd:all>
-      </xsd:complexType>
-      <xsd:complexType name="BaseLinkSettings">
-        <xsd:all>
-          <xsd:element name="note" type="xsd:string" />
-          <xsd:element name="hoverNote" type="xsd:string" />
-          <xsd:element name="showOnlyCustomHoverNote" type="xsd:boolean" />
-          <xsd:element name="isBold" type="xsd:boolean" />
-          <xsd:element name="isItalic" type="xsd:boolean" />
-          <xsd:element name="isUnderline" type="xsd:boolean" />
-          <xsd:element name="isSpecialFormat" type="xsd:boolean" />
-          <xsd:element name="font" type="tns:Font" />
-          <xsd:element name="foreColor" type="xsd:string" />
-          <xsd:element name="isTextWordWrap" type="xsd:boolean" />
-          <xsd:element name="isRestricted" type="xsd:boolean" />
-          <xsd:element name="noShare" type="xsd:boolean" />
-          <xsd:element name="assignedUsers" type="xsd:string" />
-          <xsd:element name="deniedUsers" type="xsd:string" />
-          <xsd:element name="quickLinkUrl" type="xsd:string" />
-          <xsd:element name="quickLinkTitle" type="xsd:string" />
-        </xsd:all>
-      </xsd:complexType>
-      <xsd:complexType name="LineBreak">
-        <xsd:all>
-          <xsd:element name="id" type="xsd:string" />
-          <xsd:element name="libraryId" type="xsd:string" />
-          <xsd:element name="font" type="tns:Font" />
-          <xsd:element name="foreColor" type="xsd:string" />
-          <xsd:element name="note" type="xsd:string" />
-          <xsd:element name="dateModify" type="xsd:string" />
-        </xsd:all>
-      </xsd:complexType>
-      <xsd:complexType name="SoapThumbnail">
-        <xsd:all>
-          <xsd:element name="isEnabled" type="xsd:boolean" />
-          <xsd:element name="image" type="xsd:string" />
-          <xsd:element name="imagePadding" type="xsd:int" />
-          <xsd:element name="imageAlignment" type="xsd:string" />
-          <xsd:element name="showText" type="xsd:boolean" />
-          <xsd:element name="text" type="xsd:string" />
-          <xsd:element name="font" type="tns:Font" />
-          <xsd:element name="foreColor" type="xsd:string" />
-          <xsd:element name="textPosition" type="xsd:string" />
-          <xsd:element name="textAlignment" type="xsd:string" />
-        </xsd:all>
-      </xsd:complexType>
-      <xsd:complexType name="SoapOneDrive">
-        <xsd:all>
-          <xsd:element name="url" type="xsd:string" />
-        </xsd:all>
-      </xsd:complexType>
-      <xsd:complexType name="LinkSuperFilterArray">
-        <xsd:complexContent mixed="false">
-          <xsd:restriction base="soap-enc:Array">
-            <xsd:attribute wsdl:arrayType="tns:LinkSuperFilter[]" ref="soap-enc:arrayType" />
-          </xsd:restriction>
-        </xsd:complexContent>
-      </xsd:complexType>
-      <xsd:complexType name="LinkSuperFilter">
-        <xsd:all>
-          <xsd:element name="linkId" type="xsd:string" />
-          <xsd:element name="libraryId" type="xsd:string" />
-          <xsd:element name="value" type="xsd:string" />
-        </xsd:all>
-      </xsd:complexType>
-      <xsd:complexType name="LinkCategoryArray">
-        <xsd:complexContent mixed="false">
-          <xsd:restriction base="soap-enc:Array">
-            <xsd:attribute wsdl:arrayType="tns:LinkCategory[]" ref="soap-enc:arrayType" />
-          </xsd:restriction>
-        </xsd:complexContent>
-      </xsd:complexType>
-      <xsd:complexType name="LinkCategory">
-        <xsd:all>
-          <xsd:element name="linkId" type="xsd:string" />
-          <xsd:element name="libraryId" type="xsd:string" />
-          <xsd:element name="group" type="xsd:string" />
-          <xsd:element name="category" type="xsd:string" />
-          <xsd:element name="tag" type="xsd:string" />
-        </xsd:all>
-      </xsd:complexType>
-      <xsd:complexType name="SoapColumnArray">
-        <xsd:complexContent mixed="false">
-          <xsd:restriction base="soap-enc:Array">
-            <xsd:attribute wsdl:arrayType="tns:SoapColumn[]" ref="soap-enc:arrayType" />
-          </xsd:restriction>
-        </xsd:complexContent>
-      </xsd:complexType>
-      <xsd:complexType name="SoapColumn">
-        <xsd:all>
-          <xsd:element name="pageId" type="xsd:string" />
-          <xsd:element name="libraryId" type="xsd:string" />
-          <xsd:element name="name" type="xsd:string" />
-          <xsd:element name="order" type="xsd:int" />
-          <xsd:element name="backColor" type="xsd:string" />
-          <xsd:element name="foreColor" type="xsd:string" />
-          <xsd:element name="font" type="tns:Font" />
-          <xsd:element name="showText" type="xsd:boolean" />
-          <xsd:element name="alignment" type="xsd:string" />
-          <xsd:element name="enableWidget" type="xsd:boolean" />
-          <xsd:element name="widget" type="xsd:string" />
-          <xsd:element name="banner" type="tns:SoapBanner" />
-          <xsd:element name="dateModify" type="xsd:string" />
-        </xsd:all>
-      </xsd:complexType>
-      <xsd:complexType name="SoapAutoWidgetArray">
-        <xsd:complexContent mixed="false">
-          <xsd:restriction base="soap-enc:Array">
-            <xsd:attribute wsdl:arrayType="tns:SoapAutoWidget[]" ref="soap-enc:arrayType" />
-          </xsd:restriction>
-        </xsd:complexContent>
-      </xsd:complexType>
-      <xsd:complexType name="SoapAutoWidget">
-        <xsd:all>
-          <xsd:element name="libraryId" type="xsd:string" />
-          <xsd:element name="extension" type="xsd:string" />
-          <xsd:element name="widget" type="xsd:string" />
-        </xsd:all>
-      </xsd:complexType>
-      <xsd:complexType name="SoapUniversalPreviewContainerArray">
-        <xsd:complexContent mixed="false">
-          <xsd:restriction base="soap-enc:Array">
-            <xsd:attribute wsdl:arrayType="tns:SoapUniversalPreviewContainer[]" ref="soap-enc:arrayType" />
-          </xsd:restriction>
-        </xsd:complexContent>
-      </xsd:complexType>
-      <xsd:complexType name="SoapUniversalPreviewContainer">
-        <xsd:all>
-          <xsd:element name="id" type="xsd:string" />
-          <xsd:element name="libraryId" type="xsd:string" />
-          <xsd:element name="pngLinks" type="tns:stringArray" />
-          <xsd:element name="pngPhoneLinks" type="tns:stringArray" />
-          <xsd:element name="pdfLinks" type="tns:stringArray" />
-          <xsd:element name="mp4Links" type="tns:stringArray" />
-          <xsd:element name="mp4ThumbLinks" type="tns:stringArray" />
-          <xsd:element name="newOfficeFormatLinks" type="tns:stringArray" />
-          <xsd:element name="thumbsLinks" type="tns:stringArray" />
-          <xsd:element name="thumbsPhoneLinks" type="tns:stringArray" />
-          <xsd:element name="thumbsDatatableLinks" type="tns:stringArray" />
-          <xsd:element name="thumbsWidth" type="xsd:int" />
-          <xsd:element name="thumbsHeight" type="xsd:int" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="stringArray">
@@ -340,16 +35,6 @@
           </xsd:restriction>
         </xsd:complexContent>
       </xsd:complexType>
-      <xsd:complexType name="LibraryConfig">
-        <xsd:all>
-          <xsd:element name="id" type="xsd:string" />
-          <xsd:element name="libraryId" type="xsd:string" />
-          <xsd:element name="deadLinkSender" type="xsd:string" />
-          <xsd:element name="deadLinkRecipients" type="xsd:string" />
-          <xsd:element name="deadLinkSubject" type="xsd:string" />
-          <xsd:element name="deadLinkBody" type="xsd:string" />
-        </xsd:all>
-      </xsd:complexType>
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="getInactiveUsersIn">
@@ -358,7 +43,7 @@
     <wsdl:part name="dateEnd" type="xsd:string" />
   </wsdl:message>
   <wsdl:message name="getInactiveUsersOut">
-    <wsdl:part name="return" type="tns:UserModelArray" />
+    <wsdl:part name="return" type="tns:UserViewModelArray" />
   </wsdl:message>
   <wsdl:message name="resetUserIn">
     <wsdl:part name="sessionKey" type="xsd:string" />

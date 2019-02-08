@@ -7,72 +7,72 @@ using SalesLibraries.ServiceConnector.AdminService;
 
 namespace SalesLibraries.SiteManager.ToolForms
 {
-	public partial class FormEditPage : MetroForm
-	{
-		private readonly List<UserModel> _users = new List<UserModel>();
-		private readonly List<GroupModel> _groups = new List<GroupModel>();
+    public partial class FormEditPage : MetroForm
+    {
+        private readonly List<UserViewModel> _users = new List<UserViewModel>();
+        private readonly List<GroupViewModel> _groups = new List<GroupViewModel>();
 
-		public UserModel[] AssignedUsers
-		{
-			get { return _users.Where(x => x.selected).ToArray(); }
-		}
+        public UserViewModel[] AssignedUsers
+        {
+            get { return _users.Where(x => x.selected).ToArray(); }
+        }
 
-		public GroupModel[] AssignedGroups
-		{
-			get { return _groups.Where(x => x.selected).ToArray(); }
-		}
+        public GroupViewModel[] AssignedGroups
+        {
+            get { return _groups.Where(x => x.selected).ToArray(); }
+        }
 
-		public FormEditPage(UserModel[] users, GroupModel[] groups)
-		{
-			InitializeComponent();
-			_users.AddRange(users);
-			gridControlUsers.DataSource = _users;
+        public FormEditPage(UserViewModel[] users, GroupViewModel[] groups)
+        {
+            InitializeComponent();
+            _users.AddRange(users);
+            gridControlUsers.DataSource = _users;
 
-			_groups.AddRange(groups);
-			gridControlGroups.DataSource = _groups;
+            _groups.AddRange(groups);
+            gridControlGroups.DataSource = _groups;
 
-			Text = "Edit Page";
-		}
+            Text = "Edit Page";
+        }
 
-		private void FormEditPage_FormClosing(object sender, FormClosingEventArgs e)
-		{
-			if (DialogResult == DialogResult.OK)
-			{
-				gridViewGroups.PostEditor();
-				gridViewUsers.PostEditor();
-			}
-		}
+        private void FormEditPage_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (DialogResult == DialogResult.OK)
+            {
+                gridViewGroups.PostEditor();
+                gridViewUsers.PostEditor();
+            }
+        }
 
-		#region Users
-		private void buttonXUsersSelectAll_Click(object sender, EventArgs e)
-		{
-			foreach (var user in _users)
-				user.selected = true;
-			gridViewUsers.RefreshData();
-		}
+        #region Users
+        private void buttonXUsersSelectAll_Click(object sender, EventArgs e)
+        {
+            foreach (var user in _users)
+                user.selected = true;
+            gridViewUsers.RefreshData();
+        }
 
-		private void buttonXUsersClearAll_Click(object sender, EventArgs e)
-		{
-			foreach (var user in _users)
-				user.selected = false;
-			gridViewUsers.RefreshData();
-		}
-		#endregion
+        private void buttonXUsersClearAll_Click(object sender, EventArgs e)
+        {
+            foreach (var user in _users)
+                user.selected = false;
+            gridViewUsers.RefreshData();
+        }
+        #endregion
 
-		#region Groups
-		private void buttonXGroupsSelectAll_Click(object sender, EventArgs e)
-		{
-			foreach (var group in _groups)
-				group.selected = true;
-			gridViewGroups.RefreshData();
-		}
+        #region Groups
+        private void buttonXGroupsSelectAll_Click(object sender, EventArgs e)
+        {
+            foreach (var group in _groups)
+                group.selected = true;
+            gridViewGroups.RefreshData();
+        }
 
-		private void buttonXGroupsClearAll_Click(object sender, EventArgs e)
-		{
-			foreach (var group in _groups)
-				group.selected = false;
-			gridViewGroups.RefreshData();
-		}
-		#endregion
-	}
+        private void buttonXGroupsClearAll_Click(object sender, EventArgs e)
+        {
+            foreach (var group in _groups)
+                group.selected = false;
+            gridViewGroups.RefreshData();
+        }
+        #endregion
+    }
 }

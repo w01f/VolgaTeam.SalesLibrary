@@ -23,21 +23,19 @@ namespace SalesLibraries.ServiceConnector.AdminService {
     
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="AdminControllerBinding", Namespace="urn:AdminControllerwsdl")]
-    [System.Xml.Serialization.SoapIncludeAttribute(typeof(SoapUniversalPreviewContainer))]
-    [System.Xml.Serialization.SoapIncludeAttribute(typeof(SoapAutoWidget))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(SoapColumn))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(LinkCategory))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(LinkSuperFilter))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(SoapLibraryLink))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(SoapLibraryFolder))]
-    [System.Xml.Serialization.SoapIncludeAttribute(typeof(SoapLibraryPage))]
-    [System.Xml.Serialization.SoapIncludeAttribute(typeof(SoapLibrary))]
-    [System.Xml.Serialization.SoapIncludeAttribute(typeof(UserModel))]
-    [System.Xml.Serialization.SoapIncludeAttribute(typeof(GroupModel))]
+    [System.Xml.Serialization.SoapIncludeAttribute(typeof(LibraryViewModel))]
+    [System.Xml.Serialization.SoapIncludeAttribute(typeof(UserViewModel))]
+    [System.Xml.Serialization.SoapIncludeAttribute(typeof(LibraryPageViewModel))]
+    [System.Xml.Serialization.SoapIncludeAttribute(typeof(GroupViewModel))]
     public partial class AdminControllerService : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
         private System.Threading.SendOrPostCallback setUserOperationCompleted;
@@ -45,6 +43,8 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         private System.Threading.SendOrPostCallback deleteUserOperationCompleted;
         
         private System.Threading.SendOrPostCallback getUsersOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback getUserOperationCompleted;
         
         private System.Threading.SendOrPostCallback isUserPasswordComplexOperationCompleted;
         
@@ -54,9 +54,13 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         
         private System.Threading.SendOrPostCallback getGroupsOperationCompleted;
         
+        private System.Threading.SendOrPostCallback getGroupOperationCompleted;
+        
         private System.Threading.SendOrPostCallback setPageOperationCompleted;
         
         private System.Threading.SendOrPostCallback getLibrariesOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback getLibraryPageOperationCompleted;
         
         private System.Threading.SendOrPostCallback getGroupTemplatesOperationCompleted;
         
@@ -110,6 +114,9 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         public event getUsersCompletedEventHandler getUsersCompleted;
         
         /// <remarks/>
+        public event getUserCompletedEventHandler getUserCompleted;
+        
+        /// <remarks/>
         public event isUserPasswordComplexCompletedEventHandler isUserPasswordComplexCompleted;
         
         /// <remarks/>
@@ -122,10 +129,16 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         public event getGroupsCompletedEventHandler getGroupsCompleted;
         
         /// <remarks/>
+        public event getGroupCompletedEventHandler getGroupCompleted;
+        
+        /// <remarks/>
         public event setPageCompletedEventHandler setPageCompleted;
         
         /// <remarks/>
         public event getLibrariesCompletedEventHandler getLibrariesCompleted;
+        
+        /// <remarks/>
+        public event getLibraryPageCompletedEventHandler getLibraryPageCompleted;
         
         /// <remarks/>
         public event getGroupTemplatesCompletedEventHandler getGroupTemplatesCompleted;
@@ -135,7 +148,7 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:AdminControllerwsdl#setUser", RequestNamespace="urn:AdminControllerwsdl", ResponseNamespace="urn:AdminControllerwsdl")]
-        public void setUser(string sessionKey, string login, string password, string firstName, string lastName, string email, string phone, GroupModel[] assignedGroups, SoapLibraryPage[] assignedPages, int role, bool sendInfoMessage) {
+        public void setUser(string sessionKey, string login, string password, string firstName, string lastName, string email, string phone, GroupViewModel[] assignedGroups, LibraryPageViewModel[] assignedPages, int role, bool sendInfoMessage) {
             this.Invoke("setUser", new object[] {
                         sessionKey,
                         login,
@@ -151,12 +164,12 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         }
         
         /// <remarks/>
-        public void setUserAsync(string sessionKey, string login, string password, string firstName, string lastName, string email, string phone, GroupModel[] assignedGroups, SoapLibraryPage[] assignedPages, int role, bool sendInfoMessage) {
+        public void setUserAsync(string sessionKey, string login, string password, string firstName, string lastName, string email, string phone, GroupViewModel[] assignedGroups, LibraryPageViewModel[] assignedPages, int role, bool sendInfoMessage) {
             this.setUserAsync(sessionKey, login, password, firstName, lastName, email, phone, assignedGroups, assignedPages, role, sendInfoMessage, null);
         }
         
         /// <remarks/>
-        public void setUserAsync(string sessionKey, string login, string password, string firstName, string lastName, string email, string phone, GroupModel[] assignedGroups, SoapLibraryPage[] assignedPages, int role, bool sendInfoMessage, object userState) {
+        public void setUserAsync(string sessionKey, string login, string password, string firstName, string lastName, string email, string phone, GroupViewModel[] assignedGroups, LibraryPageViewModel[] assignedPages, int role, bool sendInfoMessage, object userState) {
             if ((this.setUserOperationCompleted == null)) {
                 this.setUserOperationCompleted = new System.Threading.SendOrPostCallback(this.OnsetUserOperationCompleted);
             }
@@ -214,10 +227,10 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:AdminControllerwsdl#getUsers", RequestNamespace="urn:AdminControllerwsdl", ResponseNamespace="urn:AdminControllerwsdl")]
         [return: System.Xml.Serialization.SoapElementAttribute("return")]
-        public UserModel[] getUsers(string sessionKey) {
+        public UserViewModel[] getUsers(string sessionKey) {
             object[] results = this.Invoke("getUsers", new object[] {
                         sessionKey});
-            return ((UserModel[])(results[0]));
+            return ((UserViewModel[])(results[0]));
         }
         
         /// <remarks/>
@@ -238,6 +251,38 @@ namespace SalesLibraries.ServiceConnector.AdminService {
             if ((this.getUsersCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.getUsersCompleted(this, new getUsersCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:AdminControllerwsdl#getUser", RequestNamespace="urn:AdminControllerwsdl", ResponseNamespace="urn:AdminControllerwsdl")]
+        [return: System.Xml.Serialization.SoapElementAttribute("return")]
+        public UserEditModel getUser(string sessionKey, int userId) {
+            object[] results = this.Invoke("getUser", new object[] {
+                        sessionKey,
+                        userId});
+            return ((UserEditModel)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getUserAsync(string sessionKey, int userId) {
+            this.getUserAsync(sessionKey, userId, null);
+        }
+        
+        /// <remarks/>
+        public void getUserAsync(string sessionKey, int userId, object userState) {
+            if ((this.getUserOperationCompleted == null)) {
+                this.getUserOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetUserOperationCompleted);
+            }
+            this.InvokeAsync("getUser", new object[] {
+                        sessionKey,
+                        userId}, this.getUserOperationCompleted, userState);
+        }
+        
+        private void OngetUserOperationCompleted(object arg) {
+            if ((this.getUserCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getUserCompleted(this, new getUserCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -273,7 +318,7 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:AdminControllerwsdl#setGroup", RequestNamespace="urn:AdminControllerwsdl", ResponseNamespace="urn:AdminControllerwsdl")]
-        public void setGroup(string sessionKey, string id, string name, UserModel[] assignedUsers, SoapLibraryPage[] assignedPages) {
+        public void setGroup(string sessionKey, string id, string name, UserViewModel[] assignedUsers, LibraryPageViewModel[] assignedPages) {
             this.Invoke("setGroup", new object[] {
                         sessionKey,
                         id,
@@ -283,12 +328,12 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         }
         
         /// <remarks/>
-        public void setGroupAsync(string sessionKey, string id, string name, UserModel[] assignedUsers, SoapLibraryPage[] assignedPages) {
+        public void setGroupAsync(string sessionKey, string id, string name, UserViewModel[] assignedUsers, LibraryPageViewModel[] assignedPages) {
             this.setGroupAsync(sessionKey, id, name, assignedUsers, assignedPages, null);
         }
         
         /// <remarks/>
-        public void setGroupAsync(string sessionKey, string id, string name, UserModel[] assignedUsers, SoapLibraryPage[] assignedPages, object userState) {
+        public void setGroupAsync(string sessionKey, string id, string name, UserViewModel[] assignedUsers, LibraryPageViewModel[] assignedPages, object userState) {
             if ((this.setGroupOperationCompleted == null)) {
                 this.setGroupOperationCompleted = new System.Threading.SendOrPostCallback(this.OnsetGroupOperationCompleted);
             }
@@ -340,10 +385,10 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:AdminControllerwsdl#getGroups", RequestNamespace="urn:AdminControllerwsdl", ResponseNamespace="urn:AdminControllerwsdl")]
         [return: System.Xml.Serialization.SoapElementAttribute("return")]
-        public GroupModel[] getGroups(string sessionKey) {
+        public GroupViewModel[] getGroups(string sessionKey) {
             object[] results = this.Invoke("getGroups", new object[] {
                         sessionKey});
-            return ((GroupModel[])(results[0]));
+            return ((GroupViewModel[])(results[0]));
         }
         
         /// <remarks/>
@@ -368,8 +413,40 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:AdminControllerwsdl#getGroup", RequestNamespace="urn:AdminControllerwsdl", ResponseNamespace="urn:AdminControllerwsdl")]
+        [return: System.Xml.Serialization.SoapElementAttribute("return")]
+        public GroupEditModel getGroup(string sessionKey, string groupId) {
+            object[] results = this.Invoke("getGroup", new object[] {
+                        sessionKey,
+                        groupId});
+            return ((GroupEditModel)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getGroupAsync(string sessionKey, string groupId) {
+            this.getGroupAsync(sessionKey, groupId, null);
+        }
+        
+        /// <remarks/>
+        public void getGroupAsync(string sessionKey, string groupId, object userState) {
+            if ((this.getGroupOperationCompleted == null)) {
+                this.getGroupOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetGroupOperationCompleted);
+            }
+            this.InvokeAsync("getGroup", new object[] {
+                        sessionKey,
+                        groupId}, this.getGroupOperationCompleted, userState);
+        }
+        
+        private void OngetGroupOperationCompleted(object arg) {
+            if ((this.getGroupCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getGroupCompleted(this, new getGroupCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:AdminControllerwsdl#setPage", RequestNamespace="urn:AdminControllerwsdl", ResponseNamespace="urn:AdminControllerwsdl")]
-        public void setPage(string sessionKey, string id, UserModel[] assignedUsers, GroupModel[] assignedGroups) {
+        public void setPage(string sessionKey, string id, UserViewModel[] assignedUsers, GroupViewModel[] assignedGroups) {
             this.Invoke("setPage", new object[] {
                         sessionKey,
                         id,
@@ -378,12 +455,12 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         }
         
         /// <remarks/>
-        public void setPageAsync(string sessionKey, string id, UserModel[] assignedUsers, GroupModel[] assignedGroups) {
+        public void setPageAsync(string sessionKey, string id, UserViewModel[] assignedUsers, GroupViewModel[] assignedGroups) {
             this.setPageAsync(sessionKey, id, assignedUsers, assignedGroups, null);
         }
         
         /// <remarks/>
-        public void setPageAsync(string sessionKey, string id, UserModel[] assignedUsers, GroupModel[] assignedGroups, object userState) {
+        public void setPageAsync(string sessionKey, string id, UserViewModel[] assignedUsers, GroupViewModel[] assignedGroups, object userState) {
             if ((this.setPageOperationCompleted == null)) {
                 this.setPageOperationCompleted = new System.Threading.SendOrPostCallback(this.OnsetPageOperationCompleted);
             }
@@ -404,10 +481,10 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:AdminControllerwsdl#getLibraries", RequestNamespace="urn:AdminControllerwsdl", ResponseNamespace="urn:AdminControllerwsdl")]
         [return: System.Xml.Serialization.SoapElementAttribute("return")]
-        public SoapLibrary[] getLibraries(string sessionKey) {
+        public LibraryViewModel[] getLibraries(string sessionKey) {
             object[] results = this.Invoke("getLibraries", new object[] {
                         sessionKey});
-            return ((SoapLibrary[])(results[0]));
+            return ((LibraryViewModel[])(results[0]));
         }
         
         /// <remarks/>
@@ -428,6 +505,38 @@ namespace SalesLibraries.ServiceConnector.AdminService {
             if ((this.getLibrariesCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.getLibrariesCompleted(this, new getLibrariesCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:AdminControllerwsdl#getLibraryPage", RequestNamespace="urn:AdminControllerwsdl", ResponseNamespace="urn:AdminControllerwsdl")]
+        [return: System.Xml.Serialization.SoapElementAttribute("return")]
+        public SoapLibraryPage getLibraryPage(string sessionKey, string pageId) {
+            object[] results = this.Invoke("getLibraryPage", new object[] {
+                        sessionKey,
+                        pageId});
+            return ((SoapLibraryPage)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getLibraryPageAsync(string sessionKey, string pageId) {
+            this.getLibraryPageAsync(sessionKey, pageId, null);
+        }
+        
+        /// <remarks/>
+        public void getLibraryPageAsync(string sessionKey, string pageId, object userState) {
+            if ((this.getLibraryPageOperationCompleted == null)) {
+                this.getLibraryPageOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetLibraryPageOperationCompleted);
+            }
+            this.InvokeAsync("getLibraryPage", new object[] {
+                        sessionKey,
+                        pageId}, this.getLibraryPageOperationCompleted, userState);
+        }
+        
+        private void OngetLibraryPageOperationCompleted(object arg) {
+            if ((this.getLibraryPageCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getLibraryPageCompleted(this, new getLibraryPageCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -513,26 +622,22 @@ namespace SalesLibraries.ServiceConnector.AdminService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
-    public partial class GroupModel {
+    public partial class GroupViewModel {
         
         private string idField;
         
         private string nameField;
         
-        private bool selectedField;
-        
-        private UserModel[] usersField;
+        private string[] assignedUsersField;
         
         private bool allUsersField;
         
-        private SoapLibrary[] librariesField;
-        
-        private string[] libraryIdsField;
+        private string[] assignedLibrariesField;
         
         private bool allLibrariesField;
         
@@ -557,22 +662,12 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         }
         
         /// <remarks/>
-        public bool selected {
+        public string[] assignedUsers {
             get {
-                return this.selectedField;
+                return this.assignedUsersField;
             }
             set {
-                this.selectedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public UserModel[] users {
-            get {
-                return this.usersField;
-            }
-            set {
-                this.usersField = value;
+                this.assignedUsersField = value;
             }
         }
         
@@ -587,22 +682,12 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         }
         
         /// <remarks/>
-        public SoapLibrary[] libraries {
+        public string[] assignedLibraries {
             get {
-                return this.librariesField;
+                return this.assignedLibrariesField;
             }
             set {
-                this.librariesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string[] libraryIds {
-            get {
-                return this.libraryIdsField;
-            }
-            set {
-                this.libraryIdsField = value;
+                this.assignedLibrariesField = value;
             }
         }
         
@@ -618,814 +703,7 @@ namespace SalesLibraries.ServiceConnector.AdminService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
-    public partial class UserModel {
-        
-        private int idField;
-        
-        private string loginField;
-        
-        private string passwordField;
-        
-        private string firstNameField;
-        
-        private string lastNameField;
-        
-        private string emailField;
-        
-        private string phoneField;
-        
-        private int roleField;
-        
-        private bool selectedField;
-        
-        private string dateAddField;
-        
-        private string dateModifyField;
-        
-        private GroupModel[] groupsField;
-        
-        private string groupNamesField;
-        
-        private bool allGroupsField;
-        
-        private SoapLibrary[] librariesField;
-        
-        private bool allLibrariesField;
-        
-        /// <remarks/>
-        public int id {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string login {
-            get {
-                return this.loginField;
-            }
-            set {
-                this.loginField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string password {
-            get {
-                return this.passwordField;
-            }
-            set {
-                this.passwordField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string firstName {
-            get {
-                return this.firstNameField;
-            }
-            set {
-                this.firstNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string lastName {
-            get {
-                return this.lastNameField;
-            }
-            set {
-                this.lastNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string email {
-            get {
-                return this.emailField;
-            }
-            set {
-                this.emailField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string phone {
-            get {
-                return this.phoneField;
-            }
-            set {
-                this.phoneField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int role {
-            get {
-                return this.roleField;
-            }
-            set {
-                this.roleField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool selected {
-            get {
-                return this.selectedField;
-            }
-            set {
-                this.selectedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string dateAdd {
-            get {
-                return this.dateAddField;
-            }
-            set {
-                this.dateAddField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string dateModify {
-            get {
-                return this.dateModifyField;
-            }
-            set {
-                this.dateModifyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public GroupModel[] groups {
-            get {
-                return this.groupsField;
-            }
-            set {
-                this.groupsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string groupNames {
-            get {
-                return this.groupNamesField;
-            }
-            set {
-                this.groupNamesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool allGroups {
-            get {
-                return this.allGroupsField;
-            }
-            set {
-                this.allGroupsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public SoapLibrary[] libraries {
-            get {
-                return this.librariesField;
-            }
-            set {
-                this.librariesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool allLibraries {
-            get {
-                return this.allLibrariesField;
-            }
-            set {
-                this.allLibrariesField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
-    public partial class SoapLibrary {
-        
-        private string idField;
-        
-        private string nameField;
-        
-        private SoapLibraryPage[] pagesField;
-        
-        private SoapAutoWidget[] autoWidgetsField;
-        
-        private SoapUniversalPreviewContainer[] previewContainersField;
-        
-        private bool selectedField;
-        
-        private LibraryConfig configField;
-        
-        /// <remarks/>
-        public string id {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string name {
-            get {
-                return this.nameField;
-            }
-            set {
-                this.nameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public SoapLibraryPage[] pages {
-            get {
-                return this.pagesField;
-            }
-            set {
-                this.pagesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public SoapAutoWidget[] autoWidgets {
-            get {
-                return this.autoWidgetsField;
-            }
-            set {
-                this.autoWidgetsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public SoapUniversalPreviewContainer[] previewContainers {
-            get {
-                return this.previewContainersField;
-            }
-            set {
-                this.previewContainersField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool selected {
-            get {
-                return this.selectedField;
-            }
-            set {
-                this.selectedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public LibraryConfig config {
-            get {
-                return this.configField;
-            }
-            set {
-                this.configField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
-    public partial class SoapLibraryPage {
-        
-        private string idField;
-        
-        private string libraryIdField;
-        
-        private string nameField;
-        
-        private string libraryNameField;
-        
-        private int orderField;
-        
-        private SoapLibraryPageSettings settingsField;
-        
-        private SoapLibraryFolder[] foldersField;
-        
-        private bool enableColumnsField;
-        
-        private SoapColumn[] columnsField;
-        
-        private string dateModifyField;
-        
-        private bool selectedField;
-        
-        private GroupModel[] groupsField;
-        
-        private bool allGroupsField;
-        
-        private UserModel[] usersField;
-        
-        private bool allUsersField;
-        
-        /// <remarks/>
-        public string id {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string libraryId {
-            get {
-                return this.libraryIdField;
-            }
-            set {
-                this.libraryIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string name {
-            get {
-                return this.nameField;
-            }
-            set {
-                this.nameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string libraryName {
-            get {
-                return this.libraryNameField;
-            }
-            set {
-                this.libraryNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int order {
-            get {
-                return this.orderField;
-            }
-            set {
-                this.orderField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public SoapLibraryPageSettings settings {
-            get {
-                return this.settingsField;
-            }
-            set {
-                this.settingsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public SoapLibraryFolder[] folders {
-            get {
-                return this.foldersField;
-            }
-            set {
-                this.foldersField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool enableColumns {
-            get {
-                return this.enableColumnsField;
-            }
-            set {
-                this.enableColumnsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public SoapColumn[] columns {
-            get {
-                return this.columnsField;
-            }
-            set {
-                this.columnsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string dateModify {
-            get {
-                return this.dateModifyField;
-            }
-            set {
-                this.dateModifyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool selected {
-            get {
-                return this.selectedField;
-            }
-            set {
-                this.selectedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public GroupModel[] groups {
-            get {
-                return this.groupsField;
-            }
-            set {
-                this.groupsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool allGroups {
-            get {
-                return this.allGroupsField;
-            }
-            set {
-                this.allGroupsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public UserModel[] users {
-            get {
-                return this.usersField;
-            }
-            set {
-                this.usersField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool allUsers {
-            get {
-                return this.allUsersField;
-            }
-            set {
-                this.allUsersField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
-    public partial class SoapLibraryPageSettings {
-        
-        private string iconField;
-        
-        private string iconColorField;
-        
-        /// <remarks/>
-        public string icon {
-            get {
-                return this.iconField;
-            }
-            set {
-                this.iconField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string iconColor {
-            get {
-                return this.iconColorField;
-            }
-            set {
-                this.iconColorField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
-    public partial class LibraryConfig {
-        
-        private string idField;
-        
-        private string libraryIdField;
-        
-        private string deadLinkSenderField;
-        
-        private string deadLinkRecipientsField;
-        
-        private string deadLinkSubjectField;
-        
-        private string deadLinkBodyField;
-        
-        /// <remarks/>
-        public string id {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string libraryId {
-            get {
-                return this.libraryIdField;
-            }
-            set {
-                this.libraryIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string deadLinkSender {
-            get {
-                return this.deadLinkSenderField;
-            }
-            set {
-                this.deadLinkSenderField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string deadLinkRecipients {
-            get {
-                return this.deadLinkRecipientsField;
-            }
-            set {
-                this.deadLinkRecipientsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string deadLinkSubject {
-            get {
-                return this.deadLinkSubjectField;
-            }
-            set {
-                this.deadLinkSubjectField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string deadLinkBody {
-            get {
-                return this.deadLinkBodyField;
-            }
-            set {
-                this.deadLinkBodyField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
-    public partial class SoapUniversalPreviewContainer {
-        
-        private string idField;
-        
-        private string libraryIdField;
-        
-        private string[] pngLinksField;
-        
-        private string[] pngPhoneLinksField;
-        
-        private string[] pdfLinksField;
-        
-        private string[] mp4LinksField;
-        
-        private string[] mp4ThumbLinksField;
-        
-        private string[] newOfficeFormatLinksField;
-        
-        private string[] thumbsLinksField;
-        
-        private string[] thumbsPhoneLinksField;
-        
-        private string[] thumbsDatatableLinksField;
-        
-        private int thumbsWidthField;
-        
-        private int thumbsHeightField;
-        
-        /// <remarks/>
-        public string id {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string libraryId {
-            get {
-                return this.libraryIdField;
-            }
-            set {
-                this.libraryIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string[] pngLinks {
-            get {
-                return this.pngLinksField;
-            }
-            set {
-                this.pngLinksField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string[] pngPhoneLinks {
-            get {
-                return this.pngPhoneLinksField;
-            }
-            set {
-                this.pngPhoneLinksField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string[] pdfLinks {
-            get {
-                return this.pdfLinksField;
-            }
-            set {
-                this.pdfLinksField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string[] mp4Links {
-            get {
-                return this.mp4LinksField;
-            }
-            set {
-                this.mp4LinksField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string[] mp4ThumbLinks {
-            get {
-                return this.mp4ThumbLinksField;
-            }
-            set {
-                this.mp4ThumbLinksField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string[] newOfficeFormatLinks {
-            get {
-                return this.newOfficeFormatLinksField;
-            }
-            set {
-                this.newOfficeFormatLinksField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string[] thumbsLinks {
-            get {
-                return this.thumbsLinksField;
-            }
-            set {
-                this.thumbsLinksField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string[] thumbsPhoneLinks {
-            get {
-                return this.thumbsPhoneLinksField;
-            }
-            set {
-                this.thumbsPhoneLinksField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string[] thumbsDatatableLinks {
-            get {
-                return this.thumbsDatatableLinksField;
-            }
-            set {
-                this.thumbsDatatableLinksField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int thumbsWidth {
-            get {
-                return this.thumbsWidthField;
-            }
-            set {
-                this.thumbsWidthField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int thumbsHeight {
-            get {
-                return this.thumbsHeightField;
-            }
-            set {
-                this.thumbsHeightField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
-    public partial class SoapAutoWidget {
-        
-        private string libraryIdField;
-        
-        private string extensionField;
-        
-        private string widgetField;
-        
-        /// <remarks/>
-        public string libraryId {
-            get {
-                return this.libraryIdField;
-            }
-            set {
-                this.libraryIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string extension {
-            get {
-                return this.extensionField;
-            }
-            set {
-                this.extensionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string widget {
-            get {
-                return this.widgetField;
-            }
-            set {
-                this.widgetField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1590,7 +868,7 @@ namespace SalesLibraries.ServiceConnector.AdminService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1647,7 +925,7 @@ namespace SalesLibraries.ServiceConnector.AdminService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1788,7 +1066,7 @@ namespace SalesLibraries.ServiceConnector.AdminService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1857,7 +1135,7 @@ namespace SalesLibraries.ServiceConnector.AdminService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1902,7 +1180,28 @@ namespace SalesLibraries.ServiceConnector.AdminService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
+    public partial class SoapOneDrive {
+        
+        private string urlField;
+        
+        /// <remarks/>
+        public string url {
+            get {
+                return this.urlField;
+            }
+            set {
+                this.urlField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2031,7 +1330,7 @@ namespace SalesLibraries.ServiceConnector.AdminService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2112,7 +1411,7 @@ namespace SalesLibraries.ServiceConnector.AdminService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2313,7 +1612,7 @@ namespace SalesLibraries.ServiceConnector.AdminService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2359,6 +1658,8 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         private SoapBanner bannerField;
         
         private SoapThumbnail thumbnailField;
+        
+        private SoapOneDrive oneDriveField;
         
         private string previewIdField;
         
@@ -2575,6 +1876,16 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         }
         
         /// <remarks/>
+        public SoapOneDrive oneDrive {
+            get {
+                return this.oneDriveField;
+            }
+            set {
+                this.oneDriveField = value;
+            }
+        }
+        
+        /// <remarks/>
         public string previewId {
             get {
                 return this.previewIdField;
@@ -2646,7 +1957,7 @@ namespace SalesLibraries.ServiceConnector.AdminService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2895,19 +2206,778 @@ namespace SalesLibraries.ServiceConnector.AdminService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
+    public partial class SoapLibraryPageSettings {
+        
+        private string iconField;
+        
+        private string iconColorField;
+        
+        /// <remarks/>
+        public string icon {
+            get {
+                return this.iconField;
+            }
+            set {
+                this.iconField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string iconColor {
+            get {
+                return this.iconColorField;
+            }
+            set {
+                this.iconColorField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
+    public partial class SoapLibraryPage {
+        
+        private string idField;
+        
+        private string libraryIdField;
+        
+        private string nameField;
+        
+        private string libraryNameField;
+        
+        private int orderField;
+        
+        private SoapLibraryPageSettings settingsField;
+        
+        private SoapLibraryFolder[] foldersField;
+        
+        private bool enableColumnsField;
+        
+        private SoapColumn[] columnsField;
+        
+        private string dateModifyField;
+        
+        private GroupViewModel[] groupsField;
+        
+        private UserViewModel[] usersField;
+        
+        /// <remarks/>
+        public string id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string libraryId {
+            get {
+                return this.libraryIdField;
+            }
+            set {
+                this.libraryIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string libraryName {
+            get {
+                return this.libraryNameField;
+            }
+            set {
+                this.libraryNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int order {
+            get {
+                return this.orderField;
+            }
+            set {
+                this.orderField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public SoapLibraryPageSettings settings {
+            get {
+                return this.settingsField;
+            }
+            set {
+                this.settingsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public SoapLibraryFolder[] folders {
+            get {
+                return this.foldersField;
+            }
+            set {
+                this.foldersField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool enableColumns {
+            get {
+                return this.enableColumnsField;
+            }
+            set {
+                this.enableColumnsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public SoapColumn[] columns {
+            get {
+                return this.columnsField;
+            }
+            set {
+                this.columnsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string dateModify {
+            get {
+                return this.dateModifyField;
+            }
+            set {
+                this.dateModifyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public GroupViewModel[] groups {
+            get {
+                return this.groupsField;
+            }
+            set {
+                this.groupsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public UserViewModel[] users {
+            get {
+                return this.usersField;
+            }
+            set {
+                this.usersField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
+    public partial class UserViewModel {
+        
+        private int idField;
+        
+        private string loginField;
+        
+        private string passwordField;
+        
+        private string firstNameField;
+        
+        private string lastNameField;
+        
+        private string emailField;
+        
+        private string phoneField;
+        
+        private int roleField;
+        
+        private string dateAddField;
+        
+        private string dateModifyField;
+        
+        private string dateLastActivityField;
+        
+        private string[] assignedGroupsField;
+        
+        private bool allGroupsField;
+        
+        private string[] assignedLibrariesField;
+        
+        private bool allLibrariesField;
+        
+        /// <remarks/>
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string login {
+            get {
+                return this.loginField;
+            }
+            set {
+                this.loginField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string password {
+            get {
+                return this.passwordField;
+            }
+            set {
+                this.passwordField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string firstName {
+            get {
+                return this.firstNameField;
+            }
+            set {
+                this.firstNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string lastName {
+            get {
+                return this.lastNameField;
+            }
+            set {
+                this.lastNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string email {
+            get {
+                return this.emailField;
+            }
+            set {
+                this.emailField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string phone {
+            get {
+                return this.phoneField;
+            }
+            set {
+                this.phoneField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int role {
+            get {
+                return this.roleField;
+            }
+            set {
+                this.roleField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string dateAdd {
+            get {
+                return this.dateAddField;
+            }
+            set {
+                this.dateAddField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string dateModify {
+            get {
+                return this.dateModifyField;
+            }
+            set {
+                this.dateModifyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string dateLastActivity {
+            get {
+                return this.dateLastActivityField;
+            }
+            set {
+                this.dateLastActivityField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string[] assignedGroups {
+            get {
+                return this.assignedGroupsField;
+            }
+            set {
+                this.assignedGroupsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool allGroups {
+            get {
+                return this.allGroupsField;
+            }
+            set {
+                this.allGroupsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string[] assignedLibraries {
+            get {
+                return this.assignedLibrariesField;
+            }
+            set {
+                this.assignedLibrariesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool allLibraries {
+            get {
+                return this.allLibrariesField;
+            }
+            set {
+                this.allLibrariesField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
+    public partial class GroupEditModel {
+        
+        private string idField;
+        
+        private string nameField;
+        
+        private UserViewModel[] usersField;
+        
+        private LibraryViewModel[] librariesField;
+        
+        private string[] libraryIdsField;
+        
+        /// <remarks/>
+        public string id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public UserViewModel[] users {
+            get {
+                return this.usersField;
+            }
+            set {
+                this.usersField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public LibraryViewModel[] libraries {
+            get {
+                return this.librariesField;
+            }
+            set {
+                this.librariesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string[] libraryIds {
+            get {
+                return this.libraryIdsField;
+            }
+            set {
+                this.libraryIdsField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
+    public partial class LibraryViewModel {
+        
+        private string idField;
+        
+        private string nameField;
+        
+        private LibraryPageViewModel[] pagesField;
+        
+        /// <remarks/>
+        public string id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public LibraryPageViewModel[] pages {
+            get {
+                return this.pagesField;
+            }
+            set {
+                this.pagesField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
+    public partial class LibraryPageViewModel {
+        
+        private string idField;
+        
+        private string libraryIdField;
+        
+        private string nameField;
+        
+        private string libraryNameField;
+        
+        private string[] assignedGroupsField;
+        
+        private bool allGroupsField;
+        
+        private string[] assignedUsersField;
+        
+        private bool allUsersField;
+        
+        /// <remarks/>
+        public string id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string libraryId {
+            get {
+                return this.libraryIdField;
+            }
+            set {
+                this.libraryIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string libraryName {
+            get {
+                return this.libraryNameField;
+            }
+            set {
+                this.libraryNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string[] assignedGroups {
+            get {
+                return this.assignedGroupsField;
+            }
+            set {
+                this.assignedGroupsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool allGroups {
+            get {
+                return this.allGroupsField;
+            }
+            set {
+                this.allGroupsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string[] assignedUsers {
+            get {
+                return this.assignedUsersField;
+            }
+            set {
+                this.assignedUsersField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool allUsers {
+            get {
+                return this.allUsersField;
+            }
+            set {
+                this.allUsersField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
+    public partial class UserEditModel {
+        
+        private int idField;
+        
+        private string loginField;
+        
+        private string passwordField;
+        
+        private string firstNameField;
+        
+        private string lastNameField;
+        
+        private string emailField;
+        
+        private string phoneField;
+        
+        private int roleField;
+        
+        private string dateAddField;
+        
+        private string dateModifyField;
+        
+        private string dateLastActivityField;
+        
+        private GroupViewModel[] groupsField;
+        
+        private LibraryViewModel[] librariesField;
+        
+        /// <remarks/>
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string login {
+            get {
+                return this.loginField;
+            }
+            set {
+                this.loginField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string password {
+            get {
+                return this.passwordField;
+            }
+            set {
+                this.passwordField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string firstName {
+            get {
+                return this.firstNameField;
+            }
+            set {
+                this.firstNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string lastName {
+            get {
+                return this.lastNameField;
+            }
+            set {
+                this.lastNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string email {
+            get {
+                return this.emailField;
+            }
+            set {
+                this.emailField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string phone {
+            get {
+                return this.phoneField;
+            }
+            set {
+                this.phoneField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int role {
+            get {
+                return this.roleField;
+            }
+            set {
+                this.roleField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string dateAdd {
+            get {
+                return this.dateAddField;
+            }
+            set {
+                this.dateAddField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string dateModify {
+            get {
+                return this.dateModifyField;
+            }
+            set {
+                this.dateModifyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string dateLastActivity {
+            get {
+                return this.dateLastActivityField;
+            }
+            set {
+                this.dateLastActivityField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public GroupViewModel[] groups {
+            get {
+                return this.groupsField;
+            }
+            set {
+                this.groupsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public LibraryViewModel[] libraries {
+            get {
+                return this.librariesField;
+            }
+            set {
+                this.librariesField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
     public delegate void setUserCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
     public delegate void deleteUserCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
     public delegate void getUsersCompletedEventHandler(object sender, getUsersCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class getUsersCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2920,20 +2990,46 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         }
         
         /// <remarks/>
-        public UserModel[] Result {
+        public UserViewModel[] Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((UserModel[])(this.results[0]));
+                return ((UserViewModel[])(this.results[0]));
             }
         }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
+    public delegate void getUserCompletedEventHandler(object sender, getUserCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getUserCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getUserCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public UserEditModel Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((UserEditModel)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
     public delegate void isUserPasswordComplexCompletedEventHandler(object sender, isUserPasswordComplexCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class isUserPasswordComplexCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2955,19 +3051,19 @@ namespace SalesLibraries.ServiceConnector.AdminService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
     public delegate void setGroupCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
     public delegate void deleteGroupCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
     public delegate void getGroupsCompletedEventHandler(object sender, getGroupsCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class getGroupsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2980,24 +3076,50 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         }
         
         /// <remarks/>
-        public GroupModel[] Result {
+        public GroupViewModel[] Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((GroupModel[])(this.results[0]));
+                return ((GroupViewModel[])(this.results[0]));
             }
         }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
+    public delegate void getGroupCompletedEventHandler(object sender, getGroupCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getGroupCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getGroupCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public GroupEditModel Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((GroupEditModel)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
     public delegate void setPageCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
     public delegate void getLibrariesCompletedEventHandler(object sender, getLibrariesCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class getLibrariesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -3010,20 +3132,46 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         }
         
         /// <remarks/>
-        public SoapLibrary[] Result {
+        public LibraryViewModel[] Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((SoapLibrary[])(this.results[0]));
+                return ((LibraryViewModel[])(this.results[0]));
             }
         }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
+    public delegate void getLibraryPageCompletedEventHandler(object sender, getLibraryPageCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getLibraryPageCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getLibraryPageCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public SoapLibraryPage Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((SoapLibraryPage)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
     public delegate void getGroupTemplatesCompletedEventHandler(object sender, getGroupTemplatesCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class getGroupTemplatesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -3045,11 +3193,11 @@ namespace SalesLibraries.ServiceConnector.AdminService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
     public delegate void getSessionKeyCompletedEventHandler(object sender, getSessionKeyCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class getSessionKeyCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {

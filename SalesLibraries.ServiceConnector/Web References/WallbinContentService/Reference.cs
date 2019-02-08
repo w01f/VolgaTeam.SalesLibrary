@@ -23,7 +23,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="ContentControllerBinding", Namespace="urn:ContentControllerwsdl")]
@@ -31,8 +31,8 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(BaseLinkBundleItem))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(SoapUniversalPreviewContainer))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(SoapAutoWidget))]
-    [System.Xml.Serialization.SoapIncludeAttribute(typeof(UserModel))]
-    [System.Xml.Serialization.SoapIncludeAttribute(typeof(GroupModel))]
+    [System.Xml.Serialization.SoapIncludeAttribute(typeof(UserViewModel))]
+    [System.Xml.Serialization.SoapIncludeAttribute(typeof(GroupViewModel))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(SoapColumn))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(LinkCategory))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(LinkSuperFilter))]
@@ -829,7 +829,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -845,8 +845,6 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         private SoapAutoWidget[] autoWidgetsField;
         
         private SoapUniversalPreviewContainer[] previewContainersField;
-        
-        private bool selectedField;
         
         private LibraryConfig configField;
         
@@ -901,16 +899,6 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         }
         
         /// <remarks/>
-        public bool selected {
-            get {
-                return this.selectedField;
-            }
-            set {
-                this.selectedField = value;
-            }
-        }
-        
-        /// <remarks/>
         public LibraryConfig config {
             get {
                 return this.configField;
@@ -922,7 +910,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -949,13 +937,11 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         private string dateModifyField;
         
-        private bool selectedField;
-        
-        private GroupModel[] groupsField;
+        private GroupViewModel[] groupsField;
         
         private bool allGroupsField;
         
-        private UserModel[] usersField;
+        private UserViewModel[] usersField;
         
         private bool allUsersField;
         
@@ -1060,17 +1046,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         }
         
         /// <remarks/>
-        public bool selected {
-            get {
-                return this.selectedField;
-            }
-            set {
-                this.selectedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public GroupModel[] groups {
+        public GroupViewModel[] groups {
             get {
                 return this.groupsField;
             }
@@ -1090,7 +1066,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         }
         
         /// <remarks/>
-        public UserModel[] users {
+        public UserViewModel[] users {
             get {
                 return this.usersField;
             }
@@ -1111,7 +1087,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1144,7 +1120,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1177,7 +1153,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1354,7 +1330,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1362,10 +1338,8 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     public partial class Font {
         
         private string nameField;
-
-	    private int sizeField;
-
-		private bool isBoldField;
+        
+        private bool isBoldField;
         
         private bool isItalicField;
         
@@ -1380,21 +1354,9 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
                 this.nameField = value;
             }
         }
-
-	    public int size
-	    {
-		    get
-		    {
-			    return this.sizeField;
-		    }
-		    set
-		    {
-			    this.sizeField = value;
-		    }
-	    }
-
-		/// <remarks/>
-		public bool isBold {
+        
+        /// <remarks/>
+        public bool isBold {
             get {
                 return this.isBoldField;
             }
@@ -1425,7 +1387,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1590,7 +1552,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1755,7 +1717,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1980,7 +1942,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2097,7 +2059,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2214,7 +2176,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2331,7 +2293,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2436,7 +2398,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2445,7 +2407,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         private string customWebFormatField;
         
-        private IBaseLinkBundleItem[] bundleItemsField;
+        private BaseLinkBundleItem[] bundleItemsField;
         
         private string noteField;
         
@@ -2490,7 +2452,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         }
         
         /// <remarks/>
-        public IBaseLinkBundleItem[] bundleItems {
+        public BaseLinkBundleItem[] bundleItems {
             get {
                 return this.bundleItemsField;
             }
@@ -2661,7 +2623,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2886,7 +2848,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3111,7 +3073,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3348,7 +3310,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3609,7 +3571,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3894,7 +3856,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4167,7 +4129,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4440,7 +4402,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4653,7 +4615,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4866,7 +4828,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5091,7 +5053,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5304,7 +5266,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5529,7 +5491,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5610,7 +5572,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5775,7 +5737,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5820,12 +5782,12 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:ContentControllerwsdl")]
-    public partial class UserModel {
+    public partial class UserViewModel {
         
         private int idField;
         
@@ -5843,19 +5805,17 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         private int roleField;
         
-        private bool selectedField;
-        
         private string dateAddField;
         
         private string dateModifyField;
         
-        private GroupModel[] groupsField;
+        private string dateLastActivityField;
         
-        private string groupNamesField;
+        private string[] assignedGroupsField;
         
         private bool allGroupsField;
         
-        private SoapLibrary[] librariesField;
+        private string[] assignedLibrariesField;
         
         private bool allLibrariesField;
         
@@ -5940,16 +5900,6 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         }
         
         /// <remarks/>
-        public bool selected {
-            get {
-                return this.selectedField;
-            }
-            set {
-                this.selectedField = value;
-            }
-        }
-        
-        /// <remarks/>
         public string dateAdd {
             get {
                 return this.dateAddField;
@@ -5970,22 +5920,22 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         }
         
         /// <remarks/>
-        public GroupModel[] groups {
+        public string dateLastActivity {
             get {
-                return this.groupsField;
+                return this.dateLastActivityField;
             }
             set {
-                this.groupsField = value;
+                this.dateLastActivityField = value;
             }
         }
         
         /// <remarks/>
-        public string groupNames {
+        public string[] assignedGroups {
             get {
-                return this.groupNamesField;
+                return this.assignedGroupsField;
             }
             set {
-                this.groupNamesField = value;
+                this.assignedGroupsField = value;
             }
         }
         
@@ -6000,12 +5950,12 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         }
         
         /// <remarks/>
-        public SoapLibrary[] libraries {
+        public string[] assignedLibraries {
             get {
-                return this.librariesField;
+                return this.assignedLibrariesField;
             }
             set {
-                this.librariesField = value;
+                this.assignedLibrariesField = value;
             }
         }
         
@@ -6021,26 +5971,22 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:ContentControllerwsdl")]
-    public partial class GroupModel {
+    public partial class GroupViewModel {
         
         private string idField;
         
         private string nameField;
         
-        private bool selectedField;
-        
-        private UserModel[] usersField;
+        private string[] assignedUsersField;
         
         private bool allUsersField;
         
-        private SoapLibrary[] librariesField;
-        
-        private string[] libraryIdsField;
+        private string[] assignedLibrariesField;
         
         private bool allLibrariesField;
         
@@ -6065,22 +6011,12 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         }
         
         /// <remarks/>
-        public bool selected {
+        public string[] assignedUsers {
             get {
-                return this.selectedField;
+                return this.assignedUsersField;
             }
             set {
-                this.selectedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public UserModel[] users {
-            get {
-                return this.usersField;
-            }
-            set {
-                this.usersField = value;
+                this.assignedUsersField = value;
             }
         }
         
@@ -6095,22 +6031,12 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         }
         
         /// <remarks/>
-        public SoapLibrary[] libraries {
+        public string[] assignedLibraries {
             get {
-                return this.librariesField;
+                return this.assignedLibrariesField;
             }
             set {
-                this.librariesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string[] libraryIds {
-            get {
-                return this.libraryIdsField;
-            }
-            set {
-                this.libraryIdsField = value;
+                this.assignedLibrariesField = value;
             }
         }
         
@@ -6126,7 +6052,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6291,7 +6217,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6432,7 +6358,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6501,7 +6427,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6546,7 +6472,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6567,7 +6493,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6696,7 +6622,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6777,7 +6703,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6978,7 +6904,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -7013,7 +6939,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         private int typeField;
         
-        private IBaseLinkSettings extendedPropertiesField;
+        private BaseLinkSettings extendedPropertiesField;
         
         private LineBreak lineBreakPropertiesField;
         
@@ -7182,7 +7108,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         }
         
         /// <remarks/>
-        public IBaseLinkSettings extendedProperties {
+        public BaseLinkSettings extendedProperties {
             get {
                 return this.extendedPropertiesField;
             }
@@ -7323,7 +7249,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -7572,95 +7498,95 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
     public delegate void mockLibraryCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
     public delegate void mockVideoLinkSettingsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
     public delegate void mockHyperLinkSettingsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
     public delegate void mockPowerPointLinkSettingsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
     public delegate void mockPowerDocumentSettingsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
     public delegate void mockAppLinkSettingsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
     public delegate void mockInternalWallbinLinkSettingsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
     public delegate void mockInternalLibraryPageLinkSettingsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
     public delegate void mockInternalLibraryFolderLinkSettingsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
     public delegate void mockInternalLibraryObjectLinkSettingsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
     public delegate void mockInternalShortcutLinkSettingsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
     public delegate void mockExcelLinkSettingsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
     public delegate void mockQPageLinkSettingsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
     public delegate void mockLinkBundleLinkSettingsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
     public delegate void mockLibraryLinkBundleItemCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
     public delegate void mockUrlLinkBundleItemCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
     public delegate void mockLinkBundleCoverItemCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
     public delegate void mockLinkBundleLaunchScreenItemCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
     public delegate void mockLinkBundleInfoItemCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
     public delegate void mockLinkBundleStrategyItemCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
     public delegate void mockLinkBundleRevenueItemCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
     public delegate void getSessionKeyCompletedEventHandler(object sender, getSessionKeyCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class getSessionKeyCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {

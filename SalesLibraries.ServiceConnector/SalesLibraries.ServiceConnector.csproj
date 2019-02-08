@@ -78,6 +78,10 @@
     <Compile Include="Models\Rest\Dictionaries\SearchCategoriesGetRequestData.cs" />
     <Compile Include="Models\Rest\Dictionaries\SearchCategory.cs" />
     <Compile Include="Models\Rest\Common\RestServiceException.cs" />
+    <Compile Include="Models\Soap\AdminService\LibraryViewModel.cs" />
+    <Compile Include="Models\Soap\AdminService\LibraryPageViewModel.cs" />
+    <Compile Include="Models\Soap\AdminService\GroupViewModel.cs" />
+    <Compile Include="Models\Soap\AdminService\UserViewModel.cs" />
     <Compile Include="Models\Soap\Statistic\FileActivityReportModel.cs" />
     <Compile Include="Models\Soap\WallbinContentService\InternalShortcutLinkSettings.cs" />
     <Compile Include="Models\Soap\WallbinContentService\InternalLibraryPageLinkSettings.cs" />
@@ -98,10 +102,10 @@
     <Compile Include="Models\Rest\Common\ResponseResult.cs" />
     <Compile Include="Models\Rest\Common\RestError.cs" />
     <Compile Include="Models\Rest\Common\RestResponse.cs" />
-    <Compile Include="Models\Soap\AdminService\GroupModel.cs" />
+    <Compile Include="Models\Soap\AdminService\GroupEditModel.cs" />
     <Compile Include="Models\Soap\AdminService\LibraryPage.cs" />
     <Compile Include="Models\Soap\AdminService\UserInfo.cs" />
-    <Compile Include="Models\Soap\AdminService\UserModel.cs" />
+    <Compile Include="Models\Soap\AdminService\UserEditModel.cs" />
     <Compile Include="Models\Soap\InactiveUsers\UserModel.cs" />
     <Compile Include="Models\Soap\LinkConfigProfiles\LibraryLinkReference.cs" />
     <Compile Include="Models\Soap\LinkConfigProfiles\SecurityGroupReference.cs" />
@@ -292,20 +296,29 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="Web References\AdminService\AdminController.wsdl" />
-    <None Include="Web References\AdminService\GroupModel.datasource">
+    <None Include="Web References\AdminService\GroupEditModel.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\AdminService\GroupViewModel.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\AdminService\Library.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\AdminService\LibraryViewModel.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\AdminService\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Web References\AdminService\SoapLibrary1.datasource">
+    <None Include="Web References\AdminService\SoapLibraryPage.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\AdminService\UserModel.datasource">
+    <None Include="Web References\AdminService\UserEditModel.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\AdminService\UserViewModel.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\InactiveUsersService\InactiveUsersController.wsdl" />
@@ -313,7 +326,7 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Web References\InactiveUsersService\UserModel.datasource">
+    <None Include="Web References\InactiveUsersService\UserViewModel.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\LinkConfigProfileService\LibraryLinkReference.datasource">

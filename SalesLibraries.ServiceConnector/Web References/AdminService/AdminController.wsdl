@@ -2,33 +2,57 @@
 <wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:AdminControllerwsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" xmlns="http://schemas.xmlsoap.org/wsdl/" name="AdminController" targetNamespace="urn:AdminControllerwsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <xsd:schema targetNamespace="urn:AdminControllerwsdl">
-      <xsd:complexType name="GroupModelArray">
+      <xsd:complexType name="GroupViewModelArray">
         <xsd:complexContent mixed="false">
           <xsd:restriction base="soap-enc:Array">
-            <xsd:attribute wsdl:arrayType="tns:GroupModel[]" ref="soap-enc:arrayType" />
+            <xsd:attribute wsdl:arrayType="tns:GroupViewModel[]" ref="soap-enc:arrayType" />
           </xsd:restriction>
         </xsd:complexContent>
       </xsd:complexType>
-      <xsd:complexType name="GroupModel">
+      <xsd:complexType name="GroupViewModel">
         <xsd:all>
           <xsd:element name="id" type="xsd:string" />
           <xsd:element name="name" type="xsd:string" />
-          <xsd:element name="selected" type="xsd:boolean" />
-          <xsd:element name="users" type="tns:UserModelArray" />
+          <xsd:element name="assignedUsers" type="tns:stringArray" />
           <xsd:element name="allUsers" type="xsd:boolean" />
-          <xsd:element name="libraries" type="tns:SoapLibraryArray" />
-          <xsd:element name="libraryIds" type="tns:stringArray" />
+          <xsd:element name="assignedLibraries" type="tns:stringArray" />
           <xsd:element name="allLibraries" type="xsd:boolean" />
         </xsd:all>
       </xsd:complexType>
-      <xsd:complexType name="UserModelArray">
+      <xsd:complexType name="stringArray">
         <xsd:complexContent mixed="false">
           <xsd:restriction base="soap-enc:Array">
-            <xsd:attribute wsdl:arrayType="tns:UserModel[]" ref="soap-enc:arrayType" />
+            <xsd:attribute wsdl:arrayType="xsd:string[]" ref="soap-enc:arrayType" />
           </xsd:restriction>
         </xsd:complexContent>
       </xsd:complexType>
-      <xsd:complexType name="UserModel">
+      <xsd:complexType name="LibraryPageViewModelArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute wsdl:arrayType="tns:LibraryPageViewModel[]" ref="soap-enc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="LibraryPageViewModel">
+        <xsd:all>
+          <xsd:element name="id" type="xsd:string" />
+          <xsd:element name="libraryId" type="xsd:string" />
+          <xsd:element name="name" type="xsd:string" />
+          <xsd:element name="libraryName" type="xsd:string" />
+          <xsd:element name="assignedGroups" type="tns:stringArray" />
+          <xsd:element name="allGroups" type="xsd:boolean" />
+          <xsd:element name="assignedUsers" type="tns:stringArray" />
+          <xsd:element name="allUsers" type="xsd:boolean" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="UserViewModelArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute wsdl:arrayType="tns:UserViewModel[]" ref="soap-enc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="UserViewModel">
         <xsd:all>
           <xsd:element name="id" type="xsd:int" />
           <xsd:element name="login" type="xsd:string" />
@@ -38,40 +62,54 @@
           <xsd:element name="email" type="xsd:string" />
           <xsd:element name="phone" type="xsd:string" />
           <xsd:element name="role" type="xsd:int" />
-          <xsd:element name="selected" type="xsd:boolean" />
           <xsd:element name="dateAdd" type="xsd:string" />
           <xsd:element name="dateModify" type="xsd:string" />
-          <xsd:element name="groups" type="tns:GroupModelArray" />
-          <xsd:element name="groupNames" type="xsd:string" />
+          <xsd:element name="dateLastActivity" type="xsd:string" />
+          <xsd:element name="assignedGroups" type="tns:stringArray" />
           <xsd:element name="allGroups" type="xsd:boolean" />
-          <xsd:element name="libraries" type="tns:SoapLibraryArray" />
+          <xsd:element name="assignedLibraries" type="tns:stringArray" />
           <xsd:element name="allLibraries" type="xsd:boolean" />
         </xsd:all>
       </xsd:complexType>
-      <xsd:complexType name="SoapLibraryArray">
+      <xsd:complexType name="UserEditModel">
+        <xsd:all>
+          <xsd:element name="id" type="xsd:int" />
+          <xsd:element name="login" type="xsd:string" />
+          <xsd:element name="password" type="xsd:string" />
+          <xsd:element name="firstName" type="xsd:string" />
+          <xsd:element name="lastName" type="xsd:string" />
+          <xsd:element name="email" type="xsd:string" />
+          <xsd:element name="phone" type="xsd:string" />
+          <xsd:element name="role" type="xsd:int" />
+          <xsd:element name="dateAdd" type="xsd:string" />
+          <xsd:element name="dateModify" type="xsd:string" />
+          <xsd:element name="dateLastActivity" type="xsd:string" />
+          <xsd:element name="groups" type="tns:GroupViewModelArray" />
+          <xsd:element name="libraries" type="tns:LibraryViewModelArray" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="LibraryViewModelArray">
         <xsd:complexContent mixed="false">
           <xsd:restriction base="soap-enc:Array">
-            <xsd:attribute wsdl:arrayType="tns:SoapLibrary[]" ref="soap-enc:arrayType" />
+            <xsd:attribute wsdl:arrayType="tns:LibraryViewModel[]" ref="soap-enc:arrayType" />
           </xsd:restriction>
         </xsd:complexContent>
       </xsd:complexType>
-      <xsd:complexType name="SoapLibrary">
+      <xsd:complexType name="LibraryViewModel">
         <xsd:all>
           <xsd:element name="id" type="xsd:string" />
           <xsd:element name="name" type="xsd:string" />
-          <xsd:element name="pages" type="tns:SoapLibraryPageArray" />
-          <xsd:element name="autoWidgets" type="tns:SoapAutoWidgetArray" />
-          <xsd:element name="previewContainers" type="tns:SoapUniversalPreviewContainerArray" />
-          <xsd:element name="selected" type="xsd:boolean" />
-          <xsd:element name="config" type="tns:LibraryConfig" />
+          <xsd:element name="pages" type="tns:LibraryPageViewModelArray" />
         </xsd:all>
       </xsd:complexType>
-      <xsd:complexType name="SoapLibraryPageArray">
-        <xsd:complexContent mixed="false">
-          <xsd:restriction base="soap-enc:Array">
-            <xsd:attribute wsdl:arrayType="tns:SoapLibraryPage[]" ref="soap-enc:arrayType" />
-          </xsd:restriction>
-        </xsd:complexContent>
+      <xsd:complexType name="GroupEditModel">
+        <xsd:all>
+          <xsd:element name="id" type="xsd:string" />
+          <xsd:element name="name" type="xsd:string" />
+          <xsd:element name="users" type="tns:UserViewModelArray" />
+          <xsd:element name="libraries" type="tns:LibraryViewModelArray" />
+          <xsd:element name="libraryIds" type="tns:stringArray" />
+        </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="SoapLibraryPage">
         <xsd:all>
@@ -85,11 +123,8 @@
           <xsd:element name="enableColumns" type="xsd:boolean" />
           <xsd:element name="columns" type="tns:SoapColumnArray" />
           <xsd:element name="dateModify" type="xsd:string" />
-          <xsd:element name="selected" type="xsd:boolean" />
-          <xsd:element name="groups" type="tns:GroupModelArray" />
-          <xsd:element name="allGroups" type="xsd:boolean" />
-          <xsd:element name="users" type="tns:UserModelArray" />
-          <xsd:element name="allUsers" type="xsd:boolean" />
+          <xsd:element name="groups" type="tns:GroupViewModelArray" />
+          <xsd:element name="users" type="tns:UserViewModelArray" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="SoapLibraryPageSettings">
@@ -181,6 +216,7 @@
           <xsd:element name="widget" type="xsd:string" />
           <xsd:element name="banner" type="tns:SoapBanner" />
           <xsd:element name="thumbnail" type="tns:SoapThumbnail" />
+          <xsd:element name="oneDrive" type="tns:SoapOneDrive" />
           <xsd:element name="previewId" type="xsd:string" />
           <xsd:element name="superFilters" type="tns:LinkSuperFilterArray" />
           <xsd:element name="categories" type="tns:LinkCategoryArray" />
@@ -232,6 +268,11 @@
           <xsd:element name="foreColor" type="xsd:string" />
           <xsd:element name="textPosition" type="xsd:string" />
           <xsd:element name="textAlignment" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="SoapOneDrive">
+        <xsd:all>
+          <xsd:element name="url" type="xsd:string" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="LinkSuperFilterArray">
@@ -288,61 +329,6 @@
           <xsd:element name="dateModify" type="xsd:string" />
         </xsd:all>
       </xsd:complexType>
-      <xsd:complexType name="SoapAutoWidgetArray">
-        <xsd:complexContent mixed="false">
-          <xsd:restriction base="soap-enc:Array">
-            <xsd:attribute wsdl:arrayType="tns:SoapAutoWidget[]" ref="soap-enc:arrayType" />
-          </xsd:restriction>
-        </xsd:complexContent>
-      </xsd:complexType>
-      <xsd:complexType name="SoapAutoWidget">
-        <xsd:all>
-          <xsd:element name="libraryId" type="xsd:string" />
-          <xsd:element name="extension" type="xsd:string" />
-          <xsd:element name="widget" type="xsd:string" />
-        </xsd:all>
-      </xsd:complexType>
-      <xsd:complexType name="SoapUniversalPreviewContainerArray">
-        <xsd:complexContent mixed="false">
-          <xsd:restriction base="soap-enc:Array">
-            <xsd:attribute wsdl:arrayType="tns:SoapUniversalPreviewContainer[]" ref="soap-enc:arrayType" />
-          </xsd:restriction>
-        </xsd:complexContent>
-      </xsd:complexType>
-      <xsd:complexType name="SoapUniversalPreviewContainer">
-        <xsd:all>
-          <xsd:element name="id" type="xsd:string" />
-          <xsd:element name="libraryId" type="xsd:string" />
-          <xsd:element name="pngLinks" type="tns:stringArray" />
-          <xsd:element name="pngPhoneLinks" type="tns:stringArray" />
-          <xsd:element name="pdfLinks" type="tns:stringArray" />
-          <xsd:element name="mp4Links" type="tns:stringArray" />
-          <xsd:element name="mp4ThumbLinks" type="tns:stringArray" />
-          <xsd:element name="newOfficeFormatLinks" type="tns:stringArray" />
-          <xsd:element name="thumbsLinks" type="tns:stringArray" />
-          <xsd:element name="thumbsPhoneLinks" type="tns:stringArray" />
-          <xsd:element name="thumbsDatatableLinks" type="tns:stringArray" />
-          <xsd:element name="thumbsWidth" type="xsd:int" />
-          <xsd:element name="thumbsHeight" type="xsd:int" />
-        </xsd:all>
-      </xsd:complexType>
-      <xsd:complexType name="stringArray">
-        <xsd:complexContent mixed="false">
-          <xsd:restriction base="soap-enc:Array">
-            <xsd:attribute wsdl:arrayType="xsd:string[]" ref="soap-enc:arrayType" />
-          </xsd:restriction>
-        </xsd:complexContent>
-      </xsd:complexType>
-      <xsd:complexType name="LibraryConfig">
-        <xsd:all>
-          <xsd:element name="id" type="xsd:string" />
-          <xsd:element name="libraryId" type="xsd:string" />
-          <xsd:element name="deadLinkSender" type="xsd:string" />
-          <xsd:element name="deadLinkRecipients" type="xsd:string" />
-          <xsd:element name="deadLinkSubject" type="xsd:string" />
-          <xsd:element name="deadLinkBody" type="xsd:string" />
-        </xsd:all>
-      </xsd:complexType>
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="setUserIn">
@@ -353,8 +339,8 @@
     <wsdl:part name="lastName" type="xsd:string" />
     <wsdl:part name="email" type="xsd:string" />
     <wsdl:part name="phone" type="xsd:string" />
-    <wsdl:part name="assignedGroups" type="tns:GroupModelArray" />
-    <wsdl:part name="assignedPages" type="tns:SoapLibraryPageArray" />
+    <wsdl:part name="assignedGroups" type="tns:GroupViewModelArray" />
+    <wsdl:part name="assignedPages" type="tns:LibraryPageViewModelArray" />
     <wsdl:part name="role" type="xsd:int" />
     <wsdl:part name="sendInfoMessage" type="xsd:boolean" />
   </wsdl:message>
@@ -368,7 +354,14 @@
     <wsdl:part name="sessionKey" type="xsd:string" />
   </wsdl:message>
   <wsdl:message name="getUsersOut">
-    <wsdl:part name="return" type="tns:UserModelArray" />
+    <wsdl:part name="return" type="tns:UserViewModelArray" />
+  </wsdl:message>
+  <wsdl:message name="getUserIn">
+    <wsdl:part name="sessionKey" type="xsd:string" />
+    <wsdl:part name="userId" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="getUserOut">
+    <wsdl:part name="return" type="tns:UserEditModel" />
   </wsdl:message>
   <wsdl:message name="isUserPasswordComplexIn">
     <wsdl:part name="sessionKey" type="xsd:string" />
@@ -380,8 +373,8 @@
     <wsdl:part name="sessionKey" type="xsd:string" />
     <wsdl:part name="id" type="xsd:string" />
     <wsdl:part name="name" type="xsd:string" />
-    <wsdl:part name="assignedUsers" type="tns:UserModelArray" />
-    <wsdl:part name="assignedPages" type="tns:SoapLibraryPageArray" />
+    <wsdl:part name="assignedUsers" type="tns:UserViewModelArray" />
+    <wsdl:part name="assignedPages" type="tns:LibraryPageViewModelArray" />
   </wsdl:message>
   <wsdl:message name="setGroupOut" />
   <wsdl:message name="deleteGroupIn">
@@ -393,20 +386,34 @@
     <wsdl:part name="sessionKey" type="xsd:string" />
   </wsdl:message>
   <wsdl:message name="getGroupsOut">
-    <wsdl:part name="return" type="tns:GroupModelArray" />
+    <wsdl:part name="return" type="tns:GroupViewModelArray" />
+  </wsdl:message>
+  <wsdl:message name="getGroupIn">
+    <wsdl:part name="sessionKey" type="xsd:string" />
+    <wsdl:part name="groupId" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getGroupOut">
+    <wsdl:part name="return" type="tns:GroupEditModel" />
   </wsdl:message>
   <wsdl:message name="setPageIn">
     <wsdl:part name="sessionKey" type="xsd:string" />
     <wsdl:part name="id" type="xsd:string" />
-    <wsdl:part name="assignedUsers" type="tns:UserModelArray" />
-    <wsdl:part name="assignedGroups" type="tns:GroupModelArray" />
+    <wsdl:part name="assignedUsers" type="tns:UserViewModelArray" />
+    <wsdl:part name="assignedGroups" type="tns:GroupViewModelArray" />
   </wsdl:message>
   <wsdl:message name="setPageOut" />
   <wsdl:message name="getLibrariesIn">
     <wsdl:part name="sessionKey" type="xsd:string" />
   </wsdl:message>
   <wsdl:message name="getLibrariesOut">
-    <wsdl:part name="return" type="tns:SoapLibraryArray" />
+    <wsdl:part name="return" type="tns:LibraryViewModelArray" />
+  </wsdl:message>
+  <wsdl:message name="getLibraryPageIn">
+    <wsdl:part name="sessionKey" type="xsd:string" />
+    <wsdl:part name="pageId" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getLibraryPageOut">
+    <wsdl:part name="return" type="tns:SoapLibraryPage" />
   </wsdl:message>
   <wsdl:message name="getGroupTemplatesIn">
     <wsdl:part name="sessionKey" type="xsd:string" />
@@ -437,6 +444,11 @@
       <wsdl:input message="tns:getUsersIn" />
       <wsdl:output message="tns:getUsersOut" />
     </wsdl:operation>
+    <wsdl:operation name="getUser">
+      <wsdl:documentation />
+      <wsdl:input message="tns:getUserIn" />
+      <wsdl:output message="tns:getUserOut" />
+    </wsdl:operation>
     <wsdl:operation name="isUserPasswordComplex">
       <wsdl:documentation />
       <wsdl:input message="tns:isUserPasswordComplexIn" />
@@ -457,6 +469,11 @@
       <wsdl:input message="tns:getGroupsIn" />
       <wsdl:output message="tns:getGroupsOut" />
     </wsdl:operation>
+    <wsdl:operation name="getGroup">
+      <wsdl:documentation />
+      <wsdl:input message="tns:getGroupIn" />
+      <wsdl:output message="tns:getGroupOut" />
+    </wsdl:operation>
     <wsdl:operation name="setPage">
       <wsdl:documentation />
       <wsdl:input message="tns:setPageIn" />
@@ -466,6 +483,11 @@
       <wsdl:documentation />
       <wsdl:input message="tns:getLibrariesIn" />
       <wsdl:output message="tns:getLibrariesOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getLibraryPage">
+      <wsdl:documentation />
+      <wsdl:input message="tns:getLibraryPageIn" />
+      <wsdl:output message="tns:getLibraryPageOut" />
     </wsdl:operation>
     <wsdl:operation name="getGroupTemplates">
       <wsdl:documentation />
@@ -500,6 +522,15 @@
     </wsdl:operation>
     <wsdl:operation name="getUsers">
       <soap:operation soapAction="urn:AdminControllerwsdl#getUsers" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:AdminControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:AdminControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUser">
+      <soap:operation soapAction="urn:AdminControllerwsdl#getUser" style="rpc" />
       <wsdl:input>
         <soap:body use="encoded" namespace="urn:AdminControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:input>
@@ -543,6 +574,15 @@
         <soap:body use="encoded" namespace="urn:AdminControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="getGroup">
+      <soap:operation soapAction="urn:AdminControllerwsdl#getGroup" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:AdminControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:AdminControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="setPage">
       <soap:operation soapAction="urn:AdminControllerwsdl#setPage" style="rpc" />
       <wsdl:input>
@@ -554,6 +594,15 @@
     </wsdl:operation>
     <wsdl:operation name="getLibraries">
       <soap:operation soapAction="urn:AdminControllerwsdl#getLibraries" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:AdminControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:AdminControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLibraryPage">
+      <soap:operation soapAction="urn:AdminControllerwsdl#getLibraryPage" style="rpc" />
       <wsdl:input>
         <soap:body use="encoded" namespace="urn:AdminControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:input>

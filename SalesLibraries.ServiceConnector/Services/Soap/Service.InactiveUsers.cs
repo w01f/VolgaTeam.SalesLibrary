@@ -23,10 +23,10 @@ namespace SalesLibraries.ServiceConnector.Services.Soap
 			}
 		}
 
-		public UserModel[] GetInactiveUsers(DateTime startDate, DateTime endDate, out string message)
+		public UserViewModel[] GetInactiveUsers(DateTime startDate, DateTime endDate, out string message)
 		{
 			message = string.Empty;
-			var userRecords = new List<UserModel>();
+			var userRecords = new List<UserViewModel>();
 			var client = GetInactiveUsersClient();
 			if (client != null)
 			{
@@ -34,7 +34,7 @@ namespace SalesLibraries.ServiceConnector.Services.Soap
 				{
 					var sessionKey = client.getSessionKey(Login, Password);
 					if (!string.IsNullOrEmpty(sessionKey))
-						userRecords.AddRange(client.getInactiveUsers(sessionKey, startDate.ToString("MM/dd/yyyy hh:mm tt"), endDate.ToString("MM/dd/yyyy hh:mm tt")) ?? new UserModel[] { });
+						userRecords.AddRange(client.getInactiveUsers(sessionKey, startDate.ToString("MM/dd/yyyy hh:mm tt"), endDate.ToString("MM/dd/yyyy hh:mm tt")) ?? new UserViewModel[] { });
 					else
 						message = "Couldn't complete operation.\nLogin or password are not correct.";
 				}

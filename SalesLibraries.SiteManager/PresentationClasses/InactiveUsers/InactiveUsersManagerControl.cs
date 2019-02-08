@@ -22,7 +22,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.InactiveUsers
 	[ToolboxItem(false)]
 	public partial class InactiveUsersManagerControl : UserControl
 	{
-		private readonly List<UserModel> _records = new List<UserModel>();
+		private readonly List<UserViewModel> _records = new List<UserViewModel>();
 		private readonly InactiveUsersFilter _filterControl;
 
 		public InactiveUsersManagerControl()
@@ -98,7 +98,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.InactiveUsers
 
 		private void ApplyData()
 		{
-			var filteredRecords = new List<UserModel>();
+			var filteredRecords = new List<UserViewModel>();
 			_records.ForEach(x => x.Selected = false);
 			filteredRecords.AddRange(_filterControl.EnableFilter ? _records.Where(x => x.GroupNameList.Any(y => _filterControl.SelectedGroups.Contains(y))) : _records);
 			gridControlRecords.DataSource = filteredRecords;
@@ -111,7 +111,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.InactiveUsers
 
 			var userModels = gridViewRecords.GetSelectedRows()
 				.Select(rowIndex => gridViewRecords.GetRow(rowIndex))
-				.OfType<UserModel>()
+				.OfType<UserViewModel>()
 				.ToList();
 
 			if (!userModels.Any()) return;
@@ -162,7 +162,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.InactiveUsers
 
 			var userModels = gridViewRecords.GetSelectedRows()
 				.Select(rowIndex => gridViewRecords.GetRow(rowIndex))
-				.OfType<UserModel>()
+				.OfType<UserViewModel>()
 				.ToList();
 
 			if (!userModels.Any()) return;
@@ -208,7 +208,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.InactiveUsers
 		{
 			var selectedRecords = gridViewRecords.GetSelectedRows()
 				.Select(rowIndex => gridViewRecords.GetRow(rowIndex))
-				.OfType<UserModel>()
+				.OfType<UserViewModel>()
 				.ToList();
 			var selecteUsersCount = selectedRecords.Count;
 			_filterControl.UpdateUsersCount(_records.Count, selecteUsersCount);

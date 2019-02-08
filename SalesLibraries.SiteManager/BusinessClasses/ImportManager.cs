@@ -11,11 +11,11 @@ namespace SalesLibraries.SiteManager.BusinessClasses
 {
 	public class ImportManager
 	{
-		public static IEnumerable<UserInfo> ImportUsers(string filePath, UserModel[] existedUsers, GroupModel[] existedGroups, bool complexPassword, out string message)
+		public static IEnumerable<UserInfo> ImportUsers(string filePath, UserViewModel[] existedUsers, GroupViewModel[] existedGroups, bool complexPassword, out string message)
 		{
 			message = string.Empty;
 			var userInfo = new List<UserInfo>();
-			var existedGroupList = new List<GroupModel>(existedGroups);
+			var existedGroupList = new List<GroupViewModel>(existedGroups);
 			var existedUserLogins = new List<string>(existedUsers.Select(x => x.login));
 
 			var connnectionString = string.Format(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties=""Excel 12.0;HDR=Yes;IMEX=1"";", filePath);
@@ -53,7 +53,7 @@ namespace SalesLibraries.SiteManager.BusinessClasses
 								 lastName.Equals(u.lastName, StringComparison.OrdinalIgnoreCase) &&
 								 email.Equals(u.email, StringComparison.OrdinalIgnoreCase) &&
 								 phone.Equals(u.phone, StringComparison.OrdinalIgnoreCase) &&
-								 u.groups.Any(existedGroup => group.name == existedGroup.name));
+								 u.assignedGroups.Any(existedGroup => group.name == existedGroup));
 						if (notChangedUser) continue;
 
 						var newUser = !existedUserLogins.Any(existedLogin => login.Equals(existedLogin, StringComparison.OrdinalIgnoreCase));
@@ -67,7 +67,7 @@ namespace SalesLibraries.SiteManager.BusinessClasses
 
 						if (group == null)
 						{
-							group = new GroupModel();
+							group = new GroupViewModel();
 							group.IsNew = true;
 							group.id = Guid.NewGuid().ToString();
 							group.name = groupName.Trim();

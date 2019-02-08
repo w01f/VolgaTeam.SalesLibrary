@@ -9,7 +9,6 @@
           <xsd:element name="pages" type="tns:SoapLibraryPageArray" />
           <xsd:element name="autoWidgets" type="tns:SoapAutoWidgetArray" />
           <xsd:element name="previewContainers" type="tns:SoapUniversalPreviewContainerArray" />
-          <xsd:element name="selected" type="xsd:boolean" />
           <xsd:element name="config" type="tns:LibraryConfig" />
         </xsd:all>
       </xsd:complexType>
@@ -32,10 +31,9 @@
           <xsd:element name="enableColumns" type="xsd:boolean" />
           <xsd:element name="columns" type="tns:SoapColumnArray" />
           <xsd:element name="dateModify" type="xsd:string" />
-          <xsd:element name="selected" type="xsd:boolean" />
-          <xsd:element name="groups" type="tns:GroupModelArray" />
+          <xsd:element name="groups" type="tns:GroupViewModelArray" />
           <xsd:element name="allGroups" type="xsd:boolean" />
-          <xsd:element name="users" type="tns:UserModelArray" />
+          <xsd:element name="users" type="tns:UserViewModelArray" />
           <xsd:element name="allUsers" type="xsd:boolean" />
         </xsd:all>
       </xsd:complexType>
@@ -241,33 +239,38 @@
           <xsd:element name="dateModify" type="xsd:string" />
         </xsd:all>
       </xsd:complexType>
-      <xsd:complexType name="GroupModelArray">
+      <xsd:complexType name="GroupViewModelArray">
         <xsd:complexContent mixed="false">
           <xsd:restriction base="soap-enc:Array">
-            <xsd:attribute wsdl:arrayType="tns:GroupModel[]" ref="soap-enc:arrayType" />
+            <xsd:attribute wsdl:arrayType="tns:GroupViewModel[]" ref="soap-enc:arrayType" />
           </xsd:restriction>
         </xsd:complexContent>
       </xsd:complexType>
-      <xsd:complexType name="GroupModel">
+      <xsd:complexType name="GroupViewModel">
         <xsd:all>
           <xsd:element name="id" type="xsd:string" />
           <xsd:element name="name" type="xsd:string" />
-          <xsd:element name="selected" type="xsd:boolean" />
-          <xsd:element name="users" type="tns:UserModelArray" />
+          <xsd:element name="assignedUsers" type="tns:stringArray" />
           <xsd:element name="allUsers" type="xsd:boolean" />
-          <xsd:element name="libraries" type="tns:SoapLibraryArray" />
-          <xsd:element name="libraryIds" type="tns:stringArray" />
+          <xsd:element name="assignedLibraries" type="tns:stringArray" />
           <xsd:element name="allLibraries" type="xsd:boolean" />
         </xsd:all>
       </xsd:complexType>
-      <xsd:complexType name="UserModelArray">
+      <xsd:complexType name="stringArray">
         <xsd:complexContent mixed="false">
           <xsd:restriction base="soap-enc:Array">
-            <xsd:attribute wsdl:arrayType="tns:UserModel[]" ref="soap-enc:arrayType" />
+            <xsd:attribute wsdl:arrayType="xsd:string[]" ref="soap-enc:arrayType" />
           </xsd:restriction>
         </xsd:complexContent>
       </xsd:complexType>
-      <xsd:complexType name="UserModel">
+      <xsd:complexType name="UserViewModelArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute wsdl:arrayType="tns:UserViewModel[]" ref="soap-enc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="UserViewModel">
         <xsd:all>
           <xsd:element name="id" type="xsd:int" />
           <xsd:element name="login" type="xsd:string" />
@@ -277,29 +280,14 @@
           <xsd:element name="email" type="xsd:string" />
           <xsd:element name="phone" type="xsd:string" />
           <xsd:element name="role" type="xsd:int" />
-          <xsd:element name="selected" type="xsd:boolean" />
           <xsd:element name="dateAdd" type="xsd:string" />
           <xsd:element name="dateModify" type="xsd:string" />
-          <xsd:element name="groups" type="tns:GroupModelArray" />
-          <xsd:element name="groupNames" type="xsd:string" />
+          <xsd:element name="dateLastActivity" type="xsd:string" />
+          <xsd:element name="assignedGroups" type="tns:stringArray" />
           <xsd:element name="allGroups" type="xsd:boolean" />
-          <xsd:element name="libraries" type="tns:SoapLibraryArray" />
+          <xsd:element name="assignedLibraries" type="tns:stringArray" />
           <xsd:element name="allLibraries" type="xsd:boolean" />
         </xsd:all>
-      </xsd:complexType>
-      <xsd:complexType name="SoapLibraryArray">
-        <xsd:complexContent mixed="false">
-          <xsd:restriction base="soap-enc:Array">
-            <xsd:attribute wsdl:arrayType="tns:SoapLibrary[]" ref="soap-enc:arrayType" />
-          </xsd:restriction>
-        </xsd:complexContent>
-      </xsd:complexType>
-      <xsd:complexType name="stringArray">
-        <xsd:complexContent mixed="false">
-          <xsd:restriction base="soap-enc:Array">
-            <xsd:attribute wsdl:arrayType="xsd:string[]" ref="soap-enc:arrayType" />
-          </xsd:restriction>
-        </xsd:complexContent>
       </xsd:complexType>
       <xsd:complexType name="SoapAutoWidgetArray">
         <xsd:complexContent mixed="false">
