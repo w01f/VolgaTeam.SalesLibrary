@@ -19,6 +19,11 @@
 		public $iconPosition;
 		public $stripeSize;
 
+		public $leftButtonColor;
+		public $leftButtonDisabledColor;
+		public $rightButtonColor;
+		public $rightButtonDisabledColor;
+
 		/**
 		 * @param $parentShortcut \PageContentShortcut
 		 * @param $parentBlock BlockContainer
@@ -30,6 +35,11 @@
 
 			$this->iconPosition = self::IconPositionLeft;
 			$this->stripeSize = self::StripeSizeNormal;
+
+			$this->leftButtonColor = '000000';
+			$this->leftButtonDisabledColor = '000000';
+			$this->rightButtonColor = '000000';
+			$this->rightButtonDisabledColor = '000000';
 		}
 
 		/**
@@ -49,6 +59,18 @@
 			$stripeSize = $queryResult->length > 0 ? strtolower(trim($queryResult->item(0)->nodeValue)) : $this->stripeSize;
 			if (in_array($stripeSize, array(self::StripeSizeNormal, self::StripeSizeMedium, self::StripeSizeLarge)))
 				$this->stripeSize = $stripeSize;
+
+			$queryResult = $xpath->query('./LeftArrowColor/Enabled', $contextNode);
+			$this->leftButtonColor = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : $this->leftButtonColor;
+
+			$queryResult = $xpath->query('./LeftArrowColor/Disabled', $contextNode);
+			$this->leftButtonDisabledColor = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : $this->leftButtonDisabledColor;
+
+			$queryResult = $xpath->query('./RightArrowColor/Enabled', $contextNode);
+			$this->rightButtonColor = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : $this->rightButtonColor;
+
+			$queryResult = $xpath->query('./RightArrowColor/Disabled', $contextNode);
+			$this->rightButtonDisabledColor = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : $this->rightButtonDisabledColor;
 
 			if (!$this->parentShortcut->usePermissions || $this->isAccessGranted)
 			{

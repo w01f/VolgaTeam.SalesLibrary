@@ -12,6 +12,15 @@
 				$(this).css('background-image', 'url(' + imgValue + ')');
 			});
 
+			$('#login-modal').on('shown.bs.modal', function () {
+				$('#login-shortcut-password').focus();
+			});
+
+			$('#login-shortcut-password').off('keypress').on('keypress', function (e) {
+				if (e.which === 13)
+					$('#login-submit').click();
+			});
+
 			$('#login-submit').off('click').on('click', function () {
 				$.ajax({
 					type: "POST",

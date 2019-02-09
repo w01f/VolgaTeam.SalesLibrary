@@ -6,8 +6,10 @@
 
 	/** @var $contentBlock ScrollStripeBlock */
 
-	/** @var ScrollStripeItem[] $scrollStripeItem */
+	/** @var ScrollStripeItem[] $scrollStripeItems */
 	$scrollStripeItems = $contentBlock->items;
+
+	$scrollStripeId = sprintf("scroll-stripe-%s", $contentBlock->id);
 
 	$stripeConfigurationClass = '';
 	if ($contentBlock->iconPosition == ScrollStripeBlock::IconPositionTop)
@@ -18,10 +20,68 @@
 	else if ($contentBlock->stripeSize == ScrollStripeBlock::StripeSizeLarge)
 		$stripeConfigurationClass .= ' scrolltab-large';
 ?>
-<div id="scroll-stripe-<? echo $contentBlock->id; ?>"
-     class="scroll_tabs_theme_light<? echo $stripeConfigurationClass; ?> scroll-stripe">
+<style>
+    <? echo '#'.$scrollStripeId; ?> div.scroll_tab_inner > span.scroll_tab_over {
+        background-color: #ffffff;
+    }
+
+    <? echo '#'.$scrollStripeId; ?> .scroll_tab_left_button,
+    <? echo '#'.$scrollStripeId; ?> .scroll_tab_right_button{
+        border-color: <? echo Utils::formatColor($contentBlock->border->color); ?> !important;
+    }
+
+    <? echo '#'.$scrollStripeId; ?> .scroll_tab_left_button i{
+        color: <? echo Utils::formatColor($contentBlock->leftButtonColor); ?> !important;
+    }
+
+    <? echo '#'.$scrollStripeId; ?> .scroll_tab_left_button.scroll_arrow_disabled i{
+        color: <? echo Utils::formatColor($contentBlock->leftButtonDisabledColor); ?> !important;
+    }
+
+    <? echo '#'.$scrollStripeId; ?> .scroll_tab_right_button i{
+        color: <? echo Utils::formatColor($contentBlock->rightButtonColor); ?> !important;
+    }
+
+    <? echo '#'.$scrollStripeId; ?> .scroll_tab_right_button.scroll_arrow_disabled i{
+        color: <? echo Utils::formatColor($contentBlock->rightButtonDisabledColor); ?> !important;
+    }
+</style>
+<div id="<? echo $scrollStripeId; ?>" class="scroll_tabs_theme_light<? echo $stripeConfigurationClass; ?> scroll-stripe">
 	<? foreach ($scrollStripeItems as $stripeItem): ?>
-        <span>
+        <?
+		$stripeItemId = sprintf("stripe-item-%s", $stripeItem->id);
+        ?>
+        <style>
+            <? echo '#'.$stripeItemId; ?>
+            {
+                border-color: <? echo Utils::formatColor($contentBlock->border->color); ?> !important;
+                background-color: <? echo Utils::formatColor($stripeItem->backgroundColor); ?> !important;
+            }
+            <? echo '#'.$stripeItemId; ?>:hover {
+                background-color: <? echo Utils::formatColor($stripeItem->backgroundHoverColor); ?> !important;
+            }
+
+            <? echo '#'.$stripeItemId; ?> a i {
+                color: <? echo Utils::formatColor($stripeItem->iconColor); ?>
+            }
+
+            <? echo '#'.$stripeItemId; ?>:hover a i {
+                color: <? echo Utils::formatColor($stripeItem->iconHoverColor); ?>
+            }
+
+            <?if(!empty($stripeItem->textAppearance->color)):?>
+                <? echo '#'.$stripeItemId; ?> a .item-text {
+                    color: <? echo Utils::formatColor($stripeItem->textAppearance->color); ?>
+                }
+            <?endif;?>
+
+            <?if(!empty($stripeItem->textAppearance->hoverColor)):?>
+                <? echo '#'.$stripeItemId; ?>:hover a .item-text {
+                    color: <? echo Utils::formatColor($stripeItem->textAppearance->hoverColor); ?>
+                }
+            <?endif;?>
+        </style>
+        <span id="<? echo $stripeItemId; ?>">
             <? if ($stripeItem->type === 'url'): ?>
                 <? /** @var ScrollStripeUrl $stripeItem */ ?>
                 <a href="<? echo $stripeItem->url; ?>" target="_blank"
@@ -38,14 +98,16 @@
                         <? if ($contentBlock->iconPosition == ScrollStripeBlock::IconPositionTop): ?>
                             <div class="icomoon-wrap">
                         <? endif; ?>
-                        <i class="icomoon<? if (!empty($stripeItem->iconSize)): ?> icomoon-<? echo $stripeItem->iconSize; ?><? endif; ?> <? echo $stripeItem->icon; ?>"
-                           style="color: <? echo Utils::formatColor($stripeItem->iconColor); ?>"></i>
+                        <i class="icomoon<? if (!empty($stripeItem->iconSize)): ?> icomoon-<? echo $stripeItem->iconSize; ?><? endif; ?> <? echo $stripeItem->icon; ?>"></i>
                         <? if ($contentBlock->iconPosition == ScrollStripeBlock::IconPositionTop): ?>
                             </div>
                         <? endif; ?>
                     <? endif; ?>
 	                <?
                         $stripeTextId = sprintf("stripe-item-text-%s", $stripeItem->id);
+                        $textAppearance = $stripeItem->getTextAppearance();
+                        $textAppearance->color = null;
+		                $textAppearance->hoverColor = null;
                         echo $this->renderPartial('landingPageMarkup/style/styleTextAppearance',
 	                        array(
 		                        'textAppearance' => $stripeItem->getTextAppearance(),

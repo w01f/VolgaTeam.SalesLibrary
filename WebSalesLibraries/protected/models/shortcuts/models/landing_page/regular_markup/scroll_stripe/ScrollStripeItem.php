@@ -18,6 +18,9 @@
 
 		public $icon;
 		public $iconColor;
+		public $iconHoverColor;
+		public $backgroundColor;
+		public $backgroundHoverColor;
 		public $iconSize;
 
 		/**
@@ -30,7 +33,10 @@
 			$this->type = 'scroll-stripe-item';
 
 			$this->iconColor = '000000';
+			$this->iconHoverColor = '000000';
 			$this->iconSize = null;
+			$this->backgroundColor = 'ffffff';
+			$this->backgroundHoverColor = 'ffffff';
 		}
 
 		/**
@@ -49,6 +55,15 @@
 
 			$queryResult = $xpath->query('./IconColor', $contextNode);
 			$this->iconColor = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : $this->iconColor;
+
+			$queryResult = $xpath->query('./IconHoverColor', $contextNode);
+			$this->iconHoverColor = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : $this->iconHoverColor;
+
+			$queryResult = $xpath->query('./BackgroundColor', $contextNode);
+			$this->backgroundColor = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : $this->backgroundColor;
+
+			$queryResult = $xpath->query('./BackgroundHoverColor', $contextNode);
+			$this->backgroundHoverColor = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : $this->backgroundHoverColor;
 
 			$queryResult = $xpath->query('./IconSize', $contextNode);
 			$iconSize = $queryResult->length > 0 ? strtolower(trim($queryResult->item(0)->nodeValue)) : $this->iconSize;
