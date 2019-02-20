@@ -85,11 +85,8 @@
 			self::model()->deleteAll('id_user=?', array($ownerId));
 		}
 
-		/**
-		 * @param $liveLinkIds
-		 */
-		public static function clearByLinkIds($liveLinkIds)
+		public static function clearByLinkIds()
 		{
-			Yii::app()->db->createCommand()->delete('tbl_user_link_cart', "id_link not in ('" . implode("','", $liveLinkIds) . "')");
+			Yii::app()->db->createCommand()->delete('tbl_user_link_cart', "id_link not in (select l.id from tbl_link l )");
 		}
 	}

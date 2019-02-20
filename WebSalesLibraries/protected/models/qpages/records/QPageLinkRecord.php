@@ -47,11 +47,8 @@
 			self::model()->deleteByPk($linkInPageId);
 		}
 
-		/**
-		 * @param $liveLinkIds
-		 */
-		public static function clearByLinkIds($liveLinkIds)
+		public static function clearByLinkIds()
 		{
-			Yii::app()->db->createCommand()->delete('tbl_qpage_link', "id_link not in ('" . implode("','", $liveLinkIds) . "')");
+			Yii::app()->db->createCommand()->delete('tbl_qpage_link', "id_link not in (select l.id from tbl_link l )");
 		}
 	}

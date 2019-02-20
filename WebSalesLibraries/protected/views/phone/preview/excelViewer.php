@@ -27,7 +27,7 @@
                         </div>
                         <div class="ui-block-b">
 							<? if ($data->config->allowAddToQuickSite || $data->config->allowAddToFavorites || (Yii::app()->params['one_drive_links']['enabled'] && !empty($data->oneDriveUrl))): ?>
-                                <a href="#link-viewer-options-menu" data-role="button" data-rel="popup" data-inline="true" data-theme="a">Options</a>
+                                <a class="popup-toggle" id="link-viewer-options-menu-toggle" href="#link-viewer-options-menu" data-role="button" data-rel="popup" data-inline="true" data-theme="a">Options</a>
 							<? endif; ?>
                         </div>
                     </div>

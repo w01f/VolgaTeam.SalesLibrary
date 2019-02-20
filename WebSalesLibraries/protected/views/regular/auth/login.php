@@ -46,11 +46,18 @@
                                    data-toggle="modal" data-target="#new-password-modal" style="display: none;">
                                     <i class="fa fa-user"></i> Login
                                 </a>
-                                <a href="#"
-                                   class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
-                                   data-toggle="modal" data-target="#recover-password-modal">
-                                    <i class="fa fa-lock"></i> Forgot
-                                </a>
+	                            <? if (Yii::app()->params['login']['use_token_connection']): ?>
+                                    <a href="https://connect.gray.tv"
+                                       class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                                        <i class="fa fa-lock"></i> Gray Connect
+                                    </a>
+	                            <? else: ?>
+                                    <a href="#"
+                                       class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+                                       data-toggle="modal" data-target="#recover-password-modal">
+                                        <i class="fa fa-lock"></i> Forgot
+                                    </a>
+	                            <? endif; ?>
                                 <a href="#"
                                    class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
                                    data-toggle="modal" data-target="#contact-modal">

@@ -16,7 +16,7 @@
 			baseLinkViewerPage.find('.page-header .header-title').html(parentPageData.name);
 			baseLinkViewerPage.find('.main-content .content-header .back a').prop('href', parentPageData.id);
 
-			baseLinkViewerPage.find('.preview-link').off('click').on('click', function ()
+			baseLinkViewerPage.find('.preview-link').off('click').on('click', function (e)
 			{
 				$.SalesPortal.LinkManager.requestViewDialog(
 					$(this).find('.library-link-id').text(),
@@ -26,6 +26,8 @@
 					},
 					false
 				);
+				e.preventDefault();
+				e.stopPropagation();
 			});
 
 			$('.logout-button').off('click').on('click', function (e)

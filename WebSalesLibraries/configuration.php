@@ -24,7 +24,9 @@
 					'complex_password' => false,
 					'inactivity_refresh_timeout' => -1,
 					'inactivity_logout_timeout' => -1,
-					'theme_color' => '2196f3'
+					'theme_color' => '2196f3',
+					'use_token_connection' => true,
+					'secret_key' => 'graysalestv-bfc041fe-859a-8123-a308-38e51ef9ab28'
 				),
 				'stations' => array(
 					'tab_name' => 'Libraries',

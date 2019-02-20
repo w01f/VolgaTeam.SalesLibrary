@@ -41,11 +41,8 @@
 			}
 		}
 
-		/**
-		 * @param array $liveLinkIds
-		 */
-		public static function clearByLinkIds($liveLinkIds)
+		public static function clearByLinkIds()
 		{
-			Yii::app()->db->createCommand()->delete('tbl_link_qpage', "id_link not in ('" . implode("','", $liveLinkIds) . "')");
+			Yii::app()->db->createCommand()->delete('tbl_link_qpage', "id_link not in (select l.id from tbl_link l )");
 		}
 	}

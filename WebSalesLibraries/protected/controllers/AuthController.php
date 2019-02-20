@@ -168,6 +168,12 @@
 			Yii::app()->end();
 		}
 
+		public function actionGetChangePasswordDialog()
+		{
+			$login = UserIdentity::getCurrentUserLogin();
+			$this->renderPartial('changePasswordDialog', array('login' => $login), false, true);
+		}
+
 		public function actionChangePassword()
 		{
 			$login = Yii::app()->request->getQuery('login');
@@ -225,7 +231,7 @@
 					$changePasswordModel->login = $login;
 					$changePasswordModel->oldPassword = $oldPassword;
 					$changePasswordModel->rememberMe = $rememberMe;
-					$this->render('changePassword', array('formData' => $changePasswordModel));
+					$this->render('changePasswordPage', array('formData' => $changePasswordModel));
 				}
 			}
 		}
@@ -238,11 +244,20 @@
 			if (empty(trim($rememberMe)))
 				$rememberMe = false;
 			$this->pageTitle = Yii::app()->name . ' - Change Password';
-			$this->render('changePassword', array(
+			$this->render('changePasswordPage', array(
 				'login' => $login,
 				'password' => $oldPassword,
 				'rememberMe' => $rememberMe
 			));
+		}
+
+		public function actionChangePasswordQuick()
+		{
+			$password = Yii::app()->request->getPost('password');
+			$login = UserIdentity::getCurrentUserLogin();
+			UserRecord::changePasswordByLogin($login, $password);
+			ResetPasswordRecord::model()->deleteByPk($login);
+			echo CJSON::encode(array("success" => true));
 		}
 
 		public function actionValidateUserByEmail()
@@ -261,7 +276,12 @@
 			{
 				$password = UserRecord::generatePassword();
 				UserRecord::changePasswordByEmail($email, $password);
-				ResetPasswordRecord::resetPasswordForUser($email, $password, false, true);
+				ResetPasswordRecord::resetPasswordForUser(
+					$email,
+					$password,
+					true,
+					'Password Reset for ' . Yii::app()->getBaseUrl(true),
+					'existedUser');
 			}
 		}
 	}

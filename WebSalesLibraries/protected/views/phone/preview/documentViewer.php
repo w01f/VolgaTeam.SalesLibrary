@@ -23,14 +23,14 @@
 			<div class="actions">
 				<div class="ui-grid-b">
 					<div class="ui-block-a">
-						<a href="#link-viewer-open-menu" data-role="button" data-rel="popup" data-inline="true" data-theme="a">Open</a>
+                        <a class="popup-toggle" id="link-viewer-open-menu-toggle" href="#link-viewer-open-menu" data-role="button" data-rel="popup" data-inline="true" data-theme="a">Open</a>
 					</div>
 					<? if ($data->config->allowAddToQuickSite || $data->config->allowAddToFavorites || (Yii::app()->params['one_drive_links']['enabled'] && !empty($data->oneDriveUrl))): ?>
 						<div class="ui-block-b">
 							<a id="link-viwer-open-full-screen" href="#" data-role="button" data-inline="true" data-theme="a" data-transition="slidefade">Full Screen</a>
 						</div>
 						<div class="ui-block-c">
-							<a href="#link-viewer-options-menu" data-role="button" data-rel="popup" data-inline="true" data-theme="a">Options</a>
+							<a class="popup-toggle" id="link-viewer-options-menu-toggle" href="#link-viewer-options-menu" data-role="button" data-rel="popup" data-inline="true" data-theme="a">Options</a>
 						</div>
 					<? else: ?>
 						<div class="ui-block-b"></div>

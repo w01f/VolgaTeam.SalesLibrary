@@ -84,6 +84,9 @@
 				case 'vimeo':
 					$.SalesPortal.LinkManager.playVimeo(data.find('.player-title').text(), data.find('.player-url').text());
 					break;
+				case 'resetpw':
+					new $.SalesPortal.ShortcutsResetPassword().init();
+					break;
 				default :
 					if(shortcutId)
 					{

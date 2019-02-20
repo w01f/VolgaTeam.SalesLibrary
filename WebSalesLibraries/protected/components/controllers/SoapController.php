@@ -26,7 +26,7 @@
 		 */
 		public function getSessionKey($login, $password)
 		{
-			$identity = new UserIdentity($login, $password);
+			$identity = new UserIdentity($login, UserRecord::hashPassword($password));
 			$identity->authenticate();
 			if ($identity->errorCode === UserIdentity::ERROR_NONE)
 			{

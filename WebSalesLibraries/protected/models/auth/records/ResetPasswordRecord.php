@@ -28,9 +28,11 @@
 		 * @param $login
 		 * @param $password
 		 * @param $newUser
-		 * @param $email
+		 * @param $sendEmail
+		 * @param $emailSubject
+		 * @param $emailView
 		 */
-		public static function resetPasswordForUser($login, $password, $newUser, $email)
+		public static function resetPasswordForUser($login, $password, $sendEmail, $emailSubject, $emailView)
 		{
 			/** @var UserRecord $user */
 			$user = UserRecord::model()->find('LOWER(login)=? or LOWER(email)=?', array(strtolower($login),strtolower($login)));
@@ -45,16 +47,16 @@
 				$resetPassword->initial_date = date(Yii::app()->params['mysqlDateFormat']);
 				$resetPassword->save();
 
-				if ($email)
+				if ($sendEmail)
 				{
 					$message = Yii::app()->email;
 					$message->to = $user->email;
 					if (Yii::app()->params['email']['copy_enabled'])
 						$message->cc = Yii::app()->params['email']['copy'];
-					$message->subject = $newUser ? Yii::app()->params['email']['new_user']['subject'] : ('Password Reset for ' . Yii::app()->getBaseUrl(true));
+					$message->subject = $emailSubject;
 					$message->from = Yii::app()->params['email']['from'];
-					$message->viewVars = array('fullName' => ($user->first_name . ' ' . $user->last_name), 'login' => $user->login, 'password' => $password, 'site' => Yii::app()->name);
-					$message->view = $newUser ? 'newUser' : 'existedUser';
+					$message->viewVars = array('fullName' => $user->first_name, 'login' => $user->login, 'password' => $password, 'site' => Yii::app()->name);
+					$message->view = $emailView;
 					$message->send();
 				}
 			}

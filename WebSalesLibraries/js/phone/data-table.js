@@ -28,8 +28,10 @@
 				tableBody.append(tr);
 			});
 
-			tableBody.find('tr').off('click').on('click', function () {
+			tableBody.find('tr').off('click').on('click', function (e) {
 				$.SalesPortal.LinkManager.requestViewDialog($(this).find('.link-id').text(), parentPageData, false);
+				e.preventDefault();
+				e.stopPropagation();
 			})
 		};
 

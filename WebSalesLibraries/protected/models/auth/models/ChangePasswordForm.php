@@ -78,10 +78,10 @@
 		 */
 		public function changePassword()
 		{
-			$identity = new UserIdentity($this->login, $this->oldPassword);
+			$identity = new UserIdentity($this->login, UserRecord::hashPassword($this->oldPassword));
 			if ($identity->changePassword($this->newInitialPassword))
 			{
-				$identity = new UserIdentity($this->login, $this->newInitialPassword);
+				$identity = new UserIdentity($this->login, UserRecord::hashPassword($this->newInitialPassword));
 				if ($identity->authenticate())
 				{
 					$duration = $this->rememberMe ? 3600 * 24 * 30 : 0; // 30 days

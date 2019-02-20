@@ -7,7 +7,7 @@
 		this.init = function ()
 		{
 			var mainPage = $('#quicksite');
-			mainPage.find(".file-link").on('click', function ()
+			mainPage.find(".file-link").on('click', function (e)
 			{
 				if (checkEmail())
 				{
@@ -22,6 +22,8 @@
 						true
 					);
 				}
+				e.preventDefault();
+				e.stopPropagation();
 			});
 
 			$('.logout-button').off('click').on('click', function (e)

@@ -109,7 +109,7 @@
 			collapsibleLinks.collapsible('disable');
 
 			var regularLinks = libraryFolderElement.find('.regular-link');
-			regularLinks.off('click').on('click', function ()
+			regularLinks.off('click').on('click', function (e)
 			{
 				$.SalesPortal.LinkManager.requestViewDialog(
 					$(this).find('.link-id').text(),
@@ -119,6 +119,8 @@
 					},
 					false
 				);
+				e.preventDefault();
+				e.stopPropagation();
 			});
 
 			var directLinks = libraryFolderElement.find('.direct-link');

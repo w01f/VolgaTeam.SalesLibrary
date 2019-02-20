@@ -20,6 +20,9 @@
 
 		public function actionIndex()
 		{
+			if($this->isTokenAuthenticated)
+				$this->redirect(Yii::app()->getBaseUrl(true));
+
 			$menuGroups = ShortcutsManager::getAvailableGroups($this->isPhone);
 			$this->pageTitle = Yii::app()->name;
 

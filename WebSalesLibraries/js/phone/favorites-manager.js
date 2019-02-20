@@ -107,7 +107,7 @@
 		{
 			var links = folderElement.find('.link');
 			links.collapsible('disable');
-			links.off('click').on('click', function ()
+			links.off('click').on('click', function (e)
 			{
 				$.SalesPortal.LinkManager.requestViewDialog(
 					$(this).find('.link-id').text(),
@@ -117,6 +117,8 @@
 					},
 					false
 				);
+				e.preventDefault();
+				e.stopPropagation();
 			});
 			$.each(links, function ()
 			{

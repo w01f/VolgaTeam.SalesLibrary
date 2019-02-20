@@ -33,7 +33,7 @@
 		public function validateCredentials()
 		{
 			$errors = array();
-			$this->_identity = new \UserIdentity($this->login, $this->password);
+			$this->_identity = new \UserIdentity($this->login, \UserRecord::hashPassword($this->password));
 			if (!$this->_identity->authenticate())
 			{
 				if ($this->_identity->errorCode === \UserIdentity::ERROR_USERNAME_INVALID)

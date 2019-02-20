@@ -56,7 +56,7 @@
 				$this->logoPath = $logoPath;
 			else
 				$this->logoPath = $this->parent->logoPath;
-			if (isset($this->logoPath))
+			if (isset($this->logoPath) && file_exists($this->logoPath))
 				$this->logoContent = 'data:image/png;base64,' . base64_encode(file_get_contents($this->logoPath));
 			else
 				$this->logoContent = '//:0';

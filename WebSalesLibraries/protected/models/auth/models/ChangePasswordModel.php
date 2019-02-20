@@ -67,9 +67,9 @@
 
 		public function changePassword()
 		{
-			$identity = new \UserIdentity($this->login, $this->oldPassword);
+			$identity = new \UserIdentity($this->login, \UserRecord::hashPassword($this->oldPassword));
 			$identity->changePassword($this->newInitialPassword);
-			$identity = new \UserIdentity($this->login, $this->newInitialPassword);
+			$identity = new \UserIdentity($this->login, \UserRecord::hashPassword($this->newInitialPassword));
 			$identity->authenticate();
 			$duration = $this->rememberMe ? 3600 * 24 * 30 : 0; // 30 days
 			\Yii::app()->user->login($identity, $duration);

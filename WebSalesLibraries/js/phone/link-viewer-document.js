@@ -20,6 +20,13 @@
 			var baseLinkViewerPage = $('#link-viewer');
 			baseLinkViewerPage.find('.main-content .content-header .back a').prop('href', parentPageData.id);
 
+			baseLinkViewerPage.find('a.popup-toggle').off('click').on('click', function (e) {
+				e.preventDefault();
+				let popupId = $(this).attr('href');
+				$(popupId).popup('open', {positionTo: '#' + $(this).attr('id')});
+				$(this).removeClass('ui-btn-active');
+			});
+
 			var popupOpenFile = baseLinkViewerPage.find('#link-viewer-open-menu');
 			baseLinkViewerPage.find('.popup-open-action').off('click').on('click', function ()
 			{

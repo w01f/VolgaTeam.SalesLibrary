@@ -26,7 +26,9 @@
     }
 
     <? echo '#'.$scrollStripeId; ?> .scroll_tab_left_button,
-    <? echo '#'.$scrollStripeId; ?> .scroll_tab_right_button{
+    <? echo '#'.$scrollStripeId; ?> .scroll_tab_right_button,
+    <? echo '#'.$scrollStripeId; ?> span.scroll_tab_left_finisher,
+    <? echo '#'.$scrollStripeId; ?> span.scroll_tab_right_finisher{
         border-color: <? echo Utils::formatColor($contentBlock->border->color); ?> !important;
     }
 

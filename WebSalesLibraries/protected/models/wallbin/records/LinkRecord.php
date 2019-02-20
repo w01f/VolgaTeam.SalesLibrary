@@ -340,22 +340,4 @@
 			else
 				Yii::app()->db->createCommand()->delete('tbl_link', "id_folder = '" . $folderId . "'");
 		}
-
-		public static function clearDeadLinkData()
-		{
-			/** @var $liveLinkRecords LinkRecord[] */
-			$liveLinkRecords = self::model()->findAll();
-			$liveLinkIds = array();
-			if (isset($liveLinkRecords))
-				foreach ($liveLinkRecords as $linkRecord)
-					$liveLinkIds[] = $linkRecord->id;
-			if (count($liveLinkIds) > 0)
-			{
-				FavoritesLinkRecord::clearByLinkIds($liveLinkIds);
-				UserLinkCartRecord::clearByLinkIds($liveLinkIds);
-				QPageLinkRecord::clearByLinkIds($liveLinkIds);
-				LinkRateRecord::clearByLinkIds($liveLinkIds);
-				LinkQPageRecord::clearByLinkIds($liveLinkIds);
-			}
-		}
 	}

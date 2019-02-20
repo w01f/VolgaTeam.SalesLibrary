@@ -33,12 +33,12 @@
 		}
 
 		/**
-		 * @param $password
+		 * @param $passwordHash
 		 * @return bool
 		 */
-		public function validatePassword($password)
+		public function validatePasswordHash($passwordHash)
 		{
-			return self::hashPassword($password) === $this->password;
+			return $passwordHash === $this->password;
 		}
 
 		/**

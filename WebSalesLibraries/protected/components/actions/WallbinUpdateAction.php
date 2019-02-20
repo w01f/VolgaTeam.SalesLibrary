@@ -1,4 +1,5 @@
 <?
+
 	use application\models\wallbin\models\web\Library as Library;
 	use application\models\wallbin\models\web\Category as Category;
 
@@ -68,31 +69,31 @@
 									$library->load();
 									$library->buildCache($this->controller);
 									echo "HTML cache for " . $libraryName . " updated.\n";
-									unset($library);
+									$library = null;
 
 									MetaDataRecord::setData('external-library-links', 'last-update', date(Yii::app()->params['sourceDateFormat'], time()));
 
 									Yii::app()->cacheDB->flush();
 								}
 							}
+							$storageContent = null;
 						}
 					}
 				}
 			}
 
 			/** @var $libraryRecords LinkRecord[] */
-			$libraryRecords = LibraryRecord::model()->findAll();
+			$libraryRecords = LibraryRecord::model()->findAll("id not in ('" . implode("','", $libraryIds) . "')");
 			foreach ($libraryRecords as $libraryRecord)
-				if (!in_array($libraryRecord->id, $libraryIds))
-				{
-					UserLibraryRecord::model()->deleteAll('id_library = ?', array($libraryRecord->id));
-					LibraryRecord::clearData($libraryRecord->id);
-					LinkRecord::clearByLibrary($libraryRecord->id);
-					FolderRecord::clearByLibrary($libraryRecord->id);
-					LibraryPageRecord::clearByLibrary($libraryRecord->id);
-					$libraryRecord->delete();
-					Yii::app()->cacheDB->flush();
-				}
+			{
+				UserLibraryRecord::model()->deleteAll('id_library = ?', array($libraryRecord->id));
+				LibraryRecord::clearData($libraryRecord->id);
+				LinkRecord::clearByLibrary($libraryRecord->id);
+				FolderRecord::clearByLibrary($libraryRecord->id);
+				LibraryPageRecord::clearByLibrary($libraryRecord->id);
+				$libraryRecord->delete();
+			}
+			Yii::app()->cacheDB->flush();
 
 			$categoriesPath = Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . 'SDSearch.xml';
 			$maxTags = 10;
@@ -177,7 +178,11 @@
 			if (file_exists($groupTemplateFilePath))
 				GroupTemplateRecord::updateData(file($groupTemplateFilePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES));
 
-			LinkRecord::clearDeadLinkData();
+			FavoritesLinkRecord::clearByLinkIds();
+			UserLinkCartRecord::clearByLinkIds();
+			QPageLinkRecord::clearByLinkIds();
+			LinkRateRecord::clearByLinkIds();
+			LinkQPageRecord::clearByLinkIds();
 
 			echo "Job completed.\n";
 		}

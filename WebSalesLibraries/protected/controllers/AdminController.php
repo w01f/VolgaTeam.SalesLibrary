@@ -86,7 +86,12 @@
 					UserLibraryRecord::assignPagesForUser($login, $assignedPages);
 
 				if ($resetPassword)
-					ResetPasswordRecord::resetPasswordForUser($login, $password, $newUser, $sendInfoMessage);
+					ResetPasswordRecord::resetPasswordForUser(
+						$login,
+						$password,
+						$sendInfoMessage,
+						$newUser?Yii::app()->params['email']['new_user']['subject']: ('Password Reset for ' . Yii::app()->getBaseUrl(true)),
+						$newUser ? 'newUser' : 'existedUser');
 
 				MetaDataRecord::setData('library-security', 'last-update', date(Yii::app()->params['sourceDateFormat']));
 			}

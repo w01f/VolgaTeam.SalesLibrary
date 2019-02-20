@@ -1,11 +1,8 @@
-(function ($)
-{
+(function ($) {
 	window.BaseUrl = window.BaseUrl || '';
 	$.SalesPortal = $.SalesPortal || {};
-	var LinkManager = function ()
-	{
-		this.requestViewDialog = function (linkId, parentPageData, isQuickSite)
-		{
+	var LinkManager = function () {
+		this.requestViewDialog = function (linkId, parentPageData, isQuickSite) {
 			$.ajax({
 				type: "POST",
 				url: window.BaseUrl + "preview/getViewDialog",
@@ -13,22 +10,19 @@
 					linkId: linkId,
 					isQuickSite: isQuickSite
 				},
-				beforeSend: function ()
-				{
+				beforeSend: function () {
 					$.mobile.loading('show', {
 						textVisible: false,
 						html: ""
 					});
 				},
-				complete: function ()
-				{
+				complete: function () {
 					$.mobile.loading('hide', {
 						textVisible: false,
 						html: ""
 					});
 				},
-				success: function (parameters)
-				{
+				success: function (parameters) {
 					switch (parameters.format)
 					{
 						case 'document':
@@ -47,8 +41,7 @@
 			});
 		};
 
-		this.openFile = function (url, target)
-		{
+		this.openFile = function (url, target) {
 			window.open(url.replace(/&amp;/g, '%26'), target);
 		};
 	};

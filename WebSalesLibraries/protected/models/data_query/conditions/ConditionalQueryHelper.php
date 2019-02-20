@@ -292,7 +292,8 @@
 
 			$folderCondition = '1 <> 1';
 			$isAdmin = \UserIdentity::isUserAdmin();
-			if (!$usePermissionFilter || $isAdmin)
+			$notAuthorized = !\UserIdentity::isUserAuthorized();
+			if (!$usePermissionFilter || $isAdmin || $notAuthorized)
 				$folderCondition = '1 = 1';
 			else
 			{

@@ -16,7 +16,7 @@
 			$user = UserRecord::model()->find('LOWER(login)=:login or LOWER(email)=:login', array('login' => strtolower($this->username)));
 			if (!isset($user))
 				$this->errorCode = self::ERROR_USERNAME_INVALID;
-			else if (!$user->validatePassword($this->password))
+			else if (!$user->validatePasswordHash($this->password))
 				$this->errorCode = self::ERROR_PASSWORD_INVALID;
 			else
 			{
