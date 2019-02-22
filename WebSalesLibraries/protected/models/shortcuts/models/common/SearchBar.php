@@ -23,6 +23,7 @@
 		public $showTagsSelector;
 		public $defaultPageLength;
 		public $hoverTips;
+		public $hideFixedPanel;
 
 		/** @var  TableQueryConditions */
 		public $conditions;
@@ -78,6 +79,8 @@
 				$this->showTagsSelector = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
 				$queryResult = $xpath->query('./DefaultPageLength');
 				$this->defaultPageLength = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue)) : null;
+				$queryResult = $xpath->query('./HideFixedPanel', $rootNode);
+				$this->hideFixedPanel = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
 
 				$queryResult = $xpath->query('./HoverTips/Placeholder', $rootNode);
 				$this->hoverTips[self::HoverTipTagInput] = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : self::HoverTipTagInput;
@@ -161,6 +164,7 @@
 			$options->showSubSearchSearch = $this->showSubSearchSearch;
 			$options->showSubSearchTemplates = $this->showSubSearchTemplates;
 			$options->subSearchDefaultView = $this->subSearchDefaultView;
+			$options->hideFixedPanel = $this->hideFixedPanel;
 
 			$options->conditions = $this->conditions;
 

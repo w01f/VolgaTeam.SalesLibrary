@@ -19,6 +19,7 @@
 			searchShortcutId: parentSearchData.options.linkId,
 			searchShortcutTitle: searchShortcutOptions.title,
 			isSearchBar: searchShortcutOptions.isSearchBar,
+			hideFixedPanel: searchShortcutOptions.hideFixedPanel,
 			backHandler: parentSearchData.backHandler
 		});
 

@@ -97,6 +97,12 @@
 			return $('#content').find('.fixed-panel');
 		};
 
+		this.hideFixedPanels = function () {
+			let fixedPanels = $('#content').find('.fixed-panel');
+			fixedPanels.addClass('fixed-panel-hidden');
+			fixedPanels.hide();
+		};
+
 		this.updateSize = function () {
 			$('body').css({
 				'height': 'auto'
@@ -112,9 +118,9 @@
 			var bottomFixedPanel = contentRoot.find('.fixed-panel-bottom');
 
 			var height = $(window).height() - menu.outerHeight(true) - menu.offset().top;
-			if (topFixedPanel.length > 0)
+			if (topFixedPanel.length > 0 && !topFixedPanel.hasClass('fixed-panel-hidden'))
 				height = height - topFixedPanel.outerHeight(true);
-			if (bottomFixedPanel.length > 0)
+			if (bottomFixedPanel.length > 0 && !bottomFixedPanel.hasClass('fixed-panel-hidden'))
 				height = height - bottomFixedPanel.outerHeight(true);
 
 			content.css({

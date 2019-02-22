@@ -96,6 +96,7 @@
 			$options->showSubSearchTemplates = $this->showSubSearchTemplates && count($this->subConditions) > 0;
 			$options->subSearchDefaultView = $this->subSearchDefaultView;
 			$options->defaultPageLength = $this->defaultPageLength;
+			$options->hideFixedPanel = false;
 
 			$options->emptyResultLogo = $this->conditionNotMatchLogoPath;
 

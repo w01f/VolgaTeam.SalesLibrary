@@ -39,6 +39,7 @@
 			$options->isSearchBar = false;
 			$options->openInSamePage = true;
 			$options->defaultPageLength = null;
+			$options->hideFixedPanel = false;
 			$options->conditions = $this->conditions;
 			return $options;
 		}

@@ -11,6 +11,9 @@
 		this.loadResults = function (data) {
 			if (data.dataset.length > 0)
 			{
+				if (searchResultsSettings.hideFixedPanel)
+					$.SalesPortal.Content.hideFixedPanels();
+
 				dataTable = new $.SalesPortal.SearchDataTable(
 					{
 						tableIdentifier: 'search-results-data-table-content' + searchResultsSettings.searchShortcutId,
@@ -494,6 +497,7 @@
 		this.searchShortcutId = undefined;
 		this.searchShortcutTitle = undefined;
 		this.isSearchBar = undefined;
+		this.hideFixedPanel = undefined;
 		this.backHandler = undefined;
 		this.tableSizeSettings = undefined;
 

@@ -10,6 +10,7 @@
 		public $title;
 		public $isSearchBar;
 		public $openInSamePage;
+		public $hideFixedPanel;
 
 		public $enableSubSearch;
 		public $showSubSearchAll;
