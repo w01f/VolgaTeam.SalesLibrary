@@ -1335,56 +1335,70 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:ContentControllerwsdl")]
-    public partial class Font {
+	public partial class Font {
         
-        private string nameField;
+		private string nameField;
+
+		private int sizeField;
+
+		private bool isBoldField;
         
-        private bool isBoldField;
+		private bool isItalicField;
         
-        private bool isItalicField;
+		private bool isUnderlinedField;
         
-        private bool isUnderlinedField;
+		/// <remarks/>
+		public string name {
+			get {
+				return this.nameField;
+			}
+			set {
+				this.nameField = value;
+			}
+		}
+
+		public int size
+		{
+			get
+			{
+				return this.sizeField;
+			}
+			set
+			{
+				this.sizeField = value;
+			}
+		}
+
+		/// <remarks/>
+		public bool isBold {
+			get {
+				return this.isBoldField;
+			}
+			set {
+				this.isBoldField = value;
+			}
+		}
         
-        /// <remarks/>
-        public string name {
-            get {
-                return this.nameField;
-            }
-            set {
-                this.nameField = value;
-            }
-        }
+		/// <remarks/>
+		public bool isItalic {
+			get {
+				return this.isItalicField;
+			}
+			set {
+				this.isItalicField = value;
+			}
+		}
         
-        /// <remarks/>
-        public bool isBold {
-            get {
-                return this.isBoldField;
-            }
-            set {
-                this.isBoldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool isItalic {
-            get {
-                return this.isItalicField;
-            }
-            set {
-                this.isItalicField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool isUnderlined {
-            get {
-                return this.isUnderlinedField;
-            }
-            set {
-                this.isUnderlinedField = value;
-            }
-        }
-    }
+		/// <remarks/>
+		public bool isUnderlined {
+			get {
+				return this.isUnderlinedField;
+			}
+			set {
+				this.isUnderlinedField = value;
+			}
+		}
+	}
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3190.0")]
@@ -2407,7 +2421,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         private string customWebFormatField;
         
-        private BaseLinkBundleItem[] bundleItemsField;
+        private IBaseLinkBundleItem[] bundleItemsField;
         
         private string noteField;
         
@@ -2452,7 +2466,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         }
         
         /// <remarks/>
-        public BaseLinkBundleItem[] bundleItems {
+        public IBaseLinkBundleItem[] bundleItems {
             get {
                 return this.bundleItemsField;
             }
@@ -6939,7 +6953,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         private int typeField;
         
-        private BaseLinkSettings extendedPropertiesField;
+        private IBaseLinkSettings extendedPropertiesField;
         
         private LineBreak lineBreakPropertiesField;
         
@@ -7108,7 +7122,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         }
         
         /// <remarks/>
-        public BaseLinkSettings extendedProperties {
+        public IBaseLinkSettings extendedProperties {
             get {
                 return this.extendedPropertiesField;
             }
