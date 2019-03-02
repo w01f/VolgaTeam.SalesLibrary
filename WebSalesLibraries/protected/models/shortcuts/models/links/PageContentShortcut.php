@@ -22,6 +22,7 @@
 		/** @var  FixedPanelSettings */
 		public $fixedPanelSettings;
 
+		public $autoLoadShortcutId;
 		public $autoLoadLinkId;
 		public $autoLoadLinkShowDelayHours;
 
@@ -84,6 +85,9 @@
 
 			$queryResult = $xpath->query('//Config/PublicPassword');
 			$this->publicPassword = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
+
+			$queryResult = $xpath->query('//Config/AutoLoadShortcutId');
+			$this->autoLoadShortcutId = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
 
 			$queryResult = $xpath->query('//Config/AutoLoadLink');
 			if ($queryResult->length > 0)
@@ -186,13 +190,15 @@
 		{
 			$data = parent::getPageData();
 
-			if (!empty($this->autoLoadLinkId))
+			if (!empty($this->autoLoadShortcutId))
+				$data['autoLoadShortcutId'] = $this->autoLoadShortcutId;
+			else if (!empty($this->autoLoadLinkId))
 				$data['autoLoadLinkId'] = $this->autoLoadLinkId;
+
+			$data['headerOptions'] = $this->headerSettings;
 
 			if (!$this->isPhone)
 			{
-				$data['headerOptions'] = $this->headerSettings;
-
 				$data['headerIcon'] = $this->headerSettings->icon;
 				$data['headerIconHideCondition'] = array(
 					'extraSmall' => $this->headerSettings->hideIconCondition->extraSmall,

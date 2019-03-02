@@ -25,7 +25,7 @@
 			});
 		};
 
-		this.assignShortcutItemHandlers = function (shortcutsContainer)
+		this.assignShortcutItemHandlers = function (shortcutsContainer, additionalCallback)
 		{
 			shortcutsContainer.find('.shortcuts-link').off('click.shortcut').on('click.shortcut', function (e)
 			{
@@ -43,8 +43,13 @@
 				if (hasCustomHandler === true && samePage === true)
 				{
 					e.preventDefault();
+
+					if (additionalCallback != undefined)
+						additionalCallback();
+
 					return that.openShortcutByMenuItemData(data, {pushHistory: true});
 				}
+
 				return true;
 			});
 		};
@@ -197,16 +202,25 @@
 
 		var openShortcutOnSamePage = function (parameters)
 		{
-			parameters.autoLoadLinkCallback = undefined;
-			if (parameters.options.autoLoadLinkId !== undefined)
+			parameters.autoLoadModalContentCallback = undefined;
+			if (parameters.options.autoLoadShortcutId !== undefined)
 			{
-				parameters.autoLoadLinkCallback = function () {
+				parameters.autoLoadModalContentCallback = function () {
+					new $.SalesPortal.ShortcutsBundleModal().load({
+						shortcutId: parameters.options.autoLoadShortcutId
+					});
+				}
+			}
+			else if (parameters.options.autoLoadLinkId !== undefined)
+			{
+				parameters.autoLoadModalContentCallback = function () {
 					$.SalesPortal.LinkManager.requestViewDialog({
 						linkId: parameters.options.autoLoadLinkId,
 						isQuickSite: false
 					});
 				}
 			}
+
 			switch (parameters.options.shortcutType)
 			{
 				case 'gridbundle':
@@ -218,7 +232,7 @@
 					updatedAllContentNecessary = true;
 					break;
 				case 'search':
-					$.SalesPortal.ShortcutsSearchLink(parameters).runSearch(parameters.autoLoadLinkCallback);
+					$.SalesPortal.ShortcutsSearchLink(parameters).runSearch(parameters.autoLoadModalContentCallback);
 					break;
 				case 'window':
 					new $.SalesPortal.ShortcutsLibraryWindow().init(parameters);

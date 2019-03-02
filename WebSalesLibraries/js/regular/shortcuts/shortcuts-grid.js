@@ -34,8 +34,8 @@
 					$(window).off('resize.grid').on('resize.grid', updateContentSize);
 					updateContentSize();
 
-					if (data.autoLoadLinkCallback !== undefined)
-						data.autoLoadLinkCallback();
+					if (data.autoLoadModalContentCallback !== undefined)
+						data.autoLoadModalContentCallback();
 				}
 			});
 		};

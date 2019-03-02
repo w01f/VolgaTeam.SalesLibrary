@@ -57,19 +57,6 @@
 			}
 		}
 
-		/**
-		 * @param $shortcut BaseShortcut
-		 */
-		protected function renderSinglePage($shortcut)
-		{
-			$this->pageTitle = sprintf('%s - %s', $shortcut->title, $shortcut->description);
-			if (UserIdentity::isUserAuthorized())
-				$menuGroups = ShortcutsManager::getAvailableGroups($this->isPhone);
-			else
-				$menuGroups = array();
-			$this->render('pages/singlePage', array('menuGroups' => $menuGroups, 'shortcut' => $shortcut));
-		}
-
 		public function actionProcessPublicShortcutLoginData()
 		{
 			$loginData = Yii::app()->request->getPost('loginData');
@@ -189,6 +176,19 @@
 				}
 			}
 			Yii::app()->end();
+		}
+
+		/**
+		 * @param $shortcut BaseShortcut
+		 */
+		private function renderSinglePage($shortcut)
+		{
+			$this->pageTitle = sprintf('%s - %s', $shortcut->title, $shortcut->description);
+			if (UserIdentity::isUserAuthorized())
+				$menuGroups = ShortcutsManager::getAvailableGroups($this->isPhone);
+			else
+				$menuGroups = array();
+			$this->render('pages/singlePage', array('menuGroups' => $menuGroups, 'shortcut' => $shortcut));
 		}
 
 		/**
@@ -578,6 +578,23 @@
 		{
 			$superGroupTag = Yii::app()->request->getPost('superGroupTag');
 			ShortcutsManager::setSelectedSuperGroup($superGroupTag);
+		}
+
+		public function actionGetShortcutBundleDialog()
+		{
+			$shortcutId = Yii::app()->request->getPost('shortcutId');
+			/** @var  $shortcutRecord ShortcutLinkRecord */
+			$shortcutRecord = ShortcutLinkRecord::model()->findByPk($shortcutId);
+			/** @var  $shortcut BundleModalDialogShortcut */
+			$shortcut = $shortcutRecord->getRegularModel($this->isPhone);
+			$shortcut->loadConfig();
+			$content = $this->renderPartial('bundleModalDialog/mainContainer', array(
+				'shortcut' => $shortcut
+			), true);
+			echo CJSON::encode(array(
+				'content' => $content,
+				'options' => $shortcut->getOptions(),
+			));
 		}
 		//------Regular Site API-------------------------------------------
 

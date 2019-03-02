@@ -53,6 +53,7 @@
 			'application.models.statistic.models.common.*',
 			'application.models.statistic.models.links.*',
 			'application.models.statistic.models.reports.*',
+			'application.models.statistic.models.bundle_modal_dialog.*',
 			'application.models.statistic.models.*',
 			'application.models.statistic.records.*',
 			'application.models.wallbin.models.web.*',

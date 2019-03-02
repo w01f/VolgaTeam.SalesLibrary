@@ -36,8 +36,8 @@
 					updateContentSize();
 					$(window).off('resize.library-page').on('resize.library-page', updateContentSize);
 
-					if (data.autoLoadLinkCallback !== undefined)
-						data.autoLoadLinkCallback();
+					if (data.autoLoadModalContentCallback !== undefined)
+						data.autoLoadModalContentCallback();
 				}
 			});
 		};

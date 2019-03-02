@@ -254,8 +254,8 @@
 					$(window).off('resize.landing-page').on('resize.landing-page', updateContentSize);
 					updateContentSize();
 
-					if (data.autoLoadLinkCallback !== undefined)
-						data.autoLoadLinkCallback();
+					if (data.autoLoadModalContentCallback !== undefined)
+						data.autoLoadModalContentCallback();
 				}
 			});
 

@@ -41,8 +41,8 @@
 					updateContentSize();
 					$(window).off('resize.library').on('resize.library', updateContentSize);
 
-					if (data.autoLoadLinkCallback !== undefined)
-						data.autoLoadLinkCallback();
+					if (data.autoLoadModalContentCallback !== undefined)
+						data.autoLoadModalContentCallback();
 				}
 			});
 		};

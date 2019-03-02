@@ -182,6 +182,9 @@
 				case 'resetpw':
 					$shortcut = new ResetPasswordShortcut($this, $isPhone);
 					break;
+				case 'bundle_modal_dialog':
+					$shortcut = new BundleModalDialogShortcut($this, $isPhone);
+					break;
 				default:
 					$shortcut = new EmptyShortcut($this, $isPhone);
 					break;
@@ -377,6 +380,9 @@
 					break;
 				case 'resetpw':
 					$shortcut = new ResetPasswordShortcut($this, false);
+					break;
+				case 'bundle_modal_dialog':
+					$shortcut = new BundleModalDialogShortcut($this, false);
 					break;
 				default:
 					$shortcut = new EmptyShortcut($this, false);
