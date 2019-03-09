@@ -21,6 +21,11 @@
 
 			initControls();
 			applySearchConditions();
+
+			$.mobile.loading('hide', {
+				textVisible: false,
+				html: ""
+			});
 		};
 
 		var initControls = function ()

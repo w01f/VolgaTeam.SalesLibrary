@@ -47,6 +47,10 @@
 			$.mobile.pageContainer.pagecontainer("change", "#shortcut-link-page-" + shortcutData.options.linkId, {
 				transition: "slidefade"
 			});
+			$.mobile.loading('hide', {
+				textVisible: false,
+				html: ""
+			});
 
 			$('.logout-button').off('click').on('click', function (e)
 			{

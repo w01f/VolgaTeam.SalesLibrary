@@ -10,6 +10,11 @@
 		/** @var  ContentBlock[] */
 		public $contentBlocks;
 
+		public function __construct()
+		{
+			$this->contentBlocks = array();
+		}
+
 		/**
 		 * @param $parentShortcut \PageContentShortcut
 		 * @param $xpath \DOMXPath

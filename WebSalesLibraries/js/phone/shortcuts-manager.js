@@ -1,19 +1,14 @@
-(function ($)
-{
+(function ($) {
 	window.BaseUrl = window.BaseUrl || '';
 	$.SalesPortal = $.SalesPortal || {};
-	var ShortcutsGroup = function ()
-	{
+	var ShortcutsGroup = function () {
 		var that = this;
 
-		this.init = function ()
-		{
+		this.init = function () {
 			var groupPage = $('.shortcut-group-page');
 
-			var initGroup = function ()
-			{
-				groupPage.find('.menu-item').off('click').on('click', function (e)
-				{
+			var initGroup = function () {
+				groupPage.find('.menu-item').off('click').on('click', function (e) {
 					var data = $(this).find('.service-data');
 					that.trackActivity(data);
 
@@ -27,8 +22,7 @@
 					}
 				});
 
-				groupPage.find('.navigation-items-container-main .shortcuts-link').off('click').on('click', function (e)
-				{
+				groupPage.find('.navigation-items-container-main .shortcuts-link').off('click').on('click', function (e) {
 					var data = $(this).find('.service-data');
 					$.SalesPortal.ShortcutsManager.trackActivity(data);
 
@@ -42,16 +36,14 @@
 					}
 				});
 
-				$('.logout-button').off('click').on('click', function (e)
-				{
+				$('.logout-button').off('click').on('click', function (e) {
 					e.stopPropagation();
 					e.preventDefault();
 					$.SalesPortal.Auth.logout();
 				});
 			};
 
-			$(window).off("pagecontainerchange.group").on("pagecontainerchange.group", function (event, ui)
-			{
+			$(window).off("pagecontainerchange.group").on("pagecontainerchange.group", function (event, ui) {
 				if ((ui.toPage !== undefined && ui.toPage.prop('id') === groupPage.prop('id')) || ui.options.target === groupPage.prop('id'))
 				{
 					if (groupPage.find('.cbp-l-grid-masonry').length > 0)
@@ -65,8 +57,7 @@
 						}
 						catch (err)
 						{
-							groupPage.find('.menu-items').cubeportfolio('destroy', function ()
-							{
+							groupPage.find('.menu-items').cubeportfolio('destroy', function () {
 								groupPage.find('.menu-items').cubeportfolio({
 									gridAdjustment: 'alignCenter'
 								});
@@ -80,8 +71,7 @@
 			});
 		};
 
-		this.openShortcutByMenuItemData = function (data, parentShortcutId, customParameters)
-		{
+		this.openShortcutByMenuItemData = function (data, parentShortcutId, customParameters) {
 			var shortcutId = data.find('.link-id').text();
 			var url = data.find('.url').text();
 			var shortcutType = data.find('.link-type').text();
@@ -115,22 +105,15 @@
 							linkId: shortcutId,
 							parameters: customParameters
 						},
-						beforeSend: function ()
-						{
+						beforeSend: function () {
 							$.mobile.loading('show', {
 								textVisible: false,
 								html: ""
 							});
 						},
-						complete: function ()
-						{
-							$.mobile.loading('hide', {
-								textVisible: false,
-								html: ""
-							});
+						complete: function () {
 						},
-						success: function (result)
-						{
+						success: function (result) {
 							cleanupPreviousInstance(parentShortcutId);
 
 							var pageContent = $(result.content);
@@ -151,10 +134,8 @@
 							navigationItemsContainerMain.html(result.navigationPanel ? result.navigationPanel.content : '');
 
 							var allNavigationItemsContainers = pageContent.find('.navigation-items-container');
-							$(window).one("pagecontainerchange.navigation-items", function ()
-							{
-								allNavigationItemsContainers.find('.shortcuts-link').off('click').on('click', function (e)
-								{
+							$(window).one("pagecontainerchange.navigation-items", function () {
+								allNavigationItemsContainers.find('.shortcuts-link').off('click').on('click', function (e) {
 									var data = $(this).find('.service-data');
 									$.SalesPortal.ShortcutsManager.trackActivity(data);
 
@@ -167,8 +148,7 @@
 										$.SalesPortal.ShortcutsManager.openShortcutByMenuItemData(data, '#' + $('.shortcut-link-page.ui-page-active').prop('id'));
 									}
 								});
-								$('.logout-button').off('click').on('click', function (e)
-								{
+								$('.logout-button').off('click').on('click', function (e) {
 									e.stopPropagation();
 									e.preventDefault();
 									$.SalesPortal.Auth.logout();
@@ -177,44 +157,54 @@
 
 							$.mobile.initializePage();
 
-							switch (result.options.shortcutType)
+							if (result.options != undefined)
 							{
-								case 'gridbundle':
-								case 'carouselbundle':
-								case 'landing':
-									new $.SalesPortal.ShortcutsBundle(result).init();
-									break;
-								case 'search':
-									new $.SalesPortal.ShortcutsSearchLink(result).init();
-									break;
-								case 'window':
-									new $.SalesPortal.ShortcutsLibraryWindow(result).init();
-									break;
-								case 'qpage':
-									new $.SalesPortal.ShortcutsQPage(result).init();
-									break;
-								case 'page':
-									new $.SalesPortal.ShortcutsLibraryPage(result).init();
-									break;
-								case 'library':
-								case 'pagebundle':
-									new $.SalesPortal.ShortcutsWallbin(result).init(result);
-									break;
-								case 'searchapp':
-									new $.SalesPortal.ShortcutsSearchApp().init(result);
-									break;
-								case 'favorites':
-									new $.SalesPortal.ShortcutsFavorites().init(result);
-									break;
-								default :
-									$.mobile.pageContainer.pagecontainer("change", "#shortcut-link-page-" + result.options.linkId, {
-										transition: "slidefade"
-									});
-									break;
+								switch (result.options.shortcutType)
+								{
+									case 'gridbundle':
+									case 'carouselbundle':
+									case 'landing':
+										new $.SalesPortal.ShortcutsBundle(result).init();
+										break;
+									case 'search':
+										new $.SalesPortal.ShortcutsSearchLink(result).init();
+										break;
+									case 'window':
+										new $.SalesPortal.ShortcutsLibraryWindow(result).init();
+										break;
+									case 'qpage':
+										new $.SalesPortal.ShortcutsQPage(result).init();
+										break;
+									case 'page':
+										new $.SalesPortal.ShortcutsLibraryPage(result).init();
+										break;
+									case 'library':
+									case 'pagebundle':
+										new $.SalesPortal.ShortcutsWallbin(result).init(result);
+										break;
+									case 'searchapp':
+										new $.SalesPortal.ShortcutsSearchApp().init(result);
+										break;
+									case 'favorites':
+										new $.SalesPortal.ShortcutsFavorites().init(result);
+										break;
+									default :
+										$.mobile.pageContainer.pagecontainer("change", "#shortcut-link-page-" + result.options.linkId, {
+											transition: "slidefade"
+										});
+										$.mobile.loading('hide', {
+											textVisible: false,
+											html: ""
+										});
+										break;
+								}
 							}
 						},
-						error: function ()
-						{
+						error: function () {
+							$.mobile.loading('hide', {
+								textVisible: false,
+								html: ""
+							});
 						},
 						async: true,
 						dataType: 'json'
@@ -223,8 +213,7 @@
 			}
 		};
 
-		var cleanupPreviousInstance = function (parentShortcutId)
-		{
+		var cleanupPreviousInstance = function (parentShortcutId) {
 			if (parentShortcutId === undefined)
 				$('body .shortcut-link-page').remove();
 			else
@@ -243,8 +232,7 @@
 			}
 		};
 
-		this.trackActivity = function (dataObject)
-		{
+		this.trackActivity = function (dataObject) {
 			var activityData = $.parseJSON(dataObject.find('.activity-data').text());
 			$.SalesPortal.LogHelper.write({
 				type: 'Shortcut Tile',

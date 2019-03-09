@@ -290,6 +290,11 @@
 				$whereConditions[] = sprintf("link.id_library not in ('%s')", implode("','", $libraryIds));
 			}
 
+			if ($feedSettings->hideLinksWithinBundle)
+			{
+				$whereConditions[] = sprintf("link.id not in (select hide_lb.id_link from tbl_link_bundle hide_lb)");
+			}
+
 			$isAdmin = \UserIdentity::isUserAdmin();
 			if ($usePermissionFilter && !$isAdmin)
 			{
@@ -599,6 +604,7 @@
 			$feedSettings->conditions->fileTypesExclude = $feedSettings->linkFormatsExclude;
 
 			$feedSettings->conditions->limit = $feedSettings->maxLinks;
+			$feedSettings->conditions->hideLinksWithinBundle = $feedSettings->hideLinksWithinBundle;
 
 			$resultRecords = ConditionalQueryHelper::queryLinksByCondition($feedSettings->conditions, $usePermissionFilter);
 

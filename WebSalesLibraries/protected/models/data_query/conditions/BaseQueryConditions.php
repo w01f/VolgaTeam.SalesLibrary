@@ -44,6 +44,7 @@
 		public $sortSettings;
 
 		public $limit;
+		public $hideLinksWithinBundle;
 
 		public function __construct()
 		{
@@ -66,6 +67,7 @@
 			$this->onlyByName = false;
 
 			$this->limit = 0;
+			$this->hideLinksWithinBundle = false;
 		}
 
 		/**
@@ -240,5 +242,8 @@
 			$queryResult = $xpath->query('./SortSettings', $contextNode);
 			if ($queryResult->length > 0)
 				$this->sortSettings->configureFromXml($xpath, $queryResult->item(0));
+
+			$queryResult = $xpath->query('./HideLinkBundleDuplicates', $contextNode);
+			$this->hideLinksWithinBundle = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
 		}
 	}

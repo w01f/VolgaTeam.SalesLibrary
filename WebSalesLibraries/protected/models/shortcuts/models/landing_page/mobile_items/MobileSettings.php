@@ -8,6 +8,11 @@
 		/** @var  BaseMobileItem[] */
 		public $items;
 
+		public function __construct()
+		{
+			$this->items = array();
+		}
+
 		/**
 		 * @param $parentShortcut \LandingPageShortcut
 		 * @param $xpath \DOMXPath

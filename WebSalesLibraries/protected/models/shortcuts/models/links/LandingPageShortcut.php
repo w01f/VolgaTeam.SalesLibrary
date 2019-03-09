@@ -1,6 +1,7 @@
 <?
 
 	use application\models\data_query\link_feed\LinkFeedQueryHelper;
+	use application\models\shortcuts\models\landing_page\mobile_items\MobileSettings;
 	use application\models\shortcuts\models\landing_page\regular_markup\common\BlockContainer;
 	use application\models\shortcuts\models\landing_page\regular_markup\common\ContentBlock;
 	use application\models\shortcuts\models\landing_page\regular_markup\common\MarkupSettings;
@@ -16,7 +17,7 @@
 		public $enabledMobile;
 		/** @var  \BaseShortcut */
 		public $alternativeMobileShortcut;
-		/** @var  \application\models\shortcuts\models\landing_page\mobile_items\MobileSettings */
+		/** @var  MobileSettings */
 		public $mobileSettings;
 
 		public function initRegularModel()
@@ -70,13 +71,17 @@
 			{
 				$queryResult = $xpath->query('//Config/MobileSettings');
 				if ($queryResult->length > 0)
-					$this->mobileSettings = \application\models\shortcuts\models\landing_page\mobile_items\MobileSettings::fromXml($this, $xpath, $queryResult->item(0));
+					$this->mobileSettings = MobileSettings::fromXml($this, $xpath, $queryResult->item(0));
+				else
+					$this->mobileSettings = new MobileSettings();
 			}
 			else
 			{
 				$queryResult = $xpath->query('//Config/MarkupSettings');
 				if ($queryResult->length > 0)
 					$this->markupSettings = MarkupSettings::fromXml($this, $xpath, $queryResult->item(0));
+				else
+					$this->markupSettings = new MarkupSettings();
 			}
 		}
 

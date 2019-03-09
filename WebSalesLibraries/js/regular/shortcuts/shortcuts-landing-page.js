@@ -86,9 +86,9 @@
 							let stripeBlock = $(value);
 
 							let arrowSize = 42;
-							if(stripeBlock.hasClass('scrolltab-medium'))
+							if (stripeBlock.hasClass('scrolltab-medium'))
 								arrowSize = 62;
-							else if(stripeBlock.hasClass('scrolltab-large'))
+							else if (stripeBlock.hasClass('scrolltab-large'))
 								arrowSize = 82;
 
 							stripeBlock.scrollTabs({
@@ -163,10 +163,14 @@
 							let calendarBlock = $(value);
 							let calendarContainerId = calendarBlock.prop('id').replace('calendar-', '');
 
-							new $.SalesPortal.LandingPage.Calendar({
+							let calendarProcessor = new $.SalesPortal.LandingPage.Calendar({
 								containerId: calendarContainerId,
 								parentShortcutId: pageData.options.linkId,
-							}).init();
+							});
+
+							updateSizeDelegates.push(function () {
+								calendarProcessor.init();
+							});
 						});
 
 						$.each(markupObject.find('.library-block'), function (key, value) {

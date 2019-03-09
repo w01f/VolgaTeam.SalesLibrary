@@ -97,7 +97,7 @@
     text-decoration: inherit;
     outline: none;
     color: inherit;
-    display: inline;
+    display: inline-block;
     -moz-user-select: none;
 }
 

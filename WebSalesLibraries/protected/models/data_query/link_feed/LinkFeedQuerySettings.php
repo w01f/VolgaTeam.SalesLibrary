@@ -38,6 +38,7 @@
 		public $linkFormatsInclude;
 		public $linkFormatsExclude;
 		public $maxLinks;
+		public $hideLinksWithinBundle;
 
 		/** @var  ThumbnailQuerySettings */
 		public $thumbnailSettings;
@@ -48,6 +49,7 @@
 		public function __construct()
 		{
 			$this->maxLinks = 30;
+			$this->hideLinksWithinBundle = true;
 			$this->linkFormatsInclude = array(self::LinkFormatPowerPoint, self::LinkFormatDocument, self::LinkFormatVideo, self::LinkFormatHyperlink);
 			$this->linkFormatsExclude = array();
 			$this->thumbnailSettings = new ThumbnailQuerySettings();
@@ -159,5 +161,8 @@
 			$queryResult = $xpath->query('./SnapshotData', $contextNode);
 			if ($queryResult->length > 0)
 				$this->cacheSettings = QueryCacheSettings::fromXml($xpath, $queryResult->item(0));
+
+			$queryResult = $xpath->query('./HideLinkBundleDuplicates', $contextNode);
+			$this->hideLinksWithinBundle = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
 		}
 	}

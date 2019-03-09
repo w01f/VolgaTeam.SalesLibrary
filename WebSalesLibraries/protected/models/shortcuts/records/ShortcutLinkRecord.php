@@ -275,7 +275,7 @@
 					break;
 				case 'landing':
 					/** @var LandingPageShortcut $shortcut */
-					if($isPhone && !$shortcut->enabledMobile)
+					if($isPhone && !$shortcut->enabledMobile && isset($shortcut->alternativeMobileShortcut))
 					{
 						$shortcut = $shortcut->alternativeMobileShortcut;
 					}

@@ -14,6 +14,11 @@
 			$.mobile.pageContainer.pagecontainer("change", "#wallbin-" + shortcutData.options.linkId, {
 				transition: "slidefade"
 			});
+
+			$.mobile.loading('hide', {
+				textVisible: false,
+				html: ""
+			});
 		};
 	};
 })(jQuery);

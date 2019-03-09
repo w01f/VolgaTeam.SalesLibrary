@@ -339,6 +339,10 @@
 					implode("','", $libraryIds));
 			}
 
+			$hideLinksWithinBundlesCondition = "1 = 1";
+			if ($queryConditions->hideLinksWithinBundle)
+				$hideLinksWithinBundlesCondition = "link.id not in (select hide_lb.id_link from tbl_link_bundle hide_lb)";
+
 			$matchCondition = 'link.name,link.file_name,link.tags,link.content';
 			if ($queryConditions->onlyByName)
 				$matchCondition = 'link.name,link.file_name';
@@ -372,7 +376,8 @@
 				$folderCondition,
 				$excludeLinkCondition,
 				$excludeCategoryCondition,
-				$excludeLibraryCondition
+				$excludeLibraryCondition,
+				$hideLinksWithinBundlesCondition
 			);
 
 			$querySettings = DataTableQuerySettings::prepareQuery(

@@ -115,12 +115,12 @@
 								{
 									var modalDialog = new $.SalesPortal.ModalDialog({
 										title: '<span><img src="/images/shortcuts/search-bar/search-bar-no-results-warning.png"></span>' +
-										'<span style="margin-left: 20px">Search: “<b>' + searchBarConditions.get('text') + '</b>”</span>',
+											'<span style="margin-left: 20px">Search: “<b>' + searchBarConditions.get('text') + '</b>”</span>',
 										description: 'Sorry, but there are no files on the site with this specific word or phrase.<br><br>' +
-										'You might want to try a simpler, more general keyword search.<br><br>' +
-										'<i>For Example</i>:<br>' +
-										'Instead of searching for “<i>Doppler Mobile Weather App</i>”<br><br>' +
-										'You might try searching for: “<i>Weather App</i>”',
+											'You might want to try a simpler, more general keyword search.<br><br>' +
+											'<i>For Example</i>:<br>' +
+											'Instead of searching for “<i>Doppler Mobile Weather App</i>”<br><br>' +
+											'You might try searching for: “<i>Weather App</i>”',
 										width: 500,
 										buttons: [
 											{
@@ -181,15 +181,15 @@
 			var searchButton = searchBar.find('.btn.search-bar-run');
 			searchButton.removeClass('disabled');
 			if (!(hasKeyword ||
-					hasSuperFilters ||
-					hasCategories) || !(fileSettings.showPowerPoint ||
-					fileSettings.showVideo ||
-					fileSettings.showPdf ||
-					fileSettings.showWord ||
-					fileSettings.showExcel ||
-					fileSettings.showImages ||
-					fileSettings.showUrls
-				)
+				hasSuperFilters ||
+				hasCategories) || !(fileSettings.showPowerPoint ||
+				fileSettings.showVideo ||
+				fileSettings.showPdf ||
+				fileSettings.showWord ||
+				fileSettings.showExcel ||
+				fileSettings.showImages ||
+				fileSettings.showUrls
+			)
 			)
 				searchButton.addClass('disabled');
 		};
@@ -285,194 +285,219 @@
 			var categorySelector = searchBar.find('.tag-condition-selector-wrapper');
 			categorySelector.find('.tag-condition-selector').addClass('logger-form');
 
-			$.fancybox({
-				content: categorySelector.html(),
-				title: $('.tags-filter-panel-switcher').html(),
-				autoSize: true,
-				openEffect: 'none',
-				closeEffect: 'none',
-				afterShow: function () {
-					var innerContent = $('.fancybox-skin');
+			let content = categorySelector.html();
+			let title = $('.tags-filter-panel-switcher').html();
 
-					innerContent.css({
-						'padding': 0
-					});
+			$.SalesPortal.Overlay.show();
 
-					var formLogger = new $.SalesPortal.FormLogger();
-					formLogger.init({
-						logObject: {name: 'Search Bar'},
-						formContent: innerContent
-					});
+			setTimeout(function() {
+				$.fancybox({
+					content: content,
+					title: title,
+					autoSize: true,
+					openEffect: 'none',
+					closeEffect: 'none',
+					afterShow: function () {
+						var innerContent = $('.fancybox-skin');
 
-					var categoryFilters = searchBarConditions.getCategoryFilters();
-					var categoriesFiltersContent = innerContent.find(".category-filter-list");
-					var categoriesContent = innerContent.find(".category-list");
-					var tagsContent = innerContent.find(".tag-list");
-					var selectedCategories = searchBarConditions.getCategorySettings();
-
-					var updateCategoryItemsAccordingFilter = function () {
-						var selectedFilter = categoriesFiltersContent.find('li.selected');
-						var filterText = selectedFilter.find('a .text').text();
-
-						var allCategoryItems = categoriesContent.find('.category');
-						var underlinedCategoryItems = categoriesContent.find('.category[data-category-filter="' + filterText + '"]');
-						allCategoryItems.hide();
-						underlinedCategoryItems.show();
-
-						allCategoryItems.removeClass('selected');
-						underlinedCategoryItems.first().addClass('selected');
-
-						updateCategoryTagsAccordingCategory();
-					};
-
-					var updateCategoryTagsAccordingCategory = function () {
-						var selectedCategory = categoriesContent.find('li.selected');
-						var categoryText = selectedCategory.find('a span').text();
-
-						var allCategoryTags = tagsContent.find('.tag-group');
-						var underlinedCategoryTags = tagsContent.find('.tag-group[data-category="' + categoryText + '"]');
-						allCategoryTags.hide();
-						underlinedCategoryTags.show();
-					};
-
-					var updateCategoriesAccordingSelection = function () {
-						selectedCategories = [];
-						var tagGroups = tagsContent.find('.tag-group');
-						$.each(tagGroups, function () {
-							var tagGroup = $(this);
-							var tagSelectors = tagGroup.find('.tag-selector');
-							var checkedSelectors = tagSelectors.find('.tag:checked');
-							if (checkedSelectors.length > 0)
-							{
-								var tags = [];
-								var categoryName = tagGroup.data('category');
-								$.each(tagSelectors, function () {
-									var tagSelector = $(this);
-									var tagCheckBox = tagSelector.find('.tag');
-									if (tagCheckBox.prop('checked') === true)
-										tags.push(tagSelector.find('.name').text());
-								});
-								selectedCategories.push({
-									name: categoryName,
-									items: tags
-								})
-							}
+						innerContent.css({
+							'padding': 0
 						});
-					};
 
-					var updateCategoriesLabel = function () {
-						var tagsTextArray = [];
-						$.each(selectedCategories, function (categoryIndex, category) {
-							tagsTextArray.push(category.items.join(', '));
+						var formLogger = new $.SalesPortal.FormLogger();
+						formLogger.init({
+							logObject: {name: 'Search Bar'},
+							formContent: innerContent
 						});
-						innerContent.find(".selected-category-label span").text(tagsTextArray.length > 0 ? tagsTextArray.join(', ') : 'No categories selected');
-					};
 
-					if (categoryFilters.length > 0)
-					{
-						$.each(categoryFilters, function (index, value) {
-							categoriesFiltersContent.find('li:contains("' + value + '")').addClass('selected');
-						});
-					}
-					else
-						categoriesFiltersContent.find('li').first().addClass('selected');
+						var categoryFilters = searchBarConditions.getCategoryFilters();
+						var categoriesFiltersContent = innerContent.find(".category-filter-list");
+						var categoriesContent = innerContent.find(".category-list");
+						var tagsContent = innerContent.find(".tag-list");
+						var selectedCategories = searchBarConditions.getCategorySettings();
 
+						var updateCategoryItemsAccordingFilter = function () {
+							var selectedFilter = categoriesFiltersContent.find('li.selected');
+							var filterText = selectedFilter.find('a .text').text();
 
-					categoriesFiltersContent.find('li').off('click').on('click', function () {
-						var listItem = $(this);
-						if (!listItem.hasClass('selected'))
-						{
-							categoriesFiltersContent.find('li').removeClass('selected');
-							listItem.addClass('selected');
-							updateCategoryItemsAccordingFilter();
-						}
-					});
+							var allCategoryItems = categoriesContent.find('.category');
+							var underlinedCategoryItems = categoriesContent.find('.category[data-category-filter="' + filterText + '"]');
+							allCategoryItems.hide();
+							underlinedCategoryItems.show();
 
-					categoriesContent.find('li').off('click').on('click', function () {
-						var listItem = $(this);
-						if (!listItem.hasClass('selected'))
-						{
-							categoriesContent.find('li').removeClass('selected');
-							listItem.addClass('selected');
+							allCategoryItems.removeClass('selected');
+							underlinedCategoryItems.first().addClass('selected');
+
 							updateCategoryTagsAccordingCategory();
-						}
-					});
+						};
 
-					tagsContent.find('.select-all-selector input').off('change').on('change', function () {
-						$(this).closest('.tag-group').find('.tag-selector .tag').prop('checked', $(this).is(':checked'));
-						updateCategoriesAccordingSelection();
-						updateCategoriesLabel();
-					});
+						var updateCategoryTagsAccordingCategory = function () {
+							var selectedCategory = categoriesContent.find('li.selected');
+							var categoryText = selectedCategory.find('a span').text();
 
-					tagsContent.find('.tag').off('change').on('change', function () {
-						updateCategoriesAccordingSelection();
-						updateCategoriesLabel();
-					});
+							var allCategoryTags = tagsContent.find('.tag-group');
+							var underlinedCategoryTags = tagsContent.find('.tag-group[data-category="' + categoryText + '"]');
+							allCategoryTags.hide();
+							underlinedCategoryTags.show();
+						};
 
-					innerContent.find('.tags-clear-all').off('click.search-bar').on('click.search-bar', function () {
-						tagsContent.find(":checked").prop('checked', false);
-						updateCategoriesAccordingSelection();
-						updateCategoriesLabel();
-					});
-
-					updateCategoryItemsAccordingFilter();
-
-					if (selectedCategories.length > 0)
-					{
-						$.each(tagsContent.find('.tag-group'), function () {
-							var tagGroup = $(this);
-							var categoryName = tagGroup.data('category');
-							var tagSelectors = tagGroup.find('.tag-selector');
-							var selectAllSelector = tagGroup.find('.select-all-selector');
-							$.each(selectedCategories, function (groupIndex, group) {
-								if (group.name === categoryName)
+						var updateCategoriesAccordingSelection = function () {
+							selectedCategories = [];
+							var tagGroups = tagsContent.find('.tag-group');
+							$.each(tagGroups, function () {
+								var tagGroup = $(this);
+								var tagSelectors = tagGroup.find('.tag-selector');
+								var checkedSelectors = tagSelectors.find('.tag:checked');
+								if (checkedSelectors.length > 0)
 								{
-									if (group.items.length === tagSelectors.length)
-									{
-										tagSelectors.find('.tag').prop('checked', true);
-										selectAllSelector.find('input').prop('checked', true);
-									}
-									else
-									{
-										$.each(tagSelectors, function () {
-											var tagSelector = $(this);
-											var tagCheckBox = tagSelector.find('.tag');
-											var tagName = tagSelector.find('.name').text();
-											$.each(group.items, function (itemIndex, item) {
-												if (item === tagName)
-													tagCheckBox.prop('checked', true);
-											});
-										});
-										selectAllSelector.find('input').prop('checked', false);
-									}
+									var tags = [];
+									var categoryName = tagGroup.data('category');
+									$.each(tagSelectors, function () {
+										var tagSelector = $(this);
+										var tagCheckBox = tagSelector.find('.tag');
+										if (tagCheckBox.prop('checked') === true)
+											tags.push(tagSelector.find('.name').text());
+									});
+									selectedCategories.push({
+										name: categoryName,
+										items: tags
+									})
 								}
 							});
+						};
+
+						var updateCategoriesLabel = function () {
+							var tagsTextArray = [];
+							$.each(selectedCategories, function (categoryIndex, category) {
+								tagsTextArray.push(category.items.join(', '));
+							});
+							innerContent.find(".selected-category-label span").text(tagsTextArray.length > 0 ? tagsTextArray.join(', ') : 'No categories selected');
+						};
+
+						if (categoryFilters.length > 0)
+						{
+							$.each(categoryFilters, function (index, value) {
+								categoriesFiltersContent.find('li:contains("' + value + '")').addClass('selected');
+							});
+						}
+						else
+							categoriesFiltersContent.find('li').first().addClass('selected');
+
+
+						categoriesFiltersContent.find('li').off('click').on('click', function () {
+							var listItem = $(this);
+							if (!listItem.hasClass('selected'))
+							{
+								categoriesFiltersContent.find('li').removeClass('selected');
+								listItem.addClass('selected');
+								updateCategoryItemsAccordingFilter();
+							}
 						});
+
+						categoriesContent.find('li').off('click').on('click', function () {
+							var listItem = $(this);
+							if (!listItem.hasClass('selected'))
+							{
+								categoriesContent.find('li').removeClass('selected');
+								listItem.addClass('selected');
+								updateCategoryTagsAccordingCategory();
+							}
+						});
+
+						tagsContent.find('.select-all-selector input').off('change').on('change', function () {
+							$(this).closest('.tag-group').find('.tag-selector .tag').prop('checked', $(this).is(':checked'));
+							updateCategoriesAccordingSelection();
+							updateCategoriesLabel();
+						});
+
+						tagsContent.find('.tag').off('change').on('change', function () {
+							updateCategoriesAccordingSelection();
+							updateCategoriesLabel();
+						});
+
+						innerContent.find('.tags-clear-all').off('click.search-bar').on('click.search-bar', function () {
+							tagsContent.find(":checked").prop('checked', false);
+							updateCategoriesAccordingSelection();
+							updateCategoriesLabel();
+						});
+
+						updateCategoryItemsAccordingFilter();
+
+						if (selectedCategories.length > 0)
+						{
+							$.each(tagsContent.find('.tag-group'), function () {
+								var tagGroup = $(this);
+								var categoryName = tagGroup.data('category');
+								var tagSelectors = tagGroup.find('.tag-selector');
+								var selectAllSelector = tagGroup.find('.select-all-selector');
+								$.each(selectedCategories, function (groupIndex, group) {
+									if (group.name === categoryName)
+									{
+										if (group.items.length === tagSelectors.length)
+										{
+											tagSelectors.find('.tag').prop('checked', true);
+											selectAllSelector.find('input').prop('checked', true);
+										}
+										else
+										{
+											$.each(tagSelectors, function () {
+												var tagSelector = $(this);
+												var tagCheckBox = tagSelector.find('.tag');
+												var tagName = tagSelector.find('.name').text();
+												$.each(group.items, function (itemIndex, item) {
+													if (item === tagName)
+														tagCheckBox.prop('checked', true);
+												});
+											});
+											selectAllSelector.find('input').prop('checked', false);
+										}
+									}
+								});
+							});
+						}
+
+						updateCategoriesLabel();
+
+						innerContent.find('.cancel-button').on('click.search-bar', function () {
+							$.fancybox.close();
+						});
+
+						innerContent.find('.accept-button').on('click.search-bar', function () {
+							var selectedCategoryFilters = [];
+							var selectedFilter = categoriesFiltersContent.find('li.selected');
+							var filterText = selectedFilter.find('a .text').text();
+							selectedCategoryFilters.push(filterText);
+							searchBarConditions.setCategoryFilters(selectedCategoryFilters);
+
+							updateCategoriesAccordingSelection();
+							searchBarConditions.setCategorySettings(selectedCategories);
+
+							updateSearchButtonState();
+							updateSelectedCategories();
+
+							$.fancybox.close();
+						});
+
+						$.SalesPortal.Overlay.hide();
 					}
-
-					updateCategoriesLabel();
-
-					innerContent.find('.cancel-button').on('click.search-bar', function () {
-						$.fancybox.close();
-					});
-
-					innerContent.find('.accept-button').on('click.search-bar', function () {
-						var selectedCategoryFilters = [];
-						var selectedFilter = categoriesFiltersContent.find('li.selected');
-						var filterText = selectedFilter.find('a .text').text();
-						selectedCategoryFilters.push(filterText);
-						searchBarConditions.setCategoryFilters(selectedCategoryFilters);
-
-						updateCategoriesAccordingSelection();
-						searchBarConditions.setCategorySettings(selectedCategories);
-
-						updateSearchButtonState();
-						updateSelectedCategories();
-
-						$.fancybox.close();
-					});
-				}
-			});
+				});
+			}, 1000);
+			// $.ajax({
+			// 	type: "POST",
+			// 	url: window.BaseUrl + "shortcuts/editSearchBarSettings",
+			// 	beforeSend: function () {
+			// 		$.SalesPortal.Overlay.show();
+			// 	},
+			// 	complete: function () {
+			// 		$.SalesPortal.Overlay.hide();
+			// 	},
+			// 	success: function () {
+			// 	},
+			// 	error: function () {
+			// 	},
+			// 	async: true,
+			// 	dataType: 'html'
+			// });
 		};
 
 		var initActionButtons = function () {

@@ -10,6 +10,11 @@
 				transition: "slidefade"
 			});
 			$.SalesPortal.Favorites.initViewPage();
+
+			$.mobile.loading('hide', {
+				textVisible: false,
+				html: ""
+			});
 		};
 	};
 })(jQuery);

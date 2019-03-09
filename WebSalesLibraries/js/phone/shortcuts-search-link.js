@@ -1,16 +1,13 @@
-(function ($)
-{
+(function ($) {
 	window.BaseUrl = window.BaseUrl || '';
-	$.SalesPortal = $.SalesPortal || { };
-	$.SalesPortal.ShortcutsSearchLink = function (data)
-	{
+	$.SalesPortal = $.SalesPortal || {};
+	$.SalesPortal.ShortcutsSearchLink = function (data) {
 		var shortcutData = data;
 
-		this.init = function ()
-		{
+		this.init = function () {
 			var searchShortcutOptions = new $.SalesPortal.SearchOptions(shortcutData.options.searchOptions);
 			var shortcutLinkTitle = shortcutData.options.headerOptions.title;
-			var pageIdentifier = '#search-results-'+shortcutData.options.linkId;
+			var pageIdentifier = '#search-results-' + shortcutData.options.linkId;
 			var searchResultsPage = $(pageIdentifier);
 			searchResultsPage.find('.page-header .header-title').html(shortcutLinkTitle);
 
@@ -18,27 +15,21 @@
 				transition: "slidefade"
 			});
 
+			$.mobile.loading('show', {
+				textVisible: false,
+				html: ""
+			});
+
 			$.SalesPortal.SearchHelper.runSearch(
 				{
 					datasetKey: undefined,
 					conditions: $.toJSON(searchShortcutOptions.conditions)
 				},
-				function ()
-				{
-					$.mobile.loading('show', {
-						textVisible: false,
-						html: ""
-					});
+				function () {
 				},
-				function ()
-				{
-					$.mobile.loading('hide', {
-						textVisible: false,
-						html: ""
-					});
+				function () {
 				},
-				function (data)
-				{
+				function (data) {
 					searchResultsPage.find('.entities-count span').html(data.dataset.length + ' Links');
 
 					new $.SalesPortal.SearchDataTable(
@@ -50,6 +41,11 @@
 							name: shortcutLinkTitle
 						}
 					);
+
+					$.mobile.loading('hide', {
+						textVisible: false,
+						html: ""
+					});
 				}
 			);
 		};

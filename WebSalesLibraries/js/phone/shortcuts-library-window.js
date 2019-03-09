@@ -18,6 +18,11 @@
 			$.mobile.pageContainer.pagecontainer("change", pageId, {
 				transition: "slidefade"
 			});
+
+			$.mobile.loading('hide', {
+				textVisible: false,
+				html: ""
+			});
 		};
 	};
 })(jQuery);
