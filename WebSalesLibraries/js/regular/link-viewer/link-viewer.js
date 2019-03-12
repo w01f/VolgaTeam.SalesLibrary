@@ -12,7 +12,8 @@
 					viewContainer: undefined,
 					parentPreviewParameters: undefined,
 					savedState: undefined,
-					afterViewerOpenedCallback: undefined
+					afterViewerOpenedCallback: undefined,
+					afterViewerClosedCallback: undefined
 				};
 			that.cleanupContextMenu();
 			$.ajax({
@@ -30,9 +31,17 @@
 				success: function (parameters) {
 					$.SalesPortal.Overlay.hide();
 
+					ga('send', {
+						hitType: 'pageview',
+						title:parameters.data.name,
+						location:window.BaseUrl,
+						page:parameters.data.linkId
+					});
+
 					var previewParameters = parameters;
 					previewParameters.viewContainer = requestData.viewContainer;
 					previewParameters.afterViewerOpenedCallback = requestData.afterViewerOpenedCallback;
+					previewParameters.afterViewerClosedCallback = requestData.afterViewerClosedCallback;
 
 					previewParameters.data.doNotPushHistory = requestData.doNotPushHistory;
 

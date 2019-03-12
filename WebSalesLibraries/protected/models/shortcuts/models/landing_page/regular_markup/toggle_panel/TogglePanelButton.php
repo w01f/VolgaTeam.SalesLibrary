@@ -1,4 +1,5 @@
 <?
+
 	namespace application\models\shortcuts\models\landing_page\regular_markup\toggle_panel;
 
 	use application\models\shortcuts\models\landing_page\regular_markup\style\TextAppearance;
@@ -50,7 +51,7 @@
 
 			$this->isAccessGranted = true;
 
-			if(!(\Yii::app() instanceof \CConsoleApplication))
+			if (!(\Yii::app() instanceof \CConsoleApplication) && \UserIdentity::isUserAuthorized())
 			{
 				$user = \Yii::app()->user;
 				$userGroups = \UserIdentity::getCurrentUserGroups();

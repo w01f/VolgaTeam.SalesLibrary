@@ -163,6 +163,9 @@
 					'major_color' => "EACE23",
 					'minor_color' => "F6ECB6",
 				),
+				'google_analytics' => array(
+					'id' => 'UA-82056057-1',
+				),
 			),
 			'components' => array(
 				'db' => array(

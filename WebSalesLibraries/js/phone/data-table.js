@@ -30,6 +30,12 @@
 
 			tableBody.find('tr').off('click').on('click', function (e) {
 				$.SalesPortal.LinkManager.requestViewDialog($(this).find('.link-id').text(), parentPageData, false);
+				ga('send', {
+					hitType: 'pageview',
+					title: $(this).find('.link-id').text(),
+					location: window.BaseUrl,
+					page: $(this).find('.link-id').text()
+				});
 				e.preventDefault();
 				e.stopPropagation();
 			})
@@ -241,5 +247,7 @@
 
 		tableContainer.trigger('create');
 		contentHeaderContainer.find('.column-toggle-placeholder').empty().append(pageContainer.find('.ui-table-columntoggle-btn'));
+
+		ga('send', 'pageview');
 	};
 })(jQuery);

@@ -16,6 +16,13 @@
 				var pageId = $(this).find('.service-data .page-id').text();
 				wallbinPage.find('.content-header .title .page-name').html($(this).find('span').html());
 				pageChanged(pageId);
+
+				ga('send', {
+					hitType: 'pageview',
+					title:"wallbin/"+wallbinPage.find('.content-header .title .page-name').html($(this).find('span').html()),
+					location:window.BaseUrl,
+					page:"wallbin/"+wallbinPage.find('.content-header .title .page-name').html($(this).find('span').html())
+				});
 			});
 
 			that.initPageContent(wallbinPage.find('.content-data'), '#wallbin-' + wallbinId);

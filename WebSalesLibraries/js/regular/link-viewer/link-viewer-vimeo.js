@@ -114,6 +114,8 @@
 
 		this.afterClose = function ()
 		{
+			if (parameters.afterViewerClosedCallback !== undefined)
+				parameters.afterViewerClosedCallback();
 		};
 
 		var initDialogTitle = function ()

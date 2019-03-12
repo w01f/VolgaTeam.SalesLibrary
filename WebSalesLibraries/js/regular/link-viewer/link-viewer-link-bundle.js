@@ -36,6 +36,8 @@
 
 		this.afterClose = function () {
 			releaseOpenedBundleItem();
+			if (parameters.afterViewerClosedCallback !== undefined)
+				parameters.afterViewerClosedCallback();
 		};
 
 		var initDialogTitle = function () {
@@ -119,7 +121,8 @@
 						parentPreviewParameters: parameters,
 						afterViewerOpenedCallback: function (viewer) {
 							openedViewer = viewer;
-						}
+						},
+						afterViewerClosedCallback: parameters.afterViewerClosedCallback
 					});
 					$.SalesPortal.Overlay.hide();
 					break;

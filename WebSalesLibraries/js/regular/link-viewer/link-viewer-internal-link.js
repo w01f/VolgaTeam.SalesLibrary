@@ -79,7 +79,8 @@
 							isQuickSite: false,
 							viewContainer: parameters.viewContainer,
 							parentPreviewParameters: parameters.parentPreviewParameters,
-							afterViewerOpenedCallback: parameters.afterViewerOpenedCallback
+							afterViewerOpenedCallback: parameters.afterViewerOpenedCallback,
+							afterViewerClosedCallback: parameters.afterViewerClosedCallback
 						});
 					else
 					{

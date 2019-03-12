@@ -24,8 +24,15 @@
 						id: '#link-bundle-viewer',
 						name: baseLinkViewerPage.find('.header-title').text()
 					},
-					false
+					false,
 				);
+				ga('send', {
+					hitType: 'pageview',
+					title:$(this).find('.item-title').text()+"/"+$(this).find('.library-link-id').text(),
+					location:window.BaseUrl,
+					page:$(this).find('.item-title').text()+"/"+$(this).find('.library-link-id').text()
+				});
+
 				e.preventDefault();
 				e.stopPropagation();
 			});

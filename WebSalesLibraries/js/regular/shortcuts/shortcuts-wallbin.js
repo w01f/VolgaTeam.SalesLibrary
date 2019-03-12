@@ -22,7 +22,7 @@
 						contentObject: contentObject,
 						shortcutId: libraryData.options.linkId,
 						wallbinId: libraryData.options.libraryId,
-						wallbinName: libraryData.options.headerTitle,
+						wallbinName: libraryData.options.libraryName,
 						pageViewType: libraryData.options.pageViewType,
 						pageSelectorMode: libraryData.options.pageSelectorMode,
 						processResponsiveColumns: libraryData.options.processResponsiveColumns,

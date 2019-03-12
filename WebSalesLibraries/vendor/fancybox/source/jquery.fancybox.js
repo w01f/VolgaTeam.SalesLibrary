@@ -12,7 +12,9 @@
 
 (function (window, document, $, undefined) {
 	"use strict";
-
+$.fn.ignore = function(sel){
+  return this.clone().find(sel||">*").remove().end();
+};
 	var H = $("html"),
 		W = $(window),
 		D = $(document),
@@ -1738,7 +1740,16 @@
 
 		close : function() {
 			var scrollV, scrollH;
-
+			var name=$.cookie("lastname");
+			if($('span.tab_selected.selected').text()!='undefined'){
+				name += '/'+$('.tab_selected').ignore('.service-data').text();
+			}
+			ga('send', {
+			  hitType: 'pageview',
+			  title:$.cookie("lasttype")+"/"+$.cookie("lastname"),
+			  location:window.BaseUrl+"/"+$.cookie("lastloc"),
+			  page:$.cookie("lasttype")+"/"+name
+			});
 			W.unbind('resize.overlay');
 
 			if (this.el.hasClass('fancybox-lock')) {

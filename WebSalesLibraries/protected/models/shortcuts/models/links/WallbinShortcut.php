@@ -82,6 +82,7 @@
 			$data = parent::getPageData();
 			$data['serviceData'] = $this->getMenuItemData();
 			$data['libraryId'] = $this->library->id;
+			$data['libraryName'] = $this->library->name;
 			$data['pageViewType'] = $this->pageViewType;
 			$data['pageSelectorMode'] = $this->pageSelectorMode;
 			$data['processResponsiveColumns'] = $this->style->page->responsiveColumnsStyle->enabled;

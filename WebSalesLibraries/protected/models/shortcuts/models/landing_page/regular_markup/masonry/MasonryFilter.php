@@ -56,7 +56,7 @@
 
 			$this->isAccessGranted = true;
 
-			if(!(\Yii::app() instanceof \CConsoleApplication))
+			if(!(\Yii::app() instanceof \CConsoleApplication)  && \UserIdentity::isUserAuthorized())
 			{
 				$user = \Yii::app()->user;
 				$userGroups = \UserIdentity::getCurrentUserGroups();

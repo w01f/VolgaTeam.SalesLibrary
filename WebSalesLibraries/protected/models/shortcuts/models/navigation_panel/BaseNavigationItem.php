@@ -35,7 +35,7 @@
 			else
 				$this->settings = new RegularNavigationItemSettings($parent, $xpath, $settingsNode, $imagePath);
 
-			if ($this->settings->enabled)
+			if ($this->settings->enabled && \UserIdentity::isUserAuthorized())
 			{
 				$user = \Yii::app()->user;
 				$userGroups = \UserIdentity::getCurrentUserGroups();

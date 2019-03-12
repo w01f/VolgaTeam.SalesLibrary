@@ -110,6 +110,8 @@
 		this.afterClose = function ()
 		{
 			$.SalesPortal.SalesLibraryExtensions.releaseLinkData();
+			if (parameters.afterViewerClosedCallback !== undefined)
+				parameters.afterViewerClosedCallback();
 		};
 
 		var initDialogTitle = function ()

@@ -54,7 +54,14 @@
 
 		var search = function () {
 			if (searchBar.find('.btn.search-bar-run').hasClass('disabled')) return;
-			searchBarConditions.set('text', searchBar.find('.search-bar-text').val());
+			searchBarConditions.set('text', searchBar.find('.search-bar-text').val());			
+
+			ga('send', {
+				hitType: 'pageview',
+				title:"Search:"+searchBar.find('.search-bar-text').val(),
+				location:window.BaseUrl,
+				page:"search/"+searchBar.find('.search-bar-text').val()
+			});
 
 			$.ajax({
 				type: "POST",
@@ -80,6 +87,13 @@
 					modalContent.find('#search-bar-edit-only-new-files').prop('checked', searchBarConditions.get('onlyNewFiles'));
 
 					modalContent.find('.search-button').off('click.search-bar').on('click.search-bar', function () {
+						ga('send', {
+							hitType: 'pageview',
+							title:"Search:"+searchBar.find('.search-bar-text').val(),
+							location:window.BaseUrl,
+							page:"search Results/"+searchBar.find('.search-bar-text').val()
+						});
+
 						searchBarConditions.setFileTypesSettings({
 							showPowerPoint: modalContent.find('#search-bar-edit-file-power-point').prop('checked'),
 							showVideo: modalContent.find('#search-bar-edit-file-video').prop('checked'),

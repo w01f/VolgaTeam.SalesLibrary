@@ -135,7 +135,7 @@
 
 			$this->isAccessGranted = true;
 
-			if ($this->parentShortcut->usePermissions)
+			if ($this->parentShortcut->usePermissions && \UserIdentity::isUserAuthorized())
 			{
 				$user = \Yii::app()->user;
 				$userGroups = \UserIdentity::getCurrentUserGroups();
