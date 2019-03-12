@@ -154,7 +154,7 @@
 						$identity = new \UserIdentity($userRecord->login, $userRecord->password);
 						if ($identity->authenticate())
 						{
-							$duration = 0;
+							$duration = 3600 * 24 * 30; // 30 days
 							\Yii::app()->user->login($identity, $duration);
 							StatisticActivityRecord::writeCommonActivity('System', 'Login (GC)', null);
 							return true;
