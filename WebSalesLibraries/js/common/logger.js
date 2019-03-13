@@ -46,13 +46,24 @@
 
 			if (actionData.subType != "Search Activity")
 			{
-				if (actionData.type == "Shortcut Tile" && actionData.subType=="Landing page")
+				if (actionData.type == "Shortcut Tile")
 				{
-					$.cookie("lastloc", actionData.linkId, {expires: 10});
+					if (actionData.subType == "Landing page")
+					{
+						$.cookie("lastloc", actionData.linkId, {expires: 10});
 
-					document.cookie = "lastloc=" + actionData.linkId + ";path=/";
-					document.cookie = "lastname=" + actionData.data.File + ";path=/";
-					document.cookie = "lasttype=" + actionData.subType + ";path=/";
+						document.cookie = "lastloc=" + actionData.linkId + ";path=/";
+						document.cookie = "lastname=" + actionData.data.File + ";path=/";
+						document.cookie = "lasttype=" + actionData.subType + ";path=/";
+					}
+					else if (actionData.subType == "LibraryPage")
+					{
+						$.cookie("lastloc", actionData.linkId, {expires: 10});
+
+						document.cookie = "lastloc=" + actionData.linkId + ";path=/";
+						document.cookie = "lastname=" + actionData.data.File + ";path=/";
+						document.cookie = "lasttype=" + actionData.subType + ";path=/";
+					}
 				}
 
 				ga('send', {

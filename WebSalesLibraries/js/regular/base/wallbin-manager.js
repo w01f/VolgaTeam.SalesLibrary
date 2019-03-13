@@ -37,6 +37,7 @@
 
 		this.initPageSelector = function () {
 			var libraryHeader = wallbinSettings.contentObject.find('.wallbin-header');
+			let initialPageData = undefined;
 			switch (wallbinSettings.pageSelectorMode)
 			{
 				case 'tabs':
@@ -51,6 +52,8 @@
 					var selectedTab = tabContainer.find('.selected');
 					var left = tabContainer.scrollLeft();
 					tabContainer.find('.scroll_tab_inner').animate({scrollLeft: left + selectedTab.position().left + 'px'}, 0);
+
+					initialPageData  = $.parseJSON(selectedTab.find('.service-data .encoded-data').text());
 					break;
 				case 'combo':
 					var comboSelector = libraryHeader.find('.selectpicker');
@@ -59,8 +62,19 @@
 						loadPageContent(atob(comboSelector.selectpicker('val').trim()));
 						comboSelector.selectpicker('refresh');
 					});
+
+					initialPageData  = $.parseJSON(atob(comboSelector.selectpicker('val').trim()));
 					break;
 			}
+
+			$.SalesPortal.LogHelper.write({
+				type: 'Wallbin',
+				subType: 'Page Open',
+				data: {
+					Name: wallbinSettings.wallbinName,
+					pageName: initialPageData.pageName
+				}
+			});
 		};
 
 		this.updateContentSize = function () {

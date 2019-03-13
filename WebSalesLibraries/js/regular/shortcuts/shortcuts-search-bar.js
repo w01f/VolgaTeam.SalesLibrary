@@ -54,13 +54,13 @@
 
 		var search = function () {
 			if (searchBar.find('.btn.search-bar-run').hasClass('disabled')) return;
-			searchBarConditions.set('text', searchBar.find('.search-bar-text').val());			
+			searchBarConditions.set('text', searchBar.find('.search-bar-text').val());
 
 			ga('send', {
 				hitType: 'pageview',
-				title:"Search:"+searchBar.find('.search-bar-text').val(),
-				location:window.BaseUrl,
-				page:"search/"+searchBar.find('.search-bar-text').val()
+				title: "Search:" + searchBar.find('.search-bar-text').val(),
+				location: window.BaseUrl,
+				page: "search/" + searchBar.find('.search-bar-text').val()
 			});
 
 			$.ajax({
@@ -89,10 +89,13 @@
 					modalContent.find('.search-button').off('click.search-bar').on('click.search-bar', function () {
 						ga('send', {
 							hitType: 'pageview',
-							title:"Search:"+searchBar.find('.search-bar-text').val(),
-							location:window.BaseUrl,
-							page:"search Results/"+searchBar.find('.search-bar-text').val()
+							title: "Search:" + searchBar.find('.search-bar-text').val(),
+							location: window.BaseUrl,
+							page: "search Results/" + searchBar.find('.search-bar-text').val()
 						});
+						document.cookie = "lastloc=" + window.BaseUrl + ";path=/";
+						document.cookie = "lastname=;path=/";
+						document.cookie = "lasttype=" + "search Results/" + searchBar.find('.search-bar-text').val() + ";path=/";
 
 						searchBarConditions.setFileTypesSettings({
 							showPowerPoint: modalContent.find('#search-bar-edit-file-power-point').prop('checked'),
@@ -304,7 +307,7 @@
 
 			$.SalesPortal.Overlay.show();
 
-			setTimeout(function() {
+			setTimeout(function () {
 				$.fancybox({
 					content: content,
 					title: title,
