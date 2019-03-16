@@ -18,7 +18,12 @@
 	});
 </script>
 <div data-role='page' id="shortcut-group-<? echo $group->id; ?>" class="shortcut-group-page" data-cache="never" data-dom-cache="false" data-ajax="false">
-	<div data-role='header' class="page-header" data-position="fixed" data-theme="a">
+    <div class="service-data">
+        <div class="activity-data">
+	        <? echo CJSON::encode(array('type' => 'Shortcut', 'subType' => 'Open Mobile Screen Group', 'data' => array('file' => 'Mobile Screen Group '. $group->title))); ?>
+        </div>
+    </div>
+    <div data-role='header' class="page-header" data-position="fixed" data-theme="a">
 		<? if ($group->showNavigationPanel): ?>
             <a href="#shortcut-group-<? echo $group->id; ?>-popup-panel-left" class="navigation-panel-toggle" data-icon="ion-navicon-round" data-iconpos="notext"></a>
 		<? endif; ?>
@@ -52,7 +57,7 @@
                             <?endif; ?>
                             <p class="title"><? echo $menuItem->shortcut->title; ?></p>
                         </div>
-                        <div class="service-data">
+                        <div class="service-data menu-item-data">
                             <? echo $menuItem->shortcut->getMenuItemData(); ?>
                         </div>
                     </a>

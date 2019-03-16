@@ -4,6 +4,11 @@
 	 */
 ?>
 <div data-role='page' id="link-viewer" class="link-viewer-page" data-cache="never" data-dom-cache="false" data-ajax="false">
+    <div class="service-data">
+        <div class="activity-data">
+			<? echo CJSON::encode(array('type' => 'Link Preview', 'subType' => 'Open Link Preview', 'data' => array('file' => $data->fileName))); ?>
+        </div>
+    </div>
 	<div data-role='header' class="page-header" data-position="fixed">
 		<h1 class="header-title"></h1>
 		<? if ($data->config->userAuthorized): ?>
@@ -114,7 +119,12 @@
 	</div>
 </div>
 <div data-role='page' id="link-viewer-gallery" class="link-viewer-page" data-cache="never" data-dom-cache="false" data-ajax="false">
-	<div data-role='header' class="page-header" data-position="fixed">
+    <div class="service-data">
+        <div class="activity-data">
+	        <? echo CJSON::encode(array('type' => 'Link Preview', 'subType' => 'Open Gallery', 'data' => array('file' => $data->fileName))); ?>
+        </div>
+    </div>
+    <div data-role='header' class="page-header" data-position="fixed">
 		<h1 class="header-title"></h1>
 		<? if ($data->config->userAuthorized): ?>
 			<a href="#link-viewer-gallery-popup-panel-right" class="ui-btn-right" data-icon="ion-navicon-round" data-iconpos="notext"></a>

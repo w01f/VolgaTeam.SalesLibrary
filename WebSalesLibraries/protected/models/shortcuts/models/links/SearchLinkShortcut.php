@@ -114,6 +114,16 @@
 		}
 
 		/**
+		 * @return string
+		 */
+		public function getTitleForActivityTracker()
+		{
+			if ($this->isPhone)
+				return 'Mobile Search Shortcut ' . parent::getTitleForActivityTracker();
+			return parent::getTitleForActivityTracker();
+		}
+
+		/**
 		 * @param $actionsByKey array
 		 * @param $xpath DOMXPath
 		 * @param $actionConfigNodes DOMNodeList

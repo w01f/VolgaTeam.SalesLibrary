@@ -4,8 +4,12 @@
 	 * @var $backPageId string
 	 */
 ?>
-<div id="search-results-<? echo $parentShortcutId; ?>" class="search-results-page shortcut-link-page" data-role='page'
-     data-cache="never" data-dom-cache="false" data-ajax="false">
+<div id="search-results-<? echo $parentShortcutId; ?>" class="search-results-page shortcut-link-page" data-role='page' data-cache="never" data-dom-cache="false" data-ajax="false">
+    <div class="service-data">
+        <div class="activity-data">
+			<? echo CJSON::encode(array('type' => 'Search', 'subType' => 'Search Results', 'data' => array())); ?>
+        </div>
+    </div>
     <div data-role='header' class="page-header" data-position="fixed">
         <a href="#search-results-<? echo $parentShortcutId; ?>-popup-panel-left" class="navigation-panel-toggle" data-icon="ion-navicon-round" data-iconpos="notext"></a>
         <h1 class="header-title">Search Results</h1>

@@ -4,8 +4,12 @@
 	 */
 	$authorized = UserIdentity::isUserAuthorized();
 ?>
-<div data-role='page' id="link-bundle-viewer" data-cache="never" data-dom-cache="false"
-     data-ajax="false">
+<div data-role='page' id="link-bundle-viewer" data-cache="never" data-dom-cache="false" data-ajax="false">
+    <div class="service-data">
+        <div class="activity-data">
+	        <? echo CJSON::encode(array('type' => 'Link Preview', 'subType' => 'Open Link Preview', 'data' => array('file' => $data->name))); ?>
+        </div>
+    </div>
     <div data-role='header' class="page-header" data-position="fixed">
         <h1 class="header-title"></h1>
 		<? if ($authorized): ?>

@@ -251,7 +251,7 @@
 		 */
 		public function getTitleForActivityTracker()
 		{
-			return isset($this->title) && $this->title != '' ?
+			return !empty($this->title)?
 				$this->title :
 				(isset($this->headerTitle) && $this->headerTitle != '' ? $this->headerTitle : $this->description);
 		}

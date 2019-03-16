@@ -45,7 +45,18 @@
 		 */
 		public function getTypeForActivityTracker()
 		{
-			return 'Left Panel Shortcut';
+			return 'Panel Menu Shortcut';
+		}
+
+		/**
+		 * @return string
+		 */
+		public function getTitleForActivityTracker()
+		{
+			return 'Panel Menu ' . (!empty($this->title) ?
+					$this->title :
+					(!empty($this->headerTitle) ? $this->headerTitle :
+						(!empty($this->description) ? $this->description : "Empty Title")));
 		}
 
 		/** @return NavigationPanel */

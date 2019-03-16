@@ -5,8 +5,12 @@
 	 */
 	$authorized = UserIdentity::isUserAuthorized();
 ?>
-<div data-role='page' id="quicksite" class="shortcut-link-page" data-cache="never" data-dom-cache="false"
-     data-ajax="false">
+<div data-role='page' id="quicksite" class="shortcut-link-page" data-cache="never" data-dom-cache="false" data-ajax="false">
+    <div class="service-data">
+        <div class="activity-data">
+	        <? echo CJSON::encode(array('type' => 'QucikSite', 'subType' => 'Open QuickSite', 'data' => array('file' => $page->title))); ?>
+        </div>
+    </div>
     <div data-role='header' class="page-header" data-position="fixed" data-theme="a">
         <h1 class="header-title">Quicksite</h1>
 		<? if ($authorized): ?>

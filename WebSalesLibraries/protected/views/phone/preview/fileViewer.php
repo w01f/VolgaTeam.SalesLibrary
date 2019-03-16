@@ -5,7 +5,12 @@
 	$authorized = UserIdentity::isUserAuthorized();
 ?>
 <div data-role='page' id="link-viewer" class="link-viewer-page" data-cache="never" data-dom-cache="false" data-ajax="false">
-	<div data-role='header' class="page-header" data-position="fixed">
+    <div class="service-data">
+        <div class="activity-data">
+	        <? echo CJSON::encode(array('type' => 'Link Preview', 'subType' => 'Open Link Preview', 'data' => array('file' => $data->fileName))); ?>
+        </div>
+    </div>
+    <div data-role='header' class="page-header" data-position="fixed">
 		<h1 class="header-title"></h1>
 		<? if ($authorized): ?>
 			<a href="#link-viewer-popup-panel-right" class="ui-btn-right" data-icon="ion-navicon-round" data-iconpos="notext"></a>

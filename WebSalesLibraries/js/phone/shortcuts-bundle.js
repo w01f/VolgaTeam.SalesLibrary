@@ -65,8 +65,6 @@
 			contentContainer.find('.shortcuts-link').off('click').on('click', function (e)
 			{
 				var data = $(this).find('.service-data');
-				$.SalesPortal.ShortcutsManager.trackActivity(data);
-
 				var hasCustomHandler = data.find('.has-custom-handler').length > 0;
 				var samePage = data.find('.same-page').length > 0;
 
@@ -75,6 +73,8 @@
 					e.preventDefault();
 					$.SalesPortal.ShortcutsManager.openShortcutByMenuItemData(data, "#shortcut-link-page-" + shortcutData.options.linkId);
 				}
+				else
+					$.SalesPortal.ShortcutsManager.trackActivity(data);
 			});
 		};
 	};

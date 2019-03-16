@@ -6,7 +6,7 @@
 	 */
 ?>
 <div data-role='page' id="favorites-view" class="shortcut-link-page" data-cache="never" data-dom-cache="false" data-ajax="false">
-	<div data-role='header' class="page-header" data-position="fixed" data-theme="a">
+    <div data-role='header' class="page-header" data-position="fixed" data-theme="a">
 		<? if ($shortcut->showNavigationPanel): ?>
             <a href="#favorites-view-popup-panel-left" class="navigation-panel-toggle" data-icon="ion-navicon-round" data-iconpos="notext"></a>
 		<? endif; ?>

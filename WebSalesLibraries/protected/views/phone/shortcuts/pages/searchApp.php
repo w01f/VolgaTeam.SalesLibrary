@@ -10,8 +10,17 @@
 	$libraries = $libraryManager->getLibraries();
 	$libraryGroups = $libraryManager->getLibraryGroups();
 ?>
-    <div data-role='page' id="search" class="shortcut-link-page" data-cache="never" data-dom-cache="false"
-         data-ajax="false">
+    <div data-role='page' id="search" class="shortcut-link-page" data-cache="never" data-dom-cache="false" data-ajax="false">
+        <div class="service-data">
+            <div class="activity-data">
+                <div class="activity-data">
+		            <?
+			            $actionData = $shortcut->getActivityData();
+			            echo CJSON::encode(array('type' => 'Shortcut Tile', 'subType' => $actionData['action'], 'data' => $actionData['details']));
+		            ?>
+                </div>
+            </div>
+        </div>
         <div data-role='header' class="page-header" data-position="fixed" data-theme="a">
 	        <? if ($shortcut->showNavigationPanel): ?>
                 <a href="#search-popup-panel-left" class="navigation-panel-toggle" data-icon="ion-navicon-round" data-iconpos="notext"></a>

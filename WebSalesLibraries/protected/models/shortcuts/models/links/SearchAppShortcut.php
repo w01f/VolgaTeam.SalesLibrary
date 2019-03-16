@@ -1,4 +1,5 @@
 <?
+
 	use application\models\data_query\data_table\DataTableColumnSettings;
 
 	/**
@@ -26,5 +27,15 @@
 		public function getTypeForActivityTracker()
 		{
 			return 'SearchApp';
+		}
+
+		/**
+		 * @return string
+		 */
+		public function getTitleForActivityTracker()
+		{
+			if ($this->isPhone)
+				return 'Mobile Search Shortcut ' . parent::getTitleForActivityTracker();
+			return parent::getTitleForActivityTracker();
 		}
 	}

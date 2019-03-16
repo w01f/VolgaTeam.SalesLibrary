@@ -98,6 +98,16 @@
 		}
 
 		/**
+		 * @return string
+		 */
+		public function getTitleForActivityTracker()
+		{
+			if($this->isPhone)
+				return 'Mobile Library ' . parent::getTitleForActivityTracker();
+			return parent::getTitleForActivityTracker();
+		}
+
+		/**
 		 * @param $actionsByKey array
 		 * @param $xpath DOMXPath
 		 * @param $actionConfigNodes DOMNodeList
