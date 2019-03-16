@@ -274,6 +274,9 @@
 				case 'wow':
 					new $.SalesPortal.ShortcutsSalesContest().init(parameters);
 					break;
+				case 'idea1':
+					new $.SalesPortal.ShortcutsSalesIdeas().init(parameters);
+					break;
 				default :
 					$.SalesPortal.Content.fillContent({
 						content: parameters.content,

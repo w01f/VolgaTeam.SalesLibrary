@@ -12,7 +12,7 @@
 			$this->disableBanners = false;
 			$this->requireLogin = true;
 			$this->requirePinCode = false;
-			$this->autoLaunch = false;
+			$this->autoLaunch = true;
 		}
 
 		/**

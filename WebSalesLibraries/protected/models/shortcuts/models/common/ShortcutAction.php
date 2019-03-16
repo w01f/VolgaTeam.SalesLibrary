@@ -550,6 +550,45 @@
 					$action->iconClass = 'icon-save';
 					$customActions[$action->tag] = $action;
 					break;
+				case 'idea1':
+					$action = new ShortcutAction('sales-ideas-panel-show');
+					$action->order = 10;
+					$action->group = 'sales-ideas-panel';
+					$action->title = 'Show Panel';
+					$action->iconClass = 'icon-list4';
+					$customActions[$action->tag] = $action;
+
+					$action = new ShortcutAction('sales-ideas-panel-hide');
+					$action->order = 10;
+					$action->group = 'sales-ideas-panel';
+					$action->title = 'Hide Panel';
+					$action->iconClass = 'icon-list4';
+					$customActions[$action->tag] = $action;
+
+					$action = new ShortcutAction('sales-ideas-item-add');
+					$action->order = 20;
+					$action->title = 'Add Item';
+					$action->iconClass = 'icon-add';
+					$customActions[$action->tag] = $action;
+
+					$action = new ShortcutAction('sales-ideas-item-delete');
+					$action->order = 30;
+					$action->title = 'Delete Item';
+					$action->iconClass = 'icon-delete';
+					$customActions[$action->tag] = $action;
+
+					$action = new ShortcutAction('sales-ideas-item-save');
+					$action->order = 40;
+					$action->title = 'Save Item';
+					$action->iconClass = 'icon-save';
+					$customActions[$action->tag] = $action;
+
+					$action = new ShortcutAction('sales-ideas-item-submit');
+					$action->order = 50;
+					$action->title = 'Submit';
+					$action->iconClass = 'icon-save';
+					$customActions[$action->tag] = $action;
+					break;
 			}
 			return $customActions;
 		}

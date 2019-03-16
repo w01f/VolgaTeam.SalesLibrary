@@ -222,6 +222,7 @@
 				case 'starssteals':
 				case 'rrq1':
 				case 'wow':
+				case 'idea1':
 				case 'favorites':
 				case 'quizzes':
 				case 'landing':
@@ -299,6 +300,10 @@
 				case 'wow':
 					$useMobileWrapper = false;
 					$viewName = 'salesContest';
+					break;
+				case 'idea1':
+					$useMobileWrapper = false;
+					$viewName = 'salesIdeas';
 					break;
 				case 'quizzes':
 					$useMobileWrapper = false;

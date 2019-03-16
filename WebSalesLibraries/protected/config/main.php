@@ -92,6 +92,8 @@
 			'application.models.calendar.records.*',
 			'application.models.sales_contest.models.*',
 			'application.models.sales_contest.records.*',
+			'application.models.sales_ideas.models.*',
+			'application.models.sales_ideas.records.*',
 		),
 		'behaviors' => array(
 			'onBeginRequest' => array(

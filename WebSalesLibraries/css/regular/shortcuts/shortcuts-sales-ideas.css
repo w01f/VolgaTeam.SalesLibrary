@@ -1,0 +1,257 @@
+/*Common Header------------------------------------*/
+#content .sales-ideas-main-page
+{
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	display: table;
+}
+/*--------------------------------------------------*/
+
+/*Service Panel------------------------------------*/
+#content .sales-ideas-main-page .service-panel
+{
+	background: #fff;
+	padding: 5px 0 0;
+	margin: 0;
+	vertical-align: top;
+	display: table-cell;
+	width: 40%;
+	min-width: 350px;
+}
+
+#content .sales-ideas-main-page .service-panel.left
+{
+	border-right: 2px #999 solid;
+}
+
+#content .sales-ideas-main-page .service-panel .row
+{
+	margin: 0;
+}
+
+#content .sales-ideas-main-page .service-panel .row > div
+{
+	padding: 0;
+}
+
+#content .sales-ideas-main-page .service-panel .service-panel-page > div > div
+{
+	width: 100%;
+}
+
+#content .sales-ideas-main-page .service-panel .item-list-buttons,
+#content .sales-ideas-main-page .service-panel .item-list-tabs
+{
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+#content .sales-ideas-main-page .service-panel .item-list-buttons .button,
+#content .sales-ideas-main-page .service-panel .item-list-buttons .button:focus
+{
+    cursor: pointer;
+    text-decoration: none;
+    outline: none;
+}
+
+#content .sales-ideas-main-page .service-panel .item-list-container
+{
+	overflow-y: auto;
+	padding-top: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+#content .sales-ideas-main-page .service-panel .item-list-container .status-filter-container label
+{
+	font-weight: normal;
+	white-space: nowrap;
+	text-align: left;
+	width: 100%;
+}
+
+#content .sales-ideas-main-page .service-panel .item-list-container .status-filter-container .form-control
+{
+	margin-left: 0.5em;
+	width: 75%;
+}
+
+#content .sales-ideas-main-page .service-panel .item-list-container .table .item-data-row
+{
+	cursor: pointer;
+}
+
+#content .sales-ideas-main-page .service-panel .item-list-container .table tr.selected
+{
+	background: #C6E2FF !important;
+}
+
+#content .sales-ideas-main-page .service-panel .item-list-container .table tr:hover
+{
+	background: #ECFBD4;
+}
+
+#content .sales-ideas-main-page .service-panel .item-list-container .table tr .user-name
+{
+	font-size: 0.9em;
+	color: #909090;
+	display: block;
+	margin-top: 5px;
+}
+
+#content .sales-ideas-main-page .service-panel .ui-resizable-handle.ui-resizable-e
+{
+	background: #C0C0C0 !important;
+	z-index: 2 !important;
+}
+
+#content .sales-ideas-main-page .service-panel .ui-resizable-handle.ui-resizable-se
+{
+	display: none !important;
+}
+
+#content .sales-ideas-main-page .service-panel .dataTables_filter input
+{
+	width: 150px !important;
+	margin-left: 10px !important;
+}
+/*--------------------------------------------------*/
+
+/*Delete Items Dialog------------------------------------*/
+.delete-pages-list
+{
+	width: 99%;
+	background: #ffffff;
+	border: 1px #aaaaaa solid;
+	overflow: auto;
+	height: 400px;
+}
+
+.delete-pages-list li
+{
+	padding-bottom: 10px;
+	padding-left: 5px;
+}
+/*--------------------------------------------------*/
+
+/*Item Content------------------------------------*/
+#content .sales-ideas-main-page .content-panel
+{
+	vertical-align: top;
+	margin: 0;
+	padding-left: 10px;
+	padding-right: 10px;
+	display: table-cell;
+}
+
+#content .sales-ideas-main-page .content-buttons
+{
+	width: 100%;
+	margin: 0;
+}
+
+#content .sales-ideas-main-page .content-buttons > div
+{
+	padding: 10px;
+}
+
+#content .sales-ideas-main-page .item-content
+{
+	width: 100%;
+	vertical-align: top;
+	margin: 0;
+}
+
+#content .sales-ideas-main-page .item-content > div
+{
+	overflow: auto;
+	height: 100%;
+}
+
+#content .sales-ideas-main-page .item-content .form-horizontal .row
+{
+	margin-left: 0;
+	margin-right: 0;
+}
+
+#content .sales-ideas-main-page .item-content .item-content-group
+{
+	margin-left: 0;
+	margin-right: 0;
+	margin-top: 60px;
+}
+
+#content .sales-ideas-main-page .item-content .item-content-group .control-label
+{
+	font-weight: normal;
+	margin-bottom: 5px;
+	text-align: left;
+}
+
+#content .sales-ideas-main-page .item-content .item-content-group .controls label
+{
+	font-weight: normal;
+}
+
+#content .sales-ideas-main-page .item-content .sales-ideas-item-team-item
+{
+	margin-bottom: 15px;
+}
+
+#content .sales-ideas-main-page .service-panel .sub-text,
+#content .sales-ideas-main-page .item-content .item-content-sub-text
+{
+	font-size: 0.9em;
+	font-weight: normal;
+	color: #909090;
+}
+
+#content .sales-ideas-main-page .item-content .sales-ideas-item-nomination-type-label
+{
+	margin-right: 40px;
+}
+
+#content .sales-ideas-main-page .item-content .checkbox-inline
+{
+	margin-right: 50px;
+	margin-bottom: 20px;
+}
+
+#content .sales-ideas-main-page .item-content .checkbox-inline + .checkbox-inline
+{
+	margin-left: 0;
+}
+
+#content .sales-ideas-main-page .item-content .dropzone
+{
+	padding: 10px;
+}
+
+#content .sales-ideas-main-page .item-content .dropzone .file-item
+{
+	color: #000000;
+}
+
+#content .sales-ideas-main-page .item-content .dropzone .file-item-body .form-control
+{
+	outline: none;
+	box-shadow: none !important;
+	border: 1px solid #ccc !important;
+	cursor: pointer;
+}
+
+#content .sales-ideas-main-page .item-content .dropzone.disabled
+{
+	background: #eee;
+}
+
+#content .sales-ideas-main-page .item-content .dropzone .file-item-body .file-delete
+{
+	top: 0;
+	cursor: pointer;
+}
+/*--------------------------------------------------*/
+

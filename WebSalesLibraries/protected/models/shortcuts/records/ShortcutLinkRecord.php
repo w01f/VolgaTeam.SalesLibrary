@@ -179,6 +179,9 @@
 				case 'wow':
 					$shortcut = new SalesContestShortcut($this, $isPhone, $parameters);
 					break;
+				case 'idea1':
+					$shortcut = new SalesIdeasShortcut($this, $isPhone, $parameters);
+					break;
 				case 'resetpw':
 					$shortcut = new ResetPasswordShortcut($this, $isPhone);
 					break;
@@ -377,6 +380,9 @@
 					break;
 				case 'wow':
 					$shortcut = new SalesContestShortcut($this, false);
+					break;
+				case 'idea1':
+					$shortcut = new SalesIdeasShortcut($this, false);
 					break;
 				case 'resetpw':
 					$shortcut = new ResetPasswordShortcut($this, false);
