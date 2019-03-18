@@ -7,6 +7,9 @@
 	 */
 	class ExcludeQueryConditions
 	{
+		public $text;
+		public $textExactMatch;
+
 		public $libraries;
 		public $categories;
 
@@ -26,6 +29,12 @@
 		 */
 		public function configurefromXml($xpath, $contextNode)
 		{
+			$queryResult = $xpath->query('./Text', $contextNode);
+			$this->text = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
+
+			$queryResult = $xpath->query('./TextExactMatch', $contextNode);
+			$this->textExactMatch = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
+
 			$queryResult = $xpath->query('./Library', $contextNode);
 			if ($queryResult->length > 0)
 				foreach ($queryResult as $node)

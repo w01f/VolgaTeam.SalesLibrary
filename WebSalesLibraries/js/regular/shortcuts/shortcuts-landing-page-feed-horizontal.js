@@ -179,6 +179,13 @@
 
 			leftButton.prop('href', '#');
 			leftButton.on('click', function () {
+				var titleFind = "Trending(" + $('.feed-controls-container .title').text() + ")";
+				ga('send', {
+					hitType: 'pageview',
+					title: titleFind,
+					location: window.BaseUrl,
+					page: "Landing Page/carousel/leftHorizontal"
+				});
 				$(this).blur();
 
 				feedContainer.find('.carousel-inner .item').css('transition-duration', viewSettings.manualAnimationSpeed + 's');
@@ -190,6 +197,13 @@
 
 			rightButton.prop('href', '#');
 			rightButton.off('click').on('click', function () {
+				var titleFind = "Trending(" + $('.feed-controls-container .title').text() + ")";
+				ga('send', {
+					hitType: 'pageview',
+					title: titleFind,
+					location: window.BaseUrl,
+					page: "Landing Page/carousel/rightHorizontal"
+				});
 				$(this).blur();
 
 				feedContainer.find('.carousel-inner .item').css('transition-duration', viewSettings.manualAnimationSpeed + 's');
@@ -230,7 +244,6 @@
 						.appendTo($(this));
 				}
 			});
-
 
 
 			if ($.SalesPortal.Content.isMobileDevice())

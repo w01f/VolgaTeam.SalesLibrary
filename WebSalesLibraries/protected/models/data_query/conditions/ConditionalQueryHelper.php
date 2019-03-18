@@ -173,6 +173,10 @@
 						implode("','", $availableLinkIds));
 			}
 
+			$contentMatchCondition = 'link.name,link.file_name,link.tags,link.content';
+			if ($queryConditions->onlyByName)
+				$contentMatchCondition = 'link.name,link.file_name';
+
 			$textConditions = self::prepareTextCondition($queryConditions->text, $queryConditions->textExactMatch);
 
 			$libraryCondition = '1 = 1';
@@ -316,6 +320,16 @@
 				$excludeLinkCondition = sprintf("NOT (%s)", implode(' OR ', $linkConditions));
 			}
 
+			$excludeContentCondition = '1 = 1';
+			if (isset($queryConditions->excludeQueryConditions) && !empty($queryConditions->excludeQueryConditions->text))
+			{
+				$textExcludeConditions = self::prepareTextCondition($queryConditions->excludeQueryConditions->text, $queryConditions->excludeQueryConditions->textExactMatch);
+				$conditionParts = array();
+				foreach ($textExcludeConditions as $contentConditionPart)
+					$conditionParts[] = sprintf("(not match(%s) against('%s' in boolean mode))", $contentMatchCondition, str_replace("'", "\'", $contentConditionPart));
+				$excludeContentCondition = implode(" and ", $conditionParts);
+			}
+
 			$excludeCategoryCondition = '1=1';
 			if (isset($queryConditions->excludeQueryConditions) && count($queryConditions->excludeQueryConditions->categories) > 0)
 			{
@@ -343,16 +357,12 @@
 			if ($queryConditions->hideLinksWithinBundle)
 				$hideLinksWithinBundlesCondition = "link.id not in (select hide_lb.id_link from tbl_link_bundle hide_lb)";
 
-			$matchCondition = 'link.name,link.file_name,link.tags,link.content';
-			if ($queryConditions->onlyByName)
-				$matchCondition = 'link.name,link.file_name';
-
 			$contentCondition = "1=1";
 			if (count($textConditions) > 0)
 			{
 				$conditionParts = array();
 				foreach ($textConditions as $contentConditionPart)
-					$conditionParts[] = sprintf("(match(%s) against('%s' in boolean mode))", $matchCondition, str_replace("'", "\'", $contentConditionPart));
+					$conditionParts[] = sprintf("(match(%s) against('%s' in boolean mode))", $contentMatchCondition, str_replace("'", "\'", $contentConditionPart));
 				$contentCondition = implode(" or ", $conditionParts);
 			}
 			$contentCondition = sprintf("(%s%s%s%s%s)",
@@ -375,6 +385,7 @@
 				$onlyWithCategoriesCondition,
 				$folderCondition,
 				$excludeLinkCondition,
+				$excludeContentCondition,
 				$excludeCategoryCondition,
 				$excludeLibraryCondition,
 				$hideLinksWithinBundlesCondition

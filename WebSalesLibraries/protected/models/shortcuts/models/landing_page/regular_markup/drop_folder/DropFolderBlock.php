@@ -18,6 +18,8 @@
 
 		public $uploadOnClick;
 
+		public $uploadProgressPositionOnTop;
+
 		/**
 		 * @param $parentShortcut \PageContentShortcut
 		 * @param $parentBlock BlockContainer
@@ -63,6 +65,9 @@
 
 				$queryResult = $xpath->query('./ClickUploadAllowed', $contextNode);
 				$this->uploadOnClick = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
+
+				$queryResult = $xpath->query('./ProgressBar', $contextNode);
+				$this->uploadProgressPositionOnTop = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) == "top" : false;
 			}
 		}
 	}

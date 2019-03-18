@@ -1,18 +1,22 @@
-(function ($)
-{
+(function ($) {
 	window.BaseUrl = window.BaseUrl || '';
 	$.SalesPortal = $.SalesPortal || {};
-	var HistoryManager = function ()
-	{
+	var HistoryManager = function () {
 		const HistoryShortcutItem = 1;
 		const HistoryPreviewItem = 2;
 
-		this.init = function ()
-		{
-			window.onpopstate = function (event)
-			{
+		this.init = function () {
+			window.onpopstate = function (event) {
 				if (event.state && event.state.itemType)
 				{
+					//GA CODE on Browser Back Click 
+					ga('send', {
+						hitType: 'pageview',
+						title: event.state.customParameters.action + "/" + event.state.customParameters.File,
+						location: window.BaseUrl,
+						page: event.state.customParameters.action + "/" + event.state.customParameters.File
+					});
+
 					switch (event.state.itemType)
 					{
 						case HistoryShortcutItem:
@@ -28,8 +32,7 @@
 			};
 		};
 
-		this.pushPreviewLink = function (linkName, dialogData)
-		{
+		this.pushPreviewLink = function (linkName, dialogData) {
 			dialogData.doNotPushHistory = true;
 			window.history.pushState(
 				{
@@ -40,8 +43,7 @@
 			)
 		};
 
-		this.pushShortcut = function (data, customParameters)
-		{
+		this.pushShortcut = function (data, customParameters) {
 			var pushHistory = data.find('.push-history').length > 0;
 			if (pushHistory && customParameters && customParameters.pushHistory)
 			{
@@ -61,7 +63,11 @@
 				}
 
 				customParameters.pushHistory = false;
+
 				var title = data !== undefined ? $.parseJSON(data.find('.activity-data').text()) : undefined;
+				customParameters.action = title.action;
+				customParameters.File = title.details.File;
+
 				window.history.pushState(
 					{
 						itemType: HistoryShortcutItem,

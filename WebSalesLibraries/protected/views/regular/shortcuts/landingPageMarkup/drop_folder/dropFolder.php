@@ -62,12 +62,20 @@
 <div id="<? echo $containerId; ?>" class="drop-folder-container"
     style="<? echo $this->renderPartial('landingPageMarkup/style/stylePadding', array('padding' => $contentBlock->padding), true); ?>
     <? echo $this->renderPartial('landingPageMarkup/style/styleMargin', array('margin' => $contentBlock->margin), true); ?>">
+	<? if ($contentBlock->uploadProgressPositionOnTop): ?>
+        <div class="progress" style="position: relative; width: 100%; display: none;">
+            <div class="progress-text text-center" style="width: 100%; position: absolute"><span class="file-name">Test</span>: <span class="progress-percent">90</span>%</div>
+            <div class="progress-bar" style="width: 0; height: 20px;"></div>
+        </div>
+	<? endif; ?>
     <ul id="<? echo $folderBlockId; ?>" class="nav nav-pills dropzone">
     </ul>
-    <div class="progress" style="position: relative; width: 100%; display: none;">
-        <div class="progress-text text-center" style="width: 100%; position: absolute"><span class="file-name">Test</span>: <span class="progress-percent">90</span>%</div>
-        <div class="progress-bar" style="width: 0; height: 20px;"></div>
-    </div>
+	<? if (!$contentBlock->uploadProgressPositionOnTop): ?>
+        <div class="progress" style="position: relative; width: 100%; display: none;">
+            <div class="progress-text text-center" style="width: 100%; position: absolute"><span class="file-name">Test</span>: <span class="progress-percent">90</span>%</div>
+            <div class="progress-bar" style="width: 0; height: 20px;"></div>
+        </div>
+	<? endif; ?>
     <div class="service-data drop-folder-data">
 		<? echo CJSON::encode(array(
 			'folderName' => $contentBlock->folderName,
@@ -77,6 +85,7 @@
 			'allowedFileTypes' =>  $contentBlock->allowedFileTypes,
 			'fileTypeDiscardMessage' => $contentBlock->fileTypeDiscardMessage,
 			'uploadOnClick' => $contentBlock->uploadOnClick,
+			'uploadProgressPositionOnTop' => $contentBlock->uploadProgressPositionOnTop,
 		)) ?>
     </div>
 </div>

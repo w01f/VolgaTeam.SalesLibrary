@@ -44,35 +44,32 @@
 					name = "";
 			}
 
-			if (actionData.subType != "Search Activity")
+			if (actionData.type == "Shortcut Tile")
 			{
-				if (actionData.type == "Shortcut Tile")
+				if (actionData.subType == "Landing page")
 				{
-					if (actionData.subType == "Landing page")
-					{
-						$.cookie("lastloc", actionData.linkId, {expires: 10});
+					$.cookie("lastloc", actionData.linkId, {expires: 10});
 
-						document.cookie = "lastloc=" + actionData.linkId + ";path=/";
-						document.cookie = "lastname=" + actionData.data.File + ";path=/";
-						document.cookie = "lasttype=" + actionData.subType + ";path=/";
-					}
-					else if (actionData.subType == "LibraryPage")
-					{
-						$.cookie("lastloc", actionData.linkId, {expires: 10});
-
-						document.cookie = "lastloc=" + actionData.linkId + ";path=/";
-						document.cookie = "lastname=" + actionData.data.File + ";path=/";
-						document.cookie = "lasttype=" + actionData.subType + ";path=/";
-					}
+					document.cookie = "lastloc=" + actionData.linkId + ";path=/";
+					document.cookie = "lastname=" + actionData.data.File + ";path=/";
+					document.cookie = "lasttype=" + actionData.subType + ";path=/";
 				}
+				else if (actionData.subType == "LibraryPage")
+				{
+					$.cookie("lastloc", actionData.linkId, {expires: 10});
 
-				ga('send', {
-					hitType: 'pageview',
-					title: type + "/" + name,
-					location: window.BaseUrl + "/" + actionData.data.linkId,
-					page: type + "/" + name
-				});
+					document.cookie = "lastloc=" + actionData.linkId + ";path=/";
+					document.cookie = "lastname=" + actionData.data.File + ";path=/";
+					document.cookie = "lasttype=" + actionData.subType + ";path=/";
+				}
 			}
+
+			ga('send', {
+				hitType: 'pageview',
+				title: type + "/" + name,
+				location: window.BaseUrl + "/" + actionData.data.linkId,
+				page: type + "/" + name
+			});
 		};
 	};
 	$.SalesPortal.LogHelper = new LogHelper();
