@@ -368,6 +368,13 @@
 					});
 
 					addItemContent.find('.btn.accept-button').on('click.sales-contest', function () {
+						ga('send', {
+							hitType: 'pageview',
+							title: "New Nomination/" + $('#add-item-name').val(),
+							location: window.BaseUrl + "New Nomination",
+							page: "New Nomination/" + $('#add-item-name').val()
+						});
+
 						$.ajax({
 							type: "POST",
 							url: window.BaseUrl + "salesContest/addItem",
@@ -383,6 +390,8 @@
 								$.SalesPortal.Overlay.hide();
 							},
 							success: function (selectedItemId) {
+
+
 								that.load(selectedItemId);
 							},
 							error: function () {
@@ -604,6 +613,12 @@
 						itemId,
 						itemTitle
 					);
+					ga('send', {
+						hitType: 'pageview',
+						title: $('.item-list-tabs ul li.active').text().split('(')[0] + "/" + itemTitle,
+						location: window.BaseUrl + $('.item-list-tabs ul li.active').text().split('(')[0],
+						page: $('.item-list-tabs ul li.active').text().split('(')[0] + "/" + itemTitle
+					})
 				}
 			});
 
@@ -852,7 +867,7 @@
 				actionMenuSubmitButton.show();
 			}
 
-			$('#sales-contest-item-revenue').off('keypress.sales-contest').on('keypress.sales-contest',validateNumbers);
+			$('#sales-contest-item-revenue').off('keypress.sales-contest').on('keypress.sales-contest', validateNumbers);
 			$('#sales-contest-item-revenue-digital').off('keypress.sales-contest').on('keypress.sales-contest', validateNumbers);
 			$('#sales-contest-item-revenue-media').off('keypress.sales-contest').on('keypress.sales-contest', validateNumbers);
 			$('#sales-contest-item-revenue-production').off('keypress.sales-contest').on('keypress.sales-contest', validateNumbers);
@@ -931,7 +946,7 @@
 								return false;
 							}
 						});
-						if(!abortUploading)
+						if (!abortUploading)
 						{
 							if (file.size > parseInt(shortcutData.options.maxFileSize) * 1024 * 1024)
 							{
@@ -1157,7 +1172,7 @@
 							listItem.addClass('active');
 							listGroup.animate({
 								scrollTop: (listItem.offset().top - listGroup.offset().top)
-							},10);
+							}, 10);
 
 							return false;
 						}

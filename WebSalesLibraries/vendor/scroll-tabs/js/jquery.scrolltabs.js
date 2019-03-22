@@ -240,6 +240,14 @@
           $('.scroll_tab_inner > span.scroll_tab_right_finisher', _this).removeClass('scroll_tab_over').removeClass('scroll_tab_right_finisher_over');
         }
       }).click(function(e){
+		  
+		  ga('send', {
+				hitType: 'pageview',
+				title: "My Sites/" +$('#page-content-title').val()+ "/" + $(this).text().split("#")[0].trim(),
+				location: window.BaseUrl + "/mysites/" + $('#page-content-title').val(),
+				page: "My Sites/" +$('#page-content-title').val()+ "/" + $(this).text().split("#")[0].trim()
+			});
+			
         e.stopPropagation();        
         $('.scroll_tab_inner',_this).find("span").removeClass("scroll_tab_transparent");
         if (!$('.scroll_tab_inner',_this).hasClass("tap_enabled")) {
@@ -475,6 +483,7 @@
     right_arrow_size: 42,
     click_callback: function(e){
       var val = $(this).attr('rel');
+	  
       if(val){
         window.location.href = val;
       }

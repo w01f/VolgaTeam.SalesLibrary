@@ -49,7 +49,7 @@
 			updateContentSize();
 		};
 
-		var requestSaveItem = function(){
+		var requestSaveItem = function () {
 			var modalDialog = new $.SalesPortal.ModalDialog({
 				title: 'Save Request',
 				description: 'Do you want to SUBMIT this Request to your Research Team Now?',
@@ -369,6 +369,12 @@
 					});
 
 					addItemContent.find('.btn.accept-button').on('click.sales-requests', function () {
+						ga('send', {
+							hitType: 'pageview',
+							title: "New Request/" + $('#add-item-name').val(),
+							location: window.BaseUrl + "New Request",
+							page: "New Request/" + $('#add-item-name').val()
+						});
 						$.ajax({
 							type: "POST",
 							url: window.BaseUrl + "salesRequests/addItem",
@@ -617,6 +623,12 @@
 						itemId,
 						itemTitle
 					);
+					ga('send', {
+						hitType: 'pageview',
+						title: $('.item-list-tabs ul li.active').text().split('(')[0] + "/" + itemTitle,
+						location: window.BaseUrl + $('.item-list-tabs ul li.active').text().split('(')[0],
+						page: $('.item-list-tabs ul li.active').text().split('(')[0] + "/" + itemTitle
+					})
 				}
 			});
 
@@ -986,7 +998,7 @@
 								return false;
 							}
 						});
-						if(!abortUploadingAttachments)
+						if (!abortUploadingAttachments)
 						{
 							if (file.size > parseInt(shortcutData.options.maxFileSize) * 1024 * 1024)
 							{
@@ -1135,7 +1147,7 @@
 								return false;
 							}
 						});
-						if(!abortUploadingDeliverables)
+						if (!abortUploadingDeliverables)
 						{
 							if (file.size > parseInt(shortcutData.options.maxFileSize) * 1024 * 1024)
 							{

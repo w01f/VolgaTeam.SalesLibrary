@@ -55,7 +55,7 @@
 		var search = function () {
 			if (searchBar.find('.btn.search-bar-run').hasClass('disabled')) return;
 			searchBarConditions.set('text', searchBar.find('.search-bar-text').val());
-
+			document.cookie = "search-key=" + searchBar.find('.search-bar-text').val() + ";path=/";
 			ga('send', {
 				hitType: 'pageview',
 				title: "Search:" + searchBar.find('.search-bar-text').val(),

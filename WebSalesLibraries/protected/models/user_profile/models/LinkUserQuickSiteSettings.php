@@ -10,7 +10,7 @@
 			$this->showLinksAsUrl = true;
 			$this->disableWidgets = false;
 			$this->disableBanners = false;
-			$this->requireLogin = true;
+			$this->requireLogin = false;
 			$this->requirePinCode = false;
 			$this->autoLaunch = true;
 		}

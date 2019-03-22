@@ -1,15 +1,12 @@
-(function ($)
-{
+(function ($) {
 	window.BaseUrl = window.BaseUrl || '';
 	$.SalesPortal = $.SalesPortal || {};
-	$.SalesPortal.ShortcutsQBuilder = function ()
-	{
+	$.SalesPortal.ShortcutsQBuilder = function () {
 		var qBuilderData = undefined;
 
 		var servicePanel = undefined;
 
-		this.init = function (data)
-		{
+		this.init = function (data) {
 			qBuilderData = data;
 			qBuilderData.options.trackActivityDelegate = trackActivity;
 
@@ -36,11 +33,16 @@
 				servicePanel.show();
 
 			var headerContainer = servicePanel.find('.headers');
-			headerContainer.find('.btn').off('click.qbuilder').on('click.qbuilder', function ()
-			{
+			headerContainer.find('.btn').off('click.qbuilder').on('click.qbuilder', function () {
 				headerContainer.find('.btn').removeClass('selected');
 				$(this).addClass('selected');
 				var relatedContentId = $(this).find('.service-data .tab-id').text();
+				ga('send', {
+					hitType: 'pageview',
+					title: relatedContentId.substring(1, relatedContentId.length) + "/" + $(this).text().split("#")[0].trim(),
+					location: window.BaseUrl + relatedContentId,
+					page: relatedContentId.substring(1, relatedContentId.length) + "/" + $(this).text().split("#")[0].trim()
+				});
 				servicePanel.find('.service-panel-page').hide();
 				$(relatedContentId).show();
 				$.SalesPortal.QBuilder.PageList.updateContentSize();
@@ -58,8 +60,7 @@
 			updateContentSize();
 		};
 
-		var initActionButtons = function ()
-		{
+		var initActionButtons = function () {
 			var shortcutActionsContainer = $('#shortcut-action-container');
 
 			if ($.cookie("showServicePanel") === "true")
@@ -68,8 +69,7 @@
 			}
 			else
 				shortcutActionsContainer.find('.qbuilder-panel-hide').hide();
-			shortcutActionsContainer.find('.qbuilder-panel-show').off('click.action').on('click.action', function ()
-			{
+			shortcutActionsContainer.find('.qbuilder-panel-show').off('click.action').on('click.action', function () {
 				servicePanel.show();
 				shortcutActionsContainer.find('.qbuilder-panel-hide').show();
 				$(this).hide();
@@ -80,8 +80,7 @@
 
 				updateContentSize();
 			});
-			shortcutActionsContainer.find('.qbuilder-panel-hide').off('click.action').on('click.action', function ()
-			{
+			shortcutActionsContainer.find('.qbuilder-panel-hide').off('click.action').on('click.action', function () {
 				servicePanel.hide();
 				shortcutActionsContainer.find('.qbuilder-panel-show').show();
 				$(this).hide();
@@ -93,46 +92,38 @@
 				updateContentSize();
 			});
 
-			shortcutActionsContainer.find('.qbuilder-qsite-add').off('click.action').on('click.action', function ()
-			{
+			shortcutActionsContainer.find('.qbuilder-qsite-add').off('click.action').on('click.action', function () {
 				$.SalesPortal.QBuilder.PageList.addPage();
 			});
 
-			shortcutActionsContainer.find('.qbuilder-qsite-delete').off('click.action').on('click.action', function ()
-			{
+			shortcutActionsContainer.find('.qbuilder-qsite-delete').off('click.action').on('click.action', function () {
 				$.SalesPortal.QBuilder.PageList.deletePage();
 			});
 
-			shortcutActionsContainer.find('.qbuilder-qsite-save').off('click.action').on('click.action', function ()
-			{
+			shortcutActionsContainer.find('.qbuilder-qsite-save').off('click.action').on('click.action', function () {
 				$.SalesPortal.QBuilder.PageList.savePage(null);
 			});
 
 			shortcutActionsContainer.find('.qbuilder-qsite-preview')
 				.prop('target', "_blank")
-				.off('click.action').on('click.action', function (e)
-			{
+				.off('click.action').on('click.action', function (e) {
 				var url = $(this).attr('href');
 				e.preventDefault();
-				$.SalesPortal.QBuilder.PageList.savePage(function ()
-				{
+				$.SalesPortal.QBuilder.PageList.savePage(function () {
 					window.open(url);
 				});
 			});
 
-			shortcutActionsContainer.find('.qbuilder-qsite-email').off('click.action').on('click.action', function ()
-			{
+			shortcutActionsContainer.find('.qbuilder-qsite-email').off('click.action').on('click.action', function () {
 				$.SalesPortal.QBuilder.PageList.emailPage();
 			});
 
-			shortcutActionsContainer.find('.qbuilder-qsite-delete-all-links').off('click.action').on('click.action', function ()
-			{
+			shortcutActionsContainer.find('.qbuilder-qsite-delete-all-links').off('click.action').on('click.action', function () {
 				$.SalesPortal.QBuilder.PageList.selectedPage.deleteAllLinks();
 			});
 		};
 
-		var updateContentSize = function ()
-		{
+		var updateContentSize = function () {
 			var content = $.SalesPortal.Content.getContentObject();
 			var navigationPanel = $.SalesPortal.Content.getNavigationPanel();
 
@@ -153,8 +144,7 @@
 			$.SalesPortal.QBuilder.LinkCart.updateContentSize();
 		};
 
-		var trackActivity = function ()
-		{
+		var trackActivity = function () {
 			var activityData = $.parseJSON($('<div>' + qBuilderData.options.serviceData + '</div>').find('.activity-data').text());
 			$.SalesPortal.ShortcutsManager.trackActivity(
 				activityData,
