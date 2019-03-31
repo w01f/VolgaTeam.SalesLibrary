@@ -13,6 +13,9 @@
 		/** @var \application\models\shortcuts\models\bundle_modal_dialog\LeftPanelContainer */
 		public $leftPanel;
 
+		/** @var \application\models\shortcuts\models\bundle_modal_dialog\FavoritesPageContainer */
+		public $favoritesPage;
+
 		/** @var TabItemContainer[] */
 		public $tabPages;
 
@@ -41,10 +44,25 @@
 			if ($queryResult->length > 0)
 				$this->leftPanel = new \application\models\shortcuts\models\bundle_modal_dialog\LeftPanelContainer($xpath, $queryResult->item(0), $this);
 
+			$queryResult = $xpath->query('//Config/FavoritesPage');
+			if ($queryResult->length > 0)
+				$this->favoritesPage = new \application\models\shortcuts\models\bundle_modal_dialog\FavoritesPageContainer($xpath, $queryResult->item(0), $this);
+
 			$this->tabPages = array();
 			$queryResult = $xpath->query('//Config/TabControl/TabPage');
 			foreach ($queryResult as $tabPageNode)
 				$this->tabPages[] = new TabItemContainer($xpath, $tabPageNode, $this);
+		}
+
+		public function loadFavoritesConfig()
+		{
+			$linkConfig = new DOMDocument();
+			$linkConfig->loadXML($this->linkRecord->config);
+			$xpath = new DomXPath($linkConfig);
+
+			$queryResult = $xpath->query('//Config/FavoritesPage');
+			if ($queryResult->length > 0)
+				$this->favoritesPage = new \application\models\shortcuts\models\bundle_modal_dialog\FavoritesPageContainer($xpath, $queryResult->item(0), $this);
 		}
 
 		/**

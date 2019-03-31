@@ -56,6 +56,9 @@
 				$queryResult = $xpath->query('./MaxSizeMessage', $contextNode);
 				$this->maxFileSizeExcessMessage = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
 
+				$queryResult = $xpath->query('./FileTypesAllowed/FileType', $contextNode);
+				foreach ($queryResult as $fileTypeNode)
+					$this->allowedFileTypes[] = trim($fileTypeNode->nodeValue);
 				$queryResult = $xpath->query('./FileTypesAllowed/Filetype', $contextNode);
 				foreach ($queryResult as $fileTypeNode)
 					$this->allowedFileTypes[] = trim($fileTypeNode->nodeValue);

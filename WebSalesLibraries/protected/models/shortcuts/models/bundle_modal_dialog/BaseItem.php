@@ -17,12 +17,16 @@
 		public $textColor;
 		public $textSize;
 
+		public function __construct()
+		{
+		}
+
 		/**
 		 * @param $xpath \DOMXPath
 		 * @param $contextNode \DOMNode
 		 * @param $parentContainer BaseItemContainer
 		 */
-		public function __construct($xpath, $contextNode, $parentContainer)
+		public function loadFromXml($xpath, $contextNode, $parentContainer)
 		{
 			$queryResult = $xpath->query('./ItemID', $contextNode);
 			$this->id = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : uniqid();
@@ -60,18 +64,53 @@
 			switch ($itemType)
 			{
 				case 'shortcut':
-					$item = new ShortcutItem($xpath, $contextNode, $parentContainer);
+					$item = new ShortcutItem();
 					break;
 				case 'url':
-					$item = new UrlItem($xpath, $contextNode, $parentContainer);
+					$item = new UrlItem();
 					break;
 				case 'tab':
-					$item = new TabToggleItem($xpath, $contextNode, $parentContainer);
+					$item = new TabToggleItem();
 					break;
 				default:
 					$item = null;
 			}
-			return isset($item) ? $item : null;
+			if (isset($item))
+			{
+				$item->loadFromXml($xpath, $contextNode, $parentContainer);
+				return $item;
+			}
+			return null;
+		}
+
+		/**
+		 * @param $itemType string
+		 * @param $encodedContent string
+		 * @return BaseItem
+		 */
+		public static function fromJson($itemType, $encodedContent)
+		{
+			$item = null;
+			switch ($itemType)
+			{
+				case 'shortcut':
+					$item = new ShortcutItem();
+					break;
+				case 'url':
+					$item = new UrlItem();
+					break;
+				case 'tab':
+					$item = new TabToggleItem();
+					break;
+				default:
+					$item = null;
+			}
+			if (isset($item))
+			{
+				\Utils::loadFromJson($item, $encodedContent);
+				return $item;
+			}
+			return null;
 		}
 
 		/** @return string */
@@ -79,7 +118,4 @@
 
 		/** @return string */
 		public abstract function getTarget();
-
-		/** @return string */
-		public abstract function getItemData();
 	}

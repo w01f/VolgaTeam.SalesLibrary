@@ -6,17 +6,21 @@
 	{
 		public $url;
 
+		public function __construct()
+		{
+			$this->type = 'url';
+			$this->contentView = 'urlItem';
+			parent::__construct();
+		}
+
 		/**
 		 * @param $xpath \DOMXPath
 		 * @param $contextNode \DOMNode
 		 * @param $parentContainer BaseItemContainer
 		 */
-		public function __construct($xpath, $contextNode, $parentContainer)
+		public function loadFromXml($xpath, $contextNode, $parentContainer)
 		{
-			$this->type = 'url';
-			$this->contentView = 'urlItem';
-
-			parent::__construct($xpath, $contextNode, $parentContainer);
+			parent::loadFromXml($xpath, $contextNode, $parentContainer);
 
 			$queryResult = $xpath->query('Url', $contextNode);
 			$this->url = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
@@ -32,11 +36,5 @@
 		public function getTarget()
 		{
 			return "_blank";
-		}
-
-		/** @return string */
-		public function getItemData()
-		{
-			return null;
 		}
 	}

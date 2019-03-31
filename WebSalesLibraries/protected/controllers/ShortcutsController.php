@@ -178,6 +178,35 @@
 			Yii::app()->end();
 		}
 
+		public function actionGetBundleModalFavoriteItems()
+		{
+			$shortcutId = Yii::app()->request->getPost('shortcutId');
+			/** @var  $shortcutRecord ShortcutLinkRecord */
+			$shortcutRecord = ShortcutLinkRecord::model()->findByPk($shortcutId);
+			/** @var  $shortcut BundleModalDialogShortcut */
+			$shortcut = $shortcutRecord->getRegularModel($this->isPhone);
+			$shortcut->loadFavoritesConfig();
+			$this->renderPartial('bundleModalDialog/tabPage', array('tabPage' => $shortcut->favoritesPage));
+		}
+
+		public function actionAddBundleModalFavoriteItem()
+		{
+			$itemId = Yii::app()->request->getPost('itemId');
+			$itemType = Yii::app()->request->getPost('itemType');
+			$itemContent = Yii::app()->request->getPost('itemContent');
+
+			ShortcutBundleModalFavoriteItem::model()->addItem($itemId, $itemType, $itemContent);
+			echo CJSON::encode(array("success" => true));
+		}
+
+		public function actionDeleteBundleModalFavoriteItem()
+		{
+			$itemId = Yii::app()->request->getPost('itemId');
+
+			ShortcutBundleModalFavoriteItem::model()->deleteItem($itemId);
+			echo CJSON::encode(array("success" => true));
+		}
+
 		/**
 		 * @param $shortcut BaseShortcut
 		 */

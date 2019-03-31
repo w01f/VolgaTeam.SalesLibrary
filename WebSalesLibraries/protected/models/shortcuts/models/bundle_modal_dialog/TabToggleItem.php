@@ -6,17 +6,21 @@
 	{
 		public $tabId;
 
+		public function __construct()
+		{
+			$this->type = 'tab';
+			$this->contentView = 'tabToggleItem';
+			parent::__construct();
+		}
+
 		/**
 		 * @param $xpath \DOMXPath
 		 * @param $contextNode \DOMNode
 		 * @param $parentContainer BaseItemContainer
 		 */
-		public function __construct($xpath, $contextNode, $parentContainer)
+		public function loadFromXml($xpath, $contextNode, $parentContainer)
 		{
-			$this->type = 'tab';
-			$this->contentView = 'tabToggleItem';
-
-			parent::__construct($xpath, $contextNode, $parentContainer);
+			parent::loadFromXml($xpath, $contextNode, $parentContainer);
 
 			$queryResult = $xpath->query('TabID', $contextNode);
 			$this->tabId = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
@@ -32,11 +36,5 @@
 		public function getTarget()
 		{
 			return "_blank";
-		}
-
-		/** @return string */
-		public function getItemData()
-		{
-			return null;
 		}
 	}
