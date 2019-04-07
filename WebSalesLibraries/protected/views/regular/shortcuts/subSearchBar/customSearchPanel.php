@@ -45,7 +45,7 @@
 				<label class="file-selector"><input id="search-file-type-other" class="log-action" type="checkbox" checked>all other files</label>
 			</div>
 			<div class="search-option checkbox">
-				<label class="file-selector"><input id="search-file-names-only" class="log-action" type="checkbox">file names only</label>
+				<label class="file-selector"><input id="search-file-names-only" class="log-action" type="checkbox">file names & tags only</label>
 			</div>
 			<div class="search-option checkbox">
 				<label class="file-selector"><input id="search-exact-match" class="log-action" type="checkbox" checked>exact search</label>

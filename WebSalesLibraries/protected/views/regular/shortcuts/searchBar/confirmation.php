@@ -27,8 +27,8 @@
 	<div class="row">
 		<div class="col-xs-12">
 			<div class="checkbox">
-				<label><input id="search-bar-edit-file-names" type="checkbox">file names only<span class="text-muted"><small>
-							<em>(only searching in the “names” of files)</em></small></span></label>
+				<label><input id="search-bar-edit-file-names" type="checkbox">file names & tags only<span class="text-muted"><small>
+							<em>(searching the names and tags of files)</em></small></span></label>
 			</div>
 		</div>
 	</div>

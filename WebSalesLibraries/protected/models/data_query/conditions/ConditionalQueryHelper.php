@@ -175,7 +175,114 @@
 
 			$contentMatchCondition = 'link.name,link.file_name,link.tags,link.content';
 			if ($queryConditions->onlyByName)
-				$contentMatchCondition = 'link.name,link.file_name';
+				$contentMatchCondition = 'link.name,link.file_name,link.tags';
+
+			$folderCondition = '1 <> 1';
+			$isAdmin = \UserIdentity::isUserAdmin();
+			$notAuthorized = !\UserIdentity::isUserAuthorized();
+			if (!$usePermissionFilter || $isAdmin || $notAuthorized)
+				$folderCondition = '1 = 1';
+			else
+			{
+				$userId = \UserIdentity::getCurrentUserId();
+				$assignedPageIds = \UserLibraryRecord::getPageIdsByUserAngHisGroups($userId);
+				if (count($assignedPageIds) > 0)
+				{
+					$folderCondition = sprintf("link.id_folder in (select id from tbl_folder where id_page in ('%s'))",
+						implode("', '", $assignedPageIds));
+				}
+			}
+
+			$excludeLinkCondition = '1=1';
+			if (isset($queryConditions->excludeQueryConditions) && count($queryConditions->excludeQueryConditions->linkConditions) > 0)
+			{
+				$linkConditions = array();
+				foreach ($queryConditions->excludeQueryConditions->linkConditions as $linkCondition)
+					$linkConditions[] = "(trim(link.file_name)='" . $linkCondition->linkName . "' or trim(link.name)='" . $linkCondition->linkName . "') and trim(f.name)='" . $linkCondition->folderName . "' and trim(p.name)='" . $linkCondition->pageName . "' and trim(lib.name)='" . $linkCondition->libraryName . "'";
+
+				$excludeLinkCondition = sprintf("NOT (%s)", implode(' OR ', $linkConditions));
+			}
+
+			$excludeContentCondition = '1 = 1';
+			if (isset($queryConditions->excludeQueryConditions) && !empty($queryConditions->excludeQueryConditions->text))
+			{
+				$textExcludeConditions = self::prepareTextCondition($queryConditions->excludeQueryConditions->text, $queryConditions->excludeQueryConditions->textExactMatch);
+				$conditionParts = array();
+				foreach ($textExcludeConditions as $contentConditionPart)
+					$conditionParts[] = sprintf("(not match(%s) against('%s' in boolean mode))", $contentMatchCondition, str_replace("'", "\'", $contentConditionPart));
+				$excludeContentCondition = implode(" and ", $conditionParts);
+			}
+
+			$excludeCategoryCondition = '1=1';
+			if (isset($queryConditions->excludeQueryConditions) && count($queryConditions->excludeQueryConditions->categories) > 0)
+			{
+				$categoryConditions = array();
+				foreach ($queryConditions->excludeQueryConditions->categories as $category)
+					foreach ($category->items as $categoryItem)
+						$categoryConditions[] = sprintf('(link.id in (select id_link from tbl_link_category where category = "%s" and tag = "%s"))',
+							$category->name,
+							$categoryItem);
+				$excludeCategoryCondition = sprintf('NOT (%s)',
+					implode(' or ', $categoryConditions));
+			}
+
+			$excludeLibraryCondition = '1 = 1';
+			if (isset($queryConditions->excludeQueryConditions) && count($queryConditions->excludeQueryConditions->libraries) > 0)
+			{
+				$libraryIds = array();
+				foreach ($queryConditions->excludeQueryConditions->libraries as $library)
+					$libraryIds[] = $library->id;
+				$excludeLibraryCondition = sprintf("link.id_library not in ('%s')",
+					implode("','", $libraryIds));
+			}
+
+			$hideLinksWithinBundlesCondition = "1 = 1";
+			if ($queryConditions->hideLinksWithinBundle)
+				$hideLinksWithinBundlesCondition = "link.id not in (select hide_lb.id_link from tbl_link_bundle hide_lb)";
+
+			$groupConditions = self::getQueryGroupItemCondition($queryConditions, $queryConditions->dateSettings);
+
+			$whereConditions = array(
+				'link.type not in (5,6)',
+				$baseLinksCondition,
+				$folderCondition,
+				$hideLinksWithinBundlesCondition,
+				$excludeLinkCondition,
+				$excludeContentCondition,
+				$excludeCategoryCondition,
+				$excludeLibraryCondition,
+				$groupConditions['where']
+			);
+
+			$querySettings = DataTableQuerySettings::prepareQuery(
+				array(
+					DataTableQuerySettings::SettingsTagWhere => $whereConditions,
+					DataTableQuerySettings::SettingsTagCategoryWhere => $groupConditions['categoryJoin'],
+					DataTableQuerySettings::SettingsTagColumns => $queryConditions->columnSettings,
+					DataTableQuerySettings::SettingsTagDate => $queryConditions->dateSettings,
+					DataTableQuerySettings::SettingsTagCategory => $queryConditions->categorySettings,
+					DataTableQuerySettings::SettingsTagViewsCount => $queryConditions->viewCountSettings,
+					DataTableQuerySettings::SettingsTagThumbnails => $queryConditions->thumbnailSettings,
+					DataTableQuerySettings::SettingsTagSort => $queryConditions->sortSettings,
+					DataTableQuerySettings::SettingsTagLimit => $queryConditions->limit,
+				));
+			/** @var \CDbCommand $dbCommand */
+			$dbCommand = DataTableQueryHelper::buildQuery($querySettings);
+			$queryRecords = $dbCommand->queryAll();
+
+			return $queryRecords;
+		}
+
+		/**
+		 * @param $queryConditions QueryConditionGroupItem
+		 * @param $dateSettings DateQuerySettings
+		 * @return array
+		 */
+		private static function getQueryGroupItemCondition($queryConditions, $dateSettings)
+		{
+			$contentMatchCondition = 'link.name,link.file_name,link.tags,link.content';
+			if ($queryConditions->onlyByName)
+				$contentMatchCondition = 'link.name,link.file_name,link.tags';
 
 			$textConditions = self::prepareTextCondition($queryConditions->text, $queryConditions->textExactMatch);
 
@@ -208,7 +315,7 @@
 			$additionalDateCondition = '';
 			if (!empty($queryConditions->startDate) && !empty($queryConditions->endDate))
 			{
-				$dateColumn = sprintf('link.%s', DateQuerySettings::getDateColumnName($queryConditions->dateSettings->dateMode));
+				$dateColumn = sprintf('link.%s', DateQuerySettings::getDateColumnName($dateSettings->dateMode));
 				$dateCondition = sprintf('%1$s >= \'%2$s\' and %1$s <= \'%3$s\'',
 					$dateColumn,
 					date(\Yii::app()->params['mysqlDateFormat'], strtotime($queryConditions->startDate)),
@@ -294,69 +401,6 @@
 					$additionalOnlyWithCategoriesCondition = ' or (exists (select id_link from tbl_link_category where id_link = link.id))';
 			}
 
-			$folderCondition = '1 <> 1';
-			$isAdmin = \UserIdentity::isUserAdmin();
-			$notAuthorized = !\UserIdentity::isUserAuthorized();
-			if (!$usePermissionFilter || $isAdmin || $notAuthorized)
-				$folderCondition = '1 = 1';
-			else
-			{
-				$userId = \UserIdentity::getCurrentUserId();
-				$assignedPageIds = \UserLibraryRecord::getPageIdsByUserAngHisGroups($userId);
-				if (count($assignedPageIds) > 0)
-				{
-					$folderCondition = sprintf("link.id_folder in (select id from tbl_folder where id_page in ('%s'))",
-						implode("', '", $assignedPageIds));
-				}
-			}
-
-			$excludeLinkCondition = '1=1';
-			if (isset($queryConditions->excludeQueryConditions) && count($queryConditions->excludeQueryConditions->linkConditions) > 0)
-			{
-				$linkConditions = array();
-				foreach ($queryConditions->excludeQueryConditions->linkConditions as $linkCondition)
-					$linkConditions[] = "(trim(link.file_name)='" . $linkCondition->linkName . "' or trim(link.name)='" . $linkCondition->linkName . "') and trim(f.name)='" . $linkCondition->folderName . "' and trim(p.name)='" . $linkCondition->pageName . "' and trim(lib.name)='" . $linkCondition->libraryName . "'";
-
-				$excludeLinkCondition = sprintf("NOT (%s)", implode(' OR ', $linkConditions));
-			}
-
-			$excludeContentCondition = '1 = 1';
-			if (isset($queryConditions->excludeQueryConditions) && !empty($queryConditions->excludeQueryConditions->text))
-			{
-				$textExcludeConditions = self::prepareTextCondition($queryConditions->excludeQueryConditions->text, $queryConditions->excludeQueryConditions->textExactMatch);
-				$conditionParts = array();
-				foreach ($textExcludeConditions as $contentConditionPart)
-					$conditionParts[] = sprintf("(not match(%s) against('%s' in boolean mode))", $contentMatchCondition, str_replace("'", "\'", $contentConditionPart));
-				$excludeContentCondition = implode(" and ", $conditionParts);
-			}
-
-			$excludeCategoryCondition = '1=1';
-			if (isset($queryConditions->excludeQueryConditions) && count($queryConditions->excludeQueryConditions->categories) > 0)
-			{
-				$categoryConditions = array();
-				foreach ($queryConditions->excludeQueryConditions->categories as $category)
-					foreach ($category->items as $categoryItem)
-						$categoryConditions[] = sprintf('(link.id in (select id_link from tbl_link_category where category = "%s" and tag = "%s"))',
-							$category->name,
-							$categoryItem);
-				$excludeCategoryCondition = sprintf('NOT (%s)',
-					implode(' or ', $categoryConditions));
-			}
-
-			$excludeLibraryCondition = '1 = 1';
-			if (isset($queryConditions->excludeQueryConditions) && count($queryConditions->excludeQueryConditions->libraries) > 0)
-			{
-				$libraryIds = array();
-				foreach ($queryConditions->excludeQueryConditions->libraries as $library)
-					$libraryIds[] = $library->id;
-				$excludeLibraryCondition = sprintf("link.id_library not in ('%s')",
-					implode("','", $libraryIds));
-			}
-
-			$hideLinksWithinBundlesCondition = "1 = 1";
-			if ($queryConditions->hideLinksWithinBundle)
-				$hideLinksWithinBundlesCondition = "link.id not in (select hide_lb.id_link from tbl_link_bundle hide_lb)";
-
 			$contentCondition = "1=1";
 			if (count($textConditions) > 0)
 			{
@@ -372,10 +416,29 @@
 				$additionalCategoryCondition,
 				$additionalOnlyWithCategoriesCondition);
 
+			$groupConditions = '1 = 1';
+			$groupsCategoryJoinCondition = array($categoryJoinCondition);
+			if (count($queryConditions->conditionGroups) > 0)
+			{
+				$groupWheres = array();
+				foreach ($queryConditions->conditionGroups as $conditionGroup)
+				{
+					$whereConditions = array();
+					$joinConditions = array();
+					foreach ($conditionGroup->conditionItems as $conditionItem)
+					{
+						$conditionItemResult = self::getQueryGroupItemCondition($conditionItem, $dateSettings);
+						$whereConditions[] = $conditionItemResult['where'];
+						$joinConditions[] = $conditionItemResult['categoryJoin'];
+					}
+					$groupWheres[] = implode(sprintf(" %s ", $conditionGroup->operator), $whereConditions);
+					$groupsCategoryJoinCondition[] = implode(sprintf(" %s ", $conditionGroup->operator), $joinConditions);
+				}
+				$groupConditions = implode(" and ", $groupWheres);
+			}
+
 			$whereConditions = array(
-				'link.type not in (5,6)',
 				$contentCondition,
-				$baseLinksCondition,
 				$libraryCondition,
 				$fileTypeIncludeCondition,
 				$fileTypeExcludeCondition,
@@ -383,30 +446,12 @@
 				$categoryCondition,
 				$superFilterCondition,
 				$onlyWithCategoriesCondition,
-				$folderCondition,
-				$excludeLinkCondition,
-				$excludeContentCondition,
-				$excludeCategoryCondition,
-				$excludeLibraryCondition,
-				$hideLinksWithinBundlesCondition
+				$groupConditions
 			);
 
-			$querySettings = DataTableQuerySettings::prepareQuery(
-				array(
-					DataTableQuerySettings::SettingsTagWhere => $whereConditions,
-					DataTableQuerySettings::SettingsTagCategoryWhere => $categoryJoinCondition,
-					DataTableQuerySettings::SettingsTagColumns => $queryConditions->columnSettings,
-					DataTableQuerySettings::SettingsTagDate => $queryConditions->dateSettings,
-					DataTableQuerySettings::SettingsTagCategory => $queryConditions->categorySettings,
-					DataTableQuerySettings::SettingsTagViewsCount => $queryConditions->viewCountSettings,
-					DataTableQuerySettings::SettingsTagThumbnails => $queryConditions->thumbnailSettings,
-					DataTableQuerySettings::SettingsTagSort => $queryConditions->sortSettings,
-					DataTableQuerySettings::SettingsTagLimit => $queryConditions->limit,
-				));
-			/** @var \CDbCommand $dbCommand */
-			$dbCommand = DataTableQueryHelper::buildQuery($querySettings);
-			$queryRecords = $dbCommand->queryAll();
-
-			return $queryRecords;
+			return array(
+				'where' => implode(" and ", $whereConditions),
+				'categoryJoin' => implode(" and ", $groupsCategoryJoinCondition)
+			);
 		}
 	}

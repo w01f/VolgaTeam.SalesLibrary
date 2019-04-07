@@ -348,9 +348,6 @@
 					if (isset($formatKey) && array_key_exists($formatKey, \Yii::app()->params['tooltips']['wallbin']))
 						$tooltipText = nl2br($tooltipText . PHP_EOL . \Yii::app()->params['tooltips']['wallbin'][$formatKey]);
 
-//					if(array_key_exists('thumbnail', $record))
-//						$record['tooltip'] = $record['thumbnail'].$tooltipText;
-//					else
 					$record['tooltip'] = $tooltipText;
 
 					$dataset[] = $record;
