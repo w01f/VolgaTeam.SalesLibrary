@@ -277,6 +277,9 @@
 				case 'idea1':
 					new $.SalesPortal.ShortcutsSalesIdeas().init(parameters);
 					break;
+				case 'bbrd1':
+					new $.SalesPortal.ShortcutsBillboardRequests().init(parameters);
+					break;
 				default :
 					$.SalesPortal.Content.fillContent({
 						content: parameters.content,

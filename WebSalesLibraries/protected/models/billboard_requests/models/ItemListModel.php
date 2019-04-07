@@ -1,0 +1,37 @@
+<?
+
+	namespace application\models\billboard_requests\models;
+
+	class ItemListModel
+	{
+		public $id;
+		public $idOwner;
+		public $title;
+		public $status;
+		public $assignedTo;
+		public $dateSubmit;
+		public $dateNeeded;
+		public $dateCompleted;
+
+		/**
+		 * @param $itemRecord \BillboardRequestItemRecord
+		 * @return ItemListModel
+		 */
+		public static function fromRecord($itemRecord)
+		{
+			$model = new self();
+
+			$model->id = $itemRecord->id;
+			$model->idOwner = $itemRecord->id_owner;
+			$model->title = $itemRecord->title;
+			$model->status = $itemRecord->status;
+			$model->assignedTo = $itemRecord->assigned_to;
+			if (isset($itemRecord->date_submit))
+				$model->dateSubmit = $itemRecord->date_submit;
+			$model->dateNeeded = $itemRecord->date_needed;
+			if (isset($itemRecord->date_completed))
+				$model->dateCompleted = $itemRecord->date_completed;
+
+			return $model;
+		}
+	}

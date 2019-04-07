@@ -589,6 +589,45 @@
 					$action->iconClass = 'icon-save';
 					$customActions[$action->tag] = $action;
 					break;
+				case 'bbrd1':
+					$action = new ShortcutAction('billboard-requests-panel-show');
+					$action->order = 10;
+					$action->group = 'billboard-requests-panel';
+					$action->title = 'Show Panel';
+					$action->iconClass = 'icon-list4';
+					$customActions[$action->tag] = $action;
+
+					$action = new ShortcutAction('billboard-requests-panel-hide');
+					$action->order = 10;
+					$action->group = 'billboard-requests-panel';
+					$action->title = 'Hide Panel';
+					$action->iconClass = 'icon-list4';
+					$customActions[$action->tag] = $action;
+
+					$action = new ShortcutAction('billboard-requests-item-add');
+					$action->order = 20;
+					$action->title = 'Add Item';
+					$action->iconClass = 'icon-add';
+					$customActions[$action->tag] = $action;
+
+					$action = new ShortcutAction('billboard-requests-item-delete');
+					$action->order = 30;
+					$action->title = 'Delete Item';
+					$action->iconClass = 'icon-delete';
+					$customActions[$action->tag] = $action;
+
+					$action = new ShortcutAction('billboard-requests-item-save');
+					$action->order = 40;
+					$action->title = 'Save Item';
+					$action->iconClass = 'icon-save';
+					$customActions[$action->tag] = $action;
+
+					$action = new ShortcutAction('billboard-requests-item-submit');
+					$action->order = 50;
+					$action->title = 'Submit';
+					$action->iconClass = 'icon-save';
+					$customActions[$action->tag] = $action;
+					break;
 			}
 			return $customActions;
 		}

@@ -1,9 +1,6 @@
 <?
 
-	namespace application\models\sales_requests\models;
-
-
-	use SalesRequestFileRecord;
+	namespace application\models\billboard_requests\models;
 
 	class ItemEditModel
 	{
@@ -35,7 +32,7 @@
 		}
 
 		/**
-		 * @param $itemRecord \SalesRequestItemRecord
+		 * @param $itemRecord \BillboardRequestItemRecord
 		 * @return ItemEditModel
 		 */
 		public static function fromRecord($itemRecord)
@@ -59,8 +56,8 @@
 			if (!empty($itemRecord->content))
 				$model->content = Content::fromJson(\CJSON::decode($itemRecord->content, true));
 
-			$model->attachments = SalesRequestFileRecord::model()->getModels($itemRecord->id, 'attachment');
-			$model->deliverables = SalesRequestFileRecord::model()->getModels($itemRecord->id, 'deliverable');
+			$model->attachments = \BillboardRequestFileRecord::model()->getModels($itemRecord->id, 'attachment');
+			$model->deliverables = \BillboardRequestFileRecord::model()->getModels($itemRecord->id, 'deliverable');
 
 			return $model;
 		}

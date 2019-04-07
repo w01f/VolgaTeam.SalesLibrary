@@ -188,6 +188,9 @@
 				case 'bundle_modal_dialog':
 					$shortcut = new BundleModalDialogShortcut($this, $isPhone);
 					break;
+				case 'bbrd1':
+					$shortcut = new BillboardRequestsShortcut($this, $isPhone, $parameters);
+					break;
 				default:
 					$shortcut = new EmptyShortcut($this, $isPhone);
 					break;
@@ -389,6 +392,9 @@
 					break;
 				case 'bundle_modal_dialog':
 					$shortcut = new BundleModalDialogShortcut($this, false);
+					break;
+				case 'bbrd1':
+					$shortcut = new BillboardRequestsShortcut($this, false);
 					break;
 				default:
 					$shortcut = new EmptyShortcut($this, false);

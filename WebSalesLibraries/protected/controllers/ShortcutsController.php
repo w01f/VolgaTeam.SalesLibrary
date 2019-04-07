@@ -252,6 +252,7 @@
 				case 'rrq1':
 				case 'wow':
 				case 'idea1':
+				case 'bbrd1':
 				case 'favorites':
 				case 'quizzes':
 				case 'landing':
@@ -333,6 +334,10 @@
 				case 'idea1':
 					$useMobileWrapper = false;
 					$viewName = 'salesIdeas';
+					break;
+				case 'bbrd1':
+					$useMobileWrapper = false;
+					$viewName = 'billboardRequests';
 					break;
 				case 'quizzes':
 					$useMobileWrapper = false;
