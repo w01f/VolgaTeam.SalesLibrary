@@ -44,7 +44,7 @@
 			$this->minTime = "00:00:00";
 			$this->maxTime = "24:00:00";
 			$this->viewToggles = array(self::ViewTypeMonth, self::ViewTypeWeek, self::ViewTypeDay, self::ViewTypeList);
-			$this->hideLeftNavigationButtonsForViews =array();
+			$this->hideLeftNavigationButtonsForViews = array();
 			$this->headerStyle = TextAppearance::createEmpty();
 			$this->navigationButtonStyleLeft = NavigationButtonStyle::createDefault();
 			$this->navigationButtonStyleRight = NavigationButtonStyle::createDefault();
@@ -157,6 +157,9 @@
 			$queryResult = $xpath->query('./AllowEdit/Groups/Group', $contextNode);
 			foreach ($queryResult as $groupNode)
 				$approvedGroups[] = trim($groupNode->nodeValue);
+
+			if (count($approvedUsers) > 0 || count($approvedGroups) > 0)
+				$instance->allowEdit = \UserIdentity::isUserAuthorized();
 
 			if (\UserIdentity::isUserAuthorized())
 			{

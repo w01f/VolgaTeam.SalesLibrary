@@ -157,6 +157,9 @@
 				foreach ($queryResult as $groupNode)
 					$excludedGroups[] = trim($groupNode->nodeValue);
 
+				if (count($approvedUsers) > 0 || count($approvedGroups) > 0 || count($excludedUsers) > 0 || count($excludedGroups) > 0)
+					$this->isAccessGranted = \UserIdentity::isUserAuthorized();
+
 				if (UserIdentity::isUserAuthorized())
 				{
 					$user = Yii::app()->user;

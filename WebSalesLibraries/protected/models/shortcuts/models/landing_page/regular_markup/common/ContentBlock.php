@@ -135,30 +135,33 @@
 
 			$this->isAccessGranted = true;
 
+			$approvedUsers = array();
+			$queryResult = $xpath->query('./ApprovedUsers/User', $contextNode);
+			foreach ($queryResult as $groupNode)
+				$approvedUsers[] = trim($groupNode->nodeValue);
+
+			$excludedUsers = array();
+			$queryResult = $xpath->query('./ExcludedUsers/User', $contextNode);
+			foreach ($queryResult as $groupNode)
+				$excludedUsers[] = trim($groupNode->nodeValue);
+
+			$approvedGroups = array();
+			$queryResult = $xpath->query('./ApprovedGroups/Group', $contextNode);
+			foreach ($queryResult as $groupNode)
+				$approvedGroups[] = trim($groupNode->nodeValue);
+
+			$excludedGroups = array();
+			$queryResult = $xpath->query('./ExcludedGroups/Group', $contextNode);
+			foreach ($queryResult as $groupNode)
+				$excludedGroups[] = trim($groupNode->nodeValue);
+
+			if (count($approvedUsers) > 0 || count($approvedGroups) > 0 || count($excludedUsers) > 0 || count($excludedGroups) > 0)
+				$this->isAccessGranted = \UserIdentity::isUserAuthorized();
+
 			if ($this->parentShortcut->usePermissions && \UserIdentity::isUserAuthorized())
 			{
 				$user = \Yii::app()->user;
 				$userGroups = \UserIdentity::getCurrentUserGroups();
-
-				$approvedUsers = array();
-				$queryResult = $xpath->query('./ApprovedUsers/User', $contextNode);
-				foreach ($queryResult as $groupNode)
-					$approvedUsers[] = trim($groupNode->nodeValue);
-
-				$excludedUsers = array();
-				$queryResult = $xpath->query('./ExcludedUsers/User', $contextNode);
-				foreach ($queryResult as $groupNode)
-					$excludedUsers[] = trim($groupNode->nodeValue);
-
-				$approvedGroups = array();
-				$queryResult = $xpath->query('./ApprovedGroups/Group', $contextNode);
-				foreach ($queryResult as $groupNode)
-					$approvedGroups[] = trim($groupNode->nodeValue);
-
-				$excludedGroups = array();
-				$queryResult = $xpath->query('./ExcludedGroups/Group', $contextNode);
-				foreach ($queryResult as $groupNode)
-					$excludedGroups[] = trim($groupNode->nodeValue);
 
 				if (isset($user) && count($excludedUsers) > 0)
 					$this->isAccessGranted &= !in_array($user->login, $excludedUsers);

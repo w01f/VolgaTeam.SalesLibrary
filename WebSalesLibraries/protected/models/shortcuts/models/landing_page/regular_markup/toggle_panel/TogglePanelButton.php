@@ -51,11 +51,8 @@
 
 			$this->isAccessGranted = true;
 
-			if (!(\Yii::app() instanceof \CConsoleApplication) && \UserIdentity::isUserAuthorized())
+			if (!(\Yii::app() instanceof \CConsoleApplication))
 			{
-				$user = \Yii::app()->user;
-				$userGroups = \UserIdentity::getCurrentUserGroups();
-
 				$approvedUsers = array();
 				$queryResult = $xpath->query('./ApprovedUsers/User', $contextNode);
 				foreach ($queryResult as $groupNode)
@@ -76,19 +73,28 @@
 				foreach ($queryResult as $groupNode)
 					$excludedGroups[] = trim($groupNode->nodeValue);
 
-				if (isset($user) && count($excludedUsers) > 0)
-					$this->isAccessGranted &= !in_array($user->login, $excludedUsers);
-				if (isset($user) && count($excludedGroups) > 0)
-					$this->isAccessGranted &= !array_intersect($userGroups, $excludedGroups);
+				if (count($approvedUsers) > 0 || count($approvedGroups) > 0 || count($excludedUsers) > 0 || count($excludedGroups) > 0)
+					$this->isAccessGranted = \UserIdentity::isUserAuthorized();
 
-				if ($this->isAccessGranted && (count($approvedUsers) > 0 || count($approvedGroups) > 0))
+				if (\UserIdentity::isUserAuthorized())
 				{
-					$this->isAccessGranted = false;
-					if (isset($user) && isset($user->login))
+					$user = \Yii::app()->user;
+					$userGroups = \UserIdentity::getCurrentUserGroups();
+
+					if (isset($user) && count($excludedUsers) > 0)
+						$this->isAccessGranted &= !in_array($user->login, $excludedUsers);
+					if (isset($user) && count($excludedGroups) > 0)
+						$this->isAccessGranted &= !array_intersect($userGroups, $excludedGroups);
+
+					if ($this->isAccessGranted && (count($approvedUsers) > 0 || count($approvedGroups) > 0))
 					{
-						$this->isAccessGranted |= in_array($user->login, $approvedUsers);
-						if (count($userGroups) > 0)
-							$this->isAccessGranted |= array_intersect($userGroups, $approvedGroups);
+						$this->isAccessGranted = false;
+						if (isset($user) && isset($user->login))
+						{
+							$this->isAccessGranted |= in_array($user->login, $approvedUsers);
+							if (count($userGroups) > 0)
+								$this->isAccessGranted |= array_intersect($userGroups, $approvedGroups);
+						}
 					}
 				}
 			}

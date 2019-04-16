@@ -35,11 +35,8 @@
 			else
 				$this->settings = new RegularNavigationItemSettings($parent, $xpath, $settingsNode, $imagePath);
 
-			if ($this->settings->enabled && \UserIdentity::isUserAuthorized())
+			if ($this->settings->enabled)
 			{
-				$user = \Yii::app()->user;
-				$userGroups = \UserIdentity::getCurrentUserGroups();
-
 				$approvedUsers = array();
 				$queryResult = $xpath->query('./ApprovedUsers/User', $contextNode);
 				foreach ($queryResult as $groupNode)
@@ -61,20 +58,28 @@
 					$excludedGroups[] = trim($groupNode->nodeValue);
 
 				$isAccessGranted = true;
+				if (count($approvedUsers) > 0 || count($approvedGroups) > 0 || count($excludedUsers) > 0 || count($excludedGroups) > 0)
+					$isAccessGranted = \UserIdentity::isUserAuthorized();
 
-				if (isset($user) && count($excludedUsers) > 0)
-					$isAccessGranted &= !in_array($user->login, $excludedUsers);
-				if (isset($user) && count($excludedGroups) > 0)
-					$isAccessGranted &= !array_intersect($userGroups, $excludedGroups);
-
-				if ($isAccessGranted && (count($approvedUsers) > 0 || count($approvedGroups) > 0))
+				if (\UserIdentity::isUserAuthorized())
 				{
-					$isAccessGranted = false;
-					if (isset($user) && isset($user->login))
+					$user = \Yii::app()->user;
+					$userGroups = \UserIdentity::getCurrentUserGroups();
+
+					if (isset($user) && count($excludedUsers) > 0)
+						$isAccessGranted &= !in_array($user->login, $excludedUsers);
+					if (isset($user) && count($excludedGroups) > 0)
+						$isAccessGranted &= !array_intersect($userGroups, $excludedGroups);
+
+					if ($isAccessGranted && (count($approvedUsers) > 0 || count($approvedGroups) > 0))
 					{
-						$isAccessGranted |= in_array($user->login, $approvedUsers);
-						if (count($userGroups) > 0)
-							$isAccessGranted |= array_intersect($userGroups, $approvedGroups);
+						$isAccessGranted = false;
+						if (isset($user) && isset($user->login))
+						{
+							$isAccessGranted |= in_array($user->login, $approvedUsers);
+							if (count($userGroups) > 0)
+								$isAccessGranted |= array_intersect($userGroups, $approvedGroups);
+						}
 					}
 				}
 
