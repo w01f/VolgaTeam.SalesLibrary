@@ -56,7 +56,10 @@
 		 */
 		public static function getProfiles($serviceType)
 		{
-			$profileRecords = self::model()->findAll('service_type=?', array($serviceType));
+			$profileRecords = self::model()->findAll(
+				array(
+					'condition' => "service_type='" . $serviceType . "'",
+					'order' => 't.name'));
 			$profileModels = array();
 			foreach ($profileRecords as $profileRecord)
 			{

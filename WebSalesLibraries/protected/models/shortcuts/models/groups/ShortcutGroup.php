@@ -103,6 +103,11 @@
 
 			$queryResult = $xpath->query('//Config/ShowLeftPanel');
 			$this->showNavigationPanel = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
+			if ($this->showNavigationPanel && !UserIdentity::isUserAuthorized())
+			{
+				$queryResult = $xpath->query('//Config/LeftPanelPublicUser');
+				$this->showNavigationPanel = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
+			}
 
 			$queryResult = $xpath->query('//Config/LeftPanelID');
 			$this->navigationPanelId = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
