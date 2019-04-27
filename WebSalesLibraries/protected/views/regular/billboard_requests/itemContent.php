@@ -207,18 +207,9 @@
                                     <label class="control-label" for="billboard-requests-item-details-data" style="margin-bottom: 20px;margin-top: 10px;color: gray;">F. Type copy here:</label>
                                     <div class="controls">
                                         <div class="row">
-                                            <div class="col col-lg-5" style="padding-left: 0; margin-bottom: 30px;">
-                                                <textarea id="billboard-requests-item-details-data" rows="4"
-                                                          class="form-control"
-                                                          data-role="textarea" <? if (!($item->allowEdit || $isAdminRole)): ?>disabled="disabled"<? endif; ?>><? echo $item->content->details; ?></textarea>
-                                            </div>
-                                            <div class="col col-lg-2 hidden-md hidden-sm hidden-xs">
-                                            </div>
-                                            <div class="col col-lg-5" style="padding-left: 0;">
-                                                <p style="margin-bottom: 20px"><strong>:10</strong> - Restrict to 10 words or less</p>
-                                                <p style="margin-bottom: 20px"><strong>:05</strong> - Restrict to 5 words or less</p>
-                                                <p style="margin-bottom: 20px"><strong>:04</strong> - Restrict to 3 words for IDs</p>
-                                            </div>
+                                            <textarea id="billboard-requests-item-details-data" rows="6"
+                                                      class="form-control"
+                                                      data-role="textarea" <? if (!($item->allowEdit || $isAdminRole)): ?>disabled="disabled"<? endif; ?>><? echo $item->content->details; ?></textarea>
                                         </div>
                                     </div>
                                 </div>
