@@ -141,7 +141,7 @@
 						{
 							$message = Yii::app()->email;
 							$message->to = $submitEmailRecipients;
-							$message->subject = sprintf("Research Request - %s", $title);
+							$message->subject = sprintf("Production Request - %s", $title);
 							$message->from = Yii::app()->params['email']['billboard_requests']['from'];
 							if (Yii::app()->params['email']['billboard_requests']['copy_enabled'])
 							{
