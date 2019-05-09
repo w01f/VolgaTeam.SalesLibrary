@@ -50,31 +50,36 @@
 		};
 
 		var requestSaveItem = function () {
-			var modalDialog = new $.SalesPortal.ModalDialog({
-				title: 'Save Request',
-				description: 'Do you want to SUBMIT this Request to your Research Team Now?',
-				buttons: [
-					{
-						tag: 'yes',
-						title: 'Yes! Submit!',
-						width: 160,
-						clickHandler: function () {
-							modalDialog.close();
-							submitItem();
+			if(!itemList.selectedItem.isSubmitted)
+			{
+				var modalDialog = new $.SalesPortal.ModalDialog({
+					title: 'Save Request',
+					description: 'Do you want to SUBMIT this Request to your Research Team Now?',
+					buttons: [
+						{
+							tag: 'yes',
+							title: 'Yes! Submit!',
+							width: 160,
+							clickHandler: function () {
+								modalDialog.close();
+								submitItem();
+							}
+						},
+						{
+							tag: 'no',
+							title: 'Not Now',
+							width: 160,
+							clickHandler: function () {
+								modalDialog.close();
+								saveItem();
+							}
 						}
-					},
-					{
-						tag: 'no',
-						title: 'Not Now',
-						width: 160,
-						clickHandler: function () {
-							modalDialog.close();
-							saveItem();
-						}
-					}
-				]
-			});
-			modalDialog.show();
+					]
+				});
+				modalDialog.show();
+			}
+			else
+				saveItem();
 		};
 
 		var saveItem = function (onSuccessHandler) {
