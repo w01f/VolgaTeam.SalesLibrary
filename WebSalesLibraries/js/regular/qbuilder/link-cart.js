@@ -45,6 +45,8 @@
 					page: "Link Cart/" + $(this).text()
 				})
 			});
+
+			that.load();
 		};
 
 		this.load = function () {
