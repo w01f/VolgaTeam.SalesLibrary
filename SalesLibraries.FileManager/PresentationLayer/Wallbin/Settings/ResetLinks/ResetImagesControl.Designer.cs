@@ -158,6 +158,9 @@
 			this.layoutControlItemThumbnails = new DevExpress.XtraLayout.LayoutControlItem();
 			this.emptySpaceItem28 = new DevExpress.XtraLayout.EmptySpaceItem();
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
+			this.emptySpaceItem29 = new DevExpress.XtraLayout.EmptySpaceItem();
+			this.buttonXThumbnailsRefresh = new DevComponents.DotNetBar.ButtonX();
+			this.layoutControlItemThumbnailsRefresh = new DevExpress.XtraLayout.LayoutControlItem();
 			((System.ComponentModel.ISupportInitialize)(this.layoutControl)).BeginInit();
 			this.layoutControl.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditLinksInternalLibraryFolder.Properties)).BeginInit();
@@ -285,6 +288,8 @@
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemThumbnails)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem28)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem29)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemThumbnailsRefresh)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// layoutControl
@@ -306,6 +311,7 @@
 			this.layoutControl.Appearance.DisabledLayoutGroupCaption.Options.UseFont = true;
 			this.layoutControl.Appearance.DisabledLayoutItem.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.layoutControl.Appearance.DisabledLayoutItem.Options.UseFont = true;
+			this.layoutControl.Controls.Add(this.buttonXThumbnailsRefresh);
 			this.layoutControl.Controls.Add(this.buttonXThumbnails);
 			this.layoutControl.Controls.Add(this.checkEditLinksInternalLibraryFolder);
 			this.layoutControl.Controls.Add(this.buttonXBanner);
@@ -877,7 +883,9 @@
             this.layoutControlItemBanner,
             this.emptySpaceItem27,
             this.layoutControlItemThumbnails,
-            this.emptySpaceItem28});
+            this.emptySpaceItem28,
+            this.emptySpaceItem29,
+            this.layoutControlItemThumbnailsRefresh});
 			this.layoutControlGroupRoot.Location = new System.Drawing.Point(0, 0);
 			this.layoutControlGroupRoot.Name = "Root";
 			this.layoutControlGroupRoot.Size = new System.Drawing.Size(789, 522);
@@ -1894,9 +1902,9 @@
 			// emptySpaceItem28
 			// 
 			this.emptySpaceItem28.AllowHotTrack = false;
-			this.emptySpaceItem28.Location = new System.Drawing.Point(490, 30);
+			this.emptySpaceItem28.Location = new System.Drawing.Point(710, 30);
 			this.emptySpaceItem28.Name = "emptySpaceItem28";
-			this.emptySpaceItem28.Size = new System.Drawing.Size(279, 40);
+			this.emptySpaceItem28.Size = new System.Drawing.Size(59, 40);
 			this.emptySpaceItem28.TextSize = new System.Drawing.Size(0, 0);
 			// 
 			// styleController
@@ -1915,6 +1923,46 @@
 			this.styleController.AppearanceFocused.Options.UseFont = true;
 			this.styleController.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.styleController.AppearanceReadOnly.Options.UseFont = true;
+			// 
+			// emptySpaceItem29
+			// 
+			this.emptySpaceItem29.AllowHotTrack = false;
+			this.emptySpaceItem29.Location = new System.Drawing.Point(490, 30);
+			this.emptySpaceItem29.MaxSize = new System.Drawing.Size(20, 0);
+			this.emptySpaceItem29.MinSize = new System.Drawing.Size(20, 10);
+			this.emptySpaceItem29.Name = "emptySpaceItem29";
+			this.emptySpaceItem29.Size = new System.Drawing.Size(20, 40);
+			this.emptySpaceItem29.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.emptySpaceItem29.TextSize = new System.Drawing.Size(0, 0);
+			// 
+			// buttonXThumbnailsRefresh
+			// 
+			this.buttonXThumbnailsRefresh.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXThumbnailsRefresh.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXThumbnailsRefresh.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.buttonXThumbnailsRefresh.Location = new System.Drawing.Point(522, 42);
+			this.buttonXThumbnailsRefresh.Name = "buttonXThumbnailsRefresh";
+			this.buttonXThumbnailsRefresh.Size = new System.Drawing.Size(196, 36);
+			this.buttonXThumbnailsRefresh.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXThumbnailsRefresh.TabIndex = 18;
+			this.buttonXThumbnailsRefresh.Text = "Batch Thumbnail Refresh";
+			this.buttonXThumbnailsRefresh.Click += new System.EventHandler(this.OnThumbnailsRefreshClick);
+			// 
+			// layoutControlItemThumbnailsRefresh
+			// 
+			this.layoutControlItemThumbnailsRefresh.Control = this.buttonXThumbnailsRefresh;
+			this.layoutControlItemThumbnailsRefresh.ControlAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+			this.layoutControlItemThumbnailsRefresh.FillControlToClientArea = false;
+			this.layoutControlItemThumbnailsRefresh.Location = new System.Drawing.Point(510, 30);
+			this.layoutControlItemThumbnailsRefresh.MaxSize = new System.Drawing.Size(200, 40);
+			this.layoutControlItemThumbnailsRefresh.MinSize = new System.Drawing.Size(200, 40);
+			this.layoutControlItemThumbnailsRefresh.Name = "layoutControlItemThumbnailsRefresh";
+			this.layoutControlItemThumbnailsRefresh.Size = new System.Drawing.Size(200, 40);
+			this.layoutControlItemThumbnailsRefresh.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+			this.layoutControlItemThumbnailsRefresh.Text = "Thumbnails Refresh";
+			this.layoutControlItemThumbnailsRefresh.TextSize = new System.Drawing.Size(0, 0);
+			this.layoutControlItemThumbnailsRefresh.TextVisible = false;
+			this.layoutControlItemThumbnailsRefresh.TrimClientAreaToControl = false;
 			// 
 			// ResetImagesControl
 			// 
@@ -2050,6 +2098,8 @@
 			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemThumbnails)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem28)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem29)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.layoutControlItemThumbnailsRefresh)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -2185,5 +2235,8 @@
 		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem27;
 		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemThumbnails;
 		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem28;
+		private DevComponents.DotNetBar.ButtonX buttonXThumbnailsRefresh;
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem29;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItemThumbnailsRefresh;
 	}
 }

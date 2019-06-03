@@ -26,6 +26,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings.ResetLin
 				(_fileLinkToggles.Any(item => item.Checked) || _otherLinkToggles.Any(item => item.Checked));
 
 		public event EventHandler<EventArgs> SelectionChanged;
+		public event EventHandler<EventArgs> ThumbnailRefreshRequested;
 
 		public ResetImagesControl()
 		{
@@ -226,6 +227,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings.ResetLin
 			layoutControlGroupLinksAllOthers.Enabled =
 				buttonXWidget.Checked || buttonXBanner.Checked || buttonXThumbnails.Checked;
 			SelectionChanged?.Invoke(sender, e);
+		}
+
+		private void OnThumbnailsRefreshClick(object sender, EventArgs e)
+		{
+			ThumbnailRefreshRequested?.Invoke(this, EventArgs.Empty);
 		}
 	}
 }

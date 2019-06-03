@@ -111,7 +111,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			{
 				Directory.CreateDirectory(tempPath);
 
-				var thumbnailUrls = GetThumbnailSourceUrl();
+				var thumbnailUrls = GetThumbnailSourceUrl() ?? new string[] { };
 				foreach (var thumbnailUrl in thumbnailUrls)
 				{
 					var uri = new Uri(thumbnailUrl);

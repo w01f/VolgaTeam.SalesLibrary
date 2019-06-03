@@ -1,11 +1,18 @@
 using System;
+using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using DevComponents.DotNetBar;
 using DevComponents.DotNetBar.Metro;
 using DevExpress.Skins;
 using DevExpress.XtraTab;
+using SalesLibraries.Business.Entities.Interfaces;
+using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
+using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
+using SalesLibraries.Common.Extensions;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.FileManager.Controllers;
+using Padding = System.Windows.Forms.Padding;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings.ResetLinks
 {
@@ -19,6 +26,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings.ResetLin
 
 			var resetImagesControl = new ResetImagesControl();
 			resetImagesControl.SelectionChanged += OnControlSelectionChanged;
+			resetImagesControl.ThumbnailRefreshRequested += OnThumbnailRefresh;
 			xtraTabControl.TabPages.Add(resetImagesControl);
 
 			var resetInfoControl = new ResetInfoControl();
@@ -117,6 +125,67 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings.ResetLin
 				MainController.Instance.WallbinViews.ActiveWallbin.IsDataChanged = true;
 				MainController.Instance.ProcessChanges();
 			}
+		}
+
+		private void OnThumbnailRefresh(object sender, EventArgs e)
+		{
+			DialogResult = DialogResult.Cancel;
+			Visible = false;
+			MainController.Instance.ProcessManager.Run("Updating Thumbnails...", (cancelationToken, formProgess) =>
+			{
+				var thumbnailSessionKey = Guid.NewGuid().ToString();
+
+				foreach (var thumbnailLink in MainController.Instance.WallbinViews.ActiveWallbin.DataStorage.Library.Pages
+					.SelectMany(page => page.TopLevelLinks)
+					.OfType<IThumbnailSettingsHolder>()
+					.Where(thumbnailHolder => thumbnailHolder.Thumbnail.Enable)
+					.ToList())
+				{
+					if (cancelationToken.IsCancellationRequested) break;
+					var defaultImageFilePath = thumbnailLink.GetThumbnailSourceFiles(thumbnailSessionKey).FirstOrDefault();
+					if (defaultImageFilePath != null)
+						using (var tempImage = Image.FromFile(defaultImageFilePath))
+						{
+							var tranformAction = new Func<Image, Image>(image =>
+							{
+								image = image.Resize(new Size(thumbnailLink.Thumbnail.ImageWidth, tempImage.Height));
+								if (thumbnailLink.Thumbnail.BorderSize > 0)
+								{
+									image = image.DrawBorder(thumbnailLink.Thumbnail.BorderSize, thumbnailLink.Thumbnail.BorderColor);
+									if (thumbnailLink.Thumbnail.ShadowColor != Color.White)
+										image = image.DrawShadow(ThumbnailSettings.DefaultShadowSize, thumbnailLink.Thumbnail.ShadowColor);
+								}
+
+								if (thumbnailLink.Thumbnail.ImagePadding > 0)
+									image = image.DrawPadding(thumbnailLink.Thumbnail.TextEnabled
+										? new Padding(
+											thumbnailLink.Thumbnail.ImagePadding,
+											thumbnailLink.Thumbnail.TextPosition == ThumbnailTextPosition.Top ? 0 : thumbnailLink.Thumbnail.ImagePadding,
+											thumbnailLink.Thumbnail.ImagePadding,
+											thumbnailLink.Thumbnail.TextPosition == ThumbnailTextPosition.Bottom ? 0 : thumbnailLink.Thumbnail.ImagePadding)
+										: new Padding(thumbnailLink.Thumbnail.ImagePadding));
+								return image;
+							});
+							using (var changedImage = tranformAction(tempImage))
+								thumbnailLink.Thumbnail.Image = (Image)changedImage.Clone();
+						}
+
+					thumbnailLink.Thumbnail.SourcePath = defaultImageFilePath;
+				}
+			});
+
+			MainController.Instance.WallbinViews.ActiveWallbin.IsDataChanged = true;
+			MainController.Instance.ProcessChanges();
+
+			MainController.Instance.ProcessManager.Run("Loading Library...",
+				(cancelationToken, formProgess) =>
+					MainController.Instance.MainForm.ActiveForm.Invoke(
+						new MethodInvoker(() =>
+						{
+							MainController.Instance.TabWallbin.UpdateWallbin();
+						})));
+
+			MainController.Instance.PopupMessages.ShowInfo("All Thumbnails are Updated");
 		}
 	}
 }

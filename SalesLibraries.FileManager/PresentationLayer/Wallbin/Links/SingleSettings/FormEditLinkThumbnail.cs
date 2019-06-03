@@ -45,7 +45,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		private readonly List<IThumbnailSettingsHolder> _selectedLinks = new List<IThumbnailSettingsHolder>();
 		private readonly ILinksGroup _linkGroup;
 		private readonly LinkType? _defaultLinkType;
-		private readonly List<string> _cachedThumbnailFiles = new List<string>();
 
 		private IThumbnailSettingsHolder SingleLink => _selectedLinks.FirstOrDefault();
 
