@@ -193,7 +193,7 @@
 				$library = $libraryManager->getLibraryById($libraryId);
 			else
 			{
-				$availableLibraries = $libraryManager->getLibraries();
+				$availableLibraries = $libraryManager->getAllLibraries();
 				if (count($availableLibraries) > 0)
 					$library = $availableLibraries[0];
 			}

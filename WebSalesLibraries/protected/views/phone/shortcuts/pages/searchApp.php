@@ -7,7 +7,7 @@
 	$categoryManager->loadCategories();
 
 	$libraryManager = new LibraryManager();
-	$libraries = $libraryManager->getLibraries();
+	$libraries = $libraryManager->getAllLibraries();
 	$libraryGroups = $libraryManager->getLibraryGroups();
 ?>
     <div data-role='page' id="search" class="shortcut-link-page" data-cache="never" data-dom-cache="false" data-ajax="false">

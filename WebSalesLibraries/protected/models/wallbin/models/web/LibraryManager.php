@@ -9,7 +9,7 @@
 		/**
 		 * @return Library[]
 		 */
-		public function getLibraries()
+		public function getAllLibraries($loadAll = true)
 		{
 			$libraries = null;
 			$availableLibraryIds = array();
@@ -21,8 +21,8 @@
 				$librariesCache = \Yii::app()->cacheDB->get(\Yii::app()->session['sessionKey']);
 				if ($librariesCache !== false)
 				{
-					if (isset(\Yii::app()->session['libraries']))
-						$libraries = \Yii::app()->session['libraries'];
+					if (isset(\Yii::app()->session['all-libraries']))
+						$libraries = \Yii::app()->session['all-libraries'];
 				}
 				$useLibraryByUserFilter = \UserIdentity::isUserAuthorized() && !\UserIdentity::isUserAdmin();
 				if ($useLibraryByUserFilter)
@@ -31,7 +31,7 @@
 					$availableLibraryIds = \UserLibraryRecord::getLibraryIdsByUserAngHisGroups($userId);
 				}
 			}
-			if (!is_array($libraries))
+			if ($loadAll && !is_array($libraries))
 			{
 				$aliases = $this->getLibraryAliases();
 				$rootFolderPath = LibraryManager::getLibrariesRootPath();
@@ -76,15 +76,12 @@
 								$doc = new \DOMDocument();
 								$doc->load($storageFile);
 								$libraryId = trim($doc->getElementsByTagName("Identifier")->item(0)->nodeValue);
-								/** @var \LibraryRecord $libraryRecord */
-								$libraryRecord = \LibraryRecord::model()->findByPk($libraryId);
-								if (isset($libraryRecord))
+								if (!$useLibraryByUserFilter || in_array($libraryId, $availableLibraryIds))
 								{
-									if (!$useLibraryByUserFilter || in_array($libraryId, $availableLibraryIds))
+									/** @var \LibraryRecord $libraryRecord */
+									$libraryRecord = \LibraryRecord::model()->findByPk($libraryId);
+									if (isset($libraryRecord))
 									{
-										//$library = Yii::app()->cacheDB->get($libraryId);
-										//if (!isset($library))
-										//{
 										$library = new Library();
 										$library->name = $libraryName;
 										$library->id = $libraryId;
@@ -98,28 +95,15 @@
 										$library->alias = $libraryName;
 										if (array_key_exists($libraryName, $aliases))
 											$library->alias = $aliases[$libraryName];
-
 										$library->load();
-										//Yii::app()->cacheDB->set($library->id, $library, (60 * 60 * 24 * 7));
-										//}
-										$libraries[] = $library;
+										$libraries[$libraryId] = $library;
 									}
 								}
 							}
 						}
 					}
 				}
-				if (!(\Yii::app() instanceof \CConsoleApplication))
-				{
-					if (is_array($libraries) && count($libraries) > 0)
-					{
-						usort($libraries, "application\\models\\wallbin\\models\\web\\Library::libraryComparerByName");
-						\Yii::app()->session['libraries'] = $libraries;
-						\Yii::app()->cacheDB->set(\Yii::app()->session['sessionKey'], 'libraries', (60 * 60 * 24 * 7));
-					}
-					else
-						unset(\Yii::app()->session['libraries']);
-				}
+				$this->saveLibraries($libraries);
 			}
 			if (is_array($libraries))
 				return $libraries;
@@ -211,18 +195,19 @@
 		public function getLibraryById($libraryId)
 		{
 			/** @var $selectedLibrary Library */
-			$libraries = $this->getLibraries();
-			if (isset($libraries))
+			$libraries = $this->getAllLibraries(false);
+			if (!isset($libraries))
+				$libraries = array();
+
+			if (array_key_exists($libraryId, $libraries))
+				$selectedLibrary = $libraries[$libraryId];
+			else
 			{
-				foreach ($libraries as $library)
-				{
-					if ($library->id == $libraryId)
-					{
-						$selectedLibrary = $library;
-						break;
-					}
-				}
+				$selectedLibrary = $this->loadLibraryFromDatabase($libraryId);
+				$libraries[$libraryId] = $selectedLibrary;
+				$this->saveLibraries($libraries);
 			}
+
 			if (isset($selectedLibrary))
 				return $selectedLibrary;
 			return null;
@@ -235,7 +220,7 @@
 		public function getLibraryByName($libraryName)
 		{
 			/** @var $selectedLibrary Library */
-			$libraries = $this->getLibraries();
+			$libraries = $this->getAllLibraries();
 			if (isset($libraries))
 			{
 				foreach ($libraries as $library)
@@ -249,6 +234,41 @@
 			}
 			if (isset($selectedLibrary))
 				return $selectedLibrary;
+			return null;
+		}
+
+		private function saveLibraries($libraries)
+		{
+			if (!(\Yii::app() instanceof \CConsoleApplication))
+			{
+				unset(\Yii::app()->session['all-libraries']);
+				if (is_array($libraries) && count($libraries) > 0)
+				{
+					usort($libraries, "application\\models\\wallbin\\models\\web\\Library::libraryComparerByName");
+					\Yii::app()->session['all-libraries'] = $libraries;
+					\Yii::app()->cacheDB->set(\Yii::app()->session['sessionKey'], 'all-libraries', (60 * 60 * 24 * 7));
+				}
+			}
+		}
+
+		private function loadLibraryFromDatabase($libraryId)
+		{
+			/** @var \LibraryRecord $libraryRecord */
+			$libraryRecord = \LibraryRecord::model()->findByPk($libraryId);
+			if (isset($libraryRecord))
+			{
+				$library = new Library();
+				$library->name = $libraryRecord->name;
+				$library->id = $libraryId;
+				$library->groupId = $libraryRecord->id_group;
+				$library->order = $libraryRecord->order;
+				$library->lastUpdate = $libraryRecord->last_update;
+				$library->storagePath = \application\models\wallbin\models\web\LibraryManager::getLibrariesRootPath() . DIRECTORY_SEPARATOR . $libraryRecord->path;
+				$library->storageLink = self::getLibrariesRootLink() . '/' . str_replace('\\', '/', $libraryRecord->path);
+				$library->alias = $libraryRecord->name;
+				$library->load();
+				return $library;
+			}
 			return null;
 		}
 
