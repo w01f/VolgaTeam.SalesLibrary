@@ -28,12 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-			this.components = new System.ComponentModel.Container();
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject9 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject10 = new DevExpress.Utils.SerializableAppearanceObject();
 			this.gridControlUsers = new DevExpress.XtraGrid.GridControl();
 			this.gridViewUsers = new DevExpress.XtraGrid.Views.Grid.GridView();
 			this.gridColumnUsersFullName = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -48,7 +47,7 @@
 			this.splitContainerControlUsers = new DevExpress.XtraEditors.SplitContainerControl();
 			this.pnUsersFilterContent = new System.Windows.Forms.Panel();
 			this.checkedListBoxControlUserFilterGroups = new DevExpress.XtraEditors.CheckedListBoxControl();
-			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
+			this.styleController = new DevExpress.XtraEditors.StyleController();
 			this.pnUsersFilterButtons = new System.Windows.Forms.Panel();
 			this.buttonXUserFilterGroupsNone = new DevComponents.DotNetBar.ButtonX();
 			this.checkEditEnableUserFilter = new DevExpress.XtraEditors.CheckEdit();
@@ -103,7 +102,7 @@
 			this.gridControlUsers.Name = "gridControlUsers";
 			this.gridControlUsers.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemButtonEditUsersActions});
-			this.gridControlUsers.Size = new System.Drawing.Size(634, 455);
+			this.gridControlUsers.Size = new System.Drawing.Size(637, 452);
 			this.gridControlUsers.TabIndex = 2;
 			this.gridControlUsers.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewUsers});
@@ -206,8 +205,8 @@
 			// 
 			this.repositoryItemButtonEditUsersActions.AutoHeight = false;
 			this.repositoryItemButtonEditUsersActions.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.SiteManager.Properties.Resources.EditButton, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true),
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.SiteManager.Properties.Resources.DeleteButton, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.SiteManager.Properties.Resources.EditButton, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject6, "", null, null, true),
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.SiteManager.Properties.Resources.DeleteButton, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject7, "", null, null, true)});
 			this.repositoryItemButtonEditUsersActions.Name = "repositoryItemButtonEditUsersActions";
 			this.repositoryItemButtonEditUsersActions.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
 			this.repositoryItemButtonEditUsersActions.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repositoryItemButtonEditUsersActions_ButtonClick);
@@ -265,7 +264,7 @@
 			// 
 			this.xtraTabPageUsers.Controls.Add(this.splitContainerControlUsers);
 			this.xtraTabPageUsers.Name = "xtraTabPageUsers";
-			this.xtraTabPageUsers.Size = new System.Drawing.Size(896, 455);
+			this.xtraTabPageUsers.Size = new System.Drawing.Size(892, 452);
 			this.xtraTabPageUsers.Text = "Users";
 			// 
 			// splitContainerControlUsers
@@ -279,7 +278,7 @@
 			this.splitContainerControlUsers.Panel1.Text = "Panel1";
 			this.splitContainerControlUsers.Panel2.Controls.Add(this.gridControlUsers);
 			this.splitContainerControlUsers.Panel2.Text = "Panel2";
-			this.splitContainerControlUsers.Size = new System.Drawing.Size(896, 455);
+			this.splitContainerControlUsers.Size = new System.Drawing.Size(892, 452);
 			this.splitContainerControlUsers.SplitterPosition = 250;
 			this.splitContainerControlUsers.TabIndex = 3;
 			this.splitContainerControlUsers.Text = "splitContainerControl1";
@@ -291,7 +290,7 @@
 			this.pnUsersFilterContent.Location = new System.Drawing.Point(0, 101);
 			this.pnUsersFilterContent.Name = "pnUsersFilterContent";
 			this.pnUsersFilterContent.Padding = new System.Windows.Forms.Padding(5);
-			this.pnUsersFilterContent.Size = new System.Drawing.Size(250, 354);
+			this.pnUsersFilterContent.Size = new System.Drawing.Size(250, 351);
 			this.pnUsersFilterContent.TabIndex = 26;
 			// 
 			// checkedListBoxControlUserFilterGroups
@@ -303,7 +302,7 @@
 			this.checkedListBoxControlUserFilterGroups.Location = new System.Drawing.Point(5, 5);
 			this.checkedListBoxControlUserFilterGroups.Name = "checkedListBoxControlUserFilterGroups";
 			this.checkedListBoxControlUserFilterGroups.SelectionMode = System.Windows.Forms.SelectionMode.None;
-			this.checkedListBoxControlUserFilterGroups.Size = new System.Drawing.Size(240, 344);
+			this.checkedListBoxControlUserFilterGroups.Size = new System.Drawing.Size(240, 341);
 			this.checkedListBoxControlUserFilterGroups.StyleController = this.styleController;
 			this.checkedListBoxControlUserFilterGroups.TabIndex = 21;
 			this.checkedListBoxControlUserFilterGroups.ItemCheck += new DevExpress.XtraEditors.Controls.ItemCheckEventHandler(this.checkedListBoxControlUserFilterGroups_ItemCheck);
@@ -390,7 +389,7 @@
 			// 
 			this.xtraTabPageGroups.Controls.Add(this.gridControlGroups);
 			this.xtraTabPageGroups.Name = "xtraTabPageGroups";
-			this.xtraTabPageGroups.Size = new System.Drawing.Size(896, 455);
+			this.xtraTabPageGroups.Size = new System.Drawing.Size(892, 452);
 			this.xtraTabPageGroups.Text = "Groups";
 			// 
 			// gridControlGroups
@@ -401,7 +400,7 @@
 			this.gridControlGroups.Name = "gridControlGroups";
 			this.gridControlGroups.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemButtonEditGroupActions});
-			this.gridControlGroups.Size = new System.Drawing.Size(896, 455);
+			this.gridControlGroups.Size = new System.Drawing.Size(892, 452);
 			this.gridControlGroups.TabIndex = 3;
 			this.gridControlGroups.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewGroups});
@@ -476,8 +475,8 @@
 			// 
 			this.repositoryItemButtonEditGroupActions.AutoHeight = false;
 			this.repositoryItemButtonEditGroupActions.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.SiteManager.Properties.Resources.EditButton, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "", null, null, true),
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.SiteManager.Properties.Resources.DeleteButton, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject4, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.SiteManager.Properties.Resources.EditButton, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject8, "", null, null, true),
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.SiteManager.Properties.Resources.DeleteButton, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject9, "", null, null, true)});
 			this.repositoryItemButtonEditGroupActions.Name = "repositoryItemButtonEditGroupActions";
 			this.repositoryItemButtonEditGroupActions.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
 			this.repositoryItemButtonEditGroupActions.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repositoryItemButtonEditGroupActions_ButtonClick);
@@ -487,7 +486,7 @@
 			this.xtraTabPageLibraries.Controls.Add(this.gridControlPages);
 			this.xtraTabPageLibraries.Controls.Add(this.pnLibraraies);
 			this.xtraTabPageLibraries.Name = "xtraTabPageLibraries";
-			this.xtraTabPageLibraries.Size = new System.Drawing.Size(896, 455);
+			this.xtraTabPageLibraries.Size = new System.Drawing.Size(892, 452);
 			this.xtraTabPageLibraries.Text = "Libraries";
 			// 
 			// gridControlPages
@@ -499,7 +498,7 @@
 			this.gridControlPages.Name = "gridControlPages";
 			this.gridControlPages.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemButtonEditPageActions});
-			this.gridControlPages.Size = new System.Drawing.Size(896, 408);
+			this.gridControlPages.Size = new System.Drawing.Size(892, 405);
 			this.gridControlPages.TabIndex = 4;
 			this.gridControlPages.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewPages});
@@ -541,11 +540,7 @@
 			this.gridViewPages.OptionsView.ShowDetailButtons = false;
 			this.gridViewPages.OptionsView.ShowGroupPanel = false;
 			this.gridViewPages.OptionsView.ShowIndicator = false;
-			this.gridViewPages.OptionsView.ShowPreview = true;
-			this.gridViewPages.PreviewFieldName = "AssignedObjects";
-			this.gridViewPages.PreviewIndent = 5;
 			this.gridViewPages.RowHeight = 35;
-			this.gridViewPages.RowSeparatorHeight = 5;
 			this.gridViewPages.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
             new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gridColumnLibraryName, DevExpress.Data.ColumnSortOrder.Ascending)});
 			this.gridViewPages.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridView_FocusedRowChanged);
@@ -577,7 +572,7 @@
 			// 
 			this.repositoryItemButtonEditPageActions.AutoHeight = false;
 			this.repositoryItemButtonEditPageActions.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.SiteManager.Properties.Resources.EditButton, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.SiteManager.Properties.Resources.EditButton, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject10, "", null, null, true)});
 			this.repositoryItemButtonEditPageActions.Name = "repositoryItemButtonEditPageActions";
 			this.repositoryItemButtonEditPageActions.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
 			this.repositoryItemButtonEditPageActions.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repositoryItemButtonEditPageActions_ButtonClick);
@@ -600,7 +595,7 @@
 			this.pnLibraraies.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnLibraraies.Location = new System.Drawing.Point(0, 0);
 			this.pnLibraraies.Name = "pnLibraraies";
-			this.pnLibraraies.Size = new System.Drawing.Size(896, 47);
+			this.pnLibraraies.Size = new System.Drawing.Size(892, 47);
 			this.pnLibraraies.TabIndex = 5;
 			// 
 			// buttonXCollapseLibraries

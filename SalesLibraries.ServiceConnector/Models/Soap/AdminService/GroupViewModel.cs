@@ -30,19 +30,19 @@ namespace SalesLibraries.ServiceConnector.AdminService
                 }
                 else
                     result += "None";
-                result += Environment.NewLine;
-                result += "Assigned Libraries: ";
-                if (allLibraries)
-                    result += "ALL";
-                else if (assignedLibraries != null)
-                {
-                    if (assignedLibraries.Length > 0)
-                        result += string.Join(", ", assignedLibraries);
-                    else
-                        result += "None";
-                }
-                else
-                    result += "ALL";
+                //result += Environment.NewLine;
+                //result += "Assigned Libraries: ";
+                //if (allLibraries)
+                //    result += "ALL";
+                //else if (assignedLibraries != null)
+                //{
+                //    if (assignedLibraries.Length > 0)
+                //        result += string.Join(", ", assignedLibraries);
+                //    else
+                //        result += "None";
+                //}
+                //else
+                //    result += "ALL";
                 return result;
             }
         }
