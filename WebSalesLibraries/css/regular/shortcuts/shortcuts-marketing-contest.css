@@ -1,0 +1,236 @@
+/*Common Header------------------------------------*/
+#content .marketing-contest-main-page
+{
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	display: table;
+}
+/*--------------------------------------------------*/
+
+/*Service Panel------------------------------------*/
+#content .marketing-contest-main-page .service-panel
+{
+	background: #fff;
+	padding: 5px 0 0;
+	margin: 0;
+	vertical-align: top;
+	display: table-cell;
+	width: 40%;
+	min-width: 350px;
+}
+
+#content .marketing-contest-main-page .service-panel.left
+{
+	border-right: 2px #999 solid;
+}
+
+#content .marketing-contest-main-page .service-panel .row
+{
+	margin: 0;
+}
+
+#content .marketing-contest-main-page .service-panel .row > div
+{
+	padding: 0;
+}
+
+#content .marketing-contest-main-page .service-panel .service-panel-page > div > div
+{
+	width: 100%;
+}
+
+#content .marketing-contest-main-page .service-panel .item-list-buttons,
+#content .marketing-contest-main-page .service-panel .item-list-tabs
+{
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+#content .marketing-contest-main-page .service-panel .item-list-buttons .button,
+#content .marketing-contest-main-page .service-panel .item-list-buttons .button:focus
+{
+    cursor: pointer;
+    text-decoration: none;
+    outline: none;
+}
+
+#content .marketing-contest-main-page .service-panel .item-list-container
+{
+	overflow-y: auto;
+	padding-top: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+#content .marketing-contest-main-page .service-panel .item-list-container .status-filter-container label
+{
+	font-weight: normal;
+	white-space: nowrap;
+	text-align: left;
+	width: 100%;
+}
+
+#content .marketing-contest-main-page .service-panel .item-list-container .status-filter-container .form-control
+{
+	margin-left: 0.5em;
+	width: 75%;
+}
+
+#content .marketing-contest-main-page .service-panel .item-list-container .table .item-data-row
+{
+	cursor: pointer;
+}
+
+#content .marketing-contest-main-page .service-panel .item-list-container .table tr.selected
+{
+	background: #C6E2FF !important;
+}
+
+#content .marketing-contest-main-page .service-panel .item-list-container .table tr:hover
+{
+	background: #ECFBD4;
+}
+
+#content .marketing-contest-main-page .service-panel .item-list-container .table tr .user-name
+{
+	font-size: 0.9em;
+	color: #909090;
+	display: block;
+	margin-top: 5px;
+}
+
+#content .marketing-contest-main-page .service-panel .ui-resizable-handle.ui-resizable-e
+{
+	background: #C0C0C0 !important;
+	z-index: 2 !important;
+}
+
+#content .marketing-contest-main-page .service-panel .ui-resizable-handle.ui-resizable-se
+{
+	display: none !important;
+}
+
+#content .marketing-contest-main-page .service-panel .dataTables_filter input
+{
+	width: 150px !important;
+	margin-left: 10px !important;
+}
+/*--------------------------------------------------*/
+
+/*Delete Items Dialog------------------------------------*/
+.delete-pages-list
+{
+	width: 99%;
+	background: #ffffff;
+	border: 1px #aaaaaa solid;
+	overflow: auto;
+	height: 400px;
+}
+
+.delete-pages-list li
+{
+	padding-bottom: 10px;
+	padding-left: 5px;
+}
+/*--------------------------------------------------*/
+
+/*Item Content------------------------------------*/
+#content .marketing-contest-main-page .content-panel
+{
+	vertical-align: top;
+	margin: 0;
+	padding-left: 10px;
+	padding-right: 10px;
+	display: table-cell;
+}
+
+#content .marketing-contest-main-page .content-buttons
+{
+	width: 100%;
+	margin: 0;
+}
+
+#content .marketing-contest-main-page .content-buttons > div
+{
+	padding: 10px;
+}
+
+#content .marketing-contest-main-page .item-content
+{
+	width: 100%;
+	vertical-align: top;
+	margin: 0;
+}
+
+#content .marketing-contest-main-page .item-content > div
+{
+	overflow: auto;
+	height: 100%;
+}
+
+#content .marketing-contest-main-page .item-content .form-horizontal .row
+{
+	margin-left: 0;
+	margin-right: 0;
+}
+
+#content .marketing-contest-main-page .item-content .item-content-group
+{
+	margin-left: 0;
+	margin-right: 0;
+	margin-top: 30px;
+}
+
+#content .marketing-contest-main-page .item-content .item-content-group .control-label
+{
+	font-weight: normal;
+	margin-bottom: 5px;
+	text-align: left;
+}
+
+#content .marketing-contest-main-page .item-content .item-content-group .controls label
+{
+	font-weight: normal;
+}
+
+#content .marketing-contest-main-page .service-panel .sub-text,
+#content .marketing-contest-main-page .item-content .item-content-sub-text
+{
+	font-size: 0.9em;
+	font-weight: normal;
+	color: #909090;
+}
+
+#content .marketing-contest-main-page .item-content .dropzone
+{
+	padding: 10px;
+}
+
+#content .marketing-contest-main-page .item-content .dropzone .file-item
+{
+	color: #000000;
+}
+
+#content .marketing-contest-main-page .item-content .dropzone .file-item-body .form-control
+{
+	outline: none;
+	box-shadow: none !important;
+	border: 1px solid #ccc !important;
+	cursor: pointer;
+}
+
+#content .marketing-contest-main-page .item-content .dropzone.disabled
+{
+	background: #eee;
+}
+
+#content .marketing-contest-main-page .item-content .dropzone .file-item-body .file-delete
+{
+	top: 0;
+	cursor: pointer;
+}
+/*--------------------------------------------------*/
+

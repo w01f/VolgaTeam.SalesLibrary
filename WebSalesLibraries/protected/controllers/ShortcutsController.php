@@ -253,6 +253,7 @@
 				case 'wow':
 				case 'idea1':
 				case 'bbrd1':
+				case 'mktng1':
 				case 'favorites':
 				case 'quizzes':
 				case 'landing':
@@ -338,6 +339,10 @@
 				case 'bbrd1':
 					$useMobileWrapper = false;
 					$viewName = 'billboardRequests';
+					break;
+				case 'mktng1':
+					$useMobileWrapper = false;
+					$viewName = 'marketingContest';
 					break;
 				case 'quizzes':
 					$useMobileWrapper = false;

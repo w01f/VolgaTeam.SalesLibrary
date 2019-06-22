@@ -628,6 +628,45 @@
 					$action->iconClass = 'icon-save';
 					$customActions[$action->tag] = $action;
 					break;
+				case 'mktng1':
+					$action = new ShortcutAction('marketing-contest-panel-show');
+					$action->order = 10;
+					$action->group = 'marketing-contest-panel';
+					$action->title = 'Show Panel';
+					$action->iconClass = 'icon-list4';
+					$customActions[$action->tag] = $action;
+
+					$action = new ShortcutAction('marketing-contest-panel-hide');
+					$action->order = 10;
+					$action->group = 'marketing-contest-panel';
+					$action->title = 'Hide Panel';
+					$action->iconClass = 'icon-list4';
+					$customActions[$action->tag] = $action;
+
+					$action = new ShortcutAction('marketing-contest-item-add');
+					$action->order = 20;
+					$action->title = 'Add Item';
+					$action->iconClass = 'icon-add';
+					$customActions[$action->tag] = $action;
+
+					$action = new ShortcutAction('marketing-contest-item-delete');
+					$action->order = 30;
+					$action->title = 'Delete Item';
+					$action->iconClass = 'icon-delete';
+					$customActions[$action->tag] = $action;
+
+					$action = new ShortcutAction('marketing-contest-item-save');
+					$action->order = 40;
+					$action->title = 'Save Item';
+					$action->iconClass = 'icon-save';
+					$customActions[$action->tag] = $action;
+
+					$action = new ShortcutAction('marketing-contest-item-submit');
+					$action->order = 50;
+					$action->title = 'Submit';
+					$action->iconClass = 'icon-save';
+					$customActions[$action->tag] = $action;
+					break;
 			}
 			return $customActions;
 		}

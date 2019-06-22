@@ -280,6 +280,9 @@
 				case 'bbrd1':
 					new $.SalesPortal.ShortcutsBillboardRequests().init(parameters);
 					break;
+				case 'mktng1':
+					new $.SalesPortal.ShortcutsMarketingContest().init(parameters);
+					break;
 				default :
 					$.SalesPortal.Content.fillContent({
 						content: parameters.content,
