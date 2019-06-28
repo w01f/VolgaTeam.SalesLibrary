@@ -165,7 +165,7 @@
 								'</div>' +
 								'<div class="col-xs-8 col-xs-offset-1">' +
 								'<h3 style="margin-left: 0">Boom Diggity!</h3>' +
-								'<p class="text-muted">Your Win of the Week has been sent...</p>' +
+								'<p class="text-muted">Your Nomination has been sent...</p>' +
 								'</div>' +
 								'</div>' +
 								'<div class="row" style="margin: 0;"><div class="col-xs-12 text-center"><button type="button" class="btn btn-default" style="width: 80px; margin-top: 20px" onclick="$.fancybox.close()">OK</button></div></div>'),

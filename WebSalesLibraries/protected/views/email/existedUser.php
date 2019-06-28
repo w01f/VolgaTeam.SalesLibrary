@@ -18,3 +18,6 @@ Click the link below to create your NEW Password:<br><br>
 			'rememberMe' => false
 		))
 ?>
+<br><br>
+*If you have trouble setting up a new password for your account, email: billy@adSALESapps.com
+

@@ -124,7 +124,7 @@
 						{
 							$message = Yii::app()->email;
 							$message->to = $submitEmailRecipients;
-							$message->subject = sprintf("Win of the week - %s", $title);
+							$message->subject = sprintf("Marketing Nomination - %s", $title);
 							$message->from = Yii::app()->params['email']['marketing_contest']['from'];
 							if (Yii::app()->params['email']['marketing_contest']['copy_enabled'])
 							{

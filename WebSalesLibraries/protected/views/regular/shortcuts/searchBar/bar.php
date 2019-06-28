@@ -78,8 +78,8 @@
         <?echo '#'.$searchBarId; ?>
         .search-bar-text {
             height: <? echo ($style->lineHeight+14);?>px !important;
-        <?if(!empty($style->borderColor)):?> border-color: <? echo Utils::formatColor($style->borderColor);?> !important;
-        <?endif;?>
+            <?if($style->searchBackColor=='transparent'):?> background-color: transparent !important;<?endif;?>
+            <?if(!empty($style->borderColor)):?> border-color: <? echo Utils::formatColor($style->borderColor);?> !important;<?endif;?>
         }
 
         <?echo '#'.$searchBarId; ?>
