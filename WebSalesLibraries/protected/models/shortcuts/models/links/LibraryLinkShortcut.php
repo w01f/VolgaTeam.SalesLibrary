@@ -36,7 +36,7 @@
 					$this->linkId = $linkRecord->id;
 
 					$libraryManager = new LibraryManager();
-					$library = $libraryManager->getLibraryById($linkRecord->id_library);
+					$library = $libraryManager->getLibraryById($linkRecord->id_library, false);
 					$settings = \BaseLinkSettings::createByContent($linkRecord->settings);
 					$fileInfo = \FileInfo::fromLinkData(
 						$linkRecord->id,

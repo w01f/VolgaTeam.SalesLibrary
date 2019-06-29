@@ -50,7 +50,7 @@
 					$record['path'] = $linkRecord['path'];
 
 					/** @var $library Library */
-					$library = $libraryManager->getLibraryById($linkRecord['id_library']);
+					$library = $libraryManager->getLibraryById($linkRecord['id_library'], false);
 					$record['library'] = array(
 						'id' => $linkRecord['id_library'],
 						'name' => isset($library) ? $library->name : ''

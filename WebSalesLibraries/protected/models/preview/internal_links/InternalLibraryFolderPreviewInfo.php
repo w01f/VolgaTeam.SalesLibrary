@@ -86,7 +86,7 @@
 			if (!is_array($windowRecord)) return null;
 			$windowRecord = (object)$windowRecord;
 			$libraryManager = new LibraryManager();
-			$library = $libraryManager->getLibraryById($windowRecord->id_library);
+			$library = $libraryManager->getLibraryById($windowRecord->id_library, false);
 			$folder = new LibraryFolder(new LibraryPage($library));
 			$folder->load($windowRecord);
 			$folder->loadFiles(true);

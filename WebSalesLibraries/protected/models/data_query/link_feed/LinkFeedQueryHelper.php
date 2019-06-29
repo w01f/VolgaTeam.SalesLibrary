@@ -356,7 +356,7 @@
 				$feedItem->libraryName = $resultRecord['library_name'];
 				$feedItem->viewsCount = $resultRecord['total_views'];
 
-				$library = $libraryManager->getLibraryById($resultRecord['id_library']);
+				$library = $libraryManager->getLibraryById($resultRecord['id_library'], false);
 				$settings = \BaseLinkSettings::createByContent($resultRecord['settings']);
 				$fileInfo = \FileInfo::fromLinkData(
 					$resultRecord['id'],
@@ -619,7 +619,7 @@
 				$feedItem->libraryName = $resultRecord['library_name'];
 				$feedItem->viewsCount = $resultRecord['total_views'];
 
-				$library = $libraryManager->getLibraryById($resultRecord['id_library']);
+				$library = $libraryManager->getLibraryById($resultRecord['id_library'], false);
 				$settings = \BaseLinkSettings::createByContent($resultRecord['extended_properties']);
 				$fileInfo = \FileInfo::fromLinkData(
 					$resultRecord['id'],
@@ -1038,7 +1038,7 @@
 				$feedItem->libraryName = $resultRecord['library_name'];
 				$feedItem->viewsCount = $resultRecord['total_views'];
 
-				$library = $libraryManager->getLibraryById($resultRecord['id_library']);
+				$library = $libraryManager->getLibraryById($resultRecord['id_library'], false);
 				$settings = \BaseLinkSettings::createByContent($resultRecord['settings']);
 				$fileInfo = \FileInfo::fromLinkData(
 					$resultRecord['id'],

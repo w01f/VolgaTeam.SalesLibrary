@@ -7,107 +7,37 @@
 	class LibraryManager
 	{
 		/**
-		 * @return Library[]
+		 * @return array[]
 		 */
-		public function getAllLibraries($loadAll = true)
+		public function getAvailableLibraries()
 		{
-			$libraries = null;
+			$libraries = array();
 			$availableLibraryIds = array();
-			$useLibraryByUserFilter = false;
-			if (!(\Yii::app() instanceof \CConsoleApplication))
+			$useLibraryByUserFilter = \UserIdentity::isUserAuthorized() && !\UserIdentity::isUserAdmin();
+			if ($useLibraryByUserFilter)
 			{
-				if (!isset(\Yii::app()->session['sessionKey']))
-					\Yii::app()->session['sessionKey'] = uniqid();
-				$librariesCache = \Yii::app()->cacheDB->get(\Yii::app()->session['sessionKey']);
-				if ($librariesCache !== false)
-				{
-					if (isset(\Yii::app()->session['all-libraries']))
-						$libraries = \Yii::app()->session['all-libraries'];
-				}
-				$useLibraryByUserFilter = \UserIdentity::isUserAuthorized() && !\UserIdentity::isUserAdmin();
-				if ($useLibraryByUserFilter)
-				{
-					$userId = \UserIdentity::getCurrentUserId();
-					$availableLibraryIds = \UserLibraryRecord::getLibraryIdsByUserAngHisGroups($userId);
-				}
+				$userId = \UserIdentity::getCurrentUserId();
+				$availableLibraryIds = \UserLibraryRecord::getLibraryIdsByUserAngHisGroups($userId);
 			}
-			if ($loadAll && !is_array($libraries))
+
+			$libraryAliases = $this->getLibraryAliases();
+
+			/** @var \LibraryRecord[] $libraryRecords */
+			$libraryRecords = \LibraryRecord::model()->findAll();
+			foreach ($libraryRecords as $libraryRecord)
 			{
-				$aliases = $this->getLibraryAliases();
-				$rootFolderPath = LibraryManager::getLibrariesRootPath();
-				foreach (\Yii::app()->params['stations']['locations'] as $libraryLocation)
-				{
-					$librariesLocationPath = $rootFolderPath . DIRECTORY_SEPARATOR . $libraryLocation;
-					/** @var $libraryRootFolder \DirectoryIterator[] */
-					$libraryRootFolder = new \DirectoryIterator($librariesLocationPath);
-					foreach ($libraryRootFolder as $libraryFolder)
-					{
-						/** @var $libraryFolder \DirectoryIterator */
-						if ($libraryFolder->isDir() && !$libraryFolder->isDot())
-						{
-							$libraryName = $libraryFolder->getBasename();
+				if (count($availableLibraryIds) > 0 && !in_array($libraryRecord->id, $availableLibraryIds))
+					continue;
 
-							$originalStoragePath = $libraryFolder->getPathname();
-							$originalStorageLink = LibraryManager::getLibrariesRootLink() . '/' . str_replace('\\', '/', $libraryLocation) . '/' . $libraryFolder->getBasename();
+				$library = $this->loadLibraryFromDatabase($libraryRecord, false);
 
-							$storagePath = $originalStoragePath;
-							$storageLink = $originalStorageLink;
-							$storageFile = realpath($storagePath . DIRECTORY_SEPARATOR . 'z_library_data_info.xml');
-							if (!file_exists($storageFile))
-							{
-								$storagePath .= DIRECTORY_SEPARATOR . 'Primary Root';
-								$storageLink .= '/Primary Root';
-								$storageFile = realpath($storagePath . DIRECTORY_SEPARATOR . 'z_library_data_info.xml');
-							}
-							if (!file_exists($storageFile))
-							{
-								$storagePath = $originalStoragePath;
-								$storageLink = $originalStorageLink;
-								$storageFile = realpath($storagePath . DIRECTORY_SEPARATOR . 'SalesDepotCacheLight.xml');
-							}
-							if (!file_exists($storageFile))
-							{
-								$storagePath .= DIRECTORY_SEPARATOR . 'Primary Root';
-								$storageLink .= '/Primary Root';
-								$storageFile = realpath($storagePath . DIRECTORY_SEPARATOR . 'SalesDepotCacheLight.xml');
-							}
-							if (file_exists($storageFile))
-							{
-								$doc = new \DOMDocument();
-								$doc->load($storageFile);
-								$libraryId = trim($doc->getElementsByTagName("Identifier")->item(0)->nodeValue);
-								if (!$useLibraryByUserFilter || in_array($libraryId, $availableLibraryIds))
-								{
-									/** @var \LibraryRecord $libraryRecord */
-									$libraryRecord = \LibraryRecord::model()->findByPk($libraryId);
-									if (isset($libraryRecord))
-									{
-										$library = new Library();
-										$library->name = $libraryName;
-										$library->id = $libraryId;
-										$library->groupId = $libraryRecord->id_group;
-										$library->order = $libraryRecord->order;
-										$library->lastUpdate = $libraryRecord->last_update;
-										$library->storagePath = $storagePath;
-										$library->storageLink = $storageLink;
-										$library->logoPath = \Yii::app()->params['librariesRoot'] . "/Graphics/" . $libraryFolder->getBasename() . "/no_logo.png";
+				if (array_key_exists($library->name, $libraryAliases))
+					$library->alias = $libraryAliases[$library->name];
 
-										$library->alias = $libraryName;
-										if (array_key_exists($libraryName, $aliases))
-											$library->alias = $aliases[$libraryName];
-										$library->load();
-										$libraries[$libraryId] = $library;
-									}
-								}
-							}
-						}
-					}
-				}
-				$this->saveLibraries($libraries);
+				$libraries[] = $this->loadLibraryFromDatabase($libraryRecord, false);
 			}
-			if (is_array($libraries))
-				return $libraries;
-			return array();
+
+			return $libraries;
 		}
 
 		/**
@@ -190,22 +120,34 @@
 
 		/**
 		 * @param $libraryId
+		 * @param bool $loadLibraryContent
 		 * @return Library
 		 */
-		public function getLibraryById($libraryId)
+		public function getLibraryById($libraryId, $loadLibraryContent = false)
 		{
 			/** @var $selectedLibrary Library */
-			$libraries = $this->getAllLibraries(false);
+
+			$libraries = $this->getLibraryCache();
 			if (!isset($libraries))
 				$libraries = array();
 
 			if (array_key_exists($libraryId, $libraries))
-				$selectedLibrary = $libraries[$libraryId];
-			else
 			{
-				$selectedLibrary = $this->loadLibraryFromDatabase($libraryId);
-				$libraries[$libraryId] = $selectedLibrary;
-				$this->saveLibraries($libraries);
+				$libraryCache = $libraries[$libraryId];
+				if (!$loadLibraryContent)
+					$selectedLibrary = $libraryCache['library'];
+				else if ($libraryCache['contentLoaded'] == true)
+					$selectedLibrary = $libraries[$libraryId];
+			}
+
+			if (!isset($selectedLibrary))
+			{
+				$selectedLibrary = $this->loadLibraryFromDatabaseById($libraryId, $loadLibraryContent);
+				$libraries[$libraryId] = array(
+					'library' => $selectedLibrary,
+					'contentLoaded' => $loadLibraryContent
+				);
+				$this->saveLibraryCache($libraries);
 			}
 
 			if (isset($selectedLibrary))
@@ -215,29 +157,19 @@
 
 		/**
 		 * @param $libraryName
+		 * @param bool $loadLibraryContent
 		 * @return Library
 		 */
-		public function getLibraryByName($libraryName)
+		public function getLibraryByName($libraryName, $loadLibraryContent = false)
 		{
-			/** @var $selectedLibrary Library */
-			$libraries = $this->getAllLibraries();
-			if (isset($libraries))
-			{
-				foreach ($libraries as $library)
-				{
-					if ($library->name == $libraryName)
-					{
-						$selectedLibrary = $library;
-						break;
-					}
-				}
-			}
-			if (isset($selectedLibrary))
-				return $selectedLibrary;
-			return null;
+			/** @var \LibraryRecord $libraryRecord */
+			$libraryRecord = \LibraryRecord::model()->find('name=?', array($libraryName));
+			if (!isset($libraryRecord))
+				return null;
+			return $this->getLibraryById($libraryRecord->id, $loadLibraryContent);
 		}
 
-		private function saveLibraries($libraries)
+		private function saveLibraryCache($libraries)
 		{
 			if (!(\Yii::app() instanceof \CConsoleApplication))
 			{
@@ -251,22 +183,50 @@
 			}
 		}
 
-		private function loadLibraryFromDatabase($libraryId)
+		private function getLibraryCache()
+		{
+			$libraries = null;
+
+			if (!(\Yii::app() instanceof \CConsoleApplication))
+			{
+				if (!isset(\Yii::app()->session['sessionKey']))
+					\Yii::app()->session['sessionKey'] = uniqid();
+				$librariesCache = \Yii::app()->cacheDB->get(\Yii::app()->session['sessionKey']);
+				if ($librariesCache !== false)
+				{
+					if (isset(\Yii::app()->session['all-libraries']))
+						$libraries = \Yii::app()->session['all-libraries'];
+				}
+			}
+
+			return $libraries;
+		}
+
+		private function loadLibraryFromDatabaseById($libraryId, $loadLibraryContent)
 		{
 			/** @var \LibraryRecord $libraryRecord */
 			$libraryRecord = \LibraryRecord::model()->findByPk($libraryId);
 			if (isset($libraryRecord))
+				return $this->loadLibraryFromDatabase($libraryRecord, $loadLibraryContent);
+			return null;
+		}
+
+		private function loadLibraryFromDatabase($libraryRecord, $loadLibraryContent)
+		{
+			/** @var \LibraryRecord $libraryRecord */
+			if (isset($libraryRecord))
 			{
 				$library = new Library();
 				$library->name = $libraryRecord->name;
-				$library->id = $libraryId;
+				$library->id = $libraryRecord->id;
 				$library->groupId = $libraryRecord->id_group;
 				$library->order = $libraryRecord->order;
 				$library->lastUpdate = $libraryRecord->last_update;
 				$library->storagePath = \application\models\wallbin\models\web\LibraryManager::getLibrariesRootPath() . DIRECTORY_SEPARATOR . $libraryRecord->path;
 				$library->storageLink = self::getLibrariesRootLink() . '/' . str_replace('\\', '/', $libraryRecord->path);
 				$library->alias = $libraryRecord->name;
-				$library->load();
+				if ($loadLibraryContent)
+					$library->load();
 				return $library;
 			}
 			return null;

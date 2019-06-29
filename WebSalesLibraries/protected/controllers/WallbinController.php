@@ -26,7 +26,7 @@
 				/** @var $folderRecord FolderRecord */
 				$folderRecord = FolderRecord::model()->findByPk($folderId);
 				$libraryManager = new LibraryManager();
-				$library = $libraryManager->getLibraryById($folderRecord->id_library);
+				$library = $libraryManager->getLibraryById($folderRecord->id_library, false);
 				/** @var LibraryPageRecord $pageRecord */
 				$pageRecord = LibraryPageRecord::model()->findByPk($folderRecord->id_page);
 				$page = new LibraryPage($library);
@@ -47,7 +47,7 @@
 				if (isset($linkRecord))
 				{
 					$libraryManager = new LibraryManager();
-					$library = $libraryManager->getLibraryById($linkRecord->id_library);
+					$library = $libraryManager->getLibraryById($linkRecord->id_library, true);
 
 					$folderRecord = FolderRecord::model()->findByPk($linkRecord->id_folder);
 					$folder = new LibraryFolder(new LibraryPage($library));
@@ -89,7 +89,7 @@
 						break;
 					case 'internal link':
 						$linkRecord = LinkRecord::getLinkById($styleContainerId);
-						$library = $libraryManager->getLibraryById($linkRecord->id_library);
+						$library = $libraryManager->getLibraryById($linkRecord->id_library, false);
 						$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
 						$link->load($linkRecord);
 						/** @var InternalLinkPreviewData $previewData */
@@ -99,7 +99,7 @@
 				}
 			}
 
-			$library = $libraryManager->getLibraryById($libraryId);
+			$library = $libraryManager->getLibraryById($libraryId, true);
 			$selectedPage = $library->getPageById($pageId);
 			if (isset($style) && $style->page->enabled)
 			{
@@ -156,7 +156,7 @@
 						break;
 					case 'internal link':
 						$linkRecord = LinkRecord::getLinkById($styleContainerId);
-						$library = $libraryManager->getLibraryById($linkRecord->id_library);
+						$library = $libraryManager->getLibraryById($linkRecord->id_library, false);
 						$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
 						$link->load($linkRecord);
 						/** @var InternalLinkPreviewData $previewData */
@@ -168,7 +168,7 @@
 			if (!isset($style))
 				$style = \application\models\wallbin\models\web\style\WallbinStyle::createDefault();
 
-			$library = $libraryManager->getLibraryById($libraryId);
+			$library = $libraryManager->getLibraryById($libraryId, true);
 			$selectedPage = $library->getPageById($pageId);
 			$selectedPage->loadData();
 			$this->renderPartial('accordionView',
@@ -190,15 +190,16 @@
 			$pageId = Yii::app()->request->getQuery('pageId');
 			$libraryManager = new LibraryManager();
 			if (isset($libraryId))
-				$library = $libraryManager->getLibraryById($libraryId);
+				$library = $libraryManager->getLibraryById($libraryId, true);
 			else
 			{
-				$availableLibraries = $libraryManager->getAllLibraries();
+				$availableLibraries = $libraryManager->getAvailableLibraries();
 				if (count($availableLibraries) > 0)
 					$library = $availableLibraries[0];
 			}
 			if (isset($library))
 			{
+				$library = $libraryManager->getLibraryById($library->id, true);
 				$defaultPage = null;
 				if (isset($pageId))
 					$defaultPage = $library->getPageById($pageId);
@@ -221,7 +222,7 @@
 			$libraryManager = new LibraryManager();
 			/** @var  $pageRecord LibraryPageRecord */
 			$pageRecord = LibraryPageRecord::model()->findByPk($pageId);
-			$library = $libraryManager->getLibraryById($pageRecord->id_library);
+			$library = $libraryManager->getLibraryById($pageRecord->id_library, false);
 			$pageModel = new LibraryPage($library);
 			$pageModel->load($pageRecord);
 			$pageModel->loadData();

@@ -39,7 +39,7 @@
 				if (isset($linkRecord))
 				{
 					$libraryManager = new LibraryManager();
-					$library = $libraryManager->getLibraryById($linkRecord->id_library);
+					$library = $libraryManager->getLibraryById($linkRecord->id_library, false);
 					$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
 					$link->load($linkRecord);
 					$previewData = $link->getPreviewData($parentBundleId, $isQuickSite, $this->isPhone);
@@ -74,7 +74,7 @@
 				if (isset($linkRecord))
 				{
 					$libraryManager = new LibraryManager();
-					$library = $libraryManager->getLibraryById($linkRecord->id_library);
+					$library = $libraryManager->getLibraryById($linkRecord->id_library, false);
 					$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
 					$link->load($linkRecord);
 
@@ -106,7 +106,7 @@
 				if (isset($linkRecord))
 				{
 					$libraryManager = new LibraryManager();
-					$library = $libraryManager->getLibraryById($linkRecord->id_library);
+					$library = $libraryManager->getLibraryById($linkRecord->id_library, false);
 					$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
 					$link->load($linkRecord);
 
@@ -152,7 +152,7 @@
 				{
 					$authorized = UserIdentity::isUserAuthorized();
 					$libraryManager = new LibraryManager();
-					$library = $libraryManager->getLibraryById($linkRecord->id_library);
+					$library = $libraryManager->getLibraryById($linkRecord->id_library, false);
 					$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
 					$link->load($linkRecord);
 					$this->renderPartial('linkPreview', array('link' => $link, 'authorized' => $authorized, 'isQuickSite' => $isQuickSite), false, true);
@@ -176,7 +176,7 @@
 				if (isset($linkRecord))
 				{
 					$libraryManager = new LibraryManager();
-					$library = $libraryManager->getLibraryById($linkRecord->id_library);
+					$library = $libraryManager->getLibraryById($linkRecord->id_library, false);
 					$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
 					$link->load($linkRecord);
 
@@ -209,7 +209,7 @@
 				if (isset($linkRecord))
 				{
 					$libraryManager = new LibraryManager();
-					$library = $libraryManager->getLibraryById($linkRecord->id_library);
+					$library = $libraryManager->getLibraryById($linkRecord->id_library, false);
 					$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
 					$link->load($linkRecord);
 					if ($link->isFolder)
@@ -236,7 +236,7 @@
 				if (isset($linkRecord))
 				{
 					$libraryManager = new LibraryManager();
-					$library = $libraryManager->getLibraryById($linkRecord->id_library);
+					$library = $libraryManager->getLibraryById($linkRecord->id_library, false);
 					$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
 					$link->load($linkRecord);
 					if ($link->isLinkBundle)
@@ -267,7 +267,7 @@
 				foreach ($linkRecords as $linkRecord)
 				{
 					if (!isset($library))
-						$library = $libraryManager->getLibraryById($linkRecord->id_library);
+						$library = $libraryManager->getLibraryById($linkRecord->id_library, false);
 					$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
 					$link->load($linkRecord);
 					if ($link->isFolder)
@@ -327,7 +327,7 @@
 				if (isset($linkRecord))
 				{
 					$libraryManager = new LibraryManager();
-					$library = $libraryManager->getLibraryById($linkRecord->id_library);
+					$library = $libraryManager->getLibraryById($linkRecord->id_library, false);
 					$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
 					$link->load($linkRecord);
 					if ($link->isLinkBundle)

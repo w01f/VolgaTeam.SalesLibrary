@@ -22,7 +22,7 @@
 
 			$linkRecord = LinkRecord::getLinkById($linkBundleId);
 			$libraryManager = new LibraryManager();
-			$library = $libraryManager->getLibraryById($linkRecord->id_library);
+			$library = $libraryManager->getLibraryById($linkRecord->id_library, false);
 			$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
 			$link->load($linkRecord);
 			if ($link->isLinkBundle)

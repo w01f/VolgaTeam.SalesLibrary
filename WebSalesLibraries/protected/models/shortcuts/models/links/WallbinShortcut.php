@@ -71,7 +71,7 @@
 				$this->style = WallbinStyle::createDefault();
 
 			$libraryManager = new LibraryManager();
-			$this->library = $libraryManager->getLibraryByName($this->libraryName);
+			$this->library = $libraryManager->getLibraryByName($this->libraryName, true);
 		}
 
 		/**

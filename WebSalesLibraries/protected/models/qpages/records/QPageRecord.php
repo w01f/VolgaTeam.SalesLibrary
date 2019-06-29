@@ -163,7 +163,7 @@
 				if (isset($linkRecord))
 				{
 					$libraryManager = new LibraryManager();
-					$library = $libraryManager->getLibraryById($linkRecord->id_library);
+					$library = $libraryManager->getLibraryById($linkRecord->id_library, false);
 					$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
 					$link->browser = Utils::getBrowser();
 					$link->load($linkRecord);

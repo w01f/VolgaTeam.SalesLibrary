@@ -10,7 +10,7 @@
 	$previewInfo = $data->previewInfo;
 
 	$libraryManager = new LibraryManager();
-	$library = $libraryManager->getLibraryById($previewInfo->libraryId);
+	$library = $libraryManager->getLibraryById($previewInfo->libraryId, true);
 
 	if(!empty($previewInfo->pageId))
 	{

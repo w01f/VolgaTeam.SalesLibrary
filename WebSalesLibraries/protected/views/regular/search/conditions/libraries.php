@@ -2,7 +2,7 @@
 	use application\models\wallbin\models\web\LibraryManager as LibraryManager;
 
 	$libraryManager = new LibraryManager();
-	$libraries = $libraryManager->getAllLibraries();
+	$libraries = $libraryManager->getAvailableLibraries();
 	$libraryGroups = $libraryManager->getLibraryGroups();
 ?>
 <div class="row">

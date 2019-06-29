@@ -59,7 +59,7 @@
 					/** @var LibraryLinkBundleItem $bundleItem */
 					$linkRecord = LinkRecord::getLinkById($bundleItem->libraryLinkId);
 					$libraryManager = new LibraryManager();
-					$library = $libraryManager->getLibraryById($linkRecord->id_library);
+					$library = $libraryManager->getLibraryById($linkRecord->id_library, false);
 					$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
 					$link->load($linkRecord);
 					if ($link->isDirectUrl)

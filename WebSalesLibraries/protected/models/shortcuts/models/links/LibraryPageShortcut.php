@@ -79,7 +79,7 @@
 				$this->style = WallbinStyle::createDefault();
 
 			$libraryManager = new LibraryManager();
-			$this->library = $libraryManager->getLibraryByName($this->libraryName);
+			$this->library = $libraryManager->getLibraryByName($this->libraryName, false);
 		}
 
 		/**
@@ -133,7 +133,7 @@
 			if (!is_array($libraryPageRecord)) return null;
 			$libraryPageRecord = (object)$libraryPageRecord;
 			$libraryManager = new LibraryManager();
-			$library = $libraryManager->getLibraryById($libraryPageRecord->id_library);
+			$library = $libraryManager->getLibraryById($libraryPageRecord->id_library, false);
 			$libraryPage = new LibraryPage($library);
 			$libraryPage->load($libraryPageRecord);
 			$libraryPage->loadData();

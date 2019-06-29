@@ -58,7 +58,7 @@
 			}
 
 			$libraryManager = new LibraryManager();
-			$library = $libraryManager->getLibraryByName($this->libraryName);
+			$library = $libraryManager->getLibraryByName($this->libraryName, false);
 			$this->libraryId = $library->id;
 
 			$libraryPageRecord = Yii::app()->db->createCommand()

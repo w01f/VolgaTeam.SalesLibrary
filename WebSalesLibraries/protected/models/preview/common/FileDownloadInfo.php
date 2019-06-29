@@ -53,7 +53,7 @@
 			$downloadInfoList = array();
 
 			$libraryManager = new LibraryManager();
-			$library = $libraryManager->getLibraryById($link->libraryId);
+			$library = $libraryManager->getLibraryById($link->libraryId, false);
 
 			/** @var  $linkSettings \LinkBundleLinkSettings */
 			$linkBundleSettings = $link->extendedProperties;
@@ -78,7 +78,7 @@
 								$bundleInternalLinkRecord = LinkRecord::getLinkById($internalLinkRecord->id_original);
 								if (isset($bundleInternalLinkRecord))
 								{
-									$internalLibrary = $libraryManager->getLibraryById($bundleInternalLinkRecord->id_library);
+									$internalLibrary = $libraryManager->getLibraryById($bundleInternalLinkRecord->id_library, false);
 									$fileInfo = FileInfo::fromLinkRecord($bundleInternalLinkRecord, $internalLibrary);
 									if ($fileInfo->isFile)
 										$downloadInfoList[] = self::getFileDownloadInfo($fileInfo);
