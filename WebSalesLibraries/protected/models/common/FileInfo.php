@@ -42,13 +42,28 @@
 		 */
 		public static function fromLinkData($id, $type, $name, $relativePath, $extendedProperties, $parentLibrary)
 		{
+			return self::fromLinkDataAndLibraryPath($id, $type, $name, $relativePath, $extendedProperties, $parentLibrary->storagePath, $parentLibrary->storageLink);
+		}
+
+		/**
+		 * @param string $id
+		 * @param int $type
+		 * @param string $name
+		 * @param string $relativePath
+		 * @param BaseLinkSettings $extendedProperties
+		 * @param string $parentLibraryPath
+		 * @param string $parentLibraryLink
+		 * @return FileInfo
+		 */
+		public static function fromLinkDataAndLibraryPath($id, $type, $name, $relativePath, $extendedProperties, $parentLibraryPath, $parentLibraryLink)
+		{
 			$fileInfo = new FileInfo();
 			$fileInfo->isFile = false;
 			switch ($type)
 			{
 				case 5:
 					$fileInfo->name = $fileInfo->dragDownloadName = str_replace('\\', '', $relativePath);
-					$fileInfo->path = str_replace('//', DIRECTORY_SEPARATOR, str_replace('\\', DIRECTORY_SEPARATOR, $parentLibrary->storagePath . $relativePath));
+					$fileInfo->path = str_replace('//', DIRECTORY_SEPARATOR, str_replace('\\', DIRECTORY_SEPARATOR, $parentLibraryPath . $relativePath));
 					break;
 				case 6:
 					break;
@@ -89,9 +104,9 @@
 					$fileInfo->link = Yii::app()->createAbsoluteUrl('preview/zipAndDownloadLinkBundle', array('linkId' => $id));
 					break;
 				default:
-					$fileInfo->path = str_replace('//', DIRECTORY_SEPARATOR, str_replace('\\', DIRECTORY_SEPARATOR, $parentLibrary->storagePath . $relativePath));
+					$fileInfo->path = str_replace('//', DIRECTORY_SEPARATOR, str_replace('\\', DIRECTORY_SEPARATOR, $parentLibraryPath . $relativePath));
 					$fileInfo->name = $fileInfo->dragDownloadName = basename($fileInfo->path);
-					$fileInfo->link = Utils::formatUrl($parentLibrary->storageLink . $relativePath);
+					$fileInfo->link = Utils::formatUrl($parentLibraryLink . $relativePath);
 					$fileInfo->size = file_exists($fileInfo->path) ? filesize($fileInfo->path) : 0;
 					$fileInfo->isFile = true;
 					break;

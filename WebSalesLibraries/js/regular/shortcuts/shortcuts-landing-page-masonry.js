@@ -140,7 +140,7 @@
 						},
 						success: function (msg) {
 							var shortcutData = $('<div>' + msg + '</div>');
-							$.SalesPortal.ShortcutsManager.openShortcutByMenuItemData(shortcutData);
+							$.SalesPortal.ShortcutsManager.openShortcutByMenuItemData(shortcutData, {pushHistory: true});
 						},
 						error: function () {
 							$.SalesPortal.Overlay.hide();

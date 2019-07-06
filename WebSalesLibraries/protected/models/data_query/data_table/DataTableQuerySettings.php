@@ -80,6 +80,7 @@
 				'id' => 'max(link.id) as id',
 				'id_library' => 'max(link.id_library) as id_library',
 				'library_name' => 'max(lib.name) as library_name',
+				'library_path' => 'max(lib.path) as library_path',
 				'name' => 'max(link.name) as name',
 				'type' => 'max(link.type) as type',
 				'path' => 'link.file_relative_path as path',

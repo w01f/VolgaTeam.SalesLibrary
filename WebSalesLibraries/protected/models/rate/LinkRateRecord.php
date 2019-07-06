@@ -106,11 +106,9 @@
 		 */
 		public static function getStarImage($rateValue)
 		{
-			$starImagePath = realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'rate' . DIRECTORY_SEPARATOR . 'stars' . DIRECTORY_SEPARATOR . number_format($rateValue, 1, '.', '') . '.png';
-			if (file_exists($starImagePath))
-				$starImage = 'data:image/png;base64,' . base64_encode(file_get_contents($starImagePath));
+			if ($rateValue > 0)
+				return '/images/rate/stars/' . number_format($rateValue, 1, '.', '') . '.png';
 			else
-				$starImage = '';
-			return $starImage;
+				return '';
 		}
 	}

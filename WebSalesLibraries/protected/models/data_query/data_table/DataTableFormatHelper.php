@@ -38,7 +38,6 @@
 			$dataset = array();
 			if (count($linkQueryResult) > 0)
 			{
-				$libraryManager = new LibraryManager();
 				foreach ($linkQueryResult as $linkRecord)
 				{
 					$record = array();
@@ -49,13 +48,11 @@
 					$record['file_name'] = $linkRecord['file_name'];
 					$record['path'] = $linkRecord['path'];
 
-					/** @var $library Library */
-					$library = $libraryManager->getLibraryById($linkRecord['id_library'], false);
 					$record['library'] = array(
 						'id' => $linkRecord['id_library'],
-						'name' => isset($library) ? $library->name : ''
+						'name' => $linkRecord['library_name']
 					);
-					$record['lib_name'] = isset($library) ? $library->name : '';
+					$record['lib_name'] = $linkRecord['library_name'];
 
 					$type = $linkRecord['type'];
 					switch ($linkRecord['search_format'])
@@ -84,13 +81,14 @@
 					);
 
 					$extendedProperties = \BaseLinkSettings::createByContent($linkRecord['extended_properties']);
-					$fileInfo = \FileInfo::fromLinkData(
+					$fileInfo = \FileInfo::fromLinkDataAndLibraryPath(
 						$record['id'],
 						$type,
 						$linkRecord['name'],
 						$linkRecord['path'],
 						$extendedProperties,
-						$library);
+						LibraryManager::resolveLibraryStoragePath($linkRecord['library_path']),
+						LibraryManager::resolveLibraryStorageLink($linkRecord['library_path']));
 					$record['isFile'] = $fileInfo->isFile;
 
 					$isHyperlink = LibraryLink::isOpenedAsHyperlink($type, $extendedProperties);

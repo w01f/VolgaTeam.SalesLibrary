@@ -6,6 +6,8 @@
 	 */
 	class LibraryManager
 	{
+		public $loadedCache;
+
 		/**
 		 * @return array[]
 		 */
@@ -126,7 +128,6 @@
 		public function getLibraryById($libraryId, $loadLibraryContent = false)
 		{
 			/** @var $selectedLibrary Library */
-
 			$libraries = $this->getLibraryCache();
 			if (!isset($libraries))
 				$libraries = array();
@@ -174,6 +175,7 @@
 			if (!(\Yii::app() instanceof \CConsoleApplication))
 			{
 				unset(\Yii::app()->session['all-libraries']);
+				unset($this->loadedCache);
 				if (is_array($libraries) && count($libraries) > 0)
 				{
 					usort($libraries, "application\\models\\wallbin\\models\\web\\Library::libraryComparerByName");
@@ -186,19 +188,25 @@
 		private function getLibraryCache()
 		{
 			$libraries = null;
-
 			if (!(\Yii::app() instanceof \CConsoleApplication))
 			{
-				if (!isset(\Yii::app()->session['sessionKey']))
-					\Yii::app()->session['sessionKey'] = uniqid();
-				$librariesCache = \Yii::app()->cacheDB->get(\Yii::app()->session['sessionKey']);
-				if ($librariesCache !== false)
+				if (isset($this->loadedCache))
+					$libraries = $this->loadedCache;
+				else
 				{
-					if (isset(\Yii::app()->session['all-libraries']))
-						$libraries = \Yii::app()->session['all-libraries'];
+					if (!isset(\Yii::app()->session['sessionKey']))
+						\Yii::app()->session['sessionKey'] = uniqid();
+					$librariesCache = \Yii::app()->cacheDB->get(\Yii::app()->session['sessionKey']);
+					if ($librariesCache !== false)
+					{
+						if (isset(\Yii::app()->session['all-libraries']))
+						{
+							$libraries = \Yii::app()->session['all-libraries'];
+							$this->loadedCache = $libraries;
+						}
+					}
 				}
 			}
-
 			return $libraries;
 		}
 
@@ -222,8 +230,8 @@
 				$library->groupId = $libraryRecord->id_group;
 				$library->order = $libraryRecord->order;
 				$library->lastUpdate = $libraryRecord->last_update;
-				$library->storagePath = \application\models\wallbin\models\web\LibraryManager::getLibrariesRootPath() . DIRECTORY_SEPARATOR . $libraryRecord->path;
-				$library->storageLink = self::getLibrariesRootLink() . '/' . str_replace('\\', '/', $libraryRecord->path);
+				$library->storagePath = self::resolveLibraryStoragePath($libraryRecord->path);
+				$library->storageLink = self::resolveLibraryStorageLink($libraryRecord->path);
 				$library->alias = $libraryRecord->name;
 				if ($loadLibraryContent)
 					$library->load();
@@ -277,5 +285,15 @@
 		public static function getLibrariesRootLink()
 		{
 			return \Yii::app()->getBaseUrl(true) . '/' . \Yii::app()->params['librariesRoot'];
+		}
+
+		public static function resolveLibraryStoragePath($libraryRelativePath)
+		{
+			return \application\models\wallbin\models\web\LibraryManager::getLibrariesRootPath() . DIRECTORY_SEPARATOR . $libraryRelativePath;
+		}
+
+		public static function resolveLibraryStorageLink($libraryRelativePath)
+		{
+			return self::getLibrariesRootLink() . '/' . str_replace('\\', '/', $libraryRelativePath);
 		}
 	}
