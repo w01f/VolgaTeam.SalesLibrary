@@ -17,6 +17,9 @@
 		const GradientTypeToBottomLeft = 'to bottom left';
 		const GradientTypeToBottomRight = 'to bottom right';
 
+		public $image;
+		public $overlayColor;
+		public $overlayOpacity;
 		public $color1;
 		public $color2;
 		public $gradient;
@@ -29,11 +32,23 @@
 		/**
 		 * @param $xpath \DOMXPath
 		 * @param $contextNode \DOMNode
+		 * @param $imagePath string
 		 * @return BackgroundStyle
 		 */
-		public static function fromXml($xpath, $contextNode)
+		public static function fromXml($xpath, $contextNode, $imagePath)
 		{
 			$backgroundStyle = new BackgroundStyle();
+
+			$queryResult = $xpath->query('./UseImage', $contextNode);
+			$fileName = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
+			if (!empty($fileName))
+				$backgroundStyle->image = $imagePath . $fileName;
+
+			$queryResult = $xpath->query('./Overlay/Color', $contextNode);
+			$backgroundStyle->overlayColor = $queryResult->length > 0 ? strtolower(trim($queryResult->item(0)->nodeValue)) : null;
+
+			$queryResult = $xpath->query('./Overlay/Opacity', $contextNode);
+			$backgroundStyle->overlayOpacity = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue))/100 : 1;
 
 			$queryResult = $xpath->query('./Color', $contextNode);
 			$backgroundStyle->color1 = $queryResult->length > 0 ? strtolower(trim($queryResult->item(0)->nodeValue)) : null;

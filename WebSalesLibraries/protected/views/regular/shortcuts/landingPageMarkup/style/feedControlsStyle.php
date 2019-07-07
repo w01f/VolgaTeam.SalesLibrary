@@ -11,13 +11,13 @@
 	<? echo '#'.$feedId; ?> .feed-controls-container .btn.btn-default
     {
 	<?if (!empty($style->regularBackColor)):?>
-		background-color: <? echo Utils::formatColor($style->regularBackColor);?> !important;
+		background-color: <? echo Utils::formatColorToHex($style->regularBackColor);?> !important;
 	<?endif;?>
 	<?if (!empty($style->regularTextColor)):?>
-		color: <? echo Utils::formatColor($style->regularTextColor);?> !important;
+		color: <? echo Utils::formatColorToHex($style->regularTextColor);?> !important;
 	<?endif;?>
     <?if (!empty($style->borderColor)):?>
-        border-color: <? echo Utils::formatColor($style->borderColor);?> !important;
+        border-color: <? echo Utils::formatColorToHex($style->borderColor);?> !important;
     <?endif;?>
 		-webkit-box-shadow: none !important;
 		box-shadow: none !important;
@@ -34,13 +34,13 @@
 	<? echo '#'.$feedId; ?> .carousel-controls-container .btn.btn-default:focus:hover
     {
 	<?if (!empty($style->activeBackColor)):?>
-		background-color: <? echo Utils::formatColor($style->activeBackColor);?> !important;
+		background-color: <? echo Utils::formatColorToHex($style->activeBackColor);?> !important;
 	<?endif;?>
 	<?if (!empty($style->activeBackColor)):?>
-		color: <? echo Utils::formatColor($style->activeTextColor);?> !important;
+		color: <? echo Utils::formatColorToHex($style->activeTextColor);?> !important;
 	<?endif;?>
     <?if (!empty($style->borderColor)):?>
-        border-color: <? echo Utils::formatColor($style->borderColor);?> !important;
+        border-color: <? echo Utils::formatColorToHex($style->borderColor);?> !important;
     <?endif;?>
 		-webkit-box-shadow: none !important;
 		box-shadow: none !important;

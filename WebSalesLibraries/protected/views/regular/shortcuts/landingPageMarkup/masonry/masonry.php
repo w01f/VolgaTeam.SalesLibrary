@@ -14,13 +14,13 @@
     }
 
     #masonry-container-<? echo $contentBlock->id; ?> .cbp-l-filters-buttonCenter .cbp-filter-item {
-        background-color: <?echo Utils::formatColor($contentBlock->viewSettings->buttonStyle->backColorRegular);?> !important;
-        border-color: <?echo $contentBlock->viewSettings->buttonStyle->hasBorder? Utils::formatColor($contentBlock->viewSettings->buttonStyle->borderColorRegular):'transparent';?> !important;
+        background-color: <?echo Utils::formatColorToHex($contentBlock->viewSettings->buttonStyle->backColorRegular);?> !important;
+        border-color: <?echo $contentBlock->viewSettings->buttonStyle->hasBorder? Utils::formatColorToHex($contentBlock->viewSettings->buttonStyle->borderColorRegular):'transparent';?> !important;
     }
 
     #masonry-container-<? echo $contentBlock->id; ?> .cbp-l-filters-buttonCenter .cbp-filter-item.cbp-filter-item-active {
-        background-color: <?echo Utils::formatColor($contentBlock->viewSettings->buttonStyle->backColorSelected);?> !important;
-        border-color: <?echo $contentBlock->viewSettings->buttonStyle->hasBorder? Utils::formatColor($contentBlock->viewSettings->buttonStyle->borderColorSelected):'transparent';?> !important;
+        background-color: <?echo Utils::formatColorToHex($contentBlock->viewSettings->buttonStyle->backColorSelected);?> !important;
+        border-color: <?echo $contentBlock->viewSettings->buttonStyle->hasBorder? Utils::formatColorToHex($contentBlock->viewSettings->buttonStyle->borderColorSelected):'transparent';?> !important;
     }
 
     <? foreach ($contentBlock->items as $masonryItem): ?>

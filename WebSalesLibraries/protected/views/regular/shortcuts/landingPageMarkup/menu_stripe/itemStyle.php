@@ -13,7 +13,7 @@
     <? echo '#'.$blockId; ?> a
     {
         <? if (isset($textAppearance->color)): ?>
-            color: <? echo Utils::formatColor($textAppearance->color); ?> !important;
+            color: <? echo Utils::formatColorToHex($textAppearance->color); ?> !important;
         <? endif; ?>
         <? if ($textAppearance->lineHeight > 0): ?>
             line-height: <? echo $textAppearance->lineHeight; ?>px !important;
@@ -32,7 +32,7 @@
     <? if (isset($textAppearance->hoverColor)): ?>
         <? echo '#'.$blockId; ?> a:hover
         {
-          color: <? echo Utils::formatColor($textAppearance->hoverColor); ?> !important;
+          color: <? echo Utils::formatColorToHex($textAppearance->hoverColor); ?> !important;
         }
     <? endif; ?>
 

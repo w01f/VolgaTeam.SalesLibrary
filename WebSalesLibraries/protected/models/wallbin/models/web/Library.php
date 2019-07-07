@@ -100,6 +100,10 @@
 		 */
 		public static function libraryComparerByName($x, $y)
 		{
+			if (!isset($x))
+				return -1;
+			if (!isset($y))
+				return 1;
 			if ($x->name == $y->name)
 				return 0;
 			else

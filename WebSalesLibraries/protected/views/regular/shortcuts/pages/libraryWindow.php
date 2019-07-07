@@ -40,7 +40,7 @@
     <?endif;?>
 
     #content .wallbin-header .wallbin-header-cell {
-        border-bottom: 1px <? echo Utils::formatColor($shortcut->header->headerBorderColor); ?> solid !important;
+        border-bottom: 1px <? echo Utils::formatColorToHex($shortcut->header->headerBorderColor); ?> solid !important;
     }
 
     <? endif; ?>

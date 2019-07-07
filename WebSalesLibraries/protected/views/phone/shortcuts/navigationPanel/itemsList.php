@@ -9,7 +9,7 @@
 	?>
     <style>
         <?echo '#'.$identifier;?> .title {
-            color: <?echo Utils::formatColor($settings->textColor);?> !important;
+            color: <?echo Utils::formatColorToHex($settings->textColor);?> !important;
         }
     </style>
     <li data-icon="false">

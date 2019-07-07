@@ -14,7 +14,7 @@
                 white-space: normal;
             <? endif; ?>
             <? if (isset($textAppearance->color)): ?>
-                color: <? echo Utils::formatColor($textAppearance->color); ?> !important;
+                color: <? echo Utils::formatColorToHex($textAppearance->color); ?> !important;
             <? endif; ?>
             <? if (isset($textAppearance->hoverColor)): ?>
                 -moz-transition: all .2s ease-in;
@@ -38,12 +38,12 @@
         }
         <? if (isset($textAppearance->hoverColor)): ?>
             <?echo '#'.$blockId;?>:hover {
-                color: <? echo Utils::formatColor($textAppearance->hoverColor); ?> !important;
+                color: <? echo Utils::formatColorToHex($textAppearance->hoverColor); ?> !important;
             }
         <? endif; ?>
         <? if (isset($textAppearance->selectedColor) && isset($selectedClass)): ?>
             <?echo '#'.$blockId;?>.<? echo $selectedClass;?> {
-                color: <? echo Utils::formatColor($textAppearance->selectedColor); ?> !important;
+                color: <? echo Utils::formatColorToHex($textAppearance->selectedColor); ?> !important;
             }
         <? endif; ?>
     </style>

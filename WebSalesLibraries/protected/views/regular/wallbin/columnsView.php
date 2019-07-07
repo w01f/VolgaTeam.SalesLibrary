@@ -113,19 +113,19 @@
                     <?if($style->verticalBorderStretch):?>
                         <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .page-column.column0
                         {
-                            border-right: 1px solid <?echo Utils::formatColor($style->verticalBorder1Color);?>;
+                            border-right: 1px solid <?echo Utils::formatColorToHex($style->verticalBorder1Color);?>;
                         }
                     <? else: ?>
                         <?if(!$style->column1Style->frozen):?>
                             <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .page-column.column0 .page-column-inner
                             {
-                                border-right: 1px solid <?echo Utils::formatColor($style->verticalBorder1Color);?>;
+                                border-right: 1px solid <?echo Utils::formatColorToHex($style->verticalBorder1Color);?>;
                             }
                         <? endif; ?>
 
                         <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .page-column.column1 .page-column-inner
                         {
-                            border-left: 1px solid <?echo Utils::formatColor($style->verticalBorder1Color);?>;
+                            border-left: 1px solid <?echo Utils::formatColorToHex($style->verticalBorder1Color);?>;
                             margin-left: -<? echo $pageColumnInnerMargin; ?>px;
                         }
                         <?$pageColumnInnerMargin++;?>
@@ -136,16 +136,16 @@
                     <?if($style->verticalBorderStretch):?>
                         <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .page-column.column1
                         {
-                            border-right: 1px solid <?echo Utils::formatColor($style->verticalBorder2Color);?>;
+                            border-right: 1px solid <?echo Utils::formatColorToHex($style->verticalBorder2Color);?>;
                         }
                     <? else: ?>
                         <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .page-column.column1 .page-column-inner
                         {
-                            border-right: 1px solid <?echo Utils::formatColor($style->verticalBorder2Color);?>;
+                            border-right: 1px solid <?echo Utils::formatColorToHex($style->verticalBorder2Color);?>;
                         }
                         <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .page-column.column2 .page-column-inner
                         {
-                            border-left: 1px solid <?echo Utils::formatColor($style->verticalBorder2Color);?>;
+                            border-left: 1px solid <?echo Utils::formatColorToHex($style->verticalBorder2Color);?>;
                             margin-left: -<? echo $pageColumnInnerMargin; ?>px;
                         }
                     <? endif; ?>
@@ -174,7 +174,7 @@
 
                     <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .page-column.column0 .folder-body {
                         margin-bottom: <? echo ($style->column1Style->padding*0.6).'px';?>;
-                        border-bottom: 1px solid <?echo Utils::formatColor($style->column1Style->windowBorderColor);?> !important;
+                        border-bottom: 1px solid <?echo Utils::formatColorToHex($style->column1Style->windowBorderColor);?> !important;
                     }
                 <? endif; ?>
 
@@ -193,7 +193,7 @@
 
                     <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .page-column.column1 .folder-body {
                         margin-bottom: <? echo ($style->column2Style->padding*0.6).'px';?>;
-                        border-bottom: 1px solid <?echo Utils::formatColor($style->column2Style->windowBorderColor);?> !important;
+                        border-bottom: 1px solid <?echo Utils::formatColorToHex($style->column2Style->windowBorderColor);?> !important;
                     }
                 <? endif; ?>
 
@@ -213,7 +213,7 @@
                     <? echo '#'.$containerId;?> #page-<? echo $libraryPage->id; ?> .page-column.column2 .folder-body
                     {
                         margin-bottom: <? echo ($style->column3Style->padding*0.6).'px';?>;
-                        border-bottom: 1px solid <?echo Utils::formatColor($style->column3Style->windowBorderColor);?> !important;
+                        border-bottom: 1px solid <?echo Utils::formatColorToHex($style->column3Style->windowBorderColor);?> !important;
                     }
                 <? endif; ?>
         <? endif; ?>

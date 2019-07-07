@@ -12,7 +12,7 @@
         <img class="item-icon expanded" src="<? echo $settings->iconUrlExpanded; ?>">
         <img class="item-icon collapsed" src="<? echo $settings->iconUrlCollapsed; ?>">
         <div class="item-title"
-             style="color: <? echo Utils::formatColor($settings->textColor); ?>;"><? echo $settings->title; ?></div>
+             style="color: <? echo Utils::formatColorToHex($settings->textColor); ?>;"><? echo $settings->title; ?></div>
         <div class="service-data">
 			<? echo $itemData->shortcut->getMenuItemData(); ?>
         </div>

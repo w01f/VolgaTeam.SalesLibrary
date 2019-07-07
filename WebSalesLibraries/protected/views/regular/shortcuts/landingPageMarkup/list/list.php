@@ -31,7 +31,7 @@
     <?if(!empty($contentBlock->borderColor)):?>
     <? echo '#'.$blockId; ?>
     .list-group-item {
-        border-color: <? echo Utils::formatColor($contentBlock->borderColor); ?> !important;
+        border-color: <? echo Utils::formatColorToHex($contentBlock->borderColor); ?> !important;
     }
 
     <?endif;?>

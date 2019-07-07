@@ -22,7 +22,7 @@
     <? echo '#'.$blockId; ?>:active
     {
         <? if (isset($textAppearance->color)): ?>
-            color: <? echo Utils::formatColor($textAppearance->color); ?> !important;
+            color: <? echo Utils::formatColorToHex($textAppearance->color); ?> !important;
         <? endif; ?>
         <? if ($textAppearance->lineHeight > 0): ?>
             line-height: <? echo $textAppearance->lineHeight; ?>px !important;
@@ -38,17 +38,17 @@
             text-decoration: <? echo $textAppearance->font->isUnderlined ? 'underline' : 'inherit'; ?> !important;
         <? endif; ?>
         <? if (isset($buttonItem->backgroundColor)): ?>
-            background-color: <? echo Utils::formatColor($buttonItem->backgroundColor); ?> !important;
+            background-color: <? echo Utils::formatColorToHex($buttonItem->backgroundColor); ?> !important;
         <? endif; ?>
     }
 
     <? echo '#'.$blockId; ?>:hover
     {
      <? if (isset($textAppearance->hoverColor)): ?>
-        color: <? echo Utils::formatColor($textAppearance->hoverColor); ?> !important;
+        color: <? echo Utils::formatColorToHex($textAppearance->hoverColor); ?> !important;
      <? endif; ?>
      <? if (isset($buttonItem->backgroundHoverColor)): ?>
-         background-color: <? echo Utils::formatColor($buttonItem->backgroundHoverColor); ?> !important;
+         background-color: <? echo Utils::formatColorToHex($buttonItem->backgroundHoverColor); ?> !important;
      <? endif; ?>
     }
 

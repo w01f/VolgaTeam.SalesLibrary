@@ -124,10 +124,12 @@
 			$queryResult = $xpath->query('./Border', $contextNode);
 			if ($queryResult->length > 0)
 				$this->border = BorderStyle::fromXml($xpath, $queryResult->item(0));
+			else
+				$this->border = new BorderStyle();
 
 			$queryResult = $xpath->query('./Background', $contextNode);
 			if ($queryResult->length > 0)
-				$this->background = BackgroundStyle::fromXml($xpath, $queryResult->item(0));
+				$this->background = BackgroundStyle::fromXml($xpath, $queryResult->item(0), $this->imagePath);
 
 			$queryResult = $xpath->query('./Hide', $contextNode);
 			if ($queryResult->length > 0)

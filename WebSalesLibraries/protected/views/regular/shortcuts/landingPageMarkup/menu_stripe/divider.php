@@ -11,7 +11,7 @@
     <? echo '#'.$blockId; ?>
     {
         <? if (isset($textAppearance->color)): ?>
-            background-color: <? echo Utils::formatColor($textAppearance->color); ?> !important;
+            background-color: <? echo Utils::formatColorToHex($textAppearance->color); ?> !important;
         <? endif; ?>
     }
 </style>

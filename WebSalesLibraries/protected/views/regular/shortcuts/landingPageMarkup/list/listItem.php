@@ -30,7 +30,7 @@
 <li id="<? echo $blockId; ?>" class="list-group-item<? if ($contentBlock->isActive): ?> active<? endif; ?>"
     style="<? echo $this->renderPartial('landingPageMarkup/style/stylePadding', array('padding' => $contentBlock->padding), true); ?>
     <? echo $this->renderPartial('landingPageMarkup/style/styleMargin', array('margin' => $contentBlock->margin), true); ?>
-    <? if (!empty($contentBlock->backColor)): ?> background-color: <? echo Utils::formatColor($contentBlock->backColor); ?><? endif; ?>"
+    <? if (!empty($contentBlock->backColor)): ?> background-color: <? echo Utils::formatColorToHex($contentBlock->backColor); ?><? endif; ?>"
 	<? if (!empty($contentBlock->hoverText)): ?> title="<? echo $contentBlock->hoverText; ?>"<? endif; ?>>
 	<? echo $this->renderPartial('landingPageMarkup/common/blockContainer', array('contentBlocks' => $contentBlock->items, 'screenSettings' => $screenSettings), true); ?>
 </li>

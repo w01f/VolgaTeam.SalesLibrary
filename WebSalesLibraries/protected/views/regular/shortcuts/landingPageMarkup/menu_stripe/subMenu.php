@@ -24,7 +24,7 @@
             border-style: solid;
             border-width: 5px 0 5px 5px;
             <? if (isset($textAppearance->color)): ?>
-                border-left-color: <? echo Utils::formatColor($textAppearance->color); ?>;
+                border-left-color: <? echo Utils::formatColorToHex($textAppearance->color); ?>;
             <?else:?>
                 border-left-color: #ccc;
             <? endif; ?>
@@ -35,7 +35,7 @@
         <? echo '#'.$blockId; ?>:hover a:after
         {
             <? if (isset($textAppearance->hoverColor)): ?>
-                border-left-color: <? echo Utils::formatColor($textAppearance->hoverColor); ?>;
+                border-left-color: <? echo Utils::formatColorToHex($textAppearance->hoverColor); ?>;
             <?else:?>
                 border-left-color: #ccc;
             <? endif; ?>

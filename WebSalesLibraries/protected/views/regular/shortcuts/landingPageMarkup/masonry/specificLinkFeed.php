@@ -111,7 +111,7 @@
                 <style>
                     #masonry-container-<? echo $contentBlock->id; ?> .feed-details-button .svg path
                     {
-                        fill: <? echo Utils::formatColor(!empty($control->iconColor)?$control->iconColor:$viewSettings->controlsStyle->regularTextColor);?> !important;
+                        fill: <? echo Utils::formatColorToHex(!empty($control->iconColor)?$control->iconColor:$viewSettings->controlsStyle->regularTextColor);?> !important;
                     }
                 </style>
 		    <? endif; ?>
@@ -120,8 +120,8 @@
                             <? if ($control->hideCondition->medium): ?> hidden-md<? endif; ?>
                             <? if ($control->hideCondition->small): ?> hidden-sm<? endif; ?>
                             <? if ($control->hideCondition->extraSmall): ?> hidden-xs<? endif; ?>" style="
-		    <? if (!empty($control->backColor)): ?>background-color: <? echo Utils::formatColor($control->backColor); ?> !important;<? endif; ?>
-		    <? if (!empty($control->borderColor)): ?>border-color: <? echo Utils::formatColor($control->borderColor); ?> !important;<? endif; ?>">
+		    <? if (!empty($control->backColor)): ?>background-color: <? echo Utils::formatColorToHex($control->backColor); ?> !important;<? endif; ?>
+		    <? if (!empty($control->borderColor)): ?>border-color: <? echo Utils::formatColorToHex($control->borderColor); ?> !important;<? endif; ?>">
                 <img src="<? echo $contentBlock->imagePath . $control->iconFile; ?>"
 			         <? if (strpos($control->iconFile, '.svg') !== false): ?>class="svg"<? endif; ?>>
                 <span class="service-data">

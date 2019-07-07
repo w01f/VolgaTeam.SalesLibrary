@@ -43,7 +43,7 @@
     <?endif;?>
 
     #content .wallbin-header .wallbin-header-cell {
-        border-bottom: 1px <? echo Utils::formatColor($previewInfo->header->headerBorderColor); ?> solid !important;
+        border-bottom: 1px <? echo Utils::formatColorToHex($previewInfo->header->headerBorderColor); ?> solid !important;
     }
 
     <? endif; ?>

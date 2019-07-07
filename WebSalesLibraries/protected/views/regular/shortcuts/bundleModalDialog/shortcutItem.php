@@ -14,7 +14,7 @@
        href="<? echo $shortcut->getSourceLink(); ?>" target="<? echo $item->getTarget(); ?>">
         <img class="item-image" src="<? echo $item->imageUrl; ?>">
         <div class="item-title"
-             style="color: <? echo Utils::formatColor($item->textColor); ?>; font-size: <? echo $item->textSize; ?>px;"><? echo $item->title; ?></div>
+             style="color: <? echo Utils::formatColorToHex($item->textColor); ?>; font-size: <? echo $item->textSize; ?>px;"><? echo $item->title; ?></div>
         <div class="service-data">
 			<? echo $shortcut->getMenuItemData(); ?>
             <div class="bundle-item-id"><? echo $item->id; ?></div>

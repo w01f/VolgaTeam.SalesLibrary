@@ -48,7 +48,7 @@
     <? echo '#'.$blockId; ?>  li  a
     {
         <? if (isset($textAppearance->color)): ?>
-            color: <? echo Utils::formatColor($textAppearance->color); ?>;
+            color: <? echo Utils::formatColorToHex($textAppearance->color); ?>;
         <? endif; ?>
         <? if ($textAppearance->lineHeight > 0): ?>
             line-height: <? echo $textAppearance->lineHeight; ?>px;
@@ -67,7 +67,7 @@
     <? if (isset($textAppearance->hoverColor)): ?>
         <? echo '#'.$blockId; ?>  li a:hover
         {
-            color: <? echo Utils::formatColor($textAppearance->hoverColor); ?>;
+            color: <? echo Utils::formatColorToHex($textAppearance->hoverColor); ?>;
         }
     <? endif; ?>
 

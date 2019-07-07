@@ -15,9 +15,9 @@
     <style>
         <?echo '#'.$searchBarId; ?>
         .search-bar-label {
-        <?if(!empty($style->labelBackColor)):?> background-color: <? echo Utils::formatColor($style->labelBackColor);?> !important;
-        <?endif;?><?if(!empty($style->labelTextColor)):?> color: <? echo Utils::formatColor($style->labelTextColor);?> !important;
-        <?endif;?><?if(!empty($style->borderColor)):?> border-color: <? echo Utils::formatColor($style->borderColor);?> !important;
+        <?if(!empty($style->labelBackColor)):?> background-color: <? echo Utils::formatColorToHex($style->labelBackColor);?> !important;
+        <?endif;?><?if(!empty($style->labelTextColor)):?> color: <? echo Utils::formatColorToHex($style->labelTextColor);?> !important;
+        <?endif;?><?if(!empty($style->borderColor)):?> border-color: <? echo Utils::formatColorToHex($style->borderColor);?> !important;
         <?endif;?>
         }
 
@@ -26,9 +26,9 @@
         <?echo '#'.$searchBarId; ?> .search-bar-button:hover,
         <?echo '#'.$searchBarId; ?> .search-bar-button:focus,
         <?echo '#'.$searchBarId; ?> .search-bar-button:focus:hover {
-        <?if(!empty($style->buttonBackColor)):?> background-color: <? echo Utils::formatColor($style->buttonBackColor);?> !important;
-        <?endif;?><?if(!empty($style->buttonTextColor)):?> color: <? echo Utils::formatColor($style->buttonTextColor);?> !important;
-        <?endif;?><?if(!empty($style->borderColor)):?> border-color: <? echo Utils::formatColor($style->borderColor);?> !important;
+        <?if(!empty($style->buttonBackColor)):?> background-color: <? echo Utils::formatColorToHex($style->buttonBackColor);?> !important;
+        <?endif;?><?if(!empty($style->buttonTextColor)):?> color: <? echo Utils::formatColorToHex($style->buttonTextColor);?> !important;
+        <?endif;?><?if(!empty($style->borderColor)):?> border-color: <? echo Utils::formatColorToHex($style->borderColor);?> !important;
         <?endif;?> outline: none !important;
             box-shadow: unset !important;
         }
@@ -38,40 +38,40 @@
         <?echo '#'.$searchBarId; ?> .search-bar-run:hover,
         <?echo '#'.$searchBarId; ?> .search-bar-run:focus,
         <?echo '#'.$searchBarId; ?> .search-bar-run:focus:hover {
-        <?if(!empty($style->searchBackColor)):?> background-color: <? echo Utils::formatColor($style->searchBackColor);?> !important;
-        <?endif;?><?if(!empty($style->searchTextColor)):?> color: <? echo Utils::formatColor($style->searchTextColor);?> !important;
-        <?endif;?><?if(!empty($style->borderColor)):?> border-color: <? echo Utils::formatColor($style->borderColor);?> !important;
+        <?if(!empty($style->searchBackColor)):?> background-color: <? echo Utils::formatColorToHex($style->searchBackColor);?> !important;
+        <?endif;?><?if(!empty($style->searchTextColor)):?> color: <? echo Utils::formatColorToHex($style->searchTextColor);?> !important;
+        <?endif;?><?if(!empty($style->borderColor)):?> border-color: <? echo Utils::formatColorToHex($style->borderColor);?> !important;
         <?endif;?> outline: none !important;
             box-shadow: unset !important;
         }
 
         <?echo '#'.$searchBarId; ?>
         .search-bar-run path {
-        <?if(!empty($style->iconColor)):?> fill: <? echo Utils::formatColor($style->iconColor);?> !important;
+        <?if(!empty($style->iconColor)):?> fill: <? echo Utils::formatColorToHex($style->iconColor);?> !important;
         <?endif;?>
         }
 
         <?echo '#'.$searchBarId; ?>
         input::placeholder {
-        <?if(!empty($style->placeholderTextColor)):?> color: <? echo Utils::formatColor($style->placeholderTextColor);?> !important;
+        <?if(!empty($style->placeholderTextColor)):?> color: <? echo Utils::formatColorToHex($style->placeholderTextColor);?> !important;
         <?endif;?>
         }
 
         <?echo '#'.$searchBarId; ?>
         input::-moz-placeholder {
-        <?if(!empty($style->placeholderTextColor)):?> color: <? echo Utils::formatColor($style->placeholderTextColor);?> !important;
+        <?if(!empty($style->placeholderTextColor)):?> color: <? echo Utils::formatColorToHex($style->placeholderTextColor);?> !important;
         <?endif;?>
         }
 
         <?echo '#'.$searchBarId; ?>
         input:-ms-input-placeholder {
-        <?if(!empty($style->placeholderTextColor)):?> color: <? echo Utils::formatColor($style->placeholderTextColor);?> !important;
+        <?if(!empty($style->placeholderTextColor)):?> color: <? echo Utils::formatColorToHex($style->placeholderTextColor);?> !important;
         <?endif;?>
         }
 
         <?echo '#'.$searchBarId; ?>
         input::-webkit-input-placeholder {
-        <?if(!empty($style->placeholderTextColor)):?> color: <? echo Utils::formatColor($style->placeholderTextColor);?> !important;
+        <?if(!empty($style->placeholderTextColor)):?> color: <? echo Utils::formatColorToHex($style->placeholderTextColor);?> !important;
         <?endif;?>
         }
 
@@ -79,7 +79,7 @@
         .search-bar-text {
             height: <? echo ($style->lineHeight+14);?>px !important;
             <?if($style->searchBackColor=='transparent'):?> background-color: transparent !important;<?endif;?>
-            <?if(!empty($style->borderColor)):?> border-color: <? echo Utils::formatColor($style->borderColor);?> !important;<?endif;?>
+            <?if(!empty($style->borderColor)):?> border-color: <? echo Utils::formatColorToHex($style->borderColor);?> !important;<?endif;?>
         }
 
         <?echo '#'.$searchBarId; ?>

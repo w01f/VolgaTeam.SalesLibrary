@@ -41,13 +41,13 @@
     <?endif;?>
 
     <? echo '#'.$blockId; ?> .toggle-button {
-        background-color: <?echo Utils::formatColor($contentBlock->buttonStyle->backColorRegular);?> !important;
-        border-color: <?echo $contentBlock->buttonStyle->hasBorder? Utils::formatColor($contentBlock->buttonStyle->borderColorRegular):'transparent';?> !important;
+        background-color: <?echo Utils::formatColorToHex($contentBlock->buttonStyle->backColorRegular);?> !important;
+        border-color: <?echo $contentBlock->buttonStyle->hasBorder? Utils::formatColorToHex($contentBlock->buttonStyle->borderColorRegular):'transparent';?> !important;
     }
 
     <? echo '#'.$blockId; ?> .toggle-button.toggle-button-active {
-        background-color: <?echo Utils::formatColor($contentBlock->buttonStyle->backColorSelected);?> !important;
-        border-color: <?echo $contentBlock->buttonStyle->hasBorder? Utils::formatColor($contentBlock->buttonStyle->borderColorSelected):'transparent';?> !important;
+        background-color: <?echo Utils::formatColorToHex($contentBlock->buttonStyle->backColorSelected);?> !important;
+        border-color: <?echo $contentBlock->buttonStyle->hasBorder? Utils::formatColorToHex($contentBlock->buttonStyle->borderColorSelected):'transparent';?> !important;
     }
 </style>
 <div class="toggle-panel" id="<? echo $blockId; ?>">

@@ -178,7 +178,6 @@
 				unset($this->loadedCache);
 				if (is_array($libraries) && count($libraries) > 0)
 				{
-					usort($libraries, "application\\models\\wallbin\\models\\web\\Library::libraryComparerByName");
 					\Yii::app()->session['all-libraries'] = $libraries;
 					\Yii::app()->cacheDB->set(\Yii::app()->session['sessionKey'], 'all-libraries', (60 * 60 * 24 * 7));
 				}

@@ -59,45 +59,45 @@
 
     <? echo '#'.$blockId; ?>
     .wallbin-header {
-        background-color: <? echo Utils::formatColor($contentBlock->shortcut->style->header->backColor); ?> !important;
+        background-color: <? echo Utils::formatColorToHex($contentBlock->shortcut->style->header->backColor); ?> !important;
     }
 
     <? echo '#'.$blockId; ?>
     .wallbin-header .wallbin-header-cell {
-        border-bottom: 1px <? echo Utils::formatColor($contentBlock->shortcut->style->header->headerBorderColor); ?> solid !important;
+        border-bottom: 1px <? echo Utils::formatColorToHex($contentBlock->shortcut->style->header->headerBorderColor); ?> solid !important;
     }
 
     <? echo '#'.$blockId; ?>
     .wallbin-header .page-selector-container .tab-pages div,
     <? echo '#'.$blockId; ?> .wallbin-header .page-selector-container .tab-pages span,
     <? echo '#'.$blockId; ?> .wallbin-header .page-selector-container .tab-pages li {
-        background-color: <? echo Utils::formatColor($contentBlock->shortcut->style->header->tabSelector->regularBackColor)?> !important;
-        border-color: <? echo Utils::formatColor($contentBlock->shortcut->style->header->tabSelector->borderColor)?> !important;
+        background-color: <? echo Utils::formatColorToHex($contentBlock->shortcut->style->header->tabSelector->regularBackColor)?> !important;
+        border-color: <? echo Utils::formatColorToHex($contentBlock->shortcut->style->header->tabSelector->borderColor)?> !important;
     }
 
     <? echo '#'.$blockId; ?>
     .wallbin-header .page-selector-container .tab-pages div.scroll_tab_inner span,
     <? echo '#'.$blockId; ?> .wallbin-header .page-selector-container .tab-pages div.scroll_tab_inner li {
-        color: <? echo Utils::formatColor($contentBlock->shortcut->style->header->tabSelector->regularTextColor)?> !important;
+        color: <? echo Utils::formatColorToHex($contentBlock->shortcut->style->header->tabSelector->regularTextColor)?> !important;
     }
 
     <? echo '#'.$blockId; ?>
     .wallbin-header .page-selector-container .tab-pages .scroll_tab_left_button,
     <? echo '#'.$blockId; ?> .wallbin-header .page-selector-container .tab-pages .scroll_tab_right_button {
-        color: <? echo Utils::formatColor($contentBlock->shortcut->style->header->tabSelector->arrowColor)?> !important;
+        color: <? echo Utils::formatColorToHex($contentBlock->shortcut->style->header->tabSelector->arrowColor)?> !important;
     }
 
     <? echo '#'.$blockId; ?>
     .wallbin-header .page-selector-container .tab-pages div.scroll_tab_inner span.scroll_tab_over,
     <? echo '#'.$blockId; ?> .wallbin-header .page-selector-container .tab-pages div.scroll_tab_inner li.scroll_tab_over {
-        color: <? echo Utils::formatColor($contentBlock->shortcut->style->header->tabSelector->hoverTextColor)?> !important;
-        background-color: <? echo Utils::formatColor($contentBlock->shortcut->style->header->tabSelector->hoverBackColor)?> !important;
+        color: <? echo Utils::formatColorToHex($contentBlock->shortcut->style->header->tabSelector->hoverTextColor)?> !important;
+        background-color: <? echo Utils::formatColorToHex($contentBlock->shortcut->style->header->tabSelector->hoverBackColor)?> !important;
     }
 
     <? echo '#'.$blockId; ?>
     .wallbin-header .page-selector-container .tab-pages .page-tab-header.selected {
-        color: <? echo Utils::formatColor($contentBlock->shortcut->style->header->tabSelector->selectedTextColor)?> !important;
-        background-color: <? echo Utils::formatColor($contentBlock->shortcut->style->header->tabSelector->selectedBackColor)?> !important;
+        color: <? echo Utils::formatColorToHex($contentBlock->shortcut->style->header->tabSelector->selectedTextColor)?> !important;
+        background-color: <? echo Utils::formatColorToHex($contentBlock->shortcut->style->header->tabSelector->selectedBackColor)?> !important;
     }
 </style>
 <div id="<? echo $blockId; ?>" class="library-page-bundle-block">

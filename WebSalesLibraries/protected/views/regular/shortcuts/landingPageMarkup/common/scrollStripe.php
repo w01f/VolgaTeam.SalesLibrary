@@ -29,23 +29,23 @@
     <? echo '#'.$scrollStripeId; ?> .scroll_tab_right_button,
     <? echo '#'.$scrollStripeId; ?> span.scroll_tab_left_finisher,
     <? echo '#'.$scrollStripeId; ?> span.scroll_tab_right_finisher{
-        border-color: <? echo Utils::formatColor($contentBlock->border->color); ?> !important;
+        border-color: <? echo Utils::formatColorToHex($contentBlock->border->color); ?> !important;
     }
 
     <? echo '#'.$scrollStripeId; ?> .scroll_tab_left_button i{
-        color: <? echo Utils::formatColor($contentBlock->leftButtonColor); ?> !important;
+        color: <? echo Utils::formatColorToHex($contentBlock->leftButtonColor); ?> !important;
     }
 
     <? echo '#'.$scrollStripeId; ?> .scroll_tab_left_button.scroll_arrow_disabled i{
-        color: <? echo Utils::formatColor($contentBlock->leftButtonDisabledColor); ?> !important;
+        color: <? echo Utils::formatColorToHex($contentBlock->leftButtonDisabledColor); ?> !important;
     }
 
     <? echo '#'.$scrollStripeId; ?> .scroll_tab_right_button i{
-        color: <? echo Utils::formatColor($contentBlock->rightButtonColor); ?> !important;
+        color: <? echo Utils::formatColorToHex($contentBlock->rightButtonColor); ?> !important;
     }
 
     <? echo '#'.$scrollStripeId; ?> .scroll_tab_right_button.scroll_arrow_disabled i{
-        color: <? echo Utils::formatColor($contentBlock->rightButtonDisabledColor); ?> !important;
+        color: <? echo Utils::formatColorToHex($contentBlock->rightButtonDisabledColor); ?> !important;
     }
 </style>
 <div id="<? echo $scrollStripeId; ?>" class="scroll_tabs_theme_light<? echo $stripeConfigurationClass; ?> scroll-stripe">
@@ -56,30 +56,30 @@
         <style>
             <? echo '#'.$stripeItemId; ?>
             {
-                border-color: <? echo Utils::formatColor($contentBlock->border->color); ?> !important;
-                background-color: <? echo Utils::formatColor($stripeItem->backgroundColor); ?> !important;
+                border-color: <? echo Utils::formatColorToHex($contentBlock->border->color); ?> !important;
+                background-color: <? echo Utils::formatColorToHex($stripeItem->backgroundColor); ?> !important;
             }
             <? echo '#'.$stripeItemId; ?>:hover {
-                background-color: <? echo Utils::formatColor($stripeItem->backgroundHoverColor); ?> !important;
+                background-color: <? echo Utils::formatColorToHex($stripeItem->backgroundHoverColor); ?> !important;
             }
 
             <? echo '#'.$stripeItemId; ?> a i {
-                color: <? echo Utils::formatColor($stripeItem->iconColor); ?>
+                color: <? echo Utils::formatColorToHex($stripeItem->iconColor); ?>
             }
 
             <? echo '#'.$stripeItemId; ?>:hover a i {
-                color: <? echo Utils::formatColor($stripeItem->iconHoverColor); ?>
+                color: <? echo Utils::formatColorToHex($stripeItem->iconHoverColor); ?>
             }
 
             <?if(!empty($stripeItem->textAppearance->color)):?>
                 <? echo '#'.$stripeItemId; ?> a .item-text {
-                    color: <? echo Utils::formatColor($stripeItem->textAppearance->color); ?>
+                    color: <? echo Utils::formatColorToHex($stripeItem->textAppearance->color); ?>
                 }
             <?endif;?>
 
             <?if(!empty($stripeItem->textAppearance->hoverColor)):?>
                 <? echo '#'.$stripeItemId; ?>:hover a .item-text {
-                    color: <? echo Utils::formatColor($stripeItem->textAppearance->hoverColor); ?>
+                    color: <? echo Utils::formatColorToHex($stripeItem->textAppearance->hoverColor); ?>
                 }
             <?endif;?>
         </style>

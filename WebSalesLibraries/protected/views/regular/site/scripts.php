@@ -193,17 +193,17 @@
 </style>
 <style id="main-menu-custom-page-style">
     .menu-back-colored {
-        background-color: <?echo Utils::formatColor(Yii::app()->params['menu']['BarColor']);?> !important;
+        background-color: <?echo Utils::formatColorToHex(Yii::app()->params['menu']['BarColor']);?> !important;
     }
 
     #shortcut-action-menu,
     #shortcut-action-menu .main-level,
     #shortcut-action-menu .level {
-        background-color: <? echo Utils::formatColor(Yii::app()->params['menu']['BarColor']);?>;
+        background-color: <? echo Utils::formatColorToHex(Yii::app()->params['menu']['BarColor']);?>;
     }
 
     #shortcut-action-menu .main-level .shortcut-menu-header:hover {
-        background-color: <? echo Utils::formatColor(Yii::app()->params['menu']['BarColor']);?>;
+        background-color: <? echo Utils::formatColorToHex(Yii::app()->params['menu']['BarColor']);?>;
     }
 </style>
 <script type="text/javascript">

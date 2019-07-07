@@ -33,7 +33,7 @@
                         <div class="text">
                                             <span class="feed-info link-name" style="
                                             <? if (!empty($itemSettingsName->color)): ?>
-                                                    color: <? echo Utils::formatColor($itemSettingsName->color);?>;
+                                                    color: <? echo Utils::formatColorToHex($itemSettingsName->color);?>;
                                             <? endif; ?>
                                             <? if (!empty($itemSettingsName->font)): ?>
                                                     font-family: <? echo FontReplacementHelper::replaceFont($itemSettingsName->font->name); ?> !important;
@@ -56,7 +56,7 @@
 						<? if ($itemSettingsName->enabled && $style->linkNamePosition === LinkFeedStyle::LinkNamePositionBottom): ?>
                             <span class="feed-info link-name" style="
 							<? if (!empty($itemSettingsName->color)): ?>
-                                    color: <? echo Utils::formatColor($itemSettingsName->color);?>;
+                                    color: <? echo Utils::formatColorToHex($itemSettingsName->color);?>;
                             <? endif; ?>
 							<? if (!empty($itemSettingsName->font)): ?>
                                     font-family: <? echo FontReplacementHelper::replaceFont($itemSettingsName->font->name); ?> !important;
@@ -72,7 +72,7 @@
 						<? if ($itemSettingsLibrary->enabled): ?>
                             <span class="feed-info library-name" style="
 							<? if (!empty($itemSettingsLibrary->color)): ?>
-                                    color: <? echo Utils::formatColor($itemSettingsLibrary->color);?>;
+                                    color: <? echo Utils::formatColorToHex($itemSettingsLibrary->color);?>;
                             <? endif; ?>
 							<? if (!empty($itemSettingsLibrary->font)): ?>
                                     font-family: <? echo FontReplacementHelper::replaceFont($itemSettingsLibrary->font->name); ?> !important;
@@ -88,7 +88,7 @@
 						<? if ($itemSettingsViewsCount->enabled && $feedItem->viewsCount > 0): ?>
                             <span class="feed-info views-count" style="
 							<? if (!empty($itemSettingsViewsCount->color)): ?>
-                                    color: <? echo Utils::formatColor($itemSettingsViewsCount->color);?>;
+                                    color: <? echo Utils::formatColorToHex($itemSettingsViewsCount->color);?>;
                             <? endif; ?>
 							<? if (!empty($itemSettingsViewsCount->font)): ?>
                                     font-family: <? echo FontReplacementHelper::replaceFont($itemSettingsViewsCount->font->name); ?> !important;

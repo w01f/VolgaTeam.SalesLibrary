@@ -9,10 +9,10 @@
 <? if (isset($border)): ?>
     <style>
         <?echo '#'.$blockId;?> {
-            border-top: <? echo $border->size->top; ?>px <? echo Utils::formatColor($border->color); ?> <? echo $border->style;?>;
-            border-left: <? echo $border->size->left; ?>px <? echo Utils::formatColor($border->color); ?> <? echo $border->style;?>;
-            border-bottom: <? echo $border->size->bottom; ?>px <? echo Utils::formatColor($border->color); ?> <? echo $border->style;?>;
-            border-right: <? echo $border->size->right; ?>px <? echo Utils::formatColor($border->color); ?> <? echo $border->style;?>;
+            border-top: <? echo $border->size->top; ?>px <? echo Utils::formatColorToHex($border->color); ?> <? echo $border->style;?>;
+            border-left: <? echo $border->size->left; ?>px <? echo Utils::formatColorToHex($border->color); ?> <? echo $border->style;?>;
+            border-bottom: <? echo $border->size->bottom; ?>px <? echo Utils::formatColorToHex($border->color); ?> <? echo $border->style;?>;
+            border-right: <? echo $border->size->right; ?>px <? echo Utils::formatColorToHex($border->color); ?> <? echo $border->style;?>;
         }
         <?if($border->hideCondition->isConfigured):?>
             <?if($border->hideCondition->extraSmall):?>

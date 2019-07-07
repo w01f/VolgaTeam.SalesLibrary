@@ -46,7 +46,7 @@
 
     <? echo '#'.$containerId;?>
     .wallbin-header .wallbin-header-cell {
-        border-bottom: 1px <? echo Utils::formatColor($style->header->headerBorderColor);?> solid !important;
+        border-bottom: 1px <? echo Utils::formatColorToHex($style->header->headerBorderColor);?> solid !important;
     }
 
     <? if (!$isEmbedded && !($searchBar->configured && $style->header->showLogo)): ?>
@@ -77,29 +77,29 @@
     <? echo '#'.$containerId;?> .wallbin-header .page-selector-container .tab-pages div,
     <? echo '#'.$containerId;?> .wallbin-header .page-selector-container .tab-pages span,
     <? echo '#'.$containerId;?> .wallbin-header .page-selector-container .tab-pages li {
-        background-color: <? echo Utils::formatColor($style->header->tabSelector->regularBackColor)?> !important;
-        border-color: <? echo Utils::formatColor($style->header->tabSelector->borderColor)?> !important;
+        background-color: <? echo Utils::formatColorToHex($style->header->tabSelector->regularBackColor)?> !important;
+        border-color: <? echo Utils::formatColorToHex($style->header->tabSelector->borderColor)?> !important;
     }
 
     <? echo '#'.$containerId;?> .wallbin-header .page-selector-container .tab-pages div.scroll_tab_inner span,
     <? echo '#'.$containerId;?> .wallbin-header .page-selector-container .tab-pages div.scroll_tab_inner li {
-        color: <? echo Utils::formatColor($style->header->tabSelector->regularTextColor)?> !important;
+        color: <? echo Utils::formatColorToHex($style->header->tabSelector->regularTextColor)?> !important;
     }
 
     <? echo '#'.$containerId;?> .wallbin-header .page-selector-container .tab-pages .scroll_tab_left_button,
     <? echo '#'.$containerId;?> .wallbin-header .page-selector-container .tab-pages .scroll_tab_right_button {
-        color: <? echo Utils::formatColor($style->header->tabSelector->arrowColor)?> !important;
+        color: <? echo Utils::formatColorToHex($style->header->tabSelector->arrowColor)?> !important;
     }
 
     <? echo '#'.$containerId;?> .wallbin-header .page-selector-container .tab-pages div.scroll_tab_inner span.scroll_tab_over,
     <? echo '#'.$containerId;?> .wallbin-header .page-selector-container .tab-pages div.scroll_tab_inner li.scroll_tab_over {
-        color: <? echo Utils::formatColor($style->header->tabSelector->hoverTextColor)?> !important;
-        background-color: <? echo Utils::formatColor($style->header->tabSelector->hoverBackColor)?> !important;
+        color: <? echo Utils::formatColorToHex($style->header->tabSelector->hoverTextColor)?> !important;
+        background-color: <? echo Utils::formatColorToHex($style->header->tabSelector->hoverBackColor)?> !important;
     }
 
     <? echo '#'.$containerId;?> .wallbin-header .page-selector-container .tab-pages .page-tab-header.selected {
-        color: <? echo Utils::formatColor($style->header->tabSelector->selectedTextColor)?> !important;
-        background-color: <? echo Utils::formatColor($style->header->tabSelector->selectedBackColor)?> !important;
+        color: <? echo Utils::formatColorToHex($style->header->tabSelector->selectedTextColor)?> !important;
+        background-color: <? echo Utils::formatColorToHex($style->header->tabSelector->selectedBackColor)?> !important;
     }
 </style>
 <? if (!$isEmbedded): ?>

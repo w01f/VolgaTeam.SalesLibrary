@@ -47,7 +47,7 @@
 			<? endif; ?>
 			<? if (!empty($shortcut->headerSettings->topLogo)): ?>
                 <tr>
-                    <td class="shortcut-header-logo" <? if ($shortcut->headerSettings->showTopLogoDivider): ?> style="border-bottom: solid 1px <? echo Utils::formatColor($shortcut->headerSettings->topDividerColor); ?>;" <? endif; ?>>
+                    <td class="shortcut-header-logo" <? if ($shortcut->headerSettings->showTopLogoDivider): ?> style="border-bottom: solid 1px <? echo Utils::formatColorToHex($shortcut->headerSettings->topDividerColor); ?>;" <? endif; ?>>
                         <img src="<? echo $shortcut->headerSettings->topLogo; ?>">
                     </td>
                 </tr>

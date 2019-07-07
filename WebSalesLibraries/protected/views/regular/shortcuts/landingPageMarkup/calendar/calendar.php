@@ -26,28 +26,28 @@
 
     <? echo '#'.$blockId ?> .fc-toolbar .fc-left .btn
     {
-        border-color: <? echo Utils::formatColor($contentBlock->settings->navigationButtonStyleLeft->borderColor);?>;
-        color: <? echo Utils::formatColor($contentBlock->settings->navigationButtonStyleLeft->foreColorRegular);?>;
-        background-color: <? echo Utils::formatColor($contentBlock->settings->navigationButtonStyleLeft->backColorRegular);?>;
+        border-color: <? echo Utils::formatColorToHex($contentBlock->settings->navigationButtonStyleLeft->borderColor);?>;
+        color: <? echo Utils::formatColorToHex($contentBlock->settings->navigationButtonStyleLeft->foreColorRegular);?>;
+        background-color: <? echo Utils::formatColorToHex($contentBlock->settings->navigationButtonStyleLeft->backColorRegular);?>;
     }
 
     <? echo '#'.$blockId ?> .fc-toolbar .fc-left .btn.active
     {
-        color: <? echo Utils::formatColor($contentBlock->settings->navigationButtonStyleLeft->foreColorSelected);?>;
-        background-color: <? echo Utils::formatColor($contentBlock->settings->navigationButtonStyleLeft->backColorSelected);?>;
+        color: <? echo Utils::formatColorToHex($contentBlock->settings->navigationButtonStyleLeft->foreColorSelected);?>;
+        background-color: <? echo Utils::formatColorToHex($contentBlock->settings->navigationButtonStyleLeft->backColorSelected);?>;
     }
 
     <? echo '#'.$blockId ?> .fc-toolbar .fc-right .btn
     {
-        border-color: <? echo Utils::formatColor($contentBlock->settings->navigationButtonStyleRight->borderColor);?>;
-        color: <? echo Utils::formatColor($contentBlock->settings->navigationButtonStyleRight->foreColorRegular);?>;
-        background-color: <? echo Utils::formatColor($contentBlock->settings->navigationButtonStyleRight->backColorRegular);?>;
+        border-color: <? echo Utils::formatColorToHex($contentBlock->settings->navigationButtonStyleRight->borderColor);?>;
+        color: <? echo Utils::formatColorToHex($contentBlock->settings->navigationButtonStyleRight->foreColorRegular);?>;
+        background-color: <? echo Utils::formatColorToHex($contentBlock->settings->navigationButtonStyleRight->backColorRegular);?>;
     }
 
     <? echo '#'.$blockId ?> .fc-toolbar .fc-right .btn.active
     {
-        color: <? echo Utils::formatColor($contentBlock->settings->navigationButtonStyleRight->foreColorSelected);?>;
-        background-color: <? echo Utils::formatColor($contentBlock->settings->navigationButtonStyleRight->backColorSelected);?>;
+        color: <? echo Utils::formatColorToHex($contentBlock->settings->navigationButtonStyleRight->foreColorSelected);?>;
+        background-color: <? echo Utils::formatColorToHex($contentBlock->settings->navigationButtonStyleRight->backColorSelected);?>;
     }
 
     <?if($contentBlock->settings->disableWeekend):?>
@@ -61,7 +61,7 @@
     <? echo '#'.$blockId; ?> .fc-center h2
     {
         <? if (isset($headerTextAppearance->color)): ?>
-            color: <? echo Utils::formatColor($headerTextAppearance->color); ?> !important;
+            color: <? echo Utils::formatColorToHex($headerTextAppearance->color); ?> !important;
         <? endif; ?>
         <? if ($headerTextAppearance->lineHeight > 0): ?>
             line-height: <? echo $headerTextAppearance->lineHeight; ?>px !important;

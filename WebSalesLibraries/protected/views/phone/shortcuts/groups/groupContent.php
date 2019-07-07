@@ -41,11 +41,11 @@
                     <style>
                         <?echo '#'.$identifier;?> .logo
                         {
-                            color: <?echo Utils::formatColor($menuItem->appearance->iconColor);?> !important;
+                            color: <?echo Utils::formatColorToHex($menuItem->appearance->iconColor);?> !important;
                         }
                         <?echo '#'.$identifier;?> .title
                         {
-                            color: <?echo Utils::formatColor($menuItem->appearance->textColor);?> !important;
+                            color: <?echo Utils::formatColorToHex($menuItem->appearance->textColor);?> !important;
                         }
                     </style>
                     <a id="<? echo $identifier; ?>" class="cbp-item menu-item" data-ajax="false" href="<? echo $menuItem->shortcut->getSourceLink(); ?>" target="_blank">
