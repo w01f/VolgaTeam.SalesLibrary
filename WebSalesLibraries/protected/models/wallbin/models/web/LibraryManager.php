@@ -135,10 +135,8 @@
 			if (array_key_exists($libraryId, $libraries))
 			{
 				$libraryCache = $libraries[$libraryId];
-				if (!$loadLibraryContent)
+				if (!$loadLibraryContent || $libraryCache['contentLoaded'] == true)
 					$selectedLibrary = $libraryCache['library'];
-				else if ($libraryCache['contentLoaded'] == true)
-					$selectedLibrary = $libraries[$libraryId];
 			}
 
 			if (!isset($selectedLibrary))
