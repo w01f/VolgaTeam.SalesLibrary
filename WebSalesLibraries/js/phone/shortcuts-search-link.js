@@ -20,34 +20,36 @@
 				html: ""
 			});
 
-			$.SalesPortal.SearchHelper.runSearch(
-				{
-					datasetKey: undefined,
-					conditions: $.toJSON(searchShortcutOptions.conditions)
-				},
-				function () {
-				},
-				function () {
-				},
-				function (data) {
-					searchResultsPage.find('.entities-count span').html(data.dataset.length + ' Links');
+			setTimeout(function () {
+				$.SalesPortal.SearchHelper.runSearch(
+					{
+						datasetKey: undefined,
+						conditions: $.toJSON(searchShortcutOptions.conditions)
+					},
+					function () {
+					},
+					function () {
+					},
+					function (data) {
+						searchResultsPage.find('.entities-count span').html(data.dataset.length + ' Links');
 
-					new $.SalesPortal.SearchDataTable(
-						data.dataset,
-						searchShortcutOptions.conditions.sortSettings.columnTag,
-						searchShortcutOptions.conditions.sortSettings.order,
-						{
-							id: pageIdentifier,
-							name: shortcutLinkTitle
-						}
-					);
+						new $.SalesPortal.SearchDataTable(
+							data.dataset,
+							searchShortcutOptions.conditions.sortSettings.columnTag,
+							searchShortcutOptions.conditions.sortSettings.order,
+							{
+								id: pageIdentifier,
+								name: shortcutLinkTitle
+							}
+						);
 
-					$.mobile.loading('hide', {
-						textVisible: false,
-						html: ""
-					});
-				}
-			);
+						$.mobile.loading('hide', {
+							textVisible: false,
+							html: ""
+						});
+					}
+				);
+			}, 1000);
 		};
 	};
 })(jQuery);
